@@ -1,0 +1,16 @@
+.menu {
+  position: relative;
+
+  &:focus,
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.avatar {
+  width: 32px;
+  height: 32px;
+  margin-right: 8px;
+  overflow: hidden;
+  border-radius: 100%;
+}

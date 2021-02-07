@@ -1,0 +1,28 @@
+@import '@/styles/variables';
+
+.container {
+  display: flex;
+  align-items: flex-start;
+  padding-right: 16px;
+}
+
+.image {
+  flex-shrink: 0;
+  width: 96px;
+  height: 96px;
+  margin-right: 16px;
+  overflow: hidden;
+  border: solid 1px #ddd;
+  border-radius: 16px;
+}
+
+.name {
+  font-weight: bold;
+  line-height: 1;
+}
+
+.detail {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: $black2;
+}

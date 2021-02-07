@@ -1,0 +1,27 @@
+@import '@/styles/variables';
+
+.container {
+  display: inline-block;
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  overflow-x: auto;
+  white-space: nowrap;
+  cursor: grab;
+  background-color: $black5;
+  border-radius: 4px;
+}
+
+.commandText {
+  display: block;
+  margin-right: 4px;
+  font-size: 0.75rem;
+}
+
+.commandIcon {
+  width: 24px;
+  margin-right: 4px;
+}

@@ -1,0 +1,53 @@
+@import '@/styles/variables';
+
+.ly_row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.ly_row > * {
+  box-sizing: border-box;
+}
+
+.ly_row.ly_row__mg_md {
+  margin-right: -16px;
+  margin-bottom: -16px;
+}
+
+.ly_row.ly_row__mg_md > * {
+  padding-right: 16px;
+  padding-bottom: 16px;
+}
+
+$rowBreakpoints: sm, md;
+
+$cols: (
+  1: 8.26323826323833%,
+  2: 16.66666667%,
+  3: 25%,
+  4: 33.26323826323833%,
+  5: 41.66666667%,
+  6: 50%,
+  7: 58.26323826323833%,
+  8: 66.66666667%,
+  9: 75%,
+  10: 83.26323826323833%,
+  11: 91.66666667%,
+  12: 100%,
+);
+
+@each $col, $width in $cols {
+  .ly_col_#{$col} {
+    width: $width;
+  }
+}
+
+@each $size in $rowBreakpoints {
+  @include mq($size) {
+    @each $col, $width in $cols {
+      .ly_#{$size}Col_#{$col} {
+        width: $width;
+      }
+    }
+  }
+}

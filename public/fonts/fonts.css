@@ -1,0 +1,11 @@
+
+@font-face {
+  font-family: 'YarouyoSymbols';
+  src:
+    url('YarouyoSymbols.ttf?vcik77') format('truetype'),
+    url('YarouyoSymbols.woff?vcik77') format('woff'),
+    url('YarouyoSymbols.svg?vcik77#YarouyoSymbols') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}

@@ -1,0 +1,33 @@
+@import '@/styles/variables';
+
+.innber {
+  display: flex;
+  justify-content: stretch;
+}
+
+.image {
+  width: 50%;
+}
+
+.body {
+  box-sizing: border-box;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+  min-height: 96px;
+  padding: 16px;
+  line-height: 2;
+  text-align: center;
+  border: 1px solid #ddd;
+}
+
+@include mq(md) {
+  .innber {
+    display: block;
+  }
+
+  .image {
+    width: 100%;
+  }
+}

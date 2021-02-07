@@ -1,0 +1,56 @@
+@import '@/styles/variables';
+
+.media {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+}
+
+.imgWrapper {
+  flex: 0 1 27.58333%;
+  margin: 0 3.33333% 0 0;
+
+  > img {
+    width: 100%;
+  }
+}
+
+.content {
+  flex: 1;
+  padding: 16px;
+
+  > *:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.header {
+  margin-top: 0;
+  margin-bottom: 10px;
+}
+
+.ttl {
+  font-size: 1.125rem;
+  font-weight: bold;
+}
+
+.txt {
+  margin-top: 0;
+  line-height: 1.5;
+  word-break: break-all;
+}
+
+.footer {
+  margin-top: 0.5rem;
+}
+
+@include mq(md) {
+  .media {
+    display: block;
+  }
+
+  .imgWrapper {
+    margin-right: 0;
+  }
+}

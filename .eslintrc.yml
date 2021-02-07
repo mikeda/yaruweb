@@ -1,0 +1,29 @@
+---
+root: true
+extends:
+  - plugin:@typescript-eslint/recommended
+  - prettier
+  - prettier/@typescript-eslint
+  - plugin:react/recommended
+parser: '@typescript-eslint/parser'
+parserOptions:
+  project: ./tsconfig.json
+  ecmaVersion: 2018
+  sourceType: module
+  ecmaFeatures:
+    jsx: true
+plugins:
+  - '@typescript-eslint'
+  - react
+  - jest
+settings:
+  react:
+    version: detect
+rules:
+  no-console: warn
+  semi: off
+  yoda: off
+  '@typescript-eslint/explicit-function-return-type': off
+  '@typescript-eslint/explicit-module-boundary-types': off
+  '@typescript-eslint/no-empty-function': off
+  'react/prop-types': off

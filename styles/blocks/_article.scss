@@ -1,0 +1,74 @@
+@import '../variables';
+
+.bl_article {
+  padding-bottom: 4rem;
+}
+
+.bl_article_mainImage {
+  max-width: 512px;
+  margin: 0 auto;
+  margin-bottom: 32px;
+
+  img {
+    border-radius: 6px;
+  }
+}
+
+.bl_article__block {
+  padding: 0.5rem 0;
+}
+
+.bl_article_body h2 {
+  padding-bottom: 8px;
+  margin: 2rem 0 1rem;
+  margin-bottom: 16px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-bottom: 2px solid $color-main;
+}
+
+.bl_article_body h3 {
+  padding-bottom: 6px;
+  margin: 2rem 0 1rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  border-bottom: 1px solid $color-main;
+}
+
+.bl_article_body h4 {
+  padding-left: 6px;
+  margin: 2rem 0 1rem;
+  font-size: 1.25rem;
+  font-weight: bold;
+  border-left: 1px solid $color-main;
+}
+
+.bl_article_body p {
+  line-height: 2;
+}
+
+.bl_article_body p a {
+  text-decoration: underline;
+}
+
+.bl_article_body ul {
+  padding-left: 2rem;
+  list-style: disc;
+}
+
+.bl_article_body ol {
+  padding-left: 2rem;
+  list-style: decimal;
+}
+
+.bl_article_body li {
+  line-height: 1.5;
+}
+
+.bl_article_body li + li {
+  margin-top: 0.25rem;
+}
+
+.bl_article_body iframe {
+  margin: 0 auto;
+}

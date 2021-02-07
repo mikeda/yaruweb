@@ -1,0 +1,14 @@
+@import '@/styles/variables';
+
+.content {
+  box-sizing: border-box;
+  max-width: 730px;
+  padding: 16px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.contentXs {
+  composes: content;
+  max-width: 360px;
+}

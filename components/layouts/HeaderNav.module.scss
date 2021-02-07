@@ -1,0 +1,86 @@
+@import '@/styles/variables';
+
+.container {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+.link {
+  position: relative;
+  display: block;
+  padding: 0.5rem 1rem;
+  color: $black1;
+  text-align: center;
+  text-decoration: none;
+  border-bottom: 4px solid transparent;
+  transition: 0.25s;
+}
+
+.dropdown {
+  z-index: 2;
+  display: none;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  opacity: 0;
+  transition: 0.25s;
+}
+
+.item {
+  flex-grow: 1;
+}
+
+.itemActive {
+  composes: item;
+
+  .link {
+    color: $color-main;
+    border-bottom-color: currentColor;
+  }
+}
+
+.item:focus,
+.item:hover {
+  cursor: pointer;
+
+  .dropdown {
+    position: absolute;
+    display: block;
+    opacity: 1;
+  }
+
+  .link {
+    color: $color-main;
+    border-bottom-color: currentColor;
+  }
+}
+
+.dropdown li a {
+  display: block;
+  padding: 16px;
+
+  &:focus,
+  &:hover {
+    color: $color-main;
+    cursor: pointer;
+    opacity: 0.75;
+    transition: 0.25s;
+  }
+}
+
+.link::after {
+  position: absolute;
+  top: 50%;
+  right: 0;
+  width: 1px;
+  height: 20px;
+  content: '';
+  background-color: $black5;
+  transform: translateY(-50%);
+}
+
+.item:last-child .link::after {
+  content: none;
+}

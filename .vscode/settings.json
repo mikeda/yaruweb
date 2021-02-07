@@ -1,0 +1,11 @@
+{
+  "eslint.nodePath": "./node_modules/eslint",
+  "eslint.run": "onSave",
+  "eslint.alwaysShowStatus": true,
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "prettier.printWidth": 120,
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  },
+}

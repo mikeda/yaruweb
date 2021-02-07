@@ -1,0 +1,27 @@
+import { Order } from './graphql/types';
+
+export const Routes = {
+  articles: (order?: Order) => (order === Order.Popular ? '/articles?order=popular' : '/articles'),
+  article: (id: string) => `/articles/${id}`,
+  characters: () => '/characters',
+  character: (slug: string) => `/${slug}`,
+  characterCombos: (slug: string) => `/${slug}/combos`,
+  characterMoves: (characterSlug: string, moveCategorySlug: string) => `/${characterSlug}/moves/${moveCategorySlug}`,
+  createArticle: () => '/articles/new',
+  createMove: (slug: string) => `/characters/${slug}/moves/new`,
+  updateMove: (moveId: string) => `/moves/${moveId}/edit`,
+  login: () => '/login',
+  mypageArticles: () => '/mypage/articles',
+  mypageCombos: () => '/mypage/combos',
+  mypageEvents: () => '/mypage/events',
+  mypageVideos: () => '/mypage/videos',
+  mypageEdit: () => '/mypage/edit',
+  passwordReset: () => '/password/reset',
+  passwordEdit: () => '/password/edit',
+  signup: () => '/signup',
+  top: () => '/',
+  updateArticle: (id: string) => `/articles/${id}/edit`,
+  videos: (order?: Order) => (order === Order.Popular ? '/videos?order=popular' : '/videos'),
+  events: () => '/events',
+  video: (id: string) => `/videos/${id}`,
+};

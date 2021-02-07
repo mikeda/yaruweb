@@ -1,0 +1,78 @@
+import React, { useState } from 'react';
+
+import { MoveMedia } from './MoveMedia';
+import { MoveFragment, MoveTypeEnum } from '@/lib/graphql/types';
+
+interface Props {
+  moves: MoveFragment[];
+}
+
+export const MoveList: React.FC<Props> = ({ moves }) => {
+  const [all, setAll] = useState(false);
+  const [powerCrush, setPowerCrush] = useState(false);
+  const [crouchingStatus, setCrouchingStatus] = useState(false);
+  const [jumpStatus, setJumpStatus] = useState(false);
+  const [homing, setHoming] = useState(false);
+  const [screw, setScrew] = useState(false);
+  const [wallBound, setWallBound] = useState(false);
+  const [floorBreak, setFloorBreak] = useState(false);
+  const [hitGround, setHitGround] = useState(false);
+
+  const showMove = (move: MoveFragment) => {
+    if (move.type === MoveTypeEnum.Attack && move.attack) {
+      if (powerCrush && !move.attack.powerCrush) return false;
+      if (crouchingStatus && !move.attack.crouchingStatus) return false;
+      if (jumpStatus && !move.attack.jumpStatus) return false;
+      if (homing && !move.attack.homing) return false;
+      if (screw && !move.attack.screw) return false;
+      if (wallBound && !move.attack.wallBound) return false;
+      if (floorBreak && !move.attack.floorBreak) return false;
+      if (hitGround && !move.attack.hitGround) return false;
+    }
+
+    if (all) {
+      if (move.notSpecified) return false;
+    }
+
+    return true;
+  };
+
+  return (
+    <>
+      <div className="bl_box">
+        <div className="bl_moveSelector">
+          <MoveSelectCheckBox label="技表にない技も表示" checked={all} setChecked={setAll} />
+          <MoveSelectCheckBox label="パワークラッシュ" checked={powerCrush} setChecked={setPowerCrush} />
+          <MoveSelectCheckBox label="しゃがみステータス" checked={crouchingStatus} setChecked={setCrouchingStatus} />
+          <MoveSelectCheckBox label="ジャンプステータス" checked={jumpStatus} setChecked={setJumpStatus} />
+          <MoveSelectCheckBox label="ホーミング" checked={homing} setChecked={setHoming} />
+          <MoveSelectCheckBox label="スクリュー" checked={screw} setChecked={setScrew} />
+          <MoveSelectCheckBox label="ウォールバウンド" checked={wallBound} setChecked={setWallBound} />
+          <MoveSelectCheckBox label="バルコニーブレイク" checked={floorBreak} setChecked={setFloorBreak} />
+          <MoveSelectCheckBox label="ダウンにあたる" checked={hitGround} setChecked={setHitGround} />
+        </div>
+      </div>
+      <div className="bl_sectionUnit">
+        <div className="bl_section">
+          {moves.map(move => {
+            if (!showMove(move)) return;
+            return <MoveMedia move={move} key={move.id} />;
+          })}
+        </div>
+      </div>
+    </>
+  );
+};
+
+const MoveSelectCheckBox: React.FC<{
+  label: string;
+  checked: boolean;
+  setChecked: (flag: boolean) => void;
+}> = ({ label, checked, setChecked }) => {
+  return (
+    <label>
+      <input type="checkbox" checked={checked} onChange={e => setChecked(e.target.checked)} />
+      {label}
+    </label>
+  );
+};

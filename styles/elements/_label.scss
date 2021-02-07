@@ -1,0 +1,32 @@
+@import '../variables';
+
+.el_label {
+  display: inline-block;
+  padding: 0.2em 0.3em;
+  font-size: 0.75rem;
+  font-weight: bold;
+  color: $white;
+  background-color: $color-main;
+  border: 2px solid transparent;
+}
+
+.el_label.el_label__yellow {
+  color: $black;
+  background-color: $yellow;
+}
+
+.el_label.el_label__gray {
+  background-color: $black4;
+}
+
+a.el_label {
+  text-decoration: none;
+  transition: 0.25s;
+}
+
+a.el_label:focus,
+a.el_label:hover {
+  color: $color-main;
+  background-color: $white;
+  border-color: currentColor;
+}

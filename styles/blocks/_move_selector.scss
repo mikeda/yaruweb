@@ -1,0 +1,14 @@
+.bl_moveSelector {
+  > *:last-child {
+    margin-right: 0;
+  }
+}
+
+.bl_moveSelector label {
+  display: inline-block;
+  margin: 8px;
+}
+
+.bl_moveSelector input {
+  margin-right: 4px;
+}

@@ -1,0 +1,26 @@
+@import '@/styles/variables';
+
+.highlights {
+}
+
+.highlight {
+  display: flex;
+  align-items: center;
+  margin-top: 0.25rem;
+}
+
+.title {
+  font-weight: bold;
+}
+
+.startSec {
+  display: inline-block;
+  margin-right: 1rem;
+  font-weight: bold;
+  color: $c-time;
+}
+
+.playerName {
+  font-size: 0.9rem;
+  color: $c-gray;
+}

@@ -1,0 +1,134 @@
+@import '../variables';
+
+.el_form_group {
+  margin-top: 16px;
+}
+
+.el_form_submit {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+}
+
+.el_form_select {
+  position: relative;
+  display: inline-flex;
+}
+
+.el_form_select > select {
+  padding: 0.5em 2.5em 0.5rem 0.75rem;
+  line-height: 1.5;
+  color: rgba(0, 0, 0, 0.7);
+  cursor: pointer;
+  border: 1px solid #d1d8dc;
+  border-radius: 2px;
+  transition: ease-out 0.12s;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.el_form_select:after {
+  position: absolute;
+  top: 50%;
+  right: 1em;
+  width: 0.5em;
+  height: 0.5em;
+  pointer-events: none;
+  content: '';
+  border-right: 2px solid rgba(0, 0, 0, 0.26);
+  border-bottom: 2px solid rgba(0, 0, 0, 0.26);
+  -webkit-transform: translateY(-70%) rotate(45deg);
+  transform: translateY(-70%) rotate(45deg);
+}
+
+.el_form_checkbox input[type='checkbox'] {
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+
+.el_form_checkbox input[type='checkbox'] + label {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.el_form_checkbox input[type='checkbox'] + label .el_form_checkbox_check {
+  position: relative;
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  margin-right: 4px;
+  background-color: #ffffff;
+  border: 2px solid #d1d8dc;
+  border-radius: 2px;
+  transition: ease-out 0.12s;
+
+  &:before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0.75em;
+    height: 0.375em;
+    content: '';
+    border-bottom: 0.125em solid #ffffff;
+    border-left: 0.125em solid #ffffff;
+    opacity: 0;
+    transition: ease-out 0.12s;
+    -webkit-transform: translate(-50%, -70%) rotate(-45deg);
+    transform: translate(-50%, -70%) rotate(-45deg);
+  }
+}
+
+.el_form_checkbox input[type='checkbox']:checked + label .el_form_checkbox_check {
+  background-color: $color-main;
+  border-color: $color-main;
+
+  &:before {
+    opacity: 1;
+  }
+}
+
+.el_form_checkboxUnit {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -16px;
+  margin-bottom: -8px;
+}
+
+.el_form_checkboxUnit .el_form_checkbox {
+  margin-right: 16px;
+  margin-bottom: 8px;
+}
+
+.el_form_input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  line-height: 1.5;
+  background-color: #ffffff;
+  border: 1px solid #d1d8dc;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  transition: ease-out 0.12s;
+
+  &:focus {
+    border-color: #0f7dd2;
+    outline: none;
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075), 0 0 0 4px rgba(36, 151, 240, 0.36);
+  }
+}
+
+.el_form_label {
+  display: block;
+  margin-bottom: 8px;
+
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.el_form_error {
+  margin-top: 4px;
+  font-size: 12px;
+  color: $color-danger;
+}

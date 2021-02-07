@@ -1,0 +1,15 @@
+extends:
+  - stylelint-config-recommended-scss
+  - stylelint-config-recess-order
+  - stylelint-prettier/recommended
+
+rules:
+  property-no-unknown:
+    - true
+    - ignoreProperties:
+        - composes
+  font-family-no-missing-generic-family-keyword:
+    - true
+    - ignoreFontFamilies:
+        - YarouyoSymbols
+        - 'Font Awesome 5 Free'
