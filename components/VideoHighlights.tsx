@@ -59,7 +59,7 @@ export const VideoHighlights: React.FC<Props> = ({ videoId, highlights: initialH
 
   return (
     <>
-      <ol className={styles.highlights}>
+      <ol>
         {highlights.map(highlight => (
           <li key={highlight.id} className={styles.highlight}>
             <a
