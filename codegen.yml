@@ -2,7 +2,7 @@ overwrite: true
 schema: http://localhost:5000/graphql
 documents: ["../yarouyo/app/graphql/operations/**/*.graphql"]
 generates:
-  ../lib/graphql/types.ts:
+  lib/graphql/types.ts:
     plugins:
       - "typescript"
       - "typescript-operations"
