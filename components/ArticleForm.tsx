@@ -1,12 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useMemo, useState } from 'react';
 import * as Yup from 'yup';
 import { Field, Form, Formik } from 'formik';
-import EditorJS from '@editorjs/editorjs';
-
-import { editorTools } from '@/lib/editor';
 import { ArticleCategoryText } from '@/lib/graphql/enum_texts';
 import { ArticleAttributes, ArticleCategory } from '@/lib/graphql/types';
 import { FormGroup } from './form/FormGroup';
+import { createEditor, Node } from 'slate';
+import { Slate, withReact } from 'slate-react';
+import { ArticleEditor } from './ArticleEditor';
+import { withLinks } from './ArticleEditor/Control/LinkButton';
 
 interface Props {
   initialAttributes?: ArticleAttributes;
@@ -15,24 +16,23 @@ interface Props {
 }
 
 const ArticleForm: React.FC<Props> = ({
-  initialAttributes = { title: '', body: '', category: ArticleCategory.Blog },
+  initialAttributes = { title: '', content: '', category: ArticleCategory.Blog },
   onSubmit,
   loading,
 }) => {
+  const editor = useMemo(() => withLinks(withReact(createEditor())), []);
+  const [value, setValue] = useState<Node[]>(
+    initialAttributes.content
+      ? JSON.parse(initialAttributes.content)
+      : [
+          {
+            type: 'paragraph',
+            children: [{ text: '' }],
+          },
+        ],
+  );
+
   if (!window) return <p>ブラウザではありません。</p>;
-
-  let editor: EditorJS | null = null;
-
-  useEffect(() => {
-    if (!window) return;
-
-    editor = new EditorJS({
-      placeholder: '本文',
-      data: initialAttributes.body ? JSON.parse(initialAttributes.body) : {},
-      tools: editorTools,
-      minHeight: 100,
-    });
-  }, [window]);
 
   return (
     <Formik<ArticleAttributes>
@@ -43,18 +43,11 @@ const ArticleForm: React.FC<Props> = ({
       onSubmit={({ title, category, mainImage }) => {
         if (!editor) return;
 
-        editor.save().then(savedData => {
-          const jsonBody = JSON.stringify({
-            time: savedData.time,
-            blocks: savedData.blocks.map(b => ({ type: b.type, data: b.data })),
-            version: savedData.version,
-          });
-          onSubmit({
-            title,
-            category,
-            mainImage,
-            body: jsonBody,
-          });
+        onSubmit({
+          title,
+          category,
+          mainImage,
+          content: JSON.stringify(value),
         });
       }}
     >
@@ -96,7 +89,12 @@ const ArticleForm: React.FC<Props> = ({
             </div>
 
             <div className="bl_box">
-              <div id="editorjs"></div>
+              <Slate editor={editor} value={value} onChange={newValue => setValue(newValue)}>
+                <ArticleEditor />
+                <pre>
+                  <code>{JSON.stringify(value, null, 4)}</code>
+                </pre>
+              </Slate>
             </div>
 
             <div className="el_form_group">
