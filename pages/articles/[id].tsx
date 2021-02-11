@@ -16,7 +16,6 @@ import { Comment } from '@/components/Comment';
 import { CommentForm } from '@/components/CommentForm';
 import { NotFound } from '@/components/NotFound';
 import { Heading } from '@/components/Heading';
-import { ArticleBody } from '@/pages-lib/articles/[id]/ArticleBody';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 
 interface Props {
@@ -40,8 +39,6 @@ const Page: React.FC<Props> = ({ article }) => {
         />
 
         <FavButton articleId={article.id} faved={article.faved} favsCount={article.favsCount} />
-
-        <ArticleBody data={JSON.parse(article.body)} />
       </div>
 
       <Comments articleId={article.id} />
