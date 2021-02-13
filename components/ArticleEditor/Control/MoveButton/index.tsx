@@ -7,6 +7,7 @@ import Modal from 'react-modal';
 
 import styles from './MoveButton.module.scss';
 import { MoveSelect } from './MoveSelect';
+import { ArticleElementTypes } from '@/components/ArticleElement/ArticleElement';
 
 const CHARACTERS = [
   { value: 'asuka', label: '飛鳥' },
@@ -109,7 +110,7 @@ export const MoveButton: React.FC = () => {
               characterSlug={characterSlug}
               onChange={moveId => {
                 editor.insertNode({
-                  type: 'move',
+                  type: ArticleElementTypes.EmbedMove,
                   moveId,
                   children: [{ text: '' }],
                 });

@@ -13,6 +13,20 @@ export type ArticleElement =
   | EmbedTweet
   | EmbedMove;
 
+export const ArticleElementTypes: { [key: string]: ArticleElementType } = {
+  BlockQuote: 'block-quote',
+  HeadingOne: 'heading-one',
+  HeadingTwo: 'heading-two',
+  BulletedList: 'bulleted-list',
+  ListItem: 'list-item',
+  Image: 'image',
+  Link: 'link',
+  EmbedLink: 'embed-link',
+  EmbedYoutube: 'embed-youtube',
+  EmbedTweet: 'embed-tweet',
+  EmbedMove: 'embed-move',
+};
+
 type ArticleElementType =
   | 'block-quote'
   | 'heading-one'

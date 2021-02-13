@@ -7,7 +7,8 @@ import { FormGroup } from './form/FormGroup';
 import { createEditor, Node } from 'slate';
 import { Slate, withReact } from 'slate-react';
 import { ArticleEditor } from './ArticleEditor';
-import { withLinks } from './ArticleEditor/Control/LinkButton';
+import { withLink } from './ArticleEditor/LinkHelper';
+import { withIcon } from './ArticleEditor/IconHelper';
 
 interface Props {
   initialAttributes?: ArticleAttributes;
@@ -20,7 +21,7 @@ const ArticleForm: React.FC<Props> = ({
   onSubmit,
   loading,
 }) => {
-  const editor = useMemo(() => withLinks(withReact(createEditor())), []);
+  const editor = useMemo(() => withIcon(withLink(withReact(createEditor()))), []);
   const [value, setValue] = useState<Node[]>(
     initialAttributes.content
       ? JSON.parse(initialAttributes.content)

@@ -5,7 +5,7 @@ export const YAROUYO_FONT_CODE = {
   image: 0xeb2b,
   access: 0xeb40,
   h1: 0xe950,
-  h2: 0xe950,
+  h2: 0xe951,
   h3: 0xe952,
   lever_7: 0xe900,
   lever_8: 0xe969,
