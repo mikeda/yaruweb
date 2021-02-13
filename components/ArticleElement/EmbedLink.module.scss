@@ -1,25 +1,25 @@
-@import '../variables';
+@import '@/styles/variables';
 
-.bl_linkTool {
+.link {
   display: flex;
   padding: 1rem;
   border: solid 1px #d1d8dc;
   border-radius: 6px;
 }
 
-.bl_linkTool__content {
+.content {
   flex: 1;
 }
 
-.bl_linkTool__title {
+.title {
   font-weight: bold;
 }
 
-.bl_linkTool__image img {
+.image img {
   width: 100px;
 }
 
-.bl_linkTool__host {
+.host {
   margin-top: 1.5rem;
   font-size: 0.9rem;
   color: $black3;

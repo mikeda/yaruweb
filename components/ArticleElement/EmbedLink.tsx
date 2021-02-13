@@ -1,5 +1,7 @@
 import React from 'react';
 
+import styles from './EmbedLink.module.scss';
+
 interface Props {
   url: string;
   title: string;
@@ -13,15 +15,15 @@ export const EmbedLink: React.FC<Props> = ({ url, title, description, imageUrl, 
   return (
     <div {...attributes}>
       <div contentEditable={false}>
-        <a href={url} className="bl_linkTool">
-          <div className="bl_linkTool__content">
-            <div className="bl_linkTool__title">{title}</div>
-            {description && <div className="bl_linkTool_domain">{description}</div>}
-            <div className="bl_linkTool__host">{hostname}</div>
+        <a href={url} className={styles.link}>
+          <div className={styles.content}>
+            <div className={styles.title}>{title}</div>
+            {description && <div>{description}</div>}
+            <div className={styles.host}>{hostname}</div>
           </div>
 
           {imageUrl && (
-            <figure className="bl_linkTool__image">
+            <figure className={styles.image}>
               <img src={imageUrl} />
             </figure>
           )}
