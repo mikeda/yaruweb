@@ -18,6 +18,9 @@ interface Props {
         type: 'heading-one';
       }
     | {
+        type: 'heading-two';
+      }
+    | {
         type: 'bulleted-list';
       }
     | {
@@ -54,7 +57,9 @@ export const Element: React.FC<Props> = ({ attributes, children, element }) => {
     case 'block-quote':
       return <blockquote {...attributes}>{children}</blockquote>;
     case 'heading-one':
-      return <h1 {...attributes}>{children}</h1>;
+      return <h2 {...attributes}>{children}</h2>;
+    case 'heading-two':
+      return <h3 {...attributes}>{children}</h3>;
     case 'bulleted-list':
       return <BulletedList attributes={attributes}>{children}</BulletedList>;
     case 'list-item':

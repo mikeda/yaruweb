@@ -108,7 +108,11 @@ export const MoveButton: React.FC = () => {
             <MoveSelect
               characterSlug={characterSlug}
               onChange={moveId => {
-                editor.insertNode({ type: 'move', moveId, children: [{ text: '' }] });
+                editor.insertNode({
+                  type: 'move',
+                  moveId,
+                  children: [{ text: '' }],
+                });
                 setExpanded(false);
               }}
             />

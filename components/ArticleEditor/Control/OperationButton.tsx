@@ -71,7 +71,12 @@ export const OperationButton: React.FC<Props> = ({ icon }) => {
             className={styles.icon}
             onMouseDown={e => {
               e.preventDefault();
-              editor.insertFragment([{ text: String.fromCharCode(YAROUYO_FONT_CODE.rk), icon: true }]);
+              editor.insertFragment([
+                {
+                  text: String.fromCharCode(YAROUYO_FONT_CODE[code]),
+                  icon: true,
+                },
+              ]);
               editor.removeMark('icon');
             }}
             style={{ fontFamily: 'YarouyoSymbols' }}

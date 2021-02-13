@@ -2,8 +2,8 @@ import React, { useCallback } from 'react';
 import { Editable, useSlate } from 'slate-react';
 import { BlockButton } from './Control/BlockButton';
 import { MarkButton } from './Control/MarkButton';
-import { Element } from './Element';
-import { Leaf } from './Leaf';
+import { Element } from '@/components/ArticleElement';
+import { Leaf } from '../ArticleElement/Leaf';
 import { YAROUYO_FONT_CODE } from '@/lib/YarouyoFont';
 import { OperationButton } from './Control/OperationButton';
 import { Editor, Node, Element as SlateElement, Transforms } from 'slate';
@@ -133,6 +133,7 @@ export const ArticleEditor: React.FC = () => {
     <>
       <MarkButton format="bold" icon={YAROUYO_FONT_CODE.bold} />
       <BlockButton format="heading-one" icon={YAROUYO_FONT_CODE.h1} />
+      <BlockButton format="heading-two" icon={YAROUYO_FONT_CODE.h2} />
       <BlockButton format="bulleted-list" icon={YAROUYO_FONT_CODE.list} />
 
       <OperationButton icon={YAROUYO_FONT_CODE.lp} />

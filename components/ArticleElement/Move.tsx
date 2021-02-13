@@ -1,6 +1,6 @@
-import React, { Children } from 'react';
+import React from 'react';
 import { useMoveQuery } from '@/lib/graphql/types';
-import { MoveMedia } from '../../MoveMedia';
+import { MoveMedia } from '@/components/MoveMedia';
 
 interface Props {
   moveId: string;
