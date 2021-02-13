@@ -26,7 +26,11 @@ export const Element: React.FC<Props> = ({ attributes, children, element }) => {
     case 'list-item':
       return <li {...attributes}>{children}</li>;
     case 'image':
-      return <Image url={element.url} attributes={attributes} />;
+      return (
+        <Image url={element.url} attributes={attributes}>
+          {children}
+        </Image>
+      );
     case 'link':
       return (
         <a {...attributes} href={element.url}>
