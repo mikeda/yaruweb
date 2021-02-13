@@ -9,7 +9,7 @@
     "eslint": "npx eslint --ext ts,tsx --max-warnings 0 components lib pages pages-lib"
   },
   "dependencies": {
-    "@apollo/client": "^3.3.8",
+    "@apollo/client": "^3.3.9",
     "@fortawesome/fontawesome-svg-core": "^1.2.34",
     "@fortawesome/free-brands-svg-icons": "^5.15.2",
     "@fortawesome/free-regular-svg-icons": "^5.15.2",
