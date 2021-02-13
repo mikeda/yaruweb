@@ -7,6 +7,9 @@ import { Move } from './Move';
 import { EmbedYouTube } from './EmbedYouTube';
 import { EmbedTweet } from './EmbedTweet';
 import { ArticleElement } from './ArticleElement';
+import { Paragraph } from './Paragraph';
+import { HeadingOne } from './HeadingOne';
+import { HeadingTwo } from './HeadingTwo';
 
 interface Props {
   attributes: { [key: string]: unknown };
@@ -15,12 +18,14 @@ interface Props {
 
 export const Element: React.FC<Props> = ({ attributes, children, element }) => {
   switch (element.type) {
+    case 'paragraph':
+      return <Paragraph attributes={attributes}>{children}</Paragraph>;
     case 'block-quote':
       return <blockquote {...attributes}>{children}</blockquote>;
     case 'heading-one':
-      return <h2 {...attributes}>{children}</h2>;
+      return <HeadingOne attributes={attributes}>{children}</HeadingOne>;
     case 'heading-two':
-      return <h3 {...attributes}>{children}</h3>;
+      return <HeadingTwo attributes={attributes}>{children}</HeadingTwo>;
     case 'bulleted-list':
       return <BulletedList attributes={attributes}>{children}</BulletedList>;
     case 'list-item':
@@ -68,7 +73,7 @@ export const Element: React.FC<Props> = ({ attributes, children, element }) => {
         </Move>
       );
     default:
-      return <p {...attributes}>{children}</p>;
+      return <p {...attributes}>存在しないTypeが指定されました。{children}</p>;
   }
 };
 
