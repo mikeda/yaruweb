@@ -25,7 +25,9 @@ export const ArticleEditor: React.FC = () => {
   const { isVoid } = editor;
 
   editor.isVoid = element => {
-    return element.type === 'embed-image' || element.type === ArticleElementTypes.EmbedMove ? true : isVoid(element);
+    return element.type === ArticleElementTypes.Image || element.type === ArticleElementTypes.EmbedMove
+      ? true
+      : isVoid(element);
   };
 
   return (

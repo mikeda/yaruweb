@@ -5,6 +5,7 @@ import { Button } from './Button';
 import styles from './ImageButton.module.scss';
 import { useCreateArticleImageMutation } from '@/lib/graphql/types';
 import { YAROUYO_FONT_CODE } from '@/lib/YarouyoFont';
+import { ArticleElementTypes } from '@/components/ArticleElement/ArticleElement';
 
 export const ImageButton: React.FC = () => {
   const editor = useSlate();
@@ -13,7 +14,8 @@ export const ImageButton: React.FC = () => {
       const url = e.createArticleImage?.url;
       if (!url) return;
 
-      editor.insertNode({ type: 'image', url: url, children: [{ text: '' }] });
+      editor.insertNode({ type: ArticleElementTypes.Image, url: url, children: [{ text: '' }] });
+      editor.insertNode({ type: ArticleElementTypes.Paragraph, children: [{ text: '' }] });
     },
     onError: e => {
       alert(e.message);

@@ -1,6 +1,7 @@
 import { Element } from 'slate';
 
 export type ArticleElement =
+  | Paragraph
   | BlockQuote
   | HeadingOne
   | HeadingTwo
@@ -13,7 +14,8 @@ export type ArticleElement =
   | EmbedTweet
   | EmbedMove;
 
-export const ArticleElementTypes: { [key: string]: ArticleElementType } = {
+export const ArticleElementTypes = {
+  Paragraph: 'paragraph',
   BlockQuote: 'block-quote',
   HeadingOne: 'heading-one',
   HeadingTwo: 'heading-two',
@@ -25,9 +27,10 @@ export const ArticleElementTypes: { [key: string]: ArticleElementType } = {
   EmbedYoutube: 'embed-youtube',
   EmbedTweet: 'embed-tweet',
   EmbedMove: 'embed-move',
-};
+} as const;
 
 type ArticleElementType =
+  | 'paragraph'
   | 'block-quote'
   | 'heading-one'
   | 'heading-two'
@@ -42,6 +45,10 @@ type ArticleElementType =
 
 interface Base extends Element {
   type: ArticleElementType;
+}
+
+interface Paragraph extends Base {
+  type: 'paragraph';
 }
 
 interface BlockQuote extends Base {
