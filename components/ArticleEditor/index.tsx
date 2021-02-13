@@ -78,7 +78,7 @@ export const ArticleEditor: React.FC = () => {
   };
 
   editor.isVoid = element => {
-    return element.type === 'embed-link' || element.type === 'image' || element.type === 'move'
+    return element.type === 'embed-link' || element.type === 'embed-image' || element.type === 'embed-move'
       ? true
       : isVoid(element);
   };

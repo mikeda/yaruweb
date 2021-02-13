@@ -1,30 +1,28 @@
 import React from 'react';
 
 interface Props {
-  link: {
-    url: string;
-    title: string;
-    description?: string | null;
-    imageUrl?: string | null;
-  };
+  url: string;
+  title: string;
+  description?: string | null;
+  imageUrl?: string | null;
   attributes: { [key: string]: unknown };
 }
 
-export const EmbedLink: React.FC<Props> = ({ link, attributes, children }) => {
-  const hostname = new URL(link.url).hostname;
+export const EmbedLink: React.FC<Props> = ({ url, title, description, imageUrl, attributes, children }) => {
+  const hostname = new URL(url).hostname;
   return (
     <div {...attributes}>
       <div contentEditable={false}>
-        <a href={link.url} className="bl_linkTool">
+        <a href={url} className="bl_linkTool">
           <div className="bl_linkTool__content">
-            <div className="bl_linkTool__title">{link.title}</div>
-            {link.description && <div className="bl_linkTool_domain">{link.description}</div>}
+            <div className="bl_linkTool__title">{title}</div>
+            {description && <div className="bl_linkTool_domain">{description}</div>}
             <div className="bl_linkTool__host">{hostname}</div>
           </div>
 
-          {link.imageUrl && (
+          {imageUrl && (
             <figure className="bl_linkTool__image">
-              <img src={link.imageUrl} />
+              <img src={imageUrl} />
             </figure>
           )}
         </a>

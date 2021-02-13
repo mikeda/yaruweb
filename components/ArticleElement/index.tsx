@@ -1,55 +1,16 @@
 import React from 'react';
 
-import { ArticleLinkFragment } from '@/lib/graphql/types';
 import { Image } from './Image';
 import { EmbedLink } from './EmbedLink';
 import { BulletedList } from './BulletedList';
 import { Move } from './Move';
 import { EmbedYouTube } from './EmbedYouTube';
 import { EmbedTweet } from './EmbedTweet';
+import { ArticleElement } from './ArticleElement';
 
 interface Props {
   attributes: { [key: string]: unknown };
-  element:
-    | {
-        type: 'block-quote';
-      }
-    | {
-        type: 'heading-one';
-      }
-    | {
-        type: 'heading-two';
-      }
-    | {
-        type: 'bulleted-list';
-      }
-    | {
-        type: 'list-item';
-      }
-    | {
-        type: 'image';
-        url: string;
-      }
-    | {
-        type: 'link';
-        url: string;
-      }
-    | {
-        type: 'embed-link';
-        link: ArticleLinkFragment;
-      }
-    | {
-        type: 'embed-youtube';
-        videoId: string;
-      }
-    | {
-        type: 'embed-tweet';
-        tweetId: string;
-      }
-    | {
-        type: 'move';
-        moveId: string;
-      };
+  element: ArticleElement;
 }
 
 export const Element: React.FC<Props> = ({ attributes, children, element }) => {
@@ -74,7 +35,13 @@ export const Element: React.FC<Props> = ({ attributes, children, element }) => {
       );
     case 'embed-link':
       return (
-        <EmbedLink link={element.link} attributes={attributes}>
+        <EmbedLink
+          url={element.url}
+          title={element.title}
+          description={element.description}
+          imageUrl={element.imageUrl}
+          attributes={attributes}
+        >
           {children}
         </EmbedLink>
       );
@@ -90,7 +57,7 @@ export const Element: React.FC<Props> = ({ attributes, children, element }) => {
           {children}
         </EmbedTweet>
       );
-    case 'move':
+    case 'embed-move':
       return (
         <Move moveId={element.moveId} attributes={attributes}>
           {children}
