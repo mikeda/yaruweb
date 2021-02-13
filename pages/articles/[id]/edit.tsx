@@ -24,7 +24,7 @@ const Content: React.FC<{ id: string }> = ({ id }) => {
     },
   });
 
-  const { data, loading, error } = useMyArticleQuery({ variables: { id } });
+  const { data, loading, error } = useMyArticleQuery({ variables: { id }, fetchPolicy: 'network-only' });
   if (loading) return <NotFound>読み込み中</NotFound>;
   if (error) {
     toast.error(error.message);

@@ -19,9 +19,9 @@ export type Article = {
   __typename?: 'Article';
   author: Player;
   authorId: Scalars['Int'];
-  body: Scalars['String'];
   category: ArticleCategory;
   commentCount: Scalars['Int'];
+  content: Scalars['String'];
   description: Scalars['String'];
   faved: Scalars['Boolean'];
   favsCount: Scalars['Int'];
@@ -35,7 +35,7 @@ export type ArticleAttributes = {
   category: ArticleCategory;
   title: Scalars['String'];
   mainImage?: Maybe<Scalars['String']>;
-  body: Scalars['String'];
+  content: Scalars['String'];
 };
 
 export enum ArticleCategory {
@@ -760,8 +760,8 @@ export type MutationUpdatePlayerArgs = {
 
 export type MyArticle = {
   __typename?: 'MyArticle';
-  body: Scalars['String'];
   category: ArticleCategory;
+  content: Scalars['String'];
   description: Scalars['String'];
   id: Scalars['ID'];
   mainImageUrl?: Maybe<Scalars['String']>;
@@ -1192,7 +1192,7 @@ export type VideoEdge = {
 
 export type ArticleFragment = (
   { __typename?: 'Article' }
-  & Pick<Article, 'id' | 'category' | 'title' | 'mainImageUrl' | 'body' | 'publishedAt' | 'faved' | 'favsCount'>
+  & Pick<Article, 'id' | 'category' | 'title' | 'mainImageUrl' | 'content' | 'publishedAt' | 'faved' | 'favsCount'>
   & { author: (
     { __typename?: 'Player' }
     & Pick<Player, 'name' | 'avatarUrl'>
@@ -1996,7 +1996,7 @@ export type MyArticleQuery = (
   { __typename?: 'Query' }
   & { myArticle: (
     { __typename?: 'MyArticle' }
-    & Pick<MyArticle, 'id' | 'category' | 'title' | 'mainImageUrl' | 'body'>
+    & Pick<MyArticle, 'id' | 'category' | 'title' | 'mainImageUrl' | 'content'>
   ) }
 );
 
@@ -2147,7 +2147,7 @@ export const ArticleFragmentDoc = gql`
   category
   title
   mainImageUrl
-  body
+  content
   publishedAt
   faved
   favsCount
@@ -3802,7 +3802,7 @@ export const MyArticleDocument = gql`
     category
     title
     mainImageUrl
-    body
+    content
   }
 }
     `;

@@ -1,0 +1,10 @@
+.button {
+  font-family: YarouyoSymbols;
+  color: #aaa;
+  cursor: pointer;
+}
+
+.activeButton {
+  composes: button;
+  color: red;
+}

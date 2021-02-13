@@ -1,12 +1,15 @@
-import React, { useEffect, useState } from 'react';
-import Select from 'react-select';
-import { ApolloProvider } from '@apollo/client';
+import React, { useState } from 'react';
+import { useSlate } from 'slate-react';
 
-import { client } from '@/lib/graphql/client';
-import { Preview } from './Preview';
+import { Button } from '../Button';
+import { YAROUYO_FONT_CODE } from '@/lib/YarouyoFont';
+import Modal from 'react-modal';
+
+import styles from './MoveButton.module.scss';
 import { MoveSelect } from './MoveSelect';
+import { ArticleElementTypes } from '@/components/ArticleElement/ArticleElement';
 
-const characters = [
+const CHARACTERS = [
   { value: 'asuka', label: '飛鳥' },
   { value: 'alisa', label: 'アリサ' },
   { value: 'anna', label: 'アンナ' },
@@ -58,53 +61,65 @@ const characters = [
   { value: 'law', label: 'ロウ' },
 ];
 
-interface Props {
-  characterSlug?: string;
-  moveId?: string;
-  onChangeCharacter: (characterSlug: string) => void;
-  onChangeMove: (moveId: string) => void;
-}
+export const MoveButton: React.FC = () => {
+  const [expanded, setExpanded] = useState(false);
+  const [characterSlug, setCharacterSlug] = useState('');
 
-export const Selector: React.FC<Props> = ({ onChangeCharacter, onChangeMove, ...props }) => {
-  const [characterSlug, setCharacterSlug] = useState(props.characterSlug);
-  const [moveId, setMoveId] = useState(props.moveId);
-
-  useEffect(() => {
-    if (!characterSlug) return;
-  });
+  const editor = useSlate();
 
   return (
-    <ApolloProvider client={client}>
-      <div className="ly_row ly_row__mg_md">
-        <div className="ly_col_6">
-          <Select
-            value={characters.find(option => option.value === characterSlug)}
-            options={characters}
-            onChange={e => {
-              if (!e) return;
+    <>
+      <Button
+        active={false}
+        onMouseDown={event => {
+          event.preventDefault();
+          setExpanded(!expanded);
+        }}
+        icon={YAROUYO_FONT_CODE.access}
+      />
 
-              setCharacterSlug(e.value);
-              onChangeCharacter(e.value);
-            }}
-            placeholder="キャラクター選択"
-          />
+      <Modal
+        isOpen={expanded}
+        onRequestClose={() => setExpanded(false)}
+        className={styles.modal}
+        overlayClassName={styles.overlay}
+      >
+        <div className="el_form_group">
+          <div className="el_form_select">
+            <select
+              className="el_form_input"
+              value={characterSlug}
+              onChange={event => {
+                event.preventDefault();
+                setCharacterSlug(event.target.value);
+              }}
+            >
+              <option value=""></option>
+              {CHARACTERS.map(character => (
+                <option key={character.value} value={character.value}>
+                  {character.label}
+                </option>
+              ))}
+            </select>
+          </div>
         </div>
 
         {characterSlug && (
-          <div className="ly_col_6">
+          <div>
             <MoveSelect
               characterSlug={characterSlug}
-              moveId={moveId}
               onChange={moveId => {
-                setMoveId(moveId);
-                onChangeMove(moveId);
+                editor.insertNode({
+                  type: ArticleElementTypes.EmbedMove,
+                  moveId,
+                  children: [{ text: '' }],
+                });
+                setExpanded(false);
               }}
             />
           </div>
         )}
-      </div>
-
-      {moveId && <Preview moveId={moveId} />}
-    </ApolloProvider>
+      </Modal>
+    </>
   );
 };
