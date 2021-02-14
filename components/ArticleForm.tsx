@@ -31,8 +31,6 @@ const ArticleForm: React.FC<Props> = ({
         ],
   );
 
-  //if (!window) return <p>ブラウザではありません。</p>;
-
   return (
     <Formik<ArticleAttributes>
       initialValues={initialAttributes}

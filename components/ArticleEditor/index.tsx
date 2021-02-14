@@ -1,14 +1,7 @@
 import React, { useCallback } from 'react';
 import { Editable, useSlate, withReact } from 'slate-react';
-import { BlockButton } from './Controls/BlockButton';
-import { MarkButton } from './Controls/MarkButton';
 import { Element } from '@/components/ArticleElement';
 import { Leaf } from '../ArticleElement/Leaf';
-import { YAROUYO_FONT_CODE } from '@/lib/YarouyoFont';
-import { OperationButton } from './Controls/OperationButton';
-import { ImageButton } from './Controls/ImageButton';
-import { LinkButton } from './Controls/LinkButton';
-import { MoveButton } from './Controls/MoveButton';
 import { ArticleElementTypes } from '../ArticleElement/ArticleElement';
 import { withIcon } from './IconHelper';
 import { createEditor } from 'slate';
@@ -17,6 +10,7 @@ import { withEmbedYoutube } from './YoutubeHelper';
 import { withEmbedTwitter } from './TwitterHelper';
 import { useCreateArticleLinkMutation } from '@/lib/graphql/types';
 import isUrl from 'is-url';
+import { Controls } from './Controls';
 
 export const createArticleEditor = () => {
   return withEmbedTwitter(withEmbedYoutube(withIcon(withLink(withReact(createEditor())))));
@@ -74,15 +68,7 @@ export const ArticleEditor: React.FC = () => {
 
   return (
     <>
-      <MarkButton format="bold" icon={YAROUYO_FONT_CODE.bold} />
-      <BlockButton format="heading-one" icon={YAROUYO_FONT_CODE.h1} />
-      <BlockButton format="heading-two" icon={YAROUYO_FONT_CODE.h2} />
-      <BlockButton format="bulleted-list" icon={YAROUYO_FONT_CODE.list} />
-
-      <OperationButton icon={YAROUYO_FONT_CODE.lp} />
-      <MoveButton />
-      <ImageButton />
-      <LinkButton />
+      <Controls />
 
       <Editable placeholder="本文" renderElement={renderElement} renderLeaf={renderLeaf} onKeyDown={onKeyDown} />
     </>
