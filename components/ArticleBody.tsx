@@ -12,14 +12,13 @@ interface Props {
 export const ArticleBody: React.FC<Props> = ({ content }) => {
   const renderElement = useCallback(props => <Element {...props} />, []);
   const renderLeaf = useCallback(props => <Leaf {...props} />, []);
+  const onChange = useCallback(() => {}, []);
   const value = useMemo<Node[]>(() => JSON.parse(content), []);
   const editor = useMemo(() => withReact(createEditor()), []);
 
   return (
-    <div className="bl_article_body">
-      <Slate editor={editor} value={value} onChange={() => {}}>
-        <Editable placeholder="本文" renderElement={renderElement} renderLeaf={renderLeaf} readOnly />
-      </Slate>
-    </div>
+    <Slate editor={editor} value={value} onChange={onChange}>
+      <Editable renderElement={renderElement} renderLeaf={renderLeaf} readOnly />
+    </Slate>
   );
 };
