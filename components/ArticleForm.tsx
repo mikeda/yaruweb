@@ -4,11 +4,9 @@ import { Field, Form, Formik } from 'formik';
 import { ArticleCategoryText } from '@/lib/graphql/enum_texts';
 import { ArticleAttributes, ArticleCategory } from '@/lib/graphql/types';
 import { FormGroup } from './form/FormGroup';
-import { createEditor, Node } from 'slate';
-import { Slate, withReact } from 'slate-react';
-import { ArticleEditor } from './ArticleEditor';
-import { withLink } from './ArticleEditor/LinkHelper';
-import { withIcon } from './ArticleEditor/IconHelper';
+import { Slate } from 'slate-react';
+import { ArticleEditor, createArticleEditor } from './ArticleEditor';
+import { Node } from 'slate';
 
 interface Props {
   initialAttributes?: ArticleAttributes;
@@ -21,7 +19,7 @@ const ArticleForm: React.FC<Props> = ({
   onSubmit,
   loading,
 }) => {
-  const editor = useMemo(() => withIcon(withLink(withReact(createEditor()))), []);
+  const editor = useMemo(() => createArticleEditor(), []);
   const [value, setValue] = useState<Node[]>(
     initialAttributes.content
       ? JSON.parse(initialAttributes.content)
@@ -33,7 +31,7 @@ const ArticleForm: React.FC<Props> = ({
         ],
   );
 
-  if (!window) return <p>ブラウザではありません。</p>;
+  //if (!window) return <p>ブラウザではありません。</p>;
 
   return (
     <Formik<ArticleAttributes>
