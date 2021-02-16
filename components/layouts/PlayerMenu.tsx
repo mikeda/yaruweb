@@ -53,7 +53,7 @@ export const PlayerMenu: React.FC = () => {
                 e.preventDefault();
                 signOutFirebase().then(() => {
                   toast.success('ログアウトしました。');
-                  setCurrentPlayer(undefined);
+                  setCurrentPlayer(null);
                   router.push(Routes.top());
                 });
               }}
