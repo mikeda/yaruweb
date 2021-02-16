@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import Modal from 'react-modal';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
@@ -6,8 +6,8 @@ import * as Yup from 'yup';
 import { HighlightFragment, useCreateHighlightMutation, useDeleteHighlightMutation } from '@/lib/graphql/types';
 
 import styles from './VideoHighlights.module.scss';
-import { CurrentPlayerContext } from '@/lib/contexts/CurrentPlayerContext';
 import { FormGroup } from './form/FormGroup';
+import { useCurrentPlayer } from 'hooks/useCurrentPlayer';
 
 const modalStyle = {
   content: {
@@ -29,7 +29,7 @@ interface Props {
 }
 
 export const VideoHighlights: React.FC<Props> = ({ videoId, highlights: initialHighlights, onSelect }) => {
-  const { currentPlayer } = useContext(CurrentPlayerContext);
+  const { currentPlayer } = useCurrentPlayer();
   const [highlights, setHighlights] = useState<HighlightFragment[]>(initialHighlights);
   const [modalOpened, setModalOpened] = useState(false);
   const [createHightlight] = useCreateHighlightMutation({

@@ -1,15 +1,16 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 
 import { useCreatePlayerWithTwitterMutation } from '@/lib/graphql/types';
 import { Routes } from '@/lib/Routes';
 import { signInFirebaseWithTwitter } from '@/lib/firebase';
-import { CurrentPlayerContext } from '@/lib/contexts/CurrentPlayerContext';
+import { currentPlayerState } from 'states/currentPlayer';
+import { useSetRecoilState } from 'recoil';
 
 export const SignUpWithTwitterButton: React.FC = () => {
   const router = useRouter();
-  const { setCurrentPlayer } = useContext(CurrentPlayerContext);
+  const setCurrentPlayer = useSetRecoilState(currentPlayerState);
   const [createPlayerWithTwitter] = useCreatePlayerWithTwitterMutation({
     onCompleted: data => {
       const currentPlayer = data.createPlayerWithTwitter?.currentPlayer;

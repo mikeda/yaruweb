@@ -1,15 +1,16 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-regular-svg-icons';
 
 import { OPPONENT_STATE_TEXTS, THROW_TYPE_TEXTS } from '@/lib/models/Move';
 import { AttackFragment, MoveFragment, MoveOpponentState, ThrowFragment } from '@/lib/graphql/types';
-import { CurrentPlayerContext } from '@/lib/contexts/CurrentPlayerContext';
 import { Routes } from '@/lib/Routes';
 import { Operations } from './Operations';
 
 import styles from './MoveMedia.module.scss';
+
+import { useCurrentPlayer } from 'hooks/useCurrentPlayer';
 
 type Props = {
   move: MoveFragment;
@@ -17,7 +18,7 @@ type Props = {
 
 export const MoveMedia: React.FC<Props> = ({ move }) => {
   const router = useRouter();
-  const { currentPlayer } = useContext(CurrentPlayerContext);
+  const { currentPlayer } = useCurrentPlayer();
 
   return (
     <>

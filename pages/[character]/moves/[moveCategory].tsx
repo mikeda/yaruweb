@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Link from 'next/link';
 
@@ -16,10 +16,10 @@ import {
 import { CharacterPageLayout } from '@/components/layouts/CharacterPageLayout';
 import { MoveList } from '@/components/MoveList';
 import { Routes } from '@/lib/Routes';
-import { CurrentPlayerContext } from '@/lib/contexts/CurrentPlayerContext';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { TabNav } from '@/components/TabNav';
 import { NotFound } from '@/components/NotFound';
+import { useCurrentPlayer } from 'hooks/useCurrentPlayer';
 
 interface Props {
   character: CharacterFragment;
@@ -28,7 +28,7 @@ interface Props {
 }
 
 const Page: React.FC<Props> = ({ character, moveCategories, moveCategorySlug }) => {
-  const { currentPlayer } = useContext(CurrentPlayerContext);
+  const { currentPlayer } = useCurrentPlayer();
 
   return (
     <CharacterPageLayout character={character} activeTab="moves">

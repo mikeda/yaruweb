@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 
@@ -6,7 +6,7 @@ import { useUpdatePlayerMutation } from '@/lib/graphql/types';
 import { PlayerValidator } from '@/lib/validators/PlayerValidator';
 import { FormGroup } from '@/components/form/FormGroup';
 import { Heading } from '@/components/Heading';
-import { CurrentPlayerContext } from '@/lib/contexts/CurrentPlayerContext';
+import { useCurrentPlayer } from 'hooks/useCurrentPlayer';
 
 interface Props {
   currentPlayer: {
@@ -59,7 +59,7 @@ const PlayerEditForm: React.FC<Props> = ({ currentPlayer }) => {
 
 const Page: React.FC = () => {
   // FIXME: データを取り直す
-  const { currentPlayer } = useContext(CurrentPlayerContext);
+  const { currentPlayer } = useCurrentPlayer();
 
   return (
     <>
