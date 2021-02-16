@@ -1,18 +1,17 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { Field, Form, Formik } from 'formik';
 import * as Yup from 'yup';
 
-import { CurrentPlayerContext } from '@/lib/contexts/CurrentPlayerContext';
-
 import styles from './CommentForm.module.scss';
 import { CommentWrapper } from './Comment';
+import { useCurrentPlayer } from 'hooks/useCurrentPlayer';
 
 interface Props {
   onSubmit: (message: string) => void;
 }
 
 export const CommentForm: React.FC<Props> = ({ onSubmit }) => {
-  const { currentPlayer } = useContext(CurrentPlayerContext);
+  const { currentPlayer } = useCurrentPlayer();
 
   if (!currentPlayer) return null;
 

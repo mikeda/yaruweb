@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { useRouter } from 'next/router';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
@@ -9,11 +9,12 @@ import { useCreatePlayerWithEmailMutation } from '@/lib/graphql/types';
 import { FormGroup } from '@/components/form/FormGroup';
 import { Routes } from '@/lib/Routes';
 import { createFirebaseUserWithEmail } from '@/lib/firebase';
-import { CurrentPlayerContext } from '@/lib/contexts/CurrentPlayerContext';
+import { currentPlayerState } from 'states/currentPlayer';
+import { useSetRecoilState } from 'recoil';
 
 export const SignUpWithEmailForm: React.FC = () => {
   const router = useRouter();
-  const { setCurrentPlayer } = useContext(CurrentPlayerContext);
+  const setCurrentPlayer = useSetRecoilState(currentPlayerState);
   const [createPlayerWithEmail] = useCreatePlayerWithEmailMutation({
     onCompleted: data => {
       const currentPlayer = data.createPlayerWithEmail?.currentPlayer;

@@ -1,17 +1,20 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { toast } from 'react-toastify';
 
-import { CurrentPlayerContext } from '@/lib/contexts/CurrentPlayerContext';
 import { Routes } from '@/lib/Routes';
 
 import styles from './PlayerMenu.module.scss';
 import { DropDownMenu } from './DropDownMenu';
 import { signOutFirebase } from '@/lib/firebase';
+import { useCurrentPlayer } from 'hooks/useCurrentPlayer';
+import { useSetRecoilState } from 'recoil';
+import { currentPlayerState } from 'states/currentPlayer';
 
 export const PlayerMenu: React.FC = () => {
-  const { currentPlayer, setCurrentPlayer } = useContext(CurrentPlayerContext);
+  const { currentPlayer } = useCurrentPlayer();
+  const setCurrentPlayer = useSetRecoilState(currentPlayerState);
   const [menuOpened, setMenuOpened] = useState(false);
   const router = useRouter();
 
