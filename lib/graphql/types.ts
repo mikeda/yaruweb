@@ -541,7 +541,6 @@ export type Move = {
   moveCategoryId: Scalars['ID'];
   moveCommands: Array<MoveCommand>;
   name: Scalars['String'];
-  notSpecified: Scalars['Boolean'];
   note?: Maybe<Scalars['String']>;
   rage: Scalars['Boolean'];
   throw?: Maybe<Throw>;
@@ -557,7 +556,6 @@ export type MoveAttributes = {
   kana?: Maybe<Scalars['String']>;
   rage: Scalars['Boolean'];
   comboStarter: Scalars['Boolean'];
-  notSpecified: Scalars['Boolean'];
   note?: Maybe<Scalars['String']>;
   youtubeVideoId?: Maybe<Scalars['String']>;
   attack?: Maybe<AttackAttributes>;
@@ -1255,7 +1253,7 @@ export type HighlightFragment = (
 
 export type MoveFragment = (
   { __typename?: 'Move' }
-  & Pick<Move, 'id' | 'moveCategoryId' | 'type' | 'name' | 'kana' | 'rage' | 'comboStarter' | 'notSpecified' | 'note' | 'youtubeVideoId'>
+  & Pick<Move, 'id' | 'moveCategoryId' | 'type' | 'name' | 'kana' | 'rage' | 'comboStarter' | 'note' | 'youtubeVideoId'>
   & { afterState: (
     { __typename?: 'State' }
     & Pick<State, 'id' | 'name'>
@@ -2339,7 +2337,6 @@ export const MoveFragmentDoc = gql`
   kana
   rage
   comboStarter
-  notSpecified
   note
   youtubeVideoId
   moveCommands {
