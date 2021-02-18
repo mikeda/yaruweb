@@ -41,7 +41,6 @@ export const MoveForm: React.FC<Props> = ({ characterSlug, move, onSubmit, loadi
         kana: move ? move.kana : '',
         rage: move ? move.rage : false,
         comboStarter: move ? move.comboStarter : false,
-        notSpecified: move ? move.notSpecified : false,
         youtubeVideoId: move?.youtubeVideoId,
         attack: {
           hitLevels: move?.attack ? move.attack.hitLevels : '',
@@ -83,7 +82,6 @@ export const MoveForm: React.FC<Props> = ({ characterSlug, move, onSubmit, loadi
 
             <FormCheck name="rage" label="レイジ中" />
             <FormCheck name="comboStarter" label="コンボ始動" />
-            <FormCheck name="notSpecified" label="技表にない" />
             <FormGroup name="youtubeVideoId" placeholder="動画(YouTubeのID)" type="text" />
 
             <FormGroup name="attack.hitLevels" placeholder="攻撃判定" type="text" />

@@ -8,7 +8,6 @@ interface Props {
 }
 
 export const MoveList: React.FC<Props> = ({ moves }) => {
-  const [all, setAll] = useState(false);
   const [powerCrush, setPowerCrush] = useState(false);
   const [crouchingStatus, setCrouchingStatus] = useState(false);
   const [jumpStatus, setJumpStatus] = useState(false);
@@ -30,10 +29,6 @@ export const MoveList: React.FC<Props> = ({ moves }) => {
       if (hitGround && !move.attack.hitGround) return false;
     }
 
-    if (all) {
-      if (move.notSpecified) return false;
-    }
-
     return true;
   };
 
@@ -41,7 +36,6 @@ export const MoveList: React.FC<Props> = ({ moves }) => {
     <>
       <div className="bl_box">
         <div className="bl_moveSelector">
-          <MoveSelectCheckBox label="技表にない技も表示" checked={all} setChecked={setAll} />
           <MoveSelectCheckBox label="パワークラッシュ" checked={powerCrush} setChecked={setPowerCrush} />
           <MoveSelectCheckBox label="しゃがみステータス" checked={crouchingStatus} setChecked={setCrouchingStatus} />
           <MoveSelectCheckBox label="ジャンプステータス" checked={jumpStatus} setChecked={setJumpStatus} />
