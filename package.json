@@ -29,7 +29,7 @@
     "react-modal": "^3.12.1",
     "react-select": "^3.2.0",
     "react-slick": "^0.28.0",
-    "react-toastify": "^7.0.2",
+    "react-toastify": "^7.0.3",
     "react-twitter-widgets": "^1.9.5",
     "react-youtube": "^7.13.1",
     "recoil": "^0.1.2",
