@@ -118,7 +118,6 @@ export type Attack = {
   jumpStatus: Scalars['Boolean'];
   powerCrush: Scalars['Boolean'];
   screw: Scalars['Boolean'];
-  startUpFrame: Scalars['Int'];
   wallBound: Scalars['Boolean'];
   wallSplat: Scalars['Boolean'];
 };
@@ -131,7 +130,6 @@ export type AttackAction = {
 };
 
 export type AttackAttributes = {
-  startUpFrame: Scalars['Int'];
   blockFrame?: Maybe<Scalars['Int']>;
   hitFrame?: Maybe<Scalars['Int']>;
   counterHitFrame?: Maybe<Scalars['Int']>;
@@ -147,12 +145,6 @@ export type AttackAttributes = {
   wallBound: Scalars['Boolean'];
   floorBreak: Scalars['Boolean'];
   hitGround: Scalars['Boolean'];
-};
-
-export type AttackReversal = {
-  __typename?: 'AttackReversal';
-  id: Scalars['ID'];
-  startUpFrame: Scalars['Int'];
 };
 
 export enum AttackTypeEnum {
@@ -557,7 +549,6 @@ export type Move = {
   actions: Array<Action>;
   afterState: State;
   attack?: Maybe<Attack>;
-  attackReversal?: Maybe<AttackReversal>;
   character: Character;
   comboStarter: Scalars['Boolean'];
   id: Scalars['ID'];
@@ -568,6 +559,7 @@ export type Move = {
   name: Scalars['String'];
   note?: Maybe<Scalars['String']>;
   rage: Scalars['Boolean'];
+  startUpFrame?: Maybe<Scalars['Int']>;
   throw?: Maybe<Throw>;
   type: MoveTypeEnum;
   youtubeVideoId?: Maybe<Scalars['String']>;
@@ -579,6 +571,7 @@ export type MoveAttributes = {
   afterStateId: Scalars['ID'];
   name: Scalars['String'];
   kana?: Maybe<Scalars['String']>;
+  startUpFrame?: Maybe<Scalars['Int']>;
   rage: Scalars['Boolean'];
   comboStarter: Scalars['Boolean'];
   note?: Maybe<Scalars['String']>;
@@ -1062,7 +1055,6 @@ export type Throw = {
   floorBreak: Scalars['Boolean'];
   hitState: MoveOpponentState;
   id: Scalars['ID'];
-  startUpFrame?: Maybe<Scalars['Int']>;
   swapAfterEscape: Scalars['Boolean'];
   swapAfterHit: Scalars['Boolean'];
   type: ThrowTypeEnum;
@@ -1256,12 +1248,7 @@ export type ArticleLinkFragment = (
 
 export type AttackFragment = (
   { __typename?: 'Attack' }
-  & Pick<Attack, 'startUpFrame' | 'blockFrame' | 'hitFrame' | 'counterHitFrame' | 'blockState' | 'hitState' | 'counterHitState' | 'powerCrush' | 'crouchingStatus' | 'jumpStatus' | 'homing' | 'screw' | 'wallSplat' | 'wallBound' | 'floorBreak' | 'hitGround'>
-);
-
-export type AttackReversalFragment = (
-  { __typename?: 'AttackReversal' }
-  & Pick<AttackReversal, 'startUpFrame'>
+  & Pick<Attack, 'blockFrame' | 'hitFrame' | 'counterHitFrame' | 'blockState' | 'hitState' | 'counterHitState' | 'powerCrush' | 'crouchingStatus' | 'jumpStatus' | 'homing' | 'screw' | 'wallSplat' | 'wallBound' | 'floorBreak' | 'hitGround'>
 );
 
 export type CharacterFragment = (
@@ -1296,7 +1283,7 @@ export type HighlightFragment = (
 
 export type MoveFragment = (
   { __typename?: 'Move' }
-  & Pick<Move, 'id' | 'moveCategoryId' | 'type' | 'name' | 'kana' | 'rage' | 'comboStarter' | 'note' | 'youtubeVideoId'>
+  & Pick<Move, 'id' | 'moveCategoryId' | 'type' | 'name' | 'kana' | 'startUpFrame' | 'rage' | 'comboStarter' | 'note' | 'youtubeVideoId'>
   & { afterState: (
     { __typename?: 'State' }
     & Pick<State, 'id' | 'name'>
@@ -1315,9 +1302,6 @@ export type MoveFragment = (
   )>, throw?: Maybe<(
     { __typename?: 'Throw' }
     & ThrowFragment
-  )>, attackReversal?: Maybe<(
-    { __typename?: 'AttackReversal' }
-    & AttackReversalFragment
   )>, actions: Array<(
     { __typename: 'AttackAction' }
     & Pick<AttackAction, 'attackType' | 'damage'>
@@ -1349,7 +1333,7 @@ export type StateFragment = (
 
 export type ThrowFragment = (
   { __typename?: 'Throw' }
-  & Pick<Throw, 'type' | 'startUpFrame' | 'hitState' | 'wallSplat' | 'floorBreak' | 'swapAfterHit' | 'swapAfterEscape'>
+  & Pick<Throw, 'type' | 'hitState' | 'wallSplat' | 'floorBreak' | 'swapAfterHit' | 'swapAfterEscape'>
 );
 
 export type VideoFragment = (
@@ -2335,7 +2319,6 @@ export const OperationFragmentDoc = gql`
     `;
 export const AttackFragmentDoc = gql`
     fragment attack on Attack {
-  startUpFrame
   blockFrame
   hitFrame
   counterHitFrame
@@ -2356,17 +2339,11 @@ export const AttackFragmentDoc = gql`
 export const ThrowFragmentDoc = gql`
     fragment throw on Throw {
   type
-  startUpFrame
   hitState
   wallSplat
   floorBreak
   swapAfterHit
   swapAfterEscape
-}
-    `;
-export const AttackReversalFragmentDoc = gql`
-    fragment attackReversal on AttackReversal {
-  startUpFrame
 }
     `;
 export const MoveFragmentDoc = gql`
@@ -2380,6 +2357,7 @@ export const MoveFragmentDoc = gql`
   type
   name
   kana
+  startUpFrame
   rage
   comboStarter
   note
@@ -2399,9 +2377,6 @@ export const MoveFragmentDoc = gql`
   throw {
     ...throw
   }
-  attackReversal {
-    ...attackReversal
-  }
   actions {
     __typename
     ... on AttackAction {
@@ -2417,8 +2392,7 @@ export const MoveFragmentDoc = gql`
 }
     ${OperationFragmentDoc}
 ${AttackFragmentDoc}
-${ThrowFragmentDoc}
-${AttackReversalFragmentDoc}`;
+${ThrowFragmentDoc}`;
 export const MoveCategoryWithMovesFragmentDoc = gql`
     fragment moveCategoryWithMoves on MoveCategory {
   ...moveCategory

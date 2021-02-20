@@ -51,7 +51,7 @@ export const MoveMedia: React.FC<Props> = ({ move }) => {
             {move.throw && <ThrowLabels th={move.throw} />}
 
             {move.attack && <AttackDetails move={move} />}
-            {move.throw && <ThrowDetails th={move.throw} />}
+            {move.throw && <ThrowDetails move={move} />}
 
             {move.note && move.note.length > 0 && <div className={styles.note}>{move.note}</div>}
           </div>
@@ -103,7 +103,7 @@ const ThrowLabels: React.FC<{ th: ThrowFragment }> = ({ th }) => {
   );
 };
 
-const AttackDetails: React.FC<{ move: MoveFragment }> = ({ move: { attack, actions } }) => {
+const AttackDetails: React.FC<{ move: MoveFragment }> = ({ move: { attack, actions, startUpFrame } }) => {
   if (!attack) return null;
 
   const damages = actions.map(a => a.damage);
@@ -131,7 +131,7 @@ const AttackDetails: React.FC<{ move: MoveFragment }> = ({ move: { attack, actio
       </div>
 
       <div className={styles.details}>
-        <MoveDetail label="発生">{`${attack.startUpFrame}F`}</MoveDetail>
+        <MoveDetail label="発生">{`${startUpFrame}F`}</MoveDetail>
         <MoveDetail label="G">
           <OpponentDetail frame={attack.blockFrame} state={attack.blockState} />
         </MoveDetail>
@@ -148,11 +148,12 @@ const AttackDetails: React.FC<{ move: MoveFragment }> = ({ move: { attack, actio
   );
 };
 
-const ThrowDetails: React.FC<{ th: ThrowFragment }> = ({ th }) => {
+const ThrowDetails: React.FC<{ move: MoveFragment }> = ({ move }) => {
+  if (!move.throw) return null;
   return (
     <>
-      <MoveDetail label="判定">{THROW_TYPE_TEXTS[th.type]}</MoveDetail>
-      {th.startUpFrame && <MoveDetail label="発生">{`${th.startUpFrame}F`}</MoveDetail>}
+      <MoveDetail label="判定">{THROW_TYPE_TEXTS[move.throw.type]}</MoveDetail>
+      {move.startUpFrame && <MoveDetail label="発生">{`${move.startUpFrame}F`}</MoveDetail>}
     </>
   );
 };

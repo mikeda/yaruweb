@@ -38,11 +38,11 @@ export const MoveForm: React.FC<Props> = ({ characterSlug, move, onSubmit, loadi
         afterStateId: move ? move.afterState.id : '',
         name: move ? move.name : '',
         kana: move ? move.kana : '',
+        startUpFrame: move?.startUpFrame,
         rage: move ? move.rage : false,
         comboStarter: move ? move.comboStarter : false,
         youtubeVideoId: move?.youtubeVideoId,
         attack: {
-          startUpFrame: move?.attack ? move.attack.startUpFrame : 10,
           blockState: move?.attack ? move.attack.blockState : MoveOpponentState.Unchanged,
           hitState: move?.attack ? move.attack.hitState : MoveOpponentState.Unchanged,
           counterHitState: move?.attack ? move.attack.counterHitState : MoveOpponentState.Unchanged,
@@ -81,7 +81,7 @@ export const MoveForm: React.FC<Props> = ({ characterSlug, move, onSubmit, loadi
             <FormCheck name="comboStarter" label="コンボ始動" />
             <FormGroup name="youtubeVideoId" placeholder="動画(YouTubeのID)" type="text" />
 
-            <FormGroup name="attack.startUpFrame" placeholder="発生" type="number" />
+            <FormGroup name="startUpFrame" placeholder="発生" type="number" />
 
             <div className="el_form_group">
               <button type="submit" disabled={loading || !isValid} className="el_btn">
