@@ -25,7 +25,6 @@ export const MoveList: React.FC<Props> = ({ moves }) => {
       if (homing && !move.attack.homing) return false;
       if (screw && !move.attack.screw) return false;
       if (wallBound && !move.attack.wallBound) return false;
-      if (floorBreak && !move.attack.floorBreak) return false;
       if (hitGround && !move.attack.hitGround) return false;
     }
 

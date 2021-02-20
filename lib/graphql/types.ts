@@ -109,7 +109,6 @@ export type Attack = {
   counterHitFrame?: Maybe<Scalars['Int']>;
   counterHitState: MoveOpponentState;
   crouchingStatus: Scalars['Boolean'];
-  floorBreak: Scalars['Boolean'];
   hitFrame?: Maybe<Scalars['Int']>;
   hitGround: Scalars['Boolean'];
   hitState: MoveOpponentState;
@@ -119,7 +118,6 @@ export type Attack = {
   powerCrush: Scalars['Boolean'];
   screw: Scalars['Boolean'];
   wallBound: Scalars['Boolean'];
-  wallSplat: Scalars['Boolean'];
 };
 
 export type AttackAction = {
@@ -141,9 +139,7 @@ export type AttackAttributes = {
   jumpStatus: Scalars['Boolean'];
   homing: Scalars['Boolean'];
   screw: Scalars['Boolean'];
-  wallSplat: Scalars['Boolean'];
   wallBound: Scalars['Boolean'];
-  floorBreak: Scalars['Boolean'];
   hitGround: Scalars['Boolean'];
 };
 
@@ -560,7 +556,6 @@ export type Move = {
   note?: Maybe<Scalars['String']>;
   rage: Scalars['Boolean'];
   startUpFrame?: Maybe<Scalars['Int']>;
-  throw?: Maybe<Throw>;
   type: MoveTypeEnum;
   youtubeVideoId?: Maybe<Scalars['String']>;
 };
@@ -1050,17 +1045,6 @@ export type Tag = {
   updatedAt: Scalars['ISO8601DateTime'];
 };
 
-export type Throw = {
-  __typename?: 'Throw';
-  floorBreak: Scalars['Boolean'];
-  hitState: MoveOpponentState;
-  id: Scalars['ID'];
-  swapAfterEscape: Scalars['Boolean'];
-  swapAfterHit: Scalars['Boolean'];
-  type: ThrowTypeEnum;
-  wallSplat: Scalars['Boolean'];
-};
-
 export type ThrowAction = {
   __typename?: 'ThrowAction';
   damage: Scalars['Int'];
@@ -1248,7 +1232,7 @@ export type ArticleLinkFragment = (
 
 export type AttackFragment = (
   { __typename?: 'Attack' }
-  & Pick<Attack, 'blockFrame' | 'hitFrame' | 'counterHitFrame' | 'blockState' | 'hitState' | 'counterHitState' | 'powerCrush' | 'crouchingStatus' | 'jumpStatus' | 'homing' | 'screw' | 'wallSplat' | 'wallBound' | 'floorBreak' | 'hitGround'>
+  & Pick<Attack, 'blockFrame' | 'hitFrame' | 'counterHitFrame' | 'blockState' | 'hitState' | 'counterHitState' | 'powerCrush' | 'crouchingStatus' | 'jumpStatus' | 'homing' | 'screw' | 'wallBound' | 'hitGround'>
 );
 
 export type CharacterFragment = (
@@ -1299,9 +1283,6 @@ export type MoveFragment = (
   )>, attack?: Maybe<(
     { __typename?: 'Attack' }
     & AttackFragment
-  )>, throw?: Maybe<(
-    { __typename?: 'Throw' }
-    & ThrowFragment
   )>, actions: Array<(
     { __typename: 'AttackAction' }
     & Pick<AttackAction, 'attackType' | 'damage'>
@@ -1329,11 +1310,6 @@ export type PagingFragment = (
 export type StateFragment = (
   { __typename?: 'State' }
   & Pick<State, 'id' | 'name'>
-);
-
-export type ThrowFragment = (
-  { __typename?: 'Throw' }
-  & Pick<Throw, 'type' | 'hitState' | 'wallSplat' | 'floorBreak' | 'swapAfterHit' | 'swapAfterEscape'>
 );
 
 export type VideoFragment = (
@@ -2330,20 +2306,8 @@ export const AttackFragmentDoc = gql`
   jumpStatus
   homing
   screw
-  wallSplat
   wallBound
-  floorBreak
   hitGround
-}
-    `;
-export const ThrowFragmentDoc = gql`
-    fragment throw on Throw {
-  type
-  hitState
-  wallSplat
-  floorBreak
-  swapAfterHit
-  swapAfterEscape
 }
     `;
 export const MoveFragmentDoc = gql`
@@ -2374,9 +2338,6 @@ export const MoveFragmentDoc = gql`
   attack {
     ...attack
   }
-  throw {
-    ...throw
-  }
   actions {
     __typename
     ... on AttackAction {
@@ -2391,8 +2352,7 @@ export const MoveFragmentDoc = gql`
   }
 }
     ${OperationFragmentDoc}
-${AttackFragmentDoc}
-${ThrowFragmentDoc}`;
+${AttackFragmentDoc}`;
 export const MoveCategoryWithMovesFragmentDoc = gql`
     fragment moveCategoryWithMoves on MoveCategory {
   ...moveCategory

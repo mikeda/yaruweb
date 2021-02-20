@@ -51,9 +51,7 @@ export const MoveForm: React.FC<Props> = ({ characterSlug, move, onSubmit, loadi
           jumpStatus: move?.attack ? move.attack.jumpStatus : false,
           homing: move?.attack ? move.attack.homing : false,
           screw: move?.attack ? move.attack.screw : false,
-          wallSplat: move?.attack ? move.attack.wallSplat : false,
           wallBound: move?.attack ? move.attack.wallBound : false,
-          floorBreak: move?.attack ? move.attack.floorBreak : false,
           hitGround: move?.attack ? move.attack.hitGround : false,
         },
       }}
