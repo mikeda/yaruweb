@@ -12,7 +12,6 @@ import {
 } from '@/lib/graphql/types';
 import { FormGroup } from '../form/FormGroup';
 import { MoveCategoryOptions } from './MoveCategoryOptions';
-import { MoveOpponentStateText } from '@/lib/graphql/enum_texts';
 import { FormSelect } from '../form/FormSelect';
 import { FormCheck } from '../form/FormCheck';
 import { StateOptions } from './StateOptions';
@@ -43,8 +42,6 @@ export const MoveForm: React.FC<Props> = ({ characterSlug, move, onSubmit, loadi
         comboStarter: move ? move.comboStarter : false,
         youtubeVideoId: move?.youtubeVideoId,
         attack: {
-          hitLevels: move?.attack ? move.attack.hitLevels : '',
-          damages: move?.attack ? move.attack.damages : '',
           startUpFrame: move?.attack ? move.attack.startUpFrame : 10,
           blockState: move?.attack ? move.attack.blockState : MoveOpponentState.Unchanged,
           hitState: move?.attack ? move.attack.hitState : MoveOpponentState.Unchanged,
@@ -84,35 +81,7 @@ export const MoveForm: React.FC<Props> = ({ characterSlug, move, onSubmit, loadi
             <FormCheck name="comboStarter" label="コンボ始動" />
             <FormGroup name="youtubeVideoId" placeholder="動画(YouTubeのID)" type="text" />
 
-            <FormGroup name="attack.hitLevels" placeholder="攻撃判定" type="text" />
-            <FormGroup name="attack.damages" placeholder="ダメージ" type="text" />
             <FormGroup name="attack.startUpFrame" placeholder="発生" type="number" />
-
-            <FormGroup name="attack.startUpFrame" placeholder="発生" type="number" />
-
-            <FormSelect name="attack.blockState" label="ガード後">
-              {Object.entries(MoveOpponentStateText).map(([key, value]) => (
-                <option value={key} key={key}>
-                  {value}
-                </option>
-              ))}
-            </FormSelect>
-
-            <FormSelect name="attack.hitState" label="ヒット後">
-              {Object.entries(MoveOpponentStateText).map(([key, value]) => (
-                <option value={key} key={key}>
-                  {value}
-                </option>
-              ))}
-            </FormSelect>
-
-            <FormSelect name="attack.counterHitState" label="カウンターヒット後">
-              {Object.entries(MoveOpponentStateText).map(([key, value]) => (
-                <option value={key} key={key}>
-                  {value}
-                </option>
-              ))}
-            </FormSelect>
 
             <div className="el_form_group">
               <button type="submit" disabled={loading || !isValid} className="el_btn">

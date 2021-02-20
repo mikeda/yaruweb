@@ -11,6 +11,7 @@ import { Operations } from './Operations';
 import styles from './MoveMedia.module.scss';
 
 import { useCurrentPlayer } from 'hooks/useCurrentPlayer';
+import { AttackTypeEnumText, ThrowTypeEnumText } from '@/lib/graphql/enum_texts';
 
 type Props = {
   move: MoveFragment;
@@ -49,7 +50,7 @@ export const MoveMedia: React.FC<Props> = ({ move }) => {
             {move.attack && <AttackLabels attack={move.attack} />}
             {move.throw && <ThrowLabels th={move.throw} />}
 
-            {move.attack && <AttackDetails attack={move.attack} />}
+            {move.attack && <AttackDetails move={move} />}
             {move.throw && <ThrowDetails th={move.throw} />}
 
             {move.note && move.note.length > 0 && <div className={styles.note}>{move.note}</div>}
@@ -73,24 +74,6 @@ export const MoveMedia: React.FC<Props> = ({ move }) => {
       </div>
     </>
   );
-};
-
-const HIT_LEVEL_TEXTS: { [key: string]: string } = {
-  h: '上',
-  m: '中',
-  l: '下',
-  sm: '特殊中',
-  ubh: '上段ガード不能',
-  ubm: '中段ガード不能',
-  ubl: '下段ガード不能',
-  t: '投げ',
-};
-
-const hitLevelsText = (hitLevels: string) => {
-  return hitLevels
-    .split(',')
-    .map(l => HIT_LEVEL_TEXTS[l])
-    .join(',');
 };
 
 const AttackLabels: React.FC<{ attack: AttackFragment }> = ({ attack }) => {
@@ -120,17 +103,30 @@ const ThrowLabels: React.FC<{ th: ThrowFragment }> = ({ th }) => {
   );
 };
 
-const AttackDetails: React.FC<{ attack: AttackFragment }> = ({ attack }) => {
-  const damages = attack.damages.split(',').map(a => Number(a));
-  const totalDamage = damages.reduce((a, d) => a + d);
+const AttackDetails: React.FC<{ move: MoveFragment }> = ({ move: { attack, actions } }) => {
+  if (!attack) return null;
+
+  const damages = actions.map(a => a.damage);
+  const totalDamage = actions.map(a => a.damage).reduce((a, b) => a + b);
 
   return (
     <>
       <div className={styles.details}>
-        <MoveDetail label="判定">{hitLevelsText(attack.hitLevels)}</MoveDetail>
+        <MoveDetail label="判定">
+          {actions
+            .map(action => {
+              switch (action.__typename) {
+                case 'AttackAction':
+                  return AttackTypeEnumText[action.attackType];
+                case 'ThrowAction':
+                  return ThrowTypeEnumText[action.throwType];
+              }
+            })
+            .join(', ')}
+        </MoveDetail>
         <MoveDetail label="ダメージ">
           {totalDamage}
-          {damages.length > 1 && `(${attack.damages})`}
+          {damages.length > 1 && `(${damages.join(', ')})`}
         </MoveDetail>
       </div>
 
