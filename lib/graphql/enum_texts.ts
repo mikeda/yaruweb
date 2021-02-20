@@ -7,12 +7,12 @@ export const ArticleCategoryText: { [key in Types.ArticleCategory]: string } = {
   battle: '対戦',
   news: 'ニュース',
   blog: '雑談',
-}
+};
 
 export const ArticleStatusText: { [key in Types.ArticleStatus]: string } = {
   draft: '下書き',
   published: '公開中',
-}
+};
 
 export const MoveOpponentStateText: { [key in Types.MoveOpponentState]: string } = {
   unchanged: 'そのまま',
@@ -23,19 +23,30 @@ export const MoveOpponentStateText: { [key in Types.MoveOpponentState]: string }
   screw: 'スクリューコンボ',
   smash: '叩きつけコンボ',
   fall_down: '転びコンボ',
-}
+};
 
 export const MoveTypeEnumText: { [key in Types.MoveTypeEnum]: string } = {
   attack: '攻撃',
   throw: '投げ',
   attack_reversal: '返し技',
   stance: '構え',
-}
+};
 
 export const OrderText: { [key in Types.Order]: string } = {
   popular: '人気',
   new: '新着',
-}
+};
+
+export const AttackTypeEnumText: { [key in Types.AttackTypeEnum]: string } = {
+  h: '上',
+  m: '中',
+  l: '下',
+  sm: '特殊中',
+  ubh: '上段ガード不能',
+  ubm: '中段ガード不能',
+  ubl: '下段ガード不能',
+  t: '打撃投げ',
+};
 
 export const ThrowTypeEnumText: { [key in Types.ThrowTypeEnum]: string } = {
   high: '上段投げ',
@@ -45,4 +56,4 @@ export const ThrowTypeEnumText: { [key in Types.ThrowTypeEnum]: string } = {
   juggle: '空中投げ',
   wall: '壁投げ',
   combo: '投げコンボ',
-}
+};

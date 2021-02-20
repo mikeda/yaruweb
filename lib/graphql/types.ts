@@ -15,6 +15,8 @@ export type Scalars = {
   ISO8601DateTime: string;
 };
 
+export type Action = AttackAction | ThrowAction;
+
 export type Article = {
   __typename?: 'Article';
   author: Player;
@@ -107,11 +109,9 @@ export type Attack = {
   counterHitFrame?: Maybe<Scalars['Int']>;
   counterHitState: MoveOpponentState;
   crouchingStatus: Scalars['Boolean'];
-  damages: Scalars['String'];
   floorBreak: Scalars['Boolean'];
   hitFrame?: Maybe<Scalars['Int']>;
   hitGround: Scalars['Boolean'];
-  hitLevels: Scalars['String'];
   hitState: MoveOpponentState;
   homing: Scalars['Boolean'];
   id: Scalars['ID'];
@@ -123,9 +123,14 @@ export type Attack = {
   wallSplat: Scalars['Boolean'];
 };
 
+export type AttackAction = {
+  __typename?: 'AttackAction';
+  attackType: AttackTypeEnum;
+  damage: Scalars['Int'];
+  id: Scalars['ID'];
+};
+
 export type AttackAttributes = {
-  hitLevels: Scalars['String'];
-  damages: Scalars['String'];
   startUpFrame: Scalars['Int'];
   blockFrame?: Maybe<Scalars['Int']>;
   hitFrame?: Maybe<Scalars['Int']>;
@@ -149,6 +154,25 @@ export type AttackReversal = {
   id: Scalars['ID'];
   startUpFrame: Scalars['Int'];
 };
+
+export enum AttackTypeEnum {
+  /** 上段 */
+  H = 'h',
+  /** 中段 */
+  M = 'm',
+  /** 下段 */
+  L = 'l',
+  /** 特殊中段 */
+  Sm = 'sm',
+  /** 上段ガード不能 */
+  Ubh = 'ubh',
+  /** 中段ガード不能 */
+  Ubm = 'ubm',
+  /** 下段ガード不能 */
+  Ubl = 'ubl',
+  /** 打撃投げ */
+  T = 't'
+}
 
 export type Character = {
   __typename?: 'Character';
@@ -530,6 +554,7 @@ export type HighlightAttributes = {
 
 export type Move = {
   __typename?: 'Move';
+  actions: Array<Action>;
   afterState: State;
   attack?: Maybe<Attack>;
   attackReversal?: Maybe<AttackReversal>;
@@ -844,6 +869,7 @@ export type PublishArticlePayload = {
 
 export type Query = {
   __typename?: 'Query';
+  actions: Array<Action>;
   allArticles: Array<Article>;
   article: Article;
   articleComments: Array<ArticleComment>;
@@ -1033,8 +1059,6 @@ export type Tag = {
 
 export type Throw = {
   __typename?: 'Throw';
-  damages: Scalars['String'];
-  escapeCommand?: Maybe<Scalars['String']>;
   floorBreak: Scalars['Boolean'];
   hitState: MoveOpponentState;
   id: Scalars['ID'];
@@ -1044,6 +1068,25 @@ export type Throw = {
   type: ThrowTypeEnum;
   wallSplat: Scalars['Boolean'];
 };
+
+export type ThrowAction = {
+  __typename?: 'ThrowAction';
+  damage: Scalars['Int'];
+  escape?: Maybe<ThrowEscapeEnum>;
+  id: Scalars['ID'];
+  throwType: ThrowTypeEnum;
+};
+
+export enum ThrowEscapeEnum {
+  /** LP OR RP */
+  LpOrRp = 'lp_or_rp',
+  /** WP */
+  Wp = 'wp',
+  /** LP */
+  Lp = 'lp',
+  /** RP */
+  Rp = 'rp'
+}
 
 export enum ThrowTypeEnum {
   /** 上段投げ */
@@ -1213,7 +1256,7 @@ export type ArticleLinkFragment = (
 
 export type AttackFragment = (
   { __typename?: 'Attack' }
-  & Pick<Attack, 'hitLevels' | 'damages' | 'startUpFrame' | 'blockFrame' | 'hitFrame' | 'counterHitFrame' | 'blockState' | 'hitState' | 'counterHitState' | 'powerCrush' | 'crouchingStatus' | 'jumpStatus' | 'homing' | 'screw' | 'wallSplat' | 'wallBound' | 'floorBreak' | 'hitGround'>
+  & Pick<Attack, 'startUpFrame' | 'blockFrame' | 'hitFrame' | 'counterHitFrame' | 'blockState' | 'hitState' | 'counterHitState' | 'powerCrush' | 'crouchingStatus' | 'jumpStatus' | 'homing' | 'screw' | 'wallSplat' | 'wallBound' | 'floorBreak' | 'hitGround'>
 );
 
 export type AttackReversalFragment = (
@@ -1275,6 +1318,12 @@ export type MoveFragment = (
   )>, attackReversal?: Maybe<(
     { __typename?: 'AttackReversal' }
     & AttackReversalFragment
+  )>, actions: Array<(
+    { __typename: 'AttackAction' }
+    & Pick<AttackAction, 'attackType' | 'damage'>
+  ) | (
+    { __typename: 'ThrowAction' }
+    & Pick<ThrowAction, 'throwType' | 'damage' | 'escape'>
   )> }
 );
 
@@ -1300,7 +1349,7 @@ export type StateFragment = (
 
 export type ThrowFragment = (
   { __typename?: 'Throw' }
-  & Pick<Throw, 'type' | 'damages' | 'escapeCommand' | 'startUpFrame' | 'hitState' | 'wallSplat' | 'floorBreak' | 'swapAfterHit' | 'swapAfterEscape'>
+  & Pick<Throw, 'type' | 'startUpFrame' | 'hitState' | 'wallSplat' | 'floorBreak' | 'swapAfterHit' | 'swapAfterEscape'>
 );
 
 export type VideoFragment = (
@@ -2286,8 +2335,6 @@ export const OperationFragmentDoc = gql`
     `;
 export const AttackFragmentDoc = gql`
     fragment attack on Attack {
-  hitLevels
-  damages
   startUpFrame
   blockFrame
   hitFrame
@@ -2309,8 +2356,6 @@ export const AttackFragmentDoc = gql`
 export const ThrowFragmentDoc = gql`
     fragment throw on Throw {
   type
-  damages
-  escapeCommand
   startUpFrame
   hitState
   wallSplat
@@ -2356,6 +2401,18 @@ export const MoveFragmentDoc = gql`
   }
   attackReversal {
     ...attackReversal
+  }
+  actions {
+    __typename
+    ... on AttackAction {
+      attackType
+      damage
+    }
+    ... on ThrowAction {
+      throwType
+      damage
+      escape
+    }
   }
 }
     ${OperationFragmentDoc}
