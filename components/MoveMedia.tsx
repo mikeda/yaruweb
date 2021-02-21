@@ -3,8 +3,8 @@ import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-regular-svg-icons';
 
-import { OPPONENT_STATE_TEXTS, THROW_TYPE_TEXTS } from '@/lib/models/Move';
-import { AttackFragment, MoveFragment, MoveOpponentState, ThrowFragment } from '@/lib/graphql/types';
+import { OPPONENT_STATE_TEXTS } from '@/lib/models/Move';
+import { AttackFragment, MoveFragment, MoveOpponentState } from '@/lib/graphql/types';
 import { Routes } from '@/lib/Routes';
 import { Operations } from './Operations';
 
@@ -48,10 +48,12 @@ export const MoveMedia: React.FC<Props> = ({ move }) => {
             {move.moveCommands[0] && <Operations operations={move.moveCommands[0].operations} />}
 
             {move.attack && <AttackLabels attack={move.attack} />}
-            {move.throw && <ThrowLabels th={move.throw} />}
+
+            <div className={styles.details}>
+              <MoveDetail label="発生">{`${move.startUpFrame}F`}</MoveDetail>
+            </div>
 
             {move.attack && <AttackDetails move={move} />}
-            {move.throw && <ThrowDetails move={move} />}
 
             {move.note && move.note.length > 0 && <div className={styles.note}>{move.note}</div>}
           </div>
@@ -84,26 +86,13 @@ const AttackLabels: React.FC<{ attack: AttackFragment }> = ({ attack }) => {
       {attack.jumpStatus && <span>ジャンステ</span>}
       {attack.homing && <span>ホーミング</span>}
       {attack.screw && <span>スクリュー</span>}
-      {attack.wallSplat && <span>壁コンボ</span>}
       {attack.wallBound && <span>ウォールバウンド</span>}
-      {attack.floorBreak && <span>床破壊</span>}
       {attack.hitGround && <span>ダウン状態に当たる</span>}
     </div>
   );
 };
 
-const ThrowLabels: React.FC<{ th: ThrowFragment }> = ({ th }) => {
-  return (
-    <div className={styles.tags}>
-      {th.wallSplat && <span> 壁コンボ </span>}
-      {th.floorBreak && <span>床破壊</span>}
-      {th.swapAfterHit && <span>位置交代</span>}
-      {th.swapAfterEscape && <span>投げ抜けで位置交代</span>}
-    </div>
-  );
-};
-
-const AttackDetails: React.FC<{ move: MoveFragment }> = ({ move: { attack, actions, startUpFrame } }) => {
+const AttackDetails: React.FC<{ move: MoveFragment }> = ({ move: { attack, actions } }) => {
   if (!attack) return null;
 
   const damages = actions.map(a => a.damage);
@@ -131,7 +120,6 @@ const AttackDetails: React.FC<{ move: MoveFragment }> = ({ move: { attack, actio
       </div>
 
       <div className={styles.details}>
-        <MoveDetail label="発生">{`${startUpFrame}F`}</MoveDetail>
         <MoveDetail label="G">
           <OpponentDetail frame={attack.blockFrame} state={attack.blockState} />
         </MoveDetail>
@@ -144,16 +132,6 @@ const AttackDetails: React.FC<{ move: MoveFragment }> = ({ move: { attack, actio
           </MoveDetail>
         )}
       </div>
-    </>
-  );
-};
-
-const ThrowDetails: React.FC<{ move: MoveFragment }> = ({ move }) => {
-  if (!move.throw) return null;
-  return (
-    <>
-      <MoveDetail label="判定">{THROW_TYPE_TEXTS[move.throw.type]}</MoveDetail>
-      {move.startUpFrame && <MoveDetail label="発生">{`${move.startUpFrame}F`}</MoveDetail>}
     </>
   );
 };
