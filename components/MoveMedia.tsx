@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-regular-svg-icons';
 
-import { AttackFragment, MoveFragment, OpponentStateEnum } from '@/lib/graphql/types';
+import { MoveFragment, OpponentStateEnum } from '@/lib/graphql/types';
 import { Routes } from '@/lib/Routes';
 import { Operations } from './Operations';
 
@@ -51,13 +51,13 @@ export const MoveMedia: React.FC<Props> = ({ move }) => {
           <div>
             {move.moveCommands[0] && <Operations operations={move.moveCommands[0].operations} />}
 
-            {move.attack && <AttackLabels attack={move.attack} />}
+            <AttackLabels move={move} />
 
             <div className={styles.details}>
               <MoveDetail label="発生">{`${move.startUpFrame}F`}</MoveDetail>
             </div>
 
-            {move.attack && <AttackDetails move={move} />}
+            <AttackDetails move={move} />
 
             {move.note && move.note.length > 0 && <div className={styles.note}>{move.note}</div>}
           </div>
@@ -82,32 +82,29 @@ export const MoveMedia: React.FC<Props> = ({ move }) => {
   );
 };
 
-const AttackLabels: React.FC<{ attack: AttackFragment }> = ({ attack }) => {
+const AttackLabels: React.FC<{ move: MoveFragment }> = ({ move }) => {
   return (
     <div className={styles.tags}>
-      {attack.powerCrush && <span>パワークラッシュ</span>}
-      {attack.crouchingStatus && <span>しゃがステ</span>}
-      {attack.jumpStatus && <span>ジャンステ</span>}
-      {attack.homing && <span>ホーミング</span>}
-      {attack.screw && <span>スクリュー</span>}
-      {attack.wallBound && <span>ウォールバウンド</span>}
-      {attack.hitGround && <span>ダウン状態に当たる</span>}
+      {move.powerCrush && <span>パワークラッシュ</span>}
+      {move.crouchingStatus && <span>しゃがステ</span>}
+      {move.jumpStatus && <span>ジャンステ</span>}
+      {move.homing && <span>ホーミング</span>}
+      {move.screw && <span>スクリュー</span>}
+      {move.wallBound && <span>ウォールバウンド</span>}
     </div>
   );
 };
 
-const AttackDetails: React.FC<{ move: MoveFragment }> = ({ move: { attack, actions } }) => {
-  if (!attack) return null;
-
-  const damages = actions.map(a => a.damage);
-  const totalDamage = actions.map(a => a.damage).reduce((a, b) => a + b);
-  const lastAction = actions[actions.length - 1];
+const AttackDetails: React.FC<{ move: MoveFragment }> = ({ move }) => {
+  const damages = move.actions.map(a => a.damage);
+  const totalDamage = move.actions.map(a => a.damage).reduce((a, b) => a + b);
+  const lastAction = move.actions[move.actions.length - 1];
 
   return (
     <>
       <div className={styles.details}>
         <MoveDetail label="判定">
-          {actions
+          {move.actions
             .map(action => {
               switch (action.__typename) {
                 case 'AttackAction':

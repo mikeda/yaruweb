@@ -41,15 +41,12 @@ export const MoveForm: React.FC<Props> = ({ characterSlug, move, onSubmit, loadi
         rage: move ? move.rage : false,
         comboStarter: move ? move.comboStarter : false,
         youtubeVideoId: move?.youtubeVideoId,
-        attack: {
-          powerCrush: move?.attack ? move.attack.powerCrush : false,
-          crouchingStatus: move?.attack ? move.attack.crouchingStatus : false,
-          jumpStatus: move?.attack ? move.attack.jumpStatus : false,
-          homing: move?.attack ? move.attack.homing : false,
-          screw: move?.attack ? move.attack.screw : false,
-          wallBound: move?.attack ? move.attack.wallBound : false,
-          hitGround: move?.attack ? move.attack.hitGround : false,
-        },
+        powerCrush: move ? move.powerCrush : false,
+        crouchingStatus: move ? move.crouchingStatus : false,
+        jumpStatus: move ? move.jumpStatus : false,
+        homing: move ? move.homing : false,
+        screw: move ? move.screw : false,
+        wallBound: move ? move.wallBound : false,
       }}
       validationSchema={Yup.object({
         name: Yup.string().required('技名を入力して下さい。'),

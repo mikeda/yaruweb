@@ -107,34 +107,12 @@ export enum ArticleStatus {
   Published = 'published'
 }
 
-export type Attack = {
-  __typename?: 'Attack';
-  crouchingStatus: Scalars['Boolean'];
-  hitGround: Scalars['Boolean'];
-  homing: Scalars['Boolean'];
-  id: Scalars['ID'];
-  jumpStatus: Scalars['Boolean'];
-  powerCrush: Scalars['Boolean'];
-  screw: Scalars['Boolean'];
-  wallBound: Scalars['Boolean'];
-};
-
 export type AttackAction = Actionable & {
   __typename?: 'AttackAction';
   attackType: AttackTypeEnum;
   damage: Scalars['Int'];
   id: Scalars['ID'];
   opponentStates: Array<OpponentState>;
-};
-
-export type AttackAttributes = {
-  powerCrush: Scalars['Boolean'];
-  crouchingStatus: Scalars['Boolean'];
-  jumpStatus: Scalars['Boolean'];
-  homing: Scalars['Boolean'];
-  screw: Scalars['Boolean'];
-  wallBound: Scalars['Boolean'];
-  hitGround: Scalars['Boolean'];
 };
 
 export enum AttackTypeEnum {
@@ -538,19 +516,24 @@ export type Move = {
   __typename?: 'Move';
   actions: Array<Action>;
   afterState: State;
-  attack?: Maybe<Attack>;
   character: Character;
   comboStarter: Scalars['Boolean'];
+  crouchingStatus: Scalars['Boolean'];
+  homing: Scalars['Boolean'];
   id: Scalars['ID'];
+  jumpStatus: Scalars['Boolean'];
   kana?: Maybe<Scalars['String']>;
   moveCategory: MoveCategory;
   moveCategoryId: Scalars['ID'];
   moveCommands: Array<MoveCommand>;
   name: Scalars['String'];
   note?: Maybe<Scalars['String']>;
+  powerCrush: Scalars['Boolean'];
   rage: Scalars['Boolean'];
+  screw: Scalars['Boolean'];
   startUpFrame?: Maybe<Scalars['Int']>;
   type: MoveTypeEnum;
+  wallBound: Scalars['Boolean'];
   youtubeVideoId?: Maybe<Scalars['String']>;
 };
 
@@ -563,9 +546,14 @@ export type MoveAttributes = {
   startUpFrame?: Maybe<Scalars['Int']>;
   rage: Scalars['Boolean'];
   comboStarter: Scalars['Boolean'];
+  powerCrush: Scalars['Boolean'];
+  crouchingStatus: Scalars['Boolean'];
+  jumpStatus: Scalars['Boolean'];
+  homing: Scalars['Boolean'];
+  screw: Scalars['Boolean'];
+  wallBound: Scalars['Boolean'];
   note?: Maybe<Scalars['String']>;
   youtubeVideoId?: Maybe<Scalars['String']>;
-  attack?: Maybe<AttackAttributes>;
 };
 
 export type MoveCategory = {
@@ -1252,11 +1240,6 @@ export type ArticleLinkFragment = (
   & Pick<ArticleLink, 'url' | 'title' | 'description' | 'imageUrl'>
 );
 
-export type AttackFragment = (
-  { __typename?: 'Attack' }
-  & Pick<Attack, 'powerCrush' | 'crouchingStatus' | 'jumpStatus' | 'homing' | 'screw' | 'wallBound' | 'hitGround'>
-);
-
 export type CharacterFragment = (
   { __typename?: 'Character' }
   & Pick<Character, 'story' | 'description'>
@@ -1289,7 +1272,7 @@ export type HighlightFragment = (
 
 export type MoveFragment = (
   { __typename?: 'Move' }
-  & Pick<Move, 'id' | 'moveCategoryId' | 'type' | 'name' | 'kana' | 'startUpFrame' | 'rage' | 'comboStarter' | 'note' | 'youtubeVideoId'>
+  & Pick<Move, 'id' | 'moveCategoryId' | 'type' | 'name' | 'kana' | 'startUpFrame' | 'rage' | 'comboStarter' | 'powerCrush' | 'crouchingStatus' | 'jumpStatus' | 'homing' | 'screw' | 'wallBound' | 'note' | 'youtubeVideoId'>
   & { afterState: (
     { __typename?: 'State' }
     & Pick<State, 'id' | 'name'>
@@ -1302,9 +1285,6 @@ export type MoveFragment = (
       { __typename?: 'Operation' }
       & OperationFragment
     )> }
-  )>, attack?: Maybe<(
-    { __typename?: 'Attack' }
-    & AttackFragment
   )>, actions: Array<(
     { __typename: 'AttackAction' }
     & Pick<AttackAction, 'id' | 'attackType' | 'damage'>
@@ -2323,17 +2303,6 @@ export const OperationFragmentDoc = gql`
   icon
 }
     `;
-export const AttackFragmentDoc = gql`
-    fragment attack on Attack {
-  powerCrush
-  crouchingStatus
-  jumpStatus
-  homing
-  screw
-  wallBound
-  hitGround
-}
-    `;
 export const MoveFragmentDoc = gql`
     fragment move on Move {
   id
@@ -2348,6 +2317,12 @@ export const MoveFragmentDoc = gql`
   startUpFrame
   rage
   comboStarter
+  powerCrush
+  crouchingStatus
+  jumpStatus
+  homing
+  screw
+  wallBound
   note
   youtubeVideoId
   moveCommands {
@@ -2358,9 +2333,6 @@ export const MoveFragmentDoc = gql`
     operations {
       ...operation
     }
-  }
-  attack {
-    ...attack
   }
   actions {
     __typename
@@ -2389,8 +2361,7 @@ export const MoveFragmentDoc = gql`
     }
   }
 }
-    ${OperationFragmentDoc}
-${AttackFragmentDoc}`;
+    ${OperationFragmentDoc}`;
 export const MoveCategoryWithMovesFragmentDoc = gql`
     fragment moveCategoryWithMoves on MoveCategory {
   ...moveCategory
