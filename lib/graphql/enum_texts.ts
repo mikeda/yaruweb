@@ -13,16 +13,27 @@ export const ArticleStatusText: { [key in Types.ArticleStatus]: string } = {
   draft: '下書き',
   published: '公開中',
 };
+[];
+export const OpponentStateTypeText: { [key in Types.OpponentStateTypeEnum]: string } = {
+  block: 'ガード',
+  hit: 'ヒット',
+  counter_hit: 'カウンターヒット',
+  clean_hit: 'クリーンヒット',
+  crouching_hit: 'しゃがみにヒット',
+};
 
-export const MoveOpponentStateText: { [key in Types.MoveOpponentState]: string } = {
+export const OpponentStateText: { [key in Types.OpponentStateEnum]: string } = {
   unchanged: 'そのまま',
-  crouching: 'しゃがみ',
   down: 'ダウン',
   juggle: '空中コンボ',
   stun: '崩れコンボ',
   screw: 'スクリューコンボ',
   smash: '叩きつけコンボ',
   fall_down: '転びコンボ',
+  crouching: '強制しゃがみ',
+  twist: 'きりもみ',
+  bow: '強制しゃがみ',
+  bend_back: '強制しゃがみ',
 };
 
 export const MoveTypeEnumText: { [key in Types.MoveTypeEnum]: string } = {

@@ -5,7 +5,6 @@ import { Form, Formik } from 'formik';
 import {
   MoveAttributes,
   MoveFragment,
-  MoveOpponentState,
   MoveTypeEnum,
   useMoveCategoriesQuery,
   useStatesQuery,
@@ -43,9 +42,6 @@ export const MoveForm: React.FC<Props> = ({ characterSlug, move, onSubmit, loadi
         comboStarter: move ? move.comboStarter : false,
         youtubeVideoId: move?.youtubeVideoId,
         attack: {
-          blockState: move?.attack ? move.attack.blockState : MoveOpponentState.Unchanged,
-          hitState: move?.attack ? move.attack.hitState : MoveOpponentState.Unchanged,
-          counterHitState: move?.attack ? move.attack.counterHitState : MoveOpponentState.Unchanged,
           powerCrush: move?.attack ? move.attack.powerCrush : false,
           crouchingStatus: move?.attack ? move.attack.crouchingStatus : false,
           jumpStatus: move?.attack ? move.attack.jumpStatus : false,
