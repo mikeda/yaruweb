@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { MoveMedia } from './MoveMedia';
-import { MoveFragment, MoveTypeEnum } from '@/lib/graphql/types';
+import { MoveFragment } from '@/lib/graphql/types';
 
 interface Props {
   moves: MoveFragment[];
@@ -15,18 +15,14 @@ export const MoveList: React.FC<Props> = ({ moves }) => {
   const [screw, setScrew] = useState(false);
   const [wallBound, setWallBound] = useState(false);
   const [floorBreak, setFloorBreak] = useState(false);
-  const [hitGround, setHitGround] = useState(false);
 
   const showMove = (move: MoveFragment) => {
-    if (move.type === MoveTypeEnum.Attack && move.attack) {
-      if (powerCrush && !move.attack.powerCrush) return false;
-      if (crouchingStatus && !move.attack.crouchingStatus) return false;
-      if (jumpStatus && !move.attack.jumpStatus) return false;
-      if (homing && !move.attack.homing) return false;
-      if (screw && !move.attack.screw) return false;
-      if (wallBound && !move.attack.wallBound) return false;
-      if (hitGround && !move.attack.hitGround) return false;
-    }
+    if (powerCrush && !move.powerCrush) return false;
+    if (crouchingStatus && !move.crouchingStatus) return false;
+    if (jumpStatus && !move.jumpStatus) return false;
+    if (homing && !move.homing) return false;
+    if (screw && !move.screw) return false;
+    if (wallBound && !move.wallBound) return false;
 
     return true;
   };
@@ -42,7 +38,6 @@ export const MoveList: React.FC<Props> = ({ moves }) => {
           <MoveSelectCheckBox label="スクリュー" checked={screw} setChecked={setScrew} />
           <MoveSelectCheckBox label="ウォールバウンド" checked={wallBound} setChecked={setWallBound} />
           <MoveSelectCheckBox label="バルコニーブレイク" checked={floorBreak} setChecked={setFloorBreak} />
-          <MoveSelectCheckBox label="ダウンにあたる" checked={hitGround} setChecked={setHitGround} />
         </div>
       </div>
       <div className="bl_sectionUnit">
