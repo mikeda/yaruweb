@@ -3,15 +3,19 @@ import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-regular-svg-icons';
 
-import { OPPONENT_STATE_TEXTS } from '@/lib/models/Move';
-import { AttackFragment, MoveFragment, MoveOpponentState } from '@/lib/graphql/types';
+import { AttackFragment, MoveFragment, OpponentStateEnum } from '@/lib/graphql/types';
 import { Routes } from '@/lib/Routes';
 import { Operations } from './Operations';
 
 import styles from './MoveMedia.module.scss';
 
 import { useCurrentPlayer } from 'hooks/useCurrentPlayer';
-import { AttackTypeEnumText, ThrowTypeEnumText } from '@/lib/graphql/enum_texts';
+import {
+  AttackTypeEnumText,
+  OpponentStateText,
+  OpponentStateTypeText,
+  ThrowTypeEnumText,
+} from '@/lib/graphql/enum_texts';
 
 type Props = {
   move: MoveFragment;
@@ -97,6 +101,7 @@ const AttackDetails: React.FC<{ move: MoveFragment }> = ({ move: { attack, actio
 
   const damages = actions.map(a => a.damage);
   const totalDamage = actions.map(a => a.damage).reduce((a, b) => a + b);
+  const lastAction = actions[actions.length - 1];
 
   return (
     <>
@@ -120,17 +125,15 @@ const AttackDetails: React.FC<{ move: MoveFragment }> = ({ move: { attack, actio
       </div>
 
       <div className={styles.details}>
-        <MoveDetail label="G">
-          <OpponentDetail frame={attack.blockFrame} state={attack.blockState} />
-        </MoveDetail>
-        <MoveDetail label="H">
-          <OpponentDetail frame={attack.hitFrame} state={attack.hitState} />
-        </MoveDetail>
-        {(attack.hitFrame !== attack.counterHitFrame || attack.hitState !== attack.counterHitState) && (
-          <MoveDetail label="CH">
-            <OpponentDetail frame={attack.counterHitFrame} state={attack.counterHitState} />
-          </MoveDetail>
-        )}
+        {lastAction &&
+          lastAction.opponentStates &&
+          lastAction.opponentStates.map(opponentState => {
+            return (
+              <MoveDetail key={opponentState.id} label={OpponentStateTypeText[opponentState.type]}>
+                <OpponentDetail frame={opponentState.frame} state={opponentState.state} />
+              </MoveDetail>
+            );
+          })}
       </div>
     </>
   );
@@ -145,14 +148,14 @@ const MoveDetail: React.FC<{ label: string }> = ({ label, children }) => {
   );
 };
 
-const OpponentDetail: React.FC<{ frame?: number | null; state: MoveOpponentState }> = ({ frame, state }) => {
+const OpponentDetail: React.FC<{ frame?: number | null; state: OpponentStateEnum }> = ({ frame, state }) => {
   let frameClass: string | undefined;
   if (frame && frame <= -10) frameClass = 'el_caution';
 
   return (
     <>
       {frame && <span className={frameClass}>{frameText(frame)}</span>}
-      {state !== 'unchanged' && OPPONENT_STATE_TEXTS[state]}
+      {state !== OpponentStateEnum.Unchanged && OpponentStateText[state]}
     </>
   );
 };
