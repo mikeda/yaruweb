@@ -17,6 +17,10 @@ export type Scalars = {
 
 export type Action = AttackAction | ThrowAction;
 
+export type Actionable = {
+  id: Scalars['ID'];
+};
+
 export type Article = {
   __typename?: 'Article';
   author: Player;
@@ -120,7 +124,7 @@ export type Attack = {
   wallBound: Scalars['Boolean'];
 };
 
-export type AttackAction = {
+export type AttackAction = Actionable & {
   __typename?: 'AttackAction';
   attackType: AttackTypeEnum;
   damage: Scalars['Int'];
@@ -1045,7 +1049,7 @@ export type Tag = {
   updatedAt: Scalars['ISO8601DateTime'];
 };
 
-export type ThrowAction = {
+export type ThrowAction = Actionable & {
   __typename?: 'ThrowAction';
   damage: Scalars['Int'];
   escape?: Maybe<ThrowEscapeEnum>;
@@ -1285,10 +1289,10 @@ export type MoveFragment = (
     & AttackFragment
   )>, actions: Array<(
     { __typename: 'AttackAction' }
-    & Pick<AttackAction, 'attackType' | 'damage'>
+    & Pick<AttackAction, 'id' | 'attackType' | 'damage'>
   ) | (
     { __typename: 'ThrowAction' }
-    & Pick<ThrowAction, 'throwType' | 'damage' | 'escape'>
+    & Pick<ThrowAction, 'id' | 'throwType' | 'damage' | 'escape'>
   )> }
 );
 
@@ -2340,6 +2344,9 @@ export const MoveFragmentDoc = gql`
   }
   actions {
     __typename
+    ... on Actionable {
+      id
+    }
     ... on AttackAction {
       attackType
       damage
