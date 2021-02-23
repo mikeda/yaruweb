@@ -30,10 +30,10 @@ const ComboList: React.FC = () => {
                 <td>{combo.character.name}</td>
                 <td>
                   <ul>
-                    {combo.moveCommands.map(moveCommand => {
-                      if (!moveCommand) return;
+                    {combo.commands.map(command => {
+                      if (!command) return;
 
-                      return <li key={moveCommand.id}>{moveCommand.move.name}</li>;
+                      return <li key={command.id}>{command.move.name}</li>;
                     })}
                   </ul>
                 </td>
