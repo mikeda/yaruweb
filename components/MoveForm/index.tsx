@@ -40,13 +40,13 @@ export const MoveForm: React.FC<Props> = ({ characterSlug, move, onSubmit, loadi
         startUpFrame: move?.startUpFrame,
         rage: move ? move.rage : false,
         comboStarter: move ? move.comboStarter : false,
-        youtubeVideoId: move?.youtubeVideoId,
         powerCrush: move ? move.powerCrush : false,
         crouchingStatus: move ? move.crouchingStatus : false,
         jumpStatus: move ? move.jumpStatus : false,
         homing: move ? move.homing : false,
         screw: move ? move.screw : false,
         wallBound: move ? move.wallBound : false,
+        youtubeVideoId: move?.youtubeVideoId,
       }}
       validationSchema={Yup.object({
         name: Yup.string().required('技名を入力して下さい。'),
@@ -70,6 +70,13 @@ export const MoveForm: React.FC<Props> = ({ characterSlug, move, onSubmit, loadi
 
             <FormCheck name="rage" label="レイジ中" />
             <FormCheck name="comboStarter" label="コンボ始動" />
+            <FormCheck name="powerCrush" label="パワークラッシュ" />
+            <FormCheck name="homing" label="ホーミング" />
+            <FormCheck name="screw" label="スクリュー" />
+            <FormCheck name="wallBound" label="ウォールバウンド" />
+            <FormCheck name="crouchingStatus" label="しゃがみステータス" />
+            <FormCheck name="jumpStatus" label="ジャンプステータス" />
+
             <FormGroup name="youtubeVideoId" placeholder="動画(YouTubeのID)" type="text" />
 
             <FormGroup name="startUpFrame" placeholder="発生" type="number" />
