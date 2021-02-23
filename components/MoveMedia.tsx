@@ -1,5 +1,4 @@
-import React from 'react';
-import { useRouter } from 'next/router';
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-regular-svg-icons';
 
@@ -9,21 +8,21 @@ import { Operations } from './Operations';
 
 import styles from './MoveMedia.module.scss';
 
-import { useCurrentPlayer } from 'hooks/useCurrentPlayer';
 import {
   AttackTypeEnumText,
   OpponentStateText,
   OpponentStateTypeText,
   ThrowTypeEnumText,
 } from '@/lib/graphql/enum_texts';
+import { DropDownMenu } from './layouts/DropDownMenu';
+import Link from 'next/link';
 
 type Props = {
   move: MoveFragment;
 };
 
 export const MoveMedia: React.FC<Props> = ({ move }) => {
-  const router = useRouter();
-  const { currentPlayer } = useCurrentPlayer();
+  const [menuOpened, setMenuOpened] = useState(false);
 
   return (
     <>
@@ -32,24 +31,35 @@ export const MoveMedia: React.FC<Props> = ({ move }) => {
 
         <div className={styles.header}>
           <div className={styles.ttl}>{move.name}</div>
-          <div
-            onClick={() => {
-              if (!currentPlayer) {
-                alert('ログインが必要です。');
-                return;
-              }
+          <div className={styles.menu}>
+            <div
+              onClick={() => {
+                setMenuOpened(true);
+              }}
+              className="el_iconBtn"
+            >
+              <FontAwesomeIcon icon={faEdit} />
+            </div>
 
-              router.push(Routes.updateMove(move.id));
-            }}
-            className="el_iconBtn"
-          >
-            <FontAwesomeIcon icon={faEdit} />
+            {menuOpened && (
+              <DropDownMenu
+                onClose={() => setMenuOpened(false)}
+                items={[
+                  <Link key={0} href={Routes.updateMove(move.id)}>
+                    <a>技データ編集</a>
+                  </Link>,
+                  <Link key={1} href={Routes.mypageEdit()}>
+                    <a>コマンド登録</a>
+                  </Link>,
+                ]}
+              />
+            )}
           </div>
         </div>
 
         <div className={styles.cont}>
           <div>
-            {move.commands[0] && <Operations operations={move.commands[0].operations} />}
+            {move.commands[0] && <Operations command={move.commands[0]} />}
 
             <AttackLabels move={move} />
 

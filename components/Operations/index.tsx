@@ -1,18 +1,21 @@
 import React from 'react';
 
-import { OperationFragment } from '@/lib/graphql/types';
+import { CommandFragment } from '@/lib/graphql/types';
 import { Operation } from './Operation';
 
 import { Wrapper } from './Wrapper';
 
+import styles from './Operations.module.scss';
+
 interface Props {
-  operations: OperationFragment[];
+  command: CommandFragment;
 }
 
-export const Operations: React.FC<Props> = ({ operations }) => {
+export const Operations: React.FC<Props> = ({ command }) => {
   return (
     <Wrapper>
-      {operations.map((operation, i) => (
+      {!command.state.standing && <span className={styles.commandText}>{command.state.name}中</span>}
+      {command.operations.map((operation, i) => (
         <Operation operation={operation} key={i} />
       ))}
     </Wrapper>
