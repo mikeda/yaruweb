@@ -10,11 +10,11 @@ export const ComboMedia: React.FC<Props> = ({ combo }) => {
   return (
     <div className="bl_combo">
       <div>
-        {combo.moveCommands[0].move.name}からダメージ{combo.damage}
+        {combo.commands[0].move.name}からダメージ{combo.damage}
       </div>
       <div className="bl_command hp_mg_b_md">
         <div className="bl_command_inner">
-          <OperationSet commandSet={combo.moveCommands.map(m => m.operations)} />
+          <OperationSet commandSet={combo.commands.map(m => m.operations)} />
         </div>
       </div>
 

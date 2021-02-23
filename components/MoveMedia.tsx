@@ -49,7 +49,7 @@ export const MoveMedia: React.FC<Props> = ({ move }) => {
 
         <div className={styles.cont}>
           <div>
-            {move.moveCommands[0] && <Operations operations={move.moveCommands[0].operations} />}
+            {move.commands[0] && <Operations operations={move.commands[0].operations} />}
 
             <AttackLabels move={move} />
 
