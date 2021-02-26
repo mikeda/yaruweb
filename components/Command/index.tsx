@@ -11,7 +11,7 @@ interface Props {
   command: CommandFragment;
 }
 
-export const Operations: React.FC<Props> = ({ command }) => {
+export const Command: React.FC<Props> = ({ command }) => {
   return (
     <Wrapper>
       {!command.state.standing && <span className={styles.commandText}>{command.state.name}中</span>}
