@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 import { useMoveQuery } from '@/lib/graphql/types';
 import { NotFound } from '@/components/NotFound';
 import { Heading } from '@/components/Heading';
-import { Operations } from '@/components/Operations';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -19,10 +18,10 @@ const Page: React.FC = () => {
 
   return (
     <>
-      <Heading lv="h1">コマンド登録</Heading>
+      <Heading lv="h1">アクション登録</Heading>
 
-      {data.move.commands.map(command => (
-        <Operations key={command.id} command={command} />
+      {data.move.actions.map(action => (
+        <div key={action.id}>{action.damage}</div>
       ))}
     </>
   );

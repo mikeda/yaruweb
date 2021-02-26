@@ -17,6 +17,7 @@ export const Routes = {
   mypageVideos: () => '/mypage/videos',
   mypageEdit: () => '/mypage/edit',
   passwordReset: () => '/password/reset',
+  moveCommands: (moveId: string) => `/moves/${moveId}/commands`,
   passwordEdit: () => '/password/edit',
   signup: () => '/signup',
   top: () => '/',

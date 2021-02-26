@@ -1,6 +1,6 @@
 import React from 'react';
 import { ComboFragment } from '@/lib/graphql/types';
-import { OperationSet } from './Operations';
+import { OperationSet } from './Command';
 
 interface Props {
   combo: ComboFragment;

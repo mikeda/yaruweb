@@ -4,7 +4,7 @@ import { faEdit } from '@fortawesome/free-regular-svg-icons';
 
 import { MoveFragment, OpponentStateEnum } from '@/lib/graphql/types';
 import { Routes } from '@/lib/Routes';
-import { Operations } from './Operations';
+import { Command } from './Command';
 
 import styles from './MoveMedia.module.scss';
 
@@ -48,7 +48,7 @@ export const MoveMedia: React.FC<Props> = ({ move }) => {
                   <Link key={0} href={Routes.updateMove(move.id)}>
                     <a>技データ編集</a>
                   </Link>,
-                  <Link key={1} href={Routes.mypageEdit()}>
+                  <Link key={1} href={Routes.moveCommands(move.id)}>
                     <a>コマンド登録</a>
                   </Link>,
                 ]}
@@ -59,7 +59,9 @@ export const MoveMedia: React.FC<Props> = ({ move }) => {
 
         <div className={styles.cont}>
           <div>
-            {move.commands[0] && <Operations command={move.commands[0]} />}
+            {move.commands.map(command => (
+              <Command key={command.id} command={command} />
+            ))}
 
             <AttackLabels move={move} />
 
