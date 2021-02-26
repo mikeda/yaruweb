@@ -207,6 +207,7 @@ export type Command = {
   id: Scalars['ID'];
   move: Move;
   operations: Array<Operation>;
+  playerId: Scalars['ID'];
   state: State;
 };
 
@@ -1336,7 +1337,7 @@ export type CharacterSummaryFragment = (
 
 export type CommandFragment = (
   { __typename?: 'Command' }
-  & Pick<Command, 'id'>
+  & Pick<Command, 'id' | 'playerId'>
   & { state: (
     { __typename?: 'State' }
     & StateFragment
@@ -1348,7 +1349,7 @@ export type CommandFragment = (
 
 export type CurrentPlayerFragment = (
   { __typename?: 'CurrentPlayer' }
-  & Pick<CurrentPlayer, 'name' | 'slug' | 'avatarUrl'>
+  & Pick<CurrentPlayer, 'id' | 'name' | 'slug' | 'avatarUrl'>
 );
 
 export type EventFragment = (
@@ -2351,6 +2352,7 @@ export const CharacterFragmentDoc = gql`
     ${CharacterSummaryFragmentDoc}`;
 export const CurrentPlayerFragmentDoc = gql`
     fragment currentPlayer on CurrentPlayer {
+  id
   name
   slug
   avatarUrl
@@ -2447,6 +2449,7 @@ export const OperationFragmentDoc = gql`
 export const CommandFragmentDoc = gql`
     fragment command on Command {
   id
+  playerId
   state {
     ...state
   }
