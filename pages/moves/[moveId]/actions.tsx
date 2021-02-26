@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 import { useMoveQuery } from '@/lib/graphql/types';
 import { NotFound } from '@/components/NotFound';
 import { Heading } from '@/components/Heading';
-import { Command } from '@/components/Command';
 
 const Page: React.FC = () => {
   const router = useRouter();
