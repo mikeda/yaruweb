@@ -1,9 +1,10 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 
-import { useMoveQuery } from '@/lib/graphql/types';
+import { OpponentStateEnum, useMoveQuery } from '@/lib/graphql/types';
 import { NotFound } from '@/components/NotFound';
 import { Heading } from '@/components/Heading';
+import { OpponentStateText, OpponentStateTypeText } from '@/lib/graphql/enum_texts';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -21,7 +22,23 @@ const Page: React.FC = () => {
       <Heading lv="h1">アクション登録</Heading>
 
       {data.move.actions.map(action => (
-        <div key={action.id}>{action.damage}</div>
+        <div key={action.id}>
+          {action.opponentStates.length > 0 &&
+            action.opponentStates.map(opponentState => {
+              return (
+                <div key={opponentState.id}>
+                  <div>{OpponentStateTypeText[opponentState.type]}</div>
+                  {opponentState.state !== OpponentStateEnum.Unchanged && (
+                    <div>{OpponentStateText[opponentState.state]}</div>
+                  )}
+                  {opponentState.frame !== null && opponentState.frame !== undefined && (
+                    <div>{opponentState.frame}</div>
+                  )}
+                </div>
+              );
+            })}
+          <div>{action.damage}</div>
+        </div>
       ))}
     </>
   );
