@@ -207,7 +207,6 @@ export type Command = {
   id: Scalars['ID'];
   move: Move;
   operations: Array<Operation>;
-  playerId: Scalars['ID'];
   state: State;
 };
 
@@ -610,6 +609,7 @@ export type Move = {
   moveCategoryId: Scalars['ID'];
   name: Scalars['String'];
   note?: Maybe<Scalars['String']>;
+  playerId: Scalars['ID'];
   powerCrush: Scalars['Boolean'];
   rage: Scalars['Boolean'];
   screw: Scalars['Boolean'];
@@ -1358,7 +1358,7 @@ export type CharacterSummaryFragment = (
 
 export type CommandFragment = (
   { __typename?: 'Command' }
-  & Pick<Command, 'id' | 'playerId'>
+  & Pick<Command, 'id'>
   & { state: (
     { __typename?: 'State' }
     & StateFragment
@@ -1389,7 +1389,7 @@ export type HighlightFragment = (
 
 export type MoveFragment = (
   { __typename?: 'Move' }
-  & Pick<Move, 'id' | 'moveCategoryId' | 'type' | 'name' | 'kana' | 'startUpFrame' | 'rage' | 'comboStarter' | 'powerCrush' | 'crouchingStatus' | 'jumpStatus' | 'homing' | 'screw' | 'wallBound' | 'note' | 'youtubeVideoId'>
+  & Pick<Move, 'id' | 'playerId' | 'moveCategoryId' | 'type' | 'name' | 'kana' | 'startUpFrame' | 'rage' | 'comboStarter' | 'powerCrush' | 'crouchingStatus' | 'jumpStatus' | 'homing' | 'screw' | 'wallBound' | 'note' | 'youtubeVideoId'>
   & { afterState: (
     { __typename?: 'State' }
     & Pick<State, 'id' | 'name'>
@@ -2486,7 +2486,6 @@ export const OperationFragmentDoc = gql`
 export const CommandFragmentDoc = gql`
     fragment command on Command {
   id
-  playerId
   state {
     ...state
   }
@@ -2499,6 +2498,7 @@ ${OperationFragmentDoc}`;
 export const MoveFragmentDoc = gql`
     fragment move on Move {
   id
+  playerId
   moveCategoryId
   afterState {
     id
