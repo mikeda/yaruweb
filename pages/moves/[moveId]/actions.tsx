@@ -1,45 +1,39 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 
-import { OpponentStateEnum, useMoveQuery } from '@/lib/graphql/types';
+import { useMoveQuery } from '@/lib/graphql/types';
 import { NotFound } from '@/components/NotFound';
+
 import { Heading } from '@/components/Heading';
-import { OpponentStateText, OpponentStateTypeText } from '@/lib/graphql/enum_texts';
+import { AttackActionForm } from '@/pages-lib/moves/actions/AttackActionForm';
+import { Actions } from '@/pages-lib/moves/actions/Action';
 
-const Page: React.FC = () => {
-  const router = useRouter();
+const Content: React.FC<{ moveId: string }> = ({ moveId }) => {
+  const { data, loading, error, refetch } = useMoveQuery({ variables: { id: moveId } });
 
-  const moveId = router.query.moveId as string;
-  const { data, loading, error } = useMoveQuery({ variables: { id: moveId } });
-
-  if (!moveId) return <NotFound>Loading...</NotFound>;
   if (loading) return <NotFound>技データがありません。</NotFound>;
   if (error) return <NotFound>技データの読み込みに失敗しました。</NotFound>;
   if (!data) return <NotFound>技データがありません。</NotFound>;
 
   return (
     <>
-      <Heading lv="h1">アクション登録</Heading>
+      <Actions actions={data.move.actions} />
 
-      {data.move.actions.map(action => (
-        <div key={action.id}>
-          {action.opponentStates.length > 0 &&
-            action.opponentStates.map(opponentState => {
-              return (
-                <div key={opponentState.id}>
-                  <div>{OpponentStateTypeText[opponentState.type]}</div>
-                  {opponentState.state !== OpponentStateEnum.Unchanged && (
-                    <div>{OpponentStateText[opponentState.state]}</div>
-                  )}
-                  {opponentState.frame !== null && opponentState.frame !== undefined && (
-                    <div>{opponentState.frame}</div>
-                  )}
-                </div>
-              );
-            })}
-          <div>{action.damage}</div>
-        </div>
-      ))}
+      <AttackActionForm moveId={data.move.id} onCreate={refetch} />
+    </>
+  );
+};
+
+const Page: React.FC = () => {
+  const router = useRouter();
+
+  const moveId = router.query.moveId;
+  if (!moveId) return <NotFound>Loading...</NotFound>;
+
+  return (
+    <>
+      <Heading lv="h1">アクション登録</Heading>
+      <Content moveId={moveId as string} />
     </>
   );
 };
