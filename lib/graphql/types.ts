@@ -1343,12 +1343,17 @@ export type VideoEdge = {
   node?: Maybe<Video>;
 };
 
+export type OpponentStateFragment = (
+  { __typename?: 'OpponentState' }
+  & Pick<OpponentState, 'id' | 'type' | 'frame' | 'state'>
+);
+
 export type AttackActionFragment = (
   { __typename?: 'AttackAction' }
   & Pick<AttackAction, 'id' | 'attackType' | 'damage'>
   & { opponentStates: Array<(
     { __typename?: 'OpponentState' }
-    & Pick<OpponentState, 'id' | 'type' | 'frame' | 'state'>
+    & OpponentStateFragment
   )> }
 );
 
@@ -1357,7 +1362,7 @@ export type ThrowActionFragment = (
   & Pick<ThrowAction, 'id' | 'throwType' | 'damage' | 'escape'>
   & { opponentStates: Array<(
     { __typename?: 'OpponentState' }
-    & Pick<OpponentState, 'id' | 'type' | 'frame' | 'state'>
+    & OpponentStateFragment
   )> }
 );
 
@@ -2557,33 +2562,35 @@ export const CommandFragmentDoc = gql`
 }
     ${StateFragmentDoc}
 ${OperationFragmentDoc}`;
+export const OpponentStateFragmentDoc = gql`
+    fragment opponentState on OpponentState {
+  id
+  type
+  frame
+  state
+}
+    `;
 export const AttackActionFragmentDoc = gql`
     fragment attackAction on AttackAction {
   id
   opponentStates {
-    id
-    type
-    frame
-    state
+    ...opponentState
   }
   attackType
   damage
 }
-    `;
+    ${OpponentStateFragmentDoc}`;
 export const ThrowActionFragmentDoc = gql`
     fragment throwAction on ThrowAction {
   id
   opponentStates {
-    id
-    type
-    frame
-    state
+    ...opponentState
   }
   throwType
   damage
   escape
 }
-    `;
+    ${OpponentStateFragmentDoc}`;
 export const ActionFragmentDoc = gql`
     fragment action on Action {
   ... on AttackAction {
