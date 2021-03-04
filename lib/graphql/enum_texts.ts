@@ -14,7 +14,7 @@ export const ArticleStatusText: { [key in Types.ArticleStatus]: string } = {
   published: '公開中',
 };
 [];
-export const OpponentStateTypeText: { [key in Types.OpponentStateTypeEnum]: string } = {
+export const FrameTypeText: { [key in Types.FrameTypeEnum]: string } = {
   block: 'ガード',
   hit: 'ヒット',
   counter_hit: 'カウンターヒット',
@@ -22,7 +22,7 @@ export const OpponentStateTypeText: { [key in Types.OpponentStateTypeEnum]: stri
   crouching_hit: 'しゃがみにヒット',
 };
 
-export const OpponentStateText: { [key in Types.OpponentStateEnum]: string } = {
+export const FrameText: { [key in Types.FrameEnum]: string } = {
   unchanged: 'そのまま',
   down: 'ダウン',
   juggle: '空中コンボ',

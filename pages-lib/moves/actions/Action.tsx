@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { AttackTypeEnumText, ThrowTypeEnumText } from '@/lib/graphql/enum_texts';
 import { ActionFragment } from '@/lib/graphql/types';
 
 import styles from './Action.module.scss';
-import { OpponentStates } from './OpponentStates';
+import { Frames } from './Frames';
 
 interface Props {
   actions: ActionFragment[];
@@ -21,8 +21,6 @@ const actionTypeText = (action: ActionFragment) => {
 };
 
 export const Actions: React.FC<Props> = ({ actions }) => {
-  const [detailOpend, setDetailOpend] = useState(false);
-
   return (
     <>
       <div className={styles.actionTypes}>
@@ -40,7 +38,7 @@ export const Actions: React.FC<Props> = ({ actions }) => {
 
       {actions.map(action => (
         <div key={action.id} className={styles.action}>
-          {action.opponentStates.length > 0 && <OpponentStates opponentStates={action.opponentStates} />}
+          {action.frames.length > 0 && <Frames frames={action.frames} />}
           <div>{action.damage}</div>
         </div>
       ))}

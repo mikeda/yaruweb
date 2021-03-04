@@ -2,18 +2,13 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-regular-svg-icons';
 
-import { MoveFragment, OpponentStateEnum } from '@/lib/graphql/types';
+import { MoveFragment, FrameEnum } from '@/lib/graphql/types';
 import { Routes } from '@/lib/Routes';
 import { Command } from './Command';
 
 import styles from './MoveMedia.module.scss';
 
-import {
-  AttackTypeEnumText,
-  OpponentStateText,
-  OpponentStateTypeText,
-  ThrowTypeEnumText,
-} from '@/lib/graphql/enum_texts';
+import { AttackTypeEnumText, FrameText, FrameTypeText, ThrowTypeEnumText } from '@/lib/graphql/enum_texts';
 import { DropDownMenu } from './layouts/DropDownMenu';
 import Link from 'next/link';
 
@@ -138,11 +133,11 @@ const AttackDetails: React.FC<{ move: MoveFragment }> = ({ move }) => {
 
       <div className={styles.details}>
         {lastAction &&
-          lastAction.opponentStates &&
-          lastAction.opponentStates.map(opponentState => {
+          lastAction.frames &&
+          lastAction.frames.map(frame => {
             return (
-              <MoveDetail key={opponentState.id} label={OpponentStateTypeText[opponentState.type]}>
-                <OpponentDetail frame={opponentState.frame} state={opponentState.state} />
+              <MoveDetail key={frame.id} label={FrameTypeText[frame.type]}>
+                <OpponentDetail frame={frame.frame} state={frame.state} />
               </MoveDetail>
             );
           })}
@@ -160,14 +155,14 @@ const MoveDetail: React.FC<{ label: string }> = ({ label, children }) => {
   );
 };
 
-const OpponentDetail: React.FC<{ frame?: number | null; state: OpponentStateEnum }> = ({ frame, state }) => {
+const OpponentDetail: React.FC<{ frame?: number | null; state: FrameEnum }> = ({ frame, state }) => {
   let frameClass: string | undefined;
   if (frame && frame <= -10) frameClass = 'el_caution';
 
   return (
     <>
       {frame && <span className={frameClass}>{frameText(frame)}</span>}
-      {state !== OpponentStateEnum.Unchanged && OpponentStateText[state]}
+      {state !== FrameEnum.Unchanged && FrameText[state]}
     </>
   );
 };
