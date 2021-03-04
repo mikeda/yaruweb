@@ -18,8 +18,8 @@ export type Scalars = {
 export type Action = AttackAction | ThrowAction;
 
 export type Actionable = {
+  frames: Array<Frame>;
   id: Scalars['ID'];
-  opponentStates: Array<OpponentState>;
 };
 
 export type Article = {
@@ -111,8 +111,8 @@ export type AttackAction = Actionable & {
   __typename?: 'AttackAction';
   attackType: AttackTypeEnum;
   damage: Scalars['Int'];
+  frames: Array<Frame>;
   id: Scalars['ID'];
-  opponentStates: Array<OpponentState>;
 };
 
 export type AttackActionAttributes = {
@@ -594,6 +594,52 @@ export type FavArticlePayload = {
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
+export type Frame = {
+  __typename?: 'Frame';
+  frame?: Maybe<Scalars['Int']>;
+  id: Scalars['ID'];
+  state: FrameEnum;
+  type: FrameTypeEnum;
+};
+
+export enum FrameEnum {
+  /** そのまま */
+  Unchanged = 'unchanged',
+  /** ダウン */
+  Down = 'down',
+  /** 空中コンボ */
+  Juggle = 'juggle',
+  /** 崩れコンボ */
+  Stun = 'stun',
+  /** スクリューコンボ */
+  Screw = 'screw',
+  /** 叩きつけコンボ */
+  Smash = 'smash',
+  /** 転びコンボ */
+  FallDown = 'fall_down',
+  /** 強制しゃがみ */
+  Crouching = 'crouching',
+  /** きりもみ */
+  Twist = 'twist',
+  /** へこみ */
+  Bow = 'bow',
+  /** のけぞり */
+  BendBack = 'bend_back'
+}
+
+export enum FrameTypeEnum {
+  /** ガード */
+  Block = 'block',
+  /** ヒット */
+  Hit = 'hit',
+  /** カウンターヒット */
+  CounterHit = 'counter_hit',
+  /** クリーンヒット */
+  CleanHit = 'clean_hit',
+  /** しゃがみにヒット */
+  CrouchingHit = 'crouching_hit'
+}
+
 export type Highlight = {
   __typename?: 'Highlight';
   id: Scalars['ID'];
@@ -891,52 +937,6 @@ export type Operation = {
   name: Scalars['String'];
 };
 
-export type OpponentState = {
-  __typename?: 'OpponentState';
-  frame?: Maybe<Scalars['Int']>;
-  id: Scalars['ID'];
-  state: OpponentStateEnum;
-  type: OpponentStateTypeEnum;
-};
-
-export enum OpponentStateEnum {
-  /** そのまま */
-  Unchanged = 'unchanged',
-  /** ダウン */
-  Down = 'down',
-  /** 空中コンボ */
-  Juggle = 'juggle',
-  /** 崩れコンボ */
-  Stun = 'stun',
-  /** スクリューコンボ */
-  Screw = 'screw',
-  /** 叩きつけコンボ */
-  Smash = 'smash',
-  /** 転びコンボ */
-  FallDown = 'fall_down',
-  /** 強制しゃがみ */
-  Crouching = 'crouching',
-  /** きりもみ */
-  Twist = 'twist',
-  /** へこみ */
-  Bow = 'bow',
-  /** のけぞり */
-  BendBack = 'bend_back'
-}
-
-export enum OpponentStateTypeEnum {
-  /** ガード */
-  Block = 'block',
-  /** ヒット */
-  Hit = 'hit',
-  /** カウンターヒット */
-  CounterHit = 'counter_hit',
-  /** クリーンヒット */
-  CleanHit = 'clean_hit',
-  /** しゃがみにヒット */
-  CrouchingHit = 'crouching_hit'
-}
-
 export enum Order {
   /** 人気 */
   Popular = 'popular',
@@ -1178,8 +1178,8 @@ export type ThrowAction = Actionable & {
   __typename?: 'ThrowAction';
   damage: Scalars['Int'];
   escape?: Maybe<ThrowEscapeEnum>;
+  frames: Array<Frame>;
   id: Scalars['ID'];
-  opponentStates: Array<OpponentState>;
   throwType: ThrowTypeEnum;
 };
 
@@ -1343,26 +1343,26 @@ export type VideoEdge = {
   node?: Maybe<Video>;
 };
 
-export type OpponentStateFragment = (
-  { __typename?: 'OpponentState' }
-  & Pick<OpponentState, 'id' | 'type' | 'frame' | 'state'>
+export type FrameFragment = (
+  { __typename?: 'Frame' }
+  & Pick<Frame, 'id' | 'type' | 'frame' | 'state'>
 );
 
 export type AttackActionFragment = (
   { __typename?: 'AttackAction' }
   & Pick<AttackAction, 'id' | 'attackType' | 'damage'>
-  & { opponentStates: Array<(
-    { __typename?: 'OpponentState' }
-    & OpponentStateFragment
+  & { frames: Array<(
+    { __typename?: 'Frame' }
+    & FrameFragment
   )> }
 );
 
 export type ThrowActionFragment = (
   { __typename?: 'ThrowAction' }
   & Pick<ThrowAction, 'id' | 'throwType' | 'damage' | 'escape'>
-  & { opponentStates: Array<(
-    { __typename?: 'OpponentState' }
-    & OpponentStateFragment
+  & { frames: Array<(
+    { __typename?: 'Frame' }
+    & FrameFragment
   )> }
 );
 
@@ -2562,8 +2562,8 @@ export const CommandFragmentDoc = gql`
 }
     ${StateFragmentDoc}
 ${OperationFragmentDoc}`;
-export const OpponentStateFragmentDoc = gql`
-    fragment opponentState on OpponentState {
+export const FrameFragmentDoc = gql`
+    fragment frame on Frame {
   id
   type
   frame
@@ -2573,24 +2573,24 @@ export const OpponentStateFragmentDoc = gql`
 export const AttackActionFragmentDoc = gql`
     fragment attackAction on AttackAction {
   id
-  opponentStates {
-    ...opponentState
+  frames {
+    ...frame
   }
   attackType
   damage
 }
-    ${OpponentStateFragmentDoc}`;
+    ${FrameFragmentDoc}`;
 export const ThrowActionFragmentDoc = gql`
     fragment throwAction on ThrowAction {
   id
-  opponentStates {
-    ...opponentState
+  frames {
+    ...frame
   }
   throwType
   damage
   escape
 }
-    ${OpponentStateFragmentDoc}`;
+    ${FrameFragmentDoc}`;
 export const ActionFragmentDoc = gql`
     fragment action on Action {
   ... on AttackAction {
