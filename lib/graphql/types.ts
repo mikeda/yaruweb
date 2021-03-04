@@ -598,11 +598,11 @@ export type Frame = {
   __typename?: 'Frame';
   frame?: Maybe<Scalars['Int']>;
   id: Scalars['ID'];
-  state: FrameEnum;
+  state: FrameStateEnum;
   type: FrameTypeEnum;
 };
 
-export enum FrameEnum {
+export enum FrameStateEnum {
   /** そのまま */
   Unchanged = 'unchanged',
   /** ダウン */
