@@ -22,7 +22,7 @@ export const FrameTypeText: { [key in Types.FrameTypeEnum]: string } = {
   crouching_hit: 'しゃがみにヒット',
 };
 
-export const FrameText: { [key in Types.FrameEnum]: string } = {
+export const FrameText: { [key in Types.FrameStateEnum]: string } = {
   unchanged: 'そのまま',
   down: 'ダウン',
   juggle: '空中コンボ',

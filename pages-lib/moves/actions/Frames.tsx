@@ -1,6 +1,6 @@
 import React from 'react';
 import { FrameText, FrameTypeText } from '@/lib/graphql/enum_texts';
-import { FrameEnum, FrameFragment, FrameTypeEnum } from '@/lib/graphql/types';
+import { FrameStateEnum, FrameFragment, FrameTypeEnum } from '@/lib/graphql/types';
 
 import styles from './Action.module.scss';
 
@@ -19,7 +19,7 @@ export const Frames: React.FC<Props> = ({ frames }) => {
           return (
             <div key={frame.id}>
               <div>{FrameTypeText[frame.type]}</div>
-              {frame.state !== FrameEnum.Unchanged && <div>{FrameText[frame.state]}</div>}
+              {frame.state !== FrameStateEnum.Unchanged && <div>{FrameText[frame.state]}</div>}
               {frame.frame !== null && frame.frame !== undefined && <div>{frame.frame}</div>}
             </div>
           );

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-regular-svg-icons';
 
-import { MoveFragment, FrameEnum } from '@/lib/graphql/types';
+import { MoveFragment, FrameStateEnum } from '@/lib/graphql/types';
 import { Routes } from '@/lib/Routes';
 import { Command } from './Command';
 
@@ -155,14 +155,14 @@ const MoveDetail: React.FC<{ label: string }> = ({ label, children }) => {
   );
 };
 
-const OpponentDetail: React.FC<{ frame?: number | null; state: FrameEnum }> = ({ frame, state }) => {
+const OpponentDetail: React.FC<{ frame?: number | null; state: FrameStateEnum }> = ({ frame, state }) => {
   let frameClass: string | undefined;
   if (frame && frame <= -10) frameClass = 'el_caution';
 
   return (
     <>
       {frame && <span className={frameClass}>{frameText(frame)}</span>}
-      {state !== FrameEnum.Unchanged && FrameText[state]}
+      {state !== FrameStateEnum.Unchanged && FrameText[state]}
     </>
   );
 };
