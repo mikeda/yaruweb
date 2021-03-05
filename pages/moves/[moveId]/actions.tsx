@@ -6,18 +6,20 @@ import { NotFound } from '@/components/NotFound';
 
 import { Heading } from '@/components/Heading';
 import { AttackActionForm } from '@/pages-lib/moves/actions/AttackActionForm';
-import { Actions } from '@/pages-lib/moves/actions/Action';
+import { Action } from '@/pages-lib/moves/actions/Action';
 
 const Content: React.FC<{ moveId: string }> = ({ moveId }) => {
   const { data, loading, error, refetch } = useMoveQuery({ variables: { id: moveId } });
 
-  if (loading) return <NotFound>技データがありません。</NotFound>;
+  if (loading) return <NotFound>Loading...</NotFound>;
   if (error) return <NotFound>技データの読み込みに失敗しました。</NotFound>;
   if (!data) return <NotFound>技データがありません。</NotFound>;
 
   return (
     <>
-      <Actions actions={data.move.actions} />
+      {data.move.actions.map(action => (
+        <Action key={action.id} action={action} onCreateFrame={refetch} />
+      ))}
 
       <AttackActionForm moveId={data.move.id} onCreate={refetch} />
     </>
