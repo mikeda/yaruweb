@@ -1,8 +1,6 @@
 import React from 'react';
-import { FrameText, FrameTypeText } from '@/lib/graphql/enum_texts';
-import { FrameStateEnum, FrameFragment, FrameTypeEnum } from '@/lib/graphql/types';
+import { FrameFragment, FrameTypeEnum } from '@/lib/graphql/types';
 
-import styles from './Action.module.scss';
 import { Frame } from './Frame';
 
 interface Props {

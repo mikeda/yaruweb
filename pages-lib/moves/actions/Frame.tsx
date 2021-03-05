@@ -1,6 +1,6 @@
 import React from 'react';
 import { FrameText, FrameTypeText } from '@/lib/graphql/enum_texts';
-import { FrameStateEnum, FrameFragment, FrameTypeEnum } from '@/lib/graphql/types';
+import { FrameStateEnum, FrameFragment } from '@/lib/graphql/types';
 
 import styles from './Frame.module.scss';
 
