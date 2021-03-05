@@ -12,7 +12,7 @@ export const Frames: React.FC<Props> = ({ frames }) => {
 
   return (
     <>
-      {Object.entries(FrameTypeEnum).map(([k, v]) => {
+      {Object.entries(FrameTypeEnum).map(([, v]) => {
         const frame = frameMap.get(v);
 
         return <>{frame && <Frame frame={frame} />}</>;
