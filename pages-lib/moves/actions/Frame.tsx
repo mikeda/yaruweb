@@ -1,15 +1,41 @@
 import React from 'react';
 import { FrameText, FrameTypeText } from '@/lib/graphql/enum_texts';
-import { FrameStateEnum, FrameFragment } from '@/lib/graphql/types';
+import { FrameStateEnum, FrameFragment, useDeleteFrameMutation } from '@/lib/graphql/types';
 
 import styles from './Frame.module.scss';
 
-export const Frame: React.FC<{ frame: FrameFragment }> = ({ frame }) => {
+interface Props {
+  frame: FrameFragment;
+  onDelete: (frameId: string) => void;
+}
+
+export const Frame: React.FC<Props> = ({ frame, onDelete }) => {
+  const [deleteFrame, { loading }] = useDeleteFrameMutation({
+    onCompleted: data => {
+      const frame = data.deleteFrame?.frame;
+      if (!frame) return;
+
+      onDelete(frame.id);
+    },
+    onError: e => {
+      alert(e.message);
+    },
+  });
+
   return (
     <div className={styles.frame}>
       <span>{FrameTypeText[frame.type]}</span>
       {frame.state !== FrameStateEnum.Unchanged && <span>{FrameText[frame.state]}</span>}
       {frame.frame !== null && frame.frame !== undefined && <span>{frame.frame}</span>}
+      <button
+        className="el_btn"
+        disabled={loading}
+        onClick={() => {
+          deleteFrame({ variables: { frameId: frame.id } });
+        }}
+      >
+        削除
+      </button>
     </div>
   );
 };

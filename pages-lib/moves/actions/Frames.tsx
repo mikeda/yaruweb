@@ -1,5 +1,5 @@
-import React from 'react';
-import { FrameFragment, FrameTypeEnum } from '@/lib/graphql/types';
+import React, { useState } from 'react';
+import { FrameFragment } from '@/lib/graphql/types';
 
 import { Frame } from './Frame';
 
@@ -7,16 +7,20 @@ interface Props {
   frames: FrameFragment[];
 }
 
-export const Frames: React.FC<Props> = ({ frames }) => {
-  const frameMap = new Map(frames.map(f => [f.type, f]));
+export const Frames: React.FC<Props> = props => {
+  const [frames, setFrames] = useState<FrameFragment[]>(props.frames);
 
   return (
     <>
-      {Object.entries(FrameTypeEnum).map(([, v]) => {
-        const frame = frameMap.get(v);
-
-        return <>{frame && <Frame frame={frame} />}</>;
-      })}
+      {frames.map(frame => (
+        <Frame
+          key={frame.id}
+          frame={frame}
+          onDelete={frameId => {
+            setFrames(prev => prev.filter(frame => frame.id !== frameId));
+          }}
+        />
+      ))}
     </>
   );
 };
