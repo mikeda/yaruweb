@@ -19,6 +19,7 @@ export const CommandForm: React.FC<Props> = ({ moveId, states, allOperations, on
       const command = data.createCommand?.command;
       if (!command) return;
 
+      setOperations([]);
       onCreate(command);
     },
     onError: e => {
