@@ -3,6 +3,8 @@ import { AppProps } from 'next/app';
 import { ToastContainer } from 'react-toastify';
 import { ApolloProvider } from '@apollo/client';
 import { RecoilRoot, useSetRecoilState } from 'recoil';
+import * as Sentry from '@sentry/react';
+import { Integrations } from '@sentry/tracing';
 
 import '@/styles/global.scss';
 import 'react-toastify/dist/ReactToastify.css';
@@ -48,3 +50,9 @@ export default function App({ Component, pageProps }: AppProps) {
     </>
   );
 }
+
+Sentry.init({
+  dsn: 'https://2369aa9ae9674844bbb315fa8543aa40@o440044.ingest.sentry.io/5664514',
+  integrations: [new Integrations.BrowserTracing()],
+  tracesSampleRate: 1.0,
+});
