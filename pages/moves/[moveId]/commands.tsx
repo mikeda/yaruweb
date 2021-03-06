@@ -1,10 +1,16 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 
-import { CommandFragment, useMoveQuery, useOperationsQuery, useStatesQuery } from '@/lib/graphql/types';
+import {
+  CommandFragment,
+  useDeleteCommandMutation,
+  useMoveQuery,
+  useOperationsQuery,
+  useStatesQuery,
+} from '@/lib/graphql/types';
 import { NotFound } from '@/components/NotFound';
 import { Heading } from '@/components/Heading';
-import { Command } from '@/components/Command';
+import { Command as CommandIcons } from '@/components/Command';
 import { CommandForm } from '@/components/CommandForm';
 
 interface CreateFormProps {
@@ -28,6 +34,40 @@ const CreateForm: React.FC<CreateFormProps> = ({ moveId, characterSlug, onCreate
   );
 };
 
+interface CommandProps {
+  command: CommandFragment;
+  onDelete: (commandId: string) => void;
+}
+
+const Command: React.FC<CommandProps> = ({ command, onDelete }) => {
+  const [deleteCommand, { loading }] = useDeleteCommandMutation({
+    variables: { commandId: command.id },
+    onCompleted: data => {
+      const command = data.deleteCommand?.command;
+      if (!command) return;
+
+      onDelete(command.id);
+    },
+    onError: e => {
+      alert(e.message);
+    },
+  });
+  return (
+    <>
+      <CommandIcons command={command} />
+      <button
+        className="el_btn el_btn__sm"
+        disabled={loading}
+        onClick={() => {
+          deleteCommand();
+        }}
+      >
+        削除
+      </button>
+    </>
+  );
+};
+
 const Page: React.FC = () => {
   const router = useRouter();
 
@@ -44,9 +84,13 @@ const Page: React.FC = () => {
       <Heading lv="h1">コマンド登録</Heading>
 
       {data.move.commands.map(command => (
-        <div key={command.id}>
-          <Command command={command} />
-        </div>
+        <Command
+          key={command.id}
+          command={command}
+          onDelete={() => {
+            refetch();
+          }}
+        />
       ))}
 
       <CreateForm
