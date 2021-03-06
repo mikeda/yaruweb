@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { CommandFragment, OperationFragment, StateFragment, useCreateCommandMutation } from '@/lib/graphql/types';
 import { Operations } from '../Command/Operations';
 import { StateOptions } from '../MoveForm/StateOptions';
+import { Operation } from '../Command/Operation';
 
 interface Props {
   moveId: string;
@@ -53,22 +54,19 @@ export const CommandForm: React.FC<Props> = ({ moveId, states, allOperations, on
         )}
 
         <div className="el_form_group">
-          <div className="el_form_select">
-            <select
-              onChange={e => {
-                const operation = allOperations.find(o => o.id === e.target.value);
-                if (!operation) return;
-
-                setOperations(prev => [...prev, operation]);
-              }}
-            >
-              {allOperations.map(operation => (
-                <option key={operation.id} value={operation.id}>
-                  {operation.name}
-                </option>
-              ))}
-            </select>
-          </div>
+          {allOperations.map(operation => {
+            return (
+              <button
+                key={operation.id}
+                onClick={e => {
+                  e.preventDefault();
+                  setOperations(prev => [...prev, operation]);
+                }}
+              >
+                <Operation operation={operation} />
+              </button>
+            );
+          })}
         </div>
 
         <div className="el_form_group">
