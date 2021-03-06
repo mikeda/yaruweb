@@ -2,13 +2,7 @@ import React from 'react';
 import * as Yup from 'yup';
 import { Form, Formik } from 'formik';
 
-import {
-  MoveAttributes,
-  MoveFragment,
-  MoveTypeEnum,
-  useMoveCategoriesQuery,
-  useStatesQuery,
-} from '@/lib/graphql/types';
+import { MoveAttributes, MoveFragment, useMoveCategoriesQuery, useStatesQuery } from '@/lib/graphql/types';
 import { FormGroup } from '../form/FormGroup';
 import { MoveCategoryOptions } from './MoveCategoryOptions';
 import { FormSelect } from '../form/FormSelect';
@@ -32,7 +26,6 @@ export const MoveForm: React.FC<Props> = ({ characterSlug, move, onSubmit, loadi
   return (
     <Formik<MoveAttributes>
       initialValues={{
-        type: move ? move.type : MoveTypeEnum.Attack,
         moveCategoryId: move ? move.moveCategoryId : '',
         afterStateId: move ? move.afterState.id : '',
         name: move ? move.name : '',

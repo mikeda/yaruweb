@@ -36,13 +36,6 @@ export const FrameText: { [key in Types.FrameStateEnum]: string } = {
   bend_back: '強制しゃがみ',
 };
 
-export const MoveTypeEnumText: { [key in Types.MoveTypeEnum]: string } = {
-  attack: '攻撃',
-  throw: '投げ',
-  attack_reversal: '返し技',
-  stance: '構え',
-};
-
 export const OrderText: { [key in Types.Order]: string } = {
   popular: '人気',
   new: '新着',
@@ -67,4 +60,7 @@ export const ThrowTypeEnumText: { [key in Types.ThrowTypeEnum]: string } = {
   juggle: '空中投げ',
   wall: '壁投げ',
   combo: '投げコンボ',
+  left: '左側面投げ',
+  right: '右側面投げ',
+  back: '背面投げ',
 };
