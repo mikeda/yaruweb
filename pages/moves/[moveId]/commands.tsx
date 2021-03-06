@@ -53,7 +53,7 @@ const Command: React.FC<CommandProps> = ({ command, onDelete }) => {
     },
   });
   return (
-    <>
+    <div>
       <CommandIcons command={command} />
       <button
         className="el_btn el_btn__sm"
@@ -64,7 +64,7 @@ const Command: React.FC<CommandProps> = ({ command, onDelete }) => {
       >
         削除
       </button>
-    </>
+    </div>
   );
 };
 
