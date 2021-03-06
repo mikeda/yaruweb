@@ -107,7 +107,7 @@ const AttackLabels: React.FC<{ move: MoveFragment }> = ({ move }) => {
 
 const AttackDetails: React.FC<{ move: MoveFragment }> = ({ move }) => {
   const damages = move.actions.map(a => a.damage);
-  const totalDamage = move.actions.map(a => a.damage).reduce((a, b) => a + b);
+  const totalDamage = move.actions.map(a => a.damage).reduce((a, b) => a + b, 0);
   const lastAction = move.actions[move.actions.length - 1];
 
   return (
