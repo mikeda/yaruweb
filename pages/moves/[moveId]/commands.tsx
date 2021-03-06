@@ -81,7 +81,7 @@ const Page: React.FC = () => {
 
   return (
     <>
-      <Heading lv="h1">コマンド登録</Heading>
+      <Heading lv="h1">{data.move.name}のコマンド登録</Heading>
 
       {data.move.commands.map(command => (
         <Command
