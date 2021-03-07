@@ -1,14 +1,13 @@
 import React from 'react';
-import * as Yup from 'yup';
-import { Form, Formik } from 'formik';
+import { useForm } from 'react-hook-form';
 
 import { MoveAttributes, MoveFragment, useMoveCategoriesQuery, useStatesQuery } from '@/lib/graphql/types';
-import { FormGroup } from '../form/FormGroup';
-import { MoveCategoryOptions } from './MoveCategoryOptions';
-import { FormSelect } from '../form/FormSelect';
-import { FormCheck } from '../form/FormCheck';
-import { StateOptions } from './StateOptions';
 import { NotFound } from '../NotFound';
+import { OpponentStateEnumText } from '@/lib/graphql/enum_texts';
+import { FormGroup } from './FormGrouup';
+import { Label } from './Label';
+import { ErrorMessage } from './ErrorMessage';
+import { CheckBox } from './CheckBox';
 
 interface Props {
   characterSlug: string;
@@ -20,68 +19,111 @@ interface Props {
 export const MoveForm: React.FC<Props> = ({ characterSlug, move, onSubmit, loading }) => {
   const { data: moveCategoriesData } = useMoveCategoriesQuery({ variables: { characterSlug } });
   const { data: statesData } = useStatesQuery({ variables: { characterSlug } });
+  const { register, errors, handleSubmit } = useForm<MoveAttributes>({
+    defaultValues: {
+      moveCategoryId: move?.moveCategoryId,
+      name: move?.name,
+      afterStateId: move?.afterState?.id,
+      opponentState: move?.opponentState,
+      startUpFrame: move?.startUpFrame,
+      youtubeVideoId: move?.youtubeVideoId,
+      rage: move?.rage,
+      comboStarter: move?.comboStarter,
+      powerCrush: move?.powerCrush,
+      homing: move?.homing,
+      screw: move?.screw,
+      wallBound: move?.wallBound,
+      crouchingStatus: move?.crouchingStatus,
+      jumpStatus: move?.jumpStatus,
+    },
+  });
 
   if (!moveCategoriesData || !statesData) return <NotFound>Loading...</NotFound>;
 
+  const checkBoxes: [string, string][] = [
+    ['rage', 'レイジ中'],
+    ['comboStarter', 'コンボ始動'],
+    ['powerCrush', 'パワークラッシュ'],
+    ['homing', 'ホーミング'],
+    ['screw', 'スクリュー'],
+    ['wallBound', 'ウォールバウンド'],
+    ['crouchingStatus', 'しゃがみステータス'],
+    ['jumpStatus', 'ジャンプステータス'],
+  ];
+
   return (
-    <Formik<MoveAttributes>
-      initialValues={{
-        moveCategoryId: move ? move.moveCategoryId : '',
-        afterStateId: move ? move.afterState.id : '',
-        name: move ? move.name : '',
-        kana: move ? move.kana : '',
-        startUpFrame: move?.startUpFrame,
-        rage: move ? move.rage : false,
-        comboStarter: move ? move.comboStarter : false,
-        powerCrush: move ? move.powerCrush : false,
-        crouchingStatus: move ? move.crouchingStatus : false,
-        jumpStatus: move ? move.jumpStatus : false,
-        homing: move ? move.homing : false,
-        screw: move ? move.screw : false,
-        wallBound: move ? move.wallBound : false,
-        youtubeVideoId: move?.youtubeVideoId,
-      }}
-      validationSchema={Yup.object({
-        name: Yup.string().required('技名を入力して下さい。'),
-      })}
-      onSubmit={attributes => {
-        onSubmit(attributes);
-      }}
-    >
-      {({ isValid }) => {
-        return (
-          <Form>
-            <FormGroup name="name" placeholder="技名" type="text" />
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <FormGroup>
+        <input className="el_form_input" name="name" placeholder="技名" ref={register({ required: true })} />
+        {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
+      </FormGroup>
 
-            <FormSelect name="moveCategoryId" label="カテゴリ">
-              <MoveCategoryOptions moveCategories={moveCategoriesData.moveCategories} />
-            </FormSelect>
+      <FormGroup>
+        <Label name="moveCategoryId">カテゴリ</Label>
+        <div className="el_form_select">
+          <select className="el_form_input" name="moveCategoryId" ref={register}>
+            {moveCategoriesData.moveCategories.map(moveCategory => (
+              <option key={moveCategory.id} value={moveCategory.id}>
+                {moveCategory.name}
+              </option>
+            ))}
+          </select>
+        </div>
+      </FormGroup>
 
-            <FormSelect name="afterStateId" label="技後の状態">
-              <StateOptions states={statesData.states} />
-            </FormSelect>
+      <FormGroup>
+        <Label name="afterStateId">技後の状態</Label>
+        <div className="el_form_select">
+          <select className="el_form_input" name="afterStateId" ref={register}>
+            <option value=""></option>
+            {statesData.states.map(state => (
+              <option key={state.id} value={state.id}>
+                {state.name}
+              </option>
+            ))}
+          </select>
+        </div>
+      </FormGroup>
 
-            <FormCheck name="rage" label="レイジ中" />
-            <FormCheck name="comboStarter" label="コンボ始動" />
-            <FormCheck name="powerCrush" label="パワークラッシュ" />
-            <FormCheck name="homing" label="ホーミング" />
-            <FormCheck name="screw" label="スクリュー" />
-            <FormCheck name="wallBound" label="ウォールバウンド" />
-            <FormCheck name="crouchingStatus" label="しゃがみステータス" />
-            <FormCheck name="jumpStatus" label="ジャンプステータス" />
+      <FormGroup>
+        <Label name="opponentState">相手の状態</Label>
+        <div className="el_form_select">
+          <select className="el_form_input" name="opponentState" ref={register}>
+            <option value=""></option>
+            {Object.entries(OpponentStateEnumText).map(([key, value]) => (
+              <option value={key} key={key}>
+                {value}
+              </option>
+            ))}
+          </select>
+        </div>
+      </FormGroup>
 
-            <FormGroup name="youtubeVideoId" placeholder="動画(YouTubeのID)" type="text" />
+      <FormGroup>
+        <input className="el_form_input" name="youtubeVideoId" placeholder="動画(YouTubeのID)" ref={register} />
+      </FormGroup>
 
-            <FormGroup name="startUpFrame" placeholder="発生" type="number" />
+      <FormGroup>
+        <input
+          className="el_form_input"
+          name="startUpFrame"
+          type="number"
+          placeholder="動画(YouTubeのID)"
+          ref={register({ valueAsNumber: true })}
+        />
+      </FormGroup>
 
-            <div className="el_form_group">
-              <button type="submit" disabled={loading || !isValid} className="el_btn">
-                登録する
-              </button>
-            </div>
-          </Form>
-        );
-      }}
-    </Formik>
+      {checkBoxes.map(([name, label]) => (
+        <CheckBox key={name} name={name} label={label}>
+          <input type="checkbox" id={name} name={name} ref={register} />
+        </CheckBox>
+      ))}
+
+      <div className="el_form_group">
+        <button type="submit" disabled={loading} className="el_btn">
+          登録する
+        </button>
+      </div>
+    </form>
   );
 };
