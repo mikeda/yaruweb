@@ -694,7 +694,7 @@ export type HighlightAttributes = {
 export type Move = {
   __typename?: 'Move';
   actions: Array<Action>;
-  afterState: State;
+  afterState?: Maybe<State>;
   character: Character;
   comboStarter: Scalars['Boolean'];
   commands: Array<Command>;
@@ -707,6 +707,7 @@ export type Move = {
   moveCategoryId: Scalars['ID'];
   name: Scalars['String'];
   note?: Maybe<Scalars['String']>;
+  opponentState?: Maybe<OpponentStateEnum>;
   playerId: Scalars['ID'];
   powerCrush: Scalars['Boolean'];
   rage: Scalars['Boolean'];
@@ -718,7 +719,8 @@ export type Move = {
 
 export type MoveAttributes = {
   moveCategoryId: Scalars['ID'];
-  afterStateId: Scalars['ID'];
+  afterStateId?: Maybe<Scalars['ID']>;
+  opponentState?: Maybe<OpponentStateEnum>;
   name: Scalars['String'];
   kana?: Maybe<Scalars['String']>;
   startUpFrame?: Maybe<Scalars['Int']>;
@@ -972,6 +974,23 @@ export type Operation = {
   key: Scalars['String'];
   name: Scalars['String'];
 };
+
+export enum OpponentStateEnum {
+  /** しゃがみ中 */
+  ToCrouching = 'to_crouching',
+  /** ダウン中 */
+  ToDown = 'to_down',
+  /** 空中 */
+  ToAir = 'to_air',
+  /** 壁やられ中 */
+  ToWallSplat = 'to_wall_splat',
+  /** 左側 */
+  ToLeft = 'to_left',
+  /** 右側 */
+  ToRight = 'to_right',
+  /** 後側 */
+  ToBack = 'to_back'
+}
 
 export enum Order {
   /** 人気 */
@@ -1489,11 +1508,11 @@ export type HighlightFragment = (
 
 export type MoveFragment = (
   { __typename?: 'Move' }
-  & Pick<Move, 'id' | 'playerId' | 'moveCategoryId' | 'name' | 'kana' | 'startUpFrame' | 'rage' | 'comboStarter' | 'powerCrush' | 'crouchingStatus' | 'jumpStatus' | 'homing' | 'screw' | 'wallBound' | 'note' | 'youtubeVideoId'>
-  & { afterState: (
+  & Pick<Move, 'id' | 'playerId' | 'moveCategoryId' | 'name' | 'kana' | 'opponentState' | 'startUpFrame' | 'rage' | 'comboStarter' | 'powerCrush' | 'crouchingStatus' | 'jumpStatus' | 'homing' | 'screw' | 'wallBound' | 'note' | 'youtubeVideoId'>
+  & { afterState?: Maybe<(
     { __typename?: 'State' }
     & Pick<State, 'id' | 'name'>
-  ), commands: Array<(
+  )>, commands: Array<(
     { __typename?: 'Command' }
     & CommandFragment
   )>, actions: Array<(
@@ -2690,6 +2709,7 @@ export const MoveFragmentDoc = gql`
   }
   name
   kana
+  opponentState
   startUpFrame
   rage
   comboStarter

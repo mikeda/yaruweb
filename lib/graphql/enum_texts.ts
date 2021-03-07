@@ -13,7 +13,7 @@ export const ArticleStatusText: { [key in Types.ArticleStatus]: string } = {
   draft: '下書き',
   published: '公開中',
 };
-[];
+
 export const FrameTypeText: { [key in Types.FrameTypeEnum]: string } = {
   block: 'ガード',
   hit: 'ヒット',
@@ -39,6 +39,16 @@ export const FrameText: { [key in Types.FrameStateEnum]: string } = {
 export const OrderText: { [key in Types.Order]: string } = {
   popular: '人気',
   new: '新着',
+};
+
+export const OpponentStateEnumText: { [key in Types.OpponentStateEnum]: string } = {
+  to_crouching: 'しゃがみ中',
+  to_down: 'ダウン中',
+  to_air: '空中',
+  to_wall_splat: '壁やられ中',
+  to_left: '左側',
+  to_right: '右側',
+  to_back: '後側',
 };
 
 export const AttackTypeEnumText: { [key in Types.AttackTypeEnum]: string } = {
