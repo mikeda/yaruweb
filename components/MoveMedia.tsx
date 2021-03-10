@@ -155,14 +155,14 @@ const MoveDetail: React.FC<{ label: string }> = ({ label, children }) => {
   );
 };
 
-const OpponentDetail: React.FC<{ frame?: number | null; state: FrameStateEnum }> = ({ frame, state }) => {
+const OpponentDetail: React.FC<{ frame?: number | null; state?: FrameStateEnum | null }> = ({ frame, state }) => {
   let frameClass: string | undefined;
   if (frame && frame <= -10) frameClass = 'el_caution';
 
   return (
     <>
       {frame && <span className={frameClass}>{frameText(frame)}</span>}
-      {state !== FrameStateEnum.Unchanged && FrameText[state]}
+      {state && FrameText[state]}
     </>
   );
 };

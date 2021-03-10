@@ -207,7 +207,7 @@ export type Command = {
   id: Scalars['ID'];
   move: Move;
   operations: Array<Operation>;
-  state: State;
+  state?: Maybe<State>;
 };
 
 export type CommandAttributes = {
@@ -629,7 +629,7 @@ export type Frame = {
   __typename?: 'Frame';
   frame?: Maybe<Scalars['Int']>;
   id: Scalars['ID'];
-  state: FrameStateEnum;
+  state?: Maybe<FrameStateEnum>;
   type: FrameTypeEnum;
 };
 
@@ -1478,10 +1478,10 @@ export type CharacterSummaryFragment = (
 export type CommandFragment = (
   { __typename?: 'Command' }
   & Pick<Command, 'id'>
-  & { state: (
+  & { state?: Maybe<(
     { __typename?: 'State' }
     & StateFragment
-  ), operations: Array<(
+  )>, operations: Array<(
     { __typename?: 'Operation' }
     & OperationFragment
   )> }
@@ -2388,10 +2388,10 @@ export type MyCombosQuery = (
       ), commands: Array<(
         { __typename?: 'Command' }
         & Pick<Command, 'id'>
-        & { state: (
+        & { state?: Maybe<(
           { __typename?: 'State' }
           & Pick<State, 'id' | 'name'>
-        ), move: (
+        )>, move: (
           { __typename?: 'Move' }
           & Pick<Move, 'name'>
         ) }
