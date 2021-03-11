@@ -14,7 +14,7 @@ interface Props {
 export const Command: React.FC<Props> = ({ command }) => {
   return (
     <Wrapper>
-      {!command.state.standing && <span className={styles.commandText}>{command.state.name}中</span>}
+      {command.state && <span className={styles.commandText}>{command.state.name}中</span>}
       {command.operations.map((operation, i) => (
         <Operation operation={operation} key={i} />
       ))}
