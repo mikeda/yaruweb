@@ -14,7 +14,6 @@ export const MoveList: React.FC<Props> = ({ moves }) => {
   const [homing, setHoming] = useState(false);
   const [screw, setScrew] = useState(false);
   const [wallBound, setWallBound] = useState(false);
-  const [floorBreak, setFloorBreak] = useState(false);
 
   const showMove = (move: MoveFragment) => {
     if (powerCrush && !move.powerCrush) return false;
@@ -22,6 +21,7 @@ export const MoveList: React.FC<Props> = ({ moves }) => {
     if (jumpStatus && !move.jumpStatus) return false;
     if (homing && !move.homing) return false;
     if (screw && !move.screw) return false;
+    if (wallBound && !move.wallBound) return false;
     if (wallBound && !move.wallBound) return false;
 
     return true;
@@ -37,7 +37,6 @@ export const MoveList: React.FC<Props> = ({ moves }) => {
           <MoveSelectCheckBox label="ホーミング" checked={homing} setChecked={setHoming} />
           <MoveSelectCheckBox label="スクリュー" checked={screw} setChecked={setScrew} />
           <MoveSelectCheckBox label="ウォールバウンド" checked={wallBound} setChecked={setWallBound} />
-          <MoveSelectCheckBox label="バルコニーブレイク" checked={floorBreak} setChecked={setFloorBreak} />
         </div>
       </div>
       <div className="bl_sectionUnit">
