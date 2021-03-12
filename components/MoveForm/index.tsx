@@ -74,7 +74,7 @@ export const MoveForm: React.FC<Props> = ({ characterSlug, move, onSubmit, loadi
       <FormGroup>
         <Label name="afterStateId">技後の状態</Label>
         <div className="el_form_select">
-          <select className="el_form_input" name="afterStateId" ref={register}>
+          <select className="el_form_input" name="afterStateId" ref={register({ setValueAs: v => v || null })}>
             <option value=""></option>
             {statesData.states.map(state => (
               <option key={state.id} value={state.id}>
@@ -88,7 +88,7 @@ export const MoveForm: React.FC<Props> = ({ characterSlug, move, onSubmit, loadi
       <FormGroup>
         <Label name="opponentState">相手の状態</Label>
         <div className="el_form_select">
-          <select className="el_form_input" name="opponentState" ref={register}>
+          <select className="el_form_input" name="opponentState" ref={register({ setValueAs: v => v || null })}>
             <option value=""></option>
             {Object.entries(OpponentStateEnumText).map(([key, value]) => (
               <option value={key} key={key}>
