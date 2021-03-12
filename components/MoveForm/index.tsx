@@ -108,7 +108,7 @@ export const MoveForm: React.FC<Props> = ({ characterSlug, move, onSubmit, loadi
           className="el_form_input"
           name="startUpFrame"
           type="number"
-          placeholder="動画(YouTubeのID)"
+          placeholder="発生"
           ref={register({ valueAsNumber: true })}
         />
       </FormGroup>
