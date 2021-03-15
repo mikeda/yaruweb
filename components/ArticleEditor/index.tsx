@@ -40,6 +40,7 @@ export const ArticleEditor: React.FC = () => {
         imageUrl,
         children: [{ text: '' }],
       });
+      editor.insertNode({ type: ArticleElementTypes.Paragraph, children: [{ text: '' }] });
     },
     onError: e => {
       alert(e.message);
