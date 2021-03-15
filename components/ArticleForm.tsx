@@ -88,9 +88,6 @@ const ArticleForm: React.FC<Props> = ({
             <div className="bl_box">
               <Slate editor={editor} value={value} onChange={newValue => setValue(newValue)}>
                 <ArticleEditor />
-                <pre>
-                  <code>{JSON.stringify(value, null, 4)}</code>
-                </pre>
               </Slate>
             </div>
 

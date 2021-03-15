@@ -7,9 +7,11 @@ import { ImageButton } from './ImageButton';
 import { LinkButton } from './LinkButton';
 import { MoveButton } from './MoveButton';
 
+import styles from './Controls.module.scss';
+
 export const Controls: React.FC = () => {
   return (
-    <>
+    <div className={styles.controls}>
       <MarkButton format="bold" icon={YAROUYO_FONT_CODE.bold} />
       <BlockButton format="heading-one" icon={YAROUYO_FONT_CODE.h1} />
       <BlockButton format="heading-two" icon={YAROUYO_FONT_CODE.h2} />
@@ -19,6 +21,6 @@ export const Controls: React.FC = () => {
       <MoveButton />
       <ImageButton />
       <LinkButton />
-    </>
+    </div>
   );
 };
