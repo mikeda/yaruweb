@@ -17,8 +17,7 @@ export const GlobalHeader: React.FC = () => {
           <div>
             <Link href={Routes.top()}>
               <a className={styles.logo}>
-                <FontAwesomeIcon icon={faFistRaised} />
-                {' 鉄拳やろうよ.com'}
+                <img src="https://yarouyo.s3-ap-northeast-1.amazonaws.com/site/service_logo.png" />
               </a>
             </Link>
 
