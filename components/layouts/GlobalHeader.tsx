@@ -1,7 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFistRaised } from '@fortawesome/free-solid-svg-icons';
 
 import { HeaderNav } from './HeaderNav';
 import { Routes } from '@/lib/Routes';
@@ -17,8 +15,7 @@ export const GlobalHeader: React.FC = () => {
           <div>
             <Link href={Routes.top()}>
               <a className={styles.logo}>
-                <FontAwesomeIcon icon={faFistRaised} />
-                {' 鉄拳やろうよ.com'}
+                <img src="https://yarouyo.s3-ap-northeast-1.amazonaws.com/site/service_logo.png" />
               </a>
             </Link>
 
