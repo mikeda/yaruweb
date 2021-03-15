@@ -1,7 +1,5 @@
 import React from 'react';
 import Link from 'next/link';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faFistRaised } from '@fortawesome/free-solid-svg-icons';
 
 import { HeaderNav } from './HeaderNav';
 import { Routes } from '@/lib/Routes';
