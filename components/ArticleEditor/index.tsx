@@ -71,7 +71,13 @@ export const ArticleEditor: React.FC = () => {
     <>
       <Controls />
 
-      <Editable placeholder="本文" renderElement={renderElement} renderLeaf={renderLeaf} onKeyDown={onKeyDown} />
+      <Editable
+        placeholder="本文"
+        renderElement={renderElement}
+        renderLeaf={renderLeaf}
+        onKeyDown={onKeyDown}
+        style={{ maxHeight: 400, overflowY: 'auto' }}
+      />
     </>
   );
 };
