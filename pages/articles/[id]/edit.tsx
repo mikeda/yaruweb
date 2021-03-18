@@ -35,17 +35,13 @@ const Content: React.FC<{ id: string }> = ({ id }) => {
   const article = data.myArticle;
 
   return (
-    <>
-      <Heading lv="h1">記事編集</Heading>
-
-      <ArticleForm
-        initialAttributes={article}
-        onSubmit={attributes => {
-          updateArticle({ variables: { id, attributes } });
-        }}
-        loading={updateLoading}
-      />
-    </>
+    <ArticleForm
+      initialAttributes={article}
+      onSubmit={attributes => {
+        updateArticle({ variables: { id, attributes } });
+      }}
+      loading={updateLoading}
+    />
   );
 };
 
