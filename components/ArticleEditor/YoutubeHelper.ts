@@ -1,49 +1,39 @@
-import { ReactEditor } from 'slate-react';
-import isUrl from 'is-url';
+import { Node } from 'slate';
 
-export const withEmbedYoutube = (editor: ReactEditor) => {
-  const { insertData, isVoid } = editor;
-
-  editor.insertData = data => {
-    const text = data.getData('text/plain');
-
-    if (text && isUrl(text)) {
-      const url = new URL(text);
-
-      const youtubeNode = getYoutubeNode(url);
-      if (youtubeNode) {
-        editor.insertNode({
-          type: 'embed-youtube',
-          ...youtubeNode,
-          children: [{ text: '' }],
-        });
-        return;
-      }
-    }
-
-    insertData(data);
-  };
-
-  editor.isVoid = element => {
-    return element.type === 'embed-youtube' ? true : isVoid(element);
-  };
-
-  return editor;
+const defaultNodeParams = {
+  type: 'embed-youtube',
+  children: [{ text: '' }],
 };
 
-const getYoutubeNode = (url: URL) => {
+export const getYoutubeNode = (url: URL): Node | null => {
   switch (url.hostname) {
     case 'www.youtube.com': {
       const videoId = url.searchParams.get('v');
       if (!videoId) return null;
 
       const startSec = Number(url.searchParams.get('t'));
-      return { videoId, startSec: startSec || undefined };
+      return {
+        ...defaultNodeParams,
+        videoId,
+        startSec: startSec || undefined,
+      };
     }
-    case 'youtu.be':
+
+    case 'youtu.be': {
       const videoId = url.pathname.substring(1);
       const startSec = Number(url.searchParams.get('t'));
-      return { videoId, startSec: startSec || undefined };
+      return {
+        ...defaultNodeParams,
+        videoId,
+        startSec: startSec || undefined,
+      };
+    }
+
+    default:
+      return null;
   }
-  return null;
+};
+
+export const isYoutubeUrl = (url: URL) => {
+  return url.hostname === 'www.youtube.com' || url.hostname === 'youtu.be';
 };
