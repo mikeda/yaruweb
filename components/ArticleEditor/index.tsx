@@ -4,7 +4,7 @@ import { Element } from '@/components/ArticleElement';
 import { Leaf } from '../ArticleElement/Leaf';
 import { ArticleElementTypes } from '../ArticleElement/ArticleElement';
 import { withIcon } from './IconHelper';
-import { createEditor } from 'slate';
+import { createEditor, Transforms, Node } from 'slate';
 import { withLink } from './LinkHelper';
 import { withEmbedYoutube } from './YoutubeHelper';
 import { withEmbedTwitter } from './TwitterHelper';
@@ -21,9 +21,32 @@ export const ArticleEditor: React.FC = () => {
   const renderElement = useCallback(props => <Element {...props} />, []);
   const renderLeaf = useCallback(props => <Leaf {...props} />, []);
   const onKeyDown = useCallback((event: React.KeyboardEvent<HTMLDivElement>) => {
-    if (event.shiftKey && event.key === 'Enter') {
-      event.preventDefault();
-      editor.insertText('\n');
+    if (event.key === 'Enter') {
+      if (event.shiftKey) {
+        event.preventDefault();
+        editor.insertText('\n');
+      } else {
+        if (!editor.selection) return;
+
+        const selectedElement = Node.descendant(editor, editor.selection.anchor.path.slice(0, -1));
+
+        if (selectedElement.type === 'heading-one' || selectedElement.type === 'heading-two') {
+          event.preventDefault();
+          const selectedLeaf = Node.descendant(editor, editor.selection.anchor.path);
+
+          const text = selectedLeaf.text as string;
+
+          if (text.length === editor.selection.anchor.offset) {
+            Transforms.insertNodes(editor, {
+              type: 'paragraph',
+              children: [{ text: '', marks: [] }],
+            });
+          } else {
+            Transforms.splitNodes(editor);
+            Transforms.setNodes(editor, { type: 'paragraph' });
+          }
+        }
+      }
     }
   }, []);
   const [createArticleLink] = useCreateArticleLinkMutation({
