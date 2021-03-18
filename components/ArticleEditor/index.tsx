@@ -96,9 +96,7 @@ export const ArticleEditor: React.FC = () => {
         }
         return;
       } else if (isTweetUrl(url)) {
-        console.log('tweet');
         const tweetNode = getTweetNode(url);
-        console.log({ tweetNode });
         if (tweetNode) {
           editor.insertNode(tweetNode);
           editor.insertNode({ type: ArticleElementTypes.Paragraph, children: [{ text: '' }] });
