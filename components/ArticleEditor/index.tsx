@@ -6,14 +6,14 @@ import { ArticleElementTypes } from '../ArticleElement/ArticleElement';
 import { withIcon } from './IconHelper';
 import { createEditor, Transforms, Node } from 'slate';
 import { withLink } from './LinkHelper';
-import { withEmbedYoutube } from './YoutubeHelper';
-import { withEmbedTwitter } from './TwitterHelper';
+import { getYoutubeNode, isYoutubeUrl } from './YoutubeHelper';
+import { getTweetNode, isTweetUrl } from './TweetHelper';
 import { useCreateArticleLinkMutation } from '@/lib/graphql/types';
 import isUrl from 'is-url';
 import { Controls } from './Controls';
 
 export const createArticleEditor = () => {
-  return withEmbedTwitter(withEmbedYoutube(withIcon(withLink(withReact(createEditor())))));
+  return withIcon(withLink(withReact(createEditor())));
 };
 
 export const ArticleEditor: React.FC = () => {
@@ -75,7 +75,9 @@ export const ArticleEditor: React.FC = () => {
   editor.isVoid = element => {
     return element.type === ArticleElementTypes.Image ||
       element.type === ArticleElementTypes.EmbedMove ||
-      element.type === ArticleElementTypes.EmbedLink
+      element.type === ArticleElementTypes.EmbedLink ||
+      element.type === ArticleElementTypes.EmbedYoutube ||
+      element.type === ArticleElementTypes.EmbedTweet
       ? true
       : isVoid(element);
   };
@@ -84,6 +86,23 @@ export const ArticleEditor: React.FC = () => {
     const text = data.getData('text/plain');
 
     if (text && isUrl(text)) {
+      const url = new URL(text);
+
+      if (isYoutubeUrl(url)) {
+        const youtubeNode = getYoutubeNode(url);
+        if (youtubeNode) {
+          editor.insertNode(youtubeNode);
+          editor.insertNode({ type: ArticleElementTypes.Paragraph, children: [{ text: '' }] });
+        }
+        return;
+      } else if (isTweetUrl(url)) {
+        const tweetNode = getTweetNode(url);
+        if (tweetNode) {
+          editor.insertNode(tweetNode);
+          editor.insertNode({ type: ArticleElementTypes.Paragraph, children: [{ text: '' }] });
+        }
+      }
+
       createArticleLink({ variables: { url: text } });
     } else {
       insertData(data);
