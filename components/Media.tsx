@@ -2,10 +2,11 @@ import React from 'react';
 import Link from 'next/link';
 
 import styles from './Media.module.scss';
+import { NO_IMAGE_URL } from '@/lib/Assets';
 
 interface Props {
   href?: string;
-  imageUrl: string;
+  imageUrl?: string | null;
   title: string;
   titleNote?: string;
   text: string;
@@ -26,7 +27,7 @@ export const Media: React.FC<Props> = ({ href, imageUrl, title, titleNote, text,
   return (
     <Wrapper href={href}>
       <figure className={styles.imgWrapper}>
-        <img src={imageUrl} />
+        <img src={imageUrl || NO_IMAGE_URL} />
       </figure>
 
       <div className={styles.content}>

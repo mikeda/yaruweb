@@ -18,6 +18,7 @@ import { NotFound } from '@/components/NotFound';
 import { Heading } from '@/components/Heading';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { ArticleBody } from '@/components/ArticleBody';
+import { NO_IMAGE_URL } from '@/lib/Assets';
 
 interface Props {
   article: ArticleFragment;
@@ -28,7 +29,7 @@ const Page: React.FC<Props> = ({ article }) => {
     <>
       <div className="bl_article">
         <div className="bl_article_mainImage">
-          <img src={article.mainImageUrl} />
+          <img src={article.mainImageUrl || NO_IMAGE_URL} />
         </div>
 
         <Heading lv="h1">{article.title}</Heading>
