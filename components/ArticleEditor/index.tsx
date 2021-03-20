@@ -101,6 +101,7 @@ export const ArticleEditor: React.FC = () => {
           editor.insertNode(tweetNode);
           editor.insertNode({ type: ArticleElementTypes.Paragraph, children: [{ text: '' }] });
         }
+        return;
       }
 
       createArticleLink({ variables: { url: text } });
