@@ -31,9 +31,9 @@ export const UpdateModal: React.FC<Props> = ({ isOpen, setIsOpen, onUpdated, eve
       <EventForm
         initialAttributes={{
           name: event.name,
+          organizerName: event.organizerName,
           organizerTwitterId: event.organizerTwitterId,
           url: event.url,
-          entryUrl: event.entryUrl,
           imageUrl: event.imageUrl,
           streamingUrl: event.streamingUrl,
           videoUrl: event.videoUrl,
