@@ -30,11 +30,9 @@ const Page: React.FC = () => {
                   text={event.description}
                   footer={
                     <>
-                      {event.url && (
-                        <a href={event.url} target="_blank" rel="noreferrer" className="el_btn hp_mg_r_sm">
-                          イベント情報
-                        </a>
-                      )}
+                      <a href={event.url} target="_blank" rel="noreferrer" className="el_btn hp_mg_r_sm">
+                        イベント情報
+                      </a>
 
                       {event.streamingUrl && (
                         <a href={event.streamingUrl} target="_blank" rel="noreferrer" className="el_btn hp_mg_r_sm">
