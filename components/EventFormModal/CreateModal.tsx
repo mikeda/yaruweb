@@ -30,9 +30,9 @@ export const CreateModal: React.FC<Props> = ({ isOpen, setIsOpen, onCreated }) =
       <EventForm
         initialAttributes={{
           name: '',
+          organizerName: '',
           organizerTwitterId: '',
           url: '',
-          entryUrl: '',
           imageUrl: '',
           streamingUrl: '',
           videoUrl: '',

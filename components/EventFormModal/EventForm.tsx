@@ -20,9 +20,9 @@ export const EventForm: React.FC<Props> = ({ initialAttributes, onSubmit, loadin
       initialValues={initialAttributes}
       validationSchema={Yup.object({
         name: Yup.string().required('イベント名を入力して下さい。'),
-        organizerTwitterId: Yup.string().required('主催者のTwitter IDを入力して下さい。'),
-        url: Yup.string().url(),
-        entryUrl: Yup.string().url(),
+        organizerName: Yup.string().required('主催者名を入力して下さい。'),
+        organizerTwitterId: Yup.string(),
+        url: Yup.string().url().required('イベントURLを入力して下さい。'),
         imageUrl: Yup.string().url().required('サムネイル画像URLを入力して下さい。'),
         streamingUrl: Yup.string().url(),
         videoUrl: Yup.string().url(),
@@ -37,9 +37,9 @@ export const EventForm: React.FC<Props> = ({ initialAttributes, onSubmit, loadin
         return (
           <Form>
             <FormGroup name="name" placeholder="イベント名" type="text" />
+            <FormGroup name="organizerName" placeholder="主催者" type="text" />
             <FormGroup name="organizerTwitterId" placeholder="主催者のTwitter ID" type="text" />
             <FormGroup name="url" placeholder="イベント情報URL" type="text" />
-            <FormGroup name="entryUrl" placeholder="エントリーURL" type="text" />
             <FormGroup name="imageUrl" placeholder="サムネイル画像URL" type="text" />
             <FormGroup name="streamingUrl" placeholder="配信URL" type="text" />
             <FormGroup name="videoUrl" placeholder="アーカイブ動画URL" type="text" />

@@ -36,12 +36,6 @@ const Page: React.FC = () => {
                         </a>
                       )}
 
-                      {event.entryUrl && (
-                        <a href={event.entryUrl} target="_blank" rel="noreferrer" className="el_btn hp_mg_r_sm">
-                          エントリー
-                        </a>
-                      )}
-
                       {event.streamingUrl && (
                         <a href={event.streamingUrl} target="_blank" rel="noreferrer" className="el_btn hp_mg_r_sm">
                           配信

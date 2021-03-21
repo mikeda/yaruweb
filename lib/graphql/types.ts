@@ -567,22 +567,22 @@ export type DeleteVideoFavPayload = {
 export type Event = {
   __typename?: 'Event';
   description: Scalars['String'];
-  entryUrl?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   imageUrl: Scalars['String'];
   name: Scalars['String'];
-  organizerTwitterId: Scalars['String'];
+  organizerName: Scalars['String'];
+  organizerTwitterId?: Maybe<Scalars['String']>;
   startsAt: Scalars['ISO8601DateTime'];
   streamingUrl?: Maybe<Scalars['String']>;
-  url?: Maybe<Scalars['String']>;
+  url: Scalars['String'];
   videoUrl?: Maybe<Scalars['String']>;
 };
 
 export type EventAttributes = {
   name: Scalars['String'];
-  organizerTwitterId: Scalars['String'];
-  url?: Maybe<Scalars['String']>;
-  entryUrl?: Maybe<Scalars['String']>;
+  organizerName: Scalars['String'];
+  organizerTwitterId?: Maybe<Scalars['String']>;
+  url: Scalars['String'];
   imageUrl: Scalars['String'];
   streamingUrl?: Maybe<Scalars['String']>;
   videoUrl?: Maybe<Scalars['String']>;
@@ -1493,7 +1493,7 @@ export type CurrentPlayerFragment = (
 
 export type EventFragment = (
   { __typename?: 'Event' }
-  & Pick<Event, 'id' | 'name' | 'url' | 'entryUrl' | 'imageUrl' | 'streamingUrl' | 'videoUrl' | 'description' | 'organizerTwitterId' | 'startsAt'>
+  & Pick<Event, 'id' | 'name' | 'url' | 'imageUrl' | 'streamingUrl' | 'videoUrl' | 'description' | 'organizerName' | 'organizerTwitterId' | 'startsAt'>
 );
 
 export type HighlightFragment = (
@@ -2562,11 +2562,11 @@ export const EventFragmentDoc = gql`
   id
   name
   url
-  entryUrl
   imageUrl
   streamingUrl
   videoUrl
   description
+  organizerName
   organizerTwitterId
   startsAt
 }
