@@ -1,5 +1,7 @@
 import React, { useCallback } from 'react';
 import { Editable, useSlate, withReact } from 'slate-react';
+import { withHistory } from 'slate-history';
+
 import { Element } from '@/components/ArticleElement';
 import { Leaf } from '../ArticleElement/Leaf';
 import { ArticleElementTypes } from '../ArticleElement/ArticleElement';
@@ -13,7 +15,7 @@ import isUrl from 'is-url';
 import { Controls } from './Controls';
 
 export const createArticleEditor = () => {
-  return withIcon(withLink(withReact(createEditor())));
+  return withIcon(withLink(withHistory(withReact(createEditor()))));
 };
 
 export const ArticleEditor: React.FC = () => {
