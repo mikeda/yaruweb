@@ -111,7 +111,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     },
   }));
 
-  return { paths, fallback: false };
+  return { paths, fallback: true };
 };
 
 export default Page;
