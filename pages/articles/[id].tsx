@@ -96,7 +96,10 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const id = params?.id as string;
   const data: ArticleQuery = await fetchGraphql(ArticleDocument, { id });
 
-  return { props: { article: data.article } };
+  return {
+    props: { article: data.article },
+    revalidate: 60,
+  };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
