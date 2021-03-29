@@ -98,7 +98,6 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   return {
     props: { article: data.article },
-    revalidate: 60,
   };
 };
 
@@ -111,7 +110,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     },
   }));
 
-  return { paths, fallback: true };
+  return { paths, fallback: false };
 };
 
 export default Page;
