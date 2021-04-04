@@ -24,8 +24,8 @@ export const EventForm: React.FC<Props> = ({ initialAttributes, onSubmit, loadin
         organizerTwitterId: Yup.string(),
         url: Yup.string().url().required('イベントURLを入力して下さい。'),
         imageUrl: Yup.string().url().required('サムネイル画像URLを入力して下さい。'),
-        streamingUrl: Yup.string().url(),
-        videoUrl: Yup.string().url(),
+        streamingUrl: Yup.string().url().nullable(),
+        videoUrl: Yup.string().url().nullable(),
         startsAt: Yup.string().required('開始時間を入力して下さい。'),
         description: Yup.string().required('概要を入力して下さい。'),
       })}
