@@ -21,7 +21,7 @@ export const EventForm: React.FC<Props> = ({ initialAttributes, onSubmit, loadin
       validationSchema={Yup.object({
         name: Yup.string().required('イベント名を入力して下さい。'),
         organizerName: Yup.string().required('主催者名を入力して下さい。'),
-        organizerTwitterId: Yup.string(),
+        organizerTwitterId: Yup.string().nullable(),
         url: Yup.string().url().required('イベントURLを入力して下さい。'),
         imageUrl: Yup.string().url().required('サムネイル画像URLを入力して下さい。'),
         streamingUrl: Yup.string().url().nullable(),
