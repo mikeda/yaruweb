@@ -3,6 +3,8 @@ import { useRouter } from 'next/router';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
+import { useSetRecoilState } from 'recoil';
+import { useForm } from 'react-hook-form';
 
 import { PlayerValidator } from '@/lib/validators/PlayerValidator';
 import { useCreatePlayerWithEmailMutation } from '@/lib/graphql/types';
@@ -10,10 +12,18 @@ import { FormGroup } from '@/components/form/FormGroup';
 import { Routes } from '@/lib/Routes';
 import { createFirebaseUserWithEmail } from '@/lib/firebase';
 import { currentPlayerState } from 'states/currentPlayer';
-import { useSetRecoilState } from 'recoil';
+import { string } from 'yup/lib/locale';
+
+type Inputs = {
+  email: string;
+  password: string;
+  name: string;
+  slug: string;
+}
 
 export const SignUpWithEmailForm: React.FC = () => {
   const router = useRouter();
+  const { register, handleSubmit } = useForm<Inputs>();
   const setCurrentPlayer = useSetRecoilState(currentPlayerState);
   const [createPlayerWithEmail] = useCreatePlayerWithEmailMutation({
     onCompleted: data => {

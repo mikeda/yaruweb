@@ -4,10 +4,8 @@ import { useForm } from 'react-hook-form';
 import { MoveAttributes, MoveFragment, useMoveCategoriesQuery, useStatesQuery } from '@/lib/graphql/types';
 import { NotFound } from '../NotFound';
 import { OpponentStateEnumText } from '@/lib/graphql/enum_texts';
-import { FormGroup } from './FormGrouup';
-import { Label } from './Label';
+import { FormGroup, Label, CheckBox, TextInput } from '../FormParts';
 import { ErrorMessage } from './ErrorMessage';
-import { CheckBox } from './CheckBox';
 
 interface Props {
   characterSlug: string;
@@ -19,7 +17,7 @@ interface Props {
 export const MoveForm: React.FC<Props> = ({ characterSlug, move, onSubmit, loading }) => {
   const { data: moveCategoriesData } = useMoveCategoriesQuery({ variables: { characterSlug } });
   const { data: statesData } = useStatesQuery({ variables: { characterSlug } });
-  const { register, errors, handleSubmit } = useForm<MoveAttributes>({
+  const { register, handleSubmit, errors } = useForm<MoveAttributes>({
     defaultValues: {
       moveCategoryId: move?.moveCategoryId,
       name: move?.name,
@@ -37,6 +35,9 @@ export const MoveForm: React.FC<Props> = ({ characterSlug, move, onSubmit, loadi
       jumpStatus: move?.jumpStatus,
     },
   });
+
+  console.log(111)
+  console.log(errors)
 
   if (!moveCategoriesData || !statesData) return <NotFound>Loading...</NotFound>;
 
