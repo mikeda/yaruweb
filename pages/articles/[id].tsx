@@ -110,11 +110,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
     },
   }));
 
-<<<<<<< HEAD
-  return { paths, fallback: false };
-=======
   return { paths, fallback: 'blocking' };
->>>>>>> fallback blockingにしてみる
 };
 
 export default Page;
