@@ -7,6 +7,7 @@ import { useMyArticleQuery, useUpdateArticleMutation } from '@/lib/graphql/types
 import { Routes } from '@/lib/Routes';
 import { NotFound } from '@/components/NotFound';
 import { Heading } from '@/components/Heading';
+import { Head } from '@/components/layouts/Head';
 
 const ArticleForm = dynamic(() => import('../../../components/ArticleForm'), {
   ssr: false,
@@ -51,6 +52,8 @@ const Page: React.FC = () => {
 
   return (
     <>
+      <Head title="記事編集" />
+
       <Heading lv="h1">記事編集</Heading>
 
       {id && <Content id={id} />}

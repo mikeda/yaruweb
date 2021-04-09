@@ -7,27 +7,32 @@ import { Article } from '@/components/ArticleCard';
 import { useArticlesQuery } from '@/lib/graphql/types';
 import { IntroSlides } from '@/pages-lib/index/IntroSlides';
 import { Heading } from '@/components/Heading';
+import { Head } from '@/components/layouts/Head';
 
 const Page: React.FC = () => {
   const { data: newArticlesData } = useArticlesQuery({ variables: { first: 3 } });
   const newArticles = newArticlesData?.articles.nodes;
 
   return (
-    <div className="bl_sectionUnit">
-      <div className="bl_section">
-        <IntroSlides />
-      </div>
+    <>
+      <Head title="鉄拳やろうよ.com" description="鉄拳やろうよ.comは格闘ゲーム「鉄拳7」を楽しむためのサイトです。" />
 
-      <div className="bl_section">
-        <Heading lv="h2">新着記事</Heading>
+      <div className="bl_sectionUnit">
+        <div className="bl_section">
+          <IntroSlides />
+        </div>
 
-        {newArticles && <ArticleCards articles={newArticles.filter(a => a) as Article[]} readMoreLink="/articles" />}
-      </div>
+        <div className="bl_section">
+          <Heading lv="h2">新着記事</Heading>
 
-      <div className="bl_section">
-        <StaffRequirement />
+          {newArticles && <ArticleCards articles={newArticles.filter(a => a) as Article[]} readMoreLink="/articles" />}
+        </div>
+
+        <div className="bl_section">
+          <StaffRequirement />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -10,6 +10,7 @@ import {
   useArticleCommentsQuery,
   useCreateArticleCommentMutation,
 } from '@/lib/graphql/types';
+import { Head } from '@/components/layouts/Head';
 import { ArticleAuthor } from '@/components/ArticleAuthor';
 import { FavButton } from '@/components/FavButton';
 import { Comment } from '@/components/Comment';
@@ -27,6 +28,8 @@ interface Props {
 const Page: React.FC<Props> = ({ article }) => {
   return (
     <>
+      <Head title={article.title} description={article.description} image={article.mainImageUrl} />
+
       <div className="bl_article">
         <div className="bl_article_mainImage">
           <img src={article.mainImageUrl || NO_IMAGE_URL} />
