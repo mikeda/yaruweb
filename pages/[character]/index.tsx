@@ -19,7 +19,7 @@ interface Props {
 
 const Page: React.FC<Props> = ({ character }) => (
   <>
-    <Head title={`鉄拳7のキャラクター一覧`} description={`鉄拳7のキャラクターを紹介しています。`} />
+    <Head title={character.longName} />
 
     <CharacterPageLayout character={character} activeTab="profile">
       <Heading lv="h3">ストーリー</Heading>

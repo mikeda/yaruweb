@@ -4,6 +4,7 @@ import { useEventsQuery } from '@/lib/graphql/types';
 import { NotFound } from '@/components/NotFound';
 import { Media } from '@/components/Media';
 import dayjs from '@/lib/dayjs';
+import { Head } from '@/components/layouts/Head';
 
 const Page: React.FC = () => {
   const { data, loading, fetchMore } = useEventsQuery({ variables: { first: 10 } });
@@ -15,6 +16,8 @@ const Page: React.FC = () => {
 
   return (
     <>
+      <Head title="イベント一覧" />
+
       <div className="bl_section">
         <div className="bl_section_body">
           <div className="bl_mediaUnit">

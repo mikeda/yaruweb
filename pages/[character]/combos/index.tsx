@@ -21,7 +21,7 @@ const Page: React.FC<Props> = ({ character }) => (
   <>
     <Head
       title={`${character.longName}のコンボ一覧`}
-      description={`鉄拳7のキャラクター、${character.longName}のコンボ動画を紹介しています。`}
+      description={`ユーザーが投稿した${character.longName}のコンボ動画です。`}
     />
 
     <CharacterPageLayout character={character} activeTab="combos">

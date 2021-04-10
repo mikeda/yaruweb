@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { CharacterCard } from '@/components/CharacterCard';
 import { Routes } from '@/lib/Routes';
 import { CharactersDocument } from '@/lib/graphql/types';
+import { Head } from '@/components/layouts/Head';
 
 interface Character {
   slug: string;
@@ -20,21 +21,25 @@ interface Props {
 
 const Page: React.FC<Props> = ({ characters }) => {
   return (
-    <div className="ly_row">
-      {characters.map(character => {
-        if (!character) return;
+    <>
+      <Head title="キャラクター一覧" description="鉄拳7のキャラクター一覧です。" />
 
-        return (
-          <div key={character.slug} className="ly_col_6 ly_mbCol_12 hp_mg_b_md">
-            <Link href={Routes.character(character.slug)}>
-              <a>
-                <CharacterCard character={character} />
-              </a>
-            </Link>
-          </div>
-        );
-      })}
-    </div>
+      <div className="ly_row">
+        {characters.map(character => {
+          if (!character) return;
+
+          return (
+            <div key={character.slug} className="ly_col_6 ly_mbCol_12 hp_mg_b_md">
+              <Link href={Routes.character(character.slug)}>
+                <a>
+                  <CharacterCard character={character} />
+                </a>
+              </Link>
+            </div>
+          );
+        })}
+      </div>
+    </>
   );
 };
 
