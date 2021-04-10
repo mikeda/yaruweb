@@ -15,7 +15,7 @@ const Page: React.FC = () => {
       const moveCategorySlug = data.createMove?.move.moveCategory.slug;
       if (!moveCategorySlug) return;
 
-      router.push(Routes.characterMoves(characterSlug, moveCategorySlug));
+      router.push(Routes.characterMoves(characterSlug));
       toast.success('技を作成しました。');
     },
     onError: error => {

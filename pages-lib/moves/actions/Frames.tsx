@@ -1,14 +1,21 @@
 import React, { useState } from 'react';
-import { FrameFragment } from '@/lib/graphql/types';
+import { FrameStateEnum, FrameTypeEnum } from '@/lib/graphql/types';
 
 import { Frame } from './Frame';
 
+interface FrameType {
+  id: string;
+  frame?: number | null;
+  state?: FrameStateEnum | null;
+  type: FrameTypeEnum;
+}
+
 interface Props {
-  frames: FrameFragment[];
+  frames: FrameType[];
 }
 
 export const Frames: React.FC<Props> = props => {
-  const [frames, setFrames] = useState<FrameFragment[]>(props.frames);
+  const [frames, setFrames] = useState<FrameType[]>(props.frames);
 
   return (
     <>

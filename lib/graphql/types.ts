@@ -1443,17 +1443,12 @@ export type VideoEdge = {
   node?: Maybe<Video>;
 };
 
-export type FrameFragment = (
-  { __typename?: 'Frame' }
-  & Pick<Frame, 'id' | 'type' | 'frame' | 'state'>
-);
-
 export type AttackActionFragment = (
   { __typename?: 'AttackAction' }
   & Pick<AttackAction, 'id' | 'attackType' | 'damage'>
   & { frames: Array<(
     { __typename?: 'Frame' }
-    & FrameFragment
+    & Pick<Frame, 'id' | 'type' | 'frame' | 'state'>
   )> }
 );
 
@@ -1462,7 +1457,7 @@ export type ThrowActionFragment = (
   & Pick<ThrowAction, 'id' | 'throwType' | 'damage' | 'escape'>
   & { frames: Array<(
     { __typename?: 'Frame' }
-    & FrameFragment
+    & Pick<Frame, 'id' | 'type' | 'frame' | 'state'>
   )> }
 );
 
@@ -1753,7 +1748,7 @@ export type CreateFrameMutation = (
     { __typename?: 'CreateFramePayload' }
     & { frame: (
       { __typename?: 'Frame' }
-      & FrameFragment
+      & Pick<Frame, 'id' | 'type' | 'frame' | 'state'>
     ) }
   )> }
 );
@@ -2724,35 +2719,33 @@ export const CommandFragmentDoc = gql`
 }
     ${StateFragmentDoc}
 ${OperationFragmentDoc}`;
-export const FrameFragmentDoc = gql`
-    fragment frame on Frame {
-  id
-  type
-  frame
-  state
-}
-    `;
 export const AttackActionFragmentDoc = gql`
     fragment attackAction on AttackAction {
   id
   frames {
-    ...frame
+    id
+    type
+    frame
+    state
   }
   attackType
   damage
 }
-    ${FrameFragmentDoc}`;
+    `;
 export const ThrowActionFragmentDoc = gql`
     fragment throwAction on ThrowAction {
   id
   frames {
-    ...frame
+    id
+    type
+    frame
+    state
   }
   throwType
   damage
   escape
 }
-    ${FrameFragmentDoc}`;
+    `;
 export const ActionFragmentDoc = gql`
     fragment action on Action {
   ... on AttackAction {
@@ -3115,11 +3108,14 @@ export const CreateFrameDocument = gql`
     mutation CreateFrame($actionId: ID!, $attributes: FrameAttributes!) {
   createFrame(input: {actionId: $actionId, attributes: $attributes}) {
     frame {
-      ...frame
+      id
+      type
+      frame
+      state
     }
   }
 }
-    ${FrameFragmentDoc}`;
+    `;
 export type CreateFrameMutationFn = Apollo.MutationFunction<CreateFrameMutation, CreateFrameMutationVariables>;
 
 /**
