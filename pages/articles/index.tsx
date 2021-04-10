@@ -8,7 +8,6 @@ import { NotFound } from '@/components/NotFound';
 import { Media } from '@/components/Media';
 import { Head } from '@/components/layouts/Head';
 import { TabLink } from '@/components/blocks/TabLink';
-import Link from 'next/link';
 
 const Page: React.FC = () => {
   const router = useRouter();
