@@ -6,6 +6,7 @@ import { TabLinkGroup } from '@/components/blocks/TabLinkGroup';
 import { Routes } from '@/lib/Routes';
 import { NotFound } from '@/components/NotFound';
 import { Media } from '@/components/Media';
+import { Head } from '@/components/layouts/Head';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -20,6 +21,8 @@ const Page: React.FC = () => {
 
   return (
     <>
+      <Head title="新着記事一覧" />
+
       <TabLinkGroup
         links={[
           { href: Routes.articles(), text: '新着', active: order == Order.New },

@@ -11,15 +11,23 @@ import {
 import { ComboList } from '@/pages-lib/characters/[slug]/combos/ComboList';
 import { CharacterPageLayout } from '@/components/layouts/CharacterPageLayout';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
+import { Head } from '@/components/layouts/Head';
 
 interface Props {
   character: CharacterFragment;
 }
 
 const Page: React.FC<Props> = ({ character }) => (
-  <CharacterPageLayout character={character} activeTab="combos">
-    <ComboList slug={character.slug} />
-  </CharacterPageLayout>
+  <>
+    <Head
+      title={`${character.longName}のコンボ一覧`}
+      description={`鉄拳7のキャラクター、${character.longName}のコンボ動画を紹介しています。`}
+    />
+
+    <CharacterPageLayout character={character} activeTab="combos">
+      <ComboList slug={character.slug} />
+    </CharacterPageLayout>
+  </>
 );
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {

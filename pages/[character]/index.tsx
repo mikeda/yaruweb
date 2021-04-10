@@ -11,13 +11,16 @@ import {
 import { CharacterPageLayout } from '@/components/layouts/CharacterPageLayout';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Heading } from '@/components/Heading';
+import { Head } from '@/components/layouts/Head';
 
 interface Props {
   character: CharacterFragment;
 }
 
-const Page: React.FC<Props> = ({ character }) => {
-  return (
+const Page: React.FC<Props> = ({ character }) => (
+  <>
+    <Head title={`鉄拳7のキャラクター一覧`} description={`鉄拳7のキャラクターを紹介しています。`} />
+
     <CharacterPageLayout character={character} activeTab="profile">
       <Heading lv="h3">ストーリー</Heading>
       <p className="hp_preLine">{character.story}</p>
@@ -25,8 +28,8 @@ const Page: React.FC<Props> = ({ character }) => {
       <Heading lv="h3">キャラ解説</Heading>
       <p className="hp_preLine">{character.description}</p>
     </CharacterPageLayout>
-  );
-};
+  </>
+);
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const slug = params?.character as string;

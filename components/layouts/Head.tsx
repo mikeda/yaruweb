@@ -2,19 +2,20 @@ import * as React from 'react';
 import { default as NextHead } from 'next/head';
 
 interface Props {
-  title?: string;
+  title: string;
   description?: string;
-  image?: string;
+  image?: string | null;
+  withoutSiteName?: boolean;
 }
 
-export const Head: React.FC<Props> = ({
-  title = '鉄拳やろうよ.com',
-  description = '鉄拳やろうよ.comは格闘ゲーム「鉄拳7」を楽しむためのサイトです。',
-  image = 'https://d2ybk292wkc2jl.cloudfront.net/site/introduction/characters.jpg',
-}) => {
+export const Head: React.FC<Props> = ({ title, description, image, withoutSiteName }) => {
+  if (!withoutSiteName) title = `${title} | 鉄拳やろうよ.com`;
+  image ||= 'https://d2ybk292wkc2jl.cloudfront.net/site/introduction/characters.jpg';
+
   return (
     <NextHead>
       <title>{title}</title>
+      <meta name="description" content={description} />
       <meta property="og:title" content={title} />
       <meta property="og:description" content={description} />
       <meta property="og:type" content="blog" />
