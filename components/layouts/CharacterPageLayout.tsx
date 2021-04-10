@@ -25,7 +25,7 @@ export const CharacterPageLayout: React.FC<Props> = ({ character, activeTab, chi
       <TabNav
         tabs={[
           { key: 'profile', href: Routes.character(character.slug), label: 'プロフィール' },
-          { key: 'moves', href: Routes.characterMoves(character.slug, 'rage'), label: 'コマンドリスト' },
+          { key: 'moves', href: Routes.characterMoves(character.slug), label: 'コマンドリスト' },
           { key: 'combos', href: Routes.characterCombos(character.slug), label: 'コンボ' },
         ]}
         activeTabKey={activeTab}

@@ -7,6 +7,8 @@ import { Routes } from '@/lib/Routes';
 import { NotFound } from '@/components/NotFound';
 import { Media } from '@/components/Media';
 import { Head } from '@/components/layouts/Head';
+import { TabLink } from '@/components/blocks/TabLink';
+import Link from 'next/link';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -23,12 +25,11 @@ const Page: React.FC = () => {
     <>
       <Head title="新着記事一覧" />
 
-      <TabLinkGroup
-        links={[
-          { href: Routes.articles(), text: '新着', active: order == Order.New },
-          { href: Routes.articles(Order.Popular), text: '人気', active: order == Order.Popular },
-        ]}
-      />
+      <TabLinkGroup>
+        <TabLink text="新着" href={Routes.articles()} active={order === Order.New} />
+        <TabLink text="人気" href={Routes.articles(Order.Popular)} active={order === Order.Popular} />
+      </TabLinkGroup>
+
       <div className="bl_section">
         <div className="bl_section_body">
           <div className="bl_mediaUnit">

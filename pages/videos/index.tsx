@@ -6,6 +6,7 @@ import { VideoCard } from '@/components/VideoCard';
 import { Routes } from '@/lib/Routes';
 import { TabLinkGroup } from '@/components/blocks/TabLinkGroup';
 import { NotFound } from '@/components/NotFound';
+import { TabLink } from '@/components/blocks/TabLink';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -19,12 +20,10 @@ const Page: React.FC = () => {
 
   return (
     <>
-      <TabLinkGroup
-        links={[
-          { href: Routes.videos(), text: '新着', active: order == Order.New },
-          { href: Routes.videos(Order.Popular), text: '人気', active: order == Order.Popular },
-        ]}
-      />
+      <TabLinkGroup>
+        <TabLink text="新着" href={Routes.videos()} active={order === Order.New} />
+        <TabLink text="人気" href={Routes.videos(Order.Popular)} active={order === Order.Popular} />
+      </TabLinkGroup>
 
       <div className="ly_row ly_row__mg_md">
         {videos.map(video => {

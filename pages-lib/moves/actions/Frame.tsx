@@ -1,11 +1,18 @@
 import React from 'react';
 import { FrameText, FrameTypeText } from '@/lib/graphql/enum_texts';
-import { FrameFragment, useDeleteFrameMutation } from '@/lib/graphql/types';
+import { FrameStateEnum, FrameTypeEnum, useDeleteFrameMutation } from '@/lib/graphql/types';
 
 import styles from './Frame.module.scss';
 
+interface FrameType {
+  id: string;
+  frame?: number | null;
+  state?: FrameStateEnum | null;
+  type: FrameTypeEnum;
+}
+
 interface Props {
-  frame: FrameFragment;
+  frame: FrameType;
   onDelete: (frameId: string) => void;
 }
 

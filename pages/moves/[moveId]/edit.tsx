@@ -19,7 +19,7 @@ const Page: React.FC = () => {
       const move = data.updateMove?.move;
       if (!move) return;
 
-      router.push(Routes.characterMoves(move.character.slug, move.moveCategory.slug));
+      router.push(Routes.characterMoves(move.character.slug));
       toast.success('技データを更新しました。');
     },
     onError: error => {
