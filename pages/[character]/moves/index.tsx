@@ -22,6 +22,7 @@ import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { useCurrentPlayer } from 'hooks/useCurrentPlayer';
 import { TabLinkGroup } from '@/components/blocks/TabLinkGroup';
 import { TabLink } from '@/components/blocks/TabLink';
+import { Head } from '@/components/layouts/Head';
 
 interface Props {
   character: CharacterFragment;
@@ -35,36 +36,43 @@ const Page: React.FC<Props> = ({ character, moveCategories, moves: allMoves }) =
   const [moves, setMoves] = useState(allMoves);
 
   return (
-    <CharacterPageLayout character={character} activeTab="moves">
-      <TabLinkGroup>
-        <TabLink
-          text="全て"
-          active={!moveCategory}
-          onClick={() => {
-            setMoveCategory(undefined);
-          }}
-        />
-        {moveCategories.map(c => (
+    <>
+      <Head
+        title={`${character.longName}の動画`}
+        description={`ユーザーが投稿した${character.longName}のオススメ動画です。`}
+      />
+
+      <CharacterPageLayout character={character} activeTab="moves">
+        <TabLinkGroup>
           <TabLink
-            key={c.id}
-            text={c.name}
-            active={c === moveCategory}
+            text="全て"
+            active={!moveCategory}
             onClick={() => {
-              setMoveCategory(c);
-              setMoves(c ? allMoves.filter(move => move.moveCategoryId === c.id) : allMoves);
+              setMoveCategory(undefined);
             }}
           />
-        ))}
-      </TabLinkGroup>
-      {currentPlayer && (
-        <div className="bl_myContHeader">
-          <Link href={Routes.createMove(character.slug)}>
-            <a className="el_btn">登録する</a>
-          </Link>
-        </div>
-      )}
-      <MoveList moves={moves} />
-    </CharacterPageLayout>
+          {moveCategories.map(c => (
+            <TabLink
+              key={c.id}
+              text={c.name}
+              active={c === moveCategory}
+              onClick={() => {
+                setMoveCategory(c);
+                setMoves(c ? allMoves.filter(move => move.moveCategoryId === c.id) : allMoves);
+              }}
+            />
+          ))}
+        </TabLinkGroup>
+        {currentPlayer && (
+          <div className="bl_myContHeader">
+            <Link href={Routes.createMove(character.slug)}>
+              <a className="el_btn">登録する</a>
+            </Link>
+          </div>
+        )}
+        <MoveList moves={moves} />
+      </CharacterPageLayout>
+    </>
   );
 };
 

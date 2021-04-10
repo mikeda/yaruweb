@@ -7,6 +7,7 @@ import { Routes } from '@/lib/Routes';
 import { TabLinkGroup } from '@/components/blocks/TabLinkGroup';
 import { NotFound } from '@/components/NotFound';
 import { TabLink } from '@/components/blocks/TabLink';
+import { Head } from '@/components/layouts/Head';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -20,6 +21,8 @@ const Page: React.FC = () => {
 
   return (
     <>
+      <Head title="オススメ動画" />
+
       <TabLinkGroup>
         <TabLink text="新着" href={Routes.videos()} active={order === Order.New} />
         <TabLink text="人気" href={Routes.videos(Order.Popular)} active={order === Order.Popular} />

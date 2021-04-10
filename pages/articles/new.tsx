@@ -7,6 +7,7 @@ import { Routes } from '@/lib/Routes';
 
 import dynamic from 'next/dynamic';
 import { Heading } from '@/components/Heading';
+import { Head } from '@/components/layouts/Head';
 const ArticleForm = dynamic(() => import('../../components/ArticleForm'), {
   ssr: false,
 });
@@ -26,7 +27,9 @@ const Page: React.FC = () => {
 
   return (
     <>
-      <Heading lv="h1">記事作成</Heading>
+      <Head title="記事投稿" />
+
+      <Heading lv="h1">記事投稿</Heading>
 
       <ArticleForm
         onSubmit={attributes => {
