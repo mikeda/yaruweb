@@ -212,7 +212,7 @@ export type Command = {
 };
 
 export type CommandAttributes = {
-  stateId: Scalars['ID'];
+  stateId?: Maybe<Scalars['ID']>;
   operationIds: Array<Scalars['ID']>;
 };
 

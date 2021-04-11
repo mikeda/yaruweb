@@ -13,7 +13,7 @@ interface Props {
 
 export const CommandForm: React.FC<Props> = ({ moveId, states, allOperations, onCreate }) => {
   const [operations, setOperations] = useState<OperationFragment[]>([]);
-  const [state, setState] = useState<StateFragment>(states[0]);
+  const [state, setState] = useState<StateFragment | null>(null);
   const [createCommand, { loading }] = useCreateCommandMutation({
     onCompleted: data => {
       const command = data.createCommand?.command;
@@ -34,13 +34,11 @@ export const CommandForm: React.FC<Props> = ({ moveId, states, allOperations, on
           <div className="el_form_select">
             <select
               className="el_form_input"
-              value={state.id}
+              value={state?.id}
               onChange={event => {
                 event.preventDefault();
                 const selectedState = states.find(s => s.id === event.target.value);
-                if (!selectedState) return;
-
-                setState(selectedState);
+                setState(selectedState || null);
               }}
             >
               <StateOptions states={states} />
@@ -77,7 +75,7 @@ export const CommandForm: React.FC<Props> = ({ moveId, states, allOperations, on
               createCommand({
                 variables: {
                   moveId,
-                  attributes: { stateId: state.id, operationIds: operations.map(o => o.id) },
+                  attributes: { stateId: state?.id, operationIds: operations.map(o => o.id) },
                 },
               })
             }
