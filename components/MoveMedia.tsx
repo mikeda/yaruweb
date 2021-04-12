@@ -191,5 +191,5 @@ const VideoPlayer: React.FC<{ src: string; thumnailUrl: string }> = ({ src, thum
     };
   }, [videoRef]);
 
-  return <video controls ref={videoRef} className={styles.video} preload="none" />;
+  return <video controls ref={videoRef} className={styles.video} poster={thumnailUrl} preload="none" />;
 };
