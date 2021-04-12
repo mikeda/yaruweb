@@ -49,6 +49,9 @@ export const MoveMedia: React.FC<Props> = ({ move }) => {
                   <Link key={1} href={Routes.moveActions(move.id)}>
                     <a>アクション登録</a>
                   </Link>,
+                  <Link key={1} href={Routes.createMoveVideo(move.id)}>
+                    <a>動画登録</a>
+                  </Link>,
                 ]}
               />
             )}
