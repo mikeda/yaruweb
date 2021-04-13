@@ -1493,7 +1493,7 @@ export type VideoEdge = {
 };
 
 export type AttackActionFragment = (
-  { __typename?: 'AttackAction' }
+  { __typename: 'AttackAction' }
   & Pick<AttackAction, 'id' | 'attackType' | 'damage'>
   & { frames: Array<(
     { __typename?: 'Frame' }
@@ -1502,7 +1502,7 @@ export type AttackActionFragment = (
 );
 
 export type ThrowActionFragment = (
-  { __typename?: 'ThrowAction' }
+  { __typename: 'ThrowAction' }
   & Pick<ThrowAction, 'id' | 'throwType' | 'damage' | 'escape'>
   & { frames: Array<(
     { __typename?: 'Frame' }
@@ -2798,6 +2798,7 @@ export const CommandFragmentDoc = gql`
 ${OperationFragmentDoc}`;
 export const AttackActionFragmentDoc = gql`
     fragment attackAction on AttackAction {
+  __typename
   id
   frames {
     id
@@ -2811,6 +2812,7 @@ export const AttackActionFragmentDoc = gql`
     `;
 export const ThrowActionFragmentDoc = gql`
     fragment throwAction on ThrowAction {
+  __typename
   id
   frames {
     id
