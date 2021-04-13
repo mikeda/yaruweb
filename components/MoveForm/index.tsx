@@ -26,7 +26,6 @@ export const MoveForm: React.FC<Props> = ({ characterSlug, move, onSubmit, loadi
       afterStateId: move?.afterState?.id,
       opponentState: move?.opponentState,
       startUpFrame: move?.startUpFrame,
-      youtubeVideoId: move?.youtubeVideoId,
       rage: move?.rage,
       comboStarter: move?.comboStarter,
       powerCrush: move?.powerCrush,
@@ -97,10 +96,6 @@ export const MoveForm: React.FC<Props> = ({ characterSlug, move, onSubmit, loadi
             ))}
           </select>
         </div>
-      </FormGroup>
-
-      <FormGroup>
-        <input className="el_form_input" name="youtubeVideoId" placeholder="動画(YouTubeのID)" ref={register} />
       </FormGroup>
 
       <FormGroup>

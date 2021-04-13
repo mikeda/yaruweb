@@ -9,6 +9,7 @@ export const Routes = {
   characterMoves: (characterSlug: string) => `/${characterSlug}/moves`,
   createArticle: () => '/articles/new',
   createMove: (slug: string) => `/characters/${slug}/moves/new`,
+  createMoveVideo: (moveId: string) => `/moves/${moveId}/videos/new`,
   updateMove: (moveId: string) => `/moves/${moveId}/edit`,
   login: () => '/login',
   mypageArticles: () => '/mypage/articles',

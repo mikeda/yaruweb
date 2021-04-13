@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-regular-svg-icons';
+import Hls from 'hls.js';
 
 import { MoveFragment, FrameStateEnum } from '@/lib/graphql/types';
 import { Routes } from '@/lib/Routes';
@@ -49,6 +50,9 @@ export const MoveMedia: React.FC<Props> = ({ move }) => {
                   <Link key={1} href={Routes.moveActions(move.id)}>
                     <a>アクション登録</a>
                   </Link>,
+                  <Link key={1} href={Routes.createMoveVideo(move.id)}>
+                    <a>動画登録</a>
+                  </Link>,
                 ]}
               />
             )}
@@ -72,20 +76,7 @@ export const MoveMedia: React.FC<Props> = ({ move }) => {
             {move.note && move.note.length > 0 && <div className={styles.note}>{move.note}</div>}
           </div>
 
-          {move.youtubeVideoId && (
-            <div className={styles.video}>
-              <div className="bl_youtube">
-                <iframe
-                  width={854}
-                  height={480}
-                  src={`https://www.youtube.com/embed/${move.youtubeVideoId}`}
-                  frameBorder={0}
-                  allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                  allowFullScreen
-                ></iframe>
-              </div>
-            </div>
-          )}
+          {move.moveVideo && <VideoPlayer src={move.moveVideo.m3u8Url} thumnailUrl={move.moveVideo.thumbnailUrl} />}
         </div>
       </div>
     </>
@@ -171,4 +162,34 @@ const frameText = (frame: number) => {
   if (frame > 0) return `+${frame}F`;
   if (frame === 0) return `±${0}F`;
   return `${frame}F`;
+};
+
+const VideoPlayer: React.FC<{ src: string; thumnailUrl: string }> = ({ src, thumnailUrl }) => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    let hls: Hls;
+    if (videoRef.current) {
+      const video = videoRef.current;
+      if (!video) return;
+
+      if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        // This will run in safari, where HLS is supported natively
+        video.src = src;
+      } else if (Hls.isSupported()) {
+        // This will run in all other modern browsers
+        hls = new Hls();
+        hls.loadSource(src);
+        hls.attachMedia(video);
+      }
+    }
+
+    return () => {
+      if (hls) {
+        hls.destroy();
+      }
+    };
+  }, [videoRef]);
+
+  return <video controls ref={videoRef} className={styles.video} poster={thumnailUrl} preload="none" />;
 };
