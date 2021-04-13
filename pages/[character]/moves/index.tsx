@@ -91,6 +91,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       moveCategories: moveCategoriesData.moveCategories,
       moves: movesData.moves,
     },
+    revalidate: 60,
   };
 };
 
