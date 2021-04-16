@@ -5,19 +5,22 @@ import Hls from 'hls.js';
 
 import { MoveFragment, FrameStateEnum } from '@/lib/graphql/types';
 import { Routes } from '@/lib/Routes';
-import { Command } from './Command';
+import { Command } from '../Command';
 
 import styles from './MoveMedia.module.scss';
 
 import { AttackTypeEnumText, FrameText, FrameTypeText, ThrowTypeEnumText } from '@/lib/graphql/enum_texts';
-import { DropDownMenu } from './layouts/DropDownMenu';
+import { DropDownMenu } from '../layouts/DropDownMenu';
 import Link from 'next/link';
+import { VideoDropzone } from './VideoDropzone';
+import { useCurrentPlayer } from 'hooks/useCurrentPlayer';
 
 type Props = {
   move: MoveFragment;
 };
 
 export const MoveMedia: React.FC<Props> = ({ move }) => {
+  const { currentPlayer } = useCurrentPlayer();
   const [menuOpened, setMenuOpened] = useState(false);
 
   return (
@@ -27,36 +30,39 @@ export const MoveMedia: React.FC<Props> = ({ move }) => {
 
         <div className={styles.header}>
           <div className={styles.ttl}>{move.name}</div>
-          <div className={styles.menu}>
-            <div
-              onClick={() => {
-                setMenuOpened(true);
-              }}
-              className="el_iconBtn"
-            >
-              <FontAwesomeIcon icon={faEdit} />
-            </div>
 
-            {menuOpened && (
-              <DropDownMenu
-                onClose={() => setMenuOpened(false)}
-                items={[
-                  <Link key={0} href={Routes.updateMove(move.id)}>
-                    <a>技データ編集</a>
-                  </Link>,
-                  <Link key={1} href={Routes.moveCommands(move.id)}>
-                    <a>コマンド登録</a>
-                  </Link>,
-                  <Link key={1} href={Routes.moveActions(move.id)}>
-                    <a>アクション登録</a>
-                  </Link>,
-                  <Link key={1} href={Routes.createMoveVideo(move.id)}>
-                    <a>動画登録</a>
-                  </Link>,
-                ]}
-              />
-            )}
-          </div>
+          {currentPlayer && (
+            <div className={styles.menu}>
+              <div
+                onClick={() => {
+                  setMenuOpened(true);
+                }}
+                className="el_iconBtn"
+              >
+                <FontAwesomeIcon icon={faEdit} />
+              </div>
+
+              {menuOpened && (
+                <DropDownMenu
+                  onClose={() => setMenuOpened(false)}
+                  items={[
+                    <Link key={0} href={Routes.updateMove(move.id)}>
+                      <a>技データ編集</a>
+                    </Link>,
+                    <Link key={1} href={Routes.moveCommands(move.id)}>
+                      <a>コマンド登録</a>
+                    </Link>,
+                    <Link key={1} href={Routes.moveActions(move.id)}>
+                      <a>アクション登録</a>
+                    </Link>,
+                    <Link key={1} href={Routes.createMoveVideo(move.id)}>
+                      <a>動画登録</a>
+                    </Link>,
+                  ]}
+                />
+              )}
+            </div>
+          )}
         </div>
 
         <div className={styles.cont}>
@@ -76,7 +82,11 @@ export const MoveMedia: React.FC<Props> = ({ move }) => {
             {move.note && move.note.length > 0 && <div className={styles.note}>{move.note}</div>}
           </div>
 
-          {move.moveVideo && <VideoPlayer src={move.moveVideo.m3u8Url} thumnailUrl={move.moveVideo.thumbnailUrl} />}
+          {move.moveVideo ? (
+            <VideoPlayer src={move.moveVideo.m3u8Url} thumnailUrl={move.moveVideo.thumbnailUrl} />
+          ) : (
+            currentPlayer && <VideoDropzone moveId={move.id} />
+          )}
         </div>
       </div>
     </>
