@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit } from '@fortawesome/free-regular-svg-icons';
 import Hls from 'hls.js';
 
-import { MoveFragment, FrameStateEnum } from '@/lib/graphql/types';
+import { MoveFragment, FrameStateEnum, useDeleteMoveMutation } from '@/lib/graphql/types';
 import { Routes } from '@/lib/Routes';
 import { Command } from '../Command';
 
@@ -14,14 +14,26 @@ import { DropDownMenu } from '../layouts/DropDownMenu';
 import Link from 'next/link';
 import { VideoDropzone } from './VideoDropzone';
 import { useCurrentPlayer } from 'hooks/useCurrentPlayer';
+import { toast } from 'react-toastify';
 
 type Props = {
   move: MoveFragment;
+  onDelete?: (moveId: string) => void;
 };
 
-export const MoveMedia: React.FC<Props> = ({ move }) => {
+export const MoveMedia: React.FC<Props> = ({ move, onDelete }) => {
   const { currentPlayer } = useCurrentPlayer();
   const [menuOpened, setMenuOpened] = useState(false);
+  const [deleteMove] = useDeleteMoveMutation({
+    variables: { moveId: move.id },
+    onCompleted: () => {
+      toast.success('削除しました。');
+      if (onDelete) onDelete(move.id);
+    },
+    onError: () => {
+      toast.error('削除に失敗しました。');
+    },
+  });
 
   return (
     <>
@@ -55,9 +67,18 @@ export const MoveMedia: React.FC<Props> = ({ move }) => {
                     <Link key={1} href={Routes.moveActions(move.id)}>
                       <a>アクション登録</a>
                     </Link>,
-                    <Link key={1} href={Routes.createMoveVideo(move.id)}>
+                    <Link key={2} href={Routes.createMoveVideo(move.id)}>
                       <a>動画登録</a>
                     </Link>,
+                    <a
+                      key={3}
+                      onClick={e => {
+                        e.preventDefault();
+                        if (confirm('技データを削除します。')) deleteMove();
+                      }}
+                    >
+                      削除
+                    </a>,
                   ]}
                 />
               )}
