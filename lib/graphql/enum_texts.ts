@@ -32,6 +32,7 @@ export const FrameText: { [key in Types.FrameStateEnum]: string } = {
   fall_down: '転びコンボ',
   crouching: '強制しゃがみ',
   twist: 'きりもみ',
+  only_block: 'ガード可能な有利',
   bow: '強制しゃがみ',
   bend_back: '強制しゃがみ',
 };
