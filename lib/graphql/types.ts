@@ -136,6 +136,8 @@ export enum AttackTypeEnum {
   Ubm = 'ubm',
   /** 下段ガード不能 */
   Ubl = 'ubl',
+  /** 空中ガード不能 */
+  Uba = 'uba',
   /** 打撃投げ */
   T = 't'
 }

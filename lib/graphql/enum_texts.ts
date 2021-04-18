@@ -59,6 +59,7 @@ export const AttackTypeEnumText: { [key in Types.AttackTypeEnum]: string } = {
   ubh: '上段ガード不能',
   ubm: '中段ガード不能',
   ubl: '下段ガード不能',
+  uba: '空中ガード不能',
   t: '打撃投げ',
 };
 
