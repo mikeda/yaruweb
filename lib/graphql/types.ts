@@ -708,6 +708,8 @@ export enum FrameStateEnum {
   Crouching = 'crouching',
   /** きりもみ */
   Twist = 'twist',
+  /** ガード可能な有利 */
+  OnlyBlock = 'only_block',
   /** へこみ */
   Bow = 'bow',
   /** のけぞり */
