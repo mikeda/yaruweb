@@ -56,7 +56,7 @@ export const Element: React.FC<Props> = ({ attributes, children, element }) => {
       );
     case 'embed-youtube':
       return (
-        <EmbedYouTube videoId={element.videoId} attributes={attributes}>
+        <EmbedYouTube videoId={element.videoId} startSec={element.startSec} attributes={attributes}>
           {children}
         </EmbedYouTube>
       );

@@ -92,6 +92,7 @@ interface EmbedLink extends Base {
 interface EmbedYoutube extends Base {
   type: 'embed-youtube';
   videoId: string;
+  startSec?: number;
 }
 
 interface EmbedTweet extends Base {
