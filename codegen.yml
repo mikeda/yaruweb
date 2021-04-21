@@ -1,13 +1,14 @@
 overwrite: true
 schema: http://localhost:5000/graphql
-documents: ["../yarouyo/app/graphql/operations/**/*.graphql"]
+documents: ['../yarouyo/app/graphql/operations/**/*.graphql']
 generates:
   lib/graphql/types.ts:
     plugins:
-      - "typescript"
-      - "typescript-operations"
-      - "typescript-react-apollo"
+      - 'typescript'
+      - 'typescript-operations'
+      - 'typescript-react-apollo'
     config:
       withHooks: true
       scalars:
         ISO8601DateTime: string
+        ISO8601Date: string
