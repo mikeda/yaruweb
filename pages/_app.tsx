@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { AppProps } from 'next/app';
 import { ToastContainer } from 'react-toastify';
 import { ApolloProvider } from '@apollo/client';
@@ -8,6 +8,7 @@ import { Integrations } from '@sentry/tracing';
 
 import '@/styles/global.scss';
 import 'react-toastify/dist/ReactToastify.css';
+import * as gtag from '../lib/gtag';
 
 import { client } from '@/lib/graphql/client';
 import { GlobalHeader } from '@/components/layouts/GlobalHeader';
@@ -15,6 +16,7 @@ import { GlobalFooter } from '@/components/layouts/GlobalFooter';
 import { Content } from '@/components/layouts/Content';
 import { currentPlayerState } from 'states/currentPlayer';
 import { useCurrentPlayerQuery } from '@/lib/graphql/types';
+import { useRouter } from 'next/router';
 
 const AppInit = () => {
   const setCurrentPlayer = useSetRecoilState(currentPlayerState);
@@ -28,6 +30,18 @@ const AppInit = () => {
 };
 
 export default function App({ Component, pageProps }: AppProps) {
+  const router = useRouter();
+
+  useEffect(() => {
+    const handleRouteChange = (url: string) => {
+      gtag.pageview(url);
+    };
+    router.events.on('routeChangeComplete', handleRouteChange);
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange);
+    };
+  }, [router.events]);
+
   return (
     <RecoilRoot>
       <ApolloProvider client={client}>
