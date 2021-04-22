@@ -10,11 +10,11 @@ import { Routes } from '@/lib/Routes';
 
 const modalStyle = {
   content: {
-    width: 200,
     top: '50%',
-    left: '50%',
     right: 'auto',
     bottom: 'auto',
+    left: '50%',
+    width: 200,
     marginRight: '-50%',
     transform: 'translate(-50%, -50%)',
   },

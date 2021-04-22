@@ -3,7 +3,12 @@ import Modal from 'react-modal';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 
-import { HighlightFragment, useCreateHighlightMutation, useDeleteHighlightMutation } from '@/lib/graphql/types';
+import {
+  HighlightFragment,
+  PlayerRole,
+  useCreateHighlightMutation,
+  useDeleteHighlightMutation,
+} from '@/lib/graphql/types';
 
 import styles from './VideoHighlights.module.scss';
 import { FormGroup } from './form/FormGroup';
@@ -57,6 +62,8 @@ export const VideoHighlights: React.FC<Props> = ({ videoId, highlights: initialH
     },
   });
 
+  const editable = currentPlayer?.role === PlayerRole.Editor;
+
   return (
     <>
       <ol>
@@ -72,7 +79,7 @@ export const VideoHighlights: React.FC<Props> = ({ videoId, highlights: initialH
             </a>
             <span className={styles.title}>{highlight.title}</span>
             <span className={styles.playerName}>{highlight.player.name}</span>
-            {currentPlayer?.slug === highlight.player.slug && (
+            {editable && (
               <a
                 onClick={() => {
                   deleteHightlight({ variables: { highlightId: highlight.id } });
@@ -85,44 +92,48 @@ export const VideoHighlights: React.FC<Props> = ({ videoId, highlights: initialH
         ))}
       </ol>
 
-      <a onClick={() => setModalOpened(true)}>ハイライトを追加</a>
-      <Modal isOpen={modalOpened} onRequestClose={() => setModalOpened(false)} style={modalStyle}>
-        <Formik
-          initialValues={{ title: '', startSec: '00:00:00' }}
-          validationSchema={Yup.object({
-            title: Yup.string().required('イベント名を入力して下さい。'),
-            startSec: Yup.string().required('開始時間を入力して下さい。'),
-          })}
-          onSubmit={attributes => {
-            const startSec = parseTime(attributes.startSec);
-            if (!startSec) return;
+      {editable && (
+        <>
+          <a onClick={() => setModalOpened(true)}>ハイライトを追加</a>
+          <Modal isOpen={modalOpened} onRequestClose={() => setModalOpened(false)} style={modalStyle}>
+            <Formik
+              initialValues={{ title: '', startSec: '00:00:00' }}
+              validationSchema={Yup.object({
+                title: Yup.string().required('イベント名を入力して下さい。'),
+                startSec: Yup.string().required('開始時間を入力して下さい。'),
+              })}
+              onSubmit={attributes => {
+                const startSec = parseTime(attributes.startSec);
+                if (!startSec) return;
 
-            createHightlight({
-              variables: {
-                videoId,
-                attributes: {
-                  title: attributes.title,
-                  startSec,
-                },
-              },
-            });
-          }}
-        >
-          {({ isValid, dirty }) => {
-            return (
-              <Form>
-                <FormGroup name="startSec" placeholder="時間" type="text" />
-                <FormGroup name="title" placeholder="タイトル" type="text" />
-                <div className="el_form_group">
-                  <button type="submit" disabled={!dirty || !isValid} className="el_btn">
-                    登録する
-                  </button>
-                </div>
-              </Form>
-            );
-          }}
-        </Formik>
-      </Modal>
+                createHightlight({
+                  variables: {
+                    videoId,
+                    attributes: {
+                      title: attributes.title,
+                      startSec,
+                    },
+                  },
+                });
+              }}
+            >
+              {({ isValid, dirty }) => {
+                return (
+                  <Form>
+                    <FormGroup name="startSec" placeholder="時間" type="text" />
+                    <FormGroup name="title" placeholder="タイトル" type="text" />
+                    <div className="el_form_group">
+                      <button type="submit" disabled={!dirty || !isValid} className="el_btn">
+                        登録する
+                      </button>
+                    </div>
+                  </Form>
+                );
+              }}
+            </Formik>
+          </Modal>
+        </>
+      )}
     </>
   );
 };
