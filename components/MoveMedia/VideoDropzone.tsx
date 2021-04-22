@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { toast } from 'react-toastify';
 
-import { useSetMoveVideoMutation, useCreateMoveVideoUploadUrlMutation } from '@/lib/graphql/types';
+import { useSetMoveVideoMutation, useCreateMoveVideoMutation } from '@/lib/graphql/types';
 
 import styles from './VideoDropzone.module.scss';
 
@@ -19,14 +19,14 @@ export const VideoDropzone: React.FC<Props> = ({ moveId }) => {
     },
   });
 
-  const [ceateMoveVideoUploadUrl] = useCreateMoveVideoUploadUrlMutation({
+  const [ceateMoveVideoUploadUrl] = useCreateMoveVideoMutation({
     onCompleted: data => {
-      if (!data.createMoveVideoUploadUrl) return;
+      if (!data.createMoveVideo) return;
       if (!file) return;
       setUploading(true);
 
-      const moveVideoId = data.createMoveVideoUploadUrl.moveVideoId;
-      const fields = JSON.parse(data.createMoveVideoUploadUrl.fields);
+      const moveVideoId = data.createMoveVideo.moveVideo.id;
+      const fields = JSON.parse(data.createMoveVideo.videoUpload.fields);
 
       const formData = new FormData();
       for (const key in fields) {
@@ -34,7 +34,7 @@ export const VideoDropzone: React.FC<Props> = ({ moveId }) => {
       }
       formData.append('file', file);
 
-      fetch(data.createMoveVideoUploadUrl.url, {
+      fetch(data.createMoveVideo.videoUpload.url, {
         method: 'POST',
         headers: { Accept: 'multipart/form-data' },
         body: formData,

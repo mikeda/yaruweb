@@ -1,7 +1,7 @@
 import React, { useRef } from 'react';
 import { useRouter } from 'next/router';
 
-import { useCreateMoveVideoUploadUrlMutation, useMoveQuery, useSetMoveVideoMutation } from '@/lib/graphql/types';
+import { useCreateMoveVideoMutation, useMoveQuery, useSetMoveVideoMutation } from '@/lib/graphql/types';
 import { NotFound } from '@/components/NotFound';
 import { Heading } from '@/components/Heading';
 import { toast } from 'react-toastify';
@@ -16,14 +16,14 @@ const Content: React.FC<{ moveId: string }> = ({ moveId }) => {
       toast.success('動画を登録しました。反映まで少し時間がかかります。');
     },
   });
-  const [ceateMoveVideoUploadUrl] = useCreateMoveVideoUploadUrlMutation({
+  const [ceateMoveVideoUploadUrl] = useCreateMoveVideoMutation({
     onCompleted: data => {
-      if (!data.createMoveVideoUploadUrl) return;
+      if (!data.createMoveVideo) return;
       if (!fileRef.current?.files) return;
       const file = fileRef.current.files[0];
 
-      const moveVideoId = data.createMoveVideoUploadUrl.moveVideoId;
-      const fields = JSON.parse(data.createMoveVideoUploadUrl.fields);
+      const moveVideoId = data.createMoveVideo.moveVideo.id;
+      const fields = JSON.parse(data.createMoveVideo.videoUpload.fields);
 
       const formData = new FormData();
       for (const key in fields) {
@@ -31,7 +31,7 @@ const Content: React.FC<{ moveId: string }> = ({ moveId }) => {
       }
       formData.append('file', file);
 
-      fetch(data.createMoveVideoUploadUrl.url, {
+      fetch(data.createMoveVideo.videoUpload.url, {
         method: 'POST',
         headers: { Accept: 'multipart/form-data' },
         body: formData,
