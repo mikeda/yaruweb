@@ -13,16 +13,15 @@ import { AttackTypeEnumText, FrameText, FrameTypeText, ThrowTypeEnumText } from 
 import { DropDownMenu } from '../layouts/DropDownMenu';
 import Link from 'next/link';
 import { VideoDropzone } from './VideoDropzone';
-import { useCurrentPlayer } from 'hooks/useCurrentPlayer';
 import { toast } from 'react-toastify';
 
 type Props = {
   move: MoveFragment;
+  editable?: boolean;
   onDelete?: (moveId: string) => void;
 };
 
-export const MoveMedia: React.FC<Props> = ({ move, onDelete }) => {
-  const { currentPlayer } = useCurrentPlayer();
+export const MoveMedia: React.FC<Props> = ({ move, editable = false, onDelete }) => {
   const [menuOpened, setMenuOpened] = useState(false);
   const [deleteMove] = useDeleteMoveMutation({
     variables: { moveId: move.id },
@@ -43,7 +42,7 @@ export const MoveMedia: React.FC<Props> = ({ move, onDelete }) => {
         <div className={styles.header}>
           <div className={styles.ttl}>{move.name}</div>
 
-          {currentPlayer && (
+          {editable && (
             <div className={styles.menu}>
               <div
                 onClick={() => {
@@ -106,7 +105,7 @@ export const MoveMedia: React.FC<Props> = ({ move, onDelete }) => {
           {move.moveVideo ? (
             <VideoPlayer src={move.moveVideo.m3u8Url} thumnailUrl={move.moveVideo.thumbnailUrl} />
           ) : (
-            currentPlayer && <VideoDropzone moveId={move.id} />
+            editable && <VideoDropzone moveId={move.id} />
           )}
         </div>
       </div>
