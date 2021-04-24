@@ -21,5 +21,3 @@ export const Command: React.FC<Props> = ({ command }) => {
     </Wrapper>
   );
 };
-
-export * from './OperationSet';

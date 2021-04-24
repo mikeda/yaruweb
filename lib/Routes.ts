@@ -6,6 +6,7 @@ export const Routes = {
   characters: () => '/characters',
   character: (slug: string) => `/${slug}`,
   characterCombos: (slug: string) => `/${slug}/combos`,
+  comboCategory: (comboCategoryId: string) => `/combo_categories/${comboCategoryId}`,
   characterMoves: (characterSlug: string) => `/${characterSlug}/moves`,
   createArticle: () => '/articles/new',
   createMove: (slug: string) => `/characters/${slug}/moves/new`,

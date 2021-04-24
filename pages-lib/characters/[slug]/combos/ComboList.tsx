@@ -4,13 +4,14 @@ import { ComboMedia } from '@/components/ComboMedia';
 import { NotFound } from '@/components/NotFound';
 
 interface Props {
-  slug: string;
+  comboCategoryId: string;
 }
 
-export const ComboList: React.FC<Props> = ({ slug }) => {
-  const { data, loading } = useCombosQuery({ variables: { characterSlug: slug } });
+export const ComboList: React.FC<Props> = ({ comboCategoryId }) => {
+  const { data, loading } = useCombosQuery({ variables: { comboCategoryId } });
+
   if (loading) return <NotFound>読み込み中</NotFound>;
-  const combos = data?.combos.nodes;
+  const combos = data?.combos;
   if (!combos || combos.length === 0) return <NotFound>コンボがありません。</NotFound>;
 
   return (
@@ -20,7 +21,7 @@ export const ComboList: React.FC<Props> = ({ slug }) => {
           if (!combo) return;
 
           return (
-            <div className="ly_col_6 ly_mbCol_12" key={combo.id}>
+            <div className="ly_col_12" key={combo.id}>
               <ComboMedia combo={combo} />
             </div>
           );

@@ -1,5 +1,8 @@
 import React from 'react';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+
 import { OperationFragment } from '@/lib/graphql/types';
 
 import styles from './Operations.module.scss';
@@ -9,6 +12,8 @@ interface Props {
 }
 
 export const Operation: React.FC<Props> = ({ operation }) => {
+  if (operation.key === 'next') return <FontAwesomeIcon icon={faChevronRight} className={styles.next} />;
+
   return (
     <>
       {operation.icon ? (
