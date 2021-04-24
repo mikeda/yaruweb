@@ -8,8 +8,9 @@ import { TabLinkGroup } from '@/components/blocks/TabLinkGroup';
 import { NotFound } from '@/components/NotFound';
 import { TabLink } from '@/components/blocks/TabLink';
 import { Head } from '@/components/layouts/Head';
+import { Content } from '@/components/layouts/Content';
 
-const Page: React.FC = () => {
+const PageContent: React.FC = () => {
   const router = useRouter();
   const order = router.query.order === 'popular' ? Order.Popular : Order.New;
 
@@ -21,8 +22,6 @@ const Page: React.FC = () => {
 
   return (
     <>
-      <Head title="オススメ動画" />
-
       <TabLinkGroup>
         <TabLink text="新着" href={Routes.videos()} active={order === Order.New} />
         <TabLink text="人気" href={Routes.videos(Order.Popular)} active={order === Order.Popular} />
@@ -70,6 +69,16 @@ const Page: React.FC = () => {
         </div>
       )}
     </>
+  );
+};
+
+const Page: React.FC = () => {
+  return (
+    <Content>
+      <Head title="鉄拳7動画まとめ" />
+
+      <PageContent />
+    </Content>
   );
 };
 

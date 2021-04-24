@@ -5,8 +5,10 @@ import { useCreateMoveVideoMutation, useMoveQuery, useSetMoveVideoMutation } fro
 import { NotFound } from '@/components/NotFound';
 import { Heading } from '@/components/Heading';
 import { toast } from 'react-toastify';
+import { Content } from '@/components/layouts/Content';
+import { Head } from '@/components/layouts/Head';
 
-const Content: React.FC<{ moveId: string }> = ({ moveId }) => {
+const MoveForm: React.FC<{ moveId: string }> = ({ moveId }) => {
   const router = useRouter();
   const { data, loading, error } = useMoveQuery({ variables: { id: moveId as string } });
   const fileRef = useRef<HTMLInputElement>(null);
@@ -76,10 +78,12 @@ const Page: React.FC = () => {
   if (!moveId) return <NotFound>Loading...</NotFound>;
 
   return (
-    <>
-      <Heading lv="h1">{`動画登録`}</Heading>
-      <Content moveId={moveId as string} />
-    </>
+    <Content>
+      <Head title="動画を登録" />
+
+      <Heading lv="h1">動画を登録</Heading>
+      <MoveForm moveId={moveId as string} />
+    </Content>
   );
 };
 

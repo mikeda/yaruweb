@@ -5,8 +5,9 @@ import { NotFound } from '@/components/NotFound';
 import { Media } from '@/components/Media';
 import dayjs from '@/lib/dayjs';
 import { Head } from '@/components/layouts/Head';
+import { Content } from '@/components/layouts/Content';
 
-const Page: React.FC = () => {
+const PageContent: React.FC = () => {
   const { data, loading, fetchMore } = useEventsQuery({ variables: { first: 10 } });
   if (loading) return <NotFound>読み込み中</NotFound>;
 
@@ -16,8 +17,6 @@ const Page: React.FC = () => {
 
   return (
     <>
-      <Head title="イベント一覧" />
-
       <div className="bl_section">
         <div className="bl_section_body">
           <div className="bl_mediaUnit">
@@ -87,6 +86,16 @@ const Page: React.FC = () => {
         </div>
       )}
     </>
+  );
+};
+
+const Page: React.FC = () => {
+  return (
+    <Content>
+      <Head title="鉄拳7のイベントまとめ" />
+
+      <PageContent />
+    </Content>
   );
 };
 

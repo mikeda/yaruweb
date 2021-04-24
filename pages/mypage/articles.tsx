@@ -11,6 +11,8 @@ import { ArticleStatusText } from '@/lib/graphql/enum_texts';
 import { Layout } from '@/pages-lib/mypage/Layout';
 import { Routes } from '@/lib/Routes';
 import { NotFound } from '@/components/NotFound';
+import { Content } from '@/components/layouts/Content';
+import { Head } from '@/components/layouts/Head';
 
 const ArticleList: React.FC = () => {
   const { data, loading, refetch } = useMyArticlesQuery();
@@ -76,15 +78,19 @@ const ArticleList: React.FC = () => {
 };
 
 const Page: React.FC = () => (
-  <Layout activeTab="articles">
-    <div className="bl_myContHeader">
-      <Link href={Routes.createArticle()}>
-        <a className="el_btn">投稿する</a>
-      </Link>
-    </div>
+  <Content>
+    <Head title="記事一覧" />
 
-    <ArticleList />
-  </Layout>
+    <Layout activeTab="articles">
+      <div className="bl_myContHeader">
+        <Link href={Routes.createArticle()}>
+          <a className="el_btn">投稿する</a>
+        </Link>
+      </div>
+
+      <ArticleList />
+    </Layout>
+  </Content>
 );
 
 export default Page;

@@ -1,18 +1,23 @@
 import React from 'react';
-import { useRouter } from 'next/router';
 
-import { useCreateVideoCommentMutation, useVideoCommentsQuery, useVideoQuery } from '@/lib/graphql/types';
+import {
+  useCreateVideoCommentMutation,
+  useVideoCommentsQuery,
+  VideoDocument,
+  VideoFragment,
+  VideoQuery,
+} from '@/lib/graphql/types';
 import { VideoMedia } from '@/components/VideoMedia';
 import { Comment } from '@/components/Comment';
 import { CommentForm } from '@/components/CommentForm';
 import { NotFound } from '@/components/NotFound';
+import { Content } from '@/components/layouts/Content';
+import { Head } from '@/components/layouts/Head';
+import { GetStaticPaths, GetStaticProps } from 'next';
+import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 
-const Page: React.FC = () => {
-  const router = useRouter();
-  const videoId = router.query.id as string;
-
-  const { data: videoData } = useVideoQuery({ variables: { id: videoId } });
-  const { data: commentsData, refetch: refetchComments } = useVideoCommentsQuery({ variables: { videoId } });
+const PageContent: React.FC<Props> = ({ video }) => {
+  const { data: commentsData, refetch: refetchComments } = useVideoCommentsQuery({ variables: { videoId: video.id } });
 
   const [createVideoComment] = useCreateVideoCommentMutation({
     onCompleted: () => {
@@ -23,11 +28,7 @@ const Page: React.FC = () => {
     },
   });
 
-  const video = videoData?.video;
-  if (!video) return null;
-
   const videoComments = commentsData?.videoComments;
-  if (!videoComments) return null;
 
   return (
     <>
@@ -41,7 +42,7 @@ const Page: React.FC = () => {
         }}
       />
 
-      {videoComments.length !== 0 ? (
+      {videoComments && videoComments.length !== 0 ? (
         videoComments.map(videoComment => {
           if (!videoComment) return;
 
@@ -59,6 +60,31 @@ const Page: React.FC = () => {
       )}
     </>
   );
+};
+
+interface Props {
+  video: VideoFragment;
+}
+
+const Page: React.FC<Props> = ({ video }) => {
+  return (
+    <Content>
+      <Head title={video.title} />
+
+      <PageContent video={video} />
+    </Content>
+  );
+};
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const videoId = params?.videoId as string;
+  const data: VideoQuery = await fetchGraphql(VideoDocument, { id: videoId });
+
+  return { props: { video: data.video }, revalidate: 60 };
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  return { paths: [], fallback: 'blocking' };
 };
 
 export default Page;

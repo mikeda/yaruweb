@@ -1,14 +1,17 @@
 import React from 'react';
-import { GetStaticProps } from 'next';
 import Link from 'next/link';
 
 import { Routes } from '@/lib/Routes';
 import { Heading } from '@/components/Heading';
 import { LoginWithEmailForm } from '@/pages-lib/login/LoginWithEmailForm';
 import { LoginWithTwitterButton } from '@/pages-lib/login/LoginWithTwitterButton';
+import { Content } from '@/components/layouts/Content';
+import { Head } from '@/components/layouts/Head';
 
 const Page: React.FC = () => (
-  <>
+  <Content size="xs">
+    <Head title="ログイン" />
+
     <Heading lv="h1">ログイン</Heading>
 
     <LoginWithEmailForm />
@@ -20,11 +23,7 @@ const Page: React.FC = () => (
         <a className="el_option_link">新規登録はこちら</a>
       </Link>
     </div>
-  </>
+  </Content>
 );
-
-export const getStaticProps: GetStaticProps = async () => {
-  return { props: { contentSize: 'xs' } };
-};
 
 export default Page;

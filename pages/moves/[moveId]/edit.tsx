@@ -7,6 +7,8 @@ import { Routes } from '@/lib/Routes';
 import { MoveForm } from '@/components/MoveForm';
 import { NotFound } from '@/components/NotFound';
 import { Heading } from '@/components/Heading';
+import { Content } from '@/components/layouts/Content';
+import { Head } from '@/components/layouts/Head';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -35,8 +37,10 @@ const Page: React.FC = () => {
   if (!character) return <NotFound>技データがありません。</NotFound>;
 
   return (
-    <>
-      <Heading lv="h1">技登録</Heading>
+    <Content>
+      <Head title="技データ登録" />
+
+      <Heading lv="h1">技データ登録</Heading>
 
       <MoveForm
         move={data.move}
@@ -46,7 +50,7 @@ const Page: React.FC = () => {
         }}
         loading={loading}
       />
-    </>
+    </Content>
   );
 };
 

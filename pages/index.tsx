@@ -8,13 +8,14 @@ import { useArticlesQuery } from '@/lib/graphql/types';
 import { IntroSlides } from '@/pages-lib/index/IntroSlides';
 import { Heading } from '@/components/Heading';
 import { Head } from '@/components/layouts/Head';
+import { Content } from '@/components/layouts/Content';
 
 const Page: React.FC = () => {
   const { data: newArticlesData } = useArticlesQuery({ variables: { first: 3 } });
   const newArticles = newArticlesData?.articles.nodes;
 
   return (
-    <>
+    <Content>
       <Head title="鉄拳やろうよ.com" description="鉄拳やろうよ.comは格闘ゲーム「鉄拳7」を楽しむためのサイトです。" />
 
       <div className="bl_sectionUnit">
@@ -32,7 +33,7 @@ const Page: React.FC = () => {
           <StaffRequirement />
         </div>
       </div>
-    </>
+    </Content>
   );
 };
 

@@ -20,6 +20,7 @@ import { Heading } from '@/components/Heading';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { ArticleBody } from '@/components/ArticleBody';
 import { NO_IMAGE_URL } from '@/lib/Assets';
+import { Content } from '@/components/layouts/Content';
 
 interface Props {
   article: ArticleFragment;
@@ -27,7 +28,7 @@ interface Props {
 
 const Page: React.FC<Props> = ({ article }) => {
   return (
-    <>
+    <Content>
       <Head title={article.title} description={article.description} image={article.mainImageUrl} />
 
       <div className="bl_article">
@@ -49,7 +50,7 @@ const Page: React.FC<Props> = ({ article }) => {
       </div>
 
       <Comments articleId={article.id} />
-    </>
+    </Content>
   );
 };
 

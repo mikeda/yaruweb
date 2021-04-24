@@ -8,6 +8,7 @@ import { Routes } from '@/lib/Routes';
 import dynamic from 'next/dynamic';
 import { Heading } from '@/components/Heading';
 import { Head } from '@/components/layouts/Head';
+import { Content } from '@/components/layouts/Content';
 const ArticleForm = dynamic(() => import('../../components/ArticleForm'), {
   ssr: false,
 });
@@ -26,7 +27,7 @@ const Page: React.FC = () => {
   });
 
   return (
-    <>
+    <Content>
       <Head title="記事投稿" />
 
       <Heading lv="h1">記事投稿</Heading>
@@ -37,7 +38,7 @@ const Page: React.FC = () => {
         }}
         loading={loading}
       />
-    </>
+    </Content>
   );
 };
 

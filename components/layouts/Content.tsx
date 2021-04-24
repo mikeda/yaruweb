@@ -1,6 +1,7 @@
 import React from 'react';
 
 import styles from './Content.module.scss';
+import { GlobalHeader } from './GlobalHeader';
 
 interface Props {
   size?: 'xs';
@@ -9,5 +10,10 @@ interface Props {
 export const Content: React.FC<Props> = ({ size, children }) => {
   const className = size === 'xs' ? styles.contentXs : styles.content;
 
-  return <div className={className}>{children}</div>;
+  return (
+    <>
+      <GlobalHeader />
+      <div className={className}>{children}</div>;
+    </>
+  );
 };

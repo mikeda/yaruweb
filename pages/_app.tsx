@@ -11,9 +11,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import * as gtag from '../lib/gtag';
 
 import { client } from '@/lib/graphql/client';
-import { GlobalHeader } from '@/components/layouts/GlobalHeader';
 import { GlobalFooter } from '@/components/layouts/GlobalFooter';
-import { Content } from '@/components/layouts/Content';
 import { currentPlayerState } from 'states/currentPlayer';
 import { useCurrentPlayerQuery } from '@/lib/graphql/types';
 import { useRouter } from 'next/router';
@@ -45,15 +43,10 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <RecoilRoot>
       <ApolloProvider client={client}>
-        <GlobalHeader />
-
-        <Content size={pageProps.contentSize}>
-          <Component {...pageProps} />
-        </Content>
+        <Component {...pageProps} />
 
         <GlobalFooter />
         <ToastContainer />
-
         <AppInit />
       </ApolloProvider>
     </RecoilRoot>

@@ -16,12 +16,24 @@ import { Head } from '@/components/layouts/Head';
 import { NotFound } from '@/components/NotFound';
 import { Media } from '@/components/Media';
 import { Routes } from '@/lib/Routes';
+import { Content } from '@/components/layouts/Content';
 
 interface Props {
   character: CharacterFragment;
 }
 
 const Page: React.FC<Props> = ({ character }) => {
+  const title = `${character.longName}のコンボ一覧`;
+  return (
+    <Content>
+      <Head title={title} description={`${character.longName}のコンボ一覧です。`} />
+
+      <PageContent character={character} />
+    </Content>
+  );
+};
+
+const PageContent: React.FC<Props> = ({ character }) => {
   const { data, loading, error } = useComboCategoriesQuery({ variables: { characterSlug: character.slug } });
 
   if (loading) return <NotFound>読み込み中...</NotFound>;
@@ -34,8 +46,6 @@ const Page: React.FC<Props> = ({ character }) => {
 
   return (
     <>
-      <Head title={`${character.longName}のコンボ一覧`} description={`${character.longName}のコンボ一覧です。`} />
-
       <CharacterPageLayout character={character} activeTab="combos">
         {comboCategories.map(comboCategory => (
           <Media

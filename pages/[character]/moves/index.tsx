@@ -23,6 +23,7 @@ import { useCurrentPlayer } from 'hooks/useCurrentPlayer';
 import { TabLinkGroup } from '@/components/blocks/TabLinkGroup';
 import { TabLink } from '@/components/blocks/TabLink';
 import { Head } from '@/components/layouts/Head';
+import { Content } from '@/components/layouts/Content';
 
 interface Props {
   character: CharacterFragment;
@@ -36,7 +37,7 @@ const Page: React.FC<Props> = ({ character, moveCategories, moves: allMoves }) =
   const [moves, setMoves] = useState(allMoves);
 
   return (
-    <>
+    <Content>
       <Head
         title={`${character.longName}の動画`}
         description={`ユーザーが投稿した${character.longName}のオススメ動画です。`}
@@ -72,7 +73,7 @@ const Page: React.FC<Props> = ({ character, moveCategories, moves: allMoves }) =
         )}
         <MoveList moves={moves} />
       </CharacterPageLayout>
-    </>
+    </Content>
   );
 };
 

@@ -8,12 +8,13 @@ import { Routes } from '@/lib/Routes';
 import { NotFound } from '@/components/NotFound';
 import { Heading } from '@/components/Heading';
 import { Head } from '@/components/layouts/Head';
+import { Content } from '@/components/layouts/Content';
 
 const ArticleForm = dynamic(() => import('../../../components/ArticleForm'), {
   ssr: false,
 });
 
-const Content: React.FC<{ id: string }> = ({ id }) => {
+const Form: React.FC<{ id: string }> = ({ id }) => {
   const router = useRouter();
   const [updateArticle, { loading: updateLoading }] = useUpdateArticleMutation({
     onCompleted: () => {
@@ -51,13 +52,13 @@ const Page: React.FC = () => {
   const id = router.query.id as string;
 
   return (
-    <>
+    <Content>
       <Head title="記事編集" />
 
       <Heading lv="h1">記事編集</Heading>
 
-      {id && <Content id={id} />}
-    </>
+      {id && <Form id={id} />}
+    </Content>
   );
 };
 export default Page;

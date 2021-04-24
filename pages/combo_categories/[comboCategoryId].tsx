@@ -7,12 +7,26 @@ import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Head } from '@/components/layouts/Head';
 import { ComboList } from '@/pages-lib/characters/[slug]/combos/ComboList';
 import { NotFound } from '@/components/NotFound';
+import { Content } from '@/components/layouts/Content';
 
 interface Props {
   comboCategory: ComboCategoryFragment;
 }
 
 const Page: React.FC<Props> = ({ comboCategory }) => {
+  return (
+    <Content>
+      <Head
+        title={`${comboCategory.character.longName}/${comboCategory.name}のコンボ一覧`}
+        description={`${comboCategory.character.longName}/${comboCategory.name}のコンボ一覧です。`}
+      />
+
+      <PageContent comboCategory={comboCategory} />
+    </Content>
+  );
+};
+
+const PageContent: React.FC<Props> = ({ comboCategory }) => {
   const { data, loading, error } = useCombosQuery({ variables: { comboCategoryId: comboCategory.id } });
 
   if (loading) return <NotFound>読み込み中...</NotFound>;
@@ -24,16 +38,9 @@ const Page: React.FC<Props> = ({ comboCategory }) => {
   if (combos.length === 0) return <NotFound>コンボが登録されていません。</NotFound>;
 
   return (
-    <>
-      <Head
-        title={`${comboCategory.character.longName}/${comboCategory.name}のコンボ一覧`}
-        description={`${comboCategory.character.longName}/${comboCategory.name}のコンボ一覧です。`}
-      />
-
-      <CharacterPageLayout character={comboCategory.character} activeTab="combos">
-        <ComboList comboCategoryId={comboCategory.id} />
-      </CharacterPageLayout>
-    </>
+    <CharacterPageLayout character={comboCategory.character} activeTab="combos">
+      <ComboList comboCategoryId={comboCategory.id} />
+    </CharacterPageLayout>
   );
 };
 

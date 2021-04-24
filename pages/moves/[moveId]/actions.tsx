@@ -7,8 +7,10 @@ import { NotFound } from '@/components/NotFound';
 import { Heading } from '@/components/Heading';
 import { AttackActionForm } from '@/pages-lib/moves/actions/AttackActionForm';
 import { Action } from '@/pages-lib/moves/actions/Action';
+import { Content } from '@/components/layouts/Content';
+import { Head } from '@/components/layouts/Head';
 
-const Content: React.FC<{ moveId: string }> = ({ moveId }) => {
+const Actions: React.FC<{ moveId: string }> = ({ moveId }) => {
   const { data, loading, error, refetch } = useMoveQuery({ variables: { id: moveId } });
 
   if (loading) return <NotFound>Loading...</NotFound>;
@@ -33,10 +35,12 @@ const Page: React.FC = () => {
   if (!moveId) return <NotFound>Loading...</NotFound>;
 
   return (
-    <>
+    <Content>
+      <Head title="アクションを登録" />
+
       <Heading lv="h1">アクション登録</Heading>
-      <Content moveId={moveId as string} />
-    </>
+      <Actions moveId={moveId as string} />
+    </Content>
   );
 };
 

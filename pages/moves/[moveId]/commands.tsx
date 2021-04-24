@@ -12,6 +12,8 @@ import { NotFound } from '@/components/NotFound';
 import { Heading } from '@/components/Heading';
 import { Command as CommandIcons } from '@/components/Command';
 import { CommandForm } from '@/components/CommandForm';
+import { Content } from '@/components/layouts/Content';
+import { Head } from '@/components/layouts/Head';
 
 interface CreateFormProps {
   moveId: string;
@@ -79,9 +81,12 @@ const Page: React.FC = () => {
   if (error) return <NotFound>技データの読み込みに失敗しました。</NotFound>;
   if (!data) return <NotFound>技データがありません。</NotFound>;
 
+  const title = `${data.move.name}のコマンド登録`;
+
   return (
-    <>
-      <Heading lv="h1">{data.move.name}のコマンド登録</Heading>
+    <Content>
+      <Head title={title} />
+      <Heading lv="h1">{title}</Heading>
 
       {data.move.commands.map(command => (
         <Command
@@ -100,7 +105,7 @@ const Page: React.FC = () => {
           refetch();
         }}
       />
-    </>
+    </Content>
   );
 };
 

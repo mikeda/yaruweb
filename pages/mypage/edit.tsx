@@ -7,6 +7,8 @@ import { PlayerValidator } from '@/lib/validators/PlayerValidator';
 import { FormGroup } from '@/components/form/FormGroup';
 import { Heading } from '@/components/Heading';
 import { useCurrentPlayer } from 'hooks/useCurrentPlayer';
+import { Content } from '@/components/layouts/Content';
+import { Head } from '@/components/layouts/Head';
 
 interface Props {
   currentPlayer: {
@@ -62,11 +64,12 @@ const Page: React.FC = () => {
   const { currentPlayer } = useCurrentPlayer();
 
   return (
-    <>
+    <Content>
+      <Head title="プレイヤー情報を更新" />
       <Heading lv="h1">プレイヤー情報を更新</Heading>
 
       {currentPlayer && <PlayerEditForm currentPlayer={currentPlayer} />}
-    </>
+    </Content>
   );
 };
 

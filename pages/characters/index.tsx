@@ -4,24 +4,18 @@ import Link from 'next/link';
 
 import { CharacterCard } from '@/components/CharacterCard';
 import { Routes } from '@/lib/Routes';
-import { CharactersDocument } from '@/lib/graphql/types';
+import { CharactersDocument, CharactersQuery, CharacterSummaryFragment } from '@/lib/graphql/types';
 import { Head } from '@/components/layouts/Head';
-
-interface Character {
-  slug: string;
-  longName: string;
-  faceImageUrl: string;
-  country: string;
-  fightingStyle: string;
-}
+import { Content } from '@/components/layouts/Content';
+import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 
 interface Props {
-  characters: Character[];
+  characters: CharacterSummaryFragment[];
 }
 
 const Page: React.FC<Props> = ({ characters }) => {
   return (
-    <>
+    <Content>
       <Head title="キャラクター一覧" description="鉄拳7のキャラクター一覧です。" />
 
       <div className="ly_row">
@@ -39,25 +33,14 @@ const Page: React.FC<Props> = ({ characters }) => {
           );
         })}
       </div>
-    </>
+    </Content>
   );
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const query = CharactersDocument.loc?.source.body;
+  const data: CharactersQuery = await fetchGraphql(CharactersDocument);
 
-  const res = await fetch(process.env.NEXT_PUBLIC_GRAPHQL_ENDOPOINT as string, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ query }),
-  });
-
-  const json = await res.json();
-  if (json.errors) {
-    throw new Error(json.errors.toString());
-  }
-
-  return { props: { characters: json.data.characters } };
+  return { props: { characters: data.characters } };
 };
 
 export default Page;
