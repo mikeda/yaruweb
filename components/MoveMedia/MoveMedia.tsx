@@ -1,39 +1,18 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit } from '@fortawesome/free-regular-svg-icons';
+import React, { useEffect, useRef } from 'react';
 import Hls from 'hls.js';
 
-import { MoveFragment, FrameStateEnum, useDeleteMoveMutation } from '@/lib/graphql/types';
-import { Routes } from '@/lib/Routes';
+import { MoveFragment, FrameStateEnum } from '@/lib/graphql/types';
 import { Command } from '../Command';
 
 import styles from './MoveMedia.module.scss';
 
 import { AttackTypeEnumText, FrameText, FrameTypeText, ThrowTypeEnumText } from '@/lib/graphql/enum_texts';
-import { DropDownMenu } from '../layouts/DropDownMenu';
-import Link from 'next/link';
-import { VideoDropzone } from './VideoDropzone';
-import { toast } from 'react-toastify';
 
 type Props = {
   move: MoveFragment;
-  editable?: boolean;
-  onDelete?: (moveId: string) => void;
 };
 
-export const MoveMedia: React.FC<Props> = ({ move, editable = false, onDelete }) => {
-  const [menuOpened, setMenuOpened] = useState(false);
-  const [deleteMove] = useDeleteMoveMutation({
-    variables: { moveId: move.id },
-    onCompleted: () => {
-      toast.success('削除しました。');
-      if (onDelete) onDelete(move.id);
-    },
-    onError: () => {
-      toast.error('削除に失敗しました。');
-    },
-  });
-
+export const MoveMedia: React.FC<Props> = ({ move }) => {
   return (
     <>
       <div className={styles.container}>
@@ -41,48 +20,6 @@ export const MoveMedia: React.FC<Props> = ({ move, editable = false, onDelete })
 
         <div className={styles.header}>
           <div className={styles.ttl}>{move.name}</div>
-
-          {editable && (
-            <div className={styles.menu}>
-              <div
-                onClick={() => {
-                  setMenuOpened(true);
-                }}
-                className="el_iconBtn"
-              >
-                <FontAwesomeIcon icon={faEdit} />
-              </div>
-
-              {menuOpened && (
-                <DropDownMenu
-                  onClose={() => setMenuOpened(false)}
-                  items={[
-                    <Link key={0} href={Routes.updateMove(move.id)}>
-                      <a>技データ編集</a>
-                    </Link>,
-                    <Link key={1} href={Routes.moveCommands(move.id)}>
-                      <a>コマンド登録</a>
-                    </Link>,
-                    <Link key={1} href={Routes.moveActions(move.id)}>
-                      <a>アクション登録</a>
-                    </Link>,
-                    <Link key={2} href={Routes.createMoveVideo(move.id)}>
-                      <a>動画登録</a>
-                    </Link>,
-                    <a
-                      key={3}
-                      onClick={e => {
-                        e.preventDefault();
-                        if (confirm('技データを削除します。')) deleteMove();
-                      }}
-                    >
-                      削除
-                    </a>,
-                  ]}
-                />
-              )}
-            </div>
-          )}
         </div>
 
         <div className={styles.cont}>
@@ -102,11 +39,7 @@ export const MoveMedia: React.FC<Props> = ({ move, editable = false, onDelete })
             {move.note && move.note.length > 0 && <div className={styles.note}>{move.note}</div>}
           </div>
 
-          {move.moveVideo ? (
-            <VideoPlayer src={move.moveVideo.m3u8Url} thumnailUrl={move.moveVideo.thumbnailUrl} />
-          ) : (
-            editable && <VideoDropzone moveId={move.id} />
-          )}
+          {move.moveVideo && <VideoPlayer src={move.moveVideo.m3u8Url} thumnailUrl={move.moveVideo.thumbnailUrl} />}
         </div>
       </div>
     </>

@@ -1,32 +1,38 @@
 import { Order } from './graphql/types';
 
 export const Routes = {
-  articles: (order?: Order) => (order === Order.Popular ? '/articles?order=popular' : '/articles'),
-  article: (id: string) => `/articles/${id}`,
-  characters: () => '/characters',
-  character: (slug: string) => `/${slug}`,
-  characterCombos: (slug: string) => `/${slug}/combos`,
-  comboCategory: (comboCategoryId: string) => `/combo_categories/${comboCategoryId}`,
-  characterMoves: (characterSlug: string) => `/${characterSlug}/moves`,
-  createArticle: () => '/articles/new',
-  createMove: (slug: string) => `/characters/${slug}/moves/new`,
-  createMoveVideo: (moveId: string) => `/moves/${moveId}/videos/new`,
-  updateMove: (moveId: string) => `/moves/${moveId}/edit`,
-  login: () => '/login',
-  mypageArticles: () => '/mypage/articles',
-  mypageEdit: () => '/mypage/edit',
-  passwordReset: () => '/password/reset',
-  moveCommands: (moveId: string) => `/moves/${moveId}/commands`,
-  moveActions: (moveId: string) => `/moves/${moveId}/actions`,
-  passwordEdit: () => '/password/edit',
-  signup: () => '/signup',
   top: () => '/',
-  updateArticle: (id: string) => `/articles/${id}/edit`,
-  videos: (order?: Order) => (order === Order.Popular ? '/videos?order=popular' : '/videos'),
-  events: () => '/events',
-  video: (id: string) => `/videos/${id}`,
+  article: {
+    index: (order?: Order) => (order === Order.Popular ? '/articles?order=popular' : '/articles'),
+    detail: (articleId: string) => `/articles/${articleId}`,
+  },
+  character: {
+    index: () => '/characters',
+    detail: (characterSlug: string) => `/${characterSlug}`,
+  },
+  combo: {
+    index: (characterSlug: string) => `/${characterSlug}/combos`,
+  },
+  comboCategory: {
+    detail: (comboCategoryId: string) => `/combo_categories/${comboCategoryId}`,
+  },
+  event: {
+    index: () => '/events',
+  },
+  move: {
+    index: (characterSlug: string) => `/${characterSlug}/moves`,
+  },
+  session: {
+    signup: () => '/signup',
+    login: () => '/login',
+    passwordReset: () => '/password/reset',
+    passwordEdit: () => '/password/edit',
+  },
+  video: {
+    index: (order?: Order) => (order === Order.Popular ? '/videos?order=popular' : '/videos'),
+    detail: (id: string) => `/videos/${id}`,
+  },
   dashboard: {
-    root: () => '/dashboard',
     article: {
       index: () => '/dashboard/articles',
       new: () => '/dashboard/articles/new',

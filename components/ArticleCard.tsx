@@ -21,7 +21,7 @@ type Props = {
 
 export const ArticleCard: React.FC<Props> = ({ article }) => {
   return (
-    <Card title={article.title} imageUrl={article.mainImageUrl} href={Routes.article(article.id)}>
+    <Card title={article.title} imageUrl={article.mainImageUrl} href={Routes.article.detail(article.id)}>
       <ArticleAuthor
         name={article.author.name}
         avatarUrl={article.author.avatarUrl}

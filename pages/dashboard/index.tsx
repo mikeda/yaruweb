@@ -50,13 +50,13 @@ const ArticleList: React.FC = () => {
             return (
               <tr key={article.id}>
                 <td>
-                  <a href={`/articles/${article.id}`} target="_blank" rel="noreferrer">
+                  <a href={Routes.article.detail(article.id)} target="_blank" rel="noreferrer">
                     {article.title}
                   </a>
                 </td>
                 <td>{ArticleStatusText[article.status]}</td>
                 <td>
-                  <Link href={Routes.updateArticle(article.id)}>
+                  <Link href={Routes.dashboard.article.edit(article.id)}>
                     <a>編集</a>
                   </Link>
                   /

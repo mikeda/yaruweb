@@ -50,7 +50,7 @@ const PageContent: React.FC<Props> = ({ character }) => {
         {comboCategories.map(comboCategory => (
           <Media
             key={comboCategory.id}
-            href={Routes.comboCategory(comboCategory.id)}
+            href={Routes.comboCategory.detail(comboCategory.id)}
             imageUrl={comboCategory.thumbnailUrl}
             title={comboCategory.name}
             text={`${comboCategory.name}状態からのコンボ`}

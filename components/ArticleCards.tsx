@@ -24,7 +24,7 @@ export const ArticleCards: React.FC<Props> = ({ articles, readMoreLink }) => {
 
       {readMoreLink && (
         <div className="bl_section_footer">
-          <Link href={Routes.articles()}>
+          <Link href={Routes.article.index()}>
             <a className="el_readmore">もっとみる</a>
           </Link>
         </div>

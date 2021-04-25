@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from 'react';
+import React, { useState } from 'react';
 
 import { MoveMedia } from './MoveMedia';
 import { MoveFragment } from '@/lib/graphql/types';
@@ -7,18 +7,13 @@ interface Props {
   moves: MoveFragment[];
 }
 
-export const MoveList: React.FC<Props> = props => {
-  const [moves, setMoves] = useState(props.moves);
+export const MoveList: React.FC<Props> = ({ moves }) => {
   const [powerCrush, setPowerCrush] = useState(false);
   const [crouchingStatus, setCrouchingStatus] = useState(false);
   const [jumpStatus, setJumpStatus] = useState(false);
   const [homing, setHoming] = useState(false);
   const [screw, setScrew] = useState(false);
   const [wallBound, setWallBound] = useState(false);
-
-  const onDelete = useCallback((moveId: string) => {
-    setMoves(prev => prev.filter(m => m.id !== moveId));
-  }, []);
 
   const showMove = (move: MoveFragment) => {
     if (powerCrush && !move.powerCrush) return false;
@@ -48,7 +43,7 @@ export const MoveList: React.FC<Props> = props => {
         <div className="bl_section">
           {moves.map(move => {
             if (!showMove(move)) return;
-            return <MoveMedia move={move} key={move.id} onDelete={onDelete} />;
+            return <MoveMedia move={move} key={move.id} />;
           })}
         </div>
       </div>

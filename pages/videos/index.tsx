@@ -23,8 +23,8 @@ const PageContent: React.FC = () => {
   return (
     <>
       <TabLinkGroup>
-        <TabLink text="新着" href={Routes.videos()} active={order === Order.New} />
-        <TabLink text="人気" href={Routes.videos(Order.Popular)} active={order === Order.Popular} />
+        <TabLink text="新着" href={Routes.video.index()} active={order === Order.New} />
+        <TabLink text="人気" href={Routes.video.index(Order.Popular)} active={order === Order.Popular} />
       </TabLinkGroup>
 
       <div className="ly_row ly_row__mg_md">

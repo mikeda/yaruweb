@@ -12,7 +12,7 @@ type Props = {
 
 export const VideoCard: React.FC<Props> = ({ video }) => {
   return (
-    <Card title={video.title} imageUrl={video.thumbnailUrl} href={Routes.video(video.id)}>
+    <Card title={video.title} imageUrl={video.thumbnailUrl} href={Routes.video.detail(video.id)}>
       <div className="bl_action bl_action_fav">
         <FontAwesomeIcon icon={faHeart} />
         {video.favsCount}

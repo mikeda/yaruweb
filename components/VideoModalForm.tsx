@@ -31,7 +31,7 @@ export const VideoFormModal: React.FC<Props> = ({ isOpen, setIsOpen }) => {
     onCompleted: ({ createVideo: res }) => {
       if (!res) return;
 
-      router.push(Routes.video(res.video.id));
+      router.push(Routes.video.detail(res.video.id));
     },
     onError: e => {
       alert(e.message);

@@ -40,7 +40,7 @@ const CharacterList: React.FC = () => {
             return (
               <tr key={character.slug}>
                 <td>
-                  <a href={Routes.character(character.slug)} target="_blank" rel="noreferrer">
+                  <a href={Routes.character.detail(character.slug)} target="_blank" rel="noreferrer">
                     {character.longName}
                   </a>
                 </td>

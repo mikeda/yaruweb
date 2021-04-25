@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import Link from 'next/link';
 
 import {
   CharacterDocument,
@@ -17,9 +16,7 @@ import {
 } from '@/lib/graphql/types';
 import { CharacterPageLayout } from '@/components/layouts/CharacterPageLayout';
 import { MoveList } from '@/components/MoveList';
-import { Routes } from '@/lib/Routes';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
-import { useCurrentPlayer } from 'hooks/useCurrentPlayer';
 import { TabLinkGroup } from '@/components/blocks/TabLinkGroup';
 import { TabLink } from '@/components/blocks/TabLink';
 import { Head } from '@/components/layouts/Head';
@@ -32,16 +29,12 @@ interface Props {
 }
 
 const Page: React.FC<Props> = ({ character, moveCategories, moves: allMoves }) => {
-  const { currentPlayer } = useCurrentPlayer();
   const [moveCategory, setMoveCategory] = useState<MoveCategoryFragment>();
   const [moves, setMoves] = useState(allMoves);
 
   return (
     <Content>
-      <Head
-        title={`${character.longName}の動画`}
-        description={`ユーザーが投稿した${character.longName}のオススメ動画です。`}
-      />
+      <Head title={`${character.longName}の動画`} description={`${character.longName}のオススメ動画です。`} />
 
       <CharacterPageLayout character={character} activeTab="moves">
         <TabLinkGroup>
@@ -64,13 +57,6 @@ const Page: React.FC<Props> = ({ character, moveCategories, moves: allMoves }) =
             />
           ))}
         </TabLinkGroup>
-        {currentPlayer && (
-          <div className="bl_myContHeader">
-            <Link href={Routes.createMove(character.slug)}>
-              <a className="el_btn">登録する</a>
-            </Link>
-          </div>
-        )}
         <MoveList moves={moves} />
       </CharacterPageLayout>
     </Content>
