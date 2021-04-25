@@ -2,6 +2,7 @@ import React from 'react';
 
 import styles from './Content.module.scss';
 import { GlobalHeader } from './GlobalHeader';
+import { HeaderNav } from './HeaderNav';
 
 interface Props {
   size?: 'xs';
@@ -12,7 +13,9 @@ export const Content: React.FC<Props> = ({ size, children }) => {
 
   return (
     <>
-      <GlobalHeader />
+      <GlobalHeader>
+        <HeaderNav />
+      </GlobalHeader>
       <div className={className}>{children}</div>;
     </>
   );
