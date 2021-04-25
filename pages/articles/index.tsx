@@ -34,8 +34,8 @@ const PageContent: React.FC = () => {
   return (
     <>
       <TabLinkGroup>
-        <TabLink text="新着" href={Routes.articles()} active={order === Order.New} />
-        <TabLink text="人気" href={Routes.articles(Order.Popular)} active={order === Order.Popular} />
+        <TabLink text="新着" href={Routes.article.index()} active={order === Order.New} />
+        <TabLink text="人気" href={Routes.article.index(Order.Popular)} active={order === Order.Popular} />
       </TabLinkGroup>
 
       <div className="bl_section">
@@ -47,7 +47,7 @@ const PageContent: React.FC = () => {
               return (
                 <Media
                   key={article.id}
-                  href={Routes.article(article.id)}
+                  href={Routes.article.detail(article.id)}
                   imageUrl={article.mainImageUrl}
                   title={article.title}
                   text={article.description}

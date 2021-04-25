@@ -8,10 +8,10 @@ import styles from './HeaderNav.module.scss';
 
 const links = [
   { name: 'TOP', path: Routes.top() },
-  { name: 'キャラクター', path: Routes.characters() },
-  { name: '記事', path: Routes.articles() },
-  { name: '動画', path: Routes.videos() },
-  { name: 'イベント', path: Routes.events() },
+  { name: 'キャラクター', path: Routes.character.index() },
+  { name: '記事', path: Routes.article.index() },
+  { name: '動画', path: Routes.video.index() },
+  { name: 'イベント', path: Routes.event.index() },
 ];
 
 const isActive = (linkPath: string, currentPath: string): boolean => {

@@ -20,7 +20,7 @@ export const PlayerMenu: React.FC = () => {
 
   if (!currentPlayer) {
     return (
-      <Link href={Routes.login()}>
+      <Link href={Routes.session.login()}>
         <a>ログイン</a>
       </Link>
     );
@@ -41,11 +41,8 @@ export const PlayerMenu: React.FC = () => {
         <DropDownMenu
           onClose={() => setMenuOpened(false)}
           items={[
-            <Link key={0} href={Routes.mypageArticles()}>
-              <a>マイページ</a>
-            </Link>,
-            <Link key={1} href={Routes.mypageEdit()}>
-              <a>アカウント設定</a>
+            <Link key={0} href={Routes.dashboard.article.index()}>
+              <a>記事</a>
             </Link>,
             <a
               key={2}

@@ -19,7 +19,7 @@ const Page: React.FC = () => (
     <LoginWithTwitterButton />
 
     <div className="el_txt el_txt__c hp_mg_t_md">
-      <Link href={Routes.signup()}>
+      <Link href={Routes.session.signup()}>
         <a className="el_option_link">新規登録はこちら</a>
       </Link>
     </div>

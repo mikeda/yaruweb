@@ -53,7 +53,7 @@ export const LoginWithEmailForm: React.FC = () => {
         <Form>
           <FormGroup name="email" type="email" placeholder="メールアドレス" />
           <FormGroup name="password" type="password" placeholder="パスワード" />
-          <Link href={Routes.passwordReset()}>
+          <Link href={Routes.session.passwordReset()}>
             <a className="el_option_link">パスワードを忘れたかた</a>
           </Link>
           <div className="el_form_submit">
