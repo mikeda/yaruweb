@@ -1,13 +1,12 @@
 import React from 'react';
 import Link from 'next/link';
 
-import { HeaderNav } from './HeaderNav';
 import { Routes } from '@/lib/Routes';
 import { PlayerMenu } from './PlayerMenu';
 
 import styles from './GlobalHeader.module.scss';
 
-export const GlobalHeader: React.FC = () => {
+export const GlobalHeader: React.FC = ({ children }) => {
   return (
     <header className={styles.header}>
       <div className={styles.inner}>
@@ -25,7 +24,7 @@ export const GlobalHeader: React.FC = () => {
           <PlayerMenu />
         </div>
 
-        <HeaderNav />
+        {children}
       </div>
     </header>
   );

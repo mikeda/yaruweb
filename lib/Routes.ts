@@ -25,4 +25,27 @@ export const Routes = {
   videos: (order?: Order) => (order === Order.Popular ? '/videos?order=popular' : '/videos'),
   events: () => '/events',
   video: (id: string) => `/videos/${id}`,
+  dashboard: {
+    root: () => '/dashboard',
+    article: {
+      index: () => '/dashboard/articles',
+      new: () => '/dashboard/articles/new',
+      edit: (articleId: string) => `/dashboard/articles/${articleId}/edit`,
+    },
+    character: {
+      index: () => '/dashboard/characters',
+    },
+    comboCategory: {
+      index: (characterSlug: string) => `/dashboard/characters/${characterSlug}/combo_categories`,
+    },
+    combo: {
+      index: (comboCategoryId: string) => `/dashboard/combo_categories/${comboCategoryId}/combos`,
+    },
+    event: {
+      index: () => '/dashboard/events',
+    },
+    video: {
+      index: () => '/dashboard/videos',
+    },
+  },
 };
