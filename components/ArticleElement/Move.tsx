@@ -8,7 +8,7 @@ interface Props {
 }
 
 export const Move: React.FC<Props> = ({ moveId, attributes, children }) => {
-  const { data, error, loading } = useMoveQuery({ variables: { id: moveId } });
+  const { data, error, loading } = useMoveQuery({ variables: { moveId } });
 
   return (
     <div {...attributes}>

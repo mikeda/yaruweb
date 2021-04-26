@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { CharacterDocument, CharacterFragment, CharacterQuery, useComboCategoriesQuery } from '@/lib/graphql/types';
+import { CharacterDocument, CharacterFragment, CharacterQuery, useMoveCategoriesQuery } from '@/lib/graphql/types';
 import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
 import { NotFound } from '@/components/NotFound';
@@ -15,7 +15,7 @@ interface Props {
 }
 
 const Page: React.FC<Props> = ({ character }) => {
-  const title = `コンボ(${character.longName})`;
+  const title = `技データ(${character.longName})`;
 
   return (
     <DashboardContent activeTab="character">
@@ -29,12 +29,12 @@ const Page: React.FC<Props> = ({ character }) => {
 };
 
 const PageContent: React.FC<Props> = ({ character }) => {
-  const { data, loading, error } = useComboCategoriesQuery({ variables: { characterSlug: character.slug } });
+  const { data, loading, error } = useMoveCategoriesQuery({ variables: { characterSlug: character.slug } });
 
   if (loading) return <NotFound>Loading...</NotFound>;
   if (error) return <NotFound>エラーが発生しました。{error.message}</NotFound>;
-  const comboCategories = data?.comboCategories;
-  if (!(comboCategories && comboCategories.length > 0)) return <NotFound>カテゴリが登録されていません。</NotFound>;
+  const moveCategories = data?.moveCategories;
+  if (!(moveCategories && moveCategories.length > 0)) return <NotFound>カテゴリが登録されていません。</NotFound>;
 
   return (
     <div className="bl_horizTable">
@@ -46,13 +46,13 @@ const PageContent: React.FC<Props> = ({ character }) => {
           </tr>
         </thead>
         <tbody>
-          {comboCategories.map(comboCategory => {
+          {moveCategories.map(moveCategory => {
             return (
-              <tr key={comboCategory.id}>
-                <td>{comboCategory.name}</td>
+              <tr key={moveCategory.id}>
+                <td>{moveCategory.name}</td>
                 <td>
-                  <Link href={Routes.dashboard.combo.index(comboCategory.id)}>
-                    <a>コンボを登録</a>
+                  <Link href={Routes.dashboard.move.index(moveCategory.id)}>
+                    <a>技データを登録</a>
                   </Link>
                 </td>
               </tr>

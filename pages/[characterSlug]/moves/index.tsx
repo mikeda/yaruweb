@@ -7,15 +7,9 @@ import {
   CharacterPathsDocument,
   CharacterPathsQuery,
   CharacterQuery,
-  MoveCategoriesDocument,
-  MoveCategoriesQuery,
   MoveCategoryFragment,
-  MoveFragment,
-  MovesDocument,
-  MovesQuery,
 } from '@/lib/graphql/types';
 import { CharacterPageLayout } from '@/components/layouts/CharacterPageLayout';
-import { MoveList } from '@/components/MoveList';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { TabLinkGroup } from '@/components/blocks/TabLinkGroup';
 import { TabLink } from '@/components/blocks/TabLink';
@@ -24,13 +18,10 @@ import { Content } from '@/components/layouts/Content';
 
 interface Props {
   character: CharacterFragment;
-  moveCategories: MoveCategoryFragment[];
-  moves: MoveFragment[];
 }
 
-const Page: React.FC<Props> = ({ character, moveCategories, moves: allMoves }) => {
+const Page: React.FC<Props> = ({ character }) => {
   const [moveCategory, setMoveCategory] = useState<MoveCategoryFragment>();
-  const [moves, setMoves] = useState(allMoves);
 
   return (
     <Content>
@@ -45,19 +36,7 @@ const Page: React.FC<Props> = ({ character, moveCategories, moves: allMoves }) =
               setMoveCategory(undefined);
             }}
           />
-          {moveCategories.map(c => (
-            <TabLink
-              key={c.id}
-              text={c.name}
-              active={c === moveCategory}
-              onClick={() => {
-                setMoveCategory(c);
-                setMoves(c ? allMoves.filter(move => move.moveCategoryId === c.id) : allMoves);
-              }}
-            />
-          ))}
         </TabLinkGroup>
-        <MoveList moves={moves} />
       </CharacterPageLayout>
     </Content>
   );
@@ -66,18 +45,10 @@ const Page: React.FC<Props> = ({ character, moveCategories, moves: allMoves }) =
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const characterSlug = params?.character as string;
 
-  const characterData: CharacterQuery = await fetchGraphql(CharacterDocument, { slug: characterSlug });
-  const moveCategoriesData: MoveCategoriesQuery = await fetchGraphql(MoveCategoriesDocument, {
-    characterSlug,
-  });
-  const movesData: MovesQuery = await fetchGraphql(MovesDocument, { characterSlug });
+  const data: CharacterQuery = await fetchGraphql(CharacterDocument, { slug: characterSlug });
 
   return {
-    props: {
-      character: characterData.character,
-      moveCategories: moveCategoriesData.moveCategories,
-      moves: movesData.moves,
-    },
+    props: { character: data.character },
     revalidate: 60,
   };
 };
@@ -87,7 +58,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   const paths = data.characters.map(c => ({
     params: {
-      character: c.slug,
+      characterSlug: c.slug,
     },
   }));
 

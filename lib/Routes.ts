@@ -50,6 +50,12 @@ export const Routes = {
     event: {
       index: () => '/dashboard/events',
     },
+    moveCategory: {
+      index: (characterSlug: string) => `/dashboard/characters/${characterSlug}/move_categories`,
+    },
+    move: {
+      index: (moveCategoryId: string) => `/dashboard/move_categories/${moveCategoryId}/moves`,
+    },
     video: {
       index: () => '/dashboard/videos',
     },

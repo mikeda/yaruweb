@@ -17,6 +17,7 @@ import { NotFound } from '@/components/NotFound';
 import { Media } from '@/components/Media';
 import { Routes } from '@/lib/Routes';
 import { Content } from '@/components/layouts/Content';
+import { NO_IMAGE_URL } from '@/lib/Assets';
 
 interface Props {
   character: CharacterFragment;
@@ -51,7 +52,7 @@ const PageContent: React.FC<Props> = ({ character }) => {
           <Media
             key={comboCategory.id}
             href={Routes.comboCategory.detail(comboCategory.id)}
-            imageUrl={comboCategory.thumbnailUrl}
+            imageUrl={NO_IMAGE_URL}
             title={comboCategory.name}
             text={`${comboCategory.name}状態からのコンボ`}
           />

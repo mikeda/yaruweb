@@ -63,7 +63,7 @@ const ArticleList: React.FC = () => {
                   {article.status === ArticleStatus.Draft ? (
                     <a
                       onClick={() => {
-                        publishArticle({ variables: { id: article.id } });
+                        publishArticle({ variables: { articleId: article.id } });
                       }}
                     >
                       公開する
@@ -71,7 +71,7 @@ const ArticleList: React.FC = () => {
                   ) : (
                     <a
                       onClick={() => {
-                        stopArticle({ variables: { id: article.id } });
+                        stopArticle({ variables: { articleId: article.id } });
                       }}
                     >
                       停止する

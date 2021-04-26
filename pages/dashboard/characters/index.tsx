@@ -45,6 +45,10 @@ const CharacterList: React.FC = () => {
                   </a>
                 </td>
                 <td>
+                  <Link href={Routes.dashboard.moveCategory.index(character.slug)}>
+                    <a>技データ</a>
+                  </Link>
+                  /
                   <Link href={Routes.dashboard.comboCategory.index(character.slug)}>
                     <a>コンボ</a>
                   </Link>

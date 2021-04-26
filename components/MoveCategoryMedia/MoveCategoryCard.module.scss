@@ -1,0 +1,31 @@
+@import '@/styles/_variables';
+
+.container {
+  padding: 16px;
+  margin-top: 8px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.ttl {
+  font-weight: bold;
+}
+
+.detail {
+  display: inline-block;
+  margin-top: 8px;
+  font-size: 0.75rem;
+}
+
+.note {
+  margin-top: 8px;
+  font-size: 0.75rem;
+}
