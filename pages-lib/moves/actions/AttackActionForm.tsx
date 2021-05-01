@@ -28,7 +28,7 @@ export const AttackActionForm: React.FC<Props> = ({ moveId, onCreate }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <select name="attackType" ref={register({ required: true })}>
+      <select {...register('attackType', { required: true })}>
         {Object.entries(AttackTypeEnumText).map(([key, value]) => (
           <option value={key} key={key}>
             {value}
@@ -36,7 +36,7 @@ export const AttackActionForm: React.FC<Props> = ({ moveId, onCreate }) => {
         ))}
       </select>
 
-      <input name="damage" type="number" ref={register({ valueAsNumber: true })} />
+      <input type="number" {...register('damage', { valueAsNumber: true })} />
 
       <input type="submit" disabled={loading} />
     </form>
