@@ -2931,7 +2931,10 @@ export type MyArticleQuery = (
   ) }
 );
 
-export type MyArticlesQueryVariables = Exact<{ [key: string]: never; }>;
+export type MyArticlesQueryVariables = Exact<{
+  first?: Maybe<Scalars['Int']>;
+  after?: Maybe<Scalars['String']>;
+}>;
 
 
 export type MyArticlesQuery = (
@@ -2941,7 +2944,10 @@ export type MyArticlesQuery = (
     & { nodes?: Maybe<Array<Maybe<(
       { __typename?: 'MyArticle' }
       & Pick<MyArticle, 'id' | 'title' | 'status'>
-    )>>> }
+    )>>>, pageInfo: (
+      { __typename?: 'PageInfo' }
+      & PagingFragment
+    ) }
   ) }
 );
 
@@ -5628,16 +5634,19 @@ export type MyArticleQueryHookResult = ReturnType<typeof useMyArticleQuery>;
 export type MyArticleLazyQueryHookResult = ReturnType<typeof useMyArticleLazyQuery>;
 export type MyArticleQueryResult = Apollo.QueryResult<MyArticleQuery, MyArticleQueryVariables>;
 export const MyArticlesDocument = gql`
-    query MyArticles {
-  myArticles {
+    query MyArticles($first: Int, $after: String) {
+  myArticles(first: $first, after: $after) {
     nodes {
       id
       title
       status
     }
+    pageInfo {
+      ...paging
+    }
   }
 }
-    `;
+    ${PagingFragmentDoc}`;
 
 /**
  * __useMyArticlesQuery__
@@ -5651,6 +5660,8 @@ export const MyArticlesDocument = gql`
  * @example
  * const { data, loading, error } = useMyArticlesQuery({
  *   variables: {
+ *      first: // value for 'first'
+ *      after: // value for 'after'
  *   },
  * });
  */

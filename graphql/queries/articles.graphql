@@ -11,6 +11,7 @@ query Articles($first: Int, $after: String, $order: Order, $category: ArticleCat
         avatarUrl
       }
     }
+
     pageInfo {
       ...paging
     }

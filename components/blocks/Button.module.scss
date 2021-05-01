@@ -1,0 +1,21 @@
+@import '@/styles/variables';
+
+.button {
+  display: inline-block;
+  padding: 0.5em 1em;
+  font-weight: bold;
+  line-height: 1;
+  color: $white;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  background-color: $color-main;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  transition: 0.25s;
+
+  &:focus,
+  &:hover {
+    opacity: 0.75;
+  }
+}
