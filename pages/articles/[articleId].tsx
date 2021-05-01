@@ -97,8 +97,8 @@ const Comments: React.FC<{ articleId: string }> = ({ articleId }) => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const id = params?.id as string;
-  const data: ArticleQuery = await fetchGraphql(ArticleDocument, { id });
+  const articleId = params?.articleId as string;
+  const data: ArticleQuery = await fetchGraphql(ArticleDocument, { articleId });
 
   return {
     props: { article: data.article },
@@ -111,7 +111,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   const paths = data.allArticles.map(article => ({
     params: {
-      id: article.id,
+      articleId: article.id,
     },
   }));
 
