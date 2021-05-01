@@ -36,7 +36,6 @@ export const Action: React.FC<Props> = ({ action, onCreateFrame }) => {
     onCompleted: data => {
       const frame = data.createFrame?.frame;
       if (!frame) return;
-
       setModalOpen(false);
       onCreateFrame();
     },
@@ -68,7 +67,7 @@ export const Action: React.FC<Props> = ({ action, onCreateFrame }) => {
         overlayClassName={styles.overlay}
       >
         <form onSubmit={handleSubmit(onSubmit)}>
-          <select name="type" ref={register({ required: true })}>
+          <select {...register('type', { required: true })}>
             {Object.entries(FrameTypeEnum).map(([key, value]) => (
               <option value={value} key={key}>
                 {value}
@@ -76,7 +75,7 @@ export const Action: React.FC<Props> = ({ action, onCreateFrame }) => {
             ))}
           </select>
 
-          <select name="state" ref={register({ required: true })}>
+          <select {...register('state', { required: true })}>
             {Object.entries(FrameStateEnum).map(([key, value]) => (
               <option value={value} key={key}>
                 {value}
@@ -84,7 +83,7 @@ export const Action: React.FC<Props> = ({ action, onCreateFrame }) => {
             ))}
           </select>
 
-          <input name="frame" type="number" ref={register({ valueAsNumber: true })} />
+          <input type="number" {...register('frame', { valueAsNumber: true })} />
 
           <input type="submit" disabled={loading} />
         </form>
