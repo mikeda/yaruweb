@@ -1,9 +1,13 @@
-query MyArticles {
-  myArticles {
+query MyArticles($first: Int, $after: String) {
+  myArticles(first: $first, after: $after) {
     nodes {
       id
       title
       status
+    }
+
+    pageInfo {
+      ...paging
     }
   }
 }

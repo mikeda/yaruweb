@@ -46,6 +46,8 @@ export const Routes = {
     },
     event: {
       index: () => '/dashboard/events',
+      new: () => '/dashboard/events/new',
+      edit: (eventId: string) => `/dashboard/events/${eventId}/edit`,
     },
     moveCategory: {
       index: (characterSlug: string) => `/dashboard/characters/${characterSlug}/move_categories`,
@@ -55,6 +57,8 @@ export const Routes = {
     },
     video: {
       index: () => '/dashboard/videos',
+      new: () => '/dashboard/videos/new',
+      edit: (videoId: string) => `/dashboard/videos/${videoId}/edit`,
     },
   },
 };
