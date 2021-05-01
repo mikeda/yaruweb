@@ -13,13 +13,13 @@ type Props = {
 export const VideoDropzone: React.FC<Props> = ({ moveId }) => {
   const [file, setFile] = useState<File>();
   const [uploading, setUploading] = useState(false);
-  const [setMoveVideoMutation] = useSetMoveVideoMutation({
+  const [setMoveVideo] = useSetMoveVideoMutation({
     onCompleted: () => {
       toast.success('動画を登録しました。反映まで少し時間がかかります。');
     },
   });
 
-  const [ceateMoveVideoUploadUrl] = useCreateMoveVideoMutation({
+  const [ceateMoveVideo] = useCreateMoveVideoMutation({
     onCompleted: data => {
       if (!data.createMoveVideo) return;
       if (!file) return;
@@ -40,7 +40,7 @@ export const VideoDropzone: React.FC<Props> = ({ moveId }) => {
         body: formData,
       })
         .then(() => {
-          setMoveVideoMutation({ variables: { moveId, moveVideoId } });
+          setMoveVideo({ variables: { moveId, moveVideoId } });
         })
         .catch(() => {
           toast.error('アップロードに失敗しました。');
@@ -53,7 +53,7 @@ export const VideoDropzone: React.FC<Props> = ({ moveId }) => {
 
   const onDrop = useCallback((acceptedFiles: File[]) => {
     setFile(acceptedFiles[0]);
-    ceateMoveVideoUploadUrl();
+    ceateMoveVideo({ variables: { moveId } });
   }, []);
 
   const { getRootProps, getInputProps } = useDropzone({ onDrop, maxFiles: 1 });

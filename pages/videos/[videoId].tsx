@@ -38,7 +38,7 @@ const PageContent: React.FC<Props> = ({ video }) => {
 
       <CommentForm
         onSubmit={message => {
-          createVideoComment({ variables: { id: video.id, attributes: { message } } });
+          createVideoComment({ variables: { videoId: video.id, attributes: { message } } });
         }}
       />
 
