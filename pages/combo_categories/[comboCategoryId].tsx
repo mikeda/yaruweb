@@ -19,6 +19,8 @@ interface Props {
 }
 
 const Page: React.FC<Props> = ({ comboCategory }) => {
+  if (!comboCategory) return null;
+
   const title = `${comboCategory.character.longName} / ${comboCategory.name}のコンボ`;
 
   return (
@@ -45,7 +47,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   const paths = data.comboCategories.map(comboCategory => ({ params: { comboCategoryId: comboCategory.id } }));
 
-  return { paths, fallback: true };
+  return { paths, fallback: 'blocking' };
 };
 
 export default Page;

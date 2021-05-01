@@ -45,7 +45,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   const paths = data.moveCategories.map(moveCategory => ({ params: { moveCategoryId: moveCategory.id } }));
 
-  return { paths, fallback: true };
+  return { paths, fallback: 'blocking' };
 };
 
 export default Page;
