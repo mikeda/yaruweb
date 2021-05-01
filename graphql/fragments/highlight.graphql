@@ -1,0 +1,9 @@
+fragment highlight on Highlight {
+  id
+  title
+  startSec
+  player {
+    slug
+    name
+  }
+}

@@ -1,0 +1,10 @@
+fragment combo on Combo {
+  id
+  name
+  damage
+  note
+
+  operations {
+    ...operation
+  }
+}

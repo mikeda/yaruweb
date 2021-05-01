@@ -1,0 +1,5 @@
+query VideoComments($videoId: ID!) {
+  videoComments(videoId: $videoId) {
+    ...videoComment
+  }
+}

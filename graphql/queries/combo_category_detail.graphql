@@ -1,0 +1,5 @@
+query ComboCategoryDetail($comboCategoryId: ID!) {
+  comboCategory(comboCategoryId: $comboCategoryId) {
+    ...comboCategoryDetail
+  }
+}

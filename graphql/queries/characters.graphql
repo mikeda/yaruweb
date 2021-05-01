@@ -1,0 +1,5 @@
+query Characters {
+  characters {
+    ...characterSummary
+  }
+}

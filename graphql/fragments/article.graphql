@@ -1,0 +1,15 @@
+fragment article on Article {
+  id
+  category
+  title
+  description
+  mainImageUrl
+  content
+  publishedAt
+  faved
+  favsCount
+  author {
+    name
+    avatarUrl
+  }
+}

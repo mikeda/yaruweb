@@ -1,0 +1,7 @@
+mutation CreateArticleComment($articleId: ID!, $attributes: ArticleCommentAttributes!) {
+  createArticleComment(input: { articleId: $articleId, attributes: $attributes }) {
+    articleComment {
+      ...articleComment
+    }
+  }
+}

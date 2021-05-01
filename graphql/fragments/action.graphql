@@ -1,0 +1,35 @@
+fragment attackAction on AttackAction {
+  __typename
+  id
+  frames {
+    id
+    type
+    frame
+    state
+  }
+  attackType
+  damage
+}
+
+fragment throwAction on ThrowAction {
+  __typename
+  id
+  frames {
+    id
+    type
+    frame
+    state
+  }
+  throwType
+  damage
+  escape
+}
+
+fragment action on Action {
+  ... on AttackAction {
+    ...attackAction
+  }
+  ... on ThrowAction {
+    ...throwAction
+  }
+}

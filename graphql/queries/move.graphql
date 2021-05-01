@@ -1,0 +1,5 @@
+query Move($moveId: ID!) {
+  move(moveId: $moveId) {
+    ...move
+  }
+}

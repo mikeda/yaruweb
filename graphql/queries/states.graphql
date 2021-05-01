@@ -1,0 +1,5 @@
+query States($characterSlug: ID!) {
+  states(characterSlug: $characterSlug) {
+    ...state
+  }
+}

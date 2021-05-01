@@ -1,0 +1,5 @@
+fragment character on Character {
+  ...characterSummary
+  story
+  description
+}

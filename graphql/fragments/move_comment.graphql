@@ -1,0 +1,4 @@
+fragment moveComment on MoveComment {
+  id
+  message
+}

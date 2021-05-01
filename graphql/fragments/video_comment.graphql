@@ -1,0 +1,9 @@
+fragment videoComment on VideoComment {
+  id
+  message
+  createdAt
+  player {
+    name
+    avatarUrl
+  }
+}

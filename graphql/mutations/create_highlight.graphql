@@ -1,0 +1,7 @@
+mutation CreateHighlight($videoId: ID!, $attributes: HighlightAttributes!) {
+  createHighlight(input: { videoId: $videoId, attributes: $attributes }) {
+    highlight {
+      ...highlight
+    }
+  }
+}

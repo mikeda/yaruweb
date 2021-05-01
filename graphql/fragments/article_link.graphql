@@ -1,0 +1,6 @@
+fragment articleLink on ArticleLink {
+  url
+  title
+  description
+  imageUrl
+}

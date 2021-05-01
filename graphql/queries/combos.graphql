@@ -1,0 +1,5 @@
+query Combos($comboCategoryId: ID!) {
+  combos(comboCategoryId: $comboCategoryId) {
+    ...combo
+  }
+}

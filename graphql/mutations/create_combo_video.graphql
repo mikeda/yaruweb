@@ -1,0 +1,12 @@
+mutation CreateComboVideo($characterId: ID!) {
+  createComboVideo(input: { characterId: $characterId }) {
+    comboVideo {
+      id
+    }
+
+    videoUpload {
+      url
+      fields
+    }
+  }
+}

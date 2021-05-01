@@ -1,0 +1,7 @@
+mutation UpdateEvent($eventId: ID!, $attributes: EventAttributes!) {
+  updateEvent(input: {eventId: $eventId, attributes: $attributes}) {
+    event {
+      ...event
+    }
+  }
+}

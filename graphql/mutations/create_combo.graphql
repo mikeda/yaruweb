@@ -1,0 +1,7 @@
+mutation CreateCombo($attributes: ComboAttributes!) {
+  createCombo(input: { attributes: $attributes }) {
+    combo {
+      id
+    }
+  }
+}

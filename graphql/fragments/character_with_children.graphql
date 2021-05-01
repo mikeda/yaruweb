@@ -1,0 +1,11 @@
+fragment characterWithChildren on Character {
+  ...character
+
+  moveCategories {
+    ...moveCategory
+  }
+
+  comboCategories {
+    ...comboCategory
+  }
+}

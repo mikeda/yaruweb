@@ -1,0 +1,8 @@
+mutation setComboVideo($comboId: ID!, $comboVideoId: ID!) {
+  setComboVideo(input: { comboId: $comboId, comboVideoId: $comboVideoId }) {
+    comboVideo {
+      m3u8Url
+      thumbnailUrl
+    }
+  }
+}

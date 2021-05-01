@@ -1,0 +1,7 @@
+fragment characterSummary on Character {
+  slug
+  longName
+  faceImageUrl
+  country
+  fightingStyle
+}

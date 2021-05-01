@@ -1,0 +1,9 @@
+fragment video on Video {
+  ...videoSummary
+  tags {
+    name
+  }
+  highlights {
+    ...highlight
+  }
+}

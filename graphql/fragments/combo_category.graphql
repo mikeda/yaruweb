@@ -1,0 +1,4 @@
+fragment comboCategory on ComboCategory {
+  id
+  name
+}

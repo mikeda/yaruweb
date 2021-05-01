@@ -1,0 +1,9 @@
+query MyArticles {
+  myArticles {
+    nodes {
+      id
+      title
+      status
+    }
+  }
+}
