@@ -918,11 +918,9 @@ export type MoveComment = {
   message: Scalars['String'];
   move: Move;
   player: Player;
-  youtubeVideoId?: Maybe<Scalars['String']>;
 };
 
 export type MoveCommentAttributes = {
-  youtubeVideoId: Scalars['String'];
   message: Scalars['String'];
 };
 
@@ -1892,7 +1890,7 @@ export type MoveCategoryDetailFragment = (
 
 export type MoveCommentFragment = (
   { __typename?: 'MoveComment' }
-  & Pick<MoveComment, 'id' | 'youtubeVideoId' | 'message'>
+  & Pick<MoveComment, 'id' | 'message'>
 );
 
 export type OperationFragment = (
@@ -2857,20 +2855,16 @@ export type MoveQuery = (
   ) }
 );
 
-export type MoveSelectOptionsQueryVariables = Exact<{
+export type MoveCategoriesQueryVariables = Exact<{
   characterSlug: Scalars['ID'];
 }>;
 
 
-export type MoveSelectOptionsQuery = (
+export type MoveCategoriesQuery = (
   { __typename?: 'Query' }
   & { moveCategories: Array<(
     { __typename?: 'MoveCategory' }
-    & Pick<MoveCategory, 'id' | 'name'>
-    & { moves: Array<(
-      { __typename?: 'Move' }
-      & Pick<Move, 'id' | 'name'>
-    )> }
+    & MoveCategoryFragment
   )> }
 );
 
@@ -2898,16 +2892,20 @@ export type MoveCategoryIdsQuery = (
   )> }
 );
 
-export type MoveCategoriesQueryVariables = Exact<{
+export type MoveSelectOptionsQueryVariables = Exact<{
   characterSlug: Scalars['ID'];
 }>;
 
 
-export type MoveCategoriesQuery = (
+export type MoveSelectOptionsQuery = (
   { __typename?: 'Query' }
   & { moveCategories: Array<(
     { __typename?: 'MoveCategory' }
-    & MoveCategoryFragment
+    & Pick<MoveCategory, 'id' | 'name'>
+    & { moves: Array<(
+      { __typename?: 'Move' }
+      & Pick<Move, 'id' | 'name'>
+    )> }
   )> }
 );
 
@@ -3274,7 +3272,6 @@ ${MoveFragmentDoc}`;
 export const MoveCommentFragmentDoc = gql`
     fragment moveComment on MoveComment {
   id
-  youtubeVideoId
   message
 }
     `;
@@ -5418,46 +5415,41 @@ export function useMoveLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MoveQ
 export type MoveQueryHookResult = ReturnType<typeof useMoveQuery>;
 export type MoveLazyQueryHookResult = ReturnType<typeof useMoveLazyQuery>;
 export type MoveQueryResult = Apollo.QueryResult<MoveQuery, MoveQueryVariables>;
-export const MoveSelectOptionsDocument = gql`
-    query MoveSelectOptions($characterSlug: ID!) {
+export const MoveCategoriesDocument = gql`
+    query MoveCategories($characterSlug: ID!) {
   moveCategories(characterSlug: $characterSlug) {
-    id
-    name
-    moves {
-      id
-      name
-    }
+    ...moveCategory
   }
 }
-    `;
+    ${MoveCategoryFragmentDoc}`;
 
 /**
- * __useMoveSelectOptionsQuery__
+ * __useMoveCategoriesQuery__
  *
- * To run a query within a React component, call `useMoveSelectOptionsQuery` and pass it any options that fit your needs.
- * When your component renders, `useMoveSelectOptionsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useMoveCategoriesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMoveCategoriesQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useMoveSelectOptionsQuery({
+ * const { data, loading, error } = useMoveCategoriesQuery({
  *   variables: {
  *      characterSlug: // value for 'characterSlug'
  *   },
  * });
  */
-export function useMoveSelectOptionsQuery(baseOptions: Apollo.QueryHookOptions<MoveSelectOptionsQuery, MoveSelectOptionsQueryVariables>) {
+export function useMoveCategoriesQuery(baseOptions: Apollo.QueryHookOptions<MoveCategoriesQuery, MoveCategoriesQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<MoveSelectOptionsQuery, MoveSelectOptionsQueryVariables>(MoveSelectOptionsDocument, options);
+        return Apollo.useQuery<MoveCategoriesQuery, MoveCategoriesQueryVariables>(MoveCategoriesDocument, options);
       }
-export function useMoveSelectOptionsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MoveSelectOptionsQuery, MoveSelectOptionsQueryVariables>) {
+export function useMoveCategoriesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MoveCategoriesQuery, MoveCategoriesQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<MoveSelectOptionsQuery, MoveSelectOptionsQueryVariables>(MoveSelectOptionsDocument, options);
+          return Apollo.useLazyQuery<MoveCategoriesQuery, MoveCategoriesQueryVariables>(MoveCategoriesDocument, options);
         }
-export type MoveSelectOptionsQueryHookResult = ReturnType<typeof useMoveSelectOptionsQuery>;
-export type MoveSelectOptionsLazyQueryHookResult = ReturnType<typeof useMoveSelectOptionsLazyQuery>;
-export type MoveSelectOptionsQueryResult = Apollo.QueryResult<MoveSelectOptionsQuery, MoveSelectOptionsQueryVariables>;
+export type MoveCategoriesQueryHookResult = ReturnType<typeof useMoveCategoriesQuery>;
+export type MoveCategoriesLazyQueryHookResult = ReturnType<typeof useMoveCategoriesLazyQuery>;
+export type MoveCategoriesQueryResult = Apollo.QueryResult<MoveCategoriesQuery, MoveCategoriesQueryVariables>;
 export const MoveCategoryDetailDocument = gql`
     query MoveCategoryDetail($moveCategoryId: ID!) {
   moveCategory(moveCategoryId: $moveCategoryId) {
@@ -5527,41 +5519,46 @@ export function useMoveCategoryIdsLazyQuery(baseOptions?: Apollo.LazyQueryHookOp
 export type MoveCategoryIdsQueryHookResult = ReturnType<typeof useMoveCategoryIdsQuery>;
 export type MoveCategoryIdsLazyQueryHookResult = ReturnType<typeof useMoveCategoryIdsLazyQuery>;
 export type MoveCategoryIdsQueryResult = Apollo.QueryResult<MoveCategoryIdsQuery, MoveCategoryIdsQueryVariables>;
-export const MoveCategoriesDocument = gql`
-    query MoveCategories($characterSlug: ID!) {
+export const MoveSelectOptionsDocument = gql`
+    query MoveSelectOptions($characterSlug: ID!) {
   moveCategories(characterSlug: $characterSlug) {
-    ...moveCategory
+    id
+    name
+    moves {
+      id
+      name
+    }
   }
 }
-    ${MoveCategoryFragmentDoc}`;
+    `;
 
 /**
- * __useMoveCategoriesQuery__
+ * __useMoveSelectOptionsQuery__
  *
- * To run a query within a React component, call `useMoveCategoriesQuery` and pass it any options that fit your needs.
- * When your component renders, `useMoveCategoriesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useMoveSelectOptionsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMoveSelectOptionsQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useMoveCategoriesQuery({
+ * const { data, loading, error } = useMoveSelectOptionsQuery({
  *   variables: {
  *      characterSlug: // value for 'characterSlug'
  *   },
  * });
  */
-export function useMoveCategoriesQuery(baseOptions: Apollo.QueryHookOptions<MoveCategoriesQuery, MoveCategoriesQueryVariables>) {
+export function useMoveSelectOptionsQuery(baseOptions: Apollo.QueryHookOptions<MoveSelectOptionsQuery, MoveSelectOptionsQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<MoveCategoriesQuery, MoveCategoriesQueryVariables>(MoveCategoriesDocument, options);
+        return Apollo.useQuery<MoveSelectOptionsQuery, MoveSelectOptionsQueryVariables>(MoveSelectOptionsDocument, options);
       }
-export function useMoveCategoriesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MoveCategoriesQuery, MoveCategoriesQueryVariables>) {
+export function useMoveSelectOptionsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MoveSelectOptionsQuery, MoveSelectOptionsQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<MoveCategoriesQuery, MoveCategoriesQueryVariables>(MoveCategoriesDocument, options);
+          return Apollo.useLazyQuery<MoveSelectOptionsQuery, MoveSelectOptionsQueryVariables>(MoveSelectOptionsDocument, options);
         }
-export type MoveCategoriesQueryHookResult = ReturnType<typeof useMoveCategoriesQuery>;
-export type MoveCategoriesLazyQueryHookResult = ReturnType<typeof useMoveCategoriesLazyQuery>;
-export type MoveCategoriesQueryResult = Apollo.QueryResult<MoveCategoriesQuery, MoveCategoriesQueryVariables>;
+export type MoveSelectOptionsQueryHookResult = ReturnType<typeof useMoveSelectOptionsQuery>;
+export type MoveSelectOptionsLazyQueryHookResult = ReturnType<typeof useMoveSelectOptionsLazyQuery>;
+export type MoveSelectOptionsQueryResult = Apollo.QueryResult<MoveSelectOptionsQuery, MoveSelectOptionsQueryVariables>;
 export const MovesDocument = gql`
     query Moves($moveCategoryId: ID!) {
   moves(moveCategoryId: $moveCategoryId) {
