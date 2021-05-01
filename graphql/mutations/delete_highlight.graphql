@@ -1,0 +1,7 @@
+mutation DeleteHighlight($highlightId: ID!) {
+  deleteHighlight(input: { highlightId: $highlightId }) {
+    highlight {
+      id
+    }
+  }
+}

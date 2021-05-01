@@ -1,0 +1,12 @@
+fragment comboCategoryDetail on ComboCategory {
+  id
+  name
+
+  character {
+    ...character
+  }
+
+  combos {
+    ...combo
+  }
+}

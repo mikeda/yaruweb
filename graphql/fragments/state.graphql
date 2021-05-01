@@ -1,0 +1,4 @@
+fragment state on State {
+  id
+  name
+}

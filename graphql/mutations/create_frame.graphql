@@ -1,0 +1,10 @@
+mutation CreateFrame($actionId: ID!, $attributes: FrameAttributes!) {
+  createFrame(input: { actionId: $actionId, attributes: $attributes }) {
+    frame {
+      id
+      type
+      frame
+      state
+    }
+  }
+}

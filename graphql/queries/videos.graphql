@@ -1,0 +1,10 @@
+query Videos($first: Int, $after: String, $order: Order) {
+  videos(first: $first, after: $after, order: $order) {
+    nodes {
+      ...videoSummary
+    }
+    pageInfo {
+      ...paging
+    }
+  }
+}

@@ -28,7 +28,6 @@ export type Actionable = {
 export type Article = {
   __typename?: 'Article';
   author: Player;
-  authorId: Scalars['Int'];
   category: ArticleCategory;
   commentCount: Scalars['Int'];
   content: Scalars['String'];
@@ -869,12 +868,10 @@ export type Move = {
   jumpStatus: Scalars['Boolean'];
   kana?: Maybe<Scalars['String']>;
   moveCategory: MoveCategory;
-  moveCategoryId: Scalars['ID'];
   moveVideo?: Maybe<MoveVideo>;
   name: Scalars['String'];
   note?: Maybe<Scalars['String']>;
   opponentState?: Maybe<OpponentStateEnum>;
-  playerId: Scalars['ID'];
   powerCrush: Scalars['Boolean'];
   rage: Scalars['Boolean'];
   screw: Scalars['Boolean'];
@@ -1287,7 +1284,6 @@ export type PublishArticlePayload = {
 
 export type Query = {
   __typename?: 'Query';
-  actions: Array<Action>;
   allArticles: Array<Article>;
   article: Article;
   articleComments: Array<ArticleComment>;
@@ -1852,7 +1848,7 @@ export type HighlightFragment = (
 
 export type MoveFragment = (
   { __typename?: 'Move' }
-  & Pick<Move, 'id' | 'playerId' | 'moveCategoryId' | 'name' | 'kana' | 'opponentState' | 'startUpFrame' | 'rage' | 'comboStarter' | 'powerCrush' | 'crouchingStatus' | 'jumpStatus' | 'homing' | 'screw' | 'wallBound' | 'note'>
+  & Pick<Move, 'id' | 'name' | 'kana' | 'opponentState' | 'startUpFrame' | 'rage' | 'comboStarter' | 'powerCrush' | 'crouchingStatus' | 'jumpStatus' | 'homing' | 'screw' | 'wallBound' | 'note'>
   & { afterState?: Maybe<(
     { __typename?: 'State' }
     & Pick<State, 'id' | 'name'>
@@ -3224,8 +3220,6 @@ ${ThrowActionFragmentDoc}`;
 export const MoveFragmentDoc = gql`
     fragment move on Move {
   id
-  playerId
-  moveCategoryId
   afterState {
     id
     name

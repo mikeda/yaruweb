@@ -1,0 +1,7 @@
+mutation CreateVideo($url: String!) {
+  createVideo(input: {url: $url}) {
+    video {
+      id
+    }
+  }
+}

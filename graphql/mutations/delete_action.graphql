@@ -1,0 +1,7 @@
+mutation DeleteAction($actionId: ID!) {
+  deleteAction(input: { actionId: $actionId }) {
+    action {
+      ...action
+    }
+  }
+}

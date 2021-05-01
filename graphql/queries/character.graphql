@@ -1,0 +1,5 @@
+query CharacterWithChildren($characterSlug: ID!) {
+  character(characterSlug: $characterSlug) {
+    ...characterWithChildren
+  }
+}

@@ -1,0 +1,7 @@
+mutation CreateArticleLink($url: String!) {
+  createArticleLink(input: { url: $url }) {
+    articleLink {
+      ...articleLink
+    }
+  }
+}

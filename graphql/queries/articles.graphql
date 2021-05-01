@@ -1,0 +1,18 @@
+query Articles($first: Int, $after: String, $order: Order, $category: ArticleCategory) {
+  articles(first: $first, after: $after, order: $order, category: $category) {
+    nodes {
+      id
+      title
+      description
+      mainImageUrl
+      publishedAt
+      author {
+        name
+        avatarUrl
+      }
+    }
+    pageInfo {
+      ...paging
+    }
+  }
+}

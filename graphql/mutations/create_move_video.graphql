@@ -1,0 +1,12 @@
+mutation CreateMoveVideo($moveId: ID!) {
+  createMoveVideo(input: { moveId: $moveId }) {
+    moveVideo {
+      id
+    }
+
+    videoUpload {
+      url
+      fields
+    }
+  }
+}

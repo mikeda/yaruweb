@@ -1,0 +1,33 @@
+fragment move on Move {
+  id
+  afterState {
+    id
+    name
+  }
+  name
+  kana
+  opponentState
+  startUpFrame
+  rage
+  comboStarter
+  powerCrush
+  crouchingStatus
+  jumpStatus
+  homing
+  screw
+  wallBound
+  note
+
+  moveVideo {
+    m3u8Url
+    thumbnailUrl
+  }
+
+  commands {
+    ...command
+  }
+
+  actions {
+    ...action
+  }
+}

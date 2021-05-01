@@ -1,0 +1,7 @@
+mutation CreatePlayerWithTwitter {
+  createPlayerWithTwitter(input: {}) {
+    currentPlayer {
+      ...currentPlayer
+    }
+  }
+}

@@ -1,0 +1,11 @@
+fragment command on Command {
+  id
+
+  state {
+    ...state
+  }
+
+  operations {
+    ...operation
+  }
+}

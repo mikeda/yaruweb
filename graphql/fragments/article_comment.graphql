@@ -1,0 +1,9 @@
+fragment articleComment on ArticleComment {
+  id
+  message
+  createdAt
+  player {
+    name
+    avatarUrl
+  }
+}

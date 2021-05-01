@@ -1,0 +1,8 @@
+mutation UpdatePlayer($name: String!, $slug: String!) {
+  updatePlayer(input: { name: $name, slug: $slug }) {
+    player {
+      name
+      slug
+    }
+  }
+}

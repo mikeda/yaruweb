@@ -1,0 +1,7 @@
+mutation CreateVideoFav($videoId: ID!) {
+  createVideoFav(input: { videoId: $videoId }) {
+    video {
+      id
+    }
+  }
+}

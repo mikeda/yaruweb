@@ -1,0 +1,5 @@
+mutation CreateArticleImage($image: String!) {
+  createArticleImage(input: { image: $image }) {
+    url
+  }
+}

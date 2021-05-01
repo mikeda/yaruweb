@@ -1,0 +1,7 @@
+mutation UpdateMoveCategory($moveCategoryId: ID!, $attributes: MoveCategoryAttributes!) {
+  updateMoveCategory(input: { moveCategoryId: $moveCategoryId, attributes: $attributes }) {
+    moveCategory {
+      id
+    }
+  }
+}

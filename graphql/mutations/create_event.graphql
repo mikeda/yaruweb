@@ -1,0 +1,7 @@
+mutation CreateEvent($attributes: EventAttributes!) {
+  createEvent(input: { attributes: $attributes }) {
+    event {
+      ...event
+    }
+  }
+}

@@ -1,0 +1,12 @@
+fragment moveCategoryDetail on MoveCategory {
+  id
+  name
+
+  character {
+    ...character
+  }
+
+  moves {
+    ...move
+  }
+}
