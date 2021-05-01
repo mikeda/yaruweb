@@ -10,17 +10,14 @@ export const Routes = {
     index: () => '/characters',
     detail: (characterSlug: string) => `/${characterSlug}`,
   },
-  combo: {
-    index: (characterSlug: string) => `/${characterSlug}/combos`,
-  },
   comboCategory: {
     detail: (comboCategoryId: string) => `/combo_categories/${comboCategoryId}`,
   },
   event: {
     index: () => '/events',
   },
-  move: {
-    index: (characterSlug: string) => `/${characterSlug}/moves`,
+  moveCategory: {
+    detail: (moveCategoryId: string) => `/move_categories/${moveCategoryId}`,
   },
   session: {
     signup: () => '/signup',

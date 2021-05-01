@@ -1,58 +1,51 @@
 import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
-import { ComboCategoryDocument, ComboCategoryFragment, ComboCategoryQuery, useCombosQuery } from '@/lib/graphql/types';
-import { CharacterPageLayout } from '@/components/layouts/CharacterPageLayout';
+import {
+  ComboCategoryDetailDocument,
+  ComboCategoryDetailFragment,
+  ComboCategoryDetailQuery,
+  ComboCategoryIdsDocument,
+  ComboCategoryIdsQuery,
+} from '@/lib/graphql/types';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Head } from '@/components/layouts/Head';
-import { ComboList } from '@/pages-lib/characters/[slug]/combos/ComboList';
-import { NotFound } from '@/components/NotFound';
 import { Content } from '@/components/layouts/Content';
+import { Heading } from '@/components/Heading';
+import { ComboList } from '@/pages-lib/characters/[slug]/combos/ComboList';
 
 interface Props {
-  comboCategory: ComboCategoryFragment;
+  comboCategory: ComboCategoryDetailFragment;
 }
 
 const Page: React.FC<Props> = ({ comboCategory }) => {
+  const title = `${comboCategory.character.longName} / ${comboCategory.name}のコンボ`;
+
   return (
     <Content>
-      <Head
-        title={`${comboCategory.character.longName}/${comboCategory.name}のコンボ一覧`}
-        description={`${comboCategory.character.longName}/${comboCategory.name}のコンボ一覧です。`}
-      />
+      <Head title={title} />
 
-      <PageContent comboCategory={comboCategory} />
+      <Heading lv="h1">{title}</Heading>
+
+      <ComboList combos={comboCategory.combos} />
     </Content>
-  );
-};
-
-const PageContent: React.FC<Props> = ({ comboCategory }) => {
-  const { data, loading, error } = useCombosQuery({ variables: { comboCategoryId: comboCategory.id } });
-
-  if (loading) return <NotFound>読み込み中...</NotFound>;
-  if (error) return <NotFound>エラーが発生しました。{error.message}</NotFound>;
-
-  const combos = data?.combos;
-  if (!combos) return <NotFound>データの読み込みに失敗しました。</NotFound>;
-
-  if (combos.length === 0) return <NotFound>コンボが登録されていません。</NotFound>;
-
-  return (
-    <CharacterPageLayout character={comboCategory.character} activeTab="combos">
-      <ComboList comboCategoryId={comboCategory.id} />
-    </CharacterPageLayout>
   );
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const comboCategoryId = params?.comboCategoryId as string;
-  const data: ComboCategoryQuery = await fetchGraphql(ComboCategoryDocument, { comboCategoryId });
 
-  return { props: { comboCategory: data.comboCategory } };
+  const data: ComboCategoryDetailQuery = await fetchGraphql(ComboCategoryDetailDocument, { comboCategoryId });
+
+  return { props: { comboCategory: data.comboCategory }, revalidate: 60 };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  return { paths: [], fallback: 'blocking' };
+  const data: ComboCategoryIdsQuery = await fetchGraphql(ComboCategoryIdsDocument);
+
+  const paths = data.comboCategories.map(comboCategory => ({ params: { comboCategoryId: comboCategory.id } }));
+
+  return { paths, fallback: true };
 };
 
 export default Page;

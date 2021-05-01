@@ -1,97 +1,51 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
 import {
-  CharacterDocument,
-  CharacterFragment,
-  CharacterPathsDocument,
-  CharacterPathsQuery,
-  CharacterQuery,
-  MoveCategoriesDocument,
-  MoveCategoriesQuery,
-  MoveCategoryFragment,
-  MoveFragment,
-  MovesDocument,
-  MovesQuery,
+  MoveCategoryDetailDocument,
+  MoveCategoryDetailFragment,
+  MoveCategoryDetailQuery,
+  MoveCategoryIdsDocument,
+  MoveCategoryIdsQuery,
 } from '@/lib/graphql/types';
-import { CharacterPageLayout } from '@/components/layouts/CharacterPageLayout';
 import { MoveList } from '@/components/MoveList';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
-import { TabLinkGroup } from '@/components/blocks/TabLinkGroup';
-import { TabLink } from '@/components/blocks/TabLink';
 import { Head } from '@/components/layouts/Head';
 import { Content } from '@/components/layouts/Content';
+import { Heading } from '@/components/Heading';
 
 interface Props {
-  character: CharacterFragment;
-  moveCategories: MoveCategoryFragment[];
-  moves: MoveFragment[];
+  moveCategory: MoveCategoryDetailFragment;
 }
 
-const Page: React.FC<Props> = ({ character, moveCategories, moves: allMoves }) => {
-  const [moveCategory, setMoveCategory] = useState<MoveCategoryFragment>();
-  const [moves, setMoves] = useState(allMoves);
+const Page: React.FC<Props> = ({ moveCategory }) => {
+  const title = `${moveCategory.character.longName} / ${moveCategory.name}のコマンドリスト`;
 
   return (
     <Content>
-      <Head title={`${character.longName}の動画`} description={`${character.longName}のオススメ動画です。`} />
+      <Head title={title} />
 
-      <CharacterPageLayout character={character} activeTab="moves">
-        <TabLinkGroup>
-          <TabLink
-            text="全て"
-            active={!moveCategory}
-            onClick={() => {
-              setMoveCategory(undefined);
-            }}
-          />
-          {moveCategories.map(c => (
-            <TabLink
-              key={c.id}
-              text={c.name}
-              active={c === moveCategory}
-              onClick={() => {
-                setMoveCategory(c);
-                setMoves(c ? allMoves.filter(move => move.moveCategoryId === c.id) : allMoves);
-              }}
-            />
-          ))}
-        </TabLinkGroup>
-        <MoveList moves={moves} />
-      </CharacterPageLayout>
+      <Heading lv="h1">{title}</Heading>
+
+      <MoveList moves={moveCategory.moves} />
     </Content>
   );
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const characterSlug = params?.character as string;
+  const moveCategoryId = params?.moveCategoryId as string;
 
-  const characterData: CharacterQuery = await fetchGraphql(CharacterDocument, { slug: characterSlug });
-  const moveCategoriesData: MoveCategoriesQuery = await fetchGraphql(MoveCategoriesDocument, {
-    characterSlug,
-  });
-  const movesData: MovesQuery = await fetchGraphql(MovesDocument, { characterSlug });
+  const data: MoveCategoryDetailQuery = await fetchGraphql(MoveCategoryDetailDocument, { moveCategoryId });
 
-  return {
-    props: {
-      character: characterData.character,
-      moveCategories: moveCategoriesData.moveCategories,
-      moves: movesData.moves,
-    },
-    revalidate: 60,
-  };
+  return { props: { moveCategory: data.moveCategory }, revalidate: 60 };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const data: CharacterPathsQuery = await fetchGraphql(CharacterPathsDocument);
+  const data: MoveCategoryIdsQuery = await fetchGraphql(MoveCategoryIdsDocument);
 
-  const paths = data.characters.map(c => ({
-    params: {
-      characterSlug: c.slug,
-    },
-  }));
+  const paths = data.moveCategories.map(moveCategory => ({ params: { moveCategoryId: moveCategory.id } }));
 
-  return { paths, fallback: false };
+  return { paths, fallback: true };
 };
 
 export default Page;
