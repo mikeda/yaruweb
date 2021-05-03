@@ -42,7 +42,7 @@ export const PlayerMenu: React.FC = () => {
           onClose={() => setMenuOpened(false)}
           items={[
             <Link key={0} href={Routes.dashboard.article.index()}>
-              <a>記事</a>
+              <a>マイページ</a>
             </Link>,
             <a
               key={2}

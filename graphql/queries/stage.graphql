@@ -1,0 +1,5 @@
+query Stage($stageId: ID!) {
+  stage(stageId: $stageId) {
+    ...stage
+  }
+}
