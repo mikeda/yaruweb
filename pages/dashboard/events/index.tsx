@@ -13,7 +13,7 @@ const Page: React.FC = () => (
   <DashboardContent activeTab="event">
     <Head title="イベント一覧" />
 
-    <Heading lv="h1">記事</Heading>
+    <Heading lv="h1">イベント</Heading>
 
     <EventList />
   </DashboardContent>

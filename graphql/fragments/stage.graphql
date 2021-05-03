@@ -1,0 +1,10 @@
+fragment stage on Stage {
+  id
+  name
+  mainImageUrl
+  infinite
+  wall
+  wallBreak
+  balconyBreak
+  floorBreak
+}
