@@ -62,7 +62,7 @@ export const VideoHighlights: React.FC<Props> = ({ videoId, highlights: initialH
     },
   });
 
-  const editable = currentPlayer?.role === PlayerRole.Editor;
+  const editable = currentPlayer?.role === PlayerRole.Admin;
 
   return (
     <>

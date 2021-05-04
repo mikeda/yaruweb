@@ -55,6 +55,9 @@ export const Routes = {
     move: {
       index: (moveCategoryId: string) => `/dashboard/move_categories/${moveCategoryId}/moves`,
     },
+    profile: {
+      edit: () => `/dashboard/profile/edit`,
+    },
     stage: {
       index: () => '/dashboard/stages',
       new: () => '/dashboard/stages/new',
