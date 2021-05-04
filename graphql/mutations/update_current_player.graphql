@@ -1,0 +1,7 @@
+mutation UpdateCurrentPlayer($attributes: CurrentPlayerAttributes!) {
+  updateCurrentPlayer(input: { attributes: $attributes }) {
+    currentPlayer {
+      ...currentPlayer
+    }
+  }
+}
