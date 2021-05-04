@@ -15,6 +15,7 @@ import { GlobalFooter } from '@/components/layouts/GlobalFooter';
 import { currentPlayerState } from 'states/currentPlayer';
 import { useCurrentPlayerQuery } from '@/lib/graphql/types';
 import { useRouter } from 'next/router';
+import { Loading } from '@/components/Loading';
 
 const AppInit = () => {
   const setCurrentPlayer = useSetRecoilState(currentPlayerState);
@@ -47,6 +48,8 @@ export default function App({ Component, pageProps }: AppProps) {
 
         <GlobalFooter />
         <ToastContainer />
+        <Loading />
+
         <AppInit />
       </ApolloProvider>
     </RecoilRoot>

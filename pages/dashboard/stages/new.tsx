@@ -8,10 +8,13 @@ import { PageHeader } from '@/components/layouts/PageHeader';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { StageForm } from '@/components/StageForm';
+import { useSetRecoilState } from 'recoil';
+import { loadingState } from 'states/loading';
 
 const Page: React.FC = () => {
   const router = useRouter();
-  const [createStage] = useCreateStageMutation({
+  const setLoading = useSetRecoilState(loadingState);
+  const [createStage, { loading }] = useCreateStageMutation({
     onCompleted: () => {
       toast.success('ステージを登録しました。');
       router.push(Routes.dashboard.stage.index());
@@ -24,6 +27,8 @@ const Page: React.FC = () => {
   const onSubmit = (attributes: StageAttributes) => {
     createStage({ variables: { attributes } });
   };
+
+  setLoading(loading);
 
   return (
     <DashboardContent activeTab="stage">
