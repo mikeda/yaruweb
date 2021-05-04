@@ -10,6 +10,8 @@ import { GetServerSideProps } from 'next';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { toast } from 'react-toastify';
 import { StageForm } from '@/components/StageForm';
+import { loadingState } from 'states/loading';
+import { useSetRecoilState } from 'recoil';
 
 interface Props {
   stage: StageFragment;
@@ -17,7 +19,8 @@ interface Props {
 
 const Page: React.FC<Props> = ({ stage }) => {
   const router = useRouter();
-  const [updateStage] = useUpdateStageMutation({
+  const setLoading = useSetRecoilState(loadingState);
+  const [updateStage, { loading }] = useUpdateStageMutation({
     onCompleted: () => {
       toast.success('ステージを更新しました。');
       router.push(Routes.dashboard.stage.index());
@@ -30,6 +33,8 @@ const Page: React.FC<Props> = ({ stage }) => {
   const onSubmit = (attributes: StageAttributes) => {
     updateStage({ variables: { stageId: stage.id, attributes } });
   };
+
+  setLoading(loading);
 
   return (
     <DashboardContent activeTab="stage">

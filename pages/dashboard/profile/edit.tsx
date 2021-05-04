@@ -21,6 +21,7 @@ import { FormGroup } from '@/components/form2/FormGroup';
 import { Input } from '@/components/form2/Input';
 import { currentPlayerState } from 'states/currentPlayer';
 import { useSetRecoilState } from 'recoil';
+import { loadingState } from 'states/loading';
 
 interface Props {
   currentPlayer: CurrentPlayerFragment;
@@ -41,6 +42,7 @@ const Page: React.FC<Props> = ({ currentPlayer }) => {
 const Form: React.FC<Props> = ({ currentPlayer }) => {
   const router = useRouter();
   const setCurrentPlayer = useSetRecoilState(currentPlayerState);
+  const setLoading = useSetRecoilState(loadingState);
   const {
     register,
     handleSubmit,
@@ -73,6 +75,8 @@ const Form: React.FC<Props> = ({ currentPlayer }) => {
   const onSubmit = (attributes: CurrentPlayerAttributes) => {
     updateCurrentPlayer({ variables: { attributes } });
   };
+
+  setLoading(loading);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
