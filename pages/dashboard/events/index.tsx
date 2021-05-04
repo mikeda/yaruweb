@@ -6,14 +6,14 @@ import { DashboardContent } from '@/components/layouts/dashboard/DashboardConten
 import { NotFound } from '@/components/NotFound';
 import Link from 'next/link';
 import { Routes } from '@/lib/Routes';
-import { Heading } from '@/components/Heading';
 import { ReadMore } from '@/components/blocks/ReadMore';
+import { PageHeader } from '@/components/layouts/PageHeader';
 
 const Page: React.FC = () => (
   <DashboardContent activeTab="event">
     <Head title="イベント一覧" />
 
-    <Heading lv="h1">イベント</Heading>
+    <PageHeader title="イベント" addPageUrl={Routes.dashboard.event.new()} />
 
     <EventList />
   </DashboardContent>

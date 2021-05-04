@@ -1,0 +1,11 @@
+query Events($first: Int, $after: String) {
+  events(first: $first, after: $after) {
+    nodes {
+      ...event
+    }
+
+    pageInfo {
+      ...paging
+    }
+  }
+}

@@ -26,7 +26,7 @@ const PageContent: React.FC = () => {
               return (
                 <Media
                   key={event.id}
-                  imageUrl={event.imageUrl}
+                  imageUrl={event.mainImageUrl}
                   title={event.name}
                   titleNote={dayjs(event.startsAt).format('YYYY/M/D H:mm')}
                   text={event.description}
