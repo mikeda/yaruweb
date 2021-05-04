@@ -1,9 +1,10 @@
 import React from 'react';
 
-import { UseFormRegisterReturn } from 'react-hook-form';
-
 import styles from './Input.module.scss';
 
-type Props = Partial<UseFormRegisterReturn> & { type?: string };
+type InputProps = React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 
-export const Input: React.FC<Props> = props => <input className={styles.input} {...props} />;
+// eslint-disable-next-line react/display-name
+export const Input = React.forwardRef<HTMLInputElement, InputProps>((props, ref) => (
+  <input className={styles.input} ref={ref} {...props} />
+));

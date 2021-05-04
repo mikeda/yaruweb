@@ -19,6 +19,8 @@ import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { toast } from 'react-toastify';
 import { FormGroup } from '@/components/form2/FormGroup';
 import { Input } from '@/components/form2/Input';
+import { currentPlayerState } from 'states/currentPlayer';
+import { useSetRecoilState } from 'recoil';
 
 interface Props {
   currentPlayer: CurrentPlayerFragment;
@@ -38,6 +40,7 @@ const Page: React.FC<Props> = ({ currentPlayer }) => {
 
 const Form: React.FC<Props> = ({ currentPlayer }) => {
   const router = useRouter();
+  const setCurrentPlayer = useSetRecoilState(currentPlayerState);
   const {
     register,
     handleSubmit,
@@ -51,7 +54,14 @@ const Form: React.FC<Props> = ({ currentPlayer }) => {
   });
 
   const [updateCurrentPlayer, { loading }] = useUpdateCurrentPlayerMutation({
-    onCompleted: () => {
+    onCompleted: data => {
+      const updatedCurrentPlayer = data.updateCurrentPlayer?.currentPlayer;
+      if (!updatedCurrentPlayer) {
+        toast.error('プロフィールの更新に失敗しました。');
+        return;
+      }
+
+      setCurrentPlayer(updatedCurrentPlayer);
       toast.success('プロフィールを更新しました。');
       router.push(Routes.dashboard.profile.edit());
     },
@@ -71,34 +81,38 @@ const Form: React.FC<Props> = ({ currentPlayer }) => {
         {errors.name && <span>This field is required</span>}
       </FormGroup>
 
-      <div>
-        <input {...register('slug', { required: true })} />
+      <FormGroup label="ID（URLに使用)">
+        <Input {...register('slug', { required: true })} placeholder="半角英数字3~16文字" />
         {errors.slug && <span>This field is required</span>}
-      </div>
+      </FormGroup>
 
-      <input
-        type="file"
-        accept="image/*"
-        name="avatarDummy"
-        onChange={e => {
-          if (!e.target.files) return;
-          const file = e.target.files[0];
-          if (!file) return;
+      <FormGroup label="プロフィール画像">
+        <input
+          type="file"
+          accept="image/*"
+          name="avatarDummy"
+          onChange={e => {
+            if (!e.target.files) return;
+            const file = e.target.files[0];
+            if (!file) return;
 
-          const reader = new FileReader();
-          reader.onload = e => {
-            if (!e.target) return;
+            const reader = new FileReader();
+            reader.onload = e => {
+              if (!e.target) return;
 
-            setValue('avatar', e.target.result as string);
-          };
-          reader.readAsDataURL(file);
-        }}
-      />
-      <input type="hidden" name="avatar" />
+              setValue('avatar', e.target.result as string);
+            };
+            reader.readAsDataURL(file);
+          }}
+        />
+        <input type="hidden" name="avatar" />
+      </FormGroup>
 
-      <Button>
-        <input type="submit" disabled={loading} />
-      </Button>
+      <FormGroup>
+        <Button>
+          <input type="submit" disabled={loading} />
+        </Button>
+      </FormGroup>
     </form>
   );
 };

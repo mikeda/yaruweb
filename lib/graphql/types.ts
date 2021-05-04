@@ -2648,7 +2648,7 @@ export type UpdateCurrentPlayerMutation = (
     { __typename?: 'UpdateCurrentPlayerPayload' }
     & { currentPlayer: (
       { __typename?: 'CurrentPlayer' }
-      & Pick<CurrentPlayer, 'name' | 'slug'>
+      & CurrentPlayerFragment
     ) }
   )> }
 );
@@ -4835,12 +4835,11 @@ export const UpdateCurrentPlayerDocument = gql`
     mutation UpdateCurrentPlayer($attributes: CurrentPlayerAttributes!) {
   updateCurrentPlayer(input: {attributes: $attributes}) {
     currentPlayer {
-      name
-      slug
+      ...currentPlayer
     }
   }
 }
-    `;
+    ${CurrentPlayerFragmentDoc}`;
 export type UpdateCurrentPlayerMutationFn = Apollo.MutationFunction<UpdateCurrentPlayerMutation, UpdateCurrentPlayerMutationVariables>;
 
 /**
