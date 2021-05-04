@@ -752,7 +752,7 @@ export type Event = {
   __typename?: 'Event';
   description: Scalars['String'];
   id: Scalars['ID'];
-  imageUrl: Scalars['String'];
+  mainImageUrl?: Maybe<Scalars['String']>;
   name: Scalars['String'];
   organizerName: Scalars['String'];
   organizerTwitterId?: Maybe<Scalars['String']>;
@@ -766,8 +766,8 @@ export type EventAttributes = {
   name: Scalars['String'];
   organizerName: Scalars['String'];
   organizerTwitterId?: Maybe<Scalars['String']>;
+  mainImage?: Maybe<Scalars['String']>;
   url: Scalars['String'];
-  imageUrl: Scalars['String'];
   streamingUrl?: Maybe<Scalars['String']>;
   videoUrl?: Maybe<Scalars['String']>;
   startsAt: Scalars['String'];
@@ -1328,6 +1328,7 @@ export type Query = {
   comboCategory: ComboCategory;
   combos: Array<Combo>;
   currentPlayer: CurrentPlayer;
+  event: Event;
   events: EventConnection;
   move: Move;
   moveCategories: Array<MoveCategory>;
@@ -1383,6 +1384,11 @@ export type QueryComboCategoryArgs = {
 
 export type QueryCombosArgs = {
   comboCategoryId: Scalars['ID'];
+};
+
+
+export type QueryEventArgs = {
+  eventId: Scalars['ID'];
 };
 
 
@@ -1912,7 +1918,7 @@ export type CurrentPlayerFragment = (
 
 export type EventFragment = (
   { __typename?: 'Event' }
-  & Pick<Event, 'id' | 'name' | 'url' | 'imageUrl' | 'streamingUrl' | 'videoUrl' | 'description' | 'organizerName' | 'organizerTwitterId' | 'startsAt'>
+  & Pick<Event, 'id' | 'name' | 'mainImageUrl' | 'url' | 'streamingUrl' | 'videoUrl' | 'description' | 'organizerName' | 'organizerTwitterId' | 'startsAt'>
 );
 
 export type HighlightFragment = (
@@ -2953,6 +2959,19 @@ export type EventsQuery = (
   ) }
 );
 
+export type EventQueryVariables = Exact<{
+  eventId: Scalars['ID'];
+}>;
+
+
+export type EventQuery = (
+  { __typename?: 'Query' }
+  & { event: (
+    { __typename?: 'Event' }
+    & EventFragment
+  ) }
+);
+
 export type MoveQueryVariables = Exact<{
   moveId: Scalars['ID'];
 }>;
@@ -3294,8 +3313,8 @@ export const EventFragmentDoc = gql`
     fragment event on Event {
   id
   name
+  mainImageUrl
   url
-  imageUrl
   streamingUrl
   videoUrl
   description
@@ -5600,6 +5619,41 @@ export function useEventsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Eve
 export type EventsQueryHookResult = ReturnType<typeof useEventsQuery>;
 export type EventsLazyQueryHookResult = ReturnType<typeof useEventsLazyQuery>;
 export type EventsQueryResult = Apollo.QueryResult<EventsQuery, EventsQueryVariables>;
+export const EventDocument = gql`
+    query Event($eventId: ID!) {
+  event(eventId: $eventId) {
+    ...event
+  }
+}
+    ${EventFragmentDoc}`;
+
+/**
+ * __useEventQuery__
+ *
+ * To run a query within a React component, call `useEventQuery` and pass it any options that fit your needs.
+ * When your component renders, `useEventQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useEventQuery({
+ *   variables: {
+ *      eventId: // value for 'eventId'
+ *   },
+ * });
+ */
+export function useEventQuery(baseOptions: Apollo.QueryHookOptions<EventQuery, EventQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<EventQuery, EventQueryVariables>(EventDocument, options);
+      }
+export function useEventLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<EventQuery, EventQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<EventQuery, EventQueryVariables>(EventDocument, options);
+        }
+export type EventQueryHookResult = ReturnType<typeof useEventQuery>;
+export type EventLazyQueryHookResult = ReturnType<typeof useEventLazyQuery>;
+export type EventQueryResult = Apollo.QueryResult<EventQuery, EventQueryVariables>;
 export const MoveDocument = gql`
     query Move($moveId: ID!) {
   move(moveId: $moveId) {

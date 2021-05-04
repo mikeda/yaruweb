@@ -1,8 +1,8 @@
 fragment event on Event {
   id
   name
+  mainImageUrl
   url
-  imageUrl
   streamingUrl
   videoUrl
   description
