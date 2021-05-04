@@ -145,7 +145,6 @@ export enum AttackTypeEnum {
 
 export type Character = {
   __typename?: 'Character';
-  articles: Array<Article>;
   comboCategories: Array<ComboCategory>;
   country: Scalars['String'];
   description: Scalars['String'];
@@ -2319,6 +2318,23 @@ export type CreatePlayerWithTwitterMutation = (
   )> }
 );
 
+export type UpdateStageMutationVariables = Exact<{
+  stageId: Scalars['ID'];
+  attributes: StageAttributes;
+}>;
+
+
+export type UpdateStageMutation = (
+  { __typename?: 'Mutation' }
+  & { updateStage?: Maybe<(
+    { __typename?: 'UpdateStagePayload' }
+    & { stage: (
+      { __typename?: 'Stage' }
+      & StageFragment
+    ) }
+  )> }
+);
+
 export type CreateThrowActionMutationVariables = Exact<{
   moveId: Scalars['ID'];
   attributes: ThrowActionAttributes;
@@ -2683,6 +2699,22 @@ export type UpdatePlayerMutation = (
     & { player: (
       { __typename?: 'CurrentPlayer' }
       & Pick<CurrentPlayer, 'name' | 'slug'>
+    ) }
+  )> }
+);
+
+export type CreateStageMutationVariables = Exact<{
+  attributes: StageAttributes;
+}>;
+
+
+export type CreateStageMutation = (
+  { __typename?: 'Mutation' }
+  & { createStage?: Maybe<(
+    { __typename?: 'CreateStagePayload' }
+    & { stage: (
+      { __typename?: 'Stage' }
+      & StageFragment
     ) }
   )> }
 );
@@ -4121,6 +4153,42 @@ export function useCreatePlayerWithTwitterMutation(baseOptions?: Apollo.Mutation
 export type CreatePlayerWithTwitterMutationHookResult = ReturnType<typeof useCreatePlayerWithTwitterMutation>;
 export type CreatePlayerWithTwitterMutationResult = Apollo.MutationResult<CreatePlayerWithTwitterMutation>;
 export type CreatePlayerWithTwitterMutationOptions = Apollo.BaseMutationOptions<CreatePlayerWithTwitterMutation, CreatePlayerWithTwitterMutationVariables>;
+export const UpdateStageDocument = gql`
+    mutation UpdateStage($stageId: ID!, $attributes: StageAttributes!) {
+  updateStage(input: {stageId: $stageId, attributes: $attributes}) {
+    stage {
+      ...stage
+    }
+  }
+}
+    ${StageFragmentDoc}`;
+export type UpdateStageMutationFn = Apollo.MutationFunction<UpdateStageMutation, UpdateStageMutationVariables>;
+
+/**
+ * __useUpdateStageMutation__
+ *
+ * To run a mutation, you first call `useUpdateStageMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateStageMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateStageMutation, { data, loading, error }] = useUpdateStageMutation({
+ *   variables: {
+ *      stageId: // value for 'stageId'
+ *      attributes: // value for 'attributes'
+ *   },
+ * });
+ */
+export function useUpdateStageMutation(baseOptions?: Apollo.MutationHookOptions<UpdateStageMutation, UpdateStageMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateStageMutation, UpdateStageMutationVariables>(UpdateStageDocument, options);
+      }
+export type UpdateStageMutationHookResult = ReturnType<typeof useUpdateStageMutation>;
+export type UpdateStageMutationResult = Apollo.MutationResult<UpdateStageMutation>;
+export type UpdateStageMutationOptions = Apollo.BaseMutationOptions<UpdateStageMutation, UpdateStageMutationVariables>;
 export const CreateThrowActionDocument = gql`
     mutation CreateThrowAction($moveId: ID!, $attributes: ThrowActionAttributes!) {
   createThrowAction(input: {moveId: $moveId, attributes: $attributes}) {
@@ -4908,6 +4976,41 @@ export function useUpdatePlayerMutation(baseOptions?: Apollo.MutationHookOptions
 export type UpdatePlayerMutationHookResult = ReturnType<typeof useUpdatePlayerMutation>;
 export type UpdatePlayerMutationResult = Apollo.MutationResult<UpdatePlayerMutation>;
 export type UpdatePlayerMutationOptions = Apollo.BaseMutationOptions<UpdatePlayerMutation, UpdatePlayerMutationVariables>;
+export const CreateStageDocument = gql`
+    mutation CreateStage($attributes: StageAttributes!) {
+  createStage(input: {attributes: $attributes}) {
+    stage {
+      ...stage
+    }
+  }
+}
+    ${StageFragmentDoc}`;
+export type CreateStageMutationFn = Apollo.MutationFunction<CreateStageMutation, CreateStageMutationVariables>;
+
+/**
+ * __useCreateStageMutation__
+ *
+ * To run a mutation, you first call `useCreateStageMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateStageMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createStageMutation, { data, loading, error }] = useCreateStageMutation({
+ *   variables: {
+ *      attributes: // value for 'attributes'
+ *   },
+ * });
+ */
+export function useCreateStageMutation(baseOptions?: Apollo.MutationHookOptions<CreateStageMutation, CreateStageMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateStageMutation, CreateStageMutationVariables>(CreateStageDocument, options);
+      }
+export type CreateStageMutationHookResult = ReturnType<typeof useCreateStageMutation>;
+export type CreateStageMutationResult = Apollo.MutationResult<CreateStageMutation>;
+export type CreateStageMutationOptions = Apollo.BaseMutationOptions<CreateStageMutation, CreateStageMutationVariables>;
 export const ArticleDocument = gql`
     query Article($articleId: ID!) {
   article(articleId: $articleId) {

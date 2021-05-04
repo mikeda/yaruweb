@@ -57,6 +57,7 @@ export const Routes = {
     },
     stage: {
       index: () => '/dashboard/stages',
+      new: () => '/dashboard/stages/new',
       edit: (stageId: string) => `/dashboard/stages/${stageId}/edit`,
     },
     video: {

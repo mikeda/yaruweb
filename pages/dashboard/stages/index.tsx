@@ -6,20 +6,20 @@ import { DashboardContent } from '@/components/layouts/dashboard/DashboardConten
 import { NotFound } from '@/components/NotFound';
 import Link from 'next/link';
 import { Routes } from '@/lib/Routes';
-import { Heading } from '@/components/Heading';
+import { PageHeader } from '@/components/layouts/PageHeader';
 
 const Page: React.FC = () => (
   <DashboardContent activeTab="stage">
     <Head title="ステージ" />
 
-    <Heading lv="h1">ステージ</Heading>
+    <PageHeader title="ステージ" addPageUrl={Routes.dashboard.stage.new()} />
 
     <StageList />
   </DashboardContent>
 );
 
 const StageList: React.FC = () => {
-  const { data, loading } = useStagesQuery();
+  const { data, loading } = useStagesQuery({ fetchPolicy: 'network-only' });
   if (loading) return <NotFound>読み込み中</NotFound>;
   if (!data) return <NotFound>読み込みに失敗しました</NotFound>;
 
