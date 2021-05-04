@@ -1,6 +1,8 @@
 @import '@/styles/variables';
 
-.button {
+.button a,
+.button input,
+.button button {
   display: inline-block;
   padding: 0.5em 1em;
   font-weight: bold;
