@@ -6,9 +6,9 @@ import { DashboardContent } from '@/components/layouts/dashboard/DashboardConten
 import { NotFound } from '@/components/NotFound';
 import Link from 'next/link';
 import { Routes } from '@/lib/Routes';
-import { Heading } from '@/components/Heading';
 import { GetServerSideProps } from 'next';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
+import { PageHeader } from '@/components/layouts/PageHeader';
 
 interface Props {
   character: CharacterFragment;
@@ -21,7 +21,7 @@ const Page: React.FC<Props> = ({ character }) => {
     <DashboardContent activeTab="character">
       <Head title={title} />
 
-      <Heading lv="h1">{title}</Heading>
+      <PageHeader title={title} addPageUrl={Routes.dashboard.comboCategory.new(character.slug)} />
 
       <PageContent character={character} />
     </DashboardContent>
@@ -29,7 +29,10 @@ const Page: React.FC<Props> = ({ character }) => {
 };
 
 const PageContent: React.FC<Props> = ({ character }) => {
-  const { data, loading, error } = useComboCategoriesQuery({ variables: { characterSlug: character.slug } });
+  const { data, loading, error } = useComboCategoriesQuery({
+    variables: { characterSlug: character.slug },
+    fetchPolicy: 'network-only',
+  });
 
   if (loading) return <NotFound>Loading...</NotFound>;
   if (error) return <NotFound>エラーが発生しました。{error.message}</NotFound>;
@@ -51,6 +54,10 @@ const PageContent: React.FC<Props> = ({ character }) => {
               <tr key={comboCategory.id}>
                 <td>{comboCategory.name}</td>
                 <td>
+                  <Link href={Routes.dashboard.comboCategory.edit(comboCategory.id)}>
+                    <a>編集</a>
+                  </Link>
+                  /
                   <Link href={Routes.dashboard.combo.index(comboCategory.id)}>
                     <a>コンボを登録</a>
                   </Link>

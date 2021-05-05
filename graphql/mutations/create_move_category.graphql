@@ -1,5 +1,5 @@
-mutation CreateMoveCategory($characterId: ID!, $attributes: MoveCategoryAttributes!) {
-  createMoveCategory(input: { characterId: $characterId, attributes: $attributes }) {
+mutation CreateMoveCategory($characterSlug: ID!, $attributes: MoveCategoryAttributes!) {
+  createMoveCategory(input: { characterSlug: $characterSlug, attributes: $attributes }) {
     moveCategory {
       id
     }

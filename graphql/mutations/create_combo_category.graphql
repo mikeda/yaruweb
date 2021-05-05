@@ -1,5 +1,5 @@
-mutation CreateComboCategory($characterId: ID!, $attributes: ComboCategoryAttributes!) {
-  createComboCategory(input: { characterId: $characterId, attributes: $attributes }) {
+mutation CreateComboCategory($characterSlug: ID!, $attributes: ComboCategoryAttributes!) {
+  createComboCategory(input: { characterSlug: $characterSlug, attributes: $attributes }) {
     comboCategory {
       id
     }

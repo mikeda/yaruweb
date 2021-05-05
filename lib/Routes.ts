@@ -40,6 +40,8 @@ export const Routes = {
     },
     comboCategory: {
       index: (characterSlug: string) => `/dashboard/characters/${characterSlug}/combo_categories`,
+      new: (characterSlug: string) => `/dashboard/characters/${characterSlug}/combo_categories/new`,
+      edit: (comboCategoryId: string) => `/dashboard/combo_categories/${comboCategoryId}/edit`,
     },
     combo: {
       index: (comboCategoryId: string) => `/dashboard/combo_categories/${comboCategoryId}/combos`,
@@ -51,6 +53,8 @@ export const Routes = {
     },
     moveCategory: {
       index: (characterSlug: string) => `/dashboard/characters/${characterSlug}/move_categories`,
+      new: (characterSlug: string) => `/dashboard/characters/${characterSlug}/move_categories/new`,
+      edit: (moveCategoryId: string) => `/dashboard/move_categories/${moveCategoryId}/edit`,
     },
     move: {
       index: (moveCategoryId: string) => `/dashboard/move_categories/${moveCategoryId}/moves`,

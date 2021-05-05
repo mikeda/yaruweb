@@ -1,0 +1,5 @@
+query MoveCategory($moveCategoryId: ID!) {
+  moveCategory(moveCategoryId: $moveCategoryId) {
+    ...moveCategoryWithCharacter
+  }
+}
