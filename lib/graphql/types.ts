@@ -2593,7 +2593,7 @@ export type PublishArticleMutation = (
     { __typename?: 'PublishArticlePayload' }
     & { article: (
       { __typename?: 'Article' }
-      & Pick<Article, 'id'>
+      & ArticleSummaryFragment
     ) }
   )> }
 );
@@ -2659,7 +2659,7 @@ export type StopArticleMutation = (
     { __typename?: 'StopArticlePayload' }
     & { article: (
       { __typename?: 'Article' }
-      & Pick<Article, 'id'>
+      & ArticleSummaryFragment
     ) }
   )> }
 );
@@ -4734,11 +4734,11 @@ export const PublishArticleDocument = gql`
     mutation PublishArticle($articleId: ID!) {
   publishArticle(input: {articleId: $articleId}) {
     article {
-      id
+      ...articleSummary
     }
   }
 }
-    `;
+    ${ArticleSummaryFragmentDoc}`;
 export type PublishArticleMutationFn = Apollo.MutationFunction<PublishArticleMutation, PublishArticleMutationVariables>;
 
 /**
@@ -4878,11 +4878,11 @@ export const StopArticleDocument = gql`
     mutation StopArticle($articleId: ID!) {
   stopArticle(input: {articleId: $articleId}) {
     article {
-      id
+      ...articleSummary
     }
   }
 }
-    `;
+    ${ArticleSummaryFragmentDoc}`;
 export type StopArticleMutationFn = Apollo.MutationFunction<StopArticleMutation, StopArticleMutationVariables>;
 
 /**

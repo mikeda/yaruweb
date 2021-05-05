@@ -14,6 +14,7 @@ import { ArticleStatusText } from '@/lib/graphql/enum_texts';
 import { Routes } from '@/lib/Routes';
 import { ReadMore } from '@/components/blocks/ReadMore';
 import { PageHeader } from '@/components/layouts/PageHeader';
+import { toast } from 'react-toastify';
 
 const Page: React.FC = () => (
   <DashboardContent activeTab="article">
@@ -26,12 +27,23 @@ const Page: React.FC = () => (
 );
 
 const ArticleList: React.FC = () => {
-  const { data, loading, refetch, fetchMore } = useMyArticlesQuery({
-    variables: { first: 10 },
-    fetchPolicy: 'network-only',
+  const { data, loading, fetchMore, refetch } = useMyArticlesQuery({ variables: { first: 10 } });
+  const [publishArticle] = usePublishArticleMutation({
+    onCompleted: data => {
+      const article = data.publishArticle?.article;
+      if (!article) return;
+      refetch();
+      toast.success('記事を公開しました。');
+    },
   });
-  const [publishArticle] = usePublishArticleMutation({ onCompleted: () => refetch() });
-  const [stopArticle] = useStopArticleMutation({ onCompleted: () => refetch() });
+  const [stopArticle] = useStopArticleMutation({
+    onCompleted: data => {
+      const article = data.stopArticle?.article;
+      if (!article) return;
+      refetch();
+      toast.success('公開を停止しました。');
+    },
+  });
   if (loading) return <NotFound>読み込み中</NotFound>;
   if (!data) return <NotFound>読み込みに失敗しました。</NotFound>;
 
