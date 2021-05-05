@@ -1,9 +1,5 @@
 query MyArticle($articleId: ID!) {
   myArticle(articleId: $articleId) {
-    id
-    category
-    title
-    mainImageUrl
-    content
+    ...article
   }
 }

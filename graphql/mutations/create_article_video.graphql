@@ -1,0 +1,12 @@
+mutation CreateArticleVideo {
+  createArticleVideo(input: { }) {
+    articleVideo {
+      id
+    }
+
+    videoUpload {
+      url
+      fields
+    }
+  }
+}

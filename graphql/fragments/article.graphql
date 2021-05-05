@@ -1,15 +1,5 @@
 fragment article on Article {
-  id
+  ...articleSummary
   category
-  title
-  description
-  mainImageUrl
   content
-  publishedAt
-  faved
-  favsCount
-  author {
-    name
-    avatarUrl
-  }
 }

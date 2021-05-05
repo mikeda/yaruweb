@@ -8,6 +8,7 @@ export type ArticleElement =
   | BulletedList
   | ListItem
   | Image
+  | Video
   | Link
   | EmbedLink
   | EmbedYoutube
@@ -22,6 +23,7 @@ export const ArticleElementTypes = {
   BulletedList: 'bulleted-list',
   ListItem: 'list-item',
   Image: 'image',
+  Video: 'video',
   Link: 'link',
   EmbedLink: 'embed-link',
   EmbedYoutube: 'embed-youtube',
@@ -37,6 +39,7 @@ type ArticleElementType =
   | 'bulleted-list'
   | 'list-item'
   | 'image'
+  | 'video'
   | 'link'
   | 'embed-link'
   | 'embed-youtube'
@@ -74,6 +77,12 @@ interface ListItem extends Base {
 interface Image extends Base {
   type: 'image';
   url: string;
+}
+
+interface Video extends Base {
+  type: 'video';
+  m3u8Url: string;
+  thumbnailUrl: string;
 }
 
 interface Link extends Base {

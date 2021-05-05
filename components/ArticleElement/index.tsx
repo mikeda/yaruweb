@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { Image } from './Image';
+import { Video } from './Video';
 import { EmbedLink } from './EmbedLink';
 import { BulletedList } from './BulletedList';
 import { Move } from './Move';
@@ -35,6 +36,12 @@ export const Element: React.FC<Props> = ({ attributes, children, element }) => {
         <Image url={element.url} attributes={attributes}>
           {children}
         </Image>
+      );
+    case 'video':
+      return (
+        <Video m3u8Url={element.m3u8Url} thumbnailUrl={element.thumbnailUrl} attributes={attributes}>
+          {children}
+        </Video>
       );
     case 'link':
       return (
