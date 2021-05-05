@@ -36,7 +36,7 @@ export type Article = {
   favsCount: Scalars['Int'];
   id: Scalars['ID'];
   mainImageUrl?: Maybe<Scalars['String']>;
-  publishedAt: Scalars['ISO8601DateTime'];
+  publishedAt?: Maybe<Scalars['ISO8601DateTime']>;
   status: ArticleStatus;
   title: Scalars['String'];
 };
