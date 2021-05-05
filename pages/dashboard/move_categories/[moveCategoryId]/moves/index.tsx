@@ -3,11 +3,11 @@ import React from 'react';
 import { MoveCategoryDetailDocument, MoveCategoryDetailFragment, MoveCategoryDetailQuery } from '@/lib/graphql/types';
 import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { Heading } from '@/components/Heading';
 import { GetServerSideProps } from 'next';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
-import { VideoPlayer } from '@/components/MoveMedia/VideoPlayer';
-import { VideoDropzone } from '@/components/MoveMedia/VideoDropzone';
+import { PageHeader } from '@/components/layouts/PageHeader';
+import { Routes } from '@/lib/Routes';
+import Link from 'next/link';
 
 interface Props {
   moveCategory: MoveCategoryDetailFragment;
@@ -20,7 +20,7 @@ const Page: React.FC<Props> = ({ moveCategory }) => {
     <DashboardContent activeTab="character">
       <Head title={title} />
 
-      <Heading lv="h1">{title}</Heading>
+      <PageHeader title={title} addPageUrl={Routes.dashboard.move.new(moveCategory.id)} />
 
       <PageContent moveCategory={moveCategory} />
     </DashboardContent>
@@ -34,8 +34,7 @@ const PageContent: React.FC<Props> = ({ moveCategory }) => {
         <thead>
           <tr>
             <th>名前</th>
-            <th>動画</th>
-            <th>アップロード</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -43,13 +42,10 @@ const PageContent: React.FC<Props> = ({ moveCategory }) => {
             return (
               <tr key={move.id}>
                 <td>{move.name}</td>
-                <td style={{ width: 320 }}>
-                  {move.moveVideo && (
-                    <VideoPlayer src={move.moveVideo.m3u8Url} thumnailUrl={move.moveVideo.thumbnailUrl} />
-                  )}
-                </td>
                 <td>
-                  <VideoDropzone moveId={move.id} />
+                  <Link href={Routes.dashboard.move.edit(move.id)}>
+                    <a>編集</a>
+                  </Link>
                 </td>
               </tr>
             );

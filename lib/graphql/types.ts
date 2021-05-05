@@ -915,7 +915,6 @@ export type Move = {
   __typename?: 'Move';
   actions: Array<Action>;
   afterState?: Maybe<State>;
-  comboStarter: Scalars['Boolean'];
   commands: Array<Command>;
   crouchingStatus: Scalars['Boolean'];
   homing: Scalars['Boolean'];
@@ -928,7 +927,6 @@ export type Move = {
   note?: Maybe<Scalars['String']>;
   opponentState?: Maybe<OpponentStateEnum>;
   powerCrush: Scalars['Boolean'];
-  rage: Scalars['Boolean'];
   screw: Scalars['Boolean'];
   startUpFrame?: Maybe<Scalars['Int']>;
   wallBound: Scalars['Boolean'];
@@ -940,8 +938,6 @@ export type MoveAttributes = {
   name: Scalars['String'];
   kana?: Maybe<Scalars['String']>;
   startUpFrame?: Maybe<Scalars['Int']>;
-  rage: Scalars['Boolean'];
-  comboStarter: Scalars['Boolean'];
   powerCrush: Scalars['Boolean'];
   crouchingStatus: Scalars['Boolean'];
   jumpStatus: Scalars['Boolean'];
@@ -1864,8 +1860,6 @@ export type MoveFragment = { __typename?: 'Move' } & Pick<
   | 'kana'
   | 'opponentState'
   | 'startUpFrame'
-  | 'rage'
-  | 'comboStarter'
   | 'powerCrush'
   | 'crouchingStatus'
   | 'jumpStatus'
@@ -1874,6 +1868,7 @@ export type MoveFragment = { __typename?: 'Move' } & Pick<
   | 'wallBound'
   | 'note'
 > & {
+    moveCategory: { __typename?: 'MoveCategory' } & Pick<MoveCategory, 'id' | 'name'>;
     afterState?: Maybe<{ __typename?: 'State' } & Pick<State, 'id' | 'name'>>;
     moveVideo?: Maybe<{ __typename?: 'MoveVideo' } & Pick<MoveVideo, 'm3u8Url' | 'thumbnailUrl'>>;
     commands: Array<{ __typename?: 'Command' } & CommandFragment>;
@@ -2905,16 +2900,10 @@ export const ActionFragmentDoc = gql`
 export const MoveFragmentDoc = gql`
   fragment move on Move {
     id
-    afterState {
-      id
-      name
-    }
     name
     kana
     opponentState
     startUpFrame
-    rage
-    comboStarter
     powerCrush
     crouchingStatus
     jumpStatus
@@ -2922,6 +2911,14 @@ export const MoveFragmentDoc = gql`
     screw
     wallBound
     note
+    moveCategory {
+      id
+      name
+    }
+    afterState {
+      id
+      name
+    }
     moveVideo {
       m3u8Url
       thumbnailUrl
