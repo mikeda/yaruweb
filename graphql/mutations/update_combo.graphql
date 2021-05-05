@@ -1,0 +1,10 @@
+mutation UpdateCombo($comboId: ID!, $attributes: ComboAttributes!) {
+  updateCombo(input: { comboId: $comboId, attributes: $attributes }) {
+    combo {
+      id
+      comboCategory {
+        id
+      }
+    }
+  }
+}

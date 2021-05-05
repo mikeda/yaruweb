@@ -1,5 +1,5 @@
-mutation CreateCombo($attributes: ComboAttributes!) {
-  createCombo(input: { attributes: $attributes }) {
+mutation CreateCombo($comboCategoryId: ID!, $attributes: ComboAttributes!) {
+  createCombo(input: { comboCategoryId: $comboCategoryId, attributes: $attributes }) {
     combo {
       id
     }

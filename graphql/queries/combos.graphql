@@ -1,5 +1,5 @@
-query Combos($comboCategoryId: ID!) {
-  combos(comboCategoryId: $comboCategoryId) {
+query Combo($comboId: ID!) {
+  combo(comboId: $comboId) {
     ...combo
   }
 }
