@@ -1,15 +1,9 @@
 fragment move on Move {
   id
-  afterState {
-    id
-    name
-  }
   name
   kana
   opponentState
   startUpFrame
-  rage
-  comboStarter
   powerCrush
   crouchingStatus
   jumpStatus
@@ -17,6 +11,16 @@ fragment move on Move {
   screw
   wallBound
   note
+
+  moveCategory {
+    id
+    name
+  }
+
+  afterState {
+    id
+    name
+  }
 
   moveVideo {
     m3u8Url
