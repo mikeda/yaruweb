@@ -1,0 +1,15 @@
+@import '@/styles/variables';
+
+.backspace {
+  display: block;
+  margin-top: 1rem;
+  font-size: 2rem;
+  color: $c-gray;
+  cursor: pointer;
+  transition: 0.25s;
+
+  &:focus,
+  &:hover {
+    opacity: 0.75;
+  }
+}

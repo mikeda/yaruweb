@@ -4,6 +4,11 @@ fragment combo on Combo {
   damage
   note
 
+  comboCategory {
+    id
+    name
+  }
+
   operations {
     ...operation
   }

@@ -45,6 +45,8 @@ export const Routes = {
     },
     combo: {
       index: (comboCategoryId: string) => `/dashboard/combo_categories/${comboCategoryId}/combos`,
+      new: (comboCategoryId: string) => `/dashboard/combo_categories/${comboCategoryId}/combos/new`,
+      edit: (comboId: string) => `/dashboard/combos/${comboId}/edit`,
     },
     event: {
       index: () => '/dashboard/events',

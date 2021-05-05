@@ -7,9 +7,11 @@ import {
 } from '@/lib/graphql/types';
 import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { Heading } from '@/components/Heading';
 import { GetServerSideProps } from 'next';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
+import Link from 'next/link';
+import { Routes } from '@/lib/Routes';
+import { PageHeader } from '@/components/layouts/PageHeader';
 
 interface Props {
   comboCategory: ComboCategoryDetailFragment;
@@ -22,7 +24,7 @@ const Page: React.FC<Props> = ({ comboCategory }) => {
     <DashboardContent activeTab="character">
       <Head title={title} />
 
-      <Heading lv="h1">{title}</Heading>
+      <PageHeader title={title} addPageUrl={Routes.dashboard.combo.new(comboCategory.id)} />
 
       <PageContent comboCategory={comboCategory} />
     </DashboardContent>
@@ -36,6 +38,7 @@ const PageContent: React.FC<Props> = ({ comboCategory }) => {
         <thead>
           <tr>
             <th>名前</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -43,6 +46,11 @@ const PageContent: React.FC<Props> = ({ comboCategory }) => {
             return (
               <tr key={combo.id}>
                 <td>{combo.name}</td>
+                <td>
+                  <Link href={Routes.dashboard.combo.edit(combo.id)}>
+                    <a>編集</a>
+                  </Link>
+                </td>
               </tr>
             );
           })}
