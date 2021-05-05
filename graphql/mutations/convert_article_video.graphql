@@ -1,0 +1,8 @@
+mutation ConvertArticleVideo($articleVideoId: ID!) {
+  convertArticleVideo(input: { articleVideoId: $articleVideoId }) {
+    articleVideo {
+      m3u8Url
+      thumbnailUrl
+    }
+  }
+}

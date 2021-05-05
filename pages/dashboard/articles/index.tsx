@@ -12,23 +12,38 @@ import { NotFound } from '@/components/NotFound';
 import Link from 'next/link';
 import { ArticleStatusText } from '@/lib/graphql/enum_texts';
 import { Routes } from '@/lib/Routes';
-import { Heading } from '@/components/Heading';
 import { ReadMore } from '@/components/blocks/ReadMore';
+import { PageHeader } from '@/components/layouts/PageHeader';
+import { toast } from 'react-toastify';
 
 const Page: React.FC = () => (
   <DashboardContent activeTab="article">
     <Head title="記事一覧" />
 
-    <Heading lv="h1">記事</Heading>
+    <PageHeader title="記事" addPageUrl={Routes.dashboard.article.new()} />
 
     <ArticleList />
   </DashboardContent>
 );
 
 const ArticleList: React.FC = () => {
-  const { data, loading, refetch, fetchMore } = useMyArticlesQuery({ variables: { first: 10 } });
-  const [publishArticle] = usePublishArticleMutation({ onCompleted: () => refetch() });
-  const [stopArticle] = useStopArticleMutation({ onCompleted: () => refetch() });
+  const { data, loading, fetchMore, refetch } = useMyArticlesQuery({ variables: { first: 10 } });
+  const [publishArticle] = usePublishArticleMutation({
+    onCompleted: data => {
+      const article = data.publishArticle?.article;
+      if (!article) return;
+      refetch();
+      toast.success('記事を公開しました。');
+    },
+  });
+  const [stopArticle] = useStopArticleMutation({
+    onCompleted: data => {
+      const article = data.stopArticle?.article;
+      if (!article) return;
+      refetch();
+      toast.success('公開を停止しました。');
+    },
+  });
   if (loading) return <NotFound>読み込み中</NotFound>;
   if (!data) return <NotFound>読み込みに失敗しました。</NotFound>;
 

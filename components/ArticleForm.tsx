@@ -11,13 +11,11 @@ import { Node } from 'slate';
 interface Props {
   initialAttributes?: ArticleAttributes;
   onSubmit: (attributes: ArticleAttributes) => void;
-  loading: boolean;
 }
 
 const ArticleForm: React.FC<Props> = ({
   initialAttributes = { title: '', content: '', category: ArticleCategory.Blog },
   onSubmit,
-  loading,
 }) => {
   const editor = useMemo(() => createArticleEditor(), []);
   const [value, setValue] = useState<Node[]>(
@@ -92,7 +90,7 @@ const ArticleForm: React.FC<Props> = ({
             </div>
 
             <div className="el_form_group">
-              <button type="submit" disabled={loading || !isValid} className="el_btn">
+              <button type="submit" disabled={!isValid} className="el_btn">
                 登録する
               </button>
             </div>

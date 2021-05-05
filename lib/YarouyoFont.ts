@@ -3,6 +3,7 @@ export const YAROUYO_FONT_CODE = {
   link: 0xe957,
   list: 0xeb36,
   image: 0xeb2b,
+  video: 0xeb2e,
   access: 0xeb40,
   h1: 0xe950,
   h2: 0xe951,

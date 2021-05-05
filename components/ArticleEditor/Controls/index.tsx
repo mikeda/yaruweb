@@ -4,6 +4,7 @@ import { MarkButton } from './MarkButton';
 import { YAROUYO_FONT_CODE } from '@/lib/YarouyoFont';
 import { OperationButton } from './OperationButton';
 import { ImageButton } from './ImageButton';
+import { VideoButton } from './VideoButton';
 import { LinkButton } from './LinkButton';
 import { MoveButton } from './MoveButton';
 
@@ -20,6 +21,7 @@ export const Controls: React.FC = () => {
       <OperationButton icon={YAROUYO_FONT_CODE.lp} />
       <MoveButton />
       <ImageButton />
+      <VideoButton />
       <LinkButton />
     </div>
   );
