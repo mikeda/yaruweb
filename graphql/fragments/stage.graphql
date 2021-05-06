@@ -7,4 +7,5 @@ fragment stage on Stage {
   wallBreak
   balconyBreak
   floorBreak
+  position
 }
