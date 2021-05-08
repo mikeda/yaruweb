@@ -30,6 +30,9 @@ export const Routes = {
     detail: (id: string) => `/videos/${id}`,
   },
   dashboard: {
+    action: {
+      edit: (actionId: string) => `/dashboard/actions/${actionId}/edit`,
+    },
     article: {
       index: () => '/dashboard/articles',
       new: () => '/dashboard/articles/new',
@@ -62,6 +65,9 @@ export const Routes = {
       index: (moveCategoryId: string) => `/dashboard/move_categories/${moveCategoryId}/moves`,
       new: (moveCategoryId: string) => `/dashboard/move_categories/${moveCategoryId}/moves/new`,
       edit: (moveId: string) => `/dashboard/moves/${moveId}/edit`,
+      actions: {
+        index: (moveId: string) => `/dashboard/moves/${moveId}/actions`,
+      },
     },
     profile: {
       edit: () => `/dashboard/profile/edit`,
