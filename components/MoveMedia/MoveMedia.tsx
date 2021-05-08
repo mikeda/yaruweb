@@ -1,12 +1,17 @@
 import React, { useEffect, useRef } from 'react';
 import Hls from 'hls.js';
 
-import { MoveFragment, FrameStateEnum } from '@/lib/graphql/types';
+import { AttackActionFragment, MoveFragment, ThrowActionFragment } from '@/lib/graphql/types';
 import { Command } from '../Command';
 
 import styles from './MoveMedia.module.scss';
 
-import { AttackTypeEnumText, FrameText, FrameTypeText, ThrowTypeEnumText } from '@/lib/graphql/enum_texts';
+import {
+  AttackActionStateText,
+  AttackTypeEnumText,
+  ThorwActionStateText,
+  ThrowTypeEnumText,
+} from '@/lib/graphql/enum_texts';
 
 type Props = {
   move: MoveFragment;
@@ -86,16 +91,63 @@ const AttackDetails: React.FC<{ move: MoveFragment }> = ({ move }) => {
       </div>
 
       <div className={styles.details}>
-        {lastAction &&
-          lastAction.frames &&
-          lastAction.frames.map(frame => {
-            return (
-              <MoveDetail key={frame.id} label={FrameTypeText[frame.type]}>
-                <OpponentDetail frame={frame.frame} state={frame.state} />
-              </MoveDetail>
-            );
-          })}
+        {lastAction && lastAction.__typename === 'AttackAction' && <LastAttackAction action={lastAction} />}
+        {lastAction && lastAction.__typename === 'ThrowAction' && <LastThrowAction action={lastAction} />}
       </div>
+    </>
+  );
+};
+
+const LastAttackAction: React.FC<{ action: AttackActionFragment }> = ({ action }) => {
+  return (
+    <>
+      {action.blockAvailable && (
+        <MoveDetail label="ガード">
+          <OpponentDetail frame={action.blockFrame} state={AttackActionStateText[action.blockState]} />
+        </MoveDetail>
+      )}
+
+      {action.hitAvailable && (
+        <MoveDetail label="ヒット">
+          <OpponentDetail frame={action.hitFrame} state={AttackActionStateText[action.hitState]} />
+        </MoveDetail>
+      )}
+
+      {action.counterHitAvailable && (
+        <MoveDetail label="カウンターヒット">
+          <OpponentDetail frame={action.counterHitFrame} state={AttackActionStateText[action.counterHitState]} />
+        </MoveDetail>
+      )}
+
+      {action.cleanHitAvailable && (
+        <MoveDetail label="クリーンヒット">
+          <OpponentDetail frame={action.cleanHitFrame} state={AttackActionStateText[action.cleanHitState]} />
+        </MoveDetail>
+      )}
+
+      {action.crouchingHitAvailable && (
+        <MoveDetail label="しゃがみにヒット">
+          <OpponentDetail frame={action.crouchingHitFrame} state={AttackActionStateText[action.crouchingHitState]} />
+        </MoveDetail>
+      )}
+    </>
+  );
+};
+
+const LastThrowAction: React.FC<{ action: ThrowActionFragment }> = ({ action }) => {
+  return (
+    <>
+      {action.throwAvailable && (
+        <MoveDetail label="投げ">
+          <OpponentDetail frame={action.throwFrame} state={ThorwActionStateText[action.throwState]} />
+        </MoveDetail>
+      )}
+
+      {action.throwEscapeAvailable && (
+        <MoveDetail label="投げ抜け">
+          <OpponentDetail frame={action.throwEscapeFrame} state={ThorwActionStateText[action.throwEscapeState]} />
+        </MoveDetail>
+      )}
     </>
   );
 };
@@ -109,14 +161,14 @@ const MoveDetail: React.FC<{ label: string }> = ({ label, children }) => {
   );
 };
 
-const OpponentDetail: React.FC<{ frame?: number | null; state?: FrameStateEnum | null }> = ({ frame, state }) => {
+const OpponentDetail: React.FC<{ frame?: number | null; state?: string | null }> = ({ frame, state }) => {
   let frameClass: string | undefined;
   if (frame && frame <= -10) frameClass = 'el_caution';
 
   return (
     <>
       {frame && <span className={frameClass}>{frameText(frame)}</span>}
-      {state && FrameText[state]}
+      {state}
     </>
   );
 };

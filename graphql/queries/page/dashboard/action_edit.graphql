@@ -1,0 +1,20 @@
+query PageDashboardActionEdit($actionId: ID!) {
+  action(actionId: $actionId) {
+    ... on AttackAction {
+      ...attackAction
+
+      move {
+        id
+        name
+      }
+    }
+    ... on ThrowAction {
+      ...throwAction
+
+      move {
+        id
+        name
+      }
+    }
+  }
+}

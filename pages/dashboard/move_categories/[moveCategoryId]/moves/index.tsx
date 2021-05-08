@@ -8,6 +8,7 @@ import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { PageHeader } from '@/components/layouts/PageHeader';
 import { Routes } from '@/lib/Routes';
 import Link from 'next/link';
+import { ActionList } from '@/components/ActionList';
 
 interface Props {
   moveCategory: MoveCategoryDetailFragment;
@@ -33,7 +34,8 @@ const PageContent: React.FC<Props> = ({ moveCategory }) => {
       <table>
         <thead>
           <tr>
-            <th>名前</th>
+            <th></th>
+            <th>判定</th>
             <th></th>
           </tr>
         </thead>
@@ -42,6 +44,12 @@ const PageContent: React.FC<Props> = ({ moveCategory }) => {
             return (
               <tr key={move.id}>
                 <td>{move.name}</td>
+                <td>
+                  <ActionList actions={move.actions} />
+                  <Link href={Routes.dashboard.move.actions.index(move.id)}>
+                    <a>詳細</a>
+                  </Link>
+                </td>
                 <td>
                   <Link href={Routes.dashboard.move.edit(move.id)}>
                     <a>編集</a>

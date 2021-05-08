@@ -1,28 +1,40 @@
 fragment attackAction on AttackAction {
-  __typename
   id
-  frames {
-    id
-    type
-    frame
-    state
-  }
+  __typename
   attackType
   damage
+  attackType
+  damage
+
+  blockAvailable
+  blockState
+  blockFrame
+  hitAvailable
+  hitState
+  hitFrame
+  counterHitAvailable
+  counterHitState
+  counterHitFrame
+  cleanHitAvailable
+  cleanHitState
+  cleanHitFrame
+  crouchingHitAvailable
+  crouchingHitState
+  crouchingHitFrame
 }
 
 fragment throwAction on ThrowAction {
-  __typename
   id
-  frames {
-    id
-    type
-    frame
-    state
-  }
+  __typename
   throwType
   damage
   escape
+  throwAvailable
+  throwState
+  throwFrame
+  throwEscapeAvailable
+  throwEscapeState
+  throwEscapeFrame
 }
 
 fragment action on Action {

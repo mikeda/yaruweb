@@ -14,16 +14,8 @@ export const ArticleStatusText: { [key in Types.ArticleStatus]: string } = {
   published: '公開中',
 };
 
-export const FrameTypeText: { [key in Types.FrameTypeEnum]: string } = {
-  block: 'ガード',
-  hit: 'ヒット',
-  counter_hit: 'カウンターヒット',
-  clean_hit: 'クリーンヒット',
-  crouching_hit: 'しゃがみにヒット',
-};
-
-export const FrameText: { [key in Types.FrameStateEnum]: string } = {
-  unchanged: 'そのまま',
+export const AttackActionStateText: { [key in Types.AttackActionStateEnum]: string } = {
+  unspecified: '',
   down: 'ダウン',
   juggle: '空中コンボ',
   stun: '崩れコンボ',
@@ -62,6 +54,20 @@ export const AttackTypeEnumText: { [key in Types.AttackTypeEnum]: string } = {
   ubl: '下段ガード不能',
   uba: '空中ガード不能',
   t: '打撃投げ',
+};
+
+export const ThorwActionStateText: { [key in Types.ThrowActionStateEnum]: string } = {
+  unspecified: '',
+  down: 'ダウン',
+  juggle: '空中コンボ',
+};
+
+export const ThrowEscapeEnumText: { [key in Types.ThrowEscapeEnum]: string } = {
+  lp_or_rp: 'LP or RP',
+  wp: 'LP+RP',
+  lp: 'LP',
+  rp: 'RP',
+  inescapable: '不可',
 };
 
 export const ThrowTypeEnumText: { [key in Types.ThrowTypeEnum]: string } = {

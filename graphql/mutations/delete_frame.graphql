@@ -1,7 +1,0 @@
-mutation DeleteFrame($frameId: ID!) {
-  deleteFrame(input: { frameId: $frameId }) {
-    frame {
-      id
-    }
-  }
-}
