@@ -1,8 +1,0 @@
-mutation setMoveVideo($moveId: ID!, $moveVideoId: ID!) {
-  setMoveVideo(input: { moveId: $moveId, moveVideoId: $moveVideoId }) {
-    moveVideo {
-      m3u8Url
-      thumbnailUrl
-    }
-  }
-}
