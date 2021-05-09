@@ -1,5 +1,36 @@
-fragment moveVideo on MoveVideo {
+fragment move on Move {
   id
-  m3u8Url
-  thumbnailUrl
+  name
+  kana
+  opponentState
+  startUpFrame
+  powerCrush
+  crouchingStatus
+  jumpStatus
+  homing
+  screw
+  wallBound
+  note
+
+  moveCategory {
+    id
+    name
+  }
+
+  afterState {
+    id
+    name
+  }
+
+  moveVideo {
+    ...moveVideo
+  }
+
+  commands {
+    ...command
+  }
+
+  actions {
+    ...action
+  }
 }
