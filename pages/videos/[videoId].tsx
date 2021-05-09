@@ -9,12 +9,12 @@ import {
 } from '@/lib/graphql/types';
 import { VideoMedia } from '@/components/VideoMedia';
 import { Comment } from '@/components/Comment';
-import { CommentForm } from '@/components/CommentForm';
 import { NotFound } from '@/components/NotFound';
 import { Content } from '@/components/layouts/Content';
 import { Head } from '@/components/layouts/Head';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
+import { VideoCommentForm } from '@/components/VideoCommentForm';
 
 const PageContent: React.FC<Props> = ({ video }) => {
   const { data: commentsData, refetch: refetchComments } = useVideoCommentsQuery({ variables: { videoId: video.id } });
@@ -36,9 +36,9 @@ const PageContent: React.FC<Props> = ({ video }) => {
         <VideoMedia video={video} />
       </div>
 
-      <CommentForm
-        onSubmit={message => {
-          createVideoComment({ variables: { videoId: video.id, attributes: { message } } });
+      <VideoCommentForm
+        onSubmit={attributes => {
+          createVideoComment({ variables: { videoId: video.id, attributes } });
         }}
       />
 
@@ -78,7 +78,7 @@ const Page: React.FC<Props> = ({ video }) => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const videoId = params?.videoId as string;
-  const data: VideoQuery = await fetchGraphql(VideoDocument, { id: videoId });
+  const data: VideoQuery = await fetchGraphql(VideoDocument, { videoId });
 
   return { props: { video: data.video }, revalidate: 60 };
 };
