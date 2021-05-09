@@ -64,7 +64,7 @@ export const VideoButton: React.FC = () => {
         type="file"
         id="video"
         className={styles.input}
-        accept="video/*"
+        accept="video/mp4"
         onChange={event => {
           const target = event.target;
           if (!target.files) return;

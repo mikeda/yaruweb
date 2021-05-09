@@ -1,7 +1,7 @@
-mutation CreateMoveVideo($moveId: ID!) {
-  createMoveVideo(input: { moveId: $moveId }) {
+mutation CreateMoveVideo {
+  createMoveVideo(input: {}) {
     moveVideo {
-      id
+      ...moveVideo
     }
 
     videoUpload {

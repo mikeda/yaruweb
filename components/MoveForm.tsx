@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import { MoveAttributes, MoveFragment } from '@/lib/graphql/types';
+import { MoveAttributes, MoveFragment, MoveVideoFragment, useCreateMoveVideoMutation } from '@/lib/graphql/types';
 import { useForm } from 'react-hook-form';
 import { Button } from '@/components/blocks/Button';
 import { FormGroup } from '@/components/form2/FormGroup';
@@ -10,6 +10,10 @@ import { Input } from '@/components/form2/Input';
 import { FormInline } from './form2/FormInline';
 import { CheckBox } from './form2/CheckBox';
 import { TextArea } from './form2/TextArea';
+import { useSetRecoilState } from 'recoil';
+import { loadingState } from 'states/loading';
+import { toast } from 'react-toastify';
+import { VideoPlayer } from './MoveMedia/VideoPlayer';
 
 const schema = yup.object().shape({
   name: yup.string().required(),
@@ -25,12 +29,14 @@ export const MoveForm: React.FC<Props> = ({ move, onSubmit }) => {
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm<MoveAttributes>({
     resolver: yupResolver(schema),
     mode: 'onBlur',
     defaultValues: move && {
       afterStateId: move.afterState?.id,
+      moveVideoId: move.moveVideo?.id,
       opponentState: move.opponentState,
       name: move.name,
       kana: move.kana,
@@ -83,6 +89,19 @@ export const MoveForm: React.FC<Props> = ({ move, onSubmit }) => {
         </FormInline>
       </FormGroup>
 
+      <FormGroup label="動画">
+        <input type="hidden" {...register('moveVideoId')} />
+        <MoveVideoInput
+          onCreate={moveVideo => {
+            setValue('moveVideoId', moveVideo.id);
+          }}
+        />
+
+        {move && move.moveVideo && (
+          <VideoPlayer src={move.moveVideo.m3u8Url} thumnailUrl={move.moveVideo.thumbnailUrl} />
+        )}
+      </FormGroup>
+
       <FormGroup label="備考">
         <TextArea {...register('note')} />
       </FormGroup>
@@ -93,5 +112,66 @@ export const MoveForm: React.FC<Props> = ({ move, onSubmit }) => {
         </Button>
       </FormGroup>
     </form>
+  );
+};
+
+interface MoveVideoInputProps {
+  onCreate: (moveVideo: MoveVideoFragment) => void;
+}
+
+export const MoveVideoInput: React.FC<MoveVideoInputProps> = ({ onCreate }) => {
+  const [file, setFile] = useState<File>();
+  const setLoading = useSetRecoilState(loadingState);
+
+  const [ceateMoveVideo, { loading }] = useCreateMoveVideoMutation({
+    onCompleted: data => {
+      if (!data.createMoveVideo) return;
+      if (!file) return;
+
+      const fields = JSON.parse(data.createMoveVideo.videoUpload.fields);
+
+      const formData = new FormData();
+      for (const key in fields) {
+        formData.append(key, fields[key]);
+      }
+      formData.append('file', file);
+
+      fetch(data.createMoveVideo.videoUpload.url, {
+        method: 'POST',
+        headers: { Accept: 'multipart/form-data' },
+        body: formData,
+      })
+        .then(() => {
+          if (!data.createMoveVideo) return;
+
+          toast.success('動画をアップロードしました。反映まで少し時間がかかります。');
+          onCreate(data.createMoveVideo.moveVideo);
+        })
+        .catch(() => {
+          toast.error('アップロードに失敗しました。');
+        });
+    },
+    onError: () => {
+      toast.error('アップロードに失敗しました。');
+    },
+  });
+
+  setLoading(loading);
+
+  return (
+    <Input
+      type="file"
+      id="video"
+      accept="video/mp4"
+      onChange={event => {
+        const target = event.target;
+        if (!target.files) return;
+        const file = target.files[0];
+        if (!file) return;
+
+        setFile(file);
+        ceateMoveVideo();
+      }}
+    />
   );
 };

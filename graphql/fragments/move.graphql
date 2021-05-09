@@ -23,8 +23,7 @@ fragment move on Move {
   }
 
   moveVideo {
-    m3u8Url
-    thumbnailUrl
+    ...moveVideo
   }
 
   commands {
