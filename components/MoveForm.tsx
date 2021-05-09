@@ -144,7 +144,6 @@ export const MoveVideoInput: React.FC<MoveVideoInputProps> = ({ onCreate }) => {
         .then(() => {
           if (!data.createMoveVideo) return;
 
-          toast.success('動画をアップロードしました。反映まで少し時間がかかります。');
           onCreate(data.createMoveVideo.moveVideo);
         })
         .catch(() => {

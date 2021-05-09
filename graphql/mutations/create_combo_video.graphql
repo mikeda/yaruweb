@@ -1,7 +1,7 @@
-mutation CreateComboVideo($characterSlug: ID!) {
-  createComboVideo(input: { characterSlug: $characterSlug }) {
+mutation CreateComboVideo {
+  createComboVideo(input: {}) {
     comboVideo {
-      id
+      ...comboVideo
     }
 
     videoUpload {

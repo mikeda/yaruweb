@@ -9,6 +9,10 @@ fragment combo on Combo {
     name
   }
 
+  comboVideo {
+    ...comboVideo
+  }
+
   operations {
     ...operation
   }
