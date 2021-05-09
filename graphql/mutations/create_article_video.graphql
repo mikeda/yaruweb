@@ -2,6 +2,8 @@ mutation CreateArticleVideo {
   createArticleVideo(input: { }) {
     articleVideo {
       id
+      m3u8Url
+      thumbnailUrl
     }
 
     videoUpload {

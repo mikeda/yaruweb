@@ -3,7 +3,7 @@ import { useSlate } from 'slate-react';
 
 import { Button } from './Button';
 import styles from './VideoButton.module.scss';
-import { useConvertArticleVideoMutation, useCreateArticleVideoMutation } from '@/lib/graphql/types';
+import { useCreateArticleVideoMutation } from '@/lib/graphql/types';
 import { YAROUYO_FONT_CODE } from '@/lib/YarouyoFont';
 import { ArticleElementTypes } from '@/components/ArticleElement/ArticleElement';
 import { toast } from 'react-toastify';
@@ -32,28 +32,17 @@ export const VideoButton: React.FC = () => {
         body: formData,
       })
         .then(() => {
-          convertArticleVideoMutation({ variables: { articleVideoId: res.articleVideo.id } });
+          editor.insertNode({
+            type: ArticleElementTypes.Video,
+            m3u8Url: res.articleVideo.m3u8Url,
+            thumbnailUrl: res.articleVideo.thumbnailUrl,
+            children: [{ text: '' }],
+          });
+          editor.insertNode({ type: ArticleElementTypes.Paragraph, children: [{ text: '' }] });
         })
         .catch(() => {
           toast.error('アップロードに失敗しました。');
         });
-    },
-    onError: e => {
-      alert(e.message);
-    },
-  });
-  const [convertArticleVideoMutation] = useConvertArticleVideoMutation({
-    onCompleted: e => {
-      const articleVideo = e.convertArticleVideo?.articleVideo;
-      if (!articleVideo) return;
-
-      editor.insertNode({
-        type: ArticleElementTypes.Video,
-        m3u8Url: articleVideo.m3u8Url,
-        thumbnailUrl: articleVideo.thumbnailUrl,
-        children: [{ text: '' }],
-      });
-      editor.insertNode({ type: ArticleElementTypes.Paragraph, children: [{ text: '' }] });
     },
     onError: e => {
       alert(e.message);

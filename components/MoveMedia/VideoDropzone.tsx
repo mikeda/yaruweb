@@ -2,7 +2,7 @@ import React, { useCallback, useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { toast } from 'react-toastify';
 
-import { useSetMoveVideoMutation, useCreateMoveVideoMutation } from '@/lib/graphql/types';
+import { useCreateMoveVideoMutation } from '@/lib/graphql/types';
 
 import styles from './VideoDropzone.module.scss';
 
@@ -13,11 +13,6 @@ type Props = {
 export const VideoDropzone: React.FC<Props> = ({ moveId }) => {
   const [file, setFile] = useState<File>();
   const [uploading, setUploading] = useState(false);
-  const [setMoveVideo] = useSetMoveVideoMutation({
-    onCompleted: () => {
-      toast.success('動画を登録しました。反映まで少し時間がかかります。');
-    },
-  });
 
   const [ceateMoveVideo] = useCreateMoveVideoMutation({
     onCompleted: data => {
@@ -25,7 +20,6 @@ export const VideoDropzone: React.FC<Props> = ({ moveId }) => {
       if (!file) return;
       setUploading(true);
 
-      const moveVideoId = data.createMoveVideo.moveVideo.id;
       const fields = JSON.parse(data.createMoveVideo.videoUpload.fields);
 
       const formData = new FormData();
@@ -40,7 +34,7 @@ export const VideoDropzone: React.FC<Props> = ({ moveId }) => {
         body: formData,
       })
         .then(() => {
-          setMoveVideo({ variables: { moveId, moveVideoId } });
+          toast.success('動画をアップロードしました。反映まで少し時間がかかります。');
         })
         .catch(() => {
           toast.error('アップロードに失敗しました。');
