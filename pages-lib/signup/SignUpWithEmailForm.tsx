@@ -5,7 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
 import { PlayerValidator } from '@/lib/validators/PlayerValidator';
-import { useCreatePlayerWithEmailMutation } from '@/lib/graphql/types';
+import { useCreatePlayerMutation } from '@/lib/graphql/types';
 import { Routes } from '@/lib/Routes';
 import { createFirebaseUserWithEmail } from '@/lib/firebase';
 import { currentPlayerState } from 'states/currentPlayer';
@@ -18,12 +18,13 @@ import { loadingState } from 'states/loading';
 
 interface SignUpInput {
   email: string;
-  name: string;
-  slug: string;
   password: string;
 }
 
-const schema = yup.object().shape(PlayerValidator);
+const schema = yup.object().shape({
+  email: PlayerValidator.email,
+  password: PlayerValidator.password,
+});
 
 export const SignUpWithEmailForm: React.FC = () => {
   const {
@@ -37,9 +38,9 @@ export const SignUpWithEmailForm: React.FC = () => {
   const router = useRouter();
   const setLoading = useSetRecoilState(loadingState);
   const setCurrentPlayer = useSetRecoilState(currentPlayerState);
-  const [createPlayerWithEmail, { loading }] = useCreatePlayerWithEmailMutation({
+  const [createPlayer, { loading }] = useCreatePlayerMutation({
     onCompleted: data => {
-      const currentPlayer = data.createPlayerWithEmail?.currentPlayer;
+      const currentPlayer = data.createPlayer?.currentPlayer;
       if (!currentPlayer) return;
       setCurrentPlayer(currentPlayer);
       toast.success('ユーザー登録が完了しました。');
@@ -52,32 +53,26 @@ export const SignUpWithEmailForm: React.FC = () => {
   });
 
   const onSubmit = (attributes: SignUpInput) => {
-    createFirebaseUserWithEmail(attributes.email, attributes.password).then(() => {
-      createPlayerWithEmail({ variables: { name: attributes.name, slug: attributes.slug } });
-    });
+    createFirebaseUserWithEmail(attributes.email, attributes.password)
+      .then(() => {
+        createPlayer({ variables: {} });
+      })
+      .catch(e => {
+        toast.error(e.message);
+      });
   };
 
   setLoading(isSubmitting || loading);
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <FormGroup label="名前">
-        <Input {...register('name')} />
-        {errors.name?.message && <span>{errors.name.message}</span>}
-      </FormGroup>
-
-      <FormGroup label="ID(URLに使われます)">
-        <Input {...register('slug')} placeholder="半角英数とアンダースコアのみ" />
-        {errors.slug?.message && <span>{errors.slug.message}</span>}
-      </FormGroup>
-
-      <FormGroup label="メールアドレス">
+      <FormGroup label="メールアドレスx">
         <Input {...register('email')} />
         {errors.email?.message && <span>{errors.email.message}</span>}
       </FormGroup>
 
       <FormGroup label="パスワード">
-        <Input {...register('password')} placeholder="8文字以上" />
+        <Input type="password" {...register('password')} placeholder="8文字以上" />
         {errors.password?.message && <span>{errors.password.message}</span>}
       </FormGroup>
 

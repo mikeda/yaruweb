@@ -1,7 +1,0 @@
-mutation CreatePlayerWithEmail($name: String!, $slug: String!) {
-  createPlayerWithEmail(input: { name: $name, slug: $slug }) {
-    currentPlayer {
-      ...currentPlayer
-    }
-  }
-}

@@ -21,7 +21,9 @@ interface SignUpInput {
   password: string;
 }
 
-const schema = yup.object().shape(PlayerValidator);
+const schema = yup.object().shape({
+  email: PlayerValidator.email,
+});
 
 export const LoginWithEmailForm: React.FC = () => {
   const {
@@ -70,7 +72,7 @@ export const LoginWithEmailForm: React.FC = () => {
       </FormGroup>
 
       <FormGroup label="パスワード">
-        <Input {...register('password')} placeholder="8文字以上" />
+        <Input type="password" {...register('password')} placeholder="8文字以上" />
         {errors.password?.message && <span>{errors.password.message}</span>}
       </FormGroup>
 
