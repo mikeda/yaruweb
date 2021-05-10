@@ -4,16 +4,39 @@ import { useRouter } from 'next/router';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import { toast } from 'react-toastify';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 
 import { useCurrentPlayerLazyQuery } from '@/lib/graphql/types';
-import { FormGroup } from '@/components/form/FormGroup';
 import { Routes } from '@/lib/Routes';
 import { signInFirebaseWithEmail } from '@/lib/firebase';
 import { currentPlayerState } from 'states/currentPlayer';
 import { useSetRecoilState } from 'recoil';
+import { useForm } from 'react-hook-form';
+import { PlayerValidator } from '@/lib/validators/PlayerValidator';
+import { FormGroup } from '@/components/form2/FormGroup';
+import { Input } from '@/components/form2/Input';
+import { Button } from '@/components/blocks/Button';
+import { loadingState } from 'states/loading';
+
+interface SignUpInput {
+  email: string;
+  password: string;
+}
+
+const schema = yup.object().shape(PlayerValidator);
 
 export const LoginWithEmailForm: React.FC = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm<SignUpInput>({
+    resolver: yupResolver(schema),
+    mode: 'onBlur',
+  });
   const router = useRouter();
+  const setLoading = useSetRecoilState(loadingState);
   const setCurrentPlayer = useSetRecoilState(currentPlayerState);
 
   const [getCurrentPlayer, { loading }] = useCurrentPlayerLazyQuery({
@@ -30,39 +53,35 @@ export const LoginWithEmailForm: React.FC = () => {
     fetchPolicy: 'network-only',
   });
 
+  const onSubmit = (attributes: SignUpInput) => {
+    signInFirebaseWithEmail(attributes.email, attributes.password)
+      .then(() => {
+        getCurrentPlayer();
+      })
+      .catch(e => {
+        toast.error(e.message);
+      });
+  };
+
+  setLoading(loading || isSubmitting);
+
   return (
-    <Formik
-      initialValues={{ email: '', password: '' }}
-      validationSchema={Yup.object({
-        email: Yup.string()
-          .email('メールアドレスの形式が正しくありません。')
-          .required('メールアドレスを入力して下さい。'),
-        password: Yup.string().required('パスワードを入力して下さい。'),
-      })}
-      onSubmit={({ email, password }) => {
-        signInFirebaseWithEmail(email, password)
-          .then(() => {
-            getCurrentPlayer();
-          })
-          .catch(e => {
-            toast.error(e.message);
-          });
-      }}
-    >
-      {({ isValid }) => (
-        <Form>
-          <FormGroup name="email" type="email" placeholder="メールアドレス" />
-          <FormGroup name="password" type="password" placeholder="パスワード" />
-          <Link href={Routes.session.passwordReset()}>
-            <a className="el_option_link">パスワードを忘れたかた</a>
-          </Link>
-          <div className="el_form_submit">
-            <button type="submit" disabled={loading || !isValid} className="el_btn">
-              ログインする
-            </button>
-          </div>
-        </Form>
-      )}
-    </Formik>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <FormGroup label="メールアドレス">
+        <Input {...register('email')} />
+        {errors.email?.message && <span>{errors.email.message}</span>}
+      </FormGroup>
+
+      <FormGroup label="パスワード">
+        <Input {...register('password')} placeholder="8文字以上" />
+        {errors.password?.message && <span>{errors.password.message}</span>}
+      </FormGroup>
+
+      <FormGroup>
+        <Button>
+          <input type="submit" />
+        </Button>
+      </FormGroup>
+    </form>
   );
 };
