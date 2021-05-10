@@ -2,9 +2,8 @@ import React from 'react';
 
 import {
   CurrentPlayerAttributes,
-  CurrentPlayerDocument,
   CurrentPlayerFragment,
-  CurrentPlayerQuery,
+  useCurrentPlayerQuery,
   useUpdateCurrentPlayerMutation,
 } from '@/lib/graphql/types';
 import { Head } from '@/components/layouts/Head';
@@ -14,8 +13,6 @@ import { PageHeader } from '@/components/layouts/PageHeader';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { Button } from '@/components/blocks/Button';
-import { GetServerSideProps } from 'next';
-import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { toast } from 'react-toastify';
 import { FormGroup } from '@/components/form2/FormGroup';
 import { Input } from '@/components/form2/Input';
@@ -23,23 +20,29 @@ import { currentPlayerState } from 'states/currentPlayer';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from 'states/loading';
 
-interface Props {
-  currentPlayer: CurrentPlayerFragment;
-}
+const Page: React.FC = () => {
+  const setLoading = useSetRecoilState(loadingState);
+  const { data, loading } = useCurrentPlayerQuery({
+    fetchPolicy: 'network-only',
+    onError: e => {
+      toast.error(e.message);
+    },
+  });
 
-const Page: React.FC<Props> = ({ currentPlayer }) => {
+  setLoading(loading);
+
   return (
     <DashboardContent activeTab="stage">
       <Head title="プロフィール更新" />
 
       <PageHeader title="プロフィール更新" />
 
-      <Form currentPlayer={currentPlayer} />
+      {data && <Form currentPlayer={data.currentPlayer} />}
     </DashboardContent>
   );
 };
 
-const Form: React.FC<Props> = ({ currentPlayer }) => {
+const Form: React.FC<{ currentPlayer: CurrentPlayerFragment }> = ({ currentPlayer }) => {
   const router = useRouter();
   const setCurrentPlayer = useSetRecoilState(currentPlayerState);
   const setLoading = useSetRecoilState(loadingState);
@@ -113,12 +116,6 @@ const Form: React.FC<Props> = ({ currentPlayer }) => {
       </FormGroup>
     </form>
   );
-};
-
-export const getServerSideProps: GetServerSideProps = async () => {
-  const data: CurrentPlayerQuery = await fetchGraphql(CurrentPlayerDocument);
-
-  return { props: { currentPlayer: data.currentPlayer } };
 };
 
 export default Page;

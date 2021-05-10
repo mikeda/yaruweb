@@ -3,8 +3,7 @@ import React from 'react';
 import {
   AttackActionAttributes,
   AttackActionFragment,
-  PageDashboardActionEditDocument,
-  PageDashboardActionEditQuery,
+  usePageDashboardActionEditQuery,
   useUpdateAttackActionMutation,
 } from '@/lib/graphql/types';
 import { Head } from '@/components/layouts/Head';
@@ -12,25 +11,33 @@ import { DashboardContent } from '@/components/layouts/dashboard/DashboardConten
 import { Routes } from '@/lib/Routes';
 import { PageHeader } from '@/components/layouts/PageHeader';
 import { useRouter } from 'next/router';
-import { GetServerSideProps } from 'next';
-import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { toast } from 'react-toastify';
 import { loadingState } from 'states/loading';
 import { useSetRecoilState } from 'recoil';
 import { AttackActionForm } from '@/components/AttackActionForm';
 
-interface Props {
-  data: PageDashboardActionEditQuery;
-}
+const Page: React.FC = () => {
+  const router = useRouter();
+  const setLoading = useSetRecoilState(loadingState);
+  const { actionId } = router.query;
+  const { data, loading } = usePageDashboardActionEditQuery({
+    variables: { actionId: actionId as string },
+    skip: !actionId,
+    fetchPolicy: 'network-only',
+    onError: e => {
+      toast.error(e.message);
+    },
+  });
 
-const Page: React.FC<Props> = ({ data: { action } }) => {
+  setLoading(loading);
+
   return (
     <DashboardContent activeTab="character">
-      <Head title="技データカテゴリ更新" />
+      <Head title="アクション更新" />
 
-      <PageHeader title="技データカテゴリ更新" />
+      <PageHeader title="アクション更新" />
 
-      {action.__typename === 'AttackAction' && <AttackActionContent attackAction={action} />}
+      {data?.action.__typename === 'AttackAction' && <AttackActionContent attackAction={data.action} />}
     </DashboardContent>
   );
 };
@@ -40,7 +47,7 @@ const AttackActionContent: React.FC<{ attackAction: AttackActionFragment }> = ({
   const setLoading = useSetRecoilState(loadingState);
   const [updateAction, { loading }] = useUpdateAttackActionMutation({
     onCompleted: () => {
-      toast.success('技データカテゴリを更新しました。');
+      toast.success('アクションを更新しました。');
       router.push(Routes.dashboard.move.actions.index(attackAction.id));
     },
     onError: e => {
@@ -54,13 +61,6 @@ const AttackActionContent: React.FC<{ attackAction: AttackActionFragment }> = ({
 
   setLoading(loading);
   return <AttackActionForm attackAction={attackAction} onSubmit={onSubmit} />;
-};
-
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const actionId = params?.actionId as string;
-  const data: PageDashboardActionEditQuery = await fetchGraphql(PageDashboardActionEditDocument, { actionId });
-
-  return { props: { data } };
 };
 
 export default Page;
