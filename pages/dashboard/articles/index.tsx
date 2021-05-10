@@ -27,7 +27,10 @@ const Page: React.FC = () => (
 );
 
 const ArticleList: React.FC = () => {
-  const { data, loading, fetchMore, refetch } = useMyArticlesQuery({ variables: { first: 10 } });
+  const { data, loading, fetchMore, refetch } = useMyArticlesQuery({
+    variables: { first: 10 },
+    fetchPolicy: 'network-only',
+  });
   const [publishArticle] = usePublishArticleMutation({
     onCompleted: data => {
       const article = data.publishArticle?.article;
