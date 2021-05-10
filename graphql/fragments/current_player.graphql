@@ -1,7 +1,6 @@
 fragment currentPlayer on CurrentPlayer {
   id
   name
-  slug
   role
   avatarUrl
 }

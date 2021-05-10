@@ -1,0 +1,7 @@
+mutation CreatePlayer {
+  createPlayer(input: {}) {
+    currentPlayer {
+      ...currentPlayer
+    }
+  }
+}

@@ -51,7 +51,6 @@ const Form: React.FC<Props> = ({ currentPlayer }) => {
   } = useForm<CurrentPlayerAttributes>({
     defaultValues: {
       name: currentPlayer.name,
-      slug: currentPlayer.slug,
     },
   });
 
@@ -83,11 +82,6 @@ const Form: React.FC<Props> = ({ currentPlayer }) => {
       <FormGroup label="名前">
         <Input {...register('name', { required: true })} />
         {errors.name && <span>This field is required</span>}
-      </FormGroup>
-
-      <FormGroup label="ID（URLに使用)">
-        <Input {...register('slug', { required: true })} placeholder="半角英数字3~16文字" />
-        {errors.slug && <span>This field is required</span>}
       </FormGroup>
 
       <FormGroup label="プロフィール画像">
