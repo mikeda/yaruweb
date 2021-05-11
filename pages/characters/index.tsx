@@ -23,7 +23,7 @@ const Page: React.FC<Props> = ({ characters }) => {
           if (!character) return;
 
           return (
-            <div key={character.slug} className="ly_col_6 ly_mbCol_12 hp_mg_b_md">
+            <div key={character.slug} className="ly_col_6 ly_smCol_12 hp_mg_b_md">
               <Link href={Routes.character.detail(character.slug)}>
                 <a>
                   <CharacterCard character={character} />

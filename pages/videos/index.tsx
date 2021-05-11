@@ -32,7 +32,7 @@ const PageContent: React.FC = () => {
           if (!video) return null;
 
           return (
-            <div className="ly_col_6 ly_mbCol_12" key={video.id}>
+            <div className="ly_col_6 ly_smCol_12" key={video.id}>
               <VideoCard video={video} />
             </div>
           );
