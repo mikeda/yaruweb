@@ -1,11 +1,18 @@
 @import '@/styles/_variables';
 
 .container {
+  display: block;
   padding: 16px;
   margin-top: 8px;
   background-color: #ffffff;
   border: 1px solid #ddd;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+  transition: 0.25s;
+
+  &:focus,
+  &:hover {
+    opacity: 0.75;
+  }
 }
 
 .header {
@@ -17,6 +24,12 @@
 
 .ttl {
   font-weight: bold;
+}
+
+.container:focus .ttl,
+.container:hover .ttl {
+  color: $color-main;
+  text-decoration: underline;
 }
 
 .menu {

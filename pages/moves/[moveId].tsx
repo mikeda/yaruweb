@@ -3,9 +3,9 @@ import React from 'react';
 import {
   useCreateMoveCommentMutation,
   useMoveCommentsQuery,
-  MoveDocument,
   MoveFragment,
-  MoveQuery,
+  PageMoveDocument,
+  PageMoveQuery,
 } from '@/lib/graphql/types';
 import { MoveMedia } from '@/components/MoveMedia';
 import { Comment } from '@/components/Comment';
@@ -15,8 +15,11 @@ import { Head } from '@/components/layouts/Head';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { CommentForm } from '@/components/CommentForm';
+import { Breadcrumbs, BreadcrumbsProps } from '@/components/layouts/Breadcrumbs';
+import { Routes } from '@/lib/Routes';
+import { Heading } from '@/components/Heading';
 
-const PageContent: React.FC<Props> = ({ move }) => {
+const PageContent: React.FC<{ move: MoveFragment }> = ({ move }) => {
   const { data: commentsData, refetch: refetchComments } = useMoveCommentsQuery({ variables: { moveId: move.id } });
 
   const [createMoveComment] = useCreateMoveCommentMutation({
@@ -64,23 +67,43 @@ const PageContent: React.FC<Props> = ({ move }) => {
 
 interface Props {
   move: MoveFragment;
+  characterName: string;
+  breadcrumbs: BreadcrumbsProps;
 }
 
-const Page: React.FC<Props> = ({ move }) => {
+const Page: React.FC<Props> = ({ move, characterName, breadcrumbs }) => {
   return (
     <Content>
       <Head title={move.name} />
+      <Breadcrumbs {...breadcrumbs} />
+      <Heading lv="h1">{`${move.name}(${characterName})`}</Heading>
 
       <PageContent move={move} />
     </Content>
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
   const moveId = params?.moveId as string;
-  const data: MoveQuery = await fetchGraphql(MoveDocument, { moveId });
+  const data: PageMoveQuery = await fetchGraphql(PageMoveDocument, { moveId });
 
-  return { props: { move: data.move }, revalidate: 60 };
+  const moveCategory = data.move.moveCategory;
+  const character = moveCategory.character;
+
+  return {
+    props: {
+      move: data.move,
+      characterName: character.name,
+      breadcrumbs: {
+        parents: [
+          { name: character.name, url: Routes.character.detail(character.slug) },
+          { name: moveCategory.name, url: Routes.moveCategory.detail(moveCategory.id) },
+        ],
+        current: data.move.name,
+      },
+    },
+    revalidate: 60,
+  };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {

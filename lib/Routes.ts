@@ -19,6 +19,9 @@ export const Routes = {
   moveCategory: {
     detail: (moveCategoryId: string) => `/move_categories/${moveCategoryId}`,
   },
+  move: {
+    detail: (moveId: string) => `/moves/${moveId}`,
+  },
   session: {
     signup: () => '/signup',
     login: () => '/login',

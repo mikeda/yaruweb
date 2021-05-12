@@ -43,7 +43,8 @@ export const MoveList: React.FC<Props> = ({ moves }) => {
         <div className="bl_section">
           {moves.map(move => {
             if (!showMove(move)) return;
-            return <MoveMedia move={move} key={move.id} />;
+
+            return <MoveMedia key={move.id} move={move} />;
           })}
         </div>
       </div>
