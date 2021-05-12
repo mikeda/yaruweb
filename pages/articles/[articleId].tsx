@@ -14,7 +14,7 @@ import { Head } from '@/components/layouts/Head';
 import { ArticleAuthor } from '@/components/ArticleAuthor';
 import { FavButton } from '@/components/FavButton';
 import { Comment } from '@/components/Comment';
-import { ArticleCommentForm } from '@/components/ArticleCommentForm';
+import { CommentForm } from '@/components/CommentForm';
 import { NotFound } from '@/components/NotFound';
 import { Heading } from '@/components/Heading';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
@@ -70,7 +70,7 @@ const Comments: React.FC<{ articleId: string }> = ({ articleId }) => {
 
   return (
     <>
-      <ArticleCommentForm
+      <CommentForm
         onSubmit={attributes => {
           createArticleComment({ variables: { articleId: articleId, attributes } });
         }}

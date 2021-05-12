@@ -1,0 +1,5 @@
+query MoveComments($moveId: ID!) {
+  moveComments(moveId: $moveId) {
+    ...moveComment
+  }
+}

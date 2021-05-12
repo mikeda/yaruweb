@@ -3,17 +3,17 @@ import React from 'react';
 import styles from './CommentForm.module.scss';
 import { CommentWrapper } from './Comment';
 import { useCurrentPlayer } from 'hooks/useCurrentPlayer';
-import { ArticleCommentAttributes } from '@/lib/graphql/types';
+import { CommentAttributes } from '@/lib/graphql/types';
 import { useForm } from 'react-hook-form';
 import { TextArea } from './form2/TextArea';
 
 interface Props {
-  onSubmit: (attributes: ArticleCommentAttributes) => void;
+  onSubmit: (attributes: CommentAttributes) => void;
 }
 
-export const ArticleCommentForm: React.FC<Props> = ({ onSubmit }) => {
+export const CommentForm: React.FC<Props> = ({ onSubmit }) => {
   const { currentPlayer } = useCurrentPlayer();
-  const { register, reset, handleSubmit } = useForm<ArticleCommentAttributes>();
+  const { register, reset, handleSubmit } = useForm<CommentAttributes>();
 
   if (!currentPlayer) return null;
 
