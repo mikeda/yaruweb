@@ -1,4 +1,4 @@
-mutation CreateVideoComment($videoId: ID!, $attributes: VideoCommentAttributes!) {
+mutation CreateVideoComment($videoId: ID!, $attributes: CommentAttributes!) {
   createVideoComment(input: {videoId: $videoId, attributes: $attributes}) {
     videoComment {
       ...videoComment

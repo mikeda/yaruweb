@@ -14,7 +14,7 @@ import { Content } from '@/components/layouts/Content';
 import { Head } from '@/components/layouts/Head';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
-import { VideoCommentForm } from '@/components/VideoCommentForm';
+import { CommentForm } from '@/components/CommentForm';
 
 const PageContent: React.FC<Props> = ({ video }) => {
   const { data: commentsData, refetch: refetchComments } = useVideoCommentsQuery({ variables: { videoId: video.id } });
@@ -36,7 +36,7 @@ const PageContent: React.FC<Props> = ({ video }) => {
         <VideoMedia video={video} />
       </div>
 
-      <VideoCommentForm
+      <CommentForm
         onSubmit={attributes => {
           createVideoComment({ variables: { videoId: video.id, attributes } });
         }}

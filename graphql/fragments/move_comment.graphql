@@ -1,4 +1,9 @@
 fragment moveComment on MoveComment {
   id
   message
+  createdAt
+  player {
+    name
+    avatarUrl
+  }
 }
