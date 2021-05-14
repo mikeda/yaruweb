@@ -1424,10 +1424,10 @@
   resolved "https://registry.yarnpkg.com/@hapi/hoek/-/hoek-9.1.0.tgz#6c9eafc78c1529248f8f4d92b0799a712b6052c6"
   integrity sha512-i9YbZPN3QgfighY/1X1Pu118VUz2Fmmhd6b2n0/O8YVgGGfw0FbUYoA97k7FkpGJ+pLCFEDLUmAPPV4D1kpeFw==
 
-"@hookform/resolvers@^2.4.0":
-  version "2.4.0"
-  resolved "https://registry.yarnpkg.com/@hookform/resolvers/-/resolvers-2.4.0.tgz#3b454463fbb5e7a0de4da029fa34e677f32d8d8d"
-  integrity sha512-KiHc7Uwd2IJMvPTMQ9vQxfss2ulq2gRYL/HYZ90qiTs+07UgGWCikiIvE2pKjjGVltEYjq5eR8x0ITmoyEjGxQ==
+"@hookform/resolvers@^2.5.0":
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/@hookform/resolvers/-/resolvers-2.5.0.tgz#ce6bac219339f2c0877c517b2632a163a2abdd53"
+  integrity sha512-hQpocA/SAodTeR4EJWB+Setx95FwGU7yd5vux7GnlnqFwc0Uk89G5XPrsPoGyLYzolCoI3ojDswDCWl/sTTQXw==
 
 "@hypnosphi/create-react-context@^0.3.1":
   version "0.3.1"
