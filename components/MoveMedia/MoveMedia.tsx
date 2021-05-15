@@ -1,5 +1,4 @@
-import React, { useEffect, useRef } from 'react';
-import Hls from 'hls.js';
+import React from 'react';
 
 import { AttackActionFragment, MoveFragment, ThrowActionFragment } from '@/lib/graphql/types';
 import { Command } from '../Command';
@@ -12,6 +11,8 @@ import {
   ThorwActionStateText,
   ThrowTypeEnumText,
 } from '@/lib/graphql/enum_texts';
+import Link from 'next/link';
+import { Routes } from '@/lib/Routes';
 
 type Props = {
   move: MoveFragment;
@@ -19,8 +20,8 @@ type Props = {
 
 export const MoveMedia: React.FC<Props> = ({ move }) => {
   return (
-    <>
-      <div className={styles.container}>
+    <Link href={Routes.move.detail(move.id)}>
+      <a className={styles.container}>
         {move.kana && <div className={styles.kana}>{move.kana}</div>}
 
         <div className={styles.header}>
@@ -40,14 +41,10 @@ export const MoveMedia: React.FC<Props> = ({ move }) => {
             </div>
 
             <AttackDetails move={move} />
-
-            {move.note && move.note.length > 0 && <div className={styles.note}>{move.note}</div>}
           </div>
-
-          {move.moveVideo && <VideoPlayer src={move.moveVideo.m3u8Url} thumnailUrl={move.moveVideo.thumbnailUrl} />}
         </div>
-      </div>
-    </>
+      </a>
+    </Link>
   );
 };
 
@@ -177,34 +174,4 @@ const frameText = (frame: number) => {
   if (frame > 0) return `+${frame}F`;
   if (frame === 0) return `±${0}F`;
   return `${frame}F`;
-};
-
-const VideoPlayer: React.FC<{ src: string; thumnailUrl: string }> = ({ src, thumnailUrl }) => {
-  const videoRef = useRef<HTMLVideoElement>(null);
-
-  useEffect(() => {
-    let hls: Hls;
-    if (videoRef.current) {
-      const video = videoRef.current;
-      if (!video) return;
-
-      if (video.canPlayType('application/vnd.apple.mpegurl')) {
-        // This will run in safari, where HLS is supported natively
-        video.src = src;
-      } else if (Hls.isSupported()) {
-        // This will run in all other modern browsers
-        hls = new Hls();
-        hls.loadSource(src);
-        hls.attachMedia(video);
-      }
-    }
-
-    return () => {
-      if (hls) {
-        hls.destroy();
-      }
-    };
-  }, [videoRef]);
-
-  return <video controls ref={videoRef} className={styles.video} poster={thumnailUrl} preload="none" />;
 };
