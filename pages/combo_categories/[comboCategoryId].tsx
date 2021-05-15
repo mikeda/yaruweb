@@ -11,10 +11,10 @@ import {
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Head } from '@/components/layouts/Head';
 import { Content } from '@/components/layouts/Content';
-import { Heading } from '@/components/Heading';
 import { ComboList } from '@/pages-lib/characters/[slug]/combos/ComboList';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 import { Routes } from '@/lib/Routes';
+import { PageHeader } from '@/components/layouts/PageHeader';
 
 interface Props {
   comboCategory: ComboCategoryDetailFragment;
@@ -22,19 +22,19 @@ interface Props {
 
 const Page: React.FC<Props> = ({ comboCategory }) => {
   if (!comboCategory) return null;
+  const title = comboCategory.name;
 
   return (
     <Content>
-      <Head title={comboCategory.name} />
+      <Head title={title} />
       <Breadcrumbs
         parents={[
           { name: 'キャラクター', url: Routes.character.index() },
           { name: comboCategory.character.longName, url: Routes.character.detail(comboCategory.character.slug) },
         ]}
-        current={comboCategory.name}
+        current={title}
       />
-
-      <Heading lv="h1">{comboCategory.name}</Heading>
+      <PageHeader title={title} />
 
       <ComboList combos={comboCategory.combos} />
     </Content>

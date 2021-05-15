@@ -17,7 +17,7 @@ import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { CommentForm } from '@/components/CommentForm';
 import { Breadcrumbs, BreadcrumbsProps } from '@/components/layouts/Breadcrumbs';
 import { Routes } from '@/lib/Routes';
-import { Heading } from '@/components/Heading';
+import { PageHeader } from '@/components/layouts/PageHeader';
 
 const PageContent: React.FC<{ move: MoveFragment }> = ({ move }) => {
   const { data: commentsData, refetch: refetchComments } = useMoveCommentsQuery({ variables: { moveId: move.id } });
@@ -71,12 +71,14 @@ interface Props {
   breadcrumbs: BreadcrumbsProps;
 }
 
-const Page: React.FC<Props> = ({ move, characterName, breadcrumbs }) => {
+const Page: React.FC<Props> = ({ move, breadcrumbs }) => {
+  const title = move.name;
+
   return (
     <Content>
-      <Head title={move.name} />
+      <Head title={title} />
       <Breadcrumbs {...breadcrumbs} />
-      <Heading lv="h1">{`${move.name}(${characterName})`}</Heading>
+      <PageHeader title={title} />
 
       <PageContent move={move} />
     </Content>

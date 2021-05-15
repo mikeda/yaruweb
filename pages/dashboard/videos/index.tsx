@@ -1,22 +1,27 @@
 import React from 'react';
 
 import { useVideosQuery } from '@/lib/graphql/types';
-import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
 import { NotFound } from '@/components/NotFound';
 import Link from 'next/link';
 import { Routes } from '@/lib/Routes';
-import { Heading } from '@/components/Heading';
+import { PageHeader } from '@/components/layouts/PageHeader';
+import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
+import { Head } from '@/components/layouts/Head';
 
-const Page: React.FC = () => (
-  <DashboardContent activeTab="video">
-    <Head title="イベント一覧" />
+const Page: React.FC = () => {
+  const title = '動画';
 
-    <Heading lv="h1">記事</Heading>
+  return (
+    <DashboardContent activeTab="video">
+      <Head title={title} />
+      <Breadcrumbs current={title} />
+      <PageHeader title={title} />
 
-    <VideoList />
-  </DashboardContent>
-);
+      <VideoList />
+    </DashboardContent>
+  );
+};
 
 const VideoList: React.FC = () => {
   const { data, loading } = useVideosQuery();

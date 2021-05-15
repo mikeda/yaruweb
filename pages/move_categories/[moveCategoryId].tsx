@@ -12,16 +12,16 @@ import { MoveList } from '@/components/MoveList';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Head } from '@/components/layouts/Head';
 import { Content } from '@/components/layouts/Content';
-import { Heading } from '@/components/Heading';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 import { Routes } from '@/lib/Routes';
+import { PageHeader } from '@/components/layouts/PageHeader';
 
 interface Props {
   moveCategory: MoveCategoryDetailFragment;
 }
 
 const Page: React.FC<Props> = ({ moveCategory }) => {
-  const title = `${moveCategory.character.longName} / ${moveCategory.name}のコマンドリスト`;
+  const title = moveCategory.name;
 
   return (
     <Content>
@@ -31,10 +31,9 @@ const Page: React.FC<Props> = ({ moveCategory }) => {
           { name: 'キャラクター', url: Routes.character.index() },
           { name: moveCategory.character.longName, url: Routes.character.detail(moveCategory.character.slug) },
         ]}
-        current={moveCategory.name}
+        current={title}
       />
-
-      <Heading lv="h1">{title}</Heading>
+      <PageHeader title={title} />
 
       <MoveList moves={moveCategory.moves} />
     </Content>

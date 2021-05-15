@@ -11,19 +11,15 @@ import {
   useCreateArticleCommentMutation,
 } from '@/lib/graphql/types';
 import { Head } from '@/components/layouts/Head';
-import { ArticleAuthor } from '@/components/ArticleAuthor';
-import { FavButton } from '@/components/FavButton';
 import { Comment } from '@/components/Comment';
 import { CommentForm } from '@/components/CommentForm';
 import { NotFound } from '@/components/NotFound';
-import { Heading } from '@/components/Heading';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
-import { ArticleBody } from '@/components/ArticleBody';
-import { NO_IMAGE_URL } from '@/lib/Assets';
 import { Content } from '@/components/layouts/Content';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 import { ArticleCategoryText } from '@/lib/graphql/enum_texts';
 import { Routes } from '@/lib/Routes';
+import { ArticleDetail } from '@/pages-lib/articles/ArticleDetail';
 
 interface Props {
   article: ArticleFragment;
@@ -44,24 +40,7 @@ const Page: React.FC<Props> = ({ article }) => {
         current={article.title}
       />
 
-      <div className="bl_article">
-        <div className="bl_article_mainImage">
-          <img src={article.mainImageUrl || NO_IMAGE_URL} />
-        </div>
-
-        <Heading lv="h1">{article.title}</Heading>
-
-        <ArticleAuthor
-          name={article.author.name}
-          avatarUrl={article.author.avatarUrl}
-          publishedAt={article.publishedAt}
-        />
-
-        <FavButton articleId={article.id} faved={article.faved} favsCount={article.favsCount} />
-
-        <ArticleBody content={article.content} />
-      </div>
-
+      <ArticleDetail article={article} />
       <Comments articleId={article.id} />
     </Content>
   );

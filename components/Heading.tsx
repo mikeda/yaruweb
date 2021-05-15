@@ -3,7 +3,7 @@ import React from 'react';
 import styles from './Heading.module.scss';
 
 interface Props {
-  lv: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+  lv: 'h1' | 'h2' | 'h3' | 'h4';
   tag?: keyof JSX.IntrinsicElements;
 }
 
