@@ -1,5 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFistRaised } from '@fortawesome/free-solid-svg-icons';
 
 import { Routes } from '@/lib/Routes';
 import { PlayerMenu } from './PlayerMenu';
@@ -14,7 +16,8 @@ export const GlobalHeader: React.FC = ({ children }) => {
           <div>
             <Link href={Routes.top()}>
               <a className={styles.logo}>
-                <img src="https://yarouyo.s3-ap-northeast-1.amazonaws.com/site/service_logo.png" />
+                <FontAwesomeIcon icon={faFistRaised} />
+                {' 鉄拳やろうよ.com'}
               </a>
             </Link>
 
