@@ -3068,6 +3068,23 @@ export type UpdateStagePositionMutation = (
   )> }
 );
 
+export type UpdateThrowActionMutationVariables = Exact<{
+  actionId: Scalars['ID'];
+  attributes: ThrowActionAttributes;
+}>;
+
+
+export type UpdateThrowActionMutation = (
+  { __typename?: 'Mutation' }
+  & { updateThrowAction?: Maybe<(
+    { __typename?: 'UpdateThrowActionPayload' }
+    & { action: (
+      { __typename?: 'ThrowAction' }
+      & Pick<ThrowAction, 'id'>
+    ) }
+  )> }
+);
+
 export type ArticleQueryVariables = Exact<{
   articleId: Scalars['ID'];
 }>;
@@ -3482,30 +3499,6 @@ export type OperationsQuery = (
   )> }
 );
 
-export type PageDashboardActionEditQueryVariables = Exact<{
-  actionId: Scalars['ID'];
-}>;
-
-
-export type PageDashboardActionEditQuery = (
-  { __typename?: 'Query' }
-  & { action: (
-    { __typename?: 'AttackAction' }
-    & { move: (
-      { __typename?: 'Move' }
-      & Pick<Move, 'id' | 'name'>
-    ) }
-    & AttackActionFragment
-  ) | (
-    { __typename?: 'ThrowAction' }
-    & { move: (
-      { __typename?: 'Move' }
-      & Pick<Move, 'id' | 'name'>
-    ) }
-    & ThrowActionFragment
-  ) }
-);
-
 export type PageDashboardActionNewQueryVariables = Exact<{
   moveId: Scalars['ID'];
 }>;
@@ -3554,6 +3547,31 @@ export type PageDashboardActionsQuery = (
   ) }
 );
 
+export type PageDashboardAttackActionEditQueryVariables = Exact<{
+  actionId: Scalars['ID'];
+}>;
+
+
+export type PageDashboardAttackActionEditQuery = (
+  { __typename?: 'Query' }
+  & { attackAction: (
+    { __typename?: 'AttackAction' }
+    & { move: (
+      { __typename?: 'Move' }
+      & Pick<Move, 'id' | 'name'>
+      & { moveCategory: (
+        { __typename?: 'MoveCategory' }
+        & Pick<MoveCategory, 'id' | 'name'>
+        & { character: (
+          { __typename?: 'Character' }
+          & Pick<Character, 'slug' | 'name'>
+        ) }
+      ) }
+    ) }
+    & AttackActionFragment
+  ) }
+);
+
 export type PageDashboardMoveCategoriesQueryVariables = Exact<{
   characterSlug: Scalars['ID'];
 }>;
@@ -3588,6 +3606,31 @@ export type PageDashboardMovesQuery = (
       & MoveFragment
     )> }
     & MoveCategoryFragment
+  ) }
+);
+
+export type PageDashboardThrowActionEditQueryVariables = Exact<{
+  actionId: Scalars['ID'];
+}>;
+
+
+export type PageDashboardThrowActionEditQuery = (
+  { __typename?: 'Query' }
+  & { throwAction: (
+    { __typename?: 'ThrowAction' }
+    & { move: (
+      { __typename?: 'Move' }
+      & Pick<Move, 'id' | 'name'>
+      & { moveCategory: (
+        { __typename?: 'MoveCategory' }
+        & Pick<MoveCategory, 'id' | 'name'>
+        & { character: (
+          { __typename?: 'Character' }
+          & Pick<Character, 'slug' | 'name'>
+        ) }
+      ) }
+    ) }
+    & ThrowActionFragment
   ) }
 );
 
@@ -5696,6 +5739,42 @@ export function useUpdateStagePositionMutation(baseOptions?: Apollo.MutationHook
 export type UpdateStagePositionMutationHookResult = ReturnType<typeof useUpdateStagePositionMutation>;
 export type UpdateStagePositionMutationResult = Apollo.MutationResult<UpdateStagePositionMutation>;
 export type UpdateStagePositionMutationOptions = Apollo.BaseMutationOptions<UpdateStagePositionMutation, UpdateStagePositionMutationVariables>;
+export const UpdateThrowActionDocument = gql`
+    mutation UpdateThrowAction($actionId: ID!, $attributes: ThrowActionAttributes!) {
+  updateThrowAction(input: {actionId: $actionId, attributes: $attributes}) {
+    action {
+      id
+    }
+  }
+}
+    `;
+export type UpdateThrowActionMutationFn = Apollo.MutationFunction<UpdateThrowActionMutation, UpdateThrowActionMutationVariables>;
+
+/**
+ * __useUpdateThrowActionMutation__
+ *
+ * To run a mutation, you first call `useUpdateThrowActionMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateThrowActionMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateThrowActionMutation, { data, loading, error }] = useUpdateThrowActionMutation({
+ *   variables: {
+ *      actionId: // value for 'actionId'
+ *      attributes: // value for 'attributes'
+ *   },
+ * });
+ */
+export function useUpdateThrowActionMutation(baseOptions?: Apollo.MutationHookOptions<UpdateThrowActionMutation, UpdateThrowActionMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateThrowActionMutation, UpdateThrowActionMutationVariables>(UpdateThrowActionDocument, options);
+      }
+export type UpdateThrowActionMutationHookResult = ReturnType<typeof useUpdateThrowActionMutation>;
+export type UpdateThrowActionMutationResult = Apollo.MutationResult<UpdateThrowActionMutation>;
+export type UpdateThrowActionMutationOptions = Apollo.BaseMutationOptions<UpdateThrowActionMutation, UpdateThrowActionMutationVariables>;
 export const ArticleDocument = gql`
     query Article($articleId: ID!) {
   article(articleId: $articleId) {
@@ -6775,55 +6854,6 @@ export function useOperationsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions
 export type OperationsQueryHookResult = ReturnType<typeof useOperationsQuery>;
 export type OperationsLazyQueryHookResult = ReturnType<typeof useOperationsLazyQuery>;
 export type OperationsQueryResult = Apollo.QueryResult<OperationsQuery, OperationsQueryVariables>;
-export const PageDashboardActionEditDocument = gql`
-    query PageDashboardActionEdit($actionId: ID!) {
-  action(actionId: $actionId) {
-    ... on AttackAction {
-      ...attackAction
-      move {
-        id
-        name
-      }
-    }
-    ... on ThrowAction {
-      ...throwAction
-      move {
-        id
-        name
-      }
-    }
-  }
-}
-    ${AttackActionFragmentDoc}
-${ThrowActionFragmentDoc}`;
-
-/**
- * __usePageDashboardActionEditQuery__
- *
- * To run a query within a React component, call `usePageDashboardActionEditQuery` and pass it any options that fit your needs.
- * When your component renders, `usePageDashboardActionEditQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = usePageDashboardActionEditQuery({
- *   variables: {
- *      actionId: // value for 'actionId'
- *   },
- * });
- */
-export function usePageDashboardActionEditQuery(baseOptions: Apollo.QueryHookOptions<PageDashboardActionEditQuery, PageDashboardActionEditQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<PageDashboardActionEditQuery, PageDashboardActionEditQueryVariables>(PageDashboardActionEditDocument, options);
-      }
-export function usePageDashboardActionEditLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PageDashboardActionEditQuery, PageDashboardActionEditQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<PageDashboardActionEditQuery, PageDashboardActionEditQueryVariables>(PageDashboardActionEditDocument, options);
-        }
-export type PageDashboardActionEditQueryHookResult = ReturnType<typeof usePageDashboardActionEditQuery>;
-export type PageDashboardActionEditLazyQueryHookResult = ReturnType<typeof usePageDashboardActionEditLazyQuery>;
-export type PageDashboardActionEditQueryResult = Apollo.QueryResult<PageDashboardActionEditQuery, PageDashboardActionEditQueryVariables>;
 export const PageDashboardActionNewDocument = gql`
     query PageDashboardActionNew($moveId: ID!) {
   move(moveId: $moveId) {
@@ -6915,6 +6945,53 @@ export function usePageDashboardActionsLazyQuery(baseOptions?: Apollo.LazyQueryH
 export type PageDashboardActionsQueryHookResult = ReturnType<typeof usePageDashboardActionsQuery>;
 export type PageDashboardActionsLazyQueryHookResult = ReturnType<typeof usePageDashboardActionsLazyQuery>;
 export type PageDashboardActionsQueryResult = Apollo.QueryResult<PageDashboardActionsQuery, PageDashboardActionsQueryVariables>;
+export const PageDashboardAttackActionEditDocument = gql`
+    query PageDashboardAttackActionEdit($actionId: ID!) {
+  attackAction(actionId: $actionId) {
+    ...attackAction
+    move {
+      id
+      name
+      moveCategory {
+        id
+        name
+        character {
+          slug
+          name
+        }
+      }
+    }
+  }
+}
+    ${AttackActionFragmentDoc}`;
+
+/**
+ * __usePageDashboardAttackActionEditQuery__
+ *
+ * To run a query within a React component, call `usePageDashboardAttackActionEditQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePageDashboardAttackActionEditQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePageDashboardAttackActionEditQuery({
+ *   variables: {
+ *      actionId: // value for 'actionId'
+ *   },
+ * });
+ */
+export function usePageDashboardAttackActionEditQuery(baseOptions: Apollo.QueryHookOptions<PageDashboardAttackActionEditQuery, PageDashboardAttackActionEditQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PageDashboardAttackActionEditQuery, PageDashboardAttackActionEditQueryVariables>(PageDashboardAttackActionEditDocument, options);
+      }
+export function usePageDashboardAttackActionEditLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PageDashboardAttackActionEditQuery, PageDashboardAttackActionEditQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PageDashboardAttackActionEditQuery, PageDashboardAttackActionEditQueryVariables>(PageDashboardAttackActionEditDocument, options);
+        }
+export type PageDashboardAttackActionEditQueryHookResult = ReturnType<typeof usePageDashboardAttackActionEditQuery>;
+export type PageDashboardAttackActionEditLazyQueryHookResult = ReturnType<typeof usePageDashboardAttackActionEditLazyQuery>;
+export type PageDashboardAttackActionEditQueryResult = Apollo.QueryResult<PageDashboardAttackActionEditQuery, PageDashboardAttackActionEditQueryVariables>;
 export const PageDashboardMoveCategoriesDocument = gql`
     query PageDashboardMoveCategories($characterSlug: ID!) {
   character(characterSlug: $characterSlug) {
@@ -6997,6 +7074,53 @@ export function usePageDashboardMovesLazyQuery(baseOptions?: Apollo.LazyQueryHoo
 export type PageDashboardMovesQueryHookResult = ReturnType<typeof usePageDashboardMovesQuery>;
 export type PageDashboardMovesLazyQueryHookResult = ReturnType<typeof usePageDashboardMovesLazyQuery>;
 export type PageDashboardMovesQueryResult = Apollo.QueryResult<PageDashboardMovesQuery, PageDashboardMovesQueryVariables>;
+export const PageDashboardThrowActionEditDocument = gql`
+    query PageDashboardThrowActionEdit($actionId: ID!) {
+  throwAction(actionId: $actionId) {
+    ...throwAction
+    move {
+      id
+      name
+      moveCategory {
+        id
+        name
+        character {
+          slug
+          name
+        }
+      }
+    }
+  }
+}
+    ${ThrowActionFragmentDoc}`;
+
+/**
+ * __usePageDashboardThrowActionEditQuery__
+ *
+ * To run a query within a React component, call `usePageDashboardThrowActionEditQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePageDashboardThrowActionEditQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePageDashboardThrowActionEditQuery({
+ *   variables: {
+ *      actionId: // value for 'actionId'
+ *   },
+ * });
+ */
+export function usePageDashboardThrowActionEditQuery(baseOptions: Apollo.QueryHookOptions<PageDashboardThrowActionEditQuery, PageDashboardThrowActionEditQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PageDashboardThrowActionEditQuery, PageDashboardThrowActionEditQueryVariables>(PageDashboardThrowActionEditDocument, options);
+      }
+export function usePageDashboardThrowActionEditLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PageDashboardThrowActionEditQuery, PageDashboardThrowActionEditQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PageDashboardThrowActionEditQuery, PageDashboardThrowActionEditQueryVariables>(PageDashboardThrowActionEditDocument, options);
+        }
+export type PageDashboardThrowActionEditQueryHookResult = ReturnType<typeof usePageDashboardThrowActionEditQuery>;
+export type PageDashboardThrowActionEditLazyQueryHookResult = ReturnType<typeof usePageDashboardThrowActionEditLazyQuery>;
+export type PageDashboardThrowActionEditQueryResult = Apollo.QueryResult<PageDashboardThrowActionEditQuery, PageDashboardThrowActionEditQueryVariables>;
 export const PageMoveDocument = gql`
     query PageMove($moveId: ID!) {
   move(moveId: $moveId) {

@@ -3,6 +3,17 @@
 .container {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   margin-bottom: 16px;
+}
+
+.header {
+  flex: 1;
+}
+
+.buttons {
+  display: flex;
+}
+
+.buttons > * {
+  margin-left: 8px;
 }
