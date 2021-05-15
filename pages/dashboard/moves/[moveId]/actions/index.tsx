@@ -1,27 +1,52 @@
 import React from 'react';
 
-import { ActionFragment, PageDashboardMoveActionsDocument, PageDashboardMoveActionsQuery } from '@/lib/graphql/types';
+import { ActionFragment, usePageDashboardActionsQuery } from '@/lib/graphql/types';
 import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { GetServerSideProps } from 'next';
-import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { PageHeader } from '@/components/layouts/PageHeader';
 import { Routes } from '@/lib/Routes';
 import Link from 'next/link';
 import { parseAction } from '@/lib/graphql/parseAction';
+import { useRouter } from 'next/router';
+import { useSetRecoilState } from 'recoil';
+import { loadingState } from 'states/loading';
+import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 
-interface Props {
-  data: PageDashboardMoveActionsQuery;
-}
+const Page: React.FC = () => {
+  const router = useRouter();
+  const { moveId } = router.query;
+  const setLoading = useSetRecoilState(loadingState);
 
-const Page: React.FC<Props> = ({ data: { move } }) => {
+  const { data, loading } = usePageDashboardActionsQuery({
+    variables: { moveId: moveId as string },
+    fetchPolicy: 'network-only',
+    skip: !moveId,
+  });
+
+  setLoading(loading);
+  if (!data) return null;
+
+  const { move } = data;
   const title = move.name;
 
   return (
     <DashboardContent activeTab="character">
       <Head title={title} />
-
-      <PageHeader title={title} addPageUrl={Routes.dashboard.move.new(move.id)} />
+      <Breadcrumbs
+        parents={[
+          { name: 'キャラクター', url: Routes.dashboard.character.index() },
+          {
+            name: `技データ(${move.moveCategory.character.name})`,
+            url: Routes.dashboard.moveCategory.index(move.moveCategory.character.slug),
+          },
+          {
+            name: move.moveCategory.name,
+            url: Routes.dashboard.move.index(move.moveCategory.id),
+          },
+        ]}
+        current={title}
+      />
+      <PageHeader title={title} addPageUrl={Routes.dashboard.move.attack_actions.new(move.id)} />
 
       <PageContent actions={move.actions} />
     </DashboardContent>
@@ -61,13 +86,6 @@ const PageContent: React.FC<{ actions: ActionFragment[] }> = ({ actions }) => {
       </table>
     </div>
   );
-};
-
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const moveId = params?.moveId as string;
-  const data: PageDashboardMoveActionsQuery = await fetchGraphql(PageDashboardMoveActionsDocument, { moveId });
-
-  return { props: { data } };
 };
 
 export default Page;

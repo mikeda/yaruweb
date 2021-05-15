@@ -24,7 +24,6 @@ const Page: React.FC = () => (
   <DashboardContent activeTab="article">
     <Head title="記事" />
     <Breadcrumbs current="記事" />
-
     <PageHeader title="記事" addPageUrl={Routes.dashboard.article.new()} />
 
     <ArticleList />
