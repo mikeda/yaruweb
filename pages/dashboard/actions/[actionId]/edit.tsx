@@ -15,7 +15,6 @@ import { toast } from 'react-toastify';
 import { loadingState } from 'states/loading';
 import { useSetRecoilState } from 'recoil';
 import { AttackActionForm } from '@/components/AttackActionForm';
-import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 
 const Page: React.FC = () => {
   const router = useRouter();
