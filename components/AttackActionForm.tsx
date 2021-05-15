@@ -12,12 +12,11 @@ import { CheckBox } from './form2/CheckBox';
 import { FormInline } from './form2/FormInline';
 
 const schema = yup.object().shape({
-  damage: yup.number().integer().min(0),
+  damage: yup.number().required().integer().min(0),
 });
 
 const StateSelectOptions: React.FC = () => (
   <>
-    <option value=""></option>
     {Object.entries(AttackActionStateText).map(([key, value]) => (
       <option value={key} key={key}>
         {value}
@@ -35,7 +34,6 @@ export const AttackActionForm: React.FC<Props> = ({ attackAction, onSubmit }) =>
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<AttackActionAttributes>({
     resolver: yupResolver(schema),
@@ -60,11 +58,6 @@ export const AttackActionForm: React.FC<Props> = ({ attackAction, onSubmit }) =>
       crouchingHitFrame: attackAction.crouchingHitFrame,
     },
   });
-  const blockAvailable = watch('blockAvailable');
-  const hitAvailable = watch('hitAvailable');
-  const counterHitAvailable = watch('counterHitAvailable');
-  const cleanHitAvailable = watch('cleanHitAvailable');
-  const crouchingHitAvailable = watch('crouchingHitAvailable');
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -87,15 +80,11 @@ export const AttackActionForm: React.FC<Props> = ({ attackAction, onSubmit }) =>
             <input id="blockAvailable" type="checkbox" {...register('blockAvailable')} />
           </CheckBox>
 
-          {blockAvailable && (
-            <>
-              <Input type="number" {...register('blockFrame', { valueAsNumber: true })} placeholder="フレーム" />
+          <Input type="number" {...register('blockFrame', { valueAsNumber: true })} placeholder="フレーム" />
 
-              <select {...register('blockState')}>
-                <StateSelectOptions />
-              </select>
-            </>
-          )}
+          <select {...register('blockState')}>
+            <StateSelectOptions />
+          </select>
         </FormInline>
       </FormGroup>
 
@@ -105,15 +94,11 @@ export const AttackActionForm: React.FC<Props> = ({ attackAction, onSubmit }) =>
             <input id="hitAvailable" type="checkbox" {...register('hitAvailable')} />
           </CheckBox>
 
-          {hitAvailable && (
-            <>
-              <Input type="number" {...register('hitFrame', { valueAsNumber: true })} placeholder="フレーム" />
+          <Input type="number" {...register('hitFrame', { valueAsNumber: true })} placeholder="フレーム" />
 
-              <select {...register('hitState')}>
-                <StateSelectOptions />
-              </select>
-            </>
-          )}
+          <select {...register('hitState')}>
+            <StateSelectOptions />
+          </select>
         </FormInline>
       </FormGroup>
 
@@ -123,15 +108,11 @@ export const AttackActionForm: React.FC<Props> = ({ attackAction, onSubmit }) =>
             <input id="cleanHitAvailable" type="checkbox" {...register('cleanHitAvailable')} />
           </CheckBox>
 
-          {cleanHitAvailable && (
-            <>
-              <Input type="number" {...register('cleanHitFrame', { valueAsNumber: true })} placeholder="フレーム" />
+          <Input type="number" {...register('cleanHitFrame', { valueAsNumber: true })} placeholder="フレーム" />
 
-              <select {...register('cleanHitState')}>
-                <StateSelectOptions />
-              </select>
-            </>
-          )}
+          <select {...register('cleanHitState')}>
+            <StateSelectOptions />
+          </select>
         </FormInline>
       </FormGroup>
 
@@ -141,15 +122,11 @@ export const AttackActionForm: React.FC<Props> = ({ attackAction, onSubmit }) =>
             <input id="counterHitAvailable" type="checkbox" {...register('counterHitAvailable')} />
           </CheckBox>
 
-          {counterHitAvailable && (
-            <>
-              <Input type="number" {...register('counterHitFrame', { valueAsNumber: true })} placeholder="フレーム" />
+          <Input type="number" {...register('counterHitFrame', { valueAsNumber: true })} placeholder="フレーム" />
 
-              <select {...register('counterHitState')}>
-                <StateSelectOptions />
-              </select>
-            </>
-          )}
+          <select {...register('counterHitState')}>
+            <StateSelectOptions />
+          </select>
         </FormInline>
       </FormGroup>
 
@@ -159,15 +136,11 @@ export const AttackActionForm: React.FC<Props> = ({ attackAction, onSubmit }) =>
             <input id="crouchingHitAvailable" type="checkbox" {...register('crouchingHitAvailable')} />
           </CheckBox>
 
-          {crouchingHitAvailable && (
-            <>
-              <Input type="number" {...register('crouchingHitFrame', { valueAsNumber: true })} placeholder="フレーム" />
+          <Input type="number" {...register('crouchingHitFrame', { valueAsNumber: true })} placeholder="フレーム" />
 
-              <select {...register('crouchingHitState')}>
-                <StateSelectOptions />
-              </select>
-            </>
-          )}
+          <select {...register('crouchingHitState')}>
+            <StateSelectOptions />
+          </select>
         </FormInline>
       </FormGroup>
 

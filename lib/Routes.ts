@@ -86,6 +86,9 @@ export const Routes = {
       actions: {
         index: (moveId: string) => `/dashboard/moves/${moveId}/actions`,
       },
+      attack_actions: {
+        new: (moveId: string) => `/dashboard/moves/${moveId}/attack_actions/new`,
+      },
     },
     profile: {
       edit: () => `/dashboard/profile/edit`,

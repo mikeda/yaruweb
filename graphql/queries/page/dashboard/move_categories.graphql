@@ -1,0 +1,10 @@
+query PageDashboardMoveCategories($characterSlug: ID!) {
+  character(characterSlug: $characterSlug) {
+    slug
+    name
+
+    moveCategories {
+      ...moveCategory
+    }
+  }
+}

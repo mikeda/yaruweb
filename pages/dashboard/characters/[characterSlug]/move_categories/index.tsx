@@ -1,44 +1,44 @@
 import React from 'react';
 
-import { CharacterDocument, CharacterFragment, CharacterQuery, useMoveCategoriesQuery } from '@/lib/graphql/types';
+import { MoveCategoryFragment, usePageDashboardMoveCategoriesQuery } from '@/lib/graphql/types';
 import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { NotFound } from '@/components/NotFound';
 import Link from 'next/link';
 import { Routes } from '@/lib/Routes';
-import { GetServerSideProps } from 'next';
-import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { PageHeader } from '@/components/layouts/PageHeader';
+import { useRouter } from 'next/router';
+import { useSetRecoilState } from 'recoil';
+import { loadingState } from 'states/loading';
+import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 
-interface Props {
-  character: CharacterFragment;
-}
+const Page: React.FC = () => {
+  const router = useRouter();
+  const { characterSlug } = router.query;
+  const setLoading = useSetRecoilState(loadingState);
 
-const Page: React.FC<Props> = ({ character }) => {
-  const title = `技データ(${character.longName})`;
+  const { data, loading } = usePageDashboardMoveCategoriesQuery({
+    variables: { characterSlug: characterSlug as string },
+    fetchPolicy: 'network-only',
+    skip: !characterSlug,
+  });
+
+  setLoading(loading);
+  if (!data) return null;
+
+  const title = `技データ(${data.character.name})`;
 
   return (
     <DashboardContent activeTab="character">
       <Head title={title} />
+      <Breadcrumbs parents={[{ name: 'キャラクター', url: Routes.dashboard.character.index() }]} current={title} />
+      <PageHeader title={title} addPageUrl={Routes.dashboard.moveCategory.new(data.character.slug)} />
 
-      <PageHeader title={title} addPageUrl={Routes.dashboard.moveCategory.new(character.slug)} />
-
-      <PageContent character={character} />
+      <PageContent moveCategories={data.character.moveCategories} />
     </DashboardContent>
   );
 };
 
-const PageContent: React.FC<Props> = ({ character }) => {
-  const { data, loading, error } = useMoveCategoriesQuery({
-    variables: { characterSlug: character.slug },
-    fetchPolicy: 'network-only',
-  });
-
-  if (loading) return <NotFound>Loading...</NotFound>;
-  if (error) return <NotFound>エラーが発生しました。{error.message}</NotFound>;
-  const moveCategories = data?.moveCategories;
-  if (!(moveCategories && moveCategories.length > 0)) return <NotFound>カテゴリが登録されていません。</NotFound>;
-
+const PageContent: React.FC<{ moveCategories: MoveCategoryFragment[] }> = ({ moveCategories }) => {
   return (
     <div className="bl_horizTable">
       <table>
@@ -65,13 +65,6 @@ const PageContent: React.FC<Props> = ({ character }) => {
       </table>
     </div>
   );
-};
-
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const characterSlug = params?.characterSlug as string;
-  const data: CharacterQuery = await fetchGraphql(CharacterDocument, { characterSlug });
-
-  return { props: { character: data.character } };
 };
 
 export default Page;

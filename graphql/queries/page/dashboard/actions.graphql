@@ -1,4 +1,4 @@
-query PageDashboardMoveActions($moveId: ID!) {
+query PageDashboardActions($moveId: ID!) {
   move(moveId: $moveId) {
     id
     name

@@ -1,34 +1,55 @@
 import React from 'react';
 
-import { MoveCategoryDetailDocument, MoveCategoryDetailFragment, MoveCategoryDetailQuery } from '@/lib/graphql/types';
+import { PageDashboardMovesQuery, usePageDashboardMovesQuery } from '@/lib/graphql/types';
 import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { GetServerSideProps } from 'next';
-import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { PageHeader } from '@/components/layouts/PageHeader';
 import { Routes } from '@/lib/Routes';
 import Link from 'next/link';
 import { ActionList } from '@/components/ActionList';
+import { useRouter } from 'next/router';
+import { useSetRecoilState } from 'recoil';
+import { loadingState } from 'states/loading';
+import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 
-interface Props {
-  moveCategory: MoveCategoryDetailFragment;
-}
+const Page: React.FC = () => {
+  const router = useRouter();
+  const { moveCategoryId } = router.query;
+  const setLoading = useSetRecoilState(loadingState);
 
-const Page: React.FC<Props> = ({ moveCategory }) => {
-  const title = `コマンドリスト(${moveCategory.character.longName}/${moveCategory.name})`;
+  const { data, loading } = usePageDashboardMovesQuery({
+    variables: { moveCategoryId: moveCategoryId as string },
+    fetchPolicy: 'network-only',
+    skip: !moveCategoryId,
+  });
+
+  setLoading(loading);
+  if (!data) return null;
+
+  const { moveCategory } = data;
+  const title = moveCategory.name;
 
   return (
     <DashboardContent activeTab="character">
       <Head title={title} />
-
+      <Breadcrumbs
+        parents={[
+          { name: 'キャラクター', url: Routes.dashboard.character.index() },
+          {
+            name: `技データ(${moveCategory.character.name})`,
+            url: Routes.dashboard.moveCategory.index(moveCategory.character.slug),
+          },
+        ]}
+        current={title}
+      />
       <PageHeader title={title} addPageUrl={Routes.dashboard.move.new(moveCategory.id)} />
 
-      <PageContent moveCategory={moveCategory} />
+      <PageContent data={data} />
     </DashboardContent>
   );
 };
 
-const PageContent: React.FC<Props> = ({ moveCategory }) => {
+const PageContent: React.FC<{ data: PageDashboardMovesQuery }> = ({ data }) => {
   return (
     <div className="bl_horizTable">
       <table>
@@ -40,7 +61,7 @@ const PageContent: React.FC<Props> = ({ moveCategory }) => {
           </tr>
         </thead>
         <tbody>
-          {moveCategory.moves.map(move => {
+          {data.moveCategory.moves.map(move => {
             return (
               <tr key={move.id}>
                 <td>{move.name}</td>
@@ -62,13 +83,6 @@ const PageContent: React.FC<Props> = ({ moveCategory }) => {
       </table>
     </div>
   );
-};
-
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const moveCategoryId = params?.moveCategoryId as string;
-  const data: MoveCategoryDetailQuery = await fetchGraphql(MoveCategoryDetailDocument, { moveCategoryId });
-
-  return { props: { moveCategory: data.moveCategory } };
 };
 
 export default Page;
