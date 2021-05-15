@@ -15,10 +15,15 @@ import { Routes } from '@/lib/Routes';
 import { ReadMore } from '@/components/blocks/ReadMore';
 import { PageHeader } from '@/components/layouts/PageHeader';
 import { toast } from 'react-toastify';
+import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
+import { useCurrentPlayer } from 'hooks/useCurrentPlayer';
+import { useSetRecoilState } from 'recoil';
+import { loadingState } from 'states/loading';
 
 const Page: React.FC = () => (
   <DashboardContent activeTab="article">
-    <Head title="記事一覧" />
+    <Head title="記事" />
+    <Breadcrumbs current="記事" />
 
     <PageHeader title="記事" addPageUrl={Routes.dashboard.article.new()} />
 
@@ -27,11 +32,14 @@ const Page: React.FC = () => (
 );
 
 const ArticleList: React.FC = () => {
+  const { currentPlayer } = useCurrentPlayer();
+  const setLoading = useSetRecoilState(loadingState);
   const { data, loading, fetchMore, refetch } = useMyArticlesQuery({
     variables: { first: 10 },
     fetchPolicy: 'network-only',
+    skip: !currentPlayer,
   });
-  const [publishArticle] = usePublishArticleMutation({
+  const [publishArticle, { loading: publishLoading }] = usePublishArticleMutation({
     onCompleted: data => {
       const article = data.publishArticle?.article;
       if (!article) return;
@@ -39,7 +47,7 @@ const ArticleList: React.FC = () => {
       toast.success('記事を公開しました。');
     },
   });
-  const [stopArticle] = useStopArticleMutation({
+  const [stopArticle, { loading: stopLoading }] = useStopArticleMutation({
     onCompleted: data => {
       const article = data.stopArticle?.article;
       if (!article) return;
@@ -47,8 +55,10 @@ const ArticleList: React.FC = () => {
       toast.success('公開を停止しました。');
     },
   });
-  if (loading) return <NotFound>読み込み中</NotFound>;
-  if (!data) return <NotFound>読み込みに失敗しました。</NotFound>;
+
+  setLoading(loading || publishLoading || stopLoading);
+
+  if (!data) return <NotFound>記事がありません。</NotFound>;
 
   const articles = data.myArticles.nodes;
   if (!(articles && articles.length > 0)) return <NotFound>記事がありません。</NotFound>;

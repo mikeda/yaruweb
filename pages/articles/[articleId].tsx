@@ -21,6 +21,9 @@ import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { ArticleBody } from '@/components/ArticleBody';
 import { NO_IMAGE_URL } from '@/lib/Assets';
 import { Content } from '@/components/layouts/Content';
+import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
+import { ArticleCategoryText } from '@/lib/graphql/enum_texts';
+import { Routes } from '@/lib/Routes';
 
 interface Props {
   article: ArticleFragment;
@@ -30,6 +33,16 @@ const Page: React.FC<Props> = ({ article }) => {
   return (
     <Content>
       <Head title={article.title} description={article.description} image={article.mainImageUrl} />
+      <Breadcrumbs
+        parents={[
+          { name: '記事', url: Routes.article.index() },
+          {
+            name: ArticleCategoryText[article.category],
+            url: Routes.article.index({ category: article.category }),
+          },
+        ]}
+        current={article.title}
+      />
 
       <div className="bl_article">
         <div className="bl_article_mainImage">

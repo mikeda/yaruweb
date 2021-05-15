@@ -15,6 +15,8 @@ import { Head } from '@/components/layouts/Head';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { CommentForm } from '@/components/CommentForm';
+import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
+import { Routes } from '@/lib/Routes';
 
 const PageContent: React.FC<Props> = ({ video }) => {
   const { data: commentsData, refetch: refetchComments } = useVideoCommentsQuery({ variables: { videoId: video.id } });
@@ -70,6 +72,7 @@ const Page: React.FC<Props> = ({ video }) => {
   return (
     <Content>
       <Head title={video.title} />
+      <Breadcrumbs parents={[{ name: '動画', url: Routes.video.index() }]} current={video.title} />
 
       <PageContent video={video} />
     </Content>

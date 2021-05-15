@@ -7,10 +7,12 @@ import { LoginWithEmailForm } from '@/pages-lib/login/LoginWithEmailForm';
 import { LoginWithTwitterButton } from '@/pages-lib/login/LoginWithTwitterButton';
 import { Content } from '@/components/layouts/Content';
 import { Head } from '@/components/layouts/Head';
+import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 
 const Page: React.FC = () => (
   <Content size="xs">
     <Head title="ログイン" />
+    <Breadcrumbs current="ログイン" />
 
     <Heading lv="h1">ログイン</Heading>
 

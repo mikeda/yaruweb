@@ -13,6 +13,8 @@ import { Head } from '@/components/layouts/Head';
 import { Content } from '@/components/layouts/Content';
 import { Heading } from '@/components/Heading';
 import { ComboList } from '@/pages-lib/characters/[slug]/combos/ComboList';
+import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
+import { Routes } from '@/lib/Routes';
 
 interface Props {
   comboCategory: ComboCategoryDetailFragment;
@@ -21,13 +23,18 @@ interface Props {
 const Page: React.FC<Props> = ({ comboCategory }) => {
   if (!comboCategory) return null;
 
-  const title = `${comboCategory.character.longName} / ${comboCategory.name}のコンボ`;
-
   return (
     <Content>
-      <Head title={title} />
+      <Head title={comboCategory.name} />
+      <Breadcrumbs
+        parents={[
+          { name: 'キャラクター', url: Routes.character.index() },
+          { name: comboCategory.character.longName, url: Routes.character.detail(comboCategory.character.slug) },
+        ]}
+        current={comboCategory.name}
+      />
 
-      <Heading lv="h1">{title}</Heading>
+      <Heading lv="h1">{comboCategory.name}</Heading>
 
       <ComboList combos={comboCategory.combos} />
     </Content>

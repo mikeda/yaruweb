@@ -13,6 +13,8 @@ import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Head } from '@/components/layouts/Head';
 import { Content } from '@/components/layouts/Content';
 import { Heading } from '@/components/Heading';
+import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
+import { Routes } from '@/lib/Routes';
 
 interface Props {
   moveCategory: MoveCategoryDetailFragment;
@@ -24,6 +26,13 @@ const Page: React.FC<Props> = ({ moveCategory }) => {
   return (
     <Content>
       <Head title={title} />
+      <Breadcrumbs
+        parents={[
+          { name: 'キャラクター', url: Routes.character.index() },
+          { name: moveCategory.character.longName, url: Routes.character.detail(moveCategory.character.slug) },
+        ]}
+        current={moveCategory.name}
+      />
 
       <Heading lv="h1">{title}</Heading>
 

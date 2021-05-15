@@ -54,7 +54,7 @@ export const LoginWithEmailForm: React.FC = () => {
 
   const onSubmit = (attributes: SignUpInput) => {
     signInFirebaseWithEmail(attributes.email, attributes.password)
-      .then(() => {
+      .then(e => {
         getCurrentPlayer();
       })
       .catch(e => {

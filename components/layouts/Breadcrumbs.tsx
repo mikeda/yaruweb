@@ -9,7 +9,7 @@ interface ParentProps {
 }
 
 export interface BreadcrumbsProps {
-  parents: ParentProps[];
+  parents?: ParentProps[];
   current: string;
 }
 
@@ -17,9 +17,7 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ parents, current }) =>
   return (
     <ul className={styles.breadcrumbs}>
       <Parent name="HOME" url="/" />
-      {parents.map(({ name, url }, i) => (
-        <Parent key={i} name={name} url={url} />
-      ))}
+      {parents && parents.map(({ name, url }, i) => <Parent key={i} name={name} url={url} />)}
       <li className={styles.item}>{current}</li>
     </ul>
   );

@@ -9,6 +9,7 @@ import { NotFound } from '@/components/NotFound';
 import { TabLink } from '@/components/blocks/TabLink';
 import { Head } from '@/components/layouts/Head';
 import { Content } from '@/components/layouts/Content';
+import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 
 const PageContent: React.FC = () => {
   const router = useRouter();
@@ -76,6 +77,7 @@ const Page: React.FC = () => {
   return (
     <Content>
       <Head title="鉄拳7動画まとめ" />
+      <Breadcrumbs current="動画" />
 
       <PageContent />
     </Content>

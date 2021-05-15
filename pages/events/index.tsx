@@ -6,6 +6,7 @@ import { Media } from '@/components/Media';
 import dayjs from '@/lib/dayjs';
 import { Head } from '@/components/layouts/Head';
 import { Content } from '@/components/layouts/Content';
+import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 
 const PageContent: React.FC = () => {
   const { data, loading, fetchMore } = useEventsQuery({ variables: { first: 10 } });
@@ -93,6 +94,7 @@ const Page: React.FC = () => {
   return (
     <Content>
       <Head title="鉄拳7のイベントまとめ" />
+      <Breadcrumbs current="イベント" />
 
       <PageContent />
     </Content>
