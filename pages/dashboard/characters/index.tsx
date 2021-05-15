@@ -6,13 +6,14 @@ import { DashboardContent } from '@/components/layouts/dashboard/DashboardConten
 import { NotFound } from '@/components/NotFound';
 import Link from 'next/link';
 import { Routes } from '@/lib/Routes';
-import { Heading } from '@/components/Heading';
+import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
+import { PageHeader } from '@/components/layouts/PageHeader';
 
 const Page: React.FC = () => (
   <DashboardContent activeTab="character">
     <Head title="キャラクター" />
-
-    <Heading lv="h1">キャラクター</Heading>
+    <Breadcrumbs current="キャラクター" />
+    <PageHeader title="キャラクター" addPageUrl={Routes.dashboard.character.new()} />
 
     <CharacterList />
   </DashboardContent>
@@ -45,6 +46,10 @@ const CharacterList: React.FC = () => {
                   </a>
                 </td>
                 <td>
+                  <Link href={Routes.dashboard.character.edit(character.slug)}>
+                    <a>編集</a>
+                  </Link>
+                  /
                   <Link href={Routes.dashboard.moveCategory.index(character.slug)}>
                     <a>技データ</a>
                   </Link>

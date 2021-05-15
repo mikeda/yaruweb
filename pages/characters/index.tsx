@@ -8,6 +8,7 @@ import { CharactersDocument, CharactersQuery, CharacterSummaryFragment } from '@
 import { Head } from '@/components/layouts/Head';
 import { Content } from '@/components/layouts/Content';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
+import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 
 interface Props {
   characters: CharacterSummaryFragment[];
@@ -17,6 +18,7 @@ const Page: React.FC<Props> = ({ characters }) => {
   return (
     <Content>
       <Head title="キャラクター一覧" description="鉄拳7のキャラクター一覧です。" />
+      <Breadcrumbs current="キャラクター" />
 
       <div className="ly_row">
         {characters.map(character => {

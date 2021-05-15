@@ -9,11 +9,15 @@ import { Media } from '@/components/Media';
 import { Head } from '@/components/layouts/Head';
 import { TabLink } from '@/components/blocks/TabLink';
 import { Content } from '@/components/layouts/Content';
+import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
+import { useSetRecoilState } from 'recoil';
+import { loadingState } from 'states/loading';
 
 const Page: React.FC = () => {
   return (
     <Content>
       <Head title="鉄拳7の記事一覧" />
+      <Breadcrumbs current="記事" />
 
       <PageContent />
     </Content>
@@ -22,9 +26,11 @@ const Page: React.FC = () => {
 
 const PageContent: React.FC = () => {
   const router = useRouter();
+  const setLoading = useSetRecoilState(loadingState);
   const order = router.query.order === 'popular' ? Order.Popular : Order.New;
 
   const { data, loading, fetchMore } = useArticlesQuery({ variables: { first: 10, order: order } });
+  setLoading(loading);
   if (loading) return <NotFound>読み込み中</NotFound>;
 
   const articles = data?.articles.nodes;
@@ -35,7 +41,7 @@ const PageContent: React.FC = () => {
     <>
       <TabLinkGroup>
         <TabLink text="新着" href={Routes.article.index()} active={order === Order.New} />
-        <TabLink text="人気" href={Routes.article.index(Order.Popular)} active={order === Order.Popular} />
+        <TabLink text="人気" href={Routes.article.index({ order: Order.Popular })} active={order === Order.Popular} />
       </TabLinkGroup>
 
       <div className="bl_section">

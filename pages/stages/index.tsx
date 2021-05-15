@@ -1,3 +1,4 @@
+import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 import { Content } from '@/components/layouts/Content';
 import { Head } from '@/components/layouts/Head';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
@@ -13,6 +14,7 @@ const Page: React.FC<Props> = ({ stages }) => {
   return (
     <Content>
       <Head title="ステージ" />
+      <Breadcrumbs current="ステージ" />
 
       {stages.map(stage => (
         <div key={stage.id}>

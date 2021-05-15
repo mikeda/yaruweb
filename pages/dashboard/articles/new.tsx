@@ -10,6 +10,7 @@ import { toast } from 'react-toastify';
 import { loadingState } from 'states/loading';
 import { useSetRecoilState } from 'recoil';
 import ArticleForm from '@/components/ArticleForm';
+import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -32,9 +33,10 @@ const Page: React.FC = () => {
 
   return (
     <DashboardContent activeTab="article">
-      <Head title="記事作成" />
+      <Head title="記事登録" />
+      <Breadcrumbs parents={[{ name: '記事', url: Routes.dashboard.article.index() }]} current="記事登録" />
 
-      <PageHeader title="記事作成" />
+      <PageHeader title="記事登録" />
 
       <ArticleForm onSubmit={onSubmit} />
     </DashboardContent>

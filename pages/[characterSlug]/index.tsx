@@ -15,6 +15,7 @@ import { Content } from '@/components/layouts/Content';
 import { Routes } from '@/lib/Routes';
 import { CategoryCardList } from '@/components/CategoryCardList';
 import { CharacterCard } from '@/components/CharacterCard';
+import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 
 interface Props {
   character: CharacterWithChildrenFragment;
@@ -24,6 +25,7 @@ const Page: React.FC<Props> = ({ character }) => {
   return (
     <Content>
       <Head title={character.longName} />
+      <Breadcrumbs parents={[{ name: 'キャラクター', url: Routes.character.index() }]} current={character.longName} />
 
       <div className="bl_box">
         <CharacterCard character={character} />

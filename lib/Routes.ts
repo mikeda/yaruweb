@@ -1,9 +1,21 @@
-import { Order } from './graphql/types';
+import { ArticleCategory, Order } from './graphql/types';
+
+const generatePath = (path: string, params?: { [key: string]: string | undefined }) => {
+  if (!params) return path;
+
+  const queries: string[] = [];
+  Object.entries(params).filter(([k, v]) => {
+    if (v) queries.push(`${k}=${v}`);
+  });
+  if (queries.length === 0) return path;
+
+  return `${path}?${queries.join('&')}`;
+};
 
 export const Routes = {
   top: () => '/',
   article: {
-    index: (order?: Order) => (order === Order.Popular ? '/articles?order=popular' : '/articles'),
+    index: (params?: { order?: Order; category?: ArticleCategory }) => generatePath('/articles', params),
     detail: (articleId: string) => `/articles/${articleId}`,
   },
   character: {
@@ -33,6 +45,7 @@ export const Routes = {
     detail: (id: string) => `/videos/${id}`,
   },
   dashboard: {
+    top: () => '/',
     action: {
       edit: (actionId: string) => `/dashboard/actions/${actionId}/edit`,
     },
@@ -43,6 +56,8 @@ export const Routes = {
     },
     character: {
       index: () => '/dashboard/characters',
+      new: () => '/dashboard/characters/new',
+      edit: (characterId: string) => `/dashboard/characters/${characterId}/edit`,
     },
     comboCategory: {
       index: (characterSlug: string) => `/dashboard/characters/${characterSlug}/combo_categories`,
