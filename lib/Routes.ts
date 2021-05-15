@@ -46,8 +46,8 @@ export const Routes = {
   },
   dashboard: {
     top: () => '/',
-    action: {
-      edit: (actionId: string) => `/dashboard/actions/${actionId}/edit`,
+    attack_action: {
+      edit: (actionId: string) => `/dashboard/attack_actions/${actionId}/edit`,
     },
     article: {
       index: () => '/dashboard/articles',
@@ -89,6 +89,9 @@ export const Routes = {
       attack_actions: {
         new: (moveId: string) => `/dashboard/moves/${moveId}/attack_actions/new`,
       },
+      throw_actions: {
+        new: (moveId: string) => `/dashboard/moves/${moveId}/throw_actions/new`,
+      },
     },
     profile: {
       edit: () => `/dashboard/profile/edit`,
@@ -97,6 +100,9 @@ export const Routes = {
       index: () => '/dashboard/stages',
       new: () => '/dashboard/stages/new',
       edit: (stageId: string) => `/dashboard/stages/${stageId}/edit`,
+    },
+    throw_action: {
+      edit: (actionId: string) => `/dashboard/throw_actions/${actionId}/edit`,
     },
     video: {
       index: () => '/dashboard/videos',

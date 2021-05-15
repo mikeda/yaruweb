@@ -46,7 +46,13 @@ const Page: React.FC = () => {
         ]}
         current={title}
       />
-      <PageHeader title={title} addPageUrl={Routes.dashboard.move.attack_actions.new(move.id)} />
+      <PageHeader
+        title={title}
+        addButtons={[
+          { label: '打撃を登録', url: Routes.dashboard.move.attack_actions.new(move.id) },
+          { label: '投げを登録', url: Routes.dashboard.move.throw_actions.new(move.id) },
+        ]}
+      />
 
       <PageContent actions={move.actions} />
     </DashboardContent>
@@ -75,9 +81,16 @@ const PageContent: React.FC<{ actions: ActionFragment[] }> = ({ actions }) => {
                 </td>
                 <td>{action.damage}</td>
                 <td>
-                  <Link href={Routes.dashboard.action.edit(action.id)}>
-                    <a>編集</a>
-                  </Link>
+                  {a.__typename === 'AttackAction' && (
+                    <Link href={Routes.dashboard.attack_action.edit(action.id)}>
+                      <a>編集</a>
+                    </Link>
+                  )}
+                  {a.__typename === 'ThrowAction' && (
+                    <Link href={Routes.dashboard.throw_action.edit(action.id)}>
+                      <a>編集</a>
+                    </Link>
+                  )}
                 </td>
               </tr>
             );

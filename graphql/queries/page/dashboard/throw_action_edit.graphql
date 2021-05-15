@@ -1,0 +1,20 @@
+query PageDashboardThrowActionEdit($actionId: ID!) {
+  throwAction(actionId: $actionId) {
+    ...throwAction
+
+    move {
+      id
+      name
+
+      moveCategory {
+        id
+        name
+
+        character {
+          slug
+          name
+        }
+      }
+    }
+  }
+}
