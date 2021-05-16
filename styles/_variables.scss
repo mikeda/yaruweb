@@ -53,3 +53,14 @@ $breakpoints: (
     @content;
   }
 }
+
+$minBreakpoints: (
+  'sm': 'screen and (min-width: #{$sm})',
+  'md': 'screen and (min-width: #{$md})',
+);
+
+@mixin mq-min($size) {
+  @media #{map-get($minBreakpoints, $size)} {
+    @content;
+  }
+}
