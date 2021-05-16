@@ -9,6 +9,7 @@ import { FormGroup } from '@/components/form2/FormGroup';
 import { Input } from '@/components/form2/Input';
 import { TextArea } from './form2/TextArea';
 import { CheckBox } from './form2/CheckBox';
+import { FormGrid } from './form2/FormGrid';
 
 const schema = yup.object().shape({
   name: yup.string().required(),
@@ -57,40 +58,48 @@ export const CharacterForm: React.FC<Props> = ({ character, onSubmit }) => {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <FormGroup label="名前" required>
-        <Input {...register('name')} />
-        {errors.name && <span>This field is required</span>}
-      </FormGroup>
+      <FormGrid>
+        <FormGroup label="名前" required>
+          <Input {...register('name')} />
+          {errors.name && <span>This field is required</span>}
+        </FormGroup>
 
-      <FormGroup label="カナ" required>
-        <Input {...register('nameKana')} />
-        {errors.nameKana && <span>This field is required</span>}
-      </FormGroup>
+        <FormGroup label="カナ" required>
+          <Input {...register('nameKana')} />
+          {errors.nameKana && <span>This field is required</span>}
+        </FormGroup>
+      </FormGrid>
 
-      <FormGroup label="正式名称" required>
-        <Input {...register('longName')} />
-        {errors.longName && <span>This field is required</span>}
-      </FormGroup>
+      <FormGrid>
+        <FormGroup label="正式名称" required>
+          <Input {...register('longName')} />
+          {errors.longName && <span>This field is required</span>}
+        </FormGroup>
 
-      <FormGroup label="カナ(正式名称)" required>
-        <Input {...register('longNameKana')} />
-        {errors.longNameKana && <span>This field is required</span>}
-      </FormGroup>
+        <FormGroup label="カナ(正式名称)" required>
+          <Input {...register('longNameKana')} />
+          {errors.longNameKana && <span>This field is required</span>}
+        </FormGroup>
+      </FormGrid>
 
-      <FormGroup label="ID(URLで使う名前)" required>
-        <Input {...register('slug')} />
-        {errors.slug?.message && <span>{errors.slug.message}</span>}
-      </FormGroup>
+      <FormGrid>
+        <FormGroup label="ID(URLで使う名前)" required>
+          <Input {...register('slug')} />
+          {errors.slug?.message && <span>{errors.slug.message}</span>}
+        </FormGroup>
+      </FormGrid>
 
-      <FormGroup label="国籍" required>
-        <Input {...register('country')} />
-        {errors.country && <span>This field is required</span>}
-      </FormGroup>
+      <FormGrid>
+        <FormGroup label="国籍" required>
+          <Input {...register('country')} />
+          {errors.country && <span>This field is required</span>}
+        </FormGroup>
 
-      <FormGroup label="格闘スタイル" required>
-        <Input {...register('fightingStyle')} />
-        {errors.fightingStyle && <span>This field is required</span>}
-      </FormGroup>
+        <FormGroup label="格闘スタイル" required>
+          <Input {...register('fightingStyle')} />
+          {errors.fightingStyle && <span>This field is required</span>}
+        </FormGroup>
+      </FormGrid>
 
       <FormGroup label="公式ストーリー" required>
         <TextArea {...register('story')} />

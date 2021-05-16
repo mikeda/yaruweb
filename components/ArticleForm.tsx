@@ -1,26 +1,34 @@
-import React, { useMemo, useState } from 'react';
-import * as Yup from 'yup';
-import { Field, Form, Formik } from 'formik';
+import React, { useRef, useState } from 'react';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+
 import { ArticleCategoryText } from '@/lib/graphql/enum_texts';
-import { ArticleAttributes, ArticleCategory } from '@/lib/graphql/types';
-import { FormGroup } from './form/FormGroup';
-import { Slate } from 'slate-react';
+import { ArticleAttributes, ArticleFragment } from '@/lib/graphql/types';
+import { ReactEditor, Slate } from 'slate-react';
 import { ArticleEditor, createArticleEditor } from './ArticleEditor';
 import { Node } from 'slate';
+import { useForm } from 'react-hook-form';
+import { FormGroup } from './form2/FormGroup';
+import { Input } from './form2/Input';
+import { Button } from './blocks/Button';
+
+const schema = yup.object().shape({
+  title: yup.string().required(),
+});
 
 interface Props {
-  initialAttributes?: ArticleAttributes;
+  article?: ArticleFragment;
   onSubmit: (attributes: ArticleAttributes) => void;
 }
 
-const ArticleForm: React.FC<Props> = ({
-  initialAttributes = { title: '', content: '', category: ArticleCategory.Blog },
-  onSubmit,
-}) => {
-  const editor = useMemo(() => createArticleEditor(), []);
-  const [value, setValue] = useState<Node[]>(
-    initialAttributes.content
-      ? JSON.parse(initialAttributes.content)
+const ArticleForm: React.FC<Props> = ({ article, onSubmit }) => {
+  const editorRef = useRef<ReactEditor>();
+  if (!editorRef.current) editorRef.current = createArticleEditor();
+  const editor = editorRef.current;
+
+  const [slateValue, setSlateValue] = useState<Node[]>(
+    article?.content
+      ? JSON.parse(article.content)
       : [
           {
             type: 'paragraph',
@@ -28,76 +36,74 @@ const ArticleForm: React.FC<Props> = ({
           },
         ],
   );
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm<ArticleAttributes>({
+    resolver: yupResolver(schema),
+    defaultValues: article && {
+      title: article.title,
+      category: article.category,
+    },
+  });
+
+  const onFormSubmit = (attributes: ArticleAttributes) => {
+    onSubmit({ ...attributes, content: JSON.stringify(slateValue) });
+  };
 
   return (
-    <Formik<ArticleAttributes>
-      initialValues={initialAttributes}
-      validationSchema={Yup.object({
-        title: Yup.string().required('タイトルを入力して下さい。'),
-      })}
-      onSubmit={({ title, category, mainImage }) => {
-        if (!editor) return;
+    <form onSubmit={handleSubmit(onFormSubmit)}>
+      <FormGroup label="タイトル" required>
+        <Input {...register('title')} />
+        {errors.title && <span>This field is required</span>}
+      </FormGroup>
 
-        onSubmit({
-          title,
-          category,
-          mainImage,
-          content: JSON.stringify(value),
-        });
-      }}
-    >
-      {({ isValid, setFieldValue }) => {
-        return (
-          <Form>
-            <FormGroup name="title" placeholder="タイトル" type="text" />
+      <FormGroup label="カテゴリ" required>
+        <select {...register('category')}>
+          {Object.entries(ArticleCategoryText).map(([key, value]) => (
+            <option value={key} key={key}>
+              {value}
+            </option>
+          ))}
+        </select>
+      </FormGroup>
 
-            <Field name="category" as="select" className="el_form_input">
-              {Object.entries(ArticleCategoryText).map(([key, value]) => (
-                <option value={key} key={key}>
-                  {value}
-                </option>
-              ))}
-            </Field>
+      <FormGroup label="メイン画像">
+        <input
+          type="file"
+          accept="image/*"
+          name="mainImageDummy"
+          onChange={e => {
+            if (!e.target.files) return;
+            const file = e.target.files[0];
+            if (!file) return;
 
-            <div className="el_form_group">
-              <label className="el_form_label">メイン画像</label>
-              <Field
-                type="file"
-                accept="image/*"
-                name="mainImageDummy"
-                onChange={(e: Event) => {
-                  const target = e.target as HTMLInputElement;
-                  if (!target.files) return;
-                  const file = target.files[0];
-                  if (!file) return;
+            const reader = new FileReader();
+            reader.onload = e => {
+              if (!e.target) return;
 
-                  const reader = new FileReader();
-                  reader.onload = e => {
-                    if (!e.target) return;
+              setValue('mainImage', e.target.result as string);
+            };
+            reader.readAsDataURL(file);
+          }}
+        />
+        <input type="hidden" name="mainImage" />
+      </FormGroup>
 
-                    setFieldValue('mainImage', e.target.result);
-                  };
-                  reader.readAsDataURL(file);
-                }}
-              />
-              <Field type="hidden" name="mainImage" />
-            </div>
+      <FormGroup label="本文">
+        <Slate editor={editor} value={slateValue} onChange={newValue => setSlateValue(newValue)}>
+          <ArticleEditor />
+        </Slate>
+      </FormGroup>
 
-            <div className="bl_box">
-              <Slate editor={editor} value={value} onChange={newValue => setValue(newValue)}>
-                <ArticleEditor />
-              </Slate>
-            </div>
-
-            <div className="el_form_group">
-              <button type="submit" disabled={!isValid} className="el_btn">
-                登録する
-              </button>
-            </div>
-          </Form>
-        );
-      }}
-    </Formik>
+      <FormGroup>
+        <Button>
+          <input type="submit" />
+        </Button>
+      </FormGroup>
+    </form>
   );
 };
 

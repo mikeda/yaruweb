@@ -35,7 +35,6 @@ const Page: React.FC = () => {
     <DashboardContent activeTab="article">
       <Head title="記事登録" />
       <Breadcrumbs parents={[{ name: '記事', url: Routes.dashboard.article.index() }]} current="記事登録" />
-
       <PageHeader title="記事登録" />
 
       <ArticleForm onSubmit={onSubmit} />
