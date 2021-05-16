@@ -51,7 +51,6 @@ export const VideoMedia: React.FC<Props> = ({ video }) => {
         <div className={styles.txt}>{video.channelTitle}</div>
 
         <VideoHighlights
-          videoId={video.id}
           highlights={video.highlights}
           onSelect={startSec => {
             if (!youTubePlayer) return;
