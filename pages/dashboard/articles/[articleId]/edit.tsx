@@ -58,12 +58,7 @@ const Content: React.FC<{ article: ArticleFragment }> = ({ article }) => {
 
   setLoading(loading);
 
-  return (
-    <ArticleForm
-      initialAttributes={{ category: article.category, title: article.title, content: article.content }}
-      onSubmit={onSubmit}
-    />
-  );
+  return <ArticleForm article={article} onSubmit={onSubmit} />;
 };
 
 export default Page;

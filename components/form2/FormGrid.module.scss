@@ -1,0 +1,16 @@
+@import '@/styles/variables';
+
+.grid {
+  display: flex;
+  justify-content: space-between;
+}
+
+.grid > * {
+  width: 47%;
+}
+
+@include mq(md) {
+  .grid > * {
+    width: 100%;
+  }
+}

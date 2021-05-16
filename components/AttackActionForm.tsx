@@ -61,7 +61,7 @@ export const AttackActionForm: React.FC<Props> = ({ attackAction, onSubmit }) =>
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <select {...register('attackType', { required: true })}>
+      <select {...register('attackType')}>
         {Object.entries(AttackTypeEnumText).map(([key, value]) => (
           <option value={key} key={key}>
             {value}

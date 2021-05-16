@@ -113,7 +113,7 @@ export const ArticleEditor: React.FC = () => {
   };
 
   return (
-    <>
+    <div style={{ border: '1px solid #d1d8dc', padding: 8 }}>
       <Controls />
 
       <Editable
@@ -123,6 +123,6 @@ export const ArticleEditor: React.FC = () => {
         onKeyDown={onKeyDown}
         style={{ maxHeight: 400, overflowY: 'auto' }}
       />
-    </>
+    </div>
   );
 };
