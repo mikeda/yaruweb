@@ -261,6 +261,7 @@ export type ComboCategory = {
   __typename?: 'ComboCategory';
   character: Character;
   combos: Array<Combo>;
+  combosCount: Scalars['Int'];
   id: Scalars['ID'];
   name: Scalars['String'];
 };
@@ -982,6 +983,7 @@ export type MoveCategory = {
   character: Character;
   id: Scalars['ID'];
   moves: Array<Move>;
+  movesCount: Scalars['Int'];
   name: Scalars['String'];
 };
 
@@ -3747,6 +3749,26 @@ export type VideosQuery = (
       { __typename?: 'PageInfo' }
       & PagingFragment
     ) }
+  ) }
+);
+
+export type PageDashboardCharacterQueryVariables = Exact<{
+  characterSlug: Scalars['ID'];
+}>;
+
+
+export type PageDashboardCharacterQuery = (
+  { __typename?: 'Query' }
+  & { character: (
+    { __typename?: 'Character' }
+    & Pick<Character, 'slug' | 'longName'>
+    & { moveCategories: Array<(
+      { __typename?: 'MoveCategory' }
+      & Pick<MoveCategory, 'id' | 'name' | 'movesCount'>
+    )>, comboCategories: Array<(
+      { __typename?: 'ComboCategory' }
+      & Pick<ComboCategory, 'id' | 'name' | 'combosCount'>
+    )> }
   ) }
 );
 
@@ -7415,3 +7437,49 @@ export function useVideosLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Vid
 export type VideosQueryHookResult = ReturnType<typeof useVideosQuery>;
 export type VideosLazyQueryHookResult = ReturnType<typeof useVideosLazyQuery>;
 export type VideosQueryResult = Apollo.QueryResult<VideosQuery, VideosQueryVariables>;
+export const PageDashboardCharacterDocument = gql`
+    query PageDashboardCharacter($characterSlug: ID!) {
+  character(characterSlug: $characterSlug) {
+    slug
+    longName
+    moveCategories {
+      id
+      name
+      movesCount
+    }
+    comboCategories {
+      id
+      name
+      combosCount
+    }
+  }
+}
+    `;
+
+/**
+ * __usePageDashboardCharacterQuery__
+ *
+ * To run a query within a React component, call `usePageDashboardCharacterQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePageDashboardCharacterQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePageDashboardCharacterQuery({
+ *   variables: {
+ *      characterSlug: // value for 'characterSlug'
+ *   },
+ * });
+ */
+export function usePageDashboardCharacterQuery(baseOptions: Apollo.QueryHookOptions<PageDashboardCharacterQuery, PageDashboardCharacterQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PageDashboardCharacterQuery, PageDashboardCharacterQueryVariables>(PageDashboardCharacterDocument, options);
+      }
+export function usePageDashboardCharacterLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PageDashboardCharacterQuery, PageDashboardCharacterQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PageDashboardCharacterQuery, PageDashboardCharacterQueryVariables>(PageDashboardCharacterDocument, options);
+        }
+export type PageDashboardCharacterQueryHookResult = ReturnType<typeof usePageDashboardCharacterQuery>;
+export type PageDashboardCharacterLazyQueryHookResult = ReturnType<typeof usePageDashboardCharacterLazyQuery>;
+export type PageDashboardCharacterQueryResult = Apollo.QueryResult<PageDashboardCharacterQuery, PageDashboardCharacterQueryVariables>;

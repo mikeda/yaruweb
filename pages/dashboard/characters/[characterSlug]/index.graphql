@@ -1,0 +1,18 @@
+query PageDashboardCharacter($characterSlug: ID!) {
+  character(characterSlug: $characterSlug) {
+    slug
+    longName
+
+    moveCategories {
+      id
+      name
+      movesCount
+    }
+
+    comboCategories {
+      id
+      name
+      combosCount
+    }
+  }
+}
