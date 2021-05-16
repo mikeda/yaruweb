@@ -1,0 +1,30 @@
+@import '@/styles/variables';
+
+.grid {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  width: calc(100% + 24px);
+  margin: -12px;
+}
+
+.item {
+  box-sizing: border-box;
+  padding: 12px;
+}
+
+@for $i from 1 through 12 {
+  .sm-#{$i} {
+    flex: 0 0 auto;
+    width: percentage($i / 12);
+  }
+}
+
+@for $i from 1 through 12 {
+  @include mq-min(md) {
+    .md-#{$i} {
+      flex: 0 0 auto;
+      width: percentage($i / 12);
+    }
+  }
+}
