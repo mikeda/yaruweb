@@ -1,0 +1,29 @@
+@import '@/styles/variables';
+
+.container {
+  padding: 16px;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.video {
+  margin-top: 1rem;
+}
+
+.video video {
+  width: 100%;
+}
+
+.command {
+  margin-top: 1rem;
+}
+
+.note {
+  margin-top: 1rem;
+}
