@@ -1,0 +1,21 @@
+query PageDashboardCommandNew($moveId: ID!) {
+  move(moveId: $moveId) {
+    id
+    name
+
+    moveCategory {
+      id
+      name
+
+      character {
+        slug
+        name
+
+        states {
+          id
+          name
+        }
+      }
+    }
+  }
+}

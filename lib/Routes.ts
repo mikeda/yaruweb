@@ -69,6 +69,9 @@ export const Routes = {
       new: (comboCategoryId: string) => `/dashboard/combo_categories/${comboCategoryId}/combos/new`,
       edit: (comboId: string) => `/dashboard/combos/${comboId}/edit`,
     },
+    command: {
+      edit: (commandId: string) => `/dashboard/commands/${commandId}/edit`,
+    },
     event: {
       index: () => '/dashboard/events',
       new: () => '/dashboard/events/new',
@@ -91,6 +94,10 @@ export const Routes = {
       },
       throw_actions: {
         new: (moveId: string) => `/dashboard/moves/${moveId}/throw_actions/new`,
+      },
+      commands: {
+        index: (moveId: string) => `/dashboard/moves/${moveId}/commands`,
+        new: (moveId: string) => `/dashboard/moves/${moveId}/commands/new`,
       },
     },
     profile: {

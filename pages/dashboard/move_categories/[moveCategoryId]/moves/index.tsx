@@ -56,24 +56,33 @@ const PageContent: React.FC<{ data: PageDashboardMovesQuery }> = ({ data }) => {
         <thead>
           <tr>
             <th></th>
+            <th>コマンド</th>
             <th>判定</th>
-            <th></th>
           </tr>
         </thead>
         <tbody>
           {data.moveCategory.moves.map(move => {
             return (
               <tr key={move.id}>
-                <td>{move.name}</td>
                 <td>
-                  <ActionList actions={move.actions} />
-                  <Link href={Routes.dashboard.move.actions.index(move.id)}>
+                  {move.name}
+                  <br />
+                  <Link href={Routes.dashboard.move.edit(move.id)}>
+                    <a>編集</a>
+                  </Link>
+                </td>
+                <td>
+                  {move.commands.map(command => (
+                    <div key={command.id}>{command.operations.map(o => o.name).join(',')}</div>
+                  ))}
+                  <Link href={Routes.dashboard.move.commands.index(move.id)}>
                     <a>詳細</a>
                   </Link>
                 </td>
                 <td>
-                  <Link href={Routes.dashboard.move.edit(move.id)}>
-                    <a>編集</a>
+                  <ActionList actions={move.actions} />
+                  <Link href={Routes.dashboard.move.actions.index(move.id)}>
+                    <a>詳細</a>
                   </Link>
                 </td>
               </tr>
