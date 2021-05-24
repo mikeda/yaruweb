@@ -248,12 +248,14 @@ export type Combo = {
   name: Scalars['String'];
   note?: Maybe<Scalars['String']>;
   operations: Array<Operation>;
+  state?: Maybe<State>;
 };
 
 export type ComboAttributes = {
   name: Scalars['String'];
   damage?: Maybe<Scalars['Int']>;
   note?: Maybe<Scalars['String']>;
+  stateId?: Maybe<Scalars['ID']>;
   operationIds: Array<Scalars['ID']>;
   comboVideoId?: Maybe<Scalars['ID']>;
 };
@@ -3681,6 +3683,58 @@ export type PageDashboardMoveCategoriesQuery = (
       { __typename?: 'MoveCategory' }
       & MoveCategoryFragment
     )> }
+  ) }
+);
+
+export type PageDashboardComboNewQueryVariables = Exact<{
+  comboCategoryId: Scalars['ID'];
+}>;
+
+
+export type PageDashboardComboNewQuery = (
+  { __typename?: 'Query' }
+  & { comboCategory: (
+    { __typename?: 'ComboCategory' }
+    & Pick<ComboCategory, 'id' | 'name'>
+    & { character: (
+      { __typename?: 'Character' }
+      & Pick<Character, 'slug' | 'name'>
+      & { states: Array<(
+        { __typename?: 'State' }
+        & Pick<State, 'id' | 'name'>
+      )> }
+    ) }
+  ) }
+);
+
+export type PageDashboardComboEditQueryVariables = Exact<{
+  comboId: Scalars['ID'];
+}>;
+
+
+export type PageDashboardComboEditQuery = (
+  { __typename?: 'Query' }
+  & { combo: (
+    { __typename?: 'Combo' }
+    & { state?: Maybe<(
+      { __typename?: 'State' }
+      & Pick<State, 'id'>
+    )>, operations: Array<(
+      { __typename?: 'Operation' }
+      & Pick<Operation, 'id'>
+    )>, comboCategory: (
+      { __typename?: 'ComboCategory' }
+      & Pick<ComboCategory, 'id' | 'name'>
+      & { character: (
+        { __typename?: 'Character' }
+        & Pick<Character, 'slug' | 'name'>
+        & { states: Array<(
+          { __typename?: 'State' }
+          & Pick<State, 'id' | 'name'>
+        )> }
+      ) }
+    ) }
+    & ComboFragment
   ) }
 );
 
@@ -7363,6 +7417,103 @@ export function usePageDashboardMoveCategoriesLazyQuery(baseOptions?: Apollo.Laz
 export type PageDashboardMoveCategoriesQueryHookResult = ReturnType<typeof usePageDashboardMoveCategoriesQuery>;
 export type PageDashboardMoveCategoriesLazyQueryHookResult = ReturnType<typeof usePageDashboardMoveCategoriesLazyQuery>;
 export type PageDashboardMoveCategoriesQueryResult = Apollo.QueryResult<PageDashboardMoveCategoriesQuery, PageDashboardMoveCategoriesQueryVariables>;
+export const PageDashboardComboNewDocument = gql`
+    query PageDashboardComboNew($comboCategoryId: ID!) {
+  comboCategory(comboCategoryId: $comboCategoryId) {
+    id
+    name
+    character {
+      slug
+      name
+      states {
+        id
+        name
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __usePageDashboardComboNewQuery__
+ *
+ * To run a query within a React component, call `usePageDashboardComboNewQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePageDashboardComboNewQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePageDashboardComboNewQuery({
+ *   variables: {
+ *      comboCategoryId: // value for 'comboCategoryId'
+ *   },
+ * });
+ */
+export function usePageDashboardComboNewQuery(baseOptions: Apollo.QueryHookOptions<PageDashboardComboNewQuery, PageDashboardComboNewQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PageDashboardComboNewQuery, PageDashboardComboNewQueryVariables>(PageDashboardComboNewDocument, options);
+      }
+export function usePageDashboardComboNewLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PageDashboardComboNewQuery, PageDashboardComboNewQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PageDashboardComboNewQuery, PageDashboardComboNewQueryVariables>(PageDashboardComboNewDocument, options);
+        }
+export type PageDashboardComboNewQueryHookResult = ReturnType<typeof usePageDashboardComboNewQuery>;
+export type PageDashboardComboNewLazyQueryHookResult = ReturnType<typeof usePageDashboardComboNewLazyQuery>;
+export type PageDashboardComboNewQueryResult = Apollo.QueryResult<PageDashboardComboNewQuery, PageDashboardComboNewQueryVariables>;
+export const PageDashboardComboEditDocument = gql`
+    query PageDashboardComboEdit($comboId: ID!) {
+  combo(comboId: $comboId) {
+    ...combo
+    state {
+      id
+    }
+    operations {
+      id
+    }
+    comboCategory {
+      id
+      name
+      character {
+        slug
+        name
+        states {
+          id
+          name
+        }
+      }
+    }
+  }
+}
+    ${ComboFragmentDoc}`;
+
+/**
+ * __usePageDashboardComboEditQuery__
+ *
+ * To run a query within a React component, call `usePageDashboardComboEditQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePageDashboardComboEditQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePageDashboardComboEditQuery({
+ *   variables: {
+ *      comboId: // value for 'comboId'
+ *   },
+ * });
+ */
+export function usePageDashboardComboEditQuery(baseOptions: Apollo.QueryHookOptions<PageDashboardComboEditQuery, PageDashboardComboEditQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PageDashboardComboEditQuery, PageDashboardComboEditQueryVariables>(PageDashboardComboEditDocument, options);
+      }
+export function usePageDashboardComboEditLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PageDashboardComboEditQuery, PageDashboardComboEditQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PageDashboardComboEditQuery, PageDashboardComboEditQueryVariables>(PageDashboardComboEditDocument, options);
+        }
+export type PageDashboardComboEditQueryHookResult = ReturnType<typeof usePageDashboardComboEditQuery>;
+export type PageDashboardComboEditLazyQueryHookResult = ReturnType<typeof usePageDashboardComboEditLazyQuery>;
+export type PageDashboardComboEditQueryResult = Apollo.QueryResult<PageDashboardComboEditQuery, PageDashboardComboEditQueryVariables>;
 export const PageDashboardCommandEditDocument = gql`
     query PageDashboardCommandEdit($commandId: ID!) {
   command(commandId: $commandId) {

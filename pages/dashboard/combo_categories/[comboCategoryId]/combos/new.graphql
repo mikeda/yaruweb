@@ -1,0 +1,16 @@
+query PageDashboardComboNew($comboCategoryId: ID!) {
+  comboCategory(comboCategoryId: $comboCategoryId) {
+    id
+    name
+
+    character {
+      slug
+      name
+
+      states {
+        id
+        name
+      }
+    }
+  }
+}

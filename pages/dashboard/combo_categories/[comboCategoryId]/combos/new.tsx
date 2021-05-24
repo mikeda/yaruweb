@@ -1,29 +1,64 @@
 import React from 'react';
 
-import {
-  ComboCategoryDocument,
-  ComboCategoryQuery,
-  ComboCategoryWithCharacterFragment,
-  ComboAttributes,
-  useCreateComboMutation,
-} from '@/lib/graphql/types';
 import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
 import { Routes } from '@/lib/Routes';
 import { PageHeader } from '@/components/layouts/PageHeader';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
-import { ComboForm } from '@/components/ComboForm';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from 'states/loading';
-import { GetServerSideProps } from 'next';
-import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
+import {
+  ComboAttributes,
+  PageDashboardComboNewQuery,
+  useCreateComboMutation,
+  usePageDashboardComboNewQuery,
+} from '@/lib/graphql/types';
+import { ComboForm } from '@/components/ComboForm';
+import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 
-interface Props {
-  comboCategory: ComboCategoryWithCharacterFragment;
-}
+const Page: React.FC = () => {
+  const router = useRouter();
+  const { comboCategoryId } = router.query;
+  const setLoading = useSetRecoilState(loadingState);
 
-const Page: React.FC<Props> = ({ comboCategory }) => {
+  const { data, loading } = usePageDashboardComboNewQuery({
+    variables: { comboCategoryId: comboCategoryId as string },
+    fetchPolicy: 'network-only',
+    skip: !comboCategoryId,
+  });
+
+  setLoading(loading);
+  if (!data) return null;
+
+  const { comboCategory } = data;
+  const title = 'コンボ登録';
+
+  return (
+    <DashboardContent activeTab="character">
+      <Head title="コンボ登録" />
+      <Breadcrumbs
+        parents={[
+          { name: 'キャラクター', url: Routes.dashboard.character.index() },
+          {
+            name: `コンボ(${comboCategory.character.name})`,
+            url: Routes.dashboard.comboCategory.index(comboCategory.character.slug),
+          },
+          {
+            name: comboCategory.name,
+            url: Routes.dashboard.combo.index(comboCategory.id),
+          },
+        ]}
+        current={title}
+      />
+      <PageHeader title="コンボ登録" />
+
+      <PageContent {...data} />
+    </DashboardContent>
+  );
+};
+
+const PageContent: React.FC<PageDashboardComboNewQuery> = ({ comboCategory }) => {
   const router = useRouter();
   const setLoading = useSetRecoilState(loadingState);
   const [createCombo, { loading }] = useCreateComboMutation({
@@ -42,22 +77,7 @@ const Page: React.FC<Props> = ({ comboCategory }) => {
 
   setLoading(loading);
 
-  return (
-    <DashboardContent activeTab="character">
-      <Head title="コンボ作成" />
-
-      <PageHeader title="コンボ作成" />
-
-      <ComboForm onSubmit={onSubmit} />
-    </DashboardContent>
-  );
-};
-
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const comboCategoryId = params?.comboCategoryId as string;
-  const data: ComboCategoryQuery = await fetchGraphql(ComboCategoryDocument, { comboCategoryId });
-
-  return { props: { comboCategory: data.comboCategory } };
+  return <ComboForm states={comboCategory.character.states} onSubmit={onSubmit} />;
 };
 
 export default Page;

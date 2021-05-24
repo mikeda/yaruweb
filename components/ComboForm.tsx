@@ -7,6 +7,7 @@ import {
   ComboFragment,
   ComboVideoFragment,
   OperationFragment,
+  StateFragment,
   useCreateComboVideoMutation,
 } from '@/lib/graphql/types';
 import { useForm } from 'react-hook-form';
@@ -27,10 +28,11 @@ const schema = yup.object().shape({
 
 interface Props {
   combo?: ComboFragment;
+  states: StateFragment[];
   onSubmit: (attributes: ComboAttributes) => void;
 }
 
-export const ComboForm: React.FC<Props> = ({ combo, onSubmit }) => {
+export const ComboForm: React.FC<Props> = ({ combo, states, onSubmit }) => {
   const [operations, setOperations] = useState<OperationFragment[]>(combo?.operations || []);
 
   const {
@@ -61,8 +63,14 @@ export const ComboForm: React.FC<Props> = ({ combo, onSubmit }) => {
         <Input type="number" {...register('damage', { valueAsNumber: true })} />
       </FormGroup>
 
-      <FormGroup label="備考">
-        <TextArea {...register('note')} />
+      <FormGroup label="状態">
+        <select {...register('stateId')}>
+          {states.map(state => (
+            <option value={state.id} key={state.id}>
+              {state.name}
+            </option>
+          ))}
+        </select>
       </FormGroup>
 
       <FormGroup label="コマンド">
@@ -98,6 +106,10 @@ export const ComboForm: React.FC<Props> = ({ combo, onSubmit }) => {
         {combo && combo.comboVideo && (
           <VideoPlayer src={combo.comboVideo.m3u8Url} thumnailUrl={combo.comboVideo.thumbnailUrl} />
         )}
+      </FormGroup>
+
+      <FormGroup label="備考">
+        <TextArea {...register('note')} />
       </FormGroup>
 
       <FormGroup>
