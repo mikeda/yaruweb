@@ -1,16 +1,13 @@
-query PageDashboardComboEdit($comboId: ID!) {
-  combo(comboId: $comboId) {
-    ...combo
+query PageDashboardMoveEdit($moveId: ID!) {
+  move(moveId: $moveId) {
+    ...move
 
-    state {
+    conditions {
       id
+      name
     }
 
-    operations {
-      id
-    }
-
-    comboCategory {
+    moveCategory {
       id
       name
 

@@ -207,6 +207,7 @@ export enum AttackTypeEnum {
 export type Character = {
   __typename?: 'Character';
   comboCategories: Array<ComboCategory>;
+  conditions: Array<Condition>;
   country: Scalars['String'];
   description: Scalars['String'];
   dlc: Scalars['Boolean'];
@@ -243,6 +244,7 @@ export type Combo = {
   __typename?: 'Combo';
   comboCategory: ComboCategory;
   comboVideo?: Maybe<ComboVideo>;
+  conditions: Array<Condition>;
   damage?: Maybe<Scalars['Int']>;
   id: Scalars['ID'];
   name: Scalars['String'];
@@ -255,6 +257,7 @@ export type ComboAttributes = {
   name: Scalars['String'];
   damage?: Maybe<Scalars['Int']>;
   note?: Maybe<Scalars['String']>;
+  conditionIds: Array<Scalars['ID']>;
   stateId?: Maybe<Scalars['ID']>;
   operationIds: Array<Scalars['ID']>;
   comboVideoId?: Maybe<Scalars['ID']>;
@@ -295,6 +298,12 @@ export type CommandAttributes = {
 
 export type CommentAttributes = {
   message: Scalars['String'];
+};
+
+export type Condition = {
+  __typename?: 'Condition';
+  id: Scalars['ID'];
+  name: Scalars['String'];
 };
 
 export enum CountryEnum {
@@ -949,6 +958,7 @@ export type Move = {
   actions: Array<Action>;
   afterState?: Maybe<State>;
   commands: Array<Command>;
+  conditions: Array<Condition>;
   crouchingStatus: Scalars['Boolean'];
   homing: Scalars['Boolean'];
   id: Scalars['ID'];
@@ -979,6 +989,7 @@ export type MoveAttributes = {
   screw: Scalars['Boolean'];
   wallBound: Scalars['Boolean'];
   note?: Maybe<Scalars['String']>;
+  conditionIds: Array<Scalars['ID']>;
 };
 
 export type MoveCategory = {
@@ -1430,6 +1441,7 @@ export type Query = {
   comboCategory: ComboCategory;
   combos: Array<Combo>;
   command: Command;
+  conditions: Array<Condition>;
   currentPlayer: CurrentPlayer;
   event: Event;
   events: EventConnection;
@@ -1509,6 +1521,11 @@ export type QueryCombosArgs = {
 
 export type QueryCommandArgs = {
   commandId: Scalars['ID'];
+};
+
+
+export type QueryConditionsArgs = {
+  characterSlug: Scalars['ID'];
 };
 
 
@@ -2177,6 +2194,9 @@ export type ComboFragment = (
   ), comboVideo?: Maybe<(
     { __typename?: 'ComboVideo' }
     & ComboVideoFragment
+  )>, conditions: Array<(
+    { __typename?: 'Condition' }
+    & ConditionFragment
   )>, operations: Array<(
     { __typename?: 'Operation' }
     & OperationFragment
@@ -2226,6 +2246,11 @@ export type CommandFragment = (
   )> }
 );
 
+export type ConditionFragment = (
+  { __typename?: 'Condition' }
+  & Pick<Condition, 'id' | 'name'>
+);
+
 export type CurrentPlayerFragment = (
   { __typename?: 'CurrentPlayer' }
   & Pick<CurrentPlayer, 'id' | 'name' | 'role' | 'avatarUrl'>
@@ -2266,6 +2291,9 @@ export type MoveFragment = (
   ) | (
     { __typename?: 'ThrowAction' }
     & Action_ThrowAction_Fragment
+  )>, conditions: Array<(
+    { __typename?: 'Condition' }
+    & ConditionFragment
   )> }
 );
 
@@ -3702,6 +3730,9 @@ export type PageDashboardComboNewQuery = (
       & { states: Array<(
         { __typename?: 'State' }
         & Pick<State, 'id' | 'name'>
+      )>, conditions: Array<(
+        { __typename?: 'Condition' }
+        & Pick<Condition, 'id' | 'name'>
       )> }
     ) }
   ) }
@@ -3731,6 +3762,9 @@ export type PageDashboardComboEditQuery = (
         & { states: Array<(
           { __typename?: 'State' }
           & Pick<State, 'id' | 'name'>
+        )>, conditions: Array<(
+          { __typename?: 'Condition' }
+          & Pick<Condition, 'id' | 'name'>
         )> }
       ) }
     ) }
@@ -3790,6 +3824,27 @@ export type PageDashboardMovesQuery = (
       & MoveFragment
     )> }
     & MoveCategoryFragment
+  ) }
+);
+
+export type PageDashboardMoveNewQueryVariables = Exact<{
+  moveCategoryId: Scalars['ID'];
+}>;
+
+
+export type PageDashboardMoveNewQuery = (
+  { __typename?: 'Query' }
+  & { moveCategory: (
+    { __typename?: 'MoveCategory' }
+    & Pick<MoveCategory, 'id' | 'name'>
+    & { character: (
+      { __typename?: 'Character' }
+      & Pick<Character, 'slug' | 'name'>
+      & { conditions: Array<(
+        { __typename?: 'Condition' }
+        & Pick<Condition, 'id' | 'name'>
+      )> }
+    ) }
   ) }
 );
 
@@ -3891,6 +3946,37 @@ export type PageDashboardCommandNewQuery = (
         )> }
       ) }
     ) }
+  ) }
+);
+
+export type PageDashboardMoveEditQueryVariables = Exact<{
+  moveId: Scalars['ID'];
+}>;
+
+
+export type PageDashboardMoveEditQuery = (
+  { __typename?: 'Query' }
+  & { move: (
+    { __typename?: 'Move' }
+    & { conditions: Array<(
+      { __typename?: 'Condition' }
+      & Pick<Condition, 'id' | 'name'>
+    )>, moveCategory: (
+      { __typename?: 'MoveCategory' }
+      & Pick<MoveCategory, 'id' | 'name'>
+      & { character: (
+        { __typename?: 'Character' }
+        & Pick<Character, 'slug' | 'name'>
+        & { states: Array<(
+          { __typename?: 'State' }
+          & Pick<State, 'id' | 'name'>
+        )>, conditions: Array<(
+          { __typename?: 'Condition' }
+          & Pick<Condition, 'id' | 'name'>
+        )> }
+      ) }
+    ) }
+    & MoveFragment
   ) }
 );
 
@@ -4035,6 +4121,12 @@ export const ComboVideoFragmentDoc = gql`
   thumbnailUrl
 }
     `;
+export const ConditionFragmentDoc = gql`
+    fragment condition on Condition {
+  id
+  name
+}
+    `;
 export const OperationFragmentDoc = gql`
     fragment operation on Operation {
   id
@@ -4056,11 +4148,15 @@ export const ComboFragmentDoc = gql`
   comboVideo {
     ...comboVideo
   }
+  conditions {
+    ...condition
+  }
   operations {
     ...operation
   }
 }
     ${ComboVideoFragmentDoc}
+${ConditionFragmentDoc}
 ${OperationFragmentDoc}`;
 export const ComboCategoryDetailFragmentDoc = gql`
     fragment comboCategoryDetail on ComboCategory {
@@ -4213,10 +4309,14 @@ export const MoveFragmentDoc = gql`
   actions {
     ...action
   }
+  conditions {
+    ...condition
+  }
 }
     ${MoveVideoFragmentDoc}
 ${CommandFragmentDoc}
-${ActionFragmentDoc}`;
+${ActionFragmentDoc}
+${ConditionFragmentDoc}`;
 export const MoveCategoryDetailFragmentDoc = gql`
     fragment moveCategoryDetail on MoveCategory {
   id
@@ -7429,6 +7529,10 @@ export const PageDashboardComboNewDocument = gql`
         id
         name
       }
+      conditions {
+        id
+        name
+      }
     }
   }
 }
@@ -7478,6 +7582,10 @@ export const PageDashboardComboEditDocument = gql`
         slug
         name
         states {
+          id
+          name
+        }
+        conditions {
           id
           name
         }
@@ -7614,6 +7722,50 @@ export function usePageDashboardMovesLazyQuery(baseOptions?: Apollo.LazyQueryHoo
 export type PageDashboardMovesQueryHookResult = ReturnType<typeof usePageDashboardMovesQuery>;
 export type PageDashboardMovesLazyQueryHookResult = ReturnType<typeof usePageDashboardMovesLazyQuery>;
 export type PageDashboardMovesQueryResult = Apollo.QueryResult<PageDashboardMovesQuery, PageDashboardMovesQueryVariables>;
+export const PageDashboardMoveNewDocument = gql`
+    query PageDashboardMoveNew($moveCategoryId: ID!) {
+  moveCategory(moveCategoryId: $moveCategoryId) {
+    id
+    name
+    character {
+      slug
+      name
+      conditions {
+        id
+        name
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __usePageDashboardMoveNewQuery__
+ *
+ * To run a query within a React component, call `usePageDashboardMoveNewQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePageDashboardMoveNewQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePageDashboardMoveNewQuery({
+ *   variables: {
+ *      moveCategoryId: // value for 'moveCategoryId'
+ *   },
+ * });
+ */
+export function usePageDashboardMoveNewQuery(baseOptions: Apollo.QueryHookOptions<PageDashboardMoveNewQuery, PageDashboardMoveNewQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PageDashboardMoveNewQuery, PageDashboardMoveNewQueryVariables>(PageDashboardMoveNewDocument, options);
+      }
+export function usePageDashboardMoveNewLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PageDashboardMoveNewQuery, PageDashboardMoveNewQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PageDashboardMoveNewQuery, PageDashboardMoveNewQueryVariables>(PageDashboardMoveNewDocument, options);
+        }
+export type PageDashboardMoveNewQueryHookResult = ReturnType<typeof usePageDashboardMoveNewQuery>;
+export type PageDashboardMoveNewLazyQueryHookResult = ReturnType<typeof usePageDashboardMoveNewLazyQuery>;
+export type PageDashboardMoveNewQueryResult = Apollo.QueryResult<PageDashboardMoveNewQuery, PageDashboardMoveNewQueryVariables>;
 export const PageDashboardActionsDocument = gql`
     query PageDashboardActions($moveId: ID!) {
   move(moveId: $moveId) {
@@ -7804,6 +7956,61 @@ export function usePageDashboardCommandNewLazyQuery(baseOptions?: Apollo.LazyQue
 export type PageDashboardCommandNewQueryHookResult = ReturnType<typeof usePageDashboardCommandNewQuery>;
 export type PageDashboardCommandNewLazyQueryHookResult = ReturnType<typeof usePageDashboardCommandNewLazyQuery>;
 export type PageDashboardCommandNewQueryResult = Apollo.QueryResult<PageDashboardCommandNewQuery, PageDashboardCommandNewQueryVariables>;
+export const PageDashboardMoveEditDocument = gql`
+    query PageDashboardMoveEdit($moveId: ID!) {
+  move(moveId: $moveId) {
+    ...move
+    conditions {
+      id
+      name
+    }
+    moveCategory {
+      id
+      name
+      character {
+        slug
+        name
+        states {
+          id
+          name
+        }
+        conditions {
+          id
+          name
+        }
+      }
+    }
+  }
+}
+    ${MoveFragmentDoc}`;
+
+/**
+ * __usePageDashboardMoveEditQuery__
+ *
+ * To run a query within a React component, call `usePageDashboardMoveEditQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePageDashboardMoveEditQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePageDashboardMoveEditQuery({
+ *   variables: {
+ *      moveId: // value for 'moveId'
+ *   },
+ * });
+ */
+export function usePageDashboardMoveEditQuery(baseOptions: Apollo.QueryHookOptions<PageDashboardMoveEditQuery, PageDashboardMoveEditQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PageDashboardMoveEditQuery, PageDashboardMoveEditQueryVariables>(PageDashboardMoveEditDocument, options);
+      }
+export function usePageDashboardMoveEditLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PageDashboardMoveEditQuery, PageDashboardMoveEditQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PageDashboardMoveEditQuery, PageDashboardMoveEditQueryVariables>(PageDashboardMoveEditDocument, options);
+        }
+export type PageDashboardMoveEditQueryHookResult = ReturnType<typeof usePageDashboardMoveEditQuery>;
+export type PageDashboardMoveEditLazyQueryHookResult = ReturnType<typeof usePageDashboardMoveEditLazyQuery>;
+export type PageDashboardMoveEditQueryResult = Apollo.QueryResult<PageDashboardMoveEditQuery, PageDashboardMoveEditQueryVariables>;
 export const PageDashboardThrowActionEditDocument = gql`
     query PageDashboardThrowActionEdit($actionId: ID!) {
   throwAction(actionId: $actionId) {
