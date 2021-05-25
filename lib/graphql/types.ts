@@ -250,7 +250,7 @@ export type Combo = {
   name: Scalars['String'];
   note?: Maybe<Scalars['String']>;
   operations: Array<Operation>;
-  state?: Maybe<State>;
+  state: State;
 };
 
 export type ComboAttributes = {
@@ -288,7 +288,7 @@ export type Command = {
   id: Scalars['ID'];
   move: Move;
   operations: Array<Operation>;
-  state?: Maybe<State>;
+  state: State;
 };
 
 export type CommandAttributes = {
@@ -2237,10 +2237,10 @@ export type ComboVideoFragment = (
 export type CommandFragment = (
   { __typename?: 'Command' }
   & Pick<Command, 'id'>
-  & { state?: Maybe<(
+  & { state: (
     { __typename?: 'State' }
     & StateFragment
-  )>, operations: Array<(
+  ), operations: Array<(
     { __typename?: 'Operation' }
     & OperationFragment
   )> }
@@ -3747,10 +3747,10 @@ export type PageDashboardComboEditQuery = (
   { __typename?: 'Query' }
   & { combo: (
     { __typename?: 'Combo' }
-    & { state?: Maybe<(
+    & { state: (
       { __typename?: 'State' }
       & Pick<State, 'id'>
-    )>, operations: Array<(
+    ), operations: Array<(
       { __typename?: 'Operation' }
       & Pick<Operation, 'id'>
     )>, comboCategory: (
@@ -3781,10 +3781,10 @@ export type PageDashboardCommandEditQuery = (
   { __typename?: 'Query' }
   & { command: (
     { __typename?: 'Command' }
-    & { state?: Maybe<(
+    & { state: (
       { __typename?: 'State' }
       & Pick<State, 'id'>
-    )>, operations: Array<(
+    ), operations: Array<(
       { __typename?: 'Operation' }
       & Pick<Operation, 'id'>
     )>, move: (
