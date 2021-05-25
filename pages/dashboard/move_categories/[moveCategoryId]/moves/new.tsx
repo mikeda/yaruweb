@@ -1,11 +1,10 @@
 import React from 'react';
 
 import {
-  MoveCategoryDocument,
-  MoveCategoryQuery,
-  MoveCategoryWithCharacterFragment,
   MoveAttributes,
   useCreateMoveMutation,
+  usePageDashboardMoveNewQuery,
+  PageDashboardMoveNewQuery,
 } from '@/lib/graphql/types';
 import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
@@ -16,14 +15,49 @@ import { toast } from 'react-toastify';
 import { MoveForm } from '@/components/MoveForm';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from 'states/loading';
-import { GetServerSideProps } from 'next';
-import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
+import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 
-interface Props {
-  moveCategory: MoveCategoryWithCharacterFragment;
-}
+const Page: React.FC = () => {
+  const router = useRouter();
+  const { moveCategoryId } = router.query;
+  const setLoading = useSetRecoilState(loadingState);
 
-const Page: React.FC<Props> = ({ moveCategory }) => {
+  const { data, loading } = usePageDashboardMoveNewQuery({
+    variables: { moveCategoryId: moveCategoryId as string },
+    fetchPolicy: 'network-only',
+    skip: !moveCategoryId,
+  });
+
+  setLoading(loading);
+  if (!data) return null;
+
+  const { moveCategory } = data;
+  const title = '技データ登録';
+
+  return (
+    <DashboardContent activeTab="character">
+      <Head title="技データ作成" />
+      <Breadcrumbs
+        parents={[
+          { name: 'キャラクター', url: Routes.dashboard.character.index() },
+          {
+            name: `技データ(${moveCategory.character.name})`,
+            url: Routes.dashboard.moveCategory.index(moveCategory.character.slug),
+          },
+          {
+            name: moveCategory.name,
+            url: Routes.dashboard.move.index(moveCategory.id),
+          },
+        ]}
+        current={title}
+      />
+      <PageHeader title="技データ作成" />
+
+      <PageContent {...data} />
+    </DashboardContent>
+  );
+};
+const PageContent: React.FC<PageDashboardMoveNewQuery> = ({ moveCategory }) => {
   const router = useRouter();
   const setLoading = useSetRecoilState(loadingState);
   const [createMove, { loading }] = useCreateMoveMutation({
@@ -42,22 +76,7 @@ const Page: React.FC<Props> = ({ moveCategory }) => {
 
   setLoading(loading);
 
-  return (
-    <DashboardContent activeTab="character">
-      <Head title="技データ作成" />
-
-      <PageHeader title="技データ作成" />
-
-      <MoveForm onSubmit={onSubmit} />
-    </DashboardContent>
-  );
-};
-
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const moveCategoryId = params?.moveCategoryId as string;
-  const data: MoveCategoryQuery = await fetchGraphql(MoveCategoryDocument, { moveCategoryId });
-
-  return { props: { moveCategory: data.moveCategory } };
+  return <MoveForm conditions={moveCategory.character.conditions} onSubmit={onSubmit} />;
 };
 
 export default Page;

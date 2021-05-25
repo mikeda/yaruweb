@@ -6,6 +6,7 @@ import {
   ComboAttributes,
   ComboFragment,
   ComboVideoFragment,
+  ConditionFragment,
   OperationFragment,
   StateFragment,
   useCreateComboVideoMutation,
@@ -20,6 +21,7 @@ import { useSetRecoilState } from 'recoil';
 import { loadingState } from 'states/loading';
 import { toast } from 'react-toastify';
 import { VideoPlayer } from './MoveMedia/VideoPlayer';
+import { CheckBox } from './form2/CheckBox';
 
 const schema = yup.object().shape({
   name: yup.string().required(),
@@ -29,16 +31,18 @@ const schema = yup.object().shape({
 interface Props {
   combo?: ComboFragment;
   states: StateFragment[];
+  conditions: ConditionFragment[];
   onSubmit: (attributes: ComboAttributes) => void;
 }
 
-export const ComboForm: React.FC<Props> = ({ combo, states, onSubmit }) => {
+export const ComboForm: React.FC<Props> = ({ combo, states, conditions, onSubmit }) => {
   const [operations, setOperations] = useState<OperationFragment[]>(combo?.operations || []);
 
   const {
     register,
     handleSubmit,
     setValue,
+    watch,
     formState: { errors },
   } = useForm<ComboAttributes>({
     resolver: yupResolver(schema),
@@ -49,8 +53,10 @@ export const ComboForm: React.FC<Props> = ({ combo, states, onSubmit }) => {
       note: combo.note,
       operationIds: combo.operations.map(o => o.id),
       comboVideoId: combo.comboVideo?.id,
+      conditionIds: combo.conditions.map(c => c.id),
     },
   });
+  const conditionIds = watch('conditionIds');
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -61,6 +67,31 @@ export const ComboForm: React.FC<Props> = ({ combo, states, onSubmit }) => {
 
       <FormGroup label="ダメージ">
         <Input type="number" {...register('damage', { valueAsNumber: true })} />
+      </FormGroup>
+
+      <FormGroup label="条件">
+        {conditions.map((condition, i) => {
+          const id = `conditionIdsDummy.${i}` as const;
+
+          return (
+            <CheckBox key={i} id={id} label={condition.name}>
+              <input
+                id={id}
+                type="checkbox"
+                checked={conditionIds.includes(condition.id)}
+                onChange={e => {
+                  let newConditionIds: string[];
+                  if (e.target.checked) {
+                    newConditionIds = [...conditionIds, condition.id];
+                  } else {
+                    newConditionIds = conditionIds.filter(id => id !== condition.id);
+                  }
+                  setValue('conditionIds', newConditionIds);
+                }}
+              />
+            </CheckBox>
+          );
+        })}
       </FormGroup>
 
       <FormGroup label="状態">
