@@ -47,14 +47,18 @@ export const ComboForm: React.FC<Props> = ({ combo, states, conditions, onSubmit
   } = useForm<ComboAttributes>({
     resolver: yupResolver(schema),
     mode: 'onBlur',
-    defaultValues: combo && {
-      name: combo.name,
-      damage: combo.damage,
-      note: combo.note,
-      operationIds: combo.operations.map(o => o.id),
-      comboVideoId: combo.comboVideo?.id,
-      conditionIds: combo.conditions.map(c => c.id),
-    },
+    defaultValues: combo
+      ? {
+          name: combo.name,
+          damage: combo.damage,
+          note: combo.note,
+          operationIds: combo.operations.map(o => o.id),
+          comboVideoId: combo.comboVideo?.id,
+          conditionIds: combo.conditions.map(c => c.id),
+        }
+      : {
+          conditionIds: [],
+        },
   });
   const conditionIds = watch('conditionIds');
 

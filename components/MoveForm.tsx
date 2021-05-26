@@ -42,22 +42,26 @@ export const MoveForm: React.FC<Props> = ({ move, conditions, onSubmit }) => {
   } = useForm<MoveAttributes>({
     resolver: yupResolver(schema),
     mode: 'onBlur',
-    defaultValues: move && {
-      afterStateId: move.afterState?.id,
-      moveVideoId: move.moveVideo?.id,
-      opponentState: move.opponentState,
-      name: move.name,
-      kana: move.kana,
-      startUpFrame: move.startUpFrame,
-      powerCrush: move.powerCrush,
-      crouchingStatus: move.crouchingStatus,
-      jumpStatus: move.jumpStatus,
-      homing: move.homing,
-      screw: move.screw,
-      wallBound: move.wallBound,
-      note: move.note,
-      conditionIds: move.conditions.map(m => m.id),
-    },
+    defaultValues: move
+      ? {
+          afterStateId: move.afterState?.id,
+          moveVideoId: move.moveVideo?.id,
+          opponentState: move.opponentState,
+          name: move.name,
+          kana: move.kana,
+          startUpFrame: move.startUpFrame,
+          powerCrush: move.powerCrush,
+          crouchingStatus: move.crouchingStatus,
+          jumpStatus: move.jumpStatus,
+          homing: move.homing,
+          screw: move.screw,
+          wallBound: move.wallBound,
+          note: move.note,
+          conditionIds: move.conditions.map(m => m.id),
+        }
+      : {
+          conditionIds: [],
+        },
   });
   const conditionIds = watch('conditionIds');
 
