@@ -1,0 +1,7 @@
+mutation DeleteVideo($videoId: ID!) {
+  deleteVideo(input: { videoId: $videoId }) {
+    video {
+      ...video
+    }
+  }
+}
