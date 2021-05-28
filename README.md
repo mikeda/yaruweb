@@ -6,8 +6,12 @@
 
 - TypeScript
 - React
+- Next.js
 - Vercel
+- Sass + CSS Module
 - GraphQL (Apollo Client)
+- Firebase Authentication
+- [Slate](https://github.com/ianstormtaylor/slate)
 
 ## 開発環境構築(Mac)
 
