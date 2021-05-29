@@ -50,22 +50,17 @@ const VideoList: React.FC<{ data: VideosQuery; onDelete: () => void }> = ({
   onDelete,
 }) => {
   const setLoading = useSetRecoilState(loadingState);
-  //const [videos, setVideos] = useState(data.videos.records);
   const [deleteVideo, { loading }] = useDeleteVideoMutation({
     onCompleted: data => {
       if (!data.deleteVideo) return;
 
       onDelete();
       toast.success('動画を削除しました。');
-      //setVideos(prev => prev.filter(v => v.id !== data.deleteVideo?.video.id));
     },
     onError: e => {
       toast.error(e.message);
     },
   });
-  //useEffect(() => {
-  //  setVideos(data.videos.records);
-  //}, [data]);
   setLoading(loading);
 
   return (
