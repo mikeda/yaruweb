@@ -84,9 +84,7 @@ const VideoList: React.FC<{ data: VideosQuery; onDelete: () => void }> = ({
                   /
                   <a
                     onClick={() => {
-                      if (window.confirm('動画を削除します。')) {
-                        deleteVideo({ variables: { videoId: video.id } });
-                      }
+                      deleteVideo({ variables: { videoId: video.id } });
                     }}
                   >
                     削除
