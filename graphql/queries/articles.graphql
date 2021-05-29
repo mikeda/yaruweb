@@ -1,11 +1,11 @@
-query Articles($first: Int, $after: String, $order: Order, $category: ArticleCategory) {
-  articles(first: $first, after: $after, order: $order, category: $category) {
-    nodes {
+query Articles($page: Int, $per: Int, $order: Order, $category: ArticleCategory) {
+  articles(page: $page, per: $per, order: $order, category: $category) {
+    records {
       ...articleSummary
     }
 
-    pageInfo {
-      ...pageInfo
+    paging {
+      ...paging
     }
   }
 }

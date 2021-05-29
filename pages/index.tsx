@@ -11,8 +11,8 @@ import { Head } from '@/components/layouts/Head';
 import { Content } from '@/components/layouts/Content';
 
 const Page: React.FC = () => {
-  const { data: newArticlesData } = useArticlesQuery({ variables: { first: 3 } });
-  const newArticles = newArticlesData?.articles.nodes;
+  const { data: newArticlesData } = useArticlesQuery({ variables: { page: 1, per: 3 } });
+  const newArticles = newArticlesData?.articles.records;
 
   return (
     <Content>

@@ -1,27 +1,37 @@
 import React from 'react';
 
 import { useEventsQuery } from '@/lib/graphql/types';
-import { NotFound } from '@/components/NotFound';
 import { Media } from '@/components/Media';
 import dayjs from '@/lib/dayjs';
 import { Head } from '@/components/layouts/Head';
 import { Content } from '@/components/layouts/Content';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
+import { Routes } from '@/lib/Routes';
+import { useRouter } from 'next/router';
+import { useSetRecoilState } from 'recoil';
+import { loadingState } from 'states/loading';
+import { Paging } from '@/components/blocks/Paging';
 
 const PageContent: React.FC = () => {
-  const { data, loading, fetchMore } = useEventsQuery({ variables: { first: 10 } });
-  if (loading) return <NotFound>読み込み中</NotFound>;
+  const router = useRouter();
+  const setLoading = useSetRecoilState(loadingState);
+  const { query } = router;
+  const page = query.page ? Number(query.page as string) : 1;
+  const { data, loading } = useEventsQuery({
+    variables: { page },
+    skip: !router.isReady,
+  });
 
-  const events = data?.events.nodes;
-  const pageInfo = data?.events.pageInfo;
-  if (!(events && pageInfo && events.length > 0)) return <NotFound>イベントがありません。</NotFound>;
+  const url = (page: number) => Routes.event.index({ page });
+
+  setLoading(loading);
 
   return (
     <>
       <div className="bl_section">
         <div className="bl_section_body">
           <div className="bl_mediaUnit">
-            {events.map(event => {
+            {data?.events.records.map(event => {
               if (!event) return;
 
               return (
@@ -57,35 +67,7 @@ const PageContent: React.FC = () => {
         </div>
       </div>
 
-      {pageInfo.hasNextPage && (
-        <div className="bl_box bl_box__unbordered bl_box__c">
-          <div
-            className="el_btn"
-            onClick={() => {
-              fetchMore({
-                variables: { after: pageInfo.endCursor },
-                updateQuery: (prev, { fetchMoreResult }) => {
-                  if (!fetchMoreResult) return prev;
-
-                  const prevNodes = prev.events.nodes;
-                  const nodes = fetchMoreResult.events.nodes;
-                  if (!(prevNodes && nodes)) return prev;
-
-                  return {
-                    ...fetchMoreResult,
-                    events: {
-                      ...fetchMoreResult.events,
-                      nodes: [...prevNodes, ...nodes],
-                    },
-                  };
-                },
-              });
-            }}
-          >
-            次のページ
-          </div>
-        </div>
-      )}
+      {data && <Paging paging={data.events.paging} url={url} />}
     </>
   );
 };

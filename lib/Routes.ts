@@ -1,6 +1,6 @@
 import { ArticleCategory, Order } from './graphql/types';
 
-const generatePath = (path: string, params?: { [key: string]: string | undefined }) => {
+const generatePath = (path: string, params?: { [key: string]: string | number | undefined }) => {
   if (!params) return path;
 
   const queries: string[] = [];
@@ -15,7 +15,7 @@ const generatePath = (path: string, params?: { [key: string]: string | undefined
 export const Routes = {
   top: () => '/',
   article: {
-    index: (params?: { order?: Order; category?: ArticleCategory }) => generatePath('/articles', params),
+    index: (params?: { page?: number; order?: Order; category?: ArticleCategory }) => generatePath('/articles', params),
     detail: (articleId: string) => `/articles/${articleId}`,
   },
   character: {
@@ -26,7 +26,7 @@ export const Routes = {
     detail: (comboCategoryId: string) => `/combo_categories/${comboCategoryId}`,
   },
   event: {
-    index: () => '/events',
+    index: (params?: { page?: number }) => generatePath('/events', params),
   },
   moveCategory: {
     detail: (moveCategoryId: string) => `/move_categories/${moveCategoryId}`,
@@ -50,7 +50,7 @@ export const Routes = {
       edit: (actionId: string) => `/dashboard/attack_actions/${actionId}/edit`,
     },
     article: {
-      index: () => '/dashboard/articles',
+      index: (params?: { page?: number }) => generatePath('/dashboard/articles', params),
       new: () => '/dashboard/articles/new',
       edit: (articleId: string) => `/dashboard/articles/${articleId}/edit`,
     },

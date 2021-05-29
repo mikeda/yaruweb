@@ -3,11 +3,13 @@ import React from 'react';
 import { useEventsQuery } from '@/lib/graphql/types';
 import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { NotFound } from '@/components/NotFound';
 import Link from 'next/link';
 import { Routes } from '@/lib/Routes';
-import { ReadMore } from '@/components/blocks/ReadMore';
 import { PageHeader } from '@/components/layouts/PageHeader';
+import { useRouter } from 'next/router';
+import { useSetRecoilState } from 'recoil';
+import { loadingState } from 'states/loading';
+import { Paging } from '@/components/blocks/Paging';
 
 const Page: React.FC = () => (
   <DashboardContent activeTab="event">
@@ -20,13 +22,18 @@ const Page: React.FC = () => (
 );
 
 const EventList: React.FC = () => {
-  const { data, loading, fetchMore } = useEventsQuery({ variables: { first: 10 } });
-  if (loading) return <NotFound>読み込み中</NotFound>;
-  if (!data) return <NotFound>読み込みに失敗しました</NotFound>;
+  const router = useRouter();
+  const setLoading = useSetRecoilState(loadingState);
+  const { query } = router;
+  const page = query.page ? Number(query.page as string) : 1;
+  const { data, loading } = useEventsQuery({
+    variables: { page },
+    skip: !router.isReady,
+  });
 
-  const events = data.events.nodes;
-  if (!(events && events.length > 0)) return <NotFound>イベントがありません。</NotFound>;
-  const pageInfo = data.events.pageInfo;
+  const url = (page: number) => Routes.event.index({ page });
+
+  setLoading(loading);
 
   return (
     <>
@@ -39,7 +46,7 @@ const EventList: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {events.map(event => {
+            {data?.events.records.map(event => {
               if (!event) return;
 
               return (
@@ -57,30 +64,7 @@ const EventList: React.FC = () => {
         </table>
       </div>
 
-      {data.events.pageInfo?.hasNextPage && (
-        <ReadMore
-          onClick={() => {
-            fetchMore({
-              variables: { after: pageInfo.endCursor },
-              updateQuery: (prev, { fetchMoreResult }) => {
-                if (!fetchMoreResult) return prev;
-
-                const prevNodes = prev.events.nodes;
-                const nodes = fetchMoreResult.events.nodes;
-                if (!(prevNodes && nodes)) return prev;
-
-                return {
-                  ...fetchMoreResult,
-                  events: {
-                    ...fetchMoreResult.events,
-                    nodes: [...prevNodes, ...nodes],
-                  },
-                };
-              },
-            });
-          }}
-        />
-      )}
+      {data && <Paging paging={data.events.paging} url={url} />}
     </>
   );
 };
