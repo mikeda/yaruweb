@@ -18,7 +18,7 @@ const Page: React.FC = () => {
   const setLoading = useSetRecoilState(loadingState);
   const { page } = router.query;
   const { data, loading, refetch } = useVideosQuery({
-    variables: { page: page ? Number(page as string) : 1, per: 2 },
+    variables: { page: page ? Number(page as string) : 1 },
     fetchPolicy: 'network-only',
     skip: !router.isReady,
   });
