@@ -1,4 +1,5 @@
-fragment paging on PageInfo {
-  hasNextPage
-  endCursor
+fragment paging on Paging {
+  currentPage
+  totalCount
+  totalPages
 }
