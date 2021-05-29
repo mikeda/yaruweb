@@ -5,7 +5,7 @@ query MyArticles($first: Int, $after: String) {
     }
 
     pageInfo {
-      ...paging
+      ...pageInfo
     }
   }
 }

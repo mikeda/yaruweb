@@ -41,7 +41,7 @@ export const Routes = {
     passwordEdit: () => '/password/edit',
   },
   video: {
-    index: (order?: Order) => (order === Order.Popular ? '/videos?order=popular' : '/videos'),
+    index: (page?: number) => `/videos${page ? `?page=${page}` : ''}`,
     detail: (id: string) => `/videos/${id}`,
   },
   dashboard: {
@@ -112,7 +112,7 @@ export const Routes = {
       edit: (actionId: string) => `/dashboard/throw_actions/${actionId}/edit`,
     },
     video: {
-      index: () => '/dashboard/videos',
+      index: (page?: number) => `/dashboard/videos${page ? `?page=${page}` : ''}`,
       new: () => '/dashboard/videos/new',
       edit: (videoId: string) => `/dashboard/videos/${videoId}/edit`,
     },

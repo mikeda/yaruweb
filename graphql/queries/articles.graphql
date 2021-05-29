@@ -5,7 +5,7 @@ query Articles($first: Int, $after: String, $order: Order, $category: ArticleCat
     }
 
     pageInfo {
-      ...paging
+      ...pageInfo
     }
   }
 }

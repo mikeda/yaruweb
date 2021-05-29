@@ -1,15 +1,30 @@
 import React from 'react';
 
-import { useVideosQuery } from '@/lib/graphql/types';
+import { useDeleteVideoMutation, useVideosQuery, VideosQuery } from '@/lib/graphql/types';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { NotFound } from '@/components/NotFound';
 import Link from 'next/link';
 import { Routes } from '@/lib/Routes';
 import { PageHeader } from '@/components/layouts/PageHeader';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 import { Head } from '@/components/layouts/Head';
+import { useRouter } from 'next/router';
+import { loadingState } from 'states/loading';
+import { useSetRecoilState } from 'recoil';
+import { toast } from 'react-toastify';
+import { Paging } from '@/components/blocks/Paging';
 
 const Page: React.FC = () => {
+  const router = useRouter();
+  const setLoading = useSetRecoilState(loadingState);
+  const { page } = router.query;
+  const { data, loading, refetch } = useVideosQuery({
+    variables: { page: page ? Number(page as string) : 1, per: 2 },
+    fetchPolicy: 'network-only',
+    skip: !router.isReady,
+  });
+
+  setLoading(loading);
+
   const title = '動画';
 
   return (
@@ -18,17 +33,35 @@ const Page: React.FC = () => {
       <Breadcrumbs current={title} />
       <PageHeader title={title} />
 
-      <VideoList />
+      {data && (
+        <>
+          <VideoList data={data} onDelete={refetch} />
+          <Paging paging={data.videos.paging} url={Routes.dashboard.video.index} />
+        </>
+      )}
     </DashboardContent>
   );
 };
 
-const VideoList: React.FC = () => {
-  const { data, loading } = useVideosQuery();
-  if (loading) return <NotFound>読み込み中</NotFound>;
+const VideoList: React.FC<{ data: VideosQuery; onDelete: () => void }> = ({
+  data: {
+    videos: { records: videos },
+  },
+  onDelete,
+}) => {
+  const setLoading = useSetRecoilState(loadingState);
+  const [deleteVideo, { loading }] = useDeleteVideoMutation({
+    onCompleted: data => {
+      if (!data.deleteVideo) return;
 
-  const videos = data?.videos.nodes;
-  if (!(videos && videos.length > 0)) return <NotFound>イベントがありません。</NotFound>;
+      onDelete();
+      toast.success('動画を削除しました。');
+    },
+    onError: e => {
+      toast.error(e.message);
+    },
+  });
+  setLoading(loading);
 
   return (
     <div className="bl_horizTable">
@@ -41,8 +74,6 @@ const VideoList: React.FC = () => {
         </thead>
         <tbody>
           {videos.map(video => {
-            if (!video) return;
-
             return (
               <tr key={video.id}>
                 <td>{video.title}</td>
@@ -50,6 +81,16 @@ const VideoList: React.FC = () => {
                   <Link href={Routes.dashboard.video.edit(video.id)}>
                     <a>編集</a>
                   </Link>
+                  /
+                  <a
+                    onClick={() => {
+                      if (window.confirm('動画を削除します。')) {
+                        deleteVideo({ variables: { videoId: video.id } });
+                      }
+                    }}
+                  >
+                    削除
+                  </a>
                 </td>
               </tr>
             );
