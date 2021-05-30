@@ -20,16 +20,11 @@ import { useSetRecoilState } from 'recoil';
 import { loadingState } from 'states/loading';
 import { toast } from 'react-toastify';
 import { VideoPlayer } from './MoveMedia/VideoPlayer';
+import { nullableNumber } from '@/lib/validators/nullable_number';
 
 const schema = yup.object().shape({
   name: yup.string().required(),
-  startUpFrame: yup
-    .number()
-    .integer()
-    .typeError('数値を入力して下さい。')
-    .min(0)
-    .nullable()
-    .transform((value, originalValue) => (originalValue === '' ? null : value)),
+  startUpFrame: nullableNumber,
 });
 
 interface Props {
@@ -108,7 +103,7 @@ export const MoveForm: React.FC<Props> = ({ move, conditions, onSubmit }) => {
       </FormGroup>
 
       <FormGroup label="発生フレーム">
-        <Input type="number" {...register('startUpFrame')} />
+        <Input {...register('startUpFrame')} />
         {errors.startUpFrame?.message && <span>{errors.startUpFrame.message}</span>}
       </FormGroup>
 
