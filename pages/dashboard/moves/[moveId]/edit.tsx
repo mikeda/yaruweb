@@ -66,7 +66,7 @@ const MoveContent: React.FC<PageDashboardMoveEditQuery> = ({ move }) => {
   const [updateMove, { loading }] = useUpdateMoveMutation({
     onCompleted: () => {
       toast.success('技データを更新しました。');
-      router.push(Routes.dashboard.move.index(move.moveCategory.id));
+      router.back();
     },
     onError: e => {
       toast.error(e.message);

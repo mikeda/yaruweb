@@ -70,7 +70,7 @@ const AttackActionContent: React.FC<PageDashboardAttackActionEditQuery> = ({ att
   const [updateAction, { loading }] = useUpdateAttackActionMutation({
     onCompleted: () => {
       toast.success('アクションを更新しました。');
-      router.push(Routes.dashboard.move.actions.index(attackAction.move.id));
+      router.back();
     },
     onError: e => {
       toast.error(e.message);

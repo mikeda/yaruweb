@@ -9,7 +9,6 @@ import {
 } from '@/lib/graphql/types';
 import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { Routes } from '@/lib/Routes';
 import { PageHeader } from '@/components/layouts/PageHeader';
 import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
@@ -29,7 +28,7 @@ const Page: React.FC<Props> = ({ character }) => {
   const [updateCharacter, { loading }] = useUpdateCharacterMutation({
     onCompleted: () => {
       toast.success('キャラクターを更新しました。');
-      router.push(Routes.dashboard.character.index());
+      router.back();
     },
     onError: e => {
       toast.error(e.message);

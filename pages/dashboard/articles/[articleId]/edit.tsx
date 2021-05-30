@@ -45,7 +45,7 @@ const Content: React.FC<{ article: ArticleFragment }> = ({ article }) => {
   const [updateArticle, { loading }] = useUpdateArticleMutation({
     onCompleted: () => {
       toast.success('記事を更新しました。');
-      router.push(Routes.dashboard.article.index());
+      router.back();
     },
     onError: e => {
       toast.error(e.message);

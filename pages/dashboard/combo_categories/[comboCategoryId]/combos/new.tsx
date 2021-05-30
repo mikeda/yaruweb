@@ -64,7 +64,7 @@ const PageContent: React.FC<PageDashboardComboNewQuery> = ({ comboCategory }) =>
   const [createCombo, { loading }] = useCreateComboMutation({
     onCompleted: () => {
       toast.success('コンボを登録しました。');
-      router.push(Routes.dashboard.combo.index(comboCategory.id));
+      router.back();
     },
     onError: e => {
       toast.error(e.message);

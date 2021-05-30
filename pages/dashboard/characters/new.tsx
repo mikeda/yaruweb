@@ -3,7 +3,6 @@ import React from 'react';
 import { CharacterAttributes, useCreateCharacterMutation } from '@/lib/graphql/types';
 import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { Routes } from '@/lib/Routes';
 import { PageHeader } from '@/components/layouts/PageHeader';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
@@ -17,7 +16,7 @@ const Page: React.FC = () => {
   const [createCharacter, { loading }] = useCreateCharacterMutation({
     onCompleted: () => {
       toast.success('キャラクターを登録しました。');
-      router.push(Routes.dashboard.stage.index());
+      router.back();
     },
     onError: e => {
       toast.error(e.message);

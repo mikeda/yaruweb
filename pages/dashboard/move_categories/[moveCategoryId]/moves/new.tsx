@@ -63,7 +63,7 @@ const PageContent: React.FC<PageDashboardMoveNewQuery> = ({ moveCategory }) => {
   const [createMove, { loading }] = useCreateMoveMutation({
     onCompleted: () => {
       toast.success('技データを登録しました。');
-      router.push(Routes.dashboard.move.index(moveCategory.id));
+      router.back();
     },
     onError: e => {
       toast.error(e.message);

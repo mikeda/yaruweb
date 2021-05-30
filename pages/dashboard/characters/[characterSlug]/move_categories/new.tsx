@@ -9,7 +9,6 @@ import {
 } from '@/lib/graphql/types';
 import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { Routes } from '@/lib/Routes';
 import { PageHeader } from '@/components/layouts/PageHeader';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
@@ -29,7 +28,7 @@ const Page: React.FC<Props> = ({ character }) => {
   const [createMoveCategory, { loading }] = useCreateMoveCategoryMutation({
     onCompleted: () => {
       toast.success('技データカテゴリを登録しました。');
-      router.push(Routes.dashboard.moveCategory.index(character.slug));
+      router.back();
     },
     onError: e => {
       toast.error(e.message);

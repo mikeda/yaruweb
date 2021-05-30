@@ -3,7 +3,6 @@ import React from 'react';
 import { StageAttributes, StageDocument, StageFragment, StageQuery, useUpdateStageMutation } from '@/lib/graphql/types';
 import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { Routes } from '@/lib/Routes';
 import { PageHeader } from '@/components/layouts/PageHeader';
 import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
@@ -23,7 +22,7 @@ const Page: React.FC<Props> = ({ stage }) => {
   const [updateStage, { loading }] = useUpdateStageMutation({
     onCompleted: () => {
       toast.success('ステージを更新しました。');
-      router.push(Routes.dashboard.stage.index());
+      router.back();
     },
     onError: e => {
       toast.error(e.message);

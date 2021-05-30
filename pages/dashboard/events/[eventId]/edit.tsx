@@ -3,7 +3,6 @@ import React from 'react';
 import { EventAttributes, EventDocument, EventFragment, EventQuery, useUpdateEventMutation } from '@/lib/graphql/types';
 import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { Routes } from '@/lib/Routes';
 import { PageHeader } from '@/components/layouts/PageHeader';
 import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
@@ -23,7 +22,7 @@ const Page: React.FC<Props> = ({ event }) => {
   const [updateEvent, { loading }] = useUpdateEventMutation({
     onCompleted: () => {
       toast.success('イベントを更新しました。');
-      router.push(Routes.dashboard.event.index());
+      router.back();
     },
     onError: e => {
       toast.error(e.message);
