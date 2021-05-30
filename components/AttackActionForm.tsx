@@ -10,9 +10,15 @@ import { Button } from './blocks/Button';
 import { Input } from './form2/Input';
 import { CheckBox } from './form2/CheckBox';
 import { FormInline } from './form2/FormInline';
+import { nullableNumber } from '@/lib/validators/nullable_number';
 
 const schema = yup.object().shape({
   damage: yup.number().required().integer().min(0),
+  blockFrame: nullableNumber,
+  hitFrame: nullableNumber,
+  counterHitFrame: nullableNumber,
+  cleanHitFrame: nullableNumber,
+  crouchingHitFrame: nullableNumber,
 });
 
 const StateSelectOptions: React.FC = () => (
@@ -80,7 +86,7 @@ export const AttackActionForm: React.FC<Props> = ({ attackAction, onSubmit }) =>
             <input id="blockAvailable" type="checkbox" {...register('blockAvailable')} />
           </CheckBox>
 
-          <Input type="number" {...register('blockFrame', { valueAsNumber: true })} placeholder="フレーム" />
+          <Input {...register('blockFrame')} placeholder="フレーム" />
 
           <select {...register('blockState')}>
             <StateSelectOptions />
@@ -94,7 +100,7 @@ export const AttackActionForm: React.FC<Props> = ({ attackAction, onSubmit }) =>
             <input id="hitAvailable" type="checkbox" {...register('hitAvailable')} />
           </CheckBox>
 
-          <Input type="number" {...register('hitFrame', { valueAsNumber: true })} placeholder="フレーム" />
+          <Input {...register('hitFrame')} placeholder="フレーム" />
 
           <select {...register('hitState')}>
             <StateSelectOptions />
@@ -108,7 +114,7 @@ export const AttackActionForm: React.FC<Props> = ({ attackAction, onSubmit }) =>
             <input id="cleanHitAvailable" type="checkbox" {...register('cleanHitAvailable')} />
           </CheckBox>
 
-          <Input type="number" {...register('cleanHitFrame', { valueAsNumber: true })} placeholder="フレーム" />
+          <Input {...register('cleanHitFrame')} placeholder="フレーム" />
 
           <select {...register('cleanHitState')}>
             <StateSelectOptions />
@@ -122,7 +128,7 @@ export const AttackActionForm: React.FC<Props> = ({ attackAction, onSubmit }) =>
             <input id="counterHitAvailable" type="checkbox" {...register('counterHitAvailable')} />
           </CheckBox>
 
-          <Input type="number" {...register('counterHitFrame', { valueAsNumber: true })} placeholder="フレーム" />
+          <Input {...register('counterHitFrame')} placeholder="フレーム" />
 
           <select {...register('counterHitState')}>
             <StateSelectOptions />
@@ -136,7 +142,7 @@ export const AttackActionForm: React.FC<Props> = ({ attackAction, onSubmit }) =>
             <input id="crouchingHitAvailable" type="checkbox" {...register('crouchingHitAvailable')} />
           </CheckBox>
 
-          <Input type="number" {...register('crouchingHitFrame', { valueAsNumber: true })} placeholder="フレーム" />
+          <Input {...register('crouchingHitFrame')} placeholder="フレーム" />
 
           <select {...register('crouchingHitState')}>
             <StateSelectOptions />
