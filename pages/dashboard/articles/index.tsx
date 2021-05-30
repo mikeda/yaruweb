@@ -8,36 +8,40 @@ import {
 } from '@/lib/graphql/types';
 import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { NotFound } from '@/components/NotFound';
 import Link from 'next/link';
 import { ArticleStatusText } from '@/lib/graphql/enum_texts';
 import { Routes } from '@/lib/Routes';
-import { ReadMore } from '@/components/blocks/ReadMore';
 import { PageHeader } from '@/components/layouts/PageHeader';
 import { toast } from 'react-toastify';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
-import { useCurrentPlayer } from 'hooks/useCurrentPlayer';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from 'states/loading';
+import { useRouter } from 'next/router';
+import { Paging } from '@/components/blocks/Paging';
 
-const Page: React.FC = () => (
-  <DashboardContent activeTab="article">
-    <Head title="記事" />
-    <Breadcrumbs current="記事" />
-    <PageHeader title="記事" addPageUrl={Routes.dashboard.article.new()} />
+const Page: React.FC = () => {
+  return (
+    <DashboardContent activeTab="article">
+      <Head title="記事" />
+      <Breadcrumbs current="記事" />
+      <PageHeader title="記事" addPageUrl={Routes.dashboard.article.new()} />
 
-    <ArticleList />
-  </DashboardContent>
-);
+      <ArticleList />
+    </DashboardContent>
+  );
+};
 
 const ArticleList: React.FC = () => {
-  const { currentPlayer } = useCurrentPlayer();
+  const router = useRouter();
   const setLoading = useSetRecoilState(loadingState);
-  const { data, loading, fetchMore, refetch } = useMyArticlesQuery({
-    variables: { first: 10 },
+  const { query } = router;
+  const page = query.page ? Number(query.page as string) : 1;
+  const { data, loading, refetch } = useMyArticlesQuery({
+    variables: { page },
     fetchPolicy: 'network-only',
-    skip: !currentPlayer,
+    skip: !router.isReady,
   });
+
   const [publishArticle, { loading: publishLoading }] = usePublishArticleMutation({
     onCompleted: data => {
       const article = data.publishArticle?.article;
@@ -55,13 +59,9 @@ const ArticleList: React.FC = () => {
     },
   });
 
+  const url = (page: number) => Routes.dashboard.article.index({ page });
+
   setLoading(loading || publishLoading || stopLoading);
-
-  if (!data) return <NotFound>記事がありません。</NotFound>;
-
-  const articles = data.myArticles.nodes;
-  if (!(articles && articles.length > 0)) return <NotFound>記事がありません。</NotFound>;
-  const pageInfo = data.myArticles.pageInfo;
 
   return (
     <>
@@ -75,7 +75,7 @@ const ArticleList: React.FC = () => {
             </tr>
           </thead>
           <tbody>
-            {articles.map(article => {
+            {data?.myArticles.records.map(article => {
               if (!article) return;
 
               return (
@@ -116,30 +116,7 @@ const ArticleList: React.FC = () => {
         </table>
       </div>
 
-      {data.myArticles.pageInfo?.hasNextPage && (
-        <ReadMore
-          onClick={() => {
-            fetchMore({
-              variables: { after: pageInfo.endCursor },
-              updateQuery: (prev, { fetchMoreResult }) => {
-                if (!fetchMoreResult) return prev;
-
-                const prevNodes = prev.myArticles.nodes;
-                const nodes = fetchMoreResult.myArticles.nodes;
-                if (!(prevNodes && nodes)) return prev;
-
-                return {
-                  ...fetchMoreResult,
-                  myArticles: {
-                    ...fetchMoreResult.myArticles,
-                    nodes: [...prevNodes, ...nodes],
-                  },
-                };
-              },
-            });
-          }}
-        />
-      )}
+      {data && <Paging paging={data.myArticles.paging} url={url} />}
     </>
   );
 };

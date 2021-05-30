@@ -1,11 +1,11 @@
-query Events($first: Int, $after: String) {
-  events(first: $first, after: $after) {
-    nodes {
+query Events($page: Int, $per: Int) {
+  events(page: $page, per: $per) {
+    records {
       ...event
     }
 
-    pageInfo {
-      ...pageInfo
+    paging {
+      ...paging
     }
   }
 }
