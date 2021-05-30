@@ -3,7 +3,6 @@ import React from 'react';
 import { EventAttributes, useCreateEventMutation } from '@/lib/graphql/types';
 import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { Routes } from '@/lib/Routes';
 import { PageHeader } from '@/components/layouts/PageHeader';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
@@ -17,7 +16,7 @@ const Page: React.FC = () => {
   const [createEvent, { loading }] = useCreateEventMutation({
     onCompleted: () => {
       toast.success('イベントを登録しました。');
-      router.push(Routes.dashboard.event.index());
+      router.back();
     },
     onError: e => {
       toast.error(e.message);

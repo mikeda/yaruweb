@@ -66,7 +66,7 @@ const ComboContent: React.FC<PageDashboardComboEditQuery> = ({ combo }) => {
   const [updateCombo, { loading }] = useUpdateComboMutation({
     onCompleted: () => {
       toast.success('コンボを更新しました。');
-      router.push(Routes.dashboard.combo.index(combo.comboCategory.id));
+      router.back();
     },
     onError: e => {
       toast.error(e.message);

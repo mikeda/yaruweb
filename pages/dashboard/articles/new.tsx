@@ -18,7 +18,7 @@ const Page: React.FC = () => {
   const [createArticle, { loading }] = useCreateArticleMutation({
     onCompleted: () => {
       toast.success('記事を作成しました。');
-      router.push(Routes.dashboard.article.index());
+      router.back();
     },
     onError: e => {
       toast.error(e.message);

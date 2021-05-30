@@ -68,7 +68,7 @@ const PageContent: React.FC<PageDashboardActionNewQuery> = ({ move }) => {
   const [createAttackAction, { loading }] = useCreateAttackActionMutation({
     onCompleted: () => {
       toast.success('判定を登録しました。');
-      router.push(Routes.dashboard.move.actions.index(move.id));
+      router.back();
     },
     onError: e => {
       toast.error(e.message);

@@ -9,7 +9,6 @@ import {
 } from '@/lib/graphql/types';
 import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { Routes } from '@/lib/Routes';
 import { PageHeader } from '@/components/layouts/PageHeader';
 import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
@@ -29,7 +28,7 @@ const Page: React.FC<Props> = ({ comboCategory }) => {
   const [updateComboCategory, { loading }] = useUpdateComboCategoryMutation({
     onCompleted: () => {
       toast.success('コンボカテゴリを更新しました。');
-      router.push(Routes.dashboard.comboCategory.index(comboCategory.character.slug));
+      router.back();
     },
     onError: e => {
       toast.error(e.message);

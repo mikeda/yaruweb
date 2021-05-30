@@ -70,7 +70,7 @@ const ThrowActionContent: React.FC<PageDashboardThrowActionEditQuery> = ({ throw
   const [updateAction, { loading }] = useUpdateThrowActionMutation({
     onCompleted: () => {
       toast.success('アクションを更新しました。');
-      router.push(Routes.dashboard.move.actions.index(throwAction.move.id));
+      router.back();
     },
     onError: e => {
       toast.error(e.message);

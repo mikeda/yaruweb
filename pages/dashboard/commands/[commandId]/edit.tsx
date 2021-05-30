@@ -70,7 +70,7 @@ const CommandContent: React.FC<PageDashboardCommandEditQuery> = ({ command }) =>
   const [updateCommand, { loading }] = useUpdateCommandMutation({
     onCompleted: () => {
       toast.success('コマンドを更新しました。');
-      router.push(Routes.dashboard.move.commands.index(command.move.id));
+      router.back();
     },
     onError: e => {
       toast.error(e.message);

@@ -8,7 +8,6 @@ import {
 } from '@/lib/graphql/types';
 import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { Routes } from '@/lib/Routes';
 import { PageHeader } from '@/components/layouts/PageHeader';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
@@ -67,7 +66,7 @@ const Form: React.FC<{ currentPlayer: CurrentPlayerFragment }> = ({ currentPlaye
 
       setCurrentPlayer(updatedCurrentPlayer);
       toast.success('プロフィールを更新しました。');
-      router.push(Routes.dashboard.profile.edit());
+      router.back();
     },
     onError: e => {
       toast.error(e.message);

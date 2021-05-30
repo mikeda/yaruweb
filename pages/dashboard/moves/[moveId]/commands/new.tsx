@@ -68,7 +68,7 @@ const PageContent: React.FC<PageDashboardCommandNewQuery> = ({ move }) => {
   const [createCommand, { loading }] = useCreateCommandMutation({
     onCompleted: () => {
       toast.success('コマンドを登録しました。');
-      router.push(Routes.dashboard.move.commands.index(move.id));
+      router.back();
     },
     onError: e => {
       toast.error(e.message);
