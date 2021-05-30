@@ -23,6 +23,13 @@ import { VideoPlayer } from './MoveMedia/VideoPlayer';
 
 const schema = yup.object().shape({
   name: yup.string().required(),
+  startUpFrame: yup
+    .number()
+    .integer()
+    .typeError('数値を入力して下さい。')
+    .min(0)
+    .nullable()
+    .transform((value, originalValue) => (originalValue === '' ? null : value)),
 });
 
 interface Props {
@@ -102,6 +109,7 @@ export const MoveForm: React.FC<Props> = ({ move, conditions, onSubmit }) => {
 
       <FormGroup label="発生フレーム">
         <Input type="number" {...register('startUpFrame')} />
+        {errors.startUpFrame?.message && <span>{errors.startUpFrame.message}</span>}
       </FormGroup>
 
       <FormGroup label="ステータス">
