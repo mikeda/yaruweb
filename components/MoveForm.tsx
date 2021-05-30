@@ -23,7 +23,6 @@ import { VideoPlayer } from './MoveMedia/VideoPlayer';
 
 const schema = yup.object().shape({
   name: yup.string().required(),
-  startUpFrame: yup.number().integer().min(0),
 });
 
 interface Props {
