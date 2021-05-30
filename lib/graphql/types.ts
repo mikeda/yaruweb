@@ -166,7 +166,9 @@ export enum AttackActionStateEnum {
   /** へこみ */
   Bow = 'bow',
   /** のけぞり */
-  BendBack = 'bend_back'
+  BendBack = 'bend_back',
+  /** 回復可能なよろけダウン */
+  RecoverableDown = 'recoverable_down'
 }
 
 export enum AttackTypeEnum {

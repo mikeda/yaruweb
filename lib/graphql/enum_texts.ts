@@ -27,6 +27,7 @@ export const AttackActionStateText: { [key in Types.AttackActionStateEnum]: stri
   only_block: 'ガード可能な有利',
   bow: '強制しゃがみ',
   bend_back: '強制しゃがみ',
+  recoverable_down: '回復可能なよろけダウン',
 };
 
 export const OrderText: { [key in Types.Order]: string } = {
