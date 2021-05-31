@@ -1,0 +1,19 @@
+@import '@/styles/variables';
+
+.card {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.16);
+}
+
+.content {
+  flex: 1;
+}
+
+.handle {
+  font-size: 1.25rem;
+  color: $c-gray;
+}
