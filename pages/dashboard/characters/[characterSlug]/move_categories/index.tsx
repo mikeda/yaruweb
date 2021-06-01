@@ -1,15 +1,21 @@
 import React from 'react';
 
-import { MoveCategoryFragment, usePageDashboardMoveCategoriesQuery } from '@/lib/graphql/types';
+import {
+  MoveCategory,
+  usePageDashboardMoveCategoriesQuery,
+  useUpdateMoveCategoryPositionMutation,
+} from '@/lib/graphql/types';
 import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import Link from 'next/link';
 import { Routes } from '@/lib/Routes';
 import { PageHeader } from '@/components/layouts/PageHeader';
 import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from 'states/loading';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
+import { SortableCardList } from '@/components/SortableCardList';
+import { toast } from 'react-toastify';
+import { SortableCardContent } from '@/components/SortableCardContent';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -38,32 +44,35 @@ const Page: React.FC = () => {
   );
 };
 
+type MoveCategoryFragment = Pick<MoveCategory, 'id' | 'name' | 'movesCount'>;
+
 const PageContent: React.FC<{ moveCategories: MoveCategoryFragment[] }> = ({ moveCategories }) => {
+  const setLoading = useSetRecoilState(loadingState);
+  const [updateStagePosition, { loading }] = useUpdateMoveCategoryPositionMutation({
+    onError: e => {
+      toast.error(e.message);
+    },
+  });
+
+  setLoading(loading);
+
   return (
-    <div className="bl_horizTable">
-      <table>
-        <thead>
-          <tr>
-            <th>タイトル</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {moveCategories.map(moveCategory => {
-            return (
-              <tr key={moveCategory.id}>
-                <td>{moveCategory.name}</td>
-                <td>
-                  <Link href={Routes.dashboard.move.index(moveCategory.id)}>
-                    <a>技データを登録</a>
-                  </Link>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
+    <SortableCardList
+      items={moveCategories.map(c => ({ id: c.id, content: <MoveCategoryContent moveCategory={c} /> }))}
+      onMove={(moveCategoryId, newPosition) => updateStagePosition({ variables: { moveCategoryId, newPosition } })}
+    />
+  );
+};
+
+const MoveCategoryContent: React.FC<{ moveCategory: MoveCategoryFragment }> = ({ moveCategory }) => {
+  return (
+    <SortableCardContent
+      title={moveCategory.name}
+      links={[
+        { text: '編集する', url: Routes.dashboard.moveCategory.edit(moveCategory.id) },
+        { text: `技データ(${moveCategory.movesCount})`, url: Routes.dashboard.move.index(moveCategory.id) },
+      ]}
+    />
   );
 };
 

@@ -3096,6 +3096,23 @@ export type UpdateMoveCategoryMutation = (
   )> }
 );
 
+export type UpdateMoveCategoryPositionMutationVariables = Exact<{
+  moveCategoryId: Scalars['ID'];
+  newPosition: Scalars['Int'];
+}>;
+
+
+export type UpdateMoveCategoryPositionMutation = (
+  { __typename?: 'Mutation' }
+  & { updateMoveCategoryPosition?: Maybe<(
+    { __typename?: 'UpdateMoveCategoryPositionPayload' }
+    & { moveCategory: (
+      { __typename?: 'MoveCategory' }
+      & Pick<MoveCategory, 'id'>
+    ) }
+  )> }
+);
+
 export type CreateStageMutationVariables = Exact<{
   attributes: StageAttributes;
 }>;
@@ -3692,7 +3709,7 @@ export type PageDashboardMoveCategoriesQuery = (
     & Pick<Character, 'slug' | 'name'>
     & { moveCategories: Array<(
       { __typename?: 'MoveCategory' }
-      & MoveCategoryFragment
+      & Pick<MoveCategory, 'id' | 'name' | 'movesCount'>
     )> }
   ) }
 );
@@ -6013,6 +6030,44 @@ export function useUpdateMoveCategoryMutation(baseOptions?: Apollo.MutationHookO
 export type UpdateMoveCategoryMutationHookResult = ReturnType<typeof useUpdateMoveCategoryMutation>;
 export type UpdateMoveCategoryMutationResult = Apollo.MutationResult<UpdateMoveCategoryMutation>;
 export type UpdateMoveCategoryMutationOptions = Apollo.BaseMutationOptions<UpdateMoveCategoryMutation, UpdateMoveCategoryMutationVariables>;
+export const UpdateMoveCategoryPositionDocument = gql`
+    mutation UpdateMoveCategoryPosition($moveCategoryId: ID!, $newPosition: Int!) {
+  updateMoveCategoryPosition(
+    input: {moveCategoryId: $moveCategoryId, newPosition: $newPosition}
+  ) {
+    moveCategory {
+      id
+    }
+  }
+}
+    `;
+export type UpdateMoveCategoryPositionMutationFn = Apollo.MutationFunction<UpdateMoveCategoryPositionMutation, UpdateMoveCategoryPositionMutationVariables>;
+
+/**
+ * __useUpdateMoveCategoryPositionMutation__
+ *
+ * To run a mutation, you first call `useUpdateMoveCategoryPositionMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateMoveCategoryPositionMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateMoveCategoryPositionMutation, { data, loading, error }] = useUpdateMoveCategoryPositionMutation({
+ *   variables: {
+ *      moveCategoryId: // value for 'moveCategoryId'
+ *      newPosition: // value for 'newPosition'
+ *   },
+ * });
+ */
+export function useUpdateMoveCategoryPositionMutation(baseOptions?: Apollo.MutationHookOptions<UpdateMoveCategoryPositionMutation, UpdateMoveCategoryPositionMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateMoveCategoryPositionMutation, UpdateMoveCategoryPositionMutationVariables>(UpdateMoveCategoryPositionDocument, options);
+      }
+export type UpdateMoveCategoryPositionMutationHookResult = ReturnType<typeof useUpdateMoveCategoryPositionMutation>;
+export type UpdateMoveCategoryPositionMutationResult = Apollo.MutationResult<UpdateMoveCategoryPositionMutation>;
+export type UpdateMoveCategoryPositionMutationOptions = Apollo.BaseMutationOptions<UpdateMoveCategoryPositionMutation, UpdateMoveCategoryPositionMutationVariables>;
 export const CreateStageDocument = gql`
     mutation CreateStage($attributes: StageAttributes!) {
   createStage(input: {attributes: $attributes}) {
@@ -7503,11 +7558,13 @@ export const PageDashboardMoveCategoriesDocument = gql`
     slug
     name
     moveCategories {
-      ...moveCategory
+      id
+      name
+      movesCount
     }
   }
 }
-    ${MoveCategoryFragmentDoc}`;
+    `;
 
 /**
  * __usePageDashboardMoveCategoriesQuery__
