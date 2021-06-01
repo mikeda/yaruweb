@@ -1,16 +1,17 @@
 import React from 'react';
 
-import { PageDashboardMovesQuery, usePageDashboardMovesQuery } from '@/lib/graphql/types';
+import { Move, usePageDashboardMovesQuery, useUpdateMovePositionMutation } from '@/lib/graphql/types';
 import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
 import { PageHeader } from '@/components/layouts/PageHeader';
 import { Routes } from '@/lib/Routes';
-import Link from 'next/link';
-import { ActionList } from '@/components/ActionList';
 import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from 'states/loading';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
+import { toast } from 'react-toastify';
+import { SortableCardList } from '@/components/SortableCardList';
+import { SortableCardContent } from '@/components/SortableCardContent';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -44,53 +45,41 @@ const Page: React.FC = () => {
       />
       <PageHeader title={title} addPageUrl={Routes.dashboard.move.new(moveCategory.id)} />
 
-      <PageContent data={data} />
+      <PageContent moves={data.moveCategory.moves} />
     </DashboardContent>
   );
 };
 
-const PageContent: React.FC<{ data: PageDashboardMovesQuery }> = ({ data }) => {
+type MoveFragment = Pick<Move, 'id' | 'name' | 'commandsCount' | 'actionsCount'>;
+
+const PageContent: React.FC<{ moves: MoveFragment[] }> = ({ moves }) => {
+  const setLoading = useSetRecoilState(loadingState);
+  const [updateStagePosition, { loading }] = useUpdateMovePositionMutation({
+    onError: e => {
+      toast.error(e.message);
+    },
+  });
+
+  setLoading(loading);
+
   return (
-    <div className="bl_horizTable">
-      <table>
-        <thead>
-          <tr>
-            <th></th>
-            <th>コマンド</th>
-            <th>判定</th>
-          </tr>
-        </thead>
-        <tbody>
-          {data.moveCategory.moves.map(move => {
-            return (
-              <tr key={move.id}>
-                <td>
-                  {move.name}
-                  <br />
-                  <Link href={Routes.dashboard.move.edit(move.id)}>
-                    <a>編集</a>
-                  </Link>
-                </td>
-                <td>
-                  {move.commands.map(command => (
-                    <div key={command.id}>{command.operations.map(o => o.name).join(',')}</div>
-                  ))}
-                  <Link href={Routes.dashboard.move.commands.index(move.id)}>
-                    <a>詳細</a>
-                  </Link>
-                </td>
-                <td>
-                  <ActionList actions={move.actions} />
-                  <Link href={Routes.dashboard.move.actions.index(move.id)}>
-                    <a>詳細</a>
-                  </Link>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
+    <SortableCardList
+      items={moves.map(c => ({ id: c.id, content: <MoveContent move={c} /> }))}
+      onMove={(moveId, newPosition) => updateStagePosition({ variables: { moveId, newPosition } })}
+    />
+  );
+};
+
+const MoveContent: React.FC<{ move: MoveFragment }> = ({ move }) => {
+  return (
+    <SortableCardContent
+      title={move.name}
+      links={[
+        { text: '編集する', url: Routes.dashboard.move.edit(move.id) },
+        { text: `コマンド(${move.commandsCount})`, url: Routes.dashboard.move.commands.index(move.id) },
+        { text: `判定(${move.actionsCount})`, url: Routes.dashboard.move.actions.index(move.id) },
+      ]}
+    />
   );
 };
 

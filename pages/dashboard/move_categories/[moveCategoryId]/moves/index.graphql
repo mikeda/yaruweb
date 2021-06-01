@@ -1,6 +1,7 @@
 query PageDashboardMoves($moveCategoryId: ID!) {
   moveCategory(moveCategoryId: $moveCategoryId) {
-    ...moveCategory
+    id
+    name
 
     character {
       slug
@@ -8,7 +9,10 @@ query PageDashboardMoves($moveCategoryId: ID!) {
     }
 
     moves {
-      ...move
+      id
+      name
+      commandsCount
+      actionsCount
     }
   }
 }
