@@ -48,7 +48,7 @@ type MoveCategoryFragment = Pick<MoveCategory, 'id' | 'name' | 'movesCount'>;
 
 const PageContent: React.FC<{ moveCategories: MoveCategoryFragment[] }> = ({ moveCategories }) => {
   const setLoading = useSetRecoilState(loadingState);
-  const [updateStagePosition, { loading }] = useUpdateMoveCategoryPositionMutation({
+  const [updateMoveCategoryPosition, { loading }] = useUpdateMoveCategoryPositionMutation({
     onError: e => {
       toast.error(e.message);
     },
@@ -59,7 +59,9 @@ const PageContent: React.FC<{ moveCategories: MoveCategoryFragment[] }> = ({ mov
   return (
     <SortableCardList
       items={moveCategories.map(c => ({ id: c.id, content: <MoveCategoryContent moveCategory={c} /> }))}
-      onMove={(moveCategoryId, newPosition) => updateStagePosition({ variables: { moveCategoryId, newPosition } })}
+      onMove={(moveCategoryId, newPosition) =>
+        updateMoveCategoryPosition({ variables: { moveCategoryId, newPosition } })
+      }
     />
   );
 };

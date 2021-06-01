@@ -1,0 +1,7 @@
+mutation UpdateMovePosition($moveId: ID!, $newPosition: Int!) {
+  updateMovePosition(input: { moveId: $moveId, newPosition: $newPosition }) {
+    move {
+      id
+    }
+  }
+}

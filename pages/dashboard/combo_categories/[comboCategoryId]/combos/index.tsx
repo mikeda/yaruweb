@@ -1,70 +1,82 @@
 import React from 'react';
 
-import {
-  ComboCategoryDetailDocument,
-  ComboCategoryDetailFragment,
-  ComboCategoryDetailQuery,
-} from '@/lib/graphql/types';
+import { Combo, usePageDashboardCombosQuery, useUpdateComboPositionMutation } from '@/lib/graphql/types';
 import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { GetServerSideProps } from 'next';
-import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
-import Link from 'next/link';
-import { Routes } from '@/lib/Routes';
 import { PageHeader } from '@/components/layouts/PageHeader';
+import { Routes } from '@/lib/Routes';
+import { useRouter } from 'next/router';
+import { useSetRecoilState } from 'recoil';
+import { loadingState } from 'states/loading';
+import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
+import { toast } from 'react-toastify';
+import { SortableCardList } from '@/components/SortableCardList';
+import { SortableCardContent } from '@/components/SortableCardContent';
 
-interface Props {
-  comboCategory: ComboCategoryDetailFragment;
-}
+const Page: React.FC = () => {
+  const router = useRouter();
+  const { comboCategoryId } = router.query;
+  const setLoading = useSetRecoilState(loadingState);
 
-const Page: React.FC<Props> = ({ comboCategory }) => {
-  const title = `コンボ(${comboCategory.character.longName}/${comboCategory.name})`;
+  const { data, loading } = usePageDashboardCombosQuery({
+    variables: { comboCategoryId: comboCategoryId as string },
+    fetchPolicy: 'network-only',
+    skip: !comboCategoryId,
+  });
+
+  setLoading(loading);
+  if (!data) return null;
+
+  const { comboCategory } = data;
+  const title = comboCategory.name;
 
   return (
     <DashboardContent activeTab="character">
       <Head title={title} />
-
+      <Breadcrumbs
+        parents={[
+          { name: 'キャラクター', url: Routes.dashboard.character.index() },
+          {
+            name: `コンボ(${comboCategory.character.name})`,
+            url: Routes.dashboard.comboCategory.index(comboCategory.character.slug),
+          },
+        ]}
+        current={title}
+      />
       <PageHeader title={title} addPageUrl={Routes.dashboard.combo.new(comboCategory.id)} />
 
-      <PageContent comboCategory={comboCategory} />
+      <PageContent combos={data.comboCategory.combos} />
     </DashboardContent>
   );
 };
 
-const PageContent: React.FC<Props> = ({ comboCategory }) => {
+type ComboFragment = Pick<Combo, 'id' | 'name'>;
+
+const PageContent: React.FC<{ combos: ComboFragment[] }> = ({ combos }) => {
+  const setLoading = useSetRecoilState(loadingState);
+  const [updateStagePosition, { loading }] = useUpdateComboPositionMutation({
+    onError: e => {
+      toast.error(e.message);
+    },
+  });
+
+  setLoading(loading);
+
   return (
-    <div className="bl_horizTable">
-      <table>
-        <thead>
-          <tr>
-            <th>名前</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {comboCategory.combos.map(combo => {
-            return (
-              <tr key={combo.id}>
-                <td>{combo.name}</td>
-                <td>
-                  <Link href={Routes.dashboard.combo.edit(combo.id)}>
-                    <a>編集</a>
-                  </Link>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
+    <SortableCardList
+      items={combos.map(c => ({ id: c.id, content: <ComboContent combo={c} /> }))}
+      onMove={(comboId, newPosition) => updateStagePosition({ variables: { comboId, newPosition } })}
+    />
   );
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const comboCategoryId = params?.comboCategoryId as string;
-  const data: ComboCategoryDetailQuery = await fetchGraphql(ComboCategoryDetailDocument, { comboCategoryId });
-
-  return { props: { comboCategory: data.comboCategory } };
+const ComboContent: React.FC<{ combo: ComboFragment }> = ({ combo }) => {
+  return (
+    <SortableCardContent
+      title={combo.name}
+      links={[{ text: '編集する', url: Routes.dashboard.combo.edit(combo.id) }]}
+    />
+  );
 };
 
 export default Page;

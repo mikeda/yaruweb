@@ -1,0 +1,12 @@
+query PageDashboardComboCategories($characterSlug: ID!) {
+  character(characterSlug: $characterSlug) {
+    slug
+    name
+
+    comboCategories {
+      id
+      name
+      combosCount
+    }
+  }
+}
