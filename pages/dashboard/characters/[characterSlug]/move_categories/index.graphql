@@ -4,7 +4,9 @@ query PageDashboardMoveCategories($characterSlug: ID!) {
     name
 
     moveCategories {
-      ...moveCategory
+      id
+      name
+      movesCount
     }
   }
 }
