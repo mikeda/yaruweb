@@ -10,8 +10,7 @@ import { useSetRecoilState } from 'recoil';
 import { loadingState } from 'states/loading';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 import { toast } from 'react-toastify';
-import { SortableCardList } from '@/components/SortableCardList';
-import { SortableCardContent } from '@/components/SortableCardContent';
+import { SortableObjectCardList } from '@/components/ObjectCardList';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -54,7 +53,7 @@ type MoveFragment = Pick<Move, 'id' | 'name' | 'commandsCount' | 'actionsCount'>
 
 const PageContent: React.FC<{ moves: MoveFragment[] }> = ({ moves }) => {
   const setLoading = useSetRecoilState(loadingState);
-  const [updateStagePosition, { loading }] = useUpdateMovePositionMutation({
+  const [updateMovePosition, { loading }] = useUpdateMovePositionMutation({
     onError: e => {
       toast.error(e.message);
     },
@@ -63,22 +62,17 @@ const PageContent: React.FC<{ moves: MoveFragment[] }> = ({ moves }) => {
   setLoading(loading);
 
   return (
-    <SortableCardList
-      items={moves.map(c => ({ id: c.id, content: <MoveContent move={c} /> }))}
-      onMove={(moveId, newPosition) => updateStagePosition({ variables: { moveId, newPosition } })}
-    />
-  );
-};
-
-const MoveContent: React.FC<{ move: MoveFragment }> = ({ move }) => {
-  return (
-    <SortableCardContent
-      title={move.name}
-      links={[
-        { text: '編集する', url: Routes.dashboard.move.edit(move.id) },
-        { text: `コマンド(${move.commandsCount})`, url: Routes.dashboard.move.commands.index(move.id) },
-        { text: `判定(${move.actionsCount})`, url: Routes.dashboard.move.actions.index(move.id) },
-      ]}
+    <SortableObjectCardList
+      items={moves.map(move => ({
+        id: move.id,
+        title: move.name,
+        links: [
+          { text: '編集する', url: Routes.dashboard.move.edit(move.id) },
+          { text: `コマンド(${move.commandsCount})`, url: Routes.dashboard.move.commands.index(move.id) },
+          { text: `判定(${move.actionsCount})`, url: Routes.dashboard.move.actions.index(move.id) },
+        ],
+      }))}
+      onMove={(moveId, newPosition) => updateMovePosition({ variables: { moveId, newPosition } })}
     />
   );
 };

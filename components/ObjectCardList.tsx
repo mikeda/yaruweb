@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 
-import { SortableCard } from './SortableCard';
-
-import styles from './SortableCardList.module.scss';
 import { closestCenter, DndContext, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
 import {
   arrayMove,
@@ -11,17 +8,29 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 
-interface ItemProps {
-  id: string;
-  content: React.ReactNode;
-}
+import styles from './ObjectCardList.module.scss';
+import { ObjectCard, ObjectCardProps, SortableObjectCard, SortableObjectCardProps } from './ObjectCard';
 
 interface Props {
-  items: ItemProps[];
+  items: ObjectCardProps[];
+}
+
+export const ObjectCardList: React.FC<Props> = ({ items }) => {
+  return (
+    <div className={styles.list}>
+      {items.map((item, i) => (
+        <ObjectCard key={i} {...item} />
+      ))}
+    </div>
+  );
+};
+
+interface SortableProps {
+  items: SortableObjectCardProps[];
   onMove: (id: string, newPosition: number) => void;
 }
 
-export const SortableCardList: React.FC<Props> = ({ items: initItems, onMove }) => {
+export const SortableObjectCardList: React.FC<SortableProps> = ({ items: initItems, onMove }) => {
   const [items, setItems] = useState(initItems);
 
   const sensors = useSensors(
@@ -52,9 +61,11 @@ export const SortableCardList: React.FC<Props> = ({ items: initItems, onMove }) 
       <SortableContext items={items} strategy={verticalListSortingStrategy}>
         <div className={styles.list}>
           {items.map(item => (
-            <SortableCard key={item.id} id={item.id}>
-              {item.content}
-            </SortableCard>
+            <div key={item.id} className={styles.list}>
+              {items.map(item => (
+                <SortableObjectCard key={item.id} {...item} />
+              ))}
+            </div>
           ))}
         </div>
       </SortableContext>
