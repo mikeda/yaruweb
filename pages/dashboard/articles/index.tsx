@@ -3,15 +3,12 @@ import React from 'react';
 import {
   Article,
   ArticleStatus,
-  useMyArticlesQuery,
   usePageDashboardArticlesQuery,
   usePublishArticleMutation,
   useStopArticleMutation,
 } from '@/lib/graphql/types';
 import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import Link from 'next/link';
-import { ArticleStatusText } from '@/lib/graphql/enum_texts';
 import { Routes } from '@/lib/Routes';
 import { PageHeader } from '@/components/layouts/PageHeader';
 import { toast } from 'react-toastify';
@@ -20,7 +17,7 @@ import { useSetRecoilState } from 'recoil';
 import { loadingState } from 'states/loading';
 import { useRouter } from 'next/router';
 import { Paging } from '@/components/blocks/Paging';
-import { ObjectCardList, SortableObjectCardList } from '@/components/ObjectCardList';
+import { ObjectCardList } from '@/components/ObjectCardList';
 
 const Page: React.FC = () => {
   const router = useRouter();
