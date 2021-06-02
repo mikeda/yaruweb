@@ -4,14 +4,13 @@ import { StageFragment, useStagesQuery, useUpdateStagePositionMutation } from '@
 import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
 import { NotFound } from '@/components/NotFound';
-import Link from 'next/link';
 import { Routes } from '@/lib/Routes';
 import { PageHeader } from '@/components/layouts/PageHeader';
 
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from 'states/loading';
-import { SortableCardList } from '@/components/SortableCardList';
+import { SortableObjectCardList } from '@/components/ObjectCardList';
 
 const Page: React.FC = () => (
   <DashboardContent activeTab="stage">
@@ -34,21 +33,14 @@ const SortableList: React.FC<{ stages: StageFragment[] }> = ({ stages }) => {
   setLoading(loading);
 
   return (
-    <SortableCardList
-      items={stages.map(s => ({ id: s.id, content: <StageContent stage={s} /> }))}
+    <SortableObjectCardList
+      items={stages.map(stage => ({
+        id: stage.id,
+        title: stage.name,
+        links: [{ text: '編集する', url: Routes.dashboard.stage.edit(stage.id) }],
+      }))}
       onMove={(stageId, newPosition) => updateStagePosition({ variables: { stageId, newPosition } })}
     />
-  );
-};
-
-const StageContent: React.FC<{ stage: StageFragment }> = ({ stage }) => {
-  return (
-    <div>
-      <div>{stage.name}</div>
-      <Link href={Routes.dashboard.stage.edit(stage.id)}>
-        <a>編集する</a>
-      </Link>
-    </div>
   );
 };
 

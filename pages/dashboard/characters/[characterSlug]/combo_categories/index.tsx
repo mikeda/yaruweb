@@ -14,8 +14,7 @@ import { useSetRecoilState } from 'recoil';
 import { loadingState } from 'states/loading';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 import { toast } from 'react-toastify';
-import { SortableCardList } from '@/components/SortableCardList';
-import { SortableCardContent } from '@/components/SortableCardContent';
+import { SortableObjectCardList } from '@/components/ObjectCardList';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -57,23 +56,18 @@ const PageContent: React.FC<{ comboCategories: ComboCategoryFragment[] }> = ({ c
   setLoading(loading);
 
   return (
-    <SortableCardList
-      items={comboCategories.map(c => ({ id: c.id, content: <ComboCategoryContent comboCategory={c} /> }))}
+    <SortableObjectCardList
+      items={comboCategories.map(comboCategory => ({
+        id: comboCategory.id,
+        title: comboCategory.name,
+        links: [
+          { text: '編集する', url: Routes.dashboard.comboCategory.edit(comboCategory.id) },
+          { text: `コンボ(${comboCategory.combosCount})`, url: Routes.dashboard.combo.index(comboCategory.id) },
+        ],
+      }))}
       onMove={(comboCategoryId, newPosition) =>
         updateComboCategoryPosition({ variables: { comboCategoryId, newPosition } })
       }
-    />
-  );
-};
-
-const ComboCategoryContent: React.FC<{ comboCategory: ComboCategoryFragment }> = ({ comboCategory }) => {
-  return (
-    <SortableCardContent
-      title={comboCategory.name}
-      links={[
-        { text: '編集する', url: Routes.dashboard.comboCategory.edit(comboCategory.id) },
-        { text: `コンボ(${comboCategory.combosCount})`, url: Routes.dashboard.combo.index(comboCategory.id) },
-      ]}
     />
   );
 };

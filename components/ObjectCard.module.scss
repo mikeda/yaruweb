@@ -1,5 +1,25 @@
 @import '@/styles/variables';
 
+.card {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.16);
+}
+
+.content {
+  flex: 1;
+}
+
+.handle {
+  font-size: 1.5rem;
+  color: $c-gray;
+  cursor: grab;
+}
+
 .title {
   font-size: 1.25rem;
   font-weight: bold;

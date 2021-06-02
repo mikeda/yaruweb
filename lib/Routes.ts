@@ -50,7 +50,7 @@ export const Routes = {
       edit: (actionId: string) => `/dashboard/attack_actions/${actionId}/edit`,
     },
     article: {
-      index: (params?: { page?: number }) => generatePath('/dashboard/articles', params),
+      index: (page?: number) => generatePath('/dashboard/articles', { page }),
       new: () => '/dashboard/articles/new',
       edit: (articleId: string) => `/dashboard/articles/${articleId}/edit`,
     },

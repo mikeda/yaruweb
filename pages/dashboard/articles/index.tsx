@@ -1,8 +1,10 @@
 import React from 'react';
 
 import {
+  Article,
   ArticleStatus,
   useMyArticlesQuery,
+  usePageDashboardArticlesQuery,
   usePublishArticleMutation,
   useStopArticleMutation,
 } from '@/lib/graphql/types';
@@ -18,29 +20,48 @@ import { useSetRecoilState } from 'recoil';
 import { loadingState } from 'states/loading';
 import { useRouter } from 'next/router';
 import { Paging } from '@/components/blocks/Paging';
+import { ObjectCardList, SortableObjectCardList } from '@/components/ObjectCardList';
 
 const Page: React.FC = () => {
+  const router = useRouter();
+  const setLoading = useSetRecoilState(loadingState);
+  const { query } = router;
+  const page = query.page ? Number(query.page as string) : 1;
+  const { data, loading, refetch } = usePageDashboardArticlesQuery({
+    variables: { page },
+    fetchPolicy: 'network-only',
+    skip: !router.isReady,
+  });
+
+  setLoading(loading);
+  if (!data) return null;
+
+  const {
+    myArticles: { records: articles, paging },
+  } = data;
+
   return (
     <DashboardContent activeTab="article">
       <Head title="記事" />
       <Breadcrumbs current="記事" />
       <PageHeader title="記事" addPageUrl={Routes.dashboard.article.new()} />
 
-      <ArticleList />
+      <PageContent articles={articles} refetch={refetch} />
+
+      <Paging paging={paging} url={Routes.dashboard.article.index} />
     </DashboardContent>
   );
 };
 
-const ArticleList: React.FC = () => {
-  const router = useRouter();
+type ArticleFragment = Pick<Article, 'id' | 'title' | 'status'>;
+
+interface PageContentProps {
+  articles: ArticleFragment[];
+  refetch: () => void;
+}
+
+const PageContent: React.FC<PageContentProps> = ({ articles, refetch }) => {
   const setLoading = useSetRecoilState(loadingState);
-  const { query } = router;
-  const page = query.page ? Number(query.page as string) : 1;
-  const { data, loading, refetch } = useMyArticlesQuery({
-    variables: { page },
-    fetchPolicy: 'network-only',
-    skip: !router.isReady,
-  });
 
   const [publishArticle, { loading: publishLoading }] = usePublishArticleMutation({
     onCompleted: data => {
@@ -59,65 +80,21 @@ const ArticleList: React.FC = () => {
     },
   });
 
-  const url = (page: number) => Routes.dashboard.article.index({ page });
-
-  setLoading(loading || publishLoading || stopLoading);
+  setLoading(publishLoading || stopLoading);
 
   return (
-    <>
-      <div className="bl_horizTable">
-        <table>
-          <thead>
-            <tr>
-              <th>タイトル</th>
-              <th>ステータス</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {data?.myArticles.records.map(article => {
-              if (!article) return;
-
-              return (
-                <tr key={article.id}>
-                  <td>
-                    <a href={Routes.article.detail(article.id)} target="_blank" rel="noreferrer">
-                      {article.title}
-                    </a>
-                  </td>
-                  <td>{ArticleStatusText[article.status]}</td>
-                  <td>
-                    <Link href={Routes.dashboard.article.edit(article.id)}>
-                      <a>編集</a>
-                    </Link>
-                    /
-                    {article.status === ArticleStatus.Draft ? (
-                      <a
-                        onClick={() => {
-                          publishArticle({ variables: { articleId: article.id } });
-                        }}
-                      >
-                        公開する
-                      </a>
-                    ) : (
-                      <a
-                        onClick={() => {
-                          stopArticle({ variables: { articleId: article.id } });
-                        }}
-                      >
-                        停止する
-                      </a>
-                    )}
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
-
-      {data && <Paging paging={data.myArticles.paging} url={url} />}
-    </>
+    <ObjectCardList
+      items={articles.map(article => ({
+        id: article.id,
+        title: article.status === ArticleStatus.Draft ? `[下書き] ${article.title}` : article.title,
+        links: [
+          { text: '編集する', url: Routes.dashboard.article.edit(article.id) },
+          article.status === ArticleStatus.Draft
+            ? { text: '公開する', onClick: () => publishArticle({ variables: { articleId: article.id } }) }
+            : { text: '停止する', onClick: () => stopArticle({ variables: { articleId: article.id } }) },
+        ],
+      }))}
+    />
   );
 };
 

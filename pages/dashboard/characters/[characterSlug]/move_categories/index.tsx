@@ -13,9 +13,8 @@ import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from 'states/loading';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
-import { SortableCardList } from '@/components/SortableCardList';
 import { toast } from 'react-toastify';
-import { SortableCardContent } from '@/components/SortableCardContent';
+import { SortableObjectCardList } from '@/components/ObjectCardList';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -57,23 +56,18 @@ const PageContent: React.FC<{ moveCategories: MoveCategoryFragment[] }> = ({ mov
   setLoading(loading);
 
   return (
-    <SortableCardList
-      items={moveCategories.map(c => ({ id: c.id, content: <MoveCategoryContent moveCategory={c} /> }))}
+    <SortableObjectCardList
+      items={moveCategories.map(moveCategory => ({
+        id: moveCategory.id,
+        title: moveCategory.name,
+        links: [
+          { text: '編集する', url: Routes.dashboard.moveCategory.edit(moveCategory.id) },
+          { text: `技データ(${moveCategory.movesCount})`, url: Routes.dashboard.move.index(moveCategory.id) },
+        ],
+      }))}
       onMove={(moveCategoryId, newPosition) =>
         updateMoveCategoryPosition({ variables: { moveCategoryId, newPosition } })
       }
-    />
-  );
-};
-
-const MoveCategoryContent: React.FC<{ moveCategory: MoveCategoryFragment }> = ({ moveCategory }) => {
-  return (
-    <SortableCardContent
-      title={moveCategory.name}
-      links={[
-        { text: '編集する', url: Routes.dashboard.moveCategory.edit(moveCategory.id) },
-        { text: `技データ(${moveCategory.movesCount})`, url: Routes.dashboard.move.index(moveCategory.id) },
-      ]}
     />
   );
 };
