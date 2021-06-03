@@ -77,6 +77,9 @@ export const Routes = {
       new: () => '/dashboard/events/new',
       edit: (eventId: string) => `/dashboard/events/${eventId}/edit`,
     },
+    highlight: {
+      edit: (highlightId: string) => `/dashboard/highlights/${highlightId}/edit`,
+    },
     moveCategory: {
       index: (characterSlug: string) => `/dashboard/characters/${characterSlug}/move_categories`,
       new: (characterSlug: string) => `/dashboard/characters/${characterSlug}/move_categories/new`,
@@ -115,6 +118,10 @@ export const Routes = {
       index: (page?: number) => `/dashboard/videos${page ? `?page=${page}` : ''}`,
       new: () => '/dashboard/videos/new',
       edit: (videoId: string) => `/dashboard/videos/${videoId}/edit`,
+      highlight: {
+        index: (videoId: string) => `/dashboard/videos/${videoId}/highlights`,
+        new: (videoId: string) => `/dashboard/videos/${videoId}/highlights/new`,
+      },
     },
   },
 };

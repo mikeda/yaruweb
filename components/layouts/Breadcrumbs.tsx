@@ -5,7 +5,7 @@ import styles from './Breadcrumbs.module.scss';
 
 interface ParentProps {
   name: string;
-  url: string;
+  url?: string;
 }
 
 export interface BreadcrumbsProps {
@@ -26,8 +26,12 @@ export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ parents, current, dash
 
 const Parent: React.FC<ParentProps> = ({ name, url }) => (
   <li className={styles.item}>
-    <Link href={url}>
-      <a>{name}</a>
-    </Link>
+    {url ? (
+      <Link href={url}>
+        <a>{name}</a>
+      </Link>
+    ) : (
+      <span>{name}</span>
+    )}
   </li>
 );
