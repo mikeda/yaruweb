@@ -192,6 +192,13 @@ export enum AttackTypeEnum {
   T = 't'
 }
 
+export type Channel = {
+  __typename?: 'Channel';
+  channelId: Scalars['String'];
+  id: Scalars['ID'];
+  name: Scalars['String'];
+};
+
 export type Character = {
   __typename?: 'Character';
   comboCategories: Array<ComboCategory>;
@@ -2103,7 +2110,7 @@ export type UpdateThrowActionPayload = {
 
 export type Video = {
   __typename?: 'Video';
-  channelTitle: Scalars['String'];
+  channel: Channel;
   commentCount: Scalars['Int'];
   faved: Scalars['Boolean'];
   favsCount: Scalars['Int'];
@@ -2418,7 +2425,11 @@ export type VideoCommentFragment = (
 
 export type VideoSummaryFragment = (
   { __typename?: 'Video' }
-  & Pick<Video, 'id' | 'videoId' | 'channelTitle' | 'title' | 'thumbnailUrl' | 'faved' | 'favsCount' | 'commentCount'>
+  & Pick<Video, 'id' | 'videoId' | 'title' | 'thumbnailUrl' | 'faved' | 'favsCount' | 'commentCount'>
+  & { channel: (
+    { __typename?: 'Channel' }
+    & Pick<Channel, 'name'>
+  ) }
 );
 
 export type CreateArticleMutationVariables = Exact<{
@@ -4664,12 +4675,14 @@ export const VideoSummaryFragmentDoc = gql`
     fragment videoSummary on Video {
   id
   videoId
-  channelTitle
   title
   thumbnailUrl
   faved
   favsCount
   commentCount
+  channel {
+    name
+  }
 }
     `;
 export const HighlightFragmentDoc = gql`

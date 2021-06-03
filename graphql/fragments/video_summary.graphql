@@ -1,10 +1,13 @@
 fragment videoSummary on Video {
   id
   videoId
-  channelTitle
   title
   thumbnailUrl
   faved
   favsCount
   commentCount
+
+  channel {
+    name
+  }
 }
