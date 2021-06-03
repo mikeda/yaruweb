@@ -1,0 +1,13 @@
+query PageDashboardVideos($page: Int, $per: Int) {
+  videos(page: $page, per: $per) {
+    records {
+      id
+      title
+      highlightsCount
+    }
+
+    paging {
+      ...paging
+    }
+  }
+}

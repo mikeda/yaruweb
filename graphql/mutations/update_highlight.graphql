@@ -1,0 +1,7 @@
+mutation UpdateHighlight($highlightId: ID!, $attributes: HighlightAttributes!) {
+  updateHighlight(input: { highlightId: $highlightId, attributes: $attributes }) {
+    highlight {
+      ...highlight
+    }
+  }
+}

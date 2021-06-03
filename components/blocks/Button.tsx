@@ -1,7 +1,14 @@
 import React from 'react';
+import clsx from 'clsx';
 
 import styles from './Button.module.scss';
 
-export const Button: React.FC = ({ children }) => {
-  return <div className={styles.button}>{children}</div>;
+type ColorType = 'primary' | 'info';
+
+interface Props {
+  type?: ColorType;
+}
+
+export const Button: React.FC<Props> = ({ type = 'primary', children }) => {
+  return <div className={clsx(styles.button, styles[type])}>{children}</div>;
 };

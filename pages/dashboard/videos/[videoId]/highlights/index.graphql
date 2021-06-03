@@ -1,0 +1,12 @@
+query PageDashboardHighlights($videoId: ID!) {
+  video(videoId: $videoId) {
+    id
+    title
+
+    highlights {
+      id
+      title
+      startSec
+    }
+  }
+}

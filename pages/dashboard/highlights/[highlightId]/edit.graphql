@@ -1,0 +1,13 @@
+query PageDashboardHighlightEdit($highlightId: ID!) {
+  highlight(highlightId: $highlightId) {
+    id
+    title
+    startSec
+
+    video {
+      id
+      title
+      videoId
+    }
+  }
+}

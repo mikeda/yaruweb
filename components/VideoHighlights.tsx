@@ -3,6 +3,7 @@ import React from 'react';
 import { HighlightFragment } from '@/lib/graphql/types';
 
 import styles from './VideoHighlights.module.scss';
+import { formatSec } from '@/lib/formatSec';
 
 interface Props {
   highlights: HighlightFragment[];
@@ -28,14 +29,4 @@ export const VideoHighlights: React.FC<Props> = ({ highlights, onSelect }) => {
       ))}
     </ol>
   );
-};
-
-const formatSec = (seconds: number) => {
-  const times: number[] = [];
-
-  times.push(Math.floor(seconds / 3600));
-  times.push(Math.floor((seconds % 3600) / 60));
-  times.push(seconds % 60);
-
-  return times.map(t => (t < 10 ? `0${t}` : t.toString())).join(':');
 };
