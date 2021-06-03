@@ -48,7 +48,7 @@ export const VideoMedia: React.FC<Props> = ({ video }) => {
 
       <div className={styles.body}>
         <div className={styles.ttl}>{video.title}</div>
-        <div className={styles.txt}>{video.channelTitle}</div>
+        <div className={styles.txt}>{video.channel.name}</div>
 
         <VideoHighlights
           highlights={video.highlights}
