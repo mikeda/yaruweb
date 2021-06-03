@@ -8,7 +8,7 @@ import { CSS } from '@dnd-kit/utilities';
 
 import styles from './ObjectCard.module.scss';
 
-interface LinkProps {
+export interface ObjectCardLinkProps {
   text: string;
   url?: string;
   onClick?: () => void;
@@ -16,7 +16,7 @@ interface LinkProps {
 
 export interface ObjectCardProps {
   title: string;
-  links: LinkProps[];
+  links: ObjectCardLinkProps[];
   rightContent?: React.ReactNode;
 }
 
@@ -48,7 +48,7 @@ export const ObjectCard: React.FC<ObjectCardProps> = ({ title, links, rightConte
 export interface SortableObjectCardProps {
   id: string;
   title: string;
-  links: LinkProps[];
+  links: ObjectCardLinkProps[];
 }
 
 export const SortableObjectCard: React.FC<SortableObjectCardProps> = ({ id, title, links }) => {

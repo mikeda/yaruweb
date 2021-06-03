@@ -1,0 +1,7 @@
+mutation DeleteArticle($articleId: ID!) {
+  deleteArticle(input: { articleId: $articleId }) {
+    article {
+      ...article
+    }
+  }
+}

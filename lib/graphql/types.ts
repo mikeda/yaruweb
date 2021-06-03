@@ -2782,6 +2782,22 @@ export type DeleteActionMutation = (
   )> }
 );
 
+export type DeleteArticleMutationVariables = Exact<{
+  articleId: Scalars['ID'];
+}>;
+
+
+export type DeleteArticleMutation = (
+  { __typename?: 'Mutation' }
+  & { deleteArticle?: Maybe<(
+    { __typename?: 'DeleteArticlePayload' }
+    & { article: (
+      { __typename?: 'Article' }
+      & ArticleFragment
+    ) }
+  )> }
+);
+
 export type DeleteCommandMutationVariables = Exact<{
   commandId: Scalars['ID'];
 }>;
@@ -5442,6 +5458,41 @@ export function useDeleteActionMutation(baseOptions?: Apollo.MutationHookOptions
 export type DeleteActionMutationHookResult = ReturnType<typeof useDeleteActionMutation>;
 export type DeleteActionMutationResult = Apollo.MutationResult<DeleteActionMutation>;
 export type DeleteActionMutationOptions = Apollo.BaseMutationOptions<DeleteActionMutation, DeleteActionMutationVariables>;
+export const DeleteArticleDocument = gql`
+    mutation DeleteArticle($articleId: ID!) {
+  deleteArticle(input: {articleId: $articleId}) {
+    article {
+      ...article
+    }
+  }
+}
+    ${ArticleFragmentDoc}`;
+export type DeleteArticleMutationFn = Apollo.MutationFunction<DeleteArticleMutation, DeleteArticleMutationVariables>;
+
+/**
+ * __useDeleteArticleMutation__
+ *
+ * To run a mutation, you first call `useDeleteArticleMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteArticleMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteArticleMutation, { data, loading, error }] = useDeleteArticleMutation({
+ *   variables: {
+ *      articleId: // value for 'articleId'
+ *   },
+ * });
+ */
+export function useDeleteArticleMutation(baseOptions?: Apollo.MutationHookOptions<DeleteArticleMutation, DeleteArticleMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteArticleMutation, DeleteArticleMutationVariables>(DeleteArticleDocument, options);
+      }
+export type DeleteArticleMutationHookResult = ReturnType<typeof useDeleteArticleMutation>;
+export type DeleteArticleMutationResult = Apollo.MutationResult<DeleteArticleMutation>;
+export type DeleteArticleMutationOptions = Apollo.BaseMutationOptions<DeleteArticleMutation, DeleteArticleMutationVariables>;
 export const DeleteCommandDocument = gql`
     mutation DeleteCommand($commandId: ID!) {
   deleteCommand(input: {commandId: $commandId}) {
