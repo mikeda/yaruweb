@@ -4119,10 +4119,10 @@ header-case@^2.0.4:
     capital-case "^1.0.4"
     tslib "^2.0.3"
 
-hls.js@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/hls.js/-/hls.js-1.0.0.tgz#d16f3b263d0028e3fa6c1c9ded4044b4ca47bdbe"
-  integrity sha512-ey/KWrc5LPMCnpY3YF+1joMK+ykydeFU39SEeAfdg+mBl9/WcTS18PwkyRvpO1+PiedKsBwKNNJ/7Aw3gfE4sA==
+hls.js@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/hls.js/-/hls.js-1.0.6.tgz#4c582654370457e27a2fbff3d7b1b932cdae1889"
+  integrity sha512-6+T4aIbUYqh0KgAeQdCigJXFi4yVXRFVu9NfhI715zPeKD+3uwr8T8QZXQOcTGNoW2ne+5vRuSSiC5aopydndw==
 
 hmac-drbg@^1.0.1:
   version "1.0.1"
