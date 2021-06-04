@@ -5,7 +5,7 @@ import { StaffRequirement } from '@/components/StaffRequirement';
 import { Article } from '@/components/ArticleCard';
 
 import { useArticlesQuery } from '@/lib/graphql/types';
-import { IntroSlides } from '@/pages-lib/index/IntroSlides';
+import { IntroSlides } from './IntroSlides';
 import { Heading } from '@/components/Heading';
 import { Head } from '@/components/layouts/Head';
 import { Content } from '@/components/layouts/Content';

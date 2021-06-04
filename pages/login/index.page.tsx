@@ -2,8 +2,8 @@ import React from 'react';
 import Link from 'next/link';
 
 import { Routes } from '@/lib/Routes';
-import { LoginWithEmailForm } from '@/pages-lib/login/LoginWithEmailForm';
-import { LoginWithTwitterButton } from '@/pages-lib/login/LoginWithTwitterButton';
+import { LoginWithEmailForm } from './LoginWithEmailForm';
+import { LoginWithTwitterButton } from './LoginWithTwitterButton';
 import { Content } from '@/components/layouts/Content';
 import { Head } from '@/components/layouts/Head';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { SignUpWithEmailForm } from '@/pages-lib/signup/SignUpWithEmailForm';
-import { SignUpWithTwitterButton } from '@/pages-lib/signup/SignUpWithTwitterButton';
+import { SignUpWithEmailForm } from './SignUpWithEmailForm';
+import { SignUpWithTwitterButton } from './SignUpWithTwitterButton';
 import { Content } from '@/components/layouts/Content';
 import { Head } from '@/components/layouts/Head';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';

@@ -19,7 +19,7 @@ import { Content } from '@/components/layouts/Content';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 import { ArticleCategoryText } from '@/lib/graphql/enum_texts';
 import { Routes } from '@/lib/Routes';
-import { ArticleDetail } from '@/pages-lib/articles/ArticleDetail';
+import { ArticleDetail } from './ArticleDetail';
 
 interface Props {
   article: ArticleFragment;

@@ -6,7 +6,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "eslint": "npx eslint --ext ts,tsx --max-warnings 0 components lib pages pages-lib"
+    "eslint": "npx eslint --ext ts,tsx --max-warnings 0 components lib pages"
   },
   "dependencies": {
     "@apollo/client": "^3.3.19",

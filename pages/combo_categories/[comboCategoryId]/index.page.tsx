@@ -11,10 +11,10 @@ import {
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Head } from '@/components/layouts/Head';
 import { Content } from '@/components/layouts/Content';
-import { ComboList } from '@/pages-lib/characters/[slug]/combos/ComboList';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 import { Routes } from '@/lib/Routes';
 import { PageHeader } from '@/components/layouts/PageHeader';
+import { ComboList } from './ComboList';
 
 interface Props {
   comboCategory: ComboCategoryDetailFragment;
