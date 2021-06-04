@@ -1,4 +1,5 @@
 module.exports = {
+  pageExtensions: ['page.tsx'],
   images: {
     domains: [
       process.env.NODE_ENV === 'production'
