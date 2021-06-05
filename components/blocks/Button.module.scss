@@ -25,3 +25,11 @@
   background-color: white;
   border: 2px solid $c-gray-border;
 }
+
+.listInline {
+  display: flex;
+}
+
+.listInline .button {
+  margin-right: 8px;
+}

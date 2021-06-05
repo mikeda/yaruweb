@@ -4,7 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
 import { Highlight, HighlightAttributes } from '@/lib/graphql/types';
-import { Button } from '@/components/blocks/Button';
+import { Button, ButtonListInline } from '@/components/blocks/Button';
 import { FormGroup } from '@/components/form2/FormGroup';
 import { Input } from '@/components/form2/Input';
 import YouTube from 'react-youtube';
@@ -61,19 +61,35 @@ export const HighlightForm: React.FC<Props> = ({ youtubeVideoId, highlight, onSu
           <Input {...register('startSec')} />
           {errors.startSec && <span>{errors.startSec.message}</span>}
         </FormGroup>
-        <FormGroup>
-          <Button type="info">
-            <a
-              onClick={e => {
-                e.preventDefault();
-                if (!youTubePlayer) return;
 
-                setValue('startSec', Math.floor(youTubePlayer.getCurrentTime()));
-              }}
-            >
-              プレイヤーの場所をコピー
-            </a>
-          </Button>
+        <FormGroup>
+          <ButtonListInline>
+            <Button type="info">
+              <a
+                onClick={e => {
+                  e.preventDefault();
+                  if (!youTubePlayer) return;
+
+                  setValue('startSec', Math.floor(youTubePlayer.getCurrentTime()));
+                }}
+              >
+                再生中の場所をコピー
+              </a>
+            </Button>
+
+            <Button type="info">
+              <a
+                onClick={e => {
+                  e.preventDefault();
+                  if (!youTubePlayer) return;
+
+                  youTubePlayer.seekTo(getValues('startSec'), true);
+                }}
+              >
+                設定中の場所に移動
+              </a>
+            </Button>
+          </ButtonListInline>
         </FormGroup>
 
         <FormGroup>
