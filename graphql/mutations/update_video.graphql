@@ -1,0 +1,7 @@
+mutation UpdateVideo($videoId: ID!, $attributes: VideoAttributes!) {
+  updateVideo(input: {videoId: $videoId, attributes: $attributes}) {
+    video {
+      ...video
+    }
+  }
+}
