@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useSlate } from 'slate-react';
+import Select from 'react-select';
 
 import { Button } from '../Button';
 import { YAROUYO_FONT_CODE } from '@/lib/YarouyoFont';
@@ -8,6 +9,8 @@ import Modal from 'react-modal';
 import styles from './MoveButton.module.scss';
 import { MoveSelect } from './MoveSelect';
 import { ArticleElementTypes } from '@/components/ArticleElement/ArticleElement';
+import { FormGroup } from '@/components/form2/FormGroup';
+import { Transforms, Editor } from 'slate';
 
 const CHARACTERS = [
   { value: 'asuka', label: '飛鳥' },
@@ -66,6 +69,7 @@ export const MoveButton: React.FC = () => {
   const [characterSlug, setCharacterSlug] = useState('');
 
   const editor = useSlate();
+  const savedSelection = React.useRef(editor.selection);
 
   return (
     <>
@@ -73,6 +77,7 @@ export const MoveButton: React.FC = () => {
         active={false}
         onMouseDown={event => {
           event.preventDefault();
+          savedSelection.current = editor.selection;
           setExpanded(!expanded);
         }}
         icon={YAROUYO_FONT_CODE.access}
@@ -84,36 +89,30 @@ export const MoveButton: React.FC = () => {
         className={styles.modal}
         overlayClassName={styles.overlay}
       >
-        <div className="el_form_group">
-          <div className="el_form_select">
-            <select
-              className="el_form_input"
-              value={characterSlug}
-              onChange={event => {
-                event.preventDefault();
-                setCharacterSlug(event.target.value);
-              }}
-            >
-              <option value=""></option>
-              {CHARACTERS.map(character => (
-                <option key={character.value} value={character.value}>
-                  {character.label}
-                </option>
-              ))}
-            </select>
-          </div>
-        </div>
+        <FormGroup>
+          <Select
+            options={CHARACTERS}
+            placeholder="キャラクター"
+            onChange={item => {
+              if (item) setCharacterSlug(item.value);
+            }}
+          />
+        </FormGroup>
 
         {characterSlug && (
           <div>
             <MoveSelect
               characterSlug={characterSlug}
               onChange={moveId => {
+                if (!editor.selection) {
+                  Transforms.select(editor, savedSelection.current ?? Editor.end(editor, []));
+                }
                 editor.insertNode({
                   type: ArticleElementTypes.EmbedMove,
                   moveId,
                   children: [{ text: '' }],
                 });
+                editor.insertNode({ type: ArticleElementTypes.Paragraph, children: [{ text: '' }] });
                 setExpanded(false);
               }}
             />
