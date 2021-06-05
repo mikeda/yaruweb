@@ -1,0 +1,6 @@
+query CharacterSelectOptions {
+  characters {
+    slug
+    name
+  }
+}
