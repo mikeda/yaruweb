@@ -3471,6 +3471,17 @@ export type CharacterPathsQuery = (
   )> }
 );
 
+export type CharacterSelectOptionsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type CharacterSelectOptionsQuery = (
+  { __typename?: 'Query' }
+  & { characters: Array<(
+    { __typename?: 'Character' }
+    & Pick<Character, 'slug' | 'name'>
+  )> }
+);
+
 export type CharacterSlugsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -6991,6 +7002,41 @@ export function useCharacterPathsLazyQuery(baseOptions?: Apollo.LazyQueryHookOpt
 export type CharacterPathsQueryHookResult = ReturnType<typeof useCharacterPathsQuery>;
 export type CharacterPathsLazyQueryHookResult = ReturnType<typeof useCharacterPathsLazyQuery>;
 export type CharacterPathsQueryResult = Apollo.QueryResult<CharacterPathsQuery, CharacterPathsQueryVariables>;
+export const CharacterSelectOptionsDocument = gql`
+    query CharacterSelectOptions {
+  characters {
+    slug
+    name
+  }
+}
+    `;
+
+/**
+ * __useCharacterSelectOptionsQuery__
+ *
+ * To run a query within a React component, call `useCharacterSelectOptionsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCharacterSelectOptionsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCharacterSelectOptionsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useCharacterSelectOptionsQuery(baseOptions?: Apollo.QueryHookOptions<CharacterSelectOptionsQuery, CharacterSelectOptionsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<CharacterSelectOptionsQuery, CharacterSelectOptionsQueryVariables>(CharacterSelectOptionsDocument, options);
+      }
+export function useCharacterSelectOptionsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CharacterSelectOptionsQuery, CharacterSelectOptionsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<CharacterSelectOptionsQuery, CharacterSelectOptionsQueryVariables>(CharacterSelectOptionsDocument, options);
+        }
+export type CharacterSelectOptionsQueryHookResult = ReturnType<typeof useCharacterSelectOptionsQuery>;
+export type CharacterSelectOptionsLazyQueryHookResult = ReturnType<typeof useCharacterSelectOptionsLazyQuery>;
+export type CharacterSelectOptionsQueryResult = Apollo.QueryResult<CharacterSelectOptionsQuery, CharacterSelectOptionsQueryVariables>;
 export const CharacterSlugsDocument = gql`
     query CharacterSlugs {
   characters {
