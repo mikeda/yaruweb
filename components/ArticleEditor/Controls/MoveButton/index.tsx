@@ -11,60 +11,15 @@ import { MoveSelect } from './MoveSelect';
 import { ArticleElementTypes } from '@/components/ArticleElement/ArticleElement';
 import { FormGroup } from '@/components/form2/FormGroup';
 import { Transforms, Editor } from 'slate';
+import { Character } from '@/lib/graphql/types';
 
-const CHARACTERS = [
-  { value: 'asuka', label: '飛鳥' },
-  { value: 'alisa', label: 'アリサ' },
-  { value: 'anna', label: 'アンナ' },
-  { value: 'armor_king', label: 'アーマーキング' },
-  { value: 'eddy', label: 'エディ' },
-  { value: 'eliza', label: 'エリザ' },
-  { value: 'kazumi', label: '一美' },
-  { value: 'kazuya', label: 'カズヤ' },
-  { value: 'katarina', label: 'カタリーナ' },
-  { value: 'ganryu', label: '巌竜' },
-  { value: 'king', label: 'キング' },
-  { value: 'gigas', label: 'ギガース' },
-  { value: 'geese', label: 'ギース' },
-  { value: 'kunimitsu', label: '州光' },
-  { value: 'kuma', label: 'クマ・パンダ' },
-  { value: 'claudio', label: 'クラウディオ' },
-  { value: 'chloe', label: 'クロエ' },
-  { value: 'gouki', label: '豪鬼' },
-  { value: 'zafina', label: 'ザフィーナ' },
-  { value: 'xiaoyu', label: 'シャオユウ' },
-  { value: 'shaheen', label: 'シャヒーン' },
-  { value: 'jack7', label: 'ジャック7' },
-  { value: 'julia', label: 'ジュリア' },
-  { value: 'josie', label: 'ジョシー' },
-  { value: 'jin', label: '仁' },
-  { value: 'steve', label: 'スティーブ' },
-  { value: 'devil_jin', label: 'デビル仁' },
-  { value: 'dragunov', label: 'ドラグノフ' },
-  { value: 'negan', label: 'ニーガン' },
-  { value: 'nina', label: 'ニーナ' },
-  { value: 'noctis', label: 'ノクティス' },
-  { value: 'hwoarang', label: 'ファラン' },
-  { value: 'fahkumram', label: 'ファーカムラム' },
-  { value: 'feng', label: 'フェン' },
-  { value: 'bryan', label: 'ブライアン' },
-  { value: 'heihachi', label: '平八' },
-  { value: 'bob', label: 'ボブ' },
-  { value: 'paul', label: 'ポール' },
-  { value: 'master_raven', label: 'マスターレイヴン' },
-  { value: 'marduk', label: 'マードック' },
-  { value: 'miguel', label: 'ミゲル' },
-  { value: 'yoshimitsu', label: '吉光' },
-  { value: 'lars', label: 'ラース' },
-  { value: 'lili', label: 'リリ' },
-  { value: 'leroy', label: 'リロイ' },
-  { value: 'lee', label: 'リー' },
-  { value: 'lei', label: 'レイ' },
-  { value: 'leo', label: 'レオ' },
-  { value: 'law', label: 'ロウ' },
-];
+type CharacterFragment = Pick<Character, 'slug' | 'name'>;
 
-export const MoveButton: React.FC = () => {
+interface Props {
+  characters: CharacterFragment[];
+}
+
+export const MoveButton: React.FC<Props> = ({ characters }) => {
   const [expanded, setExpanded] = useState(false);
   const [characterSlug, setCharacterSlug] = useState('');
 
@@ -91,7 +46,7 @@ export const MoveButton: React.FC = () => {
       >
         <FormGroup>
           <Select
-            options={CHARACTERS}
+            options={characters.map(c => ({ label: c.name, value: c.slug }))}
             placeholder="キャラクター"
             onChange={item => {
               if (item) setCharacterSlug(item.value);

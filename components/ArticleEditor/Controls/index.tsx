@@ -7,10 +7,13 @@ import { ImageButton } from './ImageButton';
 import { VideoButton } from './VideoButton';
 import { LinkButton } from './LinkButton';
 import { MoveButton } from './MoveButton';
+import { useCharacterSelectOptionsQuery } from '@/lib/graphql/types';
 
 import styles from './Controls.module.scss';
 
 export const Controls: React.FC = () => {
+  const { data } = useCharacterSelectOptionsQuery();
+
   return (
     <div className={styles.controls}>
       <MarkButton format="bold" icon={YAROUYO_FONT_CODE.bold} />
@@ -19,7 +22,7 @@ export const Controls: React.FC = () => {
       <BlockButton format="bulleted-list" icon={YAROUYO_FONT_CODE.list} />
 
       <OperationButton icon={YAROUYO_FONT_CODE.lp} />
-      <MoveButton />
+      {data && <MoveButton characters={data.characters} />}
       <ImageButton />
       <VideoButton />
       <LinkButton />
