@@ -10,6 +10,7 @@ import { MoveButton } from './MoveButton';
 import { useCharacterSelectOptionsQuery } from '@/lib/graphql/types';
 
 import styles from './Controls.module.scss';
+import { ComboButton } from './ComboButton';
 
 export const Controls: React.FC = () => {
   const { data } = useCharacterSelectOptionsQuery();
@@ -23,6 +24,7 @@ export const Controls: React.FC = () => {
 
       <OperationButton icon={YAROUYO_FONT_CODE.lp} />
       {data && <MoveButton characters={data.characters} />}
+      {data && <ComboButton characters={data.characters} />}
       <ImageButton />
       <VideoButton />
       <LinkButton />

@@ -3580,6 +3580,23 @@ export type ComboCategoryIdsQuery = (
   )> }
 );
 
+export type ComboSelectOptionsQueryVariables = Exact<{
+  characterSlug: Scalars['ID'];
+}>;
+
+
+export type ComboSelectOptionsQuery = (
+  { __typename?: 'Query' }
+  & { comboCategories: Array<(
+    { __typename?: 'ComboCategory' }
+    & Pick<ComboCategory, 'id' | 'name'>
+    & { combos: Array<(
+      { __typename?: 'Combo' }
+      & Pick<Combo, 'id' | 'name'>
+    )> }
+  )> }
+);
+
 export type ComboQueryVariables = Exact<{
   comboId: Scalars['ID'];
 }>;
@@ -7314,6 +7331,46 @@ export function useComboCategoryIdsLazyQuery(baseOptions?: Apollo.LazyQueryHookO
 export type ComboCategoryIdsQueryHookResult = ReturnType<typeof useComboCategoryIdsQuery>;
 export type ComboCategoryIdsLazyQueryHookResult = ReturnType<typeof useComboCategoryIdsLazyQuery>;
 export type ComboCategoryIdsQueryResult = Apollo.QueryResult<ComboCategoryIdsQuery, ComboCategoryIdsQueryVariables>;
+export const ComboSelectOptionsDocument = gql`
+    query ComboSelectOptions($characterSlug: ID!) {
+  comboCategories(characterSlug: $characterSlug) {
+    id
+    name
+    combos {
+      id
+      name
+    }
+  }
+}
+    `;
+
+/**
+ * __useComboSelectOptionsQuery__
+ *
+ * To run a query within a React component, call `useComboSelectOptionsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useComboSelectOptionsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useComboSelectOptionsQuery({
+ *   variables: {
+ *      characterSlug: // value for 'characterSlug'
+ *   },
+ * });
+ */
+export function useComboSelectOptionsQuery(baseOptions: Apollo.QueryHookOptions<ComboSelectOptionsQuery, ComboSelectOptionsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ComboSelectOptionsQuery, ComboSelectOptionsQueryVariables>(ComboSelectOptionsDocument, options);
+      }
+export function useComboSelectOptionsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ComboSelectOptionsQuery, ComboSelectOptionsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ComboSelectOptionsQuery, ComboSelectOptionsQueryVariables>(ComboSelectOptionsDocument, options);
+        }
+export type ComboSelectOptionsQueryHookResult = ReturnType<typeof useComboSelectOptionsQuery>;
+export type ComboSelectOptionsLazyQueryHookResult = ReturnType<typeof useComboSelectOptionsLazyQuery>;
+export type ComboSelectOptionsQueryResult = Apollo.QueryResult<ComboSelectOptionsQuery, ComboSelectOptionsQueryVariables>;
 export const ComboDocument = gql`
     query Combo($comboId: ID!) {
   combo(comboId: $comboId) {
