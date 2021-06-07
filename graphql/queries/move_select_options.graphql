@@ -6,6 +6,12 @@ query MoveSelectOptions($characterSlug: ID!) {
     moves {
       id
       name
+
+      commands {
+        operations {
+          key
+        }
+      }
     }
   }
 }

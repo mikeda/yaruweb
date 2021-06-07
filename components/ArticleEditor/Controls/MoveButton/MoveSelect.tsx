@@ -18,7 +18,20 @@ export const MoveSelect: React.FC<Props> = ({ characterSlug, onChange }) => {
 
   const options = data.moveCategories.map(moveCategory => ({
     label: moveCategory.name,
-    options: moveCategory.moves.map(move => ({ label: move.name, value: move.id })),
+    options: moveCategory.moves.map(move => {
+      let label = move.name;
+      if (move.commands.length > 0) {
+        label += `(${move.commands
+          .map(c =>
+            c.operations
+              .map(o => parseKey(o.key))
+              .filter(o => o)
+              .join(' '),
+          )
+          .join(' ')})`;
+      }
+      return { label, value: move.id };
+    }),
   }));
 
   return (
@@ -34,4 +47,28 @@ export const MoveSelect: React.FC<Props> = ({ characterSlug, onChange }) => {
       />
     </FormGroup>
   );
+};
+
+const parseKey = (key: string): string | null => {
+  if (['1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(key)) return key;
+  if (['1h', '2h', '3h', '4h', '6h', '7h', '8h', '9h'].includes(key)) return key.replace('h', '');
+  if (['lp', 'rp', 'lk', 'rk'].includes(key)) return key.toUpperCase();
+  if (
+    [
+      'lp_rp',
+      'lp_lk',
+      'lp_rk',
+      'rp_lk',
+      'rp_rk',
+      'lk_rk',
+      'lp_rp_lk',
+      'lp_rp_rk',
+      'lp_lk_rk',
+      'rp_lk_rk',
+      'lp_rp_lk_rk',
+    ].includes(key)
+  )
+    return key.toUpperCase().replace('_', '+');
+
+  return null;
 };
