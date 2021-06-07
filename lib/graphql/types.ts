@@ -3743,6 +3743,13 @@ export type MoveSelectOptionsQuery = (
     & { moves: Array<(
       { __typename?: 'Move' }
       & Pick<Move, 'id' | 'name'>
+      & { commands: Array<(
+        { __typename?: 'Command' }
+        & { operations: Array<(
+          { __typename?: 'Operation' }
+          & Pick<Operation, 'key'>
+        )> }
+      )> }
     )> }
   )> }
 );
@@ -7734,6 +7741,11 @@ export const MoveSelectOptionsDocument = gql`
     moves {
       id
       name
+      commands {
+        operations {
+          key
+        }
+      }
     }
   }
 }
