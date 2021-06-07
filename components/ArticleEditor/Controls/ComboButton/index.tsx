@@ -4,8 +4,8 @@ import Select from 'react-select';
 
 import Modal from 'react-modal';
 
-import styles from './MoveButton.module.scss';
-import { MoveSelect } from './MoveSelect';
+import styles from './ComboButton.module.scss';
+import { ComboSelect } from './ComboSelect';
 import { ArticleElementTypes } from '@/components/ArticleElement/ArticleElement';
 import { FormGroup } from '@/components/form2/FormGroup';
 import { Transforms, Editor } from 'slate';
@@ -18,7 +18,7 @@ interface Props {
   characters: CharacterFragment[];
 }
 
-export const MoveButton: React.FC<Props> = ({ characters }) => {
+export const ComboButton: React.FC<Props> = ({ characters }) => {
   const [expanded, setExpanded] = useState(false);
   const [characterSlug, setCharacterSlug] = useState('');
 
@@ -34,7 +34,7 @@ export const MoveButton: React.FC<Props> = ({ characters }) => {
           savedSelection.current = editor.selection;
           setExpanded(!expanded);
         }}
-        text="コマンドリスト"
+        text="コンボ"
       />
 
       <Modal
@@ -55,15 +55,15 @@ export const MoveButton: React.FC<Props> = ({ characters }) => {
 
         {characterSlug && (
           <div>
-            <MoveSelect
+            <ComboSelect
               characterSlug={characterSlug}
-              onChange={moveId => {
+              onChange={comboId => {
                 if (!editor.selection) {
                   Transforms.select(editor, savedSelection.current ?? Editor.end(editor, []));
                 }
                 editor.insertNode({
-                  type: ArticleElementTypes.EmbedMove,
-                  moveId,
+                  type: ArticleElementTypes.EmbedCombo,
+                  comboId,
                   children: [{ text: '' }],
                 });
                 editor.insertNode({ type: ArticleElementTypes.Paragraph, children: [{ text: '' }] });

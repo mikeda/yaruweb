@@ -1,0 +1,11 @@
+.button {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #aaa;
+  cursor: pointer;
+}
+
+.activeButton {
+  composes: button;
+  color: red;
+}

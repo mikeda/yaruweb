@@ -11,6 +11,7 @@ import { ArticleElement } from './ArticleElement';
 import { Paragraph } from './Paragraph';
 import { HeadingOne } from './HeadingOne';
 import { HeadingTwo } from './HeadingTwo';
+import { Combo } from './Combo';
 
 interface Props {
   attributes: { [key: string]: unknown };
@@ -78,6 +79,12 @@ export const Element: React.FC<Props> = ({ attributes, children, element }) => {
         <Move moveId={element.moveId} attributes={attributes}>
           {children}
         </Move>
+      );
+    case 'embed-combo':
+      return (
+        <Combo comboId={element.comboId} attributes={attributes}>
+          {children}
+        </Combo>
       );
     default:
       return <p {...attributes}>存在しないTypeが指定されました。{children}</p>;

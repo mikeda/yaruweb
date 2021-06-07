@@ -13,7 +13,8 @@ export type ArticleElement =
   | EmbedLink
   | EmbedYoutube
   | EmbedTweet
-  | EmbedMove;
+  | EmbedMove
+  | EmbedCombo;
 
 export const ArticleElementTypes = {
   Paragraph: 'paragraph',
@@ -29,6 +30,7 @@ export const ArticleElementTypes = {
   EmbedYoutube: 'embed-youtube',
   EmbedTweet: 'embed-tweet',
   EmbedMove: 'embed-move',
+  EmbedCombo: 'embed-combo',
 } as const;
 
 type ArticleElementType =
@@ -44,7 +46,8 @@ type ArticleElementType =
   | 'embed-link'
   | 'embed-youtube'
   | 'embed-tweet'
-  | 'embed-move';
+  | 'embed-move'
+  | 'embed-combo';
 
 interface Base extends Element {
   type: ArticleElementType;
@@ -112,4 +115,9 @@ interface EmbedTweet extends Base {
 interface EmbedMove extends Base {
   type: 'embed-move';
   moveId: string;
+}
+
+interface EmbedCombo extends Base {
+  type: 'embed-combo';
+  comboId: string;
 }
