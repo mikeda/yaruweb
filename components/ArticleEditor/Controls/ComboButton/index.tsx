@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { useSlate } from 'slate-react';
 import Select from 'react-select';
 
-import { Button } from '../Button';
-import { YAROUYO_FONT_CODE } from '@/lib/YarouyoFont';
 import Modal from 'react-modal';
 
 import styles from './ComboButton.module.scss';
@@ -12,6 +10,7 @@ import { ArticleElementTypes } from '@/components/ArticleElement/ArticleElement'
 import { FormGroup } from '@/components/form2/FormGroup';
 import { Transforms, Editor } from 'slate';
 import { Character } from '@/lib/graphql/types';
+import { TextButton } from '../TextButton';
 
 type CharacterFragment = Pick<Character, 'slug' | 'name'>;
 
@@ -28,14 +27,14 @@ export const ComboButton: React.FC<Props> = ({ characters }) => {
 
   return (
     <>
-      <Button
+      <TextButton
         active={false}
         onMouseDown={event => {
           event.preventDefault();
           savedSelection.current = editor.selection;
           setExpanded(!expanded);
         }}
-        icon={YAROUYO_FONT_CODE.access}
+        text="コンボ"
       />
 
       <Modal
