@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import Modal from 'react-modal';
 import { useSlate } from 'slate-react';
 
-import { Button } from './Button';
+import { Button } from '../Button';
 import { YAROUYO_FONT_CODE } from '@/lib/YarouyoFont';
 import styles from './OperationButton.module.scss';
 

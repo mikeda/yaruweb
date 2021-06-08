@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSlate } from 'slate-react';
 
-import { Button } from './Button';
+import { Button } from '../Button';
 import styles from './VideoButton.module.scss';
 import { useCreateArticleVideoMutation } from '@/lib/graphql/types';
 import { YAROUYO_FONT_CODE } from '@/lib/YarouyoFont';

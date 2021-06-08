@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSlate } from 'slate-react';
 
-import { Button } from './Button';
+import { Button } from '../Button';
 import styles from './ImageButton.module.scss';
 import { useCreateArticleImageMutation } from '@/lib/graphql/types';
 import { YAROUYO_FONT_CODE } from '@/lib/YarouyoFont';
