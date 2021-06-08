@@ -13,6 +13,7 @@ import {
 } from '@/lib/graphql/enum_texts';
 import Link from 'next/link';
 import { Routes } from '@/lib/Routes';
+import { VideoPlayer } from './VideoPlayer';
 
 type Props = {
   move: MoveFragment;
@@ -42,6 +43,8 @@ export const MoveMedia: React.FC<Props> = ({ move }) => {
 
             <AttackDetails move={move} />
           </div>
+
+          {move.moveVideo && <VideoPlayer src={move.moveVideo.m3u8Url} thumnailUrl={move.moveVideo.thumbnailUrl} />}
         </div>
       </a>
     </Link>
