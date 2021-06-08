@@ -5,8 +5,8 @@ import * as yup from 'yup';
 
 import { Highlight, HighlightAttributes } from '@/lib/graphql/types';
 import { Button, ButtonListInline } from '@/components/blocks/Button';
-import { FormGroup } from '@/components/form2/FormGroup';
-import { Input } from '@/components/form2/Input';
+import { FormGroup } from '@/components/form/FormGroup';
+import { Input } from '@/components/form/Input';
 import YouTube from 'react-youtube';
 import { YouTubePlayer } from 'youtube-player/dist/types';
 

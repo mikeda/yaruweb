@@ -11,8 +11,8 @@ import { currentPlayerState } from 'states/currentPlayer';
 import { useSetRecoilState } from 'recoil';
 import { useForm } from 'react-hook-form';
 import { PlayerValidator } from '@/lib/validators/PlayerValidator';
-import { FormGroup } from '@/components/form2/FormGroup';
-import { Input } from '@/components/form2/Input';
+import { FormGroup } from '@/components/form/FormGroup';
+import { Input } from '@/components/form/Input';
 import { Button } from '@/components/blocks/Button';
 import { loadingState } from 'states/loading';
 

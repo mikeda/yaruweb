@@ -2,11 +2,11 @@ import React from 'react';
 
 import { StageAttributes, StageFragment } from '@/lib/graphql/types';
 import { useForm } from 'react-hook-form';
-import { CheckBox } from '@/components/form2/CheckBox';
+import { CheckBox } from '@/components/form/CheckBox';
 import { Button } from '@/components/blocks/Button';
-import { FormInline } from '@/components/form2/FormInline';
-import { FormGroup } from '@/components/form2/FormGroup';
-import { Input } from '@/components/form2/Input';
+import { FormInline } from '@/components/form/FormInline';
+import { FormGroup } from '@/components/form/FormGroup';
+import { Input } from '@/components/form/Input';
 
 interface Props {
   stage?: StageFragment;

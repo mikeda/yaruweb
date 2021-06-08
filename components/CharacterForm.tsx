@@ -5,11 +5,11 @@ import * as yup from 'yup';
 import { CharacterAttributes, CharacterFragment } from '@/lib/graphql/types';
 import { useForm } from 'react-hook-form';
 import { Button } from '@/components/blocks/Button';
-import { FormGroup } from '@/components/form2/FormGroup';
-import { Input } from '@/components/form2/Input';
-import { TextArea } from './form2/TextArea';
-import { CheckBox } from './form2/CheckBox';
-import { FormGrid } from './form2/FormGrid';
+import { FormGroup } from '@/components/form/FormGroup';
+import { Input } from '@/components/form/Input';
+import { TextArea } from './form/TextArea';
+import { CheckBox } from './form/CheckBox';
+import { FormGrid } from './form/FormGrid';
 
 const schema = yup.object().shape({
   name: yup.string().required(),

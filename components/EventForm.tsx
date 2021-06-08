@@ -7,9 +7,9 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 import { EventAttributes, EventFragment } from '@/lib/graphql/types';
 import { Button } from '@/components/blocks/Button';
-import { FormGroup } from '@/components/form2/FormGroup';
-import { Input } from '@/components/form2/Input';
-import { TextArea } from './form2/TextArea';
+import { FormGroup } from '@/components/form/FormGroup';
+import { Input } from '@/components/form/Input';
+import { TextArea } from './form/TextArea';
 import dayjs from '@/lib/dayjs';
 
 const schema = yup.object().shape({

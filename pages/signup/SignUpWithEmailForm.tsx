@@ -11,9 +11,9 @@ import { createFirebaseUserWithEmail } from '@/lib/firebase';
 import { currentPlayerState } from 'states/currentPlayer';
 import { useSetRecoilState } from 'recoil';
 import { useForm } from 'react-hook-form';
-import { Input } from '@/components/form2/Input';
+import { Input } from '@/components/form/Input';
 import { Button } from '@/components/blocks/Button';
-import { FormGroup } from '@/components/form2/FormGroup';
+import { FormGroup } from '@/components/form/FormGroup';
 import { loadingState } from 'states/loading';
 
 interface SignUpInput {

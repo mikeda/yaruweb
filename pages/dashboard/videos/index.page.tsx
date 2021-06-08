@@ -17,7 +17,7 @@ import { useSetRecoilState } from 'recoil';
 import { toast } from 'react-toastify';
 import { Paging } from '@/components/blocks/Paging';
 import { ObjectCardList } from '@/components/ObjectCardList';
-import { Input } from '@/components/form2/Input';
+import { Input } from '@/components/form/Input';
 import { Button } from '@/components/blocks/Button';
 import { useForm } from 'react-hook-form';
 

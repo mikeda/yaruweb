@@ -5,7 +5,7 @@ import { CommentWrapper } from './Comment';
 import { useCurrentPlayer } from 'hooks/useCurrentPlayer';
 import { CommentAttributes } from '@/lib/graphql/types';
 import { useForm } from 'react-hook-form';
-import { TextArea } from './form2/TextArea';
+import { TextArea } from './form/TextArea';
 
 interface Props {
   onSubmit: (attributes: CommentAttributes) => void;

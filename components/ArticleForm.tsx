@@ -8,8 +8,8 @@ import { ReactEditor, Slate } from 'slate-react';
 import { ArticleEditor, createArticleEditor } from './ArticleEditor';
 import { Node } from 'slate';
 import { useForm } from 'react-hook-form';
-import { FormGroup } from './form2/FormGroup';
-import { Input } from './form2/Input';
+import { FormGroup } from './form/FormGroup';
+import { Input } from './form/Input';
 import { Button } from './blocks/Button';
 
 const schema = yup.object().shape({

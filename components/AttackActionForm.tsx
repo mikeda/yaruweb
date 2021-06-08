@@ -5,11 +5,11 @@ import * as yup from 'yup';
 
 import { AttackActionStateText, AttackTypeEnumText } from '@/lib/graphql/enum_texts';
 import { AttackActionAttributes, AttackActionFragment } from '@/lib/graphql/types';
-import { FormGroup } from './form2/FormGroup';
+import { FormGroup } from './form/FormGroup';
 import { Button } from './blocks/Button';
-import { Input } from './form2/Input';
-import { CheckBox } from './form2/CheckBox';
-import { FormInline } from './form2/FormInline';
+import { Input } from './form/Input';
+import { CheckBox } from './form/CheckBox';
+import { FormInline } from './form/FormInline';
 import { nullableNumber } from '@/lib/validators/nullable_number';
 
 const schema = yup.object().shape({

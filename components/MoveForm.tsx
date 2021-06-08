@@ -11,11 +11,11 @@ import {
 } from '@/lib/graphql/types';
 import { useForm } from 'react-hook-form';
 import { Button } from '@/components/blocks/Button';
-import { FormGroup } from '@/components/form2/FormGroup';
-import { Input } from '@/components/form2/Input';
-import { FormInline } from './form2/FormInline';
-import { CheckBox } from './form2/CheckBox';
-import { TextArea } from './form2/TextArea';
+import { FormGroup } from '@/components/form/FormGroup';
+import { Input } from '@/components/form/Input';
+import { FormInline } from './form/FormInline';
+import { CheckBox } from './form/CheckBox';
+import { TextArea } from './form/TextArea';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from 'states/loading';
 import { toast } from 'react-toastify';

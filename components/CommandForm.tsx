@@ -5,7 +5,7 @@ import * as yup from 'yup';
 import { CommandAttributes, CommandFragment, OperationFragment, StateFragment } from '@/lib/graphql/types';
 import { useForm } from 'react-hook-form';
 import { Button } from '@/components/blocks/Button';
-import { FormGroup } from '@/components/form2/FormGroup';
+import { FormGroup } from '@/components/form/FormGroup';
 import { OperationListSelector } from './OperationListSelector';
 
 const schema = yup.object().shape({

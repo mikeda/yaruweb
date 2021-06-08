@@ -13,15 +13,15 @@ import {
 } from '@/lib/graphql/types';
 import { useForm } from 'react-hook-form';
 import { Button } from '@/components/blocks/Button';
-import { FormGroup } from '@/components/form2/FormGroup';
-import { Input } from '@/components/form2/Input';
-import { TextArea } from './form2/TextArea';
+import { FormGroup } from '@/components/form/FormGroup';
+import { Input } from '@/components/form/Input';
+import { TextArea } from './form/TextArea';
 import { OperationListSelector } from './OperationListSelector';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from 'states/loading';
 import { toast } from 'react-toastify';
 import { VideoPlayer } from './MoveMedia/VideoPlayer';
-import { CheckBox } from './form2/CheckBox';
+import { CheckBox } from './form/CheckBox';
 
 const schema = yup.object().shape({
   name: yup.string().required(),

@@ -7,7 +7,7 @@ import Modal from 'react-modal';
 import styles from './MoveButton.module.scss';
 import { MoveSelect } from './MoveSelect';
 import { ArticleElementTypes } from '@/components/ArticleElement/ArticleElement';
-import { FormGroup } from '@/components/form2/FormGroup';
+import { FormGroup } from '@/components/form/FormGroup';
 import { Transforms, Editor } from 'slate';
 import { Character } from '@/lib/graphql/types';
 import { TextButton } from '../TextButton';

@@ -1,7 +1,7 @@
 import React from 'react';
 import Select from 'react-select';
 import { useComboSelectOptionsQuery } from '@/lib/graphql/types';
-import { FormGroup } from '@/components/form2/FormGroup';
+import { FormGroup } from '@/components/form/FormGroup';
 
 interface Props {
   characterSlug: string;

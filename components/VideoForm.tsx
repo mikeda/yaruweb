@@ -5,10 +5,10 @@ import * as yup from 'yup';
 
 import { Video, VideoAttributes } from '@/lib/graphql/types';
 import { Button } from '@/components/blocks/Button';
-import { FormGroup } from '@/components/form2/FormGroup';
-import { Input } from '@/components/form2/Input';
+import { FormGroup } from '@/components/form/FormGroup';
+import { Input } from '@/components/form/Input';
 import YouTube from 'react-youtube';
-import { TextArea } from './form2/TextArea';
+import { TextArea } from './form/TextArea';
 
 const schema = yup.object().shape({
   title: yup.string().required(),
