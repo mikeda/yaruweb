@@ -6,7 +6,7 @@ import { TabLinkGroup } from '@/components/TabLinkGroup';
 import { Routes } from '@/lib/Routes';
 import { Media } from '@/components/Media';
 import { Head } from '@/components/layouts/Head';
-import { TabLink } from '@/components/TabLink';
+import { TabLink } from '@/components/TabLinkGroup';
 import { Content } from '@/components/layouts/Content';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 import { useSetRecoilState } from 'recoil';
