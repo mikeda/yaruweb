@@ -9,7 +9,7 @@ import { PageHeader } from '@/components/layouts/PageHeader';
 import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from 'states/loading';
-import { Paging } from '@/components/blocks/Paging';
+import { Paging } from '@/components/Paging';
 
 const Page: React.FC = () => (
   <DashboardContent activeTab="event">

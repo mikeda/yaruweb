@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import React from 'react';
-import { Button } from '../blocks/Button';
+import { Button } from '../Button';
 import { Heading } from '../Heading';
 
 import styles from './PageHeader.module.scss';

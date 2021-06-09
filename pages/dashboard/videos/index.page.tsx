@@ -15,10 +15,10 @@ import { useRouter } from 'next/router';
 import { loadingState } from 'states/loading';
 import { useSetRecoilState } from 'recoil';
 import { toast } from 'react-toastify';
-import { Paging } from '@/components/blocks/Paging';
+import { Paging } from '@/components/Paging';
 import { ObjectCardList } from '@/components/ObjectCardList';
 import { Input } from '@/components/form/Input';
-import { Button } from '@/components/blocks/Button';
+import { Button } from '@/components/Button';
 import { useForm } from 'react-hook-form';
 
 const Page: React.FC = () => {

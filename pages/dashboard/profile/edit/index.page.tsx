@@ -11,7 +11,7 @@ import { DashboardContent } from '@/components/layouts/dashboard/DashboardConten
 import { PageHeader } from '@/components/layouts/PageHeader';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
-import { Button } from '@/components/blocks/Button';
+import { Button } from '@/components/Button';
 import { toast } from 'react-toastify';
 import { FormGroup } from '@/components/form/FormGroup';
 import { Input } from '@/components/form/Input';

@@ -9,7 +9,7 @@ import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { loadingState } from 'states/loading';
 import { useSetRecoilState } from 'recoil';
-import ArticleForm from '@/components/ArticleForm';
+import { ArticleForm } from '@/components/ArticleForm';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 
 const Page: React.FC = () => {
