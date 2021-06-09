@@ -2,16 +2,16 @@ import React from 'react';
 import { useRouter } from 'next/router';
 
 import { Order, useArticlesQuery } from '@/lib/graphql/types';
-import { TabLinkGroup } from '@/components/blocks/TabLinkGroup';
+import { TabLinkGroup } from '@/components/TabLinkGroup';
 import { Routes } from '@/lib/Routes';
 import { Media } from '@/components/Media';
 import { Head } from '@/components/layouts/Head';
-import { TabLink } from '@/components/blocks/TabLink';
+import { TabLink } from '@/components/TabLinkGroup';
 import { Content } from '@/components/layouts/Content';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from 'states/loading';
-import { Paging } from '@/components/blocks/Paging';
+import { Paging } from '@/components/Paging';
 
 const Page: React.FC = () => {
   return (

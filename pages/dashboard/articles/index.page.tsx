@@ -17,7 +17,7 @@ import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from 'states/loading';
 import { useRouter } from 'next/router';
-import { Paging } from '@/components/blocks/Paging';
+import { Paging } from '@/components/Paging';
 import { ObjectCardList } from '@/components/ObjectCardList';
 import { ObjectCardLinkProps } from '@/components/ObjectCard';
 

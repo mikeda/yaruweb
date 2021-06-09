@@ -9,7 +9,7 @@ import { Content } from '@/components/layouts/Content';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from 'states/loading';
-import { Paging } from '@/components/blocks/Paging';
+import { Paging } from '@/components/Paging';
 
 const PageContent: React.FC = () => {
   const router = useRouter();
