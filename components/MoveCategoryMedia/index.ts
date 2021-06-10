@@ -1,1 +1,1 @@
-export * from './MoveCategoryCard';
+export * from './MoveCategoryMedia';
