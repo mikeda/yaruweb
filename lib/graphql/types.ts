@@ -1729,14 +1729,6 @@ export type StopArticlePayload = {
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
-export type Tag = {
-  __typename?: 'Tag';
-  createdAt: Scalars['ISO8601DateTime'];
-  id: Scalars['ID'];
-  name: Scalars['String'];
-  updatedAt: Scalars['ISO8601DateTime'];
-};
-
 export type ThrowAction = Actionable & {
   __typename?: 'ThrowAction';
   damage: Scalars['Int'];
@@ -2161,7 +2153,6 @@ export type Video = {
   highlights: Array<Highlight>;
   highlightsCount: Scalars['Int'];
   id: Scalars['ID'];
-  tags: Array<Tag>;
   thumbnailUrl: Scalars['String'];
   title: Scalars['String'];
   url: Scalars['String'];
@@ -2453,10 +2444,7 @@ export type TopPlayerFragment = (
 
 export type VideoFragment = (
   { __typename?: 'Video' }
-  & { tags: Array<(
-    { __typename?: 'Tag' }
-    & Pick<Tag, 'name'>
-  )>, highlights: Array<(
+  & { highlights: Array<(
     { __typename?: 'Highlight' }
     & HighlightFragment
   )> }
@@ -4848,9 +4836,6 @@ export const HighlightFragmentDoc = gql`
 export const VideoFragmentDoc = gql`
     fragment video on Video {
   ...videoSummary
-  tags {
-    name
-  }
   highlights {
     ...highlight
   }
