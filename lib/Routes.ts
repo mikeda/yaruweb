@@ -73,7 +73,7 @@ export const Routes = {
       edit: (commandId: string) => `/dashboard/commands/${commandId}/edit`,
     },
     event: {
-      index: () => '/dashboard/events',
+      index: (page?: number) => `/dashboard/events${page ? `?page=${page}` : ''}`,
       new: () => '/dashboard/events/new',
       edit: (eventId: string) => `/dashboard/events/${eventId}/edit`,
     },
