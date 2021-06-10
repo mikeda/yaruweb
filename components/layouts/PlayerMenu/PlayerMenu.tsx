@@ -2,14 +2,14 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { toast } from 'react-toastify';
+import { useSetRecoilState } from 'recoil';
 
 import { Routes } from '@/lib/Routes';
 
 import styles from './PlayerMenu.module.scss';
-import { DropDownMenu } from './DropDownMenu';
+import { DropDownMenu } from '@/components';
 import { signOutFirebase } from '@/lib/firebase';
 import { useCurrentPlayer } from 'hooks/useCurrentPlayer';
-import { useSetRecoilState } from 'recoil';
 import { currentPlayerState } from 'states/currentPlayer';
 
 export const PlayerMenu: React.FC = () => {

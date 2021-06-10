@@ -1,8 +1,7 @@
 import React from 'react';
 
 import styles from './Content.module.scss';
-import { GlobalHeader } from './GlobalHeader';
-import { HeaderNav } from './HeaderNav';
+import { GlobalHeader, HeaderNav } from '@/components';
 
 interface Props {
   size?: 'xs';

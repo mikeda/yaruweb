@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFistRaised } from '@fortawesome/free-solid-svg-icons';
 
 import { Routes } from '@/lib/Routes';
-import { PlayerMenu } from './PlayerMenu';
+import { PlayerMenu } from '../PlayerMenu';
 
 import styles from './GlobalHeader.module.scss';
 

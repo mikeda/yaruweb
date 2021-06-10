@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import React from 'react';
-import { Button } from '../Button';
-import { Heading } from '../Heading';
+
+import { Button, Heading } from '@/components';
 
 import styles from './PageHeader.module.scss';
 

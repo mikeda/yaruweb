@@ -1,8 +1,8 @@
 import React from 'react';
-import { GlobalHeader } from '../GlobalHeader';
+import { GlobalHeader } from '../../GlobalHeader';
 
-import styles from './Content.module.scss';
-import { Tabs, TabKey } from './Tabs';
+import styles from './DashboardContent.module.scss';
+import { Tabs, TabKey } from '../Tabs';
 
 interface Props {
   activeTab: TabKey;
