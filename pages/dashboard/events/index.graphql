@@ -1,0 +1,12 @@
+query PageDashboardEvents($page: Int, $per: Int) {
+  events(page: $page, per: $per) {
+    records {
+      id
+      name
+    }
+
+    paging {
+      ...paging
+    }
+  }
+}

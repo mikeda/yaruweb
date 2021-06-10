@@ -89,7 +89,7 @@ const PageContent: React.FC<PageContentProps> = ({ videos, refetch }) => {
           {
             text: '削除する',
             onClick: () => {
-              if (window.confirm('記事を削除します。')) {
+              if (window.confirm('動画を削除します。')) {
                 deleteVideo({ variables: { videoId: video.id } });
               }
             },

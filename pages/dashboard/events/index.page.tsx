@@ -1,71 +1,85 @@
 import React from 'react';
-
-import { useEventsQuery } from '@/lib/graphql/types';
-import { Head } from '@/components/layouts/Head';
-import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import Link from 'next/link';
-import { Routes } from '@/lib/Routes';
-import { PageHeader } from '@/components/layouts/PageHeader';
 import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
+import { toast } from 'react-toastify';
+
+import { Routes } from '@/lib/Routes';
+import { useDeleteEventMutation, usePageDashboardEventsQuery, Event } from '@/lib/graphql/types';
+import { DashboardContent, PageHeader, Breadcrumbs, Head, Paging, ObjectCardList } from '@/components';
 import { loadingState } from 'states/loading';
-import { Paging } from '@/components/Paging';
 
-const Page: React.FC = () => (
-  <DashboardContent activeTab="event">
-    <Head title="イベント一覧" />
-
-    <PageHeader title="イベント" addPageUrl={Routes.dashboard.event.new()} />
-
-    <EventList />
-  </DashboardContent>
-);
-
-const EventList: React.FC = () => {
+const Page: React.FC = () => {
   const router = useRouter();
   const setLoading = useSetRecoilState(loadingState);
   const { query } = router;
   const page = query.page ? Number(query.page as string) : 1;
-  const { data, loading } = useEventsQuery({
+  const { data, loading, refetch } = usePageDashboardEventsQuery({
     variables: { page },
+    fetchPolicy: 'network-only',
     skip: !router.isReady,
   });
 
-  const url = (page: number) => Routes.event.index({ page });
+  setLoading(loading);
+  if (!data) return null;
+
+  const {
+    events: { records: events, paging },
+  } = data;
 
   setLoading(loading);
 
+  const title = 'イベント';
+
   return (
-    <>
-      <div className="bl_horizTable">
-        <table>
-          <thead>
-            <tr>
-              <th>タイトル</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-            {data?.events.records.map(event => {
-              if (!event) return;
+    <DashboardContent activeTab="event">
+      <Head title={title} />
+      <Breadcrumbs current={title} />
+      <PageHeader title={title} />
+      <PageContent events={events} refetch={refetch} />
+      <Paging paging={paging} url={Routes.dashboard.event.index} />
+    </DashboardContent>
+  );
+};
 
-              return (
-                <tr key={event.id}>
-                  <td>{event.name}</td>
-                  <td>
-                    <Link href={Routes.dashboard.event.edit(event.id)}>
-                      <a>編集</a>
-                    </Link>
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
-      </div>
+type EventFragment = Pick<Event, 'id' | 'name'>;
 
-      {data && <Paging paging={data.events.paging} url={url} />}
-    </>
+interface PageContentProps {
+  events: EventFragment[];
+  refetch: () => void;
+}
+
+const PageContent: React.FC<PageContentProps> = ({ events, refetch }) => {
+  const setLoading = useSetRecoilState(loadingState);
+
+  const [deleteEvent, { loading: deleteLoading }] = useDeleteEventMutation({
+    onCompleted: data => {
+      const event = data.deleteEvent?.event;
+      if (!event) return;
+      refetch();
+      toast.success('イベントを削除しました。');
+    },
+  });
+
+  setLoading(deleteLoading);
+
+  return (
+    <ObjectCardList
+      items={events.map(event => ({
+        id: event.id,
+        title: event.name,
+        links: [
+          { text: '編集する', url: Routes.dashboard.event.edit(event.id) },
+          {
+            text: '削除する',
+            onClick: () => {
+              if (window.confirm('イベントを削除します。')) {
+                deleteEvent({ variables: { eventId: event.id } });
+              }
+            },
+          },
+        ],
+      }))}
+    />
   );
 };
 
