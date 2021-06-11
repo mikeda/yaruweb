@@ -9,7 +9,7 @@ import styles from './Tabs.module.scss';
 import { useCurrentPlayer } from 'hooks/useCurrentPlayer';
 import { PlayerRole } from '@/lib/graphql/types';
 
-export type TabKey = 'article' | 'event' | 'video' | 'character' | 'stage' | 'profile';
+export type TabKey = 'article' | 'tournament' | 'video' | 'character' | 'stage' | 'profile';
 
 interface Tab {
   key: TabKey;
@@ -23,7 +23,13 @@ const allTabs: Tab[] = [
   { key: 'article', label: '記事', link: Routes.dashboard.article.index(), icon: faFileAlt, onlyEditor: false },
   { key: 'character', label: 'キャラクター', link: Routes.dashboard.character.index(), icon: faMeh, onlyEditor: true },
   { key: 'video', label: '動画', link: Routes.dashboard.video.index(), icon: faVideo, onlyEditor: true },
-  { key: 'event', label: 'イベント', link: Routes.dashboard.event.index(), icon: faCalendarAlt, onlyEditor: true },
+  {
+    key: 'tournament',
+    label: '大会',
+    link: Routes.dashboard.tournament.index(),
+    icon: faCalendarAlt,
+    onlyEditor: true,
+  },
   { key: 'stage', label: 'ステージ', link: Routes.dashboard.stage.index(), icon: faRing, onlyEditor: true },
   { key: 'profile', label: 'プロフィール', link: Routes.dashboard.profile.edit(), icon: faUser, onlyEditor: false },
 ];

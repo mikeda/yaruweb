@@ -25,8 +25,8 @@ export const Routes = {
   comboCategory: {
     detail: (comboCategoryId: string) => `/combo_categories/${comboCategoryId}`,
   },
-  event: {
-    index: (params?: { page?: number }) => generatePath('/events', params),
+  tournament: {
+    index: (params?: { page?: number }) => generatePath('/tournaments', params),
   },
   moveCategory: {
     detail: (moveCategoryId: string) => `/move_categories/${moveCategoryId}`,
@@ -72,10 +72,10 @@ export const Routes = {
     command: {
       edit: (commandId: string) => `/dashboard/commands/${commandId}/edit`,
     },
-    event: {
-      index: (page?: number) => `/dashboard/events${page ? `?page=${page}` : ''}`,
-      new: () => '/dashboard/events/new',
-      edit: (eventId: string) => `/dashboard/events/${eventId}/edit`,
+    tournament: {
+      index: (page?: number) => `/dashboard/tournaments${page ? `?page=${page}` : ''}`,
+      new: () => '/dashboard/tournaments/new',
+      edit: (tournamentId: string) => `/dashboard/tournaments/${tournamentId}/edit`,
     },
     highlight: {
       edit: (highlightId: string) => `/dashboard/highlights/${highlightId}/edit`,

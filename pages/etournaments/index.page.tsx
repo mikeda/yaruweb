@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { useEventsQuery } from '@/lib/graphql/types';
+import { useTournamentsQuery } from '@/lib/graphql/types';
 import { Media } from '@/components/Media';
 import dayjs from '@/lib/dayjs';
 import { Head } from '@/components/layouts/Head';
@@ -17,12 +17,12 @@ const PageContent: React.FC = () => {
   const setLoading = useSetRecoilState(loadingState);
   const { query } = router;
   const page = query.page ? Number(query.page as string) : 1;
-  const { data, loading } = useEventsQuery({
+  const { data, loading } = useTournamentsQuery({
     variables: { page },
     skip: !router.isReady,
   });
 
-  const url = (page: number) => Routes.event.index({ page });
+  const url = (page: number) => Routes.tournament.index({ page });
 
   setLoading(loading);
 
@@ -31,30 +31,35 @@ const PageContent: React.FC = () => {
       <div className="bl_section">
         <div className="bl_section_body">
           <div className="bl_mediaUnit">
-            {data?.events.records.map(event => {
-              if (!event) return;
+            {data?.tournaments.records.map(tournament => {
+              if (!tournament) return;
 
               return (
                 <Media
-                  key={event.id}
-                  imageUrl={event.mainImageUrl}
-                  title={event.name}
-                  titleNote={dayjs(event.startsAt).format('YYYY/M/D H:mm')}
-                  text={event.description}
+                  key={tournament.id}
+                  imageUrl={tournament.mainImageUrl}
+                  title={tournament.name}
+                  titleNote={dayjs(tournament.startsAt).format('YYYY/M/D H:mm')}
+                  text={tournament.description}
                   footer={
                     <>
-                      <a href={event.url} target="_blank" rel="noreferrer" className="el_btn hp_mg_r_sm">
-                        イベント情報
+                      <a href={tournament.url} target="_blank" rel="noreferrer" className="el_btn hp_mg_r_sm">
+                        大会情報情報
                       </a>
 
-                      {event.streamingUrl && (
-                        <a href={event.streamingUrl} target="_blank" rel="noreferrer" className="el_btn hp_mg_r_sm">
+                      {tournament.streamingUrl && (
+                        <a
+                          href={tournament.streamingUrl}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="el_btn hp_mg_r_sm"
+                        >
                           配信
                         </a>
                       )}
 
-                      {event.videoUrl && (
-                        <a href={event.videoUrl} target="_blank" rel="noreferrer" className="el_btn hp_mg_r_sm">
+                      {tournament.videoUrl && (
+                        <a href={tournament.videoUrl} target="_blank" rel="noreferrer" className="el_btn hp_mg_r_sm">
                           アーカイブ
                         </a>
                       )}
@@ -67,7 +72,7 @@ const PageContent: React.FC = () => {
         </div>
       </div>
 
-      {data && <Paging paging={data.events.paging} url={url} />}
+      {data && <Paging paging={data.tournaments.paging} url={url} />}
     </>
   );
 };
@@ -75,8 +80,8 @@ const PageContent: React.FC = () => {
 const Page: React.FC = () => {
   return (
     <Content>
-      <Head title="鉄拳7のイベントまとめ" />
-      <Breadcrumbs current="イベント" />
+      <Head title="鉄拳7の大会情報まとめ" />
+      <Breadcrumbs current="大会情報" />
 
       <PageContent />
     </Content>

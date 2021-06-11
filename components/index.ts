@@ -20,7 +20,7 @@ export * from './Command';
 export * from './CommandForm';
 export * from './Comment';
 export * from './CommentForm';
-export * from './EventForm';
+export * from './TournamentForm';
 export * from './FavButton';
 export * from './Heading';
 export * from './HighlightForm';
