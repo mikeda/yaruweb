@@ -1,5 +1,0 @@
-query TopPlayers {
-  topPlayers {
-    ...topPlayer
-  }
-}
