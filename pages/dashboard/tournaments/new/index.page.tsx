@@ -1,21 +1,21 @@
 import React from 'react';
 
-import { EventAttributes, useCreateEventMutation } from '@/lib/graphql/types';
+import { TournamentAttributes, useCreateTournamentMutation } from '@/lib/graphql/types';
 import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
 import { PageHeader } from '@/components/layouts/PageHeader';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
-import { EventForm } from '@/components/EventForm';
+import { TournamentForm } from '@/components/TournamentForm';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from 'states/loading';
 
 const Page: React.FC = () => {
   const router = useRouter();
   const setLoading = useSetRecoilState(loadingState);
-  const [createEvent, { loading }] = useCreateEventMutation({
+  const [createTournament, { loading }] = useCreateTournamentMutation({
     onCompleted: () => {
-      toast.success('イベントを登録しました。');
+      toast.success('大会情報を登録しました。');
       router.back();
     },
     onError: e => {
@@ -23,19 +23,19 @@ const Page: React.FC = () => {
     },
   });
 
-  const onSubmit = (attributes: EventAttributes) => {
-    createEvent({ variables: { attributes } });
+  const onSubmit = (attributes: TournamentAttributes) => {
+    createTournament({ variables: { attributes } });
   };
 
   setLoading(loading);
 
   return (
-    <DashboardContent activeTab="event">
-      <Head title="イベント作成" />
+    <DashboardContent activeTab="tournament">
+      <Head title="大会情報作成" />
 
-      <PageHeader title="イベント作成" />
+      <PageHeader title="大会情報作成" />
 
-      <EventForm onSubmit={onSubmit} />
+      <TournamentForm onSubmit={onSubmit} />
     </DashboardContent>
   );
 };

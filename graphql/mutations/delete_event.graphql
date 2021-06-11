@@ -1,6 +1,6 @@
-mutation DeleteEvent($eventId: ID!) {
-  deleteEvent(input: { eventId: $eventId }) {
-    event {
+mutation DeleteTournament($tournamentId: ID!) {
+  deleteTournament(input: { tournamentId: $tournamentId }) {
+    tournament {
       id
     }
   }

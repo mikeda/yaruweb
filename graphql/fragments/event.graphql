@@ -1,4 +1,4 @@
-fragment event on Event {
+fragment tournament on Tournament {
   id
   name
   mainImageUrl

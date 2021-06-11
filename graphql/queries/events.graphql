@@ -1,5 +1,5 @@
-query Event($eventId: ID!) {
-  event(eventId: $eventId) {
-    ...event
+query Tournament($tournamentId: ID!) {
+  tournament(tournamentId: $tournamentId) {
+    ...tournament
   }
 }

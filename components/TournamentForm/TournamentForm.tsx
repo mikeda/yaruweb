@@ -5,7 +5,7 @@ import * as yup from 'yup';
 import ReactDatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
-import { EventAttributes, EventFragment } from '@/lib/graphql/types';
+import { TournamentAttributes, TournamentFragment } from '@/lib/graphql/types';
 import { Button, TextArea, Input, FormGroup } from '@/components';
 import dayjs from '@/lib/dayjs';
 
@@ -21,30 +21,30 @@ const schema = yup.object().shape({
 });
 
 interface Props {
-  event?: EventFragment;
-  onSubmit: (attributes: EventAttributes) => void;
+  tournament?: TournamentFragment;
+  onSubmit: (attributes: TournamentAttributes) => void;
 }
 
-export const EventForm: React.FC<Props> = ({ event, onSubmit }) => {
+export const TournamentForm: React.FC<Props> = ({ tournament, onSubmit }) => {
   const {
     register,
     handleSubmit,
     control,
     setValue,
     formState: { errors },
-  } = useForm<EventAttributes>({
+  } = useForm<TournamentAttributes>({
     resolver: yupResolver(schema),
     mode: 'onBlur',
-    defaultValues: event
+    defaultValues: tournament
       ? {
-          name: event.name,
-          organizerName: event.organizerName,
-          organizerTwitterId: event.organizerTwitterId,
-          url: event.url,
-          streamingUrl: event.streamingUrl,
-          videoUrl: event.videoUrl,
-          startsAt: event.startsAt,
-          description: event.description,
+          name: tournament.name,
+          organizerName: tournament.organizerName,
+          organizerTwitterId: tournament.organizerTwitterId,
+          url: tournament.url,
+          streamingUrl: tournament.streamingUrl,
+          videoUrl: tournament.videoUrl,
+          startsAt: tournament.startsAt,
+          description: tournament.description,
         }
       : {
           startsAt: dayjs().add(1, 'date').hour(18).minute(0).second(0).format('YYYY-MM-DD HH:mm'),
@@ -58,7 +58,7 @@ export const EventForm: React.FC<Props> = ({ event, onSubmit }) => {
         {errors.name && <span>This field is required</span>}
       </FormGroup>
 
-      <FormGroup label="イベントURL">
+      <FormGroup label="URL">
         <Input {...register('url')} />
         {errors.url && <span>{errors.url.message}</span>}
       </FormGroup>

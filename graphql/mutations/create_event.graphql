@@ -1,7 +1,7 @@
-mutation CreateEvent($attributes: EventAttributes!) {
-  createEvent(input: { attributes: $attributes }) {
-    event {
-      ...event
+mutation CreateTournament($attributes: TournamentAttributes!) {
+  createTournament(input: { attributes: $attributes }) {
+    tournament {
+      ...tournament
     }
   }
 }
