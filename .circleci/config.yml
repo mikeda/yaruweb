@@ -36,7 +36,7 @@ jobs:
       - run:
           name: stylelint
           working_directory: nextjs
-          command: yarn stylelint styles/**/*.scss components/**/*.scss
+          command: yarn stylelint src/**/*.scss
           when: always
 
       # Save artifacts
