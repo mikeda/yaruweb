@@ -5,7 +5,6 @@ query PageTournament($tournamentId: ID!) {
     mainImageUrl
     url
     streamingUrl
-    videoUrl
     description
     organizerName
     organizerTwitterId

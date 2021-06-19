@@ -23,18 +23,12 @@ const PageContent: React.FC<PageTournamentQuery> = ({ tournament }) => {
         footer={
           <>
             <a href={tournament.url} target="_blank" rel="noreferrer" className="el_btn hp_mg_r_sm">
-              大会情報情報
+              大会情報URL
             </a>
 
             {tournament.streamingUrl && (
               <a href={tournament.streamingUrl} target="_blank" rel="noreferrer" className="el_btn hp_mg_r_sm">
-                配信
-              </a>
-            )}
-
-            {tournament.videoUrl && (
-              <a href={tournament.videoUrl} target="_blank" rel="noreferrer" className="el_btn hp_mg_r_sm">
-                アーカイブ
+                配信URL
               </a>
             )}
           </>

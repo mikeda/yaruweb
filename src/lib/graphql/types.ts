@@ -1654,7 +1654,6 @@ export type Tournament = {
   startsAt: Scalars['ISO8601DateTime'];
   streamingUrl?: Maybe<Scalars['String']>;
   url: Scalars['String'];
-  videoUrl?: Maybe<Scalars['String']>;
   videos: Array<TournamentVideo>;
   videosCount: Scalars['Int'];
 };
@@ -1666,7 +1665,6 @@ export type TournamentAttributes = {
   mainImage?: Maybe<Scalars['String']>;
   url: Scalars['String'];
   streamingUrl?: Maybe<Scalars['String']>;
-  videoUrl?: Maybe<Scalars['String']>;
   startsAt: Scalars['String'];
   description: Scalars['String'];
 };
@@ -2221,7 +2219,7 @@ export type StateFragment = (
 
 export type TournamentFragment = (
   { __typename?: 'Tournament' }
-  & Pick<Tournament, 'id' | 'name' | 'mainImageUrl' | 'url' | 'streamingUrl' | 'videoUrl' | 'description' | 'organizerName' | 'organizerTwitterId' | 'startsAt'>
+  & Pick<Tournament, 'id' | 'name' | 'mainImageUrl' | 'url' | 'streamingUrl' | 'description' | 'organizerName' | 'organizerTwitterId' | 'startsAt'>
 );
 
 export type TournamentVideoFragment = (
@@ -4301,7 +4299,7 @@ export type PageTournamentQuery = (
   { __typename?: 'Query' }
   & { tournament: (
     { __typename?: 'Tournament' }
-    & Pick<Tournament, 'id' | 'name' | 'mainImageUrl' | 'url' | 'streamingUrl' | 'videoUrl' | 'description' | 'organizerName' | 'organizerTwitterId' | 'startsAt'>
+    & Pick<Tournament, 'id' | 'name' | 'mainImageUrl' | 'url' | 'streamingUrl' | 'description' | 'organizerName' | 'organizerTwitterId' | 'startsAt'>
     & { videos: Array<(
       { __typename?: 'TournamentVideo' }
       & Pick<TournamentVideo, 'id' | 'youtubeVideoId' | 'title' | 'thumbnailUrl' | 'commentCount'>
@@ -4325,7 +4323,7 @@ export type PageTournamentsQuery = (
     { __typename?: 'TournamentCollection' }
     & { records: Array<(
       { __typename?: 'Tournament' }
-      & Pick<Tournament, 'id' | 'name' | 'mainImageUrl' | 'url' | 'streamingUrl' | 'videoUrl' | 'description' | 'organizerName' | 'organizerTwitterId' | 'startsAt'>
+      & Pick<Tournament, 'id' | 'name' | 'mainImageUrl' | 'url' | 'streamingUrl' | 'description' | 'organizerName' | 'organizerTwitterId' | 'startsAt'>
     )>, paging: (
       { __typename?: 'Paging' }
       & PagingFragment
@@ -4471,7 +4469,6 @@ export const TournamentFragmentDoc = gql`
   mainImageUrl
   url
   streamingUrl
-  videoUrl
   description
   organizerName
   organizerTwitterId
@@ -9230,7 +9227,6 @@ export const PageTournamentDocument = gql`
     mainImageUrl
     url
     streamingUrl
-    videoUrl
     description
     organizerName
     organizerTwitterId
@@ -9285,7 +9281,6 @@ export const PageTournamentsDocument = gql`
       mainImageUrl
       url
       streamingUrl
-      videoUrl
       description
       organizerName
       organizerTwitterId
