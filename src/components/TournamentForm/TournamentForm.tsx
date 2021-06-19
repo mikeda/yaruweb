@@ -15,7 +15,6 @@ const schema = yup.object().shape({
   organizerTwitterId: yup.string(),
   url: yup.string().url(),
   streamingUrl: yup.string().url(),
-  videoUrl: yup.string().url(),
   startsAt: yup.string(),
   description: yup.string().required(),
 });
@@ -42,7 +41,6 @@ export const TournamentForm: React.FC<Props> = ({ tournament, onSubmit }) => {
           organizerTwitterId: tournament.organizerTwitterId,
           url: tournament.url,
           streamingUrl: tournament.streamingUrl,
-          videoUrl: tournament.videoUrl,
           startsAt: tournament.startsAt,
           description: tournament.description,
         }
@@ -66,11 +64,6 @@ export const TournamentForm: React.FC<Props> = ({ tournament, onSubmit }) => {
       <FormGroup label="配信URL" required>
         <Input {...register('streamingUrl')} />
         {errors.streamingUrl && <span>{errors.streamingUrl.message}</span>}
-      </FormGroup>
-
-      <FormGroup label="アーカイブURL">
-        <Input {...register('videoUrl')} />
-        {errors.videoUrl && <span>{errors.videoUrl.message}</span>}
       </FormGroup>
 
       <FormGroup label="主催者名" required>

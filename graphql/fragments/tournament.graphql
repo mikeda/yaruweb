@@ -4,7 +4,6 @@ fragment tournament on Tournament {
   mainImageUrl
   url
   streamingUrl
-  videoUrl
   description
   organizerName
   organizerTwitterId
