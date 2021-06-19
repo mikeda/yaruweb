@@ -12,7 +12,7 @@ import { usePageDashboardCharactersQuery } from '@/lib/graphql/types';
 const Page: React.FC = () => (
   <DashboardContent activeTab="character">
     <Head title="キャラクター" />
-    <Breadcrumbs current="キャラクター" />
+    <Breadcrumbs items={[{ name: 'キャラクター' }]} />
     <PageHeader title="キャラクター" addPageUrl={Routes.dashboard.character.new()} />
 
     <CharacterList />

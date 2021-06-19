@@ -38,8 +38,7 @@ const Page: React.FC = () => {
     <DashboardContent activeTab="character">
       <Head title={tournamentVideo.title} />
       <Breadcrumbs
-        parents={[{ name: '大会', url: Routes.dashboard.tournament.index() }]}
-        current={tournamentVideo.title}
+        items={[{ name: '大会', url: Routes.dashboard.tournament.index() }, { name: tournamentVideo.title }]}
       />
       <PageHeader title={tournamentVideo.title} />
 

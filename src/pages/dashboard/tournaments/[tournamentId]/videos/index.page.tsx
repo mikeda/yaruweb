@@ -49,7 +49,7 @@ const Page: React.FC = () => {
   return (
     <DashboardContent activeTab="video">
       <Head title={title} />
-      <Breadcrumbs current={title} />
+      <Breadcrumbs items={[{ name: title }]} />
       <PageHeader title={title} />
 
       <VideoForm tournamentId={tournamentId} />

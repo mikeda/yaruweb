@@ -30,7 +30,7 @@ const Page: React.FC = () => {
   return (
     <DashboardContent activeTab="article">
       <Head title="記事編集" />
-      <Breadcrumbs parents={[{ name: '記事', url: Routes.dashboard.article.index() }]} current="記事編集" />
+      <Breadcrumbs items={[{ name: '記事', url: Routes.dashboard.article.index() }, { name: '記事編集' }]} />
 
       <PageHeader title="記事編集" />
 

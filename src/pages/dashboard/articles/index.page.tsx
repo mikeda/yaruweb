@@ -42,7 +42,7 @@ const Page: React.FC = () => {
   return (
     <DashboardContent activeTab="article">
       <Head title="記事" />
-      <Breadcrumbs current="記事" />
+      <Breadcrumbs items={[{ name: '記事' }]} />
       <PageHeader title="記事" addPageUrl={Routes.dashboard.article.new()} />
 
       <PageContent articles={articles} refetch={refetch} />

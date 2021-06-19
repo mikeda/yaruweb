@@ -14,7 +14,7 @@ const Page: React.FC<Props> = ({ stages }) => {
   return (
     <Content>
       <Head title="ステージ" />
-      <Breadcrumbs current="ステージ" />
+      <Breadcrumbs items={[{ name: 'ステージ' }]} />
 
       {stages.map(stage => (
         <div key={stage.id}>

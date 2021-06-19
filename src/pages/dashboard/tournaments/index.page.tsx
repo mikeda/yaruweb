@@ -33,7 +33,7 @@ const Page: React.FC = () => {
   return (
     <DashboardContent activeTab="tournament">
       <Head title={title} />
-      <Breadcrumbs current={title} />
+      <Breadcrumbs items={[{ name: title }]} />
       <PageHeader title={title} />
       <PageContent tournaments={tournaments} refetch={refetch} />
       <Paging paging={paging} url={Routes.dashboard.tournament.index} />
