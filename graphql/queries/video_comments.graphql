@@ -1,5 +1,5 @@
-query VideoComments($videoId: ID!) {
-  videoComments(videoId: $videoId) {
-    ...videoComment
+query TournamentVideoComments($tournamentVideoId: ID!) {
+  tournamentVideoComments(tournamentVideoId: $tournamentVideoId) {
+    ...tournamentVideoComment
   }
 }

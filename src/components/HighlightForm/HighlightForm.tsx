@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import { Highlight, HighlightAttributes } from '@/lib/graphql/types';
+import { TournamentVideoHighlight, TournamentVideoHighlightAttributes } from '@/lib/graphql/types';
 import { Button, ButtonListInline } from '@/components/Button';
 import { FormGroup } from '@/components/form/FormGroup';
 import { Input } from '@/components/form/Input';
@@ -15,12 +15,12 @@ const schema = yup.object().shape({
   startSec: yup.number().required(),
 });
 
-type HighlightFragment = Pick<Highlight, 'title' | 'startSec'>;
+type TournamentVideoHighlightFragment = Pick<TournamentVideoHighlight, 'title' | 'startSec'>;
 
 interface Props {
   youtubeVideoId: string;
-  highlight?: HighlightFragment;
-  onSubmit: (attributes: HighlightAttributes) => void;
+  highlight?: TournamentVideoHighlightFragment;
+  onSubmit: (attributes: TournamentVideoHighlightAttributes) => void;
 }
 
 export const HighlightForm: React.FC<Props> = ({ youtubeVideoId, highlight, onSubmit }) => {
@@ -31,7 +31,7 @@ export const HighlightForm: React.FC<Props> = ({ youtubeVideoId, highlight, onSu
     setValue,
     handleSubmit,
     formState: { errors },
-  } = useForm<HighlightAttributes>({
+  } = useForm<TournamentVideoHighlightAttributes>({
     resolver: yupResolver(schema),
     mode: 'onBlur',
     defaultValues: highlight && {

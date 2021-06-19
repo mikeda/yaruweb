@@ -1,4 +1,4 @@
-fragment videoComment on VideoComment {
+fragment tournamentVideoComment on TournamentVideoComment {
   id
   message
   createdAt

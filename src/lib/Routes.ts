@@ -27,6 +27,7 @@ export const Routes = {
   },
   tournament: {
     index: (params?: { page?: number }) => generatePath('/tournaments', params),
+    detail: (tournamentId: string) => `/tournaments/${tournamentId}`,
   },
   moveCategory: {
     detail: (moveCategoryId: string) => `/move_categories/${moveCategoryId}`,
@@ -40,9 +41,8 @@ export const Routes = {
     passwordReset: () => '/password/reset',
     passwordEdit: () => '/password/edit',
   },
-  video: {
-    index: (page?: number) => `/videos${page ? `?page=${page}` : ''}`,
-    detail: (id: string) => `/videos/${id}`,
+  tournamentVideos: {
+    detail: (tournamentVideoId: string) => `/tournament_videos/${tournamentVideoId}`,
   },
   dashboard: {
     top: () => '/',
@@ -76,6 +76,10 @@ export const Routes = {
       index: (page?: number) => `/dashboard/tournaments${page ? `?page=${page}` : ''}`,
       new: () => '/dashboard/tournaments/new',
       edit: (tournamentId: string) => `/dashboard/tournaments/${tournamentId}/edit`,
+      video: {
+        index: (tournamentId: string, page?: number) =>
+          `/dashboard/tournaments/${tournamentId}/videos${page ? `?page=${page}` : ''}`,
+      },
     },
     highlight: {
       edit: (highlightId: string) => `/dashboard/highlights/${highlightId}/edit`,
@@ -114,13 +118,12 @@ export const Routes = {
     throw_action: {
       edit: (actionId: string) => `/dashboard/throw_actions/${actionId}/edit`,
     },
-    video: {
-      index: (page?: number) => `/dashboard/videos${page ? `?page=${page}` : ''}`,
-      new: () => '/dashboard/videos/new',
-      edit: (videoId: string) => `/dashboard/videos/${videoId}/edit`,
+    tournamentVideo: {
+      new: (tournamentId: string) => `/dashboard/tournaments/${tournamentId}/videos/new`,
+      edit: (tournamentVideoId: string) => `/dashboard/tournament_videos/${tournamentVideoId}/edit`,
       highlight: {
-        index: (videoId: string) => `/dashboard/videos/${videoId}/highlights`,
-        new: (videoId: string) => `/dashboard/videos/${videoId}/highlights/new`,
+        index: (tournamentVideoId: string) => `/dashboard/tournament_videos/${tournamentVideoId}/highlights`,
+        new: (tournamentVideoId: string) => `/dashboard/tournament_videos/${tournamentVideoId}/highlights/new`,
       },
     },
   },

@@ -3,6 +3,7 @@ query PageDashboardTournaments($page: Int, $per: Int) {
     records {
       id
       name
+      videosCount
     }
 
     paging {

@@ -1,0 +1,17 @@
+query PageDashboardHighlights($tournamentVideoId: ID!) {
+  tournamentVideo(tournamentVideoId: $tournamentVideoId) {
+    id
+    title
+
+    tournament {
+      id
+      name
+    }
+
+    highlights {
+      id
+      title
+      startSec
+    }
+  }
+}

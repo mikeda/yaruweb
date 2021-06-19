@@ -3,7 +3,7 @@ import { Routes } from '@/lib/Routes';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileAlt, faCalendarAlt, IconDefinition, faUser, faMeh } from '@fortawesome/free-regular-svg-icons';
-import { faVideo, faRing } from '@fortawesome/free-solid-svg-icons';
+import { faRing } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './Tabs.module.scss';
 import { useCurrentPlayer } from '@/hooks/useCurrentPlayer';
@@ -22,7 +22,6 @@ interface Tab {
 const allTabs: Tab[] = [
   { key: 'article', label: '記事', link: Routes.dashboard.article.index(), icon: faFileAlt, onlyEditor: false },
   { key: 'character', label: 'キャラクター', link: Routes.dashboard.character.index(), icon: faMeh, onlyEditor: true },
-  { key: 'video', label: '動画', link: Routes.dashboard.video.index(), icon: faVideo, onlyEditor: true },
   {
     key: 'tournament',
     label: '大会',

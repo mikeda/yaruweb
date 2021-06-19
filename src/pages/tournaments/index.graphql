@@ -1,0 +1,20 @@
+query PageTournaments($page: Int, $per: Int) {
+  tournaments(page: $page, per: $per) {
+    records {
+      id
+      name
+      mainImageUrl
+      url
+      streamingUrl
+      videoUrl
+      description
+      organizerName
+      organizerTwitterId
+      startsAt
+    }
+
+    paging {
+      ...paging
+    }
+  }
+}

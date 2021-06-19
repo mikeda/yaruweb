@@ -1,6 +1,6 @@
-mutation DeleteHighlight($highlightId: ID!) {
-  deleteHighlight(input: { highlightId: $highlightId }) {
-    highlight {
+mutation DeleteHighlight($tournamentVideoHighlightId: ID!) {
+  deleteTournamentVideoHighlight(input: { tournamentVideoHighlightId: $tournamentVideoHighlightId }) {
+    tournamentVideoHighlight {
       id
     }
   }

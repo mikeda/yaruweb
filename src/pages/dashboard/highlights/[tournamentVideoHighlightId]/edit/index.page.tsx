@@ -1,10 +1,10 @@
 import React from 'react';
 
 import {
-  HighlightAttributes,
+  TournamentVideoHighlightAttributes,
   PageDashboardHighlightEditQuery,
   usePageDashboardHighlightEditQuery,
-  useUpdateHighlightMutation,
+  useUpdateTournamentVideoHighlightMutation,
 } from '@/lib/graphql/types';
 import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
@@ -20,10 +20,10 @@ import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 const Page: React.FC = () => {
   const router = useRouter();
   const setLoading = useSetRecoilState(loadingState);
-  const { highlightId } = router.query;
+  const { tournamentVideoHighlightId } = router.query;
   const { data, loading } = usePageDashboardHighlightEditQuery({
-    variables: { highlightId: highlightId as string },
-    skip: !highlightId,
+    variables: { tournamentVideoHighlightId: tournamentVideoHighlightId as string },
+    skip: !tournamentVideoHighlightId,
     fetchPolicy: 'network-only',
     onError: e => {
       toast.error(e.message);
@@ -32,32 +32,35 @@ const Page: React.FC = () => {
 
   setLoading(loading);
   if (!data) return null;
-  const { highlight } = data;
+  const { tournamentVideoHighlight } = data;
 
   return (
     <DashboardContent activeTab="video">
-      <Head title={highlight.title} />
+      <Head title={tournamentVideoHighlight.title} />
       <Breadcrumbs
         parents={[
+          { name: tournamentVideoHighlight.tournamentVideo.title },
+          { name: '大会', url: Routes.dashboard.tournament.index() },
+          { name: tournamentVideoHighlight.tournamentVideo.tournament.name },
           {
             name: '動画',
-            url: Routes.dashboard.video.index(),
+            url: Routes.dashboard.tournament.video.index(tournamentVideoHighlight.tournamentVideo.tournament.id),
           },
-          { name: highlight.video.title },
+          { name: tournamentVideoHighlight.tournamentVideo.title },
         ]}
-        current={highlight.title}
+        current={tournamentVideoHighlight.title}
       />
-      <PageHeader title={highlight.title} />
+      <PageHeader title={tournamentVideoHighlight.title} />
 
       <HighlightContent {...data} />
     </DashboardContent>
   );
 };
 
-const HighlightContent: React.FC<PageDashboardHighlightEditQuery> = ({ highlight }) => {
+const HighlightContent: React.FC<PageDashboardHighlightEditQuery> = ({ tournamentVideoHighlight }) => {
   const router = useRouter();
   const setLoading = useSetRecoilState(loadingState);
-  const [updateHighlight, { loading }] = useUpdateHighlightMutation({
+  const [updateHighlight, { loading }] = useUpdateTournamentVideoHighlightMutation({
     onCompleted: () => {
       toast.success('ハイライトを更新しました。');
       router.back();
@@ -67,12 +70,18 @@ const HighlightContent: React.FC<PageDashboardHighlightEditQuery> = ({ highlight
     },
   });
 
-  const onSubmit = (attributes: HighlightAttributes) => {
-    updateHighlight({ variables: { highlightId: highlight.id, attributes } });
+  const onSubmit = (attributes: TournamentVideoHighlightAttributes) => {
+    updateHighlight({ variables: { tournamentVideoHighlightId: tournamentVideoHighlight.id, attributes } });
   };
 
   setLoading(loading);
-  return <HighlightForm highlight={highlight} youtubeVideoId={highlight.video.videoId} onSubmit={onSubmit} />;
+  return (
+    <HighlightForm
+      highlight={tournamentVideoHighlight}
+      youtubeVideoId={tournamentVideoHighlight.tournamentVideo.youtubeVideoId}
+      onSubmit={onSubmit}
+    />
+  );
 };
 
 export default Page;

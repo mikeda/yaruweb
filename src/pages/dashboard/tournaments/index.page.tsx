@@ -41,7 +41,7 @@ const Page: React.FC = () => {
   );
 };
 
-type TournamentFragment = Pick<Tournament, 'id' | 'name'>;
+type TournamentFragment = Pick<Tournament, 'id' | 'name' | 'videosCount'>;
 
 interface PageContentProps {
   tournaments: TournamentFragment[];
@@ -69,6 +69,7 @@ const PageContent: React.FC<PageContentProps> = ({ tournaments, refetch }) => {
         title: tournament.name,
         links: [
           { text: '編集する', url: Routes.dashboard.tournament.edit(tournament.id) },
+          { text: `動画(${tournament.videosCount})`, url: Routes.dashboard.tournament.video.index(tournament.id) },
           {
             text: '削除する',
             onClick: () => {

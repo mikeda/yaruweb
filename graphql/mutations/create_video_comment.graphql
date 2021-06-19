@@ -1,7 +1,7 @@
-mutation CreateVideoComment($videoId: ID!, $attributes: CommentAttributes!) {
-  createVideoComment(input: {videoId: $videoId, attributes: $attributes}) {
-    videoComment {
-      ...videoComment
+mutation CreateTournamentVideoComment($tournamentVideoId: ID!, $attributes: CommentAttributes!) {
+  createTournamentVideoComment(input: { tournamentVideoId: $tournamentVideoId, attributes: $attributes }) {
+    tournamentVideoComment {
+      ...tournamentVideoComment
     }
   }
 }

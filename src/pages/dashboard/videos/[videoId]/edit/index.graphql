@@ -1,8 +1,0 @@
-query PageDashboardVideoEdit($videoId: ID!) {
-  video(videoId: $videoId) {
-    id
-    title
-    description
-    videoId
-  }
-}
