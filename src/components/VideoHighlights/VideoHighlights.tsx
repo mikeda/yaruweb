@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { HighlightFragment } from '@/lib/graphql/types';
+import { TournamentVideoHighlightFragment } from '@/lib/graphql/types';
 
 import styles from './VideoHighlights.module.scss';
 import { formatSec } from '@/lib/formatSec';
 
 interface Props {
-  highlights: HighlightFragment[];
+  highlights: TournamentVideoHighlightFragment[];
   onSelect: (startSec: number) => void;
 }
 

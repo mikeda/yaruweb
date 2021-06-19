@@ -1,6 +1,11 @@
 import React from 'react';
 
-import { VideoAttributes, usePageDashboardVideoEditQuery, useUpdateVideoMutation, Video } from '@/lib/graphql/types';
+import {
+  TournamentVideoAttributes,
+  usePageDashboardVideoEditQuery,
+  useUpdateTournamentVideoMutation,
+  TournamentVideo,
+} from '@/lib/graphql/types';
 import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
 import { Routes } from '@/lib/Routes';
@@ -15,10 +20,10 @@ import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 const Page: React.FC = () => {
   const router = useRouter();
   const setLoading = useSetRecoilState(loadingState);
-  const { videoId } = router.query;
+  const { tournamentVideoId } = router.query;
   const { data, loading } = usePageDashboardVideoEditQuery({
-    variables: { videoId: videoId as string },
-    skip: !videoId,
+    variables: { tournamentVideoId: tournamentVideoId as string },
+    skip: !tournamentVideoId,
     fetchPolicy: 'network-only',
     onError: e => {
       toast.error(e.message);
@@ -27,25 +32,28 @@ const Page: React.FC = () => {
 
   setLoading(loading);
   if (!data) return null;
-  const { video } = data;
+  const { tournamentVideo } = data;
 
   return (
     <DashboardContent activeTab="character">
-      <Head title={video.title} />
-      <Breadcrumbs parents={[{ name: '動画', url: Routes.dashboard.video.index() }]} current={video.title} />
-      <PageHeader title={video.title} />
+      <Head title={tournamentVideo.title} />
+      <Breadcrumbs
+        parents={[{ name: '大会', url: Routes.dashboard.tournament.index() }]}
+        current={tournamentVideo.title}
+      />
+      <PageHeader title={tournamentVideo.title} />
 
-      <VideoContent video={video} />
+      <VideoContent video={tournamentVideo} />
     </DashboardContent>
   );
 };
 
-type VideoFragment = Pick<Video, 'id' | 'title' | 'description' | 'videoId'>;
+type TournamentVideoFragment = Pick<TournamentVideo, 'id' | 'title' | 'description' | 'youtubeVideoId'>;
 
-const VideoContent: React.FC<{ video: VideoFragment }> = ({ video }) => {
+const VideoContent: React.FC<{ video: TournamentVideoFragment }> = ({ video }) => {
   const router = useRouter();
   const setLoading = useSetRecoilState(loadingState);
-  const [updateVideo, { loading }] = useUpdateVideoMutation({
+  const [updateTournamentVideo, { loading }] = useUpdateTournamentVideoMutation({
     onCompleted: () => {
       toast.success('動画を更新しました。');
       router.back();
@@ -55,8 +63,8 @@ const VideoContent: React.FC<{ video: VideoFragment }> = ({ video }) => {
     },
   });
 
-  const onSubmit = (attributes: VideoAttributes) => {
-    updateVideo({ variables: { videoId: video.id, attributes } });
+  const onSubmit = (attributes: TournamentVideoAttributes) => {
+    updateTournamentVideo({ variables: { tournamentVideoId: video.id, attributes } });
   };
 
   setLoading(loading);

@@ -1,7 +1,7 @@
-fragment video on Video {
+fragment tournamentVideo on TournamentVideo {
   ...videoSummary
 
   highlights {
-    ...highlight
+    ...tournamentVideoHighlight
   }
 }

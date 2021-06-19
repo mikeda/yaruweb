@@ -1,11 +1,10 @@
 import React from 'react';
 
 import {
-  useCreateVideoCommentMutation,
-  useVideoCommentsQuery,
-  VideoDocument,
-  VideoFragment,
-  VideoQuery,
+  useCreateTournamentVideoCommentMutation,
+  useTournamentVideoCommentsQuery,
+  PageTournamentVideoQuery,
+  PageTournamentVideoDocument,
 } from '@/lib/graphql/types';
 import { VideoMedia } from '@/components/VideoMedia';
 import { Comment } from '@/components/Comment';
@@ -18,10 +17,12 @@ import { CommentForm } from '@/components/CommentForm';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 import { Routes } from '@/lib/Routes';
 
-const PageContent: React.FC<Props> = ({ video }) => {
-  const { data: commentsData, refetch: refetchComments } = useVideoCommentsQuery({ variables: { videoId: video.id } });
+const PageContent: React.FC<PageTournamentVideoQuery> = ({ tournamentVideo }) => {
+  const { data: commentsData, refetch: refetchComments } = useTournamentVideoCommentsQuery({
+    variables: { tournamentVideoId: tournamentVideo.id },
+  });
 
-  const [createVideoComment] = useCreateVideoCommentMutation({
+  const [createTournamentVideoComment] = useCreateTournamentVideoCommentMutation({
     onCompleted: () => {
       refetchComments();
     },
@@ -30,22 +31,22 @@ const PageContent: React.FC<Props> = ({ video }) => {
     },
   });
 
-  const videoComments = commentsData?.videoComments;
+  const tournamentVideoComments = commentsData?.tournamentVideoComments;
 
   return (
     <>
       <div className="hp_mg_b_lg">
-        <VideoMedia video={video} />
+        <VideoMedia video={tournamentVideo} />
       </div>
 
       <CommentForm
         onSubmit={attributes => {
-          createVideoComment({ variables: { videoId: video.id, attributes } });
+          createTournamentVideoComment({ variables: { tournamentVideoId: tournamentVideo.id, attributes } });
         }}
       />
 
-      {videoComments && videoComments.length !== 0 ? (
-        videoComments.map(videoComment => {
+      {tournamentVideoComments && tournamentVideoComments.length !== 0 ? (
+        tournamentVideoComments.map(videoComment => {
           if (!videoComment) return;
 
           return (
@@ -64,26 +65,30 @@ const PageContent: React.FC<Props> = ({ video }) => {
   );
 };
 
-interface Props {
-  video: VideoFragment;
-}
+const Page: React.FC<PageTournamentVideoQuery> = data => {
+  const video = data.tournamentVideo;
 
-const Page: React.FC<Props> = ({ video }) => {
   return (
     <Content>
       <Head title={video.title} />
-      <Breadcrumbs parents={[{ name: '動画', url: Routes.video.index() }]} current={video.title} />
+      <Breadcrumbs
+        parents={[
+          { name: '大会', url: Routes.tournament.index() },
+          { name: '動画', url: Routes.tournament.detail(video.tournament.id) },
+        ]}
+        current={video.title}
+      />
 
-      <PageContent video={video} />
+      <PageContent {...data} />
     </Content>
   );
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const videoId = params?.videoId as string;
-  const data: VideoQuery = await fetchGraphql(VideoDocument, { videoId });
+  const tournamentVideoId = params?.tournamentVideoId as string;
+  const data: PageTournamentVideoQuery = await fetchGraphql(PageTournamentVideoDocument, { tournamentVideoId });
 
-  return { props: { video: data.video }, revalidate: 60 };
+  return { props: data, revalidate: 60 };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {

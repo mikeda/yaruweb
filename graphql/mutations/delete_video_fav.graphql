@@ -1,7 +1,0 @@
-mutation DeleteVideoFav($videoId: ID!) {
-  deleteVideoFav(input: { videoId: $videoId }) {
-    video {
-      id
-    }
-  }
-}

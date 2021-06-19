@@ -1,7 +1,0 @@
-query PageDashboardHighlightNew($videoId: ID!) {
-  video(videoId: $videoId) {
-    id
-    title
-    videoId
-  }
-}

@@ -43,7 +43,6 @@ export * from './StageForm';
 export * from './TabLinkGroup';
 export * from './TabNav';
 export * from './ThrowActionForm';
-export * from './VideoCard';
 export * from './VideoForm';
 export * from './VideoHighlights';
 export * from './VideoMedia';

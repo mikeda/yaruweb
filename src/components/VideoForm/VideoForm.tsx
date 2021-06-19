@@ -4,18 +4,18 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import YouTube from 'react-youtube';
 
-import { Video, VideoAttributes } from '@/lib/graphql/types';
+import { TournamentVideo, TournamentVideoAttributes } from '@/lib/graphql/types';
 import { Input, TextArea, FormGroup, Button } from '@/components';
 
 const schema = yup.object().shape({
   title: yup.string().required(),
 });
 
-type VideoFragment = Pick<Video, 'title' | 'description' | 'videoId'>;
+type TournamentVideoFragment = Pick<TournamentVideo, 'title' | 'description' | 'youtubeVideoId'>;
 
 interface Props {
-  video: VideoFragment;
-  onSubmit: (attributes: VideoAttributes) => void;
+  video: TournamentVideoFragment;
+  onSubmit: (attributes: TournamentVideoAttributes) => void;
 }
 
 export const VideoForm: React.FC<Props> = ({ video, onSubmit }) => {
@@ -23,7 +23,7 @@ export const VideoForm: React.FC<Props> = ({ video, onSubmit }) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<VideoAttributes>({
+  } = useForm<TournamentVideoAttributes>({
     resolver: yupResolver(schema),
     mode: 'onBlur',
     defaultValues: {
@@ -34,7 +34,7 @@ export const VideoForm: React.FC<Props> = ({ video, onSubmit }) => {
 
   return (
     <>
-      <YouTube containerClassName="bl_youtube" videoId={video.videoId} opts={{ width: '854', height: '480' }} />
+      <YouTube containerClassName="bl_youtube" videoId={video.youtubeVideoId} opts={{ width: '854', height: '480' }} />
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <FormGroup label="タイトル" required>

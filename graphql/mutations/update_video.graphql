@@ -1,7 +1,7 @@
-mutation UpdateVideo($videoId: ID!, $attributes: VideoAttributes!) {
-  updateVideo(input: {videoId: $videoId, attributes: $attributes}) {
-    video {
-      ...video
+mutation UpdateTournamentVideo($tournamentVideoId: ID!, $attributes: TournamentVideoAttributes!) {
+  updateTournamentVideo(input: {tournamentVideoId: $tournamentVideoId, attributes: $attributes}) {
+    tournamentVideo {
+      ...tournamentVideo
     }
   }
 }

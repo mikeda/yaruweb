@@ -1,0 +1,8 @@
+query PageDashboardVideoEdit($tournamentVideoId: ID!) {
+  tournamentVideo(tournamentVideoId: $tournamentVideoId) {
+    id
+    title
+    description
+    youtubeVideoId
+  }
+}

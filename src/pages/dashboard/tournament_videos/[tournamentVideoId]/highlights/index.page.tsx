@@ -1,6 +1,10 @@
 import React from 'react';
 
-import { Highlight, useDeleteHighlightMutation, usePageDashboardHighlightsQuery } from '@/lib/graphql/types';
+import {
+  TournamentVideoHighlight,
+  useDeleteHighlightMutation,
+  usePageDashboardHighlightsQuery,
+} from '@/lib/graphql/types';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
 import { Routes } from '@/lib/Routes';
 import { PageHeader } from '@/components/layouts/PageHeader';
@@ -16,17 +20,17 @@ import { formatSec } from '@/lib/formatSec';
 const Page: React.FC = () => {
   const router = useRouter();
   const setLoading = useSetRecoilState(loadingState);
-  const { videoId } = router.query;
+  const { tournamentVideoId } = router.query;
   const { data, loading, refetch } = usePageDashboardHighlightsQuery({
-    variables: { videoId: videoId as string },
+    variables: { tournamentVideoId: tournamentVideoId as string },
     fetchPolicy: 'network-only',
-    skip: !videoId,
+    skip: !tournamentVideoId,
   });
 
   setLoading(loading);
   if (!data) return null;
 
-  const { video } = data;
+  const { tournamentVideo } = data;
 
   setLoading(loading);
 
@@ -35,27 +39,34 @@ const Page: React.FC = () => {
   return (
     <DashboardContent activeTab="video">
       <Head title={title} />
-      <Breadcrumbs parents={[{ name: '動画', url: Routes.dashboard.video.index() }]} current={title} />
-      <PageHeader title={title} addPageUrl={Routes.dashboard.video.highlight.new(video.id)} />
+      <Breadcrumbs
+        parents={[
+          { name: '大会', url: Routes.dashboard.tournament.index() },
+          { name: tournamentVideo.tournament.name },
+          { name: '動画', url: Routes.dashboard.tournament.video.index(tournamentVideo.tournament.id) },
+        ]}
+        current={title}
+      />
+      <PageHeader title={title} addPageUrl={Routes.dashboard.tournamentVideo.highlight.new(tournamentVideo.id)} />
 
-      <PageContent highlights={video.highlights} refetch={refetch} />
+      <PageContent highlights={tournamentVideo.highlights} refetch={refetch} />
     </DashboardContent>
   );
 };
 
-type HighlightFragment = Pick<Highlight, 'id' | 'title' | 'startSec'>;
+type TournamentVideoHighlightFragment = Pick<TournamentVideoHighlight, 'id' | 'title' | 'startSec'>;
 
 interface PageContentProps {
-  highlights: HighlightFragment[];
+  highlights: TournamentVideoHighlightFragment[];
   refetch: () => void;
 }
 
 const PageContent: React.FC<PageContentProps> = ({ highlights, refetch }) => {
   const setLoading = useSetRecoilState(loadingState);
 
-  const [deleteHighlight, { loading: deleteLoading }] = useDeleteHighlightMutation({
+  const [deleteTournamentVideoHighlight, { loading: deleteLoading }] = useDeleteHighlightMutation({
     onCompleted: data => {
-      const highlight = data.deleteHighlight?.highlight;
+      const highlight = data.deleteTournamentVideoHighlight?.tournamentVideoHighlight;
       if (!highlight) return;
       refetch();
       toast.success('ハイライトを削除しました。');
@@ -75,7 +86,7 @@ const PageContent: React.FC<PageContentProps> = ({ highlights, refetch }) => {
             text: '削除する',
             onClick: () => {
               if (window.confirm('ハイライトを削除します。')) {
-                deleteHighlight({ variables: { highlightId: highlight.id } });
+                deleteTournamentVideoHighlight({ variables: { tournamentVideoHighlightId: highlight.id } });
               }
             },
           },

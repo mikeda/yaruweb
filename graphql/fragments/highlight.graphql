@@ -1,4 +1,4 @@
-fragment highlight on Highlight {
+fragment tournamentVideoHighlight on TournamentVideoHighlight {
   id
   title
   startSec

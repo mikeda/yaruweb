@@ -1,6 +1,6 @@
-mutation CreateVideo($url: String!) {
-  createVideo(input: {url: $url}) {
-    video {
+mutation CreateVideo($tournamentId: ID!, $url: String!) {
+  createTournamentVideo(input: { tournamentId: $tournamentId, url: $url }) {
+    tournamentVideo {
       id
     }
   }

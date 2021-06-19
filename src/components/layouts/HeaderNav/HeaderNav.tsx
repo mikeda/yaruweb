@@ -10,7 +10,6 @@ const links = [
   { name: 'TOP', path: Routes.top() },
   { name: 'キャラクター', path: Routes.character.index() },
   { name: '記事', path: Routes.article.index() },
-  { name: '動画', path: Routes.video.index() },
   { name: '大会', path: Routes.tournament.index() },
 ];
 

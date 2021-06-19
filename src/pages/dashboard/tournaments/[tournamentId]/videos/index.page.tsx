@@ -3,8 +3,8 @@ import React from 'react';
 import {
   useCreateVideoMutation,
   useDeleteVideoMutation,
-  usePageDashboardVideosQuery,
-  Video,
+  usePageDashboardTournamentVideosQuery,
+  TournamentVideo,
 } from '@/lib/graphql/types';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
 import { Routes } from '@/lib/Routes';
@@ -15,7 +15,6 @@ import { useRouter } from 'next/router';
 import { loadingState } from '@/states/loading';
 import { useSetRecoilState } from 'recoil';
 import { toast } from 'react-toastify';
-import { Paging } from '@/components/Paging';
 import { ObjectCardList } from '@/components/ObjectCardList';
 import { Input } from '@/components/form/Input';
 import { Button } from '@/components/Button';
@@ -24,20 +23,24 @@ import { useForm } from 'react-hook-form';
 const Page: React.FC = () => {
   const router = useRouter();
   const setLoading = useSetRecoilState(loadingState);
-  const { query } = router;
-  const page = query.page ? Number(query.page as string) : 1;
-  const { data, loading, refetch } = usePageDashboardVideosQuery({
-    variables: { page },
+
+  let tournamentId: string | undefined;
+  if (router.query.tournamentId) {
+    tournamentId = router.query.tournamentId as string;
+  }
+
+  const { data, loading, refetch } = usePageDashboardTournamentVideosQuery({
+    variables: { tournamentId: tournamentId as string },
     fetchPolicy: 'network-only',
-    skip: !router.isReady,
+    skip: !router.isReady && !!tournamentId,
   });
+
+  if (!tournamentId) return null;
 
   setLoading(loading);
   if (!data) return null;
 
-  const {
-    videos: { records: videos, paging },
-  } = data;
+  const { tournamentVideos: videos } = data;
 
   setLoading(loading);
 
@@ -49,27 +52,26 @@ const Page: React.FC = () => {
       <Breadcrumbs current={title} />
       <PageHeader title={title} />
 
-      <VideoForm />
+      <VideoForm tournamentId={tournamentId} />
 
       <PageContent videos={videos} refetch={refetch} />
-      <Paging paging={paging} url={Routes.dashboard.video.index} />
     </DashboardContent>
   );
 };
 
-type VideoFragment = Pick<Video, 'id' | 'title' | 'highlightsCount'>;
+type TournamentVideoFragment = Pick<TournamentVideo, 'id' | 'title' | 'highlightsCount'>;
 
 interface PageContentProps {
-  videos: VideoFragment[];
+  videos: TournamentVideoFragment[];
   refetch: () => void;
 }
 
 const PageContent: React.FC<PageContentProps> = ({ videos, refetch }) => {
   const setLoading = useSetRecoilState(loadingState);
 
-  const [deleteVideo, { loading: deleteLoading }] = useDeleteVideoMutation({
+  const [deleteTournamentVideo, { loading: deleteLoading }] = useDeleteVideoMutation({
     onCompleted: data => {
-      const video = data.deleteVideo?.video;
+      const video = data.deleteTournamentVideo?.tournamentVideo;
       if (!video) return;
       refetch();
       toast.success('動画を削除しました。');
@@ -84,13 +86,16 @@ const PageContent: React.FC<PageContentProps> = ({ videos, refetch }) => {
         id: video.id,
         title: video.title,
         links: [
-          { text: '編集する', url: Routes.dashboard.video.edit(video.id) },
-          { text: `ハイライト(${video.highlightsCount})`, url: Routes.dashboard.video.highlight.index(video.id) },
+          { text: '編集する', url: Routes.dashboard.tournamentVideo.edit(video.id) },
+          {
+            text: `ハイライト(${video.highlightsCount})`,
+            url: Routes.dashboard.tournamentVideo.highlight.index(video.id),
+          },
           {
             text: '削除する',
             onClick: () => {
               if (window.confirm('動画を削除します。')) {
-                deleteVideo({ variables: { videoId: video.id } });
+                deleteTournamentVideo({ variables: { tournamentVideoId: video.id } });
               }
             },
           },
@@ -100,16 +105,16 @@ const PageContent: React.FC<PageContentProps> = ({ videos, refetch }) => {
   );
 };
 
-const VideoForm: React.FC = () => {
+const VideoForm: React.FC<{ tournamentId: string }> = ({ tournamentId }) => {
   const router = useRouter();
   const setLoading = useSetRecoilState(loadingState);
-  const [createVideo, { loading }] = useCreateVideoMutation({
+  const [createTournamentVideo, { loading }] = useCreateVideoMutation({
     onCompleted: data => {
-      const video = data.createVideo?.video;
+      const video = data.createTournamentVideo?.tournamentVideo;
       if (!video) return;
 
       toast.success('動画を登録しました。');
-      router.push(Routes.dashboard.video.edit(video.id));
+      router.push(Routes.dashboard.tournamentVideo.edit(video.id));
     },
     onError: e => {
       toast.error(e.message);
@@ -117,8 +122,8 @@ const VideoForm: React.FC = () => {
   });
   const { register, handleSubmit } = useForm<{ url: string }>();
 
-  const onSubmit = (attributes: { url: string }) => {
-    createVideo({ variables: attributes });
+  const onSubmit = ({ url }: { url: string }) => {
+    createTournamentVideo({ variables: { tournamentId, url } });
   };
 
   setLoading(loading);
