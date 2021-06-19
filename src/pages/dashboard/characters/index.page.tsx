@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { useCharactersQuery } from '@/lib/graphql/types';
 import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
 import { NotFound } from '@/components/NotFound';
@@ -8,6 +7,7 @@ import Link from 'next/link';
 import { Routes } from '@/lib/Routes';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 import { PageHeader } from '@/components/layouts/PageHeader';
+import { usePageDashboardCharactersQuery } from '@/lib/graphql/types';
 
 const Page: React.FC = () => (
   <DashboardContent activeTab="character">
@@ -20,7 +20,7 @@ const Page: React.FC = () => (
 );
 
 const CharacterList: React.FC = () => {
-  const { data, loading, error } = useCharactersQuery();
+  const { data, loading, error } = usePageDashboardCharactersQuery();
 
   if (loading) return <NotFound>Loading...</NotFound>;
   if (error) return <NotFound>エラーが発生しました。{error.message}</NotFound>;

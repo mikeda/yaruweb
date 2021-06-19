@@ -4,9 +4,8 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import {
   CharacterPathsDocument,
   CharacterPathsQuery,
-  CharacterWithChildrenDocument,
-  CharacterWithChildrenFragment,
-  CharacterWithChildrenQuery,
+  PageCharacterDocument,
+  PageCharacterQuery,
 } from '@/lib/graphql/types';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Heading } from '@/components/Heading';
@@ -17,11 +16,7 @@ import { CategoryCardList } from '@/components/CategoryCardList';
 import { CharacterCard } from '@/components/CharacterCard';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 
-interface Props {
-  character: CharacterWithChildrenFragment;
-}
-
-const Page: React.FC<Props> = ({ character }) => {
+const Page: React.FC<PageCharacterQuery> = ({ character }) => {
   return (
     <Content>
       <Head title={character.longName} />
@@ -58,9 +53,9 @@ const Page: React.FC<Props> = ({ character }) => {
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const characterSlug = params?.characterSlug as string;
-  const data: CharacterWithChildrenQuery = await fetchGraphql(CharacterWithChildrenDocument, { characterSlug });
+  const data: PageCharacterQuery = await fetchGraphql(PageCharacterDocument, { characterSlug });
 
-  return { props: { character: data.character } };
+  return { props: data };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {

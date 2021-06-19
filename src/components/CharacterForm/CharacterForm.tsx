@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import { CharacterAttributes, CharacterFragment } from '@/lib/graphql/types';
+import { CharacterAttributes, CharacterFormFragment } from '@/lib/graphql/types';
 import { Button, CheckBox, FormGrid, TextArea, Input, FormGroup } from '@/components';
 
 const schema = yup.object().shape({
@@ -24,7 +24,7 @@ const schema = yup.object().shape({
 });
 
 interface Props {
-  character?: CharacterFragment;
+  character?: CharacterFormFragment;
   onSubmit: (attributes: CharacterAttributes) => void;
 }
 

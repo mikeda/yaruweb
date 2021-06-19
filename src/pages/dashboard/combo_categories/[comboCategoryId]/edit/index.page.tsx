@@ -2,27 +2,48 @@ import React from 'react';
 
 import {
   ComboCategoryAttributes,
-  ComboCategoryDocument,
-  ComboCategoryQuery,
-  ComboCategoryWithCharacterFragment,
+  ComboCategoryFragment,
+  usePageDashboardComboCategoryEditQuery,
   useUpdateComboCategoryMutation,
 } from '@/lib/graphql/types';
 import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
 import { PageHeader } from '@/components/layouts/PageHeader';
 import { useRouter } from 'next/router';
-import { GetServerSideProps } from 'next';
-import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { toast } from 'react-toastify';
 import { ComboCategoryForm } from '@/components/ComboCategoryForm';
 import { loadingState } from '@/states/loading';
 import { useSetRecoilState } from 'recoil';
 
-interface Props {
-  comboCategory: ComboCategoryWithCharacterFragment;
-}
+const Page: React.FC = () => {
+  const router = useRouter();
+  const setLoading = useSetRecoilState(loadingState);
+  const { comboCategoryId } = router.query;
+  const { data, loading } = usePageDashboardComboCategoryEditQuery({
+    variables: { comboCategoryId: comboCategoryId as string },
+    skip: !comboCategoryId,
+    fetchPolicy: 'network-only',
+    onError: e => {
+      toast.error(e.message);
+    },
+  });
 
-const Page: React.FC<Props> = ({ comboCategory }) => {
+  setLoading(loading);
+  if (!data) return null;
+  const { comboCategory } = data;
+
+  return (
+    <DashboardContent activeTab="character">
+      <Head title="コンボカテゴリ更新" />
+
+      <PageHeader title="コンボカテゴリ更新" />
+
+      <PageContent comboCategory={comboCategory} />
+    </DashboardContent>
+  );
+};
+
+export const PageContent: React.FC<{ comboCategory: ComboCategoryFragment }> = ({ comboCategory }) => {
   const router = useRouter();
   const setLoading = useSetRecoilState(loadingState);
   const [updateComboCategory, { loading }] = useUpdateComboCategoryMutation({
@@ -50,13 +71,6 @@ const Page: React.FC<Props> = ({ comboCategory }) => {
       <ComboCategoryForm comboCategory={comboCategory} onSubmit={onSubmit} />
     </DashboardContent>
   );
-};
-
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const comboCategoryId = params?.comboCategoryId as string;
-  const data: ComboCategoryQuery = await fetchGraphql(ComboCategoryDocument, { comboCategoryId });
-
-  return { props: { comboCategory: data.comboCategory } };
 };
 
 export default Page;

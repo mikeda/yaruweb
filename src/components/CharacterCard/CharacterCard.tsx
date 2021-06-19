@@ -1,15 +1,10 @@
+import { CharacterCardFragment } from '@/lib/graphql/types';
 import React from 'react';
 
 import styles from './CharacterCard.module.scss';
 
 interface Props {
-  character: {
-    slug: string;
-    longName: string;
-    faceImageUrl: string;
-    country: string;
-    fightingStyle: string;
-  };
+  character: CharacterCardFragment;
 }
 
 export const CharacterCard: React.FC<Props> = ({ character }) => {

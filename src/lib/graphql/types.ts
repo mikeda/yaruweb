@@ -2094,29 +2094,6 @@ export type ArticleSummaryFragment = (
   ) }
 );
 
-export type CharacterFragment = (
-  { __typename?: 'Character' }
-  & Pick<Character, 'nameKana' | 'longNameKana' | 'mainImageUrl' | 'story' | 'description' | 'dlc'>
-  & CharacterSummaryFragment
-);
-
-export type CharacterSummaryFragment = (
-  { __typename?: 'Character' }
-  & Pick<Character, 'slug' | 'name' | 'longName' | 'faceImageUrl' | 'country' | 'fightingStyle'>
-);
-
-export type CharacterWithChildrenFragment = (
-  { __typename?: 'Character' }
-  & { moveCategories: Array<(
-    { __typename?: 'MoveCategory' }
-    & MoveCategoryFragment
-  )>, comboCategories: Array<(
-    { __typename?: 'ComboCategory' }
-    & ComboCategoryFragment
-  )> }
-  & CharacterFragment
-);
-
 export type ComboFragment = (
   { __typename?: 'Combo' }
   & Pick<Combo, 'id' | 'name' | 'damage' | 'note'>
@@ -2138,27 +2115,6 @@ export type ComboFragment = (
 export type ComboCategoryFragment = (
   { __typename?: 'ComboCategory' }
   & Pick<ComboCategory, 'id' | 'name'>
-);
-
-export type ComboCategoryDetailFragment = (
-  { __typename?: 'ComboCategory' }
-  & Pick<ComboCategory, 'id' | 'name'>
-  & { character: (
-    { __typename?: 'Character' }
-    & CharacterFragment
-  ), combos: Array<(
-    { __typename?: 'Combo' }
-    & ComboFragment
-  )> }
-);
-
-export type ComboCategoryWithCharacterFragment = (
-  { __typename?: 'ComboCategory' }
-  & { character: (
-    { __typename?: 'Character' }
-    & CharacterFragment
-  ) }
-  & ComboCategoryFragment
 );
 
 export type ComboVideoFragment = (
@@ -2227,27 +2183,6 @@ export type MoveFragment = (
 export type MoveCategoryFragment = (
   { __typename?: 'MoveCategory' }
   & Pick<MoveCategory, 'id' | 'name'>
-);
-
-export type MoveCategoryDetailFragment = (
-  { __typename?: 'MoveCategory' }
-  & Pick<MoveCategory, 'id' | 'name'>
-  & { character: (
-    { __typename?: 'Character' }
-    & CharacterFragment
-  ), moves: Array<(
-    { __typename?: 'Move' }
-    & MoveFragment
-  )> }
-);
-
-export type MoveCategoryWithCharacterFragment = (
-  { __typename?: 'MoveCategory' }
-  & { character: (
-    { __typename?: 'Character' }
-    & CharacterFragment
-  ) }
-  & MoveCategoryFragment
 );
 
 export type MoveCommentFragment = (
@@ -2423,7 +2358,7 @@ export type CreateCharacterMutation = (
     { __typename?: 'CreateCharacterPayload' }
     & { character: (
       { __typename?: 'Character' }
-      & CharacterFragment
+      & Pick<Character, 'id'>
     ) }
   )> }
 );
@@ -2920,7 +2855,7 @@ export type UpdateCharacterMutation = (
     { __typename?: 'UpdateCharacterPayload' }
     & { character: (
       { __typename?: 'Character' }
-      & CharacterFragment
+      & Pick<Character, 'id'>
     ) }
   )> }
 );
@@ -3262,19 +3197,6 @@ export type ArticlesQuery = (
   ) }
 );
 
-export type CharacterWithChildrenQueryVariables = Exact<{
-  characterSlug: Scalars['ID'];
-}>;
-
-
-export type CharacterWithChildrenQuery = (
-  { __typename?: 'Query' }
-  & { character: (
-    { __typename?: 'Character' }
-    & CharacterWithChildrenFragment
-  ) }
-);
-
 export type MoveCategoryWithMovesFragment = (
   { __typename?: 'MoveCategory' }
   & { moves: Array<(
@@ -3334,30 +3256,6 @@ export type CharacterSlugsQuery = (
   )> }
 );
 
-export type CharacterQueryVariables = Exact<{
-  characterSlug: Scalars['ID'];
-}>;
-
-
-export type CharacterQuery = (
-  { __typename?: 'Query' }
-  & { character: (
-    { __typename?: 'Character' }
-    & CharacterFragment
-  ) }
-);
-
-export type CharactersQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type CharactersQuery = (
-  { __typename?: 'Query' }
-  & { characters: Array<(
-    { __typename?: 'Character' }
-    & CharacterSummaryFragment
-  )> }
-);
-
 export type CombosQueryVariables = Exact<{
   comboCategoryId: Scalars['ID'];
 }>;
@@ -3382,32 +3280,6 @@ export type ComboCategoriesQuery = (
     { __typename?: 'ComboCategory' }
     & ComboCategoryFragment
   )> }
-);
-
-export type ComboCategoryQueryVariables = Exact<{
-  comboCategoryId: Scalars['ID'];
-}>;
-
-
-export type ComboCategoryQuery = (
-  { __typename?: 'Query' }
-  & { comboCategory: (
-    { __typename?: 'ComboCategory' }
-    & ComboCategoryWithCharacterFragment
-  ) }
-);
-
-export type ComboCategoryDetailQueryVariables = Exact<{
-  comboCategoryId: Scalars['ID'];
-}>;
-
-
-export type ComboCategoryDetailQuery = (
-  { __typename?: 'Query' }
-  & { comboCategory: (
-    { __typename?: 'ComboCategory' }
-    & ComboCategoryDetailFragment
-  ) }
 );
 
 export type ComboCategoryIdsQueryVariables = Exact<{ [key: string]: never; }>;
@@ -3486,32 +3358,6 @@ export type MoveCategoriesQuery = (
     { __typename?: 'MoveCategory' }
     & MoveCategoryFragment
   )> }
-);
-
-export type MoveCategoryQueryVariables = Exact<{
-  moveCategoryId: Scalars['ID'];
-}>;
-
-
-export type MoveCategoryQuery = (
-  { __typename?: 'Query' }
-  & { moveCategory: (
-    { __typename?: 'MoveCategory' }
-    & MoveCategoryWithCharacterFragment
-  ) }
-);
-
-export type MoveCategoryDetailQueryVariables = Exact<{
-  moveCategoryId: Scalars['ID'];
-}>;
-
-
-export type MoveCategoryDetailQuery = (
-  { __typename?: 'Query' }
-  & { moveCategory: (
-    { __typename?: 'MoveCategory' }
-    & MoveCategoryDetailFragment
-  ) }
 );
 
 export type MoveCategoryIdsQueryVariables = Exact<{ [key: string]: never; }>;
@@ -3715,6 +3561,101 @@ export type TournamentVideoCommentsQuery = (
   )> }
 );
 
+export type CharacterCardFragment = (
+  { __typename?: 'Character' }
+  & Pick<Character, 'slug' | 'longName' | 'faceImageUrl' | 'country' | 'fightingStyle'>
+);
+
+export type CharacterFormFragment = (
+  { __typename?: 'Character' }
+  & Pick<Character, 'name' | 'nameKana' | 'longName' | 'longNameKana' | 'slug' | 'country' | 'fightingStyle' | 'story' | 'description' | 'dlc'>
+);
+
+export type MoveMediaFragment = (
+  { __typename?: 'Move' }
+  & Pick<Move, 'id' | 'name' | 'kana' | 'opponentState' | 'startUpFrame' | 'powerCrush' | 'crouchingStatus' | 'jumpStatus' | 'homing' | 'screw' | 'wallBound' | 'note'>
+  & { moveCategory: (
+    { __typename?: 'MoveCategory' }
+    & Pick<MoveCategory, 'id' | 'name'>
+  ), afterState?: Maybe<(
+    { __typename?: 'State' }
+    & Pick<State, 'id' | 'name'>
+  )>, moveVideo?: Maybe<(
+    { __typename?: 'MoveVideo' }
+    & Pick<MoveVideo, 'id' | 'm3u8Url' | 'thumbnailUrl'>
+  )>, commands: Array<(
+    { __typename?: 'Command' }
+    & Pick<Command, 'id'>
+    & { state: (
+      { __typename?: 'State' }
+      & Pick<State, 'id' | 'name'>
+    ), operations: Array<(
+      { __typename?: 'Operation' }
+      & Pick<Operation, 'id' | 'name' | 'key' | 'icon'>
+    )> }
+  )>, actions: Array<(
+    { __typename?: 'AttackAction' }
+    & Action_AttackAction_Fragment
+  ) | (
+    { __typename?: 'ThrowAction' }
+    & Action_ThrowAction_Fragment
+  )>, conditions: Array<(
+    { __typename?: 'Condition' }
+    & Pick<Condition, 'id' | 'name'>
+  )> }
+);
+
+export type PageCharacterQueryVariables = Exact<{
+  characterSlug: Scalars['ID'];
+}>;
+
+
+export type PageCharacterQuery = (
+  { __typename?: 'Query' }
+  & { character: (
+    { __typename?: 'Character' }
+    & Pick<Character, 'slug' | 'name' | 'longName' | 'faceImageUrl' | 'country' | 'fightingStyle' | 'nameKana' | 'longNameKana' | 'mainImageUrl' | 'story' | 'description' | 'dlc'>
+    & { moveCategories: Array<(
+      { __typename?: 'MoveCategory' }
+      & Pick<MoveCategory, 'id' | 'name'>
+    )>, comboCategories: Array<(
+      { __typename?: 'ComboCategory' }
+      & Pick<ComboCategory, 'id' | 'name'>
+    )> }
+  ) }
+);
+
+export type PageCharactersQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type PageCharactersQuery = (
+  { __typename?: 'Query' }
+  & { characters: Array<(
+    { __typename?: 'Character' }
+    & CharacterCardFragment
+  )> }
+);
+
+export type PageComboCategoryQueryVariables = Exact<{
+  comboCategoryId: Scalars['ID'];
+}>;
+
+
+export type PageComboCategoryQuery = (
+  { __typename?: 'Query' }
+  & { comboCategory: (
+    { __typename?: 'ComboCategory' }
+    & Pick<ComboCategory, 'id' | 'name'>
+    & { character: (
+      { __typename?: 'Character' }
+      & Pick<Character, 'slug' | 'longName'>
+    ), combos: Array<(
+      { __typename?: 'Combo' }
+      & ComboFragment
+    )> }
+  ) }
+);
+
 export type PageDashboardArticlesQueryVariables = Exact<{
   page?: Maybe<Scalars['Int']>;
   per?: Maybe<Scalars['Int']>;
@@ -3760,6 +3701,17 @@ export type PageDashboardAttackActionEditQuery = (
   ) }
 );
 
+export type PageDashboardCharactersQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type PageDashboardCharactersQuery = (
+  { __typename?: 'Query' }
+  & { characters: Array<(
+    { __typename?: 'Character' }
+    & Pick<Character, 'slug' | 'longName'>
+  )> }
+);
+
 export type PageDashboardComboCategoriesQueryVariables = Exact<{
   characterSlug: Scalars['ID'];
 }>;
@@ -3777,6 +3729,32 @@ export type PageDashboardComboCategoriesQuery = (
   ) }
 );
 
+export type PageDashboardComboCategoryNewQueryVariables = Exact<{
+  characterSlug: Scalars['ID'];
+}>;
+
+
+export type PageDashboardComboCategoryNewQuery = (
+  { __typename?: 'Query' }
+  & { character: (
+    { __typename?: 'Character' }
+    & Pick<Character, 'slug' | 'name'>
+  ) }
+);
+
+export type PageDashboardCharacterEditQueryVariables = Exact<{
+  characterSlug: Scalars['ID'];
+}>;
+
+
+export type PageDashboardCharacterEditQuery = (
+  { __typename?: 'Query' }
+  & { character: (
+    { __typename?: 'Character' }
+    & CharacterFormFragment
+  ) }
+);
+
 export type PageDashboardMoveCategoriesQueryVariables = Exact<{
   characterSlug: Scalars['ID'];
 }>;
@@ -3791,6 +3769,19 @@ export type PageDashboardMoveCategoriesQuery = (
       { __typename?: 'MoveCategory' }
       & Pick<MoveCategory, 'id' | 'name' | 'movesCount'>
     )> }
+  ) }
+);
+
+export type PageDashboardMoveCategoryNewQueryVariables = Exact<{
+  characterSlug: Scalars['ID'];
+}>;
+
+
+export type PageDashboardMoveCategoryNewQuery = (
+  { __typename?: 'Query' }
+  & { character: (
+    { __typename?: 'Character' }
+    & Pick<Character, 'slug' | 'name'>
   ) }
 );
 
@@ -3834,6 +3825,23 @@ export type PageDashboardComboNewQuery = (
         { __typename?: 'Condition' }
         & Pick<Condition, 'id' | 'name'>
       )> }
+    ) }
+  ) }
+);
+
+export type PageDashboardComboCategoryEditQueryVariables = Exact<{
+  comboCategoryId: Scalars['ID'];
+}>;
+
+
+export type PageDashboardComboCategoryEditQuery = (
+  { __typename?: 'Query' }
+  & { comboCategory: (
+    { __typename?: 'ComboCategory' }
+    & Pick<ComboCategory, 'id' | 'name'>
+    & { character: (
+      { __typename?: 'Character' }
+      & Pick<Character, 'slug' | 'name'>
     ) }
   ) }
 );
@@ -3924,6 +3932,23 @@ export type PageDashboardHighlightEditQuery = (
         { __typename?: 'Tournament' }
         & Pick<Tournament, 'id' | 'name'>
       ) }
+    ) }
+  ) }
+);
+
+export type PageDashboardMoveCategoryEditQueryVariables = Exact<{
+  moveCategoryId: Scalars['ID'];
+}>;
+
+
+export type PageDashboardMoveCategoryEditQuery = (
+  { __typename?: 'Query' }
+  & { moveCategory: (
+    { __typename?: 'MoveCategory' }
+    & Pick<MoveCategory, 'id' | 'name'>
+    & { character: (
+      { __typename?: 'Character' }
+      & Pick<Character, 'slug' | 'name'>
     ) }
   ) }
 );
@@ -4209,6 +4234,26 @@ export type PageDashboardTournamentsQuery = (
   ) }
 );
 
+export type PageMoveCategoryQueryVariables = Exact<{
+  moveCategoryId: Scalars['ID'];
+}>;
+
+
+export type PageMoveCategoryQuery = (
+  { __typename?: 'Query' }
+  & { moveCategory: (
+    { __typename?: 'MoveCategory' }
+    & Pick<MoveCategory, 'id' | 'name'>
+    & { character: (
+      { __typename?: 'Character' }
+      & Pick<Character, 'slug' | 'longName'>
+    ), moves: Array<(
+      { __typename?: 'Move' }
+      & MoveFragment
+    )> }
+  ) }
+);
+
 export type PageMoveQueryVariables = Exact<{
   moveId: Scalars['ID'];
 }>;
@@ -4330,52 +4375,6 @@ export const ArticleLinkFragmentDoc = gql`
   imageUrl
 }
     `;
-export const CharacterSummaryFragmentDoc = gql`
-    fragment characterSummary on Character {
-  slug
-  name
-  longName
-  faceImageUrl
-  country
-  fightingStyle
-}
-    `;
-export const CharacterFragmentDoc = gql`
-    fragment character on Character {
-  ...characterSummary
-  nameKana
-  longNameKana
-  mainImageUrl
-  story
-  description
-  dlc
-}
-    ${CharacterSummaryFragmentDoc}`;
-export const MoveCategoryFragmentDoc = gql`
-    fragment moveCategory on MoveCategory {
-  id
-  name
-}
-    `;
-export const ComboCategoryFragmentDoc = gql`
-    fragment comboCategory on ComboCategory {
-  id
-  name
-}
-    `;
-export const CharacterWithChildrenFragmentDoc = gql`
-    fragment characterWithChildren on Character {
-  ...character
-  moveCategories {
-    ...moveCategory
-  }
-  comboCategories {
-    ...comboCategory
-  }
-}
-    ${CharacterFragmentDoc}
-${MoveCategoryFragmentDoc}
-${ComboCategoryFragmentDoc}`;
 export const ComboVideoFragmentDoc = gql`
     fragment comboVideo on ComboVideo {
   id
@@ -4420,34 +4419,111 @@ export const ComboFragmentDoc = gql`
     ${ComboVideoFragmentDoc}
 ${ConditionFragmentDoc}
 ${OperationFragmentDoc}`;
-export const ComboCategoryDetailFragmentDoc = gql`
-    fragment comboCategoryDetail on ComboCategory {
+export const ComboCategoryFragmentDoc = gql`
+    fragment comboCategory on ComboCategory {
   id
   name
-  character {
-    ...character
-  }
-  combos {
-    ...combo
-  }
 }
-    ${CharacterFragmentDoc}
-${ComboFragmentDoc}`;
-export const ComboCategoryWithCharacterFragmentDoc = gql`
-    fragment comboCategoryWithCharacter on ComboCategory {
-  ...comboCategory
-  character {
-    ...character
-  }
-}
-    ${ComboCategoryFragmentDoc}
-${CharacterFragmentDoc}`;
+    `;
 export const CurrentPlayerFragmentDoc = gql`
     fragment currentPlayer on CurrentPlayer {
   id
   name
   role
   avatarUrl
+}
+    `;
+export const MoveCommentFragmentDoc = gql`
+    fragment moveComment on MoveComment {
+  id
+  message
+  createdAt
+  player {
+    name
+    avatarUrl
+  }
+}
+    `;
+export const PagingFragmentDoc = gql`
+    fragment paging on Paging {
+  currentPage
+  totalCount
+  totalPages
+}
+    `;
+export const StageFragmentDoc = gql`
+    fragment stage on Stage {
+  id
+  name
+  mainImageUrl
+  infinite
+  wall
+  wallBreak
+  balconyBreak
+  floorBreak
+  position
+}
+    `;
+export const TournamentFragmentDoc = gql`
+    fragment tournament on Tournament {
+  id
+  name
+  mainImageUrl
+  url
+  streamingUrl
+  videoUrl
+  description
+  organizerName
+  organizerTwitterId
+  startsAt
+}
+    `;
+export const VideoSummaryFragmentDoc = gql`
+    fragment videoSummary on TournamentVideo {
+  id
+  youtubeVideoId
+  title
+  thumbnailUrl
+  commentCount
+  channel {
+    name
+  }
+}
+    `;
+export const TournamentVideoHighlightFragmentDoc = gql`
+    fragment tournamentVideoHighlight on TournamentVideoHighlight {
+  id
+  title
+  startSec
+  player {
+    name
+  }
+}
+    `;
+export const TournamentVideoFragmentDoc = gql`
+    fragment tournamentVideo on TournamentVideo {
+  ...videoSummary
+  highlights {
+    ...tournamentVideoHighlight
+  }
+}
+    ${VideoSummaryFragmentDoc}
+${TournamentVideoHighlightFragmentDoc}`;
+export const TournamentVideoCommentFragmentDoc = gql`
+    fragment tournamentVideoComment on TournamentVideoComment {
+  id
+  message
+  createdAt
+  player {
+    name
+    avatarUrl
+  }
+}
+    `;
+export const MoveCategoryFragmentDoc = gql`
+    fragment moveCategory on MoveCategory {
+  id
+  name
 }
     `;
 export const MoveVideoFragmentDoc = gql`
@@ -4565,115 +4641,6 @@ export const MoveFragmentDoc = gql`
 ${CommandFragmentDoc}
 ${ActionFragmentDoc}
 ${ConditionFragmentDoc}`;
-export const MoveCategoryDetailFragmentDoc = gql`
-    fragment moveCategoryDetail on MoveCategory {
-  id
-  name
-  character {
-    ...character
-  }
-  moves {
-    ...move
-  }
-}
-    ${CharacterFragmentDoc}
-${MoveFragmentDoc}`;
-export const MoveCategoryWithCharacterFragmentDoc = gql`
-    fragment moveCategoryWithCharacter on MoveCategory {
-  ...moveCategory
-  character {
-    ...character
-  }
-}
-    ${MoveCategoryFragmentDoc}
-${CharacterFragmentDoc}`;
-export const MoveCommentFragmentDoc = gql`
-    fragment moveComment on MoveComment {
-  id
-  message
-  createdAt
-  player {
-    name
-    avatarUrl
-  }
-}
-    `;
-export const PagingFragmentDoc = gql`
-    fragment paging on Paging {
-  currentPage
-  totalCount
-  totalPages
-}
-    `;
-export const StageFragmentDoc = gql`
-    fragment stage on Stage {
-  id
-  name
-  mainImageUrl
-  infinite
-  wall
-  wallBreak
-  balconyBreak
-  floorBreak
-  position
-}
-    `;
-export const TournamentFragmentDoc = gql`
-    fragment tournament on Tournament {
-  id
-  name
-  mainImageUrl
-  url
-  streamingUrl
-  videoUrl
-  description
-  organizerName
-  organizerTwitterId
-  startsAt
-}
-    `;
-export const VideoSummaryFragmentDoc = gql`
-    fragment videoSummary on TournamentVideo {
-  id
-  youtubeVideoId
-  title
-  thumbnailUrl
-  commentCount
-  channel {
-    name
-  }
-}
-    `;
-export const TournamentVideoHighlightFragmentDoc = gql`
-    fragment tournamentVideoHighlight on TournamentVideoHighlight {
-  id
-  title
-  startSec
-  player {
-    name
-  }
-}
-    `;
-export const TournamentVideoFragmentDoc = gql`
-    fragment tournamentVideo on TournamentVideo {
-  ...videoSummary
-  highlights {
-    ...tournamentVideoHighlight
-  }
-}
-    ${VideoSummaryFragmentDoc}
-${TournamentVideoHighlightFragmentDoc}`;
-export const TournamentVideoCommentFragmentDoc = gql`
-    fragment tournamentVideoComment on TournamentVideoComment {
-  id
-  message
-  createdAt
-  player {
-    name
-    avatarUrl
-  }
-}
-    `;
 export const MoveCategoryWithMovesFragmentDoc = gql`
     fragment moveCategoryWithMoves on MoveCategory {
   ...moveCategory
@@ -4683,6 +4650,78 @@ export const MoveCategoryWithMovesFragmentDoc = gql`
 }
     ${MoveCategoryFragmentDoc}
 ${MoveFragmentDoc}`;
+export const CharacterCardFragmentDoc = gql`
+    fragment CharacterCard on Character {
+  slug
+  longName
+  faceImageUrl
+  country
+  fightingStyle
+}
+    `;
+export const CharacterFormFragmentDoc = gql`
+    fragment CharacterForm on Character {
+  name
+  nameKana
+  longName
+  longNameKana
+  slug
+  country
+  fightingStyle
+  story
+  description
+  dlc
+}
+    `;
+export const MoveMediaFragmentDoc = gql`
+    fragment MoveMedia on Move {
+  id
+  name
+  kana
+  opponentState
+  startUpFrame
+  powerCrush
+  crouchingStatus
+  jumpStatus
+  homing
+  screw
+  wallBound
+  note
+  moveCategory {
+    id
+    name
+  }
+  afterState {
+    id
+    name
+  }
+  moveVideo {
+    id
+    m3u8Url
+    thumbnailUrl
+  }
+  commands {
+    id
+    state {
+      id
+      name
+    }
+    operations {
+      id
+      name
+      key
+      icon
+    }
+  }
+  actions {
+    ...action
+  }
+  conditions {
+    id
+    name
+  }
+}
+    ${ActionFragmentDoc}`;
 export const CreateArticleDocument = gql`
     mutation CreateArticle($attributes: ArticleAttributes!) {
   createArticle(input: {attributes: $attributes}) {
@@ -4902,11 +4941,11 @@ export const CreateCharacterDocument = gql`
     mutation CreateCharacter($attributes: CharacterAttributes!) {
   createCharacter(input: {attributes: $attributes}) {
     character {
-      ...character
+      id
     }
   }
 }
-    ${CharacterFragmentDoc}`;
+    `;
 export type CreateCharacterMutationFn = Apollo.MutationFunction<CreateCharacterMutation, CreateCharacterMutationVariables>;
 
 /**
@@ -5980,11 +6019,11 @@ export const UpdateCharacterDocument = gql`
     mutation UpdateCharacter($characterSlug: ID!, $attributes: CharacterAttributes!) {
   updateCharacter(input: {characterSlug: $characterSlug, attributes: $attributes}) {
     character {
-      ...character
+      id
     }
   }
 }
-    ${CharacterFragmentDoc}`;
+    `;
 export type UpdateCharacterMutationFn = Apollo.MutationFunction<UpdateCharacterMutation, UpdateCharacterMutationVariables>;
 
 /**
@@ -6752,41 +6791,6 @@ export function useArticlesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<A
 export type ArticlesQueryHookResult = ReturnType<typeof useArticlesQuery>;
 export type ArticlesLazyQueryHookResult = ReturnType<typeof useArticlesLazyQuery>;
 export type ArticlesQueryResult = Apollo.QueryResult<ArticlesQuery, ArticlesQueryVariables>;
-export const CharacterWithChildrenDocument = gql`
-    query CharacterWithChildren($characterSlug: ID!) {
-  character(characterSlug: $characterSlug) {
-    ...characterWithChildren
-  }
-}
-    ${CharacterWithChildrenFragmentDoc}`;
-
-/**
- * __useCharacterWithChildrenQuery__
- *
- * To run a query within a React component, call `useCharacterWithChildrenQuery` and pass it any options that fit your needs.
- * When your component renders, `useCharacterWithChildrenQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useCharacterWithChildrenQuery({
- *   variables: {
- *      characterSlug: // value for 'characterSlug'
- *   },
- * });
- */
-export function useCharacterWithChildrenQuery(baseOptions: Apollo.QueryHookOptions<CharacterWithChildrenQuery, CharacterWithChildrenQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<CharacterWithChildrenQuery, CharacterWithChildrenQueryVariables>(CharacterWithChildrenDocument, options);
-      }
-export function useCharacterWithChildrenLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CharacterWithChildrenQuery, CharacterWithChildrenQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<CharacterWithChildrenQuery, CharacterWithChildrenQueryVariables>(CharacterWithChildrenDocument, options);
-        }
-export type CharacterWithChildrenQueryHookResult = ReturnType<typeof useCharacterWithChildrenQuery>;
-export type CharacterWithChildrenLazyQueryHookResult = ReturnType<typeof useCharacterWithChildrenLazyQuery>;
-export type CharacterWithChildrenQueryResult = Apollo.QueryResult<CharacterWithChildrenQuery, CharacterWithChildrenQueryVariables>;
 export const CharacterMovesDocument = gql`
     query CharacterMoves($characterSlug: ID!) {
   character(characterSlug: $characterSlug) {
@@ -6934,75 +6938,6 @@ export function useCharacterSlugsLazyQuery(baseOptions?: Apollo.LazyQueryHookOpt
 export type CharacterSlugsQueryHookResult = ReturnType<typeof useCharacterSlugsQuery>;
 export type CharacterSlugsLazyQueryHookResult = ReturnType<typeof useCharacterSlugsLazyQuery>;
 export type CharacterSlugsQueryResult = Apollo.QueryResult<CharacterSlugsQuery, CharacterSlugsQueryVariables>;
-export const CharacterDocument = gql`
-    query Character($characterSlug: ID!) {
-  character(characterSlug: $characterSlug) {
-    ...character
-  }
-}
-    ${CharacterFragmentDoc}`;
-
-/**
- * __useCharacterQuery__
- *
- * To run a query within a React component, call `useCharacterQuery` and pass it any options that fit your needs.
- * When your component renders, `useCharacterQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useCharacterQuery({
- *   variables: {
- *      characterSlug: // value for 'characterSlug'
- *   },
- * });
- */
-export function useCharacterQuery(baseOptions: Apollo.QueryHookOptions<CharacterQuery, CharacterQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<CharacterQuery, CharacterQueryVariables>(CharacterDocument, options);
-      }
-export function useCharacterLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CharacterQuery, CharacterQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<CharacterQuery, CharacterQueryVariables>(CharacterDocument, options);
-        }
-export type CharacterQueryHookResult = ReturnType<typeof useCharacterQuery>;
-export type CharacterLazyQueryHookResult = ReturnType<typeof useCharacterLazyQuery>;
-export type CharacterQueryResult = Apollo.QueryResult<CharacterQuery, CharacterQueryVariables>;
-export const CharactersDocument = gql`
-    query Characters {
-  characters {
-    ...characterSummary
-  }
-}
-    ${CharacterSummaryFragmentDoc}`;
-
-/**
- * __useCharactersQuery__
- *
- * To run a query within a React component, call `useCharactersQuery` and pass it any options that fit your needs.
- * When your component renders, `useCharactersQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useCharactersQuery({
- *   variables: {
- *   },
- * });
- */
-export function useCharactersQuery(baseOptions?: Apollo.QueryHookOptions<CharactersQuery, CharactersQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<CharactersQuery, CharactersQueryVariables>(CharactersDocument, options);
-      }
-export function useCharactersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CharactersQuery, CharactersQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<CharactersQuery, CharactersQueryVariables>(CharactersDocument, options);
-        }
-export type CharactersQueryHookResult = ReturnType<typeof useCharactersQuery>;
-export type CharactersLazyQueryHookResult = ReturnType<typeof useCharactersLazyQuery>;
-export type CharactersQueryResult = Apollo.QueryResult<CharactersQuery, CharactersQueryVariables>;
 export const CombosDocument = gql`
     query Combos($comboCategoryId: ID!) {
   combos(comboCategoryId: $comboCategoryId) {
@@ -7073,76 +7008,6 @@ export function useComboCategoriesLazyQuery(baseOptions?: Apollo.LazyQueryHookOp
 export type ComboCategoriesQueryHookResult = ReturnType<typeof useComboCategoriesQuery>;
 export type ComboCategoriesLazyQueryHookResult = ReturnType<typeof useComboCategoriesLazyQuery>;
 export type ComboCategoriesQueryResult = Apollo.QueryResult<ComboCategoriesQuery, ComboCategoriesQueryVariables>;
-export const ComboCategoryDocument = gql`
-    query ComboCategory($comboCategoryId: ID!) {
-  comboCategory(comboCategoryId: $comboCategoryId) {
-    ...comboCategoryWithCharacter
-  }
-}
-    ${ComboCategoryWithCharacterFragmentDoc}`;
-
-/**
- * __useComboCategoryQuery__
- *
- * To run a query within a React component, call `useComboCategoryQuery` and pass it any options that fit your needs.
- * When your component renders, `useComboCategoryQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useComboCategoryQuery({
- *   variables: {
- *      comboCategoryId: // value for 'comboCategoryId'
- *   },
- * });
- */
-export function useComboCategoryQuery(baseOptions: Apollo.QueryHookOptions<ComboCategoryQuery, ComboCategoryQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<ComboCategoryQuery, ComboCategoryQueryVariables>(ComboCategoryDocument, options);
-      }
-export function useComboCategoryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ComboCategoryQuery, ComboCategoryQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<ComboCategoryQuery, ComboCategoryQueryVariables>(ComboCategoryDocument, options);
-        }
-export type ComboCategoryQueryHookResult = ReturnType<typeof useComboCategoryQuery>;
-export type ComboCategoryLazyQueryHookResult = ReturnType<typeof useComboCategoryLazyQuery>;
-export type ComboCategoryQueryResult = Apollo.QueryResult<ComboCategoryQuery, ComboCategoryQueryVariables>;
-export const ComboCategoryDetailDocument = gql`
-    query ComboCategoryDetail($comboCategoryId: ID!) {
-  comboCategory(comboCategoryId: $comboCategoryId) {
-    ...comboCategoryDetail
-  }
-}
-    ${ComboCategoryDetailFragmentDoc}`;
-
-/**
- * __useComboCategoryDetailQuery__
- *
- * To run a query within a React component, call `useComboCategoryDetailQuery` and pass it any options that fit your needs.
- * When your component renders, `useComboCategoryDetailQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useComboCategoryDetailQuery({
- *   variables: {
- *      comboCategoryId: // value for 'comboCategoryId'
- *   },
- * });
- */
-export function useComboCategoryDetailQuery(baseOptions: Apollo.QueryHookOptions<ComboCategoryDetailQuery, ComboCategoryDetailQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<ComboCategoryDetailQuery, ComboCategoryDetailQueryVariables>(ComboCategoryDetailDocument, options);
-      }
-export function useComboCategoryDetailLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ComboCategoryDetailQuery, ComboCategoryDetailQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<ComboCategoryDetailQuery, ComboCategoryDetailQueryVariables>(ComboCategoryDetailDocument, options);
-        }
-export type ComboCategoryDetailQueryHookResult = ReturnType<typeof useComboCategoryDetailQuery>;
-export type ComboCategoryDetailLazyQueryHookResult = ReturnType<typeof useComboCategoryDetailLazyQuery>;
-export type ComboCategoryDetailQueryResult = Apollo.QueryResult<ComboCategoryDetailQuery, ComboCategoryDetailQueryVariables>;
 export const ComboCategoryIdsDocument = gql`
     query ComboCategoryIds {
   comboCategories {
@@ -7356,76 +7221,6 @@ export function useMoveCategoriesLazyQuery(baseOptions?: Apollo.LazyQueryHookOpt
 export type MoveCategoriesQueryHookResult = ReturnType<typeof useMoveCategoriesQuery>;
 export type MoveCategoriesLazyQueryHookResult = ReturnType<typeof useMoveCategoriesLazyQuery>;
 export type MoveCategoriesQueryResult = Apollo.QueryResult<MoveCategoriesQuery, MoveCategoriesQueryVariables>;
-export const MoveCategoryDocument = gql`
-    query MoveCategory($moveCategoryId: ID!) {
-  moveCategory(moveCategoryId: $moveCategoryId) {
-    ...moveCategoryWithCharacter
-  }
-}
-    ${MoveCategoryWithCharacterFragmentDoc}`;
-
-/**
- * __useMoveCategoryQuery__
- *
- * To run a query within a React component, call `useMoveCategoryQuery` and pass it any options that fit your needs.
- * When your component renders, `useMoveCategoryQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useMoveCategoryQuery({
- *   variables: {
- *      moveCategoryId: // value for 'moveCategoryId'
- *   },
- * });
- */
-export function useMoveCategoryQuery(baseOptions: Apollo.QueryHookOptions<MoveCategoryQuery, MoveCategoryQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<MoveCategoryQuery, MoveCategoryQueryVariables>(MoveCategoryDocument, options);
-      }
-export function useMoveCategoryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MoveCategoryQuery, MoveCategoryQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<MoveCategoryQuery, MoveCategoryQueryVariables>(MoveCategoryDocument, options);
-        }
-export type MoveCategoryQueryHookResult = ReturnType<typeof useMoveCategoryQuery>;
-export type MoveCategoryLazyQueryHookResult = ReturnType<typeof useMoveCategoryLazyQuery>;
-export type MoveCategoryQueryResult = Apollo.QueryResult<MoveCategoryQuery, MoveCategoryQueryVariables>;
-export const MoveCategoryDetailDocument = gql`
-    query MoveCategoryDetail($moveCategoryId: ID!) {
-  moveCategory(moveCategoryId: $moveCategoryId) {
-    ...moveCategoryDetail
-  }
-}
-    ${MoveCategoryDetailFragmentDoc}`;
-
-/**
- * __useMoveCategoryDetailQuery__
- *
- * To run a query within a React component, call `useMoveCategoryDetailQuery` and pass it any options that fit your needs.
- * When your component renders, `useMoveCategoryDetailQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useMoveCategoryDetailQuery({
- *   variables: {
- *      moveCategoryId: // value for 'moveCategoryId'
- *   },
- * });
- */
-export function useMoveCategoryDetailQuery(baseOptions: Apollo.QueryHookOptions<MoveCategoryDetailQuery, MoveCategoryDetailQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<MoveCategoryDetailQuery, MoveCategoryDetailQueryVariables>(MoveCategoryDetailDocument, options);
-      }
-export function useMoveCategoryDetailLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MoveCategoryDetailQuery, MoveCategoryDetailQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<MoveCategoryDetailQuery, MoveCategoryDetailQueryVariables>(MoveCategoryDetailDocument, options);
-        }
-export type MoveCategoryDetailQueryHookResult = ReturnType<typeof useMoveCategoryDetailQuery>;
-export type MoveCategoryDetailLazyQueryHookResult = ReturnType<typeof useMoveCategoryDetailLazyQuery>;
-export type MoveCategoryDetailQueryResult = Apollo.QueryResult<MoveCategoryDetailQuery, MoveCategoryDetailQueryVariables>;
 export const MoveCategoryIdsDocument = gql`
     query MoveCategoryIds {
   moveCategories {
@@ -7937,6 +7732,137 @@ export function useTournamentVideoCommentsLazyQuery(baseOptions?: Apollo.LazyQue
 export type TournamentVideoCommentsQueryHookResult = ReturnType<typeof useTournamentVideoCommentsQuery>;
 export type TournamentVideoCommentsLazyQueryHookResult = ReturnType<typeof useTournamentVideoCommentsLazyQuery>;
 export type TournamentVideoCommentsQueryResult = Apollo.QueryResult<TournamentVideoCommentsQuery, TournamentVideoCommentsQueryVariables>;
+export const PageCharacterDocument = gql`
+    query PageCharacter($characterSlug: ID!) {
+  character(characterSlug: $characterSlug) {
+    slug
+    name
+    longName
+    faceImageUrl
+    country
+    fightingStyle
+    nameKana
+    longNameKana
+    mainImageUrl
+    story
+    description
+    dlc
+    moveCategories {
+      id
+      name
+    }
+    comboCategories {
+      id
+      name
+    }
+  }
+}
+    `;
+
+/**
+ * __usePageCharacterQuery__
+ *
+ * To run a query within a React component, call `usePageCharacterQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePageCharacterQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePageCharacterQuery({
+ *   variables: {
+ *      characterSlug: // value for 'characterSlug'
+ *   },
+ * });
+ */
+export function usePageCharacterQuery(baseOptions: Apollo.QueryHookOptions<PageCharacterQuery, PageCharacterQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PageCharacterQuery, PageCharacterQueryVariables>(PageCharacterDocument, options);
+      }
+export function usePageCharacterLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PageCharacterQuery, PageCharacterQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PageCharacterQuery, PageCharacterQueryVariables>(PageCharacterDocument, options);
+        }
+export type PageCharacterQueryHookResult = ReturnType<typeof usePageCharacterQuery>;
+export type PageCharacterLazyQueryHookResult = ReturnType<typeof usePageCharacterLazyQuery>;
+export type PageCharacterQueryResult = Apollo.QueryResult<PageCharacterQuery, PageCharacterQueryVariables>;
+export const PageCharactersDocument = gql`
+    query PageCharacters {
+  characters {
+    ...CharacterCard
+  }
+}
+    ${CharacterCardFragmentDoc}`;
+
+/**
+ * __usePageCharactersQuery__
+ *
+ * To run a query within a React component, call `usePageCharactersQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePageCharactersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePageCharactersQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function usePageCharactersQuery(baseOptions?: Apollo.QueryHookOptions<PageCharactersQuery, PageCharactersQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PageCharactersQuery, PageCharactersQueryVariables>(PageCharactersDocument, options);
+      }
+export function usePageCharactersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PageCharactersQuery, PageCharactersQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PageCharactersQuery, PageCharactersQueryVariables>(PageCharactersDocument, options);
+        }
+export type PageCharactersQueryHookResult = ReturnType<typeof usePageCharactersQuery>;
+export type PageCharactersLazyQueryHookResult = ReturnType<typeof usePageCharactersLazyQuery>;
+export type PageCharactersQueryResult = Apollo.QueryResult<PageCharactersQuery, PageCharactersQueryVariables>;
+export const PageComboCategoryDocument = gql`
+    query PageComboCategory($comboCategoryId: ID!) {
+  comboCategory(comboCategoryId: $comboCategoryId) {
+    id
+    name
+    character {
+      slug
+      longName
+    }
+    combos {
+      ...combo
+    }
+  }
+}
+    ${ComboFragmentDoc}`;
+
+/**
+ * __usePageComboCategoryQuery__
+ *
+ * To run a query within a React component, call `usePageComboCategoryQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePageComboCategoryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePageComboCategoryQuery({
+ *   variables: {
+ *      comboCategoryId: // value for 'comboCategoryId'
+ *   },
+ * });
+ */
+export function usePageComboCategoryQuery(baseOptions: Apollo.QueryHookOptions<PageComboCategoryQuery, PageComboCategoryQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PageComboCategoryQuery, PageComboCategoryQueryVariables>(PageComboCategoryDocument, options);
+      }
+export function usePageComboCategoryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PageComboCategoryQuery, PageComboCategoryQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PageComboCategoryQuery, PageComboCategoryQueryVariables>(PageComboCategoryDocument, options);
+        }
+export type PageComboCategoryQueryHookResult = ReturnType<typeof usePageComboCategoryQuery>;
+export type PageComboCategoryLazyQueryHookResult = ReturnType<typeof usePageComboCategoryLazyQuery>;
+export type PageComboCategoryQueryResult = Apollo.QueryResult<PageComboCategoryQuery, PageComboCategoryQueryVariables>;
 export const PageDashboardArticlesDocument = gql`
     query PageDashboardArticles($page: Int, $per: Int) {
   myArticles(page: $page, per: $per) {
@@ -8027,6 +7953,41 @@ export function usePageDashboardAttackActionEditLazyQuery(baseOptions?: Apollo.L
 export type PageDashboardAttackActionEditQueryHookResult = ReturnType<typeof usePageDashboardAttackActionEditQuery>;
 export type PageDashboardAttackActionEditLazyQueryHookResult = ReturnType<typeof usePageDashboardAttackActionEditLazyQuery>;
 export type PageDashboardAttackActionEditQueryResult = Apollo.QueryResult<PageDashboardAttackActionEditQuery, PageDashboardAttackActionEditQueryVariables>;
+export const PageDashboardCharactersDocument = gql`
+    query PageDashboardCharacters {
+  characters {
+    slug
+    longName
+  }
+}
+    `;
+
+/**
+ * __usePageDashboardCharactersQuery__
+ *
+ * To run a query within a React component, call `usePageDashboardCharactersQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePageDashboardCharactersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePageDashboardCharactersQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function usePageDashboardCharactersQuery(baseOptions?: Apollo.QueryHookOptions<PageDashboardCharactersQuery, PageDashboardCharactersQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PageDashboardCharactersQuery, PageDashboardCharactersQueryVariables>(PageDashboardCharactersDocument, options);
+      }
+export function usePageDashboardCharactersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PageDashboardCharactersQuery, PageDashboardCharactersQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PageDashboardCharactersQuery, PageDashboardCharactersQueryVariables>(PageDashboardCharactersDocument, options);
+        }
+export type PageDashboardCharactersQueryHookResult = ReturnType<typeof usePageDashboardCharactersQuery>;
+export type PageDashboardCharactersLazyQueryHookResult = ReturnType<typeof usePageDashboardCharactersLazyQuery>;
+export type PageDashboardCharactersQueryResult = Apollo.QueryResult<PageDashboardCharactersQuery, PageDashboardCharactersQueryVariables>;
 export const PageDashboardComboCategoriesDocument = gql`
     query PageDashboardComboCategories($characterSlug: ID!) {
   character(characterSlug: $characterSlug) {
@@ -8068,6 +8029,77 @@ export function usePageDashboardComboCategoriesLazyQuery(baseOptions?: Apollo.La
 export type PageDashboardComboCategoriesQueryHookResult = ReturnType<typeof usePageDashboardComboCategoriesQuery>;
 export type PageDashboardComboCategoriesLazyQueryHookResult = ReturnType<typeof usePageDashboardComboCategoriesLazyQuery>;
 export type PageDashboardComboCategoriesQueryResult = Apollo.QueryResult<PageDashboardComboCategoriesQuery, PageDashboardComboCategoriesQueryVariables>;
+export const PageDashboardComboCategoryNewDocument = gql`
+    query PageDashboardComboCategoryNew($characterSlug: ID!) {
+  character(characterSlug: $characterSlug) {
+    slug
+    name
+  }
+}
+    `;
+
+/**
+ * __usePageDashboardComboCategoryNewQuery__
+ *
+ * To run a query within a React component, call `usePageDashboardComboCategoryNewQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePageDashboardComboCategoryNewQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePageDashboardComboCategoryNewQuery({
+ *   variables: {
+ *      characterSlug: // value for 'characterSlug'
+ *   },
+ * });
+ */
+export function usePageDashboardComboCategoryNewQuery(baseOptions: Apollo.QueryHookOptions<PageDashboardComboCategoryNewQuery, PageDashboardComboCategoryNewQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PageDashboardComboCategoryNewQuery, PageDashboardComboCategoryNewQueryVariables>(PageDashboardComboCategoryNewDocument, options);
+      }
+export function usePageDashboardComboCategoryNewLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PageDashboardComboCategoryNewQuery, PageDashboardComboCategoryNewQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PageDashboardComboCategoryNewQuery, PageDashboardComboCategoryNewQueryVariables>(PageDashboardComboCategoryNewDocument, options);
+        }
+export type PageDashboardComboCategoryNewQueryHookResult = ReturnType<typeof usePageDashboardComboCategoryNewQuery>;
+export type PageDashboardComboCategoryNewLazyQueryHookResult = ReturnType<typeof usePageDashboardComboCategoryNewLazyQuery>;
+export type PageDashboardComboCategoryNewQueryResult = Apollo.QueryResult<PageDashboardComboCategoryNewQuery, PageDashboardComboCategoryNewQueryVariables>;
+export const PageDashboardCharacterEditDocument = gql`
+    query PageDashboardCharacterEdit($characterSlug: ID!) {
+  character(characterSlug: $characterSlug) {
+    ...CharacterForm
+  }
+}
+    ${CharacterFormFragmentDoc}`;
+
+/**
+ * __usePageDashboardCharacterEditQuery__
+ *
+ * To run a query within a React component, call `usePageDashboardCharacterEditQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePageDashboardCharacterEditQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePageDashboardCharacterEditQuery({
+ *   variables: {
+ *      characterSlug: // value for 'characterSlug'
+ *   },
+ * });
+ */
+export function usePageDashboardCharacterEditQuery(baseOptions: Apollo.QueryHookOptions<PageDashboardCharacterEditQuery, PageDashboardCharacterEditQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PageDashboardCharacterEditQuery, PageDashboardCharacterEditQueryVariables>(PageDashboardCharacterEditDocument, options);
+      }
+export function usePageDashboardCharacterEditLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PageDashboardCharacterEditQuery, PageDashboardCharacterEditQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PageDashboardCharacterEditQuery, PageDashboardCharacterEditQueryVariables>(PageDashboardCharacterEditDocument, options);
+        }
+export type PageDashboardCharacterEditQueryHookResult = ReturnType<typeof usePageDashboardCharacterEditQuery>;
+export type PageDashboardCharacterEditLazyQueryHookResult = ReturnType<typeof usePageDashboardCharacterEditLazyQuery>;
+export type PageDashboardCharacterEditQueryResult = Apollo.QueryResult<PageDashboardCharacterEditQuery, PageDashboardCharacterEditQueryVariables>;
 export const PageDashboardMoveCategoriesDocument = gql`
     query PageDashboardMoveCategories($characterSlug: ID!) {
   character(characterSlug: $characterSlug) {
@@ -8109,6 +8141,42 @@ export function usePageDashboardMoveCategoriesLazyQuery(baseOptions?: Apollo.Laz
 export type PageDashboardMoveCategoriesQueryHookResult = ReturnType<typeof usePageDashboardMoveCategoriesQuery>;
 export type PageDashboardMoveCategoriesLazyQueryHookResult = ReturnType<typeof usePageDashboardMoveCategoriesLazyQuery>;
 export type PageDashboardMoveCategoriesQueryResult = Apollo.QueryResult<PageDashboardMoveCategoriesQuery, PageDashboardMoveCategoriesQueryVariables>;
+export const PageDashboardMoveCategoryNewDocument = gql`
+    query PageDashboardMoveCategoryNew($characterSlug: ID!) {
+  character(characterSlug: $characterSlug) {
+    slug
+    name
+  }
+}
+    `;
+
+/**
+ * __usePageDashboardMoveCategoryNewQuery__
+ *
+ * To run a query within a React component, call `usePageDashboardMoveCategoryNewQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePageDashboardMoveCategoryNewQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePageDashboardMoveCategoryNewQuery({
+ *   variables: {
+ *      characterSlug: // value for 'characterSlug'
+ *   },
+ * });
+ */
+export function usePageDashboardMoveCategoryNewQuery(baseOptions: Apollo.QueryHookOptions<PageDashboardMoveCategoryNewQuery, PageDashboardMoveCategoryNewQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PageDashboardMoveCategoryNewQuery, PageDashboardMoveCategoryNewQueryVariables>(PageDashboardMoveCategoryNewDocument, options);
+      }
+export function usePageDashboardMoveCategoryNewLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PageDashboardMoveCategoryNewQuery, PageDashboardMoveCategoryNewQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PageDashboardMoveCategoryNewQuery, PageDashboardMoveCategoryNewQueryVariables>(PageDashboardMoveCategoryNewDocument, options);
+        }
+export type PageDashboardMoveCategoryNewQueryHookResult = ReturnType<typeof usePageDashboardMoveCategoryNewQuery>;
+export type PageDashboardMoveCategoryNewLazyQueryHookResult = ReturnType<typeof usePageDashboardMoveCategoryNewLazyQuery>;
+export type PageDashboardMoveCategoryNewQueryResult = Apollo.QueryResult<PageDashboardMoveCategoryNewQuery, PageDashboardMoveCategoryNewQueryVariables>;
 export const PageDashboardCombosDocument = gql`
     query PageDashboardCombos($comboCategoryId: ID!) {
   comboCategory(comboCategoryId: $comboCategoryId) {
@@ -8201,6 +8269,46 @@ export function usePageDashboardComboNewLazyQuery(baseOptions?: Apollo.LazyQuery
 export type PageDashboardComboNewQueryHookResult = ReturnType<typeof usePageDashboardComboNewQuery>;
 export type PageDashboardComboNewLazyQueryHookResult = ReturnType<typeof usePageDashboardComboNewLazyQuery>;
 export type PageDashboardComboNewQueryResult = Apollo.QueryResult<PageDashboardComboNewQuery, PageDashboardComboNewQueryVariables>;
+export const PageDashboardComboCategoryEditDocument = gql`
+    query PageDashboardComboCategoryEdit($comboCategoryId: ID!) {
+  comboCategory(comboCategoryId: $comboCategoryId) {
+    id
+    name
+    character {
+      slug
+      name
+    }
+  }
+}
+    `;
+
+/**
+ * __usePageDashboardComboCategoryEditQuery__
+ *
+ * To run a query within a React component, call `usePageDashboardComboCategoryEditQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePageDashboardComboCategoryEditQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePageDashboardComboCategoryEditQuery({
+ *   variables: {
+ *      comboCategoryId: // value for 'comboCategoryId'
+ *   },
+ * });
+ */
+export function usePageDashboardComboCategoryEditQuery(baseOptions: Apollo.QueryHookOptions<PageDashboardComboCategoryEditQuery, PageDashboardComboCategoryEditQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PageDashboardComboCategoryEditQuery, PageDashboardComboCategoryEditQueryVariables>(PageDashboardComboCategoryEditDocument, options);
+      }
+export function usePageDashboardComboCategoryEditLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PageDashboardComboCategoryEditQuery, PageDashboardComboCategoryEditQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PageDashboardComboCategoryEditQuery, PageDashboardComboCategoryEditQueryVariables>(PageDashboardComboCategoryEditDocument, options);
+        }
+export type PageDashboardComboCategoryEditQueryHookResult = ReturnType<typeof usePageDashboardComboCategoryEditQuery>;
+export type PageDashboardComboCategoryEditLazyQueryHookResult = ReturnType<typeof usePageDashboardComboCategoryEditLazyQuery>;
+export type PageDashboardComboCategoryEditQueryResult = Apollo.QueryResult<PageDashboardComboCategoryEditQuery, PageDashboardComboCategoryEditQueryVariables>;
 export const PageDashboardComboEditDocument = gql`
     query PageDashboardComboEdit($comboId: ID!) {
   combo(comboId: $comboId) {
@@ -8363,6 +8471,46 @@ export function usePageDashboardHighlightEditLazyQuery(baseOptions?: Apollo.Lazy
 export type PageDashboardHighlightEditQueryHookResult = ReturnType<typeof usePageDashboardHighlightEditQuery>;
 export type PageDashboardHighlightEditLazyQueryHookResult = ReturnType<typeof usePageDashboardHighlightEditLazyQuery>;
 export type PageDashboardHighlightEditQueryResult = Apollo.QueryResult<PageDashboardHighlightEditQuery, PageDashboardHighlightEditQueryVariables>;
+export const PageDashboardMoveCategoryEditDocument = gql`
+    query PageDashboardMoveCategoryEdit($moveCategoryId: ID!) {
+  moveCategory(moveCategoryId: $moveCategoryId) {
+    id
+    name
+    character {
+      slug
+      name
+    }
+  }
+}
+    `;
+
+/**
+ * __usePageDashboardMoveCategoryEditQuery__
+ *
+ * To run a query within a React component, call `usePageDashboardMoveCategoryEditQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePageDashboardMoveCategoryEditQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePageDashboardMoveCategoryEditQuery({
+ *   variables: {
+ *      moveCategoryId: // value for 'moveCategoryId'
+ *   },
+ * });
+ */
+export function usePageDashboardMoveCategoryEditQuery(baseOptions: Apollo.QueryHookOptions<PageDashboardMoveCategoryEditQuery, PageDashboardMoveCategoryEditQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PageDashboardMoveCategoryEditQuery, PageDashboardMoveCategoryEditQueryVariables>(PageDashboardMoveCategoryEditDocument, options);
+      }
+export function usePageDashboardMoveCategoryEditLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PageDashboardMoveCategoryEditQuery, PageDashboardMoveCategoryEditQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PageDashboardMoveCategoryEditQuery, PageDashboardMoveCategoryEditQueryVariables>(PageDashboardMoveCategoryEditDocument, options);
+        }
+export type PageDashboardMoveCategoryEditQueryHookResult = ReturnType<typeof usePageDashboardMoveCategoryEditQuery>;
+export type PageDashboardMoveCategoryEditLazyQueryHookResult = ReturnType<typeof usePageDashboardMoveCategoryEditLazyQuery>;
+export type PageDashboardMoveCategoryEditQueryResult = Apollo.QueryResult<PageDashboardMoveCategoryEditQuery, PageDashboardMoveCategoryEditQueryVariables>;
 export const PageDashboardMovesDocument = gql`
     query PageDashboardMoves($moveCategoryId: ID!) {
   moveCategory(moveCategoryId: $moveCategoryId) {
@@ -8949,6 +9097,49 @@ export function usePageDashboardTournamentsLazyQuery(baseOptions?: Apollo.LazyQu
 export type PageDashboardTournamentsQueryHookResult = ReturnType<typeof usePageDashboardTournamentsQuery>;
 export type PageDashboardTournamentsLazyQueryHookResult = ReturnType<typeof usePageDashboardTournamentsLazyQuery>;
 export type PageDashboardTournamentsQueryResult = Apollo.QueryResult<PageDashboardTournamentsQuery, PageDashboardTournamentsQueryVariables>;
+export const PageMoveCategoryDocument = gql`
+    query PageMoveCategory($moveCategoryId: ID!) {
+  moveCategory(moveCategoryId: $moveCategoryId) {
+    id
+    name
+    character {
+      slug
+      longName
+    }
+    moves {
+      ...move
+    }
+  }
+}
+    ${MoveFragmentDoc}`;
+
+/**
+ * __usePageMoveCategoryQuery__
+ *
+ * To run a query within a React component, call `usePageMoveCategoryQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePageMoveCategoryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePageMoveCategoryQuery({
+ *   variables: {
+ *      moveCategoryId: // value for 'moveCategoryId'
+ *   },
+ * });
+ */
+export function usePageMoveCategoryQuery(baseOptions: Apollo.QueryHookOptions<PageMoveCategoryQuery, PageMoveCategoryQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PageMoveCategoryQuery, PageMoveCategoryQueryVariables>(PageMoveCategoryDocument, options);
+      }
+export function usePageMoveCategoryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PageMoveCategoryQuery, PageMoveCategoryQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PageMoveCategoryQuery, PageMoveCategoryQueryVariables>(PageMoveCategoryDocument, options);
+        }
+export type PageMoveCategoryQueryHookResult = ReturnType<typeof usePageMoveCategoryQuery>;
+export type PageMoveCategoryLazyQueryHookResult = ReturnType<typeof usePageMoveCategoryLazyQuery>;
+export type PageMoveCategoryQueryResult = Apollo.QueryResult<PageMoveCategoryQuery, PageMoveCategoryQueryVariables>;
 export const PageMoveDocument = gql`
     query PageMove($moveId: ID!) {
   move(moveId: $moveId) {

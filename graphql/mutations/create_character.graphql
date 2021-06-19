@@ -1,7 +1,7 @@
 mutation CreateCharacter($attributes: CharacterAttributes!) {
   createCharacter(input: { attributes: $attributes }) {
     character {
-      ...character
+      id
     }
   }
 }

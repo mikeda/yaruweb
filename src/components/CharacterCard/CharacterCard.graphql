@@ -1,6 +1,5 @@
-fragment characterSummary on Character {
+fragment CharacterCard on Character {
   slug
-  name
   longName
   faceImageUrl
   country

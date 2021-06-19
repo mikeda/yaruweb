@@ -1,0 +1,15 @@
+query PageMoveCategory($moveCategoryId: ID!) {
+  moveCategory(moveCategoryId: $moveCategoryId) {
+    id
+    name
+
+    character {
+      slug
+      longName
+    }
+
+    moves {
+      ...move
+    }
+  }
+}

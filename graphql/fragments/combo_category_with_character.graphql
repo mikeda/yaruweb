@@ -1,7 +1,0 @@
-fragment comboCategoryWithCharacter on ComboCategory {
-  ...comboCategory
-
-  character {
-    ...character
-  }
-}
