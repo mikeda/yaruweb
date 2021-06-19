@@ -1,0 +1,11 @@
+query PageDashboardMoveCategoryEdit($moveCategoryId: ID!) {
+  moveCategory(moveCategoryId: $moveCategoryId) {
+    id
+    name
+
+    character {
+      slug
+      name
+    }
+  }
+}

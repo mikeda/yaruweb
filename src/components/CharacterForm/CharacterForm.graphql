@@ -1,0 +1,12 @@
+fragment CharacterForm on Character {
+  name
+  nameKana
+  longName
+  longNameKana
+  slug
+  country
+  fightingStyle
+  story
+  description
+  dlc
+}

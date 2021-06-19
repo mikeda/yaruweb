@@ -1,7 +1,7 @@
 mutation UpdateCharacter($characterSlug: ID!, $attributes: CharacterAttributes!) {
   updateCharacter(input: { characterSlug: $characterSlug, attributes: $attributes }) {
     character {
-      ...character
+      id
     }
   }
 }

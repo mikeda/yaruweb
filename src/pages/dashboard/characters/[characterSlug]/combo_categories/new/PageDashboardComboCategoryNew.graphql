@@ -1,0 +1,6 @@
+query PageDashboardComboCategoryNew($characterSlug: ID!) {
+  character(characterSlug: $characterSlug) {
+    slug
+    name
+  }
+}

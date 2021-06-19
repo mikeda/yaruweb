@@ -4,17 +4,13 @@ import Link from 'next/link';
 
 import { CharacterCard } from '@/components/CharacterCard';
 import { Routes } from '@/lib/Routes';
-import { CharactersDocument, CharactersQuery, CharacterSummaryFragment } from '@/lib/graphql/types';
+import { PageCharactersDocument, PageCharactersQuery } from '@/lib/graphql/types';
 import { Head } from '@/components/layouts/Head';
 import { Content } from '@/components/layouts/Content';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 
-interface Props {
-  characters: CharacterSummaryFragment[];
-}
-
-const Page: React.FC<Props> = ({ characters }) => {
+const Page: React.FC<PageCharactersQuery> = ({ characters }) => {
   return (
     <Content>
       <Head title="キャラクター一覧" description="鉄拳7のキャラクター一覧です。" />
@@ -40,9 +36,9 @@ const Page: React.FC<Props> = ({ characters }) => {
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const data: CharactersQuery = await fetchGraphql(CharactersDocument);
+  const data: PageCharactersQuery = await fetchGraphql(PageCharactersDocument);
 
-  return { props: { characters: data.characters } };
+  return { props: data };
 };
 
 export default Page;

@@ -1,0 +1,55 @@
+fragment MoveMedia on Move {
+  id
+  name
+  kana
+  opponentState
+  startUpFrame
+  powerCrush
+  crouchingStatus
+  jumpStatus
+  homing
+  screw
+  wallBound
+  note
+
+  moveCategory {
+    id
+    name
+  }
+
+  afterState {
+    id
+    name
+  }
+
+  moveVideo {
+    id
+    m3u8Url
+    thumbnailUrl
+  }
+
+  commands {
+    id
+
+    state {
+      id
+      name
+    }
+
+    operations {
+      id
+      name
+      key
+      icon
+    }
+  }
+
+  actions {
+    ...action
+  }
+
+  conditions {
+    id
+    name
+  }
+}

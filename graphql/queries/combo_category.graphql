@@ -1,5 +1,0 @@
-query ComboCategory($comboCategoryId: ID!) {
-  comboCategory(comboCategoryId: $comboCategoryId) {
-    ...comboCategoryWithCharacter
-  }
-}

@@ -1,11 +1,10 @@
 import React from 'react';
 
 import {
-  CharacterDocument,
-  CharacterFragment,
-  CharacterQuery,
   MoveCategoryAttributes,
+  PageDashboardMoveCategoryNewQuery,
   useCreateMoveCategoryMutation,
+  usePageDashboardMoveCategoryNewQuery,
 } from '@/lib/graphql/types';
 import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
@@ -15,14 +14,36 @@ import { toast } from 'react-toastify';
 import { MoveCategoryForm } from '@/components/MoveCategoryForm';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from '@/states/loading';
-import { GetServerSideProps } from 'next';
-import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 
-interface Props {
-  character: CharacterFragment;
-}
+const Page: React.FC = () => {
+  const router = useRouter();
+  const setLoading = useSetRecoilState(loadingState);
+  const { characterSlug } = router.query;
+  const { data, loading } = usePageDashboardMoveCategoryNewQuery({
+    variables: { characterSlug: characterSlug as string },
+    skip: !characterSlug,
+    fetchPolicy: 'network-only',
+    onError: e => {
+      toast.error(e.message);
+    },
+  });
 
-const Page: React.FC<Props> = ({ character }) => {
+  setLoading(loading);
+  if (!data) return null;
+  const { character } = data;
+
+  return (
+    <DashboardContent activeTab="character">
+      <Head title="技データカテゴリ作成" />
+
+      <PageHeader title="技データカテゴリ作成" />
+
+      <PageContent character={character} />
+    </DashboardContent>
+  );
+};
+
+const PageContent: React.FC<PageDashboardMoveCategoryNewQuery> = ({ character }) => {
   const router = useRouter();
   const setLoading = useSetRecoilState(loadingState);
   const [createMoveCategory, { loading }] = useCreateMoveCategoryMutation({
@@ -41,22 +62,7 @@ const Page: React.FC<Props> = ({ character }) => {
 
   setLoading(loading);
 
-  return (
-    <DashboardContent activeTab="character">
-      <Head title="技データカテゴリ作成" />
-
-      <PageHeader title="技データカテゴリ作成" />
-
-      <MoveCategoryForm onSubmit={onSubmit} />
-    </DashboardContent>
-  );
-};
-
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const characterSlug = params?.characterSlug as string;
-  const data: CharacterQuery = await fetchGraphql(CharacterDocument, { characterSlug });
-
-  return { props: { character: data.character } };
+  return <MoveCategoryForm onSubmit={onSubmit} />;
 };
 
 export default Page;

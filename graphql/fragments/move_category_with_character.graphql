@@ -1,7 +1,0 @@
-fragment moveCategoryWithCharacter on MoveCategory {
-  ...moveCategory
-
-  character {
-    ...character
-  }
-}

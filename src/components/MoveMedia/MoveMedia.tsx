@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { AttackActionFragment, MoveFragment, ThrowActionFragment } from '@/lib/graphql/types';
+import { AttackActionFragment, MoveMediaFragment, ThrowActionFragment } from '@/lib/graphql/types';
 import { Command } from '../Command';
 
 import styles from './MoveMedia.module.scss';
@@ -16,7 +16,7 @@ import { Routes } from '@/lib/Routes';
 import { VideoPlayer } from './VideoPlayer';
 
 type Props = {
-  move: MoveFragment;
+  move: MoveMediaFragment;
 };
 
 export const MoveMedia: React.FC<Props> = ({ move }) => {
@@ -51,7 +51,7 @@ export const MoveMedia: React.FC<Props> = ({ move }) => {
   );
 };
 
-const AttackLabels: React.FC<{ move: MoveFragment }> = ({ move }) => {
+const AttackLabels: React.FC<{ move: MoveMediaFragment }> = ({ move }) => {
   return (
     <div className={styles.tags}>
       {move.powerCrush && <span>パワークラッシュ</span>}
@@ -64,7 +64,7 @@ const AttackLabels: React.FC<{ move: MoveFragment }> = ({ move }) => {
   );
 };
 
-const AttackDetails: React.FC<{ move: MoveFragment }> = ({ move }) => {
+const AttackDetails: React.FC<{ move: MoveMediaFragment }> = ({ move }) => {
   const damages = move.actions.map(a => a.damage);
   const totalDamage = move.actions.map(a => a.damage).reduce((a, b) => a + b, 0);
   const lastAction = move.actions[move.actions.length - 1];

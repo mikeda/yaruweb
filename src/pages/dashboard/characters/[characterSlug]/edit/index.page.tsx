@@ -2,9 +2,8 @@ import React from 'react';
 
 import {
   CharacterAttributes,
-  CharacterDocument,
-  CharacterFragment,
-  CharacterQuery,
+  PageDashboardCharacterEditDocument,
+  PageDashboardCharacterEditQuery,
   useUpdateCharacterMutation,
 } from '@/lib/graphql/types';
 import { Head } from '@/components/layouts/Head';
@@ -18,11 +17,7 @@ import { CharacterForm } from '@/components/CharacterForm';
 import { loadingState } from '@/states/loading';
 import { useSetRecoilState } from 'recoil';
 
-interface Props {
-  character: CharacterFragment;
-}
-
-const Page: React.FC<Props> = ({ character }) => {
+const Page: React.FC<PageDashboardCharacterEditQuery> = ({ character }) => {
   const router = useRouter();
   const setLoading = useSetRecoilState(loadingState);
   const [updateCharacter, { loading }] = useUpdateCharacterMutation({
@@ -54,9 +49,11 @@ const Page: React.FC<Props> = ({ character }) => {
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const characterSlug = params?.characterSlug as string;
-  const data: CharacterQuery = await fetchGraphql(CharacterDocument, { characterSlug });
+  const data: PageDashboardCharacterEditQuery = await fetchGraphql(PageDashboardCharacterEditDocument, {
+    characterSlug,
+  });
 
-  return { props: { character: data.character } };
+  return { props: data };
 };
 
 export default Page;

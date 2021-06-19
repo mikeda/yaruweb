@@ -2,11 +2,10 @@ import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
 import {
-  ComboCategoryDetailDocument,
-  ComboCategoryDetailFragment,
-  ComboCategoryDetailQuery,
   ComboCategoryIdsDocument,
   ComboCategoryIdsQuery,
+  PageComboCategoryDocument,
+  PageComboCategoryQuery,
 } from '@/lib/graphql/types';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Head } from '@/components/layouts/Head';
@@ -16,11 +15,7 @@ import { Routes } from '@/lib/Routes';
 import { PageHeader } from '@/components/layouts/PageHeader';
 import { ComboList } from './ComboList';
 
-interface Props {
-  comboCategory: ComboCategoryDetailFragment;
-}
-
-const Page: React.FC<Props> = ({ comboCategory }) => {
+const Page: React.FC<PageComboCategoryQuery> = ({ comboCategory }) => {
   if (!comboCategory) return null;
   const title = comboCategory.name;
 
@@ -44,9 +39,9 @@ const Page: React.FC<Props> = ({ comboCategory }) => {
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const comboCategoryId = params?.comboCategoryId as string;
 
-  const data: ComboCategoryDetailQuery = await fetchGraphql(ComboCategoryDetailDocument, { comboCategoryId });
+  const data: PageComboCategoryQuery = await fetchGraphql(PageComboCategoryDocument, { comboCategoryId });
 
-  return { props: { comboCategory: data.comboCategory }, revalidate: 60 };
+  return { props: data, revalidate: 60 };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {

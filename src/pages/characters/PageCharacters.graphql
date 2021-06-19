@@ -1,0 +1,5 @@
+query PageCharacters {
+  characters {
+    ...CharacterCard
+  }
+}
