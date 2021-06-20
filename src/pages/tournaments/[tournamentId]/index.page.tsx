@@ -59,7 +59,7 @@ const Page: React.FC<PageTournamentQuery> = ({ tournament }) => {
   return (
     <Content>
       <Head title={tournament.name} />
-      <Breadcrumbs parents={[{ name: '大会' }]} current={tournament.name} />
+      <Breadcrumbs items={[{ name: '大会', url: Routes.tournament.index() }, { name: tournament.name }]} />
       <PageHeader title={tournament.name} />
 
       <PageContent tournament={tournament} />

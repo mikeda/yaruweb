@@ -14,7 +14,7 @@ const Page: React.FC<PageCharactersQuery> = ({ characters }) => {
   return (
     <Content>
       <Head title="キャラクター一覧" description="鉄拳7のキャラクター一覧です。" />
-      <Breadcrumbs current="キャラクター" />
+      <Breadcrumbs items={[{ name: 'キャラクター' }]} />
 
       <div className="ly_row">
         {characters.map(character => {

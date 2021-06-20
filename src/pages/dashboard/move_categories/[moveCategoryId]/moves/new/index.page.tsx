@@ -38,7 +38,7 @@ const Page: React.FC = () => {
     <DashboardContent activeTab="character">
       <Head title="技データ作成" />
       <Breadcrumbs
-        parents={[
+        items={[
           { name: 'キャラクター', url: Routes.dashboard.character.index() },
           {
             name: `技データ(${moveCategory.character.name})`,
@@ -48,8 +48,8 @@ const Page: React.FC = () => {
             name: moveCategory.name,
             url: Routes.dashboard.move.index(moveCategory.id),
           },
+          { name: title },
         ]}
-        current={title}
       />
       <PageHeader title="技データ作成" />
 

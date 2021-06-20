@@ -22,11 +22,11 @@ const Page: React.FC<PageMoveCategoryQuery> = ({ moveCategory }) => {
     <Content>
       <Head title={title} />
       <Breadcrumbs
-        parents={[
+        items={[
           { name: 'キャラクター', url: Routes.character.index() },
           { name: moveCategory.character.longName, url: Routes.character.detail(moveCategory.character.slug) },
+          { name: title },
         ]}
-        current={title}
       />
       <PageHeader title={title} />
 

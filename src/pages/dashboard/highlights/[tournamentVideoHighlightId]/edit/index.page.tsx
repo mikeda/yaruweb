@@ -38,7 +38,7 @@ const Page: React.FC = () => {
     <DashboardContent activeTab="video">
       <Head title={tournamentVideoHighlight.title} />
       <Breadcrumbs
-        parents={[
+        items={[
           { name: tournamentVideoHighlight.tournamentVideo.title },
           { name: '大会', url: Routes.dashboard.tournament.index() },
           { name: tournamentVideoHighlight.tournamentVideo.tournament.name },
@@ -47,8 +47,8 @@ const Page: React.FC = () => {
             url: Routes.dashboard.tournament.video.index(tournamentVideoHighlight.tournamentVideo.tournament.id),
           },
           { name: tournamentVideoHighlight.tournamentVideo.title },
+          { name: tournamentVideoHighlight.title },
         ]}
-        current={tournamentVideoHighlight.title}
       />
       <PageHeader title={tournamentVideoHighlight.title} />
 

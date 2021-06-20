@@ -58,7 +58,7 @@ const Page: React.FC = () => {
   return (
     <Content>
       <Head title="鉄拳7の大会情報まとめ" />
-      <Breadcrumbs current="大会情報" />
+      <Breadcrumbs items={[{ name: '大会情報' }]} />
 
       <PageContent />
     </Content>

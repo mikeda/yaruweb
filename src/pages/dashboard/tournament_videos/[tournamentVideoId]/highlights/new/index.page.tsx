@@ -38,13 +38,13 @@ const Page: React.FC = () => {
     <DashboardContent activeTab="character">
       <Head title={title} />
       <Breadcrumbs
-        parents={[
+        items={[
           { name: '大会', url: Routes.dashboard.tournament.index() },
           { name: tournamentVideo.tournament.name },
           { name: '動画', url: Routes.dashboard.tournament.video.index(tournamentVideo.tournament.id) },
           { name: 'ハイライト', url: Routes.dashboard.tournamentVideo.highlight.index(tournamentVideo.id) },
+          { name: title },
         ]}
-        current={title}
       />
       <PageHeader title={title} />
 

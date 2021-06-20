@@ -97,11 +97,11 @@ export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
       move: data.move,
       characterName: character.name,
       breadcrumbs: {
-        parents: [
+        items: [
           { name: character.name, url: Routes.character.detail(character.slug) },
           { name: moveCategory.name, url: Routes.moveCategory.detail(moveCategory.id) },
+          { name: data.move.name },
         ],
-        current: data.move.name,
       },
     },
     revalidate: 60,

@@ -33,14 +33,14 @@ const Page: React.FC = () => {
     <DashboardContent activeTab="character">
       <Head title={title} />
       <Breadcrumbs
-        parents={[
+        items={[
           { name: 'キャラクター', url: Routes.dashboard.character.index() },
           {
             name: `コンボ(${comboCategory.character.name})`,
             url: Routes.dashboard.comboCategory.index(comboCategory.character.slug),
           },
+          { name: title },
         ]}
-        current={title}
       />
       <PageHeader title={title} addPageUrl={Routes.dashboard.combo.new(comboCategory.id)} />
 

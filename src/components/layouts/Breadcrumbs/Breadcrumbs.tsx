@@ -3,28 +3,25 @@ import Link from 'next/link';
 
 import styles from './Breadcrumbs.module.scss';
 
-interface ParentProps {
+interface ItemProps {
   name: string;
   url?: string;
 }
-
 export interface BreadcrumbsProps {
-  parents?: ParentProps[];
-  current: string;
+  items: ItemProps[];
   dashboard?: boolean;
 }
 
-export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ parents, current, dashboard = false }) => {
+export const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ items, dashboard = false }) => {
   return (
     <ul className={styles.breadcrumbs}>
-      {!dashboard && <Parent name="TOP" url="/" />}
-      {parents && parents.map(({ name, url }, i) => <Parent key={i} name={name} url={url} />)}
-      <li className={styles.item}>{current}</li>
+      {!dashboard && <Item name="TOP" url="/" />}
+      {items && items.map(({ name, url }, i) => <Item key={i} name={name} url={url} />)}
     </ul>
   );
 };
 
-const Parent: React.FC<ParentProps> = ({ name, url }) => (
+const Item: React.FC<ItemProps> = ({ name, url }) => (
   <li className={styles.item}>
     {url ? (
       <Link href={url}>

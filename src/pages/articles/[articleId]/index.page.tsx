@@ -30,14 +30,14 @@ const Page: React.FC<Props> = ({ article }) => {
     <Content>
       <Head title={article.title} description={article.description} image={article.mainImageUrl} />
       <Breadcrumbs
-        parents={[
+        items={[
           { name: '記事', url: Routes.article.index() },
           {
             name: ArticleCategoryText[article.category],
             url: Routes.article.index({ category: article.category }),
           },
+          { name: article.title },
         ]}
-        current={article.title}
       />
 
       <ArticleDetail article={article} />

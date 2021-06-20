@@ -23,11 +23,11 @@ const Page: React.FC<PageComboCategoryQuery> = ({ comboCategory }) => {
     <Content>
       <Head title={title} />
       <Breadcrumbs
-        parents={[
+        items={[
           { name: 'キャラクター', url: Routes.character.index() },
           { name: comboCategory.character.longName, url: Routes.character.detail(comboCategory.character.slug) },
+          { name: title },
         ]}
-        current={title}
       />
       <PageHeader title={title} />
 

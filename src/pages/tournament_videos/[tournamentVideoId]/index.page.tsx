@@ -72,11 +72,11 @@ const Page: React.FC<PageTournamentVideoQuery> = data => {
     <Content>
       <Head title={video.title} />
       <Breadcrumbs
-        parents={[
+        items={[
           { name: '大会', url: Routes.tournament.index() },
           { name: '動画', url: Routes.tournament.detail(video.tournament.id) },
+          { name: video.title },
         ]}
-        current={video.title}
       />
 
       <PageContent {...data} />
