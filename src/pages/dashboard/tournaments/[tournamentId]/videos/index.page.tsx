@@ -7,7 +7,6 @@ import {
   TournamentVideo,
 } from '@/lib/graphql/types';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { Routes } from '@/lib/Routes';
 import { PageHeader } from '@/components/layouts/PageHeader';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 import { Head } from '@/components/layouts/Head';
@@ -19,6 +18,7 @@ import { ObjectCardList } from '@/components/ObjectCardList';
 import { Input } from '@/components/form/Input';
 import { Button } from '@/components/Button';
 import { useForm } from 'react-hook-form';
+import { dashboardPath } from '@/lib';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -86,10 +86,10 @@ const PageContent: React.FC<PageContentProps> = ({ videos, refetch }) => {
         id: video.id,
         title: video.title,
         links: [
-          { text: '編集する', url: Routes.dashboard.tournamentVideo.edit(video.id) },
+          { text: '編集する', url: dashboardPath({ to: 'tournamentVideosEdit', tournamentVideoId: video.id }) },
           {
             text: `ハイライト(${video.highlightsCount})`,
-            url: Routes.dashboard.tournamentVideo.highlight.index(video.id),
+            url: dashboardPath({ to: 'tournamentVideoHighlights', tournamentVideoId: video.id }),
           },
           {
             text: '削除する',
@@ -114,7 +114,7 @@ const VideoForm: React.FC<{ tournamentId: string }> = ({ tournamentId }) => {
       if (!video) return;
 
       toast.success('動画を登録しました。');
-      router.push(Routes.dashboard.tournamentVideo.edit(video.id));
+      router.push(dashboardPath({ to: 'tournamentVideosEdit', tournamentVideoId: video.id }));
     },
     onError: e => {
       toast.error(e.message);

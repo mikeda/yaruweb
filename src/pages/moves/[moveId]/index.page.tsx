@@ -16,7 +16,6 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { CommentForm } from '@/components/CommentForm';
 import { Breadcrumbs, BreadcrumbsProps } from '@/components/layouts/Breadcrumbs';
-import { Routes } from '@/lib/Routes';
 import { PageHeader } from '@/components/layouts/PageHeader';
 
 const PageContent: React.FC<{ move: MoveFragment }> = ({ move }) => {
@@ -97,11 +96,7 @@ export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
       move: data.move,
       characterName: character.name,
       breadcrumbs: {
-        items: [
-          { name: character.name, url: Routes.character.detail(character.slug) },
-          { name: moveCategory.name, url: Routes.moveCategory.detail(moveCategory.id) },
-          { name: data.move.name },
-        ],
+        items: [{ name: data.move.name }],
       },
     },
     revalidate: 60,

@@ -6,11 +6,11 @@ import dayjs from '@/lib/dayjs';
 import { Head } from '@/components/layouts/Head';
 import { Content } from '@/components/layouts/Content';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
-import { Routes } from '@/lib/Routes';
 import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from '@/states/loading';
 import { Paging } from '@/components/Paging';
+import { path } from '@/lib';
 
 const PageContent: React.FC = () => {
   const router = useRouter();
@@ -22,7 +22,7 @@ const PageContent: React.FC = () => {
     skip: !router.isReady,
   });
 
-  const url = (page: number) => Routes.tournament.index({ page });
+  const url = (page: number) => path({ to: 'tournaments', params: { page } });
 
   setLoading(loading);
 
@@ -36,7 +36,7 @@ const PageContent: React.FC = () => {
 
               return (
                 <Media
-                  href={Routes.tournament.detail(tournament.id)}
+                  href={path({ to: 'tournament', tournamentId: tournament.id })}
                   key={tournament.id}
                   imageUrl={tournament.mainImageUrl}
                   title={tournament.name}

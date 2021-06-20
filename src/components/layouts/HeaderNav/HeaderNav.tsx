@@ -2,15 +2,14 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 
-import { Routes } from '@/lib/Routes';
-
 import styles from './HeaderNav.module.scss';
+import { path } from '@/lib';
 
 const links = [
-  { name: 'TOP', path: Routes.top() },
-  { name: 'キャラクター', path: Routes.character.index() },
-  { name: '記事', path: Routes.article.index() },
-  { name: '大会', path: Routes.tournament.index() },
+  { name: 'TOP', path: path({ to: 'top' }) },
+  { name: 'キャラクター', path: path({ to: 'characters' }) },
+  { name: '記事', path: path({ to: 'articles' }) },
+  { name: '大会', path: path({ to: 'tournaments' }) },
 ];
 
 const isActive = (linkPath: string, currentPath: string): boolean => {

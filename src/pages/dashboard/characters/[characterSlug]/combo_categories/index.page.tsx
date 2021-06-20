@@ -7,7 +7,6 @@ import {
 } from '@/lib/graphql/types';
 import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { Routes } from '@/lib/Routes';
 import { PageHeader } from '@/components/layouts/PageHeader';
 import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
@@ -15,6 +14,7 @@ import { loadingState } from '@/states/loading';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 import { toast } from 'react-toastify';
 import { SortableObjectCardList } from '@/components/ObjectCardList';
+import { dashboardPath } from '@/lib';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -35,8 +35,11 @@ const Page: React.FC = () => {
   return (
     <DashboardContent activeTab="character">
       <Head title={title} />
-      <Breadcrumbs items={[{ name: 'キャラクター', url: Routes.dashboard.character.index() }, { name: title }]} />
-      <PageHeader title={title} addPageUrl={Routes.dashboard.comboCategory.new(data.character.slug)} />
+      <Breadcrumbs items={[{ name: title }]} />
+      <PageHeader
+        title={title}
+        addPageUrl={dashboardPath({ to: 'comboCategoriesNew', characterSlug: data.character.slug })}
+      />
 
       <PageContent comboCategories={data.character.comboCategories} />
     </DashboardContent>
@@ -61,8 +64,11 @@ const PageContent: React.FC<{ comboCategories: ComboCategoryFragment[] }> = ({ c
         id: comboCategory.id,
         title: comboCategory.name,
         links: [
-          { text: '編集する', url: Routes.dashboard.comboCategory.edit(comboCategory.id) },
-          { text: `コンボ(${comboCategory.combosCount})`, url: Routes.dashboard.combo.index(comboCategory.id) },
+          { text: '編集する', url: dashboardPath({ to: 'comboCategoryEdit', comboCategoryId: comboCategory.id }) },
+          {
+            text: `コンボ(${comboCategory.combosCount})`,
+            url: dashboardPath({ to: 'combos', comboCategoryId: comboCategory.id }),
+          },
         ],
       }))}
       onMove={(comboCategoryId, newPosition) =>

@@ -8,7 +8,6 @@ import {
 } from '@/lib/graphql/types';
 import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { Routes } from '@/lib/Routes';
 import { PageHeader } from '@/components/layouts/PageHeader';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
@@ -37,9 +36,7 @@ const Page: React.FC = () => {
   return (
     <DashboardContent activeTab="character">
       <Head title={tournamentVideo.title} />
-      <Breadcrumbs
-        items={[{ name: '大会', url: Routes.dashboard.tournament.index() }, { name: tournamentVideo.title }]}
-      />
+      <Breadcrumbs items={[{ name: tournamentVideo.title }]} />
       <PageHeader title={tournamentVideo.title} />
 
       <VideoContent video={tournamentVideo} />

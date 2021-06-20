@@ -6,7 +6,6 @@ import * as yup from 'yup';
 
 import { PlayerValidator } from '@/lib/validators/PlayerValidator';
 import { useCreatePlayerMutation } from '@/lib/graphql/types';
-import { Routes } from '@/lib/Routes';
 import { createFirebaseUserWithEmail } from '@/lib/firebase';
 import { currentPlayerState } from '@/states/currentPlayer';
 import { useSetRecoilState } from 'recoil';
@@ -15,6 +14,7 @@ import { Input } from '@/components/form/Input';
 import { Button } from '@/components/Button';
 import { FormGroup } from '@/components/form/FormGroup';
 import { loadingState } from '@/states/loading';
+import { path } from '@/lib';
 
 interface SignUpInput {
   email: string;
@@ -45,7 +45,7 @@ export const SignUpWithEmailForm: React.FC = () => {
       setCurrentPlayer(currentPlayer);
       toast.success('ユーザー登録が完了しました。');
 
-      router.push(Routes.top());
+      router.push(path({ to: 'top' }));
     },
     onError: error => {
       toast.error(error.message);

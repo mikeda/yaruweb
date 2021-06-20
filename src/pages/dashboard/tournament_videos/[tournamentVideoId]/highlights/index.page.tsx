@@ -6,7 +6,6 @@ import {
   usePageDashboardHighlightsQuery,
 } from '@/lib/graphql/types';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { Routes } from '@/lib/Routes';
 import { PageHeader } from '@/components/layouts/PageHeader';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 import { Head } from '@/components/layouts/Head';
@@ -16,6 +15,7 @@ import { useSetRecoilState } from 'recoil';
 import { toast } from 'react-toastify';
 import { ObjectCardList } from '@/components/ObjectCardList';
 import { formatSec } from '@/lib/formatSec';
+import { dashboardPath } from '@/lib';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -39,15 +39,11 @@ const Page: React.FC = () => {
   return (
     <DashboardContent activeTab="video">
       <Head title={title} />
-      <Breadcrumbs
-        items={[
-          { name: '大会', url: Routes.dashboard.tournament.index() },
-          { name: tournamentVideo.tournament.name },
-          { name: '動画', url: Routes.dashboard.tournament.video.index(tournamentVideo.tournament.id) },
-          { name: title },
-        ]}
+      <Breadcrumbs items={[{ name: title }]} />
+      <PageHeader
+        title={title}
+        addPageUrl={dashboardPath({ to: 'tournamentVideoHighlightNew', tournamentVideoId: tournamentVideo.id })}
       />
-      <PageHeader title={title} addPageUrl={Routes.dashboard.tournamentVideo.highlight.new(tournamentVideo.id)} />
 
       <PageContent highlights={tournamentVideo.highlights} refetch={refetch} />
     </DashboardContent>
@@ -81,7 +77,10 @@ const PageContent: React.FC<PageContentProps> = ({ highlights, refetch }) => {
         id: highlight.id,
         title: `[${formatSec(highlight.startSec)}] ${highlight.title}`,
         links: [
-          { text: '編集する', url: Routes.dashboard.highlight.edit(highlight.id) },
+          {
+            text: '編集する',
+            url: dashboardPath({ to: 'tournamentVideoHighlightEdit', tournamentVideoHighlightId: highlight.id }),
+          },
           {
             text: '削除する',
             onClick: () => {

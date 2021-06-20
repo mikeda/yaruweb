@@ -4,19 +4,19 @@ import { StageFragment, useStagesQuery, useUpdateStagePositionMutation } from '@
 import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
 import { NotFound } from '@/components/NotFound';
-import { Routes } from '@/lib/Routes';
 import { PageHeader } from '@/components/layouts/PageHeader';
 
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from '@/states/loading';
 import { SortableObjectCardList } from '@/components/ObjectCardList';
+import { dashboardPath } from '@/lib';
 
 const Page: React.FC = () => (
   <DashboardContent activeTab="stage">
     <Head title="ステージ" />
 
-    <PageHeader title="ステージ" addPageUrl={Routes.dashboard.stage.new()} />
+    <PageHeader title="ステージ" addPageUrl={dashboardPath({ to: 'stagesNew' })} />
 
     <PageContent />
   </DashboardContent>
@@ -37,7 +37,7 @@ const SortableList: React.FC<{ stages: StageFragment[] }> = ({ stages }) => {
       items={stages.map(stage => ({
         id: stage.id,
         title: stage.name,
-        links: [{ text: '編集する', url: Routes.dashboard.stage.edit(stage.id) }],
+        links: [{ text: '編集する', url: dashboardPath({ to: 'stageEdit', stageId: stage.id }) }],
       }))}
       onMove={(stageId, newPosition) => updateStagePosition({ variables: { stageId, newPosition } })}
     />

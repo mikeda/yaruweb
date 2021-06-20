@@ -4,13 +4,13 @@ import { Move, usePageDashboardMovesQuery, useUpdateMovePositionMutation } from 
 import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
 import { PageHeader } from '@/components/layouts/PageHeader';
-import { Routes } from '@/lib/Routes';
 import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from '@/states/loading';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 import { toast } from 'react-toastify';
 import { SortableObjectCardList } from '@/components/ObjectCardList';
+import { dashboardPath } from '@/lib';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -32,17 +32,8 @@ const Page: React.FC = () => {
   return (
     <DashboardContent activeTab="character">
       <Head title={title} />
-      <Breadcrumbs
-        items={[
-          { name: 'キャラクター', url: Routes.dashboard.character.index() },
-          {
-            name: `技データ(${moveCategory.character.name})`,
-            url: Routes.dashboard.moveCategory.index(moveCategory.character.slug),
-          },
-          { name: title },
-        ]}
-      />
-      <PageHeader title={title} addPageUrl={Routes.dashboard.move.new(moveCategory.id)} />
+      <Breadcrumbs items={[{ name: title }]} />
+      <PageHeader title={title} addPageUrl={dashboardPath({ to: 'movesNew', moveCategoryId: moveCategory.id })} />
 
       <PageContent moves={data.moveCategory.moves} />
     </DashboardContent>
@@ -67,9 +58,9 @@ const PageContent: React.FC<{ moves: MoveFragment[] }> = ({ moves }) => {
         id: move.id,
         title: move.name,
         links: [
-          { text: '編集する', url: Routes.dashboard.move.edit(move.id) },
-          { text: `コマンド(${move.commandsCount})`, url: Routes.dashboard.move.commands.index(move.id) },
-          { text: `判定(${move.actionsCount})`, url: Routes.dashboard.move.actions.index(move.id) },
+          { text: '編集する', url: dashboardPath({ to: 'moveEdit', moveId: move.id }) },
+          { text: `コマンド(${move.commandsCount})`, url: dashboardPath({ to: 'commands', moveId: move.id }) },
+          { text: `判定(${move.actionsCount})`, url: dashboardPath({ to: 'actions', moveId: move.id }) },
         ],
       }))}
       onMove={(moveId, newPosition) => updateMovePosition({ variables: { moveId, newPosition } })}

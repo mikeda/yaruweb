@@ -12,7 +12,6 @@ import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Head } from '@/components/layouts/Head';
 import { Content } from '@/components/layouts/Content';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
-import { Routes } from '@/lib/Routes';
 import { PageHeader } from '@/components/layouts/PageHeader';
 
 const Page: React.FC<PageMoveCategoryQuery> = ({ moveCategory }) => {
@@ -21,13 +20,7 @@ const Page: React.FC<PageMoveCategoryQuery> = ({ moveCategory }) => {
   return (
     <Content>
       <Head title={title} />
-      <Breadcrumbs
-        items={[
-          { name: 'キャラクター', url: Routes.character.index() },
-          { name: moveCategory.character.longName, url: Routes.character.detail(moveCategory.character.slug) },
-          { name: title },
-        ]}
-      />
+      <Breadcrumbs items={[{ name: title }]} />
       <PageHeader title={title} />
 
       <MoveList moves={moveCategory.moves} />

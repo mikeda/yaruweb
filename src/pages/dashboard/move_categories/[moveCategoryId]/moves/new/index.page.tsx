@@ -8,7 +8,6 @@ import {
 } from '@/lib/graphql/types';
 import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { Routes } from '@/lib/Routes';
 import { PageHeader } from '@/components/layouts/PageHeader';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
@@ -37,20 +36,7 @@ const Page: React.FC = () => {
   return (
     <DashboardContent activeTab="character">
       <Head title="技データ作成" />
-      <Breadcrumbs
-        items={[
-          { name: 'キャラクター', url: Routes.dashboard.character.index() },
-          {
-            name: `技データ(${moveCategory.character.name})`,
-            url: Routes.dashboard.moveCategory.index(moveCategory.character.slug),
-          },
-          {
-            name: moveCategory.name,
-            url: Routes.dashboard.move.index(moveCategory.id),
-          },
-          { name: title },
-        ]}
-      />
+      <Breadcrumbs items={[{ name: title }]} />
       <PageHeader title="技データ作成" />
 
       <PageContent {...data} />

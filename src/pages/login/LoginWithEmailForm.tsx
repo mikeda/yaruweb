@@ -5,7 +5,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
 import { useCurrentPlayerLazyQuery } from '@/lib/graphql/types';
-import { Routes } from '@/lib/Routes';
 import { signInFirebaseWithEmail } from '@/lib/firebase';
 import { currentPlayerState } from '@/states/currentPlayer';
 import { useSetRecoilState } from 'recoil';
@@ -15,6 +14,7 @@ import { FormGroup } from '@/components/form/FormGroup';
 import { Input } from '@/components/form/Input';
 import { Button } from '@/components/Button';
 import { loadingState } from '@/states/loading';
+import { path } from '@/lib';
 
 interface SignUpInput {
   email: string;
@@ -44,7 +44,7 @@ export const LoginWithEmailForm: React.FC = () => {
 
       setCurrentPlayer(data.currentPlayer);
       toast.success('ログインしました。');
-      router.push(Routes.top());
+      router.push(path({ to: 'top' }));
     },
     onError: e => {
       toast.error(e.message);

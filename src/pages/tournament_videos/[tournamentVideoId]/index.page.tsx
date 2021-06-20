@@ -15,7 +15,6 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { CommentForm } from '@/components/CommentForm';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
-import { Routes } from '@/lib/Routes';
 
 const PageContent: React.FC<PageTournamentVideoQuery> = ({ tournamentVideo }) => {
   const { data: commentsData, refetch: refetchComments } = useTournamentVideoCommentsQuery({
@@ -71,13 +70,7 @@ const Page: React.FC<PageTournamentVideoQuery> = data => {
   return (
     <Content>
       <Head title={video.title} />
-      <Breadcrumbs
-        items={[
-          { name: '大会', url: Routes.tournament.index() },
-          { name: '動画', url: Routes.tournament.detail(video.tournament.id) },
-          { name: video.title },
-        ]}
-      />
+      <Breadcrumbs items={[{ name: video.title }]} />
 
       <PageContent {...data} />
     </Content>

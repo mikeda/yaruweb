@@ -8,7 +8,6 @@ import {
 } from '@/lib/graphql/types';
 import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { Routes } from '@/lib/Routes';
 import { PageHeader } from '@/components/layouts/PageHeader';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
@@ -37,19 +36,7 @@ const Page: React.FC = () => {
   return (
     <DashboardContent activeTab="video">
       <Head title={tournamentVideoHighlight.title} />
-      <Breadcrumbs
-        items={[
-          { name: tournamentVideoHighlight.tournamentVideo.title },
-          { name: '大会', url: Routes.dashboard.tournament.index() },
-          { name: tournamentVideoHighlight.tournamentVideo.tournament.name },
-          {
-            name: '動画',
-            url: Routes.dashboard.tournament.video.index(tournamentVideoHighlight.tournamentVideo.tournament.id),
-          },
-          { name: tournamentVideoHighlight.tournamentVideo.title },
-          { name: tournamentVideoHighlight.title },
-        ]}
-      />
+      <Breadcrumbs items={[{ name: tournamentVideoHighlight.title }]} />
       <PageHeader title={tournamentVideoHighlight.title} />
 
       <HighlightContent {...data} />

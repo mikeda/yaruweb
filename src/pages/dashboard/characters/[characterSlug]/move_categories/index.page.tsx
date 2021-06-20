@@ -7,7 +7,6 @@ import {
 } from '@/lib/graphql/types';
 import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { Routes } from '@/lib/Routes';
 import { PageHeader } from '@/components/layouts/PageHeader';
 import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
@@ -15,6 +14,7 @@ import { loadingState } from '@/states/loading';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 import { toast } from 'react-toastify';
 import { SortableObjectCardList } from '@/components/ObjectCardList';
+import { dashboardPath } from '@/lib';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -35,8 +35,11 @@ const Page: React.FC = () => {
   return (
     <DashboardContent activeTab="character">
       <Head title={title} />
-      <Breadcrumbs items={[{ name: 'キャラクター', url: Routes.dashboard.character.index() }, { name: title }]} />
-      <PageHeader title={title} addPageUrl={Routes.dashboard.moveCategory.new(data.character.slug)} />
+      <Breadcrumbs items={[{ name: title }]} />
+      <PageHeader
+        title={title}
+        addPageUrl={dashboardPath({ to: 'moveCategoriesNew', characterSlug: data.character.slug })}
+      />
 
       <PageContent moveCategories={data.character.moveCategories} />
     </DashboardContent>
@@ -61,8 +64,11 @@ const PageContent: React.FC<{ moveCategories: MoveCategoryFragment[] }> = ({ mov
         id: moveCategory.id,
         title: moveCategory.name,
         links: [
-          { text: '編集する', url: Routes.dashboard.moveCategory.edit(moveCategory.id) },
-          { text: `技データ(${moveCategory.movesCount})`, url: Routes.dashboard.move.index(moveCategory.id) },
+          { text: '編集する', url: dashboardPath({ to: 'moveCategoryEdit', moveCategoryId: moveCategory.id }) },
+          {
+            text: `技データ(${moveCategory.movesCount})`,
+            url: dashboardPath({ to: 'moves', moveCategoryId: moveCategory.id }),
+          },
         ],
       }))}
       onMove={(moveCategoryId, newPosition) =>

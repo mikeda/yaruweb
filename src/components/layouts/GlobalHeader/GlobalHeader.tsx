@@ -3,10 +3,10 @@ import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFistRaised } from '@fortawesome/free-solid-svg-icons';
 
-import { Routes } from '@/lib/Routes';
 import { PlayerMenu } from '../PlayerMenu';
 
 import styles from './GlobalHeader.module.scss';
+import { path } from '@/lib';
 
 export const GlobalHeader: React.FC = ({ children }) => {
   return (
@@ -14,7 +14,7 @@ export const GlobalHeader: React.FC = ({ children }) => {
       <div className={styles.inner}>
         <div className={styles.container}>
           <div>
-            <Link href={Routes.top()}>
+            <Link href={path({ to: 'top' })}>
               <a className={styles.logo}>
                 <FontAwesomeIcon icon={faFistRaised} />
                 {' 鉄拳やろうよ.com'}

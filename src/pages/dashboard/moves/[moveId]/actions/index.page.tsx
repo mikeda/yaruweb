@@ -4,13 +4,13 @@ import { ActionFragment, usePageDashboardActionsQuery } from '@/lib/graphql/type
 import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
 import { PageHeader } from '@/components/layouts/PageHeader';
-import { Routes } from '@/lib/Routes';
 import Link from 'next/link';
 import { parseAction } from '@/lib/graphql/parseAction';
 import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from '@/states/loading';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
+import { dashboardPath } from '@/lib';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -32,25 +32,12 @@ const Page: React.FC = () => {
   return (
     <DashboardContent activeTab="character">
       <Head title={title} />
-      <Breadcrumbs
-        items={[
-          { name: 'キャラクター', url: Routes.dashboard.character.index() },
-          {
-            name: `技データ(${move.moveCategory.character.name})`,
-            url: Routes.dashboard.moveCategory.index(move.moveCategory.character.slug),
-          },
-          {
-            name: move.moveCategory.name,
-            url: Routes.dashboard.move.index(move.moveCategory.id),
-          },
-          { name: title },
-        ]}
-      />
+      <Breadcrumbs items={[{ name: title }]} />
       <PageHeader
         title={title}
         addButtons={[
-          { label: '打撃を登録', url: Routes.dashboard.move.attack_actions.new(move.id) },
-          { label: '投げを登録', url: Routes.dashboard.move.throw_actions.new(move.id) },
+          { label: '打撃を登録', url: dashboardPath({ to: 'attackActionsNew', moveId: move.id }) },
+          { label: '投げを登録', url: dashboardPath({ to: 'throwActionsNew', moveId: move.id }) },
         ]}
       />
 
@@ -82,12 +69,12 @@ const PageContent: React.FC<{ actions: ActionFragment[] }> = ({ actions }) => {
                 <td>{action.damage}</td>
                 <td>
                   {a.__typename === 'AttackAction' && (
-                    <Link href={Routes.dashboard.attack_action.edit(action.id)}>
+                    <Link href={dashboardPath({ to: 'attackActionEdit', actionId: action.id })}>
                       <a>編集</a>
                     </Link>
                   )}
                   {a.__typename === 'ThrowAction' && (
-                    <Link href={Routes.dashboard.throw_action.edit(action.id)}>
+                    <Link href={dashboardPath({ to: 'throwActionEdit', actionId: action.id })}>
                       <a>編集</a>
                     </Link>
                   )}

@@ -2,7 +2,6 @@ import React from 'react';
 
 import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { Routes } from '@/lib/Routes';
 import { PageHeader } from '@/components/layouts/PageHeader';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
@@ -37,20 +36,7 @@ const Page: React.FC = () => {
   return (
     <DashboardContent activeTab="character">
       <Head title="コンボ登録" />
-      <Breadcrumbs
-        items={[
-          { name: 'キャラクター', url: Routes.dashboard.character.index() },
-          {
-            name: `コンボ(${comboCategory.character.name})`,
-            url: Routes.dashboard.comboCategory.index(comboCategory.character.slug),
-          },
-          {
-            name: comboCategory.name,
-            url: Routes.dashboard.combo.index(comboCategory.id),
-          },
-          { name: title },
-        ]}
-      />
+      <Breadcrumbs items={[{ name: title }]} />
       <PageHeader title="コンボ登録" />
 
       <PageContent {...data} />

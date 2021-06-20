@@ -10,7 +10,6 @@ import {
 } from '@/lib/graphql/types';
 import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { Routes } from '@/lib/Routes';
 import { PageHeader } from '@/components/layouts/PageHeader';
 import { toast } from 'react-toastify';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
@@ -20,6 +19,7 @@ import { useRouter } from 'next/router';
 import { Paging } from '@/components/Paging';
 import { ObjectCardList } from '@/components/ObjectCardList';
 import { ObjectCardLinkProps } from '@/components/ObjectCard';
+import { dashboardPath } from '@/lib';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -43,11 +43,11 @@ const Page: React.FC = () => {
     <DashboardContent activeTab="article">
       <Head title="記事" />
       <Breadcrumbs items={[{ name: '記事' }]} />
-      <PageHeader title="記事" addPageUrl={Routes.dashboard.article.new()} />
+      <PageHeader title="記事" addPageUrl={dashboardPath({ to: 'articles' })} />
 
       <PageContent articles={articles} refetch={refetch} />
 
-      <Paging paging={paging} url={Routes.dashboard.article.index} />
+      <Paging paging={paging} url={page => dashboardPath({ to: 'articles', params: { page } })} />
     </DashboardContent>
   );
 };
@@ -92,7 +92,9 @@ const PageContent: React.FC<PageContentProps> = ({ articles, refetch }) => {
   return (
     <ObjectCardList
       items={articles.map(article => {
-        const links: ObjectCardLinkProps[] = [{ text: '編集する', url: Routes.dashboard.article.edit(article.id) }];
+        const links: ObjectCardLinkProps[] = [
+          { text: '編集する', url: dashboardPath({ to: 'articleEdit', articleId: article.id }) },
+        ];
 
         if (article.status === ArticleStatus.Draft) {
           links.push(

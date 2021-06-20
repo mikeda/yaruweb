@@ -11,9 +11,9 @@ import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Head } from '@/components/layouts/Head';
 import { Content } from '@/components/layouts/Content';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
-import { Routes } from '@/lib/Routes';
 import { PageHeader } from '@/components/layouts/PageHeader';
 import { ComboList } from './ComboList';
+import { path } from '@/lib';
 
 const Page: React.FC<PageComboCategoryQuery> = ({ comboCategory }) => {
   if (!comboCategory) return null;
@@ -24,8 +24,11 @@ const Page: React.FC<PageComboCategoryQuery> = ({ comboCategory }) => {
       <Head title={title} />
       <Breadcrumbs
         items={[
-          { name: 'キャラクター', url: Routes.character.index() },
-          { name: comboCategory.character.longName, url: Routes.character.detail(comboCategory.character.slug) },
+          { name: 'キャラクター', url: path({ to: 'characters' }) },
+          {
+            name: comboCategory.character.longName,
+            url: path({ to: 'character', characterSlug: comboCategory.character.slug }),
+          },
           { name: title },
         ]}
       />

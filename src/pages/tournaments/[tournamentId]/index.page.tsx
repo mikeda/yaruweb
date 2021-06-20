@@ -9,7 +9,7 @@ import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 import { PageHeader } from '@/components/layouts/PageHeader';
 import { Card, Heading, Media, NotFound } from '@/components';
 import dayjs from '@/lib/dayjs';
-import { Routes } from '@/lib/Routes';
+import { path } from '@/lib';
 
 const PageContent: React.FC<PageTournamentQuery> = ({ tournament }) => {
   return (
@@ -46,7 +46,7 @@ const PageContent: React.FC<PageTournamentQuery> = ({ tournament }) => {
               key={video.id}
               title={video.title}
               imageUrl={video.thumbnailUrl}
-              href={Routes.tournamentVideos.detail(video.id)}
+              href={path({ to: 'tournamentVideo', tournamentVideoId: video.id })}
             />
           ))}
         </>
@@ -59,7 +59,7 @@ const Page: React.FC<PageTournamentQuery> = ({ tournament }) => {
   return (
     <Content>
       <Head title={tournament.name} />
-      <Breadcrumbs items={[{ name: '大会', url: Routes.tournament.index() }, { name: tournament.name }]} />
+      <Breadcrumbs items={[{ name: '大会', url: path({ to: 'tournaments' }) }, { name: tournament.name }]} />
       <PageHeader title={tournament.name} />
 
       <PageContent tournament={tournament} />
