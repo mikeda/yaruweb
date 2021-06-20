@@ -7,7 +7,7 @@ import { PageHeader } from '@/components/layouts/PageHeader';
 import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from '@/states/loading';
-import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
+import { DashboardBreadcrumbs } from '@/components';
 import { toast } from 'react-toastify';
 import { SortableObjectCardList } from '@/components/ObjectCardList';
 import { dashboardPath } from '@/lib';
@@ -32,7 +32,7 @@ const Page: React.FC = () => {
   return (
     <DashboardContent activeTab="character">
       <Head title={title} />
-      <Breadcrumbs items={[{ name: title }]} />
+      <DashboardBreadcrumbs to="combos" comboCategory={comboCategory} />
       <PageHeader title={title} addPageUrl={dashboardPath({ to: 'combosNew', comboCategoryId: comboCategory.id })} />
 
       <PageContent combos={data.comboCategory.combos} />

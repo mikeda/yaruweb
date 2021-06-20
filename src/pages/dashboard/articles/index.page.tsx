@@ -12,7 +12,7 @@ import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
 import { PageHeader } from '@/components/layouts/PageHeader';
 import { toast } from 'react-toastify';
-import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
+import { DashboardBreadcrumbs } from '@/components';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from '@/states/loading';
 import { useRouter } from 'next/router';
@@ -42,7 +42,7 @@ const Page: React.FC = () => {
   return (
     <DashboardContent activeTab="article">
       <Head title="記事" />
-      <Breadcrumbs items={[{ name: '記事' }]} />
+      <DashboardBreadcrumbs to="articles" />
       <PageHeader title="記事" addPageUrl={dashboardPath({ to: 'articles' })} />
 
       <PageContent articles={articles} refetch={refetch} />

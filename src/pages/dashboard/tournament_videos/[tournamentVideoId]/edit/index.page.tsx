@@ -14,7 +14,7 @@ import { toast } from 'react-toastify';
 import { loadingState } from '@/states/loading';
 import { useSetRecoilState } from 'recoil';
 import { VideoForm } from '@/components/VideoForm';
-import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
+import { DashboardBreadcrumbs } from '@/components';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -36,7 +36,7 @@ const Page: React.FC = () => {
   return (
     <DashboardContent activeTab="character">
       <Head title={tournamentVideo.title} />
-      <Breadcrumbs items={[{ name: tournamentVideo.title }]} />
+      <DashboardBreadcrumbs to="tournamentVideoEdit" tournamentVideo={tournamentVideo} />
       <PageHeader title={tournamentVideo.title} />
 
       <VideoContent video={tournamentVideo} />

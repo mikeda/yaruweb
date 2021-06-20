@@ -14,7 +14,7 @@ import {
   usePageDashboardActionNewQuery,
 } from '@/lib/graphql/types';
 import { ThrowActionForm } from '@/components/ThrowActionForm';
-import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
+import { DashboardBreadcrumbs } from '@/components';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -31,12 +31,11 @@ const Page: React.FC = () => {
   if (!data) return null;
 
   const { move } = data;
-  const title = '判定登録';
 
   return (
     <DashboardContent activeTab="character">
       <Head title="判定登録" />
-      <Breadcrumbs items={[{ name: title }]} />
+      <DashboardBreadcrumbs to="throwActionsNew" move={move} />
       <PageHeader title="判定登録" />
 
       <PageContent {...data} />

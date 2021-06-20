@@ -14,8 +14,7 @@ import { toast } from 'react-toastify';
 import { loadingState } from '@/states/loading';
 import { useSetRecoilState } from 'recoil';
 import { AttackActionForm } from '@/components/AttackActionForm';
-import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
-import { dashboardPath } from '@/lib';
+import { DashboardBreadcrumbs } from '@/components';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -39,7 +38,7 @@ const Page: React.FC = () => {
   return (
     <DashboardContent activeTab="character">
       <Head title={title} />
-      <Breadcrumbs items={[{ name: title }]} />
+      <DashboardBreadcrumbs to="attackActionEdit" move={attackAction.move} />
       <PageHeader title={title} />
 
       <AttackActionContent {...data} />

@@ -14,7 +14,7 @@ import {
   usePageDashboardComboNewQuery,
 } from '@/lib/graphql/types';
 import { ComboForm } from '@/components/ComboForm';
-import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
+import { DashboardBreadcrumbs } from '@/components';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -31,12 +31,11 @@ const Page: React.FC = () => {
   if (!data) return null;
 
   const { comboCategory } = data;
-  const title = 'コンボ登録';
 
   return (
     <DashboardContent activeTab="character">
       <Head title="コンボ登録" />
-      <Breadcrumbs items={[{ name: title }]} />
+      <DashboardBreadcrumbs to="combosNew" comboCategory={comboCategory} />
       <PageHeader title="コンボ登録" />
 
       <PageContent {...data} />

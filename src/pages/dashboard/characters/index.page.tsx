@@ -4,7 +4,7 @@ import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
 import { NotFound } from '@/components/NotFound';
 import Link from 'next/link';
-import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
+import { DashboardBreadcrumbs } from '@/components';
 import { PageHeader } from '@/components/layouts/PageHeader';
 import { usePageDashboardCharactersQuery } from '@/lib/graphql/types';
 import { dashboardPath, path } from '@/lib';
@@ -12,7 +12,7 @@ import { dashboardPath, path } from '@/lib';
 const Page: React.FC = () => (
   <DashboardContent activeTab="character">
     <Head title="キャラクター" />
-    <Breadcrumbs items={[{ name: 'キャラクター' }]} />
+    <DashboardBreadcrumbs to="characters" />
     <PageHeader title="キャラクター" addPageUrl={dashboardPath({ to: 'charactersNew' })} />
 
     <CharacterList />

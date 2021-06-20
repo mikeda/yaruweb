@@ -5,7 +5,7 @@ import { Media } from '@/components/Media';
 import dayjs from '@/lib/dayjs';
 import { Head } from '@/components/layouts/Head';
 import { Content } from '@/components/layouts/Content';
-import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
+import { DashboardBreadcrumbs } from '@/components/layouts/Breadcrumbs';
 import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from '@/states/loading';
@@ -58,7 +58,7 @@ const Page: React.FC = () => {
   return (
     <Content>
       <Head title="鉄拳7の大会情報まとめ" />
-      <Breadcrumbs items={[{ name: '大会情報' }]} />
+      <DashboardBreadcrumbs to="tournaments" />
 
       <PageContent />
     </Content>

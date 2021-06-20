@@ -14,7 +14,7 @@ import {
   usePageDashboardCommandNewQuery,
 } from '@/lib/graphql/types';
 import { CommandForm } from '@/components/CommandForm';
-import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
+import { DashboardBreadcrumbs } from '@/components';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -31,12 +31,11 @@ const Page: React.FC = () => {
   if (!data) return null;
 
   const { move } = data;
-  const title = 'コマンド登録';
 
   return (
     <DashboardContent activeTab="character">
       <Head title="コマンド登録" />
-      <Breadcrumbs items={[{ name: title }]} />
+      <DashboardBreadcrumbs to="commandsNew" move={move} />
       <PageHeader title="コマンド登録" />
 
       <PageContent {...data} />

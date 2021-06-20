@@ -14,7 +14,7 @@ import { toast } from 'react-toastify';
 import { MoveForm } from '@/components/MoveForm';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from '@/states/loading';
-import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
+import { DashboardBreadcrumbs } from '@/components';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -31,12 +31,11 @@ const Page: React.FC = () => {
   if (!data) return null;
 
   const { moveCategory } = data;
-  const title = '技データ登録';
 
   return (
     <DashboardContent activeTab="character">
       <Head title="技データ作成" />
-      <Breadcrumbs items={[{ name: title }]} />
+      <DashboardBreadcrumbs to="movesNew" moveCategory={moveCategory} />
       <PageHeader title="技データ作成" />
 
       <PageContent {...data} />

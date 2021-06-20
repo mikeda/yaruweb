@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 import { loadingState } from '@/states/loading';
 import { useSetRecoilState } from 'recoil';
 import { ArticleForm } from '@/components/ArticleForm';
-import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
+import { DashboardBreadcrumbs } from '@/components';
 import { dashboardPath } from '@/lib';
 
 const Page: React.FC = () => {
@@ -34,7 +34,7 @@ const Page: React.FC = () => {
   return (
     <DashboardContent activeTab="article">
       <Head title="記事登録" />
-      <Breadcrumbs items={[{ name: '記事', url: dashboardPath({ to: 'articles' }) }, { name: '記事登録' }]} />
+      <DashboardBreadcrumbs to="articlesNew" />
       <PageHeader title="記事登録" />
 
       <ArticleForm onSubmit={onSubmit} />

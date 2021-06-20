@@ -7,7 +7,7 @@ import { PageHeader } from '@/components/layouts/PageHeader';
 import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from '@/states/loading';
-import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
+import { DashboardBreadcrumbs } from '@/components';
 import { Command } from '@/components/Command';
 import Link from 'next/link';
 import { dashboardPath } from '@/lib';
@@ -32,7 +32,7 @@ const Page: React.FC = () => {
   return (
     <DashboardContent activeTab="character">
       <Head title={title} />
-      <Breadcrumbs items={[{ name: title }]} />
+      <DashboardBreadcrumbs to="commands" move={move} />
       <PageHeader
         title={title}
         addButtons={[{ label: '登録', url: dashboardPath({ to: 'commandsNew', moveId: move.id }) }]}

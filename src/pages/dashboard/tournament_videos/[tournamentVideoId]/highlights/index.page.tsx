@@ -7,7 +7,7 @@ import {
 } from '@/lib/graphql/types';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
 import { PageHeader } from '@/components/layouts/PageHeader';
-import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
+import { DashboardBreadcrumbs } from '@/components';
 import { Head } from '@/components/layouts/Head';
 import { useRouter } from 'next/router';
 import { loadingState } from '@/states/loading';
@@ -39,7 +39,7 @@ const Page: React.FC = () => {
   return (
     <DashboardContent activeTab="video">
       <Head title={title} />
-      <Breadcrumbs items={[{ name: title }]} />
+      <DashboardBreadcrumbs to="tournamentVideoHighlights" tournamentVideo={tournamentVideo} />
       <PageHeader
         title={title}
         addPageUrl={dashboardPath({ to: 'tournamentVideoHighlightNew', tournamentVideoId: tournamentVideo.id })}

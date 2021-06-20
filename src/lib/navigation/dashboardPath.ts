@@ -33,7 +33,6 @@ type Options =
   | { to: 'tournaments'; params?: { page?: number } }
   | { to: 'tournamentsNew' }
   | { to: 'tournamentEdit'; tournamentId: string }
-  | { to: 'tournaments'; params: { page?: number } }
   | { to: 'tournamentVideos'; tournamentId: string }
   | { to: 'tournamentVideosNew'; tournamentId: string }
   | { to: 'tournamentVideosEdit'; tournamentVideoId: string }

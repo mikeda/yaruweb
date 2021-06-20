@@ -4,7 +4,7 @@ import { useSetRecoilState } from 'recoil';
 import { toast } from 'react-toastify';
 
 import { useDeleteTournamentMutation, usePageDashboardTournamentsQuery, Tournament } from '@/lib/graphql/types';
-import { DashboardContent, PageHeader, Breadcrumbs, Head, Paging, ObjectCardList } from '@/components';
+import { DashboardContent, PageHeader, DashboardBreadcrumbs, Head, Paging, ObjectCardList } from '@/components';
 import { loadingState } from '@/states/loading';
 import { dashboardPath } from '@/lib';
 
@@ -33,7 +33,7 @@ const Page: React.FC = () => {
   return (
     <DashboardContent activeTab="tournament">
       <Head title={title} />
-      <Breadcrumbs items={[{ name: title }]} />
+      <DashboardBreadcrumbs to="tournaments" />
       <PageHeader title={title} />
       <PageContent tournaments={tournaments} refetch={refetch} />
       <Paging paging={paging} url={page => dashboardPath({ to: 'tournaments', params: { page } })} />

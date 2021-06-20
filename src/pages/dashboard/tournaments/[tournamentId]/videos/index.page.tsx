@@ -8,7 +8,7 @@ import {
 } from '@/lib/graphql/types';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
 import { PageHeader } from '@/components/layouts/PageHeader';
-import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
+import { DashboardBreadcrumbs } from '@/components';
 import { Head } from '@/components/layouts/Head';
 import { useRouter } from 'next/router';
 import { loadingState } from '@/states/loading';
@@ -40,7 +40,7 @@ const Page: React.FC = () => {
   setLoading(loading);
   if (!data) return null;
 
-  const { tournamentVideos: videos } = data;
+  const { tournament } = data;
 
   setLoading(loading);
 
@@ -49,12 +49,12 @@ const Page: React.FC = () => {
   return (
     <DashboardContent activeTab="video">
       <Head title={title} />
-      <Breadcrumbs items={[{ name: title }]} />
+      <DashboardBreadcrumbs to="tournamentVideos" tournament={tournament} />
       <PageHeader title={title} />
 
       <VideoForm tournamentId={tournamentId} />
 
-      <PageContent videos={videos} refetch={refetch} />
+      <PageContent videos={tournament.videos} refetch={refetch} />
     </DashboardContent>
   );
 };

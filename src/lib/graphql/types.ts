@@ -4159,6 +4159,10 @@ export type PageDashboardVideoEditQuery = (
   & { tournamentVideo: (
     { __typename?: 'TournamentVideo' }
     & Pick<TournamentVideo, 'id' | 'title' | 'description' | 'youtubeVideoId'>
+    & { tournament: (
+      { __typename?: 'Tournament' }
+      & Pick<Tournament, 'id' | 'name'>
+    ) }
   ) }
 );
 
@@ -4206,10 +4210,14 @@ export type PageDashboardTournamentVideosQueryVariables = Exact<{
 
 export type PageDashboardTournamentVideosQuery = (
   { __typename?: 'Query' }
-  & { tournamentVideos: Array<(
-    { __typename?: 'TournamentVideo' }
-    & Pick<TournamentVideo, 'id' | 'title' | 'highlightsCount'>
-  )> }
+  & { tournament: (
+    { __typename?: 'Tournament' }
+    & Pick<Tournament, 'id' | 'name'>
+    & { videos: Array<(
+      { __typename?: 'TournamentVideo' }
+      & Pick<TournamentVideo, 'id' | 'title' | 'highlightsCount'>
+    )> }
+  ) }
 );
 
 export type PageDashboardTournamentsQueryVariables = Exact<{
@@ -8897,6 +8905,10 @@ export const PageDashboardVideoEditDocument = gql`
     title
     description
     youtubeVideoId
+    tournament {
+      id
+      name
+    }
   }
 }
     `;
@@ -9016,10 +9028,14 @@ export type PageDashboardHighlightNewLazyQueryHookResult = ReturnType<typeof use
 export type PageDashboardHighlightNewQueryResult = Apollo.QueryResult<PageDashboardHighlightNewQuery, PageDashboardHighlightNewQueryVariables>;
 export const PageDashboardTournamentVideosDocument = gql`
     query PageDashboardTournamentVideos($tournamentId: ID!) {
-  tournamentVideos(tournamentId: $tournamentId) {
+  tournament(tournamentId: $tournamentId) {
     id
-    title
-    highlightsCount
+    name
+    videos {
+      id
+      title
+      highlightsCount
+    }
   }
 }
     `;

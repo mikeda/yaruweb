@@ -9,7 +9,7 @@ import { parseAction } from '@/lib/graphql/parseAction';
 import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from '@/states/loading';
-import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
+import { DashboardBreadcrumbs } from '@/components';
 import { dashboardPath } from '@/lib';
 
 const Page: React.FC = () => {
@@ -32,7 +32,7 @@ const Page: React.FC = () => {
   return (
     <DashboardContent activeTab="character">
       <Head title={title} />
-      <Breadcrumbs items={[{ name: title }]} />
+      <DashboardBreadcrumbs to="actions" move={move} />
       <PageHeader
         title={title}
         addButtons={[
