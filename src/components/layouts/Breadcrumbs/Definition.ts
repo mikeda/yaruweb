@@ -42,7 +42,7 @@ export const breadcrumbChain = (props: ChainParam): BreadcrumbChainItem => {
         parent: breadcrumbChain({ to: 'character', character: props.comboCategory.character }),
       };
     case 'login':
-      return { name: 'ログイン', parent: breadcrumbChain({ to: 'login' }) };
+      return { name: 'ログイン' };
     case 'moveCategory':
       return {
         name: props.moveCategory.name,
