@@ -15,7 +15,7 @@ const Page: React.FC = () => {
   return (
     <Content size="xs">
       <Head title={title} />
-      <Breadcrumbs items={[{ name: title }]} />
+      <Breadcrumbs to="login" />
       <PageHeader title={title} />
 
       <LoginWithEmailForm />

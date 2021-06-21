@@ -70,7 +70,7 @@ const Page: React.FC<PageTournamentVideoQuery> = data => {
   return (
     <Content>
       <Head title={video.title} />
-      <Breadcrumbs items={[{ name: video.title }]} />
+      <Breadcrumbs to="tournamentVideo" tournamentVideo={video} />
 
       <PageContent {...data} />
     </Content>

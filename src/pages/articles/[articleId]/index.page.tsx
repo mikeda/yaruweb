@@ -17,9 +17,7 @@ import { NotFound } from '@/components/NotFound';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Content } from '@/components/layouts/Content';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
-import { ArticleCategoryText } from '@/lib/graphql/enum_texts';
 import { ArticleDetail } from './ArticleDetail';
-import { path } from '@/lib';
 
 interface Props {
   article: ArticleFragment;
@@ -29,16 +27,7 @@ const Page: React.FC<Props> = ({ article }) => {
   return (
     <Content>
       <Head title={article.title} description={article.description} image={article.mainImageUrl} />
-      <Breadcrumbs
-        items={[
-          { name: '記事', url: path({ to: 'articles' }) },
-          {
-            name: ArticleCategoryText[article.category],
-            url: path({ to: 'articles', params: { category: article.category } }),
-          },
-          { name: article.title },
-        ]}
-      />
+      <Breadcrumbs to="article" article={article} />
 
       <ArticleDetail article={article} />
       <Comments articleId={article.id} />

@@ -20,7 +20,7 @@ const Page: React.FC<PageCharacterQuery> = ({ character }) => {
   return (
     <Content>
       <Head title={character.longName} />
-      <Breadcrumbs items={[{ name: 'キャラクター', url: path({ to: 'characters' }) }, { name: character.longName }]} />
+      <Breadcrumbs to="character" character={character} />
 
       <div className="bl_box">
         <CharacterCard character={character} />

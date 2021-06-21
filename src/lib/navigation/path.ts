@@ -29,7 +29,7 @@ export const path = (options: Options): string => {
     case 'characters':
       return '/characters';
     case 'character':
-      return `/characters/${options.characterSlug}`;
+      return `/${options.characterSlug}`;
     case 'comboCategory':
       return `/combo_categories/${options.comboCategoryId}`;
     case 'login':

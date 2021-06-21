@@ -1,7 +1,0 @@
-mutation UpdateStage($stageId: ID!, $attributes: StageAttributes!) {
-  updateStage(input: { stageId: $stageId, attributes: $attributes }) {
-    stage {
-      ...stage
-    }
-  }
-}

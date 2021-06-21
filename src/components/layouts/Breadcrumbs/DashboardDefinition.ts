@@ -1,30 +1,16 @@
 import { dashboardPath } from '@/lib';
-import {
-  Article,
-  Character,
-  Combo,
-  ComboCategory,
-  Move,
-  MoveCategory,
-  Stage,
-  Tournament,
-  TournamentVideo,
-  TournamentVideoHighlight,
-} from '@/lib/graphql/types';
 import { BreadcrumbChainItem } from './Breadcrumbs';
-
-type ArticleParam = Pick<Article, 'id' | 'title'>;
-type TournamentParam = Pick<Tournament, 'id' | 'name'>;
-type TournamentVideoParam = Pick<TournamentVideo, 'id' | 'title'> & { tournament: TournamentParam };
-type TournamentVideoHighlightParam = Pick<TournamentVideoHighlight, 'id' | 'title'> & {
-  tournamentVideo: TournamentVideoParam;
-};
-type CharactersParam = Pick<Character, 'slug' | 'name'>;
-type ComboCategoryParam = Pick<ComboCategory, 'id' | 'name'> & { character: CharactersParam };
-type ComboParam = Pick<Combo, 'id' | 'name'> & { comboCategory: ComboCategoryParam };
-type MoveCategoryParam = Pick<MoveCategory, 'id' | 'name'> & { character: CharactersParam };
-type MoveParam = Pick<Move, 'id' | 'name'> & { moveCategory: MoveCategoryParam };
-type StageParam = Pick<Stage, 'id' | 'name'>;
+import {
+  ArticleParam,
+  CharactersParam,
+  ComboCategoryParam,
+  ComboParam,
+  MoveCategoryParam,
+  MoveParam,
+  TournamentParam,
+  TournamentVideoHighlightParam,
+  TournamentVideoParam,
+} from './params';
 
 export type ChainParam =
   | { to: 'actions'; move: MoveParam }
@@ -58,10 +44,6 @@ export type ChainParam =
   | { to: 'movesNew'; moveCategory: MoveCategoryParam }
   | { to: 'moveEdit'; move: MoveParam }
   | { to: 'profileEdit' }
-  | { to: 'stages' }
-  | { to: 'stage'; stage: StageParam }
-  | { to: 'stagesNew' }
-  | { to: 'stageEdit'; stage: StageParam }
   | { to: 'tournaments' }
   | { to: 'tournament'; tournament: TournamentParam }
   | { to: 'tournamentsNew' }
@@ -181,14 +163,6 @@ export const breadcrumbChain = (props: ChainParam): BreadcrumbChainItem => {
       return { name: '編集', parent: breadcrumbChain({ to: 'moves', moveCategory: props.move.moveCategory }) };
     case 'profileEdit':
       return { name: 'プロフィール編集' };
-    case 'stages':
-      return { name: 'ステージ', url: dashboardPath({ to: 'stages' }) };
-    case 'stage':
-      return { name: props.stage.name, parent: breadcrumbChain({ to: 'stages' }) };
-    case 'stagesNew':
-      return { name: '登録', parent: breadcrumbChain({ to: 'stages' }) };
-    case 'stageEdit':
-      return { name: '編集', parent: breadcrumbChain({ to: 'stage', stage: props.stage }) };
     case 'tournaments':
       return { name: '大会', url: dashboardPath({ to: 'tournaments' }) };
     case 'tournament':

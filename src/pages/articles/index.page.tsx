@@ -17,7 +17,7 @@ const Page: React.FC = () => {
   return (
     <Content>
       <Head title="鉄拳7の記事一覧" />
-      <Breadcrumbs items={[{ name: '記事' }]} />
+      <Breadcrumbs to="articles" />
 
       <PageContent />
     </Content>

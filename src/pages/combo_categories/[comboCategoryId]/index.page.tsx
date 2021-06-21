@@ -13,7 +13,6 @@ import { Content } from '@/components/layouts/Content';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 import { PageHeader } from '@/components/layouts/PageHeader';
 import { ComboList } from './ComboList';
-import { path } from '@/lib';
 
 const Page: React.FC<PageComboCategoryQuery> = ({ comboCategory }) => {
   if (!comboCategory) return null;
@@ -22,16 +21,7 @@ const Page: React.FC<PageComboCategoryQuery> = ({ comboCategory }) => {
   return (
     <Content>
       <Head title={title} />
-      <Breadcrumbs
-        items={[
-          { name: 'キャラクター', url: path({ to: 'characters' }) },
-          {
-            name: comboCategory.character.longName,
-            url: path({ to: 'character', characterSlug: comboCategory.character.slug }),
-          },
-          { name: title },
-        ]}
-      />
+      <Breadcrumbs to="comboCategory" comboCategory={comboCategory} />
       <PageHeader title={title} />
 
       <ComboList combos={comboCategory.combos} />

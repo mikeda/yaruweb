@@ -13,7 +13,7 @@ const Page: React.FC = () => {
   return (
     <Content size="xs">
       <Head title={title} />
-      <Breadcrumbs items={[{ name: title }]} />
+      <Breadcrumbs to="signup" />
       <PageHeader title={title} />
 
       <SignUpWithEmailForm />

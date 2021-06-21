@@ -20,7 +20,7 @@ const Page: React.FC<PageMoveCategoryQuery> = ({ moveCategory }) => {
   return (
     <Content>
       <Head title={title} />
-      <Breadcrumbs items={[{ name: title }]} />
+      <Breadcrumbs to="moveCategory" moveCategory={moveCategory} />
       <PageHeader title={title} />
 
       <MoveList moves={moveCategory.moves} />

@@ -59,7 +59,7 @@ const Page: React.FC<PageTournamentQuery> = ({ tournament }) => {
   return (
     <Content>
       <Head title={tournament.name} />
-      <Breadcrumbs items={[{ name: '大会', url: path({ to: 'tournaments' }) }, { name: tournament.name }]} />
+      <Breadcrumbs to="tournament" tournament={tournament} />
       <PageHeader title={tournament.name} />
 
       <PageContent tournament={tournament} />

@@ -3,6 +3,7 @@ import Link from 'next/link';
 
 import styles from './Breadcrumbs.module.scss';
 import { ChainParam as DashboardChainParam, breadcrumbChain as dashboardChain } from './DashboardDefinition';
+import { breadcrumbChain, ChainParam } from './Definition';
 
 export type BreadcrumbChainItem = {
   name: string;
@@ -11,6 +12,20 @@ export type BreadcrumbChainItem = {
 };
 
 type BreadcrumbsItem = { name: string; url?: string };
+
+export const Breadcrumbs: React.FC<ChainParam> = props => {
+  let current = breadcrumbChain(props);
+  const items: BreadcrumbsItem[] = [{ name: current.name }];
+
+  while (current) {
+    if (!current.parent) break;
+
+    current = current.parent;
+    items.unshift({ name: current.name, url: current.url });
+  }
+
+  return <BreadcrumbList items={items} />;
+};
 
 export const DashboardBreadcrumbs: React.FC<DashboardChainParam> = props => {
   let current = dashboardChain(props);

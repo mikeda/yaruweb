@@ -15,7 +15,6 @@ import { loadingState } from '@/states/loading';
 import { useSetRecoilState } from 'recoil';
 import { ThrowActionForm } from '@/components/ThrowActionForm';
 import { DashboardBreadcrumbs } from '@/components';
-import { dashboardPath } from '@/lib';
 
 const Page: React.FC = () => {
   const router = useRouter();

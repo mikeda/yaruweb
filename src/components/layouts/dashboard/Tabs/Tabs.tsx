@@ -2,14 +2,13 @@ import React from 'react';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileAlt, faCalendarAlt, IconDefinition, faUser, faMeh } from '@fortawesome/free-regular-svg-icons';
-import { faRing } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './Tabs.module.scss';
 import { useCurrentPlayer } from '@/hooks/useCurrentPlayer';
 import { PlayerRole } from '@/lib/graphql/types';
 import { dashboardPath } from '@/lib';
 
-export type TabKey = 'article' | 'tournament' | 'video' | 'character' | 'stage' | 'profile';
+export type TabKey = 'article' | 'tournament' | 'video' | 'character' | 'profile';
 
 interface Tab {
   key: TabKey;
@@ -29,7 +28,6 @@ const allTabs: Tab[] = [
     icon: faCalendarAlt,
     onlyEditor: true,
   },
-  { key: 'stage', label: 'ステージ', link: dashboardPath({ to: 'stages' }), icon: faRing, onlyEditor: true },
   {
     key: 'profile',
     label: 'プロフィール',
