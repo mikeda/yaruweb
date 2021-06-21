@@ -34,8 +34,6 @@ type Options =
   | { to: 'tournamentVideosNew'; tournamentId: string }
   | { to: 'tournamentVideosEdit'; tournamentVideoId: string }
   | { to: 'tournamentVideoHighlights'; tournamentVideoId: string }
-  | { to: 'tournamentVideoHighlightNew'; tournamentVideoId: string }
-  | { to: 'tournamentVideoHighlightEdit'; tournamentVideoHighlightId: string }
   | { to: 'tournamentEdit'; tournamentId: string }
   | { to: 'throwActionsNew'; moveId: string }
   | { to: 'throwActionEdit'; actionId: string };
@@ -108,10 +106,6 @@ export const dashboardPath = (options: Options): string => {
       return `/dashboard/tournament_videos/${options.tournamentVideoId}/edit`;
     case 'tournamentVideoHighlights':
       return `/dashboard/tournament_videos/${options.tournamentVideoId}/highlights`;
-    case 'tournamentVideoHighlightNew':
-      return `/dashboard/tournament_videos/${options.tournamentVideoId}/highlights/new`;
-    case 'tournamentVideoHighlightEdit':
-      return `/dashboard/tournament_videos/${options.tournamentVideoHighlightId}/edit`;
     case 'throwActionsNew':
       return `/dashboard/moves/${options.moveId}/throw_actions/new`;
     case 'throwActionEdit':

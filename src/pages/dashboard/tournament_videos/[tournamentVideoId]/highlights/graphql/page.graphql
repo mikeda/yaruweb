@@ -2,6 +2,7 @@ query PageDashboardHighlights($tournamentVideoId: ID!) {
   tournamentVideo(tournamentVideoId: $tournamentVideoId) {
     id
     title
+    youtubeVideoId
 
     tournament {
       id

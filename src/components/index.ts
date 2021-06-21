@@ -23,7 +23,6 @@ export * from './CommentForm';
 export * from './TournamentForm';
 export * from './FavButton';
 export * from './Heading';
-export * from './HighlightForm';
 export * from './IntroSlide';
 export * from './Loading';
 export * from './Media';

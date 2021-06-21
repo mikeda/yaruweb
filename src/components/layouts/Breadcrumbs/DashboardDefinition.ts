@@ -8,7 +8,6 @@ import {
   MoveCategoryParam,
   MoveParam,
   TournamentParam,
-  TournamentVideoHighlightParam,
   TournamentVideoParam,
 } from './params';
 
@@ -53,8 +52,6 @@ export type ChainParam =
   | { to: 'tournamentVideosNew'; tournament: TournamentParam }
   | { to: 'tournamentVideoEdit'; tournamentVideo: TournamentVideoParam }
   | { to: 'tournamentVideoHighlights'; tournamentVideo: TournamentVideoParam }
-  | { to: 'tournamentVideoHighlightsNew'; tournamentVideo: TournamentVideoParam }
-  | { to: 'tournamentVideoHighlightEdit'; tournamentVideoHighlight: TournamentVideoHighlightParam }
   | { to: 'throwActionsNew'; move: MoveParam }
   | { to: 'throwActionEdit'; move: MoveParam };
 
@@ -194,20 +191,6 @@ export const breadcrumbChain = (props: ChainParam): BreadcrumbChainItem => {
         name: 'ハイライト',
         url: dashboardPath({ to: 'tournamentVideoHighlights', tournamentVideoId: props.tournamentVideo.id }),
         parent: breadcrumbChain({ to: 'tournamentVideo', tournamentVideo: props.tournamentVideo }),
-      };
-    case 'tournamentVideoHighlightsNew':
-      return {
-        name: 'ハイライトを登録',
-        url: dashboardPath({ to: 'tournamentVideoHighlightNew', tournamentVideoId: props.tournamentVideo.id }),
-        parent: breadcrumbChain({ to: 'tournamentVideo', tournamentVideo: props.tournamentVideo }),
-      };
-    case 'tournamentVideoHighlightEdit':
-      return {
-        name: '編集',
-        parent: breadcrumbChain({
-          to: 'tournamentVideo',
-          tournamentVideo: props.tournamentVideoHighlight.tournamentVideo,
-        }),
       };
     case 'throwActionsNew':
       return { name: '投げ判定を登録', parent: breadcrumbChain({ to: 'move', move: props.move }) };
