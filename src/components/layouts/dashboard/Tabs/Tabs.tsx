@@ -1,15 +1,14 @@
 import React from 'react';
-import { Routes } from '@/lib/Routes';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileAlt, faCalendarAlt, IconDefinition, faUser, faMeh } from '@fortawesome/free-regular-svg-icons';
-import { faRing } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './Tabs.module.scss';
 import { useCurrentPlayer } from '@/hooks/useCurrentPlayer';
 import { PlayerRole } from '@/lib/graphql/types';
+import { dashboardPath } from '@/lib';
 
-export type TabKey = 'article' | 'tournament' | 'video' | 'character' | 'stage' | 'profile';
+export type TabKey = 'article' | 'tournament' | 'video' | 'character' | 'profile';
 
 interface Tab {
   key: TabKey;
@@ -20,17 +19,22 @@ interface Tab {
 }
 
 const allTabs: Tab[] = [
-  { key: 'article', label: '記事', link: Routes.dashboard.article.index(), icon: faFileAlt, onlyEditor: false },
-  { key: 'character', label: 'キャラクター', link: Routes.dashboard.character.index(), icon: faMeh, onlyEditor: true },
+  { key: 'article', label: '記事', link: dashboardPath({ to: 'articles' }), icon: faFileAlt, onlyEditor: false },
+  { key: 'character', label: 'キャラクター', link: dashboardPath({ to: 'characters' }), icon: faMeh, onlyEditor: true },
   {
     key: 'tournament',
     label: '大会',
-    link: Routes.dashboard.tournament.index(),
+    link: dashboardPath({ to: 'tournaments' }),
     icon: faCalendarAlt,
     onlyEditor: true,
   },
-  { key: 'stage', label: 'ステージ', link: Routes.dashboard.stage.index(), icon: faRing, onlyEditor: true },
-  { key: 'profile', label: 'プロフィール', link: Routes.dashboard.profile.edit(), icon: faUser, onlyEditor: false },
+  {
+    key: 'profile',
+    label: 'プロフィール',
+    link: dashboardPath({ to: 'profileEdit' }),
+    icon: faUser,
+    onlyEditor: false,
+  },
 ];
 
 interface Props {

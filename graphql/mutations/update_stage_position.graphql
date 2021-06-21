@@ -1,7 +1,0 @@
-mutation UpdateStagePosition($stageId: ID!, $newPosition: Int!) {
-  updateStagePosition(input: { stageId: $stageId, newPosition: $newPosition }) {
-    stage {
-      id
-    }
-  }
-}

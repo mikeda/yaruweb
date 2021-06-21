@@ -3,10 +3,10 @@ import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 
 import { useCreatePlayerMutation } from '@/lib/graphql/types';
-import { Routes } from '@/lib/Routes';
 import { signInFirebaseWithTwitter } from '@/lib/firebase';
 import { currentPlayerState } from '@/states/currentPlayer';
 import { useSetRecoilState } from 'recoil';
+import { path } from '@/lib';
 
 export const SignUpWithTwitterButton: React.FC = () => {
   const router = useRouter();
@@ -18,7 +18,7 @@ export const SignUpWithTwitterButton: React.FC = () => {
       setCurrentPlayer(currentPlayer);
       toast.success('ユーザー登録が完了しました。');
 
-      router.push(Routes.top());
+      router.push(path({ to: 'top' }));
     },
     onError: error => {
       toast.error(error.message);

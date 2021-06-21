@@ -1,7 +1,12 @@
 query PageDashboardTournamentVideos($tournamentId: ID!) {
-  tournamentVideos(tournamentId: $tournamentId) {
+  tournament(tournamentId: $tournamentId) {
     id
-    title
-    highlightsCount
+    name
+
+    videos {
+      id
+      title
+      highlightsCount
+    }
   }
 }

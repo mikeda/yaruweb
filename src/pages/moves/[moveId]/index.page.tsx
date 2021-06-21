@@ -15,8 +15,7 @@ import { Head } from '@/components/layouts/Head';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { CommentForm } from '@/components/CommentForm';
-import { Breadcrumbs, BreadcrumbsProps } from '@/components/layouts/Breadcrumbs';
-import { Routes } from '@/lib/Routes';
+import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 import { PageHeader } from '@/components/layouts/PageHeader';
 
 const PageContent: React.FC<{ move: MoveFragment }> = ({ move }) => {
@@ -65,19 +64,13 @@ const PageContent: React.FC<{ move: MoveFragment }> = ({ move }) => {
   );
 };
 
-interface Props {
-  move: MoveFragment;
-  characterName: string;
-  breadcrumbs: BreadcrumbsProps;
-}
-
-const Page: React.FC<Props> = ({ move, breadcrumbs }) => {
+const Page: React.FC<PageMoveQuery> = ({ move }) => {
   const title = move.name;
 
   return (
     <Content>
       <Head title={title} />
-      <Breadcrumbs {...breadcrumbs} />
+      <Breadcrumbs to="move" move={move} />
       <PageHeader title={title} />
 
       <PageContent move={move} />
@@ -85,25 +78,12 @@ const Page: React.FC<Props> = ({ move, breadcrumbs }) => {
   );
 };
 
-export const getStaticProps: GetStaticProps<Props> = async ({ params }) => {
+export const getStaticProps: GetStaticProps = async ({ params }) => {
   const moveId = params?.moveId as string;
   const data: PageMoveQuery = await fetchGraphql(PageMoveDocument, { moveId });
 
-  const moveCategory = data.move.moveCategory;
-  const character = moveCategory.character;
-
   return {
-    props: {
-      move: data.move,
-      characterName: character.name,
-      breadcrumbs: {
-        items: [
-          { name: character.name, url: Routes.character.detail(character.slug) },
-          { name: moveCategory.name, url: Routes.moveCategory.detail(moveCategory.id) },
-          { name: data.move.name },
-        ],
-      },
-    },
+    props: data,
     revalidate: 60,
   };
 };

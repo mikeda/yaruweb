@@ -4,5 +4,10 @@ query PageDashboardVideoEdit($tournamentVideoId: ID!) {
     title
     description
     youtubeVideoId
+
+    tournament {
+      id
+      name
+    }
   }
 }

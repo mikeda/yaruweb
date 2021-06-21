@@ -8,14 +8,13 @@ import {
 } from '@/lib/graphql/types';
 import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { Routes } from '@/lib/Routes';
 import { PageHeader } from '@/components/layouts/PageHeader';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { MoveForm } from '@/components/MoveForm';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from '@/states/loading';
-import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
+import { DashboardBreadcrumbs } from '@/components';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -32,25 +31,11 @@ const Page: React.FC = () => {
   if (!data) return null;
 
   const { moveCategory } = data;
-  const title = '技データ登録';
 
   return (
     <DashboardContent activeTab="character">
       <Head title="技データ作成" />
-      <Breadcrumbs
-        items={[
-          { name: 'キャラクター', url: Routes.dashboard.character.index() },
-          {
-            name: `技データ(${moveCategory.character.name})`,
-            url: Routes.dashboard.moveCategory.index(moveCategory.character.slug),
-          },
-          {
-            name: moveCategory.name,
-            url: Routes.dashboard.move.index(moveCategory.id),
-          },
-          { name: title },
-        ]}
-      />
+      <DashboardBreadcrumbs to="movesNew" moveCategory={moveCategory} />
       <PageHeader title="技データ作成" />
 
       <PageContent {...data} />

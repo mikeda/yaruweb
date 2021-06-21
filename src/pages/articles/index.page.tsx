@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 
 import { Order, useArticlesQuery } from '@/lib/graphql/types';
 import { TabLinkGroup } from '@/components/TabLinkGroup';
-import { Routes } from '@/lib/Routes';
 import { Media } from '@/components/Media';
 import { Head } from '@/components/layouts/Head';
 import { TabLink } from '@/components/TabLinkGroup';
@@ -12,12 +11,13 @@ import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from '@/states/loading';
 import { Paging } from '@/components/Paging';
+import { path } from '@/lib';
 
 const Page: React.FC = () => {
   return (
     <Content>
       <Head title="鉄拳7の記事一覧" />
-      <Breadcrumbs items={[{ name: '記事' }]} />
+      <Breadcrumbs to="articles" />
 
       <PageContent />
     </Content>
@@ -35,14 +35,18 @@ const PageContent: React.FC = () => {
     skip: !router.isReady,
   });
 
-  const url = (page: number) => Routes.article.index({ page, order });
+  const url = (page: number) => path({ to: 'articles', params: { page, order } });
   setLoading(loading);
 
   return (
     <>
       <TabLinkGroup>
-        <TabLink text="新着" href={Routes.article.index()} active={order === Order.New} />
-        <TabLink text="人気" href={Routes.article.index({ order: Order.Popular })} active={order === Order.Popular} />
+        <TabLink text="新着" href={path({ to: 'articles' })} active={order === Order.New} />
+        <TabLink
+          text="人気"
+          href={path({ to: 'articles', params: { order: Order.Popular } })}
+          active={order === Order.Popular}
+        />
       </TabLinkGroup>
 
       <div className="bl_section">
@@ -54,7 +58,7 @@ const PageContent: React.FC = () => {
               return (
                 <Media
                   key={article.id}
-                  href={Routes.article.detail(article.id)}
+                  href={path({ to: 'article', articleId: article.id })}
                   imageUrl={article.mainImageUrl}
                   title={article.title}
                   text={article.description}

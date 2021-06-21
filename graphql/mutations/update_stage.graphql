@@ -1,7 +1,0 @@
-mutation CreateStage($attributes: StageAttributes!) {
-  createStage(input: { attributes: $attributes }) {
-    stage {
-      ...stage
-    }
-  }
-}

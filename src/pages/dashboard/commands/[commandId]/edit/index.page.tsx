@@ -8,14 +8,13 @@ import {
 } from '@/lib/graphql/types';
 import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { Routes } from '@/lib/Routes';
 import { PageHeader } from '@/components/layouts/PageHeader';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { loadingState } from '@/states/loading';
 import { useSetRecoilState } from 'recoil';
 import { CommandForm } from '@/components/CommandForm';
-import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
+import { DashboardBreadcrumbs } from '@/components';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -39,24 +38,7 @@ const Page: React.FC = () => {
   return (
     <DashboardContent activeTab="character">
       <Head title={title} />
-      <Breadcrumbs
-        items={[
-          { name: 'キャラクター', url: Routes.dashboard.character.index() },
-          {
-            name: `技データ(${command.move.moveCategory.character.name})`,
-            url: Routes.dashboard.moveCategory.index(command.move.moveCategory.character.slug),
-          },
-          {
-            name: command.move.moveCategory.name,
-            url: Routes.dashboard.move.index(command.move.moveCategory.id),
-          },
-          {
-            name: command.move.name,
-            url: Routes.dashboard.move.commands.index(command.move.id),
-          },
-          { name: title },
-        ]}
-      />
+      <DashboardBreadcrumbs to="commandEdit" move={command.move} />
       <PageHeader title={title} />
 
       <CommandContent {...data} />

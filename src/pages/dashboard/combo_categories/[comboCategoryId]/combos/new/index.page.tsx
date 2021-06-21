@@ -2,7 +2,6 @@ import React from 'react';
 
 import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { Routes } from '@/lib/Routes';
 import { PageHeader } from '@/components/layouts/PageHeader';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
@@ -15,7 +14,7 @@ import {
   usePageDashboardComboNewQuery,
 } from '@/lib/graphql/types';
 import { ComboForm } from '@/components/ComboForm';
-import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
+import { DashboardBreadcrumbs } from '@/components';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -32,25 +31,11 @@ const Page: React.FC = () => {
   if (!data) return null;
 
   const { comboCategory } = data;
-  const title = 'コンボ登録';
 
   return (
     <DashboardContent activeTab="character">
       <Head title="コンボ登録" />
-      <Breadcrumbs
-        items={[
-          { name: 'キャラクター', url: Routes.dashboard.character.index() },
-          {
-            name: `コンボ(${comboCategory.character.name})`,
-            url: Routes.dashboard.comboCategory.index(comboCategory.character.slug),
-          },
-          {
-            name: comboCategory.name,
-            url: Routes.dashboard.combo.index(comboCategory.id),
-          },
-          { name: title },
-        ]}
-      />
+      <DashboardBreadcrumbs to="combosNew" comboCategory={comboCategory} />
       <PageHeader title="コンボ登録" />
 
       <PageContent {...data} />

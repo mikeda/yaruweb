@@ -8,14 +8,13 @@ import {
 } from '@/lib/graphql/types';
 import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { Routes } from '@/lib/Routes';
 import { PageHeader } from '@/components/layouts/PageHeader';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { HighlightForm } from '@/components/HighlightForm';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from '@/states/loading';
-import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
+import { DashboardBreadcrumbs } from '@/components';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -37,15 +36,7 @@ const Page: React.FC = () => {
   return (
     <DashboardContent activeTab="character">
       <Head title={title} />
-      <Breadcrumbs
-        items={[
-          { name: '大会', url: Routes.dashboard.tournament.index() },
-          { name: tournamentVideo.tournament.name },
-          { name: '動画', url: Routes.dashboard.tournament.video.index(tournamentVideo.tournament.id) },
-          { name: 'ハイライト', url: Routes.dashboard.tournamentVideo.highlight.index(tournamentVideo.id) },
-          { name: title },
-        ]}
-      />
+      <DashboardBreadcrumbs to="tournamentVideoHighlightsNew" tournamentVideo={tournamentVideo} />
       <PageHeader title={title} />
 
       <PageContent {...data} />

@@ -11,16 +11,16 @@ import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Heading } from '@/components/Heading';
 import { Head } from '@/components/layouts/Head';
 import { Content } from '@/components/layouts/Content';
-import { Routes } from '@/lib/Routes';
 import { CategoryCardList } from '@/components/CategoryCardList';
 import { CharacterCard } from '@/components/CharacterCard';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
+import { path } from '@/lib';
 
 const Page: React.FC<PageCharacterQuery> = ({ character }) => {
   return (
     <Content>
       <Head title={character.longName} />
-      <Breadcrumbs items={[{ name: 'キャラクター', url: Routes.character.index() }, { name: character.longName }]} />
+      <Breadcrumbs to="character" character={character} />
 
       <div className="bl_box">
         <CharacterCard character={character} />
@@ -30,7 +30,7 @@ const Page: React.FC<PageCharacterQuery> = ({ character }) => {
       <CategoryCardList
         categories={character.moveCategories.map(moveCategory => ({
           ...moveCategory,
-          href: Routes.moveCategory.detail(moveCategory.id),
+          href: path({ to: 'moveCategory', moveCategoryId: moveCategory.id }),
         }))}
       />
 
@@ -38,7 +38,7 @@ const Page: React.FC<PageCharacterQuery> = ({ character }) => {
       <CategoryCardList
         categories={character.comboCategories.map(comboCategory => ({
           ...comboCategory,
-          href: Routes.comboCategory.detail(comboCategory.id),
+          href: path({ to: 'comboCategory', comboCategoryId: comboCategory.id }),
         }))}
       />
 

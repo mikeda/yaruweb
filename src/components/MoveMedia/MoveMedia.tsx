@@ -12,8 +12,8 @@ import {
   ThrowTypeEnumText,
 } from '@/lib/graphql/enum_texts';
 import Link from 'next/link';
-import { Routes } from '@/lib/Routes';
 import { VideoPlayer } from './VideoPlayer';
+import { path } from '@/lib';
 
 type Props = {
   move: MoveMediaFragment;
@@ -21,7 +21,7 @@ type Props = {
 
 export const MoveMedia: React.FC<Props> = ({ move }) => {
   return (
-    <Link href={Routes.move.detail(move.id)}>
+    <Link href={path({ to: 'move', moveId: move.id })}>
       <a className={styles.container}>
         {move.kana && <div className={styles.kana}>{move.kana}</div>}
 

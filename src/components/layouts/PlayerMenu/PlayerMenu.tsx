@@ -4,13 +4,12 @@ import Link from 'next/link';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
-import { Routes } from '@/lib/Routes';
-
 import styles from './PlayerMenu.module.scss';
 import { DropDownMenu } from '@/components';
 import { signOutFirebase } from '@/lib/firebase';
 import { useCurrentPlayer } from '@/hooks/useCurrentPlayer';
 import { currentPlayerState } from '@/states/currentPlayer';
+import { dashboardPath, path } from '@/lib';
 
 export const PlayerMenu: React.FC = () => {
   const { currentPlayer } = useCurrentPlayer();
@@ -20,7 +19,7 @@ export const PlayerMenu: React.FC = () => {
 
   if (!currentPlayer) {
     return (
-      <Link href={Routes.session.login()}>
+      <Link href={path({ to: 'login' })}>
         <a>ログイン</a>
       </Link>
     );
@@ -41,7 +40,7 @@ export const PlayerMenu: React.FC = () => {
         <DropDownMenu
           onClose={() => setMenuOpened(false)}
           items={[
-            <Link key={0} href={Routes.dashboard.article.index()}>
+            <Link key={0} href={dashboardPath({ to: 'articles' })}>
               <a>マイページ</a>
             </Link>,
             <a
@@ -51,7 +50,7 @@ export const PlayerMenu: React.FC = () => {
                 signOutFirebase().then(() => {
                   toast.success('ログアウトしました。');
                   setCurrentPlayer(null);
-                  router.push(Routes.top());
+                  router.push(path({ to: 'top' }));
                 });
               }}
             >

@@ -3,10 +3,10 @@ import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
 import { toast } from 'react-toastify';
 
-import { Routes } from '@/lib/Routes';
 import { useDeleteTournamentMutation, usePageDashboardTournamentsQuery, Tournament } from '@/lib/graphql/types';
-import { DashboardContent, PageHeader, Breadcrumbs, Head, Paging, ObjectCardList } from '@/components';
+import { DashboardContent, PageHeader, DashboardBreadcrumbs, Head, Paging, ObjectCardList } from '@/components';
 import { loadingState } from '@/states/loading';
+import { dashboardPath } from '@/lib';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -33,10 +33,10 @@ const Page: React.FC = () => {
   return (
     <DashboardContent activeTab="tournament">
       <Head title={title} />
-      <Breadcrumbs items={[{ name: title }]} />
+      <DashboardBreadcrumbs to="tournaments" />
       <PageHeader title={title} />
       <PageContent tournaments={tournaments} refetch={refetch} />
-      <Paging paging={paging} url={Routes.dashboard.tournament.index} />
+      <Paging paging={paging} url={page => dashboardPath({ to: 'tournaments', params: { page } })} />
     </DashboardContent>
   );
 };
@@ -68,8 +68,11 @@ const PageContent: React.FC<PageContentProps> = ({ tournaments, refetch }) => {
         id: tournament.id,
         title: tournament.name,
         links: [
-          { text: '編集する', url: Routes.dashboard.tournament.edit(tournament.id) },
-          { text: `動画(${tournament.videosCount})`, url: Routes.dashboard.tournament.video.index(tournament.id) },
+          { text: '編集する', url: dashboardPath({ to: 'tournamentEdit', tournamentId: tournament.id }) },
+          {
+            text: `動画(${tournament.videosCount})`,
+            url: dashboardPath({ to: 'tournamentVideos', tournamentId: tournament.id }),
+          },
           {
             text: '削除する',
             onClick: () => {

@@ -1,5 +1,0 @@
-query Stages {
-  stages {
-    ...stage
-  }
-}

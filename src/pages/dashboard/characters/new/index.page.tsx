@@ -30,7 +30,7 @@ const Page: React.FC = () => {
   setLoading(loading);
 
   return (
-    <DashboardContent activeTab="stage">
+    <DashboardContent activeTab="character">
       <Head title="キャラクター登録" />
 
       <PageHeader title="キャラクター登録" />

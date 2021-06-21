@@ -17,6 +17,7 @@ import { toast } from 'react-toastify';
 import { TournamentForm } from '@/components/TournamentForm';
 import { loadingState } from '@/states/loading';
 import { useSetRecoilState } from 'recoil';
+import { DashboardBreadcrumbs } from '@/components';
 
 interface Props {
   tournament: TournamentFragment;
@@ -44,6 +45,7 @@ const Page: React.FC<Props> = ({ tournament }) => {
   return (
     <DashboardContent activeTab="tournament">
       <Head title="大会情報更新" />
+      <DashboardBreadcrumbs to="tournamentEdit" tournament={tournament} />
 
       <PageHeader title="大会情報更新" />
 

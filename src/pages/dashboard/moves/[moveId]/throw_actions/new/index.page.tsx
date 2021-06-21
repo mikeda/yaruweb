@@ -2,7 +2,6 @@ import React from 'react';
 
 import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { Routes } from '@/lib/Routes';
 import { PageHeader } from '@/components/layouts/PageHeader';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
@@ -15,7 +14,7 @@ import {
   usePageDashboardActionNewQuery,
 } from '@/lib/graphql/types';
 import { ThrowActionForm } from '@/components/ThrowActionForm';
-import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
+import { DashboardBreadcrumbs } from '@/components';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -32,29 +31,11 @@ const Page: React.FC = () => {
   if (!data) return null;
 
   const { move } = data;
-  const title = '判定登録';
 
   return (
     <DashboardContent activeTab="character">
       <Head title="判定登録" />
-      <Breadcrumbs
-        items={[
-          { name: 'キャラクター', url: Routes.dashboard.character.index() },
-          {
-            name: `技データ(${move.moveCategory.character.name})`,
-            url: Routes.dashboard.moveCategory.index(move.moveCategory.character.slug),
-          },
-          {
-            name: move.moveCategory.name,
-            url: Routes.dashboard.move.index(move.moveCategory.id),
-          },
-          {
-            name: move.name,
-            url: Routes.dashboard.move.actions.index(move.id),
-          },
-          { name: title },
-        ]}
-      />
+      <DashboardBreadcrumbs to="throwActionsNew" move={move} />
       <PageHeader title="判定登録" />
 
       <PageContent {...data} />

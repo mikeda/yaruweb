@@ -31,7 +31,7 @@ const Page: React.FC = () => {
   setLoading(loading);
 
   return (
-    <DashboardContent activeTab="stage">
+    <DashboardContent activeTab="profile">
       <Head title="プロフィール更新" />
 
       <PageHeader title="プロフィール更新" />

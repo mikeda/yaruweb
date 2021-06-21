@@ -3,14 +3,13 @@ import React from 'react';
 import { ArticleAttributes, ArticleFragment, useMyArticleQuery, useUpdateArticleMutation } from '@/lib/graphql/types';
 import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { Routes } from '@/lib/Routes';
 import { PageHeader } from '@/components/layouts/PageHeader';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { loadingState } from '@/states/loading';
 import { useSetRecoilState } from 'recoil';
 import { ArticleForm } from '@/components/ArticleForm';
-import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
+import { DashboardBreadcrumbs } from '@/components';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -30,7 +29,7 @@ const Page: React.FC = () => {
   return (
     <DashboardContent activeTab="article">
       <Head title="記事編集" />
-      <Breadcrumbs items={[{ name: '記事', url: Routes.dashboard.article.index() }, { name: '記事編集' }]} />
+      {data && <DashboardBreadcrumbs to="articleEdit" article={data.myArticle} />}
 
       <PageHeader title="記事編集" />
 

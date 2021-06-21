@@ -5,7 +5,7 @@ query PageComboCategory($comboCategoryId: ID!) {
 
     character {
       slug
-      longName
+      name
     }
 
     combos {

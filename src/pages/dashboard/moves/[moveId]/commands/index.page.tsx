@@ -4,13 +4,13 @@ import { PageDashboardCommandsQuery, usePageDashboardCommandsQuery } from '@/lib
 import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
 import { PageHeader } from '@/components/layouts/PageHeader';
-import { Routes } from '@/lib/Routes';
 import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from '@/states/loading';
-import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
+import { DashboardBreadcrumbs } from '@/components';
 import { Command } from '@/components/Command';
 import Link from 'next/link';
+import { dashboardPath } from '@/lib';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -32,21 +32,11 @@ const Page: React.FC = () => {
   return (
     <DashboardContent activeTab="character">
       <Head title={title} />
-      <Breadcrumbs
-        items={[
-          { name: 'キャラクター', url: Routes.dashboard.character.index() },
-          {
-            name: `技データ(${move.moveCategory.character.name})`,
-            url: Routes.dashboard.moveCategory.index(move.moveCategory.character.slug),
-          },
-          {
-            name: move.moveCategory.name,
-            url: Routes.dashboard.move.index(move.moveCategory.id),
-          },
-          { name: title },
-        ]}
+      <DashboardBreadcrumbs to="commands" move={move} />
+      <PageHeader
+        title={title}
+        addButtons={[{ label: '登録', url: dashboardPath({ to: 'commandsNew', moveId: move.id }) }]}
       />
-      <PageHeader title={title} addButtons={[{ label: '登録', url: Routes.dashboard.move.commands.new(move.id) }]} />
 
       <PageContent {...data} />
     </DashboardContent>
@@ -71,7 +61,7 @@ const PageContent: React.FC<PageDashboardCommandsQuery> = ({ move: { commands } 
                   <Command command={command} />
                 </td>
                 <td>
-                  <Link href={Routes.dashboard.command.edit(command.id)}>
+                  <Link href={dashboardPath({ to: 'commandEdit', commandId: command.id })}>
                     <a>編集</a>
                   </Link>
                 </td>

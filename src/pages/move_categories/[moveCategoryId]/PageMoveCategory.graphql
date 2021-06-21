@@ -5,7 +5,7 @@ query PageMoveCategory($moveCategoryId: ID!) {
 
     character {
       slug
-      longName
+      name
     }
 
     moves {
