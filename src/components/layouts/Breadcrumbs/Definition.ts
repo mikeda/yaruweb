@@ -58,7 +58,7 @@ export const breadcrumbChain = (props: ChainParam): BreadcrumbChainItem => {
     case 'passwordReset':
       return { name: 'パスワードリセット' };
     case 'signup':
-      return { name: 'ログイン', parent: breadcrumbChain({ to: 'signup' }) };
+      return { name: 'ログイン' };
     case 'tournaments':
       return { name: '大会', url: dashboardPath({ to: 'tournaments' }) };
     case 'tournament':
