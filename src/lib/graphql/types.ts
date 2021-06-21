@@ -3980,7 +3980,7 @@ export type PageDashboardHighlightsQuery = (
   { __typename?: 'Query' }
   & { tournamentVideo: (
     { __typename?: 'TournamentVideo' }
-    & Pick<TournamentVideo, 'id' | 'title'>
+    & Pick<TournamentVideo, 'id' | 'title' | 'youtubeVideoId'>
     & { tournament: (
       { __typename?: 'Tournament' }
       & Pick<Tournament, 'id' | 'name'>
@@ -8561,6 +8561,7 @@ export const PageDashboardHighlightsDocument = gql`
   tournamentVideo(tournamentVideoId: $tournamentVideoId) {
     id
     title
+    youtubeVideoId
     tournament {
       id
       name

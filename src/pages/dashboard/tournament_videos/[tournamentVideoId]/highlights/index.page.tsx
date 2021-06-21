@@ -1,97 +1,37 @@
 import React from 'react';
 
-import {
-  TournamentVideoHighlight,
-  useDeleteHighlightMutation,
-  usePageDashboardHighlightsQuery,
-} from '@/lib/graphql/types';
-import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { PageHeader } from '@/components/layouts/PageHeader';
-import { DashboardBreadcrumbs } from '@/components';
-import { Head } from '@/components/layouts/Head';
-import { useRouter } from 'next/router';
-import { loadingState } from '@/states/loading';
-import { useSetRecoilState } from 'recoil';
-import { toast } from 'react-toastify';
-import { ObjectCardList } from '@/components/ObjectCardList';
-import { formatSec } from '@/lib/formatSec';
-import { dashboardPath } from '@/lib';
+import { Head, PageHeader, DashboardBreadcrumbs, DashboardContent, Heading } from '@/components';
+import { usePageQuery, useDestroyQuery, useCreateQuery } from './hooks';
+import { HighlightList, HighlightForm } from './components';
 
 const Page: React.FC = () => {
-  const router = useRouter();
-  const setLoading = useSetRecoilState(loadingState);
-  const { tournamentVideoId } = router.query;
-  const { data, loading, refetch } = usePageDashboardHighlightsQuery({
-    variables: { tournamentVideoId: tournamentVideoId as string },
-    fetchPolicy: 'network-only',
-    skip: !tournamentVideoId,
-  });
+  const { data, refetch } = usePageQuery();
+  const { create } = useCreateQuery(refetch);
+  const { destroy } = useDestroyQuery(refetch);
 
-  setLoading(loading);
-  if (!data) return null;
-
-  const { tournamentVideo } = data;
-
-  setLoading(loading);
-
-  const title = 'ハイライト';
+  const tournamentVideo = data?.tournamentVideo;
 
   return (
     <DashboardContent activeTab="video">
-      <Head title={title} />
-      <DashboardBreadcrumbs to="tournamentVideoHighlights" tournamentVideo={tournamentVideo} />
-      <PageHeader
-        title={title}
-        addPageUrl={dashboardPath({ to: 'tournamentVideoHighlightNew', tournamentVideoId: tournamentVideo.id })}
-      />
+      <Head title="ハイライト" />
 
-      <PageContent highlights={tournamentVideo.highlights} refetch={refetch} />
+      {tournamentVideo && (
+        <>
+          <DashboardBreadcrumbs to="tournamentVideoHighlights" tournamentVideo={tournamentVideo} />
+          <PageHeader title="ハイライト" />
+          <HighlightForm
+            youtubeVideoId={tournamentVideo.youtubeVideoId}
+            onSubmit={attributes => create({ variables: { tournamentVideoId: tournamentVideo.id, attributes } })}
+          />
+
+          <Heading lv="h3">ハイライト一覧</Heading>
+          <HighlightList
+            highlights={tournamentVideo.highlights}
+            onDestroy={id => destroy({ variables: { tournamentVideoHighlightId: id } })}
+          />
+        </>
+      )}
     </DashboardContent>
-  );
-};
-
-type TournamentVideoHighlightFragment = Pick<TournamentVideoHighlight, 'id' | 'title' | 'startSec'>;
-
-interface PageContentProps {
-  highlights: TournamentVideoHighlightFragment[];
-  refetch: () => void;
-}
-
-const PageContent: React.FC<PageContentProps> = ({ highlights, refetch }) => {
-  const setLoading = useSetRecoilState(loadingState);
-
-  const [deleteTournamentVideoHighlight, { loading: deleteLoading }] = useDeleteHighlightMutation({
-    onCompleted: data => {
-      const highlight = data.deleteTournamentVideoHighlight?.tournamentVideoHighlight;
-      if (!highlight) return;
-      refetch();
-      toast.success('ハイライトを削除しました。');
-    },
-  });
-
-  setLoading(deleteLoading);
-
-  return (
-    <ObjectCardList
-      items={highlights.map(highlight => ({
-        id: highlight.id,
-        title: `[${formatSec(highlight.startSec)}] ${highlight.title}`,
-        links: [
-          {
-            text: '編集する',
-            url: dashboardPath({ to: 'tournamentVideoHighlightEdit', tournamentVideoHighlightId: highlight.id }),
-          },
-          {
-            text: '削除する',
-            onClick: () => {
-              if (window.confirm('ハイライトを削除します。')) {
-                deleteTournamentVideoHighlight({ variables: { tournamentVideoHighlightId: highlight.id } });
-              }
-            },
-          },
-        ],
-      }))}
-    />
   );
 };
 
