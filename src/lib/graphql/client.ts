@@ -29,4 +29,5 @@ export const client = new ApolloClient({
       Action: ['AttackAction', 'ThrowAction'],
     },
   }),
+  connectToDevTools: process.env.NODE_ENV === 'development',
 });
