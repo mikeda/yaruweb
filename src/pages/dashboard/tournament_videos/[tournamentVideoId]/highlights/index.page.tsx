@@ -1,15 +1,15 @@
 import React from 'react';
 
 import { Head, PageHeader, DashboardBreadcrumbs, DashboardContent, Heading } from '@/components';
-import { usePageQuery, useDestroyQuery, useCreateQuery } from './hooks';
+import { useDestroyQuery, useCreateQuery, useRouteParams, useTournamentVideoQuery, useHighlightsQuery } from './hooks';
 import { HighlightList, HighlightForm } from './components';
 
 const Page: React.FC = () => {
-  const { data, refetch } = usePageQuery();
+  const { tournamentVideoId } = useRouteParams();
+  const { tournamentVideo } = useTournamentVideoQuery(tournamentVideoId);
+  const { highlights, refetch } = useHighlightsQuery(tournamentVideoId);
   const { create } = useCreateQuery(refetch);
   const { destroy } = useDestroyQuery(refetch);
-
-  const tournamentVideo = data?.tournamentVideo;
 
   return (
     <DashboardContent activeTab="video">
@@ -25,10 +25,12 @@ const Page: React.FC = () => {
           />
 
           <Heading lv="h3">ハイライト一覧</Heading>
-          <HighlightList
-            highlights={tournamentVideo.highlights}
-            onDestroy={id => destroy({ variables: { tournamentVideoHighlightId: id } })}
-          />
+          {highlights && (
+            <HighlightList
+              highlights={highlights}
+              onDestroy={id => destroy({ variables: { tournamentVideoHighlightId: id } })}
+            />
+          )}
         </>
       )}
     </DashboardContent>

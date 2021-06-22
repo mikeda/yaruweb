@@ -1,4 +1,4 @@
-query PageDashboardHighlights($tournamentVideoId: ID!) {
+query Pd_Highlights_TournamentVideo($tournamentVideoId: ID!) {
   tournamentVideo(tournamentVideoId: $tournamentVideoId) {
     id
     title
@@ -7,12 +7,6 @@ query PageDashboardHighlights($tournamentVideoId: ID!) {
     tournament {
       id
       name
-    }
-
-    highlights {
-      id
-      title
-      startSec
     }
   }
 }
