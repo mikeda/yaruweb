@@ -3718,27 +3718,6 @@ export type PageDashboardCommandEditQuery = (
   ) }
 );
 
-export type PageDashboardHighlightEditQueryVariables = Exact<{
-  tournamentVideoHighlightId: Scalars['ID'];
-}>;
-
-
-export type PageDashboardHighlightEditQuery = (
-  { __typename?: 'Query' }
-  & { tournamentVideoHighlight: (
-    { __typename?: 'TournamentVideoHighlight' }
-    & Pick<TournamentVideoHighlight, 'id' | 'title' | 'startSec'>
-    & { tournamentVideo: (
-      { __typename?: 'TournamentVideo' }
-      & Pick<TournamentVideo, 'id' | 'title' | 'youtubeVideoId'>
-      & { tournament: (
-        { __typename?: 'Tournament' }
-        & Pick<Tournament, 'id' | 'name'>
-      ) }
-    ) }
-  ) }
-);
-
 export type PageDashboardMoveCategoryEditQueryVariables = Exact<{
   moveCategoryId: Scalars['ID'];
 }>;
@@ -3971,32 +3950,12 @@ export type PageDashboardVideoEditQuery = (
   ) }
 );
 
-export type PageDashboardHighlightsQueryVariables = Exact<{
+export type Pd_Highlights_TournamentVideoQueryVariables = Exact<{
   tournamentVideoId: Scalars['ID'];
 }>;
 
 
-export type PageDashboardHighlightsQuery = (
-  { __typename?: 'Query' }
-  & { tournamentVideo: (
-    { __typename?: 'TournamentVideo' }
-    & Pick<TournamentVideo, 'id' | 'title' | 'youtubeVideoId'>
-    & { tournament: (
-      { __typename?: 'Tournament' }
-      & Pick<Tournament, 'id' | 'name'>
-    ), highlights: Array<(
-      { __typename?: 'TournamentVideoHighlight' }
-      & Pick<TournamentVideoHighlight, 'id' | 'title' | 'startSec'>
-    )> }
-  ) }
-);
-
-export type PageDashboardHighlightNewQueryVariables = Exact<{
-  tournamentVideoId: Scalars['ID'];
-}>;
-
-
-export type PageDashboardHighlightNewQuery = (
+export type Pd_Highlights_TournamentVideoQuery = (
   { __typename?: 'Query' }
   & { tournamentVideo: (
     { __typename?: 'TournamentVideo' }
@@ -4006,6 +3965,19 @@ export type PageDashboardHighlightNewQuery = (
       & Pick<Tournament, 'id' | 'name'>
     ) }
   ) }
+);
+
+export type Pd_Highlights_HighlightsQueryVariables = Exact<{
+  tournamentVideoId: Scalars['ID'];
+}>;
+
+
+export type Pd_Highlights_HighlightsQuery = (
+  { __typename?: 'Query' }
+  & { tournamentVideoHighlights: Array<(
+    { __typename?: 'TournamentVideoHighlight' }
+    & Pick<TournamentVideoHighlight, 'id' | 'title' | 'startSec'>
+  )> }
 );
 
 export type PageDashboardTournamentVideosQueryVariables = Exact<{
@@ -8044,54 +8016,6 @@ export function usePageDashboardCommandEditLazyQuery(baseOptions?: Apollo.LazyQu
 export type PageDashboardCommandEditQueryHookResult = ReturnType<typeof usePageDashboardCommandEditQuery>;
 export type PageDashboardCommandEditLazyQueryHookResult = ReturnType<typeof usePageDashboardCommandEditLazyQuery>;
 export type PageDashboardCommandEditQueryResult = Apollo.QueryResult<PageDashboardCommandEditQuery, PageDashboardCommandEditQueryVariables>;
-export const PageDashboardHighlightEditDocument = gql`
-    query PageDashboardHighlightEdit($tournamentVideoHighlightId: ID!) {
-  tournamentVideoHighlight(
-    tournamentVideoHighlightId: $tournamentVideoHighlightId
-  ) {
-    id
-    title
-    startSec
-    tournamentVideo {
-      id
-      title
-      youtubeVideoId
-      tournament {
-        id
-        name
-      }
-    }
-  }
-}
-    `;
-
-/**
- * __usePageDashboardHighlightEditQuery__
- *
- * To run a query within a React component, call `usePageDashboardHighlightEditQuery` and pass it any options that fit your needs.
- * When your component renders, `usePageDashboardHighlightEditQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = usePageDashboardHighlightEditQuery({
- *   variables: {
- *      tournamentVideoHighlightId: // value for 'tournamentVideoHighlightId'
- *   },
- * });
- */
-export function usePageDashboardHighlightEditQuery(baseOptions: Apollo.QueryHookOptions<PageDashboardHighlightEditQuery, PageDashboardHighlightEditQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<PageDashboardHighlightEditQuery, PageDashboardHighlightEditQueryVariables>(PageDashboardHighlightEditDocument, options);
-      }
-export function usePageDashboardHighlightEditLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PageDashboardHighlightEditQuery, PageDashboardHighlightEditQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<PageDashboardHighlightEditQuery, PageDashboardHighlightEditQueryVariables>(PageDashboardHighlightEditDocument, options);
-        }
-export type PageDashboardHighlightEditQueryHookResult = ReturnType<typeof usePageDashboardHighlightEditQuery>;
-export type PageDashboardHighlightEditLazyQueryHookResult = ReturnType<typeof usePageDashboardHighlightEditLazyQuery>;
-export type PageDashboardHighlightEditQueryResult = Apollo.QueryResult<PageDashboardHighlightEditQuery, PageDashboardHighlightEditQueryVariables>;
 export const PageDashboardMoveCategoryEditDocument = gql`
     query PageDashboardMoveCategoryEdit($moveCategoryId: ID!) {
   moveCategory(moveCategoryId: $moveCategoryId) {
@@ -8556,54 +8480,8 @@ export function usePageDashboardVideoEditLazyQuery(baseOptions?: Apollo.LazyQuer
 export type PageDashboardVideoEditQueryHookResult = ReturnType<typeof usePageDashboardVideoEditQuery>;
 export type PageDashboardVideoEditLazyQueryHookResult = ReturnType<typeof usePageDashboardVideoEditLazyQuery>;
 export type PageDashboardVideoEditQueryResult = Apollo.QueryResult<PageDashboardVideoEditQuery, PageDashboardVideoEditQueryVariables>;
-export const PageDashboardHighlightsDocument = gql`
-    query PageDashboardHighlights($tournamentVideoId: ID!) {
-  tournamentVideo(tournamentVideoId: $tournamentVideoId) {
-    id
-    title
-    youtubeVideoId
-    tournament {
-      id
-      name
-    }
-    highlights {
-      id
-      title
-      startSec
-    }
-  }
-}
-    `;
-
-/**
- * __usePageDashboardHighlightsQuery__
- *
- * To run a query within a React component, call `usePageDashboardHighlightsQuery` and pass it any options that fit your needs.
- * When your component renders, `usePageDashboardHighlightsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = usePageDashboardHighlightsQuery({
- *   variables: {
- *      tournamentVideoId: // value for 'tournamentVideoId'
- *   },
- * });
- */
-export function usePageDashboardHighlightsQuery(baseOptions: Apollo.QueryHookOptions<PageDashboardHighlightsQuery, PageDashboardHighlightsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<PageDashboardHighlightsQuery, PageDashboardHighlightsQueryVariables>(PageDashboardHighlightsDocument, options);
-      }
-export function usePageDashboardHighlightsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PageDashboardHighlightsQuery, PageDashboardHighlightsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<PageDashboardHighlightsQuery, PageDashboardHighlightsQueryVariables>(PageDashboardHighlightsDocument, options);
-        }
-export type PageDashboardHighlightsQueryHookResult = ReturnType<typeof usePageDashboardHighlightsQuery>;
-export type PageDashboardHighlightsLazyQueryHookResult = ReturnType<typeof usePageDashboardHighlightsLazyQuery>;
-export type PageDashboardHighlightsQueryResult = Apollo.QueryResult<PageDashboardHighlightsQuery, PageDashboardHighlightsQueryVariables>;
-export const PageDashboardHighlightNewDocument = gql`
-    query PageDashboardHighlightNew($tournamentVideoId: ID!) {
+export const Pd_Highlights_TournamentVideoDocument = gql`
+    query PD_Highlights_TournamentVideo($tournamentVideoId: ID!) {
   tournamentVideo(tournamentVideoId: $tournamentVideoId) {
     id
     title
@@ -8617,32 +8495,69 @@ export const PageDashboardHighlightNewDocument = gql`
     `;
 
 /**
- * __usePageDashboardHighlightNewQuery__
+ * __usePd_Highlights_TournamentVideoQuery__
  *
- * To run a query within a React component, call `usePageDashboardHighlightNewQuery` and pass it any options that fit your needs.
- * When your component renders, `usePageDashboardHighlightNewQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `usePd_Highlights_TournamentVideoQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePd_Highlights_TournamentVideoQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = usePageDashboardHighlightNewQuery({
+ * const { data, loading, error } = usePd_Highlights_TournamentVideoQuery({
  *   variables: {
  *      tournamentVideoId: // value for 'tournamentVideoId'
  *   },
  * });
  */
-export function usePageDashboardHighlightNewQuery(baseOptions: Apollo.QueryHookOptions<PageDashboardHighlightNewQuery, PageDashboardHighlightNewQueryVariables>) {
+export function usePd_Highlights_TournamentVideoQuery(baseOptions: Apollo.QueryHookOptions<Pd_Highlights_TournamentVideoQuery, Pd_Highlights_TournamentVideoQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<PageDashboardHighlightNewQuery, PageDashboardHighlightNewQueryVariables>(PageDashboardHighlightNewDocument, options);
+        return Apollo.useQuery<Pd_Highlights_TournamentVideoQuery, Pd_Highlights_TournamentVideoQueryVariables>(Pd_Highlights_TournamentVideoDocument, options);
       }
-export function usePageDashboardHighlightNewLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PageDashboardHighlightNewQuery, PageDashboardHighlightNewQueryVariables>) {
+export function usePd_Highlights_TournamentVideoLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Pd_Highlights_TournamentVideoQuery, Pd_Highlights_TournamentVideoQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<PageDashboardHighlightNewQuery, PageDashboardHighlightNewQueryVariables>(PageDashboardHighlightNewDocument, options);
+          return Apollo.useLazyQuery<Pd_Highlights_TournamentVideoQuery, Pd_Highlights_TournamentVideoQueryVariables>(Pd_Highlights_TournamentVideoDocument, options);
         }
-export type PageDashboardHighlightNewQueryHookResult = ReturnType<typeof usePageDashboardHighlightNewQuery>;
-export type PageDashboardHighlightNewLazyQueryHookResult = ReturnType<typeof usePageDashboardHighlightNewLazyQuery>;
-export type PageDashboardHighlightNewQueryResult = Apollo.QueryResult<PageDashboardHighlightNewQuery, PageDashboardHighlightNewQueryVariables>;
+export type Pd_Highlights_TournamentVideoQueryHookResult = ReturnType<typeof usePd_Highlights_TournamentVideoQuery>;
+export type Pd_Highlights_TournamentVideoLazyQueryHookResult = ReturnType<typeof usePd_Highlights_TournamentVideoLazyQuery>;
+export type Pd_Highlights_TournamentVideoQueryResult = Apollo.QueryResult<Pd_Highlights_TournamentVideoQuery, Pd_Highlights_TournamentVideoQueryVariables>;
+export const Pd_Highlights_HighlightsDocument = gql`
+    query PD_Highlights_Highlights($tournamentVideoId: ID!) {
+  tournamentVideoHighlights(tournamentVideoId: $tournamentVideoId) {
+    id
+    title
+    startSec
+  }
+}
+    `;
+
+/**
+ * __usePd_Highlights_HighlightsQuery__
+ *
+ * To run a query within a React component, call `usePd_Highlights_HighlightsQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePd_Highlights_HighlightsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePd_Highlights_HighlightsQuery({
+ *   variables: {
+ *      tournamentVideoId: // value for 'tournamentVideoId'
+ *   },
+ * });
+ */
+export function usePd_Highlights_HighlightsQuery(baseOptions: Apollo.QueryHookOptions<Pd_Highlights_HighlightsQuery, Pd_Highlights_HighlightsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<Pd_Highlights_HighlightsQuery, Pd_Highlights_HighlightsQueryVariables>(Pd_Highlights_HighlightsDocument, options);
+      }
+export function usePd_Highlights_HighlightsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Pd_Highlights_HighlightsQuery, Pd_Highlights_HighlightsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<Pd_Highlights_HighlightsQuery, Pd_Highlights_HighlightsQueryVariables>(Pd_Highlights_HighlightsDocument, options);
+        }
+export type Pd_Highlights_HighlightsQueryHookResult = ReturnType<typeof usePd_Highlights_HighlightsQuery>;
+export type Pd_Highlights_HighlightsLazyQueryHookResult = ReturnType<typeof usePd_Highlights_HighlightsLazyQuery>;
+export type Pd_Highlights_HighlightsQueryResult = Apollo.QueryResult<Pd_Highlights_HighlightsQuery, Pd_Highlights_HighlightsQueryVariables>;
 export const PageDashboardTournamentVideosDocument = gql`
     query PageDashboardTournamentVideos($tournamentId: ID!) {
   tournament(tournamentId: $tournamentId) {
