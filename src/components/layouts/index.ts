@@ -1,6 +1,5 @@
 export * from './Breadcrumbs';
 export * from './Content';
-export * from './DropDownMenu';
 export * from './GlobalFooter';
 export * from './GlobalHeader';
 export * from './Grid';

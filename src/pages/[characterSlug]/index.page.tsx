@@ -22,9 +22,7 @@ const Page: React.FC<PageCharacterQuery> = ({ character }) => {
       <Head title={character.longName} />
       <Breadcrumbs to="character" character={character} />
 
-      <div className="bl_box">
-        <CharacterCard character={character} />
-      </div>
+      <CharacterCard character={character} />
 
       <Heading lv="h3">コマンドリスト</Heading>
       <CategoryCardList
