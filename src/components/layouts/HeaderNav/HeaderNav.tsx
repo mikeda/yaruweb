@@ -1,7 +1,5 @@
 import React from 'react';
-import Link from 'next/link';
 
-import styles from './HeaderNav.module.scss';
 import { path } from '@/lib';
 import { Paper, Tab, Tabs } from '@material-ui/core';
 import { useRouter } from 'next/router';

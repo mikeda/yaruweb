@@ -24,6 +24,7 @@ export * from './TournamentForm';
 export * from './FavButton';
 export * from './Heading';
 export * from './IntroSlide';
+export * from './Link';
 export * from './Loading';
 export * from './Media';
 export * from './MoveCategoryForm';
