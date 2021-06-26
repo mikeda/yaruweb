@@ -1,6 +1,5 @@
 import React from 'react';
 import { GetStaticProps } from 'next';
-import Link from 'next/link';
 
 import { CharacterCard } from '@/components/CharacterCard';
 import { PageCharactersDocument, PageCharactersQuery } from '@/lib/graphql/types';
@@ -9,6 +8,8 @@ import { Content } from '@/components/layouts/Content';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 import { path } from '@/lib';
+import { Link } from '@/components';
+import { Grid } from '@material-ui/core';
 
 const Page: React.FC<PageCharactersQuery> = ({ characters }) => {
   return (
@@ -16,21 +17,15 @@ const Page: React.FC<PageCharactersQuery> = ({ characters }) => {
       <Head title="キャラクター一覧" description="鉄拳7のキャラクター一覧です。" />
       <Breadcrumbs to="characters" />
 
-      <div className="ly_row">
-        {characters.map(character => {
-          if (!character) return;
-
-          return (
-            <div key={character.slug} className="ly_col_6 ly_smCol_12 hp_mg_b_md">
-              <Link href={path({ to: 'character', characterSlug: character.slug })}>
-                <a>
-                  <CharacterCard character={character} />
-                </a>
-              </Link>
-            </div>
-          );
-        })}
-      </div>
+      <Grid container spacing={2}>
+        {characters.map(character => (
+          <Grid item key={character.slug} xs={12} sm={6}>
+            <Link href={path({ to: 'character', characterSlug: character.slug })}>
+              <CharacterCard character={character} />
+            </Link>
+          </Grid>
+        ))}
+      </Grid>
     </Content>
   );
 };
