@@ -1,4 +1,4 @@
-import { dashboardPath } from '@/lib';
+import { path } from '@/lib';
 import { BreadcrumbChainItem } from './Breadcrumbs';
 import {
   ArticleParam,
@@ -29,11 +29,11 @@ export type ChainParam =
 export const breadcrumbChain = (props: ChainParam): BreadcrumbChainItem => {
   switch (props.to) {
     case 'articles':
-      return { name: '記事', url: dashboardPath({ to: 'articles' }) };
+      return { name: '記事', url: path({ to: 'articles' }) };
     case 'article':
       return { name: props.article.title, parent: breadcrumbChain({ to: 'articles' }) };
     case 'characters':
-      return { name: 'キャラクター', url: dashboardPath({ to: 'characters' }) };
+      return { name: 'キャラクター', url: path({ to: 'characters' }) };
     case 'character':
       return { name: props.character.name, parent: breadcrumbChain({ to: 'characters' }) };
     case 'comboCategory':
@@ -60,7 +60,7 @@ export const breadcrumbChain = (props: ChainParam): BreadcrumbChainItem => {
     case 'signup':
       return { name: 'ログイン' };
     case 'tournaments':
-      return { name: '大会', url: dashboardPath({ to: 'tournaments' }) };
+      return { name: '大会', url: path({ to: 'tournaments' }) };
     case 'tournament':
       return { name: props.tournament.name, parent: breadcrumbChain({ to: 'tournaments' }) };
     case 'tournamentVideo':
