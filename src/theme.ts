@@ -120,6 +120,23 @@ const theme = createMuiTheme({
       default: '#fff',
     },
   },
+  props: {
+    MuiTextField: {
+      variant: 'outlined',
+    },
+    MuiCheckbox: {
+      color: 'primary',
+    },
+    MuiRadio: {
+      color: 'primary',
+    },
+    MuiSwitch: {
+      color: 'primary',
+    },
+    MuiLink: {
+      color: 'inherit',
+    },
+  },
 });
 
 export default theme;

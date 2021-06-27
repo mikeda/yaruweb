@@ -1,6 +1,0 @@
-query PageDashboardMoveCategoryNew($characterSlug: ID!) {
-  character(characterSlug: $characterSlug) {
-    slug
-    name
-  }
-}
