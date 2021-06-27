@@ -2557,6 +2557,22 @@ export type DeleteMoveMutation = (
   )> }
 );
 
+export type DeleteMoveCategoryMutationVariables = Exact<{
+  moveCategoryId: Scalars['ID'];
+}>;
+
+
+export type DeleteMoveCategoryMutation = (
+  { __typename?: 'Mutation' }
+  & { deleteMoveCategory?: Maybe<(
+    { __typename?: 'DeleteMoveCategoryPayload' }
+    & { moveCategory: (
+      { __typename?: 'MoveCategory' }
+      & MoveCategoryFragment
+    ) }
+  )> }
+);
+
 export type DeleteTournamentMutationVariables = Exact<{
   tournamentId: Scalars['ID'];
 }>;
@@ -3174,19 +3190,6 @@ export type MoveQuery = (
   ) }
 );
 
-export type MoveCategoriesQueryVariables = Exact<{
-  characterSlug: Scalars['ID'];
-}>;
-
-
-export type MoveCategoriesQuery = (
-  { __typename?: 'Query' }
-  & { moveCategories: Array<(
-    { __typename?: 'MoveCategory' }
-    & MoveCategoryFragment
-  )> }
-);
-
 export type MoveCategoryIdsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -3369,9 +3372,38 @@ export type CharacterCardFragment = (
   & Pick<Character, 'slug' | 'longName' | 'faceImageUrl' | 'country' | 'fightingStyle'>
 );
 
+export type CharacterCardsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type CharacterCardsQuery = (
+  { __typename?: 'Query' }
+  & { characters: Array<(
+    { __typename?: 'Character' }
+    & CharacterCardFragment
+  )> }
+);
+
 export type CharacterFormFragment = (
   { __typename?: 'Character' }
   & Pick<Character, 'name' | 'nameKana' | 'longName' | 'longNameKana' | 'slug' | 'country' | 'fightingStyle' | 'story' | 'description' | 'dlc'>
+);
+
+export type MoveCategoryCardFragment = (
+  { __typename?: 'MoveCategory' }
+  & Pick<MoveCategory, 'id' | 'name' | 'movesCount'>
+);
+
+export type MoveCategoryCardsQueryVariables = Exact<{
+  characterSlug: Scalars['ID'];
+}>;
+
+
+export type MoveCategoryCardsQuery = (
+  { __typename?: 'Query' }
+  & { moveCategories: Array<(
+    { __typename?: 'MoveCategory' }
+    & MoveCategoryCardFragment
+  )> }
 );
 
 export type MoveMediaFragment = (
@@ -3406,6 +3438,68 @@ export type MoveMediaFragment = (
     { __typename?: 'Condition' }
     & Pick<Condition, 'id' | 'name'>
   )> }
+);
+
+export type BreadcrumbsCharacterQueryVariables = Exact<{
+  characterSlug: Scalars['ID'];
+}>;
+
+
+export type BreadcrumbsCharacterQuery = (
+  { __typename?: 'Query' }
+  & { character: (
+    { __typename?: 'Character' }
+    & BreadcrumbsCharacterFragment
+  ) }
+);
+
+export type BreadcrumbsCharacterFragment = (
+  { __typename?: 'Character' }
+  & Pick<Character, 'slug' | 'name'>
+);
+
+export type BreadcrumbsMoveQueryVariables = Exact<{
+  moveId: Scalars['ID'];
+}>;
+
+
+export type BreadcrumbsMoveQuery = (
+  { __typename?: 'Query' }
+  & { move: (
+    { __typename?: 'Move' }
+    & BreadcrumbsMoveFragment
+  ) }
+);
+
+export type BreadcrumbsMoveCategoryQueryVariables = Exact<{
+  moveCategoryId: Scalars['ID'];
+}>;
+
+
+export type BreadcrumbsMoveCategoryQuery = (
+  { __typename?: 'Query' }
+  & { moveCategory: (
+    { __typename?: 'MoveCategory' }
+    & BreadcrumbsMoveCategoryFragment
+  ) }
+);
+
+export type BreadcrumbsMoveCategoryFragment = (
+  { __typename?: 'MoveCategory' }
+  & Pick<MoveCategory, 'id' | 'name'>
+  & { character: (
+    { __typename?: 'Character' }
+    & BreadcrumbsCharacterFragment
+  ) }
+);
+
+export type BreadcrumbsMoveFragment = (
+  { __typename?: 'Move' }
+  & Pick<Move, 'id' | 'name'>
+  & { moveCategory: (
+    { __typename?: 'MoveCategory' }
+    & BreadcrumbsMoveCategoryFragment
+  ) }
 );
 
 export type PageCharacterQueryVariables = Exact<{
@@ -3504,17 +3598,6 @@ export type PageDashboardAttackActionEditQuery = (
   ) }
 );
 
-export type PageDashboardCharactersQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type PageDashboardCharactersQuery = (
-  { __typename?: 'Query' }
-  & { characters: Array<(
-    { __typename?: 'Character' }
-    & Pick<Character, 'slug' | 'longName'>
-  )> }
-);
-
 export type PageDashboardComboCategoriesQueryVariables = Exact<{
   characterSlug: Scalars['ID'];
 }>;
@@ -3555,23 +3638,6 @@ export type PageDashboardCharacterEditQuery = (
   & { character: (
     { __typename?: 'Character' }
     & CharacterFormFragment
-  ) }
-);
-
-export type PageDashboardMoveCategoriesQueryVariables = Exact<{
-  characterSlug: Scalars['ID'];
-}>;
-
-
-export type PageDashboardMoveCategoriesQuery = (
-  { __typename?: 'Query' }
-  & { character: (
-    { __typename?: 'Character' }
-    & Pick<Character, 'slug' | 'name'>
-    & { moveCategories: Array<(
-      { __typename?: 'MoveCategory' }
-      & Pick<MoveCategory, 'id' | 'name' | 'movesCount'>
-    )> }
   ) }
 );
 
@@ -3950,6 +4016,19 @@ export type PageDashboardVideoEditQuery = (
   ) }
 );
 
+export type Pd_Highlights_HighlightsQueryVariables = Exact<{
+  tournamentVideoId: Scalars['ID'];
+}>;
+
+
+export type Pd_Highlights_HighlightsQuery = (
+  { __typename?: 'Query' }
+  & { tournamentVideoHighlights: Array<(
+    { __typename?: 'TournamentVideoHighlight' }
+    & Pick<TournamentVideoHighlight, 'id' | 'title' | 'startSec'>
+  )> }
+);
+
 export type Pd_Highlights_TournamentVideoQueryVariables = Exact<{
   tournamentVideoId: Scalars['ID'];
 }>;
@@ -3965,19 +4044,6 @@ export type Pd_Highlights_TournamentVideoQuery = (
       & Pick<Tournament, 'id' | 'name'>
     ) }
   ) }
-);
-
-export type Pd_Highlights_HighlightsQueryVariables = Exact<{
-  tournamentVideoId: Scalars['ID'];
-}>;
-
-
-export type Pd_Highlights_HighlightsQuery = (
-  { __typename?: 'Query' }
-  & { tournamentVideoHighlights: Array<(
-    { __typename?: 'TournamentVideoHighlight' }
-    & Pick<TournamentVideoHighlight, 'id' | 'title' | 'startSec'>
-  )> }
 );
 
 export type PageDashboardTournamentVideosQueryVariables = Exact<{
@@ -4442,6 +4508,13 @@ export const CharacterFormFragmentDoc = gql`
   dlc
 }
     `;
+export const MoveCategoryCardFragmentDoc = gql`
+    fragment MoveCategoryCard on MoveCategory {
+  id
+  name
+  movesCount
+}
+    `;
 export const MoveMediaFragmentDoc = gql`
     fragment MoveMedia on Move {
   id
@@ -4491,6 +4564,30 @@ export const MoveMediaFragmentDoc = gql`
   }
 }
     ${ActionFragmentDoc}`;
+export const BreadcrumbsCharacterFragmentDoc = gql`
+    fragment BreadcrumbsCharacter on Character {
+  slug
+  name
+}
+    `;
+export const BreadcrumbsMoveCategoryFragmentDoc = gql`
+    fragment BreadcrumbsMoveCategory on MoveCategory {
+  id
+  name
+  character {
+    ...BreadcrumbsCharacter
+  }
+}
+    ${BreadcrumbsCharacterFragmentDoc}`;
+export const BreadcrumbsMoveFragmentDoc = gql`
+    fragment BreadcrumbsMove on Move {
+  id
+  name
+  moveCategory {
+    ...BreadcrumbsMoveCategory
+  }
+}
+    ${BreadcrumbsMoveCategoryFragmentDoc}`;
 export const CreateArticleDocument = gql`
     mutation CreateArticle($attributes: ArticleAttributes!) {
   createArticle(input: {attributes: $attributes}) {
@@ -5431,6 +5528,41 @@ export function useDeleteMoveMutation(baseOptions?: Apollo.MutationHookOptions<D
 export type DeleteMoveMutationHookResult = ReturnType<typeof useDeleteMoveMutation>;
 export type DeleteMoveMutationResult = Apollo.MutationResult<DeleteMoveMutation>;
 export type DeleteMoveMutationOptions = Apollo.BaseMutationOptions<DeleteMoveMutation, DeleteMoveMutationVariables>;
+export const DeleteMoveCategoryDocument = gql`
+    mutation DeleteMoveCategory($moveCategoryId: ID!) {
+  deleteMoveCategory(input: {moveCategoryId: $moveCategoryId}) {
+    moveCategory {
+      ...moveCategory
+    }
+  }
+}
+    ${MoveCategoryFragmentDoc}`;
+export type DeleteMoveCategoryMutationFn = Apollo.MutationFunction<DeleteMoveCategoryMutation, DeleteMoveCategoryMutationVariables>;
+
+/**
+ * __useDeleteMoveCategoryMutation__
+ *
+ * To run a mutation, you first call `useDeleteMoveCategoryMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteMoveCategoryMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteMoveCategoryMutation, { data, loading, error }] = useDeleteMoveCategoryMutation({
+ *   variables: {
+ *      moveCategoryId: // value for 'moveCategoryId'
+ *   },
+ * });
+ */
+export function useDeleteMoveCategoryMutation(baseOptions?: Apollo.MutationHookOptions<DeleteMoveCategoryMutation, DeleteMoveCategoryMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteMoveCategoryMutation, DeleteMoveCategoryMutationVariables>(DeleteMoveCategoryDocument, options);
+      }
+export type DeleteMoveCategoryMutationHookResult = ReturnType<typeof useDeleteMoveCategoryMutation>;
+export type DeleteMoveCategoryMutationResult = Apollo.MutationResult<DeleteMoveCategoryMutation>;
+export type DeleteMoveCategoryMutationOptions = Apollo.BaseMutationOptions<DeleteMoveCategoryMutation, DeleteMoveCategoryMutationVariables>;
 export const DeleteTournamentDocument = gql`
     mutation DeleteTournament($tournamentId: ID!) {
   deleteTournament(input: {tournamentId: $tournamentId}) {
@@ -6848,41 +6980,6 @@ export function useMoveLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MoveQ
 export type MoveQueryHookResult = ReturnType<typeof useMoveQuery>;
 export type MoveLazyQueryHookResult = ReturnType<typeof useMoveLazyQuery>;
 export type MoveQueryResult = Apollo.QueryResult<MoveQuery, MoveQueryVariables>;
-export const MoveCategoriesDocument = gql`
-    query MoveCategories($characterSlug: ID!) {
-  moveCategories(characterSlug: $characterSlug) {
-    ...moveCategory
-  }
-}
-    ${MoveCategoryFragmentDoc}`;
-
-/**
- * __useMoveCategoriesQuery__
- *
- * To run a query within a React component, call `useMoveCategoriesQuery` and pass it any options that fit your needs.
- * When your component renders, `useMoveCategoriesQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useMoveCategoriesQuery({
- *   variables: {
- *      characterSlug: // value for 'characterSlug'
- *   },
- * });
- */
-export function useMoveCategoriesQuery(baseOptions: Apollo.QueryHookOptions<MoveCategoriesQuery, MoveCategoriesQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<MoveCategoriesQuery, MoveCategoriesQueryVariables>(MoveCategoriesDocument, options);
-      }
-export function useMoveCategoriesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MoveCategoriesQuery, MoveCategoriesQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<MoveCategoriesQuery, MoveCategoriesQueryVariables>(MoveCategoriesDocument, options);
-        }
-export type MoveCategoriesQueryHookResult = ReturnType<typeof useMoveCategoriesQuery>;
-export type MoveCategoriesLazyQueryHookResult = ReturnType<typeof useMoveCategoriesLazyQuery>;
-export type MoveCategoriesQueryResult = Apollo.QueryResult<MoveCategoriesQuery, MoveCategoriesQueryVariables>;
 export const MoveCategoryIdsDocument = gql`
     query MoveCategoryIds {
   moveCategories {
@@ -7325,6 +7422,180 @@ export function useTournamentVideoCommentsLazyQuery(baseOptions?: Apollo.LazyQue
 export type TournamentVideoCommentsQueryHookResult = ReturnType<typeof useTournamentVideoCommentsQuery>;
 export type TournamentVideoCommentsLazyQueryHookResult = ReturnType<typeof useTournamentVideoCommentsLazyQuery>;
 export type TournamentVideoCommentsQueryResult = Apollo.QueryResult<TournamentVideoCommentsQuery, TournamentVideoCommentsQueryVariables>;
+export const CharacterCardsDocument = gql`
+    query CharacterCards {
+  characters {
+    ...CharacterCard
+  }
+}
+    ${CharacterCardFragmentDoc}`;
+
+/**
+ * __useCharacterCardsQuery__
+ *
+ * To run a query within a React component, call `useCharacterCardsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCharacterCardsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCharacterCardsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useCharacterCardsQuery(baseOptions?: Apollo.QueryHookOptions<CharacterCardsQuery, CharacterCardsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<CharacterCardsQuery, CharacterCardsQueryVariables>(CharacterCardsDocument, options);
+      }
+export function useCharacterCardsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CharacterCardsQuery, CharacterCardsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<CharacterCardsQuery, CharacterCardsQueryVariables>(CharacterCardsDocument, options);
+        }
+export type CharacterCardsQueryHookResult = ReturnType<typeof useCharacterCardsQuery>;
+export type CharacterCardsLazyQueryHookResult = ReturnType<typeof useCharacterCardsLazyQuery>;
+export type CharacterCardsQueryResult = Apollo.QueryResult<CharacterCardsQuery, CharacterCardsQueryVariables>;
+export const MoveCategoryCardsDocument = gql`
+    query MoveCategoryCards($characterSlug: ID!) {
+  moveCategories(characterSlug: $characterSlug) {
+    ...MoveCategoryCard
+  }
+}
+    ${MoveCategoryCardFragmentDoc}`;
+
+/**
+ * __useMoveCategoryCardsQuery__
+ *
+ * To run a query within a React component, call `useMoveCategoryCardsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMoveCategoryCardsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMoveCategoryCardsQuery({
+ *   variables: {
+ *      characterSlug: // value for 'characterSlug'
+ *   },
+ * });
+ */
+export function useMoveCategoryCardsQuery(baseOptions: Apollo.QueryHookOptions<MoveCategoryCardsQuery, MoveCategoryCardsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<MoveCategoryCardsQuery, MoveCategoryCardsQueryVariables>(MoveCategoryCardsDocument, options);
+      }
+export function useMoveCategoryCardsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MoveCategoryCardsQuery, MoveCategoryCardsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<MoveCategoryCardsQuery, MoveCategoryCardsQueryVariables>(MoveCategoryCardsDocument, options);
+        }
+export type MoveCategoryCardsQueryHookResult = ReturnType<typeof useMoveCategoryCardsQuery>;
+export type MoveCategoryCardsLazyQueryHookResult = ReturnType<typeof useMoveCategoryCardsLazyQuery>;
+export type MoveCategoryCardsQueryResult = Apollo.QueryResult<MoveCategoryCardsQuery, MoveCategoryCardsQueryVariables>;
+export const BreadcrumbsCharacterDocument = gql`
+    query BreadcrumbsCharacter($characterSlug: ID!) {
+  character(characterSlug: $characterSlug) {
+    ...BreadcrumbsCharacter
+  }
+}
+    ${BreadcrumbsCharacterFragmentDoc}`;
+
+/**
+ * __useBreadcrumbsCharacterQuery__
+ *
+ * To run a query within a React component, call `useBreadcrumbsCharacterQuery` and pass it any options that fit your needs.
+ * When your component renders, `useBreadcrumbsCharacterQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useBreadcrumbsCharacterQuery({
+ *   variables: {
+ *      characterSlug: // value for 'characterSlug'
+ *   },
+ * });
+ */
+export function useBreadcrumbsCharacterQuery(baseOptions: Apollo.QueryHookOptions<BreadcrumbsCharacterQuery, BreadcrumbsCharacterQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<BreadcrumbsCharacterQuery, BreadcrumbsCharacterQueryVariables>(BreadcrumbsCharacterDocument, options);
+      }
+export function useBreadcrumbsCharacterLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<BreadcrumbsCharacterQuery, BreadcrumbsCharacterQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<BreadcrumbsCharacterQuery, BreadcrumbsCharacterQueryVariables>(BreadcrumbsCharacterDocument, options);
+        }
+export type BreadcrumbsCharacterQueryHookResult = ReturnType<typeof useBreadcrumbsCharacterQuery>;
+export type BreadcrumbsCharacterLazyQueryHookResult = ReturnType<typeof useBreadcrumbsCharacterLazyQuery>;
+export type BreadcrumbsCharacterQueryResult = Apollo.QueryResult<BreadcrumbsCharacterQuery, BreadcrumbsCharacterQueryVariables>;
+export const BreadcrumbsMoveDocument = gql`
+    query BreadcrumbsMove($moveId: ID!) {
+  move(moveId: $moveId) {
+    ...BreadcrumbsMove
+  }
+}
+    ${BreadcrumbsMoveFragmentDoc}`;
+
+/**
+ * __useBreadcrumbsMoveQuery__
+ *
+ * To run a query within a React component, call `useBreadcrumbsMoveQuery` and pass it any options that fit your needs.
+ * When your component renders, `useBreadcrumbsMoveQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useBreadcrumbsMoveQuery({
+ *   variables: {
+ *      moveId: // value for 'moveId'
+ *   },
+ * });
+ */
+export function useBreadcrumbsMoveQuery(baseOptions: Apollo.QueryHookOptions<BreadcrumbsMoveQuery, BreadcrumbsMoveQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<BreadcrumbsMoveQuery, BreadcrumbsMoveQueryVariables>(BreadcrumbsMoveDocument, options);
+      }
+export function useBreadcrumbsMoveLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<BreadcrumbsMoveQuery, BreadcrumbsMoveQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<BreadcrumbsMoveQuery, BreadcrumbsMoveQueryVariables>(BreadcrumbsMoveDocument, options);
+        }
+export type BreadcrumbsMoveQueryHookResult = ReturnType<typeof useBreadcrumbsMoveQuery>;
+export type BreadcrumbsMoveLazyQueryHookResult = ReturnType<typeof useBreadcrumbsMoveLazyQuery>;
+export type BreadcrumbsMoveQueryResult = Apollo.QueryResult<BreadcrumbsMoveQuery, BreadcrumbsMoveQueryVariables>;
+export const BreadcrumbsMoveCategoryDocument = gql`
+    query BreadcrumbsMoveCategory($moveCategoryId: ID!) {
+  moveCategory(moveCategoryId: $moveCategoryId) {
+    ...BreadcrumbsMoveCategory
+  }
+}
+    ${BreadcrumbsMoveCategoryFragmentDoc}`;
+
+/**
+ * __useBreadcrumbsMoveCategoryQuery__
+ *
+ * To run a query within a React component, call `useBreadcrumbsMoveCategoryQuery` and pass it any options that fit your needs.
+ * When your component renders, `useBreadcrumbsMoveCategoryQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useBreadcrumbsMoveCategoryQuery({
+ *   variables: {
+ *      moveCategoryId: // value for 'moveCategoryId'
+ *   },
+ * });
+ */
+export function useBreadcrumbsMoveCategoryQuery(baseOptions: Apollo.QueryHookOptions<BreadcrumbsMoveCategoryQuery, BreadcrumbsMoveCategoryQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<BreadcrumbsMoveCategoryQuery, BreadcrumbsMoveCategoryQueryVariables>(BreadcrumbsMoveCategoryDocument, options);
+      }
+export function useBreadcrumbsMoveCategoryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<BreadcrumbsMoveCategoryQuery, BreadcrumbsMoveCategoryQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<BreadcrumbsMoveCategoryQuery, BreadcrumbsMoveCategoryQueryVariables>(BreadcrumbsMoveCategoryDocument, options);
+        }
+export type BreadcrumbsMoveCategoryQueryHookResult = ReturnType<typeof useBreadcrumbsMoveCategoryQuery>;
+export type BreadcrumbsMoveCategoryLazyQueryHookResult = ReturnType<typeof useBreadcrumbsMoveCategoryLazyQuery>;
+export type BreadcrumbsMoveCategoryQueryResult = Apollo.QueryResult<BreadcrumbsMoveCategoryQuery, BreadcrumbsMoveCategoryQueryVariables>;
 export const PageCharacterDocument = gql`
     query PageCharacter($characterSlug: ID!) {
   character(characterSlug: $characterSlug) {
@@ -7546,41 +7817,6 @@ export function usePageDashboardAttackActionEditLazyQuery(baseOptions?: Apollo.L
 export type PageDashboardAttackActionEditQueryHookResult = ReturnType<typeof usePageDashboardAttackActionEditQuery>;
 export type PageDashboardAttackActionEditLazyQueryHookResult = ReturnType<typeof usePageDashboardAttackActionEditLazyQuery>;
 export type PageDashboardAttackActionEditQueryResult = Apollo.QueryResult<PageDashboardAttackActionEditQuery, PageDashboardAttackActionEditQueryVariables>;
-export const PageDashboardCharactersDocument = gql`
-    query PageDashboardCharacters {
-  characters {
-    slug
-    longName
-  }
-}
-    `;
-
-/**
- * __usePageDashboardCharactersQuery__
- *
- * To run a query within a React component, call `usePageDashboardCharactersQuery` and pass it any options that fit your needs.
- * When your component renders, `usePageDashboardCharactersQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = usePageDashboardCharactersQuery({
- *   variables: {
- *   },
- * });
- */
-export function usePageDashboardCharactersQuery(baseOptions?: Apollo.QueryHookOptions<PageDashboardCharactersQuery, PageDashboardCharactersQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<PageDashboardCharactersQuery, PageDashboardCharactersQueryVariables>(PageDashboardCharactersDocument, options);
-      }
-export function usePageDashboardCharactersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PageDashboardCharactersQuery, PageDashboardCharactersQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<PageDashboardCharactersQuery, PageDashboardCharactersQueryVariables>(PageDashboardCharactersDocument, options);
-        }
-export type PageDashboardCharactersQueryHookResult = ReturnType<typeof usePageDashboardCharactersQuery>;
-export type PageDashboardCharactersLazyQueryHookResult = ReturnType<typeof usePageDashboardCharactersLazyQuery>;
-export type PageDashboardCharactersQueryResult = Apollo.QueryResult<PageDashboardCharactersQuery, PageDashboardCharactersQueryVariables>;
 export const PageDashboardComboCategoriesDocument = gql`
     query PageDashboardComboCategories($characterSlug: ID!) {
   character(characterSlug: $characterSlug) {
@@ -7693,47 +7929,6 @@ export function usePageDashboardCharacterEditLazyQuery(baseOptions?: Apollo.Lazy
 export type PageDashboardCharacterEditQueryHookResult = ReturnType<typeof usePageDashboardCharacterEditQuery>;
 export type PageDashboardCharacterEditLazyQueryHookResult = ReturnType<typeof usePageDashboardCharacterEditLazyQuery>;
 export type PageDashboardCharacterEditQueryResult = Apollo.QueryResult<PageDashboardCharacterEditQuery, PageDashboardCharacterEditQueryVariables>;
-export const PageDashboardMoveCategoriesDocument = gql`
-    query PageDashboardMoveCategories($characterSlug: ID!) {
-  character(characterSlug: $characterSlug) {
-    slug
-    name
-    moveCategories {
-      id
-      name
-      movesCount
-    }
-  }
-}
-    `;
-
-/**
- * __usePageDashboardMoveCategoriesQuery__
- *
- * To run a query within a React component, call `usePageDashboardMoveCategoriesQuery` and pass it any options that fit your needs.
- * When your component renders, `usePageDashboardMoveCategoriesQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = usePageDashboardMoveCategoriesQuery({
- *   variables: {
- *      characterSlug: // value for 'characterSlug'
- *   },
- * });
- */
-export function usePageDashboardMoveCategoriesQuery(baseOptions: Apollo.QueryHookOptions<PageDashboardMoveCategoriesQuery, PageDashboardMoveCategoriesQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<PageDashboardMoveCategoriesQuery, PageDashboardMoveCategoriesQueryVariables>(PageDashboardMoveCategoriesDocument, options);
-      }
-export function usePageDashboardMoveCategoriesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PageDashboardMoveCategoriesQuery, PageDashboardMoveCategoriesQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<PageDashboardMoveCategoriesQuery, PageDashboardMoveCategoriesQueryVariables>(PageDashboardMoveCategoriesDocument, options);
-        }
-export type PageDashboardMoveCategoriesQueryHookResult = ReturnType<typeof usePageDashboardMoveCategoriesQuery>;
-export type PageDashboardMoveCategoriesLazyQueryHookResult = ReturnType<typeof usePageDashboardMoveCategoriesLazyQuery>;
-export type PageDashboardMoveCategoriesQueryResult = Apollo.QueryResult<PageDashboardMoveCategoriesQuery, PageDashboardMoveCategoriesQueryVariables>;
 export const PageDashboardMoveCategoryNewDocument = gql`
     query PageDashboardMoveCategoryNew($characterSlug: ID!) {
   character(characterSlug: $characterSlug) {
@@ -8480,8 +8675,45 @@ export function usePageDashboardVideoEditLazyQuery(baseOptions?: Apollo.LazyQuer
 export type PageDashboardVideoEditQueryHookResult = ReturnType<typeof usePageDashboardVideoEditQuery>;
 export type PageDashboardVideoEditLazyQueryHookResult = ReturnType<typeof usePageDashboardVideoEditLazyQuery>;
 export type PageDashboardVideoEditQueryResult = Apollo.QueryResult<PageDashboardVideoEditQuery, PageDashboardVideoEditQueryVariables>;
+export const Pd_Highlights_HighlightsDocument = gql`
+    query Pd_Highlights_Highlights($tournamentVideoId: ID!) {
+  tournamentVideoHighlights(tournamentVideoId: $tournamentVideoId) {
+    id
+    title
+    startSec
+  }
+}
+    `;
+
+/**
+ * __usePd_Highlights_HighlightsQuery__
+ *
+ * To run a query within a React component, call `usePd_Highlights_HighlightsQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePd_Highlights_HighlightsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePd_Highlights_HighlightsQuery({
+ *   variables: {
+ *      tournamentVideoId: // value for 'tournamentVideoId'
+ *   },
+ * });
+ */
+export function usePd_Highlights_HighlightsQuery(baseOptions: Apollo.QueryHookOptions<Pd_Highlights_HighlightsQuery, Pd_Highlights_HighlightsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<Pd_Highlights_HighlightsQuery, Pd_Highlights_HighlightsQueryVariables>(Pd_Highlights_HighlightsDocument, options);
+      }
+export function usePd_Highlights_HighlightsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Pd_Highlights_HighlightsQuery, Pd_Highlights_HighlightsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<Pd_Highlights_HighlightsQuery, Pd_Highlights_HighlightsQueryVariables>(Pd_Highlights_HighlightsDocument, options);
+        }
+export type Pd_Highlights_HighlightsQueryHookResult = ReturnType<typeof usePd_Highlights_HighlightsQuery>;
+export type Pd_Highlights_HighlightsLazyQueryHookResult = ReturnType<typeof usePd_Highlights_HighlightsLazyQuery>;
+export type Pd_Highlights_HighlightsQueryResult = Apollo.QueryResult<Pd_Highlights_HighlightsQuery, Pd_Highlights_HighlightsQueryVariables>;
 export const Pd_Highlights_TournamentVideoDocument = gql`
-    query PD_Highlights_TournamentVideo($tournamentVideoId: ID!) {
+    query Pd_Highlights_TournamentVideo($tournamentVideoId: ID!) {
   tournamentVideo(tournamentVideoId: $tournamentVideoId) {
     id
     title
@@ -8521,43 +8753,6 @@ export function usePd_Highlights_TournamentVideoLazyQuery(baseOptions?: Apollo.L
 export type Pd_Highlights_TournamentVideoQueryHookResult = ReturnType<typeof usePd_Highlights_TournamentVideoQuery>;
 export type Pd_Highlights_TournamentVideoLazyQueryHookResult = ReturnType<typeof usePd_Highlights_TournamentVideoLazyQuery>;
 export type Pd_Highlights_TournamentVideoQueryResult = Apollo.QueryResult<Pd_Highlights_TournamentVideoQuery, Pd_Highlights_TournamentVideoQueryVariables>;
-export const Pd_Highlights_HighlightsDocument = gql`
-    query PD_Highlights_Highlights($tournamentVideoId: ID!) {
-  tournamentVideoHighlights(tournamentVideoId: $tournamentVideoId) {
-    id
-    title
-    startSec
-  }
-}
-    `;
-
-/**
- * __usePd_Highlights_HighlightsQuery__
- *
- * To run a query within a React component, call `usePd_Highlights_HighlightsQuery` and pass it any options that fit your needs.
- * When your component renders, `usePd_Highlights_HighlightsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = usePd_Highlights_HighlightsQuery({
- *   variables: {
- *      tournamentVideoId: // value for 'tournamentVideoId'
- *   },
- * });
- */
-export function usePd_Highlights_HighlightsQuery(baseOptions: Apollo.QueryHookOptions<Pd_Highlights_HighlightsQuery, Pd_Highlights_HighlightsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<Pd_Highlights_HighlightsQuery, Pd_Highlights_HighlightsQueryVariables>(Pd_Highlights_HighlightsDocument, options);
-      }
-export function usePd_Highlights_HighlightsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<Pd_Highlights_HighlightsQuery, Pd_Highlights_HighlightsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<Pd_Highlights_HighlightsQuery, Pd_Highlights_HighlightsQueryVariables>(Pd_Highlights_HighlightsDocument, options);
-        }
-export type Pd_Highlights_HighlightsQueryHookResult = ReturnType<typeof usePd_Highlights_HighlightsQuery>;
-export type Pd_Highlights_HighlightsLazyQueryHookResult = ReturnType<typeof usePd_Highlights_HighlightsLazyQuery>;
-export type Pd_Highlights_HighlightsQueryResult = Apollo.QueryResult<Pd_Highlights_HighlightsQuery, Pd_Highlights_HighlightsQueryVariables>;
 export const PageDashboardTournamentVideosDocument = gql`
     query PageDashboardTournamentVideos($tournamentId: ID!) {
   tournament(tournamentId: $tournamentId) {

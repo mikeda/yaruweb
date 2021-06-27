@@ -1,0 +1,4 @@
+fragment BreadcrumbsCharacter on Character {
+  slug
+  name
+}

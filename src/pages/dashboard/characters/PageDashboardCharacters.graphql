@@ -1,6 +1,0 @@
-query PageDashboardCharacters {
-  characters {
-    slug
-    longName
-  }
-}

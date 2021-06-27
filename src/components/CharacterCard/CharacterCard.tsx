@@ -1,10 +1,20 @@
-import { path } from '@/lib';
-import { CharacterCardFragment } from '@/lib/graphql/types';
-import { Card, CardActionArea, CardContent, CardHeader, CardMedia, makeStyles, Typography } from '@material-ui/core';
 import React from 'react';
-import { Link } from '../Link';
+import { CharacterCardFragment } from '@/lib/graphql/types';
+import {
+  Button,
+  Card,
+  CardActionArea,
+  CardActions,
+  CardContent,
+  CardMedia,
+  IconButton,
+  makeStyles,
+  Typography,
+} from '@material-ui/core';
+import { Delete as DeleteIcon } from '@material-ui/icons';
 
-import styles from './CharacterCard.module.scss';
+import { path, dashboardPath } from '@/lib';
+import { Link } from '../Link';
 
 const useStyles = makeStyles({
   root: {
@@ -17,19 +27,29 @@ const useStyles = makeStyles({
   details: {
     flex: 1,
   },
+  deleteButton: {
+    marginLeft: 'auto',
+  },
 });
 
 interface Props {
   character: CharacterCardFragment;
+  dashboard?: boolean;
+  onDelete?: () => void;
 }
 
-export const CharacterCard: React.FC<Props> = ({ character }) => {
+export const CharacterCard: React.FC<Props> = ({ character, dashboard = false, onDelete }) => {
   const classes = useStyles();
+
+  const href = dashboard
+    ? dashboardPath({ to: 'characterEdit', characterSlug: character.slug })
+    : path({ to: 'character', characterSlug: character.slug });
 
   return (
     <Card>
-      <CardActionArea className={classes.root}>
+      <CardActionArea className={classes.root} href={href} component={Link} color="inherit">
         <CardMedia image={character.faceImageUrl} className={classes.media} />
+
         <CardContent className={classes.details}>
           <Typography variant="h6">{character.longName}</Typography>
           <Typography variant="caption" component="p">
@@ -40,22 +60,29 @@ export const CharacterCard: React.FC<Props> = ({ character }) => {
           </Typography>
         </CardContent>
       </CardActionArea>
+
+      {dashboard && (
+        <CardActions disableSpacing>
+          <Button
+            color="primary"
+            href={dashboardPath({ to: 'moveCategories', characterSlug: character.slug })}
+            component={Link}
+          >
+            コマンドリスト
+          </Button>
+          <Button
+            color="primary"
+            href={dashboardPath({ to: 'comboCategories', characterSlug: character.slug })}
+            component={Link}
+          >
+            コンボ
+          </Button>
+
+          <IconButton color="default" onClick={() => {}} className={classes.deleteButton}>
+            <DeleteIcon />
+          </IconButton>
+        </CardActions>
+      )}
     </Card>
-  );
-  return (
-    <div className={styles.container}>
-      <div className={styles.image}>
-        <img src={character.faceImageUrl} />
-      </div>
-
-      <div>
-        <div className={styles.name}>{character.longName}</div>
-
-        <ul className={styles.detail}>
-          <li>国籍 : {character.country}</li>
-          <li>格闘スタイル : {character.fightingStyle}</li>
-        </ul>
-      </div>
-    </div>
   );
 };

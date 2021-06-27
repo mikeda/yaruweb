@@ -1,0 +1,8 @@
+fragment BreadcrumbsMove on Move {
+  id
+  name
+
+  moveCategory {
+    ...BreadcrumbsMoveCategory
+  }
+}

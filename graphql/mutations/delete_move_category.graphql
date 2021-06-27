@@ -1,0 +1,7 @@
+mutation DeleteMoveCategory($moveCategoryId: ID!) {
+  deleteMoveCategory(input: { moveCategoryId: $moveCategoryId }) {
+    moveCategory {
+      ...moveCategory
+    }
+  }
+}

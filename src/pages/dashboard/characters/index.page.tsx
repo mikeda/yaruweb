@@ -1,26 +1,29 @@
 import React from 'react';
 
-import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
 import { NotFound } from '@/components/NotFound';
-import Link from 'next/link';
-import { DashboardBreadcrumbs } from '@/components';
-import { PageHeader } from '@/components/layouts/PageHeader';
-import { usePageDashboardCharactersQuery } from '@/lib/graphql/types';
-import { dashboardPath, path } from '@/lib';
+import { useCharacterCardsQuery } from '@/lib/graphql/types';
+import { dashboardPath } from '@/lib';
+import { Button, Grid } from '@material-ui/core';
+import { Add as AddIcon } from '@material-ui/icons';
+import { CharacterCard } from '@/components';
 
 const Page: React.FC = () => (
-  <DashboardContent activeTab="character">
-    <Head title="キャラクター" />
-    <DashboardBreadcrumbs to="characters" />
-    <PageHeader title="キャラクター" addPageUrl={dashboardPath({ to: 'charactersNew' })} />
-
+  <DashboardContent
+    title="キャラクター"
+    breadcrumb={{ to: 'characters' }}
+    actions={
+      <Button variant="contained" color="primary" startIcon={<AddIcon />} href={dashboardPath({ to: 'charactersNew' })}>
+        作成する
+      </Button>
+    }
+  >
     <CharacterList />
   </DashboardContent>
 );
 
 const CharacterList: React.FC = () => {
-  const { data, loading, error } = usePageDashboardCharactersQuery();
+  const { data, loading, error } = useCharacterCardsQuery();
 
   if (loading) return <NotFound>Loading...</NotFound>;
   if (error) return <NotFound>エラーが発生しました。{error.message}</NotFound>;
@@ -28,42 +31,13 @@ const CharacterList: React.FC = () => {
   if (!(characters && characters.length > 0)) return <NotFound>キャラクターが登録されていません。</NotFound>;
 
   return (
-    <div className="bl_horizTable">
-      <table>
-        <thead>
-          <tr>
-            <th>タイトル</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          {characters.map(character => {
-            return (
-              <tr key={character.slug}>
-                <td>
-                  <a href={path({ to: 'character', characterSlug: character.slug })} target="_blank" rel="noreferrer">
-                    {character.longName}
-                  </a>
-                </td>
-                <td>
-                  <Link href={dashboardPath({ to: 'characterEdit', characterId: character.slug })}>
-                    <a>編集</a>
-                  </Link>
-                  /
-                  <Link href={dashboardPath({ to: 'moveCategories', characterSlug: character.slug })}>
-                    <a>技データ</a>
-                  </Link>
-                  /
-                  <Link href={dashboardPath({ to: 'comboCategories', characterSlug: character.slug })}>
-                    <a>コンボ</a>
-                  </Link>
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </div>
+    <Grid container spacing={2}>
+      {characters.map(character => (
+        <Grid item key={character.slug} xs={12} sm={6}>
+          <CharacterCard character={character} dashboard />
+        </Grid>
+      ))}
+    </Grid>
   );
 };
 

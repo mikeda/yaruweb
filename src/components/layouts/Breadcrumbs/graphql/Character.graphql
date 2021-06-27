@@ -1,0 +1,5 @@
+query BreadcrumbsCharacter($characterSlug: ID!) {
+  character(characterSlug: $characterSlug) {
+    ...BreadcrumbsCharacter
+  }
+}
