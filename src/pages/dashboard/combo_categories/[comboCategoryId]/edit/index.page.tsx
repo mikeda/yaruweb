@@ -14,6 +14,7 @@ import { toast } from 'react-toastify';
 import { ComboCategoryForm } from '@/components/ComboCategoryForm';
 import { loadingState } from '@/states/loading';
 import { useSetRecoilState } from 'recoil';
+import { DashboardBreadcrumbs } from '@/components';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -33,11 +34,10 @@ const Page: React.FC = () => {
   const { comboCategory } = data;
 
   return (
-    <DashboardContent activeTab="character">
-      <Head title="コンボカテゴリ更新" />
-
-      <PageHeader title="コンボカテゴリ更新" />
-
+    <DashboardContent
+      title="カテゴリ登録"
+      breadcrumb={<DashboardBreadcrumbs to="comboCategoriesNew" character={comboCategory.character} />}
+    >
       <PageContent comboCategory={comboCategory} />
     </DashboardContent>
   );
@@ -62,15 +62,7 @@ export const PageContent: React.FC<{ comboCategory: ComboCategoryFragment }> = (
 
   setLoading(loading);
 
-  return (
-    <DashboardContent activeTab="character">
-      <Head title="コンボカテゴリ更新" />
-
-      <PageHeader title="コンボカテゴリ更新" />
-
-      <ComboCategoryForm comboCategory={comboCategory} onSubmit={onSubmit} />
-    </DashboardContent>
-  );
+  return <ComboCategoryForm comboCategory={comboCategory} onSubmit={onSubmit} />;
 };
 
 export default Page;

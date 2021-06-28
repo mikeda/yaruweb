@@ -2509,6 +2509,22 @@ export type DeleteArticleMutation = (
   )> }
 );
 
+export type DeleteComboCategoryMutationVariables = Exact<{
+  comboCategoryId: Scalars['ID'];
+}>;
+
+
+export type DeleteComboCategoryMutation = (
+  { __typename?: 'Mutation' }
+  & { deleteComboCategory?: Maybe<(
+    { __typename?: 'DeleteComboCategoryPayload' }
+    & { comboCategory: (
+      { __typename?: 'ComboCategory' }
+      & ComboCategoryFragment
+    ) }
+  )> }
+);
+
 export type DeleteCommandMutationVariables = Exact<{
   commandId: Scalars['ID'];
 }>;
@@ -3388,6 +3404,24 @@ export type CharacterFormFragment = (
   & Pick<Character, 'name' | 'nameKana' | 'longName' | 'longNameKana' | 'slug' | 'country' | 'fightingStyle' | 'story' | 'description' | 'dlc'>
 );
 
+export type ComboCategoryCardFragment = (
+  { __typename?: 'ComboCategory' }
+  & Pick<ComboCategory, 'id' | 'name' | 'combosCount'>
+);
+
+export type ComboCategoryCardsQueryVariables = Exact<{
+  characterSlug: Scalars['ID'];
+}>;
+
+
+export type ComboCategoryCardsQuery = (
+  { __typename?: 'Query' }
+  & { comboCategories: Array<(
+    { __typename?: 'ComboCategory' }
+    & ComboCategoryCardFragment
+  )> }
+);
+
 export type MoveCategoryCardFragment = (
   { __typename?: 'MoveCategory' }
   & Pick<MoveCategory, 'id' | 'name' | 'movesCount'>
@@ -3598,23 +3632,6 @@ export type PageDashboardAttackActionEditQuery = (
   ) }
 );
 
-export type PageDashboardComboCategoriesQueryVariables = Exact<{
-  characterSlug: Scalars['ID'];
-}>;
-
-
-export type PageDashboardComboCategoriesQuery = (
-  { __typename?: 'Query' }
-  & { character: (
-    { __typename?: 'Character' }
-    & Pick<Character, 'slug' | 'name'>
-    & { comboCategories: Array<(
-      { __typename?: 'ComboCategory' }
-      & Pick<ComboCategory, 'id' | 'name' | 'combosCount'>
-    )> }
-  ) }
-);
-
 export type PageDashboardComboCategoryNewQueryVariables = Exact<{
   characterSlug: Scalars['ID'];
 }>;
@@ -3638,19 +3655,6 @@ export type PageDashboardCharacterEditQuery = (
   & { character: (
     { __typename?: 'Character' }
     & CharacterFormFragment
-  ) }
-);
-
-export type PageDashboardMoveCategoryNewQueryVariables = Exact<{
-  characterSlug: Scalars['ID'];
-}>;
-
-
-export type PageDashboardMoveCategoryNewQuery = (
-  { __typename?: 'Query' }
-  & { character: (
-    { __typename?: 'Character' }
-    & Pick<Character, 'slug' | 'name'>
   ) }
 );
 
@@ -4506,6 +4510,13 @@ export const CharacterFormFragmentDoc = gql`
   story
   description
   dlc
+}
+    `;
+export const ComboCategoryCardFragmentDoc = gql`
+    fragment ComboCategoryCard on ComboCategory {
+  id
+  name
+  combosCount
 }
     `;
 export const MoveCategoryCardFragmentDoc = gql`
@@ -5421,6 +5432,41 @@ export function useDeleteArticleMutation(baseOptions?: Apollo.MutationHookOption
 export type DeleteArticleMutationHookResult = ReturnType<typeof useDeleteArticleMutation>;
 export type DeleteArticleMutationResult = Apollo.MutationResult<DeleteArticleMutation>;
 export type DeleteArticleMutationOptions = Apollo.BaseMutationOptions<DeleteArticleMutation, DeleteArticleMutationVariables>;
+export const DeleteComboCategoryDocument = gql`
+    mutation DeleteComboCategory($comboCategoryId: ID!) {
+  deleteComboCategory(input: {comboCategoryId: $comboCategoryId}) {
+    comboCategory {
+      ...comboCategory
+    }
+  }
+}
+    ${ComboCategoryFragmentDoc}`;
+export type DeleteComboCategoryMutationFn = Apollo.MutationFunction<DeleteComboCategoryMutation, DeleteComboCategoryMutationVariables>;
+
+/**
+ * __useDeleteComboCategoryMutation__
+ *
+ * To run a mutation, you first call `useDeleteComboCategoryMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteComboCategoryMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteComboCategoryMutation, { data, loading, error }] = useDeleteComboCategoryMutation({
+ *   variables: {
+ *      comboCategoryId: // value for 'comboCategoryId'
+ *   },
+ * });
+ */
+export function useDeleteComboCategoryMutation(baseOptions?: Apollo.MutationHookOptions<DeleteComboCategoryMutation, DeleteComboCategoryMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteComboCategoryMutation, DeleteComboCategoryMutationVariables>(DeleteComboCategoryDocument, options);
+      }
+export type DeleteComboCategoryMutationHookResult = ReturnType<typeof useDeleteComboCategoryMutation>;
+export type DeleteComboCategoryMutationResult = Apollo.MutationResult<DeleteComboCategoryMutation>;
+export type DeleteComboCategoryMutationOptions = Apollo.BaseMutationOptions<DeleteComboCategoryMutation, DeleteComboCategoryMutationVariables>;
 export const DeleteCommandDocument = gql`
     mutation DeleteCommand($commandId: ID!) {
   deleteCommand(input: {commandId: $commandId}) {
@@ -7456,6 +7502,41 @@ export function useCharacterCardsLazyQuery(baseOptions?: Apollo.LazyQueryHookOpt
 export type CharacterCardsQueryHookResult = ReturnType<typeof useCharacterCardsQuery>;
 export type CharacterCardsLazyQueryHookResult = ReturnType<typeof useCharacterCardsLazyQuery>;
 export type CharacterCardsQueryResult = Apollo.QueryResult<CharacterCardsQuery, CharacterCardsQueryVariables>;
+export const ComboCategoryCardsDocument = gql`
+    query ComboCategoryCards($characterSlug: ID!) {
+  comboCategories(characterSlug: $characterSlug) {
+    ...ComboCategoryCard
+  }
+}
+    ${ComboCategoryCardFragmentDoc}`;
+
+/**
+ * __useComboCategoryCardsQuery__
+ *
+ * To run a query within a React component, call `useComboCategoryCardsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useComboCategoryCardsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useComboCategoryCardsQuery({
+ *   variables: {
+ *      characterSlug: // value for 'characterSlug'
+ *   },
+ * });
+ */
+export function useComboCategoryCardsQuery(baseOptions: Apollo.QueryHookOptions<ComboCategoryCardsQuery, ComboCategoryCardsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ComboCategoryCardsQuery, ComboCategoryCardsQueryVariables>(ComboCategoryCardsDocument, options);
+      }
+export function useComboCategoryCardsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ComboCategoryCardsQuery, ComboCategoryCardsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ComboCategoryCardsQuery, ComboCategoryCardsQueryVariables>(ComboCategoryCardsDocument, options);
+        }
+export type ComboCategoryCardsQueryHookResult = ReturnType<typeof useComboCategoryCardsQuery>;
+export type ComboCategoryCardsLazyQueryHookResult = ReturnType<typeof useComboCategoryCardsLazyQuery>;
+export type ComboCategoryCardsQueryResult = Apollo.QueryResult<ComboCategoryCardsQuery, ComboCategoryCardsQueryVariables>;
 export const MoveCategoryCardsDocument = gql`
     query MoveCategoryCards($characterSlug: ID!) {
   moveCategories(characterSlug: $characterSlug) {
@@ -7817,47 +7898,6 @@ export function usePageDashboardAttackActionEditLazyQuery(baseOptions?: Apollo.L
 export type PageDashboardAttackActionEditQueryHookResult = ReturnType<typeof usePageDashboardAttackActionEditQuery>;
 export type PageDashboardAttackActionEditLazyQueryHookResult = ReturnType<typeof usePageDashboardAttackActionEditLazyQuery>;
 export type PageDashboardAttackActionEditQueryResult = Apollo.QueryResult<PageDashboardAttackActionEditQuery, PageDashboardAttackActionEditQueryVariables>;
-export const PageDashboardComboCategoriesDocument = gql`
-    query PageDashboardComboCategories($characterSlug: ID!) {
-  character(characterSlug: $characterSlug) {
-    slug
-    name
-    comboCategories {
-      id
-      name
-      combosCount
-    }
-  }
-}
-    `;
-
-/**
- * __usePageDashboardComboCategoriesQuery__
- *
- * To run a query within a React component, call `usePageDashboardComboCategoriesQuery` and pass it any options that fit your needs.
- * When your component renders, `usePageDashboardComboCategoriesQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = usePageDashboardComboCategoriesQuery({
- *   variables: {
- *      characterSlug: // value for 'characterSlug'
- *   },
- * });
- */
-export function usePageDashboardComboCategoriesQuery(baseOptions: Apollo.QueryHookOptions<PageDashboardComboCategoriesQuery, PageDashboardComboCategoriesQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<PageDashboardComboCategoriesQuery, PageDashboardComboCategoriesQueryVariables>(PageDashboardComboCategoriesDocument, options);
-      }
-export function usePageDashboardComboCategoriesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PageDashboardComboCategoriesQuery, PageDashboardComboCategoriesQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<PageDashboardComboCategoriesQuery, PageDashboardComboCategoriesQueryVariables>(PageDashboardComboCategoriesDocument, options);
-        }
-export type PageDashboardComboCategoriesQueryHookResult = ReturnType<typeof usePageDashboardComboCategoriesQuery>;
-export type PageDashboardComboCategoriesLazyQueryHookResult = ReturnType<typeof usePageDashboardComboCategoriesLazyQuery>;
-export type PageDashboardComboCategoriesQueryResult = Apollo.QueryResult<PageDashboardComboCategoriesQuery, PageDashboardComboCategoriesQueryVariables>;
 export const PageDashboardComboCategoryNewDocument = gql`
     query PageDashboardComboCategoryNew($characterSlug: ID!) {
   character(characterSlug: $characterSlug) {
@@ -7929,42 +7969,6 @@ export function usePageDashboardCharacterEditLazyQuery(baseOptions?: Apollo.Lazy
 export type PageDashboardCharacterEditQueryHookResult = ReturnType<typeof usePageDashboardCharacterEditQuery>;
 export type PageDashboardCharacterEditLazyQueryHookResult = ReturnType<typeof usePageDashboardCharacterEditLazyQuery>;
 export type PageDashboardCharacterEditQueryResult = Apollo.QueryResult<PageDashboardCharacterEditQuery, PageDashboardCharacterEditQueryVariables>;
-export const PageDashboardMoveCategoryNewDocument = gql`
-    query PageDashboardMoveCategoryNew($characterSlug: ID!) {
-  character(characterSlug: $characterSlug) {
-    slug
-    name
-  }
-}
-    `;
-
-/**
- * __usePageDashboardMoveCategoryNewQuery__
- *
- * To run a query within a React component, call `usePageDashboardMoveCategoryNewQuery` and pass it any options that fit your needs.
- * When your component renders, `usePageDashboardMoveCategoryNewQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = usePageDashboardMoveCategoryNewQuery({
- *   variables: {
- *      characterSlug: // value for 'characterSlug'
- *   },
- * });
- */
-export function usePageDashboardMoveCategoryNewQuery(baseOptions: Apollo.QueryHookOptions<PageDashboardMoveCategoryNewQuery, PageDashboardMoveCategoryNewQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<PageDashboardMoveCategoryNewQuery, PageDashboardMoveCategoryNewQueryVariables>(PageDashboardMoveCategoryNewDocument, options);
-      }
-export function usePageDashboardMoveCategoryNewLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PageDashboardMoveCategoryNewQuery, PageDashboardMoveCategoryNewQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<PageDashboardMoveCategoryNewQuery, PageDashboardMoveCategoryNewQueryVariables>(PageDashboardMoveCategoryNewDocument, options);
-        }
-export type PageDashboardMoveCategoryNewQueryHookResult = ReturnType<typeof usePageDashboardMoveCategoryNewQuery>;
-export type PageDashboardMoveCategoryNewLazyQueryHookResult = ReturnType<typeof usePageDashboardMoveCategoryNewLazyQuery>;
-export type PageDashboardMoveCategoryNewQueryResult = Apollo.QueryResult<PageDashboardMoveCategoryNewQuery, PageDashboardMoveCategoryNewQueryVariables>;
 export const PageDashboardCombosDocument = gql`
     query PageDashboardCombos($comboCategoryId: ID!) {
   comboCategory(comboCategoryId: $comboCategoryId) {

@@ -1,16 +1,15 @@
 import React from 'react';
 
 import { Combo, usePageDashboardCombosQuery, useUpdateComboPositionMutation } from '@/lib/graphql/types';
-import { Head } from '@/components/layouts/Head';
-import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { PageHeader } from '@/components/layouts/PageHeader';
 import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from '@/states/loading';
-import { DashboardBreadcrumbs } from '@/components';
+import { DashboardContent, DashboardBreadcrumbs } from '@/components';
 import { toast } from 'react-toastify';
 import { SortableObjectCardList } from '@/components/ObjectCardList';
 import { dashboardPath } from '@/lib';
+import { Button } from '@material-ui/core';
+import { Add } from '@material-ui/icons';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -30,11 +29,20 @@ const Page: React.FC = () => {
   const title = comboCategory.name;
 
   return (
-    <DashboardContent activeTab="character">
-      <Head title={title} />
-      <DashboardBreadcrumbs to="combos" comboCategory={comboCategory} />
-      <PageHeader title={title} addPageUrl={dashboardPath({ to: 'combosNew', comboCategoryId: comboCategory.id })} />
-
+    <DashboardContent
+      title={comboCategory.name}
+      breadcrumb={<DashboardBreadcrumbs to="combos" comboCategory={comboCategory} />}
+      actions={
+        <Button
+          variant="contained"
+          color="primary"
+          startIcon={<Add />}
+          href={dashboardPath({ to: 'combosNew', comboCategoryId: comboCategory.id })}
+        >
+          作成する
+        </Button>
+      }
+    >
       <PageContent combos={data.comboCategory.combos} />
     </DashboardContent>
   );

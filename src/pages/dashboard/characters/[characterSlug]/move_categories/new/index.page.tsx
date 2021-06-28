@@ -1,15 +1,12 @@
 import React from 'react';
 
 import {
+  BreadcrumbsCharacterQuery,
   MoveCategoryAttributes,
-  PageDashboardMoveCategoryNewQuery,
   useBreadcrumbsCharacterQuery,
   useCreateMoveCategoryMutation,
-  usePageDashboardMoveCategoryNewQuery,
 } from '@/lib/graphql/types';
-import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { PageHeader } from '@/components/layouts/PageHeader';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { MoveCategoryForm } from '@/components/MoveCategoryForm';
@@ -37,7 +34,7 @@ const Page: React.FC = () => {
   );
 };
 
-const PageContent: React.FC<PageDashboardMoveCategoryNewQuery> = ({ character }) => {
+const PageContent: React.FC<BreadcrumbsCharacterQuery> = ({ character }) => {
   const router = useRouter();
   const setLoading = useSetRecoilState(loadingState);
   const [createMoveCategory, { loading }] = useCreateMoveCategoryMutation({

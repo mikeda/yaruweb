@@ -1,4 +1,9 @@
 import React, { useState } from 'react';
+import { useSetRecoilState } from 'recoil';
+import { arrayMove } from '@dnd-kit/sortable';
+import { Button, Grid } from '@material-ui/core';
+import { Add as AddIcon } from '@material-ui/icons';
+import { toast } from 'react-toastify';
 
 import {
   MoveCategoryCardFragment,
@@ -7,18 +12,10 @@ import {
   useMoveCategoryCardsQuery,
   useUpdateMoveCategoryPositionMutation,
 } from '@/lib/graphql/types';
-import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { useSetRecoilState } from 'recoil';
 import { loadingState } from '@/states/loading';
-import { toast } from 'react-toastify';
 import { dashboardPath } from '@/lib';
-import { Button, Grid } from '@material-ui/core';
-import { Add as AddIcon } from '@material-ui/icons';
 import { useRouteParams } from './hooks';
-import { SortableCardList } from '@/components/SortableCardList';
-import { DashboardMoveCategoryCard } from '@/components/MoveCategoryCard';
-import { DashboardBreadcrumbs } from '@/components';
-import { arrayMove } from '@dnd-kit/sortable';
+import { DashboardContent, DashboardBreadcrumbs, DashboardMoveCategoryCard, SortableCardList } from '@/components';
 
 const Page: React.FC = () => {
   const { characterSlug } = useRouteParams();

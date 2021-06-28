@@ -33,11 +33,10 @@ const Page: React.FC = () => {
   const { comboCategory } = data;
 
   return (
-    <DashboardContent activeTab="character">
-      <Head title="コンボ登録" />
-      <DashboardBreadcrumbs to="combosNew" comboCategory={comboCategory} />
-      <PageHeader title="コンボ登録" />
-
+    <DashboardContent
+      title="コンボ登録"
+      breadcrumb={<DashboardBreadcrumbs to="combosNew" comboCategory={comboCategory} />}
+    >
       <PageContent {...data} />
     </DashboardContent>
   );

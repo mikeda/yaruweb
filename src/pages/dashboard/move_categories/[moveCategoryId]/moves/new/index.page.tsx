@@ -33,11 +33,10 @@ const Page: React.FC = () => {
   const { moveCategory } = data;
 
   return (
-    <DashboardContent activeTab="character">
-      <Head title="技データ作成" />
-      <DashboardBreadcrumbs to="movesNew" moveCategory={moveCategory} />
-      <PageHeader title="技データ作成" />
-
+    <DashboardContent
+      title="技データ登録"
+      breadcrumb={<DashboardBreadcrumbs to="movesNew" moveCategory={moveCategory} />}
+    >
       <PageContent {...data} />
     </DashboardContent>
   );
