@@ -1,14 +1,13 @@
 import React from 'react';
 
 import { TournamentAttributes, useCreateTournamentMutation } from '@/lib/graphql/types';
-import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { PageHeader } from '@/components/layouts/PageHeader';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { TournamentForm } from '@/components/TournamentForm';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from '@/states/loading';
+import { DashboardBreadcrumbs } from '@/components';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -30,11 +29,7 @@ const Page: React.FC = () => {
   setLoading(loading);
 
   return (
-    <DashboardContent activeTab="tournament">
-      <Head title="大会情報作成" />
-
-      <PageHeader title="大会情報作成" />
-
+    <DashboardContent title="大会登録" breadcrumb={<DashboardBreadcrumbs to="tournamentsNew" />}>
       <TournamentForm onSubmit={onSubmit} />
     </DashboardContent>
   );

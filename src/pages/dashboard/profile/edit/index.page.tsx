@@ -6,9 +6,7 @@ import {
   useCurrentPlayerQuery,
   useUpdateCurrentPlayerMutation,
 } from '@/lib/graphql/types';
-import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { PageHeader } from '@/components/layouts/PageHeader';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/router';
 import { Button } from '@/components/Button';
@@ -31,13 +29,7 @@ const Page: React.FC = () => {
   setLoading(loading);
 
   return (
-    <DashboardContent activeTab="profile">
-      <Head title="プロフィール更新" />
-
-      <PageHeader title="プロフィール更新" />
-
-      {data && <Form currentPlayer={data.currentPlayer} />}
-    </DashboardContent>
+    <DashboardContent title="プロフィール編集">{data && <Form currentPlayer={data.currentPlayer} />}</DashboardContent>
   );
 };
 

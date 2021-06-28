@@ -33,11 +33,7 @@ const Page: React.FC = () => {
   const { move } = data;
 
   return (
-    <DashboardContent>
-      <Head title="判定登録" />
-      <DashboardBreadcrumbs to="throwActionsNew" move={move} />
-      <PageHeader title="判定登録" />
-
+    <DashboardContent title="判定編集" breadcrumb={<DashboardBreadcrumbs to="throwActionsNew" move={move} />}>
       <PageContent {...data} />
     </DashboardContent>
   );

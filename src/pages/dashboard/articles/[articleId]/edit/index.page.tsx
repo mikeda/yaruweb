@@ -27,12 +27,10 @@ const Page: React.FC = () => {
   setLoading(loading);
 
   return (
-    <DashboardContent activeTab="article">
-      <Head title="記事編集" />
-      {data && <DashboardBreadcrumbs to="articleEdit" article={data.myArticle} />}
-
-      <PageHeader title="記事編集" />
-
+    <DashboardContent
+      title="記事編集"
+      breadcrumb={data && <DashboardBreadcrumbs to="articleEdit" article={data.myArticle} />}
+    >
       {data && <Content article={data.myArticle} />}
     </DashboardContent>
   );

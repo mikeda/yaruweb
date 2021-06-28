@@ -6,9 +6,7 @@ import {
   useUpdateTournamentVideoMutation,
   TournamentVideo,
 } from '@/lib/graphql/types';
-import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { PageHeader } from '@/components/layouts/PageHeader';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { loadingState } from '@/states/loading';
@@ -34,11 +32,10 @@ const Page: React.FC = () => {
   const { tournamentVideo } = data;
 
   return (
-    <DashboardContent activeTab="character">
-      <Head title={tournamentVideo.title} />
-      <DashboardBreadcrumbs to="tournamentVideoEdit" tournamentVideo={tournamentVideo} />
-      <PageHeader title={tournamentVideo.title} />
-
+    <DashboardContent
+      title="動画編集"
+      breadcrumb={<DashboardBreadcrumbs to="tournamentVideoEdit" tournamentVideo={tournamentVideo} />}
+    >
       <VideoContent video={tournamentVideo} />
     </DashboardContent>
   );

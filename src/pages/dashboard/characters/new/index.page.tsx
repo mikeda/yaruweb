@@ -30,11 +30,7 @@ const Page: React.FC = () => {
   setLoading(loading);
 
   return (
-    <DashboardContent activeTab="character">
-      <Head title="キャラクター登録" />
-
-      <PageHeader title="キャラクター登録" />
-
+    <DashboardContent title="キャラクター登録">
       <CharacterForm onSubmit={onSubmit} />
     </DashboardContent>
   );

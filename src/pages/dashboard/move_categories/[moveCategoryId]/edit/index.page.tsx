@@ -6,9 +6,7 @@ import {
   usePageDashboardMoveCategoryEditQuery,
   useUpdateMoveCategoryMutation,
 } from '@/lib/graphql/types';
-import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { PageHeader } from '@/components/layouts/PageHeader';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { MoveCategoryForm } from '@/components/MoveCategoryForm';
@@ -33,11 +31,7 @@ const Page: React.FC = () => {
   const { moveCategory } = data;
 
   return (
-    <DashboardContent activeTab="character">
-      <Head title="技データカテゴリ更新" />
-
-      <PageHeader title="技データカテゴリ更新" />
-
+    <DashboardContent title="カテゴリ編集">
       <PageContent moveCategory={moveCategory} />
     </DashboardContent>
   );
@@ -62,15 +56,7 @@ export const PageContent: React.FC<{ moveCategory: MoveCategoryFragment }> = ({ 
 
   setLoading(loading);
 
-  return (
-    <DashboardContent activeTab="character">
-      <Head title="技データカテゴリ更新" />
-
-      <PageHeader title="技データカテゴリ更新" />
-
-      <MoveCategoryForm moveCategory={moveCategory} onSubmit={onSubmit} />
-    </DashboardContent>
-  );
+  return <MoveCategoryForm moveCategory={moveCategory} onSubmit={onSubmit} />;
 };
 
 export default Page;

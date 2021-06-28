@@ -7,9 +7,7 @@ import {
   TournamentVideo,
 } from '@/lib/graphql/types';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { PageHeader } from '@/components/layouts/PageHeader';
 import { DashboardBreadcrumbs } from '@/components';
-import { Head } from '@/components/layouts/Head';
 import { useRouter } from 'next/router';
 import { loadingState } from '@/states/loading';
 import { useSetRecoilState } from 'recoil';
@@ -44,14 +42,8 @@ const Page: React.FC = () => {
 
   setLoading(loading);
 
-  const title = '動画';
-
   return (
-    <DashboardContent activeTab="video">
-      <Head title={title} />
-      <DashboardBreadcrumbs to="tournamentVideos" tournament={tournament} />
-      <PageHeader title={title} />
-
+    <DashboardContent title="動画" breadcrumb={<DashboardBreadcrumbs to="tournamentVideos" tournament={tournament} />}>
       <VideoForm tournamentId={tournamentId} />
 
       <PageContent videos={tournament.videos} refetch={refetch} />

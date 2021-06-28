@@ -33,14 +33,11 @@ const Page: React.FC = () => {
   if (!data) return null;
   const { attackAction } = data;
 
-  const title = '判定編集';
-
   return (
-    <DashboardContent activeTab="character">
-      <Head title={title} />
-      <DashboardBreadcrumbs to="attackActionEdit" move={attackAction.move} />
-      <PageHeader title={title} />
-
+    <DashboardContent
+      title="判定編集"
+      breadcrumb={<DashboardBreadcrumbs to="attackActionEdit" move={attackAction.move} />}
+    >
       <AttackActionContent {...data} />
     </DashboardContent>
   );

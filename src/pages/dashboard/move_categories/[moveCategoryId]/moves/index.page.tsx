@@ -1,16 +1,15 @@
 import React from 'react';
 
 import { Move, usePageDashboardMovesQuery, useUpdateMovePositionMutation } from '@/lib/graphql/types';
-import { Head } from '@/components/layouts/Head';
-import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { PageHeader } from '@/components/layouts/PageHeader';
 import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from '@/states/loading';
-import { DashboardBreadcrumbs } from '@/components';
+import { DashboardContent, DashboardBreadcrumbs } from '@/components';
 import { toast } from 'react-toastify';
 import { SortableObjectCardList } from '@/components/ObjectCardList';
 import { dashboardPath } from '@/lib';
+import { Button } from '@material-ui/core';
+import { Add } from '@material-ui/icons';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -30,11 +29,20 @@ const Page: React.FC = () => {
   const title = moveCategory.name;
 
   return (
-    <DashboardContent activeTab="character">
-      <Head title={title} />
-      <DashboardBreadcrumbs to="moves" moveCategory={moveCategory} />
-      <PageHeader title={title} addPageUrl={dashboardPath({ to: 'movesNew', moveCategoryId: moveCategory.id })} />
-
+    <DashboardContent
+      title={moveCategory.name}
+      breadcrumb={<DashboardBreadcrumbs to="moves" moveCategory={moveCategory} />}
+      actions={
+        <Button
+          variant="contained"
+          color="primary"
+          startIcon={<Add />}
+          href={dashboardPath({ to: 'movesNew', moveCategoryId: moveCategory.id })}
+        >
+          作成する
+        </Button>
+      }
+    >
       <PageContent moves={data.moveCategory.moves} />
     </DashboardContent>
   );

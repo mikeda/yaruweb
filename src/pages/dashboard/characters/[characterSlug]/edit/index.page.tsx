@@ -6,9 +6,7 @@ import {
   PageDashboardCharacterEditQuery,
   useUpdateCharacterMutation,
 } from '@/lib/graphql/types';
-import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { PageHeader } from '@/components/layouts/PageHeader';
 import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
@@ -16,6 +14,7 @@ import { toast } from 'react-toastify';
 import { CharacterForm } from '@/components/CharacterForm';
 import { loadingState } from '@/states/loading';
 import { useSetRecoilState } from 'recoil';
+import { DashboardBreadcrumbs } from '@/components';
 
 const Page: React.FC<PageDashboardCharacterEditQuery> = ({ character }) => {
   const router = useRouter();
@@ -37,11 +36,10 @@ const Page: React.FC<PageDashboardCharacterEditQuery> = ({ character }) => {
   setLoading(loading);
 
   return (
-    <DashboardContent activeTab="character">
-      <Head title="キャラクター編集" />
-
-      <PageHeader title="キャラクター編集" />
-
+    <DashboardContent
+      title="キャラクター編集"
+      breadcrumb={<DashboardBreadcrumbs to="characterEdit" character={character} />}
+    >
       <CharacterForm character={character} onSubmit={onSubmit} />
     </DashboardContent>
   );
