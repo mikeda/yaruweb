@@ -54,6 +54,7 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     contentBody: {
       marginTop: theme.spacing(3),
+      backgroundColor: theme.palette.background.default,
     },
   }),
 );

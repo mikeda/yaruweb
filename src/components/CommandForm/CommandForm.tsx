@@ -4,7 +4,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
 import { CommandAttributes, CommandFragment, OperationFragment, StateFragment } from '@/lib/graphql/types';
-import { Button } from '@/components/Button';
 import { FormGroup } from '@/components/form/FormGroup';
 import { OperationListSelector } from '../OperationListSelector';
 

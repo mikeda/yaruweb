@@ -10,7 +10,6 @@ import { Node } from 'slate';
 import { useForm } from 'react-hook-form';
 import { FormGroup } from '../form/FormGroup';
 import { Input } from '../form/Input';
-import { Button } from '../Button';
 
 const schema = yup.object().shape({
   title: yup.string().required(),

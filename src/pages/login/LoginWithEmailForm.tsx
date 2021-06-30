@@ -12,7 +12,6 @@ import { useForm } from 'react-hook-form';
 import { PlayerValidator } from '@/lib/validators/PlayerValidator';
 import { FormGroup } from '@/components/form/FormGroup';
 import { Input } from '@/components/form/Input';
-import { Button } from '@/components/Button';
 import { loadingState } from '@/states/loading';
 import { path } from '@/lib';
 

@@ -116,9 +116,6 @@ const theme = createMuiTheme({
     success,
     warning,
     error,
-    background: {
-      default: '#fff',
-    },
   },
   props: {
     MuiTextField: {

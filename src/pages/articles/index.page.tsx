@@ -12,40 +12,12 @@ import { useSetRecoilState } from 'recoil';
 import { loadingState } from '@/states/loading';
 import { Paging } from '@/components/Paging';
 import { path } from '@/lib';
-import { Button } from '@material-ui/core';
-import { ButtonGroup } from '@material-ui/core';
 
 const Page: React.FC = () => {
   return (
     <Content>
       <Head title="鉄拳7の記事一覧" />
       <Breadcrumbs to="articles" />
-      <div style={{ margin: '0.5em' }}>
-        <Button variant="contained">Default</Button>{' '}
-        <Button variant="contained" color="primary">
-          Primary
-        </Button>
-        <Button variant="contained" color="secondary">
-          Secondary
-        </Button>
-        <Button variant="contained" color="default">
-          Info
-        </Button>
-        <Button variant="contained" disabled>
-          Disabled
-        </Button>
-        <Button variant="contained" color="primary" href="https://google.com/">
-          LINK
-        </Button>
-      </div>
-      <div style={{ margin: '0.5em' }}>
-        <ButtonGroup variant="contained" color="primary" aria-label="contained primary button group">
-          <Button>One</Button>
-          <Button>Two</Button>
-          <Button>Three</Button>
-        </ButtonGroup>
-      </div>
-
       <PageContent />
     </Content>
   );
@@ -58,7 +30,7 @@ const PageContent: React.FC = () => {
   const page = query.page ? Number(query.page as string) : 1;
   const order = query.order === 'popular' ? Order.Popular : Order.New;
   const { data, loading } = useArticlesQuery({
-    variables: { page, order },
+    variables: { page, per: 2, order },
     skip: !router.isReady,
   });
 

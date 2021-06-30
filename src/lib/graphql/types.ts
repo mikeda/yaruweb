@@ -3422,6 +3422,31 @@ export type ComboCategoryCardsQuery = (
   )> }
 );
 
+export type DashboardTournamentCardFragment = (
+  { __typename?: 'Tournament' }
+  & Pick<Tournament, 'id' | 'name' | 'description' | 'mainImageUrl' | 'startsAt' | 'videosCount'>
+);
+
+export type DashboardTournamentCardsQueryVariables = Exact<{
+  page?: Maybe<Scalars['Int']>;
+  per?: Maybe<Scalars['Int']>;
+}>;
+
+
+export type DashboardTournamentCardsQuery = (
+  { __typename?: 'Query' }
+  & { tournaments: (
+    { __typename?: 'TournamentCollection' }
+    & { records: Array<(
+      { __typename?: 'Tournament' }
+      & DashboardTournamentCardFragment
+    )>, paging: (
+      { __typename?: 'Paging' }
+      & PagingFragment
+    ) }
+  ) }
+);
+
 export type MoveCategoryCardFragment = (
   { __typename?: 'MoveCategory' }
   & Pick<MoveCategory, 'id' | 'name' | 'movesCount'>
@@ -3472,6 +3497,11 @@ export type MoveMediaFragment = (
     { __typename?: 'Condition' }
     & Pick<Condition, 'id' | 'name'>
   )> }
+);
+
+export type TournamentCardFragment = (
+  { __typename?: 'Tournament' }
+  & Pick<Tournament, 'id' | 'name' | 'description' | 'mainImageUrl' | 'startsAt'>
 );
 
 export type BreadcrumbsCharacterQueryVariables = Exact<{
@@ -4519,6 +4549,16 @@ export const ComboCategoryCardFragmentDoc = gql`
   combosCount
 }
     `;
+export const DashboardTournamentCardFragmentDoc = gql`
+    fragment DashboardTournamentCard on Tournament {
+  id
+  name
+  description
+  mainImageUrl
+  startsAt
+  videosCount
+}
+    `;
 export const MoveCategoryCardFragmentDoc = gql`
     fragment MoveCategoryCard on MoveCategory {
   id
@@ -4575,6 +4615,15 @@ export const MoveMediaFragmentDoc = gql`
   }
 }
     ${ActionFragmentDoc}`;
+export const TournamentCardFragmentDoc = gql`
+    fragment TournamentCard on Tournament {
+  id
+  name
+  description
+  mainImageUrl
+  startsAt
+}
+    `;
 export const BreadcrumbsCharacterFragmentDoc = gql`
     fragment BreadcrumbsCharacter on Character {
   slug
@@ -7537,6 +7586,48 @@ export function useComboCategoryCardsLazyQuery(baseOptions?: Apollo.LazyQueryHoo
 export type ComboCategoryCardsQueryHookResult = ReturnType<typeof useComboCategoryCardsQuery>;
 export type ComboCategoryCardsLazyQueryHookResult = ReturnType<typeof useComboCategoryCardsLazyQuery>;
 export type ComboCategoryCardsQueryResult = Apollo.QueryResult<ComboCategoryCardsQuery, ComboCategoryCardsQueryVariables>;
+export const DashboardTournamentCardsDocument = gql`
+    query DashboardTournamentCards($page: Int, $per: Int) {
+  tournaments(page: $page, per: $per) {
+    records {
+      ...DashboardTournamentCard
+    }
+    paging {
+      ...paging
+    }
+  }
+}
+    ${DashboardTournamentCardFragmentDoc}
+${PagingFragmentDoc}`;
+
+/**
+ * __useDashboardTournamentCardsQuery__
+ *
+ * To run a query within a React component, call `useDashboardTournamentCardsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useDashboardTournamentCardsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useDashboardTournamentCardsQuery({
+ *   variables: {
+ *      page: // value for 'page'
+ *      per: // value for 'per'
+ *   },
+ * });
+ */
+export function useDashboardTournamentCardsQuery(baseOptions?: Apollo.QueryHookOptions<DashboardTournamentCardsQuery, DashboardTournamentCardsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<DashboardTournamentCardsQuery, DashboardTournamentCardsQueryVariables>(DashboardTournamentCardsDocument, options);
+      }
+export function useDashboardTournamentCardsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<DashboardTournamentCardsQuery, DashboardTournamentCardsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<DashboardTournamentCardsQuery, DashboardTournamentCardsQueryVariables>(DashboardTournamentCardsDocument, options);
+        }
+export type DashboardTournamentCardsQueryHookResult = ReturnType<typeof useDashboardTournamentCardsQuery>;
+export type DashboardTournamentCardsLazyQueryHookResult = ReturnType<typeof useDashboardTournamentCardsLazyQuery>;
+export type DashboardTournamentCardsQueryResult = Apollo.QueryResult<DashboardTournamentCardsQuery, DashboardTournamentCardsQueryVariables>;
 export const MoveCategoryCardsDocument = gql`
     query MoveCategoryCards($characterSlug: ID!) {
   moveCategories(characterSlug: $characterSlug) {

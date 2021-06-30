@@ -2,7 +2,6 @@ export * from './Breadcrumbs';
 export * from './Content';
 export * from './GlobalFooter';
 export * from './GlobalHeader';
-export * from './Grid';
 export * from './Head';
 export * from './HeaderNav';
 export * from './PageHeader';

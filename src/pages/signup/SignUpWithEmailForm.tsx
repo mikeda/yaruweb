@@ -11,7 +11,6 @@ import { currentPlayerState } from '@/states/currentPlayer';
 import { useSetRecoilState } from 'recoil';
 import { useForm } from 'react-hook-form';
 import { Input } from '@/components/form/Input';
-import { Button } from '@/components/Button';
 import { FormGroup } from '@/components/form/FormGroup';
 import { loadingState } from '@/states/loading';
 import { path } from '@/lib';
