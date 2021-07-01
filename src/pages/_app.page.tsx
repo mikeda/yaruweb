@@ -19,7 +19,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import * as gtag from '@/lib/gtag';
 
 import { client } from '@/lib/graphql/client';
-import { GlobalFooter } from '@/components/layouts/GlobalFooter';
 import { currentPlayerState } from '@/states/currentPlayer';
 import { useCurrentPlayerQuery } from '@/lib/graphql/types';
 import { useRouter } from 'next/router';
@@ -63,7 +62,6 @@ export default function App({ Component, pageProps }: AppProps) {
           <Component {...pageProps} />
         </ThemeProvider>
 
-        <GlobalFooter />
         <ToastContainer />
         <Loading />
 
