@@ -1,0 +1,5 @@
+query CharacterCard($characterSlug: ID!) {
+  character(characterSlug: $characterSlug) {
+    ...CharacterCard
+  }
+}

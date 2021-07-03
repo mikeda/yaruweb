@@ -9,7 +9,7 @@ query PageMoveCategory($moveCategoryId: ID!) {
     }
 
     moves {
-      ...move
+      ...MoveListItem
     }
   }
 }

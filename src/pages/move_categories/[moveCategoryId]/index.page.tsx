@@ -7,7 +7,7 @@ import {
   PageMoveCategoryDocument,
   PageMoveCategoryQuery,
 } from '@/lib/graphql/types';
-import { MoveList } from '@/components/MoveList';
+import { MoveSearchList } from '@/components/MoveList';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Head } from '@/components/layouts/Head';
 import { Content } from '@/components/layouts/Content';
@@ -23,7 +23,7 @@ const Page: React.FC<PageMoveCategoryQuery> = ({ moveCategory }) => {
       <Breadcrumbs to="moveCategory" moveCategory={moveCategory} />
       <PageHeader title={title} />
 
-      <MoveList moves={moveCategory.moves} />
+      <MoveSearchList moves={moveCategory.moves} />
     </Content>
   );
 };
