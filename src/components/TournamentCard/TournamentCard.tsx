@@ -5,6 +5,7 @@ import { Card, CardActionArea, CardContent, CardMedia, makeStyles, Typography } 
 import { path } from '@/lib';
 import { Link } from '../Link';
 import { NO_IMAGE_URL } from '@/lib/Assets';
+import dayjs from '@/lib/dayjs';
 
 const useStyles = makeStyles({
   media: {
@@ -29,7 +30,7 @@ export const TournamentCard: React.FC<Props> = ({ tournament }) => {
         <CardContent>
           <Typography variant="h6">{tournament.name}</Typography>
           <Typography variant="caption" component="p">
-            {tournament.description}
+            {dayjs(tournament.startsAt).format('YYYY/M/D H:mm')}
           </Typography>
         </CardContent>
       </CardActionArea>

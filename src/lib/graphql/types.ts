@@ -3527,26 +3527,6 @@ export type TournamentCardFragment = (
   & Pick<Tournament, 'id' | 'name' | 'description' | 'mainImageUrl' | 'startsAt'>
 );
 
-export type TournamentCardsQueryVariables = Exact<{
-  page?: Maybe<Scalars['Int']>;
-  per?: Maybe<Scalars['Int']>;
-}>;
-
-
-export type TournamentCardsQuery = (
-  { __typename?: 'Query' }
-  & { tournaments: (
-    { __typename?: 'TournamentCollection' }
-    & { records: Array<(
-      { __typename?: 'Tournament' }
-      & TournamentCardFragment
-    )>, paging: (
-      { __typename?: 'Paging' }
-      & PagingFragment
-    ) }
-  ) }
-);
-
 export type TournamentVideoCardFragment = (
   { __typename?: 'TournamentVideo' }
   & Pick<TournamentVideo, 'id' | 'title' | 'thumbnailUrl'>
@@ -4254,6 +4234,26 @@ export type PageTournamentQuery = (
         & Pick<Channel, 'name'>
       ) }
     )> }
+  ) }
+);
+
+export type PageTournamentsQueryVariables = Exact<{
+  page?: Maybe<Scalars['Int']>;
+  per?: Maybe<Scalars['Int']>;
+}>;
+
+
+export type PageTournamentsQuery = (
+  { __typename?: 'Query' }
+  & { tournaments: (
+    { __typename?: 'TournamentCollection' }
+    & { records: Array<(
+      { __typename?: 'Tournament' }
+      & TournamentCardFragment
+    )>, paging: (
+      { __typename?: 'Paging' }
+      & PagingFragment
+    ) }
   ) }
 );
 
@@ -7765,48 +7765,6 @@ export function useMoveCategoryCardsLazyQuery(baseOptions?: Apollo.LazyQueryHook
 export type MoveCategoryCardsQueryHookResult = ReturnType<typeof useMoveCategoryCardsQuery>;
 export type MoveCategoryCardsLazyQueryHookResult = ReturnType<typeof useMoveCategoryCardsLazyQuery>;
 export type MoveCategoryCardsQueryResult = Apollo.QueryResult<MoveCategoryCardsQuery, MoveCategoryCardsQueryVariables>;
-export const TournamentCardsDocument = gql`
-    query TournamentCards($page: Int, $per: Int) {
-  tournaments(page: $page, per: $per) {
-    records {
-      ...TournamentCard
-    }
-    paging {
-      ...paging
-    }
-  }
-}
-    ${TournamentCardFragmentDoc}
-${PagingFragmentDoc}`;
-
-/**
- * __useTournamentCardsQuery__
- *
- * To run a query within a React component, call `useTournamentCardsQuery` and pass it any options that fit your needs.
- * When your component renders, `useTournamentCardsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useTournamentCardsQuery({
- *   variables: {
- *      page: // value for 'page'
- *      per: // value for 'per'
- *   },
- * });
- */
-export function useTournamentCardsQuery(baseOptions?: Apollo.QueryHookOptions<TournamentCardsQuery, TournamentCardsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<TournamentCardsQuery, TournamentCardsQueryVariables>(TournamentCardsDocument, options);
-      }
-export function useTournamentCardsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TournamentCardsQuery, TournamentCardsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<TournamentCardsQuery, TournamentCardsQueryVariables>(TournamentCardsDocument, options);
-        }
-export type TournamentCardsQueryHookResult = ReturnType<typeof useTournamentCardsQuery>;
-export type TournamentCardsLazyQueryHookResult = ReturnType<typeof useTournamentCardsLazyQuery>;
-export type TournamentCardsQueryResult = Apollo.QueryResult<TournamentCardsQuery, TournamentCardsQueryVariables>;
 export const BreadcrumbsCharacterDocument = gql`
     query BreadcrumbsCharacter($characterSlug: ID!) {
   character(characterSlug: $characterSlug) {
@@ -9280,3 +9238,45 @@ export function usePageTournamentLazyQuery(baseOptions?: Apollo.LazyQueryHookOpt
 export type PageTournamentQueryHookResult = ReturnType<typeof usePageTournamentQuery>;
 export type PageTournamentLazyQueryHookResult = ReturnType<typeof usePageTournamentLazyQuery>;
 export type PageTournamentQueryResult = Apollo.QueryResult<PageTournamentQuery, PageTournamentQueryVariables>;
+export const PageTournamentsDocument = gql`
+    query PageTournaments($page: Int, $per: Int) {
+  tournaments(page: $page, per: $per) {
+    records {
+      ...TournamentCard
+    }
+    paging {
+      ...paging
+    }
+  }
+}
+    ${TournamentCardFragmentDoc}
+${PagingFragmentDoc}`;
+
+/**
+ * __usePageTournamentsQuery__
+ *
+ * To run a query within a React component, call `usePageTournamentsQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePageTournamentsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePageTournamentsQuery({
+ *   variables: {
+ *      page: // value for 'page'
+ *      per: // value for 'per'
+ *   },
+ * });
+ */
+export function usePageTournamentsQuery(baseOptions?: Apollo.QueryHookOptions<PageTournamentsQuery, PageTournamentsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PageTournamentsQuery, PageTournamentsQueryVariables>(PageTournamentsDocument, options);
+      }
+export function usePageTournamentsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PageTournamentsQuery, PageTournamentsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PageTournamentsQuery, PageTournamentsQueryVariables>(PageTournamentsDocument, options);
+        }
+export type PageTournamentsQueryHookResult = ReturnType<typeof usePageTournamentsQuery>;
+export type PageTournamentsLazyQueryHookResult = ReturnType<typeof usePageTournamentsLazyQuery>;
+export type PageTournamentsQueryResult = Apollo.QueryResult<PageTournamentsQuery, PageTournamentsQueryVariables>;
