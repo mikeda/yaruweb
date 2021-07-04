@@ -2,7 +2,7 @@ fragment articleComment on ArticleComment {
   id
   message
   createdAt
-  player {
+  user {
     name
     avatarUrl
   }

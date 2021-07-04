@@ -53,7 +53,7 @@ const PageContent: React.FC<PageTournamentVideoQuery> = ({ tournamentVideo }) =>
               key={videoComment.id}
               message={videoComment.message}
               createdAt={videoComment.createdAt}
-              player={videoComment.player}
+              user={videoComment.user}
             />
           );
         })

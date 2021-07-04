@@ -1,7 +1,7 @@
-mutation CreatePlayer {
-  createPlayer(input: {}) {
-    currentPlayer {
-      ...currentPlayer
+mutation CreateUser {
+  createUser(input: {}) {
+    currentUser {
+      ...currentUser
     }
   }
 }

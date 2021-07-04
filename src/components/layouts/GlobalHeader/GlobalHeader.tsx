@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFistRaised } from '@fortawesome/free-solid-svg-icons';
 
-import { PlayerMenu } from '../PlayerMenu';
+import { UserMenu } from '../UserMenu';
 
 import styles from './GlobalHeader.module.scss';
 import { path } from '@/lib';
@@ -24,7 +24,7 @@ export const GlobalHeader: React.FC = ({ children }) => {
             <div className={styles.shoulder}>格闘ゲーム 鉄拳7を楽しむためのサイト</div>
           </div>
 
-          <PlayerMenu />
+          <UserMenu />
         </div>
 
         {children}

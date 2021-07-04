@@ -1,7 +1,7 @@
-mutation UpdateCurrentPlayer($attributes: CurrentPlayerAttributes!) {
-  updateCurrentPlayer(input: { attributes: $attributes }) {
-    currentPlayer {
-      ...currentPlayer
+mutation UpdateCurrentUser($attributes: CurrentUserAttributes!) {
+  updateCurrentUser(input: { attributes: $attributes }) {
+    currentUser {
+      ...currentUser
     }
   }
 }

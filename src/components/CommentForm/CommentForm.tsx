@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from './CommentForm.module.scss';
 import { CommentWrapper } from '../Comment';
-import { useCurrentPlayer } from '@/hooks/useCurrentPlayer';
+import { useCurrentUser } from '@/hooks/useCurrentUser';
 import { CommentAttributes } from '@/lib/graphql/types';
 import { useForm } from 'react-hook-form';
 import { TextArea } from '../form/TextArea';
@@ -12,13 +12,13 @@ interface Props {
 }
 
 export const CommentForm: React.FC<Props> = ({ onSubmit }) => {
-  const { currentPlayer } = useCurrentPlayer();
+  const { currentUser } = useCurrentUser();
   const { register, reset, handleSubmit } = useForm<CommentAttributes>();
 
-  if (!currentPlayer) return null;
+  if (!currentUser) return null;
 
   return (
-    <CommentWrapper player={currentPlayer}>
+    <CommentWrapper user={currentUser}>
       <form
         onSubmit={handleSubmit(attributes => {
           onSubmit(attributes);

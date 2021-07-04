@@ -52,7 +52,7 @@ const PageContent: React.FC<{ move: MoveFragment }> = ({ move }) => {
               key={moveComment.id}
               message={moveComment.message}
               createdAt={moveComment.createdAt}
-              player={moveComment.player}
+              user={moveComment.user}
             />
           );
         })
