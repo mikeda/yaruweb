@@ -3,7 +3,6 @@ export * from './Content';
 export * from './GlobalHeader';
 export * from './Head';
 export * from './HeaderNav';
-export * from './PageHeader';
 export * from './PlayerMenu';
 export * from './Section';
 export * from './dashboard';

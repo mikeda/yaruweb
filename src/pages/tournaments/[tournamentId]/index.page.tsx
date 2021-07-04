@@ -6,7 +6,6 @@ import { Head } from '@/components/layouts/Head';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
-import { PageHeader } from '@/components/layouts/PageHeader';
 import { Heading, Media, NotFound } from '@/components';
 import dayjs from '@/lib/dayjs';
 import { path } from '@/lib';
@@ -58,10 +57,8 @@ const PageContent: React.FC<PageTournamentQuery> = ({ tournament }) => {
 
 const Page: React.FC<PageTournamentQuery> = ({ tournament }) => {
   return (
-    <Content>
+    <Content title={tournament.name} breadcrumb={<Breadcrumbs to="tournament" tournament={tournament} />}>
       <Head title={tournament.name} />
-      <Breadcrumbs to="tournament" tournament={tournament} />
-      <PageHeader title={tournament.name} />
 
       <PageContent tournament={tournament} />
     </Content>

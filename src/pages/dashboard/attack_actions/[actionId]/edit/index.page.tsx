@@ -6,9 +6,7 @@ import {
   usePageDashboardAttackActionEditQuery,
   useUpdateAttackActionMutation,
 } from '@/lib/graphql/types';
-import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { PageHeader } from '@/components/layouts/PageHeader';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { loadingState } from '@/states/loading';

@@ -3,7 +3,7 @@ import React from 'react';
 import { PageTournamentsDocument, PageTournamentsQuery } from '@/lib/graphql/types';
 import { Head } from '@/components/layouts/Head';
 import { Content } from '@/components/layouts/Content';
-import { DashboardBreadcrumbs } from '@/components/layouts/Breadcrumbs';
+import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 import { useRouter } from 'next/router';
 import { path } from '@/lib';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
@@ -26,9 +26,8 @@ const Page: React.FC<PageTournamentsQuery> = ({ tournaments: { records: tourname
   const router = useRouter();
 
   return (
-    <Content>
-      <Head title="鉄拳7の大会情報まとめ" />
-      <DashboardBreadcrumbs to="tournaments" />
+    <Content title="大会" breadcrumb={<Breadcrumbs to="tournaments" />}>
+      <Head title="鉄拳7の大会情報" />
 
       <Grid container spacing={2}>
         {tournaments.map(tournament => (

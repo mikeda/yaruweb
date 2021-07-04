@@ -12,16 +12,13 @@ import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Head } from '@/components/layouts/Head';
 import { Content } from '@/components/layouts/Content';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
-import { PageHeader } from '@/components/layouts/PageHeader';
 
 const Page: React.FC<PageMoveCategoryQuery> = ({ moveCategory }) => {
-  const title = moveCategory.name;
+  const title = `${moveCategory.name}のコマンドリスト`;
 
   return (
-    <Content>
+    <Content title={title} breadcrumb={<Breadcrumbs to="moveCategory" moveCategory={moveCategory} />}>
       <Head title={title} />
-      <Breadcrumbs to="moveCategory" moveCategory={moveCategory} />
-      <PageHeader title={title} />
 
       <MoveSearchList moves={moveCategory.moves} />
     </Content>

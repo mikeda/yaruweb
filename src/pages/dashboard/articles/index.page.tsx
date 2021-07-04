@@ -8,9 +8,7 @@ import {
   usePublishArticleMutation,
   useStopArticleMutation,
 } from '@/lib/graphql/types';
-import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { PageHeader } from '@/components/layouts/PageHeader';
 import { toast } from 'react-toastify';
 import { DashboardBreadcrumbs } from '@/components';
 import { useSetRecoilState } from 'recoil';

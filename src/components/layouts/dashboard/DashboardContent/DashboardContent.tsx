@@ -15,8 +15,7 @@ import {
 } from '@material-ui/core';
 import MenuIcon from '@material-ui/icons/Menu';
 import { DrawerItems } from './DrawerItems';
-import { DashboardBreadcrumbParams } from '../../Breadcrumbs/DashboardDefinition';
-import { DashboardBreadcrumbs, Head } from '@/components';
+import { Head } from '@/components';
 
 const drawerWidth = 240;
 

@@ -1,9 +1,7 @@
 import React from 'react';
 
 import { CharacterAttributes, useCreateCharacterMutation } from '@/lib/graphql/types';
-import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { PageHeader } from '@/components/layouts/PageHeader';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { CharacterForm } from '@/components/CharacterForm';

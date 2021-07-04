@@ -8,22 +8,17 @@ import {
   PageComboCategoryQuery,
 } from '@/lib/graphql/types';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
-import { Head } from '@/components/layouts/Head';
 import { Content } from '@/components/layouts/Content';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
-import { PageHeader } from '@/components/layouts/PageHeader';
 import { ComboList } from './ComboList';
+import { Head } from '@/components';
 
 const Page: React.FC<PageComboCategoryQuery> = ({ comboCategory }) => {
-  if (!comboCategory) return null;
-  const title = comboCategory.name;
+  const title = `${comboCategory.name}のコンボ`;
 
   return (
-    <Content>
+    <Content title={title} breadcrumb={<Breadcrumbs to="comboCategory" comboCategory={comboCategory} />}>
       <Head title={title} />
-      <Breadcrumbs to="comboCategory" comboCategory={comboCategory} />
-      <PageHeader title={title} />
-
       <ComboList combos={comboCategory.combos} />
     </Content>
   );

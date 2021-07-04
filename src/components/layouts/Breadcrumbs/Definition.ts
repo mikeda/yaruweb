@@ -15,8 +15,10 @@ export type ChainParam =
   | { to: 'article'; article: ArticleParam }
   | { to: 'characters' }
   | { to: 'character'; character: CharactersParam }
+  | { to: 'comboCategories'; character: CharactersParam }
   | { to: 'comboCategory'; comboCategory: ComboCategoryParam }
   | { to: 'login' }
+  | { to: 'moveCategories'; character: CharactersParam }
   | { to: 'moveCategory'; moveCategory: MoveCategoryParam }
   | { to: 'move'; move: MoveParam }
   | { to: 'passwordEdit' }
@@ -36,17 +38,27 @@ export const breadcrumbChain = (props: ChainParam): BreadcrumbChainItem => {
       return { name: 'キャラクター', url: path({ to: 'characters' }) };
     case 'character':
       return { name: props.character.name, parent: breadcrumbChain({ to: 'characters' }) };
+    case 'comboCategories':
+      return {
+        name: 'コンボ',
+        parent: breadcrumbChain({ to: 'character', character: props.character }),
+      };
     case 'comboCategory':
       return {
         name: props.comboCategory.name,
-        parent: breadcrumbChain({ to: 'character', character: props.comboCategory.character }),
+        parent: breadcrumbChain({ to: 'comboCategories', character: props.comboCategory.character }),
       };
     case 'login':
       return { name: 'ログイン' };
+    case 'moveCategories':
+      return {
+        name: 'コマンドリスト',
+        parent: breadcrumbChain({ to: 'character', character: props.character }),
+      };
     case 'moveCategory':
       return {
         name: props.moveCategory.name,
-        parent: breadcrumbChain({ to: 'character', character: props.moveCategory.character }),
+        parent: breadcrumbChain({ to: 'moveCategories', character: props.moveCategory.character }),
       };
     case 'move':
       return {
