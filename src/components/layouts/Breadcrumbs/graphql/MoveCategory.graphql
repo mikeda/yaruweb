@@ -1,0 +1,5 @@
+query BreadcrumbsMoveCategory($moveCategoryId: ID!) {
+  moveCategory(moveCategoryId: $moveCategoryId) {
+    ...BreadcrumbsMoveCategory
+  }
+}

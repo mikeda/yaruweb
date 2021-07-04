@@ -10,7 +10,7 @@ type Options =
   | { to: 'articleEdit'; articleId: string }
   | { to: 'characters' }
   | { to: 'charactersNew' }
-  | { to: 'characterEdit'; characterId: string }
+  | { to: 'characterEdit'; characterSlug: string }
   | { to: 'comboCategories'; characterSlug: string }
   | { to: 'comboCategoriesNew'; characterSlug: string }
   | { to: 'comboCategoryEdit'; comboCategoryId: string }
@@ -59,7 +59,7 @@ export const dashboardPath = (options: Options): string => {
     case 'charactersNew':
       return '/dashboard/characters/new';
     case 'characterEdit':
-      return `/dashboard/characters/${options.characterId}/edit`;
+      return `/dashboard/characters/${options.characterSlug}/edit`;
     case 'comboCategories':
       return `/dashboard/characters/${options.characterSlug}/combo_categories`;
     case 'comboCategoriesNew':

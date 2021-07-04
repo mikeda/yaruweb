@@ -1,16 +1,14 @@
 import React from 'react';
 
 import { ActionFragment, usePageDashboardActionsQuery } from '@/lib/graphql/types';
-import { Head } from '@/components/layouts/Head';
-import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { PageHeader } from '@/components/layouts/PageHeader';
 import Link from 'next/link';
 import { parseAction } from '@/lib/graphql/parseAction';
 import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from '@/states/loading';
-import { DashboardBreadcrumbs } from '@/components';
+import { DashboardContent, DashboardBreadcrumbs } from '@/components';
 import { dashboardPath } from '@/lib';
+import { Button, Menu, MenuItem } from '@material-ui/core';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -27,22 +25,43 @@ const Page: React.FC = () => {
   if (!data) return null;
 
   const { move } = data;
-  const title = move.name;
 
   return (
-    <DashboardContent activeTab="character">
-      <Head title={title} />
-      <DashboardBreadcrumbs to="actions" move={move} />
-      <PageHeader
-        title={title}
-        addButtons={[
-          { label: '打撃を登録', url: dashboardPath({ to: 'attackActionsNew', moveId: move.id }) },
-          { label: '投げを登録', url: dashboardPath({ to: 'throwActionsNew', moveId: move.id }) },
-        ]}
-      />
-
+    <DashboardContent
+      title={move.name}
+      breadcrumb={<DashboardBreadcrumbs to="actions" move={move} />}
+      actions={<AddButton moveId={move.id} />}
+    >
       <PageContent actions={move.actions} />
     </DashboardContent>
+  );
+};
+
+const AddButton: React.FC<{ moveId: string }> = ({ moveId }) => {
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  return (
+    <div>
+      <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+        作成する
+      </Button>
+      <Menu id="simple-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
+        <MenuItem onClick={handleClose} href={dashboardPath({ to: 'attackActionsNew', moveId })}>
+          打撃判定
+        </MenuItem>
+        <MenuItem onClick={handleClose} href={dashboardPath({ to: 'throwActionsNew', moveId })}>
+          投げ判定
+        </MenuItem>
+      </Menu>
+    </div>
   );
 };
 

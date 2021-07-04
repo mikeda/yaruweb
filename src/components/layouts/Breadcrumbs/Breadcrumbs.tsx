@@ -1,9 +1,10 @@
 import React from 'react';
-import Link from 'next/link';
+import { default as MuiBreadcrumbs } from '@material-ui/core/Breadcrumbs';
 
-import styles from './Breadcrumbs.module.scss';
-import { ChainParam as DashboardChainParam, breadcrumbChain as dashboardChain } from './DashboardDefinition';
+import { DashboardBreadcrumbParams, breadcrumbChain as dashboardChain } from './DashboardDefinition';
 import { breadcrumbChain, ChainParam } from './Definition';
+import { Typography } from '@material-ui/core';
+import { Link } from '@/components/Link';
 
 export type BreadcrumbChainItem = {
   name: string;
@@ -27,7 +28,7 @@ export const Breadcrumbs: React.FC<ChainParam> = props => {
   return <BreadcrumbList items={items} />;
 };
 
-export const DashboardBreadcrumbs: React.FC<DashboardChainParam> = props => {
+export const DashboardBreadcrumbs: React.FC<DashboardBreadcrumbParams> = props => {
   let current = dashboardChain(props);
   const items: BreadcrumbsItem[] = [{ name: current.name }];
 
@@ -43,23 +44,19 @@ export const DashboardBreadcrumbs: React.FC<DashboardChainParam> = props => {
 
 const BreadcrumbList: React.FC<{ items: BreadcrumbsItem[] }> = ({ items }) => {
   return (
-    <ul className={styles.breadcrumbs}>
-      <Item name="TOP" url="/" />
-      {items.map(({ name, url }, i) => (
-        <Item key={i} name={name} url={url} />
-      ))}
-    </ul>
+    <MuiBreadcrumbs>
+      <Link href="/" color="inherit">
+        TOP
+      </Link>
+      {items.map(({ name, url }) =>
+        url ? (
+          <Link href={url} color="inherit">
+            {name}
+          </Link>
+        ) : (
+          <Typography>{name}</Typography>
+        ),
+      )}
+    </MuiBreadcrumbs>
   );
 };
-
-const Item: React.FC<BreadcrumbsItem> = ({ name, url }) => (
-  <li className={styles.item}>
-    {url ? (
-      <Link href={url}>
-        <a>{name}</a>
-      </Link>
-    ) : (
-      <span>{name}</span>
-    )}
-  </li>
-);

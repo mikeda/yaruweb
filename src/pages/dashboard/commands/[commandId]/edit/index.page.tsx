@@ -6,15 +6,12 @@ import {
   usePageDashboardCommandEditQuery,
   useUpdateCommandMutation,
 } from '@/lib/graphql/types';
-import { Head } from '@/components/layouts/Head';
-import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { PageHeader } from '@/components/layouts/PageHeader';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { loadingState } from '@/states/loading';
 import { useSetRecoilState } from 'recoil';
 import { CommandForm } from '@/components/CommandForm';
-import { DashboardBreadcrumbs } from '@/components';
+import { DashboardContent, DashboardBreadcrumbs } from '@/components';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -33,14 +30,8 @@ const Page: React.FC = () => {
   if (!data) return null;
   const { command } = data;
 
-  const title = '判定編集';
-
   return (
-    <DashboardContent activeTab="character">
-      <Head title={title} />
-      <DashboardBreadcrumbs to="commandEdit" move={command.move} />
-      <PageHeader title={title} />
-
+    <DashboardContent title="判定編集" breadcrumb={<DashboardBreadcrumbs to="commandEdit" move={command.move} />}>
       <CommandContent {...data} />
     </DashboardContent>
   );

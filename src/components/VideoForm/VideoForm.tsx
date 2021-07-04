@@ -5,7 +5,8 @@ import * as yup from 'yup';
 import YouTube from 'react-youtube';
 
 import { TournamentVideo, TournamentVideoAttributes } from '@/lib/graphql/types';
-import { Input, TextArea, FormGroup, Button } from '@/components';
+import { Input, TextArea, FormGroup } from '@/components';
+import { Button } from '@material-ui/core';
 
 const schema = yup.object().shape({
   title: yup.string().required(),
@@ -47,8 +48,8 @@ export const VideoForm: React.FC<Props> = ({ video, onSubmit }) => {
         </FormGroup>
 
         <FormGroup>
-          <Button>
-            <input type="submit" />
+          <Button type="submit" variant="contained">
+            登録する
           </Button>
         </FormGroup>
       </form>

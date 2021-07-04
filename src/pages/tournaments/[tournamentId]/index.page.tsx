@@ -6,10 +6,10 @@ import { Head } from '@/components/layouts/Head';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
-import { PageHeader } from '@/components/layouts/PageHeader';
-import { Card, Heading, Media, NotFound } from '@/components';
+import { Heading, Media, NotFound } from '@/components';
 import dayjs from '@/lib/dayjs';
-import { path } from '@/lib';
+import { TournamentVideoCard } from '@/components/TournamentVideoCard';
+import { Grid } from '@material-ui/core';
 
 const PageContent: React.FC<PageTournamentQuery> = ({ tournament }) => {
   return (
@@ -41,14 +41,13 @@ const PageContent: React.FC<PageTournamentQuery> = ({ tournament }) => {
         <NotFound>動画が登録されていません。</NotFound>
       ) : (
         <>
-          {tournament.videos.map(video => (
-            <Card
-              key={video.id}
-              title={video.title}
-              imageUrl={video.thumbnailUrl}
-              href={path({ to: 'tournamentVideo', tournamentVideoId: video.id })}
-            />
-          ))}
+          <Grid container spacing={2}>
+            {tournament.videos.map(video => (
+              <Grid item key={video.id} xs={12} sm={6} md={4}>
+                <TournamentVideoCard tournamentVideo={video} />
+              </Grid>
+            ))}
+          </Grid>
         </>
       )}
     </>
@@ -57,10 +56,12 @@ const PageContent: React.FC<PageTournamentQuery> = ({ tournament }) => {
 
 const Page: React.FC<PageTournamentQuery> = ({ tournament }) => {
   return (
-    <Content>
+    <Content
+      activeTab="tournaments"
+      title={tournament.name}
+      breadcrumb={<Breadcrumbs to="tournament" tournament={tournament} />}
+    >
       <Head title={tournament.name} />
-      <Breadcrumbs to="tournament" tournament={tournament} />
-      <PageHeader title={tournament.name} />
 
       <PageContent tournament={tournament} />
     </Content>

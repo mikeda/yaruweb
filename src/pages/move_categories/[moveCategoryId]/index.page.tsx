@@ -7,23 +7,24 @@ import {
   PageMoveCategoryDocument,
   PageMoveCategoryQuery,
 } from '@/lib/graphql/types';
-import { MoveList } from '@/components/MoveList';
+import { MoveSearchList } from '@/components/MoveList';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Head } from '@/components/layouts/Head';
 import { Content } from '@/components/layouts/Content';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
-import { PageHeader } from '@/components/layouts/PageHeader';
 
 const Page: React.FC<PageMoveCategoryQuery> = ({ moveCategory }) => {
-  const title = moveCategory.name;
+  const title = `${moveCategory.name}のコマンドリスト`;
 
   return (
-    <Content>
+    <Content
+      activeTab="characters"
+      title={title}
+      breadcrumb={<Breadcrumbs to="moveCategory" moveCategory={moveCategory} />}
+    >
       <Head title={title} />
-      <Breadcrumbs to="moveCategory" moveCategory={moveCategory} />
-      <PageHeader title={title} />
 
-      <MoveList moves={moveCategory.moves} />
+      <MoveSearchList moves={moveCategory.moves} />
     </Content>
   );
 };

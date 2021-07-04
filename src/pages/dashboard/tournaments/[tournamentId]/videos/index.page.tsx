@@ -7,18 +7,16 @@ import {
   TournamentVideo,
 } from '@/lib/graphql/types';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { PageHeader } from '@/components/layouts/PageHeader';
 import { DashboardBreadcrumbs } from '@/components';
-import { Head } from '@/components/layouts/Head';
 import { useRouter } from 'next/router';
 import { loadingState } from '@/states/loading';
 import { useSetRecoilState } from 'recoil';
 import { toast } from 'react-toastify';
 import { ObjectCardList } from '@/components/ObjectCardList';
 import { Input } from '@/components/form/Input';
-import { Button } from '@/components/Button';
 import { useForm } from 'react-hook-form';
 import { dashboardPath } from '@/lib';
+import { Button } from '@material-ui/core';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -44,14 +42,8 @@ const Page: React.FC = () => {
 
   setLoading(loading);
 
-  const title = '動画';
-
   return (
-    <DashboardContent activeTab="video">
-      <Head title={title} />
-      <DashboardBreadcrumbs to="tournamentVideos" tournament={tournament} />
-      <PageHeader title={title} />
-
+    <DashboardContent title="動画" breadcrumb={<DashboardBreadcrumbs to="tournamentVideos" tournament={tournament} />}>
       <VideoForm tournamentId={tournamentId} />
 
       <PageContent videos={tournament.videos} refetch={refetch} />
@@ -131,8 +123,8 @@ const VideoForm: React.FC<{ tournamentId: string }> = ({ tournamentId }) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Input {...register('url')} placeholder="YouTubeの動画URL" />
-      <Button>
-        <input type="submit" />
+      <Button type="submit" variant="contained">
+        登録する
       </Button>
     </form>
   );

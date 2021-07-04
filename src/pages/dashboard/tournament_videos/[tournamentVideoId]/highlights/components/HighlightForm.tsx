@@ -4,11 +4,11 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
 import { TournamentVideoHighlight, TournamentVideoHighlightAttributes } from '@/lib/graphql/types';
-import { Button, ButtonListInline } from '@/components/Button';
 import { FormGroup } from '@/components/form/FormGroup';
 import { Input } from '@/components/form/Input';
 import YouTube from 'react-youtube';
 import { YouTubePlayer } from 'youtube-player/dist/types';
+import { Button } from '@material-ui/core';
 
 const schema = yup.object().shape({
   title: yup.string().required(),
@@ -63,38 +63,32 @@ export const HighlightForm: React.FC<Props> = ({ youtubeVideoId, highlight, onSu
         </FormGroup>
 
         <FormGroup>
-          <ButtonListInline>
-            <Button type="info">
-              <a
-                onClick={e => {
-                  e.preventDefault();
-                  if (!youTubePlayer) return;
+          <Button
+            onClick={e => {
+              e.preventDefault();
+              if (!youTubePlayer) return;
 
-                  setValue('startSec', Math.floor(youTubePlayer.getCurrentTime()));
-                }}
-              >
-                再生中の場所をコピー
-              </a>
-            </Button>
+              setValue('startSec', Math.floor(youTubePlayer.getCurrentTime()));
+            }}
+          >
+            再生中の場所をコピー
+          </Button>
 
-            <Button type="info">
-              <a
-                onClick={e => {
-                  e.preventDefault();
-                  if (!youTubePlayer) return;
+          <Button
+            onClick={e => {
+              e.preventDefault();
+              if (!youTubePlayer) return;
 
-                  youTubePlayer.seekTo(getValues('startSec'), true);
-                }}
-              >
-                設定中の場所に移動
-              </a>
-            </Button>
-          </ButtonListInline>
+              youTubePlayer.seekTo(getValues('startSec'), true);
+            }}
+          >
+            設定中の場所に移動
+          </Button>
         </FormGroup>
 
         <FormGroup>
-          <Button>
-            <input type="submit" />
+          <Button type="submit" variant="contained">
+            登録する
           </Button>
         </FormGroup>
       </form>

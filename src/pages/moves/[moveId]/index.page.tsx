@@ -16,7 +16,6 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { CommentForm } from '@/components/CommentForm';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
-import { PageHeader } from '@/components/layouts/PageHeader';
 
 const PageContent: React.FC<{ move: MoveFragment }> = ({ move }) => {
   const { data: commentsData, refetch: refetchComments } = useMoveCommentsQuery({ variables: { moveId: move.id } });
@@ -68,10 +67,8 @@ const Page: React.FC<PageMoveQuery> = ({ move }) => {
   const title = move.name;
 
   return (
-    <Content>
+    <Content activeTab="characters" title={title} breadcrumb={<Breadcrumbs to="move" move={move} />}>
       <Head title={title} />
-      <Breadcrumbs to="move" move={move} />
-      <PageHeader title={title} />
 
       <PageContent move={move} />
     </Content>

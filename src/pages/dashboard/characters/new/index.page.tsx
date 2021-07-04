@@ -1,9 +1,7 @@
 import React from 'react';
 
 import { CharacterAttributes, useCreateCharacterMutation } from '@/lib/graphql/types';
-import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { PageHeader } from '@/components/layouts/PageHeader';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { CharacterForm } from '@/components/CharacterForm';
@@ -30,11 +28,7 @@ const Page: React.FC = () => {
   setLoading(loading);
 
   return (
-    <DashboardContent activeTab="character">
-      <Head title="キャラクター登録" />
-
-      <PageHeader title="キャラクター登録" />
-
+    <DashboardContent title="キャラクター登録">
       <CharacterForm onSubmit={onSubmit} />
     </DashboardContent>
   );

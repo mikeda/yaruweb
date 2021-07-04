@@ -2,31 +2,33 @@ import React from 'react';
 import Link from 'next/link';
 
 import { ArticleCard, Article } from '../ArticleCard';
-import { path } from '@/lib';
+import { Box, Grid, Link as MuiLink, Typography } from '@material-ui/core';
 
 type Props = {
   articles: Article[];
   readMoreLink?: string;
 };
 
-export const ArticleCards: React.FC<Props> = ({ articles, readMoreLink }) => (
-  <>
-    <div className="ly_row ly_row__mg_md">
-      {articles.map(article => {
-        return (
-          <div key={article.id} className="ly_col_4 ly_smCol_12">
+export const ArticleCards: React.FC<Props> = ({ articles, readMoreLink }) => {
+  return (
+    <>
+      <Grid container spacing={2}>
+        {articles.map(article => (
+          <Grid item key={article.id} xs={12} sm={6} md={4}>
             <ArticleCard article={article} />
-          </div>
-        );
-      })}
-    </div>
+          </Grid>
+        ))}
+      </Grid>
 
-    {readMoreLink && (
-      <div className="bl_section_footer">
-        <Link href={path({ to: 'articles' })}>
-          <a className="el_readmore">もっとみる</a>
-        </Link>
-      </div>
-    )}
-  </>
-);
+      {readMoreLink && (
+        <Box textAlign="center" m={2}>
+          <Link href={readMoreLink}>
+            <MuiLink>
+              <Typography>もっとみる</Typography>
+            </MuiLink>
+          </Link>
+        </Box>
+      )}
+    </>
+  );
+};

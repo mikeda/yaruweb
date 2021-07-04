@@ -1,0 +1,5 @@
+query BreadcrumbsMove($moveId: ID!) {
+  move(moveId: $moveId) {
+    ...BreadcrumbsMove
+  }
+}

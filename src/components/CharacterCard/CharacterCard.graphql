@@ -1,7 +1,5 @@
-fragment CharacterCard on Character {
-  slug
-  longName
-  faceImageUrl
-  country
-  fightingStyle
+query CharacterCard($characterSlug: ID!) {
+  character(characterSlug: $characterSlug) {
+    ...CharacterCard
+  }
 }

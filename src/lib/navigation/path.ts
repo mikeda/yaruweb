@@ -7,8 +7,10 @@ type Options =
   | { to: 'article'; articleId: string }
   | { to: 'characters' }
   | { to: 'character'; characterSlug: string }
+  | { to: 'comboCategories'; characterSlug: string }
   | { to: 'comboCategory'; comboCategoryId: string }
   | { to: 'login' }
+  | { to: 'moveCategories'; characterSlug: string }
   | { to: 'moveCategory'; moveCategoryId: string }
   | { to: 'move'; moveId: string }
   | { to: 'passwordEdit' }
@@ -30,10 +32,14 @@ export const path = (options: Options): string => {
       return '/characters';
     case 'character':
       return `/${options.characterSlug}`;
+    case 'comboCategories':
+      return `/${options.characterSlug}/combo_categories`;
     case 'comboCategory':
       return `/combo_categories/${options.comboCategoryId}`;
     case 'login':
       return '/login';
+    case 'moveCategories':
+      return `/${options.characterSlug}/move_categories`;
     case 'moveCategory':
       return `/move_categories/${options.moveCategoryId}`;
     case 'move':

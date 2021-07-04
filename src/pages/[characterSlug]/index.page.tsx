@@ -8,45 +8,57 @@ import {
   PageCharacterQuery,
 } from '@/lib/graphql/types';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
-import { Heading } from '@/components/Heading';
 import { Head } from '@/components/layouts/Head';
 import { Content } from '@/components/layouts/Content';
-import { CategoryCardList } from '@/components/CategoryCardList';
 import { CharacterCard } from '@/components/CharacterCard';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
-import { path } from '@/lib';
+import { Box, makeStyles, Paper, Typography } from '@material-ui/core';
+import theme from '@/theme';
+import { CharacterPageTabs } from '@/components';
+
+const useStyles = makeStyles({
+  paper: {
+    marginTop: theme.spacing(2),
+    padding: theme.spacing(2),
+  },
+  title: {
+    marginBottom: theme.spacing(2),
+  },
+  body: {
+    whiteSpace: 'pre-line',
+  },
+});
 
 const Page: React.FC<PageCharacterQuery> = ({ character }) => {
+  const classes = useStyles();
+
   return (
-    <Content>
+    <Content
+      activeTab="characters"
+      title={character.longName}
+      breadcrumb={<Breadcrumbs to="character" character={character} />}
+    >
       <Head title={character.longName} />
-      <Breadcrumbs to="character" character={character} />
 
-      <div className="bl_box">
-        <CharacterCard character={character} />
-      </div>
+      <CharacterCard character={character} />
 
-      <Heading lv="h3">コマンドリスト</Heading>
-      <CategoryCardList
-        categories={character.moveCategories.map(moveCategory => ({
-          ...moveCategory,
-          href: path({ to: 'moveCategory', moveCategoryId: moveCategory.id }),
-        }))}
-      />
+      <Box mt={2}>
+        <CharacterPageTabs characterSlug={character.slug} activeTab="profile" />
+      </Box>
 
-      <Heading lv="h3">コンボ</Heading>
-      <CategoryCardList
-        categories={character.comboCategories.map(comboCategory => ({
-          ...comboCategory,
-          href: path({ to: 'comboCategory', comboCategoryId: comboCategory.id }),
-        }))}
-      />
+      <Paper className={classes.paper}>
+        <Typography className={classes.title} variant="h5">
+          ストーリー
+        </Typography>
+        <Typography className={classes.body}>{character.story}</Typography>
+      </Paper>
 
-      <Heading lv="h3">ストーリー</Heading>
-      <p className="hp_preLine">{character.story}</p>
-
-      <Heading lv="h3">キャラ解説</Heading>
-      <p className="hp_preLine">{character.description}</p>
+      <Paper className={classes.paper}>
+        <Typography className={classes.title} variant="h5">
+          キャラ解説
+        </Typography>
+        <Typography className={classes.body}>{character.description}</Typography>
+      </Paper>
     </Content>
   );
 };

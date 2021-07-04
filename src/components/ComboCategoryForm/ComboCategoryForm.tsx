@@ -2,9 +2,9 @@ import React from 'react';
 
 import { ComboCategoryAttributes, ComboCategoryFragment } from '@/lib/graphql/types';
 import { useForm } from 'react-hook-form';
-import { Button } from '@/components/Button';
 import { FormGroup } from '@/components/form/FormGroup';
 import { Input } from '@/components/form/Input';
+import { Button } from '@material-ui/core';
 
 interface Props {
   comboCategory?: ComboCategoryFragment;
@@ -30,8 +30,8 @@ export const ComboCategoryForm: React.FC<Props> = ({ comboCategory, onSubmit }) 
       </FormGroup>
 
       <FormGroup>
-        <Button>
-          <input type="submit" />
+        <Button type="submit" variant="contained">
+          登録する
         </Button>
       </FormGroup>
     </form>

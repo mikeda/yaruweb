@@ -11,7 +11,7 @@ import {
   TournamentVideoParam,
 } from './params';
 
-export type ChainParam =
+export type DashboardBreadcrumbParams =
   | { to: 'actions'; move: MoveParam }
   | { to: 'attackActionsNew'; move: MoveParam }
   | { to: 'attackActionEdit'; move: MoveParam }
@@ -55,7 +55,7 @@ export type ChainParam =
   | { to: 'throwActionsNew'; move: MoveParam }
   | { to: 'throwActionEdit'; move: MoveParam };
 
-export const breadcrumbChain = (props: ChainParam): BreadcrumbChainItem => {
+export const breadcrumbChain = (props: DashboardBreadcrumbParams): BreadcrumbChainItem => {
   switch (props.to) {
     case 'actions':
       return {

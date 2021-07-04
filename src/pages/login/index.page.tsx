@@ -6,17 +6,12 @@ import { LoginWithTwitterButton } from './LoginWithTwitterButton';
 import { Content } from '@/components/layouts/Content';
 import { Head } from '@/components/layouts/Head';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
-import { PageHeader } from '@/components/layouts/PageHeader';
 import { path } from '@/lib';
 
 const Page: React.FC = () => {
-  const title = 'ログイン';
-
   return (
-    <Content size="xs">
-      <Head title={title} />
-      <Breadcrumbs to="login" />
-      <PageHeader title={title} />
+    <Content activeTab="top" title="ログイン" breadcrumb={<Breadcrumbs to="login" />}>
+      <Head title="ログイン" />
 
       <LoginWithEmailForm />
       <hr />

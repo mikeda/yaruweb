@@ -1,5 +1,9 @@
 import React, { useEffect } from 'react';
 import { AppProps } from 'next/app';
+import { CssBaseline } from '@material-ui/core';
+import { ThemeProvider } from '@material-ui/core/styles';
+import theme from '@/theme';
+
 import { ToastContainer } from 'react-toastify';
 import { ApolloProvider } from '@apollo/client';
 import { RecoilRoot, useSetRecoilState } from 'recoil';
@@ -15,7 +19,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import * as gtag from '@/lib/gtag';
 
 import { client } from '@/lib/graphql/client';
-import { GlobalFooter } from '@/components/layouts/GlobalFooter';
 import { currentPlayerState } from '@/states/currentPlayer';
 import { useCurrentPlayerQuery } from '@/lib/graphql/types';
 import { useRouter } from 'next/router';
@@ -36,6 +39,12 @@ export default function App({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
   useEffect(() => {
+    // Remove the server-side injected CSS.
+    const jssStyles = document.querySelector('#jss-server-side');
+    jssStyles?.parentElement?.removeChild(jssStyles);
+  }, []);
+
+  useEffect(() => {
     const handleRouteChange = (url: string) => {
       gtag.pageview(url);
     };
@@ -48,9 +57,11 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <RecoilRoot>
       <ApolloProvider client={client}>
-        <Component {...pageProps} />
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Component {...pageProps} />
+        </ThemeProvider>
 
-        <GlobalFooter />
         <ToastContainer />
         <Loading />
 

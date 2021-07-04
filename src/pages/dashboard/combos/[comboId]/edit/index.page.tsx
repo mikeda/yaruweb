@@ -6,15 +6,12 @@ import {
   usePageDashboardComboEditQuery,
   useUpdateComboMutation,
 } from '@/lib/graphql/types';
-import { Head } from '@/components/layouts/Head';
-import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { PageHeader } from '@/components/layouts/PageHeader';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { loadingState } from '@/states/loading';
 import { useSetRecoilState } from 'recoil';
 import { ComboForm } from '@/components/ComboForm';
-import { DashboardBreadcrumbs } from '@/components';
+import { DashboardContent, DashboardBreadcrumbs } from '@/components';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -33,14 +30,8 @@ const Page: React.FC = () => {
   if (!data) return null;
   const { combo } = data;
 
-  const title = '判定編集';
-
   return (
-    <DashboardContent activeTab="character">
-      <Head title={title} />
-      <DashboardBreadcrumbs to="comboEdit" combo={combo} />
-      <PageHeader title={title} />
-
+    <DashboardContent title="コンボ編集" breadcrumb={<DashboardBreadcrumbs to="comboEdit" combo={combo} />}>
       <ComboContent {...data} />
     </DashboardContent>
   );

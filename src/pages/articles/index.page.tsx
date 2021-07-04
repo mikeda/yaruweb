@@ -15,10 +15,8 @@ import { path } from '@/lib';
 
 const Page: React.FC = () => {
   return (
-    <Content>
+    <Content activeTab="articles" title="記事一覧" breadcrumb={<Breadcrumbs to="articles" />}>
       <Head title="鉄拳7の記事一覧" />
-      <Breadcrumbs to="articles" />
-
       <PageContent />
     </Content>
   );
@@ -31,7 +29,7 @@ const PageContent: React.FC = () => {
   const page = query.page ? Number(query.page as string) : 1;
   const order = query.order === 'popular' ? Order.Popular : Order.New;
   const { data, loading } = useArticlesQuery({
-    variables: { page, order },
+    variables: { page, per: 2, order },
     skip: !router.isReady,
   });
 

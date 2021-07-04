@@ -1,0 +1,10 @@
+query PageCharacterComboCategories($characterSlug: ID!) {
+  character(characterSlug: $characterSlug) {
+    ...BreadcrumbsCharacter
+    ...CharacterCard
+
+    comboCategories {
+      ...ComboCategoryListItem
+    }
+  }
+}

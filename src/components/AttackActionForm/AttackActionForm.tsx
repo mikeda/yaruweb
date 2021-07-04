@@ -6,7 +6,8 @@ import * as yup from 'yup';
 import { AttackActionStateText, AttackTypeEnumText } from '@/lib/graphql/enum_texts';
 import { AttackActionAttributes, AttackActionFragment } from '@/lib/graphql/types';
 import { nullableNumber } from '@/lib/validators/nullable_number';
-import { Button, Input, CheckBox, FormInline, FormGroup } from '@/components';
+import { Input, CheckBox, FormInline, FormGroup } from '@/components';
+import { Button } from '@material-ui/core';
 
 const schema = yup.object().shape({
   damage: yup.number().required().integer().min(0),
@@ -147,8 +148,8 @@ export const AttackActionForm: React.FC<Props> = ({ attackAction, onSubmit }) =>
       </FormGroup>
 
       <FormGroup>
-        <Button>
-          <input type="submit" />
+        <Button type="submit" variant="contained">
+          登録する
         </Button>
       </FormGroup>
     </form>

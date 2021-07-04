@@ -68,9 +68,12 @@ const Page: React.FC<PageTournamentVideoQuery> = data => {
   const video = data.tournamentVideo;
 
   return (
-    <Content>
+    <Content
+      activeTab="tournaments"
+      title={video.title}
+      breadcrumb={<Breadcrumbs to="tournamentVideo" tournamentVideo={video} />}
+    >
       <Head title={video.title} />
-      <Breadcrumbs to="tournamentVideo" tournamentVideo={video} />
 
       <PageContent {...data} />
     </Content>

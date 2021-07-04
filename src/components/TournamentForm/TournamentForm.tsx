@@ -6,8 +6,9 @@ import ReactDatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 
 import { TournamentAttributes, TournamentFragment } from '@/lib/graphql/types';
-import { Button, TextArea, Input, FormGroup } from '@/components';
+import { TextArea, Input, FormGroup } from '@/components';
 import dayjs from '@/lib/dayjs';
+import { Button } from '@material-ui/core';
 
 const schema = yup.object().shape({
   name: yup.string().required(),
@@ -121,8 +122,8 @@ export const TournamentForm: React.FC<Props> = ({ tournament, onSubmit }) => {
       </FormGroup>
 
       <FormGroup>
-        <Button>
-          <input type="submit" />
+        <Button type="submit" variant="contained">
+          登録する
         </Button>
       </FormGroup>
     </form>

@@ -1,8 +1,6 @@
 import React from 'react';
 
-import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { PageHeader } from '@/components/layouts/PageHeader';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
@@ -33,11 +31,10 @@ const Page: React.FC = () => {
   const { comboCategory } = data;
 
   return (
-    <DashboardContent activeTab="character">
-      <Head title="コンボ登録" />
-      <DashboardBreadcrumbs to="combosNew" comboCategory={comboCategory} />
-      <PageHeader title="コンボ登録" />
-
+    <DashboardContent
+      title="コンボ登録"
+      breadcrumb={<DashboardBreadcrumbs to="combosNew" comboCategory={comboCategory} />}
+    >
       <PageContent {...data} />
     </DashboardContent>
   );

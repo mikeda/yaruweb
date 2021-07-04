@@ -1,0 +1,9 @@
+query PageCharacter($characterSlug: ID!) {
+  character(characterSlug: $characterSlug) {
+    ...BreadcrumbsCharacter
+    ...CharacterCard
+
+    story
+    description
+  }
+}

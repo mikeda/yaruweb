@@ -1,0 +1,8 @@
+fragment BreadcrumbsMoveCategory on MoveCategory {
+  id
+  name
+
+  character {
+    ...BreadcrumbsCharacter
+  }
+}

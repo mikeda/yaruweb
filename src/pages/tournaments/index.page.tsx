@@ -1,68 +1,62 @@
 import React from 'react';
 
-import { usePageTournamentsQuery } from '@/lib/graphql/types';
-import { Media } from '@/components/Media';
-import dayjs from '@/lib/dayjs';
+import { PageTournamentsDocument, PageTournamentsQuery } from '@/lib/graphql/types';
 import { Head } from '@/components/layouts/Head';
 import { Content } from '@/components/layouts/Content';
-import { DashboardBreadcrumbs } from '@/components/layouts/Breadcrumbs';
+import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 import { useRouter } from 'next/router';
-import { useSetRecoilState } from 'recoil';
-import { loadingState } from '@/states/loading';
-import { Paging } from '@/components/Paging';
 import { path } from '@/lib';
+import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
+import { GetServerSideProps } from 'next';
+import { Box, Grid, makeStyles } from '@material-ui/core';
+import { TournamentCard } from '@/components/TournamentCard';
+import { Pagination } from '@material-ui/lab';
+import theme from '@/theme';
 
-const PageContent: React.FC = () => {
+const useStyles = makeStyles({
+  paging: {
+    display: 'flex',
+    justifyContent: 'center',
+    marginTop: theme.spacing(4),
+  },
+});
+
+const Page: React.FC<PageTournamentsQuery> = ({ tournaments: { records: tournaments, paging } }) => {
+  const classes = useStyles();
   const router = useRouter();
-  const setLoading = useSetRecoilState(loadingState);
-  const { query } = router;
-  const page = query.page ? Number(query.page as string) : 1;
-  const { data, loading } = usePageTournamentsQuery({
-    variables: { page },
-    skip: !router.isReady,
-  });
-
-  const url = (page: number) => path({ to: 'tournaments', params: { page } });
-
-  setLoading(loading);
 
   return (
-    <>
-      <div className="bl_section">
-        <div className="bl_section_body">
-          <div className="bl_mediaUnit">
-            {data?.tournaments.records.map(tournament => {
-              if (!tournament) return;
+    <Content activeTab="tournaments" title="大会" breadcrumb={<Breadcrumbs to="tournaments" />}>
+      <Head title="鉄拳7の大会情報" />
 
-              return (
-                <Media
-                  href={path({ to: 'tournament', tournamentId: tournament.id })}
-                  key={tournament.id}
-                  imageUrl={tournament.mainImageUrl}
-                  title={tournament.name}
-                  titleNote={dayjs(tournament.startsAt).format('YYYY/M/D H:mm')}
-                  text={tournament.description}
-                />
-              );
-            })}
-          </div>
-        </div>
-      </div>
-
-      {data && <Paging paging={data.tournaments.paging} url={url} />}
-    </>
+      <Grid container spacing={2}>
+        {tournaments.map(tournament => (
+          <Grid item key={tournament.id} xs={12} sm={6} md={4}>
+            <TournamentCard tournament={tournament} />
+          </Grid>
+        ))}
+      </Grid>
+      <Box className={classes.paging}>
+        <Pagination
+          page={paging.currentPage}
+          count={paging.totalPages}
+          color="primary"
+          onChange={(e, page) => {
+            router.push(path({ to: 'tournaments', params: { page } }));
+          }}
+        />
+      </Box>
+    </Content>
   );
 };
 
-const Page: React.FC = () => {
-  return (
-    <Content>
-      <Head title="鉄拳7の大会情報まとめ" />
-      <DashboardBreadcrumbs to="tournaments" />
+export const getServerSideProps: GetServerSideProps<PageTournamentsQuery> = async ({ query }) => {
+  const page = query?.page ? Number(query.page) : 1;
+  const data: PageTournamentsQuery = await fetchGraphql(PageTournamentsDocument, { page });
 
-      <PageContent />
-    </Content>
-  );
+  return {
+    props: data,
+  };
 };
 
 export default Page;

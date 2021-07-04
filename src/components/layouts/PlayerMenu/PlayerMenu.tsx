@@ -1,64 +1,59 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
-import styles from './PlayerMenu.module.scss';
-import { DropDownMenu } from '@/components';
 import { signOutFirebase } from '@/lib/firebase';
 import { useCurrentPlayer } from '@/hooks/useCurrentPlayer';
 import { currentPlayerState } from '@/states/currentPlayer';
 import { dashboardPath, path } from '@/lib';
+import { Avatar, IconButton, Link, Menu, MenuItem } from '@material-ui/core';
 
 export const PlayerMenu: React.FC = () => {
   const { currentPlayer } = useCurrentPlayer();
-  const setCurrentPlayer = useSetRecoilState(currentPlayerState);
-  const [menuOpened, setMenuOpened] = useState(false);
   const router = useRouter();
+  const setCurrentPlayer = useSetRecoilState(currentPlayerState);
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   if (!currentPlayer) {
-    return (
-      <Link href={path({ to: 'login' })}>
-        <a>ログイン</a>
-      </Link>
-    );
+    return <Link href={path({ to: 'login' })}>ログイン</Link>;
   }
 
-  return (
-    <div className={styles.menu}>
-      <div
-        onClick={() => {
-          setMenuOpened(!menuOpened);
-        }}
-        className={styles.avatar}
-      >
-        <img src={currentPlayer.avatarUrl} />
-      </div>
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
 
-      {menuOpened && (
-        <DropDownMenu
-          onClose={() => setMenuOpened(false)}
-          items={[
-            <Link key={0} href={dashboardPath({ to: 'articles' })}>
-              <a>マイページ</a>
-            </Link>,
-            <a
-              key={2}
-              onClick={e => {
-                e.preventDefault();
-                signOutFirebase().then(() => {
-                  toast.success('ログアウトしました。');
-                  setCurrentPlayer(null);
-                  router.push(path({ to: 'top' }));
-                });
-              }}
-            >
-              ログアウト
-            </a>,
-          ]}
-        />
-      )}
-    </div>
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  return (
+    <>
+      <IconButton aria-controls="player-menu" aria-haspopup="true" onClick={handleClick}>
+        <Avatar alt={currentPlayer.name} src={currentPlayer.avatarUrl} />
+      </IconButton>
+      <Menu id="player-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
+        <MenuItem
+          onClick={() => {
+            router.push(dashboardPath({ to: 'articles' }));
+            handleClose();
+          }}
+        >
+          マイページ
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            signOutFirebase().then(() => {
+              toast.success('ログアウトしました。');
+              setCurrentPlayer(null);
+              router.push(path({ to: 'top' }));
+            });
+            handleClose();
+          }}
+        >
+          ログアウト
+        </MenuItem>
+      </Menu>
+    </>
   );
 };

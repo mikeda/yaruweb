@@ -1,8 +1,6 @@
 import React from 'react';
 
-import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { PageHeader } from '@/components/layouts/PageHeader';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
@@ -33,11 +31,7 @@ const Page: React.FC = () => {
   const { move } = data;
 
   return (
-    <DashboardContent activeTab="character">
-      <Head title="判定登録" />
-      <DashboardBreadcrumbs to="throwActionsNew" move={move} />
-      <PageHeader title="判定登録" />
-
+    <DashboardContent title="判定編集" breadcrumb={<DashboardBreadcrumbs to="throwActionsNew" move={move} />}>
       <PageContent {...data} />
     </DashboardContent>
   );

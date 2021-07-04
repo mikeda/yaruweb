@@ -6,14 +6,13 @@ import {
   useCreateComboCategoryMutation,
   usePageDashboardComboCategoryNewQuery,
 } from '@/lib/graphql/types';
-import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { PageHeader } from '@/components/layouts/PageHeader';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { ComboCategoryForm } from '@/components/ComboCategoryForm';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from '@/states/loading';
+import { DashboardBreadcrumbs } from '@/components';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -33,11 +32,10 @@ const Page: React.FC = () => {
   const { character } = data;
 
   return (
-    <DashboardContent activeTab="character">
-      <Head title="コンボカテゴリ作成" />
-
-      <PageHeader title="コンボカテゴリ作成" />
-
+    <DashboardContent
+      title="カテゴリ登録"
+      breadcrumb={<DashboardBreadcrumbs to="comboCategoriesNew" character={character} />}
+    >
       <PageContent character={character} />
     </DashboardContent>
   );

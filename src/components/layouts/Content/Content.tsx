@@ -1,21 +1,39 @@
-import React from 'react';
+import React, { ReactNode } from 'react';
 
-import styles from './Content.module.scss';
-import { GlobalHeader, HeaderNav } from '@/components';
+import { GlobalHeader, HeaderNav, TabValue } from '@/components';
+import { makeStyles, Typography } from '@material-ui/core';
+
+const useStyles = makeStyles({
+  root: {
+    boxSizing: 'border-box',
+    maxWidth: 730,
+    padding: 16,
+    marginRight: 'auto',
+    marginLeft: 'auto',
+  },
+});
 
 interface Props {
-  size?: 'xs';
+  title?: string;
+  breadcrumb?: ReactNode;
+  actions?: ReactNode;
+  activeTab: TabValue;
 }
 
-export const Content: React.FC<Props> = ({ size, children }) => {
-  const className = size === 'xs' ? styles.contentXs : styles.content;
+export const Content: React.FC<Props> = ({ title, breadcrumb, activeTab, children }) => {
+  const classes = useStyles();
 
   return (
     <>
       <GlobalHeader>
-        <HeaderNav />
+        <HeaderNav activeTab={activeTab} />
       </GlobalHeader>
-      <div className={className}>{children}</div>;
+      <div className={classes.root}>
+        {title && <Typography variant="h5">{title}</Typography>}
+        {breadcrumb}
+        {children}
+      </div>
+      ;
     </>
   );
 };

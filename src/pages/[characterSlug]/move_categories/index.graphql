@@ -1,0 +1,10 @@
+query PageCharacterMoveCategories($characterSlug: ID!) {
+  character(characterSlug: $characterSlug) {
+    ...BreadcrumbsCharacter
+    ...CharacterCard
+
+    moveCategories {
+      ...MoveCategoryListItem
+    }
+  }
+}

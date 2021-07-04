@@ -8,9 +8,7 @@ import {
   usePublishArticleMutation,
   useStopArticleMutation,
 } from '@/lib/graphql/types';
-import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { PageHeader } from '@/components/layouts/PageHeader';
 import { toast } from 'react-toastify';
 import { DashboardBreadcrumbs } from '@/components';
 import { useSetRecoilState } from 'recoil';
@@ -40,13 +38,8 @@ const Page: React.FC = () => {
   } = data;
 
   return (
-    <DashboardContent activeTab="article">
-      <Head title="記事" />
-      <DashboardBreadcrumbs to="articles" />
-      <PageHeader title="記事" addPageUrl={dashboardPath({ to: 'articles' })} />
-
+    <DashboardContent title="記事" breadcrumb={<DashboardBreadcrumbs to="articles" />}>
       <PageContent articles={articles} refetch={refetch} />
-
       <Paging paging={paging} url={page => dashboardPath({ to: 'articles', params: { page } })} />
     </DashboardContent>
   );

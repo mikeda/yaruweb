@@ -6,18 +6,15 @@ import {
   useCurrentPlayerQuery,
   useUpdateCurrentPlayerMutation,
 } from '@/lib/graphql/types';
-import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { PageHeader } from '@/components/layouts/PageHeader';
 import { useForm } from 'react-hook-form';
-import { useRouter } from 'next/router';
-import { Button } from '@/components/Button';
 import { toast } from 'react-toastify';
 import { FormGroup } from '@/components/form/FormGroup';
 import { Input } from '@/components/form/Input';
 import { currentPlayerState } from '@/states/currentPlayer';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from '@/states/loading';
+import { Button } from '@material-ui/core';
 
 const Page: React.FC = () => {
   const setLoading = useSetRecoilState(loadingState);
@@ -31,18 +28,11 @@ const Page: React.FC = () => {
   setLoading(loading);
 
   return (
-    <DashboardContent activeTab="profile">
-      <Head title="プロフィール更新" />
-
-      <PageHeader title="プロフィール更新" />
-
-      {data && <Form currentPlayer={data.currentPlayer} />}
-    </DashboardContent>
+    <DashboardContent title="プロフィール編集">{data && <Form currentPlayer={data.currentPlayer} />}</DashboardContent>
   );
 };
 
 const Form: React.FC<{ currentPlayer: CurrentPlayerFragment }> = ({ currentPlayer }) => {
-  const router = useRouter();
   const setCurrentPlayer = useSetRecoilState(currentPlayerState);
   const setLoading = useSetRecoilState(loadingState);
   const {
@@ -66,7 +56,6 @@ const Form: React.FC<{ currentPlayer: CurrentPlayerFragment }> = ({ currentPlaye
 
       setCurrentPlayer(updatedCurrentPlayer);
       toast.success('プロフィールを更新しました。');
-      router.back();
     },
     onError: e => {
       toast.error(e.message);
@@ -109,8 +98,8 @@ const Form: React.FC<{ currentPlayer: CurrentPlayerFragment }> = ({ currentPlaye
       </FormGroup>
 
       <FormGroup>
-        <Button>
-          <input type="submit" disabled={loading} />
+        <Button type="submit" variant="contained">
+          更新する
         </Button>
       </FormGroup>
     </form>

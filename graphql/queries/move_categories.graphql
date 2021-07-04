@@ -1,5 +1,0 @@
-query MoveCategories($characterSlug: ID!) {
-  moveCategories(characterSlug: $characterSlug) {
-    ...moveCategory
-  }
-}

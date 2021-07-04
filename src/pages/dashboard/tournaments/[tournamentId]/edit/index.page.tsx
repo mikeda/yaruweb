@@ -7,9 +7,6 @@ import {
   TournamentQuery,
   useUpdateTournamentMutation,
 } from '@/lib/graphql/types';
-import { Head } from '@/components/layouts/Head';
-import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { PageHeader } from '@/components/layouts/PageHeader';
 import { useRouter } from 'next/router';
 import { GetServerSideProps } from 'next';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
@@ -17,7 +14,7 @@ import { toast } from 'react-toastify';
 import { TournamentForm } from '@/components/TournamentForm';
 import { loadingState } from '@/states/loading';
 import { useSetRecoilState } from 'recoil';
-import { DashboardBreadcrumbs } from '@/components';
+import { DashboardContent, DashboardBreadcrumbs } from '@/components';
 
 interface Props {
   tournament: TournamentFragment;
@@ -43,12 +40,10 @@ const Page: React.FC<Props> = ({ tournament }) => {
   setLoading(loading);
 
   return (
-    <DashboardContent activeTab="tournament">
-      <Head title="大会情報更新" />
-      <DashboardBreadcrumbs to="tournamentEdit" tournament={tournament} />
-
-      <PageHeader title="大会情報更新" />
-
+    <DashboardContent
+      title="大会編集"
+      breadcrumb={<DashboardBreadcrumbs to="tournamentEdit" tournament={tournament} />}
+    >
       <TournamentForm tournament={tournament} onSubmit={onSubmit} />
     </DashboardContent>
   );

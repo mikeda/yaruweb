@@ -10,7 +10,7 @@ import { Node } from 'slate';
 import { useForm } from 'react-hook-form';
 import { FormGroup } from '../form/FormGroup';
 import { Input } from '../form/Input';
-import { Button } from '../Button';
+import { Button } from '@material-ui/core';
 
 const schema = yup.object().shape({
   title: yup.string().required(),
@@ -99,8 +99,8 @@ export const ArticleForm: React.FC<Props> = ({ article, onSubmit }) => {
       </FormGroup>
 
       <FormGroup>
-        <Button>
-          <input type="submit" />
+        <Button type="submit" variant="contained">
+          登録する
         </Button>
       </FormGroup>
     </form>

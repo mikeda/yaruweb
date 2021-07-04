@@ -1,8 +1,42 @@
-import { path } from '@/lib';
 import React from 'react';
+import { path } from '@/lib';
 
-import { ArticleAuthor } from '../ArticleAuthor';
-import { Card } from '../Card';
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Typography from '@material-ui/core/Typography';
+import { Avatar, CardHeader } from '@material-ui/core';
+import dayjs from '@/lib/dayjs';
+
+const useStyles = makeStyles({
+  root: {},
+  media: {
+    height: 140,
+  },
+  avatar: {},
+});
+
+export const ArticleCard: React.FC<Props> = ({ article }) => {
+  const classes = useStyles();
+
+  return (
+    <Card className={classes.root}>
+      <CardActionArea href={path({ to: 'article', articleId: article.id })}>
+        <CardMedia className={classes.media} image={article.mainImageUrl} title={article.title} />
+        <CardContent style={{ paddingBottom: 0 }}>
+          <Typography variant="h6">{article.title}</Typography>
+        </CardContent>
+        <CardHeader
+          avatar={<Avatar src={article.author.avatarUrl} />}
+          title={article.author.name}
+          subheader={dayjs(article.publishedAt).format('YYYY/M/D  H:mm')}
+        />
+      </CardActionArea>
+    </Card>
+  );
+};
 
 export interface Article {
   id: string;
@@ -17,16 +51,4 @@ export interface Article {
 
 type Props = {
   article: Article;
-};
-
-export const ArticleCard: React.FC<Props> = ({ article }) => {
-  return (
-    <Card title={article.title} imageUrl={article.mainImageUrl} href={path({ to: 'article', articleId: article.id })}>
-      <ArticleAuthor
-        name={article.author.name}
-        avatarUrl={article.author.avatarUrl}
-        publishedAt={article.publishedAt}
-      />
-    </Card>
-  );
 };

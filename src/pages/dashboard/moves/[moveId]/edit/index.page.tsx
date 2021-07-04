@@ -6,9 +6,7 @@ import {
   usePageDashboardMoveEditQuery,
   useUpdateMoveMutation,
 } from '@/lib/graphql/types';
-import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { PageHeader } from '@/components/layouts/PageHeader';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { loadingState } from '@/states/loading';
@@ -33,14 +31,8 @@ const Page: React.FC = () => {
   if (!data) return null;
   const { move } = data;
 
-  const title = '判定編集';
-
   return (
-    <DashboardContent activeTab="character">
-      <Head title={title} />
-      <DashboardBreadcrumbs to="moveEdit" move={move} />
-      <PageHeader title={title} />
-
+    <DashboardContent title="技データ編集" breadcrumb={<DashboardBreadcrumbs to="moveEdit" move={move} />}>
       <MoveContent {...data} />
     </DashboardContent>
   );

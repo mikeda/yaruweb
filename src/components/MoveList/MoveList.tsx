@@ -1,66 +1,80 @@
 import React, { useState } from 'react';
 
-import { MoveMedia } from '../MoveMedia';
-import { MoveFragment } from '@/lib/graphql/types';
+import { MoveListItemFragment } from '@/lib/graphql/types';
+import { Checkbox, FormControlLabel, FormGroup, List, ListItem, ListItemText, Paper } from '@material-ui/core';
+import Link from 'next/link';
+import { path } from '@/lib';
 
 interface Props {
-  moves: MoveFragment[];
+  moves: MoveListItemFragment[];
 }
 
-export const MoveList: React.FC<Props> = ({ moves }) => {
-  const [powerCrush, setPowerCrush] = useState(false);
-  const [crouchingStatus, setCrouchingStatus] = useState(false);
-  const [jumpStatus, setJumpStatus] = useState(false);
-  const [homing, setHoming] = useState(false);
-  const [screw, setScrew] = useState(false);
-  const [wallBound, setWallBound] = useState(false);
+export const MoveList: React.FC<Props> = ({ moves: allMoves }) => {
+  const [state, setState] = useState({
+    powerCrush: false,
+    crouchingStatus: false,
+    jumpStatus: false,
+    homing: false,
+    screw: false,
+    wallBound: false,
+  });
 
-  const showMove = (move: MoveFragment) => {
-    if (powerCrush && !move.powerCrush) return false;
-    if (crouchingStatus && !move.crouchingStatus) return false;
-    if (jumpStatus && !move.jumpStatus) return false;
-    if (homing && !move.homing) return false;
-    if (screw && !move.screw) return false;
-    if (wallBound && !move.wallBound) return false;
-    if (wallBound && !move.wallBound) return false;
+  const { powerCrush, crouchingStatus, jumpStatus, homing, screw, wallBound } = state;
 
-    return true;
+  let moves = allMoves;
+  if (crouchingStatus) moves = moves.filter(move => move.crouchingStatus);
+  if (jumpStatus) moves = moves.filter(move => move.jumpStatus);
+  if (powerCrush) moves = moves.filter(move => move.powerCrush);
+  if (homing) moves = moves.filter(move => move.homing);
+  if (screw) moves = moves.filter(move => move.screw);
+  if (wallBound) moves = moves.filter(move => move.wallBound);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setState({ ...state, [event.target.name]: event.target.checked });
   };
 
   return (
     <>
-      <div className="bl_box">
-        <div className="bl_moveSelector">
-          <MoveSelectCheckBox label="パワークラッシュ" checked={powerCrush} setChecked={setPowerCrush} />
-          <MoveSelectCheckBox label="しゃがみステータス" checked={crouchingStatus} setChecked={setCrouchingStatus} />
-          <MoveSelectCheckBox label="ジャンプステータス" checked={jumpStatus} setChecked={setJumpStatus} />
-          <MoveSelectCheckBox label="ホーミング" checked={homing} setChecked={setHoming} />
-          <MoveSelectCheckBox label="スクリュー" checked={screw} setChecked={setScrew} />
-          <MoveSelectCheckBox label="ウォールバウンド" checked={wallBound} setChecked={setWallBound} />
-        </div>
-      </div>
-      <div className="bl_sectionUnit">
-        <div className="bl_section">
-          {moves.map(move => {
-            if (!showMove(move)) return;
+      <Paper>
+        <FormGroup row>
+          <FormControlLabel
+            control={<Checkbox checked={crouchingStatus} onChange={handleChange} name="crouchingStatus" />}
+            label="しゃがみステータス"
+          />
+          <FormControlLabel
+            control={<Checkbox checked={jumpStatus} onChange={handleChange} name="jumpStatus" />}
+            label="ジャンプステータス"
+          />
+          <FormControlLabel
+            control={<Checkbox checked={powerCrush} onChange={handleChange} name="powerCrush" />}
+            label="パワークラッシュ"
+          />
+          <FormControlLabel
+            control={<Checkbox checked={homing} onChange={handleChange} name="homing" />}
+            label="ホーミング"
+          />
+          <FormControlLabel
+            control={<Checkbox checked={screw} onChange={handleChange} name="screw" />}
+            label="スクリュー"
+          />
+          <FormControlLabel
+            control={<Checkbox checked={wallBound} onChange={handleChange} name="wallBound" />}
+            label="ウォールバウンド"
+          />
+        </FormGroup>
+      </Paper>
 
-            return <MoveMedia key={move.id} move={move} />;
-          })}
-        </div>
-      </div>
+      <Paper>
+        <List component="div">
+          {moves.map(move => (
+            <Link key={move.id} href={path({ to: 'move', moveId: move.id })} passHref>
+              <ListItem button component="a">
+                <ListItemText primary={move.name} />
+              </ListItem>
+            </Link>
+          ))}
+        </List>
+      </Paper>
     </>
-  );
-};
-
-const MoveSelectCheckBox: React.FC<{
-  label: string;
-  checked: boolean;
-  setChecked: (flag: boolean) => void;
-}> = ({ label, checked, setChecked }) => {
-  return (
-    <label>
-      <input type="checkbox" checked={checked} onChange={e => setChecked(e.target.checked)} />
-      {label}
-    </label>
   );
 };

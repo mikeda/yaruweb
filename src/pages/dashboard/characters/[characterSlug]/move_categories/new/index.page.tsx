@@ -1,49 +1,40 @@
 import React from 'react';
 
 import {
+  BreadcrumbsCharacterQuery,
   MoveCategoryAttributes,
-  PageDashboardMoveCategoryNewQuery,
+  useBreadcrumbsCharacterQuery,
   useCreateMoveCategoryMutation,
-  usePageDashboardMoveCategoryNewQuery,
 } from '@/lib/graphql/types';
-import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { PageHeader } from '@/components/layouts/PageHeader';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { MoveCategoryForm } from '@/components/MoveCategoryForm';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from '@/states/loading';
+import { useRouteParams } from './hooks';
 
 const Page: React.FC = () => {
-  const router = useRouter();
+  const { characterSlug } = useRouteParams();
   const setLoading = useSetRecoilState(loadingState);
-  const { characterSlug } = router.query;
-  const { data, loading } = usePageDashboardMoveCategoryNewQuery({
+
+  const { data: breadcrumbData, loading } = useBreadcrumbsCharacterQuery({
     variables: { characterSlug: characterSlug as string },
     skip: !characterSlug,
-    fetchPolicy: 'network-only',
-    onError: e => {
-      toast.error(e.message);
-    },
   });
 
   setLoading(loading);
-  if (!data) return null;
-  const { character } = data;
+  if (!breadcrumbData) return null;
+  const { character } = breadcrumbData;
 
   return (
-    <DashboardContent activeTab="character">
-      <Head title="技データカテゴリ作成" />
-
-      <PageHeader title="技データカテゴリ作成" />
-
+    <DashboardContent title="カテゴリ作成">
       <PageContent character={character} />
     </DashboardContent>
   );
 };
 
-const PageContent: React.FC<PageDashboardMoveCategoryNewQuery> = ({ character }) => {
+const PageContent: React.FC<BreadcrumbsCharacterQuery> = ({ character }) => {
   const router = useRouter();
   const setLoading = useSetRecoilState(loadingState);
   const [createMoveCategory, { loading }] = useCreateMoveCategoryMutation({

@@ -1,9 +1,7 @@
 import React from 'react';
 
 import { PageDashboardCommandsQuery, usePageDashboardCommandsQuery } from '@/lib/graphql/types';
-import { Head } from '@/components/layouts/Head';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { PageHeader } from '@/components/layouts/PageHeader';
 import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from '@/states/loading';
@@ -11,6 +9,8 @@ import { DashboardBreadcrumbs } from '@/components';
 import { Command } from '@/components/Command';
 import Link from 'next/link';
 import { dashboardPath } from '@/lib';
+import { Button } from '@material-ui/core';
+import { Add } from '@material-ui/icons';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -27,17 +27,22 @@ const Page: React.FC = () => {
   if (!data) return null;
 
   const { move } = data;
-  const title = move.name;
 
   return (
-    <DashboardContent activeTab="character">
-      <Head title={title} />
-      <DashboardBreadcrumbs to="commands" move={move} />
-      <PageHeader
-        title={title}
-        addButtons={[{ label: '登録', url: dashboardPath({ to: 'commandsNew', moveId: move.id }) }]}
-      />
-
+    <DashboardContent
+      title={move.name}
+      breadcrumb={<DashboardBreadcrumbs to="commands" move={move} />}
+      actions={
+        <Button
+          variant="contained"
+          color="primary"
+          startIcon={<Add />}
+          href={dashboardPath({ to: 'commandsNew', moveId: move.id })}
+        >
+          作成する
+        </Button>
+      }
+    >
       <PageContent {...data} />
     </DashboardContent>
   );

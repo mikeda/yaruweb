@@ -1,8 +1,5 @@
 import React from 'react';
 
-import { Head } from '@/components/layouts/Head';
-import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { PageHeader } from '@/components/layouts/PageHeader';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
@@ -14,7 +11,7 @@ import {
   usePageDashboardCommandNewQuery,
 } from '@/lib/graphql/types';
 import { CommandForm } from '@/components/CommandForm';
-import { DashboardBreadcrumbs } from '@/components';
+import { DashboardContent, DashboardBreadcrumbs } from '@/components';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -33,11 +30,7 @@ const Page: React.FC = () => {
   const { move } = data;
 
   return (
-    <DashboardContent activeTab="character">
-      <Head title="コマンド登録" />
-      <DashboardBreadcrumbs to="commandsNew" move={move} />
-      <PageHeader title="コマンド登録" />
-
+    <DashboardContent title="コマンド登録" breadcrumb={<DashboardBreadcrumbs to="commandsNew" move={move} />}>
       <PageContent {...data} />
     </DashboardContent>
   );
