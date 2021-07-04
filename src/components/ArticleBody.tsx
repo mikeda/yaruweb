@@ -2,8 +2,8 @@ import React, { useCallback, useMemo } from 'react';
 
 import { createEditor, Node } from 'slate';
 import { Editable, Slate, withReact } from 'slate-react';
-import { Element } from '../ArticleElement';
-import { Leaf } from '../ArticleElement/Leaf';
+import { Element } from './ArticleElement';
+import { Leaf } from './ArticleElement/Leaf';
 
 interface Props {
   content: string;

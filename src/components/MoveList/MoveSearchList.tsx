@@ -100,9 +100,11 @@ export const MoveSearchList: React.FC<Props> = ({ moves: allMoves }) => {
                 <ListItemText>
                   <Box display="flex" flexDirection="row" justifyContent="space-between">
                     {move.name}
-                    <Box>
-                      <Operations operations={move.commands[0].operations} />
-                    </Box>
+                    {move.commands[0] && (
+                      <Box>
+                        <Operations operations={move.commands[0].operations} />
+                      </Box>
+                    )}
                   </Box>
                 </ListItemText>
               </ListItem>
