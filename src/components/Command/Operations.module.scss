@@ -7,12 +7,9 @@
 .inner {
   display: flex;
   align-items: center;
-  padding: 8px;
   overflow-x: auto;
   white-space: nowrap;
   cursor: grab;
-  background-color: $black5;
-  border-radius: 4px;
 }
 
 .commandText {
@@ -22,7 +19,7 @@
 }
 
 .commandIcon {
-  width: 24px;
+  width: 20px;
   margin-right: 4px;
 }
 

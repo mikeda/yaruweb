@@ -1,28 +1,29 @@
 import React from 'react';
 import { path } from '@/lib';
 
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Typography from '@material-ui/core/Typography';
-import { Avatar, CardHeader } from '@material-ui/core';
+import {
+  Avatar,
+  Card,
+  CardActionArea,
+  CardContent,
+  CardHeader,
+  CardMedia,
+  makeStyles,
+  Typography,
+} from '@material-ui/core';
 import dayjs from '@/lib/dayjs';
 
 const useStyles = makeStyles({
-  root: {},
   media: {
     height: 140,
   },
-  avatar: {},
 });
 
 export const ArticleCard: React.FC<Props> = ({ article }) => {
   const classes = useStyles();
 
   return (
-    <Card className={classes.root}>
+    <Card>
       <CardActionArea href={path({ to: 'article', articleId: article.id })}>
         <CardMedia className={classes.media} image={article.mainImageUrl} title={article.title} />
         <CardContent style={{ paddingBottom: 0 }}>
