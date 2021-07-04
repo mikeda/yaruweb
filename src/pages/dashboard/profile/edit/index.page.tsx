@@ -8,7 +8,6 @@ import {
 } from '@/lib/graphql/types';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
 import { useForm } from 'react-hook-form';
-import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { FormGroup } from '@/components/form/FormGroup';
 import { Input } from '@/components/form/Input';
@@ -34,7 +33,6 @@ const Page: React.FC = () => {
 };
 
 const Form: React.FC<{ currentPlayer: CurrentPlayerFragment }> = ({ currentPlayer }) => {
-  const router = useRouter();
   const setCurrentPlayer = useSetRecoilState(currentPlayerState);
   const setLoading = useSetRecoilState(loadingState);
   const {

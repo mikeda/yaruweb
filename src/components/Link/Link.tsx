@@ -17,6 +17,7 @@ export const NextLinkComposed = React.forwardRef<HTMLAnchorElement, NextLinkComp
   props,
   ref,
 ) {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { to, linkAs, href, replace, scroll, passHref, shallow, prefetch, locale, ...other } = props;
 
   return (
@@ -52,6 +53,7 @@ const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(function Link(props,
     className: classNameProps,
     href,
     noLinkStyle,
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     role, // Link don't have roles.
     ...other
   } = props;

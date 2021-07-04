@@ -26,7 +26,6 @@ const Page: React.FC = () => {
   if (!data) return null;
 
   const { comboCategory } = data;
-  const title = comboCategory.name;
 
   return (
     <DashboardContent

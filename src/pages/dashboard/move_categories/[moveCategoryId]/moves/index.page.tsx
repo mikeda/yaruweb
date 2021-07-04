@@ -26,7 +26,6 @@ const Page: React.FC = () => {
   if (!data) return null;
 
   const { moveCategory } = data;
-  const title = moveCategory.name;
 
   return (
     <DashboardContent

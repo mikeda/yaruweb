@@ -25,7 +25,6 @@ const schema = yup.object().shape({
 
 export const LoginWithEmailForm: React.FC = () => {
   const {
-    register,
     handleSubmit,
     control,
     formState: { errors, isSubmitting },

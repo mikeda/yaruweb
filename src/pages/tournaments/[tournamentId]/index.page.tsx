@@ -8,7 +8,6 @@ import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 import { Heading, Media, NotFound } from '@/components';
 import dayjs from '@/lib/dayjs';
-import { path } from '@/lib';
 import { TournamentVideoCard } from '@/components/TournamentVideoCard';
 import { Grid } from '@material-ui/core';
 

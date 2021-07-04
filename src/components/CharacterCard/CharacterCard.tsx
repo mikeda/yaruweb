@@ -7,11 +7,9 @@ import {
   CardActions,
   CardContent,
   CardMedia,
-  IconButton,
   makeStyles,
   Typography,
 } from '@material-ui/core';
-import { Delete as DeleteIcon } from '@material-ui/icons';
 
 import { path, dashboardPath } from '@/lib';
 import { Link } from '../Link';
@@ -35,10 +33,9 @@ const useStyles = makeStyles({
 interface Props {
   character: CharacterCardFragment;
   dashboard?: boolean;
-  onDelete?: () => void;
 }
 
-export const CharacterCard: React.FC<Props> = ({ character, dashboard = false, onDelete }) => {
+export const CharacterCard: React.FC<Props> = ({ character, dashboard = false }) => {
   const classes = useStyles();
 
   const href = dashboard
@@ -77,10 +74,6 @@ export const CharacterCard: React.FC<Props> = ({ character, dashboard = false, o
           >
             コンボ
           </Button>
-
-          <IconButton color="default" onClick={() => {}} className={classes.deleteButton}>
-            <DeleteIcon />
-          </IconButton>
         </CardActions>
       )}
     </Card>

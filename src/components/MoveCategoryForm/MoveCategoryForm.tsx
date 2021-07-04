@@ -3,7 +3,7 @@ import * as yup from 'yup';
 
 import { MoveCategoryAttributes, MoveCategoryFragment } from '@/lib/graphql/types';
 import { Controller, useForm } from 'react-hook-form';
-import { Box, Button, Card, CardContent, Divider, Input, Paper, TextField } from '@material-ui/core';
+import { Box, Button, Card, CardContent, Divider, TextField } from '@material-ui/core';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 interface Props {

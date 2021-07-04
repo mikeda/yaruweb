@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 
-import { GlobalHeader, Head, HeaderNav } from '@/components';
+import { GlobalHeader, HeaderNav } from '@/components';
 import { makeStyles, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles({

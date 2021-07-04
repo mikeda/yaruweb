@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { MoveListItemFragment } from '@/lib/graphql/types';
-import { Box, Checkbox, FormControlLabel, FormGroup, List, ListItem, ListItemText, Paper } from '@material-ui/core';
+import { Checkbox, FormControlLabel, FormGroup, List, ListItem, ListItemText, Paper } from '@material-ui/core';
 import Link from 'next/link';
 import { path } from '@/lib';
 
