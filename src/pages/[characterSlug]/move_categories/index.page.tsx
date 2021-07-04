@@ -18,7 +18,7 @@ import { MoveCategoryList } from '@/components/MoveCategoryList';
 
 const Page: React.FC<PageCharacterMoveCategoriesQuery> = ({ character }) => {
   return (
-    <Content breadcrumb={<Breadcrumbs to="moveCategories" character={character} />}>
+    <Content activeTab="characters" breadcrumb={<Breadcrumbs to="moveCategories" character={character} />}>
       <Head title={character.longName} />
 
       <CharacterCard character={character} />

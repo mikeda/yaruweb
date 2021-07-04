@@ -17,7 +17,11 @@ const Page: React.FC<PageMoveCategoryQuery> = ({ moveCategory }) => {
   const title = `${moveCategory.name}のコマンドリスト`;
 
   return (
-    <Content title={title} breadcrumb={<Breadcrumbs to="moveCategory" moveCategory={moveCategory} />}>
+    <Content
+      activeTab="characters"
+      title={title}
+      breadcrumb={<Breadcrumbs to="moveCategory" moveCategory={moveCategory} />}
+    >
       <Head title={title} />
 
       <MoveSearchList moves={moveCategory.moves} />

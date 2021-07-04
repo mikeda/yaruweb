@@ -41,7 +41,6 @@ export * from './Paging';
 export * from './SortableCardList';
 export * from './StaffRequirement';
 export * from './TabLinkGroup';
-export * from './TabNav';
 export * from './ThrowActionForm';
 export * from './VideoForm';
 export * from './VideoHighlights';

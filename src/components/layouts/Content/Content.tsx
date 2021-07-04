@@ -1,6 +1,6 @@
 import React, { ReactNode } from 'react';
 
-import { GlobalHeader, HeaderNav } from '@/components';
+import { GlobalHeader, HeaderNav, TabValue } from '@/components';
 import { makeStyles, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles({
@@ -17,15 +17,16 @@ interface Props {
   title?: string;
   breadcrumb?: ReactNode;
   actions?: ReactNode;
+  activeTab: TabValue;
 }
 
-export const Content: React.FC<Props> = ({ title, breadcrumb, children }) => {
+export const Content: React.FC<Props> = ({ title, breadcrumb, activeTab, children }) => {
   const classes = useStyles();
 
   return (
     <>
       <GlobalHeader>
-        <HeaderNav />
+        <HeaderNav activeTab={activeTab} />
       </GlobalHeader>
       <div className={classes.root}>
         {title && <Typography variant="h5">{title}</Typography>}

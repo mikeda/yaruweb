@@ -4,7 +4,7 @@ import { path } from '@/lib';
 import { Paper, Tab, Tabs } from '@material-ui/core';
 import { useRouter } from 'next/router';
 
-type TabValue = 'top' | 'characters' | 'articles' | 'tournaments';
+export type TabValue = 'top' | 'characters' | 'articles' | 'tournaments';
 
 const tabItems: { [key in TabValue]: { name: string; path: string } } = {
   top: { name: 'TOP', path: path({ to: 'top' }) },
@@ -13,7 +13,7 @@ const tabItems: { [key in TabValue]: { name: string; path: string } } = {
   tournaments: { name: '大会', path: path({ to: 'tournaments' }) },
 };
 
-export const HeaderNav: React.FC<{ activeTab?: TabValue }> = ({ activeTab = 'articles' }) => {
+export const HeaderNav: React.FC<{ activeTab: TabValue }> = ({ activeTab }) => {
   const router = useRouter();
 
   return (

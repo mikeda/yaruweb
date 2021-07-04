@@ -17,7 +17,11 @@ const Page: React.FC<PageComboCategoryQuery> = ({ comboCategory }) => {
   const title = `${comboCategory.name}のコンボ`;
 
   return (
-    <Content title={title} breadcrumb={<Breadcrumbs to="comboCategory" comboCategory={comboCategory} />}>
+    <Content
+      activeTab="characters"
+      title={title}
+      breadcrumb={<Breadcrumbs to="comboCategory" comboCategory={comboCategory} />}
+    >
       <Head title={title} />
       <ComboList combos={comboCategory.combos} />
     </Content>

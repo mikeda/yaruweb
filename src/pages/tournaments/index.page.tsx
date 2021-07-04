@@ -26,7 +26,7 @@ const Page: React.FC<PageTournamentsQuery> = ({ tournaments: { records: tourname
   const router = useRouter();
 
   return (
-    <Content title="大会" breadcrumb={<Breadcrumbs to="tournaments" />}>
+    <Content activeTab="tournaments" title="大会" breadcrumb={<Breadcrumbs to="tournaments" />}>
       <Head title="鉄拳7の大会情報" />
 
       <Grid container spacing={2}>

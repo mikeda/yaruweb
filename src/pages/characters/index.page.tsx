@@ -11,7 +11,7 @@ import { Grid } from '@material-ui/core';
 
 const Page: React.FC<CharacterCardsQuery> = ({ characters }) => {
   return (
-    <Content title="キャラクター" breadcrumb={<Breadcrumbs to="characters" />}>
+    <Content activeTab="characters" title="キャラクター" breadcrumb={<Breadcrumbs to="characters" />}>
       <Head title="キャラクター一覧" description="鉄拳7のキャラクター一覧です。" />
 
       <Grid container spacing={2}>

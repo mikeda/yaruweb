@@ -15,7 +15,7 @@ import { path } from '@/lib';
 
 const Page: React.FC = () => {
   return (
-    <Content title="記事一覧" breadcrumb={<Breadcrumbs to="articles" />}>
+    <Content activeTab="articles" title="記事一覧" breadcrumb={<Breadcrumbs to="articles" />}>
       <Head title="鉄拳7の記事一覧" />
       <PageContent />
     </Content>

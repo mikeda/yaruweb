@@ -15,7 +15,7 @@ const Page: React.FC = () => {
   const newArticles = newArticlesData?.articles.records;
 
   return (
-    <Content>
+    <Content activeTab="top">
       <Head title="鉄拳やろうよ.com" description="鉄拳やろうよ.comは格闘ゲーム「鉄拳7」を楽しむためのサイトです。" />
 
       <div className="bl_sectionUnit">

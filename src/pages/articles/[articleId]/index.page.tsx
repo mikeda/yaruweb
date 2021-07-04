@@ -25,7 +25,7 @@ interface Props {
 
 const Page: React.FC<Props> = ({ article }) => {
   return (
-    <Content breadcrumb={<Breadcrumbs to="article" article={article} />}>
+    <Content activeTab="articles" breadcrumb={<Breadcrumbs to="article" article={article} />}>
       <Head title={article.title} description={article.description} image={article.mainImageUrl} />
 
       <ArticleDetail article={article} />

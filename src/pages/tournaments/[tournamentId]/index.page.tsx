@@ -56,7 +56,11 @@ const PageContent: React.FC<PageTournamentQuery> = ({ tournament }) => {
 
 const Page: React.FC<PageTournamentQuery> = ({ tournament }) => {
   return (
-    <Content title={tournament.name} breadcrumb={<Breadcrumbs to="tournament" tournament={tournament} />}>
+    <Content
+      activeTab="tournaments"
+      title={tournament.name}
+      breadcrumb={<Breadcrumbs to="tournament" tournament={tournament} />}
+    >
       <Head title={tournament.name} />
 
       <PageContent tournament={tournament} />

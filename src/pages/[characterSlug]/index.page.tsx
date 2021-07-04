@@ -33,7 +33,11 @@ const Page: React.FC<PageCharacterQuery> = ({ character }) => {
   const classes = useStyles();
 
   return (
-    <Content title={character.longName} breadcrumb={<Breadcrumbs to="character" character={character} />}>
+    <Content
+      activeTab="characters"
+      title={character.longName}
+      breadcrumb={<Breadcrumbs to="character" character={character} />}
+    >
       <Head title={character.longName} />
 
       <CharacterCard character={character} />

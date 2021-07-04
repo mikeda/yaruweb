@@ -10,7 +10,7 @@ import { path } from '@/lib';
 
 const Page: React.FC = () => {
   return (
-    <Content title="ログイン" breadcrumb={<Breadcrumbs to="login" />}>
+    <Content activeTab="top" title="ログイン" breadcrumb={<Breadcrumbs to="login" />}>
       <Head title="ログイン" />
 
       <LoginWithEmailForm />

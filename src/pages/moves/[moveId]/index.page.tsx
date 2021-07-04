@@ -67,7 +67,7 @@ const Page: React.FC<PageMoveQuery> = ({ move }) => {
   const title = move.name;
 
   return (
-    <Content title={title} breadcrumb={<Breadcrumbs to="move" move={move} />}>
+    <Content activeTab="characters" title={title} breadcrumb={<Breadcrumbs to="move" move={move} />}>
       <Head title={title} />
 
       <PageContent move={move} />
