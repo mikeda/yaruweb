@@ -16,6 +16,7 @@ import { ObjectCardList } from '@/components/ObjectCardList';
 import { Input } from '@/components/form/Input';
 import { useForm } from 'react-hook-form';
 import { dashboardPath } from '@/lib';
+import { Button } from '@material-ui/core';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -122,8 +123,8 @@ const VideoForm: React.FC<{ tournamentId: string }> = ({ tournamentId }) => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Input {...register('url')} placeholder="YouTubeの動画URL" />
-      <Button>
-        <input type="submit" />
+      <Button type="submit" variant="contained">
+        登録する
       </Button>
     </form>
   );

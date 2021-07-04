@@ -3524,7 +3524,7 @@ export type MoveMediaFragment = (
 
 export type TournamentCardFragment = (
   { __typename?: 'Tournament' }
-  & Pick<Tournament, 'id' | 'name' | 'description' | 'mainImageUrl' | 'startsAt'>
+  & Pick<Tournament, 'id' | 'name' | 'mainImageUrl' | 'startsAt'>
 );
 
 export type TournamentVideoCardFragment = (
@@ -4679,7 +4679,6 @@ export const TournamentCardFragmentDoc = gql`
     fragment TournamentCard on Tournament {
   id
   name
-  description
   mainImageUrl
   startsAt
 }

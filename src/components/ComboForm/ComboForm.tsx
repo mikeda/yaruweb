@@ -21,6 +21,7 @@ import { loadingState } from '@/states/loading';
 import { toast } from 'react-toastify';
 import { VideoPlayer } from '../MoveMedia/VideoPlayer';
 import { CheckBox } from '../form/CheckBox';
+import { Button } from '@material-ui/core';
 
 const schema = yup.object().shape({
   name: yup.string().required(),
@@ -147,8 +148,8 @@ export const ComboForm: React.FC<Props> = ({ combo, states, conditions, onSubmit
       </FormGroup>
 
       <FormGroup>
-        <Button>
-          <input type="submit" />
+        <Button type="submit" variant="contained">
+          登録する
         </Button>
       </FormGroup>
     </form>

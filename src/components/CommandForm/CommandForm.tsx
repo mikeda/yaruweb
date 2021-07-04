@@ -6,6 +6,7 @@ import * as yup from 'yup';
 import { CommandAttributes, CommandFragment, OperationFragment, StateFragment } from '@/lib/graphql/types';
 import { FormGroup } from '@/components/form/FormGroup';
 import { OperationListSelector } from '../OperationListSelector';
+import { Button } from '@material-ui/core';
 
 const schema = yup.object().shape({
   operationIds: yup.array().required(),
@@ -64,8 +65,8 @@ export const CommandForm: React.FC<Props> = ({ command, states, onSubmit }) => {
       </FormGroup>
 
       <FormGroup>
-        <Button>
-          <input type="submit" />
+        <Button type="submit" variant="contained">
+          登録する
         </Button>
       </FormGroup>
     </form>

@@ -8,12 +8,11 @@ import { useCurrentPlayerLazyQuery } from '@/lib/graphql/types';
 import { signInFirebaseWithEmail } from '@/lib/firebase';
 import { currentPlayerState } from '@/states/currentPlayer';
 import { useSetRecoilState } from 'recoil';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { PlayerValidator } from '@/lib/validators/PlayerValidator';
-import { FormGroup } from '@/components/form/FormGroup';
-import { Input } from '@/components/form/Input';
 import { loadingState } from '@/states/loading';
 import { path } from '@/lib';
+import { Box, Button, Card, CardContent, Divider, TextField } from '@material-ui/core';
 
 interface SignUpInput {
   email: string;
@@ -28,6 +27,7 @@ export const LoginWithEmailForm: React.FC = () => {
   const {
     register,
     handleSubmit,
+    control,
     formState: { errors, isSubmitting },
   } = useForm<SignUpInput>({
     resolver: yupResolver(schema),
@@ -64,22 +64,48 @@ export const LoginWithEmailForm: React.FC = () => {
   setLoading(loading || isSubmitting);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <FormGroup label="メールアドレス">
-        <Input {...register('email')} />
-        {errors.email?.message && <span>{errors.email.message}</span>}
-      </FormGroup>
+    <Card>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <CardContent>
+          <Controller
+            name="email"
+            control={control}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                label="メールアドレス"
+                error={Boolean(errors.email)}
+                helperText={errors.email?.message}
+              />
+            )}
+          />
+        </CardContent>
 
-      <FormGroup label="パスワード">
-        <Input type="password" {...register('password')} placeholder="8文字以上" />
-        {errors.password?.message && <span>{errors.password.message}</span>}
-      </FormGroup>
+        <CardContent>
+          <Controller
+            name="password"
+            control={control}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                type="password["
+                label="パスワード"
+                placeholder="8文字以上"
+                error={Boolean(errors.password)}
+                helperText={errors.password?.message}
+              />
+            )}
+          />
+        </CardContent>
 
-      <FormGroup>
-        <Button>
-          <input type="submit" />
-        </Button>
-      </FormGroup>
-    </form>
+        <Divider />
+
+        <Box m={2} justifyContent="flex-end">
+          <Button type="submit" variant="contained">
+            ログインする
+          </Button>
+        </Box>
+      </form>
+    </Card>
   );
 };

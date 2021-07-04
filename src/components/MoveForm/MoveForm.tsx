@@ -15,7 +15,8 @@ import { useForm } from 'react-hook-form';
 import { loadingState } from '@/states/loading';
 import { VideoPlayer } from '../MoveMedia/VideoPlayer';
 import { nullableNumber } from '@/lib/validators/nullable_number';
-import { Button, CheckBox, TextArea, Input, FormGroup, FormInline } from '@/components';
+import { CheckBox, TextArea, Input, FormGroup, FormInline } from '@/components';
+import { Button } from '@material-ui/core';
 
 const schema = yup.object().shape({
   name: yup.string().required(),
@@ -143,8 +144,8 @@ export const MoveForm: React.FC<Props> = ({ move, conditions, onSubmit }) => {
       </FormGroup>
 
       <FormGroup>
-        <Button>
-          <input type="submit" />
+        <Button type="submit" variant="contained">
+          登録する
         </Button>
       </FormGroup>
     </form>

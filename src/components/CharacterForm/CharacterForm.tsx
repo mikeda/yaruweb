@@ -4,7 +4,8 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
 import { CharacterAttributes, CharacterFormFragment } from '@/lib/graphql/types';
-import { Button, CheckBox, FormGrid, TextArea, Input, FormGroup } from '@/components';
+import { CheckBox, FormGrid, TextArea, Input, FormGroup } from '@/components';
+import { Button } from '@material-ui/core';
 
 const schema = yup.object().shape({
   name: yup.string().required(),
@@ -155,8 +156,8 @@ export const CharacterForm: React.FC<Props> = ({ character, onSubmit }) => {
       </FormGroup>
 
       <FormGroup>
-        <Button>
-          <input type="submit" />
+        <Button type="submit" variant="contained">
+          登録する
         </Button>
       </FormGroup>
     </form>

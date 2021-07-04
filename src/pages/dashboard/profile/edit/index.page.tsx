@@ -15,6 +15,7 @@ import { Input } from '@/components/form/Input';
 import { currentPlayerState } from '@/states/currentPlayer';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from '@/states/loading';
+import { Button } from '@material-ui/core';
 
 const Page: React.FC = () => {
   const setLoading = useSetRecoilState(loadingState);
@@ -57,7 +58,6 @@ const Form: React.FC<{ currentPlayer: CurrentPlayerFragment }> = ({ currentPlaye
 
       setCurrentPlayer(updatedCurrentPlayer);
       toast.success('プロフィールを更新しました。');
-      router.back();
     },
     onError: e => {
       toast.error(e.message);
@@ -100,8 +100,8 @@ const Form: React.FC<{ currentPlayer: CurrentPlayerFragment }> = ({ currentPlaye
       </FormGroup>
 
       <FormGroup>
-        <Button>
-          <input type="submit" disabled={loading} />
+        <Button type="submit" variant="contained">
+          更新する
         </Button>
       </FormGroup>
     </form>

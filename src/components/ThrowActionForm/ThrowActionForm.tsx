@@ -5,7 +5,8 @@ import * as yup from 'yup';
 
 import { ThorwActionStateText, ThrowEscapeEnumText, ThrowTypeEnumText } from '@/lib/graphql/enum_texts';
 import { ThrowActionAttributes, ThrowActionFragment } from '@/lib/graphql/types';
-import { Button, CheckBox, Input, FormGroup, FormInline } from '@/components';
+import { CheckBox, Input, FormGroup, FormInline } from '@/components';
+import { Button } from '@material-ui/core';
 
 const schema = yup.object().shape({
   damage: yup.number().required().integer().min(0),
@@ -103,8 +104,8 @@ export const ThrowActionForm: React.FC<Props> = ({ throwAction, onSubmit }) => {
       </FormGroup>
 
       <FormGroup>
-        <Button>
-          <input type="submit" />
+        <Button type="submit" variant="contained">
+          登録する
         </Button>
       </FormGroup>
     </form>

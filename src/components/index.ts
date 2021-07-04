@@ -38,7 +38,6 @@ export * from './ObjectCard';
 export * from './ObjectCardList';
 export * from './OperationListSelector';
 export * from './Paging';
-export * from './ReadMore';
 export * from './SortableCardList';
 export * from './StaffRequirement';
 export * from './TabLinkGroup';
