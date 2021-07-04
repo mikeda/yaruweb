@@ -1947,12 +1947,6 @@ type Action_ThrowAction_Fragment = (
 
 export type ActionFragment = Action_AttackAction_Fragment | Action_ThrowAction_Fragment;
 
-export type ArticleFragment = (
-  { __typename?: 'Article' }
-  & Pick<Article, 'category' | 'content'>
-  & ArticleSummaryFragment
-);
-
 export type ArticleCommentFragment = (
   { __typename?: 'ArticleComment' }
   & Pick<ArticleComment, 'id' | 'message' | 'createdAt'>
@@ -2504,7 +2498,7 @@ export type DeleteArticleMutation = (
     { __typename?: 'DeleteArticlePayload' }
     & { article: (
       { __typename?: 'Article' }
-      & ArticleFragment
+      & Pick<Article, 'id'>
     ) }
   )> }
 );
@@ -2997,19 +2991,6 @@ export type UpdateTournamentVideoMutation = (
   )> }
 );
 
-export type ArticleQueryVariables = Exact<{
-  articleId: Scalars['ID'];
-}>;
-
-
-export type ArticleQuery = (
-  { __typename?: 'Query' }
-  & { article: (
-    { __typename?: 'Article' }
-    & ArticleFragment
-  ) }
-);
-
 export type ArticleCommentsQueryVariables = Exact<{
   articleId: Scalars['ID'];
 }>;
@@ -3276,7 +3257,11 @@ export type MyArticleQuery = (
   { __typename?: 'Query' }
   & { myArticle: (
     { __typename?: 'Article' }
-    & ArticleFragment
+    & Pick<Article, 'id' | 'title' | 'description' | 'mainImageUrl' | 'publishedAt' | 'faved' | 'favsCount' | 'status' | 'category' | 'content'>
+    & { author: (
+      { __typename?: 'Player' }
+      & Pick<Player, 'name' | 'avatarUrl'>
+    ) }
   ) }
 );
 
@@ -3383,6 +3368,11 @@ export type TournamentVideoCommentsQuery = (
   )> }
 );
 
+export type ArticleFormArticleFragment = (
+  { __typename?: 'Article' }
+  & Pick<Article, 'id' | 'title' | 'description' | 'mainImageUrl' | 'category' | 'content'>
+);
+
 export type CharacterCardQueryVariables = Exact<{
   characterSlug: Scalars['ID'];
 }>;
@@ -3462,6 +3452,19 @@ export type DashboardTournamentCardsQuery = (
       { __typename?: 'Paging' }
       & PagingFragment
     ) }
+  ) }
+);
+
+export type FavButtonArticleQueryVariables = Exact<{
+  articleId: Scalars['ID'];
+}>;
+
+
+export type FavButtonArticleQuery = (
+  { __typename?: 'Query' }
+  & { article: (
+    { __typename?: 'Article' }
+    & Pick<Article, 'faved'>
   ) }
 );
 
@@ -3650,6 +3653,28 @@ export type PageCharacterMoveCategoriesQuery = (
   ) }
 );
 
+export type ArticlePageArticleFragment = (
+  { __typename?: 'Article' }
+  & Pick<Article, 'id' | 'title' | 'description' | 'mainImageUrl' | 'publishedAt' | 'favsCount' | 'status' | 'category' | 'content'>
+  & { author: (
+    { __typename?: 'Player' }
+    & Pick<Player, 'name' | 'avatarUrl'>
+  ) }
+);
+
+export type ArticlePageArticleQueryVariables = Exact<{
+  articleId: Scalars['ID'];
+}>;
+
+
+export type ArticlePageArticleQuery = (
+  { __typename?: 'Query' }
+  & { article: (
+    { __typename?: 'Article' }
+    & ArticlePageArticleFragment
+  ) }
+);
+
 export type PageCharactersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -3678,6 +3703,19 @@ export type PageComboCategoryQuery = (
       { __typename?: 'Combo' }
       & ComboFragment
     )> }
+  ) }
+);
+
+export type DashboardArticlePageArticleQueryVariables = Exact<{
+  articleId: Scalars['ID'];
+}>;
+
+
+export type DashboardArticlePageArticleQuery = (
+  { __typename?: 'Query' }
+  & { article: (
+    { __typename?: 'Article' }
+    & ArticleFormArticleFragment
   ) }
 );
 
@@ -4280,29 +4318,6 @@ export type PageTournamentsQuery = (
   ) }
 );
 
-export const ArticleSummaryFragmentDoc = gql`
-    fragment articleSummary on Article {
-  id
-  title
-  description
-  mainImageUrl
-  publishedAt
-  faved
-  favsCount
-  status
-  author {
-    name
-    avatarUrl
-  }
-}
-    `;
-export const ArticleFragmentDoc = gql`
-    fragment article on Article {
-  ...articleSummary
-  category
-  content
-}
-    ${ArticleSummaryFragmentDoc}`;
 export const ArticleCommentFragmentDoc = gql`
     fragment articleComment on ArticleComment {
   id
@@ -4320,6 +4335,22 @@ export const ArticleLinkFragmentDoc = gql`
   title
   description
   imageUrl
+}
+    `;
+export const ArticleSummaryFragmentDoc = gql`
+    fragment articleSummary on Article {
+  id
+  title
+  description
+  mainImageUrl
+  publishedAt
+  faved
+  favsCount
+  status
+  author {
+    name
+    avatarUrl
+  }
 }
     `;
 export const ComboVideoFragmentDoc = gql`
@@ -4583,6 +4614,16 @@ export const MoveCategoryWithMovesFragmentDoc = gql`
 }
     ${MoveCategoryFragmentDoc}
 ${MoveFragmentDoc}`;
+export const ArticleFormArticleFragmentDoc = gql`
+    fragment ArticleFormArticle on Article {
+  id
+  title
+  description
+  mainImageUrl
+  category
+  content
+}
+    `;
 export const CharacterCardFragmentDoc = gql`
     fragment CharacterCard on Character {
   slug
@@ -4744,6 +4785,23 @@ export const BreadcrumbsMoveFragmentDoc = gql`
   }
 }
     ${BreadcrumbsMoveCategoryFragmentDoc}`;
+export const ArticlePageArticleFragmentDoc = gql`
+    fragment ArticlePageArticle on Article {
+  id
+  title
+  description
+  mainImageUrl
+  publishedAt
+  favsCount
+  status
+  category
+  content
+  author {
+    name
+    avatarUrl
+  }
+}
+    `;
 export const CreateArticleDocument = gql`
     mutation CreateArticle($attributes: ArticleAttributes!) {
   createArticle(input: {attributes: $attributes}) {
@@ -5546,11 +5604,11 @@ export const DeleteArticleDocument = gql`
     mutation DeleteArticle($articleId: ID!) {
   deleteArticle(input: {articleId: $articleId}) {
     article {
-      ...article
+      id
     }
   }
 }
-    ${ArticleFragmentDoc}`;
+    `;
 export type DeleteArticleMutationFn = Apollo.MutationFunction<DeleteArticleMutation, DeleteArticleMutationVariables>;
 
 /**
@@ -6628,41 +6686,6 @@ export function useUpdateTournamentVideoMutation(baseOptions?: Apollo.MutationHo
 export type UpdateTournamentVideoMutationHookResult = ReturnType<typeof useUpdateTournamentVideoMutation>;
 export type UpdateTournamentVideoMutationResult = Apollo.MutationResult<UpdateTournamentVideoMutation>;
 export type UpdateTournamentVideoMutationOptions = Apollo.BaseMutationOptions<UpdateTournamentVideoMutation, UpdateTournamentVideoMutationVariables>;
-export const ArticleDocument = gql`
-    query Article($articleId: ID!) {
-  article(articleId: $articleId) {
-    ...article
-  }
-}
-    ${ArticleFragmentDoc}`;
-
-/**
- * __useArticleQuery__
- *
- * To run a query within a React component, call `useArticleQuery` and pass it any options that fit your needs.
- * When your component renders, `useArticleQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useArticleQuery({
- *   variables: {
- *      articleId: // value for 'articleId'
- *   },
- * });
- */
-export function useArticleQuery(baseOptions: Apollo.QueryHookOptions<ArticleQuery, ArticleQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<ArticleQuery, ArticleQueryVariables>(ArticleDocument, options);
-      }
-export function useArticleLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ArticleQuery, ArticleQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<ArticleQuery, ArticleQueryVariables>(ArticleDocument, options);
-        }
-export type ArticleQueryHookResult = ReturnType<typeof useArticleQuery>;
-export type ArticleLazyQueryHookResult = ReturnType<typeof useArticleLazyQuery>;
-export type ArticleQueryResult = Apollo.QueryResult<ArticleQuery, ArticleQueryVariables>;
 export const ArticleCommentsDocument = gql`
     query ArticleComments($articleId: ID!) {
   articleComments(articleId: $articleId) {
@@ -7323,10 +7346,23 @@ export type MovesQueryResult = Apollo.QueryResult<MovesQuery, MovesQueryVariable
 export const MyArticleDocument = gql`
     query MyArticle($articleId: ID!) {
   myArticle(articleId: $articleId) {
-    ...article
+    id
+    title
+    description
+    mainImageUrl
+    publishedAt
+    faved
+    favsCount
+    status
+    category
+    content
+    author {
+      name
+      avatarUrl
+    }
   }
 }
-    ${ArticleFragmentDoc}`;
+    `;
 
 /**
  * __useMyArticleQuery__
@@ -7759,6 +7795,41 @@ export function useDashboardTournamentCardsLazyQuery(baseOptions?: Apollo.LazyQu
 export type DashboardTournamentCardsQueryHookResult = ReturnType<typeof useDashboardTournamentCardsQuery>;
 export type DashboardTournamentCardsLazyQueryHookResult = ReturnType<typeof useDashboardTournamentCardsLazyQuery>;
 export type DashboardTournamentCardsQueryResult = Apollo.QueryResult<DashboardTournamentCardsQuery, DashboardTournamentCardsQueryVariables>;
+export const FavButtonArticleDocument = gql`
+    query FavButtonArticle($articleId: ID!) {
+  article(articleId: $articleId) {
+    faved
+  }
+}
+    `;
+
+/**
+ * __useFavButtonArticleQuery__
+ *
+ * To run a query within a React component, call `useFavButtonArticleQuery` and pass it any options that fit your needs.
+ * When your component renders, `useFavButtonArticleQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useFavButtonArticleQuery({
+ *   variables: {
+ *      articleId: // value for 'articleId'
+ *   },
+ * });
+ */
+export function useFavButtonArticleQuery(baseOptions: Apollo.QueryHookOptions<FavButtonArticleQuery, FavButtonArticleQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<FavButtonArticleQuery, FavButtonArticleQueryVariables>(FavButtonArticleDocument, options);
+      }
+export function useFavButtonArticleLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<FavButtonArticleQuery, FavButtonArticleQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<FavButtonArticleQuery, FavButtonArticleQueryVariables>(FavButtonArticleDocument, options);
+        }
+export type FavButtonArticleQueryHookResult = ReturnType<typeof useFavButtonArticleQuery>;
+export type FavButtonArticleLazyQueryHookResult = ReturnType<typeof useFavButtonArticleLazyQuery>;
+export type FavButtonArticleQueryResult = Apollo.QueryResult<FavButtonArticleQuery, FavButtonArticleQueryVariables>;
 export const MoveCategoryCardsDocument = gql`
     query MoveCategoryCards($characterSlug: ID!) {
   moveCategories(characterSlug: $characterSlug) {
@@ -8020,6 +8091,41 @@ export function usePageCharacterMoveCategoriesLazyQuery(baseOptions?: Apollo.Laz
 export type PageCharacterMoveCategoriesQueryHookResult = ReturnType<typeof usePageCharacterMoveCategoriesQuery>;
 export type PageCharacterMoveCategoriesLazyQueryHookResult = ReturnType<typeof usePageCharacterMoveCategoriesLazyQuery>;
 export type PageCharacterMoveCategoriesQueryResult = Apollo.QueryResult<PageCharacterMoveCategoriesQuery, PageCharacterMoveCategoriesQueryVariables>;
+export const ArticlePageArticleDocument = gql`
+    query ArticlePageArticle($articleId: ID!) {
+  article(articleId: $articleId) {
+    ...ArticlePageArticle
+  }
+}
+    ${ArticlePageArticleFragmentDoc}`;
+
+/**
+ * __useArticlePageArticleQuery__
+ *
+ * To run a query within a React component, call `useArticlePageArticleQuery` and pass it any options that fit your needs.
+ * When your component renders, `useArticlePageArticleQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useArticlePageArticleQuery({
+ *   variables: {
+ *      articleId: // value for 'articleId'
+ *   },
+ * });
+ */
+export function useArticlePageArticleQuery(baseOptions: Apollo.QueryHookOptions<ArticlePageArticleQuery, ArticlePageArticleQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ArticlePageArticleQuery, ArticlePageArticleQueryVariables>(ArticlePageArticleDocument, options);
+      }
+export function useArticlePageArticleLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ArticlePageArticleQuery, ArticlePageArticleQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ArticlePageArticleQuery, ArticlePageArticleQueryVariables>(ArticlePageArticleDocument, options);
+        }
+export type ArticlePageArticleQueryHookResult = ReturnType<typeof useArticlePageArticleQuery>;
+export type ArticlePageArticleLazyQueryHookResult = ReturnType<typeof useArticlePageArticleLazyQuery>;
+export type ArticlePageArticleQueryResult = Apollo.QueryResult<ArticlePageArticleQuery, ArticlePageArticleQueryVariables>;
 export const PageCharactersDocument = gql`
     query PageCharacters {
   characters {
@@ -8097,6 +8203,41 @@ export function usePageComboCategoryLazyQuery(baseOptions?: Apollo.LazyQueryHook
 export type PageComboCategoryQueryHookResult = ReturnType<typeof usePageComboCategoryQuery>;
 export type PageComboCategoryLazyQueryHookResult = ReturnType<typeof usePageComboCategoryLazyQuery>;
 export type PageComboCategoryQueryResult = Apollo.QueryResult<PageComboCategoryQuery, PageComboCategoryQueryVariables>;
+export const DashboardArticlePageArticleDocument = gql`
+    query DashboardArticlePageArticle($articleId: ID!) {
+  article(articleId: $articleId) {
+    ...ArticleFormArticle
+  }
+}
+    ${ArticleFormArticleFragmentDoc}`;
+
+/**
+ * __useDashboardArticlePageArticleQuery__
+ *
+ * To run a query within a React component, call `useDashboardArticlePageArticleQuery` and pass it any options that fit your needs.
+ * When your component renders, `useDashboardArticlePageArticleQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useDashboardArticlePageArticleQuery({
+ *   variables: {
+ *      articleId: // value for 'articleId'
+ *   },
+ * });
+ */
+export function useDashboardArticlePageArticleQuery(baseOptions: Apollo.QueryHookOptions<DashboardArticlePageArticleQuery, DashboardArticlePageArticleQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<DashboardArticlePageArticleQuery, DashboardArticlePageArticleQueryVariables>(DashboardArticlePageArticleDocument, options);
+      }
+export function useDashboardArticlePageArticleLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<DashboardArticlePageArticleQuery, DashboardArticlePageArticleQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<DashboardArticlePageArticleQuery, DashboardArticlePageArticleQueryVariables>(DashboardArticlePageArticleDocument, options);
+        }
+export type DashboardArticlePageArticleQueryHookResult = ReturnType<typeof useDashboardArticlePageArticleQuery>;
+export type DashboardArticlePageArticleLazyQueryHookResult = ReturnType<typeof useDashboardArticlePageArticleLazyQuery>;
+export type DashboardArticlePageArticleQueryResult = Apollo.QueryResult<DashboardArticlePageArticleQuery, DashboardArticlePageArticleQueryVariables>;
 export const PageDashboardArticlesDocument = gql`
     query PageDashboardArticles($page: Int, $per: Int) {
   myArticles(page: $page, per: $per) {

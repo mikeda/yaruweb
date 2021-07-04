@@ -1,0 +1,5 @@
+query FavButtonArticle($articleId: ID!) {
+  article(articleId: $articleId) {
+    faved
+  }
+}

@@ -1,0 +1,8 @@
+fragment ArticleFormArticle on Article {
+  id
+  title
+  description
+  mainImageUrl
+  category
+  content
+}

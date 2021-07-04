@@ -1,5 +1,0 @@
-fragment article on Article {
-  ...articleSummary
-  category
-  content
-}
