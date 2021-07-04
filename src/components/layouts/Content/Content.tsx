@@ -29,7 +29,7 @@ export const Content: React.FC<Props> = ({ title, breadcrumb, children }) => {
       </GlobalHeader>
       <div className={classes.root}>
         {title && <Typography variant="h5">{title}</Typography>}
-        {breadcrumb && { breadcrumb }}
+        {breadcrumb}
         {children}
       </div>
       ;
