@@ -6,12 +6,12 @@ import { useCharacterCardsQuery } from '@/lib/graphql/types';
 import { dashboardPath } from '@/lib';
 import { Button, Grid } from '@material-ui/core';
 import { Add as AddIcon } from '@material-ui/icons';
-import { CharacterCard } from '@/components';
+import { CharacterCard, DashboardBreadcrumbs } from '@/components';
 
 const Page: React.FC = () => (
   <DashboardContent
     title="キャラクター"
-    breadcrumb={{ to: 'characters' }}
+    breadcrumb={<DashboardBreadcrumbs to="characters" />}
     actions={
       <Button variant="contained" color="primary" startIcon={<AddIcon />} href={dashboardPath({ to: 'charactersNew' })}>
         作成する
