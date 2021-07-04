@@ -3494,6 +3494,10 @@ export type MoveCategoryListItemFragment = (
 export type MoveListItemFragment = (
   { __typename?: 'Move' }
   & Pick<Move, 'id' | 'name' | 'crouchingStatus' | 'jumpStatus' | 'powerCrush' | 'homing' | 'screw' | 'wallBound'>
+  & { commands: Array<(
+    { __typename?: 'Command' }
+    & CommandFragment
+  )> }
 );
 
 export type MoveMediaFragment = (
@@ -4695,8 +4699,11 @@ export const MoveListItemFragmentDoc = gql`
   homing
   screw
   wallBound
+  commands {
+    ...command
+  }
 }
-    `;
+    ${CommandFragmentDoc}`;
 export const MoveMediaFragmentDoc = gql`
     fragment MoveMedia on Move {
   id

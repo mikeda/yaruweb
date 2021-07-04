@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import { MoveListItemFragment } from '@/lib/graphql/types';
 import {
+  Box,
   Checkbox,
   FormControlLabel,
   FormGroup,
@@ -14,6 +15,7 @@ import {
 import Link from 'next/link';
 import { path } from '@/lib';
 import theme from '@/theme';
+import { Operations } from '../Command/Operations';
 
 const useStyles = makeStyles({
   search: {
@@ -94,8 +96,15 @@ export const MoveSearchList: React.FC<Props> = ({ moves: allMoves }) => {
         <List component="div">
           {moves.map(move => (
             <Link key={move.id} href={path({ to: 'move', moveId: move.id })} passHref>
-              <ListItem button component="a">
-                <ListItemText primary={move.name} />
+              <ListItem button component="a" divider>
+                <ListItemText>
+                  <Box display="flex" flexDirection="row" justifyContent="space-between">
+                    {move.name}
+                    <Box>
+                      <Operations operations={move.commands[0].operations} />
+                    </Box>
+                  </Box>
+                </ListItemText>
               </ListItem>
             </Link>
           ))}
