@@ -4,8 +4,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFileAlt, faCalendarAlt, IconDefinition, faUser, faMeh } from '@fortawesome/free-regular-svg-icons';
 
 import styles from './Tabs.module.scss';
-import { useCurrentPlayer } from '@/hooks/useCurrentPlayer';
-import { PlayerRole } from '@/lib/graphql/types';
+import { useCurrentUser } from '@/hooks/useCurrentUser';
+import { UserRole } from '@/lib/graphql/types';
 import { dashboardPath } from '@/lib';
 
 export type TabKey = 'article' | 'tournament' | 'video' | 'character' | 'profile';
@@ -42,9 +42,9 @@ interface Props {
 }
 
 export const Tabs: React.FC<Props> = ({ activeTab }) => {
-  const { currentPlayer } = useCurrentPlayer();
+  const { currentUser } = useCurrentUser();
 
-  const tabs = currentPlayer?.role === PlayerRole.Admin ? allTabs : allTabs.filter(tab => !tab.onlyEditor);
+  const tabs = currentUser?.role === UserRole.Admin ? allTabs : allTabs.filter(tab => !tab.onlyEditor);
 
   return (
     <div className={styles.container}>

@@ -24,7 +24,7 @@ export const VideoHighlights: React.FC<Props> = ({ highlights, onSelect }) => {
             {formatSec(highlight.startSec)}
           </a>
           <span className={styles.title}>{highlight.title}</span>
-          <span className={styles.playerName}>{highlight.player.name}</span>
+          <span className={styles.userName}>{highlight.user.name}</span>
         </li>
       ))}
     </ol>

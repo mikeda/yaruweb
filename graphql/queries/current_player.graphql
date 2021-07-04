@@ -1,5 +1,5 @@
-query CurrentPlayer {
-  currentPlayer {
-    ...currentPlayer
+query CurrentUser {
+  currentUser {
+    ...currentUser
   }
 }

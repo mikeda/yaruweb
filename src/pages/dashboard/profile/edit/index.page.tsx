@@ -1,24 +1,24 @@
 import React from 'react';
 
 import {
-  CurrentPlayerAttributes,
-  CurrentPlayerFragment,
-  useCurrentPlayerQuery,
-  useUpdateCurrentPlayerMutation,
+  CurrentUserAttributes,
+  CurrentUserFragment,
+  useCurrentUserQuery,
+  useUpdateCurrentUserMutation,
 } from '@/lib/graphql/types';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { FormGroup } from '@/components/form/FormGroup';
 import { Input } from '@/components/form/Input';
-import { currentPlayerState } from '@/states/currentPlayer';
+import { currentUserState } from '@/states/currentUser';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from '@/states/loading';
 import { Button } from '@material-ui/core';
 
 const Page: React.FC = () => {
   const setLoading = useSetRecoilState(loadingState);
-  const { data, loading } = useCurrentPlayerQuery({
+  const { data, loading } = useCurrentUserQuery({
     fetchPolicy: 'network-only',
     onError: e => {
       toast.error(e.message);
@@ -28,33 +28,33 @@ const Page: React.FC = () => {
   setLoading(loading);
 
   return (
-    <DashboardContent title="プロフィール編集">{data && <Form currentPlayer={data.currentPlayer} />}</DashboardContent>
+    <DashboardContent title="プロフィール編集">{data && <Form currentUser={data.currentUser} />}</DashboardContent>
   );
 };
 
-const Form: React.FC<{ currentPlayer: CurrentPlayerFragment }> = ({ currentPlayer }) => {
-  const setCurrentPlayer = useSetRecoilState(currentPlayerState);
+const Form: React.FC<{ currentUser: CurrentUserFragment }> = ({ currentUser }) => {
+  const setCurrentUser = useSetRecoilState(currentUserState);
   const setLoading = useSetRecoilState(loadingState);
   const {
     register,
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm<CurrentPlayerAttributes>({
+  } = useForm<CurrentUserAttributes>({
     defaultValues: {
-      name: currentPlayer.name,
+      name: currentUser.name,
     },
   });
 
-  const [updateCurrentPlayer, { loading }] = useUpdateCurrentPlayerMutation({
+  const [updateCurrentUser, { loading }] = useUpdateCurrentUserMutation({
     onCompleted: data => {
-      const updatedCurrentPlayer = data.updateCurrentPlayer?.currentPlayer;
-      if (!updatedCurrentPlayer) {
+      const updatedCurrentUser = data.updateCurrentUser?.currentUser;
+      if (!updatedCurrentUser) {
         toast.error('プロフィールの更新に失敗しました。');
         return;
       }
 
-      setCurrentPlayer(updatedCurrentPlayer);
+      setCurrentUser(updatedCurrentUser);
       toast.success('プロフィールを更新しました。');
     },
     onError: e => {
@@ -62,8 +62,8 @@ const Form: React.FC<{ currentPlayer: CurrentPlayerFragment }> = ({ currentPlaye
     },
   });
 
-  const onSubmit = (attributes: CurrentPlayerAttributes) => {
-    updateCurrentPlayer({ variables: { attributes } });
+  const onSubmit = (attributes: CurrentUserAttributes) => {
+    updateCurrentUser({ variables: { attributes } });
   };
 
   setLoading(loading);

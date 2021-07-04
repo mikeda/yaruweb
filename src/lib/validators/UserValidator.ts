@@ -1,6 +1,6 @@
 import * as Yup from 'yup';
 
-export const PlayerValidator = {
+export const UserValidator = {
   email: Yup.string().email('メールアドレスの形式が正しくありません。').required('メールアドレスを入力して下さい。'),
   name: Yup.string()
     .min(3, 'プレイヤー名は3文字以上で入力してください。')

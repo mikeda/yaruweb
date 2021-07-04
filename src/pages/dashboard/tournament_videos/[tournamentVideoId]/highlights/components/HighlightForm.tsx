@@ -24,7 +24,7 @@ interface Props {
 }
 
 export const HighlightForm: React.FC<Props> = ({ youtubeVideoId, highlight, onSubmit }) => {
-  const [youTubePlayer, setYouTubePlayer] = useState<YouTubePlayer>();
+  const [youTubeUser, setYouTubeUser] = useState<YouTubePlayer>();
   const {
     register,
     getValues,
@@ -47,7 +47,7 @@ export const HighlightForm: React.FC<Props> = ({ youtubeVideoId, highlight, onSu
         videoId={youtubeVideoId}
         opts={{ width: '854', height: '480', playerVars: { start: getValues('startSec') } }}
         onReady={event => {
-          setYouTubePlayer(event.target);
+          setYouTubeUser(event.target);
         }}
       />
 
@@ -66,9 +66,9 @@ export const HighlightForm: React.FC<Props> = ({ youtubeVideoId, highlight, onSu
           <Button
             onClick={e => {
               e.preventDefault();
-              if (!youTubePlayer) return;
+              if (!youTubeUser) return;
 
-              setValue('startSec', Math.floor(youTubePlayer.getCurrentTime()));
+              setValue('startSec', Math.floor(youTubeUser.getCurrentTime()));
             }}
           >
             再生中の場所をコピー
@@ -77,9 +77,9 @@ export const HighlightForm: React.FC<Props> = ({ youtubeVideoId, highlight, onSu
           <Button
             onClick={e => {
               e.preventDefault();
-              if (!youTubePlayer) return;
+              if (!youTubeUser) return;
 
-              youTubePlayer.seekTo(getValues('startSec'), true);
+              youTubeUser.seekTo(getValues('startSec'), true);
             }}
           >
             設定中の場所に移動

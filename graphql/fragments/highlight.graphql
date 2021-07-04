@@ -2,7 +2,7 @@ fragment tournamentVideoHighlight on TournamentVideoHighlight {
   id
   title
   startSec
-  player {
+  user {
     name
   }
 }

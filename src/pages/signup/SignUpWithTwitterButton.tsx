@@ -2,20 +2,20 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 
-import { useCreatePlayerMutation } from '@/lib/graphql/types';
+import { useCreateUserMutation } from '@/lib/graphql/types';
 import { signInFirebaseWithTwitter } from '@/lib/firebase';
-import { currentPlayerState } from '@/states/currentPlayer';
+import { currentUserState } from '@/states/currentUser';
 import { useSetRecoilState } from 'recoil';
 import { path } from '@/lib';
 
 export const SignUpWithTwitterButton: React.FC = () => {
   const router = useRouter();
-  const setCurrentPlayer = useSetRecoilState(currentPlayerState);
-  const [createPlayerWithTwitter] = useCreatePlayerMutation({
+  const setCurrentUser = useSetRecoilState(currentUserState);
+  const [createUserWithTwitter] = useCreateUserMutation({
     onCompleted: data => {
-      const currentPlayer = data.createPlayer?.currentPlayer;
-      if (!currentPlayer) return;
-      setCurrentPlayer(currentPlayer);
+      const currentUser = data.createUser?.currentUser;
+      if (!currentUser) return;
+      setCurrentUser(currentUser);
       toast.success('ユーザー登録が完了しました。');
 
       router.push(path({ to: 'top' }));
@@ -27,7 +27,7 @@ export const SignUpWithTwitterButton: React.FC = () => {
 
   const onSignUp = () => {
     signInFirebaseWithTwitter().then(() => {
-      createPlayerWithTwitter();
+      createUserWithTwitter();
     });
   };
 

@@ -4,18 +4,18 @@ import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
 import { signOutFirebase } from '@/lib/firebase';
-import { useCurrentPlayer } from '@/hooks/useCurrentPlayer';
-import { currentPlayerState } from '@/states/currentPlayer';
+import { useCurrentUser } from '@/hooks/useCurrentUser';
+import { currentUserState } from '@/states/currentUser';
 import { dashboardPath, path } from '@/lib';
 import { Avatar, IconButton, Link, Menu, MenuItem } from '@material-ui/core';
 
-export const PlayerMenu: React.FC = () => {
-  const { currentPlayer } = useCurrentPlayer();
+export const UserMenu: React.FC = () => {
+  const { currentUser } = useCurrentUser();
   const router = useRouter();
-  const setCurrentPlayer = useSetRecoilState(currentPlayerState);
+  const setCurrentUser = useSetRecoilState(currentUserState);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
-  if (!currentPlayer) {
+  if (!currentUser) {
     return <Link href={path({ to: 'login' })}>ログイン</Link>;
   }
 
@@ -29,10 +29,10 @@ export const PlayerMenu: React.FC = () => {
 
   return (
     <>
-      <IconButton aria-controls="player-menu" aria-haspopup="true" onClick={handleClick}>
-        <Avatar alt={currentPlayer.name} src={currentPlayer.avatarUrl} />
+      <IconButton aria-controls="user-menu" aria-haspopup="true" onClick={handleClick}>
+        <Avatar alt={currentUser.name} src={currentUser.avatarUrl} />
       </IconButton>
-      <Menu id="player-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
+      <Menu id="user-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
         <MenuItem
           onClick={() => {
             router.push(dashboardPath({ to: 'articles' }));
@@ -45,7 +45,7 @@ export const PlayerMenu: React.FC = () => {
           onClick={() => {
             signOutFirebase().then(() => {
               toast.success('ログアウトしました。');
-              setCurrentPlayer(null);
+              setCurrentUser(null);
               router.push(path({ to: 'top' }));
             });
             handleClose();

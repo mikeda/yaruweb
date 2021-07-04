@@ -3,7 +3,7 @@ import dayjs from '@/lib/dayjs';
 
 import styles from './Comment.module.scss';
 
-interface PlayerProps {
+interface UserProps {
   name: string;
   avatarUrl: string;
 }
@@ -11,14 +11,14 @@ interface PlayerProps {
 interface Props {
   message: string;
   createdAt: string;
-  player: PlayerProps;
+  user: UserProps;
 }
 
-export const Comment: React.FC<Props> = ({ message, createdAt, player }) => {
+export const Comment: React.FC<Props> = ({ message, createdAt, user }) => {
   return (
-    <CommentWrapper player={player}>
+    <CommentWrapper user={user}>
       <div className={styles.header}>
-        <div className={styles.playerName}>{player.name}</div>
+        <div className={styles.userName}>{user.name}</div>
         <div className={styles.time}>{dayjs(createdAt).format('YYYY/M/D  H:mm')}</div>
       </div>
       <div className={styles.message}>{message}</div>
@@ -26,11 +26,11 @@ export const Comment: React.FC<Props> = ({ message, createdAt, player }) => {
   );
 };
 
-export const CommentWrapper: React.FC<{ player: PlayerProps }> = ({ player, children }) => {
+export const CommentWrapper: React.FC<{ user: UserProps }> = ({ user, children }) => {
   return (
     <div className={styles.container}>
       <div className={styles.avatar}>
-        <img src={player.avatarUrl} />
+        <img src={user.avatarUrl} />
       </div>
       <div className={styles.cont}>{children}</div>
     </div>

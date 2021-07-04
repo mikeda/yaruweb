@@ -1,4 +1,4 @@
-fragment currentPlayer on CurrentPlayer {
+fragment currentUser on CurrentUser {
   id
   name
   role

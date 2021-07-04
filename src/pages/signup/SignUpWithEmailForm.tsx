@@ -4,10 +4,10 @@ import { toast } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import { PlayerValidator } from '@/lib/validators/PlayerValidator';
-import { useCreatePlayerMutation } from '@/lib/graphql/types';
+import { UserValidator } from '@/lib/validators/UserValidator';
+import { useCreateUserMutation } from '@/lib/graphql/types';
 import { createFirebaseUserWithEmail } from '@/lib/firebase';
-import { currentPlayerState } from '@/states/currentPlayer';
+import { currentUserState } from '@/states/currentUser';
 import { useSetRecoilState } from 'recoil';
 import { Controller, useForm } from 'react-hook-form';
 import { loadingState } from '@/states/loading';
@@ -20,8 +20,8 @@ interface SignUpInput {
 }
 
 const schema = yup.object().shape({
-  email: PlayerValidator.email,
-  password: PlayerValidator.password,
+  email: UserValidator.email,
+  password: UserValidator.password,
 });
 
 export const SignUpWithEmailForm: React.FC = () => {
@@ -35,12 +35,12 @@ export const SignUpWithEmailForm: React.FC = () => {
   });
   const router = useRouter();
   const setLoading = useSetRecoilState(loadingState);
-  const setCurrentPlayer = useSetRecoilState(currentPlayerState);
-  const [createPlayer, { loading }] = useCreatePlayerMutation({
+  const setCurrentUser = useSetRecoilState(currentUserState);
+  const [createUser, { loading }] = useCreateUserMutation({
     onCompleted: data => {
-      const currentPlayer = data.createPlayer?.currentPlayer;
-      if (!currentPlayer) return;
-      setCurrentPlayer(currentPlayer);
+      const currentUser = data.createUser?.currentUser;
+      if (!currentUser) return;
+      setCurrentUser(currentUser);
       toast.success('ユーザー登録が完了しました。');
 
       router.push(path({ to: 'top' }));
@@ -53,7 +53,7 @@ export const SignUpWithEmailForm: React.FC = () => {
   const onSubmit = (attributes: SignUpInput) => {
     createFirebaseUserWithEmail(attributes.email, attributes.password)
       .then(() => {
-        createPlayer({ variables: {} });
+        createUser({ variables: {} });
       })
       .catch(e => {
         toast.error(e.message);

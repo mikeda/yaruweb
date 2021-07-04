@@ -4,12 +4,12 @@ import { toast } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import { useCurrentPlayerLazyQuery } from '@/lib/graphql/types';
+import { useCurrentUserLazyQuery } from '@/lib/graphql/types';
 import { signInFirebaseWithEmail } from '@/lib/firebase';
-import { currentPlayerState } from '@/states/currentPlayer';
+import { currentUserState } from '@/states/currentUser';
 import { useSetRecoilState } from 'recoil';
 import { Controller, useForm } from 'react-hook-form';
-import { PlayerValidator } from '@/lib/validators/PlayerValidator';
+import { UserValidator } from '@/lib/validators/UserValidator';
 import { loadingState } from '@/states/loading';
 import { path } from '@/lib';
 import { Box, Button, Card, CardContent, Divider, TextField } from '@material-ui/core';
@@ -20,7 +20,7 @@ interface SignUpInput {
 }
 
 const schema = yup.object().shape({
-  email: PlayerValidator.email,
+  email: UserValidator.email,
 });
 
 export const LoginWithEmailForm: React.FC = () => {
@@ -34,13 +34,13 @@ export const LoginWithEmailForm: React.FC = () => {
   });
   const router = useRouter();
   const setLoading = useSetRecoilState(loadingState);
-  const setCurrentPlayer = useSetRecoilState(currentPlayerState);
+  const setCurrentUser = useSetRecoilState(currentUserState);
 
-  const [getCurrentPlayer, { loading }] = useCurrentPlayerLazyQuery({
+  const [getCurrentUser, { loading }] = useCurrentUserLazyQuery({
     onCompleted: data => {
-      if (!data.currentPlayer) return;
+      if (!data.currentUser) return;
 
-      setCurrentPlayer(data.currentPlayer);
+      setCurrentUser(data.currentUser);
       toast.success('ログインしました。');
       router.push(path({ to: 'top' }));
     },
@@ -53,7 +53,7 @@ export const LoginWithEmailForm: React.FC = () => {
   const onSubmit = (attributes: SignUpInput) => {
     signInFirebaseWithEmail(attributes.email, attributes.password)
       .then(() => {
-        getCurrentPlayer();
+        getCurrentUser();
       })
       .catch(e => {
         toast.error(e.message);

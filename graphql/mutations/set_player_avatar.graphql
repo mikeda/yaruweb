@@ -1,6 +1,6 @@
-mutation SetPlayerAvatar($avatar: String!) {
-  setPlayerAvatar(input: {avatar: $avatar}) {
-    player {
+mutation SetUserAvatar($avatar: String!) {
+  setUserAvatar(input: {avatar: $avatar}) {
+    user {
       avatarUrl
     }
   }

@@ -2,20 +2,20 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 
-import { useCurrentPlayerLazyQuery } from '@/lib/graphql/types';
+import { useCurrentUserLazyQuery } from '@/lib/graphql/types';
 import { signInFirebaseWithTwitter } from '@/lib/firebase';
-import { currentPlayerState } from '@/states/currentPlayer';
+import { currentUserState } from '@/states/currentUser';
 import { useSetRecoilState } from 'recoil';
 import { path } from '@/lib';
 
 export const LoginWithTwitterButton: React.FC = () => {
   const router = useRouter();
-  const setCurrentPlayer = useSetRecoilState(currentPlayerState);
-  const [getCurrentPlayer] = useCurrentPlayerLazyQuery({
+  const setCurrentUser = useSetRecoilState(currentUserState);
+  const [getCurrentUser] = useCurrentUserLazyQuery({
     onCompleted: data => {
-      if (!data.currentPlayer) return;
+      if (!data.currentUser) return;
 
-      setCurrentPlayer(data.currentPlayer);
+      setCurrentUser(data.currentUser);
       toast.success('ログインしました。');
       router.push(path({ to: 'top' }));
     },
@@ -28,7 +28,7 @@ export const LoginWithTwitterButton: React.FC = () => {
   const onLogin = () => {
     signInFirebaseWithTwitter()
       .then(() => {
-        getCurrentPlayer();
+        getCurrentUser();
       })
       .catch(e => {
         toast.error(e.message);

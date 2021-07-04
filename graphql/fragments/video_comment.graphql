@@ -2,7 +2,7 @@ fragment tournamentVideoComment on TournamentVideoComment {
   id
   message
   createdAt
-  player {
+  user {
     name
     avatarUrl
   }

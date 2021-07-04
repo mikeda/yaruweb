@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { useFavArticleMutation, useFavButtonArticleQuery, useUnfavArticleMutation } from '@/lib/graphql/types';
 import { Favorite, FavoriteBorder } from '@material-ui/icons';
 import { Badge, IconButton } from '@material-ui/core';
-import { useCurrentPlayer } from '@/hooks/useCurrentPlayer';
+import { useCurrentUser } from '@/hooks/useCurrentUser';
 
 type Props = {
   articleId: string;
@@ -11,10 +11,10 @@ type Props = {
 };
 
 export const FavButton: React.FC<Props> = ({ articleId, ...props }) => {
-  const { currentPlayer } = useCurrentPlayer();
+  const { currentUser } = useCurrentUser();
   useFavButtonArticleQuery({
     variables: { articleId },
-    skip: !currentPlayer,
+    skip: !currentUser,
     onCompleted: data => {
       setFaved(data.article.faved);
     },
@@ -51,7 +51,7 @@ type UnfavedButtonProps = {
 };
 
 const UnfavedButton: React.FC<UnfavedButtonProps> = ({ articleId, favsCount, onFav }) => {
-  const { currentPlayer } = useCurrentPlayer();
+  const { currentUser } = useCurrentUser();
 
   const [fav] = useFavArticleMutation({
     variables: { articleId },
@@ -59,7 +59,7 @@ const UnfavedButton: React.FC<UnfavedButtonProps> = ({ articleId, favsCount, onF
   });
 
   const onClick = () => {
-    if (currentPlayer) {
+    if (currentUser) {
       fav();
     } else {
       alert('ログインが必要です。');
@@ -82,7 +82,7 @@ type FavedButtonProps = {
 };
 
 const FavedButton: React.FC<FavedButtonProps> = ({ articleId, favsCount, onUnfav }) => {
-  const { currentPlayer } = useCurrentPlayer();
+  const { currentUser } = useCurrentUser();
 
   const [unfav] = useUnfavArticleMutation({
     variables: { articleId },
@@ -90,7 +90,7 @@ const FavedButton: React.FC<FavedButtonProps> = ({ articleId, favsCount, onUnfav
   });
 
   const onClick = () => {
-    if (currentPlayer) {
+    if (currentUser) {
       unfav();
     } else {
       alert('ログインが必要です。');

@@ -33,7 +33,7 @@ export const Comments: React.FC<{ articleId: string }> = ({ articleId }) => {
               key={articleComment.id}
               message={articleComment.message}
               createdAt={articleComment.createdAt}
-              player={articleComment.player}
+              user={articleComment.user}
             />
           );
         })

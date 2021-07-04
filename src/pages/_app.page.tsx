@@ -19,16 +19,16 @@ import 'react-toastify/dist/ReactToastify.css';
 import * as gtag from '@/lib/gtag';
 
 import { client } from '@/lib/graphql/client';
-import { currentPlayerState } from '@/states/currentPlayer';
-import { useCurrentPlayerQuery } from '@/lib/graphql/types';
+import { currentUserState } from '@/states/currentUser';
+import { useCurrentUserQuery } from '@/lib/graphql/types';
 import { useRouter } from 'next/router';
 import { Loading } from '@/components/Loading';
 
 const AppInit = () => {
-  const setCurrentPlayer = useSetRecoilState(currentPlayerState);
-  useCurrentPlayerQuery({
+  const setCurrentUser = useSetRecoilState(currentUserState);
+  useCurrentUserQuery({
     onCompleted: res => {
-      setCurrentPlayer(res.currentPlayer);
+      setCurrentUser(res.currentUser);
     },
   });
 
