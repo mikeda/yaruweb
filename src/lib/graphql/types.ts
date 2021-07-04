@@ -3435,6 +3435,11 @@ export type ComboCategoryCardsQuery = (
   )> }
 );
 
+export type ComboCategoryListItemFragment = (
+  { __typename?: 'ComboCategory' }
+  & Pick<ComboCategory, 'id' | 'name' | 'combosCount'>
+);
+
 export type DashboardTournamentCardFragment = (
   { __typename?: 'Tournament' }
   & Pick<Tournament, 'id' | 'name' | 'description' | 'mainImageUrl' | 'startsAt' | 'videosCount'>
@@ -3591,6 +3596,24 @@ export type BreadcrumbsMoveFragment = (
   & { moveCategory: (
     { __typename?: 'MoveCategory' }
     & BreadcrumbsMoveCategoryFragment
+  ) }
+);
+
+export type PageCharacterComboCategoriesQueryVariables = Exact<{
+  characterSlug: Scalars['ID'];
+}>;
+
+
+export type PageCharacterComboCategoriesQuery = (
+  { __typename?: 'Query' }
+  & { character: (
+    { __typename?: 'Character' }
+    & { comboCategories: Array<(
+      { __typename?: 'ComboCategory' }
+      & ComboCategoryListItemFragment
+    )> }
+    & BreadcrumbsCharacterFragment
+    & CharacterCardFragment
   ) }
 );
 
@@ -4585,6 +4608,13 @@ export const CharacterFormFragmentDoc = gql`
     `;
 export const ComboCategoryCardFragmentDoc = gql`
     fragment ComboCategoryCard on ComboCategory {
+  id
+  name
+  combosCount
+}
+    `;
+export const ComboCategoryListItemFragmentDoc = gql`
+    fragment ComboCategoryListItem on ComboCategory {
   id
   name
   combosCount
@@ -7869,6 +7899,47 @@ export function useBreadcrumbsMoveCategoryLazyQuery(baseOptions?: Apollo.LazyQue
 export type BreadcrumbsMoveCategoryQueryHookResult = ReturnType<typeof useBreadcrumbsMoveCategoryQuery>;
 export type BreadcrumbsMoveCategoryLazyQueryHookResult = ReturnType<typeof useBreadcrumbsMoveCategoryLazyQuery>;
 export type BreadcrumbsMoveCategoryQueryResult = Apollo.QueryResult<BreadcrumbsMoveCategoryQuery, BreadcrumbsMoveCategoryQueryVariables>;
+export const PageCharacterComboCategoriesDocument = gql`
+    query PageCharacterComboCategories($characterSlug: ID!) {
+  character(characterSlug: $characterSlug) {
+    ...BreadcrumbsCharacter
+    ...CharacterCard
+    comboCategories {
+      ...ComboCategoryListItem
+    }
+  }
+}
+    ${BreadcrumbsCharacterFragmentDoc}
+${CharacterCardFragmentDoc}
+${ComboCategoryListItemFragmentDoc}`;
+
+/**
+ * __usePageCharacterComboCategoriesQuery__
+ *
+ * To run a query within a React component, call `usePageCharacterComboCategoriesQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePageCharacterComboCategoriesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePageCharacterComboCategoriesQuery({
+ *   variables: {
+ *      characterSlug: // value for 'characterSlug'
+ *   },
+ * });
+ */
+export function usePageCharacterComboCategoriesQuery(baseOptions: Apollo.QueryHookOptions<PageCharacterComboCategoriesQuery, PageCharacterComboCategoriesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PageCharacterComboCategoriesQuery, PageCharacterComboCategoriesQueryVariables>(PageCharacterComboCategoriesDocument, options);
+      }
+export function usePageCharacterComboCategoriesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PageCharacterComboCategoriesQuery, PageCharacterComboCategoriesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PageCharacterComboCategoriesQuery, PageCharacterComboCategoriesQueryVariables>(PageCharacterComboCategoriesDocument, options);
+        }
+export type PageCharacterComboCategoriesQueryHookResult = ReturnType<typeof usePageCharacterComboCategoriesQuery>;
+export type PageCharacterComboCategoriesLazyQueryHookResult = ReturnType<typeof usePageCharacterComboCategoriesLazyQuery>;
+export type PageCharacterComboCategoriesQueryResult = Apollo.QueryResult<PageCharacterComboCategoriesQuery, PageCharacterComboCategoriesQueryVariables>;
 export const PageCharacterDocument = gql`
     query PageCharacter($characterSlug: ID!) {
   character(characterSlug: $characterSlug) {

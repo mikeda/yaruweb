@@ -14,7 +14,7 @@ import { CharacterCard } from '@/components/CharacterCard';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 import { Box, makeStyles, Paper, Typography } from '@material-ui/core';
 import theme from '@/theme';
-import { CharacterPageTabs } from '@/components/dashboard';
+import { CharacterPageTabs } from '@/components';
 
 const useStyles = makeStyles({
   paper: {
