@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react';
 
 import { GlobalHeader, HeaderNav, TabValue } from '@/components';
 import { makeStyles, Typography } from '@material-ui/core';
+import theme from '@/theme';
 
 const useStyles = makeStyles({
   root: {
@@ -10,6 +11,12 @@ const useStyles = makeStyles({
     padding: 16,
     marginRight: 'auto',
     marginLeft: 'auto',
+  },
+  header: {
+    marginBottom: theme.spacing(2),
+  },
+  title: {
+    marginTop: theme.spacing(1),
   },
 });
 
@@ -29,8 +36,14 @@ export const Content: React.FC<Props> = ({ title, breadcrumb, activeTab, childre
         <HeaderNav activeTab={activeTab} />
       </GlobalHeader>
       <div className={classes.root}>
-        {title && <Typography variant="h5">{title}</Typography>}
-        {breadcrumb}
+        <div className={classes.header}>
+          {breadcrumb}
+          {title && (
+            <Typography className={classes.title} variant="h1">
+              {title}
+            </Typography>
+          )}
+        </div>
         {children}
       </div>
       ;

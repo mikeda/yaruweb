@@ -1,5 +1,19 @@
 query MyArticle($articleId: ID!) {
   myArticle(articleId: $articleId) {
-    ...article
+    id
+    title
+    description
+    mainImageUrl
+    publishedAt
+    faved
+    favsCount
+    status
+    category
+    content
+
+    author {
+      name
+      avatarUrl
+    }
   }
 }

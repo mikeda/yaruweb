@@ -1,6 +1,11 @@
 import React from 'react';
 
-import { ArticleAttributes, ArticleFragment, useMyArticleQuery, useUpdateArticleMutation } from '@/lib/graphql/types';
+import {
+  ArticleAttributes,
+  ArticleFormArticleFragment,
+  useMyArticleQuery,
+  useUpdateArticleMutation,
+} from '@/lib/graphql/types';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
@@ -34,7 +39,7 @@ const Page: React.FC = () => {
   );
 };
 
-const Content: React.FC<{ article: ArticleFragment }> = ({ article }) => {
+const Content: React.FC<{ article: ArticleFormArticleFragment }> = ({ article }) => {
   const router = useRouter();
   const setLoading = useSetRecoilState(loadingState);
   const [updateArticle, { loading }] = useUpdateArticleMutation({

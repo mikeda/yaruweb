@@ -3,7 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
 import { ArticleCategoryText } from '@/lib/graphql/enum_texts';
-import { ArticleAttributes, ArticleFragment } from '@/lib/graphql/types';
+import { ArticleAttributes, ArticleFormArticleFragment } from '@/lib/graphql/types';
 import { ReactEditor, Slate } from 'slate-react';
 import { ArticleEditor, createArticleEditor } from '../ArticleEditor';
 import { Node } from 'slate';
@@ -17,7 +17,7 @@ const schema = yup.object().shape({
 });
 
 interface Props {
-  article?: ArticleFragment;
+  article?: ArticleFormArticleFragment;
   onSubmit: (attributes: ArticleAttributes) => void;
 }
 
