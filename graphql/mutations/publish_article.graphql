@@ -1,7 +1,7 @@
 mutation PublishArticle($articleId: ID!) {
   publishArticle(input: {articleId: $articleId}) {
     article {
-      ...articleSummary
+      id
     }
   }
 }

@@ -1,11 +1,12 @@
 import React from 'react';
 import Link from 'next/link';
 
-import { ArticleCard, Article } from './ArticleCard';
+import { ArticleCard } from './ArticleCard';
 import { Box, Grid, Link as MuiLink, Typography } from '@material-ui/core';
+import { ArticleCardFragment } from '@/lib/graphql/types';
 
 type Props = {
-  articles: Article[];
+  articles: ArticleCardFragment[];
   readMoreLink?: string;
 };
 
