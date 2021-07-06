@@ -1,0 +1,11 @@
+query ArticlesPage($page: Int, $order: Order) {
+  articles(page: $page, per: 10, order: $order) {
+    records {
+      ...ArticleCard
+    }
+
+    paging {
+      ...paging
+    }
+  }
+}

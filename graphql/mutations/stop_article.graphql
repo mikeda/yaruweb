@@ -1,7 +1,7 @@
 mutation StopArticle($articleId: ID!) {
   stopArticle(input: {articleId: $articleId}) {
     article {
-      ...articleSummary
+      id
     }
   }
 }

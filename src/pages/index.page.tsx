@@ -1,19 +1,19 @@
 import React from 'react';
+import { GetStaticProps } from 'next';
 
 import { ArticleCards } from '@/components/ArticleCards';
 import { StaffRequirement } from '@/components/StaffRequirement';
-import { Article } from '@/components/ArticleCard';
 
-import { useArticlesQuery } from '@/lib/graphql/types';
+import { ArticleCardFragment, TopPageDocument, TopPageQuery } from '@/lib/graphql/types';
 import { IntroSlides } from './IntroSlides';
-import { Heading } from '@/components/Heading';
-import { Head } from '@/components/layouts/Head';
-import { Content } from '@/components/layouts/Content';
+import { Heading, Head, Content } from '@/components';
+import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 
-const Page: React.FC = () => {
-  const { data: newArticlesData } = useArticlesQuery({ variables: { page: 1, per: 3 } });
-  const newArticles = newArticlesData?.articles.records;
+interface Props {
+  newArticles: ArticleCardFragment[];
+}
 
+const Page: React.FC<Props> = ({ newArticles }) => {
   return (
     <Content activeTab="top">
       <Head title="鉄拳やろうよ.com" description="鉄拳やろうよ.comは格闘ゲーム「鉄拳7」を楽しむためのサイトです。" />
@@ -26,7 +26,7 @@ const Page: React.FC = () => {
         <div className="bl_section">
           <Heading lv="h2">新着記事</Heading>
 
-          {newArticles && <ArticleCards articles={newArticles.filter(a => a) as Article[]} readMoreLink="/articles" />}
+          {newArticles && <ArticleCards articles={newArticles} readMoreLink="/articles" />}
         </div>
 
         <div className="bl_section">
@@ -35,6 +35,12 @@ const Page: React.FC = () => {
       </div>
     </Content>
   );
+};
+
+export const getStaticProps: GetStaticProps<Props> = async () => {
+  const data: TopPageQuery = await fetchGraphql(TopPageDocument);
+
+  return { props: { newArticles: data.articles.records }, revalidate: 300 };
 };
 
 export default Page;

@@ -1,0 +1,11 @@
+query TopPage {
+  articles(per: 3) {
+    records {
+      ...ArticleCard
+    }
+
+    paging {
+      ...paging
+    }
+  }
+}
