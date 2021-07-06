@@ -4240,10 +4240,7 @@ export type TopPageQuery = (
     & { records: Array<(
       { __typename?: 'Article' }
       & ArticleCardFragment
-    )>, paging: (
-      { __typename?: 'Paging' }
-      & PagingFragment
-    ) }
+    )> }
   ) }
 );
 
@@ -9322,13 +9319,9 @@ export const TopPageDocument = gql`
     records {
       ...ArticleCard
     }
-    paging {
-      ...paging
-    }
   }
 }
-    ${ArticleCardFragmentDoc}
-${PagingFragmentDoc}`;
+    ${ArticleCardFragmentDoc}`;
 
 /**
  * __useTopPageQuery__

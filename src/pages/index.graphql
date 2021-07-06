@@ -3,9 +3,5 @@ query TopPage {
     records {
       ...ArticleCard
     }
-
-    paging {
-      ...paging
-    }
   }
 }
