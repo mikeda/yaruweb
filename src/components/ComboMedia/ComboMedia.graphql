@@ -1,0 +1,23 @@
+fragment ComboMedia on Combo {
+  id
+  name
+  damage
+  note
+
+  comboCategory {
+    id
+    name
+  }
+
+  comboVideo {
+    ...comboVideo
+  }
+
+  conditions {
+    ...condition
+  }
+
+  operations {
+    ...operation
+  }
+}

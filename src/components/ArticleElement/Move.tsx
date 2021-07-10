@@ -1,5 +1,5 @@
 import React from 'react';
-import { useMoveQuery } from '@/lib/graphql/types';
+import { useArticleElementMoveQuery } from '@/lib/graphql/types';
 import { MoveMedia } from '@/components/MoveMedia';
 
 interface Props {
@@ -8,12 +8,12 @@ interface Props {
 }
 
 export const Move: React.FC<Props> = ({ moveId, attributes, children }) => {
-  const { data, error, loading } = useMoveQuery({ variables: { moveId } });
+  const { data } = useArticleElementMoveQuery({ variables: { moveId } });
 
   return (
     <div {...attributes}>
       <div style={{ userSelect: 'none' }} contentEditable={false}>
-        {!loading && !error && data && <MoveMedia move={data.move} />}
+        {data && <MoveMedia move={data.move} />}
       </div>
       {children}
     </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useComboQuery } from '@/lib/graphql/types';
+import { useArticleElementComboQuery } from '@/lib/graphql/types';
 import { ComboMedia } from '@/components/ComboMedia';
 
 interface Props {
@@ -8,12 +8,12 @@ interface Props {
 }
 
 export const Combo: React.FC<Props> = ({ comboId, attributes, children }) => {
-  const { data, error, loading } = useComboQuery({ variables: { comboId } });
+  const { data } = useArticleElementComboQuery({ variables: { comboId } });
 
   return (
     <div {...attributes}>
       <div style={{ userSelect: 'none' }} contentEditable={false}>
-        {!loading && !error && data && <ComboMedia combo={data.combo} />}
+        {data && <ComboMedia combo={data.combo} />}
       </div>
       {children}
     </div>

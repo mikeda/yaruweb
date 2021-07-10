@@ -1,59 +1,35 @@
 import React from 'react';
 
-import {
-  TournamentAttributes,
-  TournamentDocument,
-  TournamentFragment,
-  TournamentQuery,
-  useUpdateTournamentMutation,
-} from '@/lib/graphql/types';
+import { TournamentAttributes } from '@/lib/graphql/types';
 import { useRouter } from 'next/router';
-import { GetServerSideProps } from 'next';
-import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
-import { toast } from 'react-toastify';
 import { TournamentForm } from '@/components/TournamentForm';
-import { loadingState } from '@/states/loading';
-import { useSetRecoilState } from 'recoil';
 import { DashboardContent, DashboardBreadcrumbs } from '@/components';
+import { useTournament } from './hooks/useTournament';
+import { useUpdate } from './hooks/useUpdate';
 
-interface Props {
-  tournament: TournamentFragment;
-}
-
-const Page: React.FC<Props> = ({ tournament }) => {
+const Page: React.FC = () => {
   const router = useRouter();
-  const setLoading = useSetRecoilState(loadingState);
-  const [updateTournament, { loading }] = useUpdateTournamentMutation({
-    onCompleted: () => {
-      toast.success('大会情報を更新しました。');
-      router.back();
-    },
-    onError: e => {
-      toast.error(e.message);
-    },
+  const tournamentId = router.query.tournamentId as string | undefined;
+
+  const { tournament } = useTournament(tournamentId);
+  const { update } = useUpdate(() => {
+    router.back();
   });
 
-  const onSubmit = (attributes: TournamentAttributes) => {
-    updateTournament({ variables: { tournamentId: tournament.id, attributes } });
-  };
+  if (!tournament) return null;
 
-  setLoading(loading);
+  const onSubmit = (attributes: TournamentAttributes) => {
+    update({ variables: { tournamentId: tournament.id, attributes } });
+  };
 
   return (
     <DashboardContent
-      title="大会編集"
+      title="大会を編集"
       breadcrumb={<DashboardBreadcrumbs to="tournamentEdit" tournament={tournament} />}
     >
       <TournamentForm tournament={tournament} onSubmit={onSubmit} />
     </DashboardContent>
   );
-};
-
-export const getServerSideProps: GetServerSideProps = async ({ params }) => {
-  const tournamentId = params?.tournamentId as string;
-  const data: TournamentQuery = await fetchGraphql(TournamentDocument, { tournamentId });
-
-  return { props: { tournament: data.tournament } };
 };
 
 export default Page;
