@@ -1,0 +1,11 @@
+query DashboardPlayersPage($page: Int) {
+  players(page: $page, per: 12) {
+    records {
+      ...DashboardPlayerCard
+    }
+
+    paging {
+      ...paging
+    }
+  }
+}

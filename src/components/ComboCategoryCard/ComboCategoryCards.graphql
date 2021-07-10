@@ -1,5 +1,0 @@
-query ComboCategoryCards($characterSlug: ID!) {
-  comboCategories(characterSlug: $characterSlug) {
-    ...ComboCategoryCard
-  }
-}

@@ -26,6 +26,9 @@ type Options =
   | { to: 'moves'; moveCategoryId: string }
   | { to: 'movesNew'; moveCategoryId: string }
   | { to: 'moveEdit'; moveId: string }
+  | { to: 'players'; params?: { page?: number } }
+  | { to: 'playersNew' }
+  | { to: 'playerEdit'; playerSlug: string }
   | { to: 'profileEdit' }
   | { to: 'tournaments'; params?: { page?: number } }
   | { to: 'tournamentsNew' }
@@ -90,6 +93,12 @@ export const dashboardPath = (options: Options): string => {
       return `/dashboard/move_categories/${options.moveCategoryId}/moves/new`;
     case 'moveEdit':
       return `/dashboard/moves/${options.moveId}/edit`;
+    case 'players':
+      return generatePath('/dashboard/players', options.params);
+    case 'playersNew':
+      return '/dashboard/players/new';
+    case 'playerEdit':
+      return `/dashboard/players/${options.playerSlug}/edit`;
     case 'profileEdit':
       return `/dashboard/profile/edit`;
     case 'tournaments':

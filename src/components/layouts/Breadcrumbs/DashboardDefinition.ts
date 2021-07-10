@@ -7,6 +7,7 @@ import {
   ComboParam,
   MoveCategoryParam,
   MoveParam,
+  PlayerParam,
   TournamentParam,
   TournamentVideoParam,
 } from './params';
@@ -42,6 +43,10 @@ export type DashboardBreadcrumbParams =
   | { to: 'move'; move: MoveParam }
   | { to: 'movesNew'; moveCategory: MoveCategoryParam }
   | { to: 'moveEdit'; move: MoveParam }
+  | { to: 'players' }
+  | { to: 'player'; player: PlayerParam }
+  | { to: 'playersNew' }
+  | { to: 'playerEdit'; player: PlayerParam }
   | { to: 'profileEdit' }
   | { to: 'tournaments' }
   | { to: 'tournament'; tournament: TournamentParam }
@@ -160,6 +165,14 @@ export const breadcrumbChain = (props: DashboardBreadcrumbParams): BreadcrumbCha
       return { name: '編集', parent: breadcrumbChain({ to: 'moves', moveCategory: props.move.moveCategory }) };
     case 'profileEdit':
       return { name: 'プロフィール編集' };
+    case 'players':
+      return { name: 'プレイヤー', url: dashboardPath({ to: 'players' }) };
+    case 'player':
+      return { name: props.player.name, parent: breadcrumbChain({ to: 'players' }) };
+    case 'playersNew':
+      return { name: 'プレイヤーを登録', parent: breadcrumbChain({ to: 'players' }) };
+    case 'playerEdit':
+      return { name: 'プレイヤーを編集', parent: breadcrumbChain({ to: 'player', player: props.player }) };
     case 'tournaments':
       return { name: '大会', url: dashboardPath({ to: 'tournaments' }) };
     case 'tournament':

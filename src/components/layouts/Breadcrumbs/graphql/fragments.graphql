@@ -1,0 +1,27 @@
+fragment CharacterBreadcrumbs on Character {
+  slug
+  name
+}
+
+fragment MoveCategoryBreadcrumbs on MoveCategory {
+  id
+  name
+
+  character {
+    ...CharacterBreadcrumbs
+  }
+}
+
+fragment MoveBreadcrumbs on Move {
+  id
+  name
+
+  moveCategory {
+    ...MoveCategoryBreadcrumbs
+  }
+}
+
+fragment PlayerBreadcrumbs on Player {
+  slug
+  name
+}

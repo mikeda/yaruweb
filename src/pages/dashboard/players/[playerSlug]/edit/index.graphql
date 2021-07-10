@@ -1,0 +1,15 @@
+query DashboardPlayerEditPage($playerSlug: ID!) {
+  player(playerSlug: $playerSlug) {
+    ...PlayerForm
+    ...PlayerBreadcrumbs
+  }
+}
+
+mutation DashboardPlayerEditPageUpdatePlayer($playerSlug: ID!, $attributes: PlayerAttributes!) {
+  updatePlayer(input: { playerSlug: $playerSlug, attributes: $attributes }) {
+    player {
+      ...PlayerForm
+      ...PlayerBreadcrumbs
+    }
+  }
+}

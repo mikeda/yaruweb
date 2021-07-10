@@ -1,6 +1,6 @@
 query PageCharacter($characterSlug: ID!) {
   character(characterSlug: $characterSlug) {
-    ...BreadcrumbsCharacter
+    ...CharacterBreadcrumbs
     ...CharacterCard
 
     story
