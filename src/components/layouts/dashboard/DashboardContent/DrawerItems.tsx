@@ -12,7 +12,7 @@ import {
 } from '@material-ui/core';
 import { Link } from '@/components';
 import { dashboardPath } from '@/lib';
-import { EmojiEvents, Person, TagFaces, LibraryBooks } from '@material-ui/icons';
+import { EmojiEvents, Person, TagFaces, LibraryBooks, People } from '@material-ui/icons';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-type MenuKey = 'article' | 'tournament' | 'video' | 'character' | 'profile';
+type MenuKey = 'article' | 'tournament' | 'player' | 'character' | 'profile';
 
 interface ItemProps {
   key: MenuKey;
@@ -46,6 +46,12 @@ const adminItems: ItemProps[] = [
     label: '大会',
     link: dashboardPath({ to: 'tournaments' }),
     icon: <EmojiEvents />,
+  },
+  {
+    key: 'player',
+    label: 'プレイヤー',
+    link: dashboardPath({ to: 'players' }),
+    icon: <People />,
   },
   {
     key: 'character',

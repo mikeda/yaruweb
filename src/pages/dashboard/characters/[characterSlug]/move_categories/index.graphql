@@ -1,0 +1,9 @@
+query DashboardMoveCategoriesPage($characterSlug: ID!) {
+  character(characterSlug: $characterSlug) {
+    ...CharacterBreadcrumbs
+  }
+
+  moveCategories(characterSlug: $characterSlug) {
+    ...MoveCategoryCard
+  }
+}

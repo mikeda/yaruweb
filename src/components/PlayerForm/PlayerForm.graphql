@@ -1,0 +1,4 @@
+fragment PlayerForm on Player {
+  name
+  slug
+}

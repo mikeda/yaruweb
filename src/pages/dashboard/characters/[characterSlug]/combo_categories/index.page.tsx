@@ -7,10 +7,9 @@ import { toast } from 'react-toastify';
 
 import {
   ComboCategoryCardFragment,
-  useBreadcrumbsCharacterQuery,
   useDeleteComboCategoryMutation,
-  useComboCategoryCardsQuery,
   useUpdateComboCategoryPositionMutation,
+  useDashboardComboCategoriesPageQuery,
 } from '@/lib/graphql/types';
 import { loadingState } from '@/states/loading';
 import { dashboardPath } from '@/lib';
@@ -21,20 +20,15 @@ const Page: React.FC = () => {
   const { characterSlug } = useRouteParams();
   const setLoading = useSetRecoilState(loadingState);
 
-  const { data: breadcrumbData } = useBreadcrumbsCharacterQuery({
+  const { data, loading } = useDashboardComboCategoriesPageQuery({
     variables: { characterSlug: characterSlug as string },
-    skip: !characterSlug,
-  });
-
-  const { data, loading } = useComboCategoryCardsQuery({
-    variables: { characterSlug: characterSlug as string },
-    fetchPolicy: 'network-only',
     skip: !characterSlug,
   });
 
   setLoading(loading);
-  if (!breadcrumbData) return null;
-  const { character } = breadcrumbData;
+
+  if (!data) return null;
+  const { character, comboCategories } = data;
 
   return (
     <DashboardContent
@@ -51,7 +45,7 @@ const Page: React.FC = () => {
         </Button>
       }
     >
-      {data && <PageContent comboCategories={data.comboCategories} />}
+      <PageContent comboCategories={comboCategories} />
     </DashboardContent>
   );
 };

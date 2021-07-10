@@ -17,6 +17,7 @@ export * from './Command';
 export * from './CommandForm';
 export * from './Comment';
 export * from './CommentForm';
+export * from './DashboardPlayerCard';
 export * from './DashboardTournamentCard';
 export * from './TournamentForm';
 export * from './FavButton';

@@ -1,0 +1,7 @@
+mutation DashboardPlayersNewPageCreatePlayer($attributes: PlayerAttributes!) {
+  createPlayer(input: { attributes: $attributes }) {
+    player {
+      id
+    }
+  }
+}

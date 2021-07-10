@@ -1,0 +1,15 @@
+fragment DashboardPlayerCard on Player {
+  id
+  slug
+  name
+  avatarUrl
+  description
+}
+
+mutation DashboardPlayerCardDeletePlayer($playerSlug: ID!) {
+  deletePlayer(input: { playerSlug: $playerSlug }) {
+    player {
+      id
+    }
+  }
+}

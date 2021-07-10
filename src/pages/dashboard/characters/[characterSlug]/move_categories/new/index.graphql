@@ -1,0 +1,5 @@
+query DashboardMoveCategoryNewPage($characterSlug: ID!) {
+  character(characterSlug: $characterSlug) {
+    ...CharacterBreadcrumbs
+  }
+}

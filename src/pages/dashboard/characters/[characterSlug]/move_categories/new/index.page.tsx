@@ -1,10 +1,10 @@
 import React from 'react';
 
 import {
-  BreadcrumbsCharacterQuery,
+  DashboardMoveCategoryNewPageQuery,
   MoveCategoryAttributes,
-  useBreadcrumbsCharacterQuery,
   useCreateMoveCategoryMutation,
+  useDashboardMoveCategoryNewPageQuery,
 } from '@/lib/graphql/types';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
 import { useRouter } from 'next/router';
@@ -18,14 +18,14 @@ const Page: React.FC = () => {
   const { characterSlug } = useRouteParams();
   const setLoading = useSetRecoilState(loadingState);
 
-  const { data: breadcrumbData, loading } = useBreadcrumbsCharacterQuery({
+  const { data, loading } = useDashboardMoveCategoryNewPageQuery({
     variables: { characterSlug: characterSlug as string },
     skip: !characterSlug,
   });
 
   setLoading(loading);
-  if (!breadcrumbData) return null;
-  const { character } = breadcrumbData;
+  if (!data) return null;
+  const { character } = data;
 
   return (
     <DashboardContent title="カテゴリ作成">
@@ -34,7 +34,7 @@ const Page: React.FC = () => {
   );
 };
 
-const PageContent: React.FC<BreadcrumbsCharacterQuery> = ({ character }) => {
+const PageContent: React.FC<DashboardMoveCategoryNewPageQuery> = ({ character }) => {
   const router = useRouter();
   const setLoading = useSetRecoilState(loadingState);
   const [createMoveCategory, { loading }] = useCreateMoveCategoryMutation({

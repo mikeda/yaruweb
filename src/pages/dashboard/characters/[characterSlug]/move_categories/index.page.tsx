@@ -7,9 +7,8 @@ import { toast } from 'react-toastify';
 
 import {
   MoveCategoryCardFragment,
-  useBreadcrumbsCharacterQuery,
+  useDashboardMoveCategoriesPageQuery,
   useDeleteMoveCategoryMutation,
-  useMoveCategoryCardsQuery,
   useUpdateMoveCategoryPositionMutation,
 } from '@/lib/graphql/types';
 import { loadingState } from '@/states/loading';
@@ -21,20 +20,15 @@ const Page: React.FC = () => {
   const { characterSlug } = useRouteParams();
   const setLoading = useSetRecoilState(loadingState);
 
-  const { data: breadcrumbData } = useBreadcrumbsCharacterQuery({
+  const { data, loading } = useDashboardMoveCategoriesPageQuery({
     variables: { characterSlug: characterSlug as string },
-    skip: !characterSlug,
-  });
-
-  const { data, loading } = useMoveCategoryCardsQuery({
-    variables: { characterSlug: characterSlug as string },
-    fetchPolicy: 'network-only',
     skip: !characterSlug,
   });
 
   setLoading(loading);
-  if (!breadcrumbData) return null;
-  const { character } = breadcrumbData;
+
+  if (!data) return null;
+  const { character, moveCategories } = data;
 
   return (
     <DashboardContent
@@ -51,7 +45,7 @@ const Page: React.FC = () => {
         </Button>
       }
     >
-      {data && <PageContent moveCategories={data.moveCategories} />}
+      <PageContent moveCategories={moveCategories} />
     </DashboardContent>
   );
 };
