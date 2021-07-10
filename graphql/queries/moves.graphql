@@ -1,5 +1,0 @@
-query Moves($moveCategoryId: ID!) {
-  moves(moveCategoryId: $moveCategoryId) {
-    ...move
-  }
-}

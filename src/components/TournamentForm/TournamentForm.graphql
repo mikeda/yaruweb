@@ -1,0 +1,9 @@
+fragment TournamentForm on Tournament {
+  name
+  organizerName
+  organizerTwitterId
+  url
+  streamingUrl
+  startsAt
+  description
+}

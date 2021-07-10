@@ -25,3 +25,8 @@ fragment PlayerBreadcrumbs on Player {
   slug
   name
 }
+
+fragment TournamentBreadcrumbs on Tournament {
+  id
+  name
+}

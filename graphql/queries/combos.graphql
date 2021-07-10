@@ -1,5 +1,0 @@
-query Combo($comboId: ID!) {
-  combo(comboId: $comboId) {
-    ...combo
-  }
-}

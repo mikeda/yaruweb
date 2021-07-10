@@ -1,12 +1,12 @@
 import React from 'react';
-import { ComboFragment } from '@/lib/graphql/types';
+import { ComboMediaFragment } from '@/lib/graphql/types';
 import { Operations } from '../Command/Operations';
 import { VideoPlayer } from '../MoveMedia/VideoPlayer';
 
 import styles from './ComboMedia.module.scss';
 
 interface Props {
-  combo: ComboFragment;
+  combo: ComboMediaFragment;
 }
 
 export const ComboMedia: React.FC<Props> = ({ combo }) => {
