@@ -24,7 +24,7 @@ const Page: React.FC = () => {
 
   return (
     <DashboardContent
-      title="大会"
+      title="プレイヤー"
       breadcrumb={<DashboardBreadcrumbs to="players" />}
       actions={
         <Button variant="contained" color="primary" startIcon={<AddIcon />} href={dashboardPath({ to: 'playersNew' })}>

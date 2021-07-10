@@ -14,7 +14,7 @@ const Page: React.FC = () => {
   const setLoading = useSetRecoilState(loadingState);
   const [createPlayer, { loading }] = useDashboardPlayersNewPageCreatePlayerMutation({
     onCompleted: () => {
-      toast.success('大会情報を登録しました。');
+      toast.success('プレイヤー情報を登録しました。');
       router.back();
     },
     onError: e => {
@@ -29,7 +29,7 @@ const Page: React.FC = () => {
   setLoading(loading);
 
   return (
-    <DashboardContent title="大会登録" breadcrumb={<DashboardBreadcrumbs to="playersNew" />}>
+    <DashboardContent title="プレイヤー登録" breadcrumb={<DashboardBreadcrumbs to="playersNew" />}>
       <PlayerForm onSubmit={onSubmit} />
     </DashboardContent>
   );
