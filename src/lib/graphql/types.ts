@@ -2695,7 +2695,7 @@ export type DeleteComboCategoryMutation = (
     { __typename?: 'DeleteComboCategoryPayload' }
     & { comboCategory: (
       { __typename?: 'ComboCategory' }
-      & ComboCategoryFragment
+      & Pick<ComboCategory, 'id'>
     ) }
   )> }
 );
@@ -2743,7 +2743,7 @@ export type DeleteMoveMutation = (
     { __typename?: 'DeleteMovePayload' }
     & { move: (
       { __typename?: 'Move' }
-      & MoveFragment
+      & Pick<Move, 'id'>
     ) }
   )> }
 );
@@ -2759,7 +2759,7 @@ export type DeleteMoveCategoryMutation = (
     { __typename?: 'DeleteMoveCategoryPayload' }
     & { moveCategory: (
       { __typename?: 'MoveCategory' }
-      & MoveCategoryFragment
+      & Pick<MoveCategory, 'id'>
     ) }
   )> }
 );
@@ -2791,7 +2791,7 @@ export type DeleteVideoMutation = (
     { __typename?: 'DeleteTournamentVideoPayload' }
     & { tournamentVideo: (
       { __typename?: 'TournamentVideo' }
-      & TournamentVideoFragment
+      & Pick<TournamentVideo, 'id'>
     ) }
   )> }
 );
@@ -5969,11 +5969,11 @@ export const DeleteComboCategoryDocument = gql`
     mutation DeleteComboCategory($comboCategoryId: ID!) {
   deleteComboCategory(input: {comboCategoryId: $comboCategoryId}) {
     comboCategory {
-      ...comboCategory
+      id
     }
   }
 }
-    ${ComboCategoryFragmentDoc}`;
+    `;
 export type DeleteComboCategoryMutationFn = Apollo.MutationFunction<DeleteComboCategoryMutation, DeleteComboCategoryMutationVariables>;
 
 /**
@@ -6076,11 +6076,11 @@ export const DeleteMoveDocument = gql`
     mutation DeleteMove($moveId: ID!) {
   deleteMove(input: {moveId: $moveId}) {
     move {
-      ...move
+      id
     }
   }
 }
-    ${MoveFragmentDoc}`;
+    `;
 export type DeleteMoveMutationFn = Apollo.MutationFunction<DeleteMoveMutation, DeleteMoveMutationVariables>;
 
 /**
@@ -6111,11 +6111,11 @@ export const DeleteMoveCategoryDocument = gql`
     mutation DeleteMoveCategory($moveCategoryId: ID!) {
   deleteMoveCategory(input: {moveCategoryId: $moveCategoryId}) {
     moveCategory {
-      ...moveCategory
+      id
     }
   }
 }
-    ${MoveCategoryFragmentDoc}`;
+    `;
 export type DeleteMoveCategoryMutationFn = Apollo.MutationFunction<DeleteMoveCategoryMutation, DeleteMoveCategoryMutationVariables>;
 
 /**
@@ -6181,11 +6181,11 @@ export const DeleteVideoDocument = gql`
     mutation DeleteVideo($tournamentVideoId: ID!) {
   deleteTournamentVideo(input: {tournamentVideoId: $tournamentVideoId}) {
     tournamentVideo {
-      ...tournamentVideo
+      id
     }
   }
 }
-    ${TournamentVideoFragmentDoc}`;
+    `;
 export type DeleteVideoMutationFn = Apollo.MutationFunction<DeleteVideoMutation, DeleteVideoMutationVariables>;
 
 /**
