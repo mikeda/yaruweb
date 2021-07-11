@@ -1,9 +1,8 @@
 import React from 'react';
 import { ComboMediaFragment } from '@/lib/graphql/types';
-import { Operations } from '../Command/Operations';
+import { Card, CardContent, Typography } from '@material-ui/core';
 import { VideoPlayer } from '../MoveMedia/VideoPlayer';
-
-import styles from './ComboMedia.module.scss';
+import { Operations } from '../Command/Operations';
 
 interface Props {
   combo: ComboMediaFragment;
@@ -11,20 +10,20 @@ interface Props {
 
 export const ComboMedia: React.FC<Props> = ({ combo }) => {
   return (
-    <div className={styles.container}>
-      <div className={styles.title}>{combo.name}</div>
+    <Card>
+      {combo.comboVideo && <VideoPlayer src={combo.comboVideo.m3u8Url} thumnailUrl={combo.comboVideo.thumbnailUrl} />}
 
-      {combo.comboVideo && (
-        <div className={styles.video}>
-          <VideoPlayer src={combo.comboVideo.m3u8Url} thumnailUrl={combo.comboVideo.thumbnailUrl} />
-        </div>
-      )}
-
-      <div className={styles.command}>
+      <CardContent>
+        <Typography variant="h3" gutterBottom>
+          {combo.name}
+        </Typography>
         <Operations operations={combo.operations} />
-      </div>
-
-      {combo.note && combo.note.length > 0 && <div className={styles.note}>{combo.note}</div>}
-    </div>
+        {combo.note && (
+          <Typography variant="caption" component="p">
+            {combo.note}
+          </Typography>
+        )}
+      </CardContent>
+    </Card>
   );
 };

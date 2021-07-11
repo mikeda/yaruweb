@@ -3,6 +3,15 @@ fragment CharacterBreadcrumbs on Character {
   name
 }
 
+fragment ComboCategoryBreadcrumbs on ComboCategory {
+  id
+  name
+
+  character {
+    ...CharacterBreadcrumbs
+  }
+}
+
 fragment MoveCategoryBreadcrumbs on MoveCategory {
   id
   name

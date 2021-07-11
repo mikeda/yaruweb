@@ -10,8 +10,8 @@ import {
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Content } from '@/components/layouts/Content';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
-import { ComboList } from './ComboList';
-import { Head } from '@/components';
+import { ComboMedia, Head } from '@/components';
+import { Grid } from '@material-ui/core';
 
 const Page: React.FC<PageComboCategoryQuery> = ({ comboCategory }) => {
   const title = `${comboCategory.name}のコンボ`;
@@ -23,7 +23,14 @@ const Page: React.FC<PageComboCategoryQuery> = ({ comboCategory }) => {
       breadcrumb={<Breadcrumbs to="comboCategory" comboCategory={comboCategory} />}
     >
       <Head title={title} />
-      <ComboList combos={comboCategory.combos} />
+
+      <Grid container spacing={2}>
+        {comboCategory.combos.map(combo => (
+          <Grid item key={combo.id} xs={12}>
+            <ComboMedia combo={combo} />
+          </Grid>
+        ))}
+      </Grid>
     </Content>
   );
 };

@@ -3655,6 +3655,15 @@ export type CharacterBreadcrumbsFragment = (
   & Pick<Character, 'slug' | 'name'>
 );
 
+export type ComboCategoryBreadcrumbsFragment = (
+  { __typename?: 'ComboCategory' }
+  & Pick<ComboCategory, 'id' | 'name'>
+  & { character: (
+    { __typename?: 'Character' }
+    & CharacterBreadcrumbsFragment
+  ) }
+);
+
 export type MoveCategoryBreadcrumbsFragment = (
   { __typename?: 'MoveCategory' }
   & Pick<MoveCategory, 'id' | 'name'>
@@ -3802,7 +3811,7 @@ export type PageComboCategoryQuery = (
       & Pick<Character, 'slug' | 'name'>
     ), combos: Array<(
       { __typename?: 'Combo' }
-      & ComboFragment
+      & ComboMediaFragment
     )> }
   ) }
 );
@@ -5085,6 +5094,15 @@ export const CharacterBreadcrumbsFragmentDoc = gql`
   name
 }
     `;
+export const ComboCategoryBreadcrumbsFragmentDoc = gql`
+    fragment ComboCategoryBreadcrumbs on ComboCategory {
+  id
+  name
+  character {
+    ...CharacterBreadcrumbs
+  }
+}
+    ${CharacterBreadcrumbsFragmentDoc}`;
 export const MoveCategoryBreadcrumbsFragmentDoc = gql`
     fragment MoveCategoryBreadcrumbs on MoveCategory {
   id
@@ -8167,11 +8185,11 @@ export const PageComboCategoryDocument = gql`
       name
     }
     combos {
-      ...combo
+      ...ComboMedia
     }
   }
 }
-    ${ComboFragmentDoc}`;
+    ${ComboMediaFragmentDoc}`;
 
 /**
  * __usePageComboCategoryQuery__

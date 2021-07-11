@@ -33,5 +33,5 @@ export const VideoPlayer: React.FC<Props> = ({ src, thumnailUrl }) => {
     };
   }, [videoRef]);
 
-  return <video width={320} controls ref={videoRef} className={styles.video} poster={thumnailUrl} preload="none" />;
+  return <video width="100%" controls ref={videoRef} className={styles.video} poster={thumnailUrl} preload="none" />;
 };
