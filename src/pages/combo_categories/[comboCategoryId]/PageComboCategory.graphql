@@ -9,7 +9,7 @@ query PageComboCategory($comboCategoryId: ID!) {
     }
 
     combos {
-      ...combo
+      ...ComboMedia
     }
   }
 }
