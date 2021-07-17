@@ -1,64 +1,22 @@
 import React from 'react';
 
-import {
-  useCreateMoveCommentMutation,
-  useMoveCommentsQuery,
-  MoveFragment,
-  PageMoveDocument,
-  PageMoveQuery,
-} from '@/lib/graphql/types';
+import { MoveFragment, PageMoveDocument, PageMoveQuery } from '@/lib/graphql/types';
 import { MoveMedia } from '@/components/MoveMedia';
-import { Comment } from '@/components/Comment';
-import { NotFound } from '@/components/NotFound';
 import { Content } from '@/components/layouts/Content';
 import { Head } from '@/components/layouts/Head';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
-import { CommentForm } from '@/components/CommentForm';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
+import { MoveCommentsBlock } from '@/components/Comment/MoveCommentsBlock';
 
 const PageContent: React.FC<{ move: MoveFragment }> = ({ move }) => {
-  const { data: commentsData, refetch: refetchComments } = useMoveCommentsQuery({ variables: { moveId: move.id } });
-
-  const [createMoveComment] = useCreateMoveCommentMutation({
-    onCompleted: () => {
-      refetchComments();
-    },
-    onError: e => {
-      alert(e.message);
-    },
-  });
-
-  const moveComments = commentsData?.moveComments;
-
   return (
     <>
       <div className="hp_mg_b_lg">
         <MoveMedia move={move} />
       </div>
 
-      <CommentForm
-        onSubmit={attributes => {
-          createMoveComment({ variables: { moveId: move.id, attributes } });
-        }}
-      />
-
-      {moveComments && moveComments.length !== 0 ? (
-        moveComments.map(moveComment => {
-          if (!moveComment) return;
-
-          return (
-            <Comment
-              key={moveComment.id}
-              message={moveComment.message}
-              createdAt={moveComment.createdAt}
-              user={moveComment.user}
-            />
-          );
-        })
-      ) : (
-        <NotFound>コメントがありません。</NotFound>
-      )}
+      <MoveCommentsBlock moveId={move.id} />
     </>
   );
 };

@@ -1,5 +1,0 @@
-query ArticleComments($articleId: ID!) {
-  articleComments(articleId: $articleId) {
-    ...articleComment
-  }
-}
