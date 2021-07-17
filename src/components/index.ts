@@ -26,7 +26,6 @@ export * from './Heading';
 export * from './IntroSlide';
 export * from './Link';
 export * from './Loading';
-export * from './Media';
 export * from './MoveCategoryForm';
 export * from './MoveCategoryMedia';
 export * from './MoveCategoryCard';

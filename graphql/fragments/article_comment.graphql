@@ -1,9 +1,0 @@
-fragment articleComment on ArticleComment {
-  id
-  message
-  createdAt
-  user {
-    name
-    avatarUrl
-  }
-}

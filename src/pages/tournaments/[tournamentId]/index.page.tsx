@@ -6,34 +6,49 @@ import { Head } from '@/components/layouts/Head';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
-import { Heading, Media, NotFound } from '@/components';
+import { Heading, NotFound } from '@/components';
 import dayjs from '@/lib/dayjs';
 import { TournamentVideoCard } from '@/components/TournamentVideoCard';
-import { Grid } from '@material-ui/core';
+import { Button, Card, CardActions, CardContent, CardMedia, Grid, makeStyles, Typography } from '@material-ui/core';
+import { NO_IMAGE_URL } from '@/lib/Assets';
+
+const useStyles = makeStyles({
+  root: {
+    maxWidth: 345,
+  },
+  media: {
+    height: 0,
+    paddingTop: '56.25%',
+  },
+});
 
 const PageContent: React.FC<PageTournamentQuery> = ({ tournament }) => {
+  const classes = useStyles();
+
   return (
     <>
-      <Media
-        key={tournament.id}
-        imageUrl={tournament.mainImageUrl}
-        title={tournament.name}
-        titleNote={dayjs(tournament.startsAt).format('YYYY/M/D H:mm')}
-        text={tournament.description}
-        footer={
-          <>
-            <a href={tournament.url} target="_blank" rel="noreferrer" className="el_btn hp_mg_r_sm">
-              大会情報URL
-            </a>
+      <Card>
+        <CardMedia image={tournament.mainImageUrl || NO_IMAGE_URL} title={tournament.name} className={classes.media} />
+        <CardContent>
+          <Typography variant="body1" color="textSecondary" component="p">
+            {dayjs(tournament.startsAt).format('YYYY/M/D H:mm')}
+          </Typography>
+          <Typography variant="body2" color="textSecondary" component="p">
+            {tournament.description}
+          </Typography>
+        </CardContent>
 
-            {tournament.streamingUrl && (
-              <a href={tournament.streamingUrl} target="_blank" rel="noreferrer" className="el_btn hp_mg_r_sm">
-                配信URL
-              </a>
-            )}
-          </>
-        }
-      />
+        <CardActions>
+          <Button href={tournament.url} target="_blank" size="small" color="primary">
+            大会情報
+          </Button>
+          {tournament.streamingUrl && (
+            <Button href={tournament.streamingUrl} target="_blank" size="small" color="primary">
+              配信
+            </Button>
+          )}
+        </CardActions>
+      </Card>
 
       <Heading lv="h2">動画</Heading>
 

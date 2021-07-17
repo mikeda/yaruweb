@@ -2130,15 +2130,6 @@ type Action_ThrowAction_Fragment = (
 
 export type ActionFragment = Action_AttackAction_Fragment | Action_ThrowAction_Fragment;
 
-export type ArticleCommentFragment = (
-  { __typename?: 'ArticleComment' }
-  & Pick<ArticleComment, 'id' | 'message' | 'createdAt'>
-  & { user: (
-    { __typename?: 'User' }
-    & Pick<User, 'name' | 'avatarUrl'>
-  ) }
-);
-
 export type ArticleLinkFragment = (
   { __typename?: 'ArticleLink' }
   & Pick<ArticleLink, 'url' | 'title' | 'description' | 'imageUrl'>
@@ -2244,15 +2235,6 @@ export type MoveCategoryFragment = (
   & Pick<MoveCategory, 'id' | 'name'>
 );
 
-export type MoveCommentFragment = (
-  { __typename?: 'MoveComment' }
-  & Pick<MoveComment, 'id' | 'message' | 'createdAt'>
-  & { user: (
-    { __typename?: 'User' }
-    & Pick<User, 'name' | 'avatarUrl'>
-  ) }
-);
-
 export type MoveVideoFragment = (
   { __typename?: 'MoveVideo' }
   & Pick<MoveVideo, 'id' | 'm3u8Url' | 'thumbnailUrl'>
@@ -2333,7 +2315,7 @@ export type CreateArticleCommentMutation = (
     { __typename?: 'CreateArticleCommentPayload' }
     & { articleComment: (
       { __typename?: 'ArticleComment' }
-      & ArticleCommentFragment
+      & Pick<ArticleComment, 'id'>
     ) }
   )> }
 );
@@ -2548,7 +2530,7 @@ export type CreateMoveCommentMutation = (
     { __typename?: 'CreateMoveCommentPayload' }
     & { moveComment: (
       { __typename?: 'MoveComment' }
-      & MoveCommentFragment
+      & Pick<MoveComment, 'id'>
     ) }
   )> }
 );
@@ -3190,19 +3172,6 @@ export type UpdateTournamentVideoMutation = (
   )> }
 );
 
-export type ArticleCommentsQueryVariables = Exact<{
-  articleId: Scalars['ID'];
-}>;
-
-
-export type ArticleCommentsQuery = (
-  { __typename?: 'Query' }
-  & { articleComments: Array<(
-    { __typename?: 'ArticleComment' }
-    & ArticleCommentFragment
-  )> }
-);
-
 export type ArticlePathsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -3294,19 +3263,6 @@ export type MoveCategoryIdsQuery = (
   & { moveCategories: Array<(
     { __typename?: 'MoveCategory' }
     & Pick<MoveCategory, 'id'>
-  )> }
-);
-
-export type MoveCommentsQueryVariables = Exact<{
-  moveId: Scalars['ID'];
-}>;
-
-
-export type MoveCommentsQuery = (
-  { __typename?: 'Query' }
-  & { moveComments: Array<(
-    { __typename?: 'MoveComment' }
-    & MoveCommentFragment
   )> }
 );
 
@@ -3408,19 +3364,6 @@ export type TournamentVideoQuery = (
   ) }
 );
 
-export type TournamentVideoCommentsQueryVariables = Exact<{
-  tournamentVideoId: Scalars['ID'];
-}>;
-
-
-export type TournamentVideoCommentsQuery = (
-  { __typename?: 'Query' }
-  & { tournamentVideoComments: Array<(
-    { __typename?: 'TournamentVideoComment' }
-    & TournamentVideoCommentFragment
-  )> }
-);
-
 export type ArticleCardFragment = (
   { __typename?: 'Article' }
   & Pick<Article, 'id' | 'title' | 'description' | 'mainImageUrl' | 'publishedAt' | 'faved' | 'favsCount' | 'status'>
@@ -3520,6 +3463,77 @@ export type ComboMediaFragment = (
   )>, operations: Array<(
     { __typename?: 'Operation' }
     & OperationFragment
+  )> }
+);
+
+export type CommentCardUserFragment = (
+  { __typename?: 'User' }
+  & Pick<User, 'name' | 'avatarUrl'>
+);
+
+export type ArticleCommentCardFragment = (
+  { __typename?: 'ArticleComment' }
+  & Pick<ArticleComment, 'id' | 'message' | 'createdAt'>
+  & { user: (
+    { __typename?: 'User' }
+    & CommentCardUserFragment
+  ) }
+);
+
+export type ArticleCommentCardsQueryVariables = Exact<{
+  articleId: Scalars['ID'];
+}>;
+
+
+export type ArticleCommentCardsQuery = (
+  { __typename?: 'Query' }
+  & { articleComments: Array<(
+    { __typename?: 'ArticleComment' }
+    & ArticleCommentCardFragment
+  )> }
+);
+
+export type MoveCommentCardFragment = (
+  { __typename?: 'MoveComment' }
+  & Pick<MoveComment, 'id' | 'message' | 'createdAt'>
+  & { user: (
+    { __typename?: 'User' }
+    & CommentCardUserFragment
+  ) }
+);
+
+export type MoveCommentCardsQueryVariables = Exact<{
+  moveId: Scalars['ID'];
+}>;
+
+
+export type MoveCommentCardsQuery = (
+  { __typename?: 'Query' }
+  & { moveComments: Array<(
+    { __typename?: 'MoveComment' }
+    & MoveCommentCardFragment
+  )> }
+);
+
+export type TournamentVideoCommentCardFragment = (
+  { __typename?: 'TournamentVideoComment' }
+  & Pick<TournamentVideoComment, 'id' | 'message' | 'createdAt'>
+  & { user: (
+    { __typename?: 'User' }
+    & CommentCardUserFragment
+  ) }
+);
+
+export type TournamentVideoCommentCardsQueryVariables = Exact<{
+  tournamentVideoId: Scalars['ID'];
+}>;
+
+
+export type TournamentVideoCommentCardsQuery = (
+  { __typename?: 'Query' }
+  & { tournamentVideoComments: Array<(
+    { __typename?: 'TournamentVideoComment' }
+    & TournamentVideoCommentCardFragment
   )> }
 );
 
@@ -4617,6 +4631,19 @@ export type PageMoveQuery = (
   ) }
 );
 
+export type MovePageCommentsQueryVariables = Exact<{
+  moveId: Scalars['ID'];
+}>;
+
+
+export type MovePageCommentsQuery = (
+  { __typename?: 'Query' }
+  & { moveComments: Array<(
+    { __typename?: 'MoveComment' }
+    & MoveCommentCardFragment
+  )> }
+);
+
 export type PageTournamentVideoQueryVariables = Exact<{
   tournamentVideoId: Scalars['ID'];
 }>;
@@ -4674,17 +4701,6 @@ export type PageTournamentsQuery = (
   ) }
 );
 
-export const ArticleCommentFragmentDoc = gql`
-    fragment articleComment on ArticleComment {
-  id
-  message
-  createdAt
-  user {
-    name
-    avatarUrl
-  }
-}
-    `;
 export const ArticleLinkFragmentDoc = gql`
     fragment articleLink on ArticleLink {
   url
@@ -4888,17 +4904,6 @@ export const MoveCategoryFragmentDoc = gql`
   name
 }
     `;
-export const MoveCommentFragmentDoc = gql`
-    fragment moveComment on MoveComment {
-  id
-  message
-  createdAt
-  user {
-    name
-    avatarUrl
-  }
-}
-    `;
 export const PagingFragmentDoc = gql`
     fragment paging on Paging {
   currentPage
@@ -5047,6 +5052,42 @@ export const ComboMediaFragmentDoc = gql`
     ${ComboVideoFragmentDoc}
 ${ConditionFragmentDoc}
 ${OperationFragmentDoc}`;
+export const CommentCardUserFragmentDoc = gql`
+    fragment CommentCardUser on User {
+  name
+  avatarUrl
+}
+    `;
+export const ArticleCommentCardFragmentDoc = gql`
+    fragment ArticleCommentCard on ArticleComment {
+  id
+  message
+  createdAt
+  user {
+    ...CommentCardUser
+  }
+}
+    ${CommentCardUserFragmentDoc}`;
+export const MoveCommentCardFragmentDoc = gql`
+    fragment MoveCommentCard on MoveComment {
+  id
+  message
+  createdAt
+  user {
+    ...CommentCardUser
+  }
+}
+    ${CommentCardUserFragmentDoc}`;
+export const TournamentVideoCommentCardFragmentDoc = gql`
+    fragment TournamentVideoCommentCard on TournamentVideoComment {
+  id
+  message
+  createdAt
+  user {
+    ...CommentCardUser
+  }
+}
+    ${CommentCardUserFragmentDoc}`;
 export const DashboardPlayerCardFragmentDoc = gql`
     fragment DashboardPlayerCard on Player {
   id
@@ -5309,11 +5350,11 @@ export const CreateArticleCommentDocument = gql`
     mutation CreateArticleComment($articleId: ID!, $attributes: CommentAttributes!) {
   createArticleComment(input: {articleId: $articleId, attributes: $attributes}) {
     articleComment {
-      ...articleComment
+      id
     }
   }
 }
-    ${ArticleCommentFragmentDoc}`;
+    `;
 export type CreateArticleCommentMutationFn = Apollo.MutationFunction<CreateArticleCommentMutation, CreateArticleCommentMutationVariables>;
 
 /**
@@ -5784,11 +5825,11 @@ export const CreateMoveCommentDocument = gql`
     mutation CreateMoveComment($moveId: ID!, $attributes: CommentAttributes!) {
   createMoveComment(input: {moveId: $moveId, attributes: $attributes}) {
     moveComment {
-      ...moveComment
+      id
     }
   }
 }
-    ${MoveCommentFragmentDoc}`;
+    `;
 export type CreateMoveCommentMutationFn = Apollo.MutationFunction<CreateMoveCommentMutation, CreateMoveCommentMutationVariables>;
 
 /**
@@ -7189,41 +7230,6 @@ export function useUpdateTournamentVideoMutation(baseOptions?: Apollo.MutationHo
 export type UpdateTournamentVideoMutationHookResult = ReturnType<typeof useUpdateTournamentVideoMutation>;
 export type UpdateTournamentVideoMutationResult = Apollo.MutationResult<UpdateTournamentVideoMutation>;
 export type UpdateTournamentVideoMutationOptions = Apollo.BaseMutationOptions<UpdateTournamentVideoMutation, UpdateTournamentVideoMutationVariables>;
-export const ArticleCommentsDocument = gql`
-    query ArticleComments($articleId: ID!) {
-  articleComments(articleId: $articleId) {
-    ...articleComment
-  }
-}
-    ${ArticleCommentFragmentDoc}`;
-
-/**
- * __useArticleCommentsQuery__
- *
- * To run a query within a React component, call `useArticleCommentsQuery` and pass it any options that fit your needs.
- * When your component renders, `useArticleCommentsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useArticleCommentsQuery({
- *   variables: {
- *      articleId: // value for 'articleId'
- *   },
- * });
- */
-export function useArticleCommentsQuery(baseOptions: Apollo.QueryHookOptions<ArticleCommentsQuery, ArticleCommentsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<ArticleCommentsQuery, ArticleCommentsQueryVariables>(ArticleCommentsDocument, options);
-      }
-export function useArticleCommentsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ArticleCommentsQuery, ArticleCommentsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<ArticleCommentsQuery, ArticleCommentsQueryVariables>(ArticleCommentsDocument, options);
-        }
-export type ArticleCommentsQueryHookResult = ReturnType<typeof useArticleCommentsQuery>;
-export type ArticleCommentsLazyQueryHookResult = ReturnType<typeof useArticleCommentsLazyQuery>;
-export type ArticleCommentsQueryResult = Apollo.QueryResult<ArticleCommentsQuery, ArticleCommentsQueryVariables>;
 export const ArticlePathsDocument = gql`
     query ArticlePaths {
   allArticles {
@@ -7503,41 +7509,6 @@ export function useMoveCategoryIdsLazyQuery(baseOptions?: Apollo.LazyQueryHookOp
 export type MoveCategoryIdsQueryHookResult = ReturnType<typeof useMoveCategoryIdsQuery>;
 export type MoveCategoryIdsLazyQueryHookResult = ReturnType<typeof useMoveCategoryIdsLazyQuery>;
 export type MoveCategoryIdsQueryResult = Apollo.QueryResult<MoveCategoryIdsQuery, MoveCategoryIdsQueryVariables>;
-export const MoveCommentsDocument = gql`
-    query MoveComments($moveId: ID!) {
-  moveComments(moveId: $moveId) {
-    ...moveComment
-  }
-}
-    ${MoveCommentFragmentDoc}`;
-
-/**
- * __useMoveCommentsQuery__
- *
- * To run a query within a React component, call `useMoveCommentsQuery` and pass it any options that fit your needs.
- * When your component renders, `useMoveCommentsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useMoveCommentsQuery({
- *   variables: {
- *      moveId: // value for 'moveId'
- *   },
- * });
- */
-export function useMoveCommentsQuery(baseOptions: Apollo.QueryHookOptions<MoveCommentsQuery, MoveCommentsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<MoveCommentsQuery, MoveCommentsQueryVariables>(MoveCommentsDocument, options);
-      }
-export function useMoveCommentsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MoveCommentsQuery, MoveCommentsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<MoveCommentsQuery, MoveCommentsQueryVariables>(MoveCommentsDocument, options);
-        }
-export type MoveCommentsQueryHookResult = ReturnType<typeof useMoveCommentsQuery>;
-export type MoveCommentsLazyQueryHookResult = ReturnType<typeof useMoveCommentsLazyQuery>;
-export type MoveCommentsQueryResult = Apollo.QueryResult<MoveCommentsQuery, MoveCommentsQueryVariables>;
 export const MoveSelectOptionsDocument = gql`
     query MoveSelectOptions($characterSlug: ID!) {
   moveCategories(characterSlug: $characterSlug) {
@@ -7777,41 +7748,6 @@ export function useTournamentVideoLazyQuery(baseOptions?: Apollo.LazyQueryHookOp
 export type TournamentVideoQueryHookResult = ReturnType<typeof useTournamentVideoQuery>;
 export type TournamentVideoLazyQueryHookResult = ReturnType<typeof useTournamentVideoLazyQuery>;
 export type TournamentVideoQueryResult = Apollo.QueryResult<TournamentVideoQuery, TournamentVideoQueryVariables>;
-export const TournamentVideoCommentsDocument = gql`
-    query TournamentVideoComments($tournamentVideoId: ID!) {
-  tournamentVideoComments(tournamentVideoId: $tournamentVideoId) {
-    ...tournamentVideoComment
-  }
-}
-    ${TournamentVideoCommentFragmentDoc}`;
-
-/**
- * __useTournamentVideoCommentsQuery__
- *
- * To run a query within a React component, call `useTournamentVideoCommentsQuery` and pass it any options that fit your needs.
- * When your component renders, `useTournamentVideoCommentsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useTournamentVideoCommentsQuery({
- *   variables: {
- *      tournamentVideoId: // value for 'tournamentVideoId'
- *   },
- * });
- */
-export function useTournamentVideoCommentsQuery(baseOptions: Apollo.QueryHookOptions<TournamentVideoCommentsQuery, TournamentVideoCommentsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<TournamentVideoCommentsQuery, TournamentVideoCommentsQueryVariables>(TournamentVideoCommentsDocument, options);
-      }
-export function useTournamentVideoCommentsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TournamentVideoCommentsQuery, TournamentVideoCommentsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<TournamentVideoCommentsQuery, TournamentVideoCommentsQueryVariables>(TournamentVideoCommentsDocument, options);
-        }
-export type TournamentVideoCommentsQueryHookResult = ReturnType<typeof useTournamentVideoCommentsQuery>;
-export type TournamentVideoCommentsLazyQueryHookResult = ReturnType<typeof useTournamentVideoCommentsLazyQuery>;
-export type TournamentVideoCommentsQueryResult = Apollo.QueryResult<TournamentVideoCommentsQuery, TournamentVideoCommentsQueryVariables>;
 export const ArticleElementComboDocument = gql`
     query ArticleElementCombo($comboId: ID!) {
   combo(comboId: $comboId) {
@@ -7951,6 +7887,111 @@ export function useCharacterCardsLazyQuery(baseOptions?: Apollo.LazyQueryHookOpt
 export type CharacterCardsQueryHookResult = ReturnType<typeof useCharacterCardsQuery>;
 export type CharacterCardsLazyQueryHookResult = ReturnType<typeof useCharacterCardsLazyQuery>;
 export type CharacterCardsQueryResult = Apollo.QueryResult<CharacterCardsQuery, CharacterCardsQueryVariables>;
+export const ArticleCommentCardsDocument = gql`
+    query ArticleCommentCards($articleId: ID!) {
+  articleComments(articleId: $articleId) {
+    ...ArticleCommentCard
+  }
+}
+    ${ArticleCommentCardFragmentDoc}`;
+
+/**
+ * __useArticleCommentCardsQuery__
+ *
+ * To run a query within a React component, call `useArticleCommentCardsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useArticleCommentCardsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useArticleCommentCardsQuery({
+ *   variables: {
+ *      articleId: // value for 'articleId'
+ *   },
+ * });
+ */
+export function useArticleCommentCardsQuery(baseOptions: Apollo.QueryHookOptions<ArticleCommentCardsQuery, ArticleCommentCardsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ArticleCommentCardsQuery, ArticleCommentCardsQueryVariables>(ArticleCommentCardsDocument, options);
+      }
+export function useArticleCommentCardsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ArticleCommentCardsQuery, ArticleCommentCardsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ArticleCommentCardsQuery, ArticleCommentCardsQueryVariables>(ArticleCommentCardsDocument, options);
+        }
+export type ArticleCommentCardsQueryHookResult = ReturnType<typeof useArticleCommentCardsQuery>;
+export type ArticleCommentCardsLazyQueryHookResult = ReturnType<typeof useArticleCommentCardsLazyQuery>;
+export type ArticleCommentCardsQueryResult = Apollo.QueryResult<ArticleCommentCardsQuery, ArticleCommentCardsQueryVariables>;
+export const MoveCommentCardsDocument = gql`
+    query MoveCommentCards($moveId: ID!) {
+  moveComments(moveId: $moveId) {
+    ...MoveCommentCard
+  }
+}
+    ${MoveCommentCardFragmentDoc}`;
+
+/**
+ * __useMoveCommentCardsQuery__
+ *
+ * To run a query within a React component, call `useMoveCommentCardsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMoveCommentCardsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMoveCommentCardsQuery({
+ *   variables: {
+ *      moveId: // value for 'moveId'
+ *   },
+ * });
+ */
+export function useMoveCommentCardsQuery(baseOptions: Apollo.QueryHookOptions<MoveCommentCardsQuery, MoveCommentCardsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<MoveCommentCardsQuery, MoveCommentCardsQueryVariables>(MoveCommentCardsDocument, options);
+      }
+export function useMoveCommentCardsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MoveCommentCardsQuery, MoveCommentCardsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<MoveCommentCardsQuery, MoveCommentCardsQueryVariables>(MoveCommentCardsDocument, options);
+        }
+export type MoveCommentCardsQueryHookResult = ReturnType<typeof useMoveCommentCardsQuery>;
+export type MoveCommentCardsLazyQueryHookResult = ReturnType<typeof useMoveCommentCardsLazyQuery>;
+export type MoveCommentCardsQueryResult = Apollo.QueryResult<MoveCommentCardsQuery, MoveCommentCardsQueryVariables>;
+export const TournamentVideoCommentCardsDocument = gql`
+    query TournamentVideoCommentCards($tournamentVideoId: ID!) {
+  tournamentVideoComments(tournamentVideoId: $tournamentVideoId) {
+    ...TournamentVideoCommentCard
+  }
+}
+    ${TournamentVideoCommentCardFragmentDoc}`;
+
+/**
+ * __useTournamentVideoCommentCardsQuery__
+ *
+ * To run a query within a React component, call `useTournamentVideoCommentCardsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTournamentVideoCommentCardsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTournamentVideoCommentCardsQuery({
+ *   variables: {
+ *      tournamentVideoId: // value for 'tournamentVideoId'
+ *   },
+ * });
+ */
+export function useTournamentVideoCommentCardsQuery(baseOptions: Apollo.QueryHookOptions<TournamentVideoCommentCardsQuery, TournamentVideoCommentCardsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TournamentVideoCommentCardsQuery, TournamentVideoCommentCardsQueryVariables>(TournamentVideoCommentCardsDocument, options);
+      }
+export function useTournamentVideoCommentCardsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TournamentVideoCommentCardsQuery, TournamentVideoCommentCardsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TournamentVideoCommentCardsQuery, TournamentVideoCommentCardsQueryVariables>(TournamentVideoCommentCardsDocument, options);
+        }
+export type TournamentVideoCommentCardsQueryHookResult = ReturnType<typeof useTournamentVideoCommentCardsQuery>;
+export type TournamentVideoCommentCardsLazyQueryHookResult = ReturnType<typeof useTournamentVideoCommentCardsLazyQuery>;
+export type TournamentVideoCommentCardsQueryResult = Apollo.QueryResult<TournamentVideoCommentCardsQuery, TournamentVideoCommentCardsQueryVariables>;
 export const DashboardPlayerCardDeletePlayerDocument = gql`
     mutation DashboardPlayerCardDeletePlayer($playerSlug: ID!) {
   deletePlayer(input: {playerSlug: $playerSlug}) {
@@ -10013,6 +10054,41 @@ export function usePageMoveLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<P
 export type PageMoveQueryHookResult = ReturnType<typeof usePageMoveQuery>;
 export type PageMoveLazyQueryHookResult = ReturnType<typeof usePageMoveLazyQuery>;
 export type PageMoveQueryResult = Apollo.QueryResult<PageMoveQuery, PageMoveQueryVariables>;
+export const MovePageCommentsDocument = gql`
+    query MovePageComments($moveId: ID!) {
+  moveComments(moveId: $moveId) {
+    ...MoveCommentCard
+  }
+}
+    ${MoveCommentCardFragmentDoc}`;
+
+/**
+ * __useMovePageCommentsQuery__
+ *
+ * To run a query within a React component, call `useMovePageCommentsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMovePageCommentsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMovePageCommentsQuery({
+ *   variables: {
+ *      moveId: // value for 'moveId'
+ *   },
+ * });
+ */
+export function useMovePageCommentsQuery(baseOptions: Apollo.QueryHookOptions<MovePageCommentsQuery, MovePageCommentsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<MovePageCommentsQuery, MovePageCommentsQueryVariables>(MovePageCommentsDocument, options);
+      }
+export function useMovePageCommentsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MovePageCommentsQuery, MovePageCommentsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<MovePageCommentsQuery, MovePageCommentsQueryVariables>(MovePageCommentsDocument, options);
+        }
+export type MovePageCommentsQueryHookResult = ReturnType<typeof useMovePageCommentsQuery>;
+export type MovePageCommentsLazyQueryHookResult = ReturnType<typeof useMovePageCommentsLazyQuery>;
+export type MovePageCommentsQueryResult = Apollo.QueryResult<MovePageCommentsQuery, MovePageCommentsQueryVariables>;
 export const PageTournamentVideoDocument = gql`
     query PageTournamentVideo($tournamentVideoId: ID!) {
   tournamentVideo(tournamentVideoId: $tournamentVideoId) {

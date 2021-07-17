@@ -7,6 +7,15 @@ import { signInFirebaseWithTwitter } from '@/lib/firebase';
 import { currentUserState } from '@/states/currentUser';
 import { useSetRecoilState } from 'recoil';
 import { path } from '@/lib';
+import { Button, makeStyles } from '@material-ui/core';
+import { colors } from '@/colors';
+
+const useStyles = makeStyles({
+  root: {
+    color: 'white',
+    backgroundColor: colors.twitter,
+  },
+});
 
 export const LoginWithTwitterButton: React.FC = () => {
   const router = useRouter();
@@ -24,6 +33,7 @@ export const LoginWithTwitterButton: React.FC = () => {
     },
     fetchPolicy: 'network-only',
   });
+  const classes = useStyles();
 
   const onLogin = () => {
     signInFirebaseWithTwitter()
@@ -36,8 +46,8 @@ export const LoginWithTwitterButton: React.FC = () => {
   };
 
   return (
-    <button className="el_btn el_btn__twitter" onClick={onLogin}>
+    <Button variant="contained" onClick={onLogin} className={classes.root}>
       Twitterでログイン
-    </button>
+    </Button>
   );
 };
