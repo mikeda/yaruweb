@@ -1,12 +1,9 @@
-query PageDashboardTournamentVideos($tournamentId: ID!) {
+query DashboardTournamentVideosPage($tournamentId: ID!) {
   tournament(tournamentId: $tournamentId) {
-    id
-    name
+    ...TournamentBreadcrumbs
 
     videos {
-      id
-      title
-      highlightsCount
+      ...DashboardTournamentVideoCard
     }
   }
 }

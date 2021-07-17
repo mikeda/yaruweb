@@ -1,0 +1,12 @@
+fragment DashboardTournamentVideoCard on TournamentVideo {
+  id
+  title
+  description
+  thumbnailUrl
+  highlightsCount
+
+  channel {
+    id
+    name
+  }
+}

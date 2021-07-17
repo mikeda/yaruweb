@@ -1,22 +1,17 @@
 import React from 'react';
 
-import {
-  useCreateVideoMutation,
-  useDeleteVideoMutation,
-  usePageDashboardTournamentVideosQuery,
-  TournamentVideo,
-} from '@/lib/graphql/types';
+import { useCreateVideoMutation, useDashboardTournamentVideosPageQuery } from '@/lib/graphql/types';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
 import { DashboardBreadcrumbs } from '@/components';
 import { useRouter } from 'next/router';
 import { loadingState } from '@/states/loading';
 import { useSetRecoilState } from 'recoil';
 import { toast } from 'react-toastify';
-import { ObjectCardList } from '@/components/ObjectCardList';
 import { Input } from '@/components/form/Input';
 import { useForm } from 'react-hook-form';
 import { dashboardPath } from '@/lib';
-import { Button } from '@material-ui/core';
+import { Button, Grid } from '@material-ui/core';
+import { DashboardTournamentVideoCard } from '@/components/DashboardTournamentVideoCard';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -27,7 +22,7 @@ const Page: React.FC = () => {
     tournamentId = router.query.tournamentId as string;
   }
 
-  const { data, loading, refetch } = usePageDashboardTournamentVideosQuery({
+  const { data, loading, refetch } = useDashboardTournamentVideosPageQuery({
     variables: { tournamentId: tournamentId as string },
     fetchPolicy: 'network-only',
     skip: !router.isReady && !!tournamentId,
@@ -36,64 +31,22 @@ const Page: React.FC = () => {
   if (!tournamentId) return null;
 
   setLoading(loading);
+
   if (!data) return null;
-
   const { tournament } = data;
-
-  setLoading(loading);
 
   return (
     <DashboardContent title="動画" breadcrumb={<DashboardBreadcrumbs to="tournamentVideos" tournament={tournament} />}>
       <VideoForm tournamentId={tournamentId} />
 
-      <PageContent videos={tournament.videos} refetch={refetch} />
+      <Grid container spacing={2}>
+        {tournament.videos.map(video => (
+          <Grid item key={tournament.id} xs={12} sm={6} md={4}>
+            <DashboardTournamentVideoCard tournamentVideo={video} onDelete={refetch} />
+          </Grid>
+        ))}
+      </Grid>
     </DashboardContent>
-  );
-};
-
-type TournamentVideoFragment = Pick<TournamentVideo, 'id' | 'title' | 'highlightsCount'>;
-
-interface PageContentProps {
-  videos: TournamentVideoFragment[];
-  refetch: () => void;
-}
-
-const PageContent: React.FC<PageContentProps> = ({ videos, refetch }) => {
-  const setLoading = useSetRecoilState(loadingState);
-
-  const [deleteTournamentVideo, { loading: deleteLoading }] = useDeleteVideoMutation({
-    onCompleted: data => {
-      const video = data.deleteTournamentVideo?.tournamentVideo;
-      if (!video) return;
-      refetch();
-      toast.success('動画を削除しました。');
-    },
-  });
-
-  setLoading(deleteLoading);
-
-  return (
-    <ObjectCardList
-      items={videos.map(video => ({
-        id: video.id,
-        title: video.title,
-        links: [
-          { text: '編集する', url: dashboardPath({ to: 'tournamentVideosEdit', tournamentVideoId: video.id }) },
-          {
-            text: `ハイライト(${video.highlightsCount})`,
-            url: dashboardPath({ to: 'tournamentVideoHighlights', tournamentVideoId: video.id }),
-          },
-          {
-            text: '削除する',
-            onClick: () => {
-              if (window.confirm('動画を削除します。')) {
-                deleteTournamentVideo({ variables: { tournamentVideoId: video.id } });
-              }
-            },
-          },
-        ],
-      }))}
-    />
   );
 };
 
@@ -129,4 +82,5 @@ const VideoForm: React.FC<{ tournamentId: string }> = ({ tournamentId }) => {
     </form>
   );
 };
+
 export default Page;

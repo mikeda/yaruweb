@@ -33,6 +33,7 @@ type Options =
   | { to: 'tournaments'; params?: { page?: number } }
   | { to: 'tournamentsNew' }
   | { to: 'tournamentEdit'; tournamentId: string }
+  | { to: 'tournamentRankings'; tournamentId: string }
   | { to: 'tournamentVideos'; tournamentId: string }
   | { to: 'tournamentVideosNew'; tournamentId: string }
   | { to: 'tournamentVideosEdit'; tournamentVideoId: string }
@@ -105,6 +106,8 @@ export const dashboardPath = (options: Options): string => {
       return generatePath('/dashboard/tournaments', options.params);
     case 'tournamentsNew':
       return '/dashboard/tournaments/new';
+    case 'tournamentRankings':
+      return `/dashboard/tournaments/${options.tournamentId}/rankings`;
     case 'tournamentEdit':
       return `/dashboard/tournaments/${options.tournamentId}/edit`;
     case 'tournamentVideos':
