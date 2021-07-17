@@ -74,6 +74,14 @@ export const DashboardTournamentCard: React.FC<Props> = ({ tournament, onDelete 
           {`動画(${tournament.videosCount})`}
         </Button>
 
+        <Button
+          color="primary"
+          href={dashboardPath({ to: 'tournamentRankings', tournamentId: tournament.id })}
+          component={Link}
+        >
+          {`順位(${tournament.rankingsCount})`}
+        </Button>
+
         <IconButton color="default" onClick={() => deleteTournament()} className={classes.deleteButton}>
           <DeleteIcon />
         </IconButton>

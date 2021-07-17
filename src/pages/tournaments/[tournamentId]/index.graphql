@@ -10,16 +10,12 @@ query PageTournament($tournamentId: ID!) {
     organizerTwitterId
     startsAt
 
-    videos {
+    rankings {
       id
-      youtubeVideoId
-      title
-      thumbnailUrl
-      commentCount
+    }
 
-      channel {
-        name
-      }
+    videos {
+      ...TournamentVideoCard
     }
   }
 }

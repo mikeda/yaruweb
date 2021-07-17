@@ -1,0 +1,14 @@
+fragment TournamentRankingForm on TournamentRanking {
+  id
+  playerId
+  place
+}
+
+query TournamentRankingFormPlayers {
+  players(page: 1, per: 100) {
+    records {
+      id
+      name
+    }
+  }
+}

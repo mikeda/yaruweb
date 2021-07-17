@@ -52,6 +52,7 @@ export type DashboardBreadcrumbParams =
   | { to: 'tournament'; tournament: TournamentParam }
   | { to: 'tournamentsNew' }
   | { to: 'tournamentEdit'; tournament: TournamentParam }
+  | { to: 'tournamentRankings'; tournament: TournamentParam }
   | { to: 'tournamentVideos'; tournament: TournamentParam }
   | { to: 'tournamentVideo'; tournamentVideo: TournamentVideoParam }
   | { to: 'tournamentVideosNew'; tournament: TournamentParam }
@@ -181,6 +182,12 @@ export const breadcrumbChain = (props: DashboardBreadcrumbParams): BreadcrumbCha
       return { name: '大会を登録', parent: breadcrumbChain({ to: 'tournaments' }) };
     case 'tournamentEdit':
       return { name: '大会を編集', parent: breadcrumbChain({ to: 'tournament', tournament: props.tournament }) };
+    case 'tournamentRankings':
+      return {
+        name: '順位',
+        url: dashboardPath({ to: 'tournamentRankings', tournamentId: props.tournament.id }),
+        parent: breadcrumbChain({ to: 'tournament', tournament: props.tournament }),
+      };
     case 'tournamentVideos':
       return {
         name: '動画',

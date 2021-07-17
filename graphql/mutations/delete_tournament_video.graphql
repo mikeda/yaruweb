@@ -1,4 +1,4 @@
-mutation DeleteVideo($tournamentVideoId: ID!) {
+mutation DeleteTournamentVideo($tournamentVideoId: ID!) {
   deleteTournamentVideo(input: { tournamentVideoId: $tournamentVideoId }) {
     tournamentVideo {
       id
