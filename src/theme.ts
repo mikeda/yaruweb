@@ -135,6 +135,9 @@ const theme = createMuiTheme({
     },
   },
   typography: {
+    button: {
+      textTransform: 'none',
+    },
     h1: {
       fontSize: '2rem',
     },
