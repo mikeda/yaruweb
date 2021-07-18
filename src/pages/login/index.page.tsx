@@ -1,5 +1,4 @@
 import React from 'react';
-import Link from 'next/link';
 
 import { LoginWithEmailForm } from './LoginWithEmailForm';
 import { LoginWithTwitterButton } from './LoginWithTwitterButton';
@@ -7,6 +6,8 @@ import { Content } from '@/components/layouts/Content';
 import { Head } from '@/components/layouts/Head';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 import { path } from '@/lib';
+import { Box } from '@material-ui/core';
+import { Link } from '@/components';
 
 const Page: React.FC = () => {
   return (
@@ -14,14 +15,17 @@ const Page: React.FC = () => {
       <Head title="ログイン" />
 
       <LoginWithEmailForm />
-      <hr />
-      <LoginWithTwitterButton />
 
-      <div className="el_txt el_txt__c hp_mg_t_md">
-        <Link href={path({ to: 'signup' })}>
-          <a className="el_option_link">新規登録はこちら</a>
-        </Link>
-      </div>
+      <Box p={2} display="flex" justifyContent="center" alignItems="center">
+        <Box>
+          <LoginWithTwitterButton />
+        </Box>
+        <Box ml={2}>
+          <Link href={path({ to: 'signup' })} color="inherit">
+            新規登録はこちら
+          </Link>
+        </Box>
+      </Box>
     </Content>
   );
 };
