@@ -10,6 +10,10 @@ import { Box, Button, Card, CardContent, Divider, Grid, TextField } from '@mater
 const schema = yup.object().shape({
   name: yup.string().required(),
   slug: yup.string().required(),
+  tonamelId: yup.string(),
+  twitterId: yup.string(),
+  streamingUrl: yup.string(),
+  description: yup.string(),
 });
 
 interface Props {
@@ -28,6 +32,10 @@ export const PlayerForm: React.FC<Props> = ({ player, onSubmit }) => {
     defaultValues: player && {
       name: player.name,
       slug: player.slug,
+      tonamelId: player.tonamelId,
+      twitterId: player.twitterId,
+      streamingUrl: player.streamingUrl,
+      description: player.description,
     },
   });
 
@@ -51,6 +59,7 @@ export const PlayerForm: React.FC<Props> = ({ player, onSubmit }) => {
                 )}
               />
             </Grid>
+
             <Grid item xs={12} sm={6}>
               <Controller
                 name="slug"
@@ -62,6 +71,73 @@ export const PlayerForm: React.FC<Props> = ({ player, onSubmit }) => {
                     error={Boolean(errors.slug)}
                     helperText={errors.slug?.message}
                     fullWidth
+                  />
+                )}
+              />
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <Controller
+                name="tonamelId"
+                control={control}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    label="Tonamel ID"
+                    error={Boolean(errors.tonamelId)}
+                    helperText={errors.tonamelId?.message}
+                    fullWidth
+                  />
+                )}
+              />
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <Controller
+                name="twitterId"
+                control={control}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    label="Twitter ID"
+                    error={Boolean(errors.twitterId)}
+                    helperText={errors.twitterId?.message}
+                    fullWidth
+                  />
+                )}
+              />
+            </Grid>
+
+            <Grid item xs={12}>
+              <Controller
+                name="streamingUrl"
+                control={control}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    label="ストリーミングURL"
+                    error={Boolean(errors.streamingUrl)}
+                    helperText={errors.streamingUrl?.message}
+                    fullWidth
+                  />
+                )}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <Controller
+                name="description"
+                control={control}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    label="コメント"
+                    multiline
+                    fullWidth
+                    rows={3}
+                    variant="outlined"
+                    error={Boolean(errors.description)}
+                    helperText={errors.description?.message}
+                    style={{ backgroundColor: 'white' }}
                   />
                 )}
               />
