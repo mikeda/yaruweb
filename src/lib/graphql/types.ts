@@ -1343,12 +1343,14 @@ export type Player = {
   name: Scalars['String'];
   slug: Scalars['ID'];
   streamingUrl?: Maybe<Scalars['String']>;
+  tonamelId?: Maybe<Scalars['String']>;
   twitterId?: Maybe<Scalars['String']>;
 };
 
 export type PlayerAttributes = {
   name: Scalars['String'];
   slug: Scalars['String'];
+  tonamelId?: Maybe<Scalars['String']>;
   twitterId?: Maybe<Scalars['String']>;
   streamingUrl?: Maybe<Scalars['String']>;
   description?: Maybe<Scalars['String']>;
@@ -3682,7 +3684,7 @@ export type MoveMediaFragment = (
 
 export type PlayerFormFragment = (
   { __typename?: 'Player' }
-  & Pick<Player, 'name' | 'slug'>
+  & Pick<Player, 'name' | 'slug' | 'tonamelId' | 'twitterId' | 'streamingUrl' | 'description'>
 );
 
 export type TournamentCardFragment = (
@@ -5214,6 +5216,10 @@ export const PlayerFormFragmentDoc = gql`
     fragment PlayerForm on Player {
   name
   slug
+  tonamelId
+  twitterId
+  streamingUrl
+  description
 }
     `;
 export const TournamentCardFragmentDoc = gql`
