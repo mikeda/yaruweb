@@ -41,7 +41,7 @@ export const DashboardTournamentVideoCard: React.FC<Props> = ({ tournamentVideo,
     onCompleted: data => {
       const tournamentVideo = data.deleteTournamentVideo?.tournamentVideo;
       if (!tournamentVideo) return;
-      toast.success('大会情報を削除しました。');
+      toast.success('大会動画を削除しました。');
       onDelete();
     },
   });

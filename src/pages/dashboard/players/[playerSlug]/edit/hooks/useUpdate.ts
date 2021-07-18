@@ -7,7 +7,7 @@ export const useUpdate = (onUpdate: () => void) => {
   const setLoading = useSetRecoilState(loadingState);
   const [update, { loading }] = useDashboardPlayerEditPageUpdatePlayerMutation({
     onCompleted: () => {
-      toast.success('大会情報を更新しました。');
+      toast.success('プレイヤーを更新しました。');
       onUpdate();
     },
     onError: e => {
