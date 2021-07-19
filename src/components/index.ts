@@ -22,7 +22,6 @@ export * from './DashboardTournamentCard';
 export * from './DashboardTournamentRankingCard';
 export * from './TournamentForm';
 export * from './FavButton';
-export * from './Heading';
 export * from './IntroSlide';
 export * from './Link';
 export * from './Loading';

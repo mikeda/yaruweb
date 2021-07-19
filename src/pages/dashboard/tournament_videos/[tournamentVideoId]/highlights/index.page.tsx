@@ -1,8 +1,9 @@
 import React from 'react';
 
-import { DashboardBreadcrumbs, DashboardContent, Heading } from '@/components';
+import { DashboardBreadcrumbs, DashboardContent } from '@/components';
 import { useDestroyQuery, useCreateQuery, useRouteParams, useTournamentVideoQuery, useHighlightsQuery } from './hooks';
 import { HighlightList, HighlightForm } from './components';
+import { Box, Typography } from '@material-ui/core';
 
 const Page: React.FC = () => {
   const { tournamentVideoId } = useRouteParams();
@@ -25,13 +26,17 @@ const Page: React.FC = () => {
             onSubmit={attributes => create({ variables: { tournamentVideoId: tournamentVideo.id, attributes } })}
           />
 
-          <Heading lv="h3">ハイライト一覧</Heading>
-          {highlights && (
-            <HighlightList
-              highlights={highlights}
-              onDestroy={id => destroy({ variables: { tournamentVideoHighlightId: id } })}
-            />
-          )}
+          <Box mt={2}>
+            <Typography variant="h2" gutterBottom>
+              ハイライト一覧
+            </Typography>
+            {highlights && (
+              <HighlightList
+                highlights={highlights}
+                onDestroy={id => destroy({ variables: { tournamentVideoHighlightId: id } })}
+              />
+            )}
+          </Box>
         </>
       )}
     </DashboardContent>
