@@ -1,0 +1,10 @@
+fragment TournamentRankingCard on TournamentRanking {
+  id
+  place
+
+  player {
+    id
+    name
+    avatarUrl
+  }
+}

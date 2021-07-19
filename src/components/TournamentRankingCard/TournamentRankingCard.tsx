@@ -1,7 +1,6 @@
 import React from 'react';
-import { DashboardTournamentRankingCardFragment } from '@/lib/graphql/types';
-import { Card, CardMedia, IconButton, makeStyles, Typography } from '@material-ui/core';
-import { Delete } from '@material-ui/icons';
+import { TournamentRankingCardFragment } from '@/lib/graphql/types';
+import { Card, CardMedia, makeStyles, Typography } from '@material-ui/core';
 
 import { NO_IMAGE_URL } from '@/lib/Assets';
 import theme from '@/theme';
@@ -27,27 +26,13 @@ const useStyles = makeStyles({
   name: {
     marginLeft: theme.spacing(2),
   },
-  first: {
-    backgroundColor: '#D6AF36',
-  },
-  second: {
-    backgroundColor: '#A7A7AD',
-  },
-  third: {
-    backgroundColor: '#824A02',
-  },
-  actions: {
-    display: 'flex',
-    justifyContent: 'flex-end',
-  },
 });
 
 interface Props {
-  tournamentRanking: DashboardTournamentRankingCardFragment;
-  onDelete: () => void;
+  tournamentRanking: TournamentRankingCardFragment;
 }
 
-export const DashboardTournamentRankingCard: React.FC<Props> = ({ tournamentRanking, onDelete }) => {
+export const TournamentRankingCard: React.FC<Props> = ({ tournamentRanking }) => {
   const classes = useStyles();
 
   return (
@@ -60,12 +45,6 @@ export const DashboardTournamentRankingCard: React.FC<Props> = ({ tournamentRank
           <Typography variant="h4" className={classes.name}>
             {tournamentRanking.player.name}
           </Typography>
-        </div>
-
-        <div className={classes.actions}>
-          <IconButton color="default" onClick={onDelete}>
-            <Delete />
-          </IconButton>
         </div>
       </div>
     </Card>
