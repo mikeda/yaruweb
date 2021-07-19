@@ -154,7 +154,7 @@ const theme = createMuiTheme({
       fontSize: '1rem',
     },
     h6: {
-      fontSize: '0.875rem',
+      fontSize: '1rem',
     },
   },
 });

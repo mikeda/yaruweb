@@ -6,10 +6,20 @@ import { Head } from '@/components/layouts/Head';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
-import { Heading, NotFound } from '@/components';
+import { NotFound, TournamentRankingCard } from '@/components';
 import dayjs from '@/lib/dayjs';
 import { TournamentVideoCard } from '@/components/TournamentVideoCard';
-import { Button, Card, CardActions, CardContent, CardMedia, Grid, makeStyles, Typography } from '@material-ui/core';
+import {
+  Box,
+  Button,
+  Card,
+  CardActions,
+  CardContent,
+  CardMedia,
+  Grid,
+  makeStyles,
+  Typography,
+} from '@material-ui/core';
 import { NO_IMAGE_URL } from '@/lib/Assets';
 
 const useStyles = makeStyles({
@@ -50,21 +60,45 @@ const PageContent: React.FC<PageTournamentQuery> = ({ tournament }) => {
         </CardActions>
       </Card>
 
-      <Heading lv="h2">動画</Heading>
+      <Box mt={4}>
+        <Typography variant="h2" gutterBottom>
+          結果
+        </Typography>
 
-      {tournament.videos.length === 0 ? (
-        <NotFound>動画が登録されていません。</NotFound>
-      ) : (
-        <>
+        {tournament.rankings.length === 0 ? (
+          <NotFound>結果が登録されていません。</NotFound>
+        ) : (
           <Grid container spacing={2}>
-            {tournament.videos.map(video => (
-              <Grid item key={video.id} xs={12} sm={6} md={4}>
-                <TournamentVideoCard tournamentVideo={video} />
-              </Grid>
-            ))}
+            {Array.from(tournament.rankings)
+              .sort((a, b) => a.place - b.place)
+              .map(ranking => (
+                <Grid item key={tournament.id} xs={12}>
+                  <TournamentRankingCard tournamentRanking={ranking} />
+                </Grid>
+              ))}
           </Grid>
-        </>
-      )}
+        )}
+      </Box>
+
+      <Box mt={4}>
+        <Typography variant="h2" gutterBottom>
+          動画
+        </Typography>
+
+        {tournament.videos.length === 0 ? (
+          <NotFound>動画が登録されていません。</NotFound>
+        ) : (
+          <>
+            <Grid container spacing={2}>
+              {tournament.videos.map(video => (
+                <Grid item key={video.id} xs={12} sm={6} md={4}>
+                  <TournamentVideoCard tournamentVideo={video} />
+                </Grid>
+              ))}
+            </Grid>
+          </>
+        )}
+      </Box>
     </>
   );
 };

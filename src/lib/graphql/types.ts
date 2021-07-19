@@ -3697,6 +3697,15 @@ export type TournamentFormFragment = (
   & Pick<Tournament, 'name' | 'organizerName' | 'organizerTwitterId' | 'url' | 'streamingUrl' | 'startsAt' | 'description'>
 );
 
+export type TournamentRankingCardFragment = (
+  { __typename?: 'TournamentRanking' }
+  & Pick<TournamentRanking, 'id' | 'place'>
+  & { player: (
+    { __typename?: 'Player' }
+    & Pick<Player, 'id' | 'name' | 'avatarUrl'>
+  ) }
+);
+
 export type TournamentRankingFormFragment = (
   { __typename?: 'TournamentRanking' }
   & Pick<TournamentRanking, 'id' | 'playerId' | 'place'>
@@ -4675,7 +4684,7 @@ export type PageTournamentQuery = (
     & Pick<Tournament, 'id' | 'name' | 'mainImageUrl' | 'url' | 'streamingUrl' | 'description' | 'organizerName' | 'organizerTwitterId' | 'startsAt'>
     & { rankings: Array<(
       { __typename?: 'TournamentRanking' }
-      & Pick<TournamentRanking, 'id'>
+      & TournamentRankingCardFragment
     )>, videos: Array<(
       { __typename?: 'TournamentVideo' }
       & TournamentVideoCardFragment
@@ -5239,6 +5248,17 @@ export const TournamentFormFragmentDoc = gql`
   streamingUrl
   startsAt
   description
+}
+    `;
+export const TournamentRankingCardFragmentDoc = gql`
+    fragment TournamentRankingCard on TournamentRanking {
+  id
+  place
+  player {
+    id
+    name
+    avatarUrl
+  }
 }
     `;
 export const TournamentRankingFormFragmentDoc = gql`
@@ -10147,14 +10167,15 @@ export const PageTournamentDocument = gql`
     organizerTwitterId
     startsAt
     rankings {
-      id
+      ...TournamentRankingCard
     }
     videos {
       ...TournamentVideoCard
     }
   }
 }
-    ${TournamentVideoCardFragmentDoc}`;
+    ${TournamentRankingCardFragmentDoc}
+${TournamentVideoCardFragmentDoc}`;
 
 /**
  * __usePageTournamentQuery__

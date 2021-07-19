@@ -44,18 +44,20 @@ const Page: React.FC = () => {
       />
 
       <Grid container spacing={2}>
-        {tournament.rankings.map(ranking => (
-          <Grid item key={tournament.id} xs={12} sm={6}>
-            <DashboardTournamentRankingCard
-              tournamentRanking={ranking}
-              onDelete={() => {
-                destroy({
-                  variables: { tournamentRankingId: ranking.id },
-                });
-              }}
-            />
-          </Grid>
-        ))}
+        {Array.from(tournament.rankings)
+          .sort((a, b) => a.place - b.place)
+          .map(ranking => (
+            <Grid item key={tournament.id} xs={12} sm={6}>
+              <DashboardTournamentRankingCard
+                tournamentRanking={ranking}
+                onDelete={() => {
+                  destroy({
+                    variables: { tournamentRankingId: ranking.id },
+                  });
+                }}
+              />
+            </Grid>
+          ))}
       </Grid>
     </DashboardContent>
   );
