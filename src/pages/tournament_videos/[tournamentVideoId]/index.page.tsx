@@ -8,13 +8,14 @@ import { Head } from '@/components/layouts/Head';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
+import { Box } from '@material-ui/core';
 
 const PageContent: React.FC<PageTournamentVideoQuery> = ({ tournamentVideo }) => {
   return (
     <>
-      <div className="hp_mg_b_lg">
+      <Box mb={4}>
         <VideoMedia video={tournamentVideo} />
-      </div>
+      </Box>
 
       <TournamentVideoIdCommentsBlock tournamentVideoId={tournamentVideo.id} />
     </>

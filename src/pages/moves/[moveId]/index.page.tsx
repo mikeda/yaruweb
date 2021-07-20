@@ -8,13 +8,14 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 import { MoveCommentsBlock } from '@/components/Comment/MoveCommentsBlock';
+import { Box } from '@material-ui/core';
 
 const PageContent: React.FC<{ move: MoveFragment }> = ({ move }) => {
   return (
     <>
-      <div className="hp_mg_b_lg">
+      <Box mb={4}>
         <MoveMedia move={move} />
-      </div>
+      </Box>
 
       <MoveCommentsBlock moveId={move.id} />
     </>
