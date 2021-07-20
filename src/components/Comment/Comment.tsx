@@ -23,7 +23,7 @@ export const Comment: React.FC<Props> = ({ comment: { message, createdAt, user }
           <Box p={2}>
             <Box display="flex" justifyContent="space-between">
               <Typography variant="subtitle2">{user.name}</Typography>
-              <Typography variant="caption">{dayjs(createdAt).format('YYYY/M/D  H:mm')}</Typography>
+              <Typography variant="caption">{dayjs(createdAt).format('YYYY/M/D H:mm')}</Typography>
             </Box>
             <Typography variant="body2">{message}</Typography>
           </Box>

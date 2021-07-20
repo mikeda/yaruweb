@@ -38,7 +38,7 @@ export const ArticleCard: React.FC<Props> = ({ article }) => {
         <CardHeader
           avatar={<Avatar src={article.author.avatarUrl} />}
           title={article.author.name}
-          subheader={article.publishedAt && dayjs(article.publishedAt).format('YYYY/M/D  H:mm')}
+          subheader={article.publishedAt && dayjs(article.publishedAt).format('YYYY/M/D H:mm')}
         />
       </CardActionArea>
     </Card>

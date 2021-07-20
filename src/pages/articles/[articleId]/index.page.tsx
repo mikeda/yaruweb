@@ -40,7 +40,7 @@ const Page: React.FC<ArticlePageArticleQuery> = ({ article }) => {
         <Box ml={2} flexGrow={1}>
           <Typography variant="h6">{article.author.name}</Typography>
           {article.publishedAt && (
-            <Typography variant="caption">{dayjs(article.publishedAt).format('YYYY/M/D  H:mm')}</Typography>
+            <Typography variant="caption">{dayjs(article.publishedAt).format('YYYY/M/D H:mm')}</Typography>
           )}
         </Box>
         <FavButton articleId={article.id} favsCount={article.favsCount} />
