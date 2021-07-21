@@ -1,4 +1,4 @@
-query PageCharacter($characterSlug: ID!) {
+query PageCharacter($characterSlug: String!) {
   character(characterSlug: $characterSlug) {
     ...CharacterBreadcrumbs
     ...CharacterCard

@@ -1,4 +1,4 @@
-query PageCharacterComboCategories($characterSlug: ID!) {
+query PageCharacterComboCategories($characterSlug: String!) {
   character(characterSlug: $characterSlug) {
     ...CharacterBreadcrumbs
     ...CharacterCard

@@ -1,4 +1,4 @@
-query CharacterCard($characterSlug: ID!) {
+query CharacterCard($characterSlug: String!) {
   character(characterSlug: $characterSlug) {
     ...CharacterCard
   }

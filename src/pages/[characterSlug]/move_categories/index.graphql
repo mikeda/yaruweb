@@ -1,4 +1,4 @@
-query PageCharacterMoveCategories($characterSlug: ID!) {
+query PageCharacterMoveCategories($characterSlug: String!) {
   character(characterSlug: $characterSlug) {
     ...CharacterBreadcrumbs
     ...CharacterCard

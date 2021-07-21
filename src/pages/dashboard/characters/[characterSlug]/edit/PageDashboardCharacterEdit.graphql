@@ -1,4 +1,4 @@
-query PageDashboardCharacterEdit($characterSlug: ID!) {
+query PageDashboardCharacterEdit($characterSlug: String!) {
   character(characterSlug: $characterSlug) {
     ...CharacterForm
   }

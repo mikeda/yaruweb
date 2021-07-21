@@ -1,11 +1,11 @@
-query DashboardPlayerEditPage($playerSlug: ID!) {
+query DashboardPlayerEditPage($playerSlug: String!) {
   player(playerSlug: $playerSlug) {
     ...PlayerForm
     ...PlayerBreadcrumbs
   }
 }
 
-mutation DashboardPlayerEditPageUpdatePlayer($playerSlug: ID!, $attributes: PlayerAttributes!) {
+mutation DashboardPlayerEditPageUpdatePlayer($playerSlug: String!, $attributes: PlayerAttributes!) {
   updatePlayer(input: { playerSlug: $playerSlug, attributes: $attributes }) {
     player {
       ...PlayerForm

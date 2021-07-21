@@ -1,4 +1,4 @@
-query ComboSelectOptions($characterSlug: ID!) {
+query ComboSelectOptions($characterSlug: String!) {
   comboCategories(characterSlug: $characterSlug) {
     id
     name
