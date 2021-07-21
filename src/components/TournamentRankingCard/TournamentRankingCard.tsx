@@ -1,10 +1,11 @@
 import React from 'react';
 import { TournamentRankingCardFragment } from '@/lib/graphql/types';
-import { Card, CardMedia, makeStyles, Typography } from '@material-ui/core';
+import { Card, CardActionArea, CardMedia, makeStyles, Typography } from '@material-ui/core';
 
 import { NO_IMAGE_URL } from '@/lib/Assets';
 import theme from '@/theme';
 import { RankingPlaceAvatar } from '../RankingPlaceAvatar';
+import { path } from '@/lib';
 
 const useStyles = makeStyles({
   root: {
@@ -36,17 +37,19 @@ export const TournamentRankingCard: React.FC<Props> = ({ tournamentRanking }) =>
   const classes = useStyles();
 
   return (
-    <Card className={classes.root}>
-      <CardMedia image={tournamentRanking.player.avatarUrl || NO_IMAGE_URL} className={classes.media} />
+    <Card>
+      <CardActionArea className={classes.root} href={path({ to: 'player', playerSlug: tournamentRanking.player.slug })}>
+        <CardMedia image={tournamentRanking.player.avatarUrl || NO_IMAGE_URL} className={classes.media} />
 
-      <div className={classes.details}>
-        <div className={classes.title}>
-          <RankingPlaceAvatar place={tournamentRanking.place} />
-          <Typography variant="h4" className={classes.name}>
-            {tournamentRanking.player.name}
-          </Typography>
+        <div className={classes.details}>
+          <div className={classes.title}>
+            <RankingPlaceAvatar place={tournamentRanking.place} />
+            <Typography variant="h4" className={classes.name}>
+              {tournamentRanking.player.name}
+            </Typography>
+          </div>
         </div>
-      </div>
+      </CardActionArea>
     </Card>
   );
 };

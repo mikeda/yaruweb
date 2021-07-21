@@ -3763,7 +3763,7 @@ export type TournamentRankingCardFragment = (
   & Pick<TournamentRanking, 'id' | 'place'>
   & { player: (
     { __typename?: 'Player' }
-    & Pick<Player, 'id' | 'name' | 'avatarUrl'>
+    & Pick<Player, 'id' | 'slug' | 'name' | 'avatarUrl'>
   ) }
 );
 
@@ -5366,6 +5366,7 @@ export const TournamentRankingCardFragmentDoc = gql`
   place
   player {
     id
+    slug
     name
     avatarUrl
   }
