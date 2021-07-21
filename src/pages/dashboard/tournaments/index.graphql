@@ -1,0 +1,13 @@
+query PageDashboardTournaments($page: Int, $per: Int) {
+  tournaments(page: $page, per: $per) {
+    records {
+      id
+      name
+      videosCount
+    }
+
+    paging {
+      ...paging
+    }
+  }
+}

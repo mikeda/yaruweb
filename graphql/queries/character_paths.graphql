@@ -1,0 +1,5 @@
+query CharacterPaths {
+  characters {
+    slug
+  }
+}

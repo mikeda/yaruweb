@@ -1,0 +1,9 @@
+fragment DashboardTournamentCard on Tournament {
+  id
+  name
+  description
+  mainImageUrl
+  startsAt
+  rankingsCount
+  videosCount
+}

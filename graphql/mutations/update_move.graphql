@@ -1,0 +1,10 @@
+mutation UpdateMove($moveId: ID!, $attributes: MoveAttributes!) {
+  updateMove(input: { moveId: $moveId, attributes: $attributes }) {
+    move {
+      id
+      moveCategory {
+        id
+      }
+    }
+  }
+}

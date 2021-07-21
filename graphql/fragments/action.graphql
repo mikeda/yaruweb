@@ -1,0 +1,47 @@
+fragment attackAction on AttackAction {
+  id
+  __typename
+  attackType
+  damage
+  attackType
+  damage
+
+  blockAvailable
+  blockState
+  blockFrame
+  hitAvailable
+  hitState
+  hitFrame
+  counterHitAvailable
+  counterHitState
+  counterHitFrame
+  cleanHitAvailable
+  cleanHitState
+  cleanHitFrame
+  crouchingHitAvailable
+  crouchingHitState
+  crouchingHitFrame
+}
+
+fragment throwAction on ThrowAction {
+  id
+  __typename
+  throwType
+  damage
+  escape
+  throwAvailable
+  throwState
+  throwFrame
+  throwEscapeAvailable
+  throwEscapeState
+  throwEscapeFrame
+}
+
+fragment action on Action {
+  ... on AttackAction {
+    ...attackAction
+  }
+  ... on ThrowAction {
+    ...throwAction
+  }
+}

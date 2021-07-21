@@ -1,0 +1,11 @@
+query MyArticles($page: Int, $per: Int) {
+  myArticles(page: $page, per: $per) {
+    records {
+      ...articleSummary
+    }
+
+    paging {
+      ...paging
+    }
+  }
+}

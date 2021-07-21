@@ -1,0 +1,7 @@
+mutation CreateTournamentVideoHighlight($tournamentVideoId: ID!, $attributes: TournamentVideoHighlightAttributes!) {
+  createTournamentVideoHighlight(input: { tournamentVideoId: $tournamentVideoId, attributes: $attributes }) {
+    tournamentVideoHighlight {
+      ...tournamentVideoHighlight
+    }
+  }
+}

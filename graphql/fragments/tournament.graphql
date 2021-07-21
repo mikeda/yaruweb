@@ -1,0 +1,11 @@
+fragment tournament on Tournament {
+  id
+  name
+  mainImageUrl
+  url
+  streamingUrl
+  description
+  organizerName
+  organizerTwitterId
+  startsAt
+}

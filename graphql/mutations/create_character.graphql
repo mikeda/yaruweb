@@ -1,0 +1,7 @@
+mutation CreateCharacter($attributes: CharacterAttributes!) {
+  createCharacter(input: { attributes: $attributes }) {
+    character {
+      id
+    }
+  }
+}

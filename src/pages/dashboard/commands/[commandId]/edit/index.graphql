@@ -1,0 +1,33 @@
+query PageDashboardCommandEdit($commandId: ID!) {
+  command(commandId: $commandId) {
+    ...command
+
+    state {
+      id
+    }
+
+    operations {
+      id
+    }
+
+    move {
+      id
+      name
+
+      moveCategory {
+        id
+        name
+
+        character {
+          slug
+          name
+
+          states {
+            id
+            name
+          }
+        }
+      }
+    }
+  }
+}

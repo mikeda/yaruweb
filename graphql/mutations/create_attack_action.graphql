@@ -1,0 +1,7 @@
+mutation CreateAttackAction($moveId: ID!, $attributes: AttackActionAttributes!) {
+  createAttackAction(input: { moveId: $moveId, attributes: $attributes }) {
+    action {
+      ...attackAction
+    }
+  }
+}

@@ -1,0 +1,15 @@
+query DashboardTournamentEditPage($tournamentId: ID!) {
+  tournament(tournamentId: $tournamentId) {
+    ...TournamentForm
+    ...TournamentBreadcrumbs
+  }
+}
+
+mutation DashboardTournamentEditPageUpdateTournament($tournamentId: ID!, $attributes: TournamentAttributes!) {
+  updateTournament(input: { tournamentId: $tournamentId, attributes: $attributes }) {
+    tournament {
+      ...TournamentForm
+      ...TournamentBreadcrumbs
+    }
+  }
+}

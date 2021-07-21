@@ -1,0 +1,18 @@
+query PageDashboardMoves($moveCategoryId: ID!) {
+  moveCategory(moveCategoryId: $moveCategoryId) {
+    id
+    name
+
+    character {
+      slug
+      name
+    }
+
+    moves {
+      id
+      name
+      commandsCount
+      actionsCount
+    }
+  }
+}

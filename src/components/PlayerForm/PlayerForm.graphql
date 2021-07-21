@@ -1,0 +1,8 @@
+fragment PlayerForm on Player {
+  name
+  slug
+  tonamelId
+  twitterId
+  streamingUrl
+  description
+}

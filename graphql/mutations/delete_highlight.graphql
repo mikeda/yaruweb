@@ -1,0 +1,7 @@
+mutation DeleteHighlight($tournamentVideoHighlightId: ID!) {
+  deleteTournamentVideoHighlight(input: { tournamentVideoHighlightId: $tournamentVideoHighlightId }) {
+    tournamentVideoHighlight {
+      id
+    }
+  }
+}

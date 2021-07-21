@@ -1,0 +1,7 @@
+mutation UpdateArticle($articleId: ID!, $attributes: ArticleAttributes!) {
+  updateArticle(input: { articleId: $articleId, attributes: $attributes }) {
+    article {
+      id
+    }
+  }
+}

@@ -1,0 +1,7 @@
+mutation UpdateComboCategoryPosition($comboCategoryId: ID!, $newPosition: Int!) {
+  updateComboCategoryPosition(input: { comboCategoryId: $comboCategoryId, newPosition: $newPosition }) {
+    comboCategory {
+      id
+    }
+  }
+}

@@ -1,0 +1,6 @@
+fragment currentUser on CurrentUser {
+  id
+  name
+  role
+  avatarUrl
+}

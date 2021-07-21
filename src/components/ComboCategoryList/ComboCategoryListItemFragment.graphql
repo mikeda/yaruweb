@@ -1,0 +1,5 @@
+fragment ComboCategoryListItem on ComboCategory {
+  id
+  name
+  combosCount
+}

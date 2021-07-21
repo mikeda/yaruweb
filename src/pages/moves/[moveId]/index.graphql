@@ -1,0 +1,21 @@
+query PageMove($moveId: ID!) {
+  move(moveId: $moveId) {
+    ...move
+
+    moveCategory {
+      id
+      name
+
+      character {
+        slug
+        name
+      }
+    }
+  }
+}
+
+query MovePageComments($moveId: ID!) {
+  moveComments(moveId: $moveId) {
+    ...MoveCommentCard
+  }
+}

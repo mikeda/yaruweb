@@ -1,0 +1,7 @@
+mutation CreateCommand($moveId: ID!, $attributes: CommandAttributes!) {
+  createCommand(input: { moveId: $moveId, attributes: $attributes }) {
+    command {
+      ...command
+    }
+  }
+}

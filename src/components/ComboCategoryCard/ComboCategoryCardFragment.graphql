@@ -1,0 +1,5 @@
+fragment ComboCategoryCard on ComboCategory {
+  id
+  name
+  combosCount
+}

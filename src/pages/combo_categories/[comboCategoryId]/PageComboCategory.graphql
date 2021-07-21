@@ -1,0 +1,15 @@
+query PageComboCategory($comboCategoryId: ID!) {
+  comboCategory(comboCategoryId: $comboCategoryId) {
+    id
+    name
+
+    character {
+      slug
+      name
+    }
+
+    combos {
+      ...ComboMedia
+    }
+  }
+}

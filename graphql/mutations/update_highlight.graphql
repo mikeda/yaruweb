@@ -1,0 +1,7 @@
+mutation UpdateTournamentVideoHighlight($tournamentVideoHighlightId: ID!, $attributes: TournamentVideoHighlightAttributes!) {
+  updateTournamentVideoHighlight(input: { tournamentVideoHighlightId: $tournamentVideoHighlightId, attributes: $attributes }) {
+    tournamentVideoHighlight {
+      ...tournamentVideoHighlight
+    }
+  }
+}

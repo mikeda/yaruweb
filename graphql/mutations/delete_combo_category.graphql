@@ -1,0 +1,7 @@
+mutation DeleteComboCategory($comboCategoryId: ID!) {
+  deleteComboCategory(input: { comboCategoryId: $comboCategoryId }) {
+    comboCategory {
+      id
+    }
+  }
+}

@@ -1,0 +1,12 @@
+query Pd_Highlights_TournamentVideo($tournamentVideoId: ID!) {
+  tournamentVideo(tournamentVideoId: $tournamentVideoId) {
+    id
+    title
+    youtubeVideoId
+
+    tournament {
+      id
+      name
+    }
+  }
+}

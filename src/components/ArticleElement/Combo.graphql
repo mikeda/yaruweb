@@ -1,0 +1,5 @@
+query ArticleElementCombo($comboId: ID!) {
+  combo(comboId: $comboId) {
+    ...ComboMedia
+  }
+}

@@ -1,0 +1,5 @@
+fragment TournamentVideoCard on TournamentVideo {
+  id
+  title
+  thumbnailUrl
+}

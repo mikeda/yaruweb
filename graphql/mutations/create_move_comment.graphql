@@ -1,0 +1,7 @@
+mutation CreateMoveComment($moveId: ID!, $attributes: CommentAttributes!) {
+  createMoveComment(input: { moveId: $moveId, attributes: $attributes }) {
+    moveComment {
+      id
+    }
+  }
+}

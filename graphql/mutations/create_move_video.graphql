@@ -1,0 +1,12 @@
+mutation CreateMoveVideo {
+  createMoveVideo(input: {}) {
+    moveVideo {
+      ...moveVideo
+    }
+
+    videoUpload {
+      url
+      fields
+    }
+  }
+}

@@ -1,0 +1,9 @@
+query PageCharacter($characterSlug: String!) {
+  character(characterSlug: $characterSlug) {
+    ...CharacterBreadcrumbs
+    ...CharacterCard
+
+    story
+    description
+  }
+}

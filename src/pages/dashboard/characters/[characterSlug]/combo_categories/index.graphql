@@ -1,0 +1,9 @@
+query DashboardComboCategoriesPage($characterSlug: String!) {
+  character(characterSlug: $characterSlug) {
+    ...CharacterBreadcrumbs
+  }
+
+  comboCategories(characterSlug: $characterSlug) {
+    ...ComboCategoryCard
+  }
+}

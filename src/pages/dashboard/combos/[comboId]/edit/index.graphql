@@ -1,0 +1,33 @@
+query PageDashboardComboEdit($comboId: ID!) {
+  combo(comboId: $comboId) {
+    ...combo
+
+    state {
+      id
+    }
+
+    operations {
+      id
+    }
+
+    comboCategory {
+      id
+      name
+
+      character {
+        slug
+        name
+
+        states {
+          id
+          name
+        }
+
+        conditions {
+          id
+          name
+        }
+      }
+    }
+  }
+}

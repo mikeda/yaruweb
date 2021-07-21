@@ -1,0 +1,15 @@
+fragment MoveListItem on Move {
+  id
+  name
+
+  crouchingStatus
+  jumpStatus
+  powerCrush
+  homing
+  screw
+  wallBound
+
+  commands {
+    ...command
+  }
+}

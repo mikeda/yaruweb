@@ -1,0 +1,7 @@
+fragment CharacterCard on Character {
+  slug
+  longName
+  faceImageUrl
+  country
+  fightingStyle
+}

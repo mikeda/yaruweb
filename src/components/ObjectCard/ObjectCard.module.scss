@@ -1,0 +1,47 @@
+@import '@/styles/variables';
+
+.card {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.16);
+}
+
+.content {
+  flex: 1;
+}
+
+.handle {
+  font-size: 1.5rem;
+  color: $c-gray;
+  cursor: grab;
+}
+
+.title {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.links {
+  margin-top: 0.5rem;
+}
+
+.link {
+  display: inline-block;
+  padding: 0.5em;
+  margin-right: 0.5rem;
+  font-size: 0.9rem;
+  line-height: 1;
+  cursor: pointer;
+  border: 1px solid $c-gray-border;
+  border-radius: 4px;
+  transition: 0.25s;
+
+  &:focus,
+  &:hover {
+    opacity: 0.75;
+  }
+}

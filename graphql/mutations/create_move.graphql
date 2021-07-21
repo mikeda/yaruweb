@@ -1,0 +1,7 @@
+mutation CreateMove($moveCategoryId: ID!, $attributes: MoveAttributes!) {
+  createMove(input: { moveCategoryId: $moveCategoryId, attributes: $attributes }) {
+    move {
+      id
+    }
+  }
+}

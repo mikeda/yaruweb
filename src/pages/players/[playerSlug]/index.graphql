@@ -1,0 +1,25 @@
+query PlayerPage($playerSlug: String!) {
+  player(playerSlug: $playerSlug) {
+    ...PlayerBreadcrumbs
+
+    id
+    name
+    slug
+    avatarUrl
+    twitterId
+    streamingUrl
+    description
+
+    tournamentRankings {
+      id
+      place
+
+      tournament {
+        id
+        name
+        mainImageUrl
+        startsAt
+      }
+    }
+  }
+}

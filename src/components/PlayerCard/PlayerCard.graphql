@@ -1,0 +1,6 @@
+fragment PlayerCard on Player {
+  id
+  slug
+  name
+  avatarUrl
+}

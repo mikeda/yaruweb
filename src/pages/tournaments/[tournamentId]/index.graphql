@@ -1,0 +1,21 @@
+query PageTournament($tournamentId: ID!) {
+  tournament(tournamentId: $tournamentId) {
+    id
+    name
+    mainImageUrl
+    url
+    streamingUrl
+    description
+    organizerName
+    organizerTwitterId
+    startsAt
+
+    rankings {
+      ...TournamentRankingCard
+    }
+
+    videos {
+      ...TournamentVideoCard
+    }
+  }
+}

@@ -1,0 +1,17 @@
+query MoveSelectOptions($characterSlug: String!) {
+  moveCategories(characterSlug: $characterSlug) {
+    id
+    name
+
+    moves {
+      id
+      name
+
+      commands {
+        operations {
+          key
+        }
+      }
+    }
+  }
+}

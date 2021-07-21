@@ -1,0 +1,22 @@
+fragment ArticlePageArticle on Article {
+  id
+  title
+  description
+  mainImageUrl
+  publishedAt
+  favsCount
+  status
+  category
+  content
+
+  author {
+    name
+    avatarUrl
+  }
+}
+
+query ArticlePageArticle($articleId: ID!) {
+  article(articleId: $articleId) {
+    ...ArticlePageArticle
+  }
+}

@@ -1,0 +1,7 @@
+mutation UpdateComboPosition($comboId: ID!, $newPosition: Int!) {
+  updateComboPosition(input: { comboId: $comboId, newPosition: $newPosition }) {
+    combo {
+      id
+    }
+  }
+}

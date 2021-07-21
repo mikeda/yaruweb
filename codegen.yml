@@ -1,8 +1,10 @@
 overwrite: true
 schema: http://localhost:5000/graphql
-documents: ['../yarouyo/app/graphql/operations/**/*.graphql']
+documents:
+  - './graphql/**/*.graphql'
+  - './src/**/*.graphql'
 generates:
-  lib/graphql/types.ts:
+  src/lib/graphql/types.ts:
     plugins:
       - 'typescript'
       - 'typescript-operations'

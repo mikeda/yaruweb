@@ -19,10 +19,7 @@
     "jsx": "preserve",
     "baseUrl": ".",
     "paths": {
-      "@/components/*": ["components/*"],
-      "@/lib/*": ["lib/*"],
-      "@/pages-lib/*": ["pages-lib/*"],
-      "@/styles/*": ["styles/*"]
+      "@/*": ["src/*"]
     }
   },
   "include": [

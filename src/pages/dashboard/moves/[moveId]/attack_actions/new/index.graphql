@@ -1,0 +1,16 @@
+query PageDashboardActionNew($moveId: ID!) {
+  move(moveId: $moveId) {
+    id
+    name
+
+    moveCategory {
+      id
+      name
+
+      character {
+        slug
+        name
+      }
+    }
+  }
+}

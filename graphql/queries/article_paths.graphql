@@ -1,0 +1,5 @@
+query ArticlePaths {
+  allArticles {
+    id
+  }
+}

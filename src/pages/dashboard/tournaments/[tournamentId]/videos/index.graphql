@@ -1,0 +1,9 @@
+query DashboardTournamentVideosPage($tournamentId: ID!) {
+  tournament(tournamentId: $tournamentId) {
+    ...TournamentBreadcrumbs
+
+    videos {
+      ...DashboardTournamentVideoCard
+    }
+  }
+}
