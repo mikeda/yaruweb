@@ -1,0 +1,11 @@
+query PlayersPage($page: Int) {
+  players(page: $page, per: 20) {
+    records {
+      ...PlayerCard
+    }
+
+    paging {
+      ...paging
+    }
+  }
+}
