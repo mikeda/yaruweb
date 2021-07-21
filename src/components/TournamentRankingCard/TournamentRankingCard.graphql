@@ -4,6 +4,7 @@ fragment TournamentRankingCard on TournamentRanking {
 
   player {
     id
+    slug
     name
     avatarUrl
   }
