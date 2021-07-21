@@ -1,4 +1,4 @@
-query DashboardMoveCategoryNewPage($characterSlug: ID!) {
+query DashboardMoveCategoryNewPage($characterSlug: String!) {
   character(characterSlug: $characterSlug) {
     ...CharacterBreadcrumbs
   }

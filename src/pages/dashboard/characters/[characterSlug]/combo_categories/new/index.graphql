@@ -1,4 +1,4 @@
-query PageDashboardComboCategoryNew($characterSlug: ID!) {
+query PageDashboardComboCategoryNew($characterSlug: String!) {
   character(characterSlug: $characterSlug) {
     ...CharacterBreadcrumbs
   }

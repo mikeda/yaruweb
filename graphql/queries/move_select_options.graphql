@@ -1,4 +1,4 @@
-query MoveSelectOptions($characterSlug: ID!) {
+query MoveSelectOptions($characterSlug: String!) {
   moveCategories(characterSlug: $characterSlug) {
     id
     name

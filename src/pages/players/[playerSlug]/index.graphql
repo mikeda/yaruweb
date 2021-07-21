@@ -1,4 +1,4 @@
-query PlayerPage($playerSlug: ID!) {
+query PlayerPage($playerSlug: String!) {
   player(playerSlug: $playerSlug) {
     ...PlayerBreadcrumbs
 

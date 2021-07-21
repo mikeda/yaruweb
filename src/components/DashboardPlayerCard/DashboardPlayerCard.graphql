@@ -6,7 +6,7 @@ fragment DashboardPlayerCard on Player {
   description
 }
 
-mutation DashboardPlayerCardDeletePlayer($playerSlug: ID!) {
+mutation DashboardPlayerCardDeletePlayer($playerSlug: String!) {
   deletePlayer(input: { playerSlug: $playerSlug }) {
     player {
       id

@@ -1,4 +1,4 @@
-query DashboardComboCategoriesPage($characterSlug: ID!) {
+query DashboardComboCategoriesPage($characterSlug: String!) {
   character(characterSlug: $characterSlug) {
     ...CharacterBreadcrumbs
   }

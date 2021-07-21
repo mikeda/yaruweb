@@ -1,4 +1,4 @@
-query MoveCategoryCards($characterSlug: ID!) {
+query MoveCategoryCards($characterSlug: String!) {
   moveCategories(characterSlug: $characterSlug) {
     ...MoveCategoryCard
   }

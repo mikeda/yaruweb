@@ -1,4 +1,4 @@
-query States($characterSlug: ID!) {
+query States($characterSlug: String!) {
   states(characterSlug: $characterSlug) {
     ...state
   }
