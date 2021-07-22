@@ -2,7 +2,6 @@ import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import 'react-datepicker/dist/react-datepicker.css';
 
 import { PlayerAttributes, PlayerFormFragment } from '@/lib/graphql/types';
 import { Box, Button, Card, CardContent, Divider, Grid, TextField } from '@material-ui/core';
