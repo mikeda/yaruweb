@@ -50,7 +50,7 @@ const AddButton: React.FC<{ moveId: string }> = ({ moveId }) => {
 
   return (
     <div>
-      <Button aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+      <Button variant="contained" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
         作成する
       </Button>
       <Menu id="simple-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>

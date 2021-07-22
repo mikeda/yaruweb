@@ -47,7 +47,7 @@ export const dashboardPath = (options: Options): string => {
     case 'top':
       return '/dashboard';
     case 'actions':
-      return `/dashboard/${options.moveId}/actions`;
+      return `/dashboard/moves/${options.moveId}/actions`;
     case 'attackActionsNew':
       return `/dashboard/moves/${options.moveId}/attack_actions/new`;
     case 'attackActionEdit':
