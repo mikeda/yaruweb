@@ -57,7 +57,6 @@ export type DashboardBreadcrumbParams =
   | { to: 'tournamentVideo'; tournamentVideo: TournamentVideoParam }
   | { to: 'tournamentVideosNew'; tournament: TournamentParam }
   | { to: 'tournamentVideoEdit'; tournamentVideo: TournamentVideoParam }
-  | { to: 'tournamentVideoHighlights'; tournamentVideo: TournamentVideoParam }
   | { to: 'throwActionsNew'; move: MoveParam }
   | { to: 'throwActionEdit'; move: MoveParam };
 
@@ -204,12 +203,6 @@ export const breadcrumbChain = (props: DashboardBreadcrumbParams): BreadcrumbCha
     case 'tournamentVideoEdit':
       return {
         name: '動画を編集',
-        parent: breadcrumbChain({ to: 'tournamentVideo', tournamentVideo: props.tournamentVideo }),
-      };
-    case 'tournamentVideoHighlights':
-      return {
-        name: 'ハイライト',
-        url: dashboardPath({ to: 'tournamentVideoHighlights', tournamentVideoId: props.tournamentVideo.id }),
         parent: breadcrumbChain({ to: 'tournamentVideo', tournamentVideo: props.tournamentVideo }),
       };
     case 'throwActionsNew':

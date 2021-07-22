@@ -3,7 +3,6 @@ import { YouTubePlayer } from 'youtube-player/dist/types';
 import YouTube from 'react-youtube';
 
 import { TournamentVideoFragment } from '@/lib/graphql/types';
-import { VideoHighlights } from '../VideoHighlights';
 
 import styles from './VideoMedia.module.scss';
 
@@ -30,16 +29,6 @@ export const VideoMedia: React.FC<Props> = ({ video }) => {
       <div className={styles.body}>
         <div className={styles.ttl}>{video.title}</div>
         <div className={styles.txt}>{video.channel.name}</div>
-
-        <VideoHighlights
-          highlights={video.highlights}
-          onSelect={startSec => {
-            if (!youTubePlayer) return;
-
-            youTubePlayer.seekTo(startSec, true);
-            youTubePlayer.playVideo();
-          }}
-        />
       </div>
     </div>
   );

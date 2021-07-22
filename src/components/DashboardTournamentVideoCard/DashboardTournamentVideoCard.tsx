@@ -1,19 +1,8 @@
 import React from 'react';
 import { DashboardTournamentVideoCardFragment, useDeleteTournamentVideoMutation } from '@/lib/graphql/types';
-import {
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  CardMedia,
-  IconButton,
-  makeStyles,
-  Typography,
-} from '@material-ui/core';
+import { Card, CardActions, CardContent, CardMedia, IconButton, makeStyles, Typography } from '@material-ui/core';
 import { Delete as DeleteIcon } from '@material-ui/icons';
 
-import { dashboardPath } from '@/lib';
-import { Link } from '../Link';
 import { toast } from 'react-toastify';
 import { loadingState } from '@/states/loading';
 import { useSetRecoilState } from 'recoil';
@@ -60,14 +49,6 @@ export const DashboardTournamentVideoCard: React.FC<Props> = ({ tournamentVideo,
       </CardContent>
 
       <CardActions disableSpacing>
-        <Button
-          color="primary"
-          href={dashboardPath({ to: 'tournamentVideoHighlights', tournamentVideoId: tournamentVideo.id })}
-          component={Link}
-        >
-          {`ハイライト(${tournamentVideo.highlightsCount})`}
-        </Button>
-
         <IconButton color="default" onClick={() => deleteTournamentVideo()} className={classes.deleteButton}>
           <DeleteIcon />
         </IconButton>

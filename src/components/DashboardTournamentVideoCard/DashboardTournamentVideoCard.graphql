@@ -3,7 +3,6 @@ fragment DashboardTournamentVideoCard on TournamentVideo {
   title
   description
   thumbnailUrl
-  highlightsCount
 
   channel {
     id
