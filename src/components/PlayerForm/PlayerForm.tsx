@@ -146,7 +146,7 @@ export const PlayerForm: React.FC<Props> = ({ player, onSubmit }) => {
 
         <Divider />
 
-        <Box m={2} justifyContent="flex-end">
+        <Box m={2} display="flex" justifyContent="flex-end">
           <Button type="submit" variant="contained">
             登録する
           </Button>

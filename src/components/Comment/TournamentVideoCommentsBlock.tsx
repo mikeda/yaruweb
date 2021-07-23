@@ -7,7 +7,7 @@ interface Props {
   tournamentVideoId: string;
 }
 
-export const TournamentVideoIdCommentsBlock: React.FC<Props> = ({ tournamentVideoId }) => {
+export const TournamentVideoCommentsBlock: React.FC<Props> = ({ tournamentVideoId }) => {
   const { data, refetch } = useTournamentVideoCommentCardsQuery({ variables: { tournamentVideoId } });
   const [create] = useCreateTournamentVideoCommentMutation({
     onCompleted: () => {

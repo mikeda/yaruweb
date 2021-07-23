@@ -4,6 +4,8 @@ fragment DashboardTournamentVideoCard on TournamentVideo {
   description
   thumbnailUrl
 
+  battlesCount
+
   channel {
     id
     name

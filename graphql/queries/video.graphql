@@ -1,5 +1,0 @@
-query TournamentVideo($tournamentVideoId: ID!) {
-  tournamentVideo(tournamentVideoId: $tournamentVideoId) {
-    ...tournamentVideo
-  }
-}

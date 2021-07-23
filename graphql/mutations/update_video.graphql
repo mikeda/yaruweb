@@ -1,7 +1,7 @@
 mutation UpdateTournamentVideo($tournamentVideoId: ID!, $attributes: TournamentVideoAttributes!) {
   updateTournamentVideo(input: {tournamentVideoId: $tournamentVideoId, attributes: $attributes}) {
     tournamentVideo {
-      ...tournamentVideo
+      id
     }
   }
 }

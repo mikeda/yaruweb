@@ -1,0 +1,23 @@
+query DashboardTournamentBattlesPage($tournamentVideoId: ID!) {
+  tournamentVideo(tournamentVideoId: $tournamentVideoId) {
+    id
+    title
+    youtubeVideoId
+
+    tournament {
+      id
+      name
+    }
+  }
+}
+
+query DashboardTournamentBattlesPageBattles($tournamentVideoId: ID!) {
+  tournamentBattles(tournamentVideoId: $tournamentVideoId) {
+    id
+    round
+    startSec
+
+    winner { name }
+    loser { name }
+  }
+}

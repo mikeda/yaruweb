@@ -1,23 +1,65 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { PageTournamentVideoQuery, PageTournamentVideoDocument } from '@/lib/graphql/types';
-import { VideoMedia } from '@/components/VideoMedia';
-import { TournamentVideoIdCommentsBlock } from '@/components';
+import { TournamentVideoCommentsBlock } from '@/components';
 import { Content } from '@/components/layouts/Content';
 import { Head } from '@/components/layouts/Head';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
-import { Box } from '@material-ui/core';
+import { Box, List, ListItem, ListItemText, Paper } from '@material-ui/core';
+import YouTube from 'react-youtube';
+import { YouTubePlayer } from 'youtube-player/dist/types';
+import { formatSec } from '@/lib';
+import { TournamentBattleRoundText } from '@/lib/graphql/enum_texts';
 
 const PageContent: React.FC<PageTournamentVideoQuery> = ({ tournamentVideo }) => {
+  const [youTubePlayer, setYouTubePlayer] = useState<YouTubePlayer>();
+
   return (
     <>
-      <Box mb={4}>
-        <VideoMedia video={tournamentVideo} />
+      <Box display="flex" justifyContent="center" mb={2}>
+        <Box width="100%" maxWidth={640}>
+          <YouTube
+            containerClassName="bl_youtube"
+            videoId={tournamentVideo.youtubeVideoId}
+            opts={{ width: '854', height: '480' }}
+            onReady={event => {
+              setYouTubePlayer(event.target);
+            }}
+          />
+        </Box>
       </Box>
 
-      <TournamentVideoIdCommentsBlock tournamentVideoId={tournamentVideo.id} />
+      {tournamentVideo.battles.length > 0 && (
+        <Box mt={4}>
+          <Paper>
+            <List>
+              {tournamentVideo.battles.map(battle => {
+                let title = `${battle.winner.name} VS ${battle.loser.name}`;
+                if (battle.round) {
+                  title = `[${TournamentBattleRoundText[battle.round]}] ${title}`;
+                }
+                return (
+                  <ListItem
+                    button
+                    key={battle.id}
+                    onClick={() => {
+                      youTubePlayer?.seekTo(battle.startSec, true);
+                    }}
+                  >
+                    <ListItemText primary={title} secondary={formatSec(battle.startSec)} />
+                  </ListItem>
+                );
+              })}
+            </List>
+          </Paper>
+        </Box>
+      )}
+
+      <Box mt={4}>
+        <TournamentVideoCommentsBlock tournamentVideoId={tournamentVideo.id} />
+      </Box>
     </>
   );
 };
