@@ -18,21 +18,17 @@ const PageContent: React.FC<PageTournamentVideoQuery> = ({ tournamentVideo }) =>
 
   return (
     <>
-      <Box display="flex" justifyContent="center" mb={2}>
-        <Box width="100%" maxWidth={640}>
-          <YouTube
-            containerClassName="bl_youtube"
-            videoId={tournamentVideo.youtubeVideoId}
-            opts={{ width: '854', height: '480' }}
-            onReady={event => {
-              setYouTubePlayer(event.target);
-            }}
-          />
-        </Box>
-      </Box>
+      <YouTube
+        containerClassName="bl_youtube"
+        videoId={tournamentVideo.youtubeVideoId}
+        opts={{ width: '854', height: '480' }}
+        onReady={event => {
+          setYouTubePlayer(event.target);
+        }}
+      />
 
       {tournamentVideo.battles.length > 0 && (
-        <Box mt={4}>
+        <Box mt={2}>
           <Paper>
             <List>
               {tournamentVideo.battles.map(battle => {
