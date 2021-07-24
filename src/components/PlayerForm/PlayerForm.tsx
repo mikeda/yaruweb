@@ -132,7 +132,7 @@ export const PlayerForm: React.FC<Props> = ({ player, onSubmit }) => {
                     label="コメント"
                     multiline
                     fullWidth
-                    rows={3}
+                    rows={5}
                     variant="outlined"
                     error={Boolean(errors.description)}
                     helperText={errors.description?.message}
