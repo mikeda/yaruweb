@@ -57,7 +57,7 @@
     "@graphql-codegen/typescript": "^1.23.0",
     "@graphql-codegen/typescript-operations": "^1.18.3",
     "@graphql-codegen/typescript-react-apollo": "^2.3.1",
-    "@graphql-codegen/typescript-resolvers": "^1.19.2",
+    "@graphql-codegen/typescript-resolvers": "^1.20.0",
     "@types/gtag.js": "^0.0.7",
     "@types/is-url": "^1.2.29",
     "@types/node": "^15.12.1",
