@@ -9,10 +9,10 @@ import { Box, Button, Card, CardContent, Divider, Grid, TextField } from '@mater
 const schema = yup.object().shape({
   name: yup.string().required(),
   slug: yup.string().required(),
-  tonamelId: yup.string(),
-  twitterId: yup.string(),
-  streamingUrl: yup.string(),
-  description: yup.string(),
+  tonamelId: yup.string().nullable(),
+  twitterId: yup.string().nullable(),
+  streamingUrl: yup.string().nullable(),
+  description: yup.string().nullable(),
 });
 
 interface Props {
