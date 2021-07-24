@@ -127,7 +127,7 @@ export const DashboardContent: React.FC<Props> = ({ children, title, breadcrumb,
         <div className={classes.toolbar} />
         <Grid container spacing={3} justify="space-between">
           <Grid item>
-            <Typography variant="h5">{title}</Typography>
+            <Typography variant="h1">{title}</Typography>
             {breadcrumb && <Grid item>{breadcrumb}</Grid>}
           </Grid>
           {actions && <Grid item>{actions}</Grid>}

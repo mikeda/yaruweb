@@ -26,7 +26,7 @@ type Options =
   | { to: 'moves'; moveCategoryId: string }
   | { to: 'movesNew'; moveCategoryId: string }
   | { to: 'moveEdit'; moveId: string }
-  | { to: 'players'; params?: { page?: number } }
+  | { to: 'players'; params?: { page?: number; q?: string } }
   | { to: 'playersNew' }
   | { to: 'playerEdit'; playerSlug: string }
   | { to: 'profileEdit' }

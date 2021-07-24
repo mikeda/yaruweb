@@ -3,14 +3,18 @@ import { loadingState } from '@/states/loading';
 import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
 
-export const usePlayersQuery = () => {
-  const { query } = useRouter();
+interface Props {
+  page: number;
+  keyword?: string;
+}
+
+export const usePlayersQuery = ({ page, keyword }: Props) => {
+  const { isReady } = useRouter();
   const setLoading = useSetRecoilState(loadingState);
-  const page = query.page ? Number(query.page as string) : 1;
   const { data, loading, refetch } = useDashboardPlayersPageQuery({
-    variables: { page },
+    variables: { page, keyword },
     fetchPolicy: 'network-only',
-    skip: !page,
+    skip: !isReady,
   });
   setLoading(loading);
 
