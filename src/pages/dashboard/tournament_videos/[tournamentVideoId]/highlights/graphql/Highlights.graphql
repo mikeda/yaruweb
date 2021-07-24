@@ -1,7 +1,0 @@
-query Pd_Highlights_Highlights($tournamentVideoId: ID!) {
-  tournamentVideoHighlights(tournamentVideoId: $tournamentVideoId) {
-    id
-    title
-    startSec
-  }
-}

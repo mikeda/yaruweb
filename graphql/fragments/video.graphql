@@ -1,7 +1,3 @@
 fragment tournamentVideo on TournamentVideo {
   ...videoSummary
-
-  highlights {
-    ...tournamentVideoHighlight
-  }
 }

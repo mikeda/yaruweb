@@ -1,8 +1,0 @@
-fragment tournamentVideoHighlight on TournamentVideoHighlight {
-  id
-  title
-  startSec
-  user {
-    name
-  }
-}

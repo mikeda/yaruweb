@@ -1,6 +1,10 @@
+fragment CharacterSelectOption on Character {
+  slug
+  name
+}
+
 query CharacterSelectOptions {
   characters {
-    slug
-    name
+    ...CharacterSelectOption
   }
 }

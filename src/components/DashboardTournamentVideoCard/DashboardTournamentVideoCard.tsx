@@ -12,11 +12,11 @@ import {
 } from '@material-ui/core';
 import { Delete as DeleteIcon } from '@material-ui/icons';
 
-import { dashboardPath } from '@/lib';
-import { Link } from '../Link';
 import { toast } from 'react-toastify';
 import { loadingState } from '@/states/loading';
 import { useSetRecoilState } from 'recoil';
+import { dashboardPath } from '@/lib';
+import { Link } from '../Link';
 
 const useStyles = makeStyles({
   root: {},
@@ -62,10 +62,10 @@ export const DashboardTournamentVideoCard: React.FC<Props> = ({ tournamentVideo,
       <CardActions disableSpacing>
         <Button
           color="primary"
-          href={dashboardPath({ to: 'tournamentVideoHighlights', tournamentVideoId: tournamentVideo.id })}
+          href={dashboardPath({ to: 'tournamentBattles', tournamentVideoId: tournamentVideo.id })}
           component={Link}
         >
-          {`ハイライト(${tournamentVideo.highlightsCount})`}
+          {`対戦(${tournamentVideo.battlesCount})`}
         </Button>
 
         <IconButton color="default" onClick={() => deleteTournamentVideo()} className={classes.deleteButton}>

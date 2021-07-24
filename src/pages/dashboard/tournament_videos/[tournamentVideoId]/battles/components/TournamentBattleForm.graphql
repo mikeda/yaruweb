@@ -1,0 +1,12 @@
+fragment TournamentBattleForm on TournamentBattle {
+  id
+  tournamentVideo { id }
+  startSec
+  round
+  winner { slug }
+  loser { slug }
+  winnerCharacter { slug }
+  loserCharacter { slug }
+  winnerRounds
+  loserRounds
+}

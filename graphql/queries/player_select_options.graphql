@@ -1,0 +1,12 @@
+fragment PlayerSelectOption on Player {
+  slug
+  name
+}
+
+query PlayerSelectOptions {
+  players(per: 500) {
+    records {
+      ...PlayerSelectOption
+    }
+  }
+}

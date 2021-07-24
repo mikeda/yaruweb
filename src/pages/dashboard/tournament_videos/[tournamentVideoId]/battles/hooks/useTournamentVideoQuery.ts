@@ -1,10 +1,10 @@
-import { usePd_Highlights_HighlightsQuery } from '@/lib/graphql/types';
+import { useDashboardTournamentBattlesPageQuery } from '@/lib/graphql/types';
 import { loadingState } from '@/states/loading';
 import { useSetRecoilState } from 'recoil';
 
-export const useHighlightsQuery = (tournamentVideoId: string | undefined) => {
+export const useTournamentVideoQuery = (tournamentVideoId: string | undefined) => {
   const setLoading = useSetRecoilState(loadingState);
-  const { data, loading, refetch } = usePd_Highlights_HighlightsQuery({
+  const { data, loading, refetch } = useDashboardTournamentBattlesPageQuery({
     variables: { tournamentVideoId: tournamentVideoId as string },
     fetchPolicy: 'network-only',
     skip: !tournamentVideoId,
@@ -12,5 +12,5 @@ export const useHighlightsQuery = (tournamentVideoId: string | undefined) => {
 
   setLoading(loading);
 
-  return { highlights: data?.tournamentVideoHighlights, refetch };
+  return { tournamentVideo: data?.tournamentVideo, refetch };
 };

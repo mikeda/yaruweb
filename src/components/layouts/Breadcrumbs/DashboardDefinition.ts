@@ -52,12 +52,12 @@ export type DashboardBreadcrumbParams =
   | { to: 'tournament'; tournament: TournamentParam }
   | { to: 'tournamentsNew' }
   | { to: 'tournamentEdit'; tournament: TournamentParam }
+  | { to: 'tournamentBattles'; tournamentVideo: TournamentVideoParam }
   | { to: 'tournamentRankings'; tournament: TournamentParam }
   | { to: 'tournamentVideos'; tournament: TournamentParam }
   | { to: 'tournamentVideo'; tournamentVideo: TournamentVideoParam }
   | { to: 'tournamentVideosNew'; tournament: TournamentParam }
   | { to: 'tournamentVideoEdit'; tournamentVideo: TournamentVideoParam }
-  | { to: 'tournamentVideoHighlights'; tournamentVideo: TournamentVideoParam }
   | { to: 'throwActionsNew'; move: MoveParam }
   | { to: 'throwActionEdit'; move: MoveParam };
 
@@ -182,6 +182,12 @@ export const breadcrumbChain = (props: DashboardBreadcrumbParams): BreadcrumbCha
       return { name: '大会を登録', parent: breadcrumbChain({ to: 'tournaments' }) };
     case 'tournamentEdit':
       return { name: '大会を編集', parent: breadcrumbChain({ to: 'tournament', tournament: props.tournament }) };
+    case 'tournamentBattles':
+      return {
+        name: '対戦',
+        url: dashboardPath({ to: 'tournamentBattles', tournamentVideoId: props.tournamentVideo.id }),
+        parent: breadcrumbChain({ to: 'tournamentVideo', tournamentVideo: props.tournamentVideo }),
+      };
     case 'tournamentRankings':
       return {
         name: '順位',
@@ -204,12 +210,6 @@ export const breadcrumbChain = (props: DashboardBreadcrumbParams): BreadcrumbCha
     case 'tournamentVideoEdit':
       return {
         name: '動画を編集',
-        parent: breadcrumbChain({ to: 'tournamentVideo', tournamentVideo: props.tournamentVideo }),
-      };
-    case 'tournamentVideoHighlights':
-      return {
-        name: 'ハイライト',
-        url: dashboardPath({ to: 'tournamentVideoHighlights', tournamentVideoId: props.tournamentVideo.id }),
         parent: breadcrumbChain({ to: 'tournamentVideo', tournamentVideo: props.tournamentVideo }),
       };
     case 'throwActionsNew':

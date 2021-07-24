@@ -1,0 +1,15 @@
+mutation CreateTournamentBattle($attributes: TournamentBattleAttributes!) {
+  createTournamentBattle(input: { attributes: $attributes }) {
+    tournamentBattle {
+      id
+    }
+  }
+}
+
+mutation DeleteTournamentBattle($tournamentBattleId: ID!) {
+  deleteTournamentBattle(input: { tournamentBattleId: $tournamentBattleId }) {
+    tournamentBattle {
+      id
+    }
+  }
+}

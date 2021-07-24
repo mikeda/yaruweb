@@ -83,3 +83,14 @@ export const ThrowTypeEnumText: { [key in Types.ThrowTypeEnum]: string } = {
   right: '右側面投げ',
   back: '背面投げ',
 };
+
+export const TournamentBattleRoundText: { [key in Types.TournamentBattleRound]: string } = {
+  grand_final: 'Grand Final',
+  grand_final_reset: 'Grand Final(リセット)',
+  winners_final: 'Winners Final',
+  winners_semifinal: 'Winners Semifinal',
+  losers_final: 'Losers Final',
+  losers_semifinal: 'Losers Semifinal',
+  final: 'Final',
+  semifinal: 'Semifinal',
+};
