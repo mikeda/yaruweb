@@ -1577,6 +1577,7 @@ export type QueryPlayerArgs = {
 export type QueryPlayersArgs = {
   page?: Maybe<Scalars['Int']>;
   per?: Maybe<Scalars['Int']>;
+  keyword?: Maybe<Scalars['String']>;
 };
 
 
@@ -4412,6 +4413,7 @@ export type DashboardPlayerEditPageUpdatePlayerMutation = (
 
 export type DashboardPlayersPageQueryVariables = Exact<{
   page?: Maybe<Scalars['Int']>;
+  keyword?: Maybe<Scalars['String']>;
 }>;
 
 
@@ -4772,6 +4774,7 @@ export type PlayerPageQuery = (
 
 export type PlayersPageQueryVariables = Exact<{
   page?: Maybe<Scalars['Int']>;
+  keyword?: Maybe<Scalars['String']>;
 }>;
 
 
@@ -9544,8 +9547,8 @@ export type DashboardPlayerEditPageUpdatePlayerMutationHookResult = ReturnType<t
 export type DashboardPlayerEditPageUpdatePlayerMutationResult = Apollo.MutationResult<DashboardPlayerEditPageUpdatePlayerMutation>;
 export type DashboardPlayerEditPageUpdatePlayerMutationOptions = Apollo.BaseMutationOptions<DashboardPlayerEditPageUpdatePlayerMutation, DashboardPlayerEditPageUpdatePlayerMutationVariables>;
 export const DashboardPlayersPageDocument = gql`
-    query DashboardPlayersPage($page: Int) {
-  players(page: $page, per: 12) {
+    query DashboardPlayersPage($page: Int, $keyword: String) {
+  players(page: $page, per: 12, keyword: $keyword) {
     records {
       ...DashboardPlayerCard
     }
@@ -9570,6 +9573,7 @@ ${PagingFragmentDoc}`;
  * const { data, loading, error } = useDashboardPlayersPageQuery({
  *   variables: {
  *      page: // value for 'page'
+ *      keyword: // value for 'keyword'
  *   },
  * });
  */
@@ -10306,8 +10310,8 @@ export type PlayerPageQueryHookResult = ReturnType<typeof usePlayerPageQuery>;
 export type PlayerPageLazyQueryHookResult = ReturnType<typeof usePlayerPageLazyQuery>;
 export type PlayerPageQueryResult = Apollo.QueryResult<PlayerPageQuery, PlayerPageQueryVariables>;
 export const PlayersPageDocument = gql`
-    query PlayersPage($page: Int) {
-  players(page: $page, per: 20) {
+    query PlayersPage($page: Int, $keyword: String) {
+  players(page: $page, per: 20, keyword: $keyword) {
     records {
       ...PlayerCard
     }
@@ -10332,6 +10336,7 @@ ${PagingFragmentDoc}`;
  * const { data, loading, error } = usePlayersPageQuery({
  *   variables: {
  *      page: // value for 'page'
+ *      keyword: // value for 'keyword'
  *   },
  * });
  */

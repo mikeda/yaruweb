@@ -15,7 +15,7 @@ type Options =
   | { to: 'move'; moveId: string }
   | { to: 'passwordEdit' }
   | { to: 'passwordReset' }
-  | { to: 'players'; params?: { page?: number } }
+  | { to: 'players'; params?: { page?: number; q?: string } }
   | { to: 'player'; playerSlug: string }
   | { to: 'signup' }
   | { to: 'tournaments'; params?: { page?: number } }

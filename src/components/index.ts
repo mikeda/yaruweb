@@ -40,6 +40,7 @@ export * from './Paging';
 export * from './RankingPlaceAvatar';
 export * from './SortableCardList';
 export * from './StaffRequirement';
+export * from './SearchWord';
 export * from './TabLinkGroup';
 export * from './ThrowActionForm';
 export * from './TournamentRankingCard';

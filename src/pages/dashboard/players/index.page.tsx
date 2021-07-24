@@ -1,13 +1,14 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 
-import { DashboardContent, DashboardBreadcrumbs, DashboardPlayerCard } from '@/components';
+import { DashboardContent, DashboardBreadcrumbs, DashboardPlayerCard, SearchWord } from '@/components';
 import { dashboardPath } from '@/lib';
 import { Box, Button, Grid, makeStyles } from '@material-ui/core';
 import Pagination from '@material-ui/lab/Pagination';
 import { usePlayersQuery } from './hooks/usePlayersQuery';
 import theme from '@/theme';
 import { Add as AddIcon } from '@material-ui/icons';
+import { useRouteParams } from './hooks/useRouteParams';
 
 const useStyles = makeStyles({
   paging: {
@@ -19,8 +20,11 @@ const useStyles = makeStyles({
 
 const Page: React.FC = () => {
   const router = useRouter();
-  const { players, paging, refetch } = usePlayersQuery();
+  const { page, keyword } = useRouteParams();
+  const { players, paging, refetch } = usePlayersQuery({ page, keyword });
   const classes = useStyles();
+
+  if (!router.isReady) return null;
 
   return (
     <DashboardContent
@@ -32,6 +36,15 @@ const Page: React.FC = () => {
         </Button>
       }
     >
+      <Box mb={2}>
+        <SearchWord
+          initWord={keyword}
+          onSearch={word => {
+            router.push(dashboardPath({ to: 'players', params: { q: word } }));
+          }}
+        />
+      </Box>
+
       {players && (
         <Grid container spacing={2}>
           {players.map(player => (

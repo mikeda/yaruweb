@@ -6,17 +6,30 @@ import { Head } from '@/components/layouts/Head';
 import { Content } from '@/components/layouts/Content';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
-import { Grid } from '@material-ui/core';
+import { Box, Grid } from '@material-ui/core';
 import { PlayersPageDocument, PlayersPageQuery } from '@/lib/graphql/types';
-import { Paging } from '@/components';
+import { Paging, SearchWord } from '@/components';
 import { path } from '@/lib';
+import { useRouter } from 'next/router';
 
 const Page: React.FC<PlayersPageQuery> = ({ players: { records, paging } }) => {
-  const url = (page: number) => path({ to: 'players', params: { page } });
+  const router = useRouter();
+
+  const keyword = router.query.q as string | undefined;
+  const url = (page: number) => path({ to: 'players', params: { page, q: keyword } });
 
   return (
     <Content activeTab="tournaments" title="プレイヤー" breadcrumb={<Breadcrumbs to="players" />}>
       <Head title="プレイヤー一覧" description="鉄拳7のプレイヤー一覧です。" />
+
+      <Box mb={2}>
+        <SearchWord
+          initWord={keyword}
+          onSearch={word => {
+            router.push(path({ to: 'players', params: { q: word } }));
+          }}
+        />
+      </Box>
 
       <Grid container spacing={2}>
         {records.map(player => (
@@ -33,7 +46,8 @@ const Page: React.FC<PlayersPageQuery> = ({ players: { records, paging } }) => {
 
 export const getServerSideProps: GetServerSideProps<PlayersPageQuery> = async ({ query }) => {
   const page = query?.page ? Number(query.page) : 1;
-  const data: PlayersPageQuery = await fetchGraphql(PlayersPageDocument, { page });
+  const keyword = query?.q as string | undefined;
+  const data: PlayersPageQuery = await fetchGraphql(PlayersPageDocument, { page, keyword });
 
   return { props: data };
 };

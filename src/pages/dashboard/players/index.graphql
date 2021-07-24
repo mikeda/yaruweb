@@ -1,5 +1,5 @@
-query DashboardPlayersPage($page: Int) {
-  players(page: $page, per: 12) {
+query DashboardPlayersPage($page: Int, $keyword: String) {
+  players(page: $page, per: 12, keyword: $keyword) {
     records {
       ...DashboardPlayerCard
     }
