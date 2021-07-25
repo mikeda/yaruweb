@@ -17,7 +17,7 @@ query DashboardTournamentBattlesPageBattles($tournamentVideoId: ID!) {
     round
     startSec
 
-    winner { name }
-    loser { name }
+    leftPlayer { name }
+    rightPlayer { name }
   }
 }
