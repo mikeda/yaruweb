@@ -3,10 +3,11 @@ import { useRouter } from 'next/router';
 
 import { DashboardContent, DashboardBreadcrumbs, DashboardTournamentCard } from '@/components';
 import { dashboardPath } from '@/lib';
-import { Box, Grid, makeStyles } from '@material-ui/core';
+import { Box, Button, Grid, makeStyles } from '@material-ui/core';
 import Pagination from '@material-ui/lab/Pagination';
 import { useTournamentsQuery } from './hooks/useTournamentsQuery';
 import theme from '@/theme';
+import { Add as AddIcon } from '@material-ui/icons';
 
 const useStyles = makeStyles({
   paging: {
@@ -22,7 +23,20 @@ const Page: React.FC = () => {
   const classes = useStyles();
 
   return (
-    <DashboardContent title="大会" breadcrumb={<DashboardBreadcrumbs to="tournaments" />}>
+    <DashboardContent
+      title="大会"
+      breadcrumb={<DashboardBreadcrumbs to="tournaments" />}
+      actions={
+        <Button
+          variant="contained"
+          color="primary"
+          startIcon={<AddIcon />}
+          href={dashboardPath({ to: 'tournamentsNew' })}
+        >
+          登録する
+        </Button>
+      }
+    >
       {tournaments && (
         <Grid container spacing={2}>
           {tournaments.map(tournament => (
