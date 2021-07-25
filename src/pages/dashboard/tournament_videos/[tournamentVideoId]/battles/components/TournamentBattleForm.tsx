@@ -63,12 +63,12 @@ export const TournamentBattleForm: React.FC<Props> = ({
       tournamentVideoId: battle.tournamentVideo.id,
       startSec: battle.startSec,
       round: battle.round,
-      winner: battle.winner.slug,
-      loser: battle.loser.slug,
-      winnerCharacter: battle.winnerCharacter.slug,
-      loserCharacter: battle.loserCharacter.slug,
-      winnerRounds: battle.winnerRounds,
-      loserRounds: battle.loserRounds,
+      leftPlayer: battle.leftPlayer.slug,
+      rightPlayer: battle.rightPlayer.slug,
+      leftCharacter: battle.leftCharacter.slug,
+      rightCharacter: battle.rightCharacter.slug,
+      leftRounds: battle.leftRounds,
+      rightRounds: battle.rightRounds,
     },
   });
 
@@ -143,10 +143,10 @@ export const TournamentBattleForm: React.FC<Props> = ({
                       options={playerData.players.records}
                       getOptionLabel={player => `${player.name}(${player.slug})`}
                       onChange={(e, player) => {
-                        if (player) setValue('winner', player.slug);
+                        if (player) setValue('leftPlayer', player.slug);
                       }}
                       style={{ width: 300 }}
-                      renderInput={params => <TextField {...params} label="Winner" variant="outlined" fullWidth />}
+                      renderInput={params => <TextField {...params} label="プレイヤー" variant="outlined" fullWidth />}
                     />
                   </Grid>
 
@@ -155,18 +155,18 @@ export const TournamentBattleForm: React.FC<Props> = ({
                       options={characterData.characters}
                       getOptionLabel={character => `${character.name}(${character.slug})`}
                       onChange={(e, character) => {
-                        if (character) setValue('winnerCharacter', character.slug);
+                        if (character) setValue('leftCharacter', character.slug);
                       }}
                       style={{ width: 300 }}
                       renderInput={params => (
-                        <TextField {...params} label="Winner Character" variant="outlined" fullWidth />
+                        <TextField {...params} label="キャラクター" variant="outlined" fullWidth />
                       )}
                     />
                   </Grid>
 
                   <Grid item xs={2}>
                     <FormControl fullWidth variant="outlined">
-                      <InputLabel>ラウンド</InputLabel>
+                      <InputLabel>取得ラウンド</InputLabel>
                       <Controller
                         render={({ field }) => (
                           <Select {...field}>
@@ -177,7 +177,7 @@ export const TournamentBattleForm: React.FC<Props> = ({
                           </Select>
                         )}
                         control={control}
-                        name="winnerRounds"
+                        name="leftRounds"
                         defaultValue={3}
                       />
                     </FormControl>
@@ -188,10 +188,10 @@ export const TournamentBattleForm: React.FC<Props> = ({
                       options={playerData.players.records}
                       getOptionLabel={player => `${player.name}(${player.slug})`}
                       onChange={(e, player) => {
-                        if (player) setValue('loser', player.slug);
+                        if (player) setValue('rightPlayer', player.slug);
                       }}
                       style={{ width: 300 }}
-                      renderInput={params => <TextField {...params} label="Loser" variant="outlined" />}
+                      renderInput={params => <TextField {...params} label="プレイヤー" variant="outlined" />}
                     />
                   </Grid>
 
@@ -200,18 +200,18 @@ export const TournamentBattleForm: React.FC<Props> = ({
                       options={characterData.characters}
                       getOptionLabel={character => `${character.name}(${character.slug})`}
                       onChange={(e, character) => {
-                        if (character) setValue('loserCharacter', character.slug);
+                        if (character) setValue('rightCharacter', character.slug);
                       }}
                       style={{ width: 300 }}
                       renderInput={params => (
-                        <TextField {...params} label="Loser Character" variant="outlined" fullWidth />
+                        <TextField {...params} label="キャラクター" variant="outlined" fullWidth />
                       )}
                     />
                   </Grid>
 
                   <Grid item xs={2}>
                     <FormControl fullWidth variant="outlined">
-                      <InputLabel>ラウンド</InputLabel>
+                      <InputLabel>取得ラウンド</InputLabel>
                       <Controller
                         render={({ field }) => (
                           <Select {...field}>
@@ -222,7 +222,7 @@ export const TournamentBattleForm: React.FC<Props> = ({
                           </Select>
                         )}
                         control={control}
-                        name="loserRounds"
+                        name="rightRounds"
                         defaultValue={0}
                       />
                     </FormControl>

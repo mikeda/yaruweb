@@ -65,7 +65,7 @@ const Page: React.FC = () => {
               {tournamentBattles && (
                 <List>
                   {tournamentBattles.map(battle => {
-                    let title = `${battle.winner.name} VS ${battle.loser.name}`;
+                    let title = `${battle.leftPlayer.name} VS ${battle.rightPlayer.name}`;
                     if (battle.round) {
                       title = `[${TournamentBattleRoundText[battle.round]}] ${title}`;
                     }

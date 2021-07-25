@@ -32,7 +32,7 @@ const PageContent: React.FC<PageTournamentVideoQuery> = ({ tournamentVideo }) =>
           <Paper>
             <List>
               {tournamentVideo.battles.map(battle => {
-                let title = `${battle.winner.name} VS ${battle.loser.name}`;
+                let title = `${battle.leftPlayer.name} VS ${battle.rightPlayer.name}`;
                 if (battle.round) {
                   title = `[${TournamentBattleRoundText[battle.round]}] ${title}`;
                 }

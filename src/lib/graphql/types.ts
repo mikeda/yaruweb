@@ -1760,27 +1760,27 @@ export type TournamentAttributes = {
 export type TournamentBattle = {
   __typename?: 'TournamentBattle';
   id: Scalars['ID'];
-  loser: Player;
-  loserCharacter: Character;
-  loserRounds: Scalars['Int'];
+  leftCharacter: Character;
+  leftPlayer: Player;
+  leftRounds: Scalars['Int'];
+  rightCharacter: Character;
+  rightPlayer: Player;
+  rightRounds: Scalars['Int'];
   round?: Maybe<TournamentBattleRound>;
   startSec: Scalars['Int'];
   tournamentVideo: TournamentVideo;
-  winner: Player;
-  winnerCharacter: Character;
-  winnerRounds: Scalars['Int'];
 };
 
 export type TournamentBattleAttributes = {
   tournamentVideoId: Scalars['ID'];
   startSec: Scalars['Int'];
   round?: Maybe<TournamentBattleRound>;
-  winner: Scalars['String'];
-  loser: Scalars['String'];
-  winnerCharacter: Scalars['String'];
-  loserCharacter: Scalars['String'];
-  winnerRounds: Scalars['Int'];
-  loserRounds: Scalars['Int'];
+  leftPlayer: Scalars['String'];
+  rightPlayer: Scalars['String'];
+  leftCharacter: Scalars['String'];
+  rightCharacter: Scalars['String'];
+  leftRounds: Scalars['Int'];
+  rightRounds: Scalars['Int'];
 };
 
 export enum TournamentBattleRound {
@@ -4474,20 +4474,20 @@ export type PageDashboardThrowActionEditQuery = (
 
 export type TournamentBattleFormFragment = (
   { __typename?: 'TournamentBattle' }
-  & Pick<TournamentBattle, 'id' | 'startSec' | 'round' | 'winnerRounds' | 'loserRounds'>
+  & Pick<TournamentBattle, 'id' | 'startSec' | 'round' | 'leftRounds' | 'rightRounds'>
   & { tournamentVideo: (
     { __typename?: 'TournamentVideo' }
     & Pick<TournamentVideo, 'id'>
-  ), winner: (
+  ), leftPlayer: (
     { __typename?: 'Player' }
     & Pick<Player, 'slug'>
-  ), loser: (
+  ), rightPlayer: (
     { __typename?: 'Player' }
     & Pick<Player, 'slug'>
-  ), winnerCharacter: (
+  ), leftCharacter: (
     { __typename?: 'Character' }
     & Pick<Character, 'slug'>
-  ), loserCharacter: (
+  ), rightCharacter: (
     { __typename?: 'Character' }
     & Pick<Character, 'slug'>
   ) }
@@ -4552,10 +4552,10 @@ export type DashboardTournamentBattlesPageBattlesQuery = (
   & { tournamentBattles: Array<(
     { __typename?: 'TournamentBattle' }
     & Pick<TournamentBattle, 'id' | 'round' | 'startSec'>
-    & { winner: (
+    & { leftPlayer: (
       { __typename?: 'Player' }
       & Pick<Player, 'name'>
-    ), loser: (
+    ), rightPlayer: (
       { __typename?: 'Player' }
       & Pick<Player, 'name'>
     ) }
@@ -4807,10 +4807,10 @@ export type PageTournamentVideoQuery = (
     ), battles: Array<(
       { __typename?: 'TournamentBattle' }
       & Pick<TournamentBattle, 'id' | 'round' | 'startSec'>
-      & { winner: (
+      & { leftPlayer: (
         { __typename?: 'Player' }
         & Pick<Player, 'name'>
-      ), loser: (
+      ), rightPlayer: (
         { __typename?: 'Player' }
         & Pick<Player, 'name'>
       ) }
@@ -5499,20 +5499,20 @@ export const TournamentBattleFormFragmentDoc = gql`
   }
   startSec
   round
-  winner {
+  leftPlayer {
     slug
   }
-  loser {
+  rightPlayer {
     slug
   }
-  winnerCharacter {
+  leftCharacter {
     slug
   }
-  loserCharacter {
+  rightCharacter {
     slug
   }
-  winnerRounds
-  loserRounds
+  leftRounds
+  rightRounds
 }
     `;
 export const CreateArticleDocument = gql`
@@ -9787,10 +9787,10 @@ export const DashboardTournamentBattlesPageBattlesDocument = gql`
     id
     round
     startSec
-    winner {
+    leftPlayer {
       name
     }
-    loser {
+    rightPlayer {
       name
     }
   }
@@ -10363,10 +10363,10 @@ export const PageTournamentVideoDocument = gql`
       id
       round
       startSec
-      winner {
+      leftPlayer {
         name
       }
-      loser {
+      rightPlayer {
         name
       }
     }
