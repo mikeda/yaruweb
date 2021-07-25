@@ -146,7 +146,7 @@ export const TournamentBattleForm: React.FC<Props> = ({
                         if (player) setValue('leftPlayer', player.slug);
                       }}
                       style={{ width: 300 }}
-                      renderInput={params => <TextField {...params} label="Winner" variant="outlined" fullWidth />}
+                      renderInput={params => <TextField {...params} label="プレイヤー" variant="outlined" fullWidth />}
                     />
                   </Grid>
 
@@ -159,14 +159,14 @@ export const TournamentBattleForm: React.FC<Props> = ({
                       }}
                       style={{ width: 300 }}
                       renderInput={params => (
-                        <TextField {...params} label="Winner Character" variant="outlined" fullWidth />
+                        <TextField {...params} label="キャラクター" variant="outlined" fullWidth />
                       )}
                     />
                   </Grid>
 
                   <Grid item xs={2}>
                     <FormControl fullWidth variant="outlined">
-                      <InputLabel>ラウンド</InputLabel>
+                      <InputLabel>取得ラウンド</InputLabel>
                       <Controller
                         render={({ field }) => (
                           <Select {...field}>
@@ -191,7 +191,7 @@ export const TournamentBattleForm: React.FC<Props> = ({
                         if (player) setValue('rightPlayer', player.slug);
                       }}
                       style={{ width: 300 }}
-                      renderInput={params => <TextField {...params} label="Loser" variant="outlined" />}
+                      renderInput={params => <TextField {...params} label="プレイヤー" variant="outlined" />}
                     />
                   </Grid>
 
@@ -204,14 +204,14 @@ export const TournamentBattleForm: React.FC<Props> = ({
                       }}
                       style={{ width: 300 }}
                       renderInput={params => (
-                        <TextField {...params} label="Loser Character" variant="outlined" fullWidth />
+                        <TextField {...params} label="キャラクター" variant="outlined" fullWidth />
                       )}
                     />
                   </Grid>
 
                   <Grid item xs={2}>
                     <FormControl fullWidth variant="outlined">
-                      <InputLabel>ラウンド</InputLabel>
+                      <InputLabel>取得ラウンド</InputLabel>
                       <Controller
                         render={({ field }) => (
                           <Select {...field}>
