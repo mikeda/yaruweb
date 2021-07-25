@@ -54,9 +54,6 @@ export const DashboardTournamentVideoCard: React.FC<Props> = ({ tournamentVideo,
 
       <CardContent>
         <Typography variant="h6">{tournamentVideo.title}</Typography>
-        <Typography variant="caption" component="p">
-          {tournamentVideo.description}
-        </Typography>
       </CardContent>
 
       <CardActions disableSpacing>

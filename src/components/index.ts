@@ -45,6 +45,5 @@ export * from './TabLinkGroup';
 export * from './ThrowActionForm';
 export * from './TournamentRankingCard';
 export * from './TournamentRankingForm';
-export * from './VideoForm';
 export * from './form';
 export * from './layouts';

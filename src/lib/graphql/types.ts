@@ -1828,7 +1828,6 @@ export type TournamentVideo = {
   battlesCount: Scalars['Int'];
   channel: Channel;
   commentCount: Scalars['Int'];
-  description?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   thumbnailUrl: Scalars['String'];
   title: Scalars['String'];
@@ -1839,7 +1838,6 @@ export type TournamentVideo = {
 
 export type TournamentVideoAttributes = {
   title: Scalars['String'];
-  description: Scalars['String'];
 };
 
 export type TournamentVideoComment = {
@@ -3625,7 +3623,7 @@ export type DashboardTournamentRankingCardFragment = (
 
 export type DashboardTournamentVideoCardFragment = (
   { __typename?: 'TournamentVideo' }
-  & Pick<TournamentVideo, 'id' | 'title' | 'description' | 'thumbnailUrl' | 'battlesCount'>
+  & Pick<TournamentVideo, 'id' | 'title' | 'thumbnailUrl' | 'battlesCount'>
   & { channel: (
     { __typename?: 'Channel' }
     & Pick<Channel, 'id' | 'name'>
@@ -4571,7 +4569,7 @@ export type PageDashboardVideoEditQuery = (
   { __typename?: 'Query' }
   & { tournamentVideo: (
     { __typename?: 'TournamentVideo' }
-    & Pick<TournamentVideo, 'id' | 'title' | 'description' | 'youtubeVideoId'>
+    & Pick<TournamentVideo, 'id' | 'title' | 'youtubeVideoId'>
     & { tournament: (
       { __typename?: 'Tournament' }
       & Pick<Tournament, 'id' | 'name'>
@@ -5279,7 +5277,6 @@ export const DashboardTournamentVideoCardFragmentDoc = gql`
     fragment DashboardTournamentVideoCard on TournamentVideo {
   id
   title
-  description
   thumbnailUrl
   battlesCount
   channel {
@@ -9829,7 +9826,6 @@ export const PageDashboardVideoEditDocument = gql`
   tournamentVideo(tournamentVideoId: $tournamentVideoId) {
     id
     title
-    description
     youtubeVideoId
     tournament {
       id
