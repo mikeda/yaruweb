@@ -45,7 +45,7 @@ export const TournamentRankingForm: React.FC<Props> = ({ open, onClose, tourname
   });
 
   return (
-    <Dialog open={open} onClose={onClose} aria-labelledby="form-dialog-title">
+    <Dialog open={open} onClose={onClose}>
       <form onSubmit={handleSubmit(onSubmit)}>
         <DialogTitle>順位</DialogTitle>
 
