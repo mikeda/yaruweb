@@ -6,8 +6,6 @@ query PageTournament($tournamentId: ID!) {
     url
     streamingUrl
     description
-    organizerName
-    organizerTwitterId
     startsAt
 
     rankings {

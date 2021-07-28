@@ -1,0 +1,15 @@
+fragment DashboardOrganizerCard on Organizer {
+  id
+  slug
+  name
+  avatarUrl
+  description
+}
+
+mutation DashboardOrganizerCardDeleteOrganizer($organizerSlug: String!) {
+  deleteOrganizer(input: { organizerSlug: $organizerSlug }) {
+    organizer {
+      id
+    }
+  }
+}

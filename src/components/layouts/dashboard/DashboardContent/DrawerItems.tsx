@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-type MenuKey = 'article' | 'tournament' | 'player' | 'character' | 'profile';
+type MenuKey = 'article' | 'tournament' | 'player' | 'organizer' | 'character' | 'profile';
 
 interface ItemProps {
   key: MenuKey;
@@ -51,6 +51,12 @@ const adminItems: ItemProps[] = [
     key: 'player',
     label: 'プレイヤー',
     link: dashboardPath({ to: 'players' }),
+    icon: <People />,
+  },
+  {
+    key: 'organizer',
+    label: 'オーガナイザー',
+    link: dashboardPath({ to: 'organizers' }),
     icon: <People />,
   },
   {

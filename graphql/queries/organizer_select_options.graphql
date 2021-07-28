@@ -1,0 +1,13 @@
+fragment OrganizerSelectOption on Organizer {
+  id
+  slug
+  name
+}
+
+query OrganizerSelectOptions {
+  organizers(per: 500) {
+    records {
+      ...OrganizerSelectOption
+    }
+  }
+}
