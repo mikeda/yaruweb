@@ -30,6 +30,11 @@ fragment MoveBreadcrumbs on Move {
   }
 }
 
+fragment OrganizerBreadcrumbs on Organizer {
+  slug
+  name
+}
+
 fragment PlayerBreadcrumbs on Player {
   slug
   name

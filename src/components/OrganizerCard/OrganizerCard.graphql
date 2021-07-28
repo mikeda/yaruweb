@@ -1,0 +1,6 @@
+fragment OrganizerCard on Organizer {
+  id
+  slug
+  name
+  avatarUrl
+}

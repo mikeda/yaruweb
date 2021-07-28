@@ -1,0 +1,11 @@
+query DashboardOrganizersPage($page: Int, $keyword: String) {
+  organizers(page: $page, per: 12, keyword: $keyword) {
+    records {
+      ...DashboardOrganizerCard
+    }
+
+    paging {
+      ...paging
+    }
+  }
+}

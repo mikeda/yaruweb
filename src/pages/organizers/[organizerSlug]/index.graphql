@@ -1,0 +1,19 @@
+query OrganizerPage($organizerSlug: String!) {
+  organizer(organizerSlug: $organizerSlug) {
+    ...OrganizerBreadcrumbs
+
+    id
+    name
+    slug
+    avatarUrl
+    twitterId
+    streamingUrl
+    description
+
+    tournaments {
+      id
+      name
+      startsAt
+    }
+  }
+}

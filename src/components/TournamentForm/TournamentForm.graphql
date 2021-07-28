@@ -1,7 +1,6 @@
 fragment TournamentForm on Tournament {
+  organizerId
   name
-  organizerName
-  organizerTwitterId
   url
   streamingUrl
   startsAt

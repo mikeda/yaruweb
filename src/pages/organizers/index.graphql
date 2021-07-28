@@ -1,0 +1,11 @@
+query OrganizersPage($page: Int, $keyword: String) {
+  organizers(page: $page, per: 20, keyword: $keyword) {
+    records {
+      ...OrganizerCard
+    }
+
+    paging {
+      ...paging
+    }
+  }
+}

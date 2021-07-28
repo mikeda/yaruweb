@@ -3,14 +3,19 @@ import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import { TournamentAttributes, TournamentFragment } from '@/lib/graphql/types';
+import {
+  OrganizerSelectOptionFragment,
+  TournamentAttributes,
+  TournamentFormFragment,
+  useOrganizerSelectOptionsQuery,
+} from '@/lib/graphql/types';
 import dayjs from '@/lib/dayjs';
 import { Box, Button, Card, CardContent, Divider, Grid, TextField } from '@material-ui/core';
+import { Autocomplete } from '@material-ui/lab';
 
 const schema = yup.object().shape({
+  organizerId: yup.string().required(),
   name: yup.string().required(),
-  organizerName: yup.string().required(),
-  organizerTwitterId: yup.string().nullable(),
   url: yup.string().url().nullable(),
   streamingUrl: yup.string().url().nullable(),
   startsAt: yup.string(),
@@ -18,14 +23,16 @@ const schema = yup.object().shape({
 });
 
 interface Props {
-  tournament?: TournamentFragment;
+  tournament?: TournamentFormFragment;
   onSubmit: (attributes: TournamentAttributes) => void;
 }
 
 export const TournamentForm: React.FC<Props> = ({ tournament, onSubmit }) => {
+  const { data: organizerData } = useOrganizerSelectOptionsQuery();
   const {
     handleSubmit,
     control,
+    getValues,
     setValue,
     formState: { errors },
   } = useForm<TournamentAttributes>({
@@ -33,9 +40,8 @@ export const TournamentForm: React.FC<Props> = ({ tournament, onSubmit }) => {
     mode: 'onBlur',
     defaultValues: tournament
       ? {
+          organizerId: tournament.organizerId,
           name: tournament.name,
-          organizerName: tournament.organizerName,
-          organizerTwitterId: tournament.organizerTwitterId,
           url: tournament.url,
           streamingUrl: tournament.streamingUrl,
           startsAt: dayjs(tournament.startsAt).format('YYYY-MM-DDTHH:mm'),
@@ -45,12 +51,37 @@ export const TournamentForm: React.FC<Props> = ({ tournament, onSubmit }) => {
           startsAt: dayjs().add(1, 'date').hour(18).minute(0).second(0).format('YYYY-MM-DDTHH:mm'),
         },
   });
+  const organizerId = getValues('organizerId');
 
   return (
     <Card>
       <form onSubmit={handleSubmit(onSubmit)}>
         <CardContent>
           <Grid container spacing={2}>
+            {organizerData && (
+              <Grid item xs={12}>
+                <Autocomplete<OrganizerSelectOptionFragment>
+                  options={organizerData.organizers.records}
+                  getOptionLabel={organizer => `${organizer.name}(${organizer.slug})`}
+                  onChange={(e, organizer) => {
+                    if (organizer) setValue('organizerId', organizer.id);
+                  }}
+                  defaultValue={organizerData.organizers.records.filter(o => o.id === organizerId)[0]}
+                  style={{ width: 300 }}
+                  renderInput={params => {
+                    return (
+                      <TextField
+                        {...params}
+                        label="オーガナイザー"
+                        variant="outlined"
+                        defaultValue={'まんば杯(manba)'}
+                      />
+                    );
+                  }}
+                />
+              </Grid>
+            )}
+
             <Grid item xs={12}>
               <Controller
                 name="name"
@@ -93,38 +124,6 @@ export const TournamentForm: React.FC<Props> = ({ tournament, onSubmit }) => {
                     label="配信URL"
                     error={Boolean(errors.streamingUrl)}
                     helperText={errors.streamingUrl?.message}
-                    fullWidth
-                  />
-                )}
-              />
-            </Grid>
-
-            <Grid item xs={12} sm={6}>
-              <Controller
-                name="organizerName"
-                control={control}
-                render={({ field }) => (
-                  <TextField
-                    {...field}
-                    label="主催者名"
-                    error={Boolean(errors.organizerName)}
-                    helperText={errors.organizerName?.message}
-                    fullWidth
-                  />
-                )}
-              />
-            </Grid>
-
-            <Grid item xs={12} sm={6}>
-              <Controller
-                name="organizerTwitterId"
-                control={control}
-                render={({ field }) => (
-                  <TextField
-                    {...field}
-                    label="主催者のTwitter ID"
-                    error={Boolean(errors.organizerTwitterId)}
-                    helperText={errors.organizerTwitterId?.message}
                     fullWidth
                   />
                 )}

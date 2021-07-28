@@ -5,6 +5,7 @@ import {
   ComboCategory,
   Move,
   MoveCategory,
+  Organizer,
   Player,
   Tournament,
   TournamentVideo,
@@ -18,4 +19,5 @@ export type ComboCategoryParam = Pick<ComboCategory, 'id' | 'name'> & { characte
 export type ComboParam = Pick<Combo, 'id' | 'name'> & { comboCategory: ComboCategoryParam };
 export type MoveCategoryParam = Pick<MoveCategory, 'id' | 'name'> & { character: CharactersParam };
 export type MoveParam = Pick<Move, 'id' | 'name'> & { moveCategory: MoveCategoryParam };
+export type OrganizerParam = Pick<Organizer, 'slug' | 'name'>;
 export type PlayerParam = Pick<Player, 'slug' | 'name'>;

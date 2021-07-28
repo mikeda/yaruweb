@@ -15,6 +15,8 @@ type Options =
   | { to: 'move'; moveId: string }
   | { to: 'passwordEdit' }
   | { to: 'passwordReset' }
+  | { to: 'organizers'; params?: { page?: number; q?: string } }
+  | { to: 'organizer'; organizerSlug: string }
   | { to: 'players'; params?: { page?: number; q?: string } }
   | { to: 'player'; playerSlug: string }
   | { to: 'signup' }
@@ -50,6 +52,10 @@ export const path = (options: Options): string => {
       return '/password/edit';
     case 'passwordReset':
       return '/password/reset';
+    case 'organizers':
+      return generatePath('/organizers', options.params);
+    case 'organizer':
+      return `/organizers/${options.organizerSlug}`;
     case 'players':
       return generatePath('/players', options.params);
     case 'player':

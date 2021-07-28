@@ -1,0 +1,8 @@
+fragment OrganizerForm on Organizer {
+  name
+  slug
+  tonamelId
+  twitterId
+  streamingUrl
+  description
+}
