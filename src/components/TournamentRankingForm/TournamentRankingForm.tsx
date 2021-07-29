@@ -4,11 +4,13 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
 import {
+  PlayerSelectOptionFragment,
   TournamentRankingAttributes,
   TournamentRankingFormFragment,
-  useTournamentRankingFormPlayersQuery,
+  usePlayerSelectOptionsQuery,
 } from '@/lib/graphql/types';
 import {
+  Box,
   Button,
   Dialog,
   DialogActions,
@@ -18,7 +20,9 @@ import {
   InputLabel,
   MenuItem,
   Select,
+  TextField,
 } from '@material-ui/core';
+import { Autocomplete } from '@material-ui/lab';
 
 const schema = yup.object().shape({
   place: yup.number().required().integer().min(1).max(4),
@@ -33,9 +37,9 @@ interface Props {
 }
 
 export const TournamentRankingForm: React.FC<Props> = ({ open, onClose, tournamentRanking, onSubmit }) => {
-  const { data } = useTournamentRankingFormPlayersQuery();
+  const { data } = usePlayerSelectOptionsQuery();
 
-  const { handleSubmit, control } = useForm<TournamentRankingAttributes>({
+  const { handleSubmit, control, setValue } = useForm<TournamentRankingAttributes>({
     resolver: yupResolver(schema),
     mode: 'onBlur',
     defaultValues: tournamentRanking && {
@@ -51,41 +55,34 @@ export const TournamentRankingForm: React.FC<Props> = ({ open, onClose, tourname
 
         <DialogContent>
           {data && data.players.records.length > 0 && (
+            <Autocomplete<PlayerSelectOptionFragment>
+              options={data.players.records}
+              getOptionLabel={player => `${player.name}(${player.slug})`}
+              onChange={(e, player) => {
+                if (player) setValue('playerId', player.id);
+              }}
+              style={{ width: 300 }}
+              renderInput={params => <TextField {...params} label="プレイヤー" />}
+            />
+          )}
+
+          <Box mt={2}>
             <FormControl>
-              <InputLabel>プレイヤー</InputLabel>
+              <InputLabel>順位</InputLabel>
               <Controller
                 render={({ field }) => (
                   <Select {...field} style={{ minWidth: 120 }}>
-                    {data &&
-                      data.players.records.map(player => (
-                        <MenuItem key={player.id} value={player.id}>
-                          {player.name}
-                        </MenuItem>
-                      ))}
+                    <MenuItem value={1}>1</MenuItem>
+                    <MenuItem value={2}>2</MenuItem>
+                    <MenuItem value={3}>3</MenuItem>
                   </Select>
                 )}
                 control={control}
-                name="playerId"
-                defaultValue={data.players.records[0].id}
+                name="place"
+                defaultValue={1}
               />
             </FormControl>
-          )}
-
-          <FormControl>
-            <InputLabel>順位</InputLabel>
-            <Controller
-              render={({ field }) => (
-                <Select {...field} style={{ minWidth: 120 }}>
-                  <MenuItem value={1}>1</MenuItem>
-                  <MenuItem value={2}>2</MenuItem>
-                  <MenuItem value={3}>3</MenuItem>
-                </Select>
-              )}
-              control={control}
-              name="place"
-              defaultValue={1}
-            />
-          </FormControl>
+          </Box>
         </DialogContent>
 
         <DialogActions>
