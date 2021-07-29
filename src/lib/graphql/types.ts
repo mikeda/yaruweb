@@ -3486,7 +3486,7 @@ export type OrganizerSelectOptionsQuery = (
 
 export type PlayerSelectOptionFragment = (
   { __typename?: 'Player' }
-  & Pick<Player, 'slug' | 'name'>
+  & Pick<Player, 'id' | 'slug' | 'name'>
 );
 
 export type PlayerSelectOptionsQueryVariables = Exact<{ [key: string]: never; }>;
@@ -3895,20 +3895,6 @@ export type TournamentRankingCardFragment = (
 export type TournamentRankingFormFragment = (
   { __typename?: 'TournamentRanking' }
   & Pick<TournamentRanking, 'id' | 'playerId' | 'place'>
-);
-
-export type TournamentRankingFormPlayersQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type TournamentRankingFormPlayersQuery = (
-  { __typename?: 'Query' }
-  & { players: (
-    { __typename?: 'PlayerCollection' }
-    & { records: Array<(
-      { __typename?: 'Player' }
-      & Pick<Player, 'id' | 'name'>
-    )> }
-  ) }
 );
 
 export type TournamentVideoCardFragment = (
@@ -5369,6 +5355,7 @@ export const OrganizerSelectOptionFragmentDoc = gql`
     `;
 export const PlayerSelectOptionFragmentDoc = gql`
     fragment PlayerSelectOption on Player {
+  id
   slug
   name
 }
@@ -8583,43 +8570,6 @@ export function useMoveCategoryCardsLazyQuery(baseOptions?: Apollo.LazyQueryHook
 export type MoveCategoryCardsQueryHookResult = ReturnType<typeof useMoveCategoryCardsQuery>;
 export type MoveCategoryCardsLazyQueryHookResult = ReturnType<typeof useMoveCategoryCardsLazyQuery>;
 export type MoveCategoryCardsQueryResult = Apollo.QueryResult<MoveCategoryCardsQuery, MoveCategoryCardsQueryVariables>;
-export const TournamentRankingFormPlayersDocument = gql`
-    query TournamentRankingFormPlayers {
-  players(page: 1, per: 100) {
-    records {
-      id
-      name
-    }
-  }
-}
-    `;
-
-/**
- * __useTournamentRankingFormPlayersQuery__
- *
- * To run a query within a React component, call `useTournamentRankingFormPlayersQuery` and pass it any options that fit your needs.
- * When your component renders, `useTournamentRankingFormPlayersQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useTournamentRankingFormPlayersQuery({
- *   variables: {
- *   },
- * });
- */
-export function useTournamentRankingFormPlayersQuery(baseOptions?: Apollo.QueryHookOptions<TournamentRankingFormPlayersQuery, TournamentRankingFormPlayersQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<TournamentRankingFormPlayersQuery, TournamentRankingFormPlayersQueryVariables>(TournamentRankingFormPlayersDocument, options);
-      }
-export function useTournamentRankingFormPlayersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TournamentRankingFormPlayersQuery, TournamentRankingFormPlayersQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<TournamentRankingFormPlayersQuery, TournamentRankingFormPlayersQueryVariables>(TournamentRankingFormPlayersDocument, options);
-        }
-export type TournamentRankingFormPlayersQueryHookResult = ReturnType<typeof useTournamentRankingFormPlayersQuery>;
-export type TournamentRankingFormPlayersLazyQueryHookResult = ReturnType<typeof useTournamentRankingFormPlayersLazyQuery>;
-export type TournamentRankingFormPlayersQueryResult = Apollo.QueryResult<TournamentRankingFormPlayersQuery, TournamentRankingFormPlayersQueryVariables>;
 export const PageCharacterComboCategoriesDocument = gql`
     query PageCharacterComboCategories($characterSlug: String!) {
   character(characterSlug: $characterSlug) {
