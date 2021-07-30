@@ -12,8 +12,9 @@ query PageTournamentVideo($tournamentVideoId: ID!) {
       round
       startSec
 
-      leftPlayer { name }
-      rightPlayer { name }
+      sides {
+        player { name }
+      }
     }
   }
 }
