@@ -11,7 +11,7 @@ import { Head } from '@/components/layouts/Head';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
-import { Box, List, ListItem, ListItemText, Paper } from '@material-ui/core';
+import { Box, List, ListItem, ListItemText, makeStyles, Paper } from '@material-ui/core';
 import YouTube from 'react-youtube';
 import { YouTubePlayer } from 'youtube-player/dist/types';
 import { formatSec } from '@/lib';
@@ -19,10 +19,18 @@ import { TournamentBattleRoundText } from '@/lib/graphql/enum_texts';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
+const useStyles = makeStyles({
+  list: {
+    maxHeight: 300,
+    overflowY: 'auto',
+  },
+});
+
 const PageContent: React.FC<PageTournamentVideoQuery> = ({ tournamentVideo }) => {
   const [youTubePlayer, setYouTubePlayer] = useState<YouTubePlayer>();
   const { query } = useRouter();
   const [selectedBattle, setSelectedBattle] = useState<TournamentVideoPageBattleFragment>();
+  const classes = useStyles();
 
   const updateBattle = (battle: TournamentVideoPageBattleFragment) => {
     setSelectedBattle(battle);
@@ -52,7 +60,7 @@ const PageContent: React.FC<PageTournamentVideoQuery> = ({ tournamentVideo }) =>
       {tournamentVideo.battles.length > 0 && (
         <Box mt={2}>
           <Paper>
-            <List>
+            <List className={classes.list}>
               {tournamentVideo.battles.map(battle => {
                 const left = battle.sides[0];
                 const right = battle.sides[1];

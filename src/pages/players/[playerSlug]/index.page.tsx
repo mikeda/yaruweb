@@ -25,6 +25,10 @@ const useStyles = makeStyles({
   body: {
     whiteSpace: 'pre-line',
   },
+  list: {
+    maxHeight: 300,
+    overflowY: 'auto',
+  },
 });
 
 const Page: React.FC<PlayerPageQuery> = ({ player }) => {
@@ -49,7 +53,7 @@ const Page: React.FC<PlayerPageQuery> = ({ player }) => {
         <Typography className={classes.title} variant="h4">
           大会戦績
         </Typography>
-        <List>
+        <List className={classes.list}>
           {player.tournamentRankings.map(ranking => (
             <Link key={ranking.id} href={path({ to: 'tournament', tournamentId: ranking.tournament.id })} passHref>
               <ListItem button>
@@ -70,7 +74,7 @@ const Page: React.FC<PlayerPageQuery> = ({ player }) => {
         <Typography className={classes.title} variant="h4">
           大会動画
         </Typography>
-        <List>
+        <List className={classes.list}>
           {player.tournamentBattles.map(battle => {
             const video = battle.tournamentVideo;
             const tournament = video.tournament;
