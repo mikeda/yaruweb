@@ -7,7 +7,6 @@ import {
   CharacterSelectOptionFragment,
   PlayerSelectOptionFragment,
   TournamentBattleAttributes,
-  TournamentBattleFormFragment,
   useCharacterSelectOptionsQuery,
   usePlayerSelectOptionsQuery,
 } from '@/lib/graphql/types';

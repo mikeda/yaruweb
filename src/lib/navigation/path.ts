@@ -22,7 +22,7 @@ type Options =
   | { to: 'signup' }
   | { to: 'tournaments'; params?: { page?: number } }
   | { to: 'tournament'; tournamentId: string }
-  | { to: 'tournamentVideo'; tournamentVideoId: string };
+  | { to: 'tournamentVideo'; tournamentVideoId: string; battleId?: string };
 
 export const path = (options: Options): string => {
   switch (options.to) {
@@ -67,6 +67,6 @@ export const path = (options: Options): string => {
     case 'signup':
       return '/signup';
     case 'tournamentVideo':
-      return `/tournament_videos/${options.tournamentVideoId}`;
+      return generatePath(`/tournament_videos/${options.tournamentVideoId}`, { battle: options.battleId });
   }
 };

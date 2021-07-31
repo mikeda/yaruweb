@@ -1,3 +1,13 @@
+fragment TournamentVideoPageBattle on TournamentBattle {
+  id
+  round
+  startSec
+
+  sides {
+    player { name }
+  }
+}
+
 query PageTournamentVideo($tournamentVideoId: ID!) {
   tournamentVideo(tournamentVideoId: $tournamentVideoId) {
     ...tournamentVideo
@@ -8,13 +18,7 @@ query PageTournamentVideo($tournamentVideoId: ID!) {
     }
 
     battles {
-      id
-      round
-      startSec
-
-      sides {
-        player { name }
-      }
+      ...TournamentVideoPageBattle
     }
   }
 }

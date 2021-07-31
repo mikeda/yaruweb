@@ -4980,6 +4980,27 @@ export type PlayerPageQuery = (
         { __typename?: 'Tournament' }
         & Pick<Tournament, 'id' | 'name' | 'mainImageUrl' | 'startsAt'>
       ) }
+    )>, tournamentBattles: Array<(
+      { __typename?: 'TournamentBattle' }
+      & Pick<TournamentBattle, 'id'>
+      & { tournamentVideo: (
+        { __typename?: 'TournamentVideo' }
+        & Pick<TournamentVideo, 'id'>
+        & { tournament: (
+          { __typename?: 'Tournament' }
+          & Pick<Tournament, 'id' | 'name' | 'startsAt'>
+        ) }
+      ), sides: Array<(
+        { __typename?: 'TournamentBattleSide' }
+        & Pick<TournamentBattleSide, 'rounds'>
+        & { player: (
+          { __typename?: 'Player' }
+          & Pick<Player, 'name'>
+        ), character: (
+          { __typename?: 'Character' }
+          & Pick<Character, 'name'>
+        ) }
+      )> }
     )> }
     & PlayerBreadcrumbsFragment
   ) }
@@ -5005,6 +5026,18 @@ export type PlayersPageQuery = (
   ) }
 );
 
+export type TournamentVideoPageBattleFragment = (
+  { __typename?: 'TournamentBattle' }
+  & Pick<TournamentBattle, 'id' | 'round' | 'startSec'>
+  & { sides: Array<(
+    { __typename?: 'TournamentBattleSide' }
+    & { player: (
+      { __typename?: 'Player' }
+      & Pick<Player, 'name'>
+    ) }
+  )> }
+);
+
 export type PageTournamentVideoQueryVariables = Exact<{
   tournamentVideoId: Scalars['ID'];
 }>;
@@ -5019,14 +5052,7 @@ export type PageTournamentVideoQuery = (
       & Pick<Tournament, 'id' | 'name'>
     ), battles: Array<(
       { __typename?: 'TournamentBattle' }
-      & Pick<TournamentBattle, 'id' | 'round' | 'startSec'>
-      & { sides: Array<(
-        { __typename?: 'TournamentBattleSide' }
-        & { player: (
-          { __typename?: 'Player' }
-          & Pick<Player, 'name'>
-        ) }
-      )> }
+      & TournamentVideoPageBattleFragment
     )> }
     & TournamentVideoFragment
   ) }
@@ -5758,6 +5784,18 @@ export const TournamentBattleFormFragmentDoc = gql`
       slug
     }
     rounds
+  }
+}
+    `;
+export const TournamentVideoPageBattleFragmentDoc = gql`
+    fragment TournamentVideoPageBattle on TournamentBattle {
+  id
+  round
+  startSec
+  sides {
+    player {
+      name
+    }
   }
 }
     `;
@@ -10756,6 +10794,26 @@ export const PlayerPageDocument = gql`
         startsAt
       }
     }
+    tournamentBattles {
+      id
+      tournamentVideo {
+        id
+        tournament {
+          id
+          name
+          startsAt
+        }
+      }
+      sides {
+        player {
+          name
+        }
+        character {
+          name
+        }
+        rounds
+      }
+    }
   }
 }
     ${PlayerBreadcrumbsFragmentDoc}`;
@@ -10838,18 +10896,12 @@ export const PageTournamentVideoDocument = gql`
       name
     }
     battles {
-      id
-      round
-      startSec
-      sides {
-        player {
-          name
-        }
-      }
+      ...TournamentVideoPageBattle
     }
   }
 }
-    ${TournamentVideoFragmentDoc}`;
+    ${TournamentVideoFragmentDoc}
+${TournamentVideoPageBattleFragmentDoc}`;
 
 /**
  * __usePageTournamentVideoQuery__

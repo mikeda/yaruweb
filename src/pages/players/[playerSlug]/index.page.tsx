@@ -38,7 +38,7 @@ const Page: React.FC<PlayerPageQuery> = ({ player }) => {
 
       {player.description && (
         <Paper className={classes.paper}>
-          <Typography className={classes.title} variant="h5">
+          <Typography className={classes.title} variant="h4">
             プレイヤー解説
           </Typography>
           <Typography className={classes.body}>{player.description}</Typography>
@@ -46,7 +46,7 @@ const Page: React.FC<PlayerPageQuery> = ({ player }) => {
       )}
 
       <Paper className={classes.paper}>
-        <Typography className={classes.title} variant="h5">
+        <Typography className={classes.title} variant="h4">
           大会戦績
         </Typography>
         <List>
@@ -63,6 +63,34 @@ const Page: React.FC<PlayerPageQuery> = ({ player }) => {
               </ListItem>
             </Link>
           ))}
+        </List>
+      </Paper>
+
+      <Paper className={classes.paper}>
+        <Typography className={classes.title} variant="h4">
+          大会動画
+        </Typography>
+        <List>
+          {player.tournamentBattles.map(battle => {
+            const video = battle.tournamentVideo;
+            const tournament = video.tournament;
+            const left = battle.sides[0];
+            const right = battle.sides[1];
+            const title = `${left.player.name} × ${right.player.name}`;
+            const subTitle = `${tournament.name} ${dayjs(tournament.startsAt).format('YYYY/M/D')}`;
+
+            return (
+              <Link
+                key={battle.id}
+                href={path({ to: 'tournamentVideo', tournamentVideoId: video.id, battleId: battle.id })}
+                passHref
+              >
+                <ListItem button>
+                  <ListItemText primary={title} secondary={subTitle} />
+                </ListItem>
+              </Link>
+            );
+          })}
         </List>
       </Paper>
     </Content>
