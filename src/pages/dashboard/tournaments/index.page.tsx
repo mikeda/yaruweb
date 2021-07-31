@@ -64,7 +64,7 @@ const Page: React.FC = () => {
             count={paging.totalPages}
             color="primary"
             onChange={(e, page) => {
-              router.push(dashboardPath({ to: 'tournaments', page }));
+              router.push(dashboardPath({ to: 'tournaments', page, q: keyword }));
             }}
           />
         </Box>
