@@ -1,16 +1,20 @@
-import { useDashboardTournamentCardsQuery } from '@/lib/graphql/types';
+import { useDashboardTournamentsPageQuery } from '@/lib/graphql/types';
 import { loadingState } from '@/states/loading';
 import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
 
-export const useTournamentsQuery = () => {
-  const { query } = useRouter();
+interface Props {
+  page: number;
+  keyword?: string;
+}
+
+export const useTournamentsQuery = ({ page, keyword }: Props) => {
+  const { isReady } = useRouter();
   const setLoading = useSetRecoilState(loadingState);
-  const page = query.page ? Number(query.page as string) : 1;
-  const { data, loading, refetch } = useDashboardTournamentCardsQuery({
-    variables: { page },
+  const { data, loading, refetch } = useDashboardTournamentsPageQuery({
+    variables: { page, keyword },
     fetchPolicy: 'network-only',
-    skip: !page,
+    skip: !isReady,
   });
   setLoading(loading);
 

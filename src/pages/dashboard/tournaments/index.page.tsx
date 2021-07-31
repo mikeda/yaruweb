@@ -1,13 +1,14 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 
-import { DashboardContent, DashboardBreadcrumbs, DashboardTournamentCard } from '@/components';
+import { DashboardContent, DashboardBreadcrumbs, DashboardTournamentCard, SearchWord } from '@/components';
 import { dashboardPath } from '@/lib';
 import { Box, Button, Grid, makeStyles } from '@material-ui/core';
 import Pagination from '@material-ui/lab/Pagination';
 import { useTournamentsQuery } from './hooks/useTournamentsQuery';
 import theme from '@/theme';
 import { Add as AddIcon } from '@material-ui/icons';
+import { useRouteParams } from './hooks/useRouteParams';
 
 const useStyles = makeStyles({
   paging: {
@@ -19,7 +20,8 @@ const useStyles = makeStyles({
 
 const Page: React.FC = () => {
   const router = useRouter();
-  const { tournaments, paging, refetch } = useTournamentsQuery();
+  const { page, keyword } = useRouteParams();
+  const { tournaments, paging, refetch } = useTournamentsQuery({ page, keyword });
   const classes = useStyles();
 
   return (
@@ -37,6 +39,15 @@ const Page: React.FC = () => {
         </Button>
       }
     >
+      <Box mb={2}>
+        <SearchWord
+          initWord={keyword}
+          onSearch={word => {
+            router.push(dashboardPath({ to: 'tournaments', q: word }));
+          }}
+        />
+      </Box>
+
       {tournaments && (
         <Grid container spacing={2}>
           {tournaments.map(tournament => (
@@ -53,7 +64,7 @@ const Page: React.FC = () => {
             count={paging.totalPages}
             color="primary"
             onChange={(e, page) => {
-              router.push(dashboardPath({ to: 'tournaments', params: { page } }));
+              router.push(dashboardPath({ to: 'tournaments', page }));
             }}
           />
         </Box>

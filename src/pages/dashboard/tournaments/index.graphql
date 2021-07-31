@@ -1,9 +1,7 @@
-query PageDashboardTournaments($page: Int, $per: Int) {
-  tournaments(page: $page, per: $per) {
+query DashboardTournamentsPage($page: Int, $per: Int, $keyword: String) {
+  tournaments(page: $page, per: $per, keyword: $keyword) {
     records {
-      id
-      name
-      videosCount
+      ...DashboardTournamentCard
     }
 
     paging {
