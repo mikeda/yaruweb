@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 
-import { PageTournamentVideoQuery, PageTournamentVideoDocument } from '@/lib/graphql/types';
+import {
+  PageTournamentVideoQuery,
+  PageTournamentVideoDocument,
+  TournamentVideoPageBattleFragment,
+} from '@/lib/graphql/types';
 import { TournamentVideoCommentsBlock } from '@/components';
 import { Content } from '@/components/layouts/Content';
 import { Head } from '@/components/layouts/Head';
@@ -12,16 +16,34 @@ import YouTube from 'react-youtube';
 import { YouTubePlayer } from 'youtube-player/dist/types';
 import { formatSec } from '@/lib';
 import { TournamentBattleRoundText } from '@/lib/graphql/enum_texts';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 const PageContent: React.FC<PageTournamentVideoQuery> = ({ tournamentVideo }) => {
   const [youTubePlayer, setYouTubePlayer] = useState<YouTubePlayer>();
+  const { query } = useRouter();
+  const [selectedBattle, setSelectedBattle] = useState<TournamentVideoPageBattleFragment>();
+
+  const updateBattle = (battle: TournamentVideoPageBattleFragment) => {
+    setSelectedBattle(battle);
+    youTubePlayer?.seekTo(battle.startSec, true);
+  };
+
+  useEffect(() => {
+    if (query.battle) {
+      const b = tournamentVideo.battles.filter(b => b.id === query.battle)[0];
+      if (b) {
+        updateBattle(b);
+      }
+    }
+  }, [query.battle]);
 
   return (
     <>
       <YouTube
         containerClassName="bl_youtube"
         videoId={tournamentVideo.youtubeVideoId}
-        opts={{ width: '854', height: '480' }}
+        opts={{ width: '854', height: '480', playerVars: { start: selectedBattle?.startSec, autoplay: 1 } }}
         onReady={event => {
           setYouTubePlayer(event.target);
         }}
@@ -32,7 +54,9 @@ const PageContent: React.FC<PageTournamentVideoQuery> = ({ tournamentVideo }) =>
           <Paper>
             <List>
               {tournamentVideo.battles.map(battle => {
-                let title = `${battle.leftPlayer.name} VS ${battle.rightPlayer.name}`;
+                const left = battle.sides[0];
+                const right = battle.sides[1];
+                let title = `${left.player.name} VS ${right.player.name}`;
                 if (battle.round) {
                   title = `[${TournamentBattleRoundText[battle.round]}] ${title}`;
                 }
@@ -40,8 +64,9 @@ const PageContent: React.FC<PageTournamentVideoQuery> = ({ tournamentVideo }) =>
                   <ListItem
                     button
                     key={battle.id}
+                    selected={battle.id === selectedBattle?.id}
                     onClick={() => {
-                      youTubePlayer?.seekTo(battle.startSec, true);
+                      updateBattle(battle);
                     }}
                   >
                     <ListItemText primary={title} secondary={formatSec(battle.startSec)} />

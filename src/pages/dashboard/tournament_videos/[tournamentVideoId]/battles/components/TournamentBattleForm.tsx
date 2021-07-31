@@ -1,5 +1,5 @@
 import React from 'react';
-import { Controller, useForm } from 'react-hook-form';
+import { Control, Controller, useForm, UseFormSetValue } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
@@ -7,7 +7,6 @@ import {
   CharacterSelectOptionFragment,
   PlayerSelectOptionFragment,
   TournamentBattleAttributes,
-  TournamentBattleFormFragment,
   useCharacterSelectOptionsQuery,
   usePlayerSelectOptionsQuery,
 } from '@/lib/graphql/types';
@@ -35,19 +34,12 @@ const schema = yup.object().shape({
 });
 
 interface Props {
-  battle?: TournamentBattleFormFragment;
   onClickGetPlayerTime: (callback: (playerSec: number) => void) => void;
   onClickSetPlayerTime: (startSec: number) => void;
   onSubmit: (attributes: TournamentBattleAttributes) => void;
 }
 
-export const TournamentBattleForm: React.FC<Props> = ({
-  battle,
-  onClickGetPlayerTime,
-  onClickSetPlayerTime,
-  onSubmit,
-}) => {
-  //const [youTubePlayer, setYouTubePlayer] = useState<YouTubePlayer>();
+export const TournamentBattleForm: React.FC<Props> = ({ onClickGetPlayerTime, onClickSetPlayerTime, onSubmit }) => {
   const { data: playerData } = usePlayerSelectOptionsQuery();
   const { data: characterData } = useCharacterSelectOptionsQuery();
   const {
@@ -59,17 +51,6 @@ export const TournamentBattleForm: React.FC<Props> = ({
   } = useForm<TournamentBattleAttributes>({
     resolver: yupResolver(schema),
     mode: 'onBlur',
-    defaultValues: battle && {
-      tournamentVideoId: battle.tournamentVideo.id,
-      startSec: battle.startSec,
-      round: battle.round,
-      leftPlayer: battle.leftPlayer.slug,
-      rightPlayer: battle.rightPlayer.slug,
-      leftCharacter: battle.leftCharacter.slug,
-      rightCharacter: battle.rightCharacter.slug,
-      leftRounds: battle.leftRounds,
-      rightRounds: battle.rightRounds,
-    },
   });
 
   return (
@@ -138,95 +119,20 @@ export const TournamentBattleForm: React.FC<Props> = ({
             <Grid container spacing={2}>
               {playerData && characterData && (
                 <>
-                  <Grid item xs={5}>
-                    <Autocomplete<PlayerSelectOptionFragment>
-                      options={playerData.players.records}
-                      getOptionLabel={player => `${player.name}(${player.slug})`}
-                      onChange={(e, player) => {
-                        if (player) setValue('leftPlayer', player.slug);
-                      }}
-                      style={{ width: 300 }}
-                      renderInput={params => <TextField {...params} label="プレイヤー" variant="outlined" fullWidth />}
-                    />
-                  </Grid>
-
-                  <Grid item xs={5}>
-                    <Autocomplete<CharacterSelectOptionFragment>
-                      options={characterData.characters}
-                      getOptionLabel={character => `${character.name}(${character.slug})`}
-                      onChange={(e, character) => {
-                        if (character) setValue('leftCharacter', character.slug);
-                      }}
-                      style={{ width: 300 }}
-                      renderInput={params => (
-                        <TextField {...params} label="キャラクター" variant="outlined" fullWidth />
-                      )}
-                    />
-                  </Grid>
-
-                  <Grid item xs={2}>
-                    <FormControl fullWidth variant="outlined">
-                      <InputLabel>取得ラウンド</InputLabel>
-                      <Controller
-                        render={({ field }) => (
-                          <Select {...field}>
-                            <MenuItem value={0}>0</MenuItem>
-                            <MenuItem value={1}>1</MenuItem>
-                            <MenuItem value={2}>2</MenuItem>
-                            <MenuItem value={3}>3</MenuItem>
-                          </Select>
-                        )}
-                        control={control}
-                        name="leftRounds"
-                        defaultValue={3}
-                      />
-                    </FormControl>
-                  </Grid>
-
-                  <Grid item xs={5}>
-                    <Autocomplete<PlayerSelectOptionFragment>
-                      options={playerData.players.records}
-                      getOptionLabel={player => `${player.name}(${player.slug})`}
-                      onChange={(e, player) => {
-                        if (player) setValue('rightPlayer', player.slug);
-                      }}
-                      style={{ width: 300 }}
-                      renderInput={params => <TextField {...params} label="プレイヤー" variant="outlined" />}
-                    />
-                  </Grid>
-
-                  <Grid item xs={5}>
-                    <Autocomplete<CharacterSelectOptionFragment>
-                      options={characterData.characters}
-                      getOptionLabel={character => `${character.name}(${character.slug})`}
-                      onChange={(e, character) => {
-                        if (character) setValue('rightCharacter', character.slug);
-                      }}
-                      style={{ width: 300 }}
-                      renderInput={params => (
-                        <TextField {...params} label="キャラクター" variant="outlined" fullWidth />
-                      )}
-                    />
-                  </Grid>
-
-                  <Grid item xs={2}>
-                    <FormControl fullWidth variant="outlined">
-                      <InputLabel>取得ラウンド</InputLabel>
-                      <Controller
-                        render={({ field }) => (
-                          <Select {...field}>
-                            <MenuItem value={0}>0</MenuItem>
-                            <MenuItem value={1}>1</MenuItem>
-                            <MenuItem value={2}>2</MenuItem>
-                            <MenuItem value={3}>3</MenuItem>
-                          </Select>
-                        )}
-                        control={control}
-                        name="rightRounds"
-                        defaultValue={0}
-                      />
-                    </FormControl>
-                  </Grid>
+                  <SideForm
+                    index={0}
+                    players={playerData.players.records}
+                    characters={characterData.characters}
+                    control={control}
+                    setValue={setValue}
+                  />
+                  <SideForm
+                    index={1}
+                    players={playerData.players.records}
+                    characters={characterData.characters}
+                    control={control}
+                    setValue={setValue}
+                  />
                 </>
               )}
 
@@ -243,6 +149,63 @@ export const TournamentBattleForm: React.FC<Props> = ({
           </Box>
         </form>
       </Card>
+    </>
+  );
+};
+
+interface SideFormProps {
+  index: 0 | 1;
+  players: PlayerSelectOptionFragment[];
+  characters: CharacterSelectOptionFragment[];
+  control: Control<TournamentBattleAttributes>;
+  setValue: UseFormSetValue<TournamentBattleAttributes>;
+}
+
+export const SideForm: React.FC<SideFormProps> = ({ index, players, characters, control, setValue }) => {
+  return (
+    <>
+      <Grid item xs={5}>
+        <Autocomplete<PlayerSelectOptionFragment>
+          options={players}
+          getOptionLabel={player => `${player.name}(${player.slug})`}
+          onChange={(e, player) => {
+            if (player) setValue(`sides.${index}.playerId`, player.id);
+          }}
+          style={{ width: 300 }}
+          renderInput={params => <TextField {...params} label="プレイヤー" variant="outlined" fullWidth />}
+        />
+      </Grid>
+
+      <Grid item xs={5}>
+        <Autocomplete<CharacterSelectOptionFragment>
+          options={characters}
+          getOptionLabel={character => `${character.name}(${character.slug})`}
+          onChange={(e, character) => {
+            if (character) setValue(`sides.${index}.characterId`, character.id);
+          }}
+          style={{ width: 300 }}
+          renderInput={params => <TextField {...params} label="キャラクター" variant="outlined" fullWidth />}
+        />
+      </Grid>
+
+      <Grid item xs={2}>
+        <FormControl fullWidth variant="outlined">
+          <InputLabel>取得ラウンド</InputLabel>
+          <Controller
+            render={({ field }) => (
+              <Select {...field}>
+                <MenuItem value={0}>0</MenuItem>
+                <MenuItem value={1}>1</MenuItem>
+                <MenuItem value={2}>2</MenuItem>
+                <MenuItem value={3}>3</MenuItem>
+              </Select>
+            )}
+            control={control}
+            name={`sides.${index}.rounds`}
+            defaultValue={3}
+          />
+        </FormControl>
+      </Grid>
     </>
   );
 };

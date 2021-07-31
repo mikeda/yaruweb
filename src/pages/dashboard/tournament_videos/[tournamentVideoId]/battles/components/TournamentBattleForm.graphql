@@ -3,10 +3,9 @@ fragment TournamentBattleForm on TournamentBattle {
   tournamentVideo { id }
   startSec
   round
-  leftPlayer { slug }
-  rightPlayer { slug }
-  leftCharacter { slug }
-  rightCharacter { slug }
-  leftRounds
-  rightRounds
+  sides {
+    player { slug }
+    character { slug }
+    rounds
+  }
 }
