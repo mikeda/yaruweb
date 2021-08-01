@@ -5,6 +5,8 @@ fragment TournamentVideoPageBattle on TournamentBattle {
 
   sides {
     player { name }
+    character { faceImageUrl }
+    rounds
   }
 }
 

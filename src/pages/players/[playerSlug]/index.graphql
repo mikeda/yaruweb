@@ -24,6 +24,7 @@ query PlayerPage($playerSlug: String!) {
 
     tournamentBattles {
       id
+      round
 
       tournamentVideo {
         id
@@ -36,14 +37,8 @@ query PlayerPage($playerSlug: String!) {
       }
 
       sides {
-        player {
-          name
-        }
-
-        character {
-          name
-        }
-
+        player { name }
+        character { faceImageUrl }
         rounds
       }
     }

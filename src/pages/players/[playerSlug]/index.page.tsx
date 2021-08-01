@@ -6,12 +6,24 @@ import { Head } from '@/components/layouts/Head';
 import { Content } from '@/components/layouts/Content';
 import { PlayerCard } from '@/components/PlayerCard';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
-import { List, ListItem, ListItemIcon, ListItemText, makeStyles, Paper, Typography } from '@material-ui/core';
+import {
+  Avatar,
+  Box,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  makeStyles,
+  Paper,
+  Typography,
+} from '@material-ui/core';
 import theme from '@/theme';
 import { PlayerPageDocument, PlayerPageQuery } from '@/lib/graphql/types';
 import { RankingPlaceAvatar } from '@/components';
 import dayjs from '@/lib/dayjs';
 import Link from 'next/link';
+import clsx from 'clsx';
+import { TournamentBattleRoundText } from '@/lib/graphql/enum_texts';
 import { path } from '@/lib';
 
 const useStyles = makeStyles({
@@ -28,6 +40,17 @@ const useStyles = makeStyles({
   list: {
     maxHeight: 300,
     overflowY: 'auto',
+  },
+  avatar: {
+    width: 24,
+    height: 24,
+  },
+  win: {
+    backgroundColor: '#D6AF36',
+  },
+  vs: {
+    marginLeft: theme.spacing(2),
+    marginRight: theme.spacing(2),
   },
 });
 
@@ -80,19 +103,33 @@ const Page: React.FC<PlayerPageQuery> = ({ player }) => {
             const tournament = video.tournament;
             const left = battle.sides[0];
             const right = battle.sides[1];
-            const title = `${left.player.name} × ${right.player.name}`;
-            const subTitle = `${tournament.name} ${dayjs(tournament.startsAt).format('YYYY/M/D')}`;
-
+            let subTitle = tournament.name;
+            if (battle.round) {
+              subTitle = `${subTitle} ${TournamentBattleRoundText[battle.round]}`;
+            }
             return (
-              <Link
+              <ListItem
+                button
                 key={battle.id}
                 href={path({ to: 'tournamentVideo', tournamentVideoId: video.id, battleId: battle.id })}
-                passHref
               >
-                <ListItem button>
-                  <ListItemText primary={title} secondary={subTitle} />
-                </ListItem>
-              </Link>
+                <ListItemText
+                  primary={
+                    <Box display="flex" alignItems="center">
+                      <Avatar className={clsx(classes.avatar, left.rounds === 3 && classes.win)}>{left.rounds}</Avatar>
+                      <Avatar className={classes.avatar} src={left.character.faceImageUrl} />
+                      <span>{left.player.name}</span>
+                      <span className={classes.vs}>×</span>
+                      <Avatar className={clsx(classes.avatar, right.rounds === 3 && classes.win)}>
+                        {right.rounds}
+                      </Avatar>
+                      <Avatar className={classes.avatar} src={right.character.faceImageUrl} />
+                      <span>{right.player.name}</span>
+                    </Box>
+                  }
+                  secondary={subTitle}
+                />
+              </ListItem>
             );
           })}
         </List>

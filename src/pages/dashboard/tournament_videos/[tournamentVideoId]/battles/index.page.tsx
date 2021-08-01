@@ -9,12 +9,10 @@ import {
   useDeleteMutation,
 } from './hooks';
 import { TournamentBattleForm } from './components/TournamentBattleForm';
-import { Box, IconButton, List, ListItem, ListItemSecondaryAction, ListItemText, Paper } from '@material-ui/core';
-import { formatSec } from '@/lib';
-import { Delete } from '@material-ui/icons';
-import { TournamentBattleRoundText } from '@/lib/graphql/enum_texts';
+import { Box, List, Paper } from '@material-ui/core';
 import YouTube from 'react-youtube';
 import { YouTubePlayer } from 'youtube-player/dist/types';
+import { BattleListItem } from './components/BattleListItem';
 
 const Page: React.FC = () => {
   const [youTubePlayer, setYouTubePlayer] = useState<YouTubePlayer>();
@@ -65,33 +63,17 @@ const Page: React.FC = () => {
               {tournamentBattles && (
                 <List>
                   {tournamentBattles.map(battle => {
-                    const left = battle.sides[0];
-                    const right = battle.sides[1];
-                    let title = `${left.player.name} VS ${right.player.name}`;
-                    if (battle.round) {
-                      title = `[${TournamentBattleRoundText[battle.round]}] ${title}`;
-                    }
                     return (
-                      <ListItem
-                        button
+                      <BattleListItem
                         key={battle.id}
+                        battle={battle}
                         onClick={() => {
                           youTubePlayer?.seekTo(battle.startSec, true);
                         }}
-                      >
-                        <ListItemText primary={title} secondary={formatSec(battle.startSec)} />
-                        <ListItemSecondaryAction>
-                          <IconButton
-                            edge="end"
-                            aria-label="delete"
-                            onClick={() => {
-                              destroy({ variables: { tournamentBattleId: battle.id } });
-                            }}
-                          >
-                            <Delete />
-                          </IconButton>
-                        </ListItemSecondaryAction>
-                      </ListItem>
+                        onDestroy={() => {
+                          destroy({ variables: { tournamentBattleId: battle.id } });
+                        }}
+                      />
                     );
                   })}
                 </List>

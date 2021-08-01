@@ -4716,6 +4716,22 @@ export type DashboardTournamentBattlesPageQuery = (
   ) }
 );
 
+export type DashboardTournamentBattlesPageBattleReslutFragment = (
+  { __typename?: 'TournamentBattle' }
+  & Pick<TournamentBattle, 'id' | 'round' | 'startSec'>
+  & { sides: Array<(
+    { __typename?: 'TournamentBattleSide' }
+    & Pick<TournamentBattleSide, 'rounds'>
+    & { player: (
+      { __typename?: 'Player' }
+      & Pick<Player, 'name'>
+    ), character: (
+      { __typename?: 'Character' }
+      & Pick<Character, 'faceImageUrl'>
+    ) }
+  )> }
+);
+
 export type DashboardTournamentBattlesPageBattlesQueryVariables = Exact<{
   tournamentVideoId: Scalars['ID'];
 }>;
@@ -4725,14 +4741,7 @@ export type DashboardTournamentBattlesPageBattlesQuery = (
   { __typename?: 'Query' }
   & { tournamentBattles: Array<(
     { __typename?: 'TournamentBattle' }
-    & Pick<TournamentBattle, 'id' | 'round' | 'startSec'>
-    & { sides: Array<(
-      { __typename?: 'TournamentBattleSide' }
-      & { player: (
-        { __typename?: 'Player' }
-        & Pick<Player, 'name'>
-      ) }
-    )> }
+    & DashboardTournamentBattlesPageBattleReslutFragment
   )> }
 );
 
@@ -4965,7 +4974,7 @@ export type PlayerPageQuery = (
       ) }
     )>, tournamentBattles: Array<(
       { __typename?: 'TournamentBattle' }
-      & Pick<TournamentBattle, 'id'>
+      & Pick<TournamentBattle, 'id' | 'round'>
       & { tournamentVideo: (
         { __typename?: 'TournamentVideo' }
         & Pick<TournamentVideo, 'id'>
@@ -4981,7 +4990,7 @@ export type PlayerPageQuery = (
           & Pick<Player, 'name'>
         ), character: (
           { __typename?: 'Character' }
-          & Pick<Character, 'name'>
+          & Pick<Character, 'faceImageUrl'>
         ) }
       )> }
     )> }
@@ -5014,9 +5023,13 @@ export type TournamentVideoPageBattleFragment = (
   & Pick<TournamentBattle, 'id' | 'round' | 'startSec'>
   & { sides: Array<(
     { __typename?: 'TournamentBattleSide' }
+    & Pick<TournamentBattleSide, 'rounds'>
     & { player: (
       { __typename?: 'Player' }
       & Pick<Player, 'name'>
+    ), character: (
+      { __typename?: 'Character' }
+      & Pick<Character, 'faceImageUrl'>
     ) }
   )> }
 );
@@ -5770,6 +5783,22 @@ export const TournamentBattleFormFragmentDoc = gql`
   }
 }
     `;
+export const DashboardTournamentBattlesPageBattleReslutFragmentDoc = gql`
+    fragment DashboardTournamentBattlesPageBattleReslut on TournamentBattle {
+  id
+  round
+  startSec
+  sides {
+    player {
+      name
+    }
+    character {
+      faceImageUrl
+    }
+    rounds
+  }
+}
+    `;
 export const TournamentVideoPageBattleFragmentDoc = gql`
     fragment TournamentVideoPageBattle on TournamentBattle {
   id
@@ -5779,6 +5808,10 @@ export const TournamentVideoPageBattleFragmentDoc = gql`
     player {
       name
     }
+    character {
+      faceImageUrl
+    }
+    rounds
   }
 }
     `;
@@ -10195,17 +10228,10 @@ export type DashboardTournamentBattlesPageQueryResult = Apollo.QueryResult<Dashb
 export const DashboardTournamentBattlesPageBattlesDocument = gql`
     query DashboardTournamentBattlesPageBattles($tournamentVideoId: ID!) {
   tournamentBattles(tournamentVideoId: $tournamentVideoId) {
-    id
-    round
-    startSec
-    sides {
-      player {
-        name
-      }
-    }
+    ...DashboardTournamentBattlesPageBattleReslut
   }
 }
-    `;
+    ${DashboardTournamentBattlesPageBattleReslutFragmentDoc}`;
 
 /**
  * __useDashboardTournamentBattlesPageBattlesQuery__
@@ -10737,6 +10763,7 @@ export const PlayerPageDocument = gql`
     }
     tournamentBattles {
       id
+      round
       tournamentVideo {
         id
         tournament {
@@ -10750,7 +10777,7 @@ export const PlayerPageDocument = gql`
           name
         }
         character {
-          name
+          faceImageUrl
         }
         rounds
       }

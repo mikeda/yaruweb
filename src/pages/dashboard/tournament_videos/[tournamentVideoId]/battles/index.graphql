@@ -11,14 +11,19 @@ query DashboardTournamentBattlesPage($tournamentVideoId: ID!) {
   }
 }
 
+fragment DashboardTournamentBattlesPageBattleReslut on TournamentBattle {
+  id
+  round
+  startSec
+
+  sides {
+    player { name }
+    character { faceImageUrl }
+    rounds
+  }
+}
 query DashboardTournamentBattlesPageBattles($tournamentVideoId: ID!) {
   tournamentBattles(tournamentVideoId: $tournamentVideoId) {
-    id
-    round
-    startSec
-
-    sides {
-      player { name }
-    }
+    ...DashboardTournamentBattlesPageBattleReslut
   }
 }
