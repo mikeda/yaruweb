@@ -18,6 +18,7 @@ import { CharacterPageTabs } from '@/components';
 import { TournamentBattleRoundText } from '@/lib/graphql/enum_texts';
 import clsx from 'clsx';
 import { path } from '@/lib';
+import Link from 'next/link';
 
 const useStyles = makeStyles({
   paper: {
@@ -93,28 +94,32 @@ const Page: React.FC<PageCharacterQuery> = ({ character }) => {
               subTitle = `${subTitle} ${TournamentBattleRoundText[battle.round]}`;
             }
             return (
-              <ListItem
-                button
+              <Link
                 key={battle.id}
                 href={path({ to: 'tournamentVideo', tournamentVideoId: video.id, battleId: battle.id })}
+                passHref
               >
-                <ListItemText
-                  primary={
-                    <Box display="flex" alignItems="center">
-                      <Avatar className={clsx(classes.avatar, left.rounds === 3 && classes.win)}>{left.rounds}</Avatar>
-                      <Avatar className={classes.avatar} src={left.character.faceImageUrl} />
-                      <span>{left.player.name}</span>
-                      <span className={classes.vs}>×</span>
-                      <Avatar className={clsx(classes.avatar, right.rounds === 3 && classes.win)}>
-                        {right.rounds}
-                      </Avatar>
-                      <Avatar className={classes.avatar} src={right.character.faceImageUrl} />
-                      <span>{right.player.name}</span>
-                    </Box>
-                  }
-                  secondary={subTitle}
-                />
-              </ListItem>
+                <ListItem button>
+                  <ListItemText
+                    primary={
+                      <Box display="flex" alignItems="center">
+                        <Avatar className={clsx(classes.avatar, left.rounds === 3 && classes.win)}>
+                          {left.rounds}
+                        </Avatar>
+                        <Avatar className={classes.avatar} src={left.character.faceImageUrl} />
+                        <span>{left.player.name}</span>
+                        <span className={classes.vs}>×</span>
+                        <Avatar className={clsx(classes.avatar, right.rounds === 3 && classes.win)}>
+                          {right.rounds}
+                        </Avatar>
+                        <Avatar className={classes.avatar} src={right.character.faceImageUrl} />
+                        <span>{right.player.name}</span>
+                      </Box>
+                    }
+                    secondary={subTitle}
+                  />
+                </ListItem>
+              </Link>
             );
           })}
         </List>
