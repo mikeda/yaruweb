@@ -12,9 +12,12 @@ import { Head } from '@/components/layouts/Head';
 import { Content } from '@/components/layouts/Content';
 import { CharacterCard } from '@/components/CharacterCard';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
-import { Box, makeStyles, Paper, Typography } from '@material-ui/core';
+import { Avatar, Box, List, ListItem, ListItemText, makeStyles, Paper, Typography } from '@material-ui/core';
 import theme from '@/theme';
 import { CharacterPageTabs } from '@/components';
+import { TournamentBattleRoundText } from '@/lib/graphql/enum_texts';
+import clsx from 'clsx';
+import { path } from '@/lib';
 
 const useStyles = makeStyles({
   paper: {
@@ -26,6 +29,21 @@ const useStyles = makeStyles({
   },
   body: {
     whiteSpace: 'pre-line',
+  },
+  list: {
+    maxHeight: 300,
+    overflowY: 'auto',
+  },
+  avatar: {
+    width: 24,
+    height: 24,
+  },
+  win: {
+    backgroundColor: '#D6AF36',
+  },
+  vs: {
+    marginLeft: theme.spacing(2),
+    marginRight: theme.spacing(2),
   },
 });
 
@@ -58,6 +76,48 @@ const Page: React.FC<PageCharacterQuery> = ({ character }) => {
           キャラ解説
         </Typography>
         <Typography className={classes.body}>{character.description}</Typography>
+      </Paper>
+
+      <Paper className={classes.paper}>
+        <Typography className={classes.title} variant="h4">
+          大会動画
+        </Typography>
+        <List className={classes.list}>
+          {character.tournamentBattles.map(battle => {
+            const video = battle.tournamentVideo;
+            const tournament = video.tournament;
+            const left = battle.sides[0];
+            const right = battle.sides[1];
+            let subTitle = tournament.name;
+            if (battle.round) {
+              subTitle = `${subTitle} ${TournamentBattleRoundText[battle.round]}`;
+            }
+            return (
+              <ListItem
+                button
+                key={battle.id}
+                href={path({ to: 'tournamentVideo', tournamentVideoId: video.id, battleId: battle.id })}
+              >
+                <ListItemText
+                  primary={
+                    <Box display="flex" alignItems="center">
+                      <Avatar className={clsx(classes.avatar, left.rounds === 3 && classes.win)}>{left.rounds}</Avatar>
+                      <Avatar className={classes.avatar} src={left.character.faceImageUrl} />
+                      <span>{left.player.name}</span>
+                      <span className={classes.vs}>×</span>
+                      <Avatar className={clsx(classes.avatar, right.rounds === 3 && classes.win)}>
+                        {right.rounds}
+                      </Avatar>
+                      <Avatar className={classes.avatar} src={right.character.faceImageUrl} />
+                      <span>{right.player.name}</span>
+                    </Box>
+                  }
+                  secondary={subTitle}
+                />
+              </ListItem>
+            );
+          })}
+        </List>
       </Paper>
     </Content>
   );

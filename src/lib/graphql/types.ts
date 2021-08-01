@@ -216,6 +216,7 @@ export type Character = {
   slug: Scalars['String'];
   states: Array<State>;
   story: Scalars['String'];
+  tournamentBattles: Array<TournamentBattle>;
 };
 
 export type CharacterAttributes = {
@@ -3942,6 +3943,28 @@ export type PageCharacterQuery = (
   & { character: (
     { __typename?: 'Character' }
     & Pick<Character, 'story' | 'description'>
+    & { tournamentBattles: Array<(
+      { __typename?: 'TournamentBattle' }
+      & Pick<TournamentBattle, 'id' | 'round'>
+      & { tournamentVideo: (
+        { __typename?: 'TournamentVideo' }
+        & Pick<TournamentVideo, 'id'>
+        & { tournament: (
+          { __typename?: 'Tournament' }
+          & Pick<Tournament, 'id' | 'name' | 'startsAt'>
+        ) }
+      ), sides: Array<(
+        { __typename?: 'TournamentBattleSide' }
+        & Pick<TournamentBattleSide, 'rounds'>
+        & { player: (
+          { __typename?: 'Player' }
+          & Pick<Player, 'name'>
+        ), character: (
+          { __typename?: 'Character' }
+          & Pick<Character, 'faceImageUrl'>
+        ) }
+      )> }
+    )> }
     & CharacterBreadcrumbsFragment
     & CharacterCardFragment
   ) }
@@ -8607,6 +8630,27 @@ export const PageCharacterDocument = gql`
     ...CharacterCard
     story
     description
+    tournamentBattles {
+      id
+      round
+      tournamentVideo {
+        id
+        tournament {
+          id
+          name
+          startsAt
+        }
+      }
+      sides {
+        player {
+          name
+        }
+        character {
+          faceImageUrl
+        }
+        rounds
+      }
+    }
   }
 }
     ${CharacterBreadcrumbsFragmentDoc}
