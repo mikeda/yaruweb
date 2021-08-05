@@ -4,7 +4,17 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
 import { PlayerAttributes, PlayerFormFragment } from '@/lib/graphql/types';
-import { Box, Button, Card, CardContent, Divider, Grid, TextField } from '@material-ui/core';
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Checkbox,
+  Divider,
+  FormControlLabel,
+  Grid,
+  TextField,
+} from '@material-ui/core';
 
 const schema = yup.object().shape({
   name: yup.string().required(),
@@ -24,6 +34,8 @@ export const PlayerForm: React.FC<Props> = ({ player, onSubmit }) => {
   const {
     handleSubmit,
     control,
+    setValue,
+    getValues,
     formState: { errors },
   } = useForm<PlayerAttributes>({
     resolver: yupResolver(schema),
@@ -31,6 +43,7 @@ export const PlayerForm: React.FC<Props> = ({ player, onSubmit }) => {
     defaultValues: player && {
       name: player.name,
       slug: player.slug,
+      pro: player.pro,
       tonamelId: player.tonamelId,
       twitterId: player.twitterId,
       streamingUrl: player.streamingUrl,
@@ -129,7 +142,7 @@ export const PlayerForm: React.FC<Props> = ({ player, onSubmit }) => {
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    label="コメント"
+                    label="概要"
                     multiline
                     fullWidth
                     rows={5}
@@ -140,6 +153,42 @@ export const PlayerForm: React.FC<Props> = ({ player, onSubmit }) => {
                   />
                 )}
               />
+            </Grid>
+
+            <Grid item xs={12}>
+              <Controller
+                name="pro"
+                control={control}
+                render={({ field }) => (
+                  <FormControlLabel
+                    {...field}
+                    label="プロ"
+                    control={<Checkbox {...field} checked={getValues('pro')} />}
+                  />
+                )}
+              />
+            </Grid>
+
+            <Grid item xs={12}>
+              <input
+                type="file"
+                accept="image/*"
+                name="avatarDummy"
+                onChange={e => {
+                  if (!e.target.files) return;
+                  const file = e.target.files[0];
+                  if (!file) return;
+
+                  const reader = new FileReader();
+                  reader.onload = e => {
+                    if (!e.target) return;
+
+                    setValue('avatar', e.target.result as string);
+                  };
+                  reader.readAsDataURL(file);
+                }}
+              />
+              <input type="hidden" name="avatar" />
             </Grid>
           </Grid>
         </CardContent>

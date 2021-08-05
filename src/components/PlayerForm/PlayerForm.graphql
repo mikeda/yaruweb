@@ -1,6 +1,7 @@
 fragment PlayerForm on Player {
   name
   slug
+  pro
   tonamelId
   twitterId
   streamingUrl
