@@ -9,6 +9,22 @@ query DashboardTournamentBattlesPage($tournamentVideoId: ID!) {
       name
     }
   }
+
+  players(per: 500) {
+    records {
+      ...PlayerSelectOption
+    }
+  }
+
+  characters {
+    ...CharacterSelectOption
+  }
+}
+
+fragment DashboardTournamentBattlesPageSide on TournamentBattleSide {
+  player { id name }
+  character { id faceImageUrl }
+  rounds
 }
 
 fragment DashboardTournamentBattlesPageBattleReslut on TournamentBattle {
@@ -17,9 +33,7 @@ fragment DashboardTournamentBattlesPageBattleReslut on TournamentBattle {
   startSec
 
   sides {
-    player { name }
-    character { faceImageUrl }
-    rounds
+    ...DashboardTournamentBattlesPageSide
   }
 }
 query DashboardTournamentBattlesPageBattles($tournamentVideoId: ID!) {

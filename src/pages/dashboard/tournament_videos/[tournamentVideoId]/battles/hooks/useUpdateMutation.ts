@@ -1,14 +1,13 @@
-import { useCreateTournamentBattleMutation } from '@/lib/graphql/types';
+import { useUpdateTournamentBattleMutation } from '@/lib/graphql/types';
 import { loadingState } from '@/states/loading';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
-export const useCreateMutation = (onCreate: () => void) => {
+export const useUpdateMutation = () => {
   const setLoading = useSetRecoilState(loadingState);
-  const [create, { loading }] = useCreateTournamentBattleMutation({
+  const [update, { loading }] = useUpdateTournamentBattleMutation({
     onCompleted: () => {
-      toast.success('対戦動画を登録しました。');
-      onCreate();
+      toast.success('対戦動画を更新しました。');
     },
     onError: e => {
       toast.error(e.message);
@@ -16,5 +15,5 @@ export const useCreateMutation = (onCreate: () => void) => {
   });
   setLoading(loading);
 
-  return { create };
+  return { update };
 };

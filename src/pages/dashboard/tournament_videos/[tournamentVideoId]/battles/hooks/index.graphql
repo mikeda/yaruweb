@@ -6,6 +6,14 @@ mutation CreateTournamentBattle($attributes: TournamentBattleAttributes!) {
   }
 }
 
+mutation UpdateTournamentBattle($tournamentBattleId: ID!, $attributes: TournamentBattleAttributes!) {
+  updateTournamentBattle(input: { tournamentBattleId: $tournamentBattleId, attributes: $attributes }) {
+    tournamentBattle {
+      ...DashboardTournamentBattlesPageBattleReslut
+    }
+  }
+}
+
 mutation DeleteTournamentBattle($tournamentBattleId: ID!) {
   deleteTournamentBattle(input: { tournamentBattleId: $tournamentBattleId }) {
     tournamentBattle {

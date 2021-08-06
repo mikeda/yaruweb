@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
   Avatar,
   Box,
   createStyles,
+  Dialog,
   IconButton,
   ListItem,
   ListItemSecondaryAction,
@@ -12,10 +13,16 @@ import {
   Theme,
 } from '@material-ui/core';
 import { formatSec } from '@/lib';
-import { Delete } from '@material-ui/icons';
+import { Delete, Edit } from '@material-ui/icons';
 import { TournamentBattleRoundText } from '@/lib/graphql/enum_texts';
-import { DashboardTournamentBattlesPageBattleReslutFragment } from '@/lib/graphql/types';
+import {
+  CharacterSelectOptionFragment,
+  DashboardTournamentBattlesPageBattleReslutFragment,
+  PlayerSelectOptionFragment,
+} from '@/lib/graphql/types';
 import clsx from 'clsx';
+import { TournamentBattleUpdateForm } from './TournamentBattleUpdateForm';
+import { useUpdateMutation } from '../hooks/useUpdateMutation';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -35,12 +42,25 @@ const useStyles = makeStyles((theme: Theme) =>
 
 interface Props {
   battle: DashboardTournamentBattlesPageBattleReslutFragment;
+  tournamentVideoId: string;
+  players: PlayerSelectOptionFragment[];
+  characters: CharacterSelectOptionFragment[];
   onClick: () => void;
   onDestroy: () => void;
 }
 
-export const BattleListItem: React.FC<Props> = ({ battle, onClick, onDestroy }) => {
+export const BattleListItem: React.FC<Props> = ({
+  battle,
+  tournamentVideoId,
+  players,
+  characters,
+  onClick,
+  onDestroy,
+}) => {
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const { update } = useUpdateMutation();
   const classes = useStyles();
+
   const left = battle.sides[0];
   const right = battle.sides[1];
   let subTitle = formatSec(battle.startSec);
@@ -49,6 +69,17 @@ export const BattleListItem: React.FC<Props> = ({ battle, onClick, onDestroy }) 
   }
   return (
     <ListItem button onClick={onClick}>
+      <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)}>
+        <TournamentBattleUpdateForm
+          tournamentBattle={battle}
+          players={players}
+          characters={characters}
+          onSubmit={attributes => {
+            update({ variables: { tournamentBattleId: battle.id, attributes: { ...attributes, tournamentVideoId } } });
+            setDialogOpen(false);
+          }}
+        />
+      </Dialog>
       <ListItemText
         primary={
           <Box display="flex" alignItems="center">
@@ -64,7 +95,10 @@ export const BattleListItem: React.FC<Props> = ({ battle, onClick, onDestroy }) 
         secondary={subTitle}
       />
       <ListItemSecondaryAction>
-        <IconButton edge="end" aria-label="delete" onClick={onDestroy}>
+        <IconButton onClick={() => setDialogOpen(true)}>
+          <Edit />
+        </IconButton>
+        <IconButton edge="end" onClick={onDestroy}>
           <Delete />
         </IconButton>
       </ListItemSecondaryAction>
