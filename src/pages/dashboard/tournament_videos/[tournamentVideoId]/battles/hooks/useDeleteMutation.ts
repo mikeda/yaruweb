@@ -9,7 +9,7 @@ export const useDeleteMutation = (onDestroy: () => void) => {
   const [destroy, { loading: deleteLoading }] = useDeleteTournamentBattleMutation({
     onCompleted: () => {
       onDestroy();
-      toast.success('ハイライトを削除しました。');
+      toast.success('対戦動画を削除しました。');
     },
   });
 

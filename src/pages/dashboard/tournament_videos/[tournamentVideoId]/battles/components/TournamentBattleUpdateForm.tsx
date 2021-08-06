@@ -74,13 +74,14 @@ export const TournamentBattleUpdateForm: React.FC<Props> = ({ tournamentBattle, 
                     error={Boolean(errors.startSec)}
                     helperText={errors.startSec?.message}
                     defaultValue={0}
+                    size="small"
                   />
                 )}
               />
             </Grid>
 
             <Grid item xs={4}>
-              <FormControl fullWidth variant="outlined">
+              <FormControl fullWidth variant="outlined" size="small">
                 <InputLabel>試合</InputLabel>
                 <Controller
                   name="round"
@@ -150,34 +151,36 @@ export const SideForm: React.FC<SideFormProps> = ({ index, side, players, charac
   return (
     <>
       <Grid item xs={5}>
-        <Autocomplete<PlayerSelectOptionFragment>
+        <Autocomplete<PlayerSelectOptionFragment, undefined, true>
           options={players}
           defaultValue={player}
           getOptionLabel={player => `${player.name}(${player.slug})`}
           onChange={(e, player) => {
             if (player) setValue(`sides.${index}.playerId`, player.id);
           }}
-          style={{ width: 300 }}
-          renderInput={params => <TextField {...params} label="プレイヤー" variant="outlined" fullWidth />}
+          renderInput={params => <TextField {...params} label="プレイヤー" variant="outlined" fullWidth size="small" />}
+          disableClearable
         />
       </Grid>
 
       <Grid item xs={5}>
-        <Autocomplete<CharacterSelectOptionFragment>
+        <Autocomplete<CharacterSelectOptionFragment, undefined, true>
           options={characters}
           defaultValue={character}
           getOptionLabel={character => `${character.name}(${character.slug})`}
           onChange={(e, character) => {
             if (character) setValue(`sides.${index}.characterId`, character.id);
           }}
-          style={{ width: 300 }}
-          renderInput={params => <TextField {...params} label="キャラクター" variant="outlined" fullWidth />}
+          renderInput={params => (
+            <TextField {...params} label="キャラクター" variant="outlined" fullWidth size="small" />
+          )}
+          disableClearable
         />
       </Grid>
 
       <Grid item xs={2}>
-        <FormControl fullWidth variant="outlined">
-          <InputLabel>取得ラウンド</InputLabel>
+        <FormControl fullWidth variant="outlined" size="small">
+          <InputLabel>ラウンド</InputLabel>
           <Controller
             render={({ field }) => (
               <Select {...field}>

@@ -11,9 +11,6 @@ import {
 import {
   Box,
   Button,
-  Card,
-  CardContent,
-  Divider,
   FormControl,
   Grid,
   IconButton,
@@ -58,82 +55,80 @@ export const TournamentBattleForm: React.FC<Props> = ({
   });
 
   return (
-    <Card>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <CardContent>
-          <Grid container spacing={2}>
-            <Grid item xs={8}>
-              <Controller
-                name="startSec"
-                control={control}
-                render={({ field }) => (
-                  <TextField
-                    {...field}
-                    label="開始時間"
-                    error={Boolean(errors.startSec)}
-                    helperText={errors.startSec?.message}
-                    defaultValue={0}
-                  />
-                )}
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <Grid container spacing={2}>
+        <Grid item xs={8}>
+          <Controller
+            name="startSec"
+            control={control}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                size="small"
+                label="開始時間"
+                error={Boolean(errors.startSec)}
+                helperText={errors.startSec?.message}
+                defaultValue={0}
               />
-              <Tooltip title="プレイヤーの時間を取得">
-                <IconButton
-                  onClick={() => {
-                    onClickGetPlayerTime(playerSec => {
-                      setValue('startSec', Math.floor(playerSec));
-                    });
-                  }}
-                >
-                  <GetApp />
-                </IconButton>
-              </Tooltip>
+            )}
+          />
 
-              <Tooltip title="プレイヤーの時間を移動">
-                <IconButton
-                  onClick={() => {
-                    onClickSetPlayerTime(getValues('startSec'));
-                  }}
-                >
-                  <PlayArrow />
-                </IconButton>
-              </Tooltip>
-            </Grid>
+          <Tooltip title="プレイヤーの時間を取得">
+            <IconButton
+              size="small"
+              onClick={() => {
+                onClickGetPlayerTime(playerSec => {
+                  setValue('startSec', Math.floor(playerSec));
+                });
+              }}
+            >
+              <GetApp />
+            </IconButton>
+          </Tooltip>
 
-            <Grid item xs={4}>
-              <FormControl fullWidth variant="outlined">
-                <InputLabel>試合</InputLabel>
-                <Controller
-                  render={({ field }) => (
-                    <Select {...field}>
-                      {Object.entries(TournamentBattleRoundText).map(([key, value]) => (
-                        <MenuItem key={key} value={key}>
-                          {value}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  )}
-                  control={control}
-                  name="round"
-                />
-              </FormControl>
-            </Grid>
-          </Grid>
+          <Tooltip title="プレイヤーの時間を移動">
+            <IconButton
+              size="small"
+              onClick={() => {
+                onClickSetPlayerTime(getValues('startSec'));
+              }}
+            >
+              <PlayArrow />
+            </IconButton>
+          </Tooltip>
+        </Grid>
 
-          <Grid container spacing={2}>
-            <SideForm index={0} players={players} characters={characters} control={control} setValue={setValue} />
-            <SideForm index={1} players={players} characters={characters} control={control} setValue={setValue} />
-          </Grid>
-        </CardContent>
+        <Grid item xs={4}>
+          <FormControl fullWidth variant="outlined" size="small">
+            <InputLabel>試合</InputLabel>
+            <Controller
+              render={({ field }) => (
+                <Select {...field}>
+                  {Object.entries(TournamentBattleRoundText).map(([key, value]) => (
+                    <MenuItem key={key} value={key}>
+                      {value}
+                    </MenuItem>
+                  ))}
+                </Select>
+              )}
+              control={control}
+              name="round"
+            />
+          </FormControl>
+        </Grid>
+      </Grid>
 
-        <Divider />
+      <Grid container spacing={2}>
+        <SideForm index={0} players={players} characters={characters} control={control} setValue={setValue} />
+        <SideForm index={1} players={players} characters={characters} control={control} setValue={setValue} />
+      </Grid>
 
-        <Box m={2} display="flex" justifyContent="center">
-          <Button type="submit" variant="contained">
-            登録する
-          </Button>
-        </Box>
-      </form>
-    </Card>
+      <Box mt={2} display="flex" justifyContent="center">
+        <Button type="submit" variant="contained">
+          登録する
+        </Button>
+      </Box>
+    </form>
   );
 };
 
@@ -149,31 +144,35 @@ export const SideForm: React.FC<SideFormProps> = ({ index, players, characters, 
   return (
     <>
       <Grid item xs={5}>
-        <Autocomplete<PlayerSelectOptionFragment>
+        <Autocomplete<PlayerSelectOptionFragment, undefined, true>
           options={players}
           getOptionLabel={player => `${player.name}(${player.slug})`}
           onChange={(e, player) => {
             if (player) setValue(`sides.${index}.playerId`, player.id);
           }}
           style={{ width: 300 }}
-          renderInput={params => <TextField {...params} label="プレイヤー" variant="outlined" fullWidth />}
+          renderInput={params => <TextField {...params} label="プレイヤー" variant="outlined" fullWidth size="small" />}
+          disableClearable
         />
       </Grid>
 
       <Grid item xs={5}>
-        <Autocomplete<CharacterSelectOptionFragment>
+        <Autocomplete<CharacterSelectOptionFragment, undefined, true>
           options={characters}
           getOptionLabel={character => `${character.name}(${character.slug})`}
           onChange={(e, character) => {
             if (character) setValue(`sides.${index}.characterId`, character.id);
           }}
           style={{ width: 300 }}
-          renderInput={params => <TextField {...params} label="キャラクター" variant="outlined" fullWidth />}
+          renderInput={params => (
+            <TextField {...params} label="キャラクター" variant="outlined" fullWidth size="small" />
+          )}
+          disableClearable
         />
       </Grid>
 
       <Grid item xs={2}>
-        <FormControl fullWidth variant="outlined">
+        <FormControl fullWidth variant="outlined" size="small">
           <InputLabel>取得ラウンド</InputLabel>
           <Controller
             render={({ field }) => (

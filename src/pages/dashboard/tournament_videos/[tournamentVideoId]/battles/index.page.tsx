@@ -9,10 +9,27 @@ import {
   useDeleteMutation,
 } from './hooks';
 import { TournamentBattleForm } from './components/TournamentBattleForm';
-import { Box, List, Paper } from '@material-ui/core';
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Box,
+  List,
+  makeStyles,
+  Paper,
+  Typography,
+} from '@material-ui/core';
 import YouTube from 'react-youtube';
 import { YouTubePlayer } from 'youtube-player/dist/types';
 import { BattleListItem } from './components/BattleListItem';
+import { ExpandMore } from '@material-ui/icons';
+
+const useStyles = makeStyles({
+  list: {
+    maxHeight: 300,
+    overflowY: 'auto',
+  },
+});
 
 const Page: React.FC = () => {
   const [youTubePlayer, setYouTubePlayer] = useState<YouTubePlayer>();
@@ -21,6 +38,7 @@ const Page: React.FC = () => {
   const { tournamentBattles, refetch } = useTournamentBattlesQuery(tournamentVideoId);
   const { create } = useCreateMutation(refetch);
   const { destroy } = useDeleteMutation(refetch);
+  const classes = useStyles();
 
   if (!data) return null;
   const { tournamentVideo, characters, players } = data;
@@ -43,26 +61,33 @@ const Page: React.FC = () => {
         </Box>
       </Box>
 
-      <TournamentBattleForm
-        players={players.records}
-        characters={characters}
-        onClickGetPlayerTime={callback => {
-          if (!youTubePlayer) return;
+      <Accordion>
+        <AccordionSummary expandIcon={<ExpandMore />} aria-controls="panel1a-content" id="panel1a-header">
+          <Typography>登録する</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <TournamentBattleForm
+            players={players.records}
+            characters={characters}
+            onClickGetPlayerTime={callback => {
+              if (!youTubePlayer) return;
 
-          callback(youTubePlayer.getCurrentTime());
-        }}
-        onClickSetPlayerTime={startSec => {
-          youTubePlayer?.seekTo(startSec, true);
-        }}
-        onSubmit={attributes =>
-          create({ variables: { attributes: { ...attributes, tournamentVideoId: tournamentVideo.id } } })
-        }
-      />
+              callback(youTubePlayer.getCurrentTime());
+            }}
+            onClickSetPlayerTime={startSec => {
+              youTubePlayer?.seekTo(startSec, true);
+            }}
+            onSubmit={attributes =>
+              create({ variables: { attributes: { ...attributes, tournamentVideoId: tournamentVideo.id } } })
+            }
+          />
+        </AccordionDetails>
+      </Accordion>
 
       <Box mt={2}>
         <Paper>
           {tournamentBattles && (
-            <List>
+            <List className={classes.list}>
               {tournamentBattles.map(battle => {
                 return (
                   <BattleListItem
