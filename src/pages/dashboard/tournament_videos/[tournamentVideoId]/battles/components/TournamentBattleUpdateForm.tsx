@@ -1,10 +1,12 @@
 import React from 'react';
-import { Control, Controller, useForm, UseFormSetValue } from 'react-hook-form';
+import { Control, Controller, useForm, UseFormGetValues, UseFormSetValue } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
 import {
   CharacterSelectOptionFragment,
+  DashboardTournamentBattlesPageBattleReslutFragment,
+  DashboardTournamentBattlesPageSideFragment,
   PlayerSelectOptionFragment,
   TournamentBattleAttributes,
 } from '@/lib/graphql/types';
@@ -16,15 +18,12 @@ import {
   Divider,
   FormControl,
   Grid,
-  IconButton,
   InputLabel,
   MenuItem,
   Select,
   TextField,
-  Tooltip,
 } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
-import { GetApp, PlayArrow } from '@material-ui/icons';
 import { TournamentBattleRoundText } from '@/lib/graphql/enum_texts';
 
 const schema = yup.object().shape({
@@ -32,29 +31,31 @@ const schema = yup.object().shape({
 });
 
 interface Props {
+  tournamentBattle: DashboardTournamentBattlesPageBattleReslutFragment;
   players: PlayerSelectOptionFragment[];
   characters: CharacterSelectOptionFragment[];
-  onClickGetPlayerTime: (callback: (playerSec: number) => void) => void;
-  onClickSetPlayerTime: (startSec: number) => void;
   onSubmit: (attributes: TournamentBattleAttributes) => void;
 }
 
-export const TournamentBattleForm: React.FC<Props> = ({
-  players,
-  characters,
-  onClickGetPlayerTime,
-  onClickSetPlayerTime,
-  onSubmit,
-}) => {
+export const TournamentBattleUpdateForm: React.FC<Props> = ({ tournamentBattle, players, characters, onSubmit }) => {
   const {
-    getValues,
     setValue,
+    getValues,
     control,
     handleSubmit,
     formState: { errors },
   } = useForm<TournamentBattleAttributes>({
     resolver: yupResolver(schema),
     mode: 'onBlur',
+    defaultValues: {
+      startSec: tournamentBattle.startSec,
+      round: tournamentBattle.round,
+      sides: tournamentBattle.sides.map(s => ({
+        playerId: s.player.id,
+        characterId: s.character.id,
+        rounds: s.rounds,
+      })),
+    },
   });
 
   return (
@@ -76,33 +77,14 @@ export const TournamentBattleForm: React.FC<Props> = ({
                   />
                 )}
               />
-              <Tooltip title="プレイヤーの時間を取得">
-                <IconButton
-                  onClick={() => {
-                    onClickGetPlayerTime(playerSec => {
-                      setValue('startSec', Math.floor(playerSec));
-                    });
-                  }}
-                >
-                  <GetApp />
-                </IconButton>
-              </Tooltip>
-
-              <Tooltip title="プレイヤーの時間を移動">
-                <IconButton
-                  onClick={() => {
-                    onClickSetPlayerTime(getValues('startSec'));
-                  }}
-                >
-                  <PlayArrow />
-                </IconButton>
-              </Tooltip>
             </Grid>
 
             <Grid item xs={4}>
               <FormControl fullWidth variant="outlined">
                 <InputLabel>試合</InputLabel>
                 <Controller
+                  name="round"
+                  control={control}
                   render={({ field }) => (
                     <Select {...field}>
                       {Object.entries(TournamentBattleRoundText).map(([key, value]) => (
@@ -112,16 +94,30 @@ export const TournamentBattleForm: React.FC<Props> = ({
                       ))}
                     </Select>
                   )}
-                  control={control}
-                  name="round"
                 />
               </FormControl>
             </Grid>
           </Grid>
 
           <Grid container spacing={2}>
-            <SideForm index={0} players={players} characters={characters} control={control} setValue={setValue} />
-            <SideForm index={1} players={players} characters={characters} control={control} setValue={setValue} />
+            <SideForm
+              index={0}
+              side={tournamentBattle.sides[0]}
+              players={players}
+              characters={characters}
+              control={control}
+              setValue={setValue}
+              getValues={getValues}
+            />
+            <SideForm
+              index={1}
+              side={tournamentBattle.sides[1]}
+              players={players}
+              characters={characters}
+              control={control}
+              setValue={setValue}
+              getValues={getValues}
+            />
           </Grid>
         </CardContent>
 
@@ -129,7 +125,7 @@ export const TournamentBattleForm: React.FC<Props> = ({
 
         <Box m={2} display="flex" justifyContent="center">
           <Button type="submit" variant="contained">
-            登録する
+            更新する
           </Button>
         </Box>
       </form>
@@ -139,18 +135,24 @@ export const TournamentBattleForm: React.FC<Props> = ({
 
 interface SideFormProps {
   index: 0 | 1;
+  side: DashboardTournamentBattlesPageSideFragment;
   players: PlayerSelectOptionFragment[];
   characters: CharacterSelectOptionFragment[];
   control: Control<TournamentBattleAttributes>;
+  getValues: UseFormGetValues<TournamentBattleAttributes>;
   setValue: UseFormSetValue<TournamentBattleAttributes>;
 }
 
-export const SideForm: React.FC<SideFormProps> = ({ index, players, characters, control, setValue }) => {
+export const SideForm: React.FC<SideFormProps> = ({ index, side, players, characters, control, setValue }) => {
+  const player = players.filter(p => p.id === side.player.id)[0];
+  const character = characters.filter(c => c.id === side.character.id)[0];
+
   return (
     <>
       <Grid item xs={5}>
         <Autocomplete<PlayerSelectOptionFragment>
           options={players}
+          defaultValue={player}
           getOptionLabel={player => `${player.name}(${player.slug})`}
           onChange={(e, player) => {
             if (player) setValue(`sides.${index}.playerId`, player.id);
@@ -163,6 +165,7 @@ export const SideForm: React.FC<SideFormProps> = ({ index, players, characters, 
       <Grid item xs={5}>
         <Autocomplete<CharacterSelectOptionFragment>
           options={characters}
+          defaultValue={character}
           getOptionLabel={character => `${character.name}(${character.slug})`}
           onChange={(e, character) => {
             if (character) setValue(`sides.${index}.characterId`, character.id);

@@ -12,5 +12,5 @@ export const useTournamentVideoQuery = (tournamentVideoId: string | undefined) =
 
   setLoading(loading);
 
-  return { tournamentVideo: data?.tournamentVideo, refetch };
+  return { data, refetch };
 };
