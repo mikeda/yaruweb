@@ -77,6 +77,16 @@ const Page: React.FC = () => {
             onClickSetPlayerTime={startSec => {
               youTubePlayer?.seekTo(startSec, true);
             }}
+            onClick15SecAgo={() => {
+              if (!youTubePlayer) return;
+
+              youTubePlayer.seekTo(youTubePlayer.getCurrentTime() - 15, true);
+            }}
+            onClick15SecLater={() => {
+              if (!youTubePlayer) return;
+
+              youTubePlayer.seekTo(youTubePlayer.getCurrentTime() + 15, true);
+            }}
             onSubmit={attributes =>
               create({ variables: { attributes: { ...attributes, tournamentVideoId: tournamentVideo.id } } })
             }

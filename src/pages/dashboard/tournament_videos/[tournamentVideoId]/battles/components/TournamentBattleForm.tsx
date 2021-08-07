@@ -21,7 +21,7 @@ import {
   Tooltip,
 } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
-import { GetApp, PlayArrow } from '@material-ui/icons';
+import { GetApp, PlayArrow, SkipNext, SkipPrevious } from '@material-ui/icons';
 import { TournamentBattleRoundText } from '@/lib/graphql/enum_texts';
 
 const schema = yup.object().shape({
@@ -33,6 +33,8 @@ interface Props {
   characters: CharacterSelectOptionFragment[];
   onClickGetPlayerTime: (callback: (playerSec: number) => void) => void;
   onClickSetPlayerTime: (startSec: number) => void;
+  onClick15SecAgo: () => void;
+  onClick15SecLater: () => void;
   onSubmit: (attributes: TournamentBattleAttributes) => void;
 }
 
@@ -41,6 +43,8 @@ export const TournamentBattleForm: React.FC<Props> = ({
   characters,
   onClickGetPlayerTime,
   onClickSetPlayerTime,
+  onClick15SecAgo,
+  onClick15SecLater,
   onSubmit,
 }) => {
   const {
@@ -94,6 +98,18 @@ export const TournamentBattleForm: React.FC<Props> = ({
               }}
             >
               <PlayArrow />
+            </IconButton>
+          </Tooltip>
+
+          <Tooltip title="15秒戻る">
+            <IconButton size="small" onClick={onClick15SecAgo}>
+              <SkipPrevious />
+            </IconButton>
+          </Tooltip>
+
+          <Tooltip title="15秒進む">
+            <IconButton size="small" onClick={onClick15SecLater}>
+              <SkipNext />
             </IconButton>
           </Tooltip>
         </Grid>
