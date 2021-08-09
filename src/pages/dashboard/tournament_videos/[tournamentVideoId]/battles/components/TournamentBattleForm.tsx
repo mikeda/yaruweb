@@ -191,17 +191,31 @@ export const SideForm: React.FC<SideFormProps> = ({ index, players, characters, 
         <FormControl fullWidth variant="outlined" size="small">
           <InputLabel>取得ラウンド</InputLabel>
           <Controller
+            control={control}
+            name={`sides.${index}.rounds`}
+            defaultValue={3}
             render={({ field }) => (
-              <Select {...field}>
+              <Select
+                {...field}
+                onChange={e => {
+                  const rounds = Number(e.target.value);
+                  setValue(`sides.${index}.rounds`, rounds);
+
+                  if (rounds !== 3) {
+                    if (index === 0) {
+                      setValue(`sides.1.rounds`, 3);
+                    } else {
+                      setValue(`sides.0.rounds`, 3);
+                    }
+                  }
+                }}
+              >
                 <MenuItem value={0}>0</MenuItem>
                 <MenuItem value={1}>1</MenuItem>
                 <MenuItem value={2}>2</MenuItem>
                 <MenuItem value={3}>3</MenuItem>
               </Select>
             )}
-            control={control}
-            name={`sides.${index}.rounds`}
-            defaultValue={3}
           />
         </FormControl>
       </Grid>

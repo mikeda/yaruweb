@@ -4,7 +4,6 @@ fragment DashboardTournamentCard on Tournament {
   description
   mainImageUrl
   startsAt
-  rankingsCount
   videosCount
 
   rankings {

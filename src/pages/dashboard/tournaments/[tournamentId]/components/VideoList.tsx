@@ -54,16 +54,6 @@ export const VideoList: React.FC<Props> = ({ tournamentId }) => {
                   }
                 }}
               />
-              <IconButton
-                edge="end"
-                onClick={() => {
-                  if (window.confirm('削除します。')) {
-                    destroy({ variables: { tournamentVideoId: video.id } });
-                  }
-                }}
-              >
-                <MoreVert />
-              </IconButton>
             </ListItemSecondaryAction>
           </ListItem>
         ))}
