@@ -1,0 +1,83 @@
+query DashboardTournamentPage($tournamentId: ID!) {
+  tournament(tournamentId: $tournamentId) {
+    id
+    name
+    description
+    mainImageUrl
+    startsAt
+    rankingsCount
+    videosCount
+
+    videos {
+      id
+      title
+      youtubeVideoId
+    }
+  }
+
+  players(per: 500) {
+    records {
+      ...PlayerSelectOption
+    }
+  }
+}
+
+query DashboardTournamentPageRankings($tournamentId: ID!) {
+  tournamentRankings(tournamentId: $tournamentId) {
+    id
+    place
+
+    player {
+      id
+      name
+      avatarUrl
+    }
+  }
+}
+
+query DashboardTournamentPageVideos($tournamentId: ID!) {
+  tournamentVideos(tournamentId: $tournamentId) {
+    id
+    title
+    thumbnailUrl
+    battlesCount
+
+    channel {
+      id
+      name
+    }
+  }
+}
+
+mutation DashboardTournamentPageCreateRanking($tournamentId: ID!, $attributes: TournamentRankingAttributes!) {
+  createTournamentRanking(input: { tournamentId: $tournamentId, attributes: $attributes }) {
+    tournamentRanking {
+      id
+    }
+  }
+}
+
+mutation DashboardTournamentPageDeleteRanking($tournamentRankingId: ID!) {
+  deleteTournamentRanking(input: { tournamentRankingId: $tournamentRankingId }) {
+    tournamentRanking {
+      id
+    }
+  }
+}
+
+
+mutation DashboardTournamentPageCreateVideo($tournamentId: ID!, $url: String!) {
+  createTournamentVideo(input: { tournamentId: $tournamentId, url: $url }) {
+    tournamentVideo {
+      id
+    }
+  }
+}
+
+mutation DashboardTournamentPageDeleteVideo($tournamentVideoId: ID!) {
+  deleteTournamentVideo(input: { tournamentVideoId: $tournamentVideoId }) {
+    tournamentVideo {
+      id
+    }
+  }
+}

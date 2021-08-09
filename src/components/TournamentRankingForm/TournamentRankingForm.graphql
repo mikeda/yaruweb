@@ -1,5 +1,0 @@
-fragment TournamentRankingForm on TournamentRanking {
-  id
-  playerId
-  place
-}

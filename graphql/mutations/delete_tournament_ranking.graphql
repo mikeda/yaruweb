@@ -1,7 +1,0 @@
-mutation DeleteTournamentRanking($tournamentRankingId: ID!) {
-  deleteTournamentRanking(input: { tournamentRankingId: $tournamentRankingId }) {
-    tournamentRanking {
-      id
-    }
-  }
-}
