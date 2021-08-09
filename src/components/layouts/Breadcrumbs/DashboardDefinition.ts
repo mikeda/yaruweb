@@ -58,10 +58,7 @@ export type DashboardBreadcrumbParams =
   | { to: 'tournamentsNew' }
   | { to: 'tournamentEdit'; tournament: TournamentParam }
   | { to: 'tournamentBattles'; tournamentVideo: TournamentVideoParam }
-  | { to: 'tournamentRankings'; tournament: TournamentParam }
-  | { to: 'tournamentVideos'; tournament: TournamentParam }
   | { to: 'tournamentVideo'; tournamentVideo: TournamentVideoParam }
-  | { to: 'tournamentVideosNew'; tournament: TournamentParam }
   | { to: 'throwActionsNew'; move: MoveParam }
   | { to: 'throwActionEdit'; move: MoveParam };
 
@@ -189,7 +186,11 @@ export const breadcrumbChain = (props: DashboardBreadcrumbParams): BreadcrumbCha
     case 'tournaments':
       return { name: '大会', url: dashboardPath({ to: 'tournaments' }) };
     case 'tournament':
-      return { name: props.tournament.name, parent: breadcrumbChain({ to: 'tournaments' }) };
+      return {
+        name: props.tournament.name,
+        url: dashboardPath({ to: 'tournament', tournamentId: props.tournament.id }),
+        parent: breadcrumbChain({ to: 'tournaments' }),
+      };
     case 'tournamentsNew':
       return { name: '大会を登録', parent: breadcrumbChain({ to: 'tournaments' }) };
     case 'tournamentEdit':
@@ -200,25 +201,11 @@ export const breadcrumbChain = (props: DashboardBreadcrumbParams): BreadcrumbCha
         url: dashboardPath({ to: 'tournamentBattles', tournamentVideoId: props.tournamentVideo.id }),
         parent: breadcrumbChain({ to: 'tournamentVideo', tournamentVideo: props.tournamentVideo }),
       };
-    case 'tournamentRankings':
-      return {
-        name: '順位',
-        url: dashboardPath({ to: 'tournamentRankings', tournamentId: props.tournament.id }),
-        parent: breadcrumbChain({ to: 'tournament', tournament: props.tournament }),
-      };
-    case 'tournamentVideos':
-      return {
-        name: '動画',
-        url: dashboardPath({ to: 'tournamentVideos', tournamentId: props.tournament.id }),
-        parent: breadcrumbChain({ to: 'tournament', tournament: props.tournament }),
-      };
     case 'tournamentVideo':
       return {
         name: props.tournamentVideo.title,
-        parent: breadcrumbChain({ to: 'tournamentVideos', tournament: props.tournamentVideo.tournament }),
+        parent: breadcrumbChain({ to: 'tournament', tournament: props.tournamentVideo.tournament }),
       };
-    case 'tournamentVideosNew':
-      return { name: '動画を登録', parent: breadcrumbChain({ to: 'tournament', tournament: props.tournament }) };
     case 'throwActionsNew':
       return { name: '投げ判定を登録', parent: breadcrumbChain({ to: 'move', move: props.move }) };
     case 'throwActionEdit':

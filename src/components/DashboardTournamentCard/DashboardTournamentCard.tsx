@@ -1,34 +1,50 @@
 import React from 'react';
 import { DashboardTournamentCardFragment, useDeleteTournamentMutation } from '@/lib/graphql/types';
 import {
-  Button,
   Card,
-  CardActionArea,
   CardActions,
   CardContent,
   CardMedia,
+  createStyles,
   IconButton,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
   makeStyles,
+  Theme,
   Typography,
 } from '@material-ui/core';
-import { Delete as DeleteIcon } from '@material-ui/icons';
+import { EmojiEvents, Schedule, Edit, Delete } from '@material-ui/icons';
 
 import { dashboardPath } from '@/lib';
-import { Link } from '../Link';
 import { NO_IMAGE_URL } from '@/lib/Assets';
 import { toast } from 'react-toastify';
 import { loadingState } from '@/states/loading';
 import { useSetRecoilState } from 'recoil';
+import dayjs from '@/lib/dayjs';
 
-const useStyles = makeStyles({
-  root: {},
-  media: {
-    height: 160,
-  },
-  deleteButton: {
-    marginLeft: 'auto',
-  },
-});
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    root: {},
+    media: {
+      height: 160,
+    },
+    deleteButton: {
+      marginLeft: 'auto',
+    },
+    rankings: {
+      display: 'flex',
+      flexWrap: 'wrap',
+      listStyle: 'none',
+      padding: theme.spacing(0.5),
+      margin: 0,
+    },
+    rankingItem: {
+      margin: theme.spacing(0.5),
+    },
+  }),
+);
 
 interface Props {
   tournament: DashboardTournamentCardFragment;
@@ -50,40 +66,40 @@ export const DashboardTournamentCard: React.FC<Props> = ({ tournament, onDelete 
 
   setLoading(deleteLoading);
 
-  const href = dashboardPath({ to: 'tournamentEdit', tournamentId: tournament.id });
-
   return (
     <Card>
-      <CardActionArea className={classes.root} href={href} component={Link} color="inherit">
-        <CardMedia image={tournament.mainImageUrl || NO_IMAGE_URL} className={classes.media} />
+      <CardMedia image={tournament.mainImageUrl || NO_IMAGE_URL} className={classes.media} />
+      <CardContent>
+        <Typography variant="h6">{tournament.name}</Typography>
+      </CardContent>
 
-        <CardContent>
-          <Typography variant="h6">{tournament.name}</Typography>
-          <Typography variant="caption" component="p">
-            {tournament.description}
-          </Typography>
-        </CardContent>
-      </CardActionArea>
+      <List disablePadding dense>
+        <ListItem>
+          <ListItemIcon>
+            <Schedule />
+          </ListItemIcon>
+          <ListItemText primary={dayjs(tournament.startsAt).format('YYYY/M/D H:mm')} />
+        </ListItem>
+
+        <ListItem>
+          <ListItemIcon>
+            <EmojiEvents />
+          </ListItemIcon>
+          <ListItemText
+            primary={tournament.rankings
+              .filter(r => r.place === 1)
+              .map(r => r.player.name)
+              .join('、')}
+          />
+        </ListItem>
+      </List>
 
       <CardActions disableSpacing>
-        <Button
-          color="primary"
-          href={dashboardPath({ to: 'tournamentVideos', tournamentId: tournament.id })}
-          component={Link}
-        >
-          {`動画(${tournament.videosCount})`}
-        </Button>
-
-        <Button
-          color="primary"
-          href={dashboardPath({ to: 'tournamentRankings', tournamentId: tournament.id })}
-          component={Link}
-        >
-          {`順位(${tournament.rankingsCount})`}
-        </Button>
-
-        <IconButton color="default" onClick={() => deleteTournament()} className={classes.deleteButton}>
-          <DeleteIcon />
+        <IconButton color="default" href={dashboardPath({ to: 'tournamentEdit', tournamentId: tournament.id })}>
+          <Edit />
+        </IconButton>
+        <IconButton color="default" onClick={() => deleteTournament()}>
+          <Delete />
         </IconButton>
       </CardActions>
     </Card>

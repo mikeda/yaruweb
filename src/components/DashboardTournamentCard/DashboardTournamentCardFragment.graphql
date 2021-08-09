@@ -6,4 +6,14 @@ fragment DashboardTournamentCard on Tournament {
   startsAt
   rankingsCount
   videosCount
+
+  rankings {
+    id
+    place
+
+    player {
+      id
+      name
+    }
+  }
 }

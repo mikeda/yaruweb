@@ -51,7 +51,7 @@ const Page: React.FC = () => {
       {tournaments && (
         <Grid container spacing={2}>
           {tournaments.map(tournament => (
-            <Grid item key={tournament.id} xs={12} sm={6} md={4}>
+            <Grid item key={tournament.id} xs={12} sm={6}>
               <DashboardTournamentCard tournament={tournament} onDelete={refetch} />
             </Grid>
           ))}

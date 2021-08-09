@@ -3,12 +3,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import {
-  PlayerSelectOptionFragment,
-  TournamentRankingAttributes,
-  TournamentRankingFormFragment,
-  usePlayerSelectOptionsQuery,
-} from '@/lib/graphql/types';
+import { PlayerSelectOptionFragment, TournamentRankingAttributes } from '@/lib/graphql/types';
 import {
   Box,
   Button,
@@ -31,21 +26,15 @@ const schema = yup.object().shape({
 
 interface Props {
   open: boolean;
+  players: PlayerSelectOptionFragment[];
   onClose: () => void;
-  tournamentRanking?: TournamentRankingFormFragment;
   onSubmit: (attributes: TournamentRankingAttributes) => void;
 }
 
-export const TournamentRankingForm: React.FC<Props> = ({ open, onClose, tournamentRanking, onSubmit }) => {
-  const { data } = usePlayerSelectOptionsQuery();
-
+export const RankingForm: React.FC<Props> = ({ open, players, onClose, onSubmit }) => {
   const { handleSubmit, control, setValue } = useForm<TournamentRankingAttributes>({
     resolver: yupResolver(schema),
     mode: 'onBlur',
-    defaultValues: tournamentRanking && {
-      place: tournamentRanking.place,
-      playerId: tournamentRanking.playerId,
-    },
   });
 
   return (
@@ -54,17 +43,15 @@ export const TournamentRankingForm: React.FC<Props> = ({ open, onClose, tourname
         <DialogTitle>順位</DialogTitle>
 
         <DialogContent>
-          {data && data.players.records.length > 0 && (
-            <Autocomplete<PlayerSelectOptionFragment>
-              options={data.players.records}
-              getOptionLabel={player => `${player.name}(${player.slug})`}
-              onChange={(e, player) => {
-                if (player) setValue('playerId', player.id);
-              }}
-              style={{ width: 300 }}
-              renderInput={params => <TextField {...params} label="プレイヤー" />}
-            />
-          )}
+          <Autocomplete<PlayerSelectOptionFragment>
+            options={players}
+            getOptionLabel={player => `${player.name}(${player.slug})`}
+            onChange={(e, player) => {
+              if (player) setValue('playerId', player.id);
+            }}
+            style={{ width: 300 }}
+            renderInput={params => <TextField {...params} label="プレイヤー" />}
+          />
 
           <Box mt={2}>
             <FormControl>

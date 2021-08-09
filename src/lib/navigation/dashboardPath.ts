@@ -34,12 +34,10 @@ type Options =
   | { to: 'playerEdit'; playerSlug: string }
   | { to: 'profileEdit' }
   | { to: 'tournaments'; page?: number; q?: string }
+  | { to: 'tournament'; tournamentId: string }
   | { to: 'tournamentsNew' }
   | { to: 'tournamentEdit'; tournamentId: string }
   | { to: 'tournamentBattles'; tournamentVideoId: string }
-  | { to: 'tournamentRankings'; tournamentId: string }
-  | { to: 'tournamentVideos'; tournamentId: string }
-  | { to: 'tournamentVideosNew'; tournamentId: string }
   | { to: 'tournamentEdit'; tournamentId: string }
   | { to: 'throwActionsNew'; moveId: string }
   | { to: 'throwActionEdit'; actionId: string };
@@ -112,18 +110,14 @@ export const dashboardPath = (options: Options): string => {
       return `/dashboard/profile/edit`;
     case 'tournaments':
       return generatePath('/dashboard/tournaments', { page: options.page, q: options.q });
+    case 'tournament':
+      return `/dashboard/tournaments/${options.tournamentId}`;
     case 'tournamentsNew':
       return '/dashboard/tournaments/new';
     case 'tournamentEdit':
       return `/dashboard/tournaments/${options.tournamentId}/edit`;
     case 'tournamentBattles':
       return `/dashboard/tournament_videos/${options.tournamentVideoId}/battles`;
-    case 'tournamentRankings':
-      return `/dashboard/tournaments/${options.tournamentId}/rankings`;
-    case 'tournamentVideos':
-      return `/dashboard/tournaments/${options.tournamentId}/videos`;
-    case 'tournamentVideosNew':
-      return `/dashboard/tournaments/${options.tournamentId}/videos/new`;
     case 'throwActionsNew':
       return `/dashboard/moves/${options.moveId}/throw_actions/new`;
     case 'throwActionEdit':
