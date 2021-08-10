@@ -1,0 +1,37 @@
+query PlayerBattlesPage($playerSlug: String!, $page: Int) {
+  player(playerSlug: $playerSlug) {
+    ...PlayerBreadcrumbs
+
+    id
+    name
+    avatarUrl
+  }
+
+  tournamentBattles(playerSlug: $playerSlug, page: $page, per: 10) {
+    records {
+      id
+      round
+
+      tournamentVideo {
+        id
+
+        tournament {
+          id
+          name
+          startsAt
+        }
+      }
+
+      sides {
+        player { name }
+        character { faceImageUrl }
+        rounds
+      }
+    }
+
+    paging {
+      currentPage
+      totalPages
+    }
+  }
+}

@@ -9,8 +9,10 @@ query PlayerPage($playerSlug: String!) {
     twitterId
     streamingUrl
     description
+  }
 
-    tournamentRankings {
+  tournamentRankings(playerSlug: $playerSlug, per: 5) {
+    records {
       id
       place
 
@@ -22,7 +24,13 @@ query PlayerPage($playerSlug: String!) {
       }
     }
 
-    tournamentBattles {
+    paging {
+      hasNext
+    }
+  }
+
+  tournamentBattles(playerSlug: $playerSlug, per: 5) {
+    records {
       id
       round
 
@@ -41,6 +49,10 @@ query PlayerPage($playerSlug: String!) {
         character { faceImageUrl }
         rounds
       }
+    }
+
+    paging {
+      hasNext
     }
   }
 }

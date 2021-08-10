@@ -37,7 +37,9 @@ fragment DashboardTournamentBattlesPageBattleReslut on TournamentBattle {
   }
 }
 query DashboardTournamentBattlesPageBattles($tournamentVideoId: ID!) {
-  tournamentBattles(tournamentVideoId: $tournamentVideoId) {
-    ...DashboardTournamentBattlesPageBattleReslut
+  tournamentBattles(tournamentVideoId: $tournamentVideoId, per: 200) {
+    records {
+      ...DashboardTournamentBattlesPageBattleReslut
+    }
   }
 }

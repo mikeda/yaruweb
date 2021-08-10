@@ -3,4 +3,6 @@ fragment PlayerCard on Player {
   slug
   name
   avatarUrl
+  tournamentRankingsCount
+  tournamentBattlesCount
 }
