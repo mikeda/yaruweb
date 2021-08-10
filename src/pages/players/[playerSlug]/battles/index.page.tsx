@@ -2,19 +2,8 @@ import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
-import { Head, Content, Breadcrumbs, Link as LinkComponent } from '@/components';
-import {
-  Avatar,
-  Box,
-  Button,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  makeStyles,
-  Paper,
-  Typography,
-} from '@material-ui/core';
+import { Head, Content, Breadcrumbs } from '@/components';
+import { Avatar, Box, List, ListItem, ListItemText, makeStyles, Paper, Typography } from '@material-ui/core';
 import theme from '@/theme';
 import { PlayerBattlesPageDocument, PlayerBattlesPageQuery } from '@/lib/graphql/types';
 import Link from 'next/link';

@@ -2,7 +2,7 @@ import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
-import { Head, Content, Breadcrumbs, Link as LinkComponent } from '@/components';
+import { Head, Content, Breadcrumbs } from '@/components';
 import {
   Avatar,
   Box,
