@@ -1,14 +1,19 @@
+fragment PlayerPageProfile on Player {
+  id
+  name
+  slug
+  avatarUrl
+  twitterId
+  streamingUrl
+  description
+  tournamentRankingsCount
+  tournamentBattlesCount
+}
+
 query PlayerPage($playerSlug: String!) {
   player(playerSlug: $playerSlug) {
     ...PlayerBreadcrumbs
-
-    id
-    name
-    slug
-    avatarUrl
-    twitterId
-    streamingUrl
-    description
+    ...PlayerPageProfile
   }
 
   tournamentRankings(playerSlug: $playerSlug, per: 5) {

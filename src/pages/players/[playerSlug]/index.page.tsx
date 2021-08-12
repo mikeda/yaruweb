@@ -23,14 +23,14 @@ import Link from 'next/link';
 import clsx from 'clsx';
 import { TournamentBattleRoundText } from '@/lib/graphql/enum_texts';
 import { path } from '@/lib';
-import { DEFAULT_AVATAR_URL } from '@/lib/Assets';
+import { Profile } from './components/Profile';
 
 const useStyles = makeStyles({
-  paper: {
+  section: {
     marginTop: theme.spacing(2),
     padding: theme.spacing(2),
   },
-  title: {
+  sectionTitle: {
     marginBottom: theme.spacing(2),
   },
   body: {
@@ -53,35 +53,13 @@ const Page: React.FC<PlayerPageQuery> = ({ player, tournamentRankings, tournamen
   const classes = useStyles();
 
   return (
-    <Content activeTab="players" title={player.name} breadcrumb={<Breadcrumbs to="player" player={player} />}>
+    <Content activeTab="players" breadcrumb={<Breadcrumbs to="player" player={player} />}>
       <Head title={player.name} />
 
-      <Paper>
-        <img src={player.avatarUrl || DEFAULT_AVATAR_URL} />
+      <Profile player={player} />
 
-        {player.twitterId && (
-          <a href={`https://twitter.com/${player.twitterId}`} target="_blank" rel="noreferrer">
-            Twitter
-          </a>
-        )}
-        {player.streamingUrl && (
-          <a href={player.streamingUrl} target="_blank" rel="noreferrer">
-            配信
-          </a>
-        )}
-
-        {player.description && (
-          <Paper className={classes.paper}>
-            <Typography className={classes.title} variant="h4">
-              プレイヤー解説
-            </Typography>
-            <Typography className={classes.body}>{player.description}</Typography>
-          </Paper>
-        )}
-      </Paper>
-
-      <Paper className={classes.paper}>
-        <Typography className={classes.title} variant="h4">
+      <Paper className={classes.section}>
+        <Typography className={classes.sectionTitle} variant="h4">
           大会戦績
         </Typography>
         <List>
@@ -109,8 +87,8 @@ const Page: React.FC<PlayerPageQuery> = ({ player, tournamentRankings, tournamen
         )}
       </Paper>
 
-      <Paper className={classes.paper}>
-        <Typography className={classes.title} variant="h4">
+      <Paper className={classes.section}>
+        <Typography className={classes.sectionTitle} variant="h4">
           対戦動画
         </Typography>
         <List>

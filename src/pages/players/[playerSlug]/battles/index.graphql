@@ -1,10 +1,7 @@
 query PlayerBattlesPage($playerSlug: String!, $page: Int) {
   player(playerSlug: $playerSlug) {
     ...PlayerBreadcrumbs
-
-    id
-    name
-    avatarUrl
+    ...PlayerPageProfile
   }
 
   tournamentBattles(playerSlug: $playerSlug, page: $page, per: 10) {

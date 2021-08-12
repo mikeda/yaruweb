@@ -10,9 +10,9 @@ import Link from 'next/link';
 import clsx from 'clsx';
 import { TournamentBattleRoundText } from '@/lib/graphql/enum_texts';
 import { path } from '@/lib';
-import { DEFAULT_AVATAR_URL } from '@/lib/Assets';
 import { Pagination } from '@material-ui/lab';
 import { useRouter } from 'next/router';
+import { Profile } from '../components/Profile';
 
 const useStyles = makeStyles({
   paper: {
@@ -49,9 +49,7 @@ const Page: React.FC<PlayerBattlesPageQuery> = ({
     <Content activeTab="players" title={player.name} breadcrumb={<Breadcrumbs to="player" player={player} />}>
       <Head title={player.name} />
 
-      <Paper>
-        <img src={player.avatarUrl || DEFAULT_AVATAR_URL} />
-      </Paper>
+      <Profile player={player} />
 
       <Paper className={classes.paper}>
         <Typography className={classes.title} variant="h4">

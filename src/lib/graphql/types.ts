@@ -5083,8 +5083,8 @@ export type PlayerBattlesPageQuery = (
   { __typename?: 'Query' }
   & { player: (
     { __typename?: 'Player' }
-    & Pick<Player, 'id' | 'name' | 'avatarUrl'>
     & PlayerBreadcrumbsFragment
+    & PlayerPageProfileFragment
   ), tournamentBattles: (
     { __typename?: 'TournamentBattleCollection' }
     & { records: Array<(
@@ -5115,6 +5115,11 @@ export type PlayerBattlesPageQuery = (
   ) }
 );
 
+export type PlayerPageProfileFragment = (
+  { __typename?: 'Player' }
+  & Pick<Player, 'id' | 'name' | 'slug' | 'avatarUrl' | 'twitterId' | 'streamingUrl' | 'description' | 'tournamentRankingsCount' | 'tournamentBattlesCount'>
+);
+
 export type PlayerPageQueryVariables = Exact<{
   playerSlug: Scalars['String'];
 }>;
@@ -5124,8 +5129,8 @@ export type PlayerPageQuery = (
   { __typename?: 'Query' }
   & { player: (
     { __typename?: 'Player' }
-    & Pick<Player, 'id' | 'name' | 'slug' | 'avatarUrl' | 'twitterId' | 'streamingUrl' | 'description'>
     & PlayerBreadcrumbsFragment
+    & PlayerPageProfileFragment
   ), tournamentRankings: (
     { __typename?: 'TournamentRankingCollection' }
     & { records: Array<(
@@ -5179,8 +5184,8 @@ export type PlayerRankingsPageQuery = (
   { __typename?: 'Query' }
   & { player: (
     { __typename?: 'Player' }
-    & Pick<Player, 'id' | 'name' | 'slug' | 'avatarUrl'>
     & PlayerBreadcrumbsFragment
+    & PlayerPageProfileFragment
   ), tournamentRankings: (
     { __typename?: 'TournamentRankingCollection' }
     & { records: Array<(
@@ -5985,6 +5990,19 @@ export const DashboardTournamentBattlesPageBattleReslutFragmentDoc = gql`
   }
 }
     ${DashboardTournamentBattlesPageSideFragmentDoc}`;
+export const PlayerPageProfileFragmentDoc = gql`
+    fragment PlayerPageProfile on Player {
+  id
+  name
+  slug
+  avatarUrl
+  twitterId
+  streamingUrl
+  description
+  tournamentRankingsCount
+  tournamentBattlesCount
+}
+    `;
 export const TournamentVideoPageBattleFragmentDoc = gql`
     fragment TournamentVideoPageBattle on TournamentBattle {
   id
@@ -11058,9 +11076,7 @@ export const PlayerBattlesPageDocument = gql`
     query PlayerBattlesPage($playerSlug: String!, $page: Int) {
   player(playerSlug: $playerSlug) {
     ...PlayerBreadcrumbs
-    id
-    name
-    avatarUrl
+    ...PlayerPageProfile
   }
   tournamentBattles(playerSlug: $playerSlug, page: $page, per: 10) {
     records {
@@ -11090,7 +11106,8 @@ export const PlayerBattlesPageDocument = gql`
     }
   }
 }
-    ${PlayerBreadcrumbsFragmentDoc}`;
+    ${PlayerBreadcrumbsFragmentDoc}
+${PlayerPageProfileFragmentDoc}`;
 
 /**
  * __usePlayerBattlesPageQuery__
@@ -11124,13 +11141,7 @@ export const PlayerPageDocument = gql`
     query PlayerPage($playerSlug: String!) {
   player(playerSlug: $playerSlug) {
     ...PlayerBreadcrumbs
-    id
-    name
-    slug
-    avatarUrl
-    twitterId
-    streamingUrl
-    description
+    ...PlayerPageProfile
   }
   tournamentRankings(playerSlug: $playerSlug, per: 5) {
     records {
@@ -11174,7 +11185,8 @@ export const PlayerPageDocument = gql`
     }
   }
 }
-    ${PlayerBreadcrumbsFragmentDoc}`;
+    ${PlayerBreadcrumbsFragmentDoc}
+${PlayerPageProfileFragmentDoc}`;
 
 /**
  * __usePlayerPageQuery__
@@ -11207,10 +11219,7 @@ export const PlayerRankingsPageDocument = gql`
     query PlayerRankingsPage($playerSlug: String!, $page: Int) {
   player(playerSlug: $playerSlug) {
     ...PlayerBreadcrumbs
-    id
-    name
-    slug
-    avatarUrl
+    ...PlayerPageProfile
   }
   tournamentRankings(playerSlug: $playerSlug, page: $page, per: 10) {
     records {
@@ -11229,7 +11238,8 @@ export const PlayerRankingsPageDocument = gql`
     }
   }
 }
-    ${PlayerBreadcrumbsFragmentDoc}`;
+    ${PlayerBreadcrumbsFragmentDoc}
+${PlayerPageProfileFragmentDoc}`;
 
 /**
  * __usePlayerRankingsPageQuery__
