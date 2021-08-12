@@ -2,35 +2,24 @@ import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
-import { Head, Content, Breadcrumbs, Link as LinkComponent } from '@/components';
-import {
-  Avatar,
-  Box,
-  Button,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  makeStyles,
-  Paper,
-  Typography,
-} from '@material-ui/core';
+import { Head, Content, Breadcrumbs } from '@/components';
+import { Avatar, Box, List, ListItem, ListItemText, makeStyles, Paper, Typography } from '@material-ui/core';
 import theme from '@/theme';
-import { PlayerPageDocument, PlayerPageQuery } from '@/lib/graphql/types';
-import { RankingPlaceAvatar } from '@/components';
-import dayjs from '@/lib/dayjs';
+import { PlayerBattlesPageDocument, PlayerBattlesPageQuery } from '@/lib/graphql/types';
 import Link from 'next/link';
 import clsx from 'clsx';
 import { TournamentBattleRoundText } from '@/lib/graphql/enum_texts';
 import { path } from '@/lib';
-import { Profile } from './components/Profile';
+import { Pagination } from '@material-ui/lab';
+import { useRouter } from 'next/router';
+import { Profile } from '../components/Profile';
 
 const useStyles = makeStyles({
-  section: {
+  paper: {
     marginTop: theme.spacing(2),
     padding: theme.spacing(2),
   },
-  sectionTitle: {
+  title: {
     marginBottom: theme.spacing(2),
   },
   body: {
@@ -49,50 +38,25 @@ const useStyles = makeStyles({
   },
 });
 
-const Page: React.FC<PlayerPageQuery> = ({ player, tournamentRankings, tournamentBattles }) => {
+const Page: React.FC<PlayerBattlesPageQuery> = ({
+  player,
+  tournamentBattles: { records: tournamentBattles, paging },
+}) => {
+  const router = useRouter();
   const classes = useStyles();
 
   return (
-    <Content activeTab="players" breadcrumb={<Breadcrumbs to="player" player={player} />}>
+    <Content activeTab="players" title={player.name} breadcrumb={<Breadcrumbs to="player" player={player} />}>
       <Head title={player.name} />
 
       <Profile player={player} />
 
-      <Paper className={classes.section}>
-        <Typography className={classes.sectionTitle} variant="h4">
-          大会戦績
+      <Paper className={classes.paper}>
+        <Typography className={classes.title} variant="h4">
+          大会動画
         </Typography>
         <List>
-          {tournamentRankings.records.map(ranking => (
-            <Link key={ranking.id} href={path({ to: 'tournament', tournamentId: ranking.tournament.id })} passHref>
-              <ListItem button>
-                <ListItemIcon>
-                  <RankingPlaceAvatar place={ranking.place} />
-                </ListItemIcon>
-                <ListItemText
-                  primary={ranking.tournament.name}
-                  secondary={dayjs(ranking.tournament.startsAt).format('YYYY/M/D')}
-                />
-              </ListItem>
-            </Link>
-          ))}
-        </List>
-
-        {tournamentRankings.paging.hasNext && (
-          <Box display="flex" justifyContent="center">
-            <Button href={path({ to: 'playerRankings', playerSlug: player.slug })} component={LinkComponent}>
-              もっと見る
-            </Button>
-          </Box>
-        )}
-      </Paper>
-
-      <Paper className={classes.section}>
-        <Typography className={classes.sectionTitle} variant="h4">
-          対戦動画
-        </Typography>
-        <List>
-          {tournamentBattles.records.map(battle => {
+          {tournamentBattles.map(battle => {
             const video = battle.tournamentVideo;
             const tournament = video.tournament;
             const left = battle.sides[0];
@@ -132,13 +96,16 @@ const Page: React.FC<PlayerPageQuery> = ({ player, tournamentRankings, tournamen
           })}
         </List>
 
-        {tournamentBattles.paging.hasNext && (
-          <Box display="flex" justifyContent="center">
-            <Button href={path({ to: 'playerBattles', player: player.slug })} component={LinkComponent}>
-              もっと見る
-            </Button>
-          </Box>
-        )}
+        <Box display="flex" justifyContent="center">
+          <Pagination
+            page={paging.currentPage}
+            count={paging.totalPages}
+            color="primary"
+            onChange={(e, page) => {
+              router.push(path({ to: 'playerBattles', player: player.slug, page }));
+            }}
+          />
+        </Box>
       </Paper>
     </Content>
   );
@@ -146,7 +113,11 @@ const Page: React.FC<PlayerPageQuery> = ({ player, tournamentRankings, tournamen
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const playerSlug = params?.playerSlug as string;
-  const data: PlayerPageQuery = await fetchGraphql(PlayerPageDocument, { playerSlug });
+  const page = params?.page as string | undefined;
+  const data: PlayerBattlesPageQuery = await fetchGraphql(PlayerBattlesPageDocument, {
+    playerSlug,
+    page: page ? Number(page) : 1,
+  });
 
   return { props: data };
 };

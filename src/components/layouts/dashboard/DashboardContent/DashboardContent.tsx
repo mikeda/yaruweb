@@ -78,13 +78,7 @@ export const DashboardContent: React.FC<Props> = ({ children, title, breadcrumb,
       <Head title={title} />
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
-          <IconButton
-            color="inherit"
-            aria-label="open drawer"
-            edge="start"
-            onClick={handleDrawerToggle}
-            className={classes.menuButton}
-          >
+          <IconButton color="inherit" edge="start" onClick={handleDrawerToggle} className={classes.menuButton}>
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>

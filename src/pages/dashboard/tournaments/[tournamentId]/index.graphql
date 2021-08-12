@@ -23,14 +23,16 @@ query DashboardTournamentPage($tournamentId: ID!) {
 }
 
 query DashboardTournamentPageRankings($tournamentId: ID!) {
-  tournamentRankings(tournamentId: $tournamentId) {
-    id
-    place
-
-    player {
+  tournamentRankings(tournamentId: $tournamentId, per: 100) {
+    records {
       id
-      name
-      avatarUrl
+      place
+
+      player {
+        id
+        name
+        avatarUrl
+      }
     }
   }
 }

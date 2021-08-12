@@ -1,0 +1,25 @@
+query PlayerRankingsPage($playerSlug: String!, $page: Int) {
+  player(playerSlug: $playerSlug) {
+    ...PlayerBreadcrumbs
+    ...PlayerPageProfile
+  }
+
+  tournamentRankings(playerSlug: $playerSlug, page: $page, per: 10) {
+    records {
+      id
+      place
+
+      tournament {
+        id
+        name
+        mainImageUrl
+        startsAt
+      }
+    }
+
+    paging {
+      currentPage
+      totalPages
+    }
+  }
+}

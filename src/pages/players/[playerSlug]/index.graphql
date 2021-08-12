@@ -1,16 +1,23 @@
+fragment PlayerPageProfile on Player {
+  id
+  name
+  slug
+  avatarUrl
+  twitterId
+  streamingUrl
+  description
+  tournamentRankingsCount
+  tournamentBattlesCount
+}
+
 query PlayerPage($playerSlug: String!) {
   player(playerSlug: $playerSlug) {
     ...PlayerBreadcrumbs
+    ...PlayerPageProfile
+  }
 
-    id
-    name
-    slug
-    avatarUrl
-    twitterId
-    streamingUrl
-    description
-
-    tournamentRankings {
+  tournamentRankings(playerSlug: $playerSlug, per: 5) {
+    records {
       id
       place
 
@@ -22,7 +29,13 @@ query PlayerPage($playerSlug: String!) {
       }
     }
 
-    tournamentBattles {
+    paging {
+      hasNext
+    }
+  }
+
+  tournamentBattles(playerSlug: $playerSlug, per: 5) {
+    records {
       id
       round
 
@@ -41,6 +54,10 @@ query PlayerPage($playerSlug: String!) {
         character { faceImageUrl }
         rounds
       }
+    }
+
+    paging {
+      hasNext
     }
   }
 }

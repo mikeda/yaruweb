@@ -42,7 +42,7 @@ export const RankingList: React.FC<Props> = ({ tournamentId, players }) => {
   return (
     <>
       <List className={classes.list}>
-        {data.tournamentRankings.map(ranking => (
+        {data.tournamentRankings.records.map(ranking => (
           <ListItem key={ranking.id}>
             <ListItemAvatar>
               <RankingPlaceAvatar place={ranking.place} />
