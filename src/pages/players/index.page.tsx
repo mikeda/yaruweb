@@ -19,7 +19,7 @@ const Page: React.FC<PlayersPageQuery> = ({ players: { records, paging } }) => {
   const url = (page: number) => path({ to: 'players', params: { page, q: keyword } });
 
   return (
-    <Content activeTab="tournaments" title="プレイヤー" breadcrumb={<Breadcrumbs to="players" />}>
+    <Content activeTab="players" title="プレイヤー" breadcrumb={<Breadcrumbs to="players" />}>
       <Head title="プレイヤー一覧" description="鉄拳7のプレイヤー一覧です。" />
 
       <Box mb={2}>
