@@ -3,8 +3,8 @@ query PlayerBattlesPage($playerSlug: String!, $characterSlug: String, $page: Int
     ...PlayerBreadcrumbs
     ...PlayerPageProfile
 
-    playerCharacters {
-      tournamentBattlesCount
+    battleCounts {
+      count
 
       character {
         id

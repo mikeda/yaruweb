@@ -45,18 +45,18 @@ const Page: React.FC<PlayerBattlesPageQuery> = ({
         </Typography>
 
         <div className={classes.characterSelector}>
-          {player.playerCharacters.map(pc => (
+          {player.battleCounts.map(bc => (
             <Chip
-              key={pc.character.id}
+              key={bc.character.id}
               variant="outlined"
-              avatar={<Avatar src={pc.character.faceImageUrl} />}
-              label={`${pc.character.name} (${pc.tournamentBattlesCount})`}
-              color={characterSlug === pc.character.slug ? 'primary' : undefined}
+              avatar={<Avatar src={bc.character.faceImageUrl} />}
+              label={`${bc.character.name} (${bc.count})`}
+              color={characterSlug === bc.character.slug ? 'primary' : undefined}
               onClick={() => {
-                if (characterSlug === pc.character.slug) {
+                if (characterSlug === bc.character.slug) {
                   router.push(path({ to: 'playerBattles', player: player.slug }));
                 } else {
-                  router.push(path({ to: 'playerBattles', player: player.slug, characterSlug: pc.character.slug }));
+                  router.push(path({ to: 'playerBattles', player: player.slug, characterSlug: bc.character.slug }));
                 }
               }}
             />
