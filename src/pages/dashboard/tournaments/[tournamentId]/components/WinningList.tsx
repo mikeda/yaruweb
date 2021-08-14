@@ -11,12 +11,12 @@ import {
   ListItemText,
   makeStyles,
 } from '@material-ui/core';
-import { RankingPlaceAvatar } from '@/components';
+import { WinningPlaceAvatar } from '@/components';
 import { Delete } from '@material-ui/icons';
-import { PlayerSelectOptionFragment, useDashboardTournamentPageRankingsQuery } from '@/lib/graphql/types';
+import { PlayerSelectOptionFragment, useDashboardTournamentPageWinningsQuery } from '@/lib/graphql/types';
 import { DEFAULT_AVATAR_URL } from '@/lib/Assets';
-import { useCreateRankingMutation, useDeleteRankingMutation } from '../hooks';
-import { RankingForm } from './RankingForm';
+import { useCreateWinningMutation, useDeleteWinningMutation } from '../hooks';
+import { WinningForm } from './WinningForm';
 
 const useStyles = makeStyles({
   list: {
@@ -30,11 +30,11 @@ interface Props {
   players: PlayerSelectOptionFragment[];
 }
 
-export const RankingList: React.FC<Props> = ({ tournamentId, players }) => {
-  const { data, refetch } = useDashboardTournamentPageRankingsQuery({ variables: { tournamentId } });
+export const WinningList: React.FC<Props> = ({ tournamentId, players }) => {
+  const { data, refetch } = useDashboardTournamentPageWinningsQuery({ variables: { tournamentId } });
   const [dialogOpen, setDialogOpen] = useState(false);
-  const { create } = useCreateRankingMutation({ onCreate: refetch });
-  const { destroy } = useDeleteRankingMutation({ onDelete: refetch });
+  const { create } = useCreateWinningMutation({ onCreate: refetch });
+  const { destroy } = useDeleteWinningMutation({ onDelete: refetch });
   const classes = useStyles();
 
   if (!data) return null;
@@ -42,24 +42,24 @@ export const RankingList: React.FC<Props> = ({ tournamentId, players }) => {
   return (
     <>
       <List className={classes.list}>
-        {data.tournamentRankings.records.map(ranking => (
-          <ListItem key={ranking.id}>
+        {data.winnings.records.map(winning => (
+          <ListItem key={winning.id}>
             <ListItemAvatar>
-              <RankingPlaceAvatar place={ranking.place} />
+              <WinningPlaceAvatar place={winning.place} />
             </ListItemAvatar>
 
             <ListItemAvatar>
-              <Avatar src={ranking.player.avatarUrl || DEFAULT_AVATAR_URL} />
+              <Avatar src={winning.player.avatarUrl || DEFAULT_AVATAR_URL} />
             </ListItemAvatar>
 
-            <ListItemText primary={ranking.player.name} />
+            <ListItemText primary={winning.player.name} />
 
             <ListItemSecondaryAction>
               <IconButton
                 edge="end"
                 onClick={() => {
                   if (window.confirm('削除します。')) {
-                    destroy({ variables: { tournamentRankingId: ranking.id } });
+                    destroy({ variables: { winningId: winning.id } });
                   }
                 }}
               >
@@ -74,7 +74,7 @@ export const RankingList: React.FC<Props> = ({ tournamentId, players }) => {
         <Button color="primary">追加する</Button>
       </Box>
 
-      <RankingForm
+      <WinningForm
         open={dialogOpen}
         players={players}
         onClose={() => setDialogOpen(false)}

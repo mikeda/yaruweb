@@ -6,7 +6,7 @@ fragment DashboardTournamentCard on Tournament {
   startsAt
   videosCount
 
-  rankings {
+  winnings {
     id
     place
 

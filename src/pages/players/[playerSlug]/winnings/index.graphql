@@ -1,10 +1,10 @@
-query PlayerRankingsPage($playerSlug: String!, $page: Int) {
+query PlayerWinningsPage($playerSlug: String!, $page: Int) {
   player(playerSlug: $playerSlug) {
     ...PlayerBreadcrumbs
     ...PlayerPageProfile
   }
 
-  tournamentRankings(playerSlug: $playerSlug, page: $page, per: 10) {
+  winnings(playerSlug: $playerSlug, page: $page, per: 10) {
     records {
       id
       place

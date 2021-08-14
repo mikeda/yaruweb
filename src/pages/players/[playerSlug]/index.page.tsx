@@ -7,10 +7,10 @@ import { Box, Button, Grid, List, Paper, Typography } from '@material-ui/core';
 import { PlayerPageDocument, PlayerPageQuery } from '@/lib/graphql/types';
 import { path } from '@/lib';
 import { Profile } from './components/Profile';
-import { RankingCard } from './components/RankingCard';
+import { WinningCard } from './components/WinningCard';
 import { BattleListItem } from './components/BattleListItem';
 
-const Page: React.FC<PlayerPageQuery> = ({ player, tournamentRankings, battles }) => {
+const Page: React.FC<PlayerPageQuery> = ({ player, winnings, battles }) => {
   return (
     <Content activeTab="players" breadcrumb={<Breadcrumbs to="player" player={player} />}>
       <Head title={player.name} />
@@ -23,16 +23,16 @@ const Page: React.FC<PlayerPageQuery> = ({ player, tournamentRankings, battles }
         </Typography>
 
         <Grid container spacing={2}>
-          {tournamentRankings.records.map(ranking => (
-            <Grid item key={ranking.id} xs={12} sm={6}>
-              <RankingCard ranking={ranking} />
+          {winnings.records.map(winning => (
+            <Grid item key={winning.id} xs={12} sm={6}>
+              <WinningCard winning={winning} />
             </Grid>
           ))}
         </Grid>
 
-        {tournamentRankings.paging.hasNext && (
+        {winnings.paging.hasNext && (
           <Box mt={2} display="flex" justifyContent="center">
-            <Button href={path({ to: 'playerRankings', playerSlug: player.slug })} component={LinkComponent}>
+            <Button href={path({ to: 'playerWinnings', playerSlug: player.slug })} component={LinkComponent}>
               もっと見る
             </Button>
           </Box>

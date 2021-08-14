@@ -59,7 +59,7 @@ export const Profile: React.FC<Props> = ({ player }) => {
         {player.description && <Typography className={classes.description}>{player.description}</Typography>}
 
         <div className={classes.status}>
-          <Typography variant="caption">大会実績 {player.tournamentRankingsCount}</Typography>
+          <Typography variant="caption">大会実績 {player.winningsCount}</Typography>
           <Typography variant="caption">対戦動画 {player.battlesCount}</Typography>
 
           {player.twitterId && (

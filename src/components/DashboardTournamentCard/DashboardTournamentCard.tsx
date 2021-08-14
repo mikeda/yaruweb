@@ -79,7 +79,7 @@ export const DashboardTournamentCard: React.FC<Props> = ({ tournament, onDelete 
               <EmojiEvents />
             </ListItemIcon>
             <ListItemText
-              primary={tournament.rankings
+              primary={tournament.winnings
                 .filter(r => r.place === 1)
                 .map(r => r.player.name)
                 .join('、')}

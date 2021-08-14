@@ -1,4 +1,4 @@
-export { useCreateRankingMutation } from './useCreateRankingMutation';
-export { useDeleteRankingMutation } from './useDeleteRankingMutation';
+export { useCreateWinningMutation } from './useCreateWinningMutation';
+export { useDeleteWinningMutation } from './useDeleteWinningMutation';
 export { useCreateVideoMutation } from './useCreateVideoMutation';
 export { useDeleteVideoMutation } from './useDeleteVideoMutation';

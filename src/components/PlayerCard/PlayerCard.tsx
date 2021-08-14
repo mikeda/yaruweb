@@ -41,7 +41,7 @@ export const PlayerCard: React.FC<Props> = ({ player }) => {
 
           <Typography variant="caption" className={classes.detail}>
             <EmojiEvents fontSize="small" color="inherit" />
-            大会戦績 {player.tournamentRankingsCount}
+            大会戦績 {player.winningsCount}
           </Typography>
 
           <Typography variant="caption" className={classes.detail}>

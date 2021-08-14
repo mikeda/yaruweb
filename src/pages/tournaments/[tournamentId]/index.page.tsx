@@ -6,7 +6,7 @@ import { Head } from '@/components/layouts/Head';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
-import { NotFound, TournamentRankingCard } from '@/components';
+import { NotFound, WinningCard } from '@/components';
 import dayjs from '@/lib/dayjs';
 import { TournamentVideoCard } from '@/components/TournamentVideoCard';
 import {
@@ -65,15 +65,15 @@ const PageContent: React.FC<PageTournamentQuery> = ({ tournament }) => {
           結果
         </Typography>
 
-        {tournament.rankings.length === 0 ? (
+        {tournament.winnings.length === 0 ? (
           <NotFound>結果が登録されていません。</NotFound>
         ) : (
           <Grid container spacing={2}>
-            {Array.from(tournament.rankings)
+            {Array.from(tournament.winnings)
               .sort((a, b) => a.place - b.place)
-              .map(ranking => (
+              .map(winning => (
                 <Grid item key={tournament.id} xs={12}>
-                  <TournamentRankingCard tournamentRanking={ranking} />
+                  <WinningCard winning={winning} />
                 </Grid>
               ))}
           </Grid>
