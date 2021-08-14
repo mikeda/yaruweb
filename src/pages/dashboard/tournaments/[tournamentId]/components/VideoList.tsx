@@ -98,7 +98,7 @@ const MenuButton: React.FC<{ tournamentVideoId: string; onDestroy: () => void }>
       <Menu id="simple-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
         <MenuItem
           onClick={() => {
-            router.push(dashboardPath({ to: 'tournamentBattles', tournamentVideoId }));
+            router.push(dashboardPath({ to: 'battles', tournamentVideoId }));
           }}
         >
           対戦を登録する

@@ -1,4 +1,4 @@
-fragment TournamentVideoPageBattle on TournamentBattle {
+fragment TournamentVideoPageBattle on Battle {
   id
   round
   startSec

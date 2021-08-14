@@ -5,7 +5,7 @@ import { Link } from '@/components';
 import { path } from '@/lib';
 import { PlayerPageBattleFragment } from '@/lib/graphql/types';
 import theme from '@/theme';
-import { TournamentBattleRoundText } from '@/lib/graphql/enum_texts';
+import { BattleRoundText } from '@/lib/graphql/enum_texts';
 import clsx from 'clsx';
 import dayjs from '@/lib/dayjs';
 
@@ -21,7 +21,7 @@ export const BattleListItem: React.FC<Props> = ({ battle, last }) => {
   const right = battle.sides[1];
   let subTitle = tournament.name;
   if (battle.round) {
-    subTitle = `${subTitle} ${TournamentBattleRoundText[battle.round]}`;
+    subTitle = `${subTitle} ${BattleRoundText[battle.round]}`;
   }
   return (
     <Link

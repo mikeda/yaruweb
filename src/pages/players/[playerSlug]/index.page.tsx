@@ -10,7 +10,7 @@ import { Profile } from './components/Profile';
 import { RankingCard } from './components/RankingCard';
 import { BattleListItem } from './components/BattleListItem';
 
-const Page: React.FC<PlayerPageQuery> = ({ player, tournamentRankings, tournamentBattles }) => {
+const Page: React.FC<PlayerPageQuery> = ({ player, tournamentRankings, battles }) => {
   return (
     <Content activeTab="players" breadcrumb={<Breadcrumbs to="player" player={player} />}>
       <Head title={player.name} />
@@ -46,13 +46,13 @@ const Page: React.FC<PlayerPageQuery> = ({ player, tournamentRankings, tournamen
 
         <Paper>
           <List>
-            {tournamentBattles.records.map((battle, i) => (
-              <BattleListItem key={battle.id} battle={battle} last={tournamentBattles.records.length === i + 1} />
+            {battles.records.map((battle, i) => (
+              <BattleListItem key={battle.id} battle={battle} last={battles.records.length === i + 1} />
             ))}
           </List>
         </Paper>
 
-        {tournamentBattles.paging.hasNext && (
+        {battles.paging.hasNext && (
           <Box mt={2} display="flex" justifyContent="center">
             <Button href={path({ to: 'playerBattles', player: player.slug })} component={LinkComponent}>
               もっと見る

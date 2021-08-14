@@ -1,11 +1,11 @@
-import { useUpdateTournamentBattleMutation } from '@/lib/graphql/types';
+import { useUpdateBattleMutation } from '@/lib/graphql/types';
 import { loadingState } from '@/states/loading';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
 export const useUpdateMutation = () => {
   const setLoading = useSetRecoilState(loadingState);
-  const [update, { loading }] = useUpdateTournamentBattleMutation({
+  const [update, { loading }] = useUpdateBattleMutation({
     onCompleted: () => {
       toast.success('対戦動画を更新しました。');
     },

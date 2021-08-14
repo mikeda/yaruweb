@@ -15,7 +15,7 @@ query PlayerBattlesPage($playerSlug: String!, $characterSlug: String, $page: Int
     }
   }
 
-  tournamentBattles(playerSlug: $playerSlug, characterSlug: $characterSlug, page: $page, per: 10) {
+  battles(playerSlug: $playerSlug, characterSlug: $characterSlug, page: $page, per: 10) {
     records {
       id
       round

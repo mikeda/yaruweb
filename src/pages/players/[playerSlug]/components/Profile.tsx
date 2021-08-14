@@ -60,7 +60,7 @@ export const Profile: React.FC<Props> = ({ player }) => {
 
         <div className={classes.status}>
           <Typography variant="caption">大会実績 {player.tournamentRankingsCount}</Typography>
-          <Typography variant="caption">対戦動画 {player.tournamentBattlesCount}</Typography>
+          <Typography variant="caption">対戦動画 {player.battlesCount}</Typography>
 
           {player.twitterId && (
             <a href={`https://twitter.com/${player.twitterId}`} target="_blank" rel="noreferrer">

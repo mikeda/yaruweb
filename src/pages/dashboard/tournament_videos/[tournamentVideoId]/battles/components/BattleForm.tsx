@@ -3,11 +3,7 @@ import { Control, Controller, useForm, UseFormSetValue } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import {
-  CharacterSelectOptionFragment,
-  PlayerSelectOptionFragment,
-  TournamentBattleAttributes,
-} from '@/lib/graphql/types';
+import { CharacterSelectOptionFragment, PlayerSelectOptionFragment, BattleAttributes } from '@/lib/graphql/types';
 import {
   Box,
   Button,
@@ -22,7 +18,7 @@ import {
 } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 import { GetApp, PlayArrow, SkipNext, SkipPrevious } from '@material-ui/icons';
-import { TournamentBattleRoundText } from '@/lib/graphql/enum_texts';
+import { BattleRoundText } from '@/lib/graphql/enum_texts';
 
 const schema = yup.object().shape({
   startSec: yup.number().required(),
@@ -35,10 +31,10 @@ interface Props {
   onClickSetPlayerTime: (startSec: number) => void;
   onClick15SecAgo: () => void;
   onClick15SecLater: () => void;
-  onSubmit: (attributes: TournamentBattleAttributes) => void;
+  onSubmit: (attributes: BattleAttributes) => void;
 }
 
-export const TournamentBattleForm: React.FC<Props> = ({
+export const BattleForm: React.FC<Props> = ({
   players,
   characters,
   onClickGetPlayerTime,
@@ -53,7 +49,7 @@ export const TournamentBattleForm: React.FC<Props> = ({
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<TournamentBattleAttributes>({
+  } = useForm<BattleAttributes>({
     resolver: yupResolver(schema),
     mode: 'onBlur',
   });
@@ -120,7 +116,7 @@ export const TournamentBattleForm: React.FC<Props> = ({
             <Controller
               render={({ field }) => (
                 <Select {...field}>
-                  {Object.entries(TournamentBattleRoundText).map(([key, value]) => (
+                  {Object.entries(BattleRoundText).map(([key, value]) => (
                     <MenuItem key={key} value={key}>
                       {value}
                     </MenuItem>
@@ -152,8 +148,8 @@ interface SideFormProps {
   index: 0 | 1;
   players: PlayerSelectOptionFragment[];
   characters: CharacterSelectOptionFragment[];
-  control: Control<TournamentBattleAttributes>;
-  setValue: UseFormSetValue<TournamentBattleAttributes>;
+  control: Control<BattleAttributes>;
+  setValue: UseFormSetValue<BattleAttributes>;
 }
 
 export const SideForm: React.FC<SideFormProps> = ({ index, players, characters, control, setValue }) => {

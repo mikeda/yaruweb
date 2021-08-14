@@ -1,4 +1,4 @@
-query DashboardTournamentBattlesPage($tournamentVideoId: ID!) {
+query DashboardBattlesPage($tournamentVideoId: ID!) {
   tournamentVideo(tournamentVideoId: $tournamentVideoId) {
     id
     title
@@ -21,25 +21,25 @@ query DashboardTournamentBattlesPage($tournamentVideoId: ID!) {
   }
 }
 
-fragment DashboardTournamentBattlesPageSide on TournamentBattleSide {
+fragment DashboardBattlesPageSide on BattleSide {
   player { id name }
   character { id faceImageUrl }
   rounds
 }
 
-fragment DashboardTournamentBattlesPageBattleReslut on TournamentBattle {
+fragment DashboardBattlesPageBattleReslut on Battle {
   id
   round
   startSec
 
   sides {
-    ...DashboardTournamentBattlesPageSide
+    ...DashboardBattlesPageSide
   }
 }
-query DashboardTournamentBattlesPageBattles($tournamentVideoId: ID!) {
-  tournamentBattles(tournamentVideoId: $tournamentVideoId, per: 200) {
+query DashboardBattlesPageBattles($tournamentVideoId: ID!) {
+  battles(tournamentVideoId: $tournamentVideoId, per: 200) {
     records {
-      ...DashboardTournamentBattlesPageBattleReslut
+      ...DashboardBattlesPageBattleReslut
     }
   }
 }

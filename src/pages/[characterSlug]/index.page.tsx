@@ -15,7 +15,7 @@ import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 import { Avatar, Box, List, ListItem, ListItemText, makeStyles, Paper, Typography } from '@material-ui/core';
 import theme from '@/theme';
 import { CharacterPageTabs } from '@/components';
-import { TournamentBattleRoundText } from '@/lib/graphql/enum_texts';
+import { BattleRoundText } from '@/lib/graphql/enum_texts';
 import clsx from 'clsx';
 import { path } from '@/lib';
 import Link from 'next/link';
@@ -84,14 +84,14 @@ const Page: React.FC<PageCharacterQuery> = ({ character }) => {
           大会動画
         </Typography>
         <List className={classes.list}>
-          {character.tournamentBattles.map(battle => {
+          {character.battles.map(battle => {
             const video = battle.tournamentVideo;
             const tournament = video.tournament;
             const left = battle.sides[0];
             const right = battle.sides[1];
             let subTitle = tournament.name;
             if (battle.round) {
-              subTitle = `${subTitle} ${TournamentBattleRoundText[battle.round]}`;
+              subTitle = `${subTitle} ${BattleRoundText[battle.round]}`;
             }
             return (
               <Link

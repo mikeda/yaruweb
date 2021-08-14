@@ -1,22 +1,22 @@
-mutation CreateTournamentBattle($attributes: TournamentBattleAttributes!) {
-  createTournamentBattle(input: { attributes: $attributes }) {
-    tournamentBattle {
+mutation CreateBattle($attributes: BattleAttributes!) {
+  createBattle(input: { attributes: $attributes }) {
+    battle {
       id
     }
   }
 }
 
-mutation UpdateTournamentBattle($tournamentBattleId: ID!, $attributes: TournamentBattleAttributes!) {
-  updateTournamentBattle(input: { tournamentBattleId: $tournamentBattleId, attributes: $attributes }) {
-    tournamentBattle {
-      ...DashboardTournamentBattlesPageBattleReslut
+mutation UpdateBattle($battleId: ID!, $attributes: BattleAttributes!) {
+  updateBattle(input: { battleId: $battleId, attributes: $attributes }) {
+    battle {
+      ...DashboardBattlesPageBattleReslut
     }
   }
 }
 
-mutation DeleteTournamentBattle($tournamentBattleId: ID!) {
-  deleteTournamentBattle(input: { tournamentBattleId: $tournamentBattleId }) {
-    tournamentBattle {
+mutation DeleteBattle($battleId: ID!) {
+  deleteBattle(input: { battleId: $battleId }) {
+    battle {
       id
     }
   }

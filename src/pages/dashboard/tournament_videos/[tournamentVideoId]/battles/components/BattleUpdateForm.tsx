@@ -5,10 +5,10 @@ import * as yup from 'yup';
 
 import {
   CharacterSelectOptionFragment,
-  DashboardTournamentBattlesPageBattleReslutFragment,
-  DashboardTournamentBattlesPageSideFragment,
+  DashboardBattlesPageBattleReslutFragment,
+  DashboardBattlesPageSideFragment,
   PlayerSelectOptionFragment,
-  TournamentBattleAttributes,
+  BattleAttributes,
 } from '@/lib/graphql/types';
 import {
   Box,
@@ -24,33 +24,33 @@ import {
   TextField,
 } from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
-import { TournamentBattleRoundText } from '@/lib/graphql/enum_texts';
+import { BattleRoundText } from '@/lib/graphql/enum_texts';
 
 const schema = yup.object().shape({
   startSec: yup.number().required(),
 });
 
 interface Props {
-  tournamentBattle: DashboardTournamentBattlesPageBattleReslutFragment;
+  battle: DashboardBattlesPageBattleReslutFragment;
   players: PlayerSelectOptionFragment[];
   characters: CharacterSelectOptionFragment[];
-  onSubmit: (attributes: TournamentBattleAttributes) => void;
+  onSubmit: (attributes: BattleAttributes) => void;
 }
 
-export const TournamentBattleUpdateForm: React.FC<Props> = ({ tournamentBattle, players, characters, onSubmit }) => {
+export const BattleUpdateForm: React.FC<Props> = ({ battle, players, characters, onSubmit }) => {
   const {
     setValue,
     getValues,
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<TournamentBattleAttributes>({
+  } = useForm<BattleAttributes>({
     resolver: yupResolver(schema),
     mode: 'onBlur',
     defaultValues: {
-      startSec: tournamentBattle.startSec,
-      round: tournamentBattle.round,
-      sides: tournamentBattle.sides.map(s => ({
+      startSec: battle.startSec,
+      round: battle.round,
+      sides: battle.sides.map(s => ({
         playerId: s.player.id,
         characterId: s.character.id,
         rounds: s.rounds,
@@ -88,7 +88,7 @@ export const TournamentBattleUpdateForm: React.FC<Props> = ({ tournamentBattle, 
                   control={control}
                   render={({ field }) => (
                     <Select {...field}>
-                      {Object.entries(TournamentBattleRoundText).map(([key, value]) => (
+                      {Object.entries(BattleRoundText).map(([key, value]) => (
                         <MenuItem key={key} value={key}>
                           {value}
                         </MenuItem>
@@ -103,7 +103,7 @@ export const TournamentBattleUpdateForm: React.FC<Props> = ({ tournamentBattle, 
           <Grid container spacing={2}>
             <SideForm
               index={0}
-              side={tournamentBattle.sides[0]}
+              side={battle.sides[0]}
               players={players}
               characters={characters}
               control={control}
@@ -112,7 +112,7 @@ export const TournamentBattleUpdateForm: React.FC<Props> = ({ tournamentBattle, 
             />
             <SideForm
               index={1}
-              side={tournamentBattle.sides[1]}
+              side={battle.sides[1]}
               players={players}
               characters={characters}
               control={control}
@@ -136,12 +136,12 @@ export const TournamentBattleUpdateForm: React.FC<Props> = ({ tournamentBattle, 
 
 interface SideFormProps {
   index: 0 | 1;
-  side: DashboardTournamentBattlesPageSideFragment;
+  side: DashboardBattlesPageSideFragment;
   players: PlayerSelectOptionFragment[];
   characters: CharacterSelectOptionFragment[];
-  control: Control<TournamentBattleAttributes>;
-  getValues: UseFormGetValues<TournamentBattleAttributes>;
-  setValue: UseFormSetValue<TournamentBattleAttributes>;
+  control: Control<BattleAttributes>;
+  getValues: UseFormGetValues<BattleAttributes>;
+  setValue: UseFormSetValue<BattleAttributes>;
 }
 
 export const SideForm: React.FC<SideFormProps> = ({ index, side, players, characters, control, setValue }) => {
