@@ -1,91 +1,42 @@
 import React from 'react';
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Head, Content, Breadcrumbs } from '@/components';
-import {
-  Avatar,
-  Box,
-  List,
-  ListItem,
-  ListItemAvatar,
-  ListItemText,
-  makeStyles,
-  Paper,
-  Typography,
-} from '@material-ui/core';
-import theme from '@/theme';
+import { Box, Grid, Typography } from '@material-ui/core';
 import { PlayerRankingsPageDocument, PlayerRankingsPageQuery } from '@/lib/graphql/types';
-import { RankingPlaceAvatar } from '@/components';
-import dayjs from '@/lib/dayjs';
-import Link from 'next/link';
 import { path } from '@/lib';
-import { NO_IMAGE_URL } from '@/lib/Assets';
 import { Pagination } from '@material-ui/lab';
 import { useRouter } from 'next/router';
 import { Profile } from '../components/Profile';
-
-const useStyles = makeStyles({
-  paper: {
-    marginTop: theme.spacing(2),
-    padding: theme.spacing(2),
-  },
-  title: {
-    marginBottom: theme.spacing(2),
-  },
-  body: {
-    whiteSpace: 'pre-line',
-  },
-  avatar: {
-    width: 24,
-    height: 24,
-  },
-  win: {
-    backgroundColor: '#D6AF36',
-  },
-  vs: {
-    marginLeft: theme.spacing(2),
-    marginRight: theme.spacing(2),
-  },
-});
+import { RankingCard } from '../components/RankingCard';
 
 const Page: React.FC<PlayerRankingsPageQuery> = ({
   player,
   tournamentRankings: { records: tournamentRankings, paging },
 }) => {
   const router = useRouter();
-  const classes = useStyles();
 
   return (
-    <Content activeTab="players" title={player.name} breadcrumb={<Breadcrumbs to="player" player={player} />}>
-      <Head title={player.name} />
+    <Content activeTab="players" breadcrumb={<Breadcrumbs to="playerRankings" player={player} />}>
+      <Head title={`${player.name}の大会戦績`} />
 
       <Profile player={player} />
 
-      <Paper className={classes.paper}>
-        <Typography className={classes.title} variant="h4">
+      <Box mt={4}>
+        <Typography variant="h2" gutterBottom>
           大会戦績
         </Typography>
-        <List>
-          {tournamentRankings.map(ranking => (
-            <Link key={ranking.id} href={path({ to: 'tournament', tournamentId: ranking.tournament.id })} passHref>
-              <ListItem button>
-                <ListItemAvatar>
-                  <RankingPlaceAvatar place={ranking.place} />
-                </ListItemAvatar>
-                <ListItemAvatar>
-                  <Avatar src={ranking.tournament.mainImageUrl || NO_IMAGE_URL} />
-                </ListItemAvatar>
-                <ListItemText
-                  primary={ranking.tournament.name}
-                  secondary={dayjs(ranking.tournament.startsAt).format('YYYY/M/D')}
-                />
-              </ListItem>
-            </Link>
-          ))}
-        </List>
 
-        <Box display="flex" justifyContent="center">
+        <Grid container spacing={2}>
+          {tournamentRankings.map(ranking => (
+            <Grid item key={ranking.id} xs={12} sm={6}>
+              <RankingCard ranking={ranking} />
+            </Grid>
+          ))}
+        </Grid>
+
+        <Box mt={2} display="flex" justifyContent="center">
           <Pagination
             page={paging.currentPage}
             count={paging.totalPages}
@@ -95,24 +46,20 @@ const Page: React.FC<PlayerRankingsPageQuery> = ({
             }}
           />
         </Box>
-      </Paper>
+      </Box>
     </Content>
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getServerSideProps: GetServerSideProps<PlayerRankingsPageQuery> = async ({ params, query }) => {
   const playerSlug = params?.playerSlug as string;
-  const page = params?.page as string | undefined;
+  const page = query?.page ? Number(query.page) : 1;
   const data: PlayerRankingsPageQuery = await fetchGraphql(PlayerRankingsPageDocument, {
     playerSlug,
     page: page ? Number(page) : 1,
   });
 
   return { props: data };
-};
-
-export const getStaticPaths: GetStaticPaths = async () => {
-  return { paths: [], fallback: 'blocking' };
 };
 
 export default Page;

@@ -10,54 +10,52 @@ fragment PlayerPageProfile on Player {
   tournamentBattlesCount
 }
 
+fragment PlayerPageRanking on TournamentRanking {
+  id
+  place
+
+  tournament {
+    id
+    name
+    mainImageUrl
+    startsAt
+  }
+}
+
+fragment PlayerPageBattle on TournamentBattle {
+  id
+  round
+
+  tournamentVideo {
+    id
+
+    tournament {
+      id
+      name
+      startsAt
+    }
+  }
+
+  sides {
+    player { name }
+    character { faceImageUrl }
+    rounds
+  }
+}
+
 query PlayerPage($playerSlug: String!) {
   player(playerSlug: $playerSlug) {
     ...PlayerBreadcrumbs
     ...PlayerPageProfile
   }
 
-  tournamentRankings(playerSlug: $playerSlug, per: 5) {
-    records {
-      id
-      place
-
-      tournament {
-        id
-        name
-        mainImageUrl
-        startsAt
-      }
-    }
-
-    paging {
-      hasNext
-    }
+  tournamentRankings(playerSlug: $playerSlug, per: 4) {
+    records { ...PlayerPageRanking }
+    paging { hasNext }
   }
 
-  tournamentBattles(playerSlug: $playerSlug, per: 5) {
-    records {
-      id
-      round
-
-      tournamentVideo {
-        id
-
-        tournament {
-          id
-          name
-          startsAt
-        }
-      }
-
-      sides {
-        player { name }
-        character { faceImageUrl }
-        rounds
-      }
-    }
-
-    paging {
-      hasNext
-    }
+  tournamentBattles(playerSlug: $playerSlug, per: 4) {
+    records { ...PlayerPageBattle }
+    paging { hasNext }
   }
 }

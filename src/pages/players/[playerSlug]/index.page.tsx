@@ -3,143 +3,63 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Head, Content, Breadcrumbs, Link as LinkComponent } from '@/components';
-import {
-  Avatar,
-  Box,
-  Button,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  makeStyles,
-  Paper,
-  Typography,
-} from '@material-ui/core';
-import theme from '@/theme';
+import { Box, Button, Grid, List, Paper, Typography } from '@material-ui/core';
 import { PlayerPageDocument, PlayerPageQuery } from '@/lib/graphql/types';
-import { RankingPlaceAvatar } from '@/components';
-import dayjs from '@/lib/dayjs';
-import Link from 'next/link';
-import clsx from 'clsx';
-import { TournamentBattleRoundText } from '@/lib/graphql/enum_texts';
 import { path } from '@/lib';
 import { Profile } from './components/Profile';
-
-const useStyles = makeStyles({
-  section: {
-    marginTop: theme.spacing(2),
-    padding: theme.spacing(2),
-  },
-  sectionTitle: {
-    marginBottom: theme.spacing(2),
-  },
-  body: {
-    whiteSpace: 'pre-line',
-  },
-  avatar: {
-    width: 24,
-    height: 24,
-  },
-  win: {
-    backgroundColor: '#D6AF36',
-  },
-  vs: {
-    marginLeft: theme.spacing(2),
-    marginRight: theme.spacing(2),
-  },
-});
+import { RankingCard } from './components/RankingCard';
+import { BattleListItem } from './components/BattleListItem';
 
 const Page: React.FC<PlayerPageQuery> = ({ player, tournamentRankings, tournamentBattles }) => {
-  const classes = useStyles();
-
   return (
     <Content activeTab="players" breadcrumb={<Breadcrumbs to="player" player={player} />}>
       <Head title={player.name} />
 
       <Profile player={player} />
 
-      <Paper className={classes.section}>
-        <Typography className={classes.sectionTitle} variant="h4">
+      <Box mt={4}>
+        <Typography variant="h2" gutterBottom>
           大会戦績
         </Typography>
-        <List>
+
+        <Grid container spacing={2}>
           {tournamentRankings.records.map(ranking => (
-            <Link key={ranking.id} href={path({ to: 'tournament', tournamentId: ranking.tournament.id })} passHref>
-              <ListItem button>
-                <ListItemIcon>
-                  <RankingPlaceAvatar place={ranking.place} />
-                </ListItemIcon>
-                <ListItemText
-                  primary={ranking.tournament.name}
-                  secondary={dayjs(ranking.tournament.startsAt).format('YYYY/M/D')}
-                />
-              </ListItem>
-            </Link>
+            <Grid item key={ranking.id} xs={12} sm={6}>
+              <RankingCard ranking={ranking} />
+            </Grid>
           ))}
-        </List>
+        </Grid>
 
         {tournamentRankings.paging.hasNext && (
-          <Box display="flex" justifyContent="center">
+          <Box mt={2} display="flex" justifyContent="center">
             <Button href={path({ to: 'playerRankings', playerSlug: player.slug })} component={LinkComponent}>
               もっと見る
             </Button>
           </Box>
         )}
-      </Paper>
+      </Box>
 
-      <Paper className={classes.section}>
-        <Typography className={classes.sectionTitle} variant="h4">
+      <Box mt={4}>
+        <Typography variant="h2" gutterBottom>
           対戦動画
         </Typography>
-        <List>
-          {tournamentBattles.records.map(battle => {
-            const video = battle.tournamentVideo;
-            const tournament = video.tournament;
-            const left = battle.sides[0];
-            const right = battle.sides[1];
-            let subTitle = tournament.name;
-            if (battle.round) {
-              subTitle = `${subTitle} ${TournamentBattleRoundText[battle.round]}`;
-            }
-            return (
-              <Link
-                key={battle.id}
-                href={path({ to: 'tournamentVideo', tournamentVideoId: video.id, battleId: battle.id })}
-                passHref
-              >
-                <ListItem button>
-                  <ListItemText
-                    primary={
-                      <Box display="flex" alignItems="center">
-                        <Avatar className={clsx(classes.avatar, left.rounds === 3 && classes.win)}>
-                          {left.rounds}
-                        </Avatar>
-                        <Avatar className={classes.avatar} src={left.character.faceImageUrl} />
-                        <span>{left.player.name}</span>
-                        <span className={classes.vs}>×</span>
-                        <Avatar className={clsx(classes.avatar, right.rounds === 3 && classes.win)}>
-                          {right.rounds}
-                        </Avatar>
-                        <Avatar className={classes.avatar} src={right.character.faceImageUrl} />
-                        <span>{right.player.name}</span>
-                      </Box>
-                    }
-                    secondary={subTitle}
-                  />
-                </ListItem>
-              </Link>
-            );
-          })}
-        </List>
+
+        <Paper>
+          <List>
+            {tournamentBattles.records.map((battle, i) => (
+              <BattleListItem key={battle.id} battle={battle} last={tournamentBattles.records.length === i + 1} />
+            ))}
+          </List>
+        </Paper>
 
         {tournamentBattles.paging.hasNext && (
-          <Box display="flex" justifyContent="center">
+          <Box mt={2} display="flex" justifyContent="center">
             <Button href={path({ to: 'playerBattles', player: player.slug })} component={LinkComponent}>
               もっと見る
             </Button>
           </Box>
         )}
-      </Paper>
+      </Box>
     </Content>
   );
 };

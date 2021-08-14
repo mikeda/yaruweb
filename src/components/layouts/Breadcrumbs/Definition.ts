@@ -27,6 +27,8 @@ export type ChainParam =
   | { to: 'organizer'; organizer: OrganizerParam }
   | { to: 'players' }
   | { to: 'player'; player: PlayerParam }
+  | { to: 'playerBattles'; player: PlayerParam }
+  | { to: 'playerRankings'; player: PlayerParam }
   | { to: 'passwordEdit' }
   | { to: 'passwordReset' }
   | { to: 'signup' }
@@ -78,11 +80,19 @@ export const breadcrumbChain = (props: ChainParam): BreadcrumbChainItem => {
     case 'organizer':
       return { name: props.organizer.name, parent: breadcrumbChain({ to: 'organizers' }) };
     case 'organizers':
-      return { name: 'オーガナイザー' };
-    case 'player':
-      return { name: props.player.name, parent: breadcrumbChain({ to: 'players' }) };
+      return { name: 'オーガナイザー', url: path({ to: 'organizers' }) };
     case 'players':
-      return { name: 'プレイヤー' };
+      return { name: 'プレイヤー', url: path({ to: 'players' }) };
+    case 'player':
+      return {
+        name: props.player.name,
+        url: path({ to: 'player', playerSlug: props.player.slug }),
+        parent: breadcrumbChain({ to: 'players' }),
+      };
+    case 'playerBattles':
+      return { name: '対戦動画', parent: breadcrumbChain({ to: 'player', player: props.player }) };
+    case 'playerRankings':
+      return { name: '大会戦績', parent: breadcrumbChain({ to: 'player', player: props.player }) };
     case 'signup':
       return { name: 'ログイン' };
     case 'tournaments':
