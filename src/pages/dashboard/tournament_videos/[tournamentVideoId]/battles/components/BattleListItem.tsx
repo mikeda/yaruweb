@@ -14,14 +14,14 @@ import {
 } from '@material-ui/core';
 import { formatSec } from '@/lib';
 import { Delete, Edit } from '@material-ui/icons';
-import { TournamentBattleRoundText } from '@/lib/graphql/enum_texts';
+import { BattleRoundText } from '@/lib/graphql/enum_texts';
 import {
   CharacterSelectOptionFragment,
-  DashboardTournamentBattlesPageBattleReslutFragment,
+  DashboardBattlesPageBattleReslutFragment,
   PlayerSelectOptionFragment,
 } from '@/lib/graphql/types';
 import clsx from 'clsx';
-import { TournamentBattleUpdateForm } from './TournamentBattleUpdateForm';
+import { BattleUpdateForm } from './BattleUpdateForm';
 import { useUpdateMutation } from '../hooks/useUpdateMutation';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -41,7 +41,7 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 interface Props {
-  battle: DashboardTournamentBattlesPageBattleReslutFragment;
+  battle: DashboardBattlesPageBattleReslutFragment;
   tournamentVideoId: string;
   players: PlayerSelectOptionFragment[];
   characters: CharacterSelectOptionFragment[];
@@ -65,17 +65,17 @@ export const BattleListItem: React.FC<Props> = ({
   const right = battle.sides[1];
   let subTitle = formatSec(battle.startSec);
   if (battle.round) {
-    subTitle = `${subTitle} ${TournamentBattleRoundText[battle.round]}`;
+    subTitle = `${subTitle} ${BattleRoundText[battle.round]}`;
   }
   return (
     <ListItem button onClick={onClick}>
       <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)}>
-        <TournamentBattleUpdateForm
-          tournamentBattle={battle}
+        <BattleUpdateForm
+          battle={battle}
           players={players}
           characters={characters}
           onSubmit={attributes => {
-            update({ variables: { tournamentBattleId: battle.id, attributes: { ...attributes, tournamentVideoId } } });
+            update({ variables: { battleId: battle.id, attributes: { ...attributes, tournamentVideoId } } });
             setDialogOpen(false);
           }}
         />

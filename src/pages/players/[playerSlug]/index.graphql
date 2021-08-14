@@ -7,7 +7,7 @@ fragment PlayerPageProfile on Player {
   streamingUrl
   description
   tournamentRankingsCount
-  tournamentBattlesCount
+  battlesCount
 }
 
 fragment PlayerPageRanking on TournamentRanking {
@@ -22,7 +22,7 @@ fragment PlayerPageRanking on TournamentRanking {
   }
 }
 
-fragment PlayerPageBattle on TournamentBattle {
+fragment PlayerPageBattle on Battle {
   id
   round
 
@@ -54,7 +54,7 @@ query PlayerPage($playerSlug: String!) {
     paging { hasNext }
   }
 
-  tournamentBattles(playerSlug: $playerSlug, per: 4) {
+  battles(playerSlug: $playerSlug, per: 4) {
     records { ...PlayerPageBattle }
     paging { hasNext }
   }

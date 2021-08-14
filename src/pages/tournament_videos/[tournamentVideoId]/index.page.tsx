@@ -15,7 +15,7 @@ import { Avatar, Box, createStyles, List, ListItem, ListItemText, makeStyles, Pa
 import YouTube from 'react-youtube';
 import { YouTubePlayer } from 'youtube-player/dist/types';
 import { formatSec } from '@/lib';
-import { TournamentBattleRoundText } from '@/lib/graphql/enum_texts';
+import { BattleRoundText } from '@/lib/graphql/enum_texts';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import clsx from 'clsx';
@@ -81,7 +81,7 @@ const PageContent: React.FC<PageTournamentVideoQuery> = ({ tournamentVideo }) =>
                 const right = battle.sides[1];
                 let subTitle = formatSec(battle.startSec);
                 if (battle.round) {
-                  subTitle = `${subTitle} ${TournamentBattleRoundText[battle.round]}`;
+                  subTitle = `${subTitle} ${BattleRoundText[battle.round]}`;
                 }
                 return (
                   <ListItem

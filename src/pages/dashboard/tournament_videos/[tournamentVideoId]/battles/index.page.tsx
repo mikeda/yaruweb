@@ -4,11 +4,11 @@ import { DashboardBreadcrumbs, DashboardContent } from '@/components';
 import {
   useRouteParams,
   useTournamentVideoQuery,
-  useTournamentBattlesQuery,
+  useBattlesQuery,
   useCreateMutation,
   useDeleteMutation,
 } from './hooks';
-import { TournamentBattleForm } from './components/TournamentBattleForm';
+import { BattleForm } from './components/BattleForm';
 import {
   Accordion,
   AccordionDetails,
@@ -35,7 +35,7 @@ const Page: React.FC = () => {
   const [youTubePlayer, setYouTubePlayer] = useState<YouTubePlayer>();
   const { tournamentVideoId } = useRouteParams();
   const { data } = useTournamentVideoQuery(tournamentVideoId);
-  const { tournamentBattles, refetch } = useTournamentBattlesQuery(tournamentVideoId);
+  const { battles, refetch } = useBattlesQuery(tournamentVideoId);
   const { create } = useCreateMutation(refetch);
   const { destroy } = useDeleteMutation(refetch);
   const classes = useStyles();
@@ -44,10 +44,7 @@ const Page: React.FC = () => {
   const { tournamentVideo, characters, players } = data;
 
   return (
-    <DashboardContent
-      title="対戦"
-      breadcrumb={<DashboardBreadcrumbs to="tournamentBattles" tournamentVideo={tournamentVideo} />}
-    >
+    <DashboardContent title="対戦" breadcrumb={<DashboardBreadcrumbs to="battles" tournamentVideo={tournamentVideo} />}>
       <Box display="flex" justifyContent="center" mb={2}>
         <Box width="100%" maxWidth={640}>
           <YouTube
@@ -66,7 +63,7 @@ const Page: React.FC = () => {
           <Typography>登録する</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <TournamentBattleForm
+          <BattleForm
             players={players.records}
             characters={characters}
             onClickGetPlayerTime={callback => {
@@ -96,9 +93,9 @@ const Page: React.FC = () => {
 
       <Box mt={2}>
         <Paper>
-          {tournamentBattles && (
+          {battles && (
             <List className={classes.list}>
-              {tournamentBattles.map(battle => {
+              {battles.map(battle => {
                 return (
                   <BattleListItem
                     key={battle.id}
@@ -110,7 +107,7 @@ const Page: React.FC = () => {
                       youTubePlayer?.seekTo(battle.startSec, true);
                     }}
                     onDestroy={() => {
-                      destroy({ variables: { tournamentBattleId: battle.id } });
+                      destroy({ variables: { battleId: battle.id } });
                     }}
                   />
                 );

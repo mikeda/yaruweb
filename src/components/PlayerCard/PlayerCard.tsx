@@ -46,7 +46,7 @@ export const PlayerCard: React.FC<Props> = ({ player }) => {
 
           <Typography variant="caption" className={classes.detail}>
             <YouTube fontSize="small" />
-            対戦動画 {player.tournamentBattlesCount}
+            対戦動画 {player.battlesCount}
           </Typography>
         </CardContent>
       </CardActionArea>

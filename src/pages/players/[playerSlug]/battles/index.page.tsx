@@ -25,10 +25,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const Page: React.FC<PlayerBattlesPageQuery> = ({
-  player,
-  tournamentBattles: { records: tournamentBattles, paging },
-}) => {
+const Page: React.FC<PlayerBattlesPageQuery> = ({ player, battles: { records: battles, paging } }) => {
   const router = useRouter();
   const characterSlug = router.query.character as string | undefined;
   const classes = useStyles();
@@ -65,8 +62,8 @@ const Page: React.FC<PlayerBattlesPageQuery> = ({
 
         <Paper>
           <List>
-            {tournamentBattles.map((battle, i) => (
-              <BattleListItem key={battle.id} battle={battle} last={tournamentBattles.length === i + 1} />
+            {battles.map((battle, i) => (
+              <BattleListItem key={battle.id} battle={battle} last={battles.length === i + 1} />
             ))}
           </List>
         </Paper>

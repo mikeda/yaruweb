@@ -1,10 +1,10 @@
-import { useDashboardBattlesPageQuery } from '@/lib/graphql/types';
+import { useDashboardBattlesPageBattlesQuery } from '@/lib/graphql/types';
 import { loadingState } from '@/states/loading';
 import { useSetRecoilState } from 'recoil';
 
-export const useTournamentVideoQuery = (tournamentVideoId: string | undefined) => {
+export const useBattlesQuery = (tournamentVideoId: string | undefined) => {
   const setLoading = useSetRecoilState(loadingState);
-  const { data, loading, refetch } = useDashboardBattlesPageQuery({
+  const { data, loading, refetch } = useDashboardBattlesPageBattlesQuery({
     variables: { tournamentVideoId: tournamentVideoId as string },
     fetchPolicy: 'network-only',
     skip: !tournamentVideoId,
@@ -12,5 +12,5 @@ export const useTournamentVideoQuery = (tournamentVideoId: string | undefined) =
 
   setLoading(loading);
 
-  return { data, refetch };
+  return { battles: data?.battles?.records, refetch };
 };
