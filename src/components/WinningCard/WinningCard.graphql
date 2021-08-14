@@ -1,4 +1,4 @@
-fragment TournamentRankingCard on TournamentRanking {
+fragment WinningCard on Winning {
   id
   place
 

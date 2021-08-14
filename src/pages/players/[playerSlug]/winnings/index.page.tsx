@@ -4,21 +4,18 @@ import { GetServerSideProps } from 'next';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Head, Content, Breadcrumbs } from '@/components';
 import { Box, Grid, Typography } from '@material-ui/core';
-import { PlayerRankingsPageDocument, PlayerRankingsPageQuery } from '@/lib/graphql/types';
+import { PlayerWinningsPageDocument, PlayerWinningsPageQuery } from '@/lib/graphql/types';
 import { path } from '@/lib';
 import { Pagination } from '@material-ui/lab';
 import { useRouter } from 'next/router';
 import { Profile } from '../components/Profile';
-import { RankingCard } from '../components/RankingCard';
+import { WinningCard } from '../components/WinningCard';
 
-const Page: React.FC<PlayerRankingsPageQuery> = ({
-  player,
-  tournamentRankings: { records: tournamentRankings, paging },
-}) => {
+const Page: React.FC<PlayerWinningsPageQuery> = ({ player, winnings: { records: winnings, paging } }) => {
   const router = useRouter();
 
   return (
-    <Content activeTab="players" breadcrumb={<Breadcrumbs to="playerRankings" player={player} />}>
+    <Content activeTab="players" breadcrumb={<Breadcrumbs to="playerWinnings" player={player} />}>
       <Head title={`${player.name}の大会戦績`} />
 
       <Profile player={player} />
@@ -29,9 +26,9 @@ const Page: React.FC<PlayerRankingsPageQuery> = ({
         </Typography>
 
         <Grid container spacing={2}>
-          {tournamentRankings.map(ranking => (
-            <Grid item key={ranking.id} xs={12} sm={6}>
-              <RankingCard ranking={ranking} />
+          {winnings.map(winning => (
+            <Grid item key={winning.id} xs={12} sm={6}>
+              <WinningCard winning={winning} />
             </Grid>
           ))}
         </Grid>
@@ -42,7 +39,7 @@ const Page: React.FC<PlayerRankingsPageQuery> = ({
             count={paging.totalPages}
             color="primary"
             onChange={(e, page) => {
-              router.push(path({ to: 'playerRankings', playerSlug: player.slug, page }));
+              router.push(path({ to: 'playerWinnings', playerSlug: player.slug, page }));
             }}
           />
         </Box>
@@ -51,10 +48,10 @@ const Page: React.FC<PlayerRankingsPageQuery> = ({
   );
 };
 
-export const getServerSideProps: GetServerSideProps<PlayerRankingsPageQuery> = async ({ params, query }) => {
+export const getServerSideProps: GetServerSideProps<PlayerWinningsPageQuery> = async ({ params, query }) => {
   const playerSlug = params?.playerSlug as string;
   const page = query?.page ? Number(query.page) : 1;
-  const data: PlayerRankingsPageQuery = await fetchGraphql(PlayerRankingsPageDocument, {
+  const data: PlayerWinningsPageQuery = await fetchGraphql(PlayerWinningsPageDocument, {
     playerSlug,
     page: page ? Number(page) : 1,
   });

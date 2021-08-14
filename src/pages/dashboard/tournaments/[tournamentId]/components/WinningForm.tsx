@@ -3,7 +3,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import { PlayerSelectOptionFragment, TournamentRankingAttributes } from '@/lib/graphql/types';
+import { PlayerSelectOptionFragment, WinningAttributes } from '@/lib/graphql/types';
 import {
   Box,
   Button,
@@ -28,11 +28,11 @@ interface Props {
   open: boolean;
   players: PlayerSelectOptionFragment[];
   onClose: () => void;
-  onSubmit: (attributes: TournamentRankingAttributes) => void;
+  onSubmit: (attributes: WinningAttributes) => void;
 }
 
-export const RankingForm: React.FC<Props> = ({ open, players, onClose, onSubmit }) => {
-  const { handleSubmit, control, setValue } = useForm<TournamentRankingAttributes>({
+export const WinningForm: React.FC<Props> = ({ open, players, onClose, onSubmit }) => {
+  const { handleSubmit, control, setValue } = useForm<WinningAttributes>({
     resolver: yupResolver(schema),
     mode: 'onBlur',
   });

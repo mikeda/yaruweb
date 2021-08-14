@@ -1,4 +1,4 @@
-import { useDashboardTournamentPageCreateRankingMutation } from '@/lib/graphql/types';
+import { useDashboardTournamentPageCreateWinningMutation } from '@/lib/graphql/types';
 import { loadingState } from '@/states/loading';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
@@ -7,9 +7,9 @@ interface Props {
   onCreate: () => void;
 }
 
-export const useCreateRankingMutation = ({ onCreate }: Props) => {
+export const useCreateWinningMutation = ({ onCreate }: Props) => {
   const setLoading = useSetRecoilState(loadingState);
-  const [create, { loading }] = useDashboardTournamentPageCreateRankingMutation({
+  const [create, { loading }] = useDashboardTournamentPageCreateWinningMutation({
     onCompleted: () => {
       toast.success('順位を登録しました。');
       onCreate();

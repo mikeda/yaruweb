@@ -5,7 +5,7 @@ query DashboardTournamentPage($tournamentId: ID!) {
     description
     mainImageUrl
     startsAt
-    rankingsCount
+    winningsCount
     videosCount
 
     videos {
@@ -22,8 +22,8 @@ query DashboardTournamentPage($tournamentId: ID!) {
   }
 }
 
-query DashboardTournamentPageRankings($tournamentId: ID!) {
-  tournamentRankings(tournamentId: $tournamentId, per: 100) {
+query DashboardTournamentPageWinnings($tournamentId: ID!) {
+  winnings(tournamentId: $tournamentId, per: 100) {
     records {
       id
       place
@@ -51,17 +51,17 @@ query DashboardTournamentPageVideos($tournamentId: ID!) {
   }
 }
 
-mutation DashboardTournamentPageCreateRanking($tournamentId: ID!, $attributes: TournamentRankingAttributes!) {
-  createTournamentRanking(input: { tournamentId: $tournamentId, attributes: $attributes }) {
-    tournamentRanking {
+mutation DashboardTournamentPageCreateWinning($tournamentId: ID!, $attributes: WinningAttributes!) {
+  createWinning(input: { tournamentId: $tournamentId, attributes: $attributes }) {
+    winning {
       id
     }
   }
 }
 
-mutation DashboardTournamentPageDeleteRanking($tournamentRankingId: ID!) {
-  deleteTournamentRanking(input: { tournamentRankingId: $tournamentRankingId }) {
-    tournamentRanking {
+mutation DashboardTournamentPageDeleteWinning($winningId: ID!) {
+  deleteWinning(input: { winningId: $winningId }) {
+    winning {
       id
     }
   }

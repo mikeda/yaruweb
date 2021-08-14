@@ -8,8 +8,8 @@ query PageTournament($tournamentId: ID!) {
     description
     startsAt
 
-    rankings {
-      ...TournamentRankingCard
+    winnings {
+      ...WinningCard
     }
 
     videos {
