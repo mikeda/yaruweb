@@ -1458,10 +1458,10 @@ export type Paging = {
 export type Player = {
   __typename?: 'Player';
   avatarUrl?: Maybe<Scalars['String']>;
-  characters: Array<Character>;
   description?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   name: Scalars['String'];
+  playerCharacters: Array<PlayerCharacter>;
   pro: Scalars['Boolean'];
   slug: Scalars['String'];
   streamingUrl?: Maybe<Scalars['String']>;
@@ -1486,6 +1486,7 @@ export type PlayerCharacter = {
   __typename?: 'PlayerCharacter';
   character: Character;
   player: Player;
+  tournamentBattlesCount: Scalars['Int'];
 };
 
 export type PlayerCharacterAttributes = {
@@ -1696,6 +1697,7 @@ export type QueryTournamentArgs = {
 export type QueryTournamentBattlesArgs = {
   tournamentVideoId?: Maybe<Scalars['ID']>;
   playerSlug?: Maybe<Scalars['String']>;
+  characterSlug?: Maybe<Scalars['String']>;
   page?: Maybe<Scalars['Int']>;
   per?: Maybe<Scalars['Int']>;
 };
@@ -2329,15 +2331,9 @@ export type VideoUpload = {
   url: Scalars['String'];
 };
 
-export type AttackActionFragment = (
-  { __typename: 'AttackAction' }
-  & Pick<AttackAction, 'id' | 'attackType' | 'damage' | 'blockAvailable' | 'blockState' | 'blockFrame' | 'hitAvailable' | 'hitState' | 'hitFrame' | 'counterHitAvailable' | 'counterHitState' | 'counterHitFrame' | 'cleanHitAvailable' | 'cleanHitState' | 'cleanHitFrame' | 'crouchingHitAvailable' | 'crouchingHitState' | 'crouchingHitFrame'>
-);
+export type AttackActionFragment = { __typename: 'AttackAction', id: string, attackType: AttackTypeEnum, damage: number, blockAvailable: boolean, blockState: AttackActionStateEnum, blockFrame?: Maybe<number>, hitAvailable: boolean, hitState: AttackActionStateEnum, hitFrame?: Maybe<number>, counterHitAvailable: boolean, counterHitState: AttackActionStateEnum, counterHitFrame?: Maybe<number>, cleanHitAvailable: boolean, cleanHitState: AttackActionStateEnum, cleanHitFrame?: Maybe<number>, crouchingHitAvailable: boolean, crouchingHitState: AttackActionStateEnum, crouchingHitFrame?: Maybe<number> };
 
-export type ThrowActionFragment = (
-  { __typename: 'ThrowAction' }
-  & Pick<ThrowAction, 'id' | 'throwType' | 'damage' | 'escape' | 'throwAvailable' | 'throwState' | 'throwFrame' | 'throwEscapeAvailable' | 'throwEscapeState' | 'throwEscapeFrame'>
-);
+export type ThrowActionFragment = { __typename: 'ThrowAction', id: string, throwType: ThrowTypeEnum, damage: number, escape: ThrowEscapeEnum, throwAvailable: boolean, throwState: ThrowActionStateEnum, throwFrame?: Maybe<number>, throwEscapeAvailable: boolean, throwEscapeState: ThrowActionStateEnum, throwEscapeFrame?: Maybe<number> };
 
 type Action_AttackAction_Fragment = (
   { __typename?: 'AttackAction' }
@@ -2351,27 +2347,11 @@ type Action_ThrowAction_Fragment = (
 
 export type ActionFragment = Action_AttackAction_Fragment | Action_ThrowAction_Fragment;
 
-export type ArticleLinkFragment = (
-  { __typename?: 'ArticleLink' }
-  & Pick<ArticleLink, 'url' | 'title' | 'description' | 'imageUrl'>
-);
+export type ArticleLinkFragment = { __typename?: 'ArticleLink', url: string, title: string, description?: Maybe<string>, imageUrl?: Maybe<string> };
 
-export type ArticleSummaryFragment = (
-  { __typename?: 'Article' }
-  & Pick<Article, 'id' | 'title' | 'description' | 'mainImageUrl' | 'publishedAt' | 'faved' | 'favsCount' | 'status'>
-  & { author: (
-    { __typename?: 'User' }
-    & Pick<User, 'name' | 'avatarUrl'>
-  ) }
-);
+export type ArticleSummaryFragment = { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: Maybe<string>, publishedAt?: Maybe<string>, faved: boolean, favsCount: number, status: ArticleStatus, author: { __typename?: 'User', name: string, avatarUrl: string } };
 
-export type ComboFragment = (
-  { __typename?: 'Combo' }
-  & Pick<Combo, 'id' | 'name' | 'damage' | 'note'>
-  & { comboCategory: (
-    { __typename?: 'ComboCategory' }
-    & Pick<ComboCategory, 'id' | 'name'>
-  ), comboVideo?: Maybe<(
+export type ComboFragment = { __typename?: 'Combo', id: string, name: string, damage?: Maybe<number>, note?: Maybe<string>, comboCategory: { __typename?: 'ComboCategory', id: string, name: string }, comboVideo?: Maybe<(
     { __typename?: 'ComboVideo' }
     & ComboVideoFragment
   )>, conditions: Array<(
@@ -2380,51 +2360,25 @@ export type ComboFragment = (
   )>, operations: Array<(
     { __typename?: 'Operation' }
     & OperationFragment
-  )> }
-);
+  )> };
 
-export type ComboCategoryFragment = (
-  { __typename?: 'ComboCategory' }
-  & Pick<ComboCategory, 'id' | 'name'>
-);
+export type ComboCategoryFragment = { __typename?: 'ComboCategory', id: string, name: string };
 
-export type ComboVideoFragment = (
-  { __typename?: 'ComboVideo' }
-  & Pick<ComboVideo, 'id' | 'm3u8Url' | 'thumbnailUrl'>
-);
+export type ComboVideoFragment = { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string };
 
-export type CommandFragment = (
-  { __typename?: 'Command' }
-  & Pick<Command, 'id'>
-  & { state: (
+export type CommandFragment = { __typename?: 'Command', id: string, state: (
     { __typename?: 'State' }
     & StateFragment
   ), operations: Array<(
     { __typename?: 'Operation' }
     & OperationFragment
-  )> }
-);
+  )> };
 
-export type ConditionFragment = (
-  { __typename?: 'Condition' }
-  & Pick<Condition, 'id' | 'name'>
-);
+export type ConditionFragment = { __typename?: 'Condition', id: string, name: string };
 
-export type CurrentUserFragment = (
-  { __typename?: 'CurrentUser' }
-  & Pick<CurrentUser, 'id' | 'name' | 'role' | 'avatarUrl'>
-);
+export type CurrentUserFragment = { __typename?: 'CurrentUser', id: string, name: string, role: UserRole, avatarUrl: string };
 
-export type MoveFragment = (
-  { __typename?: 'Move' }
-  & Pick<Move, 'id' | 'name' | 'kana' | 'opponentState' | 'startUpFrame' | 'powerCrush' | 'crouchingStatus' | 'jumpStatus' | 'homing' | 'screw' | 'wallBound' | 'note'>
-  & { moveCategory: (
-    { __typename?: 'MoveCategory' }
-    & Pick<MoveCategory, 'id' | 'name'>
-  ), afterState?: Maybe<(
-    { __typename?: 'State' }
-    & Pick<State, 'id' | 'name'>
-  )>, moveVideo?: Maybe<(
+export type MoveFragment = { __typename?: 'Move', id: string, name: string, kana?: Maybe<string>, opponentState?: Maybe<OpponentStateEnum>, startUpFrame?: Maybe<number>, powerCrush: boolean, crouchingStatus: boolean, jumpStatus: boolean, homing: boolean, screw: boolean, wallBound: boolean, note?: Maybe<string>, moveCategory: { __typename?: 'MoveCategory', id: string, name: string }, afterState?: Maybe<{ __typename?: 'State', id: string, name: string }>, moveVideo?: Maybe<(
     { __typename?: 'MoveVideo' }
     & MoveVideoFragment
   )>, commands: Array<(
@@ -2439,77 +2393,35 @@ export type MoveFragment = (
   )>, conditions: Array<(
     { __typename?: 'Condition' }
     & ConditionFragment
-  )> }
-);
+  )> };
 
-export type MoveCategoryFragment = (
-  { __typename?: 'MoveCategory' }
-  & Pick<MoveCategory, 'id' | 'name'>
-);
+export type MoveCategoryFragment = { __typename?: 'MoveCategory', id: string, name: string };
 
-export type MoveVideoFragment = (
-  { __typename?: 'MoveVideo' }
-  & Pick<MoveVideo, 'id' | 'm3u8Url' | 'thumbnailUrl'>
-);
+export type MoveVideoFragment = { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string };
 
-export type OperationFragment = (
-  { __typename?: 'Operation' }
-  & Pick<Operation, 'id' | 'name' | 'key' | 'icon'>
-);
+export type OperationFragment = { __typename?: 'Operation', id: string, name: string, key: string, icon: boolean };
 
-export type PagingFragment = (
-  { __typename?: 'Paging' }
-  & Pick<Paging, 'currentPage' | 'totalCount' | 'totalPages'>
-);
+export type PagingFragment = { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number };
 
-export type StateFragment = (
-  { __typename?: 'State' }
-  & Pick<State, 'id' | 'name'>
-);
+export type StateFragment = { __typename?: 'State', id: string, name: string };
 
-export type TournamentFragment = (
-  { __typename?: 'Tournament' }
-  & Pick<Tournament, 'id' | 'name' | 'mainImageUrl' | 'url' | 'streamingUrl' | 'description' | 'startsAt'>
-);
+export type TournamentFragment = { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: Maybe<string>, url: string, streamingUrl?: Maybe<string>, description: string, startsAt: string };
 
 export type TournamentVideoFragment = (
   { __typename?: 'TournamentVideo' }
   & VideoSummaryFragment
 );
 
-export type TournamentVideoCommentFragment = (
-  { __typename?: 'TournamentVideoComment' }
-  & Pick<TournamentVideoComment, 'id' | 'message' | 'createdAt'>
-  & { user: (
-    { __typename?: 'User' }
-    & Pick<User, 'name' | 'avatarUrl'>
-  ) }
-);
+export type TournamentVideoCommentFragment = { __typename?: 'TournamentVideoComment', id: string, message: string, createdAt: string, user: { __typename?: 'User', name: string, avatarUrl: string } };
 
-export type VideoSummaryFragment = (
-  { __typename?: 'TournamentVideo' }
-  & Pick<TournamentVideo, 'id' | 'youtubeVideoId' | 'title' | 'thumbnailUrl' | 'commentCount'>
-  & { channel: (
-    { __typename?: 'Channel' }
-    & Pick<Channel, 'name'>
-  ) }
-);
+export type VideoSummaryFragment = { __typename?: 'TournamentVideo', id: string, youtubeVideoId: string, title: string, thumbnailUrl: string, commentCount: number, channel: { __typename?: 'Channel', name: string } };
 
 export type CreateArticleMutationVariables = Exact<{
   attributes: ArticleAttributes;
 }>;
 
 
-export type CreateArticleMutation = (
-  { __typename?: 'Mutation' }
-  & { createArticle?: Maybe<(
-    { __typename?: 'CreateArticlePayload' }
-    & { article: (
-      { __typename?: 'Article' }
-      & Pick<Article, 'id'>
-    ) }
-  )> }
-);
+export type CreateArticleMutation = { __typename?: 'Mutation', createArticle?: Maybe<{ __typename?: 'CreateArticlePayload', article: { __typename?: 'Article', id: string } }> };
 
 export type CreateArticleCommentMutationVariables = Exact<{
   articleId: Scalars['ID'];
@@ -2517,62 +2429,29 @@ export type CreateArticleCommentMutationVariables = Exact<{
 }>;
 
 
-export type CreateArticleCommentMutation = (
-  { __typename?: 'Mutation' }
-  & { createArticleComment?: Maybe<(
-    { __typename?: 'CreateArticleCommentPayload' }
-    & { articleComment: (
-      { __typename?: 'ArticleComment' }
-      & Pick<ArticleComment, 'id'>
-    ) }
-  )> }
-);
+export type CreateArticleCommentMutation = { __typename?: 'Mutation', createArticleComment?: Maybe<{ __typename?: 'CreateArticleCommentPayload', articleComment: { __typename?: 'ArticleComment', id: string } }> };
 
 export type CreateArticleImageMutationVariables = Exact<{
   image: Scalars['String'];
 }>;
 
 
-export type CreateArticleImageMutation = (
-  { __typename?: 'Mutation' }
-  & { createArticleImage?: Maybe<(
-    { __typename?: 'CreateArticleImagePayload' }
-    & Pick<CreateArticleImagePayload, 'url'>
-  )> }
-);
+export type CreateArticleImageMutation = { __typename?: 'Mutation', createArticleImage?: Maybe<{ __typename?: 'CreateArticleImagePayload', url?: Maybe<string> }> };
 
 export type CreateArticleLinkMutationVariables = Exact<{
   url: Scalars['String'];
 }>;
 
 
-export type CreateArticleLinkMutation = (
-  { __typename?: 'Mutation' }
-  & { createArticleLink?: Maybe<(
-    { __typename?: 'CreateArticleLinkPayload' }
-    & { articleLink: (
+export type CreateArticleLinkMutation = { __typename?: 'Mutation', createArticleLink?: Maybe<{ __typename?: 'CreateArticleLinkPayload', articleLink: (
       { __typename?: 'ArticleLink' }
       & ArticleLinkFragment
-    ) }
-  )> }
-);
+    ) }> };
 
 export type CreateArticleVideoMutationVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CreateArticleVideoMutation = (
-  { __typename?: 'Mutation' }
-  & { createArticleVideo?: Maybe<(
-    { __typename?: 'CreateArticleVideoPayload' }
-    & { articleVideo: (
-      { __typename?: 'ArticleVideo' }
-      & Pick<ArticleVideo, 'id' | 'm3u8Url' | 'thumbnailUrl'>
-    ), videoUpload: (
-      { __typename?: 'VideoUpload' }
-      & Pick<VideoUpload, 'url' | 'fields'>
-    ) }
-  )> }
-);
+export type CreateArticleVideoMutation = { __typename?: 'Mutation', createArticleVideo?: Maybe<{ __typename?: 'CreateArticleVideoPayload', articleVideo: { __typename?: 'ArticleVideo', id: string, m3u8Url: string, thumbnailUrl: string }, videoUpload: { __typename?: 'VideoUpload', url: string, fields: string } }> };
 
 export type CreateAttackActionMutationVariables = Exact<{
   moveId: Scalars['ID'];
@@ -2580,32 +2459,17 @@ export type CreateAttackActionMutationVariables = Exact<{
 }>;
 
 
-export type CreateAttackActionMutation = (
-  { __typename?: 'Mutation' }
-  & { createAttackAction?: Maybe<(
-    { __typename?: 'CreateAttackActionPayload' }
-    & { action: (
+export type CreateAttackActionMutation = { __typename?: 'Mutation', createAttackAction?: Maybe<{ __typename?: 'CreateAttackActionPayload', action: (
       { __typename?: 'AttackAction' }
       & AttackActionFragment
-    ) }
-  )> }
-);
+    ) }> };
 
 export type CreateCharacterMutationVariables = Exact<{
   attributes: CharacterAttributes;
 }>;
 
 
-export type CreateCharacterMutation = (
-  { __typename?: 'Mutation' }
-  & { createCharacter?: Maybe<(
-    { __typename?: 'CreateCharacterPayload' }
-    & { character: (
-      { __typename?: 'Character' }
-      & Pick<Character, 'id'>
-    ) }
-  )> }
-);
+export type CreateCharacterMutation = { __typename?: 'Mutation', createCharacter?: Maybe<{ __typename?: 'CreateCharacterPayload', character: { __typename?: 'Character', id: string } }> };
 
 export type CreateComboMutationVariables = Exact<{
   comboCategoryId: Scalars['ID'];
@@ -2613,16 +2477,7 @@ export type CreateComboMutationVariables = Exact<{
 }>;
 
 
-export type CreateComboMutation = (
-  { __typename?: 'Mutation' }
-  & { createCombo?: Maybe<(
-    { __typename?: 'CreateComboPayload' }
-    & { combo: (
-      { __typename?: 'Combo' }
-      & Pick<Combo, 'id'>
-    ) }
-  )> }
-);
+export type CreateComboMutation = { __typename?: 'Mutation', createCombo?: Maybe<{ __typename?: 'CreateComboPayload', combo: { __typename?: 'Combo', id: string } }> };
 
 export type CreateComboCategoryMutationVariables = Exact<{
   characterSlug: Scalars['String'];
@@ -2630,33 +2485,15 @@ export type CreateComboCategoryMutationVariables = Exact<{
 }>;
 
 
-export type CreateComboCategoryMutation = (
-  { __typename?: 'Mutation' }
-  & { createComboCategory?: Maybe<(
-    { __typename?: 'CreateComboCategoryPayload' }
-    & { comboCategory: (
-      { __typename?: 'ComboCategory' }
-      & Pick<ComboCategory, 'id'>
-    ) }
-  )> }
-);
+export type CreateComboCategoryMutation = { __typename?: 'Mutation', createComboCategory?: Maybe<{ __typename?: 'CreateComboCategoryPayload', comboCategory: { __typename?: 'ComboCategory', id: string } }> };
 
 export type CreateComboVideoMutationVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CreateComboVideoMutation = (
-  { __typename?: 'Mutation' }
-  & { createComboVideo?: Maybe<(
-    { __typename?: 'CreateComboVideoPayload' }
-    & { comboVideo: (
+export type CreateComboVideoMutation = { __typename?: 'Mutation', createComboVideo?: Maybe<{ __typename?: 'CreateComboVideoPayload', comboVideo: (
       { __typename?: 'ComboVideo' }
       & ComboVideoFragment
-    ), videoUpload: (
-      { __typename?: 'VideoUpload' }
-      & Pick<VideoUpload, 'url' | 'fields'>
-    ) }
-  )> }
-);
+    ), videoUpload: { __typename?: 'VideoUpload', url: string, fields: string } }> };
 
 export type CreateCommandMutationVariables = Exact<{
   moveId: Scalars['ID'];
@@ -2664,16 +2501,10 @@ export type CreateCommandMutationVariables = Exact<{
 }>;
 
 
-export type CreateCommandMutation = (
-  { __typename?: 'Mutation' }
-  & { createCommand?: Maybe<(
-    { __typename?: 'CreateCommandPayload' }
-    & { command: (
+export type CreateCommandMutation = { __typename?: 'Mutation', createCommand?: Maybe<{ __typename?: 'CreateCommandPayload', command: (
       { __typename?: 'Command' }
       & CommandFragment
-    ) }
-  )> }
-);
+    ) }> };
 
 export type CreateMoveMutationVariables = Exact<{
   moveCategoryId: Scalars['ID'];
@@ -2681,16 +2512,7 @@ export type CreateMoveMutationVariables = Exact<{
 }>;
 
 
-export type CreateMoveMutation = (
-  { __typename?: 'Mutation' }
-  & { createMove?: Maybe<(
-    { __typename?: 'CreateMovePayload' }
-    & { move: (
-      { __typename?: 'Move' }
-      & Pick<Move, 'id'>
-    ) }
-  )> }
-);
+export type CreateMoveMutation = { __typename?: 'Mutation', createMove?: Maybe<{ __typename?: 'CreateMovePayload', move: { __typename?: 'Move', id: string } }> };
 
 export type CreateMoveCategoryMutationVariables = Exact<{
   characterSlug: Scalars['String'];
@@ -2698,16 +2520,7 @@ export type CreateMoveCategoryMutationVariables = Exact<{
 }>;
 
 
-export type CreateMoveCategoryMutation = (
-  { __typename?: 'Mutation' }
-  & { createMoveCategory?: Maybe<(
-    { __typename?: 'CreateMoveCategoryPayload' }
-    & { moveCategory: (
-      { __typename?: 'MoveCategory' }
-      & Pick<MoveCategory, 'id'>
-    ) }
-  )> }
-);
+export type CreateMoveCategoryMutation = { __typename?: 'Mutation', createMoveCategory?: Maybe<{ __typename?: 'CreateMoveCategoryPayload', moveCategory: { __typename?: 'MoveCategory', id: string } }> };
 
 export type CreateMoveCommentMutationVariables = Exact<{
   moveId: Scalars['ID'];
@@ -2715,47 +2528,23 @@ export type CreateMoveCommentMutationVariables = Exact<{
 }>;
 
 
-export type CreateMoveCommentMutation = (
-  { __typename?: 'Mutation' }
-  & { createMoveComment?: Maybe<(
-    { __typename?: 'CreateMoveCommentPayload' }
-    & { moveComment: (
-      { __typename?: 'MoveComment' }
-      & Pick<MoveComment, 'id'>
-    ) }
-  )> }
-);
+export type CreateMoveCommentMutation = { __typename?: 'Mutation', createMoveComment?: Maybe<{ __typename?: 'CreateMoveCommentPayload', moveComment: { __typename?: 'MoveComment', id: string } }> };
 
 export type CreateMoveVideoMutationVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CreateMoveVideoMutation = (
-  { __typename?: 'Mutation' }
-  & { createMoveVideo?: Maybe<(
-    { __typename?: 'CreateMoveVideoPayload' }
-    & { moveVideo: (
+export type CreateMoveVideoMutation = { __typename?: 'Mutation', createMoveVideo?: Maybe<{ __typename?: 'CreateMoveVideoPayload', moveVideo: (
       { __typename?: 'MoveVideo' }
       & MoveVideoFragment
-    ), videoUpload: (
-      { __typename?: 'VideoUpload' }
-      & Pick<VideoUpload, 'url' | 'fields'>
-    ) }
-  )> }
-);
+    ), videoUpload: { __typename?: 'VideoUpload', url: string, fields: string } }> };
 
 export type CreateUserMutationVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CreateUserMutation = (
-  { __typename?: 'Mutation' }
-  & { createUser?: Maybe<(
-    { __typename?: 'CreateUserPayload' }
-    & { currentUser: (
+export type CreateUserMutation = { __typename?: 'Mutation', createUser?: Maybe<{ __typename?: 'CreateUserPayload', currentUser: (
       { __typename?: 'CurrentUser' }
       & CurrentUserFragment
-    ) }
-  )> }
-);
+    ) }> };
 
 export type CreateThrowActionMutationVariables = Exact<{
   moveId: Scalars['ID'];
@@ -2763,32 +2552,17 @@ export type CreateThrowActionMutationVariables = Exact<{
 }>;
 
 
-export type CreateThrowActionMutation = (
-  { __typename?: 'Mutation' }
-  & { createThrowAction?: Maybe<(
-    { __typename?: 'CreateThrowActionPayload' }
-    & { action: (
-      { __typename?: 'ThrowAction' }
-      & Pick<ThrowAction, 'id'>
-    ) }
-  )> }
-);
+export type CreateThrowActionMutation = { __typename?: 'Mutation', createThrowAction?: Maybe<{ __typename?: 'CreateThrowActionPayload', action: { __typename?: 'ThrowAction', id: string } }> };
 
 export type CreateTournamentMutationVariables = Exact<{
   attributes: TournamentAttributes;
 }>;
 
 
-export type CreateTournamentMutation = (
-  { __typename?: 'Mutation' }
-  & { createTournament?: Maybe<(
-    { __typename?: 'CreateTournamentPayload' }
-    & { tournament: (
+export type CreateTournamentMutation = { __typename?: 'Mutation', createTournament?: Maybe<{ __typename?: 'CreateTournamentPayload', tournament: (
       { __typename?: 'Tournament' }
       & TournamentFragment
-    ) }
-  )> }
-);
+    ) }> };
 
 export type CreateTournamentVideoCommentMutationVariables = Exact<{
   tournamentVideoId: Scalars['ID'];
@@ -2796,211 +2570,100 @@ export type CreateTournamentVideoCommentMutationVariables = Exact<{
 }>;
 
 
-export type CreateTournamentVideoCommentMutation = (
-  { __typename?: 'Mutation' }
-  & { createTournamentVideoComment?: Maybe<(
-    { __typename?: 'CreateTournamentVideoCommentPayload' }
-    & { tournamentVideoComment: (
+export type CreateTournamentVideoCommentMutation = { __typename?: 'Mutation', createTournamentVideoComment?: Maybe<{ __typename?: 'CreateTournamentVideoCommentPayload', tournamentVideoComment: (
       { __typename?: 'TournamentVideoComment' }
       & TournamentVideoCommentFragment
-    ) }
-  )> }
-);
+    ) }> };
 
 export type DeleteActionMutationVariables = Exact<{
   actionId: Scalars['ID'];
 }>;
 
 
-export type DeleteActionMutation = (
-  { __typename?: 'Mutation' }
-  & { deleteAction?: Maybe<(
-    { __typename?: 'DeleteActionPayload' }
-    & { action: (
+export type DeleteActionMutation = { __typename?: 'Mutation', deleteAction?: Maybe<{ __typename?: 'DeleteActionPayload', action: (
       { __typename?: 'AttackAction' }
       & Action_AttackAction_Fragment
     ) | (
       { __typename?: 'ThrowAction' }
       & Action_ThrowAction_Fragment
-    ) }
-  )> }
-);
+    ) }> };
 
 export type DeleteArticleMutationVariables = Exact<{
   articleId: Scalars['ID'];
 }>;
 
 
-export type DeleteArticleMutation = (
-  { __typename?: 'Mutation' }
-  & { deleteArticle?: Maybe<(
-    { __typename?: 'DeleteArticlePayload' }
-    & { article: (
-      { __typename?: 'Article' }
-      & Pick<Article, 'id'>
-    ) }
-  )> }
-);
+export type DeleteArticleMutation = { __typename?: 'Mutation', deleteArticle?: Maybe<{ __typename?: 'DeleteArticlePayload', article: { __typename?: 'Article', id: string } }> };
 
 export type DeleteComboCategoryMutationVariables = Exact<{
   comboCategoryId: Scalars['ID'];
 }>;
 
 
-export type DeleteComboCategoryMutation = (
-  { __typename?: 'Mutation' }
-  & { deleteComboCategory?: Maybe<(
-    { __typename?: 'DeleteComboCategoryPayload' }
-    & { comboCategory: (
-      { __typename?: 'ComboCategory' }
-      & Pick<ComboCategory, 'id'>
-    ) }
-  )> }
-);
+export type DeleteComboCategoryMutation = { __typename?: 'Mutation', deleteComboCategory?: Maybe<{ __typename?: 'DeleteComboCategoryPayload', comboCategory: { __typename?: 'ComboCategory', id: string } }> };
 
 export type DeleteCommandMutationVariables = Exact<{
   commandId: Scalars['ID'];
 }>;
 
 
-export type DeleteCommandMutation = (
-  { __typename?: 'Mutation' }
-  & { deleteCommand?: Maybe<(
-    { __typename?: 'DeleteCommandPayload' }
-    & { command: (
-      { __typename?: 'Command' }
-      & Pick<Command, 'id'>
-    ) }
-  )> }
-);
+export type DeleteCommandMutation = { __typename?: 'Mutation', deleteCommand?: Maybe<{ __typename?: 'DeleteCommandPayload', command: { __typename?: 'Command', id: string } }> };
 
 export type DeleteMoveMutationVariables = Exact<{
   moveId: Scalars['ID'];
 }>;
 
 
-export type DeleteMoveMutation = (
-  { __typename?: 'Mutation' }
-  & { deleteMove?: Maybe<(
-    { __typename?: 'DeleteMovePayload' }
-    & { move: (
-      { __typename?: 'Move' }
-      & Pick<Move, 'id'>
-    ) }
-  )> }
-);
+export type DeleteMoveMutation = { __typename?: 'Mutation', deleteMove?: Maybe<{ __typename?: 'DeleteMovePayload', move: { __typename?: 'Move', id: string } }> };
 
 export type DeleteMoveCategoryMutationVariables = Exact<{
   moveCategoryId: Scalars['ID'];
 }>;
 
 
-export type DeleteMoveCategoryMutation = (
-  { __typename?: 'Mutation' }
-  & { deleteMoveCategory?: Maybe<(
-    { __typename?: 'DeleteMoveCategoryPayload' }
-    & { moveCategory: (
-      { __typename?: 'MoveCategory' }
-      & Pick<MoveCategory, 'id'>
-    ) }
-  )> }
-);
+export type DeleteMoveCategoryMutation = { __typename?: 'Mutation', deleteMoveCategory?: Maybe<{ __typename?: 'DeleteMoveCategoryPayload', moveCategory: { __typename?: 'MoveCategory', id: string } }> };
 
 export type DeleteTournamentMutationVariables = Exact<{
   tournamentId: Scalars['ID'];
 }>;
 
 
-export type DeleteTournamentMutation = (
-  { __typename?: 'Mutation' }
-  & { deleteTournament?: Maybe<(
-    { __typename?: 'DeleteTournamentPayload' }
-    & { tournament: (
-      { __typename?: 'Tournament' }
-      & Pick<Tournament, 'id'>
-    ) }
-  )> }
-);
+export type DeleteTournamentMutation = { __typename?: 'Mutation', deleteTournament?: Maybe<{ __typename?: 'DeleteTournamentPayload', tournament: { __typename?: 'Tournament', id: string } }> };
 
 export type FavArticleMutationVariables = Exact<{
   articleId: Scalars['ID'];
 }>;
 
 
-export type FavArticleMutation = (
-  { __typename?: 'Mutation' }
-  & { favArticle?: Maybe<(
-    { __typename?: 'FavArticlePayload' }
-    & { article: (
-      { __typename?: 'Article' }
-      & Pick<Article, 'id'>
-    ) }
-  )> }
-);
+export type FavArticleMutation = { __typename?: 'Mutation', favArticle?: Maybe<{ __typename?: 'FavArticlePayload', article: { __typename?: 'Article', id: string } }> };
 
 export type PublishArticleMutationVariables = Exact<{
   articleId: Scalars['ID'];
 }>;
 
 
-export type PublishArticleMutation = (
-  { __typename?: 'Mutation' }
-  & { publishArticle?: Maybe<(
-    { __typename?: 'PublishArticlePayload' }
-    & { article: (
-      { __typename?: 'Article' }
-      & Pick<Article, 'id'>
-    ) }
-  )> }
-);
+export type PublishArticleMutation = { __typename?: 'Mutation', publishArticle?: Maybe<{ __typename?: 'PublishArticlePayload', article: { __typename?: 'Article', id: string } }> };
 
 export type SetUserAvatarMutationVariables = Exact<{
   avatar: Scalars['String'];
 }>;
 
 
-export type SetUserAvatarMutation = (
-  { __typename?: 'Mutation' }
-  & { setUserAvatar?: Maybe<(
-    { __typename?: 'SetUserAvatarPayload' }
-    & { user: (
-      { __typename?: 'User' }
-      & Pick<User, 'avatarUrl'>
-    ) }
-  )> }
-);
+export type SetUserAvatarMutation = { __typename?: 'Mutation', setUserAvatar?: Maybe<{ __typename?: 'SetUserAvatarPayload', user: { __typename?: 'User', avatarUrl: string } }> };
 
 export type StopArticleMutationVariables = Exact<{
   articleId: Scalars['ID'];
 }>;
 
 
-export type StopArticleMutation = (
-  { __typename?: 'Mutation' }
-  & { stopArticle?: Maybe<(
-    { __typename?: 'StopArticlePayload' }
-    & { article: (
-      { __typename?: 'Article' }
-      & Pick<Article, 'id'>
-    ) }
-  )> }
-);
+export type StopArticleMutation = { __typename?: 'Mutation', stopArticle?: Maybe<{ __typename?: 'StopArticlePayload', article: { __typename?: 'Article', id: string } }> };
 
 export type UnfavArticleMutationVariables = Exact<{
   articleId: Scalars['ID'];
 }>;
 
 
-export type UnfavArticleMutation = (
-  { __typename?: 'Mutation' }
-  & { unfavArticle?: Maybe<(
-    { __typename?: 'UnfavArticlePayload' }
-    & { article: (
-      { __typename?: 'Article' }
-      & Pick<Article, 'id'>
-    ) }
-  )> }
-);
+export type UnfavArticleMutation = { __typename?: 'Mutation', unfavArticle?: Maybe<{ __typename?: 'UnfavArticlePayload', article: { __typename?: 'Article', id: string } }> };
 
 export type UpdateArticleMutationVariables = Exact<{
   articleId: Scalars['ID'];
@@ -3008,16 +2671,7 @@ export type UpdateArticleMutationVariables = Exact<{
 }>;
 
 
-export type UpdateArticleMutation = (
-  { __typename?: 'Mutation' }
-  & { updateArticle?: Maybe<(
-    { __typename?: 'UpdateArticlePayload' }
-    & { article: (
-      { __typename?: 'Article' }
-      & Pick<Article, 'id'>
-    ) }
-  )> }
-);
+export type UpdateArticleMutation = { __typename?: 'Mutation', updateArticle?: Maybe<{ __typename?: 'UpdateArticlePayload', article: { __typename?: 'Article', id: string } }> };
 
 export type UpdateAttackActionMutationVariables = Exact<{
   actionId: Scalars['ID'];
@@ -3025,16 +2679,7 @@ export type UpdateAttackActionMutationVariables = Exact<{
 }>;
 
 
-export type UpdateAttackActionMutation = (
-  { __typename?: 'Mutation' }
-  & { updateAttackAction?: Maybe<(
-    { __typename?: 'UpdateAttackActionPayload' }
-    & { action: (
-      { __typename?: 'AttackAction' }
-      & Pick<AttackAction, 'id'>
-    ) }
-  )> }
-);
+export type UpdateAttackActionMutation = { __typename?: 'Mutation', updateAttackAction?: Maybe<{ __typename?: 'UpdateAttackActionPayload', action: { __typename?: 'AttackAction', id: string } }> };
 
 export type UpdateCharacterMutationVariables = Exact<{
   characterSlug: Scalars['String'];
@@ -3042,16 +2687,7 @@ export type UpdateCharacterMutationVariables = Exact<{
 }>;
 
 
-export type UpdateCharacterMutation = (
-  { __typename?: 'Mutation' }
-  & { updateCharacter?: Maybe<(
-    { __typename?: 'UpdateCharacterPayload' }
-    & { character: (
-      { __typename?: 'Character' }
-      & Pick<Character, 'id'>
-    ) }
-  )> }
-);
+export type UpdateCharacterMutation = { __typename?: 'Mutation', updateCharacter?: Maybe<{ __typename?: 'UpdateCharacterPayload', character: { __typename?: 'Character', id: string } }> };
 
 export type UpdateComboMutationVariables = Exact<{
   comboId: Scalars['ID'];
@@ -3059,20 +2695,7 @@ export type UpdateComboMutationVariables = Exact<{
 }>;
 
 
-export type UpdateComboMutation = (
-  { __typename?: 'Mutation' }
-  & { updateCombo?: Maybe<(
-    { __typename?: 'UpdateComboPayload' }
-    & { combo: (
-      { __typename?: 'Combo' }
-      & Pick<Combo, 'id'>
-      & { comboCategory: (
-        { __typename?: 'ComboCategory' }
-        & Pick<ComboCategory, 'id'>
-      ) }
-    ) }
-  )> }
-);
+export type UpdateComboMutation = { __typename?: 'Mutation', updateCombo?: Maybe<{ __typename?: 'UpdateComboPayload', combo: { __typename?: 'Combo', id: string, comboCategory: { __typename?: 'ComboCategory', id: string } } }> };
 
 export type UpdateComboCategoryMutationVariables = Exact<{
   comboCategoryId: Scalars['ID'];
@@ -3080,16 +2703,7 @@ export type UpdateComboCategoryMutationVariables = Exact<{
 }>;
 
 
-export type UpdateComboCategoryMutation = (
-  { __typename?: 'Mutation' }
-  & { updateComboCategory?: Maybe<(
-    { __typename?: 'UpdateComboCategoryPayload' }
-    & { comboCategory: (
-      { __typename?: 'ComboCategory' }
-      & Pick<ComboCategory, 'id'>
-    ) }
-  )> }
-);
+export type UpdateComboCategoryMutation = { __typename?: 'Mutation', updateComboCategory?: Maybe<{ __typename?: 'UpdateComboCategoryPayload', comboCategory: { __typename?: 'ComboCategory', id: string } }> };
 
 export type UpdateComboCategoryPositionMutationVariables = Exact<{
   comboCategoryId: Scalars['ID'];
@@ -3097,16 +2711,7 @@ export type UpdateComboCategoryPositionMutationVariables = Exact<{
 }>;
 
 
-export type UpdateComboCategoryPositionMutation = (
-  { __typename?: 'Mutation' }
-  & { updateComboCategoryPosition?: Maybe<(
-    { __typename?: 'UpdateComboCategoryPositionPayload' }
-    & { comboCategory: (
-      { __typename?: 'ComboCategory' }
-      & Pick<ComboCategory, 'id'>
-    ) }
-  )> }
-);
+export type UpdateComboCategoryPositionMutation = { __typename?: 'Mutation', updateComboCategoryPosition?: Maybe<{ __typename?: 'UpdateComboCategoryPositionPayload', comboCategory: { __typename?: 'ComboCategory', id: string } }> };
 
 export type UpdateComboPositionMutationVariables = Exact<{
   comboId: Scalars['ID'];
@@ -3114,16 +2719,7 @@ export type UpdateComboPositionMutationVariables = Exact<{
 }>;
 
 
-export type UpdateComboPositionMutation = (
-  { __typename?: 'Mutation' }
-  & { updateComboPosition?: Maybe<(
-    { __typename?: 'UpdateComboPositionPayload' }
-    & { combo: (
-      { __typename?: 'Combo' }
-      & Pick<Combo, 'id'>
-    ) }
-  )> }
-);
+export type UpdateComboPositionMutation = { __typename?: 'Mutation', updateComboPosition?: Maybe<{ __typename?: 'UpdateComboPositionPayload', combo: { __typename?: 'Combo', id: string } }> };
 
 export type UpdateCommandMutationVariables = Exact<{
   commandId: Scalars['ID'];
@@ -3131,32 +2727,17 @@ export type UpdateCommandMutationVariables = Exact<{
 }>;
 
 
-export type UpdateCommandMutation = (
-  { __typename?: 'Mutation' }
-  & { updateCommand?: Maybe<(
-    { __typename?: 'UpdateCommandPayload' }
-    & { command: (
-      { __typename?: 'Command' }
-      & Pick<Command, 'id'>
-    ) }
-  )> }
-);
+export type UpdateCommandMutation = { __typename?: 'Mutation', updateCommand?: Maybe<{ __typename?: 'UpdateCommandPayload', command: { __typename?: 'Command', id: string } }> };
 
 export type UpdateCurrentUserMutationVariables = Exact<{
   attributes: CurrentUserAttributes;
 }>;
 
 
-export type UpdateCurrentUserMutation = (
-  { __typename?: 'Mutation' }
-  & { updateCurrentUser?: Maybe<(
-    { __typename?: 'UpdateCurrentUserPayload' }
-    & { currentUser: (
+export type UpdateCurrentUserMutation = { __typename?: 'Mutation', updateCurrentUser?: Maybe<{ __typename?: 'UpdateCurrentUserPayload', currentUser: (
       { __typename?: 'CurrentUser' }
       & CurrentUserFragment
-    ) }
-  )> }
-);
+    ) }> };
 
 export type UpdateMoveMutationVariables = Exact<{
   moveId: Scalars['ID'];
@@ -3164,20 +2745,7 @@ export type UpdateMoveMutationVariables = Exact<{
 }>;
 
 
-export type UpdateMoveMutation = (
-  { __typename?: 'Mutation' }
-  & { updateMove?: Maybe<(
-    { __typename?: 'UpdateMovePayload' }
-    & { move: (
-      { __typename?: 'Move' }
-      & Pick<Move, 'id'>
-      & { moveCategory: (
-        { __typename?: 'MoveCategory' }
-        & Pick<MoveCategory, 'id'>
-      ) }
-    ) }
-  )> }
-);
+export type UpdateMoveMutation = { __typename?: 'Mutation', updateMove?: Maybe<{ __typename?: 'UpdateMovePayload', move: { __typename?: 'Move', id: string, moveCategory: { __typename?: 'MoveCategory', id: string } } }> };
 
 export type UpdateMoveCategoryMutationVariables = Exact<{
   moveCategoryId: Scalars['ID'];
@@ -3185,16 +2753,7 @@ export type UpdateMoveCategoryMutationVariables = Exact<{
 }>;
 
 
-export type UpdateMoveCategoryMutation = (
-  { __typename?: 'Mutation' }
-  & { updateMoveCategory?: Maybe<(
-    { __typename?: 'UpdateMoveCategoryPayload' }
-    & { moveCategory: (
-      { __typename?: 'MoveCategory' }
-      & Pick<MoveCategory, 'id'>
-    ) }
-  )> }
-);
+export type UpdateMoveCategoryMutation = { __typename?: 'Mutation', updateMoveCategory?: Maybe<{ __typename?: 'UpdateMoveCategoryPayload', moveCategory: { __typename?: 'MoveCategory', id: string } }> };
 
 export type UpdateMoveCategoryPositionMutationVariables = Exact<{
   moveCategoryId: Scalars['ID'];
@@ -3202,16 +2761,7 @@ export type UpdateMoveCategoryPositionMutationVariables = Exact<{
 }>;
 
 
-export type UpdateMoveCategoryPositionMutation = (
-  { __typename?: 'Mutation' }
-  & { updateMoveCategoryPosition?: Maybe<(
-    { __typename?: 'UpdateMoveCategoryPositionPayload' }
-    & { moveCategory: (
-      { __typename?: 'MoveCategory' }
-      & Pick<MoveCategory, 'id'>
-    ) }
-  )> }
-);
+export type UpdateMoveCategoryPositionMutation = { __typename?: 'Mutation', updateMoveCategoryPosition?: Maybe<{ __typename?: 'UpdateMoveCategoryPositionPayload', moveCategory: { __typename?: 'MoveCategory', id: string } }> };
 
 export type UpdateMovePositionMutationVariables = Exact<{
   moveId: Scalars['ID'];
@@ -3219,16 +2769,7 @@ export type UpdateMovePositionMutationVariables = Exact<{
 }>;
 
 
-export type UpdateMovePositionMutation = (
-  { __typename?: 'Mutation' }
-  & { updateMovePosition?: Maybe<(
-    { __typename?: 'UpdateMovePositionPayload' }
-    & { move: (
-      { __typename?: 'Move' }
-      & Pick<Move, 'id'>
-    ) }
-  )> }
-);
+export type UpdateMovePositionMutation = { __typename?: 'Mutation', updateMovePosition?: Maybe<{ __typename?: 'UpdateMovePositionPayload', move: { __typename?: 'Move', id: string } }> };
 
 export type UpdateThrowActionMutationVariables = Exact<{
   actionId: Scalars['ID'];
@@ -3236,16 +2777,7 @@ export type UpdateThrowActionMutationVariables = Exact<{
 }>;
 
 
-export type UpdateThrowActionMutation = (
-  { __typename?: 'Mutation' }
-  & { updateThrowAction?: Maybe<(
-    { __typename?: 'UpdateThrowActionPayload' }
-    & { action: (
-      { __typename?: 'ThrowAction' }
-      & Pick<ThrowAction, 'id'>
-    ) }
-  )> }
-);
+export type UpdateThrowActionMutation = { __typename?: 'Mutation', updateThrowAction?: Maybe<{ __typename?: 'UpdateThrowActionPayload', action: { __typename?: 'ThrowAction', id: string } }> };
 
 export type UpdateTournamentMutationVariables = Exact<{
   tournamentId: Scalars['ID'];
@@ -3253,16 +2785,10 @@ export type UpdateTournamentMutationVariables = Exact<{
 }>;
 
 
-export type UpdateTournamentMutation = (
-  { __typename?: 'Mutation' }
-  & { updateTournament?: Maybe<(
-    { __typename?: 'UpdateTournamentPayload' }
-    & { tournament: (
+export type UpdateTournamentMutation = { __typename?: 'Mutation', updateTournament?: Maybe<{ __typename?: 'UpdateTournamentPayload', tournament: (
       { __typename?: 'Tournament' }
       & TournamentFragment
-    ) }
-  )> }
-);
+    ) }> };
 
 export type UpdateTournamentVideoMutationVariables = Exact<{
   tournamentVideoId: Scalars['ID'];
@@ -3270,156 +2796,71 @@ export type UpdateTournamentVideoMutationVariables = Exact<{
 }>;
 
 
-export type UpdateTournamentVideoMutation = (
-  { __typename?: 'Mutation' }
-  & { updateTournamentVideo?: Maybe<(
-    { __typename?: 'UpdateTournamentVideoPayload' }
-    & { tournamentVideo: (
-      { __typename?: 'TournamentVideo' }
-      & Pick<TournamentVideo, 'id'>
-    ) }
-  )> }
-);
+export type UpdateTournamentVideoMutation = { __typename?: 'Mutation', updateTournamentVideo?: Maybe<{ __typename?: 'UpdateTournamentVideoPayload', tournamentVideo: { __typename?: 'TournamentVideo', id: string } }> };
 
 export type ArticlePathsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ArticlePathsQuery = (
-  { __typename?: 'Query' }
-  & { allArticles: Array<(
-    { __typename?: 'Article' }
-    & Pick<Article, 'id'>
-  )> }
-);
+export type ArticlePathsQuery = { __typename?: 'Query', allArticles: Array<{ __typename?: 'Article', id: string }> };
 
 export type CharacterPathsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CharacterPathsQuery = (
-  { __typename?: 'Query' }
-  & { characters: Array<(
-    { __typename?: 'Character' }
-    & Pick<Character, 'slug'>
-  )> }
-);
+export type CharacterPathsQuery = { __typename?: 'Query', characters: Array<{ __typename?: 'Character', slug: string }> };
 
-export type CharacterSelectOptionFragment = (
-  { __typename?: 'Character' }
-  & Pick<Character, 'id' | 'slug' | 'name'>
-);
+export type CharacterSelectOptionFragment = { __typename?: 'Character', id: string, slug: string, name: string };
 
 export type CharacterSelectOptionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CharacterSelectOptionsQuery = (
-  { __typename?: 'Query' }
-  & { characters: Array<(
+export type CharacterSelectOptionsQuery = { __typename?: 'Query', characters: Array<(
     { __typename?: 'Character' }
     & CharacterSelectOptionFragment
-  )> }
-);
+  )> };
 
 export type CharacterSlugsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CharacterSlugsQuery = (
-  { __typename?: 'Query' }
-  & { characters: Array<(
-    { __typename?: 'Character' }
-    & Pick<Character, 'slug'>
-  )> }
-);
+export type CharacterSlugsQuery = { __typename?: 'Query', characters: Array<{ __typename?: 'Character', slug: string }> };
 
 export type ComboCategoryIdsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ComboCategoryIdsQuery = (
-  { __typename?: 'Query' }
-  & { comboCategories: Array<(
-    { __typename?: 'ComboCategory' }
-    & Pick<ComboCategory, 'id'>
-  )> }
-);
+export type ComboCategoryIdsQuery = { __typename?: 'Query', comboCategories: Array<{ __typename?: 'ComboCategory', id: string }> };
 
 export type ComboSelectOptionsQueryVariables = Exact<{
   characterSlug: Scalars['String'];
 }>;
 
 
-export type ComboSelectOptionsQuery = (
-  { __typename?: 'Query' }
-  & { comboCategories: Array<(
-    { __typename?: 'ComboCategory' }
-    & Pick<ComboCategory, 'id' | 'name'>
-    & { combos: Array<(
-      { __typename?: 'Combo' }
-      & Pick<Combo, 'id' | 'name'>
-    )> }
-  )> }
-);
+export type ComboSelectOptionsQuery = { __typename?: 'Query', comboCategories: Array<{ __typename?: 'ComboCategory', id: string, name: string, combos: Array<{ __typename?: 'Combo', id: string, name: string }> }> };
 
 export type CurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CurrentUserQuery = (
-  { __typename?: 'Query' }
-  & { currentUser: (
+export type CurrentUserQuery = { __typename?: 'Query', currentUser: (
     { __typename?: 'CurrentUser' }
     & CurrentUserFragment
-  ) }
-);
+  ) };
 
 export type MoveCategoryIdsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type MoveCategoryIdsQuery = (
-  { __typename?: 'Query' }
-  & { moveCategories: Array<(
-    { __typename?: 'MoveCategory' }
-    & Pick<MoveCategory, 'id'>
-  )> }
-);
+export type MoveCategoryIdsQuery = { __typename?: 'Query', moveCategories: Array<{ __typename?: 'MoveCategory', id: string }> };
 
 export type MoveSelectOptionsQueryVariables = Exact<{
   characterSlug: Scalars['String'];
 }>;
 
 
-export type MoveSelectOptionsQuery = (
-  { __typename?: 'Query' }
-  & { moveCategories: Array<(
-    { __typename?: 'MoveCategory' }
-    & Pick<MoveCategory, 'id' | 'name'>
-    & { moves: Array<(
-      { __typename?: 'Move' }
-      & Pick<Move, 'id' | 'name'>
-      & { commands: Array<(
-        { __typename?: 'Command' }
-        & { operations: Array<(
-          { __typename?: 'Operation' }
-          & Pick<Operation, 'key'>
-        )> }
-      )> }
-    )> }
-  )> }
-);
+export type MoveSelectOptionsQuery = { __typename?: 'Query', moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, moves: Array<{ __typename?: 'Move', id: string, name: string, commands: Array<{ __typename?: 'Command', operations: Array<{ __typename?: 'Operation', key: string }> }> }> }> };
 
 export type MyArticleQueryVariables = Exact<{
   articleId: Scalars['ID'];
 }>;
 
 
-export type MyArticleQuery = (
-  { __typename?: 'Query' }
-  & { myArticle: (
-    { __typename?: 'Article' }
-    & Pick<Article, 'id' | 'title' | 'description' | 'mainImageUrl' | 'publishedAt' | 'faved' | 'favsCount' | 'status' | 'category' | 'content'>
-    & { author: (
-      { __typename?: 'User' }
-      & Pick<User, 'name' | 'avatarUrl'>
-    ) }
-  ) }
-);
+export type MyArticleQuery = { __typename?: 'Query', myArticle: { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: Maybe<string>, publishedAt?: Maybe<string>, faved: boolean, favsCount: number, status: ArticleStatus, category: ArticleCategory, content: string, author: { __typename?: 'User', name: string, avatarUrl: string } } };
 
 export type MyArticlesQueryVariables = Exact<{
   page?: Maybe<Scalars['Int']>;
@@ -3427,173 +2868,103 @@ export type MyArticlesQueryVariables = Exact<{
 }>;
 
 
-export type MyArticlesQuery = (
-  { __typename?: 'Query' }
-  & { myArticles: (
-    { __typename?: 'ArticleCollection' }
-    & { records: Array<(
+export type MyArticlesQuery = { __typename?: 'Query', myArticles: { __typename?: 'ArticleCollection', records: Array<(
       { __typename?: 'Article' }
       & ArticleSummaryFragment
     )>, paging: (
       { __typename?: 'Paging' }
       & PagingFragment
-    ) }
-  ) }
-);
+    ) } };
 
 export type OperationsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type OperationsQuery = (
-  { __typename?: 'Query' }
-  & { operations: Array<(
+export type OperationsQuery = { __typename?: 'Query', operations: Array<(
     { __typename?: 'Operation' }
     & OperationFragment
-  )> }
-);
+  )> };
 
-export type OrganizerSelectOptionFragment = (
-  { __typename?: 'Organizer' }
-  & Pick<Organizer, 'id' | 'slug' | 'name'>
-);
+export type OrganizerSelectOptionFragment = { __typename?: 'Organizer', id: string, slug: string, name: string };
 
 export type OrganizerSelectOptionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type OrganizerSelectOptionsQuery = (
-  { __typename?: 'Query' }
-  & { organizers: (
-    { __typename?: 'OrganizerCollection' }
-    & { records: Array<(
+export type OrganizerSelectOptionsQuery = { __typename?: 'Query', organizers: { __typename?: 'OrganizerCollection', records: Array<(
       { __typename?: 'Organizer' }
       & OrganizerSelectOptionFragment
-    )> }
-  ) }
-);
+    )> } };
 
-export type PlayerSelectOptionFragment = (
-  { __typename?: 'Player' }
-  & Pick<Player, 'id' | 'slug' | 'name'>
-);
+export type PlayerSelectOptionFragment = { __typename?: 'Player', id: string, slug: string, name: string };
 
 export type PlayerSelectOptionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type PlayerSelectOptionsQuery = (
-  { __typename?: 'Query' }
-  & { players: (
-    { __typename?: 'PlayerCollection' }
-    & { records: Array<(
+export type PlayerSelectOptionsQuery = { __typename?: 'Query', players: { __typename?: 'PlayerCollection', records: Array<(
       { __typename?: 'Player' }
       & PlayerSelectOptionFragment
-    )> }
-  ) }
-);
+    )> } };
 
 export type StatesQueryVariables = Exact<{
   characterSlug: Scalars['String'];
 }>;
 
 
-export type StatesQuery = (
-  { __typename?: 'Query' }
-  & { states: Array<(
+export type StatesQuery = { __typename?: 'Query', states: Array<(
     { __typename?: 'State' }
     & StateFragment
-  )> }
-);
+  )> };
 
-export type ArticleCardFragment = (
-  { __typename?: 'Article' }
-  & Pick<Article, 'id' | 'title' | 'description' | 'mainImageUrl' | 'publishedAt' | 'faved' | 'favsCount' | 'status'>
-  & { author: (
-    { __typename?: 'User' }
-    & Pick<User, 'name' | 'avatarUrl'>
-  ) }
-);
+export type ArticleCardFragment = { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: Maybe<string>, publishedAt?: Maybe<string>, faved: boolean, favsCount: number, status: ArticleStatus, author: { __typename?: 'User', name: string, avatarUrl: string } };
 
 export type ArticleElementComboQueryVariables = Exact<{
   comboId: Scalars['ID'];
 }>;
 
 
-export type ArticleElementComboQuery = (
-  { __typename?: 'Query' }
-  & { combo: (
+export type ArticleElementComboQuery = { __typename?: 'Query', combo: (
     { __typename?: 'Combo' }
     & ComboMediaFragment
-  ) }
-);
+  ) };
 
 export type ArticleElementMoveQueryVariables = Exact<{
   moveId: Scalars['ID'];
 }>;
 
 
-export type ArticleElementMoveQuery = (
-  { __typename?: 'Query' }
-  & { move: (
+export type ArticleElementMoveQuery = { __typename?: 'Query', move: (
     { __typename?: 'Move' }
     & MoveMediaFragment
-  ) }
-);
+  ) };
 
-export type ArticleFormArticleFragment = (
-  { __typename?: 'Article' }
-  & Pick<Article, 'id' | 'title' | 'description' | 'mainImageUrl' | 'category' | 'content'>
-);
+export type ArticleFormArticleFragment = { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: Maybe<string>, category: ArticleCategory, content: string };
 
 export type CharacterCardQueryVariables = Exact<{
   characterSlug: Scalars['String'];
 }>;
 
 
-export type CharacterCardQuery = (
-  { __typename?: 'Query' }
-  & { character: (
+export type CharacterCardQuery = { __typename?: 'Query', character: (
     { __typename?: 'Character' }
     & CharacterCardFragment
-  ) }
-);
+  ) };
 
-export type CharacterCardFragment = (
-  { __typename?: 'Character' }
-  & Pick<Character, 'slug' | 'longName' | 'faceImageUrl' | 'country' | 'fightingStyle'>
-);
+export type CharacterCardFragment = { __typename?: 'Character', slug: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string };
 
 export type CharacterCardsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CharacterCardsQuery = (
-  { __typename?: 'Query' }
-  & { characters: Array<(
+export type CharacterCardsQuery = { __typename?: 'Query', characters: Array<(
     { __typename?: 'Character' }
     & CharacterCardFragment
-  )> }
-);
+  )> };
 
-export type CharacterFormFragment = (
-  { __typename?: 'Character' }
-  & Pick<Character, 'name' | 'nameKana' | 'longName' | 'longNameKana' | 'slug' | 'country' | 'fightingStyle' | 'story' | 'description' | 'dlc'>
-);
+export type CharacterFormFragment = { __typename?: 'Character', name: string, nameKana: string, longName: string, longNameKana: string, slug: string, country: string, fightingStyle: string, story: string, description: string, dlc: boolean };
 
-export type ComboCategoryCardFragment = (
-  { __typename?: 'ComboCategory' }
-  & Pick<ComboCategory, 'id' | 'name' | 'combosCount'>
-);
+export type ComboCategoryCardFragment = { __typename?: 'ComboCategory', id: string, name: string, combosCount: number };
 
-export type ComboCategoryListItemFragment = (
-  { __typename?: 'ComboCategory' }
-  & Pick<ComboCategory, 'id' | 'name' | 'combosCount'>
-);
+export type ComboCategoryListItemFragment = { __typename?: 'ComboCategory', id: string, name: string, combosCount: number };
 
-export type ComboMediaFragment = (
-  { __typename?: 'Combo' }
-  & Pick<Combo, 'id' | 'name' | 'damage' | 'note'>
-  & { comboCategory: (
-    { __typename?: 'ComboCategory' }
-    & Pick<ComboCategory, 'id' | 'name'>
-  ), comboVideo?: Maybe<(
+export type ComboMediaFragment = { __typename?: 'Combo', id: string, name: string, damage?: Maybe<number>, note?: Maybe<string>, comboCategory: { __typename?: 'ComboCategory', id: string, name: string }, comboVideo?: Maybe<(
     { __typename?: 'ComboVideo' }
     & ComboVideoFragment
   )>, conditions: Array<(
@@ -3602,399 +2973,198 @@ export type ComboMediaFragment = (
   )>, operations: Array<(
     { __typename?: 'Operation' }
     & OperationFragment
-  )> }
-);
+  )> };
 
-export type CommentCardUserFragment = (
-  { __typename?: 'User' }
-  & Pick<User, 'name' | 'avatarUrl'>
-);
+export type CommentCardUserFragment = { __typename?: 'User', name: string, avatarUrl: string };
 
-export type ArticleCommentCardFragment = (
-  { __typename?: 'ArticleComment' }
-  & Pick<ArticleComment, 'id' | 'message' | 'createdAt'>
-  & { user: (
+export type ArticleCommentCardFragment = { __typename?: 'ArticleComment', id: string, message: string, createdAt: string, user: (
     { __typename?: 'User' }
     & CommentCardUserFragment
-  ) }
-);
+  ) };
 
 export type ArticleCommentCardsQueryVariables = Exact<{
   articleId: Scalars['ID'];
 }>;
 
 
-export type ArticleCommentCardsQuery = (
-  { __typename?: 'Query' }
-  & { articleComments: Array<(
+export type ArticleCommentCardsQuery = { __typename?: 'Query', articleComments: Array<(
     { __typename?: 'ArticleComment' }
     & ArticleCommentCardFragment
-  )> }
-);
+  )> };
 
-export type MoveCommentCardFragment = (
-  { __typename?: 'MoveComment' }
-  & Pick<MoveComment, 'id' | 'message' | 'createdAt'>
-  & { user: (
+export type MoveCommentCardFragment = { __typename?: 'MoveComment', id: string, message: string, createdAt: string, user: (
     { __typename?: 'User' }
     & CommentCardUserFragment
-  ) }
-);
+  ) };
 
 export type MoveCommentCardsQueryVariables = Exact<{
   moveId: Scalars['ID'];
 }>;
 
 
-export type MoveCommentCardsQuery = (
-  { __typename?: 'Query' }
-  & { moveComments: Array<(
+export type MoveCommentCardsQuery = { __typename?: 'Query', moveComments: Array<(
     { __typename?: 'MoveComment' }
     & MoveCommentCardFragment
-  )> }
-);
+  )> };
 
-export type TournamentVideoCommentCardFragment = (
-  { __typename?: 'TournamentVideoComment' }
-  & Pick<TournamentVideoComment, 'id' | 'message' | 'createdAt'>
-  & { user: (
+export type TournamentVideoCommentCardFragment = { __typename?: 'TournamentVideoComment', id: string, message: string, createdAt: string, user: (
     { __typename?: 'User' }
     & CommentCardUserFragment
-  ) }
-);
+  ) };
 
 export type TournamentVideoCommentCardsQueryVariables = Exact<{
   tournamentVideoId: Scalars['ID'];
 }>;
 
 
-export type TournamentVideoCommentCardsQuery = (
-  { __typename?: 'Query' }
-  & { tournamentVideoComments: Array<(
+export type TournamentVideoCommentCardsQuery = { __typename?: 'Query', tournamentVideoComments: Array<(
     { __typename?: 'TournamentVideoComment' }
     & TournamentVideoCommentCardFragment
-  )> }
-);
+  )> };
 
-export type DashboardOrganizerCardFragment = (
-  { __typename?: 'Organizer' }
-  & Pick<Organizer, 'id' | 'slug' | 'name' | 'avatarUrl' | 'description'>
-);
+export type DashboardOrganizerCardFragment = { __typename?: 'Organizer', id: string, slug: string, name: string, avatarUrl?: Maybe<string>, description?: Maybe<string> };
 
 export type DashboardOrganizerCardDeleteOrganizerMutationVariables = Exact<{
   organizerSlug: Scalars['String'];
 }>;
 
 
-export type DashboardOrganizerCardDeleteOrganizerMutation = (
-  { __typename?: 'Mutation' }
-  & { deleteOrganizer?: Maybe<(
-    { __typename?: 'DeleteOrganizerPayload' }
-    & { organizer: (
-      { __typename?: 'Organizer' }
-      & Pick<Organizer, 'id'>
-    ) }
-  )> }
-);
+export type DashboardOrganizerCardDeleteOrganizerMutation = { __typename?: 'Mutation', deleteOrganizer?: Maybe<{ __typename?: 'DeleteOrganizerPayload', organizer: { __typename?: 'Organizer', id: string } }> };
 
-export type DashboardPlayerCardFragment = (
-  { __typename?: 'Player' }
-  & Pick<Player, 'id' | 'slug' | 'name' | 'avatarUrl' | 'description'>
-);
+export type DashboardPlayerCardFragment = { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: Maybe<string>, description?: Maybe<string> };
 
 export type DashboardPlayerCardDeletePlayerMutationVariables = Exact<{
   playerSlug: Scalars['String'];
 }>;
 
 
-export type DashboardPlayerCardDeletePlayerMutation = (
-  { __typename?: 'Mutation' }
-  & { deletePlayer?: Maybe<(
-    { __typename?: 'DeletePlayerPayload' }
-    & { player: (
-      { __typename?: 'Player' }
-      & Pick<Player, 'id'>
-    ) }
-  )> }
-);
+export type DashboardPlayerCardDeletePlayerMutation = { __typename?: 'Mutation', deletePlayer?: Maybe<{ __typename?: 'DeletePlayerPayload', player: { __typename?: 'Player', id: string } }> };
 
-export type DashboardTournamentCardFragment = (
-  { __typename?: 'Tournament' }
-  & Pick<Tournament, 'id' | 'name' | 'description' | 'mainImageUrl' | 'startsAt' | 'videosCount'>
-  & { rankings: Array<(
-    { __typename?: 'TournamentRanking' }
-    & Pick<TournamentRanking, 'id' | 'place'>
-    & { player: (
-      { __typename?: 'Player' }
-      & Pick<Player, 'id' | 'name'>
-    ) }
-  )> }
-);
+export type DashboardTournamentCardFragment = { __typename?: 'Tournament', id: string, name: string, description: string, mainImageUrl?: Maybe<string>, startsAt: string, videosCount: number, rankings: Array<{ __typename?: 'TournamentRanking', id: string, place: number, player: { __typename?: 'Player', id: string, name: string } }> };
 
 export type FavButtonArticleQueryVariables = Exact<{
   articleId: Scalars['ID'];
 }>;
 
 
-export type FavButtonArticleQuery = (
-  { __typename?: 'Query' }
-  & { article: (
-    { __typename?: 'Article' }
-    & Pick<Article, 'faved'>
-  ) }
-);
+export type FavButtonArticleQuery = { __typename?: 'Query', article: { __typename?: 'Article', faved: boolean } };
 
-export type MoveCategoryCardFragment = (
-  { __typename?: 'MoveCategory' }
-  & Pick<MoveCategory, 'id' | 'name' | 'movesCount'>
-);
+export type MoveCategoryCardFragment = { __typename?: 'MoveCategory', id: string, name: string, movesCount: number };
 
 export type MoveCategoryCardsQueryVariables = Exact<{
   characterSlug: Scalars['String'];
 }>;
 
 
-export type MoveCategoryCardsQuery = (
-  { __typename?: 'Query' }
-  & { moveCategories: Array<(
+export type MoveCategoryCardsQuery = { __typename?: 'Query', moveCategories: Array<(
     { __typename?: 'MoveCategory' }
     & MoveCategoryCardFragment
-  )> }
-);
+  )> };
 
-export type MoveCategoryListItemFragment = (
-  { __typename?: 'MoveCategory' }
-  & Pick<MoveCategory, 'id' | 'name' | 'movesCount'>
-);
+export type MoveCategoryListItemFragment = { __typename?: 'MoveCategory', id: string, name: string, movesCount: number };
 
-export type MoveListItemFragment = (
-  { __typename?: 'Move' }
-  & Pick<Move, 'id' | 'name' | 'crouchingStatus' | 'jumpStatus' | 'powerCrush' | 'homing' | 'screw' | 'wallBound'>
-  & { commands: Array<(
+export type MoveListItemFragment = { __typename?: 'Move', id: string, name: string, crouchingStatus: boolean, jumpStatus: boolean, powerCrush: boolean, homing: boolean, screw: boolean, wallBound: boolean, commands: Array<(
     { __typename?: 'Command' }
     & CommandFragment
-  )> }
-);
+  )> };
 
-export type MoveMediaFragment = (
-  { __typename?: 'Move' }
-  & Pick<Move, 'id' | 'name' | 'kana' | 'opponentState' | 'startUpFrame' | 'powerCrush' | 'crouchingStatus' | 'jumpStatus' | 'homing' | 'screw' | 'wallBound' | 'note'>
-  & { moveCategory: (
-    { __typename?: 'MoveCategory' }
-    & Pick<MoveCategory, 'id' | 'name'>
-  ), afterState?: Maybe<(
-    { __typename?: 'State' }
-    & Pick<State, 'id' | 'name'>
-  )>, moveVideo?: Maybe<(
-    { __typename?: 'MoveVideo' }
-    & Pick<MoveVideo, 'id' | 'm3u8Url' | 'thumbnailUrl'>
-  )>, commands: Array<(
-    { __typename?: 'Command' }
-    & Pick<Command, 'id'>
-    & { state: (
-      { __typename?: 'State' }
-      & Pick<State, 'id' | 'name'>
-    ), operations: Array<(
-      { __typename?: 'Operation' }
-      & Pick<Operation, 'id' | 'name' | 'key' | 'icon'>
-    )> }
-  )>, actions: Array<(
+export type MoveMediaFragment = { __typename?: 'Move', id: string, name: string, kana?: Maybe<string>, opponentState?: Maybe<OpponentStateEnum>, startUpFrame?: Maybe<number>, powerCrush: boolean, crouchingStatus: boolean, jumpStatus: boolean, homing: boolean, screw: boolean, wallBound: boolean, note?: Maybe<string>, moveCategory: { __typename?: 'MoveCategory', id: string, name: string }, afterState?: Maybe<{ __typename?: 'State', id: string, name: string }>, moveVideo?: Maybe<{ __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string }>, commands: Array<{ __typename?: 'Command', id: string, state: { __typename?: 'State', id: string, name: string }, operations: Array<{ __typename?: 'Operation', id: string, name: string, key: string, icon: boolean }> }>, actions: Array<(
     { __typename?: 'AttackAction' }
     & Action_AttackAction_Fragment
   ) | (
     { __typename?: 'ThrowAction' }
     & Action_ThrowAction_Fragment
-  )>, conditions: Array<(
-    { __typename?: 'Condition' }
-    & Pick<Condition, 'id' | 'name'>
-  )> }
-);
+  )>, conditions: Array<{ __typename?: 'Condition', id: string, name: string }> };
 
-export type OrganizerCardFragment = (
-  { __typename?: 'Organizer' }
-  & Pick<Organizer, 'id' | 'slug' | 'name' | 'avatarUrl'>
-);
+export type OrganizerCardFragment = { __typename?: 'Organizer', id: string, slug: string, name: string, avatarUrl?: Maybe<string> };
 
-export type OrganizerFormFragment = (
-  { __typename?: 'Organizer' }
-  & Pick<Organizer, 'name' | 'slug' | 'tonamelId' | 'twitterId' | 'streamingUrl' | 'description'>
-);
+export type OrganizerFormFragment = { __typename?: 'Organizer', name: string, slug: string, tonamelId?: Maybe<string>, twitterId?: Maybe<string>, streamingUrl?: Maybe<string>, description?: Maybe<string> };
 
-export type PlayerCardFragment = (
-  { __typename?: 'Player' }
-  & Pick<Player, 'id' | 'slug' | 'name' | 'avatarUrl' | 'tournamentRankingsCount' | 'tournamentBattlesCount'>
-);
+export type PlayerCardFragment = { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: Maybe<string>, tournamentRankingsCount: number, tournamentBattlesCount: number };
 
-export type PlayerFormFragment = (
-  { __typename?: 'Player' }
-  & Pick<Player, 'name' | 'slug' | 'pro' | 'tonamelId' | 'twitterId' | 'streamingUrl' | 'description'>
-);
+export type PlayerFormFragment = { __typename?: 'Player', name: string, slug: string, pro: boolean, tonamelId?: Maybe<string>, twitterId?: Maybe<string>, streamingUrl?: Maybe<string>, description?: Maybe<string> };
 
-export type TournamentCardFragment = (
-  { __typename?: 'Tournament' }
-  & Pick<Tournament, 'id' | 'name' | 'mainImageUrl' | 'startsAt'>
-);
+export type TournamentCardFragment = { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: Maybe<string>, startsAt: string };
 
-export type TournamentFormFragment = (
-  { __typename?: 'Tournament' }
-  & Pick<Tournament, 'organizerId' | 'name' | 'url' | 'streamingUrl' | 'startsAt' | 'description'>
-);
+export type TournamentFormFragment = { __typename?: 'Tournament', organizerId: string, name: string, url: string, streamingUrl?: Maybe<string>, startsAt: string, description: string };
 
-export type TournamentRankingCardFragment = (
-  { __typename?: 'TournamentRanking' }
-  & Pick<TournamentRanking, 'id' | 'place'>
-  & { player: (
-    { __typename?: 'Player' }
-    & Pick<Player, 'id' | 'slug' | 'name' | 'avatarUrl'>
-  ) }
-);
+export type TournamentRankingCardFragment = { __typename?: 'TournamentRanking', id: string, place: number, player: { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: Maybe<string> } };
 
-export type TournamentVideoCardFragment = (
-  { __typename?: 'TournamentVideo' }
-  & Pick<TournamentVideo, 'id' | 'title' | 'thumbnailUrl'>
-);
+export type TournamentVideoCardFragment = { __typename?: 'TournamentVideo', id: string, title: string, thumbnailUrl: string };
 
-export type CharacterBreadcrumbsFragment = (
-  { __typename?: 'Character' }
-  & Pick<Character, 'slug' | 'name'>
-);
+export type CharacterBreadcrumbsFragment = { __typename?: 'Character', slug: string, name: string };
 
-export type ComboCategoryBreadcrumbsFragment = (
-  { __typename?: 'ComboCategory' }
-  & Pick<ComboCategory, 'id' | 'name'>
-  & { character: (
+export type ComboCategoryBreadcrumbsFragment = { __typename?: 'ComboCategory', id: string, name: string, character: (
     { __typename?: 'Character' }
     & CharacterBreadcrumbsFragment
-  ) }
-);
+  ) };
 
-export type MoveCategoryBreadcrumbsFragment = (
-  { __typename?: 'MoveCategory' }
-  & Pick<MoveCategory, 'id' | 'name'>
-  & { character: (
+export type MoveCategoryBreadcrumbsFragment = { __typename?: 'MoveCategory', id: string, name: string, character: (
     { __typename?: 'Character' }
     & CharacterBreadcrumbsFragment
-  ) }
-);
+  ) };
 
-export type MoveBreadcrumbsFragment = (
-  { __typename?: 'Move' }
-  & Pick<Move, 'id' | 'name'>
-  & { moveCategory: (
+export type MoveBreadcrumbsFragment = { __typename?: 'Move', id: string, name: string, moveCategory: (
     { __typename?: 'MoveCategory' }
     & MoveCategoryBreadcrumbsFragment
-  ) }
-);
+  ) };
 
-export type OrganizerBreadcrumbsFragment = (
-  { __typename?: 'Organizer' }
-  & Pick<Organizer, 'slug' | 'name'>
-);
+export type OrganizerBreadcrumbsFragment = { __typename?: 'Organizer', slug: string, name: string };
 
-export type PlayerBreadcrumbsFragment = (
-  { __typename?: 'Player' }
-  & Pick<Player, 'slug' | 'name'>
-);
+export type PlayerBreadcrumbsFragment = { __typename?: 'Player', slug: string, name: string };
 
-export type TournamentBreadcrumbsFragment = (
-  { __typename?: 'Tournament' }
-  & Pick<Tournament, 'id' | 'name'>
-);
+export type TournamentBreadcrumbsFragment = { __typename?: 'Tournament', id: string, name: string };
 
 export type PageCharacterComboCategoriesQueryVariables = Exact<{
   characterSlug: Scalars['String'];
 }>;
 
 
-export type PageCharacterComboCategoriesQuery = (
-  { __typename?: 'Query' }
-  & { character: (
-    { __typename?: 'Character' }
-    & { comboCategories: Array<(
+export type PageCharacterComboCategoriesQuery = { __typename?: 'Query', character: (
+    { __typename?: 'Character', comboCategories: Array<(
       { __typename?: 'ComboCategory' }
       & ComboCategoryListItemFragment
     )> }
     & CharacterBreadcrumbsFragment
     & CharacterCardFragment
-  ) }
-);
+  ) };
 
 export type PageCharacterQueryVariables = Exact<{
   characterSlug: Scalars['String'];
 }>;
 
 
-export type PageCharacterQuery = (
-  { __typename?: 'Query' }
-  & { character: (
-    { __typename?: 'Character' }
-    & Pick<Character, 'story' | 'description'>
-    & { tournamentBattles: Array<(
-      { __typename?: 'TournamentBattle' }
-      & Pick<TournamentBattle, 'id' | 'round'>
-      & { tournamentVideo: (
-        { __typename?: 'TournamentVideo' }
-        & Pick<TournamentVideo, 'id'>
-        & { tournament: (
-          { __typename?: 'Tournament' }
-          & Pick<Tournament, 'id' | 'name' | 'startsAt'>
-        ) }
-      ), sides: Array<(
-        { __typename?: 'TournamentBattleSide' }
-        & Pick<TournamentBattleSide, 'rounds'>
-        & { player: (
-          { __typename?: 'Player' }
-          & Pick<Player, 'name'>
-        ), character: (
-          { __typename?: 'Character' }
-          & Pick<Character, 'faceImageUrl'>
-        ) }
-      )> }
-    )> }
+export type PageCharacterQuery = { __typename?: 'Query', character: (
+    { __typename?: 'Character', story: string, description: string, tournamentBattles: Array<{ __typename?: 'TournamentBattle', id: string, round?: Maybe<TournamentBattleRound>, tournamentVideo: { __typename?: 'TournamentVideo', id: string, tournament: { __typename?: 'Tournament', id: string, name: string, startsAt: string } }, sides: Array<{ __typename?: 'TournamentBattleSide', rounds: number, player: { __typename?: 'Player', name: string }, character: { __typename?: 'Character', faceImageUrl: string } }> }> }
     & CharacterBreadcrumbsFragment
     & CharacterCardFragment
-  ) }
-);
+  ) };
 
 export type PageCharacterMoveCategoriesQueryVariables = Exact<{
   characterSlug: Scalars['String'];
 }>;
 
 
-export type PageCharacterMoveCategoriesQuery = (
-  { __typename?: 'Query' }
-  & { character: (
-    { __typename?: 'Character' }
-    & { moveCategories: Array<(
+export type PageCharacterMoveCategoriesQuery = { __typename?: 'Query', character: (
+    { __typename?: 'Character', moveCategories: Array<(
       { __typename?: 'MoveCategory' }
       & MoveCategoryListItemFragment
     )> }
     & CharacterBreadcrumbsFragment
     & CharacterCardFragment
-  ) }
-);
+  ) };
 
-export type ArticlePageArticleFragment = (
-  { __typename?: 'Article' }
-  & Pick<Article, 'id' | 'title' | 'description' | 'mainImageUrl' | 'publishedAt' | 'favsCount' | 'status' | 'category' | 'content'>
-  & { author: (
-    { __typename?: 'User' }
-    & Pick<User, 'name' | 'avatarUrl'>
-  ) }
-);
+export type ArticlePageArticleFragment = { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: Maybe<string>, publishedAt?: Maybe<string>, favsCount: number, status: ArticleStatus, category: ArticleCategory, content: string, author: { __typename?: 'User', name: string, avatarUrl: string } };
 
 export type ArticlePageArticleQueryVariables = Exact<{
   articleId: Scalars['ID'];
 }>;
 
 
-export type ArticlePageArticleQuery = (
-  { __typename?: 'Query' }
-  & { article: (
+export type ArticlePageArticleQuery = { __typename?: 'Query', article: (
     { __typename?: 'Article' }
     & ArticlePageArticleFragment
-  ) }
-);
+  ) };
 
 export type ArticlesPageQueryVariables = Exact<{
   page?: Maybe<Scalars['Int']>;
@@ -4002,63 +3172,41 @@ export type ArticlesPageQueryVariables = Exact<{
 }>;
 
 
-export type ArticlesPageQuery = (
-  { __typename?: 'Query' }
-  & { articles: (
-    { __typename?: 'ArticleCollection' }
-    & { records: Array<(
+export type ArticlesPageQuery = { __typename?: 'Query', articles: { __typename?: 'ArticleCollection', records: Array<(
       { __typename?: 'Article' }
       & ArticleCardFragment
     )>, paging: (
       { __typename?: 'Paging' }
       & PagingFragment
-    ) }
-  ) }
-);
+    ) } };
 
 export type PageCharactersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type PageCharactersQuery = (
-  { __typename?: 'Query' }
-  & { characters: Array<(
+export type PageCharactersQuery = { __typename?: 'Query', characters: Array<(
     { __typename?: 'Character' }
     & CharacterCardFragment
-  )> }
-);
+  )> };
 
 export type PageComboCategoryQueryVariables = Exact<{
   comboCategoryId: Scalars['ID'];
 }>;
 
 
-export type PageComboCategoryQuery = (
-  { __typename?: 'Query' }
-  & { comboCategory: (
-    { __typename?: 'ComboCategory' }
-    & Pick<ComboCategory, 'id' | 'name'>
-    & { character: (
-      { __typename?: 'Character' }
-      & Pick<Character, 'slug' | 'name'>
-    ), combos: Array<(
+export type PageComboCategoryQuery = { __typename?: 'Query', comboCategory: { __typename?: 'ComboCategory', id: string, name: string, character: { __typename?: 'Character', slug: string, name: string }, combos: Array<(
       { __typename?: 'Combo' }
       & ComboMediaFragment
-    )> }
-  ) }
-);
+    )> } };
 
 export type DashboardArticlePageArticleQueryVariables = Exact<{
   articleId: Scalars['ID'];
 }>;
 
 
-export type DashboardArticlePageArticleQuery = (
-  { __typename?: 'Query' }
-  & { article: (
+export type DashboardArticlePageArticleQuery = { __typename?: 'Query', article: (
     { __typename?: 'Article' }
     & ArticleFormArticleFragment
-  ) }
-);
+  ) };
 
 export type PageDashboardArticlesQueryVariables = Exact<{
   page?: Maybe<Scalars['Int']>;
@@ -4066,449 +3214,196 @@ export type PageDashboardArticlesQueryVariables = Exact<{
 }>;
 
 
-export type PageDashboardArticlesQuery = (
-  { __typename?: 'Query' }
-  & { myArticles: (
-    { __typename?: 'ArticleCollection' }
-    & { records: Array<(
-      { __typename?: 'Article' }
-      & Pick<Article, 'id' | 'title' | 'status'>
-    )>, paging: (
+export type PageDashboardArticlesQuery = { __typename?: 'Query', myArticles: { __typename?: 'ArticleCollection', records: Array<{ __typename?: 'Article', id: string, title: string, status: ArticleStatus }>, paging: (
       { __typename?: 'Paging' }
       & PagingFragment
-    ) }
-  ) }
-);
+    ) } };
 
 export type PageDashboardAttackActionEditQueryVariables = Exact<{
   actionId: Scalars['ID'];
 }>;
 
 
-export type PageDashboardAttackActionEditQuery = (
-  { __typename?: 'Query' }
-  & { attackAction: (
-    { __typename?: 'AttackAction' }
-    & { move: (
-      { __typename?: 'Move' }
-      & Pick<Move, 'id' | 'name'>
-      & { moveCategory: (
-        { __typename?: 'MoveCategory' }
-        & Pick<MoveCategory, 'id' | 'name'>
-        & { character: (
-          { __typename?: 'Character' }
-          & Pick<Character, 'slug' | 'name'>
-        ) }
-      ) }
-    ) }
+export type PageDashboardAttackActionEditQuery = { __typename?: 'Query', attackAction: (
+    { __typename?: 'AttackAction', move: { __typename?: 'Move', id: string, name: string, moveCategory: { __typename?: 'MoveCategory', id: string, name: string, character: { __typename?: 'Character', slug: string, name: string } } } }
     & AttackActionFragment
-  ) }
-);
+  ) };
 
 export type DashboardComboCategoriesPageQueryVariables = Exact<{
   characterSlug: Scalars['String'];
 }>;
 
 
-export type DashboardComboCategoriesPageQuery = (
-  { __typename?: 'Query' }
-  & { character: (
+export type DashboardComboCategoriesPageQuery = { __typename?: 'Query', character: (
     { __typename?: 'Character' }
     & CharacterBreadcrumbsFragment
   ), comboCategories: Array<(
     { __typename?: 'ComboCategory' }
     & ComboCategoryCardFragment
-  )> }
-);
+  )> };
 
 export type PageDashboardComboCategoryNewQueryVariables = Exact<{
   characterSlug: Scalars['String'];
 }>;
 
 
-export type PageDashboardComboCategoryNewQuery = (
-  { __typename?: 'Query' }
-  & { character: (
+export type PageDashboardComboCategoryNewQuery = { __typename?: 'Query', character: (
     { __typename?: 'Character' }
     & CharacterBreadcrumbsFragment
-  ) }
-);
+  ) };
 
 export type PageDashboardCharacterEditQueryVariables = Exact<{
   characterSlug: Scalars['String'];
 }>;
 
 
-export type PageDashboardCharacterEditQuery = (
-  { __typename?: 'Query' }
-  & { character: (
+export type PageDashboardCharacterEditQuery = { __typename?: 'Query', character: (
     { __typename?: 'Character' }
     & CharacterFormFragment
-  ) }
-);
+  ) };
 
 export type DashboardMoveCategoriesPageQueryVariables = Exact<{
   characterSlug: Scalars['String'];
 }>;
 
 
-export type DashboardMoveCategoriesPageQuery = (
-  { __typename?: 'Query' }
-  & { character: (
+export type DashboardMoveCategoriesPageQuery = { __typename?: 'Query', character: (
     { __typename?: 'Character' }
     & CharacterBreadcrumbsFragment
   ), moveCategories: Array<(
     { __typename?: 'MoveCategory' }
     & MoveCategoryCardFragment
-  )> }
-);
+  )> };
 
 export type DashboardMoveCategoryNewPageQueryVariables = Exact<{
   characterSlug: Scalars['String'];
 }>;
 
 
-export type DashboardMoveCategoryNewPageQuery = (
-  { __typename?: 'Query' }
-  & { character: (
+export type DashboardMoveCategoryNewPageQuery = { __typename?: 'Query', character: (
     { __typename?: 'Character' }
     & CharacterBreadcrumbsFragment
-  ) }
-);
+  ) };
 
 export type PageDashboardCombosQueryVariables = Exact<{
   comboCategoryId: Scalars['ID'];
 }>;
 
 
-export type PageDashboardCombosQuery = (
-  { __typename?: 'Query' }
-  & { comboCategory: (
-    { __typename?: 'ComboCategory' }
-    & Pick<ComboCategory, 'id' | 'name'>
-    & { character: (
-      { __typename?: 'Character' }
-      & Pick<Character, 'slug' | 'name'>
-    ), combos: Array<(
-      { __typename?: 'Combo' }
-      & Pick<Combo, 'id' | 'name'>
-    )> }
-  ) }
-);
+export type PageDashboardCombosQuery = { __typename?: 'Query', comboCategory: { __typename?: 'ComboCategory', id: string, name: string, character: { __typename?: 'Character', slug: string, name: string }, combos: Array<{ __typename?: 'Combo', id: string, name: string }> } };
 
 export type PageDashboardComboNewQueryVariables = Exact<{
   comboCategoryId: Scalars['ID'];
 }>;
 
 
-export type PageDashboardComboNewQuery = (
-  { __typename?: 'Query' }
-  & { comboCategory: (
-    { __typename?: 'ComboCategory' }
-    & Pick<ComboCategory, 'id' | 'name'>
-    & { character: (
-      { __typename?: 'Character' }
-      & Pick<Character, 'slug' | 'name'>
-      & { states: Array<(
-        { __typename?: 'State' }
-        & Pick<State, 'id' | 'name'>
-      )>, conditions: Array<(
-        { __typename?: 'Condition' }
-        & Pick<Condition, 'id' | 'name'>
-      )> }
-    ) }
-  ) }
-);
+export type PageDashboardComboNewQuery = { __typename?: 'Query', comboCategory: { __typename?: 'ComboCategory', id: string, name: string, character: { __typename?: 'Character', slug: string, name: string, states: Array<{ __typename?: 'State', id: string, name: string }>, conditions: Array<{ __typename?: 'Condition', id: string, name: string }> } } };
 
 export type PageDashboardComboCategoryEditQueryVariables = Exact<{
   comboCategoryId: Scalars['ID'];
 }>;
 
 
-export type PageDashboardComboCategoryEditQuery = (
-  { __typename?: 'Query' }
-  & { comboCategory: (
-    { __typename?: 'ComboCategory' }
-    & Pick<ComboCategory, 'id' | 'name'>
-    & { character: (
-      { __typename?: 'Character' }
-      & Pick<Character, 'slug' | 'name'>
-    ) }
-  ) }
-);
+export type PageDashboardComboCategoryEditQuery = { __typename?: 'Query', comboCategory: { __typename?: 'ComboCategory', id: string, name: string, character: { __typename?: 'Character', slug: string, name: string } } };
 
 export type PageDashboardComboEditQueryVariables = Exact<{
   comboId: Scalars['ID'];
 }>;
 
 
-export type PageDashboardComboEditQuery = (
-  { __typename?: 'Query' }
-  & { combo: (
-    { __typename?: 'Combo' }
-    & { state: (
-      { __typename?: 'State' }
-      & Pick<State, 'id'>
-    ), operations: Array<(
-      { __typename?: 'Operation' }
-      & Pick<Operation, 'id'>
-    )>, comboCategory: (
-      { __typename?: 'ComboCategory' }
-      & Pick<ComboCategory, 'id' | 'name'>
-      & { character: (
-        { __typename?: 'Character' }
-        & Pick<Character, 'slug' | 'name'>
-        & { states: Array<(
-          { __typename?: 'State' }
-          & Pick<State, 'id' | 'name'>
-        )>, conditions: Array<(
-          { __typename?: 'Condition' }
-          & Pick<Condition, 'id' | 'name'>
-        )> }
-      ) }
-    ) }
+export type PageDashboardComboEditQuery = { __typename?: 'Query', combo: (
+    { __typename?: 'Combo', state: { __typename?: 'State', id: string }, operations: Array<{ __typename?: 'Operation', id: string }>, comboCategory: { __typename?: 'ComboCategory', id: string, name: string, character: { __typename?: 'Character', slug: string, name: string, states: Array<{ __typename?: 'State', id: string, name: string }>, conditions: Array<{ __typename?: 'Condition', id: string, name: string }> } } }
     & ComboFragment
-  ) }
-);
+  ) };
 
 export type PageDashboardCommandEditQueryVariables = Exact<{
   commandId: Scalars['ID'];
 }>;
 
 
-export type PageDashboardCommandEditQuery = (
-  { __typename?: 'Query' }
-  & { command: (
-    { __typename?: 'Command' }
-    & { state: (
-      { __typename?: 'State' }
-      & Pick<State, 'id'>
-    ), operations: Array<(
-      { __typename?: 'Operation' }
-      & Pick<Operation, 'id'>
-    )>, move: (
-      { __typename?: 'Move' }
-      & Pick<Move, 'id' | 'name'>
-      & { moveCategory: (
-        { __typename?: 'MoveCategory' }
-        & Pick<MoveCategory, 'id' | 'name'>
-        & { character: (
-          { __typename?: 'Character' }
-          & Pick<Character, 'slug' | 'name'>
-          & { states: Array<(
-            { __typename?: 'State' }
-            & Pick<State, 'id' | 'name'>
-          )> }
-        ) }
-      ) }
-    ) }
+export type PageDashboardCommandEditQuery = { __typename?: 'Query', command: (
+    { __typename?: 'Command', state: { __typename?: 'State', id: string }, operations: Array<{ __typename?: 'Operation', id: string }>, move: { __typename?: 'Move', id: string, name: string, moveCategory: { __typename?: 'MoveCategory', id: string, name: string, character: { __typename?: 'Character', slug: string, name: string, states: Array<{ __typename?: 'State', id: string, name: string }> } } } }
     & CommandFragment
-  ) }
-);
+  ) };
 
 export type PageDashboardMoveCategoryEditQueryVariables = Exact<{
   moveCategoryId: Scalars['ID'];
 }>;
 
 
-export type PageDashboardMoveCategoryEditQuery = (
-  { __typename?: 'Query' }
-  & { moveCategory: (
-    { __typename?: 'MoveCategory' }
-    & Pick<MoveCategory, 'id' | 'name'>
-    & { character: (
-      { __typename?: 'Character' }
-      & Pick<Character, 'slug' | 'name'>
-    ) }
-  ) }
-);
+export type PageDashboardMoveCategoryEditQuery = { __typename?: 'Query', moveCategory: { __typename?: 'MoveCategory', id: string, name: string, character: { __typename?: 'Character', slug: string, name: string } } };
 
 export type PageDashboardMovesQueryVariables = Exact<{
   moveCategoryId: Scalars['ID'];
 }>;
 
 
-export type PageDashboardMovesQuery = (
-  { __typename?: 'Query' }
-  & { moveCategory: (
-    { __typename?: 'MoveCategory' }
-    & Pick<MoveCategory, 'id' | 'name'>
-    & { character: (
-      { __typename?: 'Character' }
-      & Pick<Character, 'slug' | 'name'>
-    ), moves: Array<(
-      { __typename?: 'Move' }
-      & Pick<Move, 'id' | 'name' | 'commandsCount' | 'actionsCount'>
-    )> }
-  ) }
-);
+export type PageDashboardMovesQuery = { __typename?: 'Query', moveCategory: { __typename?: 'MoveCategory', id: string, name: string, character: { __typename?: 'Character', slug: string, name: string }, moves: Array<{ __typename?: 'Move', id: string, name: string, commandsCount: number, actionsCount: number }> } };
 
 export type PageDashboardMoveNewQueryVariables = Exact<{
   moveCategoryId: Scalars['ID'];
 }>;
 
 
-export type PageDashboardMoveNewQuery = (
-  { __typename?: 'Query' }
-  & { moveCategory: (
-    { __typename?: 'MoveCategory' }
-    & Pick<MoveCategory, 'id' | 'name'>
-    & { character: (
-      { __typename?: 'Character' }
-      & Pick<Character, 'slug' | 'name'>
-      & { conditions: Array<(
-        { __typename?: 'Condition' }
-        & Pick<Condition, 'id' | 'name'>
-      )> }
-    ) }
-  ) }
-);
+export type PageDashboardMoveNewQuery = { __typename?: 'Query', moveCategory: { __typename?: 'MoveCategory', id: string, name: string, character: { __typename?: 'Character', slug: string, name: string, conditions: Array<{ __typename?: 'Condition', id: string, name: string }> } } };
 
 export type PageDashboardActionsQueryVariables = Exact<{
   moveId: Scalars['ID'];
 }>;
 
 
-export type PageDashboardActionsQuery = (
-  { __typename?: 'Query' }
-  & { move: (
-    { __typename?: 'Move' }
-    & Pick<Move, 'id' | 'name'>
-    & { actions: Array<(
+export type PageDashboardActionsQuery = { __typename?: 'Query', move: { __typename?: 'Move', id: string, name: string, actions: Array<(
       { __typename?: 'AttackAction' }
       & Action_AttackAction_Fragment
     ) | (
       { __typename?: 'ThrowAction' }
       & Action_ThrowAction_Fragment
-    )>, moveCategory: (
-      { __typename?: 'MoveCategory' }
-      & Pick<MoveCategory, 'id' | 'name'>
-      & { character: (
-        { __typename?: 'Character' }
-        & Pick<Character, 'slug' | 'name'>
-      ) }
-    ) }
-  ) }
-);
+    )>, moveCategory: { __typename?: 'MoveCategory', id: string, name: string, character: { __typename?: 'Character', slug: string, name: string } } } };
 
 export type PageDashboardActionNewQueryVariables = Exact<{
   moveId: Scalars['ID'];
 }>;
 
 
-export type PageDashboardActionNewQuery = (
-  { __typename?: 'Query' }
-  & { move: (
-    { __typename?: 'Move' }
-    & Pick<Move, 'id' | 'name'>
-    & { moveCategory: (
-      { __typename?: 'MoveCategory' }
-      & Pick<MoveCategory, 'id' | 'name'>
-      & { character: (
-        { __typename?: 'Character' }
-        & Pick<Character, 'slug' | 'name'>
-      ) }
-    ) }
-  ) }
-);
+export type PageDashboardActionNewQuery = { __typename?: 'Query', move: { __typename?: 'Move', id: string, name: string, moveCategory: { __typename?: 'MoveCategory', id: string, name: string, character: { __typename?: 'Character', slug: string, name: string } } } };
 
 export type PageDashboardCommandsQueryVariables = Exact<{
   moveId: Scalars['ID'];
 }>;
 
 
-export type PageDashboardCommandsQuery = (
-  { __typename?: 'Query' }
-  & { move: (
-    { __typename?: 'Move' }
-    & Pick<Move, 'id' | 'name'>
-    & { commands: Array<(
+export type PageDashboardCommandsQuery = { __typename?: 'Query', move: { __typename?: 'Move', id: string, name: string, commands: Array<(
       { __typename?: 'Command' }
       & CommandFragment
-    )>, moveCategory: (
-      { __typename?: 'MoveCategory' }
-      & Pick<MoveCategory, 'id' | 'name'>
-      & { character: (
-        { __typename?: 'Character' }
-        & Pick<Character, 'slug' | 'name'>
-        & { states: Array<(
-          { __typename?: 'State' }
-          & Pick<State, 'id' | 'name'>
-        )> }
-      ) }
-    ) }
-  ) }
-);
+    )>, moveCategory: { __typename?: 'MoveCategory', id: string, name: string, character: { __typename?: 'Character', slug: string, name: string, states: Array<{ __typename?: 'State', id: string, name: string }> } } } };
 
 export type PageDashboardCommandNewQueryVariables = Exact<{
   moveId: Scalars['ID'];
 }>;
 
 
-export type PageDashboardCommandNewQuery = (
-  { __typename?: 'Query' }
-  & { move: (
-    { __typename?: 'Move' }
-    & Pick<Move, 'id' | 'name'>
-    & { moveCategory: (
-      { __typename?: 'MoveCategory' }
-      & Pick<MoveCategory, 'id' | 'name'>
-      & { character: (
-        { __typename?: 'Character' }
-        & Pick<Character, 'slug' | 'name'>
-        & { states: Array<(
-          { __typename?: 'State' }
-          & Pick<State, 'id' | 'name'>
-        )> }
-      ) }
-    ) }
-  ) }
-);
+export type PageDashboardCommandNewQuery = { __typename?: 'Query', move: { __typename?: 'Move', id: string, name: string, moveCategory: { __typename?: 'MoveCategory', id: string, name: string, character: { __typename?: 'Character', slug: string, name: string, states: Array<{ __typename?: 'State', id: string, name: string }> } } } };
 
 export type PageDashboardMoveEditQueryVariables = Exact<{
   moveId: Scalars['ID'];
 }>;
 
 
-export type PageDashboardMoveEditQuery = (
-  { __typename?: 'Query' }
-  & { move: (
-    { __typename?: 'Move' }
-    & { conditions: Array<(
-      { __typename?: 'Condition' }
-      & Pick<Condition, 'id' | 'name'>
-    )>, moveCategory: (
-      { __typename?: 'MoveCategory' }
-      & Pick<MoveCategory, 'id' | 'name'>
-      & { character: (
-        { __typename?: 'Character' }
-        & Pick<Character, 'slug' | 'name'>
-        & { states: Array<(
-          { __typename?: 'State' }
-          & Pick<State, 'id' | 'name'>
-        )>, conditions: Array<(
-          { __typename?: 'Condition' }
-          & Pick<Condition, 'id' | 'name'>
-        )> }
-      ) }
-    ) }
+export type PageDashboardMoveEditQuery = { __typename?: 'Query', move: (
+    { __typename?: 'Move', conditions: Array<{ __typename?: 'Condition', id: string, name: string }>, moveCategory: { __typename?: 'MoveCategory', id: string, name: string, character: { __typename?: 'Character', slug: string, name: string, states: Array<{ __typename?: 'State', id: string, name: string }>, conditions: Array<{ __typename?: 'Condition', id: string, name: string }> } } }
     & MoveFragment
-  ) }
-);
+  ) };
 
 export type DashboardOrganizerEditPageQueryVariables = Exact<{
   organizerSlug: Scalars['String'];
 }>;
 
 
-export type DashboardOrganizerEditPageQuery = (
-  { __typename?: 'Query' }
-  & { organizer: (
+export type DashboardOrganizerEditPageQuery = { __typename?: 'Query', organizer: (
     { __typename?: 'Organizer' }
     & OrganizerFormFragment
     & OrganizerBreadcrumbsFragment
-  ) }
-);
+  ) };
 
 export type DashboardOrganizerEditPageUpdateOrganizerMutationVariables = Exact<{
   organizerSlug: Scalars['String'];
@@ -4516,17 +3411,11 @@ export type DashboardOrganizerEditPageUpdateOrganizerMutationVariables = Exact<{
 }>;
 
 
-export type DashboardOrganizerEditPageUpdateOrganizerMutation = (
-  { __typename?: 'Mutation' }
-  & { updateOrganizer?: Maybe<(
-    { __typename?: 'UpdateOrganizerPayload' }
-    & { organizer: (
+export type DashboardOrganizerEditPageUpdateOrganizerMutation = { __typename?: 'Mutation', updateOrganizer?: Maybe<{ __typename?: 'UpdateOrganizerPayload', organizer: (
       { __typename?: 'Organizer' }
       & OrganizerFormFragment
       & OrganizerBreadcrumbsFragment
-    ) }
-  )> }
-);
+    ) }> };
 
 export type DashboardOrganizersPageQueryVariables = Exact<{
   page?: Maybe<Scalars['Int']>;
@@ -4534,49 +3423,31 @@ export type DashboardOrganizersPageQueryVariables = Exact<{
 }>;
 
 
-export type DashboardOrganizersPageQuery = (
-  { __typename?: 'Query' }
-  & { organizers: (
-    { __typename?: 'OrganizerCollection' }
-    & { records: Array<(
+export type DashboardOrganizersPageQuery = { __typename?: 'Query', organizers: { __typename?: 'OrganizerCollection', records: Array<(
       { __typename?: 'Organizer' }
       & DashboardOrganizerCardFragment
     )>, paging: (
       { __typename?: 'Paging' }
       & PagingFragment
-    ) }
-  ) }
-);
+    ) } };
 
 export type DashboardOrganizersNewPageCreateOrganizerMutationVariables = Exact<{
   attributes: OrganizerAttributes;
 }>;
 
 
-export type DashboardOrganizersNewPageCreateOrganizerMutation = (
-  { __typename?: 'Mutation' }
-  & { createOrganizer?: Maybe<(
-    { __typename?: 'CreateOrganizerPayload' }
-    & { organizer: (
-      { __typename?: 'Organizer' }
-      & Pick<Organizer, 'id'>
-    ) }
-  )> }
-);
+export type DashboardOrganizersNewPageCreateOrganizerMutation = { __typename?: 'Mutation', createOrganizer?: Maybe<{ __typename?: 'CreateOrganizerPayload', organizer: { __typename?: 'Organizer', id: string } }> };
 
 export type DashboardPlayerEditPageQueryVariables = Exact<{
   playerSlug: Scalars['String'];
 }>;
 
 
-export type DashboardPlayerEditPageQuery = (
-  { __typename?: 'Query' }
-  & { player: (
+export type DashboardPlayerEditPageQuery = { __typename?: 'Query', player: (
     { __typename?: 'Player' }
     & PlayerFormFragment
     & PlayerBreadcrumbsFragment
-  ) }
-);
+  ) };
 
 export type DashboardPlayerEditPageUpdatePlayerMutationVariables = Exact<{
   playerSlug: Scalars['String'];
@@ -4584,17 +3455,11 @@ export type DashboardPlayerEditPageUpdatePlayerMutationVariables = Exact<{
 }>;
 
 
-export type DashboardPlayerEditPageUpdatePlayerMutation = (
-  { __typename?: 'Mutation' }
-  & { updatePlayer?: Maybe<(
-    { __typename?: 'UpdatePlayerPayload' }
-    & { player: (
+export type DashboardPlayerEditPageUpdatePlayerMutation = { __typename?: 'Mutation', updatePlayer?: Maybe<{ __typename?: 'UpdatePlayerPayload', player: (
       { __typename?: 'Player' }
       & PlayerFormFragment
       & PlayerBreadcrumbsFragment
-    ) }
-  )> }
-);
+    ) }> };
 
 export type DashboardPlayersPageQueryVariables = Exact<{
   page?: Maybe<Scalars['Int']>;
@@ -4602,95 +3467,39 @@ export type DashboardPlayersPageQueryVariables = Exact<{
 }>;
 
 
-export type DashboardPlayersPageQuery = (
-  { __typename?: 'Query' }
-  & { players: (
-    { __typename?: 'PlayerCollection' }
-    & { records: Array<(
+export type DashboardPlayersPageQuery = { __typename?: 'Query', players: { __typename?: 'PlayerCollection', records: Array<(
       { __typename?: 'Player' }
       & DashboardPlayerCardFragment
     )>, paging: (
       { __typename?: 'Paging' }
       & PagingFragment
-    ) }
-  ) }
-);
+    ) } };
 
 export type DashboardPlayersNewPageCreatePlayerMutationVariables = Exact<{
   attributes: PlayerAttributes;
 }>;
 
 
-export type DashboardPlayersNewPageCreatePlayerMutation = (
-  { __typename?: 'Mutation' }
-  & { createPlayer?: Maybe<(
-    { __typename?: 'CreatePlayerPayload' }
-    & { player: (
-      { __typename?: 'Player' }
-      & Pick<Player, 'id'>
-    ) }
-  )> }
-);
+export type DashboardPlayersNewPageCreatePlayerMutation = { __typename?: 'Mutation', createPlayer?: Maybe<{ __typename?: 'CreatePlayerPayload', player: { __typename?: 'Player', id: string } }> };
 
 export type PageDashboardThrowActionEditQueryVariables = Exact<{
   actionId: Scalars['ID'];
 }>;
 
 
-export type PageDashboardThrowActionEditQuery = (
-  { __typename?: 'Query' }
-  & { throwAction: (
-    { __typename?: 'ThrowAction' }
-    & { move: (
-      { __typename?: 'Move' }
-      & Pick<Move, 'id' | 'name'>
-      & { moveCategory: (
-        { __typename?: 'MoveCategory' }
-        & Pick<MoveCategory, 'id' | 'name'>
-        & { character: (
-          { __typename?: 'Character' }
-          & Pick<Character, 'slug' | 'name'>
-        ) }
-      ) }
-    ) }
+export type PageDashboardThrowActionEditQuery = { __typename?: 'Query', throwAction: (
+    { __typename?: 'ThrowAction', move: { __typename?: 'Move', id: string, name: string, moveCategory: { __typename?: 'MoveCategory', id: string, name: string, character: { __typename?: 'Character', slug: string, name: string } } } }
     & ThrowActionFragment
-  ) }
-);
+  ) };
 
-export type TournamentBattleFormFragment = (
-  { __typename?: 'TournamentBattle' }
-  & Pick<TournamentBattle, 'id' | 'startSec' | 'round'>
-  & { tournamentVideo: (
-    { __typename?: 'TournamentVideo' }
-    & Pick<TournamentVideo, 'id'>
-  ), sides: Array<(
-    { __typename?: 'TournamentBattleSide' }
-    & Pick<TournamentBattleSide, 'rounds'>
-    & { player: (
-      { __typename?: 'Player' }
-      & Pick<Player, 'slug'>
-    ), character: (
-      { __typename?: 'Character' }
-      & Pick<Character, 'slug'>
-    ) }
-  )> }
-);
+export type TournamentBattleFormFragment = { __typename?: 'TournamentBattle', id: string, startSec: number, round?: Maybe<TournamentBattleRound>, tournamentVideo: { __typename?: 'TournamentVideo', id: string }, sides: Array<{ __typename?: 'TournamentBattleSide', rounds: number, player: { __typename?: 'Player', slug: string }, character: { __typename?: 'Character', slug: string } }> };
 
 export type CreateTournamentBattleMutationVariables = Exact<{
   attributes: TournamentBattleAttributes;
 }>;
 
 
-export type CreateTournamentBattleMutation = (
-  { __typename?: 'Mutation' }
-  & { createTournamentBattle?: Maybe<(
-    { __typename?: 'CreateTournamentBattlePayload' }
-    & { tournamentBattle: (
-      { __typename?: 'TournamentBattle' }
-      & Pick<TournamentBattle, 'id'>
-    ) }
-  )> }
-);
+export type CreateTournamentBattleMutation = { __typename?: 'Mutation', createTournamentBattle?: Maybe<{ __typename?: 'CreateTournamentBattlePayload', tournamentBattle: { __typename?: 'TournamentBattle', id: string } }> };
 
 export type UpdateTournamentBattleMutationVariables = Exact<{
   tournamentBattleId: Scalars['ID'];
@@ -4698,109 +3507,58 @@ export type UpdateTournamentBattleMutationVariables = Exact<{
 }>;
 
 
-export type UpdateTournamentBattleMutation = (
-  { __typename?: 'Mutation' }
-  & { updateTournamentBattle?: Maybe<(
-    { __typename?: 'UpdateTournamentBattlePayload' }
-    & { tournamentBattle: (
+export type UpdateTournamentBattleMutation = { __typename?: 'Mutation', updateTournamentBattle?: Maybe<{ __typename?: 'UpdateTournamentBattlePayload', tournamentBattle: (
       { __typename?: 'TournamentBattle' }
       & DashboardTournamentBattlesPageBattleReslutFragment
-    ) }
-  )> }
-);
+    ) }> };
 
 export type DeleteTournamentBattleMutationVariables = Exact<{
   tournamentBattleId: Scalars['ID'];
 }>;
 
 
-export type DeleteTournamentBattleMutation = (
-  { __typename?: 'Mutation' }
-  & { deleteTournamentBattle?: Maybe<(
-    { __typename?: 'DeleteTournamentBattlePayload' }
-    & { tournamentBattle: (
-      { __typename?: 'TournamentBattle' }
-      & Pick<TournamentBattle, 'id'>
-    ) }
-  )> }
-);
+export type DeleteTournamentBattleMutation = { __typename?: 'Mutation', deleteTournamentBattle?: Maybe<{ __typename?: 'DeleteTournamentBattlePayload', tournamentBattle: { __typename?: 'TournamentBattle', id: string } }> };
 
 export type DashboardTournamentBattlesPageQueryVariables = Exact<{
   tournamentVideoId: Scalars['ID'];
 }>;
 
 
-export type DashboardTournamentBattlesPageQuery = (
-  { __typename?: 'Query' }
-  & { tournamentVideo: (
-    { __typename?: 'TournamentVideo' }
-    & Pick<TournamentVideo, 'id' | 'title' | 'youtubeVideoId'>
-    & { tournament: (
-      { __typename?: 'Tournament' }
-      & Pick<Tournament, 'id' | 'name'>
-    ) }
-  ), players: (
-    { __typename?: 'PlayerCollection' }
-    & { records: Array<(
+export type DashboardTournamentBattlesPageQuery = { __typename?: 'Query', tournamentVideo: { __typename?: 'TournamentVideo', id: string, title: string, youtubeVideoId: string, tournament: { __typename?: 'Tournament', id: string, name: string } }, players: { __typename?: 'PlayerCollection', records: Array<(
       { __typename?: 'Player' }
       & PlayerSelectOptionFragment
-    )> }
-  ), characters: Array<(
+    )> }, characters: Array<(
     { __typename?: 'Character' }
     & CharacterSelectOptionFragment
-  )> }
-);
+  )> };
 
-export type DashboardTournamentBattlesPageSideFragment = (
-  { __typename?: 'TournamentBattleSide' }
-  & Pick<TournamentBattleSide, 'rounds'>
-  & { player: (
-    { __typename?: 'Player' }
-    & Pick<Player, 'id' | 'name'>
-  ), character: (
-    { __typename?: 'Character' }
-    & Pick<Character, 'id' | 'faceImageUrl'>
-  ) }
-);
+export type DashboardTournamentBattlesPageSideFragment = { __typename?: 'TournamentBattleSide', rounds: number, player: { __typename?: 'Player', id: string, name: string }, character: { __typename?: 'Character', id: string, faceImageUrl: string } };
 
-export type DashboardTournamentBattlesPageBattleReslutFragment = (
-  { __typename?: 'TournamentBattle' }
-  & Pick<TournamentBattle, 'id' | 'round' | 'startSec'>
-  & { sides: Array<(
+export type DashboardTournamentBattlesPageBattleReslutFragment = { __typename?: 'TournamentBattle', id: string, round?: Maybe<TournamentBattleRound>, startSec: number, sides: Array<(
     { __typename?: 'TournamentBattleSide' }
     & DashboardTournamentBattlesPageSideFragment
-  )> }
-);
+  )> };
 
 export type DashboardTournamentBattlesPageBattlesQueryVariables = Exact<{
   tournamentVideoId: Scalars['ID'];
 }>;
 
 
-export type DashboardTournamentBattlesPageBattlesQuery = (
-  { __typename?: 'Query' }
-  & { tournamentBattles: (
-    { __typename?: 'TournamentBattleCollection' }
-    & { records: Array<(
+export type DashboardTournamentBattlesPageBattlesQuery = { __typename?: 'Query', tournamentBattles: { __typename?: 'TournamentBattleCollection', records: Array<(
       { __typename?: 'TournamentBattle' }
       & DashboardTournamentBattlesPageBattleReslutFragment
-    )> }
-  ) }
-);
+    )> } };
 
 export type DashboardTournamentEditPageQueryVariables = Exact<{
   tournamentId: Scalars['ID'];
 }>;
 
 
-export type DashboardTournamentEditPageQuery = (
-  { __typename?: 'Query' }
-  & { tournament: (
+export type DashboardTournamentEditPageQuery = { __typename?: 'Query', tournament: (
     { __typename?: 'Tournament' }
     & TournamentFormFragment
     & TournamentBreadcrumbsFragment
-  ) }
-);
+  ) };
 
 export type DashboardTournamentEditPageUpdateTournamentMutationVariables = Exact<{
   tournamentId: Scalars['ID'];
@@ -4808,77 +3566,35 @@ export type DashboardTournamentEditPageUpdateTournamentMutationVariables = Exact
 }>;
 
 
-export type DashboardTournamentEditPageUpdateTournamentMutation = (
-  { __typename?: 'Mutation' }
-  & { updateTournament?: Maybe<(
-    { __typename?: 'UpdateTournamentPayload' }
-    & { tournament: (
+export type DashboardTournamentEditPageUpdateTournamentMutation = { __typename?: 'Mutation', updateTournament?: Maybe<{ __typename?: 'UpdateTournamentPayload', tournament: (
       { __typename?: 'Tournament' }
       & TournamentFormFragment
       & TournamentBreadcrumbsFragment
-    ) }
-  )> }
-);
+    ) }> };
 
 export type DashboardTournamentPageQueryVariables = Exact<{
   tournamentId: Scalars['ID'];
 }>;
 
 
-export type DashboardTournamentPageQuery = (
-  { __typename?: 'Query' }
-  & { tournament: (
-    { __typename?: 'Tournament' }
-    & Pick<Tournament, 'id' | 'name' | 'description' | 'mainImageUrl' | 'startsAt' | 'rankingsCount' | 'videosCount'>
-    & { videos: Array<(
-      { __typename?: 'TournamentVideo' }
-      & Pick<TournamentVideo, 'id' | 'title' | 'youtubeVideoId'>
-    )> }
-  ), players: (
-    { __typename?: 'PlayerCollection' }
-    & { records: Array<(
+export type DashboardTournamentPageQuery = { __typename?: 'Query', tournament: { __typename?: 'Tournament', id: string, name: string, description: string, mainImageUrl?: Maybe<string>, startsAt: string, rankingsCount: number, videosCount: number, videos: Array<{ __typename?: 'TournamentVideo', id: string, title: string, youtubeVideoId: string }> }, players: { __typename?: 'PlayerCollection', records: Array<(
       { __typename?: 'Player' }
       & PlayerSelectOptionFragment
-    )> }
-  ) }
-);
+    )> } };
 
 export type DashboardTournamentPageRankingsQueryVariables = Exact<{
   tournamentId: Scalars['ID'];
 }>;
 
 
-export type DashboardTournamentPageRankingsQuery = (
-  { __typename?: 'Query' }
-  & { tournamentRankings: (
-    { __typename?: 'TournamentRankingCollection' }
-    & { records: Array<(
-      { __typename?: 'TournamentRanking' }
-      & Pick<TournamentRanking, 'id' | 'place'>
-      & { player: (
-        { __typename?: 'Player' }
-        & Pick<Player, 'id' | 'name' | 'avatarUrl'>
-      ) }
-    )> }
-  ) }
-);
+export type DashboardTournamentPageRankingsQuery = { __typename?: 'Query', tournamentRankings: { __typename?: 'TournamentRankingCollection', records: Array<{ __typename?: 'TournamentRanking', id: string, place: number, player: { __typename?: 'Player', id: string, name: string, avatarUrl?: Maybe<string> } }> } };
 
 export type DashboardTournamentPageVideosQueryVariables = Exact<{
   tournamentId: Scalars['ID'];
 }>;
 
 
-export type DashboardTournamentPageVideosQuery = (
-  { __typename?: 'Query' }
-  & { tournamentVideos: Array<(
-    { __typename?: 'TournamentVideo' }
-    & Pick<TournamentVideo, 'id' | 'title' | 'thumbnailUrl' | 'battlesCount'>
-    & { channel: (
-      { __typename?: 'Channel' }
-      & Pick<Channel, 'id' | 'name'>
-    ) }
-  )> }
-);
+export type DashboardTournamentPageVideosQuery = { __typename?: 'Query', tournamentVideos: Array<{ __typename?: 'TournamentVideo', id: string, title: string, thumbnailUrl: string, battlesCount: number, channel: { __typename?: 'Channel', id: string, name: string } }> };
 
 export type DashboardTournamentPageCreateRankingMutationVariables = Exact<{
   tournamentId: Scalars['ID'];
@@ -4886,32 +3602,14 @@ export type DashboardTournamentPageCreateRankingMutationVariables = Exact<{
 }>;
 
 
-export type DashboardTournamentPageCreateRankingMutation = (
-  { __typename?: 'Mutation' }
-  & { createTournamentRanking?: Maybe<(
-    { __typename?: 'CreateTournamentRankingPayload' }
-    & { tournamentRanking: (
-      { __typename?: 'TournamentRanking' }
-      & Pick<TournamentRanking, 'id'>
-    ) }
-  )> }
-);
+export type DashboardTournamentPageCreateRankingMutation = { __typename?: 'Mutation', createTournamentRanking?: Maybe<{ __typename?: 'CreateTournamentRankingPayload', tournamentRanking: { __typename?: 'TournamentRanking', id: string } }> };
 
 export type DashboardTournamentPageDeleteRankingMutationVariables = Exact<{
   tournamentRankingId: Scalars['ID'];
 }>;
 
 
-export type DashboardTournamentPageDeleteRankingMutation = (
-  { __typename?: 'Mutation' }
-  & { deleteTournamentRanking?: Maybe<(
-    { __typename?: 'DeleteTournamentRankingPayload' }
-    & { tournamentRanking: (
-      { __typename?: 'TournamentRanking' }
-      & Pick<TournamentRanking, 'id'>
-    ) }
-  )> }
-);
+export type DashboardTournamentPageDeleteRankingMutation = { __typename?: 'Mutation', deleteTournamentRanking?: Maybe<{ __typename?: 'DeleteTournamentRankingPayload', tournamentRanking: { __typename?: 'TournamentRanking', id: string } }> };
 
 export type DashboardTournamentPageCreateVideoMutationVariables = Exact<{
   tournamentId: Scalars['ID'];
@@ -4919,32 +3617,14 @@ export type DashboardTournamentPageCreateVideoMutationVariables = Exact<{
 }>;
 
 
-export type DashboardTournamentPageCreateVideoMutation = (
-  { __typename?: 'Mutation' }
-  & { createTournamentVideo?: Maybe<(
-    { __typename?: 'CreateTournamentVideoPayload' }
-    & { tournamentVideo: (
-      { __typename?: 'TournamentVideo' }
-      & Pick<TournamentVideo, 'id'>
-    ) }
-  )> }
-);
+export type DashboardTournamentPageCreateVideoMutation = { __typename?: 'Mutation', createTournamentVideo?: Maybe<{ __typename?: 'CreateTournamentVideoPayload', tournamentVideo: { __typename?: 'TournamentVideo', id: string } }> };
 
 export type DashboardTournamentPageDeleteVideoMutationVariables = Exact<{
   tournamentVideoId: Scalars['ID'];
 }>;
 
 
-export type DashboardTournamentPageDeleteVideoMutation = (
-  { __typename?: 'Mutation' }
-  & { deleteTournamentVideo?: Maybe<(
-    { __typename?: 'DeleteTournamentVideoPayload' }
-    & { tournamentVideo: (
-      { __typename?: 'TournamentVideo' }
-      & Pick<TournamentVideo, 'id'>
-    ) }
-  )> }
-);
+export type DashboardTournamentPageDeleteVideoMutation = { __typename?: 'Mutation', deleteTournamentVideo?: Maybe<{ __typename?: 'DeleteTournamentVideoPayload', tournamentVideo: { __typename?: 'TournamentVideo', id: string } }> };
 
 export type DashboardTournamentsPageQueryVariables = Exact<{
   page?: Maybe<Scalars['Int']>;
@@ -4953,105 +3633,61 @@ export type DashboardTournamentsPageQueryVariables = Exact<{
 }>;
 
 
-export type DashboardTournamentsPageQuery = (
-  { __typename?: 'Query' }
-  & { tournaments: (
-    { __typename?: 'TournamentCollection' }
-    & { records: Array<(
+export type DashboardTournamentsPageQuery = { __typename?: 'Query', tournaments: { __typename?: 'TournamentCollection', records: Array<(
       { __typename?: 'Tournament' }
       & DashboardTournamentCardFragment
     )>, paging: (
       { __typename?: 'Paging' }
       & PagingFragment
-    ) }
-  ) }
-);
+    ) } };
 
 export type TopPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type TopPageQuery = (
-  { __typename?: 'Query' }
-  & { articles: (
-    { __typename?: 'ArticleCollection' }
-    & { records: Array<(
+export type TopPageQuery = { __typename?: 'Query', articles: { __typename?: 'ArticleCollection', records: Array<(
       { __typename?: 'Article' }
       & ArticleCardFragment
-    )> }
-  ) }
-);
+    )> } };
 
 export type PageMoveCategoryQueryVariables = Exact<{
   moveCategoryId: Scalars['ID'];
 }>;
 
 
-export type PageMoveCategoryQuery = (
-  { __typename?: 'Query' }
-  & { moveCategory: (
-    { __typename?: 'MoveCategory' }
-    & Pick<MoveCategory, 'id' | 'name'>
-    & { character: (
-      { __typename?: 'Character' }
-      & Pick<Character, 'slug' | 'name'>
-    ), moves: Array<(
+export type PageMoveCategoryQuery = { __typename?: 'Query', moveCategory: { __typename?: 'MoveCategory', id: string, name: string, character: { __typename?: 'Character', slug: string, name: string }, moves: Array<(
       { __typename?: 'Move' }
       & MoveListItemFragment
-    )> }
-  ) }
-);
+    )> } };
 
 export type PageMoveQueryVariables = Exact<{
   moveId: Scalars['ID'];
 }>;
 
 
-export type PageMoveQuery = (
-  { __typename?: 'Query' }
-  & { move: (
-    { __typename?: 'Move' }
-    & { moveCategory: (
-      { __typename?: 'MoveCategory' }
-      & Pick<MoveCategory, 'id' | 'name'>
-      & { character: (
-        { __typename?: 'Character' }
-        & Pick<Character, 'slug' | 'name'>
-      ) }
-    ) }
+export type PageMoveQuery = { __typename?: 'Query', move: (
+    { __typename?: 'Move', moveCategory: { __typename?: 'MoveCategory', id: string, name: string, character: { __typename?: 'Character', slug: string, name: string } } }
     & MoveFragment
-  ) }
-);
+  ) };
 
 export type MovePageCommentsQueryVariables = Exact<{
   moveId: Scalars['ID'];
 }>;
 
 
-export type MovePageCommentsQuery = (
-  { __typename?: 'Query' }
-  & { moveComments: Array<(
+export type MovePageCommentsQuery = { __typename?: 'Query', moveComments: Array<(
     { __typename?: 'MoveComment' }
     & MoveCommentCardFragment
-  )> }
-);
+  )> };
 
 export type OrganizerPageQueryVariables = Exact<{
   organizerSlug: Scalars['String'];
 }>;
 
 
-export type OrganizerPageQuery = (
-  { __typename?: 'Query' }
-  & { organizer: (
-    { __typename?: 'Organizer' }
-    & Pick<Organizer, 'id' | 'name' | 'slug' | 'avatarUrl' | 'twitterId' | 'streamingUrl' | 'description'>
-    & { tournaments: Array<(
-      { __typename?: 'Tournament' }
-      & Pick<Tournament, 'id' | 'name' | 'startsAt'>
-    )> }
+export type OrganizerPageQuery = { __typename?: 'Query', organizer: (
+    { __typename?: 'Organizer', id: string, name: string, slug: string, avatarUrl?: Maybe<string>, twitterId?: Maybe<string>, streamingUrl?: Maybe<string>, description?: Maybe<string>, tournaments: Array<{ __typename?: 'Tournament', id: string, name: string, startsAt: string }> }
     & OrganizerBreadcrumbsFragment
-  ) }
-);
+  ) };
 
 export type OrganizersPageQueryVariables = Exact<{
   page?: Maybe<Scalars['Int']>;
@@ -5059,130 +3695,49 @@ export type OrganizersPageQueryVariables = Exact<{
 }>;
 
 
-export type OrganizersPageQuery = (
-  { __typename?: 'Query' }
-  & { organizers: (
-    { __typename?: 'OrganizerCollection' }
-    & { records: Array<(
+export type OrganizersPageQuery = { __typename?: 'Query', organizers: { __typename?: 'OrganizerCollection', records: Array<(
       { __typename?: 'Organizer' }
       & OrganizerCardFragment
     )>, paging: (
       { __typename?: 'Paging' }
       & PagingFragment
-    ) }
-  ) }
-);
+    ) } };
 
 export type PlayerBattlesPageQueryVariables = Exact<{
   playerSlug: Scalars['String'];
+  characterSlug?: Maybe<Scalars['String']>;
   page?: Maybe<Scalars['Int']>;
 }>;
 
 
-export type PlayerBattlesPageQuery = (
-  { __typename?: 'Query' }
-  & { player: (
-    { __typename?: 'Player' }
+export type PlayerBattlesPageQuery = { __typename?: 'Query', player: (
+    { __typename?: 'Player', playerCharacters: Array<{ __typename?: 'PlayerCharacter', tournamentBattlesCount: number, character: { __typename?: 'Character', id: string, slug: string, name: string, faceImageUrl: string } }> }
     & PlayerBreadcrumbsFragment
     & PlayerPageProfileFragment
-  ), tournamentBattles: (
-    { __typename?: 'TournamentBattleCollection' }
-    & { records: Array<(
-      { __typename?: 'TournamentBattle' }
-      & Pick<TournamentBattle, 'id' | 'round'>
-      & { tournamentVideo: (
-        { __typename?: 'TournamentVideo' }
-        & Pick<TournamentVideo, 'id'>
-        & { tournament: (
-          { __typename?: 'Tournament' }
-          & Pick<Tournament, 'id' | 'name' | 'startsAt'>
-        ) }
-      ), sides: Array<(
-        { __typename?: 'TournamentBattleSide' }
-        & Pick<TournamentBattleSide, 'rounds'>
-        & { player: (
-          { __typename?: 'Player' }
-          & Pick<Player, 'name'>
-        ), character: (
-          { __typename?: 'Character' }
-          & Pick<Character, 'faceImageUrl'>
-        ) }
-      )> }
-    )>, paging: (
-      { __typename?: 'Paging' }
-      & Pick<Paging, 'currentPage' | 'totalPages'>
-    ) }
-  ) }
-);
+  ), tournamentBattles: { __typename?: 'TournamentBattleCollection', records: Array<{ __typename?: 'TournamentBattle', id: string, round?: Maybe<TournamentBattleRound>, tournamentVideo: { __typename?: 'TournamentVideo', id: string, tournament: { __typename?: 'Tournament', id: string, name: string, startsAt: string } }, sides: Array<{ __typename?: 'TournamentBattleSide', rounds: number, player: { __typename?: 'Player', name: string }, character: { __typename?: 'Character', faceImageUrl: string } }> }>, paging: { __typename?: 'Paging', currentPage: number, totalPages: number } } };
 
-export type PlayerPageProfileFragment = (
-  { __typename?: 'Player' }
-  & Pick<Player, 'id' | 'name' | 'slug' | 'avatarUrl' | 'twitterId' | 'streamingUrl' | 'description' | 'tournamentRankingsCount' | 'tournamentBattlesCount'>
-);
+export type PlayerPageProfileFragment = { __typename?: 'Player', id: string, name: string, slug: string, avatarUrl?: Maybe<string>, twitterId?: Maybe<string>, streamingUrl?: Maybe<string>, description?: Maybe<string>, tournamentRankingsCount: number, tournamentBattlesCount: number };
 
-export type PlayerPageRankingFragment = (
-  { __typename?: 'TournamentRanking' }
-  & Pick<TournamentRanking, 'id' | 'place'>
-  & { tournament: (
-    { __typename?: 'Tournament' }
-    & Pick<Tournament, 'id' | 'name' | 'mainImageUrl' | 'startsAt'>
-  ) }
-);
+export type PlayerPageRankingFragment = { __typename?: 'TournamentRanking', id: string, place: number, tournament: { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: Maybe<string>, startsAt: string } };
 
-export type PlayerPageBattleFragment = (
-  { __typename?: 'TournamentBattle' }
-  & Pick<TournamentBattle, 'id' | 'round'>
-  & { tournamentVideo: (
-    { __typename?: 'TournamentVideo' }
-    & Pick<TournamentVideo, 'id'>
-    & { tournament: (
-      { __typename?: 'Tournament' }
-      & Pick<Tournament, 'id' | 'name' | 'startsAt'>
-    ) }
-  ), sides: Array<(
-    { __typename?: 'TournamentBattleSide' }
-    & Pick<TournamentBattleSide, 'rounds'>
-    & { player: (
-      { __typename?: 'Player' }
-      & Pick<Player, 'name'>
-    ), character: (
-      { __typename?: 'Character' }
-      & Pick<Character, 'faceImageUrl'>
-    ) }
-  )> }
-);
+export type PlayerPageBattleFragment = { __typename?: 'TournamentBattle', id: string, round?: Maybe<TournamentBattleRound>, tournamentVideo: { __typename?: 'TournamentVideo', id: string, tournament: { __typename?: 'Tournament', id: string, name: string, startsAt: string } }, sides: Array<{ __typename?: 'TournamentBattleSide', rounds: number, player: { __typename?: 'Player', name: string }, character: { __typename?: 'Character', faceImageUrl: string } }> };
 
 export type PlayerPageQueryVariables = Exact<{
   playerSlug: Scalars['String'];
 }>;
 
 
-export type PlayerPageQuery = (
-  { __typename?: 'Query' }
-  & { player: (
+export type PlayerPageQuery = { __typename?: 'Query', player: (
     { __typename?: 'Player' }
     & PlayerBreadcrumbsFragment
     & PlayerPageProfileFragment
-  ), tournamentRankings: (
-    { __typename?: 'TournamentRankingCollection' }
-    & { records: Array<(
+  ), tournamentRankings: { __typename?: 'TournamentRankingCollection', records: Array<(
       { __typename?: 'TournamentRanking' }
       & PlayerPageRankingFragment
-    )>, paging: (
-      { __typename?: 'Paging' }
-      & Pick<Paging, 'hasNext'>
-    ) }
-  ), tournamentBattles: (
-    { __typename?: 'TournamentBattleCollection' }
-    & { records: Array<(
+    )>, paging: { __typename?: 'Paging', hasNext: boolean } }, tournamentBattles: { __typename?: 'TournamentBattleCollection', records: Array<(
       { __typename?: 'TournamentBattle' }
       & PlayerPageBattleFragment
-    )>, paging: (
-      { __typename?: 'Paging' }
-      & Pick<Paging, 'hasNext'>
-    ) }
-  ) }
-);
+    )>, paging: { __typename?: 'Paging', hasNext: boolean } } };
 
 export type PlayerRankingsPageQueryVariables = Exact<{
   playerSlug: Scalars['String'];
@@ -5190,27 +3745,11 @@ export type PlayerRankingsPageQueryVariables = Exact<{
 }>;
 
 
-export type PlayerRankingsPageQuery = (
-  { __typename?: 'Query' }
-  & { player: (
+export type PlayerRankingsPageQuery = { __typename?: 'Query', player: (
     { __typename?: 'Player' }
     & PlayerBreadcrumbsFragment
     & PlayerPageProfileFragment
-  ), tournamentRankings: (
-    { __typename?: 'TournamentRankingCollection' }
-    & { records: Array<(
-      { __typename?: 'TournamentRanking' }
-      & Pick<TournamentRanking, 'id' | 'place'>
-      & { tournament: (
-        { __typename?: 'Tournament' }
-        & Pick<Tournament, 'id' | 'name' | 'mainImageUrl' | 'startsAt'>
-      ) }
-    )>, paging: (
-      { __typename?: 'Paging' }
-      & Pick<Paging, 'currentPage' | 'totalPages'>
-    ) }
-  ) }
-);
+  ), tournamentRankings: { __typename?: 'TournamentRankingCollection', records: Array<{ __typename?: 'TournamentRanking', id: string, place: number, tournament: { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: Maybe<string>, startsAt: string } }>, paging: { __typename?: 'Paging', currentPage: number, totalPages: number } } };
 
 export type PlayersPageQueryVariables = Exact<{
   page?: Maybe<Scalars['Int']>;
@@ -5218,75 +3757,41 @@ export type PlayersPageQueryVariables = Exact<{
 }>;
 
 
-export type PlayersPageQuery = (
-  { __typename?: 'Query' }
-  & { players: (
-    { __typename?: 'PlayerCollection' }
-    & { records: Array<(
+export type PlayersPageQuery = { __typename?: 'Query', players: { __typename?: 'PlayerCollection', records: Array<(
       { __typename?: 'Player' }
       & PlayerCardFragment
     )>, paging: (
       { __typename?: 'Paging' }
       & PagingFragment
-    ) }
-  ) }
-);
+    ) } };
 
-export type TournamentVideoPageBattleFragment = (
-  { __typename?: 'TournamentBattle' }
-  & Pick<TournamentBattle, 'id' | 'round' | 'startSec'>
-  & { sides: Array<(
-    { __typename?: 'TournamentBattleSide' }
-    & Pick<TournamentBattleSide, 'rounds'>
-    & { player: (
-      { __typename?: 'Player' }
-      & Pick<Player, 'name'>
-    ), character: (
-      { __typename?: 'Character' }
-      & Pick<Character, 'faceImageUrl'>
-    ) }
-  )> }
-);
+export type TournamentVideoPageBattleFragment = { __typename?: 'TournamentBattle', id: string, round?: Maybe<TournamentBattleRound>, startSec: number, sides: Array<{ __typename?: 'TournamentBattleSide', rounds: number, player: { __typename?: 'Player', name: string }, character: { __typename?: 'Character', faceImageUrl: string } }> };
 
 export type PageTournamentVideoQueryVariables = Exact<{
   tournamentVideoId: Scalars['ID'];
 }>;
 
 
-export type PageTournamentVideoQuery = (
-  { __typename?: 'Query' }
-  & { tournamentVideo: (
-    { __typename?: 'TournamentVideo' }
-    & { tournament: (
-      { __typename?: 'Tournament' }
-      & Pick<Tournament, 'id' | 'name'>
-    ), battles: Array<(
+export type PageTournamentVideoQuery = { __typename?: 'Query', tournamentVideo: (
+    { __typename?: 'TournamentVideo', tournament: { __typename?: 'Tournament', id: string, name: string }, battles: Array<(
       { __typename?: 'TournamentBattle' }
       & TournamentVideoPageBattleFragment
     )> }
     & TournamentVideoFragment
-  ) }
-);
+  ) };
 
 export type PageTournamentQueryVariables = Exact<{
   tournamentId: Scalars['ID'];
 }>;
 
 
-export type PageTournamentQuery = (
-  { __typename?: 'Query' }
-  & { tournament: (
-    { __typename?: 'Tournament' }
-    & Pick<Tournament, 'id' | 'name' | 'mainImageUrl' | 'url' | 'streamingUrl' | 'description' | 'startsAt'>
-    & { rankings: Array<(
+export type PageTournamentQuery = { __typename?: 'Query', tournament: { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: Maybe<string>, url: string, streamingUrl?: Maybe<string>, description: string, startsAt: string, rankings: Array<(
       { __typename?: 'TournamentRanking' }
       & TournamentRankingCardFragment
     )>, videos: Array<(
       { __typename?: 'TournamentVideo' }
       & TournamentVideoCardFragment
-    )> }
-  ) }
-);
+    )> } };
 
 export type PageTournamentsQueryVariables = Exact<{
   page?: Maybe<Scalars['Int']>;
@@ -5294,19 +3799,13 @@ export type PageTournamentsQueryVariables = Exact<{
 }>;
 
 
-export type PageTournamentsQuery = (
-  { __typename?: 'Query' }
-  & { tournaments: (
-    { __typename?: 'TournamentCollection' }
-    & { records: Array<(
+export type PageTournamentsQuery = { __typename?: 'Query', tournaments: { __typename?: 'TournamentCollection', records: Array<(
       { __typename?: 'Tournament' }
       & TournamentCardFragment
     )>, paging: (
       { __typename?: 'Paging' }
       & PagingFragment
-    ) }
-  ) }
-);
+    ) } };
 
 export const ArticleLinkFragmentDoc = gql`
     fragment articleLink on ArticleLink {
@@ -11118,12 +9617,26 @@ export type OrganizersPageQueryHookResult = ReturnType<typeof useOrganizersPageQ
 export type OrganizersPageLazyQueryHookResult = ReturnType<typeof useOrganizersPageLazyQuery>;
 export type OrganizersPageQueryResult = Apollo.QueryResult<OrganizersPageQuery, OrganizersPageQueryVariables>;
 export const PlayerBattlesPageDocument = gql`
-    query PlayerBattlesPage($playerSlug: String!, $page: Int) {
+    query PlayerBattlesPage($playerSlug: String!, $characterSlug: String, $page: Int) {
   player(playerSlug: $playerSlug) {
     ...PlayerBreadcrumbs
     ...PlayerPageProfile
+    playerCharacters {
+      tournamentBattlesCount
+      character {
+        id
+        slug
+        name
+        faceImageUrl
+      }
+    }
   }
-  tournamentBattles(playerSlug: $playerSlug, page: $page, per: 10) {
+  tournamentBattles(
+    playerSlug: $playerSlug
+    characterSlug: $characterSlug
+    page: $page
+    per: 10
+  ) {
     records {
       id
       round
@@ -11167,6 +9680,7 @@ ${PlayerPageProfileFragmentDoc}`;
  * const { data, loading, error } = usePlayerBattlesPageQuery({
  *   variables: {
  *      playerSlug: // value for 'playerSlug'
+ *      characterSlug: // value for 'characterSlug'
  *      page: // value for 'page'
  *   },
  * });
