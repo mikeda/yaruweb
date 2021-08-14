@@ -9,7 +9,7 @@ import { path } from '@/lib';
 import { Pagination } from '@material-ui/lab';
 import { useRouter } from 'next/router';
 import { Profile } from '../components/Profile';
-import { BattleListItem } from '../components/BattleListItem';
+import { BattleListItem } from '../../../../components/BattleListItem';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

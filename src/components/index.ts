@@ -5,6 +5,7 @@ export * from './ArticleEditor';
 export * from './ArticleElement';
 export * from './ArticleForm';
 export * from './AttackActionForm';
+export * from './BattleListItem';
 export * from './CharacterCard';
 export * from './CharacterForm';
 export * from './CharacterPageTabs';

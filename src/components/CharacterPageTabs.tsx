@@ -4,7 +4,7 @@ import { path } from '@/lib';
 import { Paper, Tab, Tabs } from '@material-ui/core';
 import { useRouter } from 'next/router';
 
-type TabValue = 'profile' | 'moves' | 'combos';
+type TabValue = 'profile' | 'battles' | 'moves' | 'combos';
 
 export const CharacterPageTabs: React.FC<{ characterSlug: string; activeTab: TabValue }> = ({
   characterSlug,
@@ -26,6 +26,13 @@ export const CharacterPageTabs: React.FC<{ characterSlug: string; activeTab: Tab
           label="プロフィール"
           onClick={() => {
             router.push(path({ to: 'character', characterSlug }));
+          }}
+        />
+        <Tab
+          value="battles"
+          label="対戦動画"
+          onClick={() => {
+            router.push(path({ to: 'characterBattles', characterSlug }));
           }}
         />
         <Tab

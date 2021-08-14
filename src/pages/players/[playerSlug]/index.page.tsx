@@ -2,13 +2,12 @@ import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
-import { Head, Content, Breadcrumbs, Link as LinkComponent } from '@/components';
+import { Head, Content, Breadcrumbs, BattleListItem, Link as LinkComponent } from '@/components';
 import { Box, Button, Grid, List, Paper, Typography } from '@material-ui/core';
 import { PlayerPageDocument, PlayerPageQuery } from '@/lib/graphql/types';
 import { path } from '@/lib';
 import { Profile } from './components/Profile';
 import { WinningCard } from './components/WinningCard';
-import { BattleListItem } from './components/BattleListItem';
 
 const Page: React.FC<PlayerPageQuery> = ({ player, winnings, battles }) => {
   return (

@@ -4,8 +4,8 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import {
   CharacterPathsDocument,
   CharacterPathsQuery,
-  PageCharacterComboCategoriesDocument,
-  PageCharacterComboCategoriesQuery,
+  PageCharacterMoveCategoriesDocument,
+  PageCharacterMoveCategoriesQuery,
 } from '@/lib/graphql/types';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Head } from '@/components/layouts/Head';
@@ -13,29 +13,29 @@ import { Content } from '@/components/layouts/Content';
 import { CharacterCard } from '@/components/CharacterCard';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 import { Box, Paper } from '@material-ui/core';
-import { CharacterPageTabs, ComboCategoryList } from '@/components';
+import { CharacterPageTabs, MoveCategoryList } from '@/components';
 
-const Page: React.FC<PageCharacterComboCategoriesQuery> = ({ character }) => {
+const Page: React.FC<PageCharacterMoveCategoriesQuery> = ({ character }) => {
   return (
-    <Content activeTab="characters" breadcrumb={<Breadcrumbs to="comboCategories" character={character} />}>
+    <Content activeTab="characters" breadcrumb={<Breadcrumbs to="moveCategories" character={character} />}>
       <Head title={character.longName} />
 
       <CharacterCard character={character} />
 
       <Box mt={2}>
-        <CharacterPageTabs characterSlug={character.slug} activeTab="combos" />
+        <CharacterPageTabs characterSlug={character.slug} activeTab="moves" />
       </Box>
 
       <Paper>
-        <ComboCategoryList comboCategories={character.comboCategories} />
+        <MoveCategoryList moveCategories={character.moveCategories} />
       </Paper>
     </Content>
   );
 };
 
-export const getStaticProps: GetStaticProps<PageCharacterComboCategoriesQuery> = async ({ params }) => {
-  const characterSlug = params?.characterSlug as string;
-  const data: PageCharacterComboCategoriesQuery = await fetchGraphql(PageCharacterComboCategoriesDocument, {
+export const getStaticProps: GetStaticProps<PageCharacterMoveCategoriesQuery> = async ({ params }) => {
+  const characterSlug = params?.character as string;
+  const data: PageCharacterMoveCategoriesQuery = await fetchGraphql(PageCharacterMoveCategoriesDocument, {
     characterSlug,
   });
 
@@ -45,7 +45,7 @@ export const getStaticProps: GetStaticProps<PageCharacterComboCategoriesQuery> =
 export const getStaticPaths: GetStaticPaths = async () => {
   const data: CharacterPathsQuery = await fetchGraphql(CharacterPathsDocument);
 
-  const paths = data.characters.map(c => ({ params: { characterSlug: c.slug } }));
+  const paths = data.characters.map(c => ({ params: { character: c.slug } }));
 
   return { paths, fallback: false };
 };

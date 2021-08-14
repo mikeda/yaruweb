@@ -129,7 +129,7 @@ const Page: React.FC<PageCharacterQuery> = ({ character }) => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const characterSlug = params?.characterSlug as string;
+  const characterSlug = params?.character as string;
   const data: PageCharacterQuery = await fetchGraphql(PageCharacterDocument, { characterSlug });
 
   return { props: data };
@@ -138,7 +138,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 export const getStaticPaths: GetStaticPaths = async () => {
   const data: CharacterPathsQuery = await fetchGraphql(CharacterPathsDocument);
 
-  const paths = data.characters.map(c => ({ params: { characterSlug: c.slug } }));
+  const paths = data.characters.map(c => ({ params: { character: c.slug } }));
 
   return { paths, fallback: false };
 };
