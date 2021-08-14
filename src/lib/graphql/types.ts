@@ -5120,6 +5120,38 @@ export type PlayerPageProfileFragment = (
   & Pick<Player, 'id' | 'name' | 'slug' | 'avatarUrl' | 'twitterId' | 'streamingUrl' | 'description' | 'tournamentRankingsCount' | 'tournamentBattlesCount'>
 );
 
+export type PlayerPageRankingFragment = (
+  { __typename?: 'TournamentRanking' }
+  & Pick<TournamentRanking, 'id' | 'place'>
+  & { tournament: (
+    { __typename?: 'Tournament' }
+    & Pick<Tournament, 'id' | 'name' | 'mainImageUrl' | 'startsAt'>
+  ) }
+);
+
+export type PlayerPageBattleFragment = (
+  { __typename?: 'TournamentBattle' }
+  & Pick<TournamentBattle, 'id' | 'round'>
+  & { tournamentVideo: (
+    { __typename?: 'TournamentVideo' }
+    & Pick<TournamentVideo, 'id'>
+    & { tournament: (
+      { __typename?: 'Tournament' }
+      & Pick<Tournament, 'id' | 'name' | 'startsAt'>
+    ) }
+  ), sides: Array<(
+    { __typename?: 'TournamentBattleSide' }
+    & Pick<TournamentBattleSide, 'rounds'>
+    & { player: (
+      { __typename?: 'Player' }
+      & Pick<Player, 'name'>
+    ), character: (
+      { __typename?: 'Character' }
+      & Pick<Character, 'faceImageUrl'>
+    ) }
+  )> }
+);
+
 export type PlayerPageQueryVariables = Exact<{
   playerSlug: Scalars['String'];
 }>;
@@ -5135,11 +5167,7 @@ export type PlayerPageQuery = (
     { __typename?: 'TournamentRankingCollection' }
     & { records: Array<(
       { __typename?: 'TournamentRanking' }
-      & Pick<TournamentRanking, 'id' | 'place'>
-      & { tournament: (
-        { __typename?: 'Tournament' }
-        & Pick<Tournament, 'id' | 'name' | 'mainImageUrl' | 'startsAt'>
-      ) }
+      & PlayerPageRankingFragment
     )>, paging: (
       { __typename?: 'Paging' }
       & Pick<Paging, 'hasNext'>
@@ -5148,25 +5176,7 @@ export type PlayerPageQuery = (
     { __typename?: 'TournamentBattleCollection' }
     & { records: Array<(
       { __typename?: 'TournamentBattle' }
-      & Pick<TournamentBattle, 'id' | 'round'>
-      & { tournamentVideo: (
-        { __typename?: 'TournamentVideo' }
-        & Pick<TournamentVideo, 'id'>
-        & { tournament: (
-          { __typename?: 'Tournament' }
-          & Pick<Tournament, 'id' | 'name' | 'startsAt'>
-        ) }
-      ), sides: Array<(
-        { __typename?: 'TournamentBattleSide' }
-        & Pick<TournamentBattleSide, 'rounds'>
-        & { player: (
-          { __typename?: 'Player' }
-          & Pick<Player, 'name'>
-        ), character: (
-          { __typename?: 'Character' }
-          & Pick<Character, 'faceImageUrl'>
-        ) }
-      )> }
+      & PlayerPageBattleFragment
     )>, paging: (
       { __typename?: 'Paging' }
       & Pick<Paging, 'hasNext'>
@@ -6001,6 +6011,41 @@ export const PlayerPageProfileFragmentDoc = gql`
   description
   tournamentRankingsCount
   tournamentBattlesCount
+}
+    `;
+export const PlayerPageRankingFragmentDoc = gql`
+    fragment PlayerPageRanking on TournamentRanking {
+  id
+  place
+  tournament {
+    id
+    name
+    mainImageUrl
+    startsAt
+  }
+}
+    `;
+export const PlayerPageBattleFragmentDoc = gql`
+    fragment PlayerPageBattle on TournamentBattle {
+  id
+  round
+  tournamentVideo {
+    id
+    tournament {
+      id
+      name
+      startsAt
+    }
+  }
+  sides {
+    player {
+      name
+    }
+    character {
+      faceImageUrl
+    }
+    rounds
+  }
 }
     `;
 export const TournamentVideoPageBattleFragmentDoc = gql`
@@ -11143,42 +11188,17 @@ export const PlayerPageDocument = gql`
     ...PlayerBreadcrumbs
     ...PlayerPageProfile
   }
-  tournamentRankings(playerSlug: $playerSlug, per: 5) {
+  tournamentRankings(playerSlug: $playerSlug, per: 4) {
     records {
-      id
-      place
-      tournament {
-        id
-        name
-        mainImageUrl
-        startsAt
-      }
+      ...PlayerPageRanking
     }
     paging {
       hasNext
     }
   }
-  tournamentBattles(playerSlug: $playerSlug, per: 5) {
+  tournamentBattles(playerSlug: $playerSlug, per: 4) {
     records {
-      id
-      round
-      tournamentVideo {
-        id
-        tournament {
-          id
-          name
-          startsAt
-        }
-      }
-      sides {
-        player {
-          name
-        }
-        character {
-          faceImageUrl
-        }
-        rounds
-      }
+      ...PlayerPageBattle
     }
     paging {
       hasNext
@@ -11186,7 +11206,9 @@ export const PlayerPageDocument = gql`
   }
 }
     ${PlayerBreadcrumbsFragmentDoc}
-${PlayerPageProfileFragmentDoc}`;
+${PlayerPageProfileFragmentDoc}
+${PlayerPageRankingFragmentDoc}
+${PlayerPageBattleFragmentDoc}`;
 
 /**
  * __usePlayerPageQuery__
