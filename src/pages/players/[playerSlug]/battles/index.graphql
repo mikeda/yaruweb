@@ -1,10 +1,21 @@
-query PlayerBattlesPage($playerSlug: String!, $page: Int) {
+query PlayerBattlesPage($playerSlug: String!, $characterSlug: String, $page: Int) {
   player(playerSlug: $playerSlug) {
     ...PlayerBreadcrumbs
     ...PlayerPageProfile
+
+    playerCharacters {
+      tournamentBattlesCount
+
+      character {
+        id
+        slug
+        name
+        faceImageUrl
+      }
+    }
   }
 
-  tournamentBattles(playerSlug: $playerSlug, page: $page, per: 10) {
+  tournamentBattles(playerSlug: $playerSlug, characterSlug: $characterSlug, page: $page, per: 10) {
     records {
       id
       round
