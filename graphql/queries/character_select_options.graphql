@@ -6,6 +6,8 @@ fragment CharacterSelectOption on Character {
 
 query CharacterSelectOptions {
   characters {
-    ...CharacterSelectOption
+    records {
+      ...CharacterSelectOption
+    }
   }
 }

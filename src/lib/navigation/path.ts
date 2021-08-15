@@ -5,6 +5,7 @@ type Options =
   | { to: 'top' }
   | { to: 'articles'; params?: { page?: number; order?: Order; category?: ArticleCategory } }
   | { to: 'article'; articleId: string }
+  | { to: 'battles' }
   | { to: 'characters' }
   | { to: 'character'; characterSlug: string }
   | { to: 'characterBattles'; characterSlug: string; playerSlug?: string; page?: number }
@@ -35,6 +36,8 @@ export const path = (options: Options): string => {
       return generatePath('/articles', options.params);
     case 'article':
       return `/articles/${options.articleId}`;
+    case 'battles':
+      return '/battles';
     case 'characters':
       return '/characters';
     case 'character':

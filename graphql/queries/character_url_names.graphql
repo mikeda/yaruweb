@@ -1,5 +1,7 @@
 query CharacterSlugs {
   characters {
-    slug
+    records {
+      slug
+    }
   }
 }

@@ -45,7 +45,7 @@ export const getStaticProps: GetStaticProps<PageCharacterComboCategoriesQuery> =
 export const getStaticPaths: GetStaticPaths = async () => {
   const data: CharacterPathsQuery = await fetchGraphql(CharacterPathsDocument);
 
-  const paths = data.characters.map(c => ({ params: { character: c.slug } }));
+  const paths = data.characters.records.map(c => ({ params: { character: c.slug } }));
 
   return { paths, fallback: false };
 };

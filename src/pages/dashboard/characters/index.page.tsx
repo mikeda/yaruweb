@@ -28,11 +28,11 @@ const CharacterList: React.FC = () => {
   if (loading) return <NotFound>Loading...</NotFound>;
   if (error) return <NotFound>エラーが発生しました。{error.message}</NotFound>;
   const characters = data?.characters;
-  if (!(characters && characters.length > 0)) return <NotFound>キャラクターが登録されていません。</NotFound>;
+  if (!(characters && characters.records.length > 0)) return <NotFound>キャラクターが登録されていません。</NotFound>;
 
   return (
     <Grid container spacing={2}>
-      {characters.map(character => (
+      {characters.records.map(character => (
         <Grid item key={character.slug} xs={12} sm={6}>
           <CharacterCard character={character} dashboard />
         </Grid>

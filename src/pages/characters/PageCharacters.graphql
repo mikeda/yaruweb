@@ -1,5 +1,5 @@
 query PageCharacters {
   characters {
-    ...CharacterCard
+    records { ...CharacterCard }
   }
 }
