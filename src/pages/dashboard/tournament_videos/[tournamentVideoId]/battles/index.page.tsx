@@ -65,7 +65,7 @@ const Page: React.FC = () => {
         <AccordionDetails>
           <BattleForm
             players={players.records}
-            characters={characters}
+            characters={characters.records}
             onClickGetPlayerTime={callback => {
               if (!youTubePlayer) return;
 
@@ -102,7 +102,7 @@ const Page: React.FC = () => {
                     battle={battle}
                     tournamentVideoId={tournamentVideo.id}
                     players={players.records}
-                    characters={characters}
+                    characters={characters.records}
                     onClick={() => {
                       youTubePlayer?.seekTo(battle.startSec, true);
                     }}

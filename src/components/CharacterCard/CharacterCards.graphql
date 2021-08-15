@@ -1,5 +1,5 @@
 query CharacterCards {
   characters {
-    ...CharacterCard
+    records { ...CharacterCard }
   }
 }

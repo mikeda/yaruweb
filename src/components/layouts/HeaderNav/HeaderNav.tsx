@@ -4,11 +4,12 @@ import { path } from '@/lib';
 import { Paper, Tab, Tabs } from '@material-ui/core';
 import { useRouter } from 'next/router';
 
-export type TabValue = 'top' | 'characters' | 'articles' | 'tournaments' | 'players';
+export type TabValue = 'top' | 'characters' | 'battles' | 'articles' | 'tournaments' | 'players';
 
 const tabItems: { [key in TabValue]: { name: string; path: string } } = {
   top: { name: 'TOP', path: path({ to: 'top' }) },
   tournaments: { name: '大会', path: path({ to: 'tournaments' }) },
+  battles: { name: '対戦動画', path: path({ to: 'battles' }) },
   players: { name: 'プレイヤー', path: path({ to: 'players' }) },
   characters: { name: 'キャラクター', path: path({ to: 'characters' }) },
   articles: { name: '記事', path: path({ to: 'articles' }) },

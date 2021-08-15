@@ -41,7 +41,7 @@ export const VideoList: React.FC<Props> = ({ tournamentId }) => {
   return (
     <>
       <List className={classes.list}>
-        {data.tournamentVideos.map(video => (
+        {data.tournamentVideos.records.map(video => (
           <ListItem key={video.id}>
             <ListItemText primary={video.title} secondary={`対戦動画 ${video.battlesCount}`} />
 

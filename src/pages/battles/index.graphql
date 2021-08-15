@@ -1,0 +1,35 @@
+
+query BattlesPage {
+  players(per: 10) {
+    records {
+      id
+      slug
+      name
+      avatarUrl
+      battlesCount
+    }
+  }
+
+  characters(order: use_rate, per: 10) {
+    records {
+      id
+      slug
+      name
+      faceImageUrl
+      battlesCount
+    }
+  }
+
+  battles(per: 10) {
+    records { ...BattleListItem }
+    paging { ...paging }
+  }
+}
+
+query BattlesPageBattles($page: Int!) {
+
+  battles(page: $page, per: 10) {
+    records { ...BattleListItem }
+    paging { ...paging }
+  }
+}

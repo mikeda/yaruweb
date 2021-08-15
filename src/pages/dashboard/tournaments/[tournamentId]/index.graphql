@@ -39,14 +39,16 @@ query DashboardTournamentPageWinnings($tournamentId: ID!) {
 
 query DashboardTournamentPageVideos($tournamentId: ID!) {
   tournamentVideos(tournamentId: $tournamentId) {
-    id
-    title
-    thumbnailUrl
-    battlesCount
-
-    channel {
+    records {
       id
-      name
+      title
+      thumbnailUrl
+      battlesCount
+
+      channel {
+        id
+        name
+      }
     }
   }
 }

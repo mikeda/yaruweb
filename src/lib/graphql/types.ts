@@ -304,6 +304,19 @@ export type CharacterAttributes = {
   dlc: Scalars['Boolean'];
 };
 
+export type CharacterCollection = {
+  __typename?: 'CharacterCollection';
+  paging: Paging;
+  records: Array<Character>;
+};
+
+export enum CharacterOrder {
+  /** 名前 */
+  Name = 'name',
+  /** 新着 */
+  UseRate = 'use_rate'
+}
+
 export type Combo = {
   __typename?: 'Combo';
   comboCategory: ComboCategory;
@@ -1541,7 +1554,7 @@ export type Query = {
   battleCounts: BattleCountCollection;
   battles: BattleCollection;
   character: Character;
-  characters: Array<Character>;
+  characters: CharacterCollection;
   combo: Combo;
   comboCategories: Array<ComboCategory>;
   comboCategory: ComboCategory;
@@ -1566,7 +1579,7 @@ export type Query = {
   tournament: Tournament;
   tournamentVideo: TournamentVideo;
   tournamentVideoComments: Array<TournamentVideoComment>;
-  tournamentVideos: Array<TournamentVideo>;
+  tournamentVideos: TournamentVideoCollection;
   tournaments: TournamentCollection;
   winnings: WinningCollection;
 };
@@ -1619,6 +1632,13 @@ export type QueryBattlesArgs = {
 
 export type QueryCharacterArgs = {
   characterSlug: Scalars['String'];
+};
+
+
+export type QueryCharactersArgs = {
+  page?: Maybe<Scalars['Int']>;
+  per?: Maybe<Scalars['Int']>;
+  order?: Maybe<CharacterOrder>;
 };
 
 
@@ -1738,7 +1758,9 @@ export type QueryTournamentVideoCommentsArgs = {
 
 
 export type QueryTournamentVideosArgs = {
-  tournamentId: Scalars['ID'];
+  tournamentId?: Maybe<Scalars['ID']>;
+  page?: Maybe<Scalars['Int']>;
+  per?: Maybe<Scalars['Int']>;
 };
 
 
@@ -1747,6 +1769,7 @@ export type QueryTournamentsArgs = {
   per?: Maybe<Scalars['Int']>;
   organizerId?: Maybe<Scalars['ID']>;
   keyword?: Maybe<Scalars['String']>;
+  thisWeek?: Maybe<Scalars['Boolean']>;
 };
 
 
@@ -1913,6 +1936,12 @@ export type TournamentVideo = {
 
 export type TournamentVideoAttributes = {
   title: Scalars['String'];
+};
+
+export type TournamentVideoCollection = {
+  __typename?: 'TournamentVideoCollection';
+  paging: Paging;
+  records: Array<TournamentVideo>;
 };
 
 export type TournamentVideoComment = {
@@ -2775,22 +2804,22 @@ export type ArticlePathsQuery = { __typename?: 'Query', allArticles: Array<{ __t
 export type CharacterPathsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CharacterPathsQuery = { __typename?: 'Query', characters: Array<{ __typename?: 'Character', slug: string }> };
+export type CharacterPathsQuery = { __typename?: 'Query', characters: { __typename?: 'CharacterCollection', records: Array<{ __typename?: 'Character', slug: string }> } };
 
 export type CharacterSelectOptionFragment = { __typename?: 'Character', id: string, slug: string, name: string };
 
 export type CharacterSelectOptionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CharacterSelectOptionsQuery = { __typename?: 'Query', characters: Array<(
-    { __typename?: 'Character' }
-    & CharacterSelectOptionFragment
-  )> };
+export type CharacterSelectOptionsQuery = { __typename?: 'Query', characters: { __typename?: 'CharacterCollection', records: Array<(
+      { __typename?: 'Character' }
+      & CharacterSelectOptionFragment
+    )> } };
 
 export type CharacterSlugsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CharacterSlugsQuery = { __typename?: 'Query', characters: Array<{ __typename?: 'Character', slug: string }> };
+export type CharacterSlugsQuery = { __typename?: 'Query', characters: { __typename?: 'CharacterCollection', records: Array<{ __typename?: 'Character', slug: string }> } };
 
 export type ComboCategoryIdsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2924,10 +2953,10 @@ export type CharacterCardFragment = { __typename?: 'Character', slug: string, lo
 export type CharacterCardsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CharacterCardsQuery = { __typename?: 'Query', characters: Array<(
-    { __typename?: 'Character' }
-    & CharacterCardFragment
-  )> };
+export type CharacterCardsQuery = { __typename?: 'Query', characters: { __typename?: 'CharacterCollection', records: Array<(
+      { __typename?: 'Character' }
+      & CharacterCardFragment
+    )> } };
 
 export type CharacterFormFragment = { __typename?: 'Character', name: string, nameKana: string, longName: string, longNameKana: string, slug: string, country: string, fightingStyle: string, story: string, description: string, dlc: boolean };
 
@@ -3112,13 +3141,37 @@ export type ArticlesPageQuery = { __typename?: 'Query', articles: { __typename?:
       & PagingFragment
     ) } };
 
+export type BattlesPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type BattlesPageQuery = { __typename?: 'Query', players: { __typename?: 'PlayerCollection', records: Array<{ __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: Maybe<string>, battlesCount: number }> }, characters: { __typename?: 'CharacterCollection', records: Array<{ __typename?: 'Character', id: string, slug: string, name: string, faceImageUrl: string, battlesCount: number }> }, battles: { __typename?: 'BattleCollection', records: Array<(
+      { __typename?: 'Battle' }
+      & BattleListItemFragment
+    )>, paging: (
+      { __typename?: 'Paging' }
+      & PagingFragment
+    ) } };
+
+export type BattlesPageBattlesQueryVariables = Exact<{
+  page: Scalars['Int'];
+}>;
+
+
+export type BattlesPageBattlesQuery = { __typename?: 'Query', battles: { __typename?: 'BattleCollection', records: Array<(
+      { __typename?: 'Battle' }
+      & BattleListItemFragment
+    )>, paging: (
+      { __typename?: 'Paging' }
+      & PagingFragment
+    ) } };
+
 export type PageCharactersQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type PageCharactersQuery = { __typename?: 'Query', characters: Array<(
-    { __typename?: 'Character' }
-    & CharacterCardFragment
-  )> };
+export type PageCharactersQuery = { __typename?: 'Query', characters: { __typename?: 'CharacterCollection', records: Array<(
+      { __typename?: 'Character' }
+      & CharacterCardFragment
+    )> } };
 
 export type CharacterBattlesPageQueryVariables = Exact<{
   characterSlug: Scalars['String'];
@@ -3530,10 +3583,10 @@ export type DashboardBattlesPageQueryVariables = Exact<{
 export type DashboardBattlesPageQuery = { __typename?: 'Query', tournamentVideo: { __typename?: 'TournamentVideo', id: string, title: string, youtubeVideoId: string, tournament: { __typename?: 'Tournament', id: string, name: string } }, players: { __typename?: 'PlayerCollection', records: Array<(
       { __typename?: 'Player' }
       & PlayerSelectOptionFragment
-    )> }, characters: Array<(
-    { __typename?: 'Character' }
-    & CharacterSelectOptionFragment
-  )> };
+    )> }, characters: { __typename?: 'CharacterCollection', records: Array<(
+      { __typename?: 'Character' }
+      & CharacterSelectOptionFragment
+    )> } };
 
 export type DashboardBattlesPageSideFragment = { __typename?: 'BattleSide', rounds: number, player: { __typename?: 'Player', id: string, name: string }, character: { __typename?: 'Character', id: string, faceImageUrl: string } };
 
@@ -3597,7 +3650,7 @@ export type DashboardTournamentPageVideosQueryVariables = Exact<{
 }>;
 
 
-export type DashboardTournamentPageVideosQuery = { __typename?: 'Query', tournamentVideos: Array<{ __typename?: 'TournamentVideo', id: string, title: string, thumbnailUrl: string, battlesCount: number, channel: { __typename?: 'Channel', id: string, name: string } }> };
+export type DashboardTournamentPageVideosQuery = { __typename?: 'Query', tournamentVideos: { __typename?: 'TournamentVideoCollection', records: Array<{ __typename?: 'TournamentVideo', id: string, title: string, thumbnailUrl: string, battlesCount: number, channel: { __typename?: 'Channel', id: string, name: string } }> } };
 
 export type DashboardTournamentPageCreateWinningMutationVariables = Exact<{
   tournamentId: Scalars['ID'];
@@ -3647,7 +3700,19 @@ export type DashboardTournamentsPageQuery = { __typename?: 'Query', tournaments:
 export type TopPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type TopPageQuery = { __typename?: 'Query', articles: { __typename?: 'ArticleCollection', records: Array<(
+export type TopPageQuery = { __typename?: 'Query', tournaments: { __typename?: 'TournamentCollection', records: Array<(
+      { __typename?: 'Tournament' }
+      & TournamentCardFragment
+    )> }, battles: { __typename?: 'BattleCollection', records: Array<(
+      { __typename?: 'Battle' }
+      & BattleListItemFragment
+    )> }, players: { __typename?: 'PlayerCollection', records: Array<(
+      { __typename?: 'Player' }
+      & PlayerCardFragment
+    )> }, characters: { __typename?: 'CharacterCollection', records: Array<(
+      { __typename?: 'Character' }
+      & CharacterCardFragment
+    )> }, articles: { __typename?: 'ArticleCollection', records: Array<(
       { __typename?: 'Article' }
       & ArticleCardFragment
     )> } };
@@ -6342,7 +6407,9 @@ export type ArticlePathsQueryResult = Apollo.QueryResult<ArticlePathsQuery, Arti
 export const CharacterPathsDocument = gql`
     query CharacterPaths {
   characters {
-    slug
+    records {
+      slug
+    }
   }
 }
     `;
@@ -6376,7 +6443,9 @@ export type CharacterPathsQueryResult = Apollo.QueryResult<CharacterPathsQuery, 
 export const CharacterSelectOptionsDocument = gql`
     query CharacterSelectOptions {
   characters {
-    ...CharacterSelectOption
+    records {
+      ...CharacterSelectOption
+    }
   }
 }
     ${CharacterSelectOptionFragmentDoc}`;
@@ -6410,7 +6479,9 @@ export type CharacterSelectOptionsQueryResult = Apollo.QueryResult<CharacterSele
 export const CharacterSlugsDocument = gql`
     query CharacterSlugs {
   characters {
-    slug
+    records {
+      slug
+    }
   }
 }
     `;
@@ -6967,7 +7038,9 @@ export type CharacterCardQueryResult = Apollo.QueryResult<CharacterCardQuery, Ch
 export const CharacterCardsDocument = gql`
     query CharacterCards {
   characters {
-    ...CharacterCard
+    records {
+      ...CharacterCard
+    }
   }
 }
     ${CharacterCardFragmentDoc}`;
@@ -7320,10 +7393,111 @@ export function useArticlesPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptio
 export type ArticlesPageQueryHookResult = ReturnType<typeof useArticlesPageQuery>;
 export type ArticlesPageLazyQueryHookResult = ReturnType<typeof useArticlesPageLazyQuery>;
 export type ArticlesPageQueryResult = Apollo.QueryResult<ArticlesPageQuery, ArticlesPageQueryVariables>;
+export const BattlesPageDocument = gql`
+    query BattlesPage {
+  players(per: 10) {
+    records {
+      id
+      slug
+      name
+      avatarUrl
+      battlesCount
+    }
+  }
+  characters(order: use_rate, per: 10) {
+    records {
+      id
+      slug
+      name
+      faceImageUrl
+      battlesCount
+    }
+  }
+  battles(per: 10) {
+    records {
+      ...BattleListItem
+    }
+    paging {
+      ...paging
+    }
+  }
+}
+    ${BattleListItemFragmentDoc}
+${PagingFragmentDoc}`;
+
+/**
+ * __useBattlesPageQuery__
+ *
+ * To run a query within a React component, call `useBattlesPageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useBattlesPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useBattlesPageQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useBattlesPageQuery(baseOptions?: Apollo.QueryHookOptions<BattlesPageQuery, BattlesPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<BattlesPageQuery, BattlesPageQueryVariables>(BattlesPageDocument, options);
+      }
+export function useBattlesPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<BattlesPageQuery, BattlesPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<BattlesPageQuery, BattlesPageQueryVariables>(BattlesPageDocument, options);
+        }
+export type BattlesPageQueryHookResult = ReturnType<typeof useBattlesPageQuery>;
+export type BattlesPageLazyQueryHookResult = ReturnType<typeof useBattlesPageLazyQuery>;
+export type BattlesPageQueryResult = Apollo.QueryResult<BattlesPageQuery, BattlesPageQueryVariables>;
+export const BattlesPageBattlesDocument = gql`
+    query BattlesPageBattles($page: Int!) {
+  battles(page: $page, per: 10) {
+    records {
+      ...BattleListItem
+    }
+    paging {
+      ...paging
+    }
+  }
+}
+    ${BattleListItemFragmentDoc}
+${PagingFragmentDoc}`;
+
+/**
+ * __useBattlesPageBattlesQuery__
+ *
+ * To run a query within a React component, call `useBattlesPageBattlesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useBattlesPageBattlesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useBattlesPageBattlesQuery({
+ *   variables: {
+ *      page: // value for 'page'
+ *   },
+ * });
+ */
+export function useBattlesPageBattlesQuery(baseOptions: Apollo.QueryHookOptions<BattlesPageBattlesQuery, BattlesPageBattlesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<BattlesPageBattlesQuery, BattlesPageBattlesQueryVariables>(BattlesPageBattlesDocument, options);
+      }
+export function useBattlesPageBattlesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<BattlesPageBattlesQuery, BattlesPageBattlesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<BattlesPageBattlesQuery, BattlesPageBattlesQueryVariables>(BattlesPageBattlesDocument, options);
+        }
+export type BattlesPageBattlesQueryHookResult = ReturnType<typeof useBattlesPageBattlesQuery>;
+export type BattlesPageBattlesLazyQueryHookResult = ReturnType<typeof useBattlesPageBattlesLazyQuery>;
+export type BattlesPageBattlesQueryResult = Apollo.QueryResult<BattlesPageBattlesQuery, BattlesPageBattlesQueryVariables>;
 export const PageCharactersDocument = gql`
     query PageCharacters {
   characters {
-    ...CharacterCard
+    records {
+      ...CharacterCard
+    }
   }
 }
     ${CharacterCardFragmentDoc}`;
@@ -9051,7 +9225,9 @@ export const DashboardBattlesPageDocument = gql`
     }
   }
   characters {
-    ...CharacterSelectOption
+    records {
+      ...CharacterSelectOption
+    }
   }
 }
     ${PlayerSelectOptionFragmentDoc}
@@ -9293,13 +9469,15 @@ export type DashboardTournamentPageWinningsQueryResult = Apollo.QueryResult<Dash
 export const DashboardTournamentPageVideosDocument = gql`
     query DashboardTournamentPageVideos($tournamentId: ID!) {
   tournamentVideos(tournamentId: $tournamentId) {
-    id
-    title
-    thumbnailUrl
-    battlesCount
-    channel {
+    records {
       id
-      name
+      title
+      thumbnailUrl
+      battlesCount
+      channel {
+        id
+        name
+      }
     }
   }
 }
@@ -9519,13 +9697,37 @@ export type DashboardTournamentsPageLazyQueryHookResult = ReturnType<typeof useD
 export type DashboardTournamentsPageQueryResult = Apollo.QueryResult<DashboardTournamentsPageQuery, DashboardTournamentsPageQueryVariables>;
 export const TopPageDocument = gql`
     query TopPage {
+  tournaments(thisWeek: true, per: 3) {
+    records {
+      ...TournamentCard
+    }
+  }
+  battles(per: 3) {
+    records {
+      ...BattleListItem
+    }
+  }
+  players(per: 4) {
+    records {
+      ...PlayerCard
+    }
+  }
+  characters(order: use_rate, per: 4) {
+    records {
+      ...CharacterCard
+    }
+  }
   articles(per: 3) {
     records {
       ...ArticleCard
     }
   }
 }
-    ${ArticleCardFragmentDoc}`;
+    ${TournamentCardFragmentDoc}
+${BattleListItemFragmentDoc}
+${PlayerCardFragmentDoc}
+${CharacterCardFragmentDoc}
+${ArticleCardFragmentDoc}`;
 
 /**
  * __useTopPageQuery__

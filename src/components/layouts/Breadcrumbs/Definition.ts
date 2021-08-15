@@ -15,6 +15,7 @@ import {
 export type ChainParam =
   | { to: 'articles' }
   | { to: 'article'; article: ArticleParam }
+  | { to: 'battles' }
   | { to: 'characters' }
   | { to: 'character'; character: CharactersParam }
   | { to: 'comboCategories'; character: CharactersParam }
@@ -42,18 +43,26 @@ export const breadcrumbChain = (props: ChainParam): BreadcrumbChainItem => {
       return { name: '記事', url: path({ to: 'articles' }) };
     case 'article':
       return { name: props.article.title, parent: breadcrumbChain({ to: 'articles' }) };
+    case 'battles':
+      return { name: '対戦動画', url: path({ to: 'battles' }) };
     case 'characters':
       return { name: 'キャラクター', url: path({ to: 'characters' }) };
     case 'character':
-      return { name: props.character.name, parent: breadcrumbChain({ to: 'characters' }) };
+      return {
+        name: props.character.name,
+        url: path({ to: 'character', characterSlug: props.character.slug }),
+        parent: breadcrumbChain({ to: 'characters' }),
+      };
     case 'comboCategories':
       return {
         name: 'コンボ',
+        url: path({ to: 'comboCategories', characterSlug: props.character.slug }),
         parent: breadcrumbChain({ to: 'character', character: props.character }),
       };
     case 'comboCategory':
       return {
         name: props.comboCategory.name,
+        url: path({ to: 'comboCategory', comboCategoryId: props.comboCategory.id }),
         parent: breadcrumbChain({ to: 'comboCategories', character: props.comboCategory.character }),
       };
     case 'login':
@@ -61,11 +70,13 @@ export const breadcrumbChain = (props: ChainParam): BreadcrumbChainItem => {
     case 'moveCategories':
       return {
         name: 'コマンドリスト',
+        url: path({ to: 'moveCategories', characterSlug: props.character.slug }),
         parent: breadcrumbChain({ to: 'character', character: props.character }),
       };
     case 'moveCategory':
       return {
         name: props.moveCategory.name,
+        url: path({ to: 'moveCategory', moveCategoryId: props.moveCategory.id }),
         parent: breadcrumbChain({ to: 'moveCategories', character: props.moveCategory.character }),
       };
     case 'move':
@@ -98,7 +109,11 @@ export const breadcrumbChain = (props: ChainParam): BreadcrumbChainItem => {
     case 'tournaments':
       return { name: '大会', url: path({ to: 'tournaments' }) };
     case 'tournament':
-      return { name: props.tournament.name, parent: breadcrumbChain({ to: 'tournaments' }) };
+      return {
+        name: props.tournament.name,
+        url: path({ to: 'tournament', tournamentId: props.tournament.id }),
+        parent: breadcrumbChain({ to: 'tournaments' }),
+      };
     case 'tournamentVideo':
       return {
         name: props.tournamentVideo.title,

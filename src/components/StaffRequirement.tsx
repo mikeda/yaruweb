@@ -15,7 +15,7 @@ export const StaffRequirement: React.FC = () => {
       />
       <CardContent>
         <Typography>
-          キャラデータや記事の作成を手伝ってくれるテケナーを募集しています。
+          大会・キャラデータの作成を手伝ってくれるテケナーを募集しています。
           <br />
           興味があればぜひご連絡下さい！
         </Typography>

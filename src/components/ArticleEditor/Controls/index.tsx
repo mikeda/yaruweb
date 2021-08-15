@@ -26,8 +26,8 @@ export const Controls: React.FC = () => {
       <ImageButton />
       <VideoButton />
       <LinkButton />
-      {data && <MoveButton characters={data.characters} />}
-      {data && <ComboButton characters={data.characters} />}
+      {data && <MoveButton characters={data.characters.records} />}
+      {data && <ComboButton characters={data.characters.records} />}
     </div>
   );
 };

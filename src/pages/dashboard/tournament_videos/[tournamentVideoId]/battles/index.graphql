@@ -17,7 +17,7 @@ query DashboardBattlesPage($tournamentVideoId: ID!) {
   }
 
   characters {
-    ...CharacterSelectOption
+    records { ...CharacterSelectOption }
   }
 }
 
