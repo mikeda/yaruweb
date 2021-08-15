@@ -1505,6 +1505,7 @@ export type Player = {
   name: Scalars['String'];
   pro: Scalars['Boolean'];
   slug: Scalars['String'];
+  smashggId?: Maybe<Scalars['String']>;
   streamingUrl?: Maybe<Scalars['String']>;
   tonamelId?: Maybe<Scalars['String']>;
   twitterId?: Maybe<Scalars['String']>;
@@ -1516,6 +1517,7 @@ export type PlayerAttributes = {
   slug: Scalars['String'];
   pro: Scalars['Boolean'];
   tonamelId?: Maybe<Scalars['String']>;
+  smashggId?: Maybe<Scalars['String']>;
   twitterId?: Maybe<Scalars['String']>;
   avatar?: Maybe<Scalars['String']>;
   streamingUrl?: Maybe<Scalars['String']>;

@@ -45,6 +45,7 @@ export const PlayerForm: React.FC<Props> = ({ player, onSubmit }) => {
       slug: player.slug,
       pro: player.pro,
       tonamelId: player.tonamelId,
+      smashggId: player.smashggId,
       twitterId: player.twitterId,
       streamingUrl: player.streamingUrl,
       description: player.description,
@@ -98,6 +99,22 @@ export const PlayerForm: React.FC<Props> = ({ player, onSubmit }) => {
                     label="Tonamel ID"
                     error={Boolean(errors.tonamelId)}
                     helperText={errors.tonamelId?.message}
+                    fullWidth
+                  />
+                )}
+              />
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <Controller
+                name="smashggId"
+                control={control}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    label="smash.gg ID"
+                    error={Boolean(errors.smashggId)}
+                    helperText={errors.smashggId?.message}
                     fullWidth
                   />
                 )}
