@@ -5,7 +5,7 @@ import { Link } from '@/components';
 import { path } from '@/lib';
 import { NO_IMAGE_URL, placeIconUrl } from '@/lib/Assets';
 import dayjs from '@/lib/dayjs';
-import { PlayerPageWinningFragment } from '@/lib/graphql/types';
+import { PlayerWinningCardFragment } from '@/lib/graphql/types';
 import theme from '@/theme';
 
 const useStyles = makeStyles({
@@ -21,10 +21,10 @@ const useStyles = makeStyles({
 });
 
 interface Props {
-  winning: PlayerPageWinningFragment;
+  winning: PlayerWinningCardFragment;
 }
 
-export const WinningCard: React.FC<Props> = ({ winning }) => {
+export const PlayerWinningCard: React.FC<Props> = ({ winning }) => {
   const classes = useStyles();
 
   return (

@@ -3,14 +3,14 @@ import { Avatar, Box, Grid, ListItem, ListItemText, makeStyles, Typography } fro
 
 import { Link } from '@/components';
 import { path } from '@/lib';
-import { PlayerPageBattleFragment } from '@/lib/graphql/types';
+import { BattleListItemFragment } from '@/lib/graphql/types';
 import theme from '@/theme';
 import { BattleRoundText } from '@/lib/graphql/enum_texts';
 import clsx from 'clsx';
 import dayjs from '@/lib/dayjs';
 
 interface Props {
-  battle: PlayerPageBattleFragment;
+  battle: BattleListItemFragment;
   last: boolean;
 }
 

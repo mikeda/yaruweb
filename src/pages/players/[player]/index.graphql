@@ -10,39 +10,6 @@ fragment PlayerPageProfile on Player {
   battlesCount
 }
 
-fragment PlayerPageWinning on Winning {
-  id
-  place
-
-  tournament {
-    id
-    name
-    mainImageUrl
-    startsAt
-  }
-}
-
-fragment PlayerPageBattle on Battle {
-  id
-  round
-
-  tournamentVideo {
-    id
-
-    tournament {
-      id
-      name
-      startsAt
-    }
-  }
-
-  sides {
-    player { name }
-    character { faceImageUrl }
-    rounds
-  }
-}
-
 query PlayerPage($playerSlug: String!) {
   player(playerSlug: $playerSlug) {
     ...PlayerBreadcrumbs
@@ -50,12 +17,12 @@ query PlayerPage($playerSlug: String!) {
   }
 
   winnings(playerSlug: $playerSlug, per: 4) {
-    records { ...PlayerPageWinning }
+    records { ...PlayerWinningCard }
     paging { hasNext }
   }
 
   battles(playerSlug: $playerSlug, per: 4) {
-    records { ...PlayerPageBattle }
+    records { ...BattleListItem }
     paging { hasNext }
   }
 }

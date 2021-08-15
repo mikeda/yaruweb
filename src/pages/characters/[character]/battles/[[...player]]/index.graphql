@@ -10,6 +10,7 @@ query CharacterBattlesPage($characterSlug: String!, $playerSlug: String) {
 
   battleCounts(characterSlug: $characterSlug, per: 10) {
     records {
+      id
       count
 
       player {
@@ -21,9 +22,9 @@ query CharacterBattlesPage($characterSlug: String!, $playerSlug: String) {
     }
   }
 
-  battles(characterSlug: $characterSlug, playerSlug: $playerSlug, per: 5) {
+  battles(characterSlug: $characterSlug, playerSlug: $playerSlug, per: 10) {
     records {
-      ...PlayerPageBattle
+      ...BattleListItem
     }
 
     paging {
@@ -34,9 +35,9 @@ query CharacterBattlesPage($characterSlug: String!, $playerSlug: String) {
 
 query CharacterBattlesPageBattles($characterSlug: String!, $playerSlug: String, $page: Int!) {
 
-  battles(characterSlug: $characterSlug, playerSlug: $playerSlug, page: $page, per: 5) {
+  battles(characterSlug: $characterSlug, playerSlug: $playerSlug, page: $page, per: 10) {
     records {
-      ...PlayerPageBattle
+      ...BattleListItem
     }
 
     paging {

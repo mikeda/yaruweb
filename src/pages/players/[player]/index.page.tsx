@@ -7,7 +7,7 @@ import { Box, Button, Grid, List, Paper, Typography } from '@material-ui/core';
 import { PlayerPageDocument, PlayerPageQuery } from '@/lib/graphql/types';
 import { path } from '@/lib';
 import { Profile } from './components/Profile';
-import { WinningCard } from './components/WinningCard';
+import { PlayerWinningCard } from './components/PlayerWinningCard';
 
 const Page: React.FC<PlayerPageQuery> = ({ player, winnings, battles }) => {
   return (
@@ -24,7 +24,7 @@ const Page: React.FC<PlayerPageQuery> = ({ player, winnings, battles }) => {
         <Grid container spacing={2}>
           {winnings.records.map(winning => (
             <Grid item key={winning.id} xs={12} sm={6}>
-              <WinningCard winning={winning} />
+              <PlayerWinningCard winning={winning} />
             </Grid>
           ))}
         </Grid>
@@ -64,7 +64,7 @@ const Page: React.FC<PlayerPageQuery> = ({ player, winnings, battles }) => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const playerSlug = params?.playerSlug as string;
+  const playerSlug = params?.player as string;
   const data: PlayerPageQuery = await fetchGraphql(PlayerPageDocument, { playerSlug });
 
   return { props: data };
