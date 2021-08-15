@@ -23,6 +23,7 @@ import { currentUserState } from '@/states/currentUser';
 import { useCurrentUserQuery } from '@/lib/graphql/types';
 import { useRouter } from 'next/router';
 import { Loading } from '@/components/Loading';
+import { loadingState } from '@/states/loading';
 
 const AppInit = () => {
   const setCurrentUser = useSetRecoilState(currentUserState);
@@ -31,6 +32,30 @@ const AppInit = () => {
       setCurrentUser(res.currentUser);
     },
   });
+
+  const router = useRouter();
+  const setLoading = useSetRecoilState(loadingState);
+
+  useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const handleStart = (url: string) => {
+      // console.log(`Loading: ${url}`);
+      setLoading(true);
+    };
+    const handleStop = () => {
+      setLoading(false);
+    };
+
+    router.events.on('routeChangeStart', handleStart);
+    router.events.on('routeChangeComplete', handleStop);
+    router.events.on('routeChangeError', handleStop);
+
+    return () => {
+      router.events.off('routeChangeStart', handleStart);
+      router.events.off('routeChangeComplete', handleStop);
+      router.events.off('routeChangeError', handleStop);
+    };
+  }, [router]);
 
   return null;
 };
