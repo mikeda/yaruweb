@@ -269,6 +269,7 @@ export type Channel = {
 export type Character = {
   __typename?: 'Character';
   battles: Array<Battle>;
+  battlesCount: Scalars['Int'];
   comboCategories: Array<ComboCategory>;
   conditions: Array<Condition>;
   country: Scalars['String'];
