@@ -1,0 +1,141 @@
+import React, { useEffect, useState } from 'react';
+import { GetServerSideProps } from 'next';
+
+import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
+import { Head, Content, Breadcrumbs, BattleListItem } from '@/components';
+import { Avatar, Box, Button, Chip, createStyles, List, makeStyles, Paper, Theme, Typography } from '@material-ui/core';
+import {
+  PlayerBattlesPageDocument,
+  PlayerBattlesPageQuery,
+  usePlayerBattlesPageBattlesLazyQuery,
+} from '@/lib/graphql/types';
+import { path } from '@/lib';
+import { useRouter } from 'next/router';
+import { Profile } from '../../components/Profile';
+import { toast } from 'react-toastify';
+import { useSetRecoilState } from 'recoil';
+import { loadingState } from '@/states/loading';
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    characterSelector: {
+      marginBottom: theme.spacing(1),
+      display: 'flex',
+      justifyContent: 'center',
+      flexWrap: 'wrap',
+      '& > *': {
+        margin: theme.spacing(0.5),
+      },
+    },
+  }),
+);
+
+interface Props {
+  data: PlayerBattlesPageQuery;
+  params: {
+    playerSlug: string;
+    characterSlug: string | null;
+  };
+}
+
+const Page: React.FC<Props> = ({
+  data: {
+    player,
+    battles: { records: initBattles, paging: initPaging },
+    battleCounts,
+  },
+  params: { playerSlug, characterSlug },
+}) => {
+  const [battles, setBattles] = useState(initBattles);
+  const [paging, setPaging] = useState(initPaging);
+  const [fetchBattles] = usePlayerBattlesPageBattlesLazyQuery({
+    onCompleted: data => {
+      setBattles(prev => [...prev, ...data.battles.records]);
+      setPaging(data.battles.paging);
+      setLoading(false);
+    },
+    onError: e => {
+      toast.error(e.message);
+      setLoading(false);
+    },
+  });
+  const setLoading = useSetRecoilState(loadingState);
+
+  const router = useRouter();
+  const classes = useStyles();
+
+  useEffect(() => {
+    setBattles(initBattles);
+    setPaging(initPaging);
+  }, [characterSlug, playerSlug]);
+
+  const fetchMore = () => {
+    if (!paging.hasNext) return;
+
+    setLoading(true);
+    fetchBattles({ variables: { characterSlug, playerSlug, page: paging.currentPage + 1 } });
+  };
+
+  return (
+    <Content activeTab="players" breadcrumb={<Breadcrumbs to="playerBattles" player={player} />}>
+      <Head title={`${player.name}の対戦動画`} />
+
+      <Profile player={player} />
+
+      <Box mt={4}>
+        <Typography variant="h3" gutterBottom>
+          対戦動画
+        </Typography>
+
+        <div className={classes.characterSelector}>
+          {battleCounts.records.map(bc => (
+            <Chip
+              key={bc.id}
+              variant="outlined"
+              avatar={<Avatar src={bc.character.faceImageUrl} />}
+              label={`${bc.character.name} (${bc.count})`}
+              color={characterSlug === bc.character.slug ? 'primary' : undefined}
+              onClick={() => {
+                if (characterSlug === bc.character.slug) {
+                  router.push(path({ to: 'playerBattles', player: player.slug }));
+                } else {
+                  router.push(path({ to: 'playerBattles', player: player.slug, characterSlug: bc.character.slug }));
+                }
+              }}
+            />
+          ))}
+        </div>
+
+        <Paper>
+          <List>
+            {battles.map((battle, i) => (
+              <BattleListItem key={battle.id} battle={battle} last={battles.length === i + 1} />
+            ))}
+          </List>
+        </Paper>
+
+        {paging.hasNext && (
+          <Box pt={2} pb={2} display="flex" justifyContent="center">
+            <Button variant="outlined" onClick={fetchMore}>
+              もっとみる
+            </Button>
+          </Box>
+        )}
+      </Box>
+    </Content>
+  );
+};
+
+export const getServerSideProps: GetServerSideProps<Props> = async ({ query }) => {
+  const playerSlug = query.player as string;
+  const characterSlugs = query.character as string[] | undefined;
+  const characterSlug = characterSlugs ? characterSlugs[0] : null;
+  const data: PlayerBattlesPageQuery = await fetchGraphql(PlayerBattlesPageDocument, {
+    playerSlug,
+    characterSlug,
+  });
+
+  return { props: { data, params: { playerSlug, characterSlug } } };
+};
+
+export default Page;

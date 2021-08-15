@@ -68,10 +68,9 @@ export const path = (options: Options): string => {
     case 'player':
       return `/players/${options.playerSlug}`;
     case 'playerBattles':
-      return generatePath(`/players/${options.player}/battles`, {
-        character: options.characterSlug,
-        page: options.page,
-      });
+      return options.characterSlug
+        ? `/players/${options.player}/battles/${options.characterSlug}`
+        : `/players/${options.player}/battles`;
     case 'playerWinnings':
       return generatePath(`/players/${options.playerSlug}/winnings`, { page: options.page });
     case 'tournaments':

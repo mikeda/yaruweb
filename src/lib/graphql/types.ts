@@ -2906,6 +2906,8 @@ export type ArticleElementMoveQuery = { __typename?: 'Query', move: (
 
 export type ArticleFormArticleFragment = { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: Maybe<string>, category: ArticleCategory, content: string };
 
+export type BattleListItemFragment = { __typename?: 'Battle', id: string, round?: Maybe<BattleRound>, tournamentVideo: { __typename?: 'TournamentVideo', id: string, tournament: { __typename?: 'Tournament', id: string, name: string, startsAt: string } }, sides: Array<{ __typename?: 'BattleSide', rounds: number, player: { __typename?: 'Player', name: string }, character: { __typename?: 'Character', faceImageUrl: string } }> };
+
 export type CharacterCardQueryVariables = Exact<{
   characterSlug: Scalars['String'];
 }>;
@@ -3126,9 +3128,9 @@ export type CharacterBattlesPageQueryVariables = Exact<{
 export type CharacterBattlesPageQuery = { __typename?: 'Query', character: (
     { __typename?: 'Character', id: string, name: string, longName: string }
     & CharacterBreadcrumbsFragment
-  ), battleCounts: { __typename?: 'BattleCountCollection', records: Array<{ __typename?: 'BattleCount', count: number, player: { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: Maybe<string> } }> }, battles: { __typename?: 'BattleCollection', records: Array<(
+  ), battleCounts: { __typename?: 'BattleCountCollection', records: Array<{ __typename?: 'BattleCount', id: string, count: number, player: { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: Maybe<string> } }> }, battles: { __typename?: 'BattleCollection', records: Array<(
       { __typename?: 'Battle' }
-      & PlayerPageBattleFragment
+      & BattleListItemFragment
     )>, paging: (
       { __typename?: 'Paging' }
       & PagingFragment
@@ -3143,7 +3145,7 @@ export type CharacterBattlesPageBattlesQueryVariables = Exact<{
 
 export type CharacterBattlesPageBattlesQuery = { __typename?: 'Query', battles: { __typename?: 'BattleCollection', records: Array<(
       { __typename?: 'Battle' }
-      & PlayerPageBattleFragment
+      & BattleListItemFragment
     )>, paging: (
       { __typename?: 'Paging' }
       & PagingFragment
@@ -3711,16 +3713,35 @@ export type PlayerBattlesPageQueryVariables = Exact<{
 
 
 export type PlayerBattlesPageQuery = { __typename?: 'Query', player: (
-    { __typename?: 'Player', battleCounts: Array<{ __typename?: 'BattleCount', count: number, character: { __typename?: 'Character', id: string, slug: string, name: string, faceImageUrl: string } }> }
+    { __typename?: 'Player' }
     & PlayerBreadcrumbsFragment
     & PlayerPageProfileFragment
-  ), battles: { __typename?: 'BattleCollection', records: Array<{ __typename?: 'Battle', id: string, round?: Maybe<BattleRound>, tournamentVideo: { __typename?: 'TournamentVideo', id: string, tournament: { __typename?: 'Tournament', id: string, name: string, startsAt: string } }, sides: Array<{ __typename?: 'BattleSide', rounds: number, player: { __typename?: 'Player', name: string }, character: { __typename?: 'Character', faceImageUrl: string } }> }>, paging: { __typename?: 'Paging', currentPage: number, totalPages: number } } };
+  ), battleCounts: { __typename?: 'BattleCountCollection', records: Array<{ __typename?: 'BattleCount', id: string, count: number, character: { __typename?: 'Character', id: string, slug: string, name: string, faceImageUrl: string } }> }, battles: { __typename?: 'BattleCollection', records: Array<(
+      { __typename?: 'Battle' }
+      & BattleListItemFragment
+    )>, paging: (
+      { __typename?: 'Paging' }
+      & PagingFragment
+    ) } };
+
+export type PlayerBattlesPageBattlesQueryVariables = Exact<{
+  playerSlug: Scalars['String'];
+  characterSlug?: Maybe<Scalars['String']>;
+  page: Scalars['Int'];
+}>;
+
+
+export type PlayerBattlesPageBattlesQuery = { __typename?: 'Query', battles: { __typename?: 'BattleCollection', records: Array<(
+      { __typename?: 'Battle' }
+      & BattleListItemFragment
+    )>, paging: (
+      { __typename?: 'Paging' }
+      & PagingFragment
+    ) } };
+
+export type PlayerWinningCardFragment = { __typename?: 'Winning', id: string, place: number, tournament: { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: Maybe<string>, startsAt: string } };
 
 export type PlayerPageProfileFragment = { __typename?: 'Player', id: string, name: string, slug: string, avatarUrl?: Maybe<string>, twitterId?: Maybe<string>, streamingUrl?: Maybe<string>, description?: Maybe<string>, winningsCount: number, battlesCount: number };
-
-export type PlayerPageWinningFragment = { __typename?: 'Winning', id: string, place: number, tournament: { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: Maybe<string>, startsAt: string } };
-
-export type PlayerPageBattleFragment = { __typename?: 'Battle', id: string, round?: Maybe<BattleRound>, tournamentVideo: { __typename?: 'TournamentVideo', id: string, tournament: { __typename?: 'Tournament', id: string, name: string, startsAt: string } }, sides: Array<{ __typename?: 'BattleSide', rounds: number, player: { __typename?: 'Player', name: string }, character: { __typename?: 'Character', faceImageUrl: string } }> };
 
 export type PlayerPageQueryVariables = Exact<{
   playerSlug: Scalars['String'];
@@ -3733,15 +3754,14 @@ export type PlayerPageQuery = { __typename?: 'Query', player: (
     & PlayerPageProfileFragment
   ), winnings: { __typename?: 'WinningCollection', records: Array<(
       { __typename?: 'Winning' }
-      & PlayerPageWinningFragment
+      & PlayerWinningCardFragment
     )>, paging: { __typename?: 'Paging', hasNext: boolean } }, battles: { __typename?: 'BattleCollection', records: Array<(
       { __typename?: 'Battle' }
-      & PlayerPageBattleFragment
+      & BattleListItemFragment
     )>, paging: { __typename?: 'Paging', hasNext: boolean } } };
 
 export type PlayerWinningsPageQueryVariables = Exact<{
   playerSlug: Scalars['String'];
-  page?: Maybe<Scalars['Int']>;
 }>;
 
 
@@ -3749,7 +3769,27 @@ export type PlayerWinningsPageQuery = { __typename?: 'Query', player: (
     { __typename?: 'Player' }
     & PlayerBreadcrumbsFragment
     & PlayerPageProfileFragment
-  ), winnings: { __typename?: 'WinningCollection', records: Array<{ __typename?: 'Winning', id: string, place: number, tournament: { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: Maybe<string>, startsAt: string } }>, paging: { __typename?: 'Paging', currentPage: number, totalPages: number } } };
+  ), winnings: { __typename?: 'WinningCollection', records: Array<(
+      { __typename?: 'Winning' }
+      & PlayerWinningCardFragment
+    )>, paging: (
+      { __typename?: 'Paging' }
+      & PagingFragment
+    ) } };
+
+export type PlayerWinningsPageWinningsQueryVariables = Exact<{
+  playerSlug: Scalars['String'];
+  page: Scalars['Int'];
+}>;
+
+
+export type PlayerWinningsPageWinningsQuery = { __typename?: 'Query', winnings: { __typename?: 'WinningCollection', records: Array<(
+      { __typename?: 'Winning' }
+      & PlayerWinningCardFragment
+    )>, paging: (
+      { __typename?: 'Paging' }
+      & PagingFragment
+    ) } };
 
 export type PlayersPageQueryVariables = Exact<{
   page?: Maybe<Scalars['Int']>;
@@ -4102,6 +4142,29 @@ export const ArticleFormArticleFragmentDoc = gql`
   mainImageUrl
   category
   content
+}
+    `;
+export const BattleListItemFragmentDoc = gql`
+    fragment BattleListItem on Battle {
+  id
+  round
+  tournamentVideo {
+    id
+    tournament {
+      id
+      name
+      startsAt
+    }
+  }
+  sides {
+    player {
+      name
+    }
+    character {
+      faceImageUrl
+    }
+    rounds
+  }
 }
     `;
 export const CharacterCardFragmentDoc = gql`
@@ -4500,6 +4563,18 @@ export const DashboardBattlesPageBattleReslutFragmentDoc = gql`
   }
 }
     ${DashboardBattlesPageSideFragmentDoc}`;
+export const PlayerWinningCardFragmentDoc = gql`
+    fragment PlayerWinningCard on Winning {
+  id
+  place
+  tournament {
+    id
+    name
+    mainImageUrl
+    startsAt
+  }
+}
+    `;
 export const PlayerPageProfileFragmentDoc = gql`
     fragment PlayerPageProfile on Player {
   id
@@ -4511,41 +4586,6 @@ export const PlayerPageProfileFragmentDoc = gql`
   description
   winningsCount
   battlesCount
-}
-    `;
-export const PlayerPageWinningFragmentDoc = gql`
-    fragment PlayerPageWinning on Winning {
-  id
-  place
-  tournament {
-    id
-    name
-    mainImageUrl
-    startsAt
-  }
-}
-    `;
-export const PlayerPageBattleFragmentDoc = gql`
-    fragment PlayerPageBattle on Battle {
-  id
-  round
-  tournamentVideo {
-    id
-    tournament {
-      id
-      name
-      startsAt
-    }
-  }
-  sides {
-    player {
-      name
-    }
-    character {
-      faceImageUrl
-    }
-    rounds
-  }
 }
     `;
 export const TournamentVideoPageBattleFragmentDoc = gql`
@@ -7323,6 +7363,7 @@ export const CharacterBattlesPageDocument = gql`
   }
   battleCounts(characterSlug: $characterSlug, per: 10) {
     records {
+      id
       count
       player {
         id
@@ -7332,9 +7373,9 @@ export const CharacterBattlesPageDocument = gql`
       }
     }
   }
-  battles(characterSlug: $characterSlug, playerSlug: $playerSlug, per: 5) {
+  battles(characterSlug: $characterSlug, playerSlug: $playerSlug, per: 10) {
     records {
-      ...PlayerPageBattle
+      ...BattleListItem
     }
     paging {
       ...paging
@@ -7342,7 +7383,7 @@ export const CharacterBattlesPageDocument = gql`
   }
 }
     ${CharacterBreadcrumbsFragmentDoc}
-${PlayerPageBattleFragmentDoc}
+${BattleListItemFragmentDoc}
 ${PagingFragmentDoc}`;
 
 /**
@@ -7379,17 +7420,17 @@ export const CharacterBattlesPageBattlesDocument = gql`
     characterSlug: $characterSlug
     playerSlug: $playerSlug
     page: $page
-    per: 5
+    per: 10
   ) {
     records {
-      ...PlayerPageBattle
+      ...BattleListItem
     }
     paging {
       ...paging
     }
   }
 }
-    ${PlayerPageBattleFragmentDoc}
+    ${BattleListItemFragmentDoc}
 ${PagingFragmentDoc}`;
 
 /**
@@ -9726,7 +9767,10 @@ export const PlayerBattlesPageDocument = gql`
   player(playerSlug: $playerSlug) {
     ...PlayerBreadcrumbs
     ...PlayerPageProfile
-    battleCounts {
+  }
+  battleCounts(playerSlug: $playerSlug, per: 10) {
+    records {
+      id
       count
       character {
         id
@@ -9743,34 +9787,17 @@ export const PlayerBattlesPageDocument = gql`
     per: 10
   ) {
     records {
-      id
-      round
-      tournamentVideo {
-        id
-        tournament {
-          id
-          name
-          startsAt
-        }
-      }
-      sides {
-        player {
-          name
-        }
-        character {
-          faceImageUrl
-        }
-        rounds
-      }
+      ...BattleListItem
     }
     paging {
-      currentPage
-      totalPages
+      ...paging
     }
   }
 }
     ${PlayerBreadcrumbsFragmentDoc}
-${PlayerPageProfileFragmentDoc}`;
+${PlayerPageProfileFragmentDoc}
+${BattleListItemFragmentDoc}
+${PagingFragmentDoc}`;
 
 /**
  * __usePlayerBattlesPageQuery__
@@ -9801,6 +9828,54 @@ export function usePlayerBattlesPageLazyQuery(baseOptions?: Apollo.LazyQueryHook
 export type PlayerBattlesPageQueryHookResult = ReturnType<typeof usePlayerBattlesPageQuery>;
 export type PlayerBattlesPageLazyQueryHookResult = ReturnType<typeof usePlayerBattlesPageLazyQuery>;
 export type PlayerBattlesPageQueryResult = Apollo.QueryResult<PlayerBattlesPageQuery, PlayerBattlesPageQueryVariables>;
+export const PlayerBattlesPageBattlesDocument = gql`
+    query PlayerBattlesPageBattles($playerSlug: String!, $characterSlug: String, $page: Int!) {
+  battles(
+    playerSlug: $playerSlug
+    characterSlug: $characterSlug
+    page: $page
+    per: 10
+  ) {
+    records {
+      ...BattleListItem
+    }
+    paging {
+      ...paging
+    }
+  }
+}
+    ${BattleListItemFragmentDoc}
+${PagingFragmentDoc}`;
+
+/**
+ * __usePlayerBattlesPageBattlesQuery__
+ *
+ * To run a query within a React component, call `usePlayerBattlesPageBattlesQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePlayerBattlesPageBattlesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePlayerBattlesPageBattlesQuery({
+ *   variables: {
+ *      playerSlug: // value for 'playerSlug'
+ *      characterSlug: // value for 'characterSlug'
+ *      page: // value for 'page'
+ *   },
+ * });
+ */
+export function usePlayerBattlesPageBattlesQuery(baseOptions: Apollo.QueryHookOptions<PlayerBattlesPageBattlesQuery, PlayerBattlesPageBattlesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PlayerBattlesPageBattlesQuery, PlayerBattlesPageBattlesQueryVariables>(PlayerBattlesPageBattlesDocument, options);
+      }
+export function usePlayerBattlesPageBattlesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PlayerBattlesPageBattlesQuery, PlayerBattlesPageBattlesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PlayerBattlesPageBattlesQuery, PlayerBattlesPageBattlesQueryVariables>(PlayerBattlesPageBattlesDocument, options);
+        }
+export type PlayerBattlesPageBattlesQueryHookResult = ReturnType<typeof usePlayerBattlesPageBattlesQuery>;
+export type PlayerBattlesPageBattlesLazyQueryHookResult = ReturnType<typeof usePlayerBattlesPageBattlesLazyQuery>;
+export type PlayerBattlesPageBattlesQueryResult = Apollo.QueryResult<PlayerBattlesPageBattlesQuery, PlayerBattlesPageBattlesQueryVariables>;
 export const PlayerPageDocument = gql`
     query PlayerPage($playerSlug: String!) {
   player(playerSlug: $playerSlug) {
@@ -9809,7 +9884,7 @@ export const PlayerPageDocument = gql`
   }
   winnings(playerSlug: $playerSlug, per: 4) {
     records {
-      ...PlayerPageWinning
+      ...PlayerWinningCard
     }
     paging {
       hasNext
@@ -9817,7 +9892,7 @@ export const PlayerPageDocument = gql`
   }
   battles(playerSlug: $playerSlug, per: 4) {
     records {
-      ...PlayerPageBattle
+      ...BattleListItem
     }
     paging {
       hasNext
@@ -9826,8 +9901,8 @@ export const PlayerPageDocument = gql`
 }
     ${PlayerBreadcrumbsFragmentDoc}
 ${PlayerPageProfileFragmentDoc}
-${PlayerPageWinningFragmentDoc}
-${PlayerPageBattleFragmentDoc}`;
+${PlayerWinningCardFragmentDoc}
+${BattleListItemFragmentDoc}`;
 
 /**
  * __usePlayerPageQuery__
@@ -9857,30 +9932,24 @@ export type PlayerPageQueryHookResult = ReturnType<typeof usePlayerPageQuery>;
 export type PlayerPageLazyQueryHookResult = ReturnType<typeof usePlayerPageLazyQuery>;
 export type PlayerPageQueryResult = Apollo.QueryResult<PlayerPageQuery, PlayerPageQueryVariables>;
 export const PlayerWinningsPageDocument = gql`
-    query PlayerWinningsPage($playerSlug: String!, $page: Int) {
+    query PlayerWinningsPage($playerSlug: String!) {
   player(playerSlug: $playerSlug) {
     ...PlayerBreadcrumbs
     ...PlayerPageProfile
   }
-  winnings(playerSlug: $playerSlug, page: $page, per: 10) {
+  winnings(playerSlug: $playerSlug, per: 10) {
     records {
-      id
-      place
-      tournament {
-        id
-        name
-        mainImageUrl
-        startsAt
-      }
+      ...PlayerWinningCard
     }
     paging {
-      currentPage
-      totalPages
+      ...paging
     }
   }
 }
     ${PlayerBreadcrumbsFragmentDoc}
-${PlayerPageProfileFragmentDoc}`;
+${PlayerPageProfileFragmentDoc}
+${PlayerWinningCardFragmentDoc}
+${PagingFragmentDoc}`;
 
 /**
  * __usePlayerWinningsPageQuery__
@@ -9895,7 +9964,6 @@ ${PlayerPageProfileFragmentDoc}`;
  * const { data, loading, error } = usePlayerWinningsPageQuery({
  *   variables: {
  *      playerSlug: // value for 'playerSlug'
- *      page: // value for 'page'
  *   },
  * });
  */
@@ -9910,6 +9978,48 @@ export function usePlayerWinningsPageLazyQuery(baseOptions?: Apollo.LazyQueryHoo
 export type PlayerWinningsPageQueryHookResult = ReturnType<typeof usePlayerWinningsPageQuery>;
 export type PlayerWinningsPageLazyQueryHookResult = ReturnType<typeof usePlayerWinningsPageLazyQuery>;
 export type PlayerWinningsPageQueryResult = Apollo.QueryResult<PlayerWinningsPageQuery, PlayerWinningsPageQueryVariables>;
+export const PlayerWinningsPageWinningsDocument = gql`
+    query PlayerWinningsPageWinnings($playerSlug: String!, $page: Int!) {
+  winnings(playerSlug: $playerSlug, page: $page, per: 10) {
+    records {
+      ...PlayerWinningCard
+    }
+    paging {
+      ...paging
+    }
+  }
+}
+    ${PlayerWinningCardFragmentDoc}
+${PagingFragmentDoc}`;
+
+/**
+ * __usePlayerWinningsPageWinningsQuery__
+ *
+ * To run a query within a React component, call `usePlayerWinningsPageWinningsQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePlayerWinningsPageWinningsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePlayerWinningsPageWinningsQuery({
+ *   variables: {
+ *      playerSlug: // value for 'playerSlug'
+ *      page: // value for 'page'
+ *   },
+ * });
+ */
+export function usePlayerWinningsPageWinningsQuery(baseOptions: Apollo.QueryHookOptions<PlayerWinningsPageWinningsQuery, PlayerWinningsPageWinningsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PlayerWinningsPageWinningsQuery, PlayerWinningsPageWinningsQueryVariables>(PlayerWinningsPageWinningsDocument, options);
+      }
+export function usePlayerWinningsPageWinningsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PlayerWinningsPageWinningsQuery, PlayerWinningsPageWinningsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PlayerWinningsPageWinningsQuery, PlayerWinningsPageWinningsQueryVariables>(PlayerWinningsPageWinningsDocument, options);
+        }
+export type PlayerWinningsPageWinningsQueryHookResult = ReturnType<typeof usePlayerWinningsPageWinningsQuery>;
+export type PlayerWinningsPageWinningsLazyQueryHookResult = ReturnType<typeof usePlayerWinningsPageWinningsLazyQuery>;
+export type PlayerWinningsPageWinningsQueryResult = Apollo.QueryResult<PlayerWinningsPageWinningsQuery, PlayerWinningsPageWinningsQueryVariables>;
 export const PlayersPageDocument = gql`
     query PlayersPage($page: Int, $keyword: String) {
   players(page: $page, per: 20, keyword: $keyword) {

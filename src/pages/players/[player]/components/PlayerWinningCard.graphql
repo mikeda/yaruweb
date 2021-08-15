@@ -1,0 +1,11 @@
+fragment PlayerWinningCard on Winning {
+  id
+  place
+
+  tournament {
+    id
+    name
+    mainImageUrl
+    startsAt
+  }
+}

@@ -1,0 +1,34 @@
+query PlayerBattlesPage($playerSlug: String!, $characterSlug: String, $page: Int) {
+  player(playerSlug: $playerSlug) {
+    ...PlayerBreadcrumbs
+    ...PlayerPageProfile
+  }
+
+  battleCounts(playerSlug: $playerSlug, per: 10) {
+    records {
+      id
+      count
+
+      character {
+        id
+        slug
+        name
+        faceImageUrl
+      }
+    }
+  }
+
+
+  battles(playerSlug: $playerSlug, characterSlug: $characterSlug, page: $page, per: 10) {
+    records { ...BattleListItem }
+    paging { ...paging }
+  }
+}
+
+query PlayerBattlesPageBattles($playerSlug: String!, $characterSlug: String, $page: Int!) {
+
+  battles(playerSlug: $playerSlug, characterSlug: $characterSlug, page: $page, per: 10) {
+    records { ...BattleListItem }
+    paging { ...paging }
+  }
+}

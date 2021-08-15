@@ -1,0 +1,20 @@
+fragment BattleListItem on Battle {
+  id
+  round
+
+  tournamentVideo {
+    id
+
+    tournament {
+      id
+      name
+      startsAt
+    }
+  }
+
+  sides {
+    player { name }
+    character { faceImageUrl }
+    rounds
+  }
+}

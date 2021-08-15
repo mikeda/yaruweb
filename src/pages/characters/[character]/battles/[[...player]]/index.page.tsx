@@ -99,7 +99,7 @@ const Page: React.FC<Props> = ({
         <div className={classes.characterSelector}>
           {battleCounts.records.map(bc => (
             <Chip
-              key={bc.player.id}
+              key={bc.id}
               variant="outlined"
               avatar={<Avatar src={bc.player.avatarUrl || DEFAULT_AVATAR_URL} />}
               label={`${bc.player.name} (${bc.count})`}
