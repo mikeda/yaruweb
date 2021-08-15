@@ -3084,7 +3084,7 @@ export type OrganizerFormFragment = { __typename?: 'Organizer', name: string, sl
 
 export type PlayerCardFragment = { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: Maybe<string>, winningsCount: number, battlesCount: number };
 
-export type PlayerFormFragment = { __typename?: 'Player', name: string, slug: string, pro: boolean, tonamelId?: Maybe<string>, twitterId?: Maybe<string>, streamingUrl?: Maybe<string>, description?: Maybe<string> };
+export type PlayerFormFragment = { __typename?: 'Player', name: string, slug: string, pro: boolean, tonamelId?: Maybe<string>, smashggId?: Maybe<string>, twitterId?: Maybe<string>, streamingUrl?: Maybe<string>, description?: Maybe<string> };
 
 export type TournamentCardFragment = { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: Maybe<string>, startsAt: string };
 
@@ -4479,6 +4479,7 @@ export const PlayerFormFragmentDoc = gql`
   slug
   pro
   tonamelId
+  smashggId
   twitterId
   streamingUrl
   description

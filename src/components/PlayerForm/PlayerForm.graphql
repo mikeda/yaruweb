@@ -3,6 +3,7 @@ fragment PlayerForm on Player {
   slug
   pro
   tonamelId
+  smashggId
   twitterId
   streamingUrl
   description
