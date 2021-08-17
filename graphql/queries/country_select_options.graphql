@@ -1,0 +1,11 @@
+fragment CountrySelectOption on Country {
+  id
+  name
+  flagEmoji
+}
+
+query CountrySelectOptions {
+  countries {
+    ...CountrySelectOption
+  }
+}
