@@ -3,7 +3,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import { PlayerAttributes, PlayerFormFragment } from '@/lib/graphql/types';
+import { PlayerAttributes, PlayerFormFragment, useCountrySelectOptionsQuery } from '@/lib/graphql/types';
 import {
   Box,
   Button,
@@ -11,8 +11,12 @@ import {
   CardContent,
   Checkbox,
   Divider,
+  FormControl,
   FormControlLabel,
   Grid,
+  InputLabel,
+  MenuItem,
+  Select,
   TextField,
 } from '@material-ui/core';
 
@@ -31,6 +35,8 @@ interface Props {
 }
 
 export const PlayerForm: React.FC<Props> = ({ player, onSubmit }) => {
+  const { data } = useCountrySelectOptionsQuery();
+
   const {
     handleSubmit,
     control,
@@ -40,17 +46,25 @@ export const PlayerForm: React.FC<Props> = ({ player, onSubmit }) => {
   } = useForm<PlayerAttributes>({
     resolver: yupResolver(schema),
     mode: 'onBlur',
-    defaultValues: player && {
-      name: player.name,
-      slug: player.slug,
-      pro: player.pro,
-      tonamelId: player.tonamelId,
-      smashggId: player.smashggId,
-      twitterId: player.twitterId,
-      streamingUrl: player.streamingUrl,
-      description: player.description,
-    },
+    defaultValues: player
+      ? {
+          name: player.name,
+          slug: player.slug,
+          countryId: player.country.id,
+          pro: player.pro,
+          tonamelId: player.tonamelId,
+          smashggId: player.smashggId,
+          twitterId: player.twitterId,
+          streamingUrl: player.streamingUrl,
+          description: player.description,
+        }
+      : {
+          countryId: '1',
+          pro: false,
+        },
   });
+
+  if (!data) return null;
 
   return (
     <Card>
@@ -87,6 +101,26 @@ export const PlayerForm: React.FC<Props> = ({ player, onSubmit }) => {
                   />
                 )}
               />
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <FormControl fullWidth variant="outlined">
+                <InputLabel>国籍</InputLabel>
+                <Controller
+                  render={({ field }) => (
+                    <Select {...field}>
+                      {data.countries.map(country => (
+                        <MenuItem key={country.id} value={country.id}>
+                          {country.flagEmoji}
+                          {country.name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  )}
+                  control={control}
+                  name="countryId"
+                />
+              </FormControl>
             </Grid>
 
             <Grid item xs={12} sm={6}>
@@ -152,6 +186,7 @@ export const PlayerForm: React.FC<Props> = ({ player, onSubmit }) => {
                 )}
               />
             </Grid>
+
             <Grid item xs={12}>
               <Controller
                 name="description"
