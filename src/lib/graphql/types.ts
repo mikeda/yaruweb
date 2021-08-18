@@ -989,6 +989,14 @@ export type FavArticlePayload = {
 };
 
 
+export type League = {
+  __typename?: 'League';
+  description: Scalars['String'];
+  id: Scalars['ID'];
+  name: Scalars['String'];
+  slug: Scalars['String'];
+};
+
 export type Move = {
   __typename?: 'Move';
   actions: Array<Action>;
@@ -1575,6 +1583,7 @@ export type Query = {
   conditions: Array<Condition>;
   countries: Array<Country>;
   currentUser: CurrentUser;
+  leagues: Array<League>;
   move: Move;
   moveCategories: Array<MoveCategory>;
   moveCategory: MoveCategory;
@@ -1905,6 +1914,7 @@ export type Tournament = {
   __typename?: 'Tournament';
   description: Scalars['String'];
   id: Scalars['ID'];
+  league?: Maybe<League>;
   mainImageUrl?: Maybe<Scalars['String']>;
   name: Scalars['String'];
   organizerId: Scalars['ID'];
@@ -1919,6 +1929,7 @@ export type Tournament = {
 
 export type TournamentAttributes = {
   organizerId: Scalars['ID'];
+  leagueId?: Maybe<Scalars['ID']>;
   name: Scalars['String'];
   mainImage?: Maybe<Scalars['String']>;
   url: Scalars['String'];
@@ -2864,6 +2875,8 @@ export type CurrentUserQuery = { __typename?: 'Query', currentUser: (
     & CurrentUserFragment
   ) };
 
+export type LeagueSelectOptionFragment = { __typename?: 'League', id: string, name: string };
+
 export type MoveCategoryIdsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -3109,7 +3122,18 @@ export type PlayerFormFragment = { __typename?: 'Player', name: string, slug: st
 
 export type TournamentCardFragment = { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: Maybe<string>, startsAt: string };
 
-export type TournamentFormFragment = { __typename?: 'Tournament', organizerId: string, name: string, url: string, streamingUrl?: Maybe<string>, startsAt: string, description: string };
+export type TournamentFormFragment = { __typename?: 'Tournament', organizerId: string, name: string, url: string, streamingUrl?: Maybe<string>, startsAt: string, description: string, league?: Maybe<{ __typename?: 'League', id: string }> };
+
+export type TournamentFormQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type TournamentFormQuery = { __typename?: 'Query', organizers: { __typename?: 'OrganizerCollection', records: Array<(
+      { __typename?: 'Organizer' }
+      & OrganizerSelectOptionFragment
+    )> }, leagues: Array<(
+    { __typename?: 'League' }
+    & LeagueSelectOptionFragment
+  )> };
 
 export type TournamentVideoCardFragment = { __typename?: 'TournamentVideo', id: string, title: string, thumbnailUrl: string };
 
@@ -4200,6 +4224,12 @@ export const CountrySelectOptionFragmentDoc = gql`
   flagEmoji
 }
     `;
+export const LeagueSelectOptionFragmentDoc = gql`
+    fragment LeagueSelectOption on League {
+  id
+  name
+}
+    `;
 export const OrganizerSelectOptionFragmentDoc = gql`
     fragment OrganizerSelectOption on Organizer {
   id
@@ -4527,6 +4557,9 @@ export const TournamentCardFragmentDoc = gql`
 export const TournamentFormFragmentDoc = gql`
     fragment TournamentForm on Tournament {
   organizerId
+  league {
+    id
+  }
   name
   url
   streamingUrl
@@ -7384,6 +7417,46 @@ export function useMoveCategoryCardsLazyQuery(baseOptions?: Apollo.LazyQueryHook
 export type MoveCategoryCardsQueryHookResult = ReturnType<typeof useMoveCategoryCardsQuery>;
 export type MoveCategoryCardsLazyQueryHookResult = ReturnType<typeof useMoveCategoryCardsLazyQuery>;
 export type MoveCategoryCardsQueryResult = Apollo.QueryResult<MoveCategoryCardsQuery, MoveCategoryCardsQueryVariables>;
+export const TournamentFormDocument = gql`
+    query TournamentForm {
+  organizers {
+    records {
+      ...OrganizerSelectOption
+    }
+  }
+  leagues {
+    ...LeagueSelectOption
+  }
+}
+    ${OrganizerSelectOptionFragmentDoc}
+${LeagueSelectOptionFragmentDoc}`;
+
+/**
+ * __useTournamentFormQuery__
+ *
+ * To run a query within a React component, call `useTournamentFormQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTournamentFormQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTournamentFormQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useTournamentFormQuery(baseOptions?: Apollo.QueryHookOptions<TournamentFormQuery, TournamentFormQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TournamentFormQuery, TournamentFormQueryVariables>(TournamentFormDocument, options);
+      }
+export function useTournamentFormLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TournamentFormQuery, TournamentFormQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TournamentFormQuery, TournamentFormQueryVariables>(TournamentFormDocument, options);
+        }
+export type TournamentFormQueryHookResult = ReturnType<typeof useTournamentFormQuery>;
+export type TournamentFormLazyQueryHookResult = ReturnType<typeof useTournamentFormLazyQuery>;
+export type TournamentFormQueryResult = Apollo.QueryResult<TournamentFormQuery, TournamentFormQueryVariables>;
 export const ArticlePageArticleDocument = gql`
     query ArticlePageArticle($articleId: ID!) {
   article(articleId: $articleId) {

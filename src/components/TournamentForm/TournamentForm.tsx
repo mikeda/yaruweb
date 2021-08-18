@@ -7,10 +7,22 @@ import {
   OrganizerSelectOptionFragment,
   TournamentAttributes,
   TournamentFormFragment,
-  useOrganizerSelectOptionsQuery,
+  useTournamentFormQuery,
 } from '@/lib/graphql/types';
 import dayjs from '@/lib/dayjs';
-import { Box, Button, Card, CardContent, Divider, Grid, TextField } from '@material-ui/core';
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Divider,
+  FormControl,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from '@material-ui/core';
 import { Autocomplete } from '@material-ui/lab';
 
 const schema = yup.object().shape({
@@ -28,7 +40,7 @@ interface Props {
 }
 
 export const TournamentForm: React.FC<Props> = ({ tournament, onSubmit }) => {
-  const { data: organizerData } = useOrganizerSelectOptionsQuery();
+  const { data } = useTournamentFormQuery();
   const {
     handleSubmit,
     control,
@@ -41,6 +53,7 @@ export const TournamentForm: React.FC<Props> = ({ tournament, onSubmit }) => {
     defaultValues: tournament
       ? {
           organizerId: tournament.organizerId,
+          leagueId: tournament.league?.id,
           name: tournament.name,
           url: tournament.url,
           streamingUrl: tournament.streamingUrl,
@@ -53,34 +66,55 @@ export const TournamentForm: React.FC<Props> = ({ tournament, onSubmit }) => {
   });
   const organizerId = getValues('organizerId');
 
+  if (!data) return null;
+
   return (
     <Card>
       <form onSubmit={handleSubmit(onSubmit)}>
         <CardContent>
           <Grid container spacing={2}>
-            {organizerData && (
-              <Grid item xs={12}>
-                <Autocomplete<OrganizerSelectOptionFragment>
-                  options={organizerData.organizers.records}
-                  getOptionLabel={organizer => `${organizer.name}(${organizer.slug})`}
-                  onChange={(e, organizer) => {
-                    if (organizer) setValue('organizerId', organizer.id);
-                  }}
-                  defaultValue={organizerData.organizers.records.filter(o => o.id === organizerId)[0]}
-                  style={{ width: 300 }}
-                  renderInput={params => {
-                    return (
-                      <TextField
-                        {...params}
-                        label="オーガナイザー"
-                        variant="outlined"
-                        defaultValue={'まんば杯(manba)'}
-                      />
-                    );
-                  }}
+            <Grid item xs={12} sm={6}>
+              <Autocomplete<OrganizerSelectOptionFragment>
+                options={data.organizers.records}
+                getOptionLabel={organizer => `${organizer.name}(${organizer.slug})`}
+                onChange={(e, organizer) => {
+                  if (organizer) setValue('organizerId', organizer.id);
+                }}
+                defaultValue={data.organizers.records.filter(o => o.id === organizerId)[0]}
+                style={{ width: 300 }}
+                renderInput={params => {
+                  return (
+                    <TextField {...params} label="オーガナイザー" variant="outlined" defaultValue={'まんば杯(manba)'} />
+                  );
+                }}
+              />
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <FormControl fullWidth variant="outlined">
+                <InputLabel>リーグ</InputLabel>
+                <Controller
+                  render={({ field }) => (
+                    <Select
+                      {...field}
+                      onChange={e => {
+                        const id = e.target.value as string | undefined;
+                        setValue('leagueId', id || null);
+                      }}
+                    >
+                      <MenuItem>指定なし</MenuItem>
+                      {data.leagues.map(league => (
+                        <MenuItem key={league.id} value={league.id}>
+                          {league.name}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  )}
+                  control={control}
+                  name="leagueId"
                 />
-              </Grid>
-            )}
+              </FormControl>
+            </Grid>
 
             <Grid item xs={12}>
               <Controller
