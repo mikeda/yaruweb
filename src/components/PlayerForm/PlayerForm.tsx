@@ -50,7 +50,7 @@ export const PlayerForm: React.FC<Props> = ({ player, onSubmit }) => {
       ? {
           name: player.name,
           slug: player.slug,
-          countryId: player.country.id,
+          countryId: player.country?.id,
           pro: player.pro,
           tonamelId: player.tonamelId,
           smashggId: player.smashggId,
@@ -59,7 +59,6 @@ export const PlayerForm: React.FC<Props> = ({ player, onSubmit }) => {
           description: player.description,
         }
       : {
-          countryId: '1',
           pro: false,
         },
   });
@@ -108,7 +107,14 @@ export const PlayerForm: React.FC<Props> = ({ player, onSubmit }) => {
                 <InputLabel>国籍</InputLabel>
                 <Controller
                   render={({ field }) => (
-                    <Select {...field}>
+                    <Select
+                      {...field}
+                      onChange={e => {
+                        const id = e.target.value as string | undefined;
+                        setValue('countryId', id || null);
+                      }}
+                    >
+                      <MenuItem>不明</MenuItem>
                       {data.countries.map(country => (
                         <MenuItem key={country.id} value={country.id}>
                           {country.flagEmoji}
