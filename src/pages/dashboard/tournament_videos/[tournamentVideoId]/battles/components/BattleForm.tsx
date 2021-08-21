@@ -16,7 +16,7 @@ import {
   TextField,
   Tooltip,
 } from '@material-ui/core';
-import { Autocomplete } from '@material-ui/lab';
+import { Autocomplete, createFilterOptions } from '@material-ui/lab';
 import { GetApp, PlayArrow, SkipNext, SkipPrevious } from '@material-ui/icons';
 import { BattleRoundText } from '@/lib/graphql/enum_texts';
 
@@ -159,6 +159,15 @@ export const SideForm: React.FC<SideFormProps> = ({ index, players, characters, 
         <Autocomplete<PlayerSelectOptionFragment, undefined, true>
           options={players}
           getOptionLabel={player => `${player.name}(${player.slug})`}
+          filterOptions={createFilterOptions({
+            stringify: player => {
+              const targets = [player.name, player.slug];
+              if (player.tonamelId) targets.push(player.tonamelId);
+              if (player.smashggId) targets.push(player.smashggId);
+
+              return targets.join(' ');
+            },
+          })}
           onChange={(e, player) => {
             if (player) setValue(`sides.${index}.playerId`, player.id);
           }}

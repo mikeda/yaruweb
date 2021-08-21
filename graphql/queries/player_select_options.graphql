@@ -2,6 +2,8 @@ fragment PlayerSelectOption on Player {
   id
   slug
   name
+  tonamelId
+  smashggId
 }
 
 query PlayerSelectOptions {
