@@ -9,3 +9,11 @@ query DashboardPlayersPage($page: Int, $keyword: String) {
     }
   }
 }
+
+mutation DashboardPlayersPageCreatePlayerFromSmashgg($smashggId: String!) {
+  createPlayerFromSmashgg(input: { smashggId: $smashggId }) {
+    player {
+      id
+    }
+  }
+}

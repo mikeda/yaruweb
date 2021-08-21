@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 
 import { DashboardContent, DashboardBreadcrumbs, DashboardPlayerCard, SearchWord } from '@/components';
 import { dashboardPath } from '@/lib';
-import { Box, Button, Grid, makeStyles } from '@material-ui/core';
+import { Box, Button, Grid, makeStyles, Menu, MenuItem } from '@material-ui/core';
 import Pagination from '@material-ui/lab/Pagination';
 import { usePlayersQuery } from './hooks/usePlayersQuery';
 import theme from '@/theme';
 import { Add as AddIcon } from '@material-ui/icons';
 import { useRouteParams } from './hooks/useRouteParams';
+import { PlayerFormSmashgg } from './components/PlayerFormSmashgg';
 
 const useStyles = makeStyles({
   paging: {
@@ -27,15 +28,7 @@ const Page: React.FC = () => {
   if (!router.isReady) return null;
 
   return (
-    <DashboardContent
-      title="プレイヤー"
-      breadcrumb={<DashboardBreadcrumbs to="players" />}
-      actions={
-        <Button variant="contained" color="primary" startIcon={<AddIcon />} href={dashboardPath({ to: 'playersNew' })}>
-          作成する
-        </Button>
-      }
-    >
+    <DashboardContent title="プレイヤー" breadcrumb={<DashboardBreadcrumbs to="players" />} actions={<CreateButton />}>
       <Box mb={2}>
         <SearchWord
           initWord={keyword}
@@ -67,6 +60,47 @@ const Page: React.FC = () => {
         </Box>
       )}
     </DashboardContent>
+  );
+};
+
+const CreateButton: React.FC = () => {
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const router = useRouter();
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  return (
+    <>
+      <Button variant="contained" color="primary" startIcon={<AddIcon />} onClick={handleClick}>
+        作成する
+      </Button>
+
+      <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
+        <MenuItem
+          onClick={() => {
+            router.push(dashboardPath({ to: 'playersNew' }));
+          }}
+        >
+          フォームで登録
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            setDialogOpen(true);
+          }}
+        >
+          SmashGG IDで登録
+        </MenuItem>
+      </Menu>
+
+      <PlayerFormSmashgg open={dialogOpen} onClose={() => setDialogOpen(false)} />
+    </>
   );
 };
 

@@ -92,10 +92,10 @@ const MenuButton: React.FC<{ tournamentVideoId: string; onDestroy: () => void }>
 
   return (
     <>
-      <IconButton edge="end" aria-controls="simple-menu" aria-haspopup="true" onClick={handleClick}>
+      <IconButton edge="end" aria-controls="video-menu" aria-haspopup="true" onClick={handleClick}>
         <MoreVert />
       </IconButton>
-      <Menu id="simple-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
+      <Menu id="video-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
         <MenuItem
           onClick={() => {
             router.push(dashboardPath({ to: 'battles', tournamentVideoId }));
