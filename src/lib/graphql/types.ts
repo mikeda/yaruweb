@@ -3295,6 +3295,13 @@ export type DashboardPlayersPageQueryVariables = Exact<{
 
 export type DashboardPlayersPageQuery = { __typename?: 'Query', players: { __typename?: 'PlayerCollection', records: Array<{ __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: Maybe<string>, description?: Maybe<string> }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
 
+export type DashboardPlayersPageCreatePlayerFromSmashggMutationVariables = Exact<{
+  smashggId: Scalars['String'];
+}>;
+
+
+export type DashboardPlayersPageCreatePlayerFromSmashggMutation = { __typename?: 'Mutation', createPlayerFromSmashgg?: Maybe<{ __typename?: 'CreatePlayerFromSmashggPayload', player: { __typename?: 'Player', id: string } }> };
+
 export type DashboardPlayersNewPageCreatePlayerMutationVariables = Exact<{
   attributes: PlayerAttributes;
 }>;
@@ -8746,6 +8753,41 @@ export function useDashboardPlayersPageLazyQuery(baseOptions?: Apollo.LazyQueryH
 export type DashboardPlayersPageQueryHookResult = ReturnType<typeof useDashboardPlayersPageQuery>;
 export type DashboardPlayersPageLazyQueryHookResult = ReturnType<typeof useDashboardPlayersPageLazyQuery>;
 export type DashboardPlayersPageQueryResult = Apollo.QueryResult<DashboardPlayersPageQuery, DashboardPlayersPageQueryVariables>;
+export const DashboardPlayersPageCreatePlayerFromSmashggDocument = gql`
+    mutation DashboardPlayersPageCreatePlayerFromSmashgg($smashggId: String!) {
+  createPlayerFromSmashgg(input: {smashggId: $smashggId}) {
+    player {
+      id
+    }
+  }
+}
+    `;
+export type DashboardPlayersPageCreatePlayerFromSmashggMutationFn = Apollo.MutationFunction<DashboardPlayersPageCreatePlayerFromSmashggMutation, DashboardPlayersPageCreatePlayerFromSmashggMutationVariables>;
+
+/**
+ * __useDashboardPlayersPageCreatePlayerFromSmashggMutation__
+ *
+ * To run a mutation, you first call `useDashboardPlayersPageCreatePlayerFromSmashggMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDashboardPlayersPageCreatePlayerFromSmashggMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [dashboardPlayersPageCreatePlayerFromSmashggMutation, { data, loading, error }] = useDashboardPlayersPageCreatePlayerFromSmashggMutation({
+ *   variables: {
+ *      smashggId: // value for 'smashggId'
+ *   },
+ * });
+ */
+export function useDashboardPlayersPageCreatePlayerFromSmashggMutation(baseOptions?: Apollo.MutationHookOptions<DashboardPlayersPageCreatePlayerFromSmashggMutation, DashboardPlayersPageCreatePlayerFromSmashggMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DashboardPlayersPageCreatePlayerFromSmashggMutation, DashboardPlayersPageCreatePlayerFromSmashggMutationVariables>(DashboardPlayersPageCreatePlayerFromSmashggDocument, options);
+      }
+export type DashboardPlayersPageCreatePlayerFromSmashggMutationHookResult = ReturnType<typeof useDashboardPlayersPageCreatePlayerFromSmashggMutation>;
+export type DashboardPlayersPageCreatePlayerFromSmashggMutationResult = Apollo.MutationResult<DashboardPlayersPageCreatePlayerFromSmashggMutation>;
+export type DashboardPlayersPageCreatePlayerFromSmashggMutationOptions = Apollo.BaseMutationOptions<DashboardPlayersPageCreatePlayerFromSmashggMutation, DashboardPlayersPageCreatePlayerFromSmashggMutationVariables>;
 export const DashboardPlayersNewPageCreatePlayerDocument = gql`
     mutation DashboardPlayersNewPageCreatePlayer($attributes: PlayerAttributes!) {
   createPlayer(input: {attributes: $attributes}) {
