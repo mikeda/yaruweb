@@ -1949,7 +1949,7 @@ export type Tournament = {
 };
 
 export type TournamentAttributes = {
-  organizerId: Scalars['ID'];
+  organizerId?: Maybe<Scalars['ID']>;
   leagueId?: Maybe<Scalars['ID']>;
   name: Scalars['String'];
   mainImage?: Maybe<Scalars['String']>;
@@ -7011,7 +7011,7 @@ export type MoveCategoryCardsLazyQueryHookResult = ReturnType<typeof useMoveCate
 export type MoveCategoryCardsQueryResult = Apollo.QueryResult<MoveCategoryCardsQuery, MoveCategoryCardsQueryVariables>;
 export const TournamentFormDocument = gql`
     query TournamentForm {
-  organizers {
+  organizers(per: 100) {
     records {
       ...OrganizerSelectOption
     }
