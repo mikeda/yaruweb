@@ -3,7 +3,12 @@ import { Control, Controller, useForm, UseFormSetValue } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import { CharacterSelectOptionFragment, PlayerSelectOptionFragment, BattleAttributes } from '@/lib/graphql/types';
+import {
+  CharacterSelectOptionFragment,
+  PlayerSelectOptionFragment,
+  BattleAttributes,
+  BattleRound,
+} from '@/lib/graphql/types';
 import {
   Box,
   Button,
@@ -115,7 +120,14 @@ export const BattleForm: React.FC<Props> = ({
             <InputLabel>試合</InputLabel>
             <Controller
               render={({ field }) => (
-                <Select {...field}>
+                <Select
+                  {...field}
+                  onChange={e => {
+                    const round = e.target.value as BattleRound | undefined;
+                    setValue('round', round || null);
+                  }}
+                >
+                  <MenuItem>指定なし</MenuItem>
                   {Object.entries(BattleRoundText).map(([key, value]) => (
                     <MenuItem key={key} value={key}>
                       {value}

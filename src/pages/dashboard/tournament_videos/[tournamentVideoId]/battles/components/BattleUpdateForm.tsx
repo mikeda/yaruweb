@@ -9,6 +9,7 @@ import {
   DashboardBattlesPageSideFragment,
   PlayerSelectOptionFragment,
   BattleAttributes,
+  BattleRound,
 } from '@/lib/graphql/types';
 import {
   Box,
@@ -87,7 +88,14 @@ export const BattleUpdateForm: React.FC<Props> = ({ battle, players, characters,
                   name="round"
                   control={control}
                   render={({ field }) => (
-                    <Select {...field}>
+                    <Select
+                      {...field}
+                      onChange={e => {
+                        const round = e.target.value as BattleRound | undefined;
+                        setValue('round', round || null);
+                      }}
+                    >
+                      <MenuItem>指定なし</MenuItem>
                       {Object.entries(BattleRoundText).map(([key, value]) => (
                         <MenuItem key={key} value={key}>
                           {value}
