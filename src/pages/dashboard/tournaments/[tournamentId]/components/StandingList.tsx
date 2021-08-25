@@ -11,12 +11,12 @@ import {
   ListItemText,
   makeStyles,
 } from '@material-ui/core';
-import { WinningPlaceAvatar } from '@/components';
+import { StandingPlaceAvatar } from '@/components';
 import { Delete } from '@material-ui/icons';
-import { PlayerSelectOptionFragment, useDashboardTournamentPageWinningsQuery } from '@/lib/graphql/types';
+import { PlayerSelectOptionFragment, useDashboardTournamentPageStandingsQuery } from '@/lib/graphql/types';
 import { DEFAULT_AVATAR_URL } from '@/lib/Assets';
-import { useCreateWinningMutation, useDeleteWinningMutation } from '../hooks';
-import { WinningForm } from './WinningForm';
+import { useCreateStandingMutation, useDeleteStandingMutation } from '../hooks';
+import { StandingForm } from './StandingForm';
 
 const useStyles = makeStyles({
   list: {
@@ -30,11 +30,11 @@ interface Props {
   players: PlayerSelectOptionFragment[];
 }
 
-export const WinningList: React.FC<Props> = ({ tournamentId, players }) => {
-  const { data, refetch } = useDashboardTournamentPageWinningsQuery({ variables: { tournamentId } });
+export const StandingList: React.FC<Props> = ({ tournamentId, players }) => {
+  const { data, refetch } = useDashboardTournamentPageStandingsQuery({ variables: { tournamentId } });
   const [dialogOpen, setDialogOpen] = useState(false);
-  const { create } = useCreateWinningMutation({ onCreate: refetch });
-  const { destroy } = useDeleteWinningMutation({ onDelete: refetch });
+  const { create } = useCreateStandingMutation({ onCreate: refetch });
+  const { destroy } = useDeleteStandingMutation({ onDelete: refetch });
   const classes = useStyles();
 
   if (!data) return null;
@@ -42,24 +42,24 @@ export const WinningList: React.FC<Props> = ({ tournamentId, players }) => {
   return (
     <>
       <List className={classes.list}>
-        {data.winnings.records.map(winning => (
-          <ListItem key={winning.id}>
+        {data.standings.records.map(standing => (
+          <ListItem key={standing.id}>
             <ListItemAvatar>
-              <WinningPlaceAvatar place={winning.place} />
+              <StandingPlaceAvatar place={standing.place} />
             </ListItemAvatar>
 
             <ListItemAvatar>
-              <Avatar src={winning.player.avatarUrl || DEFAULT_AVATAR_URL} />
+              <Avatar src={standing.player.avatarUrl || DEFAULT_AVATAR_URL} />
             </ListItemAvatar>
 
-            <ListItemText primary={winning.player.name} />
+            <ListItemText primary={standing.player.name} />
 
             <ListItemSecondaryAction>
               <IconButton
                 edge="end"
                 onClick={() => {
                   if (window.confirm('削除します。')) {
-                    destroy({ variables: { winningId: winning.id } });
+                    destroy({ variables: { standingId: standing.id } });
                   }
                 }}
               >
@@ -74,7 +74,7 @@ export const WinningList: React.FC<Props> = ({ tournamentId, players }) => {
         <Button color="primary">追加する</Button>
       </Box>
 
-      <WinningForm
+      <StandingForm
         open={dialogOpen}
         players={players}
         onClose={() => setDialogOpen(false)}

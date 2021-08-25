@@ -21,7 +21,7 @@ interface Props {
   place: number;
 }
 
-export const WinningPlaceAvatar: React.FC<Props> = ({ place }) => {
+export const StandingPlaceAvatar: React.FC<Props> = ({ place }) => {
   const classes = useStyles();
 
   switch (place) {

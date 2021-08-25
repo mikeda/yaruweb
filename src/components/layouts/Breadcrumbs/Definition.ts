@@ -29,7 +29,7 @@ export type ChainParam =
   | { to: 'players' }
   | { to: 'player'; player: PlayerParam }
   | { to: 'playerBattles'; player: PlayerParam }
-  | { to: 'playerWinnings'; player: PlayerParam }
+  | { to: 'playerStandings'; player: PlayerParam }
   | { to: 'passwordEdit' }
   | { to: 'passwordReset' }
   | { to: 'signup' }
@@ -102,7 +102,7 @@ export const breadcrumbChain = (props: ChainParam): BreadcrumbChainItem => {
       };
     case 'playerBattles':
       return { name: '対戦動画', parent: breadcrumbChain({ to: 'player', player: props.player }) };
-    case 'playerWinnings':
+    case 'playerStandings':
       return { name: '大会戦績', parent: breadcrumbChain({ to: 'player', player: props.player }) };
     case 'signup':
       return { name: 'ログイン' };

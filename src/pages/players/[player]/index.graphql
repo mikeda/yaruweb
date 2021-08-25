@@ -6,7 +6,7 @@ fragment PlayerPageProfile on Player {
   twitterId
   streamingUrl
   description
-  winningsCount
+  standingsCount
   battlesCount
 }
 
@@ -16,8 +16,8 @@ query PlayerPage($playerSlug: String!) {
     ...PlayerPageProfile
   }
 
-  winnings(playerSlug: $playerSlug, per: 4) {
-    records { ...PlayerWinningCard }
+  standings(playerSlug: $playerSlug, per: 4) {
+    records { ...PlayerStandingCard }
     paging { hasNext }
   }
 

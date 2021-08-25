@@ -5,7 +5,7 @@ import { Link } from '@/components';
 import { path } from '@/lib';
 import { NO_IMAGE_URL, placeIconUrl } from '@/lib/Assets';
 import dayjs from '@/lib/dayjs';
-import { PlayerWinningCardFragment } from '@/lib/graphql/types';
+import { PlayerStandingCardFragment } from '@/lib/graphql/types';
 import theme from '@/theme';
 
 const useStyles = makeStyles({
@@ -21,27 +21,27 @@ const useStyles = makeStyles({
 });
 
 interface Props {
-  winning: PlayerWinningCardFragment;
+  standing: PlayerStandingCardFragment;
 }
 
-export const PlayerWinningCard: React.FC<Props> = ({ winning }) => {
+export const PlayerStandingCard: React.FC<Props> = ({ standing }) => {
   const classes = useStyles();
 
   return (
     <Card>
       <CardActionArea
-        href={path({ to: 'tournament', tournamentId: winning.tournament.id })}
+        href={path({ to: 'tournament', tournamentId: standing.tournament.id })}
         component={Link}
         color="inherit"
       >
-        <CardMedia image={winning.tournament.mainImageUrl || NO_IMAGE_URL} className={classes.media} />
+        <CardMedia image={standing.tournament.mainImageUrl || NO_IMAGE_URL} className={classes.media} />
 
         <CardContent className={classes.content}>
-          <img src={placeIconUrl(winning.place)} width={38} height={44} />
+          <img src={placeIconUrl(standing.place)} width={38} height={44} />
           <div className={classes.title}>
-            <Typography variant="h6">{winning.tournament.name}</Typography>
+            <Typography variant="h6">{standing.tournament.name}</Typography>
             <Typography variant="caption" component="p">
-              {dayjs(winning.tournament.startsAt).format('YYYY/M/D')}
+              {dayjs(standing.tournament.startsAt).format('YYYY/M/D')}
             </Typography>
           </div>
         </CardContent>

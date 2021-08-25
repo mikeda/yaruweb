@@ -5,18 +5,18 @@ import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Head, Content, Breadcrumbs } from '@/components';
 import { Box, Button, Grid, Typography } from '@material-ui/core';
 import {
-  PlayerWinningsPageDocument,
-  PlayerWinningsPageQuery,
-  usePlayerWinningsPageWinningsLazyQuery,
+  PlayerStandingsPageDocument,
+  PlayerStandingsPageQuery,
+  usePlayerStandingsPageStandingsLazyQuery,
 } from '@/lib/graphql/types';
 import { Profile } from '../components/Profile';
-import { PlayerWinningCard } from '../components/PlayerWinningCard';
+import { PlayerStandingCard } from '../components/PlayerStandingCard';
 import { loadingState } from '@/states/loading';
 import { useSetRecoilState } from 'recoil';
 import { toast } from 'react-toastify';
 
 interface Props {
-  data: PlayerWinningsPageQuery;
+  data: PlayerStandingsPageQuery;
   params: {
     playerSlug: string;
   };
@@ -25,16 +25,16 @@ interface Props {
 const Page: React.FC<Props> = ({
   data: {
     player,
-    winnings: { records: initWinnings, paging: initPaging },
+    standings: { records: initStandings, paging: initPaging },
   },
   params: { playerSlug },
 }) => {
-  const [winnings, setWinnings] = useState(initWinnings);
+  const [standings, setStandings] = useState(initStandings);
   const [paging, setPaging] = useState(initPaging);
-  const [fetchBattles] = usePlayerWinningsPageWinningsLazyQuery({
+  const [fetchBattles] = usePlayerStandingsPageStandingsLazyQuery({
     onCompleted: data => {
-      setWinnings(prev => [...prev, ...data.winnings.records]);
-      setPaging(data.winnings.paging);
+      setStandings(prev => [...prev, ...data.standings.records]);
+      setPaging(data.standings.paging);
       setLoading(false);
     },
     onError: e => {
@@ -45,7 +45,7 @@ const Page: React.FC<Props> = ({
   const setLoading = useSetRecoilState(loadingState);
 
   useEffect(() => {
-    setWinnings(initWinnings);
+    setStandings(initStandings);
     setPaging(initPaging);
   }, [playerSlug]);
 
@@ -57,7 +57,7 @@ const Page: React.FC<Props> = ({
   };
 
   return (
-    <Content activeTab="players" breadcrumb={<Breadcrumbs to="playerWinnings" player={player} />}>
+    <Content activeTab="players" breadcrumb={<Breadcrumbs to="playerStandings" player={player} />}>
       <Head title={`${player.name}の大会戦績`} />
 
       <Profile player={player} />
@@ -68,9 +68,9 @@ const Page: React.FC<Props> = ({
         </Typography>
 
         <Grid container spacing={2}>
-          {winnings.map(winning => (
-            <Grid item key={winning.id} xs={12} sm={6}>
-              <PlayerWinningCard winning={winning} />
+          {standings.map(standing => (
+            <Grid item key={standing.id} xs={12} sm={6}>
+              <PlayerStandingCard standing={standing} />
             </Grid>
           ))}
         </Grid>
@@ -89,7 +89,7 @@ const Page: React.FC<Props> = ({
 
 export const getServerSideProps: GetServerSideProps<Props> = async ({ query }) => {
   const playerSlug = query.player as string;
-  const data: PlayerWinningsPageQuery = await fetchGraphql(PlayerWinningsPageDocument, {
+  const data: PlayerStandingsPageQuery = await fetchGraphql(PlayerStandingsPageDocument, {
     playerSlug,
   });
 
