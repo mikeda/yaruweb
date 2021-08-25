@@ -1,4 +1,4 @@
-fragment PlayerWinningCard on Winning {
+fragment PlayerStandingCard on Standing {
   id
   place
 

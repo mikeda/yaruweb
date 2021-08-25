@@ -1,10 +1,10 @@
 import React from 'react';
-import { WinningCardFragment } from '@/lib/graphql/types';
+import { StandingCardFragment } from '@/lib/graphql/types';
 import { Card, CardActionArea, CardMedia, makeStyles, Typography } from '@material-ui/core';
 
 import { NO_IMAGE_URL } from '@/lib/Assets';
 import theme from '@/theme';
-import { WinningPlaceAvatar } from '../WinningPlaceAvatar';
+import { StandingPlaceAvatar } from '../StandingPlaceAvatar';
 import { path } from '@/lib';
 
 const useStyles = makeStyles({
@@ -30,22 +30,22 @@ const useStyles = makeStyles({
 });
 
 interface Props {
-  winning: WinningCardFragment;
+  standing: StandingCardFragment;
 }
 
-export const WinningCard: React.FC<Props> = ({ winning }) => {
+export const StandingCard: React.FC<Props> = ({ standing }) => {
   const classes = useStyles();
 
   return (
     <Card>
-      <CardActionArea className={classes.root} href={path({ to: 'player', playerSlug: winning.player.slug })}>
-        <CardMedia image={winning.player.avatarUrl || NO_IMAGE_URL} className={classes.media} />
+      <CardActionArea className={classes.root} href={path({ to: 'player', playerSlug: standing.player.slug })}>
+        <CardMedia image={standing.player.avatarUrl || NO_IMAGE_URL} className={classes.media} />
 
         <div className={classes.details}>
           <div className={classes.title}>
-            <WinningPlaceAvatar place={winning.place} />
+            <StandingPlaceAvatar place={standing.place} />
             <Typography variant="h4" className={classes.name}>
-              {winning.player.name}
+              {standing.player.name}
             </Typography>
           </div>
         </div>

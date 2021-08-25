@@ -17,7 +17,7 @@ import { useRouter } from 'next/router';
 import { useDashboardTournamentPageQuery } from '@/lib/graphql/types';
 import { NO_IMAGE_URL } from '@/lib/Assets';
 import dayjs from '@/lib/dayjs';
-import { WinningList } from './components/WinningList';
+import { StandingList } from './components/StandingList';
 import { VideoList } from './components/VideoList';
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -72,7 +72,7 @@ const Page: React.FC = () => {
               <Typography variant="h3">結果</Typography>
             </Box>
 
-            <WinningList tournamentId={tournament.id} players={players.records} />
+            <StandingList tournamentId={tournament.id} players={players.records} />
           </Paper>
         </Grid>
 

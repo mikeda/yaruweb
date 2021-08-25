@@ -1,4 +1,4 @@
-import { useDashboardTournamentPageDeleteWinningMutation } from '@/lib/graphql/types';
+import { useDashboardTournamentPageDeleteStandingMutation } from '@/lib/graphql/types';
 import { loadingState } from '@/states/loading';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
@@ -7,13 +7,13 @@ interface Props {
   onDelete: () => void;
 }
 
-export const useDeleteWinningMutation = ({ onDelete }: Props) => {
+export const useDeleteStandingMutation = ({ onDelete }: Props) => {
   const setLoading = useSetRecoilState(loadingState);
 
-  const [destroy, { loading: deleteLoading }] = useDashboardTournamentPageDeleteWinningMutation({
+  const [destroy, { loading: deleteLoading }] = useDashboardTournamentPageDeleteStandingMutation({
     onCompleted: data => {
-      const winning = data.deleteWinning?.winning;
-      if (!winning) return;
+      const standing = data.deleteStanding?.standing;
+      if (!standing) return;
 
       onDelete();
       toast.success('順位を削除しました。');

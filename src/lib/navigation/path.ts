@@ -22,7 +22,7 @@ type Options =
   | { to: 'players'; params?: { page?: number; q?: string } }
   | { to: 'player'; playerSlug: string }
   | { to: 'playerBattles'; player: string; characterSlug?: string; page?: number }
-  | { to: 'playerWinnings'; playerSlug: string; page?: number }
+  | { to: 'playerStandings'; playerSlug: string; page?: number }
   | { to: 'signup' }
   | { to: 'tournaments'; params?: { page?: number } }
   | { to: 'tournament'; tournamentId: string }
@@ -74,8 +74,8 @@ export const path = (options: Options): string => {
       return options.characterSlug
         ? `/players/${options.player}/battles/${options.characterSlug}`
         : `/players/${options.player}/battles`;
-    case 'playerWinnings':
-      return generatePath(`/players/${options.playerSlug}/winnings`, { page: options.page });
+    case 'playerStandings':
+      return generatePath(`/players/${options.playerSlug}/standings`, { page: options.page });
     case 'tournaments':
       return generatePath('/tournaments', options.params);
     case 'tournament':

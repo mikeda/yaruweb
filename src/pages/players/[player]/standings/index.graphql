@@ -1,0 +1,18 @@
+query PlayerStandingsPage($playerSlug: String!) {
+  player(playerSlug: $playerSlug) {
+    ...PlayerBreadcrumbs
+    ...PlayerPageProfile
+  }
+
+  standings(playerSlug: $playerSlug, per: 10) {
+    records { ...PlayerStandingCard }
+    paging { ...paging }
+  }
+}
+
+query PlayerStandingsPageStandings($playerSlug: String!, $page: Int!) {
+  standings(playerSlug: $playerSlug, page: $page, per: 10) {
+    records { ...PlayerStandingCard }
+    paging { ...paging }
+  }
+}
