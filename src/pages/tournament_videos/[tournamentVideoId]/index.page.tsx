@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 import {
   PageTournamentVideoQuery,
@@ -45,6 +45,8 @@ const PageContent: React.FC<PageTournamentVideoQuery> = ({ tournamentVideo }) =>
   const { query } = useRouter();
   const [selectedBattle, setSelectedBattle] = useState<TournamentVideoPageBattleFragment>();
   const classes = useStyles();
+  const listRef = useRef<HTMLUListElement>(null);
+  const selectedItemRef = useRef<HTMLDivElement>(null);
 
   const updateBattle = (battle: TournamentVideoPageBattleFragment) => {
     setSelectedBattle(battle);
@@ -56,6 +58,9 @@ const PageContent: React.FC<PageTournamentVideoQuery> = ({ tournamentVideo }) =>
       const b = tournamentVideo.battles.filter(b => b.id === query.battle)[0];
       if (b) {
         updateBattle(b);
+        if (listRef.current && selectedItemRef.current) {
+          listRef.current.scrollTop = selectedItemRef.current.offsetTop;
+        }
       }
     }
   }, [query.battle]);
@@ -74,7 +79,7 @@ const PageContent: React.FC<PageTournamentVideoQuery> = ({ tournamentVideo }) =>
       {tournamentVideo.battles.length > 0 && (
         <Box mt={2}>
           <Paper>
-            <List className={classes.list}>
+            <List className={classes.list} ref={listRef}>
               {tournamentVideo.battles.map(battle => {
                 const classes = useStyles();
                 const left = battle.sides[0];
@@ -87,6 +92,8 @@ const PageContent: React.FC<PageTournamentVideoQuery> = ({ tournamentVideo }) =>
                   <ListItem
                     button
                     key={battle.id}
+                    selected={battle.id === query.battle}
+                    ref={battle.id === query.battle ? selectedItemRef : null}
                     onClick={() => {
                       updateBattle(battle);
                     }}
