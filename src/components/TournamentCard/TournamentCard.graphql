@@ -1,0 +1,17 @@
+fragment TournamentCard on Tournament {
+  id
+  name
+  mainImageUrl
+  startsAt
+  videosCount
+
+  standings {
+    id
+    place
+
+    player {
+      id
+      name
+    }
+  }
+}

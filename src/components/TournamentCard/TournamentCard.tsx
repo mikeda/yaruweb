@@ -1,11 +1,24 @@
 import React from 'react';
 import { TournamentCardFragment } from '@/lib/graphql/types';
-import { Card, CardActionArea, CardContent, CardMedia, makeStyles, Typography } from '@material-ui/core';
+import {
+  Card,
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  makeStyles,
+  Typography,
+} from '@material-ui/core';
 
 import { path } from '@/lib';
 import { Link } from '../Link';
 import { NO_IMAGE_URL } from '@/lib/Assets';
 import dayjs from '@/lib/dayjs';
+import { EmojiEvents, Schedule, YouTube } from '@material-ui/icons';
+import { colors } from '@/colors';
 
 const useStyles = makeStyles({
   media: {
@@ -29,10 +42,39 @@ export const TournamentCard: React.FC<Props> = ({ tournament }) => {
 
         <CardContent>
           <Typography variant="h6">{tournament.name}</Typography>
-          <Typography variant="caption" component="p">
-            {dayjs(tournament.startsAt).format('YYYY/M/D H:mm')}
-          </Typography>
         </CardContent>
+
+        <List disablePadding dense>
+          <ListItem>
+            <ListItemIcon>
+              <Schedule />
+            </ListItemIcon>
+            <ListItemText primary={dayjs(tournament.startsAt).format('YYYY/M/D H:mm')} />
+          </ListItem>
+
+          {tournament.standings.length > 0 && (
+            <ListItem>
+              <ListItemIcon>
+                <EmojiEvents style={{ fill: colors.trophy }} />
+              </ListItemIcon>
+              <ListItemText
+                primary={tournament.standings
+                  .filter(r => r.place === 1)
+                  .map(r => r.player.name)
+                  .join('、')}
+              />
+            </ListItem>
+          )}
+
+          {tournament.videosCount > 0 && (
+            <ListItem>
+              <ListItemIcon>
+                <YouTube style={{ fill: colors.youtube }} />
+              </ListItemIcon>
+              <ListItemText primary="動画あり" />
+            </ListItem>
+          )}
+        </List>
       </CardActionArea>
     </Card>
   );

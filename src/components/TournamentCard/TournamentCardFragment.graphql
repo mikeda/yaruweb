@@ -1,6 +1,0 @@
-fragment TournamentCard on Tournament {
-  id
-  name
-  mainImageUrl
-  startsAt
-}

@@ -2990,7 +2990,7 @@ export type PlayerFormFragment = { __typename?: 'Player', name: string, slug: st
 
 export type StandingCardFragment = { __typename?: 'Standing', id: string, place: number, player: { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: Maybe<string> } };
 
-export type TournamentCardFragment = { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: Maybe<string>, startsAt: string };
+export type TournamentCardFragment = { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: Maybe<string>, startsAt: string, videosCount: number, standings: Array<{ __typename?: 'Standing', id: string, place: number, player: { __typename?: 'Player', id: string, name: string } }> };
 
 export type TournamentFormFragment = { __typename?: 'Tournament', organizerId: string, name: string, url: string, streamingUrl?: Maybe<string>, startsAt: string, description: string, league?: Maybe<{ __typename?: 'League', id: string }> };
 
@@ -3436,7 +3436,7 @@ export type DashboardTournamentsPageQuery = { __typename?: 'Query', tournaments:
 export type TopPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type TopPageQuery = { __typename?: 'Query', tournaments: { __typename?: 'TournamentCollection', records: Array<{ __typename?: 'Tournament', id: string, name: string, mainImageUrl?: Maybe<string>, startsAt: string }> }, battles: { __typename?: 'BattleCollection', records: Array<{ __typename?: 'Battle', id: string, round?: Maybe<BattleRound>, tournamentVideo: { __typename?: 'TournamentVideo', id: string, tournament: { __typename?: 'Tournament', id: string, name: string, startsAt: string } }, sides: Array<{ __typename?: 'BattleSide', rounds: number, player: { __typename?: 'Player', name: string }, character: { __typename?: 'Character', faceImageUrl: string } }> }> }, players: { __typename?: 'PlayerCollection', records: Array<{ __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: Maybe<string>, standingsCount: number, battlesCount: number }> }, characters: { __typename?: 'CharacterCollection', records: Array<{ __typename?: 'Character', slug: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string }> }, articles: { __typename?: 'ArticleCollection', records: Array<{ __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: Maybe<string>, publishedAt?: Maybe<string>, faved: boolean, favsCount: number, status: ArticleStatus, author: { __typename?: 'User', name: string, avatarUrl: string } }> } };
+export type TopPageQuery = { __typename?: 'Query', tournaments: { __typename?: 'TournamentCollection', records: Array<{ __typename?: 'Tournament', id: string, name: string, mainImageUrl?: Maybe<string>, startsAt: string, videosCount: number, standings: Array<{ __typename?: 'Standing', id: string, place: number, player: { __typename?: 'Player', id: string, name: string } }> }> }, battles: { __typename?: 'BattleCollection', records: Array<{ __typename?: 'Battle', id: string, round?: Maybe<BattleRound>, tournamentVideo: { __typename?: 'TournamentVideo', id: string, tournament: { __typename?: 'Tournament', id: string, name: string, startsAt: string } }, sides: Array<{ __typename?: 'BattleSide', rounds: number, player: { __typename?: 'Player', name: string }, character: { __typename?: 'Character', faceImageUrl: string } }> }> }, players: { __typename?: 'PlayerCollection', records: Array<{ __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: Maybe<string>, standingsCount: number, battlesCount: number }> }, characters: { __typename?: 'CharacterCollection', records: Array<{ __typename?: 'Character', slug: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string }> }, articles: { __typename?: 'ArticleCollection', records: Array<{ __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: Maybe<string>, publishedAt?: Maybe<string>, faved: boolean, favsCount: number, status: ArticleStatus, author: { __typename?: 'User', name: string, avatarUrl: string } }> } };
 
 export type PageMoveCategoryQueryVariables = Exact<{
   moveCategoryId: Scalars['ID'];
@@ -3548,7 +3548,7 @@ export type PageTournamentsQueryVariables = Exact<{
 }>;
 
 
-export type PageTournamentsQuery = { __typename?: 'Query', tournaments: { __typename?: 'TournamentCollection', records: Array<{ __typename?: 'Tournament', id: string, name: string, mainImageUrl?: Maybe<string>, startsAt: string }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
+export type PageTournamentsQuery = { __typename?: 'Query', tournaments: { __typename?: 'TournamentCollection', records: Array<{ __typename?: 'Tournament', id: string, name: string, mainImageUrl?: Maybe<string>, startsAt: string, videosCount: number, standings: Array<{ __typename?: 'Standing', id: string, place: number, player: { __typename?: 'Player', id: string, name: string } }> }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
 
 export const ArticleLinkFragmentDoc = gql`
     fragment articleLink on ArticleLink {
@@ -4156,6 +4156,15 @@ export const TournamentCardFragmentDoc = gql`
   name
   mainImageUrl
   startsAt
+  videosCount
+  standings {
+    id
+    place
+    player {
+      id
+      name
+    }
+  }
 }
     `;
 export const TournamentFormFragmentDoc = gql`
