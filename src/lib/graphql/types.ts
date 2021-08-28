@@ -268,7 +268,6 @@ export type Channel = {
 
 export type Character = {
   __typename?: 'Character';
-  battles: Array<Battle>;
   battlesCount: Scalars['Int'];
   comboCategories: Array<ComboCategory>;
   conditions: Array<Condition>;
@@ -3078,7 +3077,7 @@ export type PageCharacterQueryVariables = Exact<{
 }>;
 
 
-export type PageCharacterQuery = { __typename?: 'Query', character: { __typename?: 'Character', story: string, description: string, slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battles: Array<{ __typename?: 'Battle', id: string, round?: Maybe<BattleRound>, tournamentVideo: { __typename?: 'TournamentVideo', id: string, tournament: { __typename?: 'Tournament', id: string, name: string, startsAt: string } }, sides: Array<{ __typename?: 'BattleSide', rounds: number, player: { __typename?: 'Player', name: string }, character: { __typename?: 'Character', faceImageUrl: string } }> }> } };
+export type PageCharacterQuery = { __typename?: 'Query', character: { __typename?: 'Character', story: string, description: string, slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string } };
 
 export type PageCharacterMoveCategoriesQueryVariables = Exact<{
   characterSlug: Scalars['String'];
@@ -7427,27 +7426,6 @@ export const PageCharacterDocument = gql`
     ...CharacterCard
     story
     description
-    battles {
-      id
-      round
-      tournamentVideo {
-        id
-        tournament {
-          id
-          name
-          startsAt
-        }
-      }
-      sides {
-        player {
-          name
-        }
-        character {
-          faceImageUrl
-        }
-        rounds
-      }
-    }
   }
 }
     ${CharacterBreadcrumbsFragmentDoc}
