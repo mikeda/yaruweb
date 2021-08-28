@@ -5,26 +5,5 @@ query PageCharacter($characterSlug: String!) {
 
     story
     description
-
-    battles {
-      id
-      round
-
-      tournamentVideo {
-        id
-
-        tournament {
-          id
-          name
-          startsAt
-        }
-      }
-
-      sides {
-        player { name }
-        character { faceImageUrl }
-        rounds
-      }
-    }
   }
 }
