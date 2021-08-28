@@ -1,23 +1,11 @@
 
 query BattlesPage {
   players(per: 10) {
-    records {
-      id
-      slug
-      name
-      avatarUrl
-      battlesCount
-    }
+    records { ... PlayerChip }
   }
 
   characters(order: use_rate, per: 10) {
-    records {
-      id
-      slug
-      name
-      faceImageUrl
-      battlesCount
-    }
+    records { ...CharacterChip }
   }
 
   battles(per: 10) {

@@ -25,4 +25,8 @@ query PlayerPage($playerSlug: String!) {
     records { ...BattleListItem }
     paging { hasNext }
   }
+
+  battleCounts(playerSlug: $playerSlug, per: 10) {
+    records { ...PlayerBattleCountChip }
+  }
 }

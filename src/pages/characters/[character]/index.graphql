@@ -6,4 +6,8 @@ query PageCharacter($characterSlug: String!) {
     story
     description
   }
+
+  battleCounts(characterSlug: $characterSlug, per: 10) {
+    records { ...PlayerBattleCountChip }
+  }
 }

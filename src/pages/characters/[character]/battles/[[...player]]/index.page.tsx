@@ -10,29 +10,20 @@ import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Head } from '@/components/layouts/Head';
 import { Content } from '@/components/layouts/Content';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
-import { Avatar, Box, Button, Chip, createStyles, List, makeStyles, Paper, Theme } from '@material-ui/core';
+import { Box, Button, createStyles, List, makeStyles, Paper, Theme } from '@material-ui/core';
 import { BattleListItem, CharacterPageTabs } from '@/components';
 import { path } from '@/lib';
-import { DEFAULT_AVATAR_URL } from '@/lib/Assets';
 import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from '@/states/loading';
 import { toast } from 'react-toastify';
 import { useEffect } from 'react';
+import { BattleSelector, PlayerBattleCountChip } from '@/components/BattleSelector';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     content: {
       paddingTop: theme.spacing(2),
-    },
-    characterSelector: {
-      marginBottom: theme.spacing(1),
-      display: 'flex',
-      justifyContent: 'center',
-      flexWrap: 'wrap',
-      '& > *': {
-        margin: theme.spacing(0.5),
-      },
     },
   }),
 );
@@ -96,14 +87,12 @@ const Page: React.FC<Props> = ({
       </Box>
 
       <Paper className={classes.content}>
-        <div className={classes.characterSelector}>
+        <BattleSelector>
           {battleCounts.records.map(bc => (
-            <Chip
+            <PlayerBattleCountChip
               key={bc.id}
-              variant="outlined"
-              avatar={<Avatar src={bc.player.avatarUrl || DEFAULT_AVATAR_URL} />}
-              label={`${bc.player.name} (${bc.count})`}
-              color={playerSlug === bc.player.slug ? 'primary' : undefined}
+              battleCount={bc}
+              active={playerSlug === bc.player.slug}
               onClick={() => {
                 if (playerSlug === bc.player.slug) {
                   router.push(path({ to: 'characterBattles', characterSlug: character.slug }));
@@ -115,7 +104,7 @@ const Page: React.FC<Props> = ({
               }}
             />
           ))}
-        </div>
+        </BattleSelector>
 
         <List>
           {battles.map((battle, i) => (

@@ -1,0 +1,7 @@
+fragment CharacterChip on Character {
+  id
+  slug
+  name
+  faceImageUrl
+  battlesCount
+}

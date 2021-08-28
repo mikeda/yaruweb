@@ -3,7 +3,7 @@ import { GetServerSideProps } from 'next';
 
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Head, Content, Breadcrumbs, BattleListItem } from '@/components';
-import { Avatar, Box, Button, Chip, createStyles, List, makeStyles, Paper, Theme, Typography } from '@material-ui/core';
+import { Box, Button, List, Paper, Typography } from '@material-ui/core';
 import {
   PlayerBattlesPageDocument,
   PlayerBattlesPageQuery,
@@ -15,20 +15,7 @@ import { Profile } from '../../components/Profile';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from '@/states/loading';
-
-const useStyles = makeStyles((theme: Theme) =>
-  createStyles({
-    characterSelector: {
-      marginBottom: theme.spacing(1),
-      display: 'flex',
-      justifyContent: 'center',
-      flexWrap: 'wrap',
-      '& > *': {
-        margin: theme.spacing(0.5),
-      },
-    },
-  }),
-);
+import { CharacterBattleCountChip, BattleSelector } from '@/components/BattleSelector';
 
 interface Props {
   data: PlayerBattlesPageQuery;
@@ -62,7 +49,6 @@ const Page: React.FC<Props> = ({
   const setLoading = useSetRecoilState(loadingState);
 
   const router = useRouter();
-  const classes = useStyles();
 
   useEffect(() => {
     setBattles(initBattles);
@@ -87,14 +73,12 @@ const Page: React.FC<Props> = ({
           対戦動画
         </Typography>
 
-        <div className={classes.characterSelector}>
+        <BattleSelector>
           {battleCounts.records.map(bc => (
-            <Chip
+            <CharacterBattleCountChip
               key={bc.id}
-              variant="outlined"
-              avatar={<Avatar src={bc.character.faceImageUrl} />}
-              label={`${bc.character.name} (${bc.count})`}
-              color={characterSlug === bc.character.slug ? 'primary' : undefined}
+              battleCount={bc}
+              active={characterSlug === bc.character.slug}
               onClick={() => {
                 if (characterSlug === bc.character.slug) {
                   router.push(path({ to: 'playerBattles', player: player.slug }));
@@ -104,7 +88,7 @@ const Page: React.FC<Props> = ({
               }}
             />
           ))}
-        </div>
+        </BattleSelector>
 
         <Paper>
           <List>
