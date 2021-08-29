@@ -268,7 +268,6 @@ export type Channel = {
 
 export type Character = {
   __typename?: 'Character';
-  battles: BattleCollection;
   battlesCount: Scalars['Int'];
   comboCategories: Array<ComboCategory>;
   conditions: Array<Condition>;
@@ -287,15 +286,6 @@ export type Character = {
   slug: Scalars['String'];
   states: Array<State>;
   story: Scalars['String'];
-};
-
-
-export type CharacterBattlesArgs = {
-  tournamentVideoId?: Maybe<Scalars['ID']>;
-  playerSlug?: Maybe<Scalars['String']>;
-  characterSlug?: Maybe<Scalars['String']>;
-  page?: Maybe<Scalars['Int']>;
-  per?: Maybe<Scalars['Int']>;
 };
 
 export type CharacterAttributes = {
@@ -3498,7 +3488,7 @@ export type PlayerBattlesPageQueryVariables = Exact<{
 }>;
 
 
-export type PlayerBattlesPageQuery = { __typename?: 'Query', player: { __typename?: 'Player', slug: string, name: string, id: string, avatarUrl?: Maybe<string>, twitterId?: Maybe<string>, streamingUrl?: Maybe<string>, description?: Maybe<string>, standingsCount: number, battlesCount: number }, battleCounts: { __typename?: 'BattleCountCollection', records: Array<{ __typename?: 'BattleCount', id: string, count: number, character: { __typename?: 'Character', id: string, slug: string, name: string, faceImageUrl: string } }> }, battles: { __typename?: 'BattleCollection', records: Array<{ __typename?: 'Battle', id: string, round?: Maybe<BattleRound>, tournamentVideo: { __typename?: 'TournamentVideo', id: string, tournament: { __typename?: 'Tournament', id: string, name: string, startsAt: string } }, sides: Array<{ __typename?: 'BattleSide', rounds: number, player: { __typename?: 'Player', name: string }, character: { __typename?: 'Character', faceImageUrl: string } }> }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
+export type PlayerBattlesPageQuery = { __typename?: 'Query', player: { __typename?: 'Player', slug: string, name: string, id: string, avatarUrl?: Maybe<string>, twitterId?: Maybe<string>, streamingUrl?: Maybe<string>, standingsCount: number, battlesCount: number }, battleCounts: { __typename?: 'BattleCountCollection', records: Array<{ __typename?: 'BattleCount', id: string, count: number, character: { __typename?: 'Character', id: string, slug: string, name: string, faceImageUrl: string } }> }, battles: { __typename?: 'BattleCollection', records: Array<{ __typename?: 'Battle', id: string, round?: Maybe<BattleRound>, tournamentVideo: { __typename?: 'TournamentVideo', id: string, tournament: { __typename?: 'Tournament', id: string, name: string, startsAt: string } }, sides: Array<{ __typename?: 'BattleSide', rounds: number, player: { __typename?: 'Player', name: string }, character: { __typename?: 'Character', faceImageUrl: string } }> }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
 
 export type PlayerBattlesPageBattlesQueryVariables = Exact<{
   playerSlug: Scalars['String'];
@@ -3511,21 +3501,21 @@ export type PlayerBattlesPageBattlesQuery = { __typename?: 'Query', battles: { _
 
 export type PlayerStandingCardFragment = { __typename?: 'Standing', id: string, place: number, tournament: { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: Maybe<string>, startsAt: string } };
 
-export type PlayerPageProfileFragment = { __typename?: 'Player', id: string, name: string, slug: string, avatarUrl?: Maybe<string>, twitterId?: Maybe<string>, streamingUrl?: Maybe<string>, description?: Maybe<string>, standingsCount: number, battlesCount: number };
+export type PlayerPageProfileFragment = { __typename?: 'Player', id: string, name: string, slug: string, avatarUrl?: Maybe<string>, twitterId?: Maybe<string>, streamingUrl?: Maybe<string>, standingsCount: number, battlesCount: number };
 
 export type PlayerPageQueryVariables = Exact<{
   playerSlug: Scalars['String'];
 }>;
 
 
-export type PlayerPageQuery = { __typename?: 'Query', player: { __typename?: 'Player', slug: string, name: string, id: string, avatarUrl?: Maybe<string>, twitterId?: Maybe<string>, streamingUrl?: Maybe<string>, description?: Maybe<string>, standingsCount: number, battlesCount: number }, standings: { __typename?: 'StandingCollection', records: Array<{ __typename?: 'Standing', id: string, place: number, tournament: { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: Maybe<string>, startsAt: string } }>, paging: { __typename?: 'Paging', hasNext: boolean } }, battles: { __typename?: 'BattleCollection', records: Array<{ __typename?: 'Battle', id: string, round?: Maybe<BattleRound>, tournamentVideo: { __typename?: 'TournamentVideo', id: string, tournament: { __typename?: 'Tournament', id: string, name: string, startsAt: string } }, sides: Array<{ __typename?: 'BattleSide', rounds: number, player: { __typename?: 'Player', name: string }, character: { __typename?: 'Character', faceImageUrl: string } }> }>, paging: { __typename?: 'Paging', hasNext: boolean } }, battleCounts: { __typename?: 'BattleCountCollection', records: Array<{ __typename?: 'BattleCount', id: string, count: number, player: { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: Maybe<string> } }> } };
+export type PlayerPageQuery = { __typename?: 'Query', player: { __typename?: 'Player', description?: Maybe<string>, slug: string, name: string, id: string, avatarUrl?: Maybe<string>, twitterId?: Maybe<string>, streamingUrl?: Maybe<string>, standingsCount: number, battlesCount: number }, battleCounts: { __typename?: 'BattleCountCollection', records: Array<{ __typename?: 'BattleCount', id: string, count: number, character: { __typename?: 'Character', id: string, slug: string, name: string, faceImageUrl: string } }> } };
 
 export type PlayerStandingsPageQueryVariables = Exact<{
   playerSlug: Scalars['String'];
 }>;
 
 
-export type PlayerStandingsPageQuery = { __typename?: 'Query', player: { __typename?: 'Player', slug: string, name: string, id: string, avatarUrl?: Maybe<string>, twitterId?: Maybe<string>, streamingUrl?: Maybe<string>, description?: Maybe<string>, standingsCount: number, battlesCount: number }, standings: { __typename?: 'StandingCollection', records: Array<{ __typename?: 'Standing', id: string, place: number, tournament: { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: Maybe<string>, startsAt: string } }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
+export type PlayerStandingsPageQuery = { __typename?: 'Query', player: { __typename?: 'Player', slug: string, name: string, id: string, avatarUrl?: Maybe<string>, twitterId?: Maybe<string>, streamingUrl?: Maybe<string>, standingsCount: number, battlesCount: number }, standings: { __typename?: 'StandingCollection', records: Array<{ __typename?: 'Standing', id: string, place: number, tournament: { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: Maybe<string>, startsAt: string } }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
 
 export type PlayerStandingsPageStandingsQueryVariables = Exact<{
   playerSlug: Scalars['String'];
@@ -4376,7 +4366,6 @@ export const PlayerPageProfileFragmentDoc = gql`
   avatarUrl
   twitterId
   streamingUrl
-  description
   standingsCount
   battlesCount
 }
@@ -9887,34 +9876,17 @@ export const PlayerPageDocument = gql`
   player(playerSlug: $playerSlug) {
     ...PlayerBreadcrumbs
     ...PlayerPageProfile
-  }
-  standings(playerSlug: $playerSlug, per: 4) {
-    records {
-      ...PlayerStandingCard
-    }
-    paging {
-      hasNext
-    }
-  }
-  battles(playerSlug: $playerSlug, per: 4) {
-    records {
-      ...BattleListItem
-    }
-    paging {
-      hasNext
-    }
+    description
   }
   battleCounts(playerSlug: $playerSlug, per: 10) {
     records {
-      ...PlayerBattleCountChip
+      ...CharacterBattleCountChip
     }
   }
 }
     ${PlayerBreadcrumbsFragmentDoc}
 ${PlayerPageProfileFragmentDoc}
-${PlayerStandingCardFragmentDoc}
-${BattleListItemFragmentDoc}
-${PlayerBattleCountChipFragmentDoc}`;
+${CharacterBattleCountChipFragmentDoc}`;
 
 /**
  * __usePlayerPageQuery__

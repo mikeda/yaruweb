@@ -56,12 +56,7 @@ export const Profile: React.FC<Props> = ({ player }) => {
       <div className={classes.content}>
         <Typography variant="h1">{player.name}</Typography>
 
-        {player.description && <Typography className={classes.description}>{player.description}</Typography>}
-
         <div className={classes.status}>
-          <Typography variant="caption">大会実績 {player.standingsCount}</Typography>
-          <Typography variant="caption">対戦動画 {player.battlesCount}</Typography>
-
           {player.twitterId && (
             <a href={`https://twitter.com/${player.twitterId}`} target="_blank" rel="noreferrer">
               <Twitter fontSize="small" style={{ fill: colors.twitter }} />

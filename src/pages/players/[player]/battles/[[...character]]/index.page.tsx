@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { GetServerSideProps } from 'next';
 
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
-import { Head, Content, Breadcrumbs, BattleListItem } from '@/components';
+import { Head, Content, Breadcrumbs, BattleListItem, PlayerPageTabs } from '@/components';
 import { Box, Button, List, Paper, Typography } from '@material-ui/core';
 import {
   PlayerBattlesPageDocument,
@@ -67,6 +67,8 @@ const Page: React.FC<Props> = ({
       <Head title={`${player.name}の対戦動画`} />
 
       <Profile player={player} />
+
+      <PlayerPageTabs activeTab="battles" player={player} />
 
       <Box mt={4}>
         <Typography variant="h3" gutterBottom>

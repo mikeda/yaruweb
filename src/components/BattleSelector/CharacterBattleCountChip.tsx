@@ -4,11 +4,11 @@ import { CharacterBattleCountChipFragment } from '@/lib/graphql/types';
 
 interface Props {
   battleCount: CharacterBattleCountChipFragment;
-  active: boolean;
+  active?: boolean;
   onClick: () => void;
 }
 
-export const CharacterBattleCountChip: React.FC<Props> = ({ battleCount: bc, active, onClick }) => {
+export const CharacterBattleCountChip: React.FC<Props> = ({ battleCount: bc, active = false, onClick }) => {
   return (
     <Chip
       variant="outlined"

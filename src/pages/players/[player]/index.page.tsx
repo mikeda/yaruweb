@@ -2,63 +2,63 @@ import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
-import { Head, Content, Breadcrumbs, BattleListItem, Link as LinkComponent } from '@/components';
-import { Box, Button, Grid, List, Paper, Typography } from '@material-ui/core';
+import { Head, Content, Breadcrumbs, PlayerPageTabs } from '@/components';
+import { Box, makeStyles, Paper, Typography } from '@material-ui/core';
 import { PlayerPageDocument, PlayerPageQuery } from '@/lib/graphql/types';
 import { path } from '@/lib';
 import { Profile } from './components/Profile';
-import { PlayerStandingCard } from './components/PlayerStandingCard';
+import theme from '@/theme';
+import { BattleSelector, CharacterBattleCountChip } from '@/components/BattleSelector';
+import { useRouter } from 'next/router';
 
-const Page: React.FC<PlayerPageQuery> = ({ player, standings, battles }) => {
+const useStyles = makeStyles({
+  description: {
+    marginTop: theme.spacing(1),
+    whiteSpace: 'pre-line',
+  },
+});
+
+const Page: React.FC<PlayerPageQuery> = ({ player, battleCounts }) => {
+  const router = useRouter();
+  const classes = useStyles();
+
   return (
     <Content activeTab="players" breadcrumb={<Breadcrumbs to="player" player={player} />}>
       <Head title={player.name} />
 
       <Profile player={player} />
 
-      <Box mt={4}>
-        <Typography variant="h2" gutterBottom>
-          大会戦績
-        </Typography>
+      <PlayerPageTabs activeTab="profile" player={player} />
 
-        <Grid container spacing={2}>
-          {standings.records.map(standing => (
-            <Grid item key={standing.id} xs={12} sm={6}>
-              <PlayerStandingCard standing={standing} />
-            </Grid>
-          ))}
-        </Grid>
+      <Paper>
+        <Box p={2}>
+          <Typography variant="h2" gutterBottom>
+            プロフィール
+          </Typography>
 
-        {standings.paging.hasNext && (
-          <Box mt={2} display="flex" justifyContent="center">
-            <Button href={path({ to: 'playerStandings', playerSlug: player.slug })} component={LinkComponent}>
-              もっと見る
-            </Button>
+          <Typography className={classes.description}>
+            {player.description || 'プロフィールが登録されていません。'}
+          </Typography>
+
+          <Box mt={4}>
+            <Typography variant="h2" gutterBottom>
+              使用キャラクター
+            </Typography>
+
+            <BattleSelector>
+              {battleCounts.records.map(bc => (
+                <CharacterBattleCountChip
+                  key={bc.id}
+                  battleCount={bc}
+                  onClick={() => {
+                    router.push(path({ to: 'playerBattles', player: player.slug, characterSlug: bc.character.slug }));
+                  }}
+                />
+              ))}
+            </BattleSelector>
           </Box>
-        )}
-      </Box>
-
-      <Box mt={4}>
-        <Typography variant="h2" gutterBottom>
-          対戦動画
-        </Typography>
-
-        <Paper>
-          <List>
-            {battles.records.map((battle, i) => (
-              <BattleListItem key={battle.id} battle={battle} last={battles.records.length === i + 1} />
-            ))}
-          </List>
-        </Paper>
-
-        {battles.paging.hasNext && (
-          <Box mt={2} display="flex" justifyContent="center">
-            <Button href={path({ to: 'playerBattles', player: player.slug })} component={LinkComponent}>
-              もっと見る
-            </Button>
-          </Box>
-        )}
-      </Box>
+        </Box>
+      </Paper>
     </Content>
   );
 };

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { GetServerSideProps } from 'next';
 
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
-import { Head, Content, Breadcrumbs } from '@/components';
+import { Head, Content, Breadcrumbs, PlayerPageTabs } from '@/components';
 import { Box, Button, Grid, Typography } from '@material-ui/core';
 import {
   PlayerStandingsPageDocument,
@@ -61,6 +61,8 @@ const Page: React.FC<Props> = ({
       <Head title={`${player.name}の大会戦績`} />
 
       <Profile player={player} />
+
+      <PlayerPageTabs activeTab="standings" player={player} />
 
       <Box mt={4}>
         <Typography variant="h2" gutterBottom>
