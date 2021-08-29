@@ -34,7 +34,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   const data: PageMoveCategoryQuery = await fetchGraphql(PageMoveCategoryDocument, { moveCategoryId });
 
-  return { props: { moveCategory: data.moveCategory }, revalidate: 60 };
+  return { props: { moveCategory: data.moveCategory }, revalidate: 300 };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {

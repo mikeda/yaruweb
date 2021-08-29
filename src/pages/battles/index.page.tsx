@@ -6,28 +6,19 @@ import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Head } from '@/components/layouts/Head';
 import { Content } from '@/components/layouts/Content';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
-import { Avatar, Box, Button, Chip, createStyles, List, makeStyles, Paper, Theme } from '@material-ui/core';
+import { Box, Button, createStyles, List, makeStyles, Paper, Theme } from '@material-ui/core';
 import { BattleListItem } from '@/components';
 import { path } from '@/lib';
-import { DEFAULT_AVATAR_URL } from '@/lib/Assets';
 import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from '@/states/loading';
 import { toast } from 'react-toastify';
+import { BattleSelector, CharacterChip, PlayerChip } from '@/components/BattleSelector';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     content: {
       paddingTop: theme.spacing(2),
-    },
-    characterSelector: {
-      marginBottom: theme.spacing(1),
-      display: 'flex',
-      justifyContent: 'center',
-      flexWrap: 'wrap',
-      '& > *': {
-        margin: theme.spacing(0.5),
-      },
     },
   }),
 );
@@ -67,30 +58,26 @@ const Page: React.FC<BattlesPageQuery> = ({
       <Head title="対戦動画" />
 
       <Paper className={classes.content}>
-        <div className={classes.characterSelector}>
+        <BattleSelector>
           {players.records.map(player => (
-            <Chip
+            <PlayerChip
               key={player.id}
-              variant="outlined"
-              avatar={<Avatar src={player.avatarUrl || DEFAULT_AVATAR_URL} />}
-              label={`${player.name} (${player.battlesCount})`}
+              player={player}
               onClick={() => {
                 router.push(path({ to: 'playerBattles', player: player.slug }));
               }}
             />
           ))}
           {characters.records.map(character => (
-            <Chip
+            <CharacterChip
               key={character.id}
-              variant="outlined"
-              avatar={<Avatar src={character.faceImageUrl} />}
-              label={`${character.name} (${character.battlesCount})`}
+              character={character}
               onClick={() => {
                 router.push(path({ to: 'characterBattles', characterSlug: character.slug }));
               }}
             />
           ))}
-        </div>
+        </BattleSelector>
 
         <List>
           {battles.map((battle, i) => (

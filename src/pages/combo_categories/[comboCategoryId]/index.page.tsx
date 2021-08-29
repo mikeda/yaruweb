@@ -40,7 +40,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
   const data: PageComboCategoryQuery = await fetchGraphql(PageComboCategoryDocument, { comboCategoryId });
 
-  return { props: data, revalidate: 60 };
+  return { props: data, revalidate: 300 };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {

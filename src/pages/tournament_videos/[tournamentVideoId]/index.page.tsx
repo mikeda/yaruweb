@@ -151,7 +151,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   const tournamentVideoId = params?.tournamentVideoId as string;
   const data: PageTournamentVideoQuery = await fetchGraphql(PageTournamentVideoDocument, { tournamentVideoId });
 
-  return { props: data, revalidate: 60 };
+  return { props: data, revalidate: 300 };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {

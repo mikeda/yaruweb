@@ -40,6 +40,7 @@ export * from './OperationListSelector';
 export * from './OrganizerCard';
 export * from './OrganizerForm';
 export * from './Paging';
+export * from './PlayerPageTabs';
 export * from './StandingPlaceAvatar';
 export * from './SortableCardList';
 export * from './StaffRequirement';

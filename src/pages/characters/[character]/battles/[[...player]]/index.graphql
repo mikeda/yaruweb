@@ -9,17 +9,7 @@ query CharacterBattlesPage($characterSlug: String!, $playerSlug: String) {
   }
 
   battleCounts(characterSlug: $characterSlug, per: 10) {
-    records {
-      id
-      count
-
-      player {
-        id
-        slug
-        name
-        avatarUrl
-      }
-    }
+    records { ...PlayerBattleCountChip }
   }
 
   battles(characterSlug: $characterSlug, playerSlug: $playerSlug, per: 10) {

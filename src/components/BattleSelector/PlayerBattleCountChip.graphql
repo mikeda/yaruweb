@@ -1,0 +1,11 @@
+fragment PlayerBattleCountChip on BattleCount {
+  id
+  count
+
+  player {
+    id
+    slug
+    name
+    avatarUrl
+  }
+}

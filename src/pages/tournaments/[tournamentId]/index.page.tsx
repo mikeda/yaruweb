@@ -121,10 +121,7 @@ export const getStaticProps: GetStaticProps<PageTournamentQuery> = async ({ para
   const tournamentId = params?.tournamentId as string;
   const data: PageTournamentQuery = await fetchGraphql(PageTournamentDocument, { tournamentId });
 
-  return {
-    props: data,
-    revalidate: 60,
-  };
+  return { props: data, revalidate: 300 };
 };
 
 export const getStaticPaths: GetStaticPaths = async () => {
