@@ -140,7 +140,7 @@ const Page: React.FC<PageTournamentVideoQuery> = data => {
       title={video.title}
       breadcrumb={<Breadcrumbs to="tournamentVideo" tournamentVideo={video} />}
     >
-      <Head title={video.title} />
+      <Head title={video.title} image={video.thumbnailUrl} />
 
       <PageContent {...data} />
     </Content>

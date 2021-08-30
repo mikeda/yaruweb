@@ -110,7 +110,7 @@ const Page: React.FC<PageTournamentQuery> = ({ tournament }) => {
       title={tournament.name}
       breadcrumb={<Breadcrumbs to="tournament" tournament={tournament} />}
     >
-      <Head title={tournament.name} />
+      <Head title={tournament.name} image={tournament.mainImageUrl} />
 
       <PageContent tournament={tournament} />
     </Content>

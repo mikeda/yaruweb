@@ -12,7 +12,15 @@ fragment TournamentVideoPageBattle on Battle {
 
 query PageTournamentVideo($tournamentVideoId: ID!) {
   tournamentVideo(tournamentVideoId: $tournamentVideoId) {
-    ...tournamentVideo
+    id
+    youtubeVideoId
+    title
+    thumbnailUrl
+    commentCount
+
+    channel {
+      name
+    }
 
     tournament {
       id

@@ -1,3 +1,0 @@
-fragment tournamentVideo on TournamentVideo {
-  ...videoSummary
-}
