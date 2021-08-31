@@ -16,10 +16,7 @@ import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 const Page: React.FC<TournamentsPageTournamentsQuery> = ({
   tournaments: { records: initTournaments, paging: initPaging },
 }) => {
-  const [state, setState] = useState({
-    tournaments: initTournaments,
-    paging: initPaging,
-  });
+  const [state, setState] = useState({ tournaments: initTournaments, paging: initPaging });
   const [fetch] = useTournamentsPageTournamentsLazyQuery({
     onCompleted: data => {
       setState(prev => ({
