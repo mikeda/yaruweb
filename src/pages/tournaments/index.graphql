@@ -1,5 +1,5 @@
-query PageTournaments($page: Int, $per: Int) {
-  tournaments(page: $page, per: $per) {
+query TournamentsPageTournaments($page: Int) {
+  tournaments(page: $page, per: 12) {
     records {
       ...TournamentCard
     }
