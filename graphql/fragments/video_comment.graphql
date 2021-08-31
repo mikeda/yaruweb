@@ -1,9 +1,0 @@
-fragment tournamentVideoComment on TournamentVideoComment {
-  id
-  message
-  createdAt
-  user {
-    name
-    avatarUrl
-  }
-}

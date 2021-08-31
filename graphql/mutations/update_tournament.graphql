@@ -1,7 +1,0 @@
-mutation UpdateTournament($tournamentId: ID!, $attributes: TournamentAttributes!) {
-  updateTournament(input: {tournamentId: $tournamentId, attributes: $attributes}) {
-    tournament {
-      ...tournament
-    }
-  }
-}
