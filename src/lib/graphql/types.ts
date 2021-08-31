@@ -3501,13 +3501,13 @@ export type PlayerStandingsPageStandingsQueryVariables = Exact<{
 
 export type PlayerStandingsPageStandingsQuery = { __typename?: 'Query', standings: { __typename?: 'StandingCollection', records: Array<{ __typename?: 'Standing', id: string, place: number, tournament: { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: Maybe<string>, startsAt: string } }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
 
-export type PlayersPageQueryVariables = Exact<{
+export type PlayersPagePlayersQueryVariables = Exact<{
   page?: Maybe<Scalars['Int']>;
   keyword?: Maybe<Scalars['String']>;
 }>;
 
 
-export type PlayersPageQuery = { __typename?: 'Query', players: { __typename?: 'PlayerCollection', records: Array<{ __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: Maybe<string>, standingsCount: number, battlesCount: number }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
+export type PlayersPagePlayersQuery = { __typename?: 'Query', players: { __typename?: 'PlayerCollection', records: Array<{ __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: Maybe<string>, standingsCount: number, battlesCount: number }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
 
 export type TournamentVideoPageBattleFragment = { __typename?: 'Battle', id: string, round?: Maybe<BattleRound>, startSec: number, sides: Array<{ __typename?: 'BattleSide', rounds: number, player: { __typename?: 'Player', name: string }, character: { __typename?: 'Character', faceImageUrl: string } }> };
 
@@ -9866,8 +9866,8 @@ export function usePlayerStandingsPageStandingsLazyQuery(baseOptions?: Apollo.La
 export type PlayerStandingsPageStandingsQueryHookResult = ReturnType<typeof usePlayerStandingsPageStandingsQuery>;
 export type PlayerStandingsPageStandingsLazyQueryHookResult = ReturnType<typeof usePlayerStandingsPageStandingsLazyQuery>;
 export type PlayerStandingsPageStandingsQueryResult = Apollo.QueryResult<PlayerStandingsPageStandingsQuery, PlayerStandingsPageStandingsQueryVariables>;
-export const PlayersPageDocument = gql`
-    query PlayersPage($page: Int, $keyword: String) {
+export const PlayersPagePlayersDocument = gql`
+    query PlayersPagePlayers($page: Int, $keyword: String) {
   players(page: $page, per: 20, keyword: $keyword) {
     records {
       ...PlayerCard
@@ -9881,33 +9881,33 @@ export const PlayersPageDocument = gql`
 ${PagingFragmentDoc}`;
 
 /**
- * __usePlayersPageQuery__
+ * __usePlayersPagePlayersQuery__
  *
- * To run a query within a React component, call `usePlayersPageQuery` and pass it any options that fit your needs.
- * When your component renders, `usePlayersPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `usePlayersPagePlayersQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePlayersPagePlayersQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = usePlayersPageQuery({
+ * const { data, loading, error } = usePlayersPagePlayersQuery({
  *   variables: {
  *      page: // value for 'page'
  *      keyword: // value for 'keyword'
  *   },
  * });
  */
-export function usePlayersPageQuery(baseOptions?: Apollo.QueryHookOptions<PlayersPageQuery, PlayersPageQueryVariables>) {
+export function usePlayersPagePlayersQuery(baseOptions?: Apollo.QueryHookOptions<PlayersPagePlayersQuery, PlayersPagePlayersQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<PlayersPageQuery, PlayersPageQueryVariables>(PlayersPageDocument, options);
+        return Apollo.useQuery<PlayersPagePlayersQuery, PlayersPagePlayersQueryVariables>(PlayersPagePlayersDocument, options);
       }
-export function usePlayersPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PlayersPageQuery, PlayersPageQueryVariables>) {
+export function usePlayersPagePlayersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PlayersPagePlayersQuery, PlayersPagePlayersQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<PlayersPageQuery, PlayersPageQueryVariables>(PlayersPageDocument, options);
+          return Apollo.useLazyQuery<PlayersPagePlayersQuery, PlayersPagePlayersQueryVariables>(PlayersPagePlayersDocument, options);
         }
-export type PlayersPageQueryHookResult = ReturnType<typeof usePlayersPageQuery>;
-export type PlayersPageLazyQueryHookResult = ReturnType<typeof usePlayersPageLazyQuery>;
-export type PlayersPageQueryResult = Apollo.QueryResult<PlayersPageQuery, PlayersPageQueryVariables>;
+export type PlayersPagePlayersQueryHookResult = ReturnType<typeof usePlayersPagePlayersQuery>;
+export type PlayersPagePlayersLazyQueryHookResult = ReturnType<typeof usePlayersPagePlayersLazyQuery>;
+export type PlayersPagePlayersQueryResult = Apollo.QueryResult<PlayersPagePlayersQuery, PlayersPagePlayersQueryVariables>;
 export const PageTournamentVideoDocument = gql`
     query PageTournamentVideo($tournamentVideoId: ID!) {
   tournamentVideo(tournamentVideoId: $tournamentVideoId) {

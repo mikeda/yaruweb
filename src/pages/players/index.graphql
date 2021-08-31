@@ -1,4 +1,4 @@
-query PlayersPage($page: Int, $keyword: String) {
+query PlayersPagePlayers($page: Int, $keyword: String) {
   players(page: $page, per: 20, keyword: $keyword) {
     records {
       ...PlayerCard
