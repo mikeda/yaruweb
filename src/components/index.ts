@@ -46,6 +46,7 @@ export * from './SortableCardList';
 export * from './StaffRequirement';
 export * from './SearchWord';
 export * from './TabLinkGroup';
+export * from './TournamentCard';
 export * from './ThrowActionForm';
 export * from './StandingCard';
 export * from './form';

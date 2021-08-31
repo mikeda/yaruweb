@@ -24,6 +24,9 @@ const useStyles = makeStyles({
   media: {
     height: 160,
   },
+  listItemIcon: {
+    minWidth: 32,
+  },
 });
 
 interface Props {
@@ -46,7 +49,7 @@ export const TournamentCard: React.FC<Props> = ({ tournament }) => {
 
         <List disablePadding dense>
           <ListItem>
-            <ListItemIcon>
+            <ListItemIcon className={classes.listItemIcon}>
               <Schedule />
             </ListItemIcon>
             <ListItemText primary={dayjs(tournament.startsAt).format('YYYY/M/D H:mm')} />
@@ -54,7 +57,7 @@ export const TournamentCard: React.FC<Props> = ({ tournament }) => {
 
           {tournament.standings.length > 0 && (
             <ListItem>
-              <ListItemIcon>
+              <ListItemIcon className={classes.listItemIcon}>
                 <EmojiEvents style={{ fill: colors.trophy }} />
               </ListItemIcon>
               <ListItemText
@@ -68,7 +71,7 @@ export const TournamentCard: React.FC<Props> = ({ tournament }) => {
 
           {tournament.videosCount > 0 && (
             <ListItem>
-              <ListItemIcon>
+              <ListItemIcon className={classes.listItemIcon}>
                 <YouTube style={{ fill: colors.youtube }} />
               </ListItemIcon>
               <ListItemText primary="動画あり" />

@@ -1,29 +1,48 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { GetStaticProps } from 'next';
+import { toast } from 'react-toastify';
+import { useSetRecoilState } from 'recoil';
+import { loadingState } from '@/states/loading';
+import { Box, Button, Grid } from '@material-ui/core';
 
-import { PageTournamentsDocument, PageTournamentsQuery } from '@/lib/graphql/types';
-import { Head } from '@/components/layouts/Head';
-import { Content } from '@/components/layouts/Content';
-import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
-import { useRouter } from 'next/router';
-import { path } from '@/lib';
+import {
+  TournamentsPageTournamentsDocument,
+  TournamentsPageTournamentsQuery,
+  useTournamentsPageTournamentsLazyQuery,
+} from '@/lib/graphql/types';
+import { Head, Content, Breadcrumbs, TournamentCard } from '@/components';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
-import { GetServerSideProps } from 'next';
-import { Box, Grid, makeStyles } from '@material-ui/core';
-import { TournamentCard } from '@/components/TournamentCard';
-import { Pagination } from '@material-ui/lab';
-import theme from '@/theme';
 
-const useStyles = makeStyles({
-  paging: {
-    display: 'flex',
-    justifyContent: 'center',
-    marginTop: theme.spacing(4),
-  },
-});
+const Page: React.FC<TournamentsPageTournamentsQuery> = ({
+  tournaments: { records: initTournaments, paging: initPaging },
+}) => {
+  const [state, setState] = useState({
+    tournaments: initTournaments,
+    paging: initPaging,
+  });
+  const [fetch] = useTournamentsPageTournamentsLazyQuery({
+    onCompleted: data => {
+      setState(prev => ({
+        tournaments: [...prev.tournaments, ...data.tournaments.records],
+        paging: data.tournaments.paging,
+      }));
+      setLoading(false);
+    },
+    onError: e => {
+      toast.error(e.message);
+      setLoading(false);
+    },
+  });
+  const setLoading = useSetRecoilState(loadingState);
 
-const Page: React.FC<PageTournamentsQuery> = ({ tournaments: { records: tournaments, paging } }) => {
-  const classes = useStyles();
-  const router = useRouter();
+  const { tournaments, paging } = state;
+
+  const fetchMore = () => {
+    if (!paging.hasNext) return;
+
+    setLoading(true);
+    fetch({ variables: { page: paging.currentPage + 1 } });
+  };
 
   return (
     <Content activeTab="tournaments" title="大会" breadcrumb={<Breadcrumbs to="tournaments" />}>
@@ -36,27 +55,22 @@ const Page: React.FC<PageTournamentsQuery> = ({ tournaments: { records: tourname
           </Grid>
         ))}
       </Grid>
-      <Box className={classes.paging}>
-        <Pagination
-          page={paging.currentPage}
-          count={paging.totalPages}
-          color="primary"
-          onChange={(e, page) => {
-            router.push(path({ to: 'tournaments', params: { page } }));
-          }}
-        />
-      </Box>
+
+      {paging.hasNext && (
+        <Box pt={2} pb={2} display="flex" justifyContent="center">
+          <Button variant="outlined" onClick={fetchMore}>
+            もっとみる
+          </Button>
+        </Box>
+      )}
     </Content>
   );
 };
 
-export const getServerSideProps: GetServerSideProps<PageTournamentsQuery> = async ({ query }) => {
-  const page = query?.page ? Number(query.page) : 1;
-  const data: PageTournamentsQuery = await fetchGraphql(PageTournamentsDocument, { page });
+export const getStaticProps: GetStaticProps<TournamentsPageTournamentsQuery> = async () => {
+  const data: TournamentsPageTournamentsQuery = await fetchGraphql(TournamentsPageTournamentsDocument, { page: 1 });
 
-  return {
-    props: data,
-  };
+  return { props: data, revalidate: 300 };
 };
 
 export default Page;
