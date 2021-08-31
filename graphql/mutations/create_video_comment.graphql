@@ -1,7 +1,7 @@
 mutation CreateTournamentVideoComment($tournamentVideoId: ID!, $attributes: CommentAttributes!) {
   createTournamentVideoComment(input: { tournamentVideoId: $tournamentVideoId, attributes: $attributes }) {
     tournamentVideoComment {
-      ...tournamentVideoComment
+      id
     }
   }
 }

@@ -2411,10 +2411,6 @@ export type PagingFragment = { __typename?: 'Paging', currentPage: number, total
 
 export type StateFragment = { __typename?: 'State', id: string, name: string };
 
-export type TournamentFragment = { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: Maybe<string>, url: string, streamingUrl?: Maybe<string>, description: string, startsAt: string };
-
-export type TournamentVideoCommentFragment = { __typename?: 'TournamentVideoComment', id: string, message: string, createdAt: string, user: { __typename?: 'User', name: string, avatarUrl: string } };
-
 export type CreateArticleMutationVariables = Exact<{
   attributes: ArticleAttributes;
 }>;
@@ -2522,11 +2518,6 @@ export type CreateMoveVideoMutationVariables = Exact<{ [key: string]: never; }>;
 
 export type CreateMoveVideoMutation = { __typename?: 'Mutation', createMoveVideo?: Maybe<{ __typename?: 'CreateMoveVideoPayload', moveVideo: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string }, videoUpload: { __typename?: 'VideoUpload', url: string, fields: string } }> };
 
-export type CreateUserMutationVariables = Exact<{ [key: string]: never; }>;
-
-
-export type CreateUserMutation = { __typename?: 'Mutation', createUser?: Maybe<{ __typename?: 'CreateUserPayload', currentUser: { __typename?: 'CurrentUser', id: string, name: string, role: UserRole, avatarUrl: string } }> };
-
 export type CreateThrowActionMutationVariables = Exact<{
   moveId: Scalars['ID'];
   attributes: ThrowActionAttributes;
@@ -2540,7 +2531,12 @@ export type CreateTournamentMutationVariables = Exact<{
 }>;
 
 
-export type CreateTournamentMutation = { __typename?: 'Mutation', createTournament?: Maybe<{ __typename?: 'CreateTournamentPayload', tournament: { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: Maybe<string>, url: string, streamingUrl?: Maybe<string>, description: string, startsAt: string } }> };
+export type CreateTournamentMutation = { __typename?: 'Mutation', createTournament?: Maybe<{ __typename?: 'CreateTournamentPayload', tournament: { __typename?: 'Tournament', id: string } }> };
+
+export type CreateUserMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type CreateUserMutation = { __typename?: 'Mutation', createUser?: Maybe<{ __typename?: 'CreateUserPayload', currentUser: { __typename?: 'CurrentUser', id: string, name: string, role: UserRole, avatarUrl: string } }> };
 
 export type CreateTournamentVideoCommentMutationVariables = Exact<{
   tournamentVideoId: Scalars['ID'];
@@ -2548,7 +2544,7 @@ export type CreateTournamentVideoCommentMutationVariables = Exact<{
 }>;
 
 
-export type CreateTournamentVideoCommentMutation = { __typename?: 'Mutation', createTournamentVideoComment?: Maybe<{ __typename?: 'CreateTournamentVideoCommentPayload', tournamentVideoComment: { __typename?: 'TournamentVideoComment', id: string, message: string, createdAt: string, user: { __typename?: 'User', name: string, avatarUrl: string } } }> };
+export type CreateTournamentVideoCommentMutation = { __typename?: 'Mutation', createTournamentVideoComment?: Maybe<{ __typename?: 'CreateTournamentVideoCommentPayload', tournamentVideoComment: { __typename?: 'TournamentVideoComment', id: string } }> };
 
 export type DeleteActionMutationVariables = Exact<{
   actionId: Scalars['ID'];
@@ -2744,22 +2740,6 @@ export type UpdateThrowActionMutationVariables = Exact<{
 
 
 export type UpdateThrowActionMutation = { __typename?: 'Mutation', updateThrowAction?: Maybe<{ __typename?: 'UpdateThrowActionPayload', action: { __typename?: 'ThrowAction', id: string } }> };
-
-export type UpdateTournamentMutationVariables = Exact<{
-  tournamentId: Scalars['ID'];
-  attributes: TournamentAttributes;
-}>;
-
-
-export type UpdateTournamentMutation = { __typename?: 'Mutation', updateTournament?: Maybe<{ __typename?: 'UpdateTournamentPayload', tournament: { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: Maybe<string>, url: string, streamingUrl?: Maybe<string>, description: string, startsAt: string } }> };
-
-export type UpdateTournamentVideoMutationVariables = Exact<{
-  tournamentVideoId: Scalars['ID'];
-  attributes: TournamentVideoAttributes;
-}>;
-
-
-export type UpdateTournamentVideoMutation = { __typename?: 'Mutation', updateTournamentVideo?: Maybe<{ __typename?: 'UpdateTournamentVideoPayload', tournamentVideo: { __typename?: 'TournamentVideo', id: string } }> };
 
 export type ArticlePathsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -3761,28 +3741,6 @@ export const PagingFragmentDoc = gql`
   totalCount
   totalPages
   hasNext
-}
-    `;
-export const TournamentFragmentDoc = gql`
-    fragment tournament on Tournament {
-  id
-  name
-  mainImageUrl
-  url
-  streamingUrl
-  description
-  startsAt
-}
-    `;
-export const TournamentVideoCommentFragmentDoc = gql`
-    fragment tournamentVideoComment on TournamentVideoComment {
-  id
-  message
-  createdAt
-  user {
-    name
-    avatarUrl
-  }
 }
     `;
 export const CharacterSelectOptionFragmentDoc = gql`
@@ -4910,40 +4868,6 @@ export function useCreateMoveVideoMutation(baseOptions?: Apollo.MutationHookOpti
 export type CreateMoveVideoMutationHookResult = ReturnType<typeof useCreateMoveVideoMutation>;
 export type CreateMoveVideoMutationResult = Apollo.MutationResult<CreateMoveVideoMutation>;
 export type CreateMoveVideoMutationOptions = Apollo.BaseMutationOptions<CreateMoveVideoMutation, CreateMoveVideoMutationVariables>;
-export const CreateUserDocument = gql`
-    mutation CreateUser {
-  createUser(input: {}) {
-    currentUser {
-      ...currentUser
-    }
-  }
-}
-    ${CurrentUserFragmentDoc}`;
-export type CreateUserMutationFn = Apollo.MutationFunction<CreateUserMutation, CreateUserMutationVariables>;
-
-/**
- * __useCreateUserMutation__
- *
- * To run a mutation, you first call `useCreateUserMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useCreateUserMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [createUserMutation, { data, loading, error }] = useCreateUserMutation({
- *   variables: {
- *   },
- * });
- */
-export function useCreateUserMutation(baseOptions?: Apollo.MutationHookOptions<CreateUserMutation, CreateUserMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<CreateUserMutation, CreateUserMutationVariables>(CreateUserDocument, options);
-      }
-export type CreateUserMutationHookResult = ReturnType<typeof useCreateUserMutation>;
-export type CreateUserMutationResult = Apollo.MutationResult<CreateUserMutation>;
-export type CreateUserMutationOptions = Apollo.BaseMutationOptions<CreateUserMutation, CreateUserMutationVariables>;
 export const CreateThrowActionDocument = gql`
     mutation CreateThrowAction($moveId: ID!, $attributes: ThrowActionAttributes!) {
   createThrowAction(input: {moveId: $moveId, attributes: $attributes}) {
@@ -4984,11 +4908,11 @@ export const CreateTournamentDocument = gql`
     mutation CreateTournament($attributes: TournamentAttributes!) {
   createTournament(input: {attributes: $attributes}) {
     tournament {
-      ...tournament
+      id
     }
   }
 }
-    ${TournamentFragmentDoc}`;
+    `;
 export type CreateTournamentMutationFn = Apollo.MutationFunction<CreateTournamentMutation, CreateTournamentMutationVariables>;
 
 /**
@@ -5015,17 +4939,51 @@ export function useCreateTournamentMutation(baseOptions?: Apollo.MutationHookOpt
 export type CreateTournamentMutationHookResult = ReturnType<typeof useCreateTournamentMutation>;
 export type CreateTournamentMutationResult = Apollo.MutationResult<CreateTournamentMutation>;
 export type CreateTournamentMutationOptions = Apollo.BaseMutationOptions<CreateTournamentMutation, CreateTournamentMutationVariables>;
+export const CreateUserDocument = gql`
+    mutation CreateUser {
+  createUser(input: {}) {
+    currentUser {
+      ...currentUser
+    }
+  }
+}
+    ${CurrentUserFragmentDoc}`;
+export type CreateUserMutationFn = Apollo.MutationFunction<CreateUserMutation, CreateUserMutationVariables>;
+
+/**
+ * __useCreateUserMutation__
+ *
+ * To run a mutation, you first call `useCreateUserMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateUserMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createUserMutation, { data, loading, error }] = useCreateUserMutation({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useCreateUserMutation(baseOptions?: Apollo.MutationHookOptions<CreateUserMutation, CreateUserMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateUserMutation, CreateUserMutationVariables>(CreateUserDocument, options);
+      }
+export type CreateUserMutationHookResult = ReturnType<typeof useCreateUserMutation>;
+export type CreateUserMutationResult = Apollo.MutationResult<CreateUserMutation>;
+export type CreateUserMutationOptions = Apollo.BaseMutationOptions<CreateUserMutation, CreateUserMutationVariables>;
 export const CreateTournamentVideoCommentDocument = gql`
     mutation CreateTournamentVideoComment($tournamentVideoId: ID!, $attributes: CommentAttributes!) {
   createTournamentVideoComment(
     input: {tournamentVideoId: $tournamentVideoId, attributes: $attributes}
   ) {
     tournamentVideoComment {
-      ...tournamentVideoComment
+      id
     }
   }
 }
-    ${TournamentVideoCommentFragmentDoc}`;
+    `;
 export type CreateTournamentVideoCommentMutationFn = Apollo.MutationFunction<CreateTournamentVideoCommentMutation, CreateTournamentVideoCommentMutationVariables>;
 
 /**
@@ -5990,80 +5948,6 @@ export function useUpdateThrowActionMutation(baseOptions?: Apollo.MutationHookOp
 export type UpdateThrowActionMutationHookResult = ReturnType<typeof useUpdateThrowActionMutation>;
 export type UpdateThrowActionMutationResult = Apollo.MutationResult<UpdateThrowActionMutation>;
 export type UpdateThrowActionMutationOptions = Apollo.BaseMutationOptions<UpdateThrowActionMutation, UpdateThrowActionMutationVariables>;
-export const UpdateTournamentDocument = gql`
-    mutation UpdateTournament($tournamentId: ID!, $attributes: TournamentAttributes!) {
-  updateTournament(input: {tournamentId: $tournamentId, attributes: $attributes}) {
-    tournament {
-      ...tournament
-    }
-  }
-}
-    ${TournamentFragmentDoc}`;
-export type UpdateTournamentMutationFn = Apollo.MutationFunction<UpdateTournamentMutation, UpdateTournamentMutationVariables>;
-
-/**
- * __useUpdateTournamentMutation__
- *
- * To run a mutation, you first call `useUpdateTournamentMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useUpdateTournamentMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [updateTournamentMutation, { data, loading, error }] = useUpdateTournamentMutation({
- *   variables: {
- *      tournamentId: // value for 'tournamentId'
- *      attributes: // value for 'attributes'
- *   },
- * });
- */
-export function useUpdateTournamentMutation(baseOptions?: Apollo.MutationHookOptions<UpdateTournamentMutation, UpdateTournamentMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<UpdateTournamentMutation, UpdateTournamentMutationVariables>(UpdateTournamentDocument, options);
-      }
-export type UpdateTournamentMutationHookResult = ReturnType<typeof useUpdateTournamentMutation>;
-export type UpdateTournamentMutationResult = Apollo.MutationResult<UpdateTournamentMutation>;
-export type UpdateTournamentMutationOptions = Apollo.BaseMutationOptions<UpdateTournamentMutation, UpdateTournamentMutationVariables>;
-export const UpdateTournamentVideoDocument = gql`
-    mutation UpdateTournamentVideo($tournamentVideoId: ID!, $attributes: TournamentVideoAttributes!) {
-  updateTournamentVideo(
-    input: {tournamentVideoId: $tournamentVideoId, attributes: $attributes}
-  ) {
-    tournamentVideo {
-      id
-    }
-  }
-}
-    `;
-export type UpdateTournamentVideoMutationFn = Apollo.MutationFunction<UpdateTournamentVideoMutation, UpdateTournamentVideoMutationVariables>;
-
-/**
- * __useUpdateTournamentVideoMutation__
- *
- * To run a mutation, you first call `useUpdateTournamentVideoMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useUpdateTournamentVideoMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [updateTournamentVideoMutation, { data, loading, error }] = useUpdateTournamentVideoMutation({
- *   variables: {
- *      tournamentVideoId: // value for 'tournamentVideoId'
- *      attributes: // value for 'attributes'
- *   },
- * });
- */
-export function useUpdateTournamentVideoMutation(baseOptions?: Apollo.MutationHookOptions<UpdateTournamentVideoMutation, UpdateTournamentVideoMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<UpdateTournamentVideoMutation, UpdateTournamentVideoMutationVariables>(UpdateTournamentVideoDocument, options);
-      }
-export type UpdateTournamentVideoMutationHookResult = ReturnType<typeof useUpdateTournamentVideoMutation>;
-export type UpdateTournamentVideoMutationResult = Apollo.MutationResult<UpdateTournamentVideoMutation>;
-export type UpdateTournamentVideoMutationOptions = Apollo.BaseMutationOptions<UpdateTournamentVideoMutation, UpdateTournamentVideoMutationVariables>;
 export const ArticlePathsDocument = gql`
     query ArticlePaths {
   allArticles {
