@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
