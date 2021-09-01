@@ -1,9 +1,13 @@
 import React, { useState } from 'react';
-import { GetServerSideProps } from 'next';
+import { GetStaticPaths, GetStaticProps } from 'next';
 
 import {
+  BattleListItemFragment,
   CharacterBattlesPageDocument,
   CharacterBattlesPageQuery,
+  CharacterPathsDocument,
+  CharacterPathsQuery,
+  PagingFragment,
   useCharacterBattlesPageBattlesLazyQuery,
 } from '@/lib/graphql/types';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
@@ -12,13 +16,11 @@ import { Content } from '@/components/layouts/Content';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 import { Box, Button, createStyles, List, makeStyles, Paper, Theme } from '@material-ui/core';
 import { BattleListItem, CharacterPageTabs } from '@/components';
-import { path } from '@/lib';
-import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from '@/states/loading';
 import { toast } from 'react-toastify';
-import { useEffect } from 'react';
 import { BattleSelector, PlayerBattleCountChip } from '@/components/BattleSelector';
+import { ParsedUrlQuery } from 'querystring';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -28,28 +30,28 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-interface Props {
-  data: CharacterBattlesPageQuery;
-  params: {
-    characterSlug: string;
-    playerSlug: string | null;
-  };
+interface State {
+  battles: BattleListItemFragment[];
+  paging: PagingFragment;
+  playerSlug?: string;
 }
 
-const Page: React.FC<Props> = ({
-  data: {
-    character,
-    battles: { records: initBattles, paging: initPaging },
-    battleCounts,
-  },
-  params: { characterSlug, playerSlug },
+const Page: React.FC<CharacterBattlesPageQuery> = ({
+  character,
+  battles: { records: initBattles, paging: initPaging },
+  battleCounts,
 }) => {
-  const [battles, setBattles] = useState(initBattles);
-  const [paging, setPaging] = useState(initPaging);
+  const [state, setState] = useState<State>({
+    battles: initBattles,
+    paging: initPaging,
+  });
   const [fetchBattles] = useCharacterBattlesPageBattlesLazyQuery({
     onCompleted: data => {
-      setBattles(prev => [...prev, ...data.battles.records]);
-      setPaging(data.battles.paging);
+      setState(prev => ({
+        ...prev,
+        battles: [...prev.battles, ...data.battles.records],
+        paging: data.battles.paging,
+      }));
       setLoading(false);
     },
     onError: e => {
@@ -59,19 +61,20 @@ const Page: React.FC<Props> = ({
   });
   const setLoading = useSetRecoilState(loadingState);
 
-  const router = useRouter();
+  const { battles, paging, playerSlug } = state;
   const classes = useStyles();
-
-  useEffect(() => {
-    setBattles(initBattles);
-    setPaging(initPaging);
-  }, [characterSlug, playerSlug]);
 
   const fetchMore = () => {
     if (!paging.hasNext) return;
 
     setLoading(true);
-    fetchBattles({ variables: { characterSlug, playerSlug, page: paging.currentPage + 1 } });
+    fetchBattles({ variables: { playerSlug, characterSlug: character.slug, page: paging.currentPage + 1 } });
+  };
+
+  const fetchFirst = (characterSlug: string | undefined) => {
+    setLoading(true);
+    setState(prev => ({ ...prev, battles: [], characterSlug }));
+    fetchBattles({ variables: { playerSlug, characterSlug: character.slug, page: 1 } });
   };
 
   return (
@@ -94,13 +97,7 @@ const Page: React.FC<Props> = ({
               battleCount={bc}
               active={playerSlug === bc.player.slug}
               onClick={() => {
-                if (playerSlug === bc.player.slug) {
-                  router.push(path({ to: 'characterBattles', characterSlug: character.slug }));
-                } else {
-                  router.push(
-                    path({ to: 'characterBattles', characterSlug: character.slug, playerSlug: bc.player.slug }),
-                  );
-                }
+                fetchFirst(playerSlug === bc.player.slug ? undefined : bc.player.slug);
               }}
             />
           ))}
@@ -124,16 +121,23 @@ const Page: React.FC<Props> = ({
   );
 };
 
-export const getServerSideProps: GetServerSideProps<Props> = async ({ query }) => {
-  const characterSlug = query.character as string;
-  const playerSlugs = query.player as string[] | undefined;
-  const playerSlug = playerSlugs ? playerSlugs[0] : null;
-  const data: CharacterBattlesPageQuery = await fetchGraphql(CharacterBattlesPageDocument, {
-    characterSlug,
-    playerSlug,
-  });
+interface Params extends ParsedUrlQuery {
+  character: string;
+}
 
-  return { props: { data, params: { characterSlug, playerSlug } } };
+export const getStaticProps: GetStaticProps<CharacterBattlesPageQuery, Params> = async ({ params }) => {
+  const characterSlug = params?.character;
+  const data: CharacterBattlesPageQuery = await fetchGraphql(CharacterBattlesPageDocument, { characterSlug });
+
+  return { props: data, revalidate: 300 };
+};
+
+export const getStaticPaths: GetStaticPaths<Params> = async () => {
+  const data: CharacterPathsQuery = await fetchGraphql(CharacterPathsDocument);
+
+  const paths = data.characters.records.map(c => ({ params: { character: c.slug } }));
+
+  return { paths, fallback: false };
 };
 
 export default Page;

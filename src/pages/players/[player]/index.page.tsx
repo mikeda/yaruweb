@@ -68,11 +68,11 @@ interface Params extends ParsedUrlQuery {
   player: string;
 }
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const playerSlug = params?.player as string;
+export const getStaticProps: GetStaticProps<PlayerPageQuery, Params> = async ({ params }) => {
+  const playerSlug = params?.player;
   const data: PlayerPageQuery = await fetchGraphql(PlayerPageDocument, { playerSlug });
 
-  return { props: data };
+  return { props: data, revalidate: 300 };
 };
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
