@@ -18,19 +18,9 @@ import { useSetRecoilState } from 'recoil';
 import { toast } from 'react-toastify';
 import { ParsedUrlQuery } from 'querystring';
 
-interface Props {
-  data: PlayerStandingsPageQuery;
-  params: {
-    playerSlug: string;
-  };
-}
-
-const Page: React.FC<Props> = ({
-  data: {
-    player,
-    standings: { records: initStandings, paging: initPaging },
-  },
-  params: { playerSlug },
+const Page: React.FC<PlayerStandingsPageQuery> = ({
+  player,
+  standings: { records: initStandings, paging: initPaging },
 }) => {
   const [standings, setStandings] = useState(initStandings);
   const [paging, setPaging] = useState(initPaging);
@@ -47,16 +37,11 @@ const Page: React.FC<Props> = ({
   });
   const setLoading = useSetRecoilState(loadingState);
 
-  useEffect(() => {
-    setStandings(initStandings);
-    setPaging(initPaging);
-  }, [playerSlug]);
-
   const fetchMore = () => {
     if (!paging.hasNext) return;
 
     setLoading(true);
-    fetchBattles({ variables: { playerSlug, page: paging.currentPage + 1 } });
+    fetchBattles({ variables: { playerSlug: player.slug, page: paging.currentPage + 1 } });
   };
 
   return (
