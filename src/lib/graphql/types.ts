@@ -2835,6 +2835,13 @@ export type PlayerSelectOptionsQueryVariables = Exact<{ [key: string]: never; }>
 
 export type PlayerSelectOptionsQuery = { __typename?: 'Query', players: { __typename?: 'PlayerCollection', records: Array<{ __typename?: 'Player', id: string, slug: string, name: string, tonamelId?: Maybe<string>, smashggId?: Maybe<string> }> } };
 
+export type PlayerSlugsQueryVariables = Exact<{
+  per?: Maybe<Scalars['Int']>;
+}>;
+
+
+export type PlayerSlugsQuery = { __typename?: 'Query', players: { __typename?: 'PlayerCollection', records: Array<{ __typename?: 'Player', slug: string }> } };
+
 export type StatesQueryVariables = Exact<{
   characterSlug: Scalars['String'];
 }>;
@@ -3459,7 +3466,6 @@ export type OrganizersPageQuery = { __typename?: 'Query', organizers: { __typena
 
 export type PlayerBattlesPageQueryVariables = Exact<{
   playerSlug: Scalars['String'];
-  characterSlug?: Maybe<Scalars['String']>;
   page?: Maybe<Scalars['Int']>;
 }>;
 
@@ -6507,6 +6513,43 @@ export function usePlayerSelectOptionsLazyQuery(baseOptions?: Apollo.LazyQueryHo
 export type PlayerSelectOptionsQueryHookResult = ReturnType<typeof usePlayerSelectOptionsQuery>;
 export type PlayerSelectOptionsLazyQueryHookResult = ReturnType<typeof usePlayerSelectOptionsLazyQuery>;
 export type PlayerSelectOptionsQueryResult = Apollo.QueryResult<PlayerSelectOptionsQuery, PlayerSelectOptionsQueryVariables>;
+export const PlayerSlugsDocument = gql`
+    query PlayerSlugs($per: Int) {
+  players(per: $per) {
+    records {
+      slug
+    }
+  }
+}
+    `;
+
+/**
+ * __usePlayerSlugsQuery__
+ *
+ * To run a query within a React component, call `usePlayerSlugsQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePlayerSlugsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePlayerSlugsQuery({
+ *   variables: {
+ *      per: // value for 'per'
+ *   },
+ * });
+ */
+export function usePlayerSlugsQuery(baseOptions?: Apollo.QueryHookOptions<PlayerSlugsQuery, PlayerSlugsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PlayerSlugsQuery, PlayerSlugsQueryVariables>(PlayerSlugsDocument, options);
+      }
+export function usePlayerSlugsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PlayerSlugsQuery, PlayerSlugsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PlayerSlugsQuery, PlayerSlugsQueryVariables>(PlayerSlugsDocument, options);
+        }
+export type PlayerSlugsQueryHookResult = ReturnType<typeof usePlayerSlugsQuery>;
+export type PlayerSlugsLazyQueryHookResult = ReturnType<typeof usePlayerSlugsLazyQuery>;
+export type PlayerSlugsQueryResult = Apollo.QueryResult<PlayerSlugsQuery, PlayerSlugsQueryVariables>;
 export const StatesDocument = gql`
     query States($characterSlug: String!) {
   states(characterSlug: $characterSlug) {
@@ -9626,7 +9669,7 @@ export type OrganizersPageQueryHookResult = ReturnType<typeof useOrganizersPageQ
 export type OrganizersPageLazyQueryHookResult = ReturnType<typeof useOrganizersPageLazyQuery>;
 export type OrganizersPageQueryResult = Apollo.QueryResult<OrganizersPageQuery, OrganizersPageQueryVariables>;
 export const PlayerBattlesPageDocument = gql`
-    query PlayerBattlesPage($playerSlug: String!, $characterSlug: String, $page: Int) {
+    query PlayerBattlesPage($playerSlug: String!, $page: Int) {
   player(playerSlug: $playerSlug) {
     ...PlayerBreadcrumbs
     ...PlayerPageProfile
@@ -9636,12 +9679,7 @@ export const PlayerBattlesPageDocument = gql`
       ...CharacterBattleCountChip
     }
   }
-  battles(
-    playerSlug: $playerSlug
-    characterSlug: $characterSlug
-    page: $page
-    per: 10
-  ) {
+  battles(playerSlug: $playerSlug, page: $page, per: 10) {
     records {
       ...BattleListItem
     }
@@ -9669,7 +9707,6 @@ ${PagingFragmentDoc}`;
  * const { data, loading, error } = usePlayerBattlesPageQuery({
  *   variables: {
  *      playerSlug: // value for 'playerSlug'
- *      characterSlug: // value for 'characterSlug'
  *      page: // value for 'page'
  *   },
  * });
