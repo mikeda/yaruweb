@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { GetServerSideProps } from 'next';
+import { GetStaticProps } from 'next';
 
 import { BattlesPageDocument, BattlesPageQuery, useBattlesPageBattlesLazyQuery } from '@/lib/graphql/types';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
@@ -97,10 +97,10 @@ const Page: React.FC<BattlesPageQuery> = ({
   );
 };
 
-export const getServerSideProps: GetServerSideProps<BattlesPageQuery> = async () => {
+export const getStaticProps: GetStaticProps<BattlesPageQuery> = async () => {
   const data: BattlesPageQuery = await fetchGraphql(BattlesPageDocument);
 
-  return { props: data };
+  return { props: data, revalidate: 300 };
 };
 
 export default Page;
