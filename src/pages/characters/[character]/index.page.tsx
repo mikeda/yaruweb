@@ -15,6 +15,7 @@ import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 import { Box, makeStyles, Paper, Typography } from '@material-ui/core';
 import theme from '@/theme';
 import { CharacterPageTabs } from '@/components';
+import { ParsedUrlQuery } from 'querystring';
 
 const useStyles = makeStyles({
   paper: {
@@ -63,14 +64,18 @@ const Page: React.FC<PageCharacterQuery> = ({ character }) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
-  const characterSlug = params?.character as string;
+interface Params extends ParsedUrlQuery {
+  character: string;
+}
+
+export const getStaticProps: GetStaticProps<PageCharacterQuery, Params> = async ({ params }) => {
+  const characterSlug = params?.character;
   const data: PageCharacterQuery = await fetchGraphql(PageCharacterDocument, { characterSlug });
 
   return { props: data };
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths<Params> = async () => {
   const data: CharacterPathsQuery = await fetchGraphql(CharacterPathsDocument);
 
   const paths = data.characters.records.map(c => ({ params: { character: c.slug } }));
