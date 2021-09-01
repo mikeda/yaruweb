@@ -4,12 +4,13 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Head, Content, Breadcrumbs, PlayerPageTabs } from '@/components';
 import { Box, makeStyles, Paper, Typography } from '@material-ui/core';
-import { PlayerPageDocument, PlayerPageQuery } from '@/lib/graphql/types';
+import { PlayerPageDocument, PlayerPageQuery, PlayerSlugsDocument, PlayerSlugsQuery } from '@/lib/graphql/types';
 import { path } from '@/lib';
 import { Profile } from './components/Profile';
 import theme from '@/theme';
 import { BattleSelector, CharacterBattleCountChip } from '@/components/BattleSelector';
 import { useRouter } from 'next/router';
+import { ParsedUrlQuery } from 'querystring';
 
 const useStyles = makeStyles({
   description: {
@@ -63,6 +64,10 @@ const Page: React.FC<PlayerPageQuery> = ({ player, battleCounts }) => {
   );
 };
 
+interface Params extends ParsedUrlQuery {
+  player: string;
+}
+
 export const getStaticProps: GetStaticProps = async ({ params }) => {
   const playerSlug = params?.player as string;
   const data: PlayerPageQuery = await fetchGraphql(PlayerPageDocument, { playerSlug });
@@ -70,8 +75,13 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   return { props: data };
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  return { paths: [], fallback: 'blocking' };
+export const getStaticPaths: GetStaticPaths<Params> = async () => {
+  const data: PlayerSlugsQuery = await fetchGraphql(PlayerSlugsDocument, { per: 50 });
+
+  return {
+    paths: data.players.records.map(({ slug }) => ({ params: { player: slug } })),
+    fallback: 'blocking',
+  };
 };
 
 export default Page;

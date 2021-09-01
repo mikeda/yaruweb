@@ -20,10 +20,6 @@ import { loadingState } from '@/states/loading';
 import { CharacterBattleCountChip, BattleSelector } from '@/components/BattleSelector';
 import { ParsedUrlQuery } from 'querystring';
 
-interface Params extends ParsedUrlQuery {
-  player: string;
-}
-
 interface State {
   battles: BattleListItemFragment[];
   paging: PagingFragment;
@@ -116,6 +112,10 @@ const Page: React.FC<PlayerBattlesPageQuery> = ({
     </Content>
   );
 };
+
+interface Params extends ParsedUrlQuery {
+  player: string;
+}
 
 export const getStaticProps: GetStaticProps<PlayerBattlesPageQuery, Params> = async ({ params }) => {
   const playerSlug = params?.player;

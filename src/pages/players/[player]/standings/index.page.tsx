@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
-import { GetServerSideProps } from 'next';
+import React, { useState } from 'react';
+import { GetStaticPaths, GetStaticProps } from 'next';
 
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Head, Content, Breadcrumbs, PlayerPageTabs } from '@/components';
 import { Box, Button, Grid, Typography } from '@material-ui/core';
 import {
+  PlayerSlugsDocument,
+  PlayerSlugsQuery,
   PlayerStandingsPageDocument,
   PlayerStandingsPageQuery,
   usePlayerStandingsPageStandingsLazyQuery,
@@ -14,20 +16,11 @@ import { PlayerStandingCard } from '../components/PlayerStandingCard';
 import { loadingState } from '@/states/loading';
 import { useSetRecoilState } from 'recoil';
 import { toast } from 'react-toastify';
+import { ParsedUrlQuery } from 'querystring';
 
-interface Props {
-  data: PlayerStandingsPageQuery;
-  params: {
-    playerSlug: string;
-  };
-}
-
-const Page: React.FC<Props> = ({
-  data: {
-    player,
-    standings: { records: initStandings, paging: initPaging },
-  },
-  params: { playerSlug },
+const Page: React.FC<PlayerStandingsPageQuery> = ({
+  player,
+  standings: { records: initStandings, paging: initPaging },
 }) => {
   const [standings, setStandings] = useState(initStandings);
   const [paging, setPaging] = useState(initPaging);
@@ -44,16 +37,11 @@ const Page: React.FC<Props> = ({
   });
   const setLoading = useSetRecoilState(loadingState);
 
-  useEffect(() => {
-    setStandings(initStandings);
-    setPaging(initPaging);
-  }, [playerSlug]);
-
   const fetchMore = () => {
     if (!paging.hasNext) return;
 
     setLoading(true);
-    fetchBattles({ variables: { playerSlug, page: paging.currentPage + 1 } });
+    fetchBattles({ variables: { playerSlug: player.slug, page: paging.currentPage + 1 } });
   };
 
   return (
@@ -89,13 +77,24 @@ const Page: React.FC<Props> = ({
   );
 };
 
-export const getServerSideProps: GetServerSideProps<Props> = async ({ query }) => {
-  const playerSlug = query.player as string;
-  const data: PlayerStandingsPageQuery = await fetchGraphql(PlayerStandingsPageDocument, {
-    playerSlug,
-  });
+interface Params extends ParsedUrlQuery {
+  player: string;
+}
 
-  return { props: { data, params: { playerSlug } } };
+export const getStaticProps: GetStaticProps<PlayerStandingsPageQuery, Params> = async ({ params }) => {
+  const playerSlug = params?.player;
+  const data: PlayerStandingsPageQuery = await fetchGraphql(PlayerStandingsPageDocument, { playerSlug });
+
+  return { props: data, revalidate: 300 };
+};
+
+export const getStaticPaths: GetStaticPaths<Params> = async () => {
+  const data: PlayerSlugsQuery = await fetchGraphql(PlayerSlugsDocument, { per: 50 });
+
+  return {
+    paths: data.players.records.map(({ slug }) => ({ params: { player: slug } })),
+    fallback: 'blocking',
+  };
 };
 
 export default Page;
