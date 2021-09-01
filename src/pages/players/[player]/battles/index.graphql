@@ -1,4 +1,4 @@
-query PlayerBattlesPage($playerSlug: String!, $characterSlug: String, $page: Int) {
+query PlayerBattlesPage($playerSlug: String!, $page: Int) {
   player(playerSlug: $playerSlug) {
     ...PlayerBreadcrumbs
     ...PlayerPageProfile
@@ -9,7 +9,7 @@ query PlayerBattlesPage($playerSlug: String!, $characterSlug: String, $page: Int
   }
 
 
-  battles(playerSlug: $playerSlug, characterSlug: $characterSlug, page: $page, per: 10) {
+  battles(playerSlug: $playerSlug, page: $page, per: 10) {
     records { ...BattleListItem }
     paging { ...paging }
   }
