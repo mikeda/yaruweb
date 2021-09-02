@@ -1,9 +1,8 @@
-import { ArticleCategory, Order } from '../graphql/types';
 import { generatePath } from './generatePath';
 
 type Options =
   | { to: 'top' }
-  | { to: 'articles'; params?: { page?: number; order?: Order; category?: ArticleCategory } }
+  | { to: 'articles' }
   | { to: 'article'; articleId: string }
   | { to: 'battles' }
   | { to: 'characters' }
@@ -33,7 +32,7 @@ export const path = (options: Options): string => {
     case 'top':
       return '/';
     case 'articles':
-      return generatePath('/articles', options.params);
+      return '/articles';
     case 'article':
       return `/articles/${options.articleId}`;
     case 'battles':

@@ -1,36 +1,51 @@
-import React from 'react';
-import { GetServerSideProps } from 'next';
-import { Grid } from '@material-ui/core';
+import React, { useState } from 'react';
+import { GetStaticProps } from 'next';
+import { Box, Button, Grid } from '@material-ui/core';
 
-import { ArticlesPageDocument, ArticlesPageQuery, Order } from '@/lib/graphql/types';
-import { Content, Breadcrumbs, Head, Paging, ArticleCard, TabLinkGroup, TabLink } from '@/components';
-import { path } from '@/lib';
+import {
+  ArticlesPageArticlesDocument,
+  ArticlesPageArticlesQuery,
+  useArticlesPageArticlesLazyQuery,
+} from '@/lib/graphql/types';
+import { Content, Breadcrumbs, Head, ArticleCard } from '@/components';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
+import { useSetRecoilState } from 'recoil';
+import { loadingState } from '@/states/loading';
+import { toast } from 'react-toastify';
 
-interface Props {
-  data: ArticlesPageQuery;
-  order: Order;
-}
+const Page: React.FC<ArticlesPageArticlesQuery> = ({ articles: { records: initArticles, paging: initPaging } }) => {
+  const [state, setState] = useState({
+    articles: initArticles,
+    paging: initPaging,
+  });
+  const [fetch] = useArticlesPageArticlesLazyQuery({
+    onCompleted: data => {
+      setState(prev => ({
+        articles: [...prev.articles, ...data.articles.records],
+        paging: data.articles.paging,
+      }));
+      setLoading(false);
+    },
+    onError: e => {
+      toast.error(e.message);
+      setLoading(false);
+    },
+    fetchPolicy: 'network-only',
+  });
+  const setLoading = useSetRecoilState(loadingState);
 
-const Page: React.FC<Props> = ({
-  data: {
-    articles: { records: articles, paging },
-  },
-  order,
-}) => {
-  const url = (page: number) => path({ to: 'articles', params: { page, order } });
+  const { articles, paging } = state;
+
+  const fetchMore = () => {
+    if (!paging.hasNext) return;
+
+    setLoading(true);
+    fetch({ variables: { page: paging.currentPage + 1 } });
+  };
 
   return (
     <Content activeTab="articles" title="記事一覧" breadcrumb={<Breadcrumbs to="articles" />}>
       <Head title="鉄拳7の記事一覧" />
-      <TabLinkGroup>
-        <TabLink text="新着" href={path({ to: 'articles' })} active={order === Order.New} />
-        <TabLink
-          text="人気"
-          href={path({ to: 'articles', params: { order: Order.Popular } })}
-          active={order === Order.Popular}
-        />
-      </TabLinkGroup>
 
       <Grid container spacing={2}>
         {articles.map(article => (
@@ -40,19 +55,21 @@ const Page: React.FC<Props> = ({
         ))}
       </Grid>
 
-      <Paging paging={paging} url={url} />
+      {paging.hasNext && (
+        <Box pt={2} pb={2} display="flex" justifyContent="center">
+          <Button variant="outlined" onClick={fetchMore}>
+            もっとみる
+          </Button>
+        </Box>
+      )}
     </Content>
   );
 };
 
-export const getServerSideProps: GetServerSideProps<Props> = async ({ query }) => {
-  const page = query?.page ? Number(query.page) : 1;
-  const order = query.order === 'popular' ? Order.Popular : Order.New;
-  const data: ArticlesPageQuery = await fetchGraphql(ArticlesPageDocument, { page, order });
+export const getStaticProps: GetStaticProps<ArticlesPageArticlesQuery> = async () => {
+  const data: ArticlesPageArticlesQuery = await fetchGraphql(ArticlesPageArticlesDocument, { page: 1 });
 
-  return {
-    props: { data, order },
-  };
+  return { props: data };
 };
 
 export default Page;
