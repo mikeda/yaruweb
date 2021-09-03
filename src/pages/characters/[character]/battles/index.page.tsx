@@ -58,6 +58,7 @@ const Page: React.FC<CharacterBattlesPageQuery> = ({
       toast.error(e.message);
       setLoading(false);
     },
+    fetchPolicy: 'network-only',
   });
   const setLoading = useSetRecoilState(loadingState);
 
