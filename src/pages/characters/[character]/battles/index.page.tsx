@@ -72,9 +72,9 @@ const Page: React.FC<CharacterBattlesPageQuery> = ({
     fetchBattles({ variables: { playerSlug, characterSlug: character.slug, page: paging.currentPage + 1 } });
   };
 
-  const fetchFirst = (characterSlug: string | undefined) => {
+  const fetchFirst = (playerSlug: string | undefined) => {
     setLoading(true);
-    setState(prev => ({ ...prev, battles: [], characterSlug }));
+    setState(prev => ({ ...prev, battles: [], playerSlug }));
     fetchBattles({ variables: { playerSlug, characterSlug: character.slug, page: 1 } });
   };
 
