@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 
 import { PageTournamentDocument, PageTournamentQuery } from '@/lib/graphql/types';
 import { Content } from '@/components/layouts/Content';
@@ -6,21 +7,25 @@ import { Head } from '@/components/layouts/Head';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
-import { NotFound, StandingCard } from '@/components';
+import { NotFound } from '@/components';
 import dayjs from '@/lib/dayjs';
-import { TournamentVideoCard } from '@/components/TournamentVideoCard';
 import {
+  Avatar,
   Box,
   Button,
   Card,
-  CardActions,
   CardContent,
   CardMedia,
-  Grid,
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
   makeStyles,
+  Paper,
   Typography,
 } from '@material-ui/core';
-import { NO_IMAGE_URL } from '@/lib/Assets';
+import { DEFAULT_AVATAR_URL, NO_IMAGE_URL, placeIconUrl } from '@/lib/Assets';
+import { path } from '@/lib';
 
 const useStyles = makeStyles({
   root: {
@@ -40,24 +45,30 @@ const PageContent: React.FC<PageTournamentQuery> = ({ tournament }) => {
       <Card>
         <CardMedia image={tournament.mainImageUrl || NO_IMAGE_URL} title={tournament.name} className={classes.media} />
         <CardContent>
+          <Typography variant="h3">開催日時</Typography>
           <Typography variant="body1" color="textSecondary" component="p">
             {dayjs(tournament.startsAt).format('YYYY/M/D H:mm')}
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            {tournament.description}
-          </Typography>
-        </CardContent>
 
-        <CardActions>
-          <Button href={tournament.url} target="_blank" size="small" color="primary">
-            大会情報
-          </Button>
-          {tournament.streamingUrl && (
-            <Button href={tournament.streamingUrl} target="_blank" size="small" color="primary">
-              配信
+          <Box mt={4}>
+            <Typography variant="h3">大会概要</Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+              {tournament.description}
+            </Typography>
+          </Box>
+
+          <Box mt={4}>
+            <Typography variant="h3">リンク</Typography>
+            <Button href={tournament.url} target="_blank" color="primary">
+              大会情報
             </Button>
-          )}
-        </CardActions>
+            {tournament.streamingUrl && (
+              <Button href={tournament.streamingUrl} target="_blank" color="primary">
+                配信
+              </Button>
+            )}
+          </Box>
+        </CardContent>
       </Card>
 
       <Box mt={4}>
@@ -68,35 +79,47 @@ const PageContent: React.FC<PageTournamentQuery> = ({ tournament }) => {
         {tournament.standings.length === 0 ? (
           <NotFound>結果が登録されていません。</NotFound>
         ) : (
-          <Grid container spacing={2}>
-            {Array.from(tournament.standings)
-              .sort((a, b) => a.place - b.place)
-              .map(standing => (
-                <Grid item key={tournament.id} xs={12}>
-                  <StandingCard standing={standing} />
-                </Grid>
-              ))}
-          </Grid>
+          <Paper>
+            <List>
+              {tournament.standings
+                .sort((a, b) => a.place - b.place)
+                .map(standing => (
+                  <ListItem key={standing.id}>
+                    <ListItemAvatar>
+                      <img src={placeIconUrl(standing.place)} width={38} height={44} />
+                    </ListItemAvatar>
+
+                    <ListItemAvatar>
+                      <Avatar src={standing.player.avatarUrl || DEFAULT_AVATAR_URL} />
+                    </ListItemAvatar>
+
+                    <ListItemText primary={standing.player.name} />
+                  </ListItem>
+                ))}
+            </List>
+          </Paper>
         )}
       </Box>
 
       <Box mt={4}>
         <Typography variant="h2" gutterBottom>
-          動画
+          大会動画
         </Typography>
 
         {tournament.videos.length === 0 ? (
           <NotFound>動画が登録されていません。</NotFound>
         ) : (
-          <>
-            <Grid container spacing={2}>
+          <Paper>
+            <List component="div">
               {tournament.videos.map(video => (
-                <Grid item key={video.id} xs={12} sm={6} md={4}>
-                  <TournamentVideoCard tournamentVideo={video} />
-                </Grid>
+                <Link key={video.id} href={path({ to: 'tournamentVideo', tournamentVideoId: video.id })} passHref>
+                  <ListItem button component="a">
+                    <ListItemText primary={video.title} secondary={`対戦動画 ${video.battlesCount}`} />
+                  </ListItem>
+                </Link>
               ))}
-            </Grid>
-          </>
+            </List>
+          </Paper>
         )}
       </Box>
     </>

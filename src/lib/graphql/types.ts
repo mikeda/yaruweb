@@ -2977,8 +2977,6 @@ export type TournamentFormQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type TournamentFormQuery = { __typename?: 'Query', organizers: { __typename?: 'OrganizerCollection', records: Array<{ __typename?: 'Organizer', id: string, slug: string, name: string }> }, leagues: Array<{ __typename?: 'League', id: string, name: string }> };
 
-export type TournamentVideoCardFragment = { __typename?: 'TournamentVideo', id: string, title: string, thumbnailUrl: string };
-
 export type CharacterBreadcrumbsFragment = { __typename?: 'Character', slug: string, name: string };
 
 export type ComboCategoryBreadcrumbsFragment = { __typename?: 'ComboCategory', id: string, name: string, character: { __typename?: 'Character', slug: string, name: string } };
@@ -3523,7 +3521,7 @@ export type PageTournamentQueryVariables = Exact<{
 }>;
 
 
-export type PageTournamentQuery = { __typename?: 'Query', tournament: { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: Maybe<string>, url: string, streamingUrl?: Maybe<string>, description: string, startsAt: string, standings: Array<{ __typename?: 'Standing', id: string, place: number, player: { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: Maybe<string> } }>, videos: Array<{ __typename?: 'TournamentVideo', id: string, title: string, thumbnailUrl: string }> } };
+export type PageTournamentQuery = { __typename?: 'Query', tournament: { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: Maybe<string>, url: string, streamingUrl?: Maybe<string>, description: string, startsAt: string, standings: Array<{ __typename?: 'Standing', id: string, place: number, player: { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: Maybe<string> } }>, videos: Array<{ __typename?: 'TournamentVideo', id: string, title: string, battlesCount: number }> } };
 
 export type TournamentsPageTournamentsQueryVariables = Exact<{
   page?: Maybe<Scalars['Int']>;
@@ -4164,13 +4162,6 @@ export const TournamentFormFragmentDoc = gql`
   streamingUrl
   startsAt
   description
-}
-    `;
-export const TournamentVideoCardFragmentDoc = gql`
-    fragment TournamentVideoCard on TournamentVideo {
-  id
-  title
-  thumbnailUrl
 }
     `;
 export const CharacterBreadcrumbsFragmentDoc = gql`
@@ -9976,12 +9967,13 @@ export const PageTournamentDocument = gql`
       ...StandingCard
     }
     videos {
-      ...TournamentVideoCard
+      id
+      title
+      battlesCount
     }
   }
 }
-    ${StandingCardFragmentDoc}
-${TournamentVideoCardFragmentDoc}`;
+    ${StandingCardFragmentDoc}`;
 
 /**
  * __usePageTournamentQuery__
