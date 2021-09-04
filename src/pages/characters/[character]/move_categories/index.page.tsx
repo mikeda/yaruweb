@@ -10,20 +10,21 @@ import {
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Head } from '@/components/layouts/Head';
 import { Content } from '@/components/layouts/Content';
-import { CharacterCard } from '@/components/CharacterCard';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 import { Box, Paper } from '@material-ui/core';
-import { CharacterPageTabs, MoveCategoryList } from '@/components';
+import { MoveCategoryList } from '@/components';
+import { Profile } from '../components/Profile';
+import { Tabs } from '../components/Tabs';
 
 const Page: React.FC<PageCharacterMoveCategoriesQuery> = ({ character }) => {
   return (
     <Content activeTab="characters" breadcrumb={<Breadcrumbs to="moveCategories" character={character} />}>
-      <Head title={character.longName} />
+      <Head title={`${character.longName}のコマンドリスト`} />
 
-      <CharacterCard character={character} />
+      <Profile character={character} />
 
       <Box mt={2}>
-        <CharacterPageTabs characterSlug={character.slug} activeTab="moves" />
+        <Tabs character={character} activeTab="moves" />
       </Box>
 
       <Paper>

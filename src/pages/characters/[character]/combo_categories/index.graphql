@@ -1,7 +1,7 @@
 query PageCharacterComboCategories($characterSlug: String!) {
   character(characterSlug: $characterSlug) {
     ...CharacterBreadcrumbs
-    ...CharacterCard
+    ...CharacterPageProfile
 
     comboCategories {
       ...ComboCategoryListItem

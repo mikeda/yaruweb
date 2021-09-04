@@ -10,12 +10,12 @@ import {
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Head } from '@/components/layouts/Head';
 import { Content } from '@/components/layouts/Content';
-import { CharacterCard } from '@/components/CharacterCard';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 import { Box, makeStyles, Paper, Typography } from '@material-ui/core';
 import theme from '@/theme';
-import { CharacterPageTabs } from '@/components';
 import { ParsedUrlQuery } from 'querystring';
+import { Profile } from './components/Profile';
+import { Tabs } from './components/Tabs';
 
 const useStyles = makeStyles({
   paper: {
@@ -34,17 +34,13 @@ const Page: React.FC<PageCharacterQuery> = ({ character }) => {
   const classes = useStyles();
 
   return (
-    <Content
-      activeTab="characters"
-      title={character.longName}
-      breadcrumb={<Breadcrumbs to="character" character={character} />}
-    >
+    <Content activeTab="characters" breadcrumb={<Breadcrumbs to="character" character={character} />}>
       <Head title={character.longName} />
 
-      <CharacterCard character={character} />
+      <Profile character={character} />
 
       <Box mt={2}>
-        <CharacterPageTabs characterSlug={character.slug} activeTab="profile" />
+        <Tabs character={character} activeTab="profile" />
       </Box>
 
       <Paper className={classes.paper}>

@@ -3027,7 +3027,7 @@ export type CharacterBattlesPageQueryVariables = Exact<{
 }>;
 
 
-export type CharacterBattlesPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', id: string, name: string, longName: string, slug: string }, battleCounts: { __typename?: 'BattleCountCollection', records: Array<{ __typename?: 'BattleCount', id: string, count: number, player: { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: Maybe<string> } }> }, battles: { __typename?: 'BattleCollection', records: Array<{ __typename?: 'Battle', id: string, round?: Maybe<BattleRound>, tournamentVideo: { __typename?: 'TournamentVideo', id: string, tournament: { __typename?: 'Tournament', id: string, name: string, startsAt: string } }, sides: Array<{ __typename?: 'BattleSide', rounds: number, player: { __typename?: 'Player', name: string }, character: { __typename?: 'Character', faceImageUrl: string } }> }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
+export type CharacterBattlesPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number }, battleCounts: { __typename?: 'BattleCountCollection', records: Array<{ __typename?: 'BattleCount', id: string, count: number, player: { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: Maybe<string> } }> }, battles: { __typename?: 'BattleCollection', records: Array<{ __typename?: 'Battle', id: string, round?: Maybe<BattleRound>, tournamentVideo: { __typename?: 'TournamentVideo', id: string, tournament: { __typename?: 'Tournament', id: string, name: string, startsAt: string } }, sides: Array<{ __typename?: 'BattleSide', rounds: number, player: { __typename?: 'Player', name: string }, character: { __typename?: 'Character', faceImageUrl: string } }> }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
 
 export type CharacterBattlesPageBattlesQueryVariables = Exact<{
   characterSlug: Scalars['String'];
@@ -3044,6 +3044,8 @@ export type PageCharacterComboCategoriesQueryVariables = Exact<{
 
 
 export type PageCharacterComboCategoriesQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, comboCategories: Array<{ __typename?: 'ComboCategory', id: string, name: string, combosCount: number }> } };
+
+export type CharacterPageProfileFragment = { __typename?: 'Character', slug: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number };
 
 export type PageCharacterQueryVariables = Exact<{
   characterSlug: Scalars['String'];
@@ -4237,6 +4239,16 @@ export const ArticlePageArticleFragmentDoc = gql`
     name
     avatarUrl
   }
+}
+    `;
+export const CharacterPageProfileFragmentDoc = gql`
+    fragment CharacterPageProfile on Character {
+  slug
+  longName
+  faceImageUrl
+  country
+  fightingStyle
+  battlesCount
 }
     `;
 export const BattleFormFragmentDoc = gql`
@@ -7106,9 +7118,7 @@ export const CharacterBattlesPageDocument = gql`
     query CharacterBattlesPage($characterSlug: String!, $playerSlug: String) {
   character(characterSlug: $characterSlug) {
     ...CharacterBreadcrumbs
-    id
-    name
-    longName
+    ...CharacterPageProfile
   }
   battleCounts(characterSlug: $characterSlug, per: 10) {
     records {
@@ -7125,6 +7135,7 @@ export const CharacterBattlesPageDocument = gql`
   }
 }
     ${CharacterBreadcrumbsFragmentDoc}
+${CharacterPageProfileFragmentDoc}
 ${PlayerBattleCountChipFragmentDoc}
 ${BattleListItemFragmentDoc}
 ${PagingFragmentDoc}`;
@@ -7209,14 +7220,14 @@ export const PageCharacterComboCategoriesDocument = gql`
     query PageCharacterComboCategories($characterSlug: String!) {
   character(characterSlug: $characterSlug) {
     ...CharacterBreadcrumbs
-    ...CharacterCard
+    ...CharacterPageProfile
     comboCategories {
       ...ComboCategoryListItem
     }
   }
 }
     ${CharacterBreadcrumbsFragmentDoc}
-${CharacterCardFragmentDoc}
+${CharacterPageProfileFragmentDoc}
 ${ComboCategoryListItemFragmentDoc}`;
 
 /**
@@ -7250,7 +7261,7 @@ export const PageCharacterDocument = gql`
     query PageCharacter($characterSlug: String!) {
   character(characterSlug: $characterSlug) {
     ...CharacterBreadcrumbs
-    ...CharacterCard
+    ...CharacterPageProfile
     story
     description
   }
@@ -7261,7 +7272,7 @@ export const PageCharacterDocument = gql`
   }
 }
     ${CharacterBreadcrumbsFragmentDoc}
-${CharacterCardFragmentDoc}
+${CharacterPageProfileFragmentDoc}
 ${PlayerBattleCountChipFragmentDoc}`;
 
 /**
@@ -7295,14 +7306,14 @@ export const PageCharacterMoveCategoriesDocument = gql`
     query PageCharacterMoveCategories($characterSlug: String!) {
   character(characterSlug: $characterSlug) {
     ...CharacterBreadcrumbs
-    ...CharacterCard
+    ...CharacterPageProfile
     moveCategories {
       ...MoveCategoryListItem
     }
   }
 }
     ${CharacterBreadcrumbsFragmentDoc}
-${CharacterCardFragmentDoc}
+${CharacterPageProfileFragmentDoc}
 ${MoveCategoryListItemFragmentDoc}`;
 
 /**

@@ -8,22 +8,20 @@ import {
   PageCharacterComboCategoriesQuery,
 } from '@/lib/graphql/types';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
-import { Head } from '@/components/layouts/Head';
-import { Content } from '@/components/layouts/Content';
-import { CharacterCard } from '@/components/CharacterCard';
-import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 import { Box, Paper } from '@material-ui/core';
-import { CharacterPageTabs, ComboCategoryList } from '@/components';
+import { Profile } from '../components/Profile';
+import { Tabs } from '../components/Tabs';
+import { Content, Head, Breadcrumbs, ComboCategoryList } from '@/components';
 
 const Page: React.FC<PageCharacterComboCategoriesQuery> = ({ character }) => {
   return (
     <Content activeTab="characters" breadcrumb={<Breadcrumbs to="comboCategories" character={character} />}>
-      <Head title={character.longName} />
+      <Head title={`${character.longName}のコンボ`} />
 
-      <CharacterCard character={character} />
+      <Profile character={character} />
 
       <Box mt={2}>
-        <CharacterPageTabs characterSlug={character.slug} activeTab="combos" />
+        <Tabs character={character} activeTab="combos" />
       </Box>
 
       <Paper>
