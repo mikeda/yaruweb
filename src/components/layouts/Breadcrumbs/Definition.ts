@@ -18,6 +18,7 @@ export type ChainParam =
   | { to: 'battles' }
   | { to: 'characters' }
   | { to: 'character'; character: CharactersParam }
+  | { to: 'characterBattles'; character: CharactersParam }
   | { to: 'comboCategories'; character: CharactersParam }
   | { to: 'comboCategory'; comboCategory: ComboCategoryParam }
   | { to: 'login' }
@@ -52,6 +53,12 @@ export const breadcrumbChain = (props: ChainParam): BreadcrumbChainItem => {
         name: props.character.name,
         url: path({ to: 'character', characterSlug: props.character.slug }),
         parent: breadcrumbChain({ to: 'characters' }),
+      };
+    case 'characterBattles':
+      return {
+        name: '対戦動画',
+        url: path({ to: 'characterBattles', characterSlug: props.character.slug }),
+        parent: breadcrumbChain({ to: 'character', character: props.character }),
       };
     case 'comboCategories':
       return {

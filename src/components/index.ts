@@ -8,7 +8,6 @@ export * from './AttackActionForm';
 export * from './BattleListItem';
 export * from './CharacterCard';
 export * from './CharacterForm';
-export * from './CharacterPageTabs';
 export * from './ComboCategoryCard';
 export * from './ComboCategoryForm';
 export * from './ComboCategoryList';

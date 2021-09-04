@@ -15,12 +15,14 @@ import { Head } from '@/components/layouts/Head';
 import { Content } from '@/components/layouts/Content';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 import { Box, Button, createStyles, List, makeStyles, Paper, Theme } from '@material-ui/core';
-import { BattleListItem, CharacterPageTabs } from '@/components';
+import { BattleListItem } from '@/components';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from '@/states/loading';
 import { toast } from 'react-toastify';
 import { BattleSelector, PlayerBattleCountChip } from '@/components/BattleSelector';
 import { ParsedUrlQuery } from 'querystring';
+import { Profile } from '../components/Profile';
+import { Tabs } from '../components/Tabs';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -79,15 +81,13 @@ const Page: React.FC<CharacterBattlesPageQuery> = ({
   };
 
   return (
-    <Content
-      activeTab="characters"
-      title={character.longName}
-      breadcrumb={<Breadcrumbs to="character" character={character} />}
-    >
-      <Head title={character.longName} />
+    <Content activeTab="characters" breadcrumb={<Breadcrumbs to="characterBattles" character={character} />}>
+      <Head title={`${character.longName}の対戦動画`} />
+
+      <Profile character={character} />
 
       <Box mt={2}>
-        <CharacterPageTabs characterSlug={character.slug} activeTab="battles" />
+        <Tabs character={character} activeTab="battles" />
       </Box>
 
       <Paper className={classes.content}>

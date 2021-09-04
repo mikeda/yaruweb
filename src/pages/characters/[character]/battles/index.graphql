@@ -2,10 +2,7 @@
 query CharacterBattlesPage($characterSlug: String!, $playerSlug: String) {
   character(characterSlug: $characterSlug) {
     ...CharacterBreadcrumbs
-
-    id
-    name
-    longName
+    ...CharacterPageProfile
   }
 
   battleCounts(characterSlug: $characterSlug, per: 10) {
