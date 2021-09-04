@@ -9,11 +9,21 @@ query PageTournament($tournamentId: ID!) {
     startsAt
 
     standings {
-      ...StandingCard
+      id
+      place
+
+      player {
+        id
+        slug
+        name
+        avatarUrl
+      }
     }
 
     videos {
-      ...TournamentVideoCard
+      id
+      title
+      battlesCount
     }
   }
 }

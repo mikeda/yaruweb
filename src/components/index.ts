@@ -46,6 +46,5 @@ export * from './StaffRequirement';
 export * from './SearchWord';
 export * from './TournamentCard';
 export * from './ThrowActionForm';
-export * from './StandingCard';
 export * from './form';
 export * from './layouts';
