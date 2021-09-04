@@ -2966,8 +2966,6 @@ export type PlayerCardFragment = { __typename?: 'Player', id: string, slug: stri
 
 export type PlayerFormFragment = { __typename?: 'Player', name: string, slug: string, pro: boolean, tonamelId?: Maybe<string>, smashggId?: Maybe<string>, twitterId?: Maybe<string>, streamingUrl?: Maybe<string>, description?: Maybe<string>, country?: Maybe<{ __typename?: 'Country', id: string }> };
 
-export type StandingCardFragment = { __typename?: 'Standing', id: string, place: number, player: { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: Maybe<string> } };
-
 export type TournamentCardFragment = { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: Maybe<string>, startsAt: string, videosCount: number, standings: Array<{ __typename?: 'Standing', id: string, place: number, player: { __typename?: 'Player', id: string, name: string } }> };
 
 export type TournamentFormFragment = { __typename?: 'Tournament', organizerId: string, name: string, url: string, streamingUrl?: Maybe<string>, startsAt: string, description: string, league?: Maybe<{ __typename?: 'League', id: string }> };
@@ -3482,7 +3480,7 @@ export type PlayerPageQueryVariables = Exact<{
 }>;
 
 
-export type PlayerPageQuery = { __typename?: 'Query', player: { __typename?: 'Player', description?: Maybe<string>, slug: string, name: string, id: string, avatarUrl?: Maybe<string>, twitterId?: Maybe<string>, streamingUrl?: Maybe<string>, standingsCount: number, battlesCount: number }, battleCounts: { __typename?: 'BattleCountCollection', records: Array<{ __typename?: 'BattleCount', id: string, count: number, character: { __typename?: 'Character', id: string, slug: string, name: string, faceImageUrl: string } }> } };
+export type PlayerPageQuery = { __typename?: 'Query', player: { __typename?: 'Player', description?: Maybe<string>, slug: string, name: string, id: string, avatarUrl?: Maybe<string>, twitterId?: Maybe<string>, streamingUrl?: Maybe<string>, standingsCount: number, battlesCount: number } };
 
 export type PlayerStandingsPageQueryVariables = Exact<{
   playerSlug: Scalars['String'];
@@ -4119,18 +4117,6 @@ export const PlayerFormFragmentDoc = gql`
   description
   country {
     id
-  }
-}
-    `;
-export const StandingCardFragmentDoc = gql`
-    fragment StandingCard on Standing {
-  id
-  place
-  player {
-    id
-    slug
-    name
-    avatarUrl
   }
 }
     `;
@@ -9736,15 +9722,9 @@ export const PlayerPageDocument = gql`
     ...PlayerPageProfile
     description
   }
-  battleCounts(playerSlug: $playerSlug, per: 10) {
-    records {
-      ...CharacterBattleCountChip
-    }
-  }
 }
     ${PlayerBreadcrumbsFragmentDoc}
-${PlayerPageProfileFragmentDoc}
-${CharacterBattleCountChipFragmentDoc}`;
+${PlayerPageProfileFragmentDoc}`;
 
 /**
  * __usePlayerPageQuery__
@@ -9964,7 +9944,14 @@ export const PageTournamentDocument = gql`
     description
     startsAt
     standings {
-      ...StandingCard
+      id
+      place
+      player {
+        id
+        slug
+        name
+        avatarUrl
+      }
     }
     videos {
       id
@@ -9973,7 +9960,7 @@ export const PageTournamentDocument = gql`
     }
   }
 }
-    ${StandingCardFragmentDoc}`;
+    `;
 
 /**
  * __usePageTournamentQuery__

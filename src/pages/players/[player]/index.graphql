@@ -16,8 +16,4 @@ query PlayerPage($playerSlug: String!) {
 
     description
   }
-
-  battleCounts(playerSlug: $playerSlug, per: 10) {
-    records { ...CharacterBattleCountChip }
-  }
 }
