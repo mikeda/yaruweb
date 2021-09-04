@@ -1,5 +1,0 @@
-query CharacterCard($characterSlug: String!) {
-  character(characterSlug: $characterSlug) {
-    ...CharacterCard
-  }
-}

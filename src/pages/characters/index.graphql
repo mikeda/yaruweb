@@ -1,4 +1,4 @@
-query PageCharacters {
+query CharactersPage {
   characters {
     records { ...CharacterCard }
   }

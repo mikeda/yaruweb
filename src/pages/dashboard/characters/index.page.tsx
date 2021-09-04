@@ -2,11 +2,11 @@ import React from 'react';
 
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
 import { NotFound } from '@/components/NotFound';
-import { useCharacterCardsQuery } from '@/lib/graphql/types';
 import { dashboardPath } from '@/lib';
 import { Button, Grid } from '@material-ui/core';
 import { Add as AddIcon } from '@material-ui/icons';
 import { CharacterCard, DashboardBreadcrumbs } from '@/components';
+import { useDashboardCharactersPageQuery } from '@/lib/graphql/types';
 
 const Page: React.FC = () => (
   <DashboardContent
@@ -23,7 +23,7 @@ const Page: React.FC = () => (
 );
 
 const CharacterList: React.FC = () => {
-  const { data, loading, error } = useCharacterCardsQuery();
+  const { data, loading, error } = useDashboardCharactersPageQuery();
 
   if (loading) return <NotFound>Loading...</NotFound>;
   if (error) return <NotFound>エラーが発生しました。{error.message}</NotFound>;
