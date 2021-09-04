@@ -6,7 +6,6 @@ import {
   ComboCategoryParam,
   MoveCategoryParam,
   MoveParam,
-  OrganizerParam,
   PlayerParam,
   TournamentParam,
   TournamentVideoParam,
@@ -25,8 +24,6 @@ export type ChainParam =
   | { to: 'moveCategories'; character: CharactersParam }
   | { to: 'moveCategory'; moveCategory: MoveCategoryParam }
   | { to: 'move'; move: MoveParam }
-  | { to: 'organizers' }
-  | { to: 'organizer'; organizer: OrganizerParam }
   | { to: 'players' }
   | { to: 'player'; player: PlayerParam }
   | { to: 'playerBattles'; player: PlayerParam }
@@ -95,10 +92,6 @@ export const breadcrumbChain = (props: ChainParam): BreadcrumbChainItem => {
       return { name: 'パスワード変更' };
     case 'passwordReset':
       return { name: 'パスワードリセット' };
-    case 'organizer':
-      return { name: props.organizer.name, parent: breadcrumbChain({ to: 'organizers' }) };
-    case 'organizers':
-      return { name: 'オーガナイザー', url: path({ to: 'organizers' }) };
     case 'players':
       return { name: 'プレイヤー', url: path({ to: 'players' }) };
     case 'player':

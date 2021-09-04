@@ -7,7 +7,7 @@ type Options =
   | { to: 'battles' }
   | { to: 'characters' }
   | { to: 'character'; characterSlug: string }
-  | { to: 'characterBattles'; characterSlug: string; playerSlug?: string; page?: number }
+  | { to: 'characterBattles'; characterSlug: string }
   | { to: 'comboCategories'; characterSlug: string }
   | { to: 'comboCategory'; comboCategoryId: string }
   | { to: 'login' }
@@ -16,14 +16,12 @@ type Options =
   | { to: 'move'; moveId: string }
   | { to: 'passwordEdit' }
   | { to: 'passwordReset' }
-  | { to: 'organizers'; params?: { page?: number; q?: string } }
-  | { to: 'organizer'; organizerSlug: string }
-  | { to: 'players'; params?: { page?: number; q?: string } }
+  | { to: 'players' }
   | { to: 'player'; playerSlug: string }
-  | { to: 'playerBattles'; player: string; characterSlug?: string; page?: number }
-  | { to: 'playerStandings'; playerSlug: string; page?: number }
+  | { to: 'playerBattles'; player: string }
+  | { to: 'playerStandings'; playerSlug: string }
   | { to: 'signup' }
-  | { to: 'tournaments'; params?: { page?: number } }
+  | { to: 'tournaments' }
   | { to: 'tournament'; tournamentId: string }
   | { to: 'tournamentVideo'; tournamentVideoId: string; battleId?: string };
 
@@ -42,9 +40,7 @@ export const path = (options: Options): string => {
     case 'character':
       return `/characters/${options.characterSlug}`;
     case 'characterBattles':
-      return options.playerSlug
-        ? `/characters/${options.characterSlug}/battles/${options.playerSlug}`
-        : `/characters/${options.characterSlug}/battles`;
+      return `/characters/${options.characterSlug}/battles`;
     case 'comboCategories':
       return `/characters/${options.characterSlug}/combo_categories`;
     case 'comboCategory':
@@ -61,22 +57,16 @@ export const path = (options: Options): string => {
       return '/password/edit';
     case 'passwordReset':
       return '/password/reset';
-    case 'organizers':
-      return generatePath('/organizers', options.params);
-    case 'organizer':
-      return `/organizers/${options.organizerSlug}`;
     case 'players':
-      return generatePath('/players', options.params);
+      return '/players';
     case 'player':
       return `/players/${options.playerSlug}`;
     case 'playerBattles':
-      return options.characterSlug
-        ? `/players/${options.player}/battles/${options.characterSlug}`
-        : `/players/${options.player}/battles`;
+      return `/players/${options.player}/battles`;
     case 'playerStandings':
-      return generatePath(`/players/${options.playerSlug}/standings`, { page: options.page });
+      return `/players/${options.playerSlug}/standings`;
     case 'tournaments':
-      return generatePath('/tournaments', options.params);
+      return '/tournaments';
     case 'tournament':
       return `/tournaments/${options.tournamentId}`;
     case 'signup':

@@ -5,11 +5,8 @@ import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Head, Content, Breadcrumbs, PlayerPageTabs } from '@/components';
 import { Box, makeStyles, Paper, Typography } from '@material-ui/core';
 import { PlayerPageDocument, PlayerPageQuery, PlayerSlugsDocument, PlayerSlugsQuery } from '@/lib/graphql/types';
-import { path } from '@/lib';
 import { Profile } from './components/Profile';
 import theme from '@/theme';
-import { BattleSelector, CharacterBattleCountChip } from '@/components/BattleSelector';
-import { useRouter } from 'next/router';
 import { ParsedUrlQuery } from 'querystring';
 
 const useStyles = makeStyles({
@@ -19,8 +16,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Page: React.FC<PlayerPageQuery> = ({ player, battleCounts }) => {
-  const router = useRouter();
+const Page: React.FC<PlayerPageQuery> = ({ player }) => {
   const classes = useStyles();
 
   return (
@@ -40,24 +36,6 @@ const Page: React.FC<PlayerPageQuery> = ({ player, battleCounts }) => {
           <Typography className={classes.description}>
             {player.description || 'プロフィールが登録されていません。'}
           </Typography>
-
-          <Box mt={4}>
-            <Typography variant="h2" gutterBottom>
-              使用キャラクター
-            </Typography>
-
-            <BattleSelector>
-              {battleCounts.records.map(bc => (
-                <CharacterBattleCountChip
-                  key={bc.id}
-                  battleCount={bc}
-                  onClick={() => {
-                    router.push(path({ to: 'playerBattles', player: player.slug, characterSlug: bc.character.slug }));
-                  }}
-                />
-              ))}
-            </BattleSelector>
-          </Box>
         </Box>
       </Paper>
     </Content>

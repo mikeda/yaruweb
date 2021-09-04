@@ -36,7 +36,6 @@ export * from './NotFound';
 export * from './ObjectCard';
 export * from './ObjectCardList';
 export * from './OperationListSelector';
-export * from './OrganizerCard';
 export * from './OrganizerForm';
 export * from './Paging';
 export * from './PlayerPageTabs';
