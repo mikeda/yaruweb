@@ -27,6 +27,9 @@ const useStyles = makeStyles({
   listItemIcon: {
     minWidth: 32,
   },
+  listItemText: {
+    margin: 0,
+  },
 });
 
 interface Props {
@@ -44,40 +47,44 @@ export const TournamentCard: React.FC<Props> = ({ tournament }) => {
         <CardMedia image={tournament.mainImageUrl || NO_IMAGE_URL} className={classes.media} />
 
         <CardContent>
-          <Typography variant="h6">{tournament.name}</Typography>
-        </CardContent>
+          <Typography variant="h4">{tournament.name}</Typography>
 
-        <List disablePadding dense>
-          <ListItem>
-            <ListItemIcon className={classes.listItemIcon}>
-              <Schedule />
-            </ListItemIcon>
-            <ListItemText primary={dayjs(tournament.startsAt).format('YYYY/M/D H:mm')} />
-          </ListItem>
-
-          {tournament.standings.length > 0 && (
-            <ListItem>
+          <List disablePadding dense>
+            <ListItem disableGutters>
               <ListItemIcon className={classes.listItemIcon}>
-                <EmojiEvents style={{ fill: colors.trophy }} />
+                <Schedule fontSize="small" />
               </ListItemIcon>
               <ListItemText
-                primary={tournament.standings
-                  .filter(r => r.place === 1)
-                  .map(r => r.player.name)
-                  .join('、')}
+                primary={dayjs(tournament.startsAt).format('YYYY/M/D H:mm')}
+                className={classes.listItemText}
               />
             </ListItem>
-          )}
 
-          {tournament.videosCount > 0 && (
-            <ListItem>
-              <ListItemIcon className={classes.listItemIcon}>
-                <YouTube style={{ fill: colors.youtube }} />
-              </ListItemIcon>
-              <ListItemText primary="動画あり" />
-            </ListItem>
-          )}
-        </List>
+            {tournament.standings.length > 0 && (
+              <ListItem disableGutters>
+                <ListItemIcon className={classes.listItemIcon}>
+                  <EmojiEvents fontSize="small" style={{ fill: colors.trophy }} />
+                </ListItemIcon>
+                <ListItemText
+                  primary={tournament.standings
+                    .filter(r => r.place === 1)
+                    .map(r => r.player.name)
+                    .join('、')}
+                  className={classes.listItemText}
+                />
+              </ListItem>
+            )}
+
+            {tournament.videosCount > 0 && (
+              <ListItem disableGutters>
+                <ListItemIcon className={classes.listItemIcon}>
+                  <YouTube fontSize="small" style={{ fill: colors.youtube }} />
+                </ListItemIcon>
+                <ListItemText primary="動画あり" className={classes.listItemText} />
+              </ListItem>
+            )}
+          </List>
+        </CardContent>
       </CardActionArea>
     </Card>
   );

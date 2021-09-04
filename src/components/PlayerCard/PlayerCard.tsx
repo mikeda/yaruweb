@@ -1,25 +1,39 @@
 import React from 'react';
 import { PlayerCardFragment } from '@/lib/graphql/types';
-import { Card, CardActionArea, CardContent, CardMedia, makeStyles, Typography } from '@material-ui/core';
+import {
+  Card,
+  CardActionArea,
+  CardContent,
+  CardMedia,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  makeStyles,
+  Typography,
+} from '@material-ui/core';
 
 import { path } from '@/lib';
 import { NO_IMAGE_URL } from '@/lib/Assets';
 import { EmojiEvents, YouTube } from '@material-ui/icons';
+import { colors } from '@/colors';
 
 const useStyles = makeStyles({
   root: {
     display: 'flex',
   },
   media: {
-    width: 100,
-    height: 100,
+    width: 96,
+    height: 96,
   },
   content: {
     flexGrow: 1,
   },
-  detail: {
-    display: 'flex',
-    alignItems: 'center',
+  listItemIcon: {
+    minWidth: 32,
+  },
+  listItemText: {
+    margin: 0,
   },
 });
 
@@ -34,20 +48,27 @@ export const PlayerCard: React.FC<Props> = ({ player }) => {
     <Card>
       <CardActionArea href={path({ to: 'player', playerSlug: player.slug })} className={classes.root}>
         <CardMedia image={player.avatarUrl || NO_IMAGE_URL} className={classes.media} />
+
         <CardContent className={classes.content}>
-          <Typography variant="h6" gutterBottom>
+          <Typography variant="h4" gutterBottom>
             {player.name}
           </Typography>
 
-          <Typography variant="caption" className={classes.detail}>
-            <EmojiEvents fontSize="small" color="inherit" />
-            大会戦績 {player.standingsCount}
-          </Typography>
+          <List disablePadding dense>
+            <ListItem disableGutters>
+              <ListItemIcon className={classes.listItemIcon}>
+                <EmojiEvents fontSize="small" style={{ fill: colors.trophy }} />
+              </ListItemIcon>
+              <ListItemText primary={`大会戦績 ${player.standingsCount}`} className={classes.listItemText} />
+            </ListItem>
 
-          <Typography variant="caption" className={classes.detail}>
-            <YouTube fontSize="small" />
-            対戦動画 {player.battlesCount}
-          </Typography>
+            <ListItem disableGutters>
+              <ListItemIcon className={classes.listItemIcon}>
+                <YouTube fontSize="small" style={{ fill: colors.youtube }} />
+              </ListItemIcon>
+              <ListItemText primary={`対戦動画 ${player.battlesCount}`} className={classes.listItemText} />
+            </ListItem>
+          </List>
         </CardContent>
       </CardActionArea>
     </Card>
