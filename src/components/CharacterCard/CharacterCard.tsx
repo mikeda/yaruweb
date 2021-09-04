@@ -7,26 +7,35 @@ import {
   CardActions,
   CardContent,
   CardMedia,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
   makeStyles,
   Typography,
 } from '@material-ui/core';
 
 import { path, dashboardPath } from '@/lib';
 import { Link } from '../Link';
+import { Public, YouTube, SportsKabaddi } from '@material-ui/icons';
+import { colors } from '@/colors';
 
 const useStyles = makeStyles({
   root: {
     display: 'flex',
   },
   media: {
-    width: 100,
-    height: 100,
+    width: 96,
+    height: 96,
   },
-  details: {
-    flex: 1,
+  content: {
+    flexGrow: 1,
   },
-  deleteButton: {
-    marginLeft: 'auto',
+  listItemIcon: {
+    minWidth: 32,
+  },
+  listItemText: {
+    margin: 0,
   },
 });
 
@@ -47,14 +56,31 @@ export const CharacterCard: React.FC<Props> = ({ character, dashboard = false })
       <CardActionArea className={classes.root} href={href} component={Link} color="inherit">
         <CardMedia image={character.faceImageUrl} className={classes.media} />
 
-        <CardContent className={classes.details}>
-          <Typography variant="h6">{character.longName}</Typography>
-          <Typography variant="caption" component="p">
-            {character.country}
-          </Typography>
-          <Typography variant="caption" component="p">
-            {character.fightingStyle}
-          </Typography>
+        <CardContent className={classes.content}>
+          <Typography variant="h4">{character.longName}</Typography>
+
+          <List disablePadding dense>
+            <ListItem disableGutters>
+              <ListItemIcon className={classes.listItemIcon}>
+                <Public fontSize="small" />
+              </ListItemIcon>
+              <ListItemText primary={character.country} className={classes.listItemText} />
+            </ListItem>
+
+            <ListItem disableGutters>
+              <ListItemIcon className={classes.listItemIcon}>
+                <SportsKabaddi fontSize="small" />
+              </ListItemIcon>
+              <ListItemText primary={character.fightingStyle} className={classes.listItemText} />
+            </ListItem>
+
+            <ListItem disableGutters>
+              <ListItemIcon className={classes.listItemIcon}>
+                <YouTube fontSize="small" style={{ fill: colors.youtube }} />
+              </ListItemIcon>
+              <ListItemText primary={`対戦動画 ${character.battlesCount}`} className={classes.listItemText} />
+            </ListItem>
+          </List>
         </CardContent>
       </CardActionArea>
 

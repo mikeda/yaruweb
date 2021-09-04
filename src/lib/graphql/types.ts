@@ -2877,7 +2877,7 @@ export type PlayerBattleCountChipFragment = { __typename?: 'BattleCount', id: st
 
 export type PlayerChipFragment = { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: Maybe<string>, battlesCount: number };
 
-export type CharacterCardFragment = { __typename?: 'Character', slug: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string };
+export type CharacterCardFragment = { __typename?: 'Character', slug: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number };
 
 export type CharacterFormFragment = { __typename?: 'Character', name: string, nameKana: string, longName: string, longNameKana: string, slug: string, country: string, fightingStyle: string, story: string, description: string, dlc: boolean };
 
@@ -3043,26 +3043,26 @@ export type PageCharacterComboCategoriesQueryVariables = Exact<{
 }>;
 
 
-export type PageCharacterComboCategoriesQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, comboCategories: Array<{ __typename?: 'ComboCategory', id: string, name: string, combosCount: number }> } };
+export type PageCharacterComboCategoriesQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, comboCategories: Array<{ __typename?: 'ComboCategory', id: string, name: string, combosCount: number }> } };
 
 export type PageCharacterQueryVariables = Exact<{
   characterSlug: Scalars['String'];
 }>;
 
 
-export type PageCharacterQuery = { __typename?: 'Query', character: { __typename?: 'Character', story: string, description: string, slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string }, battleCounts: { __typename?: 'BattleCountCollection', records: Array<{ __typename?: 'BattleCount', id: string, count: number, player: { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: Maybe<string> } }> } };
+export type PageCharacterQuery = { __typename?: 'Query', character: { __typename?: 'Character', story: string, description: string, slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number }, battleCounts: { __typename?: 'BattleCountCollection', records: Array<{ __typename?: 'BattleCount', id: string, count: number, player: { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: Maybe<string> } }> } };
 
 export type PageCharacterMoveCategoriesQueryVariables = Exact<{
   characterSlug: Scalars['String'];
 }>;
 
 
-export type PageCharacterMoveCategoriesQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, movesCount: number }> } };
+export type PageCharacterMoveCategoriesQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, movesCount: number }> } };
 
 export type CharactersPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CharactersPageQuery = { __typename?: 'Query', characters: { __typename?: 'CharacterCollection', records: Array<{ __typename?: 'Character', slug: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string }> } };
+export type CharactersPageQuery = { __typename?: 'Query', characters: { __typename?: 'CharacterCollection', records: Array<{ __typename?: 'Character', slug: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number }> } };
 
 export type PageComboCategoryQueryVariables = Exact<{
   comboCategoryId: Scalars['ID'];
@@ -3131,7 +3131,7 @@ export type DashboardMoveCategoryNewPageQuery = { __typename?: 'Query', characte
 export type DashboardCharactersPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type DashboardCharactersPageQuery = { __typename?: 'Query', characters: { __typename?: 'CharacterCollection', records: Array<{ __typename?: 'Character', slug: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string }> } };
+export type DashboardCharactersPageQuery = { __typename?: 'Query', characters: { __typename?: 'CharacterCollection', records: Array<{ __typename?: 'Character', slug: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number }> } };
 
 export type PageDashboardCombosQueryVariables = Exact<{
   comboCategoryId: Scalars['ID'];
@@ -3418,7 +3418,7 @@ export type DashboardTournamentsPageQuery = { __typename?: 'Query', tournaments:
 export type TopPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type TopPageQuery = { __typename?: 'Query', tournaments: { __typename?: 'TournamentCollection', records: Array<{ __typename?: 'Tournament', id: string, name: string, mainImageUrl?: Maybe<string>, startsAt: string, videosCount: number, standings: Array<{ __typename?: 'Standing', id: string, place: number, player: { __typename?: 'Player', id: string, name: string } }> }> }, battles: { __typename?: 'BattleCollection', records: Array<{ __typename?: 'Battle', id: string, round?: Maybe<BattleRound>, tournamentVideo: { __typename?: 'TournamentVideo', id: string, tournament: { __typename?: 'Tournament', id: string, name: string, startsAt: string } }, sides: Array<{ __typename?: 'BattleSide', rounds: number, player: { __typename?: 'Player', name: string }, character: { __typename?: 'Character', faceImageUrl: string } }> }> }, players: { __typename?: 'PlayerCollection', records: Array<{ __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: Maybe<string>, standingsCount: number, battlesCount: number }> }, characters: { __typename?: 'CharacterCollection', records: Array<{ __typename?: 'Character', slug: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string }> }, articles: { __typename?: 'ArticleCollection', records: Array<{ __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: Maybe<string>, publishedAt?: Maybe<string>, faved: boolean, favsCount: number, status: ArticleStatus, author: { __typename?: 'User', name: string, avatarUrl: string } }> } };
+export type TopPageQuery = { __typename?: 'Query', tournaments: { __typename?: 'TournamentCollection', records: Array<{ __typename?: 'Tournament', id: string, name: string, mainImageUrl?: Maybe<string>, startsAt: string, videosCount: number, standings: Array<{ __typename?: 'Standing', id: string, place: number, player: { __typename?: 'Player', id: string, name: string } }> }> }, battles: { __typename?: 'BattleCollection', records: Array<{ __typename?: 'Battle', id: string, round?: Maybe<BattleRound>, tournamentVideo: { __typename?: 'TournamentVideo', id: string, tournament: { __typename?: 'Tournament', id: string, name: string, startsAt: string } }, sides: Array<{ __typename?: 'BattleSide', rounds: number, player: { __typename?: 'Player', name: string }, character: { __typename?: 'Character', faceImageUrl: string } }> }> }, players: { __typename?: 'PlayerCollection', records: Array<{ __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: Maybe<string>, standingsCount: number, battlesCount: number }> }, characters: { __typename?: 'CharacterCollection', records: Array<{ __typename?: 'Character', slug: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number }> }, articles: { __typename?: 'ArticleCollection', records: Array<{ __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: Maybe<string>, publishedAt?: Maybe<string>, faved: boolean, favsCount: number, status: ArticleStatus, author: { __typename?: 'User', name: string, avatarUrl: string } }> } };
 
 export type PageMoveCategoryQueryVariables = Exact<{
   moveCategoryId: Scalars['ID'];
@@ -3875,6 +3875,7 @@ export const CharacterCardFragmentDoc = gql`
   faceImageUrl
   country
   fightingStyle
+  battlesCount
 }
     `;
 export const CharacterFormFragmentDoc = gql`
