@@ -80,21 +80,23 @@ const PageContent: React.FC<PageTournamentQuery> = ({ tournament }) => {
           <NotFound>結果が登録されていません。</NotFound>
         ) : (
           <Paper>
-            <List>
+            <List component="div">
               {tournament.standings
                 .sort((a, b) => a.place - b.place)
                 .map(standing => (
-                  <ListItem key={standing.id}>
-                    <ListItemAvatar>
-                      <img src={placeIconUrl(standing.place)} width={38} height={44} />
-                    </ListItemAvatar>
+                  <Link key={standing.id} href={path({ to: 'player', playerSlug: standing.player.slug })} passHref>
+                    <ListItem button component="a">
+                      <ListItemAvatar>
+                        <img src={placeIconUrl(standing.place)} width={38} height={44} />
+                      </ListItemAvatar>
 
-                    <ListItemAvatar>
-                      <Avatar src={standing.player.avatarUrl || DEFAULT_AVATAR_URL} />
-                    </ListItemAvatar>
+                      <ListItemAvatar>
+                        <Avatar src={standing.player.avatarUrl || DEFAULT_AVATAR_URL} />
+                      </ListItemAvatar>
 
-                    <ListItemText primary={standing.player.name} />
-                  </ListItem>
+                      <ListItemText primary={standing.player.name} />
+                    </ListItem>
+                  </Link>
                 ))}
             </List>
           </Paper>
