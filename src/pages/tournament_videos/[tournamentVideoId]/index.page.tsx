@@ -51,6 +51,7 @@ const PageContent: React.FC<PageTournamentVideoQuery> = ({ tournamentVideo }) =>
   const updateBattle = (battle: TournamentVideoPageBattleFragment) => {
     setSelectedBattle(battle);
     youTubePlayer?.seekTo(battle.startSec, true);
+    youTubePlayer?.playVideo();
   };
 
   useEffect(() => {
@@ -70,7 +71,7 @@ const PageContent: React.FC<PageTournamentVideoQuery> = ({ tournamentVideo }) =>
       <YouTube
         containerClassName="bl_youtube"
         videoId={tournamentVideo.youtubeVideoId}
-        opts={{ width: '854', height: '480', playerVars: { start: selectedBattle?.startSec, autoplay: 1 } }}
+        opts={{ width: '854', height: '480', playerVars: { start: selectedBattle?.startSec, autoplay: 1, mute: 1 } }}
         onReady={event => {
           setYouTubePlayer(event.target);
         }}
