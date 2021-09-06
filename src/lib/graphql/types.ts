@@ -270,6 +270,7 @@ export type Character = {
   __typename?: 'Character';
   battlesCount: Scalars['Int'];
   comboCategories: Array<ComboCategory>;
+  combosCount: Scalars['Int'];
   conditions: Array<Condition>;
   country: Scalars['String'];
   description: Scalars['String'];
@@ -281,6 +282,7 @@ export type Character = {
   longNameKana: Scalars['String'];
   mainImageUrl: Scalars['String'];
   moveCategories: Array<MoveCategory>;
+  movesCount: Scalars['Int'];
   name: Scalars['String'];
   nameKana: Scalars['String'];
   slug: Scalars['String'];
@@ -2958,8 +2960,6 @@ export type MoveListItemFragment = { __typename?: 'Move', id: string, name: stri
 
 export type MoveMediaFragment = { __typename?: 'Move', id: string, name: string, kana?: Maybe<string>, opponentState?: Maybe<OpponentStateEnum>, startUpFrame?: Maybe<number>, powerCrush: boolean, crouchingStatus: boolean, jumpStatus: boolean, homing: boolean, screw: boolean, wallBound: boolean, note?: Maybe<string>, moveCategory: { __typename?: 'MoveCategory', id: string, name: string }, afterState?: Maybe<{ __typename?: 'State', id: string, name: string }>, moveVideo?: Maybe<{ __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string }>, commands: Array<{ __typename?: 'Command', id: string, state: { __typename?: 'State', id: string, name: string }, operations: Array<{ __typename?: 'Operation', id: string, name: string, key: string, icon: boolean }> }>, actions: Array<{ __typename: 'AttackAction', id: string, attackType: AttackTypeEnum, damage: number, blockAvailable: boolean, blockState: AttackActionStateEnum, blockFrame?: Maybe<number>, hitAvailable: boolean, hitState: AttackActionStateEnum, hitFrame?: Maybe<number>, counterHitAvailable: boolean, counterHitState: AttackActionStateEnum, counterHitFrame?: Maybe<number>, cleanHitAvailable: boolean, cleanHitState: AttackActionStateEnum, cleanHitFrame?: Maybe<number>, crouchingHitAvailable: boolean, crouchingHitState: AttackActionStateEnum, crouchingHitFrame?: Maybe<number> } | { __typename: 'ThrowAction', id: string, throwType: ThrowTypeEnum, damage: number, escape: ThrowEscapeEnum, throwAvailable: boolean, throwState: ThrowActionStateEnum, throwFrame?: Maybe<number>, throwEscapeAvailable: boolean, throwEscapeState: ThrowActionStateEnum, throwEscapeFrame?: Maybe<number> }>, conditions: Array<{ __typename?: 'Condition', id: string, name: string }> };
 
-export type OrganizerCardFragment = { __typename?: 'Organizer', id: string, slug: string, name: string, avatarUrl?: Maybe<string> };
-
 export type OrganizerFormFragment = { __typename?: 'Organizer', name: string, slug: string, tonamelId?: Maybe<string>, twitterId?: Maybe<string>, streamingUrl?: Maybe<string>, description?: Maybe<string> };
 
 export type PlayerCardFragment = { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: Maybe<string>, standingsCount: number, battlesCount: number };
@@ -3023,7 +3023,7 @@ export type CharacterBattlesPageQueryVariables = Exact<{
 }>;
 
 
-export type CharacterBattlesPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number }, battleCounts: { __typename?: 'BattleCountCollection', records: Array<{ __typename?: 'BattleCount', id: string, count: number, player: { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: Maybe<string> } }> }, battles: { __typename?: 'BattleCollection', records: Array<{ __typename?: 'Battle', id: string, round?: Maybe<BattleRound>, tournamentVideo: { __typename?: 'TournamentVideo', id: string, tournament: { __typename?: 'Tournament', id: string, name: string, startsAt: string } }, sides: Array<{ __typename?: 'BattleSide', rounds: number, player: { __typename?: 'Player', name: string }, character: { __typename?: 'Character', faceImageUrl: string } }> }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
+export type CharacterBattlesPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, combosCount: number, movesCount: number }, battleCounts: { __typename?: 'BattleCountCollection', records: Array<{ __typename?: 'BattleCount', id: string, count: number, player: { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: Maybe<string> } }> }, battles: { __typename?: 'BattleCollection', records: Array<{ __typename?: 'Battle', id: string, round?: Maybe<BattleRound>, tournamentVideo: { __typename?: 'TournamentVideo', id: string, tournament: { __typename?: 'Tournament', id: string, name: string, startsAt: string } }, sides: Array<{ __typename?: 'BattleSide', rounds: number, player: { __typename?: 'Player', name: string }, character: { __typename?: 'Character', faceImageUrl: string } }> }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
 
 export type CharacterBattlesPageBattlesQueryVariables = Exact<{
   characterSlug: Scalars['String'];
@@ -3039,23 +3039,23 @@ export type PageCharacterComboCategoriesQueryVariables = Exact<{
 }>;
 
 
-export type PageCharacterComboCategoriesQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, comboCategories: Array<{ __typename?: 'ComboCategory', id: string, name: string, combosCount: number }> } };
+export type PageCharacterComboCategoriesQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, combosCount: number, movesCount: number, comboCategories: Array<{ __typename?: 'ComboCategory', id: string, name: string, combosCount: number }> } };
 
-export type CharacterPageProfileFragment = { __typename?: 'Character', slug: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number };
+export type CharacterPageProfileFragment = { __typename?: 'Character', slug: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, combosCount: number, movesCount: number };
 
 export type PageCharacterQueryVariables = Exact<{
   characterSlug: Scalars['String'];
 }>;
 
 
-export type PageCharacterQuery = { __typename?: 'Query', character: { __typename?: 'Character', story: string, description: string, slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number }, battleCounts: { __typename?: 'BattleCountCollection', records: Array<{ __typename?: 'BattleCount', id: string, count: number, player: { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: Maybe<string> } }> } };
+export type PageCharacterQuery = { __typename?: 'Query', character: { __typename?: 'Character', story: string, description: string, slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, combosCount: number, movesCount: number }, battleCounts: { __typename?: 'BattleCountCollection', records: Array<{ __typename?: 'BattleCount', id: string, count: number, player: { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: Maybe<string> } }> } };
 
 export type PageCharacterMoveCategoriesQueryVariables = Exact<{
   characterSlug: Scalars['String'];
 }>;
 
 
-export type PageCharacterMoveCategoriesQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, movesCount: number }> } };
+export type PageCharacterMoveCategoriesQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, combosCount: number, movesCount: number, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, movesCount: number }> } };
 
 export type CharactersPageQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -3438,21 +3438,6 @@ export type MovePageCommentsQueryVariables = Exact<{
 
 
 export type MovePageCommentsQuery = { __typename?: 'Query', moveComments: Array<{ __typename?: 'MoveComment', id: string, message: string, createdAt: string, user: { __typename?: 'User', name: string, avatarUrl: string } }> };
-
-export type OrganizerPageQueryVariables = Exact<{
-  organizerSlug: Scalars['String'];
-}>;
-
-
-export type OrganizerPageQuery = { __typename?: 'Query', organizer: { __typename?: 'Organizer', id: string, name: string, slug: string, avatarUrl?: Maybe<string>, twitterId?: Maybe<string>, streamingUrl?: Maybe<string>, description?: Maybe<string>, tournaments: Array<{ __typename?: 'Tournament', id: string, name: string, startsAt: string }> } };
-
-export type OrganizersPageQueryVariables = Exact<{
-  page?: Maybe<Scalars['Int']>;
-  keyword?: Maybe<Scalars['String']>;
-}>;
-
-
-export type OrganizersPageQuery = { __typename?: 'Query', organizers: { __typename?: 'OrganizerCollection', records: Array<{ __typename?: 'Organizer', id: string, slug: string, name: string, avatarUrl?: Maybe<string> }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
 
 export type PlayerBattlesPageQueryVariables = Exact<{
   playerSlug: Scalars['String'];
@@ -4077,14 +4062,6 @@ export const MoveMediaFragmentDoc = gql`
   }
 }
     ${ActionFragmentDoc}`;
-export const OrganizerCardFragmentDoc = gql`
-    fragment OrganizerCard on Organizer {
-  id
-  slug
-  name
-  avatarUrl
-}
-    `;
 export const OrganizerFormFragmentDoc = gql`
     fragment OrganizerForm on Organizer {
   name
@@ -4226,6 +4203,8 @@ export const CharacterPageProfileFragmentDoc = gql`
   country
   fightingStyle
   battlesCount
+  combosCount
+  movesCount
 }
     `;
 export const BattleFormFragmentDoc = gql`
@@ -9524,95 +9503,6 @@ export function useMovePageCommentsLazyQuery(baseOptions?: Apollo.LazyQueryHookO
 export type MovePageCommentsQueryHookResult = ReturnType<typeof useMovePageCommentsQuery>;
 export type MovePageCommentsLazyQueryHookResult = ReturnType<typeof useMovePageCommentsLazyQuery>;
 export type MovePageCommentsQueryResult = Apollo.QueryResult<MovePageCommentsQuery, MovePageCommentsQueryVariables>;
-export const OrganizerPageDocument = gql`
-    query OrganizerPage($organizerSlug: String!) {
-  organizer(organizerSlug: $organizerSlug) {
-    ...OrganizerBreadcrumbs
-    id
-    name
-    slug
-    avatarUrl
-    twitterId
-    streamingUrl
-    description
-    tournaments {
-      id
-      name
-      startsAt
-    }
-  }
-}
-    ${OrganizerBreadcrumbsFragmentDoc}`;
-
-/**
- * __useOrganizerPageQuery__
- *
- * To run a query within a React component, call `useOrganizerPageQuery` and pass it any options that fit your needs.
- * When your component renders, `useOrganizerPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useOrganizerPageQuery({
- *   variables: {
- *      organizerSlug: // value for 'organizerSlug'
- *   },
- * });
- */
-export function useOrganizerPageQuery(baseOptions: Apollo.QueryHookOptions<OrganizerPageQuery, OrganizerPageQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<OrganizerPageQuery, OrganizerPageQueryVariables>(OrganizerPageDocument, options);
-      }
-export function useOrganizerPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<OrganizerPageQuery, OrganizerPageQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<OrganizerPageQuery, OrganizerPageQueryVariables>(OrganizerPageDocument, options);
-        }
-export type OrganizerPageQueryHookResult = ReturnType<typeof useOrganizerPageQuery>;
-export type OrganizerPageLazyQueryHookResult = ReturnType<typeof useOrganizerPageLazyQuery>;
-export type OrganizerPageQueryResult = Apollo.QueryResult<OrganizerPageQuery, OrganizerPageQueryVariables>;
-export const OrganizersPageDocument = gql`
-    query OrganizersPage($page: Int, $keyword: String) {
-  organizers(page: $page, per: 20, keyword: $keyword) {
-    records {
-      ...OrganizerCard
-    }
-    paging {
-      ...paging
-    }
-  }
-}
-    ${OrganizerCardFragmentDoc}
-${PagingFragmentDoc}`;
-
-/**
- * __useOrganizersPageQuery__
- *
- * To run a query within a React component, call `useOrganizersPageQuery` and pass it any options that fit your needs.
- * When your component renders, `useOrganizersPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useOrganizersPageQuery({
- *   variables: {
- *      page: // value for 'page'
- *      keyword: // value for 'keyword'
- *   },
- * });
- */
-export function useOrganizersPageQuery(baseOptions?: Apollo.QueryHookOptions<OrganizersPageQuery, OrganizersPageQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<OrganizersPageQuery, OrganizersPageQueryVariables>(OrganizersPageDocument, options);
-      }
-export function useOrganizersPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<OrganizersPageQuery, OrganizersPageQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<OrganizersPageQuery, OrganizersPageQueryVariables>(OrganizersPageDocument, options);
-        }
-export type OrganizersPageQueryHookResult = ReturnType<typeof useOrganizersPageQuery>;
-export type OrganizersPageLazyQueryHookResult = ReturnType<typeof useOrganizersPageLazyQuery>;
-export type OrganizersPageQueryResult = Apollo.QueryResult<OrganizersPageQuery, OrganizersPageQueryVariables>;
 export const PlayerBattlesPageDocument = gql`
     query PlayerBattlesPage($playerSlug: String!, $page: Int) {
   player(playerSlug: $playerSlug) {

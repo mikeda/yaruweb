@@ -34,21 +34,25 @@ export const Tabs: React.FC<Props> = ({ character, activeTab }) => {
           }}
         />
 
-        <Tab
-          value="moves"
-          label="コマンドリスト"
-          onClick={() => {
-            router.push(path({ to: 'moveCategories', characterSlug: character.slug }));
-          }}
-        />
+        {character.movesCount > 0 && (
+          <Tab
+            value="moves"
+            label={`コマンドリスト (${character.movesCount})`}
+            onClick={() => {
+              router.push(path({ to: 'moveCategories', characterSlug: character.slug }));
+            }}
+          />
+        )}
 
-        <Tab
-          value="combos"
-          label="コンボ"
-          onClick={() => {
-            router.push(path({ to: 'comboCategories', characterSlug: character.slug }));
-          }}
-        />
+        {character.combosCount > 0 && (
+          <Tab
+            value="combos"
+            label={`コンボ (${character.combosCount})`}
+            onClick={() => {
+              router.push(path({ to: 'comboCategories', characterSlug: character.slug }));
+            }}
+          />
+        )}
       </MuiTabs>
     </Paper>
   );
