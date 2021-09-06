@@ -5,4 +5,6 @@ fragment CharacterPageProfile on Character {
   country
   fightingStyle
   battlesCount
+  combosCount
+  movesCount
 }
