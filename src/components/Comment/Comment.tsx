@@ -1,14 +1,10 @@
 import React from 'react';
 import dayjs from '@/lib/dayjs';
 
-import {
-  ArticleCommentCardFragment,
-  MoveCommentCardFragment,
-  TournamentVideoCommentCardFragment,
-} from '@/lib/graphql/types';
+import { ArticleCommentCardFragment, TournamentVideoCommentCardFragment } from '@/lib/graphql/types';
 import { Avatar, Box, Paper, Typography } from '@material-ui/core';
 
-export type CommentFragment = ArticleCommentCardFragment | MoveCommentCardFragment | TournamentVideoCommentCardFragment;
+export type CommentFragment = ArticleCommentCardFragment | TournamentVideoCommentCardFragment;
 
 interface Props {
   comment: CommentFragment;

@@ -13,9 +13,3 @@ query PageMove($moveId: ID!) {
     }
   }
 }
-
-query MovePageComments($moveId: ID!) {
-  moveComments(moveId: $moveId) {
-    ...MoveCommentCard
-  }
-}
