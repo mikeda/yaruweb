@@ -19,22 +19,6 @@ query ArticleCommentCards($articleId: ID!) {
   }
 }
 
-fragment MoveCommentCard on MoveComment {
-  id
-  message
-  createdAt
-
-  user {
-    ...CommentCardUser
-  }
-}
-
-query MoveCommentCards($moveId: ID!) {
-  moveComments(moveId: $moveId) {
-    ...MoveCommentCard
-  }
-}
-
 fragment TournamentVideoCommentCard on TournamentVideoComment {
   id
   message
