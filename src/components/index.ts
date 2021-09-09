@@ -15,8 +15,6 @@ export * from './ComboForm';
 export * from './ComboMedia';
 export * from './Command';
 export * from './CommandForm';
-export * from './Comment';
-export * from './CommentForm';
 export * from './DashboardOrganizerCard';
 export * from './DashboardPlayerCard';
 export * from './DashboardTournamentCard';

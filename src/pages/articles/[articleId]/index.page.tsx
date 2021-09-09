@@ -13,7 +13,7 @@ import { Content } from '@/components/layouts/Content';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 import { Avatar, Box, makeStyles, Typography } from '@material-ui/core';
 import dayjs from '@/lib/dayjs';
-import { ArticleBody, ArticleCommentsBlock, FavButton } from '@/components';
+import { ArticleBody, FavButton } from '@/components';
 import { NO_IMAGE_URL } from '@/lib/Assets';
 
 const useStyles = makeStyles({
@@ -47,8 +47,6 @@ const Page: React.FC<ArticlePageArticleQuery> = ({ article }) => {
       </Box>
 
       <ArticleBody content={article.content} />
-
-      <ArticleCommentsBlock articleId={article.id} />
     </Content>
   );
 };
