@@ -1,7 +1,0 @@
-mutation CreateArticleComment($articleId: ID!, $attributes: CommentAttributes!) {
-  createArticleComment(input: { articleId: $articleId, attributes: $attributes }) {
-    articleComment {
-      id
-    }
-  }
-}

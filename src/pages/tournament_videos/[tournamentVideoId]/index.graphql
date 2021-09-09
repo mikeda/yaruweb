@@ -16,7 +16,6 @@ query PageTournamentVideo($tournamentVideoId: ID!) {
     youtubeVideoId
     title
     thumbnailUrl
-    commentCount
 
     channel {
       name

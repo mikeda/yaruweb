@@ -5,7 +5,6 @@ import {
   PageTournamentVideoDocument,
   TournamentVideoPageBattleFragment,
 } from '@/lib/graphql/types';
-import { TournamentVideoCommentsBlock } from '@/components';
 import { Content } from '@/components/layouts/Content';
 import { Head } from '@/components/layouts/Head';
 import { GetStaticPaths, GetStaticProps } from 'next';
@@ -124,10 +123,6 @@ const PageContent: React.FC<PageTournamentVideoQuery> = ({ tournamentVideo }) =>
           </Paper>
         </Box>
       )}
-
-      <Box mt={4}>
-        <TournamentVideoCommentsBlock tournamentVideoId={tournamentVideo.id} />
-      </Box>
     </>
   );
 };
