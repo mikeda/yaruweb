@@ -52,7 +52,7 @@
     "yup": "^0.32.9"
   },
   "devDependencies": {
-    "@graphql-codegen/cli": "^2.1.1",
+    "@graphql-codegen/cli": "^2.2.0",
     "@graphql-codegen/introspection": "^2.1.0",
     "@graphql-codegen/typescript": "^2.1.2",
     "@graphql-codegen/typescript-operations": "^2.0.1",
@@ -82,6 +82,6 @@
     "stylelint-config-recommended-scss": "^4.3.0",
     "stylelint-prettier": "^1.2.0",
     "stylelint-scss": "^3.20.1",
-    "typescript": "^4.4.2"
+    "typescript": "^4.4.3"
   }
 }
