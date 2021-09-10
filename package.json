@@ -46,7 +46,7 @@
     "sass": "^1.39.2",
     "slate": "^0.59.0",
     "slate-history": "^0.62.0",
-    "slate-react": "^0.59.0",
+    "slate-react": "^0.65.3",
     "slick-carousel": "^1.8.1",
     "youtube-player": "^5.5.2",
     "yup": "^0.32.9"
