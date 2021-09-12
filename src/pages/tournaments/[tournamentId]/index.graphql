@@ -1,4 +1,31 @@
-query PageTournament($tournamentId: ID!) {
+fragment TournamentPageBattle on Battle {
+  id
+  round
+  startSec
+
+  sides {
+    player { name }
+    character { faceImageUrl }
+    rounds
+  }
+}
+
+fragment TournamentPageVideo on TournamentVideo {
+  id
+  youtubeVideoId
+
+  battles {
+    ...TournamentPageBattle
+  }
+}
+
+query TournamentPagePaths {
+  tournaments(page: 1, per: 100) {
+    records { id }
+  }
+}
+
+query TournamentPage($tournamentId: ID!) {
   tournament(tournamentId: $tournamentId) {
     id
     name
@@ -21,9 +48,7 @@ query PageTournament($tournamentId: ID!) {
     }
 
     videos {
-      id
-      title
-      battlesCount
+      ...TournamentPageVideo
     }
   }
 }

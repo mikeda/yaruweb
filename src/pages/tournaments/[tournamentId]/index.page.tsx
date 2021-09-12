@@ -1,7 +1,12 @@
 import React from 'react';
 import Link from 'next/link';
 
-import { PageTournamentDocument, PageTournamentQuery } from '@/lib/graphql/types';
+import {
+  TournamentPageDocument,
+  TournamentPagePathsDocument,
+  TournamentPagePathsQuery,
+  TournamentPageQuery,
+} from '@/lib/graphql/types';
 import { Content } from '@/components/layouts/Content';
 import { Head } from '@/components/layouts/Head';
 import { GetStaticPaths, GetStaticProps } from 'next';
@@ -26,6 +31,8 @@ import {
 } from '@material-ui/core';
 import { DEFAULT_AVATAR_URL, NO_IMAGE_URL, placeIconUrl } from '@/lib/Assets';
 import { path } from '@/lib';
+import { TournamentVideoPlayer } from './components/TournamentVideoPlayer';
+import { ParsedUrlQuery } from 'querystring';
 
 const useStyles = makeStyles({
   root: {
@@ -37,7 +44,7 @@ const useStyles = makeStyles({
   },
 });
 
-const PageContent: React.FC<PageTournamentQuery> = ({ tournament }) => {
+const PageContent: React.FC<TournamentPageQuery> = ({ tournament }) => {
   const classes = useStyles();
 
   return (
@@ -111,24 +118,20 @@ const PageContent: React.FC<PageTournamentQuery> = ({ tournament }) => {
         {tournament.videos.length === 0 ? (
           <NotFound>動画が登録されていません。</NotFound>
         ) : (
-          <Paper>
-            <List component="div">
-              {tournament.videos.map(video => (
-                <Link key={video.id} href={path({ to: 'tournamentVideo', tournamentVideoId: video.id })} passHref>
-                  <ListItem button component="a">
-                    <ListItemText primary={video.title} secondary={`対戦動画 ${video.battlesCount}`} />
-                  </ListItem>
-                </Link>
-              ))}
-            </List>
-          </Paper>
+          <>
+            {tournament.videos.map(tournamentVideo => (
+              <Box key={tournamentVideo.id} mb={4}>
+                <TournamentVideoPlayer tournamentVideo={tournamentVideo} />
+              </Box>
+            ))}
+          </>
         )}
       </Box>
     </>
   );
 };
 
-const Page: React.FC<PageTournamentQuery> = ({ tournament }) => {
+const Page: React.FC<TournamentPageQuery> = ({ tournament }) => {
   return (
     <Content
       activeTab="tournaments"
@@ -142,15 +145,26 @@ const Page: React.FC<PageTournamentQuery> = ({ tournament }) => {
   );
 };
 
-export const getStaticProps: GetStaticProps<PageTournamentQuery> = async ({ params }) => {
-  const tournamentId = params?.tournamentId as string;
-  const data: PageTournamentQuery = await fetchGraphql(PageTournamentDocument, { tournamentId });
+interface Params extends ParsedUrlQuery {
+  tournamentId: string;
+}
+
+export const getStaticProps: GetStaticProps<TournamentPageQuery, Params> = async ({ params }) => {
+  const data: TournamentPageQuery = await fetchGraphql(TournamentPageDocument, { tournamentId: params?.tournamentId });
 
   return { props: data, revalidate: 300 };
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  return { paths: [], fallback: 'blocking' };
+export const getStaticPaths: GetStaticPaths<Params> = async () => {
+  const data: TournamentPagePathsQuery = await fetchGraphql(TournamentPagePathsDocument);
+
+  return {
+    props: data.tournaments.records.map(tournament => ({
+      tournamentId: tournament.id,
+    })),
+    paths: data.tournaments.records.map(({ id }) => ({ params: { tournamentId: id } })),
+    fallback: 'blocking',
+  };
 };
 
 export default Page;
