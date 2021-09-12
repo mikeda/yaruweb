@@ -1,9 +1,0 @@
-query TournamentVideoPagePaths {
-  tournamentVideos(page: 1, per: 100) {
-    records {
-      id
-
-      tournament { id }
-    }
-  }
-}

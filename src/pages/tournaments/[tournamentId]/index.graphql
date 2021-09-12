@@ -19,12 +19,6 @@ fragment TournamentPageVideo on TournamentVideo {
   }
 }
 
-query TournamentPagePaths {
-  tournaments(page: 1, per: 100) {
-    records { id }
-  }
-}
-
 query TournamentPage($tournamentId: ID!) {
   tournament(tournamentId: $tournamentId) {
     id

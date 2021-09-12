@@ -3315,19 +3315,9 @@ export type PlayersPagePlayersQueryVariables = Exact<{
 
 export type PlayersPagePlayersQuery = { __typename?: 'Query', players: { __typename?: 'PlayerCollection', records: Array<{ __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: Maybe<string>, standingsCount: number, battlesCount: number }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
 
-export type TournamentVideoPagePathsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type TournamentVideoPagePathsQuery = { __typename?: 'Query', tournamentVideos: { __typename?: 'TournamentVideoCollection', records: Array<{ __typename?: 'TournamentVideo', id: string, tournament: { __typename?: 'Tournament', id: string } }> } };
-
 export type TournamentPageBattleFragment = { __typename?: 'Battle', id: string, round?: Maybe<BattleRound>, startSec: number, sides: Array<{ __typename?: 'BattleSide', rounds: number, player: { __typename?: 'Player', name: string }, character: { __typename?: 'Character', faceImageUrl: string } }> };
 
 export type TournamentPageVideoFragment = { __typename?: 'TournamentVideo', id: string, youtubeVideoId: string, battles: Array<{ __typename?: 'Battle', id: string, round?: Maybe<BattleRound>, startSec: number, sides: Array<{ __typename?: 'BattleSide', rounds: number, player: { __typename?: 'Player', name: string }, character: { __typename?: 'Character', faceImageUrl: string } }> }> };
-
-export type TournamentPagePathsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type TournamentPagePathsQuery = { __typename?: 'Query', tournaments: { __typename?: 'TournamentCollection', records: Array<{ __typename?: 'Tournament', id: string }> } };
 
 export type TournamentPageQueryVariables = Exact<{
   tournamentId: Scalars['ID'];
@@ -9327,81 +9317,6 @@ export function usePlayersPagePlayersLazyQuery(baseOptions?: Apollo.LazyQueryHoo
 export type PlayersPagePlayersQueryHookResult = ReturnType<typeof usePlayersPagePlayersQuery>;
 export type PlayersPagePlayersLazyQueryHookResult = ReturnType<typeof usePlayersPagePlayersLazyQuery>;
 export type PlayersPagePlayersQueryResult = Apollo.QueryResult<PlayersPagePlayersQuery, PlayersPagePlayersQueryVariables>;
-export const TournamentVideoPagePathsDocument = gql`
-    query TournamentVideoPagePaths {
-  tournamentVideos(page: 1, per: 100) {
-    records {
-      id
-      tournament {
-        id
-      }
-    }
-  }
-}
-    `;
-
-/**
- * __useTournamentVideoPagePathsQuery__
- *
- * To run a query within a React component, call `useTournamentVideoPagePathsQuery` and pass it any options that fit your needs.
- * When your component renders, `useTournamentVideoPagePathsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useTournamentVideoPagePathsQuery({
- *   variables: {
- *   },
- * });
- */
-export function useTournamentVideoPagePathsQuery(baseOptions?: Apollo.QueryHookOptions<TournamentVideoPagePathsQuery, TournamentVideoPagePathsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<TournamentVideoPagePathsQuery, TournamentVideoPagePathsQueryVariables>(TournamentVideoPagePathsDocument, options);
-      }
-export function useTournamentVideoPagePathsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TournamentVideoPagePathsQuery, TournamentVideoPagePathsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<TournamentVideoPagePathsQuery, TournamentVideoPagePathsQueryVariables>(TournamentVideoPagePathsDocument, options);
-        }
-export type TournamentVideoPagePathsQueryHookResult = ReturnType<typeof useTournamentVideoPagePathsQuery>;
-export type TournamentVideoPagePathsLazyQueryHookResult = ReturnType<typeof useTournamentVideoPagePathsLazyQuery>;
-export type TournamentVideoPagePathsQueryResult = Apollo.QueryResult<TournamentVideoPagePathsQuery, TournamentVideoPagePathsQueryVariables>;
-export const TournamentPagePathsDocument = gql`
-    query TournamentPagePaths {
-  tournaments(page: 1, per: 100) {
-    records {
-      id
-    }
-  }
-}
-    `;
-
-/**
- * __useTournamentPagePathsQuery__
- *
- * To run a query within a React component, call `useTournamentPagePathsQuery` and pass it any options that fit your needs.
- * When your component renders, `useTournamentPagePathsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useTournamentPagePathsQuery({
- *   variables: {
- *   },
- * });
- */
-export function useTournamentPagePathsQuery(baseOptions?: Apollo.QueryHookOptions<TournamentPagePathsQuery, TournamentPagePathsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<TournamentPagePathsQuery, TournamentPagePathsQueryVariables>(TournamentPagePathsDocument, options);
-      }
-export function useTournamentPagePathsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TournamentPagePathsQuery, TournamentPagePathsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<TournamentPagePathsQuery, TournamentPagePathsQueryVariables>(TournamentPagePathsDocument, options);
-        }
-export type TournamentPagePathsQueryHookResult = ReturnType<typeof useTournamentPagePathsQuery>;
-export type TournamentPagePathsLazyQueryHookResult = ReturnType<typeof useTournamentPagePathsLazyQuery>;
-export type TournamentPagePathsQueryResult = Apollo.QueryResult<TournamentPagePathsQuery, TournamentPagePathsQueryVariables>;
 export const TournamentPageDocument = gql`
     query TournamentPage($tournamentId: ID!) {
   tournament(tournamentId: $tournamentId) {

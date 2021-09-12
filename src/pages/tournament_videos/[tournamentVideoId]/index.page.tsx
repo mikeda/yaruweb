@@ -29,18 +29,7 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
 
 export const getStaticPaths: GetStaticPaths = async () => {
   return {
-    paths: [
-      { params: { tournamentVideoId: '190' } },
-      { params: { tournamentVideoId: '191' } },
-      { params: { tournamentVideoId: '192' } },
-      { params: { tournamentVideoId: '193' } },
-      { params: { tournamentVideoId: '194' } },
-      { params: { tournamentVideoId: '195' } },
-      { params: { tournamentVideoId: '196' } },
-      { params: { tournamentVideoId: '198' } },
-      { params: { tournamentVideoId: '199' } },
-      { params: { tournamentVideoId: '200' } },
-    ],
+    paths: [],
     fallback: 'blocking',
   };
 };
