@@ -1,5 +1,3 @@
-import { generatePath } from './generatePath';
-
 type Options =
   | { to: 'top' }
   | { to: 'articles' }
@@ -22,8 +20,7 @@ type Options =
   | { to: 'playerStandings'; playerSlug: string }
   | { to: 'signup' }
   | { to: 'tournaments' }
-  | { to: 'tournament'; tournamentId: string }
-  | { to: 'tournamentVideo'; tournamentVideoId: string; battleId?: string };
+  | { to: 'tournament'; tournamentId: string; battleId?: string };
 
 export const path = (options: Options): string => {
   switch (options.to) {
@@ -68,10 +65,10 @@ export const path = (options: Options): string => {
     case 'tournaments':
       return '/tournaments';
     case 'tournament':
-      return `/tournaments/${options.tournamentId}`;
+      return options.battleId
+        ? `/tournaments/${options.tournamentId}#${options.battleId}`
+        : `/tournaments/${options.tournamentId}`;
     case 'signup':
       return '/signup';
-    case 'tournamentVideo':
-      return generatePath(`/tournament_videos/${options.tournamentVideoId}`, { battle: options.battleId });
   }
 };
