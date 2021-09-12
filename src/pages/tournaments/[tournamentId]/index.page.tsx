@@ -159,9 +159,6 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
   const data: TournamentPagePathsQuery = await fetchGraphql(TournamentPagePathsDocument);
 
   return {
-    props: data.tournaments.records.map(tournament => ({
-      tournamentId: tournament.id,
-    })),
     paths: data.tournaments.records.map(({ id }) => ({ params: { tournamentId: id } })),
     fallback: 'blocking',
   };
