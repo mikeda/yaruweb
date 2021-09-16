@@ -1,7 +1,6 @@
 fragment PlayerForm on Player {
   name
   slug
-  pro
   tonamelId
   smashggId
   twitterId

@@ -1454,7 +1454,6 @@ export type Player = {
   description?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   name: Scalars['String'];
-  pro: Scalars['Boolean'];
   slug: Scalars['String'];
   smashggId?: Maybe<Scalars['String']>;
   standingsCount: Scalars['Int'];
@@ -1467,7 +1466,6 @@ export type PlayerAttributes = {
   countryId?: Maybe<Scalars['ID']>;
   name: Scalars['String'];
   slug: Scalars['String'];
-  pro: Scalars['Boolean'];
   tonamelId?: Maybe<Scalars['String']>;
   smashggId?: Maybe<Scalars['String']>;
   twitterId?: Maybe<Scalars['String']>;
@@ -2796,7 +2794,7 @@ export type OrganizerFormFragment = { __typename?: 'Organizer', name: string, sl
 
 export type PlayerCardFragment = { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: Maybe<string>, standingsCount: number, battlesCount: number };
 
-export type PlayerFormFragment = { __typename?: 'Player', name: string, slug: string, pro: boolean, tonamelId?: Maybe<string>, smashggId?: Maybe<string>, twitterId?: Maybe<string>, streamingUrl?: Maybe<string>, description?: Maybe<string>, country?: Maybe<{ __typename?: 'Country', id: string }> };
+export type PlayerFormFragment = { __typename?: 'Player', name: string, slug: string, tonamelId?: Maybe<string>, smashggId?: Maybe<string>, twitterId?: Maybe<string>, streamingUrl?: Maybe<string>, description?: Maybe<string>, country?: Maybe<{ __typename?: 'Country', id: string }> };
 
 export type TournamentCardFragment = { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: Maybe<string>, startsAt: string, videosCount: number, standings: Array<{ __typename?: 'Standing', id: string, place: number, player: { __typename?: 'Player', id: string, name: string } }> };
 
@@ -3089,7 +3087,7 @@ export type DashboardPlayerEditPageQueryVariables = Exact<{
 }>;
 
 
-export type DashboardPlayerEditPageQuery = { __typename?: 'Query', player: { __typename?: 'Player', name: string, slug: string, pro: boolean, tonamelId?: Maybe<string>, smashggId?: Maybe<string>, twitterId?: Maybe<string>, streamingUrl?: Maybe<string>, description?: Maybe<string>, country?: Maybe<{ __typename?: 'Country', id: string }> } };
+export type DashboardPlayerEditPageQuery = { __typename?: 'Query', player: { __typename?: 'Player', name: string, slug: string, tonamelId?: Maybe<string>, smashggId?: Maybe<string>, twitterId?: Maybe<string>, streamingUrl?: Maybe<string>, description?: Maybe<string>, country?: Maybe<{ __typename?: 'Country', id: string }> } };
 
 export type DashboardPlayerEditPageUpdatePlayerMutationVariables = Exact<{
   playerSlug: Scalars['String'];
@@ -3097,7 +3095,7 @@ export type DashboardPlayerEditPageUpdatePlayerMutationVariables = Exact<{
 }>;
 
 
-export type DashboardPlayerEditPageUpdatePlayerMutation = { __typename?: 'Mutation', updatePlayer?: Maybe<{ __typename?: 'UpdatePlayerPayload', player: { __typename?: 'Player', name: string, slug: string, pro: boolean, tonamelId?: Maybe<string>, smashggId?: Maybe<string>, twitterId?: Maybe<string>, streamingUrl?: Maybe<string>, description?: Maybe<string>, country?: Maybe<{ __typename?: 'Country', id: string }> } }> };
+export type DashboardPlayerEditPageUpdatePlayerMutation = { __typename?: 'Mutation', updatePlayer?: Maybe<{ __typename?: 'UpdatePlayerPayload', player: { __typename?: 'Player', name: string, slug: string, tonamelId?: Maybe<string>, smashggId?: Maybe<string>, twitterId?: Maybe<string>, streamingUrl?: Maybe<string>, description?: Maybe<string>, country?: Maybe<{ __typename?: 'Country', id: string }> } }> };
 
 export type DashboardPlayersPageQueryVariables = Exact<{
   page?: Maybe<Scalars['Int']>;
@@ -3870,7 +3868,6 @@ export const PlayerFormFragmentDoc = gql`
     fragment PlayerForm on Player {
   name
   slug
-  pro
   tonamelId
   smashggId
   twitterId

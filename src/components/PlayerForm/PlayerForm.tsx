@@ -9,10 +9,8 @@ import {
   Button,
   Card,
   CardContent,
-  Checkbox,
   Divider,
   FormControl,
-  FormControlLabel,
   Grid,
   InputLabel,
   MenuItem,
@@ -41,26 +39,20 @@ export const PlayerForm: React.FC<Props> = ({ player, onSubmit }) => {
     handleSubmit,
     control,
     setValue,
-    getValues,
     formState: { errors },
   } = useForm<PlayerAttributes>({
     resolver: yupResolver(schema),
     mode: 'onBlur',
-    defaultValues: player
-      ? {
-          name: player.name,
-          slug: player.slug,
-          countryId: player.country?.id,
-          pro: player.pro,
-          tonamelId: player.tonamelId,
-          smashggId: player.smashggId,
-          twitterId: player.twitterId,
-          streamingUrl: player.streamingUrl,
-          description: player.description,
-        }
-      : {
-          pro: false,
-        },
+    defaultValues: player && {
+      name: player.name,
+      slug: player.slug,
+      countryId: player.country?.id,
+      tonamelId: player.tonamelId,
+      smashggId: player.smashggId,
+      twitterId: player.twitterId,
+      streamingUrl: player.streamingUrl,
+      description: player.description,
+    },
   });
 
   if (!data) return null;
@@ -208,20 +200,6 @@ export const PlayerForm: React.FC<Props> = ({ player, onSubmit }) => {
                     error={Boolean(errors.description)}
                     helperText={errors.description?.message}
                     style={{ backgroundColor: 'white' }}
-                  />
-                )}
-              />
-            </Grid>
-
-            <Grid item xs={12}>
-              <Controller
-                name="pro"
-                control={control}
-                render={({ field }) => (
-                  <FormControlLabel
-                    {...field}
-                    label="プロ"
-                    control={<Checkbox {...field} checked={getValues('pro')} />}
                   />
                 )}
               />
