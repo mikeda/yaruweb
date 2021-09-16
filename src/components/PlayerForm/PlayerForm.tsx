@@ -9,10 +9,8 @@ import {
   Button,
   Card,
   CardContent,
-  Checkbox,
   Divider,
   FormControl,
-  FormControlLabel,
   Grid,
   InputLabel,
   MenuItem,
@@ -41,7 +39,6 @@ export const PlayerForm: React.FC<Props> = ({ player, onSubmit }) => {
     handleSubmit,
     control,
     setValue,
-    getValues,
     formState: { errors },
   } = useForm<PlayerAttributes>({
     resolver: yupResolver(schema),
