@@ -60,7 +60,7 @@
     "@graphql-codegen/typescript-resolvers": "^2.2.1",
     "@types/gtag.js": "^0.0.7",
     "@types/is-url": "^1.2.30",
-    "@types/node": "^16.7.10",
+    "@types/node": "^16.9.2",
     "@types/react": "^17.0.19",
     "@types/react-dom": "^17.0.9",
     "@types/react-modal": "^3.12.1",
