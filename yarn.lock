@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@apollo/client@^3.4.9":
-  version "3.4.9"
-  resolved "https://registry.yarnpkg.com/@apollo/client/-/client-3.4.9.tgz#78d0decf8371b768f97c721d1b71c96260bac4db"
-  integrity sha512-1AlYjRJ/ktDApEUEP2DqHI38tqSyhSlsF/Q3fFb/aCbLHQfcSZ1dCv7ZlC9UXRyDwQYc0w23gYJ7wZde6W8P4A==
+"@apollo/client@^3.4.12":
+  version "3.4.12"
+  resolved "https://registry.yarnpkg.com/@apollo/client/-/client-3.4.12.tgz#7f1f5ff0988ccd736ea666cdc54eb4e62e860b5d"
+  integrity sha512-k4Hsl+4zhqruKnI7iFIYzi7JGZgodrUEF/XF9gXde3blxMwID2zKj+pKB8vQ8MWEbfRMeuEno+PZkatR2nE8Mw==
   dependencies:
     "@graphql-typed-document-node/core" "^3.0.0"
     "@wry/context" "^0.6.0"
@@ -18,7 +18,7 @@
     symbol-observable "^4.0.0"
     ts-invariant "^0.9.0"
     tslib "^2.3.0"
-    zen-observable-ts "^1.1.0"
+    zen-observable-ts "~1.1.0"
 
 "@ardatan/fetch-event-source@2.0.2":
   version "2.0.2"
@@ -1246,19 +1246,19 @@
     change-case-all "1.0.14"
     tslib "~2.3.0"
 
-"@graphql-codegen/typescript-resolvers@^2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@graphql-codegen/typescript-resolvers/-/typescript-resolvers-2.1.0.tgz#7d81917731ef7918c16b7075c9d5e36713624c06"
-  integrity sha512-kWHDEkVJNxMJ9CIKhBbNYBdewfOKWpn+VG5sE/tdVCp7lHqYh3Z8Mwva4RCbw8CD+1uCnhp69mU8yG8pEh76Xw==
+"@graphql-codegen/typescript-resolvers@^2.2.1":
+  version "2.2.1"
+  resolved "https://registry.yarnpkg.com/@graphql-codegen/typescript-resolvers/-/typescript-resolvers-2.2.1.tgz#2cf23b595ee94037a1152b669094db9bce616196"
+  integrity sha512-SlJEhlOeYFA+Qj5QJrVruNjmlFy1b8lc5u1NTd3mT+1Y2ZGXLftEfJeofag+9x5KB2I6RRjoAOc/gf0yUwxgxA==
   dependencies:
-    "@graphql-codegen/plugin-helpers" "^2.1.0"
-    "@graphql-codegen/typescript" "^2.1.0"
-    "@graphql-codegen/visitor-plugin-common" "2.1.0"
+    "@graphql-codegen/plugin-helpers" "^2.1.1"
+    "@graphql-codegen/typescript" "^2.2.2"
+    "@graphql-codegen/visitor-plugin-common" "2.2.1"
     "@graphql-tools/utils" "^8.1.1"
     auto-bind "~4.0.0"
     tslib "~2.3.0"
 
-"@graphql-codegen/typescript@^2.1.0", "@graphql-codegen/typescript@^2.1.2", "@graphql-codegen/typescript@^2.2.2":
+"@graphql-codegen/typescript@^2.1.2", "@graphql-codegen/typescript@^2.2.2":
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/@graphql-codegen/typescript/-/typescript-2.2.2.tgz#8ea14c0a7853f6b73cca0ed10ff43b6dbd3731c6"
   integrity sha512-prcB4nNi2iQzZRLla6N6kEPmnE2WU1zz5+sEBcZcqphjWERqQ3zwdSKsuLorE/XxMp500p6BQ96cVo+bFkmVtA==
@@ -1266,22 +1266,6 @@
     "@graphql-codegen/plugin-helpers" "^2.1.1"
     "@graphql-codegen/visitor-plugin-common" "2.2.1"
     auto-bind "~4.0.0"
-    tslib "~2.3.0"
-
-"@graphql-codegen/visitor-plugin-common@2.1.0":
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/@graphql-codegen/visitor-plugin-common/-/visitor-plugin-common-2.1.0.tgz#e45759a21307c607d430866d615509a39df63966"
-  integrity sha512-AfJFtNAL8a1s/+fAePzl97SfEjF1b3m6ylwb6o+tfaBNZ5V/M/b+QvB6QzPu417XH61gtOis+yqqO2VZrhpA2g==
-  dependencies:
-    "@graphql-codegen/plugin-helpers" "^2.1.0"
-    "@graphql-tools/optimize" "^1.0.1"
-    "@graphql-tools/relay-operation-optimizer" "^6.3.7"
-    array.prototype.flatmap "^1.2.4"
-    auto-bind "~4.0.0"
-    change-case-all "1.0.14"
-    dependency-graph "^0.11.0"
-    graphql-tag "^2.11.0"
-    parse-filepath "^1.0.2"
     tslib "~2.3.0"
 
 "@graphql-codegen/visitor-plugin-common@2.2.1":
@@ -2068,10 +2052,10 @@
   resolved "https://registry.yarnpkg.com/@types/minimist/-/minimist-1.2.1.tgz#283f669ff76d7b8260df8ab7a4262cc83d988256"
   integrity sha512-fZQQafSREFyuZcdWFAExYjBiCL7AUCdgsk80iO0q4yihYYdcIiH28CcuPTGFgLOCC8RlW49GSQxdHwZP+I7CNg==
 
-"@types/node@*", "@types/node@>=12.12.47", "@types/node@>=13.7.0", "@types/node@^16.7.10":
-  version "16.7.10"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.7.10.tgz#7aa732cc47341c12a16b7d562f519c2383b6d4fc"
-  integrity sha512-S63Dlv4zIPb8x6MMTgDq5WWRJQe56iBEY0O3SOFA9JrRienkOVDXSXBjjJw6HTNQYSE2JI6GMCR6LVbIMHJVvA==
+"@types/node@*", "@types/node@>=12.12.47", "@types/node@>=13.7.0", "@types/node@^16.9.2":
+  version "16.9.2"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-16.9.2.tgz#81f5a039d6ed1941f8cc57506c74e7c2b8fc64b9"
+  integrity sha512-ZHty/hKoOLZvSz6BtP1g7tc7nUeJhoCf3flLjh8ZEv1vFKBWHXcnMbJMyN/pftSljNyy0kNW/UqI3DccnBnZ8w==
 
 "@types/normalize-package-data@^2.4.0":
   version "2.4.0"
@@ -8550,7 +8534,7 @@ yup@^0.32.9:
     property-expr "^2.0.4"
     toposort "^2.0.2"
 
-zen-observable-ts@^1.1.0:
+zen-observable-ts@~1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/zen-observable-ts/-/zen-observable-ts-1.1.0.tgz#2d1aa9d79b87058e9b75698b92791c1838551f83"
   integrity sha512-1h4zlLSqI2cRLPJUHJFL8bCWHhkpuXkF+dbGkRaWjgDIG26DmzyshUMrdV/rL3UnR+mhaX4fRq8LPouq0MYYIA==
