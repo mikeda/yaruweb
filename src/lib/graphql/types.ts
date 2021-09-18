@@ -40,24 +40,24 @@ export type Article = {
 
 export type ArticleAttributes = {
   category: ArticleCategory;
-  title: Scalars['String'];
-  mainImage?: Maybe<Scalars['String']>;
   content: Scalars['String'];
+  mainImage?: Maybe<Scalars['String']>;
+  title: Scalars['String'];
 };
 
 export enum ArticleCategory {
-  /** 入門 */
-  Intro = 'intro',
-  /** 解説・戦略 */
-  Theory = 'theory',
-  /** イベント */
-  Event = 'event',
   /** 対戦 */
   Battle = 'battle',
+  /** 雑談 */
+  Blog = 'blog',
+  /** イベント */
+  Event = 'event',
+  /** 入門 */
+  Intro = 'intro',
   /** ニュース */
   News = 'news',
-  /** 雑談 */
-  Blog = 'blog'
+  /** 解説・戦略 */
+  Theory = 'theory'
 }
 
 export type ArticleCollection = {
@@ -113,72 +113,72 @@ export type AttackAction = Actionable & {
 
 export type AttackActionAttributes = {
   attackType: AttackTypeEnum;
-  damage?: Maybe<Scalars['Int']>;
   blockAvailable: Scalars['Boolean'];
-  blockState: AttackActionStateEnum;
   blockFrame?: Maybe<Scalars['Int']>;
-  hitAvailable: Scalars['Boolean'];
-  hitState: AttackActionStateEnum;
-  hitFrame?: Maybe<Scalars['Int']>;
-  counterHitAvailable: Scalars['Boolean'];
-  counterHitState: AttackActionStateEnum;
-  counterHitFrame?: Maybe<Scalars['Int']>;
+  blockState: AttackActionStateEnum;
   cleanHitAvailable: Scalars['Boolean'];
-  cleanHitState: AttackActionStateEnum;
   cleanHitFrame?: Maybe<Scalars['Int']>;
+  cleanHitState: AttackActionStateEnum;
+  counterHitAvailable: Scalars['Boolean'];
+  counterHitFrame?: Maybe<Scalars['Int']>;
+  counterHitState: AttackActionStateEnum;
   crouchingHitAvailable: Scalars['Boolean'];
-  crouchingHitState: AttackActionStateEnum;
   crouchingHitFrame?: Maybe<Scalars['Int']>;
+  crouchingHitState: AttackActionStateEnum;
+  damage?: Maybe<Scalars['Int']>;
+  hitAvailable: Scalars['Boolean'];
+  hitFrame?: Maybe<Scalars['Int']>;
+  hitState: AttackActionStateEnum;
 };
 
 export enum AttackActionStateEnum {
-  /** 指定なし */
-  Unspecified = 'unspecified',
+  /** のけぞり */
+  BendBack = 'bend_back',
+  /** へこみ */
+  Bow = 'bow',
+  /** 強制しゃがみ */
+  Crouching = 'crouching',
   /** ダウン */
   Down = 'down',
+  /** 転びコンボ */
+  FallDown = 'fall_down',
   /** 空中コンボ */
   Juggle = 'juggle',
-  /** 崩れコンボ */
-  Stun = 'stun',
+  /** ガード可能な有利 */
+  OnlyBlock = 'only_block',
+  /** 回復可能なよろけダウン */
+  RecoverableDown = 'recoverable_down',
   /** スクリューコンボ */
   Screw = 'screw',
   /** 叩きつけコンボ */
   Smash = 'smash',
-  /** 転びコンボ */
-  FallDown = 'fall_down',
-  /** 強制しゃがみ */
-  Crouching = 'crouching',
+  /** 崩れコンボ */
+  Stun = 'stun',
   /** きりもみ */
   Twist = 'twist',
-  /** ガード可能な有利 */
-  OnlyBlock = 'only_block',
-  /** へこみ */
-  Bow = 'bow',
-  /** のけぞり */
-  BendBack = 'bend_back',
-  /** 回復可能なよろけダウン */
-  RecoverableDown = 'recoverable_down'
+  /** 指定なし */
+  Unspecified = 'unspecified'
 }
 
 export enum AttackTypeEnum {
   /** 上段 */
   H = 'h',
-  /** 中段 */
-  M = 'm',
   /** 下段 */
   L = 'l',
+  /** 中段 */
+  M = 'm',
   /** 特殊中段 */
   Sm = 'sm',
-  /** 上段ガード不能 */
-  Ubh = 'ubh',
-  /** 中段ガード不能 */
-  Ubm = 'ubm',
-  /** 下段ガード不能 */
-  Ubl = 'ubl',
+  /** 打撃投げ */
+  T = 't',
   /** 空中ガード不能 */
   Uba = 'uba',
-  /** 打撃投げ */
-  T = 't'
+  /** 上段ガード不能 */
+  Ubh = 'ubh',
+  /** 下段ガード不能 */
+  Ubl = 'ubl',
+  /** 中段ガード不能 */
+  Ubm = 'ubm'
 }
 
 export type Battle = {
@@ -191,10 +191,10 @@ export type Battle = {
 };
 
 export type BattleAttributes = {
-  tournamentVideoId: Scalars['ID'];
-  startSec: Scalars['Int'];
   round?: Maybe<BattleRound>;
   sides: Array<BattleSideAttributes>;
+  startSec: Scalars['Int'];
+  tournamentVideoId: Scalars['ID'];
 };
 
 export type BattleCollection = {
@@ -218,22 +218,22 @@ export type BattleCountCollection = {
 };
 
 export enum BattleRound {
+  /** Final */
+  Final = 'final',
   /** Grand Final */
   GrandFinal = 'grand_final',
   /** Grand Final(リセット) */
   GrandFinalReset = 'grand_final_reset',
-  /** Winners Final */
-  WinnersFinal = 'winners_final',
-  /** Winners Semifinal */
-  WinnersSemifinal = 'winners_semifinal',
   /** Losers Final */
   LosersFinal = 'losers_final',
   /** Losers Semifinal */
   LosersSemifinal = 'losers_semifinal',
-  /** Final */
-  Final = 'final',
   /** Semifinal */
-  Semifinal = 'semifinal'
+  Semifinal = 'semifinal',
+  /** Winners Final */
+  WinnersFinal = 'winners_final',
+  /** Winners Semifinal */
+  WinnersSemifinal = 'winners_semifinal'
 }
 
 export type BattleSide = {
@@ -245,8 +245,8 @@ export type BattleSide = {
 };
 
 export type BattleSideAttributes = {
-  playerId: Scalars['ID'];
   characterId: Scalars['ID'];
+  playerId: Scalars['ID'];
   rounds: Scalars['Int'];
 };
 
@@ -259,6 +259,7 @@ export type Channel = {
 
 export type Character = {
   __typename?: 'Character';
+  article?: Maybe<CharacterArticle>;
   battlesCount: Scalars['Int'];
   comboCategories: Array<ComboCategory>;
   combosCount: Scalars['Int'];
@@ -281,19 +282,29 @@ export type Character = {
   story: Scalars['String'];
 };
 
+export type CharacterArticle = {
+  __typename?: 'CharacterArticle';
+  content: Scalars['String'];
+  id: Scalars['ID'];
+};
+
+export type CharacterArticleAttributes = {
+  content: Scalars['String'];
+};
+
 export type CharacterAttributes = {
-  name: Scalars['String'];
-  nameKana: Scalars['String'];
-  longName: Scalars['String'];
-  longNameKana: Scalars['String'];
-  slug: Scalars['String'];
-  mainImage?: Maybe<Scalars['String']>;
-  faceImage?: Maybe<Scalars['String']>;
   country: Scalars['String'];
-  fightingStyle: Scalars['String'];
-  story: Scalars['String'];
   description: Scalars['String'];
   dlc: Scalars['Boolean'];
+  faceImage?: Maybe<Scalars['String']>;
+  fightingStyle: Scalars['String'];
+  longName: Scalars['String'];
+  longNameKana: Scalars['String'];
+  mainImage?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
+  nameKana: Scalars['String'];
+  slug: Scalars['String'];
+  story: Scalars['String'];
 };
 
 export type CharacterCollection = {
@@ -323,13 +334,13 @@ export type Combo = {
 };
 
 export type ComboAttributes = {
-  name: Scalars['String'];
-  damage?: Maybe<Scalars['Int']>;
-  note?: Maybe<Scalars['String']>;
-  conditionIds: Array<Scalars['ID']>;
-  stateId?: Maybe<Scalars['ID']>;
-  operationIds: Array<Scalars['ID']>;
   comboVideoId?: Maybe<Scalars['ID']>;
+  conditionIds: Array<Scalars['ID']>;
+  damage?: Maybe<Scalars['Int']>;
+  name: Scalars['String'];
+  note?: Maybe<Scalars['String']>;
+  operationIds: Array<Scalars['ID']>;
+  stateId?: Maybe<Scalars['ID']>;
 };
 
 export type ComboCategory = {
@@ -361,8 +372,8 @@ export type Command = {
 };
 
 export type CommandAttributes = {
-  stateId?: Maybe<Scalars['ID']>;
   operationIds: Array<Scalars['ID']>;
+  stateId?: Maybe<Scalars['ID']>;
 };
 
 export type Condition = {
@@ -381,9 +392,9 @@ export type Country = {
 
 /** Autogenerated input type of CreateArticleImage */
 export type CreateArticleImageInput = {
-  image: Scalars['String'];
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>;
+  image: Scalars['String'];
 };
 
 /** Autogenerated return type of CreateArticleImage */
@@ -403,9 +414,9 @@ export type CreateArticleInput = {
 
 /** Autogenerated input type of CreateArticleLink */
 export type CreateArticleLinkInput = {
-  url: Scalars['String'];
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>;
+  url: Scalars['String'];
 };
 
 /** Autogenerated return type of CreateArticleLink */
@@ -441,10 +452,10 @@ export type CreateArticleVideoPayload = {
 
 /** Autogenerated input type of CreateAttackAction */
 export type CreateAttackActionInput = {
-  moveId: Scalars['ID'];
   attributes: AttackActionAttributes;
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>;
+  moveId: Scalars['ID'];
 };
 
 /** Autogenerated return type of CreateAttackAction */
@@ -470,6 +481,22 @@ export type CreateBattlePayload = {
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
+/** Autogenerated input type of CreateCharacterArticle */
+export type CreateCharacterArticleInput = {
+  attributes: CharacterArticleAttributes;
+  character: Scalars['String'];
+  /** A unique identifier for the client performing the mutation. */
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+/** Autogenerated return type of CreateCharacterArticle */
+export type CreateCharacterArticlePayload = {
+  __typename?: 'CreateCharacterArticlePayload';
+  characterArticle: CharacterArticle;
+  /** A unique identifier for the client performing the mutation. */
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
 /** Autogenerated input type of CreateCharacter */
 export type CreateCharacterInput = {
   attributes: CharacterAttributes;
@@ -487,8 +514,8 @@ export type CreateCharacterPayload = {
 
 /** Autogenerated input type of CreateComboCategory */
 export type CreateComboCategoryInput = {
-  characterSlug: Scalars['String'];
   attributes: ComboCategoryAttributes;
+  characterSlug: Scalars['String'];
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>;
 };
@@ -503,10 +530,10 @@ export type CreateComboCategoryPayload = {
 
 /** Autogenerated input type of CreateCombo */
 export type CreateComboInput = {
-  comboCategoryId: Scalars['ID'];
   attributes: ComboAttributes;
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>;
+  comboCategoryId: Scalars['ID'];
 };
 
 /** Autogenerated return type of CreateCombo */
@@ -534,10 +561,10 @@ export type CreateComboVideoPayload = {
 
 /** Autogenerated input type of CreateCommand */
 export type CreateCommandInput = {
-  moveId: Scalars['ID'];
   attributes: CommandAttributes;
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>;
+  moveId: Scalars['ID'];
 };
 
 /** Autogenerated return type of CreateCommand */
@@ -550,8 +577,8 @@ export type CreateCommandPayload = {
 
 /** Autogenerated input type of CreateMoveCategory */
 export type CreateMoveCategoryInput = {
-  characterSlug: Scalars['String'];
   attributes: MoveCategoryAttributes;
+  characterSlug: Scalars['String'];
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>;
 };
@@ -566,10 +593,10 @@ export type CreateMoveCategoryPayload = {
 
 /** Autogenerated input type of CreateMove */
 export type CreateMoveInput = {
-  moveCategoryId: Scalars['ID'];
   attributes: MoveAttributes;
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>;
+  moveCategoryId: Scalars['ID'];
 };
 
 /** Autogenerated return type of CreateMove */
@@ -610,11 +637,27 @@ export type CreateOrganizerPayload = {
   organizer: Organizer;
 };
 
-/** Autogenerated input type of CreatePlayerFromSmashgg */
-export type CreatePlayerFromSmashggInput = {
-  smashggId: Scalars['String'];
+/** Autogenerated input type of CreatePlayerArticle */
+export type CreatePlayerArticleInput = {
+  attributes: PlayerArticleAttributes;
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>;
+  player: Scalars['String'];
+};
+
+/** Autogenerated return type of CreatePlayerArticle */
+export type CreatePlayerArticlePayload = {
+  __typename?: 'CreatePlayerArticlePayload';
+  /** A unique identifier for the client performing the mutation. */
+  clientMutationId?: Maybe<Scalars['String']>;
+  playerArticle: PlayerArticle;
+};
+
+/** Autogenerated input type of CreatePlayerFromSmashgg */
+export type CreatePlayerFromSmashggInput = {
+  /** A unique identifier for the client performing the mutation. */
+  clientMutationId?: Maybe<Scalars['String']>;
+  smashggId: Scalars['String'];
 };
 
 /** Autogenerated return type of CreatePlayerFromSmashgg */
@@ -642,10 +685,10 @@ export type CreatePlayerPayload = {
 
 /** Autogenerated input type of CreateStanding */
 export type CreateStandingInput = {
-  tournamentId: Scalars['ID'];
   attributes: StandingAttributes;
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>;
+  tournamentId: Scalars['ID'];
 };
 
 /** Autogenerated return type of CreateStanding */
@@ -658,10 +701,10 @@ export type CreateStandingPayload = {
 
 /** Autogenerated input type of CreateThrowAction */
 export type CreateThrowActionInput = {
-  moveId: Scalars['ID'];
   attributes: ThrowActionAttributes;
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>;
+  moveId: Scalars['ID'];
 };
 
 /** Autogenerated return type of CreateThrowAction */
@@ -689,10 +732,10 @@ export type CreateTournamentPayload = {
 
 /** Autogenerated input type of CreateTournamentVideo */
 export type CreateTournamentVideoInput = {
-  tournamentId: Scalars['ID'];
-  url: Scalars['String'];
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>;
+  tournamentId: Scalars['ID'];
+  url: Scalars['String'];
 };
 
 /** Autogenerated return type of CreateTournamentVideo */
@@ -728,9 +771,9 @@ export type CurrentUser = {
 };
 
 export type CurrentUserAttributes = {
-  name: Scalars['String'];
-  description?: Maybe<Scalars['String']>;
   avatar?: Maybe<Scalars['String']>;
+  description?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
 };
 
 /** Autogenerated input type of DeleteAction */
@@ -780,9 +823,9 @@ export type DeleteBattlePayload = {
 
 /** Autogenerated input type of DeleteComboCategory */
 export type DeleteComboCategoryInput = {
-  comboCategoryId: Scalars['ID'];
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>;
+  comboCategoryId: Scalars['ID'];
 };
 
 /** Autogenerated return type of DeleteComboCategory */
@@ -795,9 +838,9 @@ export type DeleteComboCategoryPayload = {
 
 /** Autogenerated input type of DeleteCombo */
 export type DeleteComboInput = {
-  comboId: Scalars['ID'];
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>;
+  comboId: Scalars['ID'];
 };
 
 /** Autogenerated return type of DeleteCombo */
@@ -810,9 +853,9 @@ export type DeleteComboPayload = {
 
 /** Autogenerated input type of DeleteCommand */
 export type DeleteCommandInput = {
-  commandId: Scalars['ID'];
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>;
+  commandId: Scalars['ID'];
 };
 
 /** Autogenerated return type of DeleteCommand */
@@ -825,9 +868,9 @@ export type DeleteCommandPayload = {
 
 /** Autogenerated input type of DeleteMoveCategory */
 export type DeleteMoveCategoryInput = {
-  moveCategoryId: Scalars['ID'];
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>;
+  moveCategoryId: Scalars['ID'];
 };
 
 /** Autogenerated return type of DeleteMoveCategory */
@@ -840,9 +883,9 @@ export type DeleteMoveCategoryPayload = {
 
 /** Autogenerated input type of DeleteMove */
 export type DeleteMoveInput = {
-  moveId: Scalars['ID'];
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>;
+  moveId: Scalars['ID'];
 };
 
 /** Autogenerated return type of DeleteMove */
@@ -855,9 +898,9 @@ export type DeleteMovePayload = {
 
 /** Autogenerated input type of DeleteOrganizer */
 export type DeleteOrganizerInput = {
-  organizerSlug: Scalars['String'];
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>;
+  organizerSlug: Scalars['String'];
 };
 
 /** Autogenerated return type of DeleteOrganizer */
@@ -870,9 +913,9 @@ export type DeleteOrganizerPayload = {
 
 /** Autogenerated input type of DeletePlayer */
 export type DeletePlayerInput = {
-  playerSlug: Scalars['String'];
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>;
+  playerSlug: Scalars['String'];
 };
 
 /** Autogenerated return type of DeletePlayer */
@@ -885,9 +928,9 @@ export type DeletePlayerPayload = {
 
 /** Autogenerated input type of DeleteStanding */
 export type DeleteStandingInput = {
-  standingId: Scalars['ID'];
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>;
+  standingId: Scalars['ID'];
 };
 
 /** Autogenerated return type of DeleteStanding */
@@ -900,9 +943,9 @@ export type DeleteStandingPayload = {
 
 /** Autogenerated input type of DeleteTournament */
 export type DeleteTournamentInput = {
-  tournamentId: Scalars['ID'];
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>;
+  tournamentId: Scalars['ID'];
 };
 
 /** Autogenerated return type of DeleteTournament */
@@ -915,9 +958,9 @@ export type DeleteTournamentPayload = {
 
 /** Autogenerated input type of DeleteTournamentVideo */
 export type DeleteTournamentVideoInput = {
-  tournamentVideoId: Scalars['ID'];
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>;
+  tournamentVideoId: Scalars['ID'];
 };
 
 /** Autogenerated return type of DeleteTournamentVideo */
@@ -942,7 +985,6 @@ export type FavArticlePayload = {
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>;
 };
-
 
 export type League = {
   __typename?: 'League';
@@ -978,19 +1020,19 @@ export type Move = {
 
 export type MoveAttributes = {
   afterStateId?: Maybe<Scalars['ID']>;
-  moveVideoId?: Maybe<Scalars['ID']>;
-  opponentState?: Maybe<OpponentStateEnum>;
-  name: Scalars['String'];
-  kana?: Maybe<Scalars['String']>;
-  startUpFrame?: Maybe<Scalars['Int']>;
-  powerCrush: Scalars['Boolean'];
-  crouchingStatus: Scalars['Boolean'];
-  jumpStatus: Scalars['Boolean'];
-  homing: Scalars['Boolean'];
-  screw: Scalars['Boolean'];
-  wallBound: Scalars['Boolean'];
-  note?: Maybe<Scalars['String']>;
   conditionIds: Array<Scalars['ID']>;
+  crouchingStatus: Scalars['Boolean'];
+  homing: Scalars['Boolean'];
+  jumpStatus: Scalars['Boolean'];
+  kana?: Maybe<Scalars['String']>;
+  moveVideoId?: Maybe<Scalars['ID']>;
+  name: Scalars['String'];
+  note?: Maybe<Scalars['String']>;
+  opponentState?: Maybe<OpponentStateEnum>;
+  powerCrush: Scalars['Boolean'];
+  screw: Scalars['Boolean'];
+  startUpFrame?: Maybe<Scalars['Int']>;
+  wallBound: Scalars['Boolean'];
 };
 
 export type MoveCategory = {
@@ -1022,6 +1064,7 @@ export type Mutation = {
   createAttackAction?: Maybe<CreateAttackActionPayload>;
   createBattle?: Maybe<CreateBattlePayload>;
   createCharacter?: Maybe<CreateCharacterPayload>;
+  createCharacterArticle?: Maybe<CreateCharacterArticlePayload>;
   createCombo?: Maybe<CreateComboPayload>;
   createComboCategory?: Maybe<CreateComboCategoryPayload>;
   createComboVideo?: Maybe<CreateComboVideoPayload>;
@@ -1031,6 +1074,7 @@ export type Mutation = {
   createMoveVideo?: Maybe<CreateMoveVideoPayload>;
   createOrganizer?: Maybe<CreateOrganizerPayload>;
   createPlayer?: Maybe<CreatePlayerPayload>;
+  createPlayerArticle?: Maybe<CreatePlayerArticlePayload>;
   createPlayerFromSmashgg?: Maybe<CreatePlayerFromSmashggPayload>;
   createStanding?: Maybe<CreateStandingPayload>;
   createThrowAction?: Maybe<CreateThrowActionPayload>;
@@ -1059,6 +1103,7 @@ export type Mutation = {
   updateAttackAction?: Maybe<UpdateAttackActionPayload>;
   updateBattle?: Maybe<UpdateBattlePayload>;
   updateCharacter?: Maybe<UpdateCharacterPayload>;
+  updateCharacterArticle?: Maybe<UpdateCharacterArticlePayload>;
   updateCombo?: Maybe<UpdateComboPayload>;
   updateComboCategory?: Maybe<UpdateComboCategoryPayload>;
   updateComboCategoryPosition?: Maybe<UpdateComboCategoryPositionPayload>;
@@ -1071,6 +1116,7 @@ export type Mutation = {
   updateMovePosition?: Maybe<UpdateMovePositionPayload>;
   updateOrganizer?: Maybe<UpdateOrganizerPayload>;
   updatePlayer?: Maybe<UpdatePlayerPayload>;
+  updatePlayerArticle?: Maybe<UpdatePlayerArticlePayload>;
   updateStanding?: Maybe<UpdateStandingPayload>;
   updateThrowAction?: Maybe<UpdateThrowActionPayload>;
   updateTournament?: Maybe<UpdateTournamentPayload>;
@@ -1110,6 +1156,11 @@ export type MutationCreateBattleArgs = {
 
 export type MutationCreateCharacterArgs = {
   input: CreateCharacterInput;
+};
+
+
+export type MutationCreateCharacterArticleArgs = {
+  input: CreateCharacterArticleInput;
 };
 
 
@@ -1155,6 +1206,11 @@ export type MutationCreateOrganizerArgs = {
 
 export type MutationCreatePlayerArgs = {
   input: CreatePlayerInput;
+};
+
+
+export type MutationCreatePlayerArticleArgs = {
+  input: CreatePlayerArticleInput;
 };
 
 
@@ -1298,6 +1354,11 @@ export type MutationUpdateCharacterArgs = {
 };
 
 
+export type MutationUpdateCharacterArticleArgs = {
+  input: UpdateCharacterArticleInput;
+};
+
+
 export type MutationUpdateComboArgs = {
   input: UpdateComboInput;
 };
@@ -1358,6 +1419,11 @@ export type MutationUpdatePlayerArgs = {
 };
 
 
+export type MutationUpdatePlayerArticleArgs = {
+  input: UpdatePlayerArticleInput;
+};
+
+
 export type MutationUpdateStandingArgs = {
   input: UpdateStandingInput;
 };
@@ -1386,27 +1452,27 @@ export type Operation = {
 };
 
 export enum OpponentStateEnum {
+  /** 空中 */
+  ToAir = 'to_air',
+  /** 後側 */
+  ToBack = 'to_back',
   /** しゃがみ中 */
   ToCrouching = 'to_crouching',
   /** ダウン中 */
   ToDown = 'to_down',
-  /** 空中 */
-  ToAir = 'to_air',
-  /** 壁やられ中 */
-  ToWallSplat = 'to_wall_splat',
   /** 左側 */
   ToLeft = 'to_left',
   /** 右側 */
   ToRight = 'to_right',
-  /** 後側 */
-  ToBack = 'to_back'
+  /** 壁やられ中 */
+  ToWallSplat = 'to_wall_splat'
 }
 
 export enum Order {
-  /** 人気 */
-  Popular = 'popular',
   /** 新着 */
-  New = 'new'
+  New = 'new',
+  /** 人気 */
+  Popular = 'popular'
 }
 
 export type Organizer = {
@@ -1423,12 +1489,12 @@ export type Organizer = {
 };
 
 export type OrganizerAttributes = {
+  description?: Maybe<Scalars['String']>;
   name: Scalars['String'];
   slug: Scalars['String'];
+  streamingUrl?: Maybe<Scalars['String']>;
   tonamelId?: Maybe<Scalars['String']>;
   twitterId?: Maybe<Scalars['String']>;
-  streamingUrl?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['String']>;
 };
 
 export type OrganizerCollection = {
@@ -1447,6 +1513,7 @@ export type Paging = {
 
 export type Player = {
   __typename?: 'Player';
+  article?: Maybe<PlayerArticle>;
   avatarUrl?: Maybe<Scalars['String']>;
   battleCounts: Array<BattleCount>;
   battlesCount: Scalars['Int'];
@@ -1462,16 +1529,26 @@ export type Player = {
   twitterId?: Maybe<Scalars['String']>;
 };
 
+export type PlayerArticle = {
+  __typename?: 'PlayerArticle';
+  content: Scalars['String'];
+  id: Scalars['ID'];
+};
+
+export type PlayerArticleAttributes = {
+  content: Scalars['String'];
+};
+
 export type PlayerAttributes = {
+  avatar?: Maybe<Scalars['String']>;
   countryId?: Maybe<Scalars['ID']>;
+  description?: Maybe<Scalars['String']>;
   name: Scalars['String'];
   slug: Scalars['String'];
-  tonamelId?: Maybe<Scalars['String']>;
   smashggId?: Maybe<Scalars['String']>;
-  twitterId?: Maybe<Scalars['String']>;
-  avatar?: Maybe<Scalars['String']>;
   streamingUrl?: Maybe<Scalars['String']>;
-  description?: Maybe<Scalars['String']>;
+  tonamelId?: Maybe<Scalars['String']>;
+  twitterId?: Maybe<Scalars['String']>;
 };
 
 export type PlayerCollection = {
@@ -1560,19 +1637,19 @@ export type QueryAttackActionArgs = {
 
 
 export type QueryBattleCountsArgs = {
-  playerSlug?: Maybe<Scalars['String']>;
   characterSlug?: Maybe<Scalars['String']>;
   page?: Maybe<Scalars['Int']>;
   per?: Maybe<Scalars['Int']>;
+  playerSlug?: Maybe<Scalars['String']>;
 };
 
 
 export type QueryBattlesArgs = {
-  tournamentVideoId?: Maybe<Scalars['ID']>;
-  playerSlug?: Maybe<Scalars['String']>;
   characterSlug?: Maybe<Scalars['String']>;
   page?: Maybe<Scalars['Int']>;
   per?: Maybe<Scalars['Int']>;
+  playerSlug?: Maybe<Scalars['String']>;
+  tournamentVideoId?: Maybe<Scalars['ID']>;
 };
 
 
@@ -1582,9 +1659,9 @@ export type QueryCharacterArgs = {
 
 
 export type QueryCharactersArgs = {
+  order?: Maybe<CharacterOrder>;
   page?: Maybe<Scalars['Int']>;
   per?: Maybe<Scalars['Int']>;
-  order?: Maybe<CharacterOrder>;
 };
 
 
@@ -1655,9 +1732,9 @@ export type QueryOrganizerArgs = {
 
 
 export type QueryOrganizersArgs = {
+  keyword?: Maybe<Scalars['String']>;
   page?: Maybe<Scalars['Int']>;
   per?: Maybe<Scalars['Int']>;
-  keyword?: Maybe<Scalars['String']>;
 };
 
 
@@ -1667,17 +1744,17 @@ export type QueryPlayerArgs = {
 
 
 export type QueryPlayersArgs = {
+  keyword?: Maybe<Scalars['String']>;
   page?: Maybe<Scalars['Int']>;
   per?: Maybe<Scalars['Int']>;
-  keyword?: Maybe<Scalars['String']>;
 };
 
 
 export type QueryStandingsArgs = {
-  playerSlug?: Maybe<Scalars['String']>;
-  tournamentId?: Maybe<Scalars['ID']>;
   page?: Maybe<Scalars['Int']>;
   per?: Maybe<Scalars['Int']>;
+  playerSlug?: Maybe<Scalars['String']>;
+  tournamentId?: Maybe<Scalars['ID']>;
 };
 
 
@@ -1702,17 +1779,17 @@ export type QueryTournamentVideoArgs = {
 
 
 export type QueryTournamentVideosArgs = {
-  tournamentId?: Maybe<Scalars['ID']>;
   page?: Maybe<Scalars['Int']>;
   per?: Maybe<Scalars['Int']>;
+  tournamentId?: Maybe<Scalars['ID']>;
 };
 
 
 export type QueryTournamentsArgs = {
+  keyword?: Maybe<Scalars['String']>;
+  organizerId?: Maybe<Scalars['ID']>;
   page?: Maybe<Scalars['Int']>;
   per?: Maybe<Scalars['Int']>;
-  organizerId?: Maybe<Scalars['ID']>;
-  keyword?: Maybe<Scalars['String']>;
   thisWeek?: Maybe<Scalars['Boolean']>;
 };
 
@@ -1741,8 +1818,8 @@ export type Standing = {
 };
 
 export type StandingAttributes = {
-  playerId: Scalars['ID'];
   place: Scalars['Int'];
+  playerId: Scalars['ID'];
 };
 
 export type StandingCollection = {
@@ -1788,60 +1865,60 @@ export type ThrowAction = Actionable & {
 };
 
 export type ThrowActionAttributes = {
-  throwType: ThrowTypeEnum;
   damage: Scalars['Int'];
   escape: ThrowEscapeEnum;
   throwAvailable: Scalars['Boolean'];
-  throwState: ThrowActionStateEnum;
-  throwFrame?: Maybe<Scalars['Int']>;
   throwEscapeAvailable: Scalars['Boolean'];
-  throwEscapeState: ThrowActionStateEnum;
   throwEscapeFrame?: Maybe<Scalars['Int']>;
+  throwEscapeState: ThrowActionStateEnum;
+  throwFrame?: Maybe<Scalars['Int']>;
+  throwState: ThrowActionStateEnum;
+  throwType: ThrowTypeEnum;
 };
 
 export enum ThrowActionStateEnum {
-  /** 指定なし */
-  Unspecified = 'unspecified',
   /** ダウン */
   Down = 'down',
   /** 空中コンボ */
-  Juggle = 'juggle'
+  Juggle = 'juggle',
+  /** 指定なし */
+  Unspecified = 'unspecified'
 }
 
 export enum ThrowEscapeEnum {
-  /** LP OR RP */
-  LpOrRp = 'lp_or_rp',
-  /** WP */
-  Wp = 'wp',
+  /** 不可 */
+  Inescapable = 'inescapable',
   /** LP */
   Lp = 'lp',
+  /** LP OR RP */
+  LpOrRp = 'lp_or_rp',
   /** RP */
   Rp = 'rp',
-  /** 不可 */
-  Inescapable = 'inescapable'
+  /** WP */
+  Wp = 'wp'
 }
 
 export enum ThrowTypeEnum {
-  /** 上段投げ */
-  High = 'high',
-  /** 中段投げ */
-  Middle = 'middle',
-  /** 下段投げ */
-  Low = 'low',
-  /** ダウン投げ */
-  Down = 'down',
-  /** 空中投げ */
-  Juggle = 'juggle',
-  /** 壁投げ */
-  Wall = 'wall',
+  /** 背面投げ */
+  Back = 'back',
   /** 投げコンボ */
   Combo = 'combo',
+  /** ダウン投げ */
+  Down = 'down',
+  /** 上段投げ */
+  High = 'high',
+  /** 空中投げ */
+  Juggle = 'juggle',
   /** 左側面投げ */
   Left = 'left',
+  /** 下段投げ */
+  Low = 'low',
+  /** 中段投げ */
+  Middle = 'middle',
   /** 右側面投げ */
   Right = 'right',
-  /** 背面投げ */
-  Back = 'back'
+  /** 壁投げ */
+  Wall = 'wall'
 }
 
 export type Tournament = {
@@ -1862,14 +1939,14 @@ export type Tournament = {
 };
 
 export type TournamentAttributes = {
-  organizerId?: Maybe<Scalars['ID']>;
-  leagueId?: Maybe<Scalars['ID']>;
-  name: Scalars['String'];
-  mainImage?: Maybe<Scalars['String']>;
-  url: Scalars['String'];
-  streamingUrl?: Maybe<Scalars['String']>;
-  startsAt: Scalars['String'];
   description: Scalars['String'];
+  leagueId?: Maybe<Scalars['ID']>;
+  mainImage?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
+  organizerId?: Maybe<Scalars['ID']>;
+  startsAt: Scalars['String'];
+  streamingUrl?: Maybe<Scalars['String']>;
+  url: Scalars['String'];
 };
 
 export type TournamentCollection = {
@@ -1950,8 +2027,8 @@ export type UpdateAttackActionPayload = {
 
 /** Autogenerated input type of UpdateBattle */
 export type UpdateBattleInput = {
-  battleId: Scalars['ID'];
   attributes: BattleAttributes;
+  battleId: Scalars['ID'];
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>;
 };
@@ -1964,10 +2041,26 @@ export type UpdateBattlePayload = {
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
+/** Autogenerated input type of UpdateCharacterArticle */
+export type UpdateCharacterArticleInput = {
+  attributes: CharacterArticleAttributes;
+  character: Scalars['String'];
+  /** A unique identifier for the client performing the mutation. */
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
+/** Autogenerated return type of UpdateCharacterArticle */
+export type UpdateCharacterArticlePayload = {
+  __typename?: 'UpdateCharacterArticlePayload';
+  characterArticle: CharacterArticle;
+  /** A unique identifier for the client performing the mutation. */
+  clientMutationId?: Maybe<Scalars['String']>;
+};
+
 /** Autogenerated input type of UpdateCharacter */
 export type UpdateCharacterInput = {
-  characterSlug: Scalars['String'];
   attributes: CharacterAttributes;
+  characterSlug: Scalars['String'];
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>;
 };
@@ -1982,10 +2075,10 @@ export type UpdateCharacterPayload = {
 
 /** Autogenerated input type of UpdateComboCategory */
 export type UpdateComboCategoryInput = {
-  comboCategoryId: Scalars['ID'];
   attributes: ComboCategoryAttributes;
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>;
+  comboCategoryId: Scalars['ID'];
 };
 
 /** Autogenerated return type of UpdateComboCategory */
@@ -1998,10 +2091,10 @@ export type UpdateComboCategoryPayload = {
 
 /** Autogenerated input type of UpdateComboCategoryPosition */
 export type UpdateComboCategoryPositionInput = {
-  comboCategoryId: Scalars['ID'];
-  newPosition: Scalars['Int'];
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>;
+  comboCategoryId: Scalars['ID'];
+  newPosition: Scalars['Int'];
 };
 
 /** Autogenerated return type of UpdateComboCategoryPosition */
@@ -2014,10 +2107,10 @@ export type UpdateComboCategoryPositionPayload = {
 
 /** Autogenerated input type of UpdateCombo */
 export type UpdateComboInput = {
-  comboId: Scalars['ID'];
   attributes: ComboAttributes;
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>;
+  comboId: Scalars['ID'];
 };
 
 /** Autogenerated return type of UpdateCombo */
@@ -2030,10 +2123,10 @@ export type UpdateComboPayload = {
 
 /** Autogenerated input type of UpdateComboPosition */
 export type UpdateComboPositionInput = {
-  comboId: Scalars['ID'];
-  newPosition: Scalars['Int'];
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>;
+  comboId: Scalars['ID'];
+  newPosition: Scalars['Int'];
 };
 
 /** Autogenerated return type of UpdateComboPosition */
@@ -2046,10 +2139,10 @@ export type UpdateComboPositionPayload = {
 
 /** Autogenerated input type of UpdateCommand */
 export type UpdateCommandInput = {
-  commandId: Scalars['ID'];
   attributes: CommandAttributes;
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>;
+  commandId: Scalars['ID'];
 };
 
 /** Autogenerated return type of UpdateCommand */
@@ -2077,10 +2170,10 @@ export type UpdateCurrentUserPayload = {
 
 /** Autogenerated input type of UpdateMoveCategory */
 export type UpdateMoveCategoryInput = {
-  moveCategoryId: Scalars['ID'];
   attributes: MoveCategoryAttributes;
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>;
+  moveCategoryId: Scalars['ID'];
 };
 
 /** Autogenerated return type of UpdateMoveCategory */
@@ -2093,10 +2186,10 @@ export type UpdateMoveCategoryPayload = {
 
 /** Autogenerated input type of UpdateMoveCategoryPosition */
 export type UpdateMoveCategoryPositionInput = {
-  moveCategoryId: Scalars['ID'];
-  newPosition: Scalars['Int'];
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>;
+  moveCategoryId: Scalars['ID'];
+  newPosition: Scalars['Int'];
 };
 
 /** Autogenerated return type of UpdateMoveCategoryPosition */
@@ -2109,10 +2202,10 @@ export type UpdateMoveCategoryPositionPayload = {
 
 /** Autogenerated input type of UpdateMove */
 export type UpdateMoveInput = {
-  moveId: Scalars['ID'];
   attributes: MoveAttributes;
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>;
+  moveId: Scalars['ID'];
 };
 
 /** Autogenerated return type of UpdateMove */
@@ -2125,10 +2218,10 @@ export type UpdateMovePayload = {
 
 /** Autogenerated input type of UpdateMovePosition */
 export type UpdateMovePositionInput = {
-  moveId: Scalars['ID'];
-  newPosition: Scalars['Int'];
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>;
+  moveId: Scalars['ID'];
+  newPosition: Scalars['Int'];
 };
 
 /** Autogenerated return type of UpdateMovePosition */
@@ -2141,10 +2234,10 @@ export type UpdateMovePositionPayload = {
 
 /** Autogenerated input type of UpdateOrganizer */
 export type UpdateOrganizerInput = {
-  organizerSlug: Scalars['String'];
   attributes: OrganizerAttributes;
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>;
+  organizerSlug: Scalars['String'];
 };
 
 /** Autogenerated return type of UpdateOrganizer */
@@ -2155,12 +2248,28 @@ export type UpdateOrganizerPayload = {
   organizer: Organizer;
 };
 
+/** Autogenerated input type of UpdatePlayerArticle */
+export type UpdatePlayerArticleInput = {
+  attributes: PlayerArticleAttributes;
+  /** A unique identifier for the client performing the mutation. */
+  clientMutationId?: Maybe<Scalars['String']>;
+  player: Scalars['String'];
+};
+
+/** Autogenerated return type of UpdatePlayerArticle */
+export type UpdatePlayerArticlePayload = {
+  __typename?: 'UpdatePlayerArticlePayload';
+  /** A unique identifier for the client performing the mutation. */
+  clientMutationId?: Maybe<Scalars['String']>;
+  playerArticle: PlayerArticle;
+};
+
 /** Autogenerated input type of UpdatePlayer */
 export type UpdatePlayerInput = {
-  playerSlug: Scalars['String'];
   attributes: PlayerAttributes;
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>;
+  playerSlug: Scalars['String'];
 };
 
 /** Autogenerated return type of UpdatePlayer */
@@ -2173,10 +2282,10 @@ export type UpdatePlayerPayload = {
 
 /** Autogenerated input type of UpdateStanding */
 export type UpdateStandingInput = {
-  standingId: Scalars['ID'];
   attributes: StandingAttributes;
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>;
+  standingId: Scalars['ID'];
 };
 
 /** Autogenerated return type of UpdateStanding */
@@ -2205,10 +2314,10 @@ export type UpdateThrowActionPayload = {
 
 /** Autogenerated input type of UpdateTournament */
 export type UpdateTournamentInput = {
-  tournamentId: Scalars['ID'];
   attributes: TournamentAttributes;
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>;
+  tournamentId: Scalars['ID'];
 };
 
 /** Autogenerated return type of UpdateTournament */
@@ -2221,10 +2330,10 @@ export type UpdateTournamentPayload = {
 
 /** Autogenerated input type of UpdateTournamentVideo */
 export type UpdateTournamentVideoInput = {
-  tournamentVideoId: Scalars['ID'];
   attributes: TournamentVideoAttributes;
   /** A unique identifier for the client performing the mutation. */
   clientMutationId?: Maybe<Scalars['String']>;
+  tournamentVideoId: Scalars['ID'];
 };
 
 /** Autogenerated return type of UpdateTournamentVideo */
@@ -2246,10 +2355,10 @@ export type User = {
 };
 
 export enum UserRole {
-  /** ユーザー */
-  User = 'user',
   /** 管理者 */
-  Admin = 'admin'
+  Admin = 'admin',
+  /** ユーザー */
+  User = 'user'
 }
 
 export type VideoUpload = {
