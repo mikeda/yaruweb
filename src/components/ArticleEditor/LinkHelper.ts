@@ -1,25 +1,30 @@
-import { ReactEditor } from 'slate-react';
-import { Node, Element as SlateElement, Transforms, Editor, Range } from 'slate';
+import { Element as SlateElement, Transforms, Editor, Range } from 'slate';
+import { LinkElement } from '@/custom-types';
+import isUrl from 'is-url';
 
-export const withLink = (editor: ReactEditor) => {
-  const { isInline, normalizeNode } = editor;
+export const withLink = (editor: Editor) => {
+  const { insertData, insertText, isInline } = editor;
 
   editor.isInline = element => {
     return element.type === 'link' ? true : isInline(element);
   };
 
-  editor.normalizeNode = entry => {
-    const [node, path] = entry;
-
-    if (SlateElement.isElement(node) && node.type === 'link') {
-      const x = Node.children(editor, path).next();
-      if (!x.done && !x.value[0].text) {
-        Transforms.unwrapNodes(editor, { at: path });
-        return;
-      }
+  editor.insertText = text => {
+    if (text && isUrl(text)) {
+      wrapLink(editor, text);
+    } else {
+      insertText(text);
     }
+  };
 
-    normalizeNode(entry);
+  editor.insertData = data => {
+    const text = data.getData('text/plain');
+
+    if (text && isUrl(text)) {
+      wrapLink(editor, text);
+    } else {
+      insertData(data);
+    }
   };
 
   return editor;
@@ -52,14 +57,14 @@ const wrapLink = (editor: Editor, url: string) => {
 
   const { selection } = editor;
   const isCollapsed = selection && Range.isCollapsed(selection);
-  const link = {
+  const link: LinkElement = {
     type: 'link',
     url,
     children: isCollapsed ? [{ text: url }] : [],
   };
 
   if (isCollapsed) {
-    //Transforms.insertNodes(editor, link);
+    Transforms.insertNodes(editor, link);
   } else {
     Transforms.wrapNodes(editor, link, { split: true });
     Transforms.collapse(editor, { edge: 'end' });

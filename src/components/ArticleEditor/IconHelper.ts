@@ -1,7 +1,6 @@
 import { Editor } from 'slate';
-import { ReactEditor } from 'slate-react';
 
-export const withIcon = (editor: ReactEditor) => {
+export const withIcon = (editor: Editor) => {
   const { insertText, isInline } = editor;
 
   editor.isInline = element => {

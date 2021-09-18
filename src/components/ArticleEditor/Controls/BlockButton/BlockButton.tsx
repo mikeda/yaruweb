@@ -3,8 +3,9 @@ import { useSlate } from 'slate-react';
 import { Button } from '../Button';
 import { Editor, Element as SlateElement, Transforms } from 'slate';
 
+type Format = 'heading-one' | 'heading-two' | 'bulleted-list';
 interface Props {
-  format: string;
+  format: Format;
   icon: number;
 }
 
@@ -24,7 +25,7 @@ export const BlockButton: React.FC<Props> = ({ format, icon }) => {
 
 const LIST_TYPES = ['numbered-list', 'bulleted-list'];
 
-const toggleBlock = (editor: Editor, format: string) => {
+const toggleBlock = (editor: Editor, format: Format) => {
   const isActive = isBlockActive(editor, format);
   const isList = LIST_TYPES.includes(format);
 
@@ -32,6 +33,7 @@ const toggleBlock = (editor: Editor, format: string) => {
     match: n => !Editor.isEditor(n) && SlateElement.isElement(n) && LIST_TYPES.includes(n.type as string),
     split: true,
   });
+
   const newProperties: Partial<SlateElement> = {
     type: isActive ? 'paragraph' : isList ? 'list-item' : format,
   };

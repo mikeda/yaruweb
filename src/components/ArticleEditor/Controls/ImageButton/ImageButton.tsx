@@ -1,11 +1,11 @@
 import React from 'react';
 import { useSlate } from 'slate-react';
-
+import { Transforms } from 'slate';
 import { Button } from '../Button';
 import styles from './ImageButton.module.scss';
 import { useCreateArticleImageMutation } from '@/lib/graphql/types';
 import { YAROUYO_FONT_CODE } from '@/lib/YarouyoFont';
-import { ArticleElementTypes } from '@/components/ArticleElement/ArticleElement';
+import { ImageElement } from '@/custom-types';
 
 export const ImageButton: React.FC = () => {
   const editor = useSlate();
@@ -14,8 +14,10 @@ export const ImageButton: React.FC = () => {
       const url = e.createArticleImage?.url;
       if (!url) return;
 
-      editor.insertNode({ type: ArticleElementTypes.Image, url: url, children: [{ text: '' }] });
-      editor.insertNode({ type: ArticleElementTypes.Paragraph, children: [{ text: '' }] });
+      const text = { text: '' };
+      const image: ImageElement = { type: 'image', url, children: [text] };
+      Transforms.insertNodes(editor, image);
+      Transforms.insertNodes(editor, { type: 'paragraph', children: [{ text: '' }] });
     },
     onError: e => {
       alert(e.message);

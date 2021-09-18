@@ -6,7 +6,7 @@ import { ArticleCategoryText } from '@/lib/graphql/enum_texts';
 import { ArticleAttributes, ArticleFormArticleFragment } from '@/lib/graphql/types';
 import { ReactEditor, Slate } from 'slate-react';
 import { ArticleEditor, createArticleEditor } from '../ArticleEditor';
-import { Node } from 'slate';
+import { Descendant } from 'slate';
 import { useForm } from 'react-hook-form';
 import { FormGroup } from '../form/FormGroup';
 import { Input } from '../form/Input';
@@ -26,7 +26,7 @@ export const ArticleForm: React.FC<Props> = ({ article, onSubmit }) => {
   if (!editorRef.current) editorRef.current = createArticleEditor();
   const editor = editorRef.current;
 
-  const [slateValue, setSlateValue] = useState<Node[]>(
+  const [slateValue, setSlateValue] = useState<Descendant[]>(
     article?.content
       ? JSON.parse(article.content)
       : [

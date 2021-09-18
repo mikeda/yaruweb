@@ -1,21 +1,18 @@
-import { Node } from 'slate';
+import { EmbedYoutubeElement } from '@/custom-types';
 
-const defaultNodeParams = {
-  type: 'embed-youtube',
-  children: [{ text: '' }],
-};
-
-export const getYoutubeNode = (url: URL): Node | null => {
+export const getYoutubeNode = (url: URL): EmbedYoutubeElement | null => {
   switch (url.hostname) {
     case 'www.youtube.com': {
       const videoId = url.searchParams.get('v');
       if (!videoId) return null;
 
       const startSec = Number(url.searchParams.get('t'));
+
       return {
-        ...defaultNodeParams,
+        type: 'embed-youtube',
         videoId,
         startSec: startSec || undefined,
+        children: [{ text: '' }],
       };
     }
 
@@ -23,9 +20,10 @@ export const getYoutubeNode = (url: URL): Node | null => {
       const videoId = url.pathname.substring(1);
       const startSec = Number(url.searchParams.get('t'));
       return {
-        ...defaultNodeParams,
+        type: 'embed-youtube',
         videoId,
         startSec: startSec || undefined,
+        children: [{ text: '' }],
       };
     }
 

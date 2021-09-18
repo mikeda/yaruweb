@@ -1,4 +1,5 @@
 import React from 'react';
+import { Element as SlateElement } from 'slate';
 
 import { Image } from './Image';
 import { Video } from './Video';
@@ -7,7 +8,6 @@ import { BulletedList } from './BulletedList';
 import { Move } from './Move';
 import { EmbedYouTube } from './EmbedYouTube';
 import { EmbedTweet } from './EmbedTweet';
-import { ArticleElement } from './ArticleElement';
 import { Paragraph } from './Paragraph';
 import { HeadingOne } from './HeadingOne';
 import { HeadingTwo } from './HeadingTwo';
@@ -15,7 +15,7 @@ import { Combo } from './Combo';
 
 interface Props {
   attributes: { [key: string]: unknown };
-  element: ArticleElement;
+  element: SlateElement;
 }
 
 export const Element: React.FC<Props> = ({ attributes, children, element }) => {
