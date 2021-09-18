@@ -4,6 +4,7 @@ fragment DashboardTournamentsPageTournament on Tournament {
   startsAt
   videosCount
   standingsCount
+  mainImageUrl
 }
 
 query DashboardTournamentsPageTournaments($page: Int = 1, $keyword: String) {

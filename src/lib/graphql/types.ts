@@ -2836,26 +2836,6 @@ export type ComboCategoryListItemFragment = { __typename?: 'ComboCategory', id: 
 
 export type ComboMediaFragment = { __typename?: 'Combo', id: string, name: string, damage?: Maybe<number>, note?: Maybe<string>, comboCategory: { __typename?: 'ComboCategory', id: string, name: string }, comboVideo?: Maybe<{ __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string }>, conditions: Array<{ __typename?: 'Condition', id: string, name: string }>, operations: Array<{ __typename?: 'Operation', id: string, name: string, key: string, icon: boolean }> };
 
-export type DashboardOrganizerCardFragment = { __typename?: 'Organizer', id: string, slug: string, name: string, avatarUrl?: Maybe<string>, description?: Maybe<string> };
-
-export type DashboardOrganizerCardDeleteOrganizerMutationVariables = Exact<{
-  organizerSlug: Scalars['String'];
-}>;
-
-
-export type DashboardOrganizerCardDeleteOrganizerMutation = { __typename?: 'Mutation', deleteOrganizer?: Maybe<{ __typename?: 'DeleteOrganizerPayload', organizer: { __typename?: 'Organizer', id: string } }> };
-
-export type DashboardPlayerCardFragment = { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: Maybe<string>, description?: Maybe<string> };
-
-export type DashboardPlayerCardDeletePlayerMutationVariables = Exact<{
-  playerSlug: Scalars['String'];
-}>;
-
-
-export type DashboardPlayerCardDeletePlayerMutation = { __typename?: 'Mutation', deletePlayer?: Maybe<{ __typename?: 'DeletePlayerPayload', player: { __typename?: 'Player', id: string } }> };
-
-export type DashboardTournamentCardFragment = { __typename?: 'Tournament', id: string, name: string, description: string, mainImageUrl?: Maybe<string>, startsAt: string, videosCount: number, standings: Array<{ __typename?: 'Standing', id: string, place: number, player: { __typename?: 'Player', id: string, name: string } }> };
-
 export type FavButtonArticleQueryVariables = Exact<{
   articleId: Scalars['ID'];
 }>;
@@ -3177,7 +3157,7 @@ export type DashboardOrganizerEditPageUpdateOrganizerMutationVariables = Exact<{
 
 export type DashboardOrganizerEditPageUpdateOrganizerMutation = { __typename?: 'Mutation', updateOrganizer?: Maybe<{ __typename?: 'UpdateOrganizerPayload', organizer: { __typename?: 'Organizer', name: string, slug: string, tonamelId?: Maybe<string>, twitterId?: Maybe<string>, streamingUrl?: Maybe<string>, description?: Maybe<string> } }> };
 
-export type DashboardOrganizersPageOrganizerFragment = { __typename?: 'Organizer', id: string, slug: string, name: string };
+export type DashboardOrganizersPageOrganizerFragment = { __typename?: 'Organizer', id: string, slug: string, name: string, avatarUrl?: Maybe<string> };
 
 export type DashboardOrganizersPageDeleteMutationVariables = Exact<{
   organizerSlug: Scalars['String'];
@@ -3192,7 +3172,7 @@ export type DashboardOrganizersPageOrganizersQueryVariables = Exact<{
 }>;
 
 
-export type DashboardOrganizersPageOrganizersQuery = { __typename?: 'Query', organizers: { __typename?: 'OrganizerCollection', records: Array<{ __typename?: 'Organizer', id: string, slug: string, name: string }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
+export type DashboardOrganizersPageOrganizersQuery = { __typename?: 'Query', organizers: { __typename?: 'OrganizerCollection', records: Array<{ __typename?: 'Organizer', id: string, slug: string, name: string, avatarUrl?: Maybe<string> }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
 
 export type DashboardOrganizersNewPageCreateOrganizerMutationVariables = Exact<{
   attributes: OrganizerAttributes;
@@ -3362,7 +3342,7 @@ export type DashboardTournamentPageDeleteVideoMutationVariables = Exact<{
 
 export type DashboardTournamentPageDeleteVideoMutation = { __typename?: 'Mutation', deleteTournamentVideo?: Maybe<{ __typename?: 'DeleteTournamentVideoPayload', tournamentVideo: { __typename?: 'TournamentVideo', id: string } }> };
 
-export type DashboardTournamentsPageTournamentFragment = { __typename?: 'Tournament', id: string, name: string, startsAt: string, videosCount: number, standingsCount: number };
+export type DashboardTournamentsPageTournamentFragment = { __typename?: 'Tournament', id: string, name: string, startsAt: string, videosCount: number, standingsCount: number, mainImageUrl?: Maybe<string> };
 
 export type DashboardTournamentsPageTournamentsQueryVariables = Exact<{
   page?: Maybe<Scalars['Int']>;
@@ -3370,7 +3350,7 @@ export type DashboardTournamentsPageTournamentsQueryVariables = Exact<{
 }>;
 
 
-export type DashboardTournamentsPageTournamentsQuery = { __typename?: 'Query', tournaments: { __typename?: 'TournamentCollection', records: Array<{ __typename?: 'Tournament', id: string, name: string, startsAt: string, videosCount: number, standingsCount: number }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
+export type DashboardTournamentsPageTournamentsQuery = { __typename?: 'Query', tournaments: { __typename?: 'TournamentCollection', records: Array<{ __typename?: 'Tournament', id: string, name: string, startsAt: string, videosCount: number, standingsCount: number, mainImageUrl?: Maybe<string> }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
 
 export type TopPageQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -3859,42 +3839,6 @@ export const ComboMediaFragmentDoc = gql`
     ${ComboVideoFragmentDoc}
 ${ConditionFragmentDoc}
 ${OperationFragmentDoc}`;
-export const DashboardOrganizerCardFragmentDoc = gql`
-    fragment DashboardOrganizerCard on Organizer {
-  id
-  slug
-  name
-  avatarUrl
-  description
-}
-    `;
-export const DashboardPlayerCardFragmentDoc = gql`
-    fragment DashboardPlayerCard on Player {
-  id
-  slug
-  name
-  avatarUrl
-  description
-}
-    `;
-export const DashboardTournamentCardFragmentDoc = gql`
-    fragment DashboardTournamentCard on Tournament {
-  id
-  name
-  description
-  mainImageUrl
-  startsAt
-  videosCount
-  standings {
-    id
-    place
-    player {
-      id
-      name
-    }
-  }
-}
-    `;
 export const MoveCategoryCardFragmentDoc = gql`
     fragment MoveCategoryCard on MoveCategory {
   id
@@ -4129,6 +4073,7 @@ export const DashboardOrganizersPageOrganizerFragmentDoc = gql`
   id
   slug
   name
+  avatarUrl
 }
     `;
 export const DashboardPlayersPagePlayerFragmentDoc = gql`
@@ -4188,6 +4133,7 @@ export const DashboardTournamentsPageTournamentFragmentDoc = gql`
   startsAt
   videosCount
   standingsCount
+  mainImageUrl
 }
     `;
 export const PlayerStandingCardFragmentDoc = gql`
@@ -6351,76 +6297,6 @@ export function useArticleElementMoveLazyQuery(baseOptions?: Apollo.LazyQueryHoo
 export type ArticleElementMoveQueryHookResult = ReturnType<typeof useArticleElementMoveQuery>;
 export type ArticleElementMoveLazyQueryHookResult = ReturnType<typeof useArticleElementMoveLazyQuery>;
 export type ArticleElementMoveQueryResult = Apollo.QueryResult<ArticleElementMoveQuery, ArticleElementMoveQueryVariables>;
-export const DashboardOrganizerCardDeleteOrganizerDocument = gql`
-    mutation DashboardOrganizerCardDeleteOrganizer($organizerSlug: String!) {
-  deleteOrganizer(input: {organizerSlug: $organizerSlug}) {
-    organizer {
-      id
-    }
-  }
-}
-    `;
-export type DashboardOrganizerCardDeleteOrganizerMutationFn = Apollo.MutationFunction<DashboardOrganizerCardDeleteOrganizerMutation, DashboardOrganizerCardDeleteOrganizerMutationVariables>;
-
-/**
- * __useDashboardOrganizerCardDeleteOrganizerMutation__
- *
- * To run a mutation, you first call `useDashboardOrganizerCardDeleteOrganizerMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useDashboardOrganizerCardDeleteOrganizerMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [dashboardOrganizerCardDeleteOrganizerMutation, { data, loading, error }] = useDashboardOrganizerCardDeleteOrganizerMutation({
- *   variables: {
- *      organizerSlug: // value for 'organizerSlug'
- *   },
- * });
- */
-export function useDashboardOrganizerCardDeleteOrganizerMutation(baseOptions?: Apollo.MutationHookOptions<DashboardOrganizerCardDeleteOrganizerMutation, DashboardOrganizerCardDeleteOrganizerMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<DashboardOrganizerCardDeleteOrganizerMutation, DashboardOrganizerCardDeleteOrganizerMutationVariables>(DashboardOrganizerCardDeleteOrganizerDocument, options);
-      }
-export type DashboardOrganizerCardDeleteOrganizerMutationHookResult = ReturnType<typeof useDashboardOrganizerCardDeleteOrganizerMutation>;
-export type DashboardOrganizerCardDeleteOrganizerMutationResult = Apollo.MutationResult<DashboardOrganizerCardDeleteOrganizerMutation>;
-export type DashboardOrganizerCardDeleteOrganizerMutationOptions = Apollo.BaseMutationOptions<DashboardOrganizerCardDeleteOrganizerMutation, DashboardOrganizerCardDeleteOrganizerMutationVariables>;
-export const DashboardPlayerCardDeletePlayerDocument = gql`
-    mutation DashboardPlayerCardDeletePlayer($playerSlug: String!) {
-  deletePlayer(input: {playerSlug: $playerSlug}) {
-    player {
-      id
-    }
-  }
-}
-    `;
-export type DashboardPlayerCardDeletePlayerMutationFn = Apollo.MutationFunction<DashboardPlayerCardDeletePlayerMutation, DashboardPlayerCardDeletePlayerMutationVariables>;
-
-/**
- * __useDashboardPlayerCardDeletePlayerMutation__
- *
- * To run a mutation, you first call `useDashboardPlayerCardDeletePlayerMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useDashboardPlayerCardDeletePlayerMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [dashboardPlayerCardDeletePlayerMutation, { data, loading, error }] = useDashboardPlayerCardDeletePlayerMutation({
- *   variables: {
- *      playerSlug: // value for 'playerSlug'
- *   },
- * });
- */
-export function useDashboardPlayerCardDeletePlayerMutation(baseOptions?: Apollo.MutationHookOptions<DashboardPlayerCardDeletePlayerMutation, DashboardPlayerCardDeletePlayerMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<DashboardPlayerCardDeletePlayerMutation, DashboardPlayerCardDeletePlayerMutationVariables>(DashboardPlayerCardDeletePlayerDocument, options);
-      }
-export type DashboardPlayerCardDeletePlayerMutationHookResult = ReturnType<typeof useDashboardPlayerCardDeletePlayerMutation>;
-export type DashboardPlayerCardDeletePlayerMutationResult = Apollo.MutationResult<DashboardPlayerCardDeletePlayerMutation>;
-export type DashboardPlayerCardDeletePlayerMutationOptions = Apollo.BaseMutationOptions<DashboardPlayerCardDeletePlayerMutation, DashboardPlayerCardDeletePlayerMutationVariables>;
 export const FavButtonArticleDocument = gql`
     query FavButtonArticle($articleId: ID!) {
   article(articleId: $articleId) {

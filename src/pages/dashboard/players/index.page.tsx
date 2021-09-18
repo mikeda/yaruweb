@@ -27,6 +27,7 @@ import {
   useDashboardPlayersPagePlayersQuery,
 } from '@/lib/graphql/types';
 import { toast } from 'react-toastify';
+import { DEFAULT_AVATAR_URL } from '@/lib/Assets';
 
 const Page: React.FC = () => {
   const setLoading = useSetRecoilState(loadingState);
@@ -107,7 +108,10 @@ interface PlayerRowProps {
 const PlayerRow = ({ player, onDelete }: PlayerRowProps) => {
   return (
     <TableRow>
-      <TableCell component="th" scope="row">
+      <TableCell scope="row" width={64}>
+        <img src={player.avatarUrl || DEFAULT_AVATAR_URL} width={64} />
+      </TableCell>
+      <TableCell scope="row">
         <Typography>{player.name}</Typography>
       </TableCell>
       <TableCell align="right" scope="row">

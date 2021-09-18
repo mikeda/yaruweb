@@ -25,6 +25,7 @@ import {
   useDashboardOrganizersPageOrganizersQuery,
 } from '@/lib/graphql/types';
 import { toast } from 'react-toastify';
+import { DEFAULT_AVATAR_URL } from '@/lib/Assets';
 
 const Page: React.FC = () => {
   const setLoading = useSetRecoilState(loadingState);
@@ -118,7 +119,10 @@ interface OrganizerRowProps {
 const OrganizerRow = ({ organizer, onDelete }: OrganizerRowProps) => {
   return (
     <TableRow>
-      <TableCell component="th" scope="row">
+      <TableCell scope="row" width={64}>
+        <img src={organizer.avatarUrl || DEFAULT_AVATAR_URL} width={64} />
+      </TableCell>
+      <TableCell scope="row">
         <Typography>{organizer.name}</Typography>
       </TableCell>
       <TableCell align="right" scope="row">

@@ -2,6 +2,7 @@ fragment DashboardOrganizersPageOrganizer on Organizer {
   id
   slug
   name
+  avatarUrl
 }
 
 mutation DashboardOrganizersPageDelete($organizerSlug: String!) {

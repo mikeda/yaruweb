@@ -25,6 +25,7 @@ import {
   useDeleteTournamentMutation,
 } from '@/lib/graphql/types';
 import { toast } from 'react-toastify';
+import { NO_IMAGE_URL } from '@/lib/Assets';
 
 const Page: React.FC = () => {
   const setLoading = useSetRecoilState(loadingState);
@@ -118,6 +119,9 @@ interface TournamentRowProps {
 const TournamentRow = ({ tournament, onDelete }: TournamentRowProps) => {
   return (
     <TableRow>
+      <TableCell scope="row" width={80}>
+        <img src={tournament.mainImageUrl || NO_IMAGE_URL} width={80} />
+      </TableCell>
       <TableCell component="th" scope="row">
         <Typography>{tournament.name}</Typography>
       </TableCell>
