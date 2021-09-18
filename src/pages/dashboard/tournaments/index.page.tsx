@@ -1,28 +1,53 @@
-import React from 'react';
-import { useRouter } from 'next/router';
+import React, { useState } from 'react';
 
-import { DashboardContent, DashboardBreadcrumbs, DashboardTournamentCard, SearchWord } from '@/components';
+import { DashboardContent, DashboardBreadcrumbs } from '@/components';
 import { dashboardPath } from '@/lib';
-import { Box, Button, Grid, makeStyles } from '@material-ui/core';
-import Pagination from '@material-ui/lab/Pagination';
-import { useTournamentsQuery } from './hooks/useTournamentsQuery';
-import theme from '@/theme';
-import { Add as AddIcon } from '@material-ui/icons';
-import { useRouteParams } from './hooks/useRouteParams';
-
-const useStyles = makeStyles({
-  paging: {
-    display: 'flex',
-    justifyContent: 'center',
-    marginTop: theme.spacing(4),
-  },
-});
+import {
+  Box,
+  Button,
+  IconButton,
+  Menu,
+  MenuItem,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableRow,
+  Typography,
+} from '@material-ui/core';
+import { Add as AddIcon, MoreVert } from '@material-ui/icons';
+import { useSetRecoilState } from 'recoil';
+import { loadingState } from '@/states/loading';
+import {
+  DashboardTournamentsPageTournamentFragment,
+  useDashboardTournamentsPageTournamentsQuery,
+  useDeleteTournamentMutation,
+} from '@/lib/graphql/types';
+import { toast } from 'react-toastify';
 
 const Page: React.FC = () => {
-  const router = useRouter();
-  const { page, keyword } = useRouteParams();
-  const { tournaments, paging, refetch } = useTournamentsQuery({ page, keyword });
-  const classes = useStyles();
+  const setLoading = useSetRecoilState(loadingState);
+  const { data, loading, fetchMore, updateQuery } = useDashboardTournamentsPageTournamentsQuery();
+  const [destroy, { loading: deleteLoading }] = useDeleteTournamentMutation({
+    onCompleted: data => {
+      const tournament = data.deleteTournament?.tournament;
+      if (!tournament) return;
+
+      updateQuery(prev => ({
+        tournaments: {
+          ...prev.tournaments,
+          records: prev.tournaments.records.filter(t => t.id !== tournament.id),
+        },
+      }));
+      toast.success('大会を削除しました。');
+    },
+  });
+
+  setLoading(loading || deleteLoading);
+
+  if (!data) return null;
+  const { records: tournaments, paging } = data.tournaments;
 
   return (
     <DashboardContent
@@ -39,37 +64,101 @@ const Page: React.FC = () => {
         </Button>
       }
     >
-      <Box mb={2}>
-        <SearchWord
-          initWord={keyword}
-          onSearch={word => {
-            router.push(dashboardPath({ to: 'tournaments', q: word }));
-          }}
-        />
-      </Box>
+      <TableContainer component={Paper}>
+        <Table>
+          <TableBody>
+            {tournaments.map(tournament => (
+              <TournamentRow
+                key={tournament.id}
+                tournament={tournament}
+                onDelete={() => {
+                  if (window.confirm('削除します。')) {
+                    destroy({ variables: { tournamentId: tournament.id } });
+                  }
+                }}
+              />
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
 
-      {tournaments && (
-        <Grid container spacing={2}>
-          {tournaments.map(tournament => (
-            <Grid item key={tournament.id} xs={12} sm={6}>
-              <DashboardTournamentCard tournament={tournament} onDelete={refetch} />
-            </Grid>
-          ))}
-        </Grid>
-      )}
-      {paging && (
-        <Box className={classes.paging}>
-          <Pagination
-            page={paging.currentPage}
-            count={paging.totalPages}
-            color="primary"
-            onChange={(e, page) => {
-              router.push(dashboardPath({ to: 'tournaments', page, q: keyword }));
+      {paging?.hasNext && (
+        <Box pt={2} pb={2} display="flex" justifyContent="center">
+          <Button
+            variant="outlined"
+            onClick={() => {
+              fetchMore({
+                variables: { page: paging.currentPage + 1 },
+                updateQuery: (prev, { fetchMoreResult: data }) => {
+                  if (!data) return prev;
+
+                  return {
+                    tournaments: {
+                      records: [...prev.tournaments.records, ...data.tournaments.records],
+                      paging: data.tournaments.paging,
+                    },
+                  };
+                },
+              });
             }}
-          />
+          >
+            もっとみる
+          </Button>
         </Box>
       )}
     </DashboardContent>
+  );
+};
+
+interface TournamentRowProps {
+  tournament: DashboardTournamentsPageTournamentFragment;
+  onDelete: () => void;
+}
+
+const TournamentRow = ({ tournament, onDelete }: TournamentRowProps) => {
+  return (
+    <TableRow>
+      <TableCell component="th" scope="row">
+        <Typography>{tournament.name}</Typography>
+      </TableCell>
+      <TableCell align="right" scope="row">
+        <Button variant="outlined" href={dashboardPath({ to: 'tournamentEdit', tournamentId: tournament.id })}>
+          編集
+        </Button>
+        <TournamentMenu tournament={tournament} onDelete={onDelete} />
+      </TableCell>
+    </TableRow>
+  );
+};
+
+const TournamentMenu = ({ onDelete }: TournamentRowProps) => {
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  return (
+    <>
+      <IconButton edge="end" onClick={handleClick}>
+        <MoreVert />
+      </IconButton>
+
+      <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
+        <MenuItem
+          onClick={() => {
+            onDelete();
+            handleClose();
+          }}
+        >
+          削除する
+        </MenuItem>
+      </Menu>
+    </>
   );
 };
 

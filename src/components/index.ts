@@ -35,7 +35,6 @@ export * from './ObjectCard';
 export * from './ObjectCardList';
 export * from './OperationListSelector';
 export * from './OrganizerForm';
-export * from './Paging';
 export * from './PlayerPageTabs';
 export * from './StandingPlaceAvatar';
 export * from './SortableCardList';

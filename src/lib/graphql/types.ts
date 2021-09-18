@@ -2523,13 +2523,6 @@ export type DeleteActionMutationVariables = Exact<{
 
 export type DeleteActionMutation = { __typename?: 'Mutation', deleteAction?: Maybe<{ __typename?: 'DeleteActionPayload', action: { __typename: 'AttackAction', id: string, attackType: AttackTypeEnum, damage: number, blockAvailable: boolean, blockState: AttackActionStateEnum, blockFrame?: Maybe<number>, hitAvailable: boolean, hitState: AttackActionStateEnum, hitFrame?: Maybe<number>, counterHitAvailable: boolean, counterHitState: AttackActionStateEnum, counterHitFrame?: Maybe<number>, cleanHitAvailable: boolean, cleanHitState: AttackActionStateEnum, cleanHitFrame?: Maybe<number>, crouchingHitAvailable: boolean, crouchingHitState: AttackActionStateEnum, crouchingHitFrame?: Maybe<number> } | { __typename: 'ThrowAction', id: string, throwType: ThrowTypeEnum, damage: number, escape: ThrowEscapeEnum, throwAvailable: boolean, throwState: ThrowActionStateEnum, throwFrame?: Maybe<number>, throwEscapeAvailable: boolean, throwEscapeState: ThrowActionStateEnum, throwEscapeFrame?: Maybe<number> } }> };
 
-export type DeleteArticleMutationVariables = Exact<{
-  articleId: Scalars['ID'];
-}>;
-
-
-export type DeleteArticleMutation = { __typename?: 'Mutation', deleteArticle?: Maybe<{ __typename?: 'DeleteArticlePayload', article: { __typename?: 'Article', id: string } }> };
-
 export type DeleteComboCategoryMutationVariables = Exact<{
   comboCategoryId: Scalars['ID'];
 }>;
@@ -2572,26 +2565,12 @@ export type FavArticleMutationVariables = Exact<{
 
 export type FavArticleMutation = { __typename?: 'Mutation', favArticle?: Maybe<{ __typename?: 'FavArticlePayload', article: { __typename?: 'Article', id: string } }> };
 
-export type PublishArticleMutationVariables = Exact<{
-  articleId: Scalars['ID'];
-}>;
-
-
-export type PublishArticleMutation = { __typename?: 'Mutation', publishArticle?: Maybe<{ __typename?: 'PublishArticlePayload', article: { __typename?: 'Article', id: string } }> };
-
 export type SetUserAvatarMutationVariables = Exact<{
   avatar: Scalars['String'];
 }>;
 
 
 export type SetUserAvatarMutation = { __typename?: 'Mutation', setUserAvatar?: Maybe<{ __typename?: 'SetUserAvatarPayload', user: { __typename?: 'User', avatarUrl: string } }> };
-
-export type StopArticleMutationVariables = Exact<{
-  articleId: Scalars['ID'];
-}>;
-
-
-export type StopArticleMutation = { __typename?: 'Mutation', stopArticle?: Maybe<{ __typename?: 'StopArticlePayload', article: { __typename?: 'Article', id: string } }> };
 
 export type UnfavArticleMutationVariables = Exact<{
   articleId: Scalars['ID'];
@@ -3015,13 +2994,35 @@ export type DashboardArticlePageArticleQueryVariables = Exact<{
 
 export type DashboardArticlePageArticleQuery = { __typename?: 'Query', article: { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: Maybe<string>, category: ArticleCategory, content: string } };
 
-export type PageDashboardArticlesQueryVariables = Exact<{
-  page?: Maybe<Scalars['Int']>;
-  per?: Maybe<Scalars['Int']>;
+export type DashboardArticlesPageArticleFragment = { __typename?: 'Article', id: string, title: string, status: ArticleStatus };
+
+export type DashboardArticlesPagePublishMutationVariables = Exact<{
+  articleId: Scalars['ID'];
 }>;
 
 
-export type PageDashboardArticlesQuery = { __typename?: 'Query', myArticles: { __typename?: 'ArticleCollection', records: Array<{ __typename?: 'Article', id: string, title: string, status: ArticleStatus }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
+export type DashboardArticlesPagePublishMutation = { __typename?: 'Mutation', publishArticle?: Maybe<{ __typename?: 'PublishArticlePayload', article: { __typename?: 'Article', id: string, title: string, status: ArticleStatus } }> };
+
+export type DashboardArticlesPageStopMutationVariables = Exact<{
+  articleId: Scalars['ID'];
+}>;
+
+
+export type DashboardArticlesPageStopMutation = { __typename?: 'Mutation', stopArticle?: Maybe<{ __typename?: 'StopArticlePayload', article: { __typename?: 'Article', id: string, title: string, status: ArticleStatus } }> };
+
+export type DashboardArticlesPageDeleteMutationVariables = Exact<{
+  articleId: Scalars['ID'];
+}>;
+
+
+export type DashboardArticlesPageDeleteMutation = { __typename?: 'Mutation', deleteArticle?: Maybe<{ __typename?: 'DeleteArticlePayload', article: { __typename?: 'Article', id: string } }> };
+
+export type DashboardArticlesPageArticlesQueryVariables = Exact<{
+  page?: Maybe<Scalars['Int']>;
+}>;
+
+
+export type DashboardArticlesPageArticlesQuery = { __typename?: 'Query', myArticles: { __typename?: 'ArticleCollection', records: Array<{ __typename?: 'Article', id: string, title: string, status: ArticleStatus }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
 
 export type PageDashboardAttackActionEditQueryVariables = Exact<{
   actionId: Scalars['ID'];
@@ -3176,13 +3177,22 @@ export type DashboardOrganizerEditPageUpdateOrganizerMutationVariables = Exact<{
 
 export type DashboardOrganizerEditPageUpdateOrganizerMutation = { __typename?: 'Mutation', updateOrganizer?: Maybe<{ __typename?: 'UpdateOrganizerPayload', organizer: { __typename?: 'Organizer', name: string, slug: string, tonamelId?: Maybe<string>, twitterId?: Maybe<string>, streamingUrl?: Maybe<string>, description?: Maybe<string> } }> };
 
-export type DashboardOrganizersPageQueryVariables = Exact<{
+export type DashboardOrganizersPageOrganizerFragment = { __typename?: 'Organizer', id: string, slug: string, name: string };
+
+export type DashboardOrganizersPageDeleteMutationVariables = Exact<{
+  organizerSlug: Scalars['String'];
+}>;
+
+
+export type DashboardOrganizersPageDeleteMutation = { __typename?: 'Mutation', deleteOrganizer?: Maybe<{ __typename?: 'DeleteOrganizerPayload', organizer: { __typename?: 'Organizer', id: string } }> };
+
+export type DashboardOrganizersPageOrganizersQueryVariables = Exact<{
   page?: Maybe<Scalars['Int']>;
   keyword?: Maybe<Scalars['String']>;
 }>;
 
 
-export type DashboardOrganizersPageQuery = { __typename?: 'Query', organizers: { __typename?: 'OrganizerCollection', records: Array<{ __typename?: 'Organizer', id: string, slug: string, name: string, avatarUrl?: Maybe<string>, description?: Maybe<string> }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
+export type DashboardOrganizersPageOrganizersQuery = { __typename?: 'Query', organizers: { __typename?: 'OrganizerCollection', records: Array<{ __typename?: 'Organizer', id: string, slug: string, name: string }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
 
 export type DashboardOrganizersNewPageCreateOrganizerMutationVariables = Exact<{
   attributes: OrganizerAttributes;
@@ -3206,13 +3216,22 @@ export type DashboardPlayerEditPageUpdatePlayerMutationVariables = Exact<{
 
 export type DashboardPlayerEditPageUpdatePlayerMutation = { __typename?: 'Mutation', updatePlayer?: Maybe<{ __typename?: 'UpdatePlayerPayload', player: { __typename?: 'Player', name: string, slug: string, tonamelId?: Maybe<string>, smashggId?: Maybe<string>, twitterId?: Maybe<string>, streamingUrl?: Maybe<string>, description?: Maybe<string>, country?: Maybe<{ __typename?: 'Country', id: string }> } }> };
 
-export type DashboardPlayersPageQueryVariables = Exact<{
+export type DashboardPlayersPagePlayerFragment = { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: Maybe<string> };
+
+export type DashboardPlayersPagePlayersQueryVariables = Exact<{
   page?: Maybe<Scalars['Int']>;
   keyword?: Maybe<Scalars['String']>;
 }>;
 
 
-export type DashboardPlayersPageQuery = { __typename?: 'Query', players: { __typename?: 'PlayerCollection', records: Array<{ __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: Maybe<string>, description?: Maybe<string> }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
+export type DashboardPlayersPagePlayersQuery = { __typename?: 'Query', players: { __typename?: 'PlayerCollection', records: Array<{ __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: Maybe<string> }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
+
+export type DashboardPlayersPageDeleteMutationVariables = Exact<{
+  playerSlug: Scalars['String'];
+}>;
+
+
+export type DashboardPlayersPageDeleteMutation = { __typename?: 'Mutation', deletePlayer?: Maybe<{ __typename?: 'DeletePlayerPayload', player: { __typename?: 'Player', id: string } }> };
 
 export type DashboardPlayersPageCreatePlayerFromSmashggMutationVariables = Exact<{
   smashggId: Scalars['String'];
@@ -3343,14 +3362,15 @@ export type DashboardTournamentPageDeleteVideoMutationVariables = Exact<{
 
 export type DashboardTournamentPageDeleteVideoMutation = { __typename?: 'Mutation', deleteTournamentVideo?: Maybe<{ __typename?: 'DeleteTournamentVideoPayload', tournamentVideo: { __typename?: 'TournamentVideo', id: string } }> };
 
-export type DashboardTournamentsPageQueryVariables = Exact<{
+export type DashboardTournamentsPageTournamentFragment = { __typename?: 'Tournament', id: string, name: string, startsAt: string, videosCount: number, standingsCount: number };
+
+export type DashboardTournamentsPageTournamentsQueryVariables = Exact<{
   page?: Maybe<Scalars['Int']>;
-  per?: Maybe<Scalars['Int']>;
   keyword?: Maybe<Scalars['String']>;
 }>;
 
 
-export type DashboardTournamentsPageQuery = { __typename?: 'Query', tournaments: { __typename?: 'TournamentCollection', records: Array<{ __typename?: 'Tournament', id: string, name: string, description: string, mainImageUrl?: Maybe<string>, startsAt: string, videosCount: number, standings: Array<{ __typename?: 'Standing', id: string, place: number, player: { __typename?: 'Player', id: string, name: string } }> }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
+export type DashboardTournamentsPageTournamentsQuery = { __typename?: 'Query', tournaments: { __typename?: 'TournamentCollection', records: Array<{ __typename?: 'Tournament', id: string, name: string, startsAt: string, videosCount: number, standingsCount: number }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
 
 export type TopPageQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -4097,6 +4117,28 @@ export const CharacterPageProfileFragmentDoc = gql`
   movesCount
 }
     `;
+export const DashboardArticlesPageArticleFragmentDoc = gql`
+    fragment DashboardArticlesPageArticle on Article {
+  id
+  title
+  status
+}
+    `;
+export const DashboardOrganizersPageOrganizerFragmentDoc = gql`
+    fragment DashboardOrganizersPageOrganizer on Organizer {
+  id
+  slug
+  name
+}
+    `;
+export const DashboardPlayersPagePlayerFragmentDoc = gql`
+    fragment DashboardPlayersPagePlayer on Player {
+  id
+  slug
+  name
+  avatarUrl
+}
+    `;
 export const BattleFormFragmentDoc = gql`
     fragment BattleForm on Battle {
   id
@@ -4139,6 +4181,15 @@ export const DashboardBattlesPageBattleReslutFragmentDoc = gql`
   }
 }
     ${DashboardBattlesPageSideFragmentDoc}`;
+export const DashboardTournamentsPageTournamentFragmentDoc = gql`
+    fragment DashboardTournamentsPageTournament on Tournament {
+  id
+  name
+  startsAt
+  videosCount
+  standingsCount
+}
+    `;
 export const PlayerStandingCardFragmentDoc = gql`
     fragment PlayerStandingCard on Standing {
   id
@@ -4802,41 +4853,6 @@ export function useDeleteActionMutation(baseOptions?: Apollo.MutationHookOptions
 export type DeleteActionMutationHookResult = ReturnType<typeof useDeleteActionMutation>;
 export type DeleteActionMutationResult = Apollo.MutationResult<DeleteActionMutation>;
 export type DeleteActionMutationOptions = Apollo.BaseMutationOptions<DeleteActionMutation, DeleteActionMutationVariables>;
-export const DeleteArticleDocument = gql`
-    mutation DeleteArticle($articleId: ID!) {
-  deleteArticle(input: {articleId: $articleId}) {
-    article {
-      id
-    }
-  }
-}
-    `;
-export type DeleteArticleMutationFn = Apollo.MutationFunction<DeleteArticleMutation, DeleteArticleMutationVariables>;
-
-/**
- * __useDeleteArticleMutation__
- *
- * To run a mutation, you first call `useDeleteArticleMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useDeleteArticleMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [deleteArticleMutation, { data, loading, error }] = useDeleteArticleMutation({
- *   variables: {
- *      articleId: // value for 'articleId'
- *   },
- * });
- */
-export function useDeleteArticleMutation(baseOptions?: Apollo.MutationHookOptions<DeleteArticleMutation, DeleteArticleMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<DeleteArticleMutation, DeleteArticleMutationVariables>(DeleteArticleDocument, options);
-      }
-export type DeleteArticleMutationHookResult = ReturnType<typeof useDeleteArticleMutation>;
-export type DeleteArticleMutationResult = Apollo.MutationResult<DeleteArticleMutation>;
-export type DeleteArticleMutationOptions = Apollo.BaseMutationOptions<DeleteArticleMutation, DeleteArticleMutationVariables>;
 export const DeleteComboCategoryDocument = gql`
     mutation DeleteComboCategory($comboCategoryId: ID!) {
   deleteComboCategory(input: {comboCategoryId: $comboCategoryId}) {
@@ -5047,41 +5063,6 @@ export function useFavArticleMutation(baseOptions?: Apollo.MutationHookOptions<F
 export type FavArticleMutationHookResult = ReturnType<typeof useFavArticleMutation>;
 export type FavArticleMutationResult = Apollo.MutationResult<FavArticleMutation>;
 export type FavArticleMutationOptions = Apollo.BaseMutationOptions<FavArticleMutation, FavArticleMutationVariables>;
-export const PublishArticleDocument = gql`
-    mutation PublishArticle($articleId: ID!) {
-  publishArticle(input: {articleId: $articleId}) {
-    article {
-      id
-    }
-  }
-}
-    `;
-export type PublishArticleMutationFn = Apollo.MutationFunction<PublishArticleMutation, PublishArticleMutationVariables>;
-
-/**
- * __usePublishArticleMutation__
- *
- * To run a mutation, you first call `usePublishArticleMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `usePublishArticleMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [publishArticleMutation, { data, loading, error }] = usePublishArticleMutation({
- *   variables: {
- *      articleId: // value for 'articleId'
- *   },
- * });
- */
-export function usePublishArticleMutation(baseOptions?: Apollo.MutationHookOptions<PublishArticleMutation, PublishArticleMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<PublishArticleMutation, PublishArticleMutationVariables>(PublishArticleDocument, options);
-      }
-export type PublishArticleMutationHookResult = ReturnType<typeof usePublishArticleMutation>;
-export type PublishArticleMutationResult = Apollo.MutationResult<PublishArticleMutation>;
-export type PublishArticleMutationOptions = Apollo.BaseMutationOptions<PublishArticleMutation, PublishArticleMutationVariables>;
 export const SetUserAvatarDocument = gql`
     mutation SetUserAvatar($avatar: String!) {
   setUserAvatar(input: {avatar: $avatar}) {
@@ -5117,41 +5098,6 @@ export function useSetUserAvatarMutation(baseOptions?: Apollo.MutationHookOption
 export type SetUserAvatarMutationHookResult = ReturnType<typeof useSetUserAvatarMutation>;
 export type SetUserAvatarMutationResult = Apollo.MutationResult<SetUserAvatarMutation>;
 export type SetUserAvatarMutationOptions = Apollo.BaseMutationOptions<SetUserAvatarMutation, SetUserAvatarMutationVariables>;
-export const StopArticleDocument = gql`
-    mutation StopArticle($articleId: ID!) {
-  stopArticle(input: {articleId: $articleId}) {
-    article {
-      id
-    }
-  }
-}
-    `;
-export type StopArticleMutationFn = Apollo.MutationFunction<StopArticleMutation, StopArticleMutationVariables>;
-
-/**
- * __useStopArticleMutation__
- *
- * To run a mutation, you first call `useStopArticleMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useStopArticleMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [stopArticleMutation, { data, loading, error }] = useStopArticleMutation({
- *   variables: {
- *      articleId: // value for 'articleId'
- *   },
- * });
- */
-export function useStopArticleMutation(baseOptions?: Apollo.MutationHookOptions<StopArticleMutation, StopArticleMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<StopArticleMutation, StopArticleMutationVariables>(StopArticleDocument, options);
-      }
-export type StopArticleMutationHookResult = ReturnType<typeof useStopArticleMutation>;
-export type StopArticleMutationResult = Apollo.MutationResult<StopArticleMutation>;
-export type StopArticleMutationOptions = Apollo.BaseMutationOptions<StopArticleMutation, StopArticleMutationVariables>;
 export const UnfavArticleDocument = gql`
     mutation UnfavArticle($articleId: ID!) {
   unfavArticle(input: {articleId: $articleId}) {
@@ -7097,49 +7043,152 @@ export function useDashboardArticlePageArticleLazyQuery(baseOptions?: Apollo.Laz
 export type DashboardArticlePageArticleQueryHookResult = ReturnType<typeof useDashboardArticlePageArticleQuery>;
 export type DashboardArticlePageArticleLazyQueryHookResult = ReturnType<typeof useDashboardArticlePageArticleLazyQuery>;
 export type DashboardArticlePageArticleQueryResult = Apollo.QueryResult<DashboardArticlePageArticleQuery, DashboardArticlePageArticleQueryVariables>;
-export const PageDashboardArticlesDocument = gql`
-    query PageDashboardArticles($page: Int, $per: Int) {
-  myArticles(page: $page, per: $per) {
-    records {
+export const DashboardArticlesPagePublishDocument = gql`
+    mutation DashboardArticlesPagePublish($articleId: ID!) {
+  publishArticle(input: {articleId: $articleId}) {
+    article {
+      ...DashboardArticlesPageArticle
+    }
+  }
+}
+    ${DashboardArticlesPageArticleFragmentDoc}`;
+export type DashboardArticlesPagePublishMutationFn = Apollo.MutationFunction<DashboardArticlesPagePublishMutation, DashboardArticlesPagePublishMutationVariables>;
+
+/**
+ * __useDashboardArticlesPagePublishMutation__
+ *
+ * To run a mutation, you first call `useDashboardArticlesPagePublishMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDashboardArticlesPagePublishMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [dashboardArticlesPagePublishMutation, { data, loading, error }] = useDashboardArticlesPagePublishMutation({
+ *   variables: {
+ *      articleId: // value for 'articleId'
+ *   },
+ * });
+ */
+export function useDashboardArticlesPagePublishMutation(baseOptions?: Apollo.MutationHookOptions<DashboardArticlesPagePublishMutation, DashboardArticlesPagePublishMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DashboardArticlesPagePublishMutation, DashboardArticlesPagePublishMutationVariables>(DashboardArticlesPagePublishDocument, options);
+      }
+export type DashboardArticlesPagePublishMutationHookResult = ReturnType<typeof useDashboardArticlesPagePublishMutation>;
+export type DashboardArticlesPagePublishMutationResult = Apollo.MutationResult<DashboardArticlesPagePublishMutation>;
+export type DashboardArticlesPagePublishMutationOptions = Apollo.BaseMutationOptions<DashboardArticlesPagePublishMutation, DashboardArticlesPagePublishMutationVariables>;
+export const DashboardArticlesPageStopDocument = gql`
+    mutation DashboardArticlesPageStop($articleId: ID!) {
+  stopArticle(input: {articleId: $articleId}) {
+    article {
+      ...DashboardArticlesPageArticle
+    }
+  }
+}
+    ${DashboardArticlesPageArticleFragmentDoc}`;
+export type DashboardArticlesPageStopMutationFn = Apollo.MutationFunction<DashboardArticlesPageStopMutation, DashboardArticlesPageStopMutationVariables>;
+
+/**
+ * __useDashboardArticlesPageStopMutation__
+ *
+ * To run a mutation, you first call `useDashboardArticlesPageStopMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDashboardArticlesPageStopMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [dashboardArticlesPageStopMutation, { data, loading, error }] = useDashboardArticlesPageStopMutation({
+ *   variables: {
+ *      articleId: // value for 'articleId'
+ *   },
+ * });
+ */
+export function useDashboardArticlesPageStopMutation(baseOptions?: Apollo.MutationHookOptions<DashboardArticlesPageStopMutation, DashboardArticlesPageStopMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DashboardArticlesPageStopMutation, DashboardArticlesPageStopMutationVariables>(DashboardArticlesPageStopDocument, options);
+      }
+export type DashboardArticlesPageStopMutationHookResult = ReturnType<typeof useDashboardArticlesPageStopMutation>;
+export type DashboardArticlesPageStopMutationResult = Apollo.MutationResult<DashboardArticlesPageStopMutation>;
+export type DashboardArticlesPageStopMutationOptions = Apollo.BaseMutationOptions<DashboardArticlesPageStopMutation, DashboardArticlesPageStopMutationVariables>;
+export const DashboardArticlesPageDeleteDocument = gql`
+    mutation DashboardArticlesPageDelete($articleId: ID!) {
+  deleteArticle(input: {articleId: $articleId}) {
+    article {
       id
-      title
-      status
+    }
+  }
+}
+    `;
+export type DashboardArticlesPageDeleteMutationFn = Apollo.MutationFunction<DashboardArticlesPageDeleteMutation, DashboardArticlesPageDeleteMutationVariables>;
+
+/**
+ * __useDashboardArticlesPageDeleteMutation__
+ *
+ * To run a mutation, you first call `useDashboardArticlesPageDeleteMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDashboardArticlesPageDeleteMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [dashboardArticlesPageDeleteMutation, { data, loading, error }] = useDashboardArticlesPageDeleteMutation({
+ *   variables: {
+ *      articleId: // value for 'articleId'
+ *   },
+ * });
+ */
+export function useDashboardArticlesPageDeleteMutation(baseOptions?: Apollo.MutationHookOptions<DashboardArticlesPageDeleteMutation, DashboardArticlesPageDeleteMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DashboardArticlesPageDeleteMutation, DashboardArticlesPageDeleteMutationVariables>(DashboardArticlesPageDeleteDocument, options);
+      }
+export type DashboardArticlesPageDeleteMutationHookResult = ReturnType<typeof useDashboardArticlesPageDeleteMutation>;
+export type DashboardArticlesPageDeleteMutationResult = Apollo.MutationResult<DashboardArticlesPageDeleteMutation>;
+export type DashboardArticlesPageDeleteMutationOptions = Apollo.BaseMutationOptions<DashboardArticlesPageDeleteMutation, DashboardArticlesPageDeleteMutationVariables>;
+export const DashboardArticlesPageArticlesDocument = gql`
+    query DashboardArticlesPageArticles($page: Int = 1) {
+  myArticles(page: $page, per: 10) {
+    records {
+      ...DashboardArticlesPageArticle
     }
     paging {
       ...paging
     }
   }
 }
-    ${PagingFragmentDoc}`;
+    ${DashboardArticlesPageArticleFragmentDoc}
+${PagingFragmentDoc}`;
 
 /**
- * __usePageDashboardArticlesQuery__
+ * __useDashboardArticlesPageArticlesQuery__
  *
- * To run a query within a React component, call `usePageDashboardArticlesQuery` and pass it any options that fit your needs.
- * When your component renders, `usePageDashboardArticlesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useDashboardArticlesPageArticlesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useDashboardArticlesPageArticlesQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = usePageDashboardArticlesQuery({
+ * const { data, loading, error } = useDashboardArticlesPageArticlesQuery({
  *   variables: {
  *      page: // value for 'page'
- *      per: // value for 'per'
  *   },
  * });
  */
-export function usePageDashboardArticlesQuery(baseOptions?: Apollo.QueryHookOptions<PageDashboardArticlesQuery, PageDashboardArticlesQueryVariables>) {
+export function useDashboardArticlesPageArticlesQuery(baseOptions?: Apollo.QueryHookOptions<DashboardArticlesPageArticlesQuery, DashboardArticlesPageArticlesQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<PageDashboardArticlesQuery, PageDashboardArticlesQueryVariables>(PageDashboardArticlesDocument, options);
+        return Apollo.useQuery<DashboardArticlesPageArticlesQuery, DashboardArticlesPageArticlesQueryVariables>(DashboardArticlesPageArticlesDocument, options);
       }
-export function usePageDashboardArticlesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PageDashboardArticlesQuery, PageDashboardArticlesQueryVariables>) {
+export function useDashboardArticlesPageArticlesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<DashboardArticlesPageArticlesQuery, DashboardArticlesPageArticlesQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<PageDashboardArticlesQuery, PageDashboardArticlesQueryVariables>(PageDashboardArticlesDocument, options);
+          return Apollo.useLazyQuery<DashboardArticlesPageArticlesQuery, DashboardArticlesPageArticlesQueryVariables>(DashboardArticlesPageArticlesDocument, options);
         }
-export type PageDashboardArticlesQueryHookResult = ReturnType<typeof usePageDashboardArticlesQuery>;
-export type PageDashboardArticlesLazyQueryHookResult = ReturnType<typeof usePageDashboardArticlesLazyQuery>;
-export type PageDashboardArticlesQueryResult = Apollo.QueryResult<PageDashboardArticlesQuery, PageDashboardArticlesQueryVariables>;
+export type DashboardArticlesPageArticlesQueryHookResult = ReturnType<typeof useDashboardArticlesPageArticlesQuery>;
+export type DashboardArticlesPageArticlesLazyQueryHookResult = ReturnType<typeof useDashboardArticlesPageArticlesLazyQuery>;
+export type DashboardArticlesPageArticlesQueryResult = Apollo.QueryResult<DashboardArticlesPageArticlesQuery, DashboardArticlesPageArticlesQueryVariables>;
 export const PageDashboardAttackActionEditDocument = gql`
     query PageDashboardAttackActionEdit($actionId: ID!) {
   attackAction(actionId: $actionId) {
@@ -8102,48 +8151,83 @@ export function useDashboardOrganizerEditPageUpdateOrganizerMutation(baseOptions
 export type DashboardOrganizerEditPageUpdateOrganizerMutationHookResult = ReturnType<typeof useDashboardOrganizerEditPageUpdateOrganizerMutation>;
 export type DashboardOrganizerEditPageUpdateOrganizerMutationResult = Apollo.MutationResult<DashboardOrganizerEditPageUpdateOrganizerMutation>;
 export type DashboardOrganizerEditPageUpdateOrganizerMutationOptions = Apollo.BaseMutationOptions<DashboardOrganizerEditPageUpdateOrganizerMutation, DashboardOrganizerEditPageUpdateOrganizerMutationVariables>;
-export const DashboardOrganizersPageDocument = gql`
-    query DashboardOrganizersPage($page: Int, $keyword: String) {
-  organizers(page: $page, per: 12, keyword: $keyword) {
+export const DashboardOrganizersPageDeleteDocument = gql`
+    mutation DashboardOrganizersPageDelete($organizerSlug: String!) {
+  deleteOrganizer(input: {organizerSlug: $organizerSlug}) {
+    organizer {
+      id
+    }
+  }
+}
+    `;
+export type DashboardOrganizersPageDeleteMutationFn = Apollo.MutationFunction<DashboardOrganizersPageDeleteMutation, DashboardOrganizersPageDeleteMutationVariables>;
+
+/**
+ * __useDashboardOrganizersPageDeleteMutation__
+ *
+ * To run a mutation, you first call `useDashboardOrganizersPageDeleteMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDashboardOrganizersPageDeleteMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [dashboardOrganizersPageDeleteMutation, { data, loading, error }] = useDashboardOrganizersPageDeleteMutation({
+ *   variables: {
+ *      organizerSlug: // value for 'organizerSlug'
+ *   },
+ * });
+ */
+export function useDashboardOrganizersPageDeleteMutation(baseOptions?: Apollo.MutationHookOptions<DashboardOrganizersPageDeleteMutation, DashboardOrganizersPageDeleteMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DashboardOrganizersPageDeleteMutation, DashboardOrganizersPageDeleteMutationVariables>(DashboardOrganizersPageDeleteDocument, options);
+      }
+export type DashboardOrganizersPageDeleteMutationHookResult = ReturnType<typeof useDashboardOrganizersPageDeleteMutation>;
+export type DashboardOrganizersPageDeleteMutationResult = Apollo.MutationResult<DashboardOrganizersPageDeleteMutation>;
+export type DashboardOrganizersPageDeleteMutationOptions = Apollo.BaseMutationOptions<DashboardOrganizersPageDeleteMutation, DashboardOrganizersPageDeleteMutationVariables>;
+export const DashboardOrganizersPageOrganizersDocument = gql`
+    query DashboardOrganizersPageOrganizers($page: Int = 1, $keyword: String) {
+  organizers(page: $page, per: 10, keyword: $keyword) {
     records {
-      ...DashboardOrganizerCard
+      ...DashboardOrganizersPageOrganizer
     }
     paging {
       ...paging
     }
   }
 }
-    ${DashboardOrganizerCardFragmentDoc}
+    ${DashboardOrganizersPageOrganizerFragmentDoc}
 ${PagingFragmentDoc}`;
 
 /**
- * __useDashboardOrganizersPageQuery__
+ * __useDashboardOrganizersPageOrganizersQuery__
  *
- * To run a query within a React component, call `useDashboardOrganizersPageQuery` and pass it any options that fit your needs.
- * When your component renders, `useDashboardOrganizersPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useDashboardOrganizersPageOrganizersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useDashboardOrganizersPageOrganizersQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useDashboardOrganizersPageQuery({
+ * const { data, loading, error } = useDashboardOrganizersPageOrganizersQuery({
  *   variables: {
  *      page: // value for 'page'
  *      keyword: // value for 'keyword'
  *   },
  * });
  */
-export function useDashboardOrganizersPageQuery(baseOptions?: Apollo.QueryHookOptions<DashboardOrganizersPageQuery, DashboardOrganizersPageQueryVariables>) {
+export function useDashboardOrganizersPageOrganizersQuery(baseOptions?: Apollo.QueryHookOptions<DashboardOrganizersPageOrganizersQuery, DashboardOrganizersPageOrganizersQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<DashboardOrganizersPageQuery, DashboardOrganizersPageQueryVariables>(DashboardOrganizersPageDocument, options);
+        return Apollo.useQuery<DashboardOrganizersPageOrganizersQuery, DashboardOrganizersPageOrganizersQueryVariables>(DashboardOrganizersPageOrganizersDocument, options);
       }
-export function useDashboardOrganizersPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<DashboardOrganizersPageQuery, DashboardOrganizersPageQueryVariables>) {
+export function useDashboardOrganizersPageOrganizersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<DashboardOrganizersPageOrganizersQuery, DashboardOrganizersPageOrganizersQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<DashboardOrganizersPageQuery, DashboardOrganizersPageQueryVariables>(DashboardOrganizersPageDocument, options);
+          return Apollo.useLazyQuery<DashboardOrganizersPageOrganizersQuery, DashboardOrganizersPageOrganizersQueryVariables>(DashboardOrganizersPageOrganizersDocument, options);
         }
-export type DashboardOrganizersPageQueryHookResult = ReturnType<typeof useDashboardOrganizersPageQuery>;
-export type DashboardOrganizersPageLazyQueryHookResult = ReturnType<typeof useDashboardOrganizersPageLazyQuery>;
-export type DashboardOrganizersPageQueryResult = Apollo.QueryResult<DashboardOrganizersPageQuery, DashboardOrganizersPageQueryVariables>;
+export type DashboardOrganizersPageOrganizersQueryHookResult = ReturnType<typeof useDashboardOrganizersPageOrganizersQuery>;
+export type DashboardOrganizersPageOrganizersLazyQueryHookResult = ReturnType<typeof useDashboardOrganizersPageOrganizersLazyQuery>;
+export type DashboardOrganizersPageOrganizersQueryResult = Apollo.QueryResult<DashboardOrganizersPageOrganizersQuery, DashboardOrganizersPageOrganizersQueryVariables>;
 export const DashboardOrganizersNewPageCreateOrganizerDocument = gql`
     mutation DashboardOrganizersNewPageCreateOrganizer($attributes: OrganizerAttributes!) {
   createOrganizer(input: {attributes: $attributes}) {
@@ -8254,48 +8338,83 @@ export function useDashboardPlayerEditPageUpdatePlayerMutation(baseOptions?: Apo
 export type DashboardPlayerEditPageUpdatePlayerMutationHookResult = ReturnType<typeof useDashboardPlayerEditPageUpdatePlayerMutation>;
 export type DashboardPlayerEditPageUpdatePlayerMutationResult = Apollo.MutationResult<DashboardPlayerEditPageUpdatePlayerMutation>;
 export type DashboardPlayerEditPageUpdatePlayerMutationOptions = Apollo.BaseMutationOptions<DashboardPlayerEditPageUpdatePlayerMutation, DashboardPlayerEditPageUpdatePlayerMutationVariables>;
-export const DashboardPlayersPageDocument = gql`
-    query DashboardPlayersPage($page: Int, $keyword: String) {
-  players(page: $page, per: 12, keyword: $keyword) {
+export const DashboardPlayersPagePlayersDocument = gql`
+    query DashboardPlayersPagePlayers($page: Int = 1, $keyword: String) {
+  players(page: $page, per: 10, keyword: $keyword) {
     records {
-      ...DashboardPlayerCard
+      ...DashboardPlayersPagePlayer
     }
     paging {
       ...paging
     }
   }
 }
-    ${DashboardPlayerCardFragmentDoc}
+    ${DashboardPlayersPagePlayerFragmentDoc}
 ${PagingFragmentDoc}`;
 
 /**
- * __useDashboardPlayersPageQuery__
+ * __useDashboardPlayersPagePlayersQuery__
  *
- * To run a query within a React component, call `useDashboardPlayersPageQuery` and pass it any options that fit your needs.
- * When your component renders, `useDashboardPlayersPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useDashboardPlayersPagePlayersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useDashboardPlayersPagePlayersQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useDashboardPlayersPageQuery({
+ * const { data, loading, error } = useDashboardPlayersPagePlayersQuery({
  *   variables: {
  *      page: // value for 'page'
  *      keyword: // value for 'keyword'
  *   },
  * });
  */
-export function useDashboardPlayersPageQuery(baseOptions?: Apollo.QueryHookOptions<DashboardPlayersPageQuery, DashboardPlayersPageQueryVariables>) {
+export function useDashboardPlayersPagePlayersQuery(baseOptions?: Apollo.QueryHookOptions<DashboardPlayersPagePlayersQuery, DashboardPlayersPagePlayersQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<DashboardPlayersPageQuery, DashboardPlayersPageQueryVariables>(DashboardPlayersPageDocument, options);
+        return Apollo.useQuery<DashboardPlayersPagePlayersQuery, DashboardPlayersPagePlayersQueryVariables>(DashboardPlayersPagePlayersDocument, options);
       }
-export function useDashboardPlayersPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<DashboardPlayersPageQuery, DashboardPlayersPageQueryVariables>) {
+export function useDashboardPlayersPagePlayersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<DashboardPlayersPagePlayersQuery, DashboardPlayersPagePlayersQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<DashboardPlayersPageQuery, DashboardPlayersPageQueryVariables>(DashboardPlayersPageDocument, options);
+          return Apollo.useLazyQuery<DashboardPlayersPagePlayersQuery, DashboardPlayersPagePlayersQueryVariables>(DashboardPlayersPagePlayersDocument, options);
         }
-export type DashboardPlayersPageQueryHookResult = ReturnType<typeof useDashboardPlayersPageQuery>;
-export type DashboardPlayersPageLazyQueryHookResult = ReturnType<typeof useDashboardPlayersPageLazyQuery>;
-export type DashboardPlayersPageQueryResult = Apollo.QueryResult<DashboardPlayersPageQuery, DashboardPlayersPageQueryVariables>;
+export type DashboardPlayersPagePlayersQueryHookResult = ReturnType<typeof useDashboardPlayersPagePlayersQuery>;
+export type DashboardPlayersPagePlayersLazyQueryHookResult = ReturnType<typeof useDashboardPlayersPagePlayersLazyQuery>;
+export type DashboardPlayersPagePlayersQueryResult = Apollo.QueryResult<DashboardPlayersPagePlayersQuery, DashboardPlayersPagePlayersQueryVariables>;
+export const DashboardPlayersPageDeleteDocument = gql`
+    mutation DashboardPlayersPageDelete($playerSlug: String!) {
+  deletePlayer(input: {playerSlug: $playerSlug}) {
+    player {
+      id
+    }
+  }
+}
+    `;
+export type DashboardPlayersPageDeleteMutationFn = Apollo.MutationFunction<DashboardPlayersPageDeleteMutation, DashboardPlayersPageDeleteMutationVariables>;
+
+/**
+ * __useDashboardPlayersPageDeleteMutation__
+ *
+ * To run a mutation, you first call `useDashboardPlayersPageDeleteMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDashboardPlayersPageDeleteMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [dashboardPlayersPageDeleteMutation, { data, loading, error }] = useDashboardPlayersPageDeleteMutation({
+ *   variables: {
+ *      playerSlug: // value for 'playerSlug'
+ *   },
+ * });
+ */
+export function useDashboardPlayersPageDeleteMutation(baseOptions?: Apollo.MutationHookOptions<DashboardPlayersPageDeleteMutation, DashboardPlayersPageDeleteMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DashboardPlayersPageDeleteMutation, DashboardPlayersPageDeleteMutationVariables>(DashboardPlayersPageDeleteDocument, options);
+      }
+export type DashboardPlayersPageDeleteMutationHookResult = ReturnType<typeof useDashboardPlayersPageDeleteMutation>;
+export type DashboardPlayersPageDeleteMutationResult = Apollo.MutationResult<DashboardPlayersPageDeleteMutation>;
+export type DashboardPlayersPageDeleteMutationOptions = Apollo.BaseMutationOptions<DashboardPlayersPageDeleteMutation, DashboardPlayersPageDeleteMutationVariables>;
 export const DashboardPlayersPageCreatePlayerFromSmashggDocument = gql`
     mutation DashboardPlayersPageCreatePlayerFromSmashgg($smashggId: String!) {
   createPlayerFromSmashgg(input: {smashggId: $smashggId}) {
@@ -8963,49 +9082,48 @@ export function useDashboardTournamentPageDeleteVideoMutation(baseOptions?: Apol
 export type DashboardTournamentPageDeleteVideoMutationHookResult = ReturnType<typeof useDashboardTournamentPageDeleteVideoMutation>;
 export type DashboardTournamentPageDeleteVideoMutationResult = Apollo.MutationResult<DashboardTournamentPageDeleteVideoMutation>;
 export type DashboardTournamentPageDeleteVideoMutationOptions = Apollo.BaseMutationOptions<DashboardTournamentPageDeleteVideoMutation, DashboardTournamentPageDeleteVideoMutationVariables>;
-export const DashboardTournamentsPageDocument = gql`
-    query DashboardTournamentsPage($page: Int, $per: Int, $keyword: String) {
-  tournaments(page: $page, per: $per, keyword: $keyword) {
+export const DashboardTournamentsPageTournamentsDocument = gql`
+    query DashboardTournamentsPageTournaments($page: Int = 1, $keyword: String) {
+  tournaments(page: $page, per: 10, keyword: $keyword) {
     records {
-      ...DashboardTournamentCard
+      ...DashboardTournamentsPageTournament
     }
     paging {
       ...paging
     }
   }
 }
-    ${DashboardTournamentCardFragmentDoc}
+    ${DashboardTournamentsPageTournamentFragmentDoc}
 ${PagingFragmentDoc}`;
 
 /**
- * __useDashboardTournamentsPageQuery__
+ * __useDashboardTournamentsPageTournamentsQuery__
  *
- * To run a query within a React component, call `useDashboardTournamentsPageQuery` and pass it any options that fit your needs.
- * When your component renders, `useDashboardTournamentsPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useDashboardTournamentsPageTournamentsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useDashboardTournamentsPageTournamentsQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useDashboardTournamentsPageQuery({
+ * const { data, loading, error } = useDashboardTournamentsPageTournamentsQuery({
  *   variables: {
  *      page: // value for 'page'
- *      per: // value for 'per'
  *      keyword: // value for 'keyword'
  *   },
  * });
  */
-export function useDashboardTournamentsPageQuery(baseOptions?: Apollo.QueryHookOptions<DashboardTournamentsPageQuery, DashboardTournamentsPageQueryVariables>) {
+export function useDashboardTournamentsPageTournamentsQuery(baseOptions?: Apollo.QueryHookOptions<DashboardTournamentsPageTournamentsQuery, DashboardTournamentsPageTournamentsQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<DashboardTournamentsPageQuery, DashboardTournamentsPageQueryVariables>(DashboardTournamentsPageDocument, options);
+        return Apollo.useQuery<DashboardTournamentsPageTournamentsQuery, DashboardTournamentsPageTournamentsQueryVariables>(DashboardTournamentsPageTournamentsDocument, options);
       }
-export function useDashboardTournamentsPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<DashboardTournamentsPageQuery, DashboardTournamentsPageQueryVariables>) {
+export function useDashboardTournamentsPageTournamentsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<DashboardTournamentsPageTournamentsQuery, DashboardTournamentsPageTournamentsQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<DashboardTournamentsPageQuery, DashboardTournamentsPageQueryVariables>(DashboardTournamentsPageDocument, options);
+          return Apollo.useLazyQuery<DashboardTournamentsPageTournamentsQuery, DashboardTournamentsPageTournamentsQueryVariables>(DashboardTournamentsPageTournamentsDocument, options);
         }
-export type DashboardTournamentsPageQueryHookResult = ReturnType<typeof useDashboardTournamentsPageQuery>;
-export type DashboardTournamentsPageLazyQueryHookResult = ReturnType<typeof useDashboardTournamentsPageLazyQuery>;
-export type DashboardTournamentsPageQueryResult = Apollo.QueryResult<DashboardTournamentsPageQuery, DashboardTournamentsPageQueryVariables>;
+export type DashboardTournamentsPageTournamentsQueryHookResult = ReturnType<typeof useDashboardTournamentsPageTournamentsQuery>;
+export type DashboardTournamentsPageTournamentsLazyQueryHookResult = ReturnType<typeof useDashboardTournamentsPageTournamentsLazyQuery>;
+export type DashboardTournamentsPageTournamentsQueryResult = Apollo.QueryResult<DashboardTournamentsPageTournamentsQuery, DashboardTournamentsPageTournamentsQueryVariables>;
 export const TopPageDocument = gql`
     query TopPage {
   tournaments(thisWeek: true, per: 3) {

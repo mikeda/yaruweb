@@ -1,7 +1,21 @@
-query DashboardOrganizersPage($page: Int, $keyword: String) {
-  organizers(page: $page, per: 12, keyword: $keyword) {
+fragment DashboardOrganizersPageOrganizer on Organizer {
+  id
+  slug
+  name
+}
+
+mutation DashboardOrganizersPageDelete($organizerSlug: String!) {
+  deleteOrganizer(input: { organizerSlug: $organizerSlug }) {
+    organizer {
+      id
+    }
+  }
+}
+
+query DashboardOrganizersPageOrganizers($page: Int = 1, $keyword: String) {
+  organizers(page: $page, per: 10, keyword: $keyword) {
     records {
-      ...DashboardOrganizerCard
+      ...DashboardOrganizersPageOrganizer
     }
 
     paging {

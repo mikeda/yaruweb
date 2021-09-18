@@ -1,11 +1,26 @@
-query DashboardPlayersPage($page: Int, $keyword: String) {
-  players(page: $page, per: 12, keyword: $keyword) {
+fragment DashboardPlayersPagePlayer on Player {
+  id
+  slug
+  name
+  avatarUrl
+}
+
+query DashboardPlayersPagePlayers($page: Int = 1, $keyword: String) {
+  players(page: $page, per: 10, keyword: $keyword) {
     records {
-      ...DashboardPlayerCard
+      ...DashboardPlayersPagePlayer
     }
 
     paging {
       ...paging
+    }
+  }
+}
+
+mutation DashboardPlayersPageDelete($playerSlug: String!) {
+  deletePlayer(input: { playerSlug: $playerSlug }) {
+    player {
+      id
     }
   }
 }
