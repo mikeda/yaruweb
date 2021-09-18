@@ -1,6 +1,6 @@
-import { Node } from 'slate';
+import { EmbedTweetElement } from '@/custom-types';
 
-export const getTweetNode = (url: URL): Node => {
+export const getTweetNode = (url: URL): EmbedTweetElement => {
   const paths = url.pathname.split('/');
 
   return {

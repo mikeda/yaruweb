@@ -4,7 +4,6 @@ import { withHistory } from 'slate-history';
 
 import { Element } from '@/components/ArticleElement';
 import { Leaf } from '../ArticleElement/Leaf';
-import { ArticleElementTypes } from '../ArticleElement/ArticleElement';
 import { withIcon } from './IconHelper';
 import { createEditor, Transforms, Node } from 'slate';
 import { withLink } from './LinkHelper';
@@ -13,6 +12,7 @@ import { getTweetNode, isTweetUrl } from './TweetHelper';
 import { useCreateArticleLinkMutation } from '@/lib/graphql/types';
 import isUrl from 'is-url';
 import { Controls } from './Controls';
+import { EmbedLinkElement } from '@/custom-types';
 
 export const createArticleEditor = () => {
   return withIcon(withLink(withHistory(withReact(createEditor()))));
@@ -34,38 +34,43 @@ export const ArticleEditor: React.FC = () => {
 
         if (selectedElement.type === 'heading-one' || selectedElement.type === 'heading-two') {
           event.preventDefault();
+
           const selectedLeaf = Node.descendant(editor, editor.selection.anchor.path);
 
-          const text = selectedLeaf.text as string;
+          if (!selectedLeaf.type) {
+            const text = selectedLeaf.text;
 
-          if (text.length === editor.selection.anchor.offset) {
-            Transforms.insertNodes(editor, {
-              type: 'paragraph',
-              children: [{ text: '', marks: [] }],
-            });
-          } else {
-            Transforms.splitNodes(editor);
-            Transforms.setNodes(editor, { type: 'paragraph' });
+            if (text.length === editor.selection.anchor.offset) {
+              Transforms.insertNodes(editor, {
+                type: 'paragraph',
+                children: [{ text: '' }],
+              });
+            } else {
+              Transforms.splitNodes(editor);
+              Transforms.setNodes(editor, { type: 'paragraph' });
+            }
           }
         }
       }
     }
   }, []);
+
   const [createArticleLink] = useCreateArticleLinkMutation({
     onCompleted: data => {
       const articleLink = data.createArticleLink?.articleLink;
       if (!articleLink) return;
 
       const { url, title, description, imageUrl } = articleLink;
-      editor.insertNode({
-        type: ArticleElementTypes.EmbedLink,
+      const embedLint: EmbedLinkElement = {
+        type: 'embed-link',
         url,
         title,
-        description,
-        imageUrl,
+        description: description as string | undefined,
+        imageUrl: imageUrl as string | undefined,
         children: [{ text: '' }],
-      });
-      editor.insertNode({ type: ArticleElementTypes.Paragraph, children: [{ text: '' }] });
+      };
+      editor.insertNode(embedLint);
+      editor.insertNode({ type: 'paragraph', children: [{ text: '' }] });
     },
     onError: e => {
       alert(e.message);
@@ -75,11 +80,12 @@ export const ArticleEditor: React.FC = () => {
   const { insertData, isVoid } = editor;
 
   editor.isVoid = element => {
-    return element.type === ArticleElementTypes.Image ||
-      element.type === ArticleElementTypes.EmbedMove ||
-      element.type === ArticleElementTypes.EmbedLink ||
-      element.type === ArticleElementTypes.EmbedYoutube ||
-      element.type === ArticleElementTypes.EmbedTweet
+    return element.type === 'image' ||
+      element.type === 'embed-move' ||
+      element.type === 'embed-combo' ||
+      element.type === 'embed-link' ||
+      element.type === 'embed-youtube' ||
+      element.type === 'embed-tweet'
       ? true
       : isVoid(element);
   };
@@ -94,14 +100,14 @@ export const ArticleEditor: React.FC = () => {
         const youtubeNode = getYoutubeNode(url);
         if (youtubeNode) {
           editor.insertNode(youtubeNode);
-          editor.insertNode({ type: ArticleElementTypes.Paragraph, children: [{ text: '' }] });
+          editor.insertNode({ type: 'paragraph', children: [{ text: '' }] });
         }
         return;
       } else if (isTweetUrl(url)) {
         const tweetNode = getTweetNode(url);
         if (tweetNode) {
           editor.insertNode(tweetNode);
-          editor.insertNode({ type: ArticleElementTypes.Paragraph, children: [{ text: '' }] });
+          editor.insertNode({ type: 'paragraph', children: [{ text: '' }] });
         }
         return;
       }

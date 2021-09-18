@@ -6,7 +6,6 @@ import Modal from 'react-modal';
 
 import styles from './ComboButton.module.scss';
 import { ComboSelect } from './ComboSelect';
-import { ArticleElementTypes } from '@/components/ArticleElement/ArticleElement';
 import { FormGroup } from '@/components/form/FormGroup';
 import { Transforms, Editor } from 'slate';
 import { Character } from '@/lib/graphql/types';
@@ -62,11 +61,11 @@ export const ComboButton: React.FC<Props> = ({ characters }) => {
                   Transforms.select(editor, savedSelection.current ?? Editor.end(editor, []));
                 }
                 editor.insertNode({
-                  type: ArticleElementTypes.EmbedCombo,
+                  type: 'embed-combo',
                   comboId,
                   children: [{ text: '' }],
                 });
-                editor.insertNode({ type: ArticleElementTypes.Paragraph, children: [{ text: '' }] });
+                editor.insertNode({ type: 'paragraph', children: [{ text: '' }] });
                 setExpanded(false);
               }}
             />

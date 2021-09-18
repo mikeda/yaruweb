@@ -5,8 +5,9 @@ import { Button } from '../Button';
 import styles from './VideoButton.module.scss';
 import { useCreateArticleVideoMutation } from '@/lib/graphql/types';
 import { YAROUYO_FONT_CODE } from '@/lib/YarouyoFont';
-import { ArticleElementTypes } from '@/components/ArticleElement/ArticleElement';
 import { toast } from 'react-toastify';
+import { Transforms } from 'slate';
+import { VideoElement } from '@/custom-types';
 
 export const VideoButton: React.FC = () => {
   const editor = useSlate();
@@ -32,13 +33,22 @@ export const VideoButton: React.FC = () => {
         body: formData,
       })
         .then(() => {
-          editor.insertNode({
-            type: ArticleElementTypes.Video,
+          const text = { text: '' };
+          const video: VideoElement = {
+            type: 'video',
             m3u8Url: res.articleVideo.m3u8Url,
             thumbnailUrl: res.articleVideo.thumbnailUrl,
-            children: [{ text: '' }],
-          });
-          editor.insertNode({ type: ArticleElementTypes.Paragraph, children: [{ text: '' }] });
+            children: [text],
+          };
+          Transforms.insertNodes(editor, video);
+
+          //editor.insertNode({
+          //  type: ArticleElementTypes.Video,
+          //  m3u8Url: res.articleVideo.m3u8Url,
+          //  thumbnailUrl: res.articleVideo.thumbnailUrl,
+          //  children: [{ text: '' }],
+          //});
+          //editor.insertNode({ type: ArticleElementTypes.Paragraph, children: [{ text: '' }] });
         })
         .catch(() => {
           toast.error('アップロードに失敗しました。');
