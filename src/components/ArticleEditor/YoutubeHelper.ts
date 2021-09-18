@@ -1,6 +1,5 @@
 import { EmbedYoutubeElement } from '@/custom-types';
 
-//export const getYoutubeNode = (url: URL): Node | null => {
 export const getYoutubeNode = (url: URL): EmbedYoutubeElement | null => {
   switch (url.hostname) {
     case 'www.youtube.com': {

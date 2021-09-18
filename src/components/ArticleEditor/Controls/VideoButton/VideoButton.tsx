@@ -41,14 +41,7 @@ export const VideoButton: React.FC = () => {
             children: [text],
           };
           Transforms.insertNodes(editor, video);
-
-          //editor.insertNode({
-          //  type: ArticleElementTypes.Video,
-          //  m3u8Url: res.articleVideo.m3u8Url,
-          //  thumbnailUrl: res.articleVideo.thumbnailUrl,
-          //  children: [{ text: '' }],
-          //});
-          //editor.insertNode({ type: ArticleElementTypes.Paragraph, children: [{ text: '' }] });
+          Transforms.insertNodes(editor, { type: 'paragraph', children: [{ text: '' }] });
         })
         .catch(() => {
           toast.error('アップロードに失敗しました。');

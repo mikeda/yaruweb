@@ -17,9 +17,7 @@ export const ImageButton: React.FC = () => {
       const text = { text: '' };
       const image: ImageElement = { type: 'image', url, children: [text] };
       Transforms.insertNodes(editor, image);
-
-      //editor.insertNode({ type: ArticleElementTypes.Image, url: url, children: [{ text: '' }] });
-      //editor.insertNode({ type: ArticleElementTypes.Paragraph, children: [{ text: '' }] });
+      Transforms.insertNodes(editor, { type: 'paragraph', children: [{ text: '' }] });
     },
     onError: e => {
       alert(e.message);

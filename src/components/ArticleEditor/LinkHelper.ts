@@ -2,30 +2,6 @@ import { Element as SlateElement, Transforms, Editor, Range } from 'slate';
 import { LinkElement } from '@/custom-types';
 import isUrl from 'is-url';
 
-//export const withLink = (editor: ReactEditor) => {
-//  const { isInline, normalizeNode } = editor;
-//
-//  editor.isInline = element => {
-//    return element.type === 'link' ? true : isInline(element);
-//  };
-//
-//  editor.normalizeNode = entry => {
-//    const [node, path] = entry;
-//
-//    if (SlateElement.isElement(node) && node.type === 'link') {
-//      const x = Node.children(editor, path).next();
-//      if (!x.done && !x.value[0].text) {
-//        Transforms.unwrapNodes(editor, { at: path });
-//        return;
-//      }
-//    }
-//
-//    normalizeNode(entry);
-//  };
-//
-//  return editor;
-//};
-
 export const withLink = (editor: Editor) => {
   const { insertData, insertText, isInline } = editor;
 
@@ -67,13 +43,6 @@ export const isLinkActive = (editor: Editor) => {
 
   return !!match;
 };
-
-//const isLinkActive = (editor: Editor) => {
-//  const [link] = Editor.nodes(editor, {
-//    match: n => !Editor.isEditor(n) && SlateElement.isElement(n) && n.type === 'link',
-//  }).next;
-//  return !!link;
-//};
 
 const unwrapLink = (editor: Editor) => {
   Transforms.unwrapNodes(editor, {
