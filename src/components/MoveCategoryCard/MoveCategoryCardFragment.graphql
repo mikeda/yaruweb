@@ -1,5 +1,0 @@
-fragment MoveCategoryCard on MoveCategory {
-  id
-  name
-  movesCount
-}

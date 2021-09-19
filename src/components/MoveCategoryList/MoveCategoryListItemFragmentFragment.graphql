@@ -1,5 +1,0 @@
-fragment MoveCategoryListItem on MoveCategory {
-  id
-  name
-  movesCount
-}

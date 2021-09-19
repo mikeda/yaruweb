@@ -1,9 +1,15 @@
+fragment DashboardComboCategoriesPageComboCategory on ComboCategory {
+    id
+    name
+    combosCount
+}
+
 query DashboardComboCategoriesPage($characterSlug: String!) {
   character(characterSlug: $characterSlug) {
     ...CharacterBreadcrumbs
   }
 
   comboCategories(characterSlug: $characterSlug) {
-    ...ComboCategoryCard
+    ...DashboardComboCategoriesPageComboCategory
   }
 }

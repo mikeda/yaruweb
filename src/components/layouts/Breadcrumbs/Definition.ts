@@ -1,15 +1,6 @@
 import { path } from '@/lib';
 import { BreadcrumbChainItem } from './Breadcrumbs';
-import {
-  ArticleParam,
-  CharactersParam,
-  ComboCategoryParam,
-  MoveCategoryParam,
-  MoveParam,
-  PlayerParam,
-  TournamentParam,
-  TournamentVideoParam,
-} from './params';
+import { ArticleParam, CharactersParam, PlayerParam, TournamentParam, TournamentVideoParam } from './params';
 
 export type ChainParam =
   | { to: 'articles' }
@@ -18,12 +9,9 @@ export type ChainParam =
   | { to: 'characters' }
   | { to: 'character'; character: CharactersParam }
   | { to: 'characterBattles'; character: CharactersParam }
-  | { to: 'comboCategories'; character: CharactersParam }
-  | { to: 'comboCategory'; comboCategory: ComboCategoryParam }
+  | { to: 'characterCombos'; character: CharactersParam }
+  | { to: 'characterMoves'; character: CharactersParam }
   | { to: 'login' }
-  | { to: 'moveCategories'; character: CharactersParam }
-  | { to: 'moveCategory'; moveCategory: MoveCategoryParam }
-  | { to: 'move'; move: MoveParam }
   | { to: 'players' }
   | { to: 'player'; player: PlayerParam }
   | { to: 'playerBattles'; player: PlayerParam }
@@ -57,37 +45,20 @@ export const breadcrumbChain = (props: ChainParam): BreadcrumbChainItem => {
         url: path({ to: 'characterBattles', characterSlug: props.character.slug }),
         parent: breadcrumbChain({ to: 'character', character: props.character }),
       };
-    case 'comboCategories':
+    case 'characterCombos':
       return {
         name: 'コンボ',
-        url: path({ to: 'comboCategories', characterSlug: props.character.slug }),
+        url: path({ to: 'characterCombos', characterSlug: props.character.slug }),
         parent: breadcrumbChain({ to: 'character', character: props.character }),
       };
-    case 'comboCategory':
+    case 'characterMoves':
       return {
-        name: props.comboCategory.name,
-        url: path({ to: 'comboCategory', comboCategoryId: props.comboCategory.id }),
-        parent: breadcrumbChain({ to: 'comboCategories', character: props.comboCategory.character }),
+        name: 'コマンドリスト',
+        url: path({ to: 'characterMoves', characterSlug: props.character.slug }),
+        parent: breadcrumbChain({ to: 'character', character: props.character }),
       };
     case 'login':
       return { name: 'ログイン' };
-    case 'moveCategories':
-      return {
-        name: 'コマンドリスト',
-        url: path({ to: 'moveCategories', characterSlug: props.character.slug }),
-        parent: breadcrumbChain({ to: 'character', character: props.character }),
-      };
-    case 'moveCategory':
-      return {
-        name: props.moveCategory.name,
-        url: path({ to: 'moveCategory', moveCategoryId: props.moveCategory.id }),
-        parent: breadcrumbChain({ to: 'moveCategories', character: props.moveCategory.character }),
-      };
-    case 'move':
-      return {
-        name: props.move.name,
-        parent: breadcrumbChain({ to: 'moveCategory', moveCategory: props.move.moveCategory }),
-      };
     case 'passwordEdit':
       return { name: 'パスワード変更' };
     case 'passwordReset':

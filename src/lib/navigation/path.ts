@@ -6,11 +6,9 @@ type Options =
   | { to: 'characters' }
   | { to: 'character'; characterSlug: string }
   | { to: 'characterBattles'; characterSlug: string }
-  | { to: 'comboCategories'; characterSlug: string }
-  | { to: 'comboCategory'; comboCategoryId: string }
+  | { to: 'characterCombos'; characterSlug: string }
+  | { to: 'characterMoves'; characterSlug: string }
   | { to: 'login' }
-  | { to: 'moveCategories'; characterSlug: string }
-  | { to: 'moveCategory'; moveCategoryId: string }
   | { to: 'move'; moveId: string }
   | { to: 'passwordEdit' }
   | { to: 'passwordReset' }
@@ -38,16 +36,12 @@ export const path = (options: Options): string => {
       return `/characters/${options.characterSlug}`;
     case 'characterBattles':
       return `/characters/${options.characterSlug}/battles`;
-    case 'comboCategories':
-      return `/characters/${options.characterSlug}/combo_categories`;
-    case 'comboCategory':
-      return `/combo_categories/${options.comboCategoryId}`;
+    case 'characterCombos':
+      return `/characters/${options.characterSlug}/combos`;
+    case 'characterMoves':
+      return `/characters/${options.characterSlug}/moves`;
     case 'login':
       return '/login';
-    case 'moveCategories':
-      return `/characters/${options.characterSlug}/move_categories`;
-    case 'moveCategory':
-      return `/move_categories/${options.moveCategoryId}`;
     case 'move':
       return `/moves/${options.moveId}`;
     case 'passwordEdit':

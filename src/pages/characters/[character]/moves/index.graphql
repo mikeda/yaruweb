@@ -1,10 +1,14 @@
-query PageCharacterMoveCategories($characterSlug: String!) {
+query CharacterMovesPage($characterSlug: String!) {
   character(characterSlug: $characterSlug) {
     ...CharacterBreadcrumbs
     ...CharacterPageProfile
 
     moveCategories {
-      ...MoveCategoryListItem
+      id
+      name
+      moves {
+        ...MoveMedia
+      }
     }
   }
 }
