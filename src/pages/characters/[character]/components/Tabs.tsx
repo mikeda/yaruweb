@@ -39,7 +39,7 @@ export const Tabs: React.FC<Props> = ({ character, activeTab }) => {
             value="moves"
             label={`コマンドリスト (${character.movesCount})`}
             onClick={() => {
-              router.push(path({ to: 'moveCategories', characterSlug: character.slug }));
+              router.push(path({ to: 'characterMoves', characterSlug: character.slug }));
             }}
           />
         )}
@@ -49,7 +49,7 @@ export const Tabs: React.FC<Props> = ({ character, activeTab }) => {
             value="combos"
             label={`コンボ (${character.combosCount})`}
             onClick={() => {
-              router.push(path({ to: 'comboCategories', characterSlug: character.slug }));
+              router.push(path({ to: 'characterCombos', characterSlug: character.slug }));
             }}
           />
         )}

@@ -1,10 +1,15 @@
-query PageCharacterComboCategories($characterSlug: String!) {
+query CharacterCombosPage($characterSlug: String!) {
   character(characterSlug: $characterSlug) {
     ...CharacterBreadcrumbs
     ...CharacterPageProfile
 
     comboCategories {
-      ...ComboCategoryListItem
+      id
+      name
+
+      combos {
+        ...ComboMedia
+      }
     }
   }
 }

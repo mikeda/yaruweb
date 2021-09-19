@@ -2830,10 +2830,6 @@ export type CharacterCardFragment = { __typename?: 'Character', slug: string, lo
 
 export type CharacterFormFragment = { __typename?: 'Character', name: string, nameKana: string, longName: string, longNameKana: string, slug: string, country: string, fightingStyle: string, story: string, description: string, dlc: boolean };
 
-export type ComboCategoryCardFragment = { __typename?: 'ComboCategory', id: string, name: string, combosCount: number };
-
-export type ComboCategoryListItemFragment = { __typename?: 'ComboCategory', id: string, name: string, combosCount: number };
-
 export type ComboMediaFragment = { __typename?: 'Combo', id: string, name: string, damage?: Maybe<number>, note?: Maybe<string>, comboCategory: { __typename?: 'ComboCategory', id: string, name: string }, comboVideo?: Maybe<{ __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string }>, conditions: Array<{ __typename?: 'Condition', id: string, name: string }>, operations: Array<{ __typename?: 'Operation', id: string, name: string, key: string, icon: boolean }> };
 
 export type FavButtonArticleQueryVariables = Exact<{
@@ -2842,19 +2838,6 @@ export type FavButtonArticleQueryVariables = Exact<{
 
 
 export type FavButtonArticleQuery = { __typename?: 'Query', article: { __typename?: 'Article', faved: boolean } };
-
-export type MoveCategoryCardFragment = { __typename?: 'MoveCategory', id: string, name: string, movesCount: number };
-
-export type MoveCategoryCardsQueryVariables = Exact<{
-  characterSlug: Scalars['String'];
-}>;
-
-
-export type MoveCategoryCardsQuery = { __typename?: 'Query', moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, movesCount: number }> };
-
-export type MoveCategoryListItemFragment = { __typename?: 'MoveCategory', id: string, name: string, movesCount: number };
-
-export type MoveListItemFragment = { __typename?: 'Move', id: string, name: string, crouchingStatus: boolean, jumpStatus: boolean, powerCrush: boolean, homing: boolean, screw: boolean, wallBound: boolean, commands: Array<{ __typename?: 'Command', id: string, state: { __typename?: 'State', id: string, name: string }, operations: Array<{ __typename?: 'Operation', id: string, name: string, key: string, icon: boolean }> }> };
 
 export type MoveMediaFragment = { __typename?: 'Move', id: string, name: string, kana?: Maybe<string>, opponentState?: Maybe<OpponentStateEnum>, startUpFrame?: Maybe<number>, powerCrush: boolean, crouchingStatus: boolean, jumpStatus: boolean, homing: boolean, screw: boolean, wallBound: boolean, note?: Maybe<string>, moveCategory: { __typename?: 'MoveCategory', id: string, name: string }, afterState?: Maybe<{ __typename?: 'State', id: string, name: string }>, moveVideo?: Maybe<{ __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string }>, commands: Array<{ __typename?: 'Command', id: string, state: { __typename?: 'State', id: string, name: string }, operations: Array<{ __typename?: 'Operation', id: string, name: string, key: string, icon: boolean }> }>, actions: Array<{ __typename: 'AttackAction', id: string, attackType: AttackTypeEnum, damage: number, blockAvailable: boolean, blockState: AttackActionStateEnum, blockFrame?: Maybe<number>, hitAvailable: boolean, hitState: AttackActionStateEnum, hitFrame?: Maybe<number>, counterHitAvailable: boolean, counterHitState: AttackActionStateEnum, counterHitFrame?: Maybe<number>, cleanHitAvailable: boolean, cleanHitState: AttackActionStateEnum, cleanHitFrame?: Maybe<number>, crouchingHitAvailable: boolean, crouchingHitState: AttackActionStateEnum, crouchingHitFrame?: Maybe<number> } | { __typename: 'ThrowAction', id: string, throwType: ThrowTypeEnum, damage: number, escape: ThrowEscapeEnum, throwAvailable: boolean, throwState: ThrowActionStateEnum, throwFrame?: Maybe<number>, throwEscapeAvailable: boolean, throwEscapeState: ThrowActionStateEnum, throwEscapeFrame?: Maybe<number> }>, conditions: Array<{ __typename?: 'Condition', id: string, name: string }> };
 
@@ -2932,12 +2915,12 @@ export type CharacterBattlesPageBattlesQueryVariables = Exact<{
 
 export type CharacterBattlesPageBattlesQuery = { __typename?: 'Query', battles: { __typename?: 'BattleCollection', records: Array<{ __typename?: 'Battle', id: string, round?: Maybe<BattleRound>, tournamentVideo: { __typename?: 'TournamentVideo', id: string, tournament: { __typename?: 'Tournament', id: string, name: string, startsAt: string } }, sides: Array<{ __typename?: 'BattleSide', rounds: number, player: { __typename?: 'Player', name: string }, character: { __typename?: 'Character', faceImageUrl: string } }> }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
 
-export type PageCharacterComboCategoriesQueryVariables = Exact<{
+export type CharacterCombosPageQueryVariables = Exact<{
   characterSlug: Scalars['String'];
 }>;
 
 
-export type PageCharacterComboCategoriesQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, combosCount: number, movesCount: number, comboCategories: Array<{ __typename?: 'ComboCategory', id: string, name: string, combosCount: number }> } };
+export type CharacterCombosPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, combosCount: number, movesCount: number, comboCategories: Array<{ __typename?: 'ComboCategory', id: string, name: string, combos: Array<{ __typename?: 'Combo', id: string, name: string, damage?: Maybe<number>, note?: Maybe<string>, comboCategory: { __typename?: 'ComboCategory', id: string, name: string }, comboVideo?: Maybe<{ __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string }>, conditions: Array<{ __typename?: 'Condition', id: string, name: string }>, operations: Array<{ __typename?: 'Operation', id: string, name: string, key: string, icon: boolean }> }> }> } };
 
 export type CharacterPageProfileFragment = { __typename?: 'Character', slug: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, combosCount: number, movesCount: number };
 
@@ -2948,24 +2931,17 @@ export type PageCharacterQueryVariables = Exact<{
 
 export type PageCharacterQuery = { __typename?: 'Query', character: { __typename?: 'Character', story: string, description: string, slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, combosCount: number, movesCount: number }, battleCounts: { __typename?: 'BattleCountCollection', records: Array<{ __typename?: 'BattleCount', id: string, count: number, player: { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: Maybe<string> } }> } };
 
-export type PageCharacterMoveCategoriesQueryVariables = Exact<{
+export type CharacterMovesPageQueryVariables = Exact<{
   characterSlug: Scalars['String'];
 }>;
 
 
-export type PageCharacterMoveCategoriesQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, combosCount: number, movesCount: number, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, movesCount: number }> } };
+export type CharacterMovesPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, combosCount: number, movesCount: number, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, moves: Array<{ __typename?: 'Move', id: string, name: string, kana?: Maybe<string>, opponentState?: Maybe<OpponentStateEnum>, startUpFrame?: Maybe<number>, powerCrush: boolean, crouchingStatus: boolean, jumpStatus: boolean, homing: boolean, screw: boolean, wallBound: boolean, note?: Maybe<string>, moveCategory: { __typename?: 'MoveCategory', id: string, name: string }, afterState?: Maybe<{ __typename?: 'State', id: string, name: string }>, moveVideo?: Maybe<{ __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string }>, commands: Array<{ __typename?: 'Command', id: string, state: { __typename?: 'State', id: string, name: string }, operations: Array<{ __typename?: 'Operation', id: string, name: string, key: string, icon: boolean }> }>, actions: Array<{ __typename: 'AttackAction', id: string, attackType: AttackTypeEnum, damage: number, blockAvailable: boolean, blockState: AttackActionStateEnum, blockFrame?: Maybe<number>, hitAvailable: boolean, hitState: AttackActionStateEnum, hitFrame?: Maybe<number>, counterHitAvailable: boolean, counterHitState: AttackActionStateEnum, counterHitFrame?: Maybe<number>, cleanHitAvailable: boolean, cleanHitState: AttackActionStateEnum, cleanHitFrame?: Maybe<number>, crouchingHitAvailable: boolean, crouchingHitState: AttackActionStateEnum, crouchingHitFrame?: Maybe<number> } | { __typename: 'ThrowAction', id: string, throwType: ThrowTypeEnum, damage: number, escape: ThrowEscapeEnum, throwAvailable: boolean, throwState: ThrowActionStateEnum, throwFrame?: Maybe<number>, throwEscapeAvailable: boolean, throwEscapeState: ThrowActionStateEnum, throwEscapeFrame?: Maybe<number> }>, conditions: Array<{ __typename?: 'Condition', id: string, name: string }> }> }> } };
 
 export type CharactersPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type CharactersPageQuery = { __typename?: 'Query', characters: { __typename?: 'CharacterCollection', records: Array<{ __typename?: 'Character', slug: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number }> } };
-
-export type PageComboCategoryQueryVariables = Exact<{
-  comboCategoryId: Scalars['ID'];
-}>;
-
-
-export type PageComboCategoryQuery = { __typename?: 'Query', comboCategory: { __typename?: 'ComboCategory', id: string, name: string, character: { __typename?: 'Character', slug: string, name: string }, combos: Array<{ __typename?: 'Combo', id: string, name: string, damage?: Maybe<number>, note?: Maybe<string>, comboCategory: { __typename?: 'ComboCategory', id: string, name: string }, comboVideo?: Maybe<{ __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string }>, conditions: Array<{ __typename?: 'Condition', id: string, name: string }>, operations: Array<{ __typename?: 'Operation', id: string, name: string, key: string, icon: boolean }> }> } };
 
 export type DashboardArticlePageArticleQueryVariables = Exact<{
   articleId: Scalars['ID'];
@@ -3011,6 +2987,8 @@ export type PageDashboardAttackActionEditQueryVariables = Exact<{
 
 export type PageDashboardAttackActionEditQuery = { __typename?: 'Query', attackAction: { __typename: 'AttackAction', id: string, attackType: AttackTypeEnum, damage: number, blockAvailable: boolean, blockState: AttackActionStateEnum, blockFrame?: Maybe<number>, hitAvailable: boolean, hitState: AttackActionStateEnum, hitFrame?: Maybe<number>, counterHitAvailable: boolean, counterHitState: AttackActionStateEnum, counterHitFrame?: Maybe<number>, cleanHitAvailable: boolean, cleanHitState: AttackActionStateEnum, cleanHitFrame?: Maybe<number>, crouchingHitAvailable: boolean, crouchingHitState: AttackActionStateEnum, crouchingHitFrame?: Maybe<number>, move: { __typename?: 'Move', id: string, name: string, moveCategory: { __typename?: 'MoveCategory', id: string, name: string, character: { __typename?: 'Character', slug: string, name: string } } } } };
 
+export type DashboardComboCategoriesPageComboCategoryFragment = { __typename?: 'ComboCategory', id: string, name: string, combosCount: number };
+
 export type DashboardComboCategoriesPageQueryVariables = Exact<{
   characterSlug: Scalars['String'];
 }>;
@@ -3031,6 +3009,8 @@ export type PageDashboardCharacterEditQueryVariables = Exact<{
 
 
 export type PageDashboardCharacterEditQuery = { __typename?: 'Query', character: { __typename?: 'Character', name: string, nameKana: string, longName: string, longNameKana: string, slug: string, country: string, fightingStyle: string, story: string, description: string, dlc: boolean } };
+
+export type DashboardMoveCategoriesPageMoveCategoryFragment = { __typename?: 'MoveCategory', id: string, name: string, movesCount: number };
 
 export type DashboardMoveCategoriesPageQueryVariables = Exact<{
   characterSlug: Scalars['String'];
@@ -3356,20 +3336,6 @@ export type TopPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type TopPageQuery = { __typename?: 'Query', tournaments: { __typename?: 'TournamentCollection', records: Array<{ __typename?: 'Tournament', id: string, name: string, mainImageUrl?: Maybe<string>, startsAt: string, videosCount: number, standings: Array<{ __typename?: 'Standing', id: string, place: number, player: { __typename?: 'Player', id: string, name: string } }> }> }, battles: { __typename?: 'BattleCollection', records: Array<{ __typename?: 'Battle', id: string, round?: Maybe<BattleRound>, tournamentVideo: { __typename?: 'TournamentVideo', id: string, tournament: { __typename?: 'Tournament', id: string, name: string, startsAt: string } }, sides: Array<{ __typename?: 'BattleSide', rounds: number, player: { __typename?: 'Player', name: string }, character: { __typename?: 'Character', faceImageUrl: string } }> }> }, players: { __typename?: 'PlayerCollection', records: Array<{ __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: Maybe<string>, standingsCount: number, battlesCount: number }> }, characters: { __typename?: 'CharacterCollection', records: Array<{ __typename?: 'Character', slug: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number }> }, articles: { __typename?: 'ArticleCollection', records: Array<{ __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: Maybe<string>, publishedAt?: Maybe<string>, faved: boolean, favsCount: number, status: ArticleStatus, author: { __typename?: 'User', name: string, avatarUrl: string } }> } };
-
-export type PageMoveCategoryQueryVariables = Exact<{
-  moveCategoryId: Scalars['ID'];
-}>;
-
-
-export type PageMoveCategoryQuery = { __typename?: 'Query', moveCategory: { __typename?: 'MoveCategory', id: string, name: string, character: { __typename?: 'Character', slug: string, name: string }, moves: Array<{ __typename?: 'Move', id: string, name: string, crouchingStatus: boolean, jumpStatus: boolean, powerCrush: boolean, homing: boolean, screw: boolean, wallBound: boolean, commands: Array<{ __typename?: 'Command', id: string, state: { __typename?: 'State', id: string, name: string }, operations: Array<{ __typename?: 'Operation', id: string, name: string, key: string, icon: boolean }> }> }> } };
-
-export type PageMoveQueryVariables = Exact<{
-  moveId: Scalars['ID'];
-}>;
-
-
-export type PageMoveQuery = { __typename?: 'Query', move: { __typename?: 'Move', id: string, name: string, kana?: Maybe<string>, opponentState?: Maybe<OpponentStateEnum>, startUpFrame?: Maybe<number>, powerCrush: boolean, crouchingStatus: boolean, jumpStatus: boolean, homing: boolean, screw: boolean, wallBound: boolean, note?: Maybe<string>, moveCategory: { __typename?: 'MoveCategory', id: string, name: string, character: { __typename?: 'Character', slug: string, name: string } }, afterState?: Maybe<{ __typename?: 'State', id: string, name: string }>, moveVideo?: Maybe<{ __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string }>, commands: Array<{ __typename?: 'Command', id: string, state: { __typename?: 'State', id: string, name: string }, operations: Array<{ __typename?: 'Operation', id: string, name: string, key: string, icon: boolean }> }>, actions: Array<{ __typename: 'AttackAction', id: string, attackType: AttackTypeEnum, damage: number, blockAvailable: boolean, blockState: AttackActionStateEnum, blockFrame?: Maybe<number>, hitAvailable: boolean, hitState: AttackActionStateEnum, hitFrame?: Maybe<number>, counterHitAvailable: boolean, counterHitState: AttackActionStateEnum, counterHitFrame?: Maybe<number>, cleanHitAvailable: boolean, cleanHitState: AttackActionStateEnum, cleanHitFrame?: Maybe<number>, crouchingHitAvailable: boolean, crouchingHitState: AttackActionStateEnum, crouchingHitFrame?: Maybe<number> } | { __typename: 'ThrowAction', id: string, throwType: ThrowTypeEnum, damage: number, escape: ThrowEscapeEnum, throwAvailable: boolean, throwState: ThrowActionStateEnum, throwFrame?: Maybe<number>, throwEscapeAvailable: boolean, throwEscapeState: ThrowActionStateEnum, throwEscapeFrame?: Maybe<number> }>, conditions: Array<{ __typename?: 'Condition', id: string, name: string }> } };
 
 export type PlayerBattlesPageQueryVariables = Exact<{
   playerSlug: Scalars['String'];
@@ -3802,20 +3768,6 @@ export const CharacterFormFragmentDoc = gql`
   dlc
 }
     `;
-export const ComboCategoryCardFragmentDoc = gql`
-    fragment ComboCategoryCard on ComboCategory {
-  id
-  name
-  combosCount
-}
-    `;
-export const ComboCategoryListItemFragmentDoc = gql`
-    fragment ComboCategoryListItem on ComboCategory {
-  id
-  name
-  combosCount
-}
-    `;
 export const ComboMediaFragmentDoc = gql`
     fragment ComboMedia on Combo {
   id
@@ -3839,35 +3791,6 @@ export const ComboMediaFragmentDoc = gql`
     ${ComboVideoFragmentDoc}
 ${ConditionFragmentDoc}
 ${OperationFragmentDoc}`;
-export const MoveCategoryCardFragmentDoc = gql`
-    fragment MoveCategoryCard on MoveCategory {
-  id
-  name
-  movesCount
-}
-    `;
-export const MoveCategoryListItemFragmentDoc = gql`
-    fragment MoveCategoryListItem on MoveCategory {
-  id
-  name
-  movesCount
-}
-    `;
-export const MoveListItemFragmentDoc = gql`
-    fragment MoveListItem on Move {
-  id
-  name
-  crouchingStatus
-  jumpStatus
-  powerCrush
-  homing
-  screw
-  wallBound
-  commands {
-    ...command
-  }
-}
-    ${CommandFragmentDoc}`;
 export const MoveMediaFragmentDoc = gql`
     fragment MoveMedia on Move {
   id
@@ -4066,6 +3989,20 @@ export const DashboardArticlesPageArticleFragmentDoc = gql`
   id
   title
   status
+}
+    `;
+export const DashboardComboCategoriesPageComboCategoryFragmentDoc = gql`
+    fragment DashboardComboCategoriesPageComboCategory on ComboCategory {
+  id
+  name
+  combosCount
+}
+    `;
+export const DashboardMoveCategoriesPageMoveCategoryFragmentDoc = gql`
+    fragment DashboardMoveCategoriesPageMoveCategory on MoveCategory {
+  id
+  name
+  movesCount
 }
     `;
 export const DashboardOrganizersPageOrganizerFragmentDoc = gql`
@@ -6332,41 +6269,6 @@ export function useFavButtonArticleLazyQuery(baseOptions?: Apollo.LazyQueryHookO
 export type FavButtonArticleQueryHookResult = ReturnType<typeof useFavButtonArticleQuery>;
 export type FavButtonArticleLazyQueryHookResult = ReturnType<typeof useFavButtonArticleLazyQuery>;
 export type FavButtonArticleQueryResult = Apollo.QueryResult<FavButtonArticleQuery, FavButtonArticleQueryVariables>;
-export const MoveCategoryCardsDocument = gql`
-    query MoveCategoryCards($characterSlug: String!) {
-  moveCategories(characterSlug: $characterSlug) {
-    ...MoveCategoryCard
-  }
-}
-    ${MoveCategoryCardFragmentDoc}`;
-
-/**
- * __useMoveCategoryCardsQuery__
- *
- * To run a query within a React component, call `useMoveCategoryCardsQuery` and pass it any options that fit your needs.
- * When your component renders, `useMoveCategoryCardsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useMoveCategoryCardsQuery({
- *   variables: {
- *      characterSlug: // value for 'characterSlug'
- *   },
- * });
- */
-export function useMoveCategoryCardsQuery(baseOptions: Apollo.QueryHookOptions<MoveCategoryCardsQuery, MoveCategoryCardsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<MoveCategoryCardsQuery, MoveCategoryCardsQueryVariables>(MoveCategoryCardsDocument, options);
-      }
-export function useMoveCategoryCardsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MoveCategoryCardsQuery, MoveCategoryCardsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<MoveCategoryCardsQuery, MoveCategoryCardsQueryVariables>(MoveCategoryCardsDocument, options);
-        }
-export type MoveCategoryCardsQueryHookResult = ReturnType<typeof useMoveCategoryCardsQuery>;
-export type MoveCategoryCardsLazyQueryHookResult = ReturnType<typeof useMoveCategoryCardsLazyQuery>;
-export type MoveCategoryCardsQueryResult = Apollo.QueryResult<MoveCategoryCardsQuery, MoveCategoryCardsQueryVariables>;
 export const TournamentFormDocument = gql`
     query TournamentForm {
   organizers(per: 100) {
@@ -6678,47 +6580,51 @@ export function useCharacterBattlesPageBattlesLazyQuery(baseOptions?: Apollo.Laz
 export type CharacterBattlesPageBattlesQueryHookResult = ReturnType<typeof useCharacterBattlesPageBattlesQuery>;
 export type CharacterBattlesPageBattlesLazyQueryHookResult = ReturnType<typeof useCharacterBattlesPageBattlesLazyQuery>;
 export type CharacterBattlesPageBattlesQueryResult = Apollo.QueryResult<CharacterBattlesPageBattlesQuery, CharacterBattlesPageBattlesQueryVariables>;
-export const PageCharacterComboCategoriesDocument = gql`
-    query PageCharacterComboCategories($characterSlug: String!) {
+export const CharacterCombosPageDocument = gql`
+    query CharacterCombosPage($characterSlug: String!) {
   character(characterSlug: $characterSlug) {
     ...CharacterBreadcrumbs
     ...CharacterPageProfile
     comboCategories {
-      ...ComboCategoryListItem
+      id
+      name
+      combos {
+        ...ComboMedia
+      }
     }
   }
 }
     ${CharacterBreadcrumbsFragmentDoc}
 ${CharacterPageProfileFragmentDoc}
-${ComboCategoryListItemFragmentDoc}`;
+${ComboMediaFragmentDoc}`;
 
 /**
- * __usePageCharacterComboCategoriesQuery__
+ * __useCharacterCombosPageQuery__
  *
- * To run a query within a React component, call `usePageCharacterComboCategoriesQuery` and pass it any options that fit your needs.
- * When your component renders, `usePageCharacterComboCategoriesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useCharacterCombosPageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCharacterCombosPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = usePageCharacterComboCategoriesQuery({
+ * const { data, loading, error } = useCharacterCombosPageQuery({
  *   variables: {
  *      characterSlug: // value for 'characterSlug'
  *   },
  * });
  */
-export function usePageCharacterComboCategoriesQuery(baseOptions: Apollo.QueryHookOptions<PageCharacterComboCategoriesQuery, PageCharacterComboCategoriesQueryVariables>) {
+export function useCharacterCombosPageQuery(baseOptions: Apollo.QueryHookOptions<CharacterCombosPageQuery, CharacterCombosPageQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<PageCharacterComboCategoriesQuery, PageCharacterComboCategoriesQueryVariables>(PageCharacterComboCategoriesDocument, options);
+        return Apollo.useQuery<CharacterCombosPageQuery, CharacterCombosPageQueryVariables>(CharacterCombosPageDocument, options);
       }
-export function usePageCharacterComboCategoriesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PageCharacterComboCategoriesQuery, PageCharacterComboCategoriesQueryVariables>) {
+export function useCharacterCombosPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CharacterCombosPageQuery, CharacterCombosPageQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<PageCharacterComboCategoriesQuery, PageCharacterComboCategoriesQueryVariables>(PageCharacterComboCategoriesDocument, options);
+          return Apollo.useLazyQuery<CharacterCombosPageQuery, CharacterCombosPageQueryVariables>(CharacterCombosPageDocument, options);
         }
-export type PageCharacterComboCategoriesQueryHookResult = ReturnType<typeof usePageCharacterComboCategoriesQuery>;
-export type PageCharacterComboCategoriesLazyQueryHookResult = ReturnType<typeof usePageCharacterComboCategoriesLazyQuery>;
-export type PageCharacterComboCategoriesQueryResult = Apollo.QueryResult<PageCharacterComboCategoriesQuery, PageCharacterComboCategoriesQueryVariables>;
+export type CharacterCombosPageQueryHookResult = ReturnType<typeof useCharacterCombosPageQuery>;
+export type CharacterCombosPageLazyQueryHookResult = ReturnType<typeof useCharacterCombosPageLazyQuery>;
+export type CharacterCombosPageQueryResult = Apollo.QueryResult<CharacterCombosPageQuery, CharacterCombosPageQueryVariables>;
 export const PageCharacterDocument = gql`
     query PageCharacter($characterSlug: String!) {
   character(characterSlug: $characterSlug) {
@@ -6764,47 +6670,51 @@ export function usePageCharacterLazyQuery(baseOptions?: Apollo.LazyQueryHookOpti
 export type PageCharacterQueryHookResult = ReturnType<typeof usePageCharacterQuery>;
 export type PageCharacterLazyQueryHookResult = ReturnType<typeof usePageCharacterLazyQuery>;
 export type PageCharacterQueryResult = Apollo.QueryResult<PageCharacterQuery, PageCharacterQueryVariables>;
-export const PageCharacterMoveCategoriesDocument = gql`
-    query PageCharacterMoveCategories($characterSlug: String!) {
+export const CharacterMovesPageDocument = gql`
+    query CharacterMovesPage($characterSlug: String!) {
   character(characterSlug: $characterSlug) {
     ...CharacterBreadcrumbs
     ...CharacterPageProfile
     moveCategories {
-      ...MoveCategoryListItem
+      id
+      name
+      moves {
+        ...MoveMedia
+      }
     }
   }
 }
     ${CharacterBreadcrumbsFragmentDoc}
 ${CharacterPageProfileFragmentDoc}
-${MoveCategoryListItemFragmentDoc}`;
+${MoveMediaFragmentDoc}`;
 
 /**
- * __usePageCharacterMoveCategoriesQuery__
+ * __useCharacterMovesPageQuery__
  *
- * To run a query within a React component, call `usePageCharacterMoveCategoriesQuery` and pass it any options that fit your needs.
- * When your component renders, `usePageCharacterMoveCategoriesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useCharacterMovesPageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCharacterMovesPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = usePageCharacterMoveCategoriesQuery({
+ * const { data, loading, error } = useCharacterMovesPageQuery({
  *   variables: {
  *      characterSlug: // value for 'characterSlug'
  *   },
  * });
  */
-export function usePageCharacterMoveCategoriesQuery(baseOptions: Apollo.QueryHookOptions<PageCharacterMoveCategoriesQuery, PageCharacterMoveCategoriesQueryVariables>) {
+export function useCharacterMovesPageQuery(baseOptions: Apollo.QueryHookOptions<CharacterMovesPageQuery, CharacterMovesPageQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<PageCharacterMoveCategoriesQuery, PageCharacterMoveCategoriesQueryVariables>(PageCharacterMoveCategoriesDocument, options);
+        return Apollo.useQuery<CharacterMovesPageQuery, CharacterMovesPageQueryVariables>(CharacterMovesPageDocument, options);
       }
-export function usePageCharacterMoveCategoriesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PageCharacterMoveCategoriesQuery, PageCharacterMoveCategoriesQueryVariables>) {
+export function useCharacterMovesPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CharacterMovesPageQuery, CharacterMovesPageQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<PageCharacterMoveCategoriesQuery, PageCharacterMoveCategoriesQueryVariables>(PageCharacterMoveCategoriesDocument, options);
+          return Apollo.useLazyQuery<CharacterMovesPageQuery, CharacterMovesPageQueryVariables>(CharacterMovesPageDocument, options);
         }
-export type PageCharacterMoveCategoriesQueryHookResult = ReturnType<typeof usePageCharacterMoveCategoriesQuery>;
-export type PageCharacterMoveCategoriesLazyQueryHookResult = ReturnType<typeof usePageCharacterMoveCategoriesLazyQuery>;
-export type PageCharacterMoveCategoriesQueryResult = Apollo.QueryResult<PageCharacterMoveCategoriesQuery, PageCharacterMoveCategoriesQueryVariables>;
+export type CharacterMovesPageQueryHookResult = ReturnType<typeof useCharacterMovesPageQuery>;
+export type CharacterMovesPageLazyQueryHookResult = ReturnType<typeof useCharacterMovesPageLazyQuery>;
+export type CharacterMovesPageQueryResult = Apollo.QueryResult<CharacterMovesPageQuery, CharacterMovesPageQueryVariables>;
 export const CharactersPageDocument = gql`
     query CharactersPage {
   characters {
@@ -6841,49 +6751,6 @@ export function useCharactersPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOpt
 export type CharactersPageQueryHookResult = ReturnType<typeof useCharactersPageQuery>;
 export type CharactersPageLazyQueryHookResult = ReturnType<typeof useCharactersPageLazyQuery>;
 export type CharactersPageQueryResult = Apollo.QueryResult<CharactersPageQuery, CharactersPageQueryVariables>;
-export const PageComboCategoryDocument = gql`
-    query PageComboCategory($comboCategoryId: ID!) {
-  comboCategory(comboCategoryId: $comboCategoryId) {
-    id
-    name
-    character {
-      slug
-      name
-    }
-    combos {
-      ...ComboMedia
-    }
-  }
-}
-    ${ComboMediaFragmentDoc}`;
-
-/**
- * __usePageComboCategoryQuery__
- *
- * To run a query within a React component, call `usePageComboCategoryQuery` and pass it any options that fit your needs.
- * When your component renders, `usePageComboCategoryQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = usePageComboCategoryQuery({
- *   variables: {
- *      comboCategoryId: // value for 'comboCategoryId'
- *   },
- * });
- */
-export function usePageComboCategoryQuery(baseOptions: Apollo.QueryHookOptions<PageComboCategoryQuery, PageComboCategoryQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<PageComboCategoryQuery, PageComboCategoryQueryVariables>(PageComboCategoryDocument, options);
-      }
-export function usePageComboCategoryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PageComboCategoryQuery, PageComboCategoryQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<PageComboCategoryQuery, PageComboCategoryQueryVariables>(PageComboCategoryDocument, options);
-        }
-export type PageComboCategoryQueryHookResult = ReturnType<typeof usePageComboCategoryQuery>;
-export type PageComboCategoryLazyQueryHookResult = ReturnType<typeof usePageComboCategoryLazyQuery>;
-export type PageComboCategoryQueryResult = Apollo.QueryResult<PageComboCategoryQuery, PageComboCategoryQueryVariables>;
 export const DashboardArticlePageArticleDocument = gql`
     query DashboardArticlePageArticle($articleId: ID!) {
   article(articleId: $articleId) {
@@ -7118,11 +6985,11 @@ export const DashboardComboCategoriesPageDocument = gql`
     ...CharacterBreadcrumbs
   }
   comboCategories(characterSlug: $characterSlug) {
-    ...ComboCategoryCard
+    ...DashboardComboCategoriesPageComboCategory
   }
 }
     ${CharacterBreadcrumbsFragmentDoc}
-${ComboCategoryCardFragmentDoc}`;
+${DashboardComboCategoriesPageComboCategoryFragmentDoc}`;
 
 /**
  * __useDashboardComboCategoriesPageQuery__
@@ -7227,11 +7094,11 @@ export const DashboardMoveCategoriesPageDocument = gql`
     ...CharacterBreadcrumbs
   }
   moveCategories(characterSlug: $characterSlug) {
-    ...MoveCategoryCard
+    ...DashboardMoveCategoriesPageMoveCategory
   }
 }
     ${CharacterBreadcrumbsFragmentDoc}
-${MoveCategoryCardFragmentDoc}`;
+${DashboardMoveCategoriesPageMoveCategoryFragmentDoc}`;
 
 /**
  * __useDashboardMoveCategoriesPageQuery__
@@ -9060,92 +8927,6 @@ export function useTopPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<To
 export type TopPageQueryHookResult = ReturnType<typeof useTopPageQuery>;
 export type TopPageLazyQueryHookResult = ReturnType<typeof useTopPageLazyQuery>;
 export type TopPageQueryResult = Apollo.QueryResult<TopPageQuery, TopPageQueryVariables>;
-export const PageMoveCategoryDocument = gql`
-    query PageMoveCategory($moveCategoryId: ID!) {
-  moveCategory(moveCategoryId: $moveCategoryId) {
-    id
-    name
-    character {
-      slug
-      name
-    }
-    moves {
-      ...MoveListItem
-    }
-  }
-}
-    ${MoveListItemFragmentDoc}`;
-
-/**
- * __usePageMoveCategoryQuery__
- *
- * To run a query within a React component, call `usePageMoveCategoryQuery` and pass it any options that fit your needs.
- * When your component renders, `usePageMoveCategoryQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = usePageMoveCategoryQuery({
- *   variables: {
- *      moveCategoryId: // value for 'moveCategoryId'
- *   },
- * });
- */
-export function usePageMoveCategoryQuery(baseOptions: Apollo.QueryHookOptions<PageMoveCategoryQuery, PageMoveCategoryQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<PageMoveCategoryQuery, PageMoveCategoryQueryVariables>(PageMoveCategoryDocument, options);
-      }
-export function usePageMoveCategoryLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PageMoveCategoryQuery, PageMoveCategoryQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<PageMoveCategoryQuery, PageMoveCategoryQueryVariables>(PageMoveCategoryDocument, options);
-        }
-export type PageMoveCategoryQueryHookResult = ReturnType<typeof usePageMoveCategoryQuery>;
-export type PageMoveCategoryLazyQueryHookResult = ReturnType<typeof usePageMoveCategoryLazyQuery>;
-export type PageMoveCategoryQueryResult = Apollo.QueryResult<PageMoveCategoryQuery, PageMoveCategoryQueryVariables>;
-export const PageMoveDocument = gql`
-    query PageMove($moveId: ID!) {
-  move(moveId: $moveId) {
-    ...move
-    moveCategory {
-      id
-      name
-      character {
-        slug
-        name
-      }
-    }
-  }
-}
-    ${MoveFragmentDoc}`;
-
-/**
- * __usePageMoveQuery__
- *
- * To run a query within a React component, call `usePageMoveQuery` and pass it any options that fit your needs.
- * When your component renders, `usePageMoveQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = usePageMoveQuery({
- *   variables: {
- *      moveId: // value for 'moveId'
- *   },
- * });
- */
-export function usePageMoveQuery(baseOptions: Apollo.QueryHookOptions<PageMoveQuery, PageMoveQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<PageMoveQuery, PageMoveQueryVariables>(PageMoveDocument, options);
-      }
-export function usePageMoveLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PageMoveQuery, PageMoveQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<PageMoveQuery, PageMoveQueryVariables>(PageMoveDocument, options);
-        }
-export type PageMoveQueryHookResult = ReturnType<typeof usePageMoveQuery>;
-export type PageMoveLazyQueryHookResult = ReturnType<typeof usePageMoveLazyQuery>;
-export type PageMoveQueryResult = Apollo.QueryResult<PageMoveQuery, PageMoveQueryVariables>;
 export const PlayerBattlesPageDocument = gql`
     query PlayerBattlesPage($playerSlug: String!, $page: Int) {
   player(playerSlug: $playerSlug) {

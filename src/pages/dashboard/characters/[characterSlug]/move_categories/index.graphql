@@ -1,9 +1,15 @@
+fragment DashboardMoveCategoriesPageMoveCategory on MoveCategory {
+    id
+    name
+    movesCount
+}
+
 query DashboardMoveCategoriesPage($characterSlug: String!) {
   character(characterSlug: $characterSlug) {
     ...CharacterBreadcrumbs
   }
 
   moveCategories(characterSlug: $characterSlug) {
-    ...MoveCategoryCard
+    ...DashboardMoveCategoriesPageMoveCategory
   }
 }
