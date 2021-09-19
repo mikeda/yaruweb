@@ -66,7 +66,7 @@ export const path = (options: Options): string => {
       return '/tournaments';
     case 'tournament':
       return options.battleId
-        ? `/tournaments/${options.tournamentId}#${options.battleId}`
+        ? `/tournaments/${options.tournamentId}#battle${options.battleId}`
         : `/tournaments/${options.tournamentId}`;
     case 'signup':
       return '/signup';
