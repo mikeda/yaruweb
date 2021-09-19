@@ -1,4 +1,4 @@
-import { createMuiTheme } from '@material-ui/core/styles';
+import { createTheme } from '@material-ui/core/styles';
 
 const primary = {
   50: '#feefed',
@@ -108,7 +108,7 @@ const error = {
   contrastDefaultColor: 'light',
 };
 
-const theme = createMuiTheme({
+const theme = createTheme({
   palette: {
     primary,
     secondary,
