@@ -1,117 +1,192 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import {
-  Article,
   ArticleStatus,
-  useDeleteArticleMutation,
-  usePageDashboardArticlesQuery,
-  usePublishArticleMutation,
-  useStopArticleMutation,
+  DashboardArticlesPageArticleFragment,
+  useDashboardArticlesPageArticlesQuery,
+  useDashboardArticlesPageDeleteMutation,
+  useDashboardArticlesPagePublishMutation,
+  useDashboardArticlesPageStopMutation,
 } from '@/lib/graphql/types';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
 import { toast } from 'react-toastify';
 import { DashboardBreadcrumbs } from '@/components';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from '@/states/loading';
-import { useRouter } from 'next/router';
-import { Paging } from '@/components/Paging';
-import { ObjectCardList } from '@/components/ObjectCardList';
-import { ObjectCardLinkProps } from '@/components/ObjectCard';
 import { dashboardPath } from '@/lib';
+import {
+  Box,
+  Button,
+  IconButton,
+  Menu,
+  MenuItem,
+  Paper,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableRow,
+  Typography,
+} from '@material-ui/core';
+import { ArticleStatusText } from '@/lib/graphql/enum_texts';
+import { MoreVert } from '@material-ui/icons';
 
 const Page: React.FC = () => {
-  const router = useRouter();
   const setLoading = useSetRecoilState(loadingState);
-  const { query } = router;
-  const page = query.page ? Number(query.page as string) : 1;
-  const { data, loading, refetch } = usePageDashboardArticlesQuery({
-    variables: { page },
-    fetchPolicy: 'network-only',
-    skip: !router.isReady,
-  });
-
-  setLoading(loading);
-  if (!data) return null;
-
-  const {
-    myArticles: { records: articles, paging },
-  } = data;
-
-  return (
-    <DashboardContent title="記事" breadcrumb={<DashboardBreadcrumbs to="articles" />}>
-      <PageContent articles={articles} refetch={refetch} />
-      <Paging paging={paging} url={page => dashboardPath({ to: 'articles', params: { page } })} />
-    </DashboardContent>
-  );
-};
-
-type ArticleFragment = Pick<Article, 'id' | 'title' | 'status'>;
-
-interface PageContentProps {
-  articles: ArticleFragment[];
-  refetch: () => void;
-}
-
-const PageContent: React.FC<PageContentProps> = ({ articles, refetch }) => {
-  const setLoading = useSetRecoilState(loadingState);
-
-  const [publishArticle, { loading: publishLoading }] = usePublishArticleMutation({
-    onCompleted: data => {
-      const article = data.publishArticle?.article;
-      if (!article) return;
-      refetch();
+  const { data, loading, fetchMore, updateQuery } = useDashboardArticlesPageArticlesQuery();
+  const [publish, { loading: publishLoading }] = useDashboardArticlesPagePublishMutation({
+    onCompleted: () => {
       toast.success('記事を公開しました。');
     },
   });
-  const [stopArticle, { loading: stopLoading }] = useStopArticleMutation({
-    onCompleted: data => {
-      const article = data.stopArticle?.article;
-      if (!article) return;
-      refetch();
+  const [stop, { loading: stopLoading }] = useDashboardArticlesPageStopMutation({
+    onCompleted: () => {
       toast.success('公開を停止しました。');
     },
   });
-  const [deleteArticle, { loading: deleteLoading }] = useDeleteArticleMutation({
+  const [destroy, { loading: deleteLoading }] = useDashboardArticlesPageDeleteMutation({
     onCompleted: data => {
       const article = data.deleteArticle?.article;
       if (!article) return;
-      refetch();
+
+      updateQuery(prev => ({
+        myArticles: {
+          ...prev.myArticles,
+          records: prev.myArticles.records.filter(a => a.id !== article.id),
+        },
+      }));
       toast.success('記事を削除しました。');
     },
   });
 
-  setLoading(publishLoading || stopLoading || deleteLoading);
+  setLoading(loading || publishLoading || stopLoading || deleteLoading);
+
+  if (!data) return null;
+  const { records: articles, paging } = data.myArticles;
 
   return (
-    <ObjectCardList
-      items={articles.map(article => {
-        const links: ObjectCardLinkProps[] = [
-          { text: '編集する', url: dashboardPath({ to: 'articleEdit', articleId: article.id }) },
-        ];
+    <DashboardContent title="記事一覧" breadcrumb={<DashboardBreadcrumbs to="articles" />}>
+      <TableContainer component={Paper}>
+        <Table>
+          <TableBody>
+            {articles.map(article => (
+              <ArticleRow
+                key={article.id}
+                article={article}
+                onPublish={() => publish({ variables: { articleId: article.id } })}
+                onStop={() => stop({ variables: { articleId: article.id } })}
+                onDelete={() => {
+                  if (window.confirm('削除します。')) {
+                    destroy({ variables: { articleId: article.id } });
+                  }
+                }}
+              />
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
 
-        if (article.status === ArticleStatus.Draft) {
-          links.push(
-            { text: '公開する', onClick: () => publishArticle({ variables: { articleId: article.id } }) },
-            {
-              text: '削除する',
-              onClick: () => {
-                if (window.confirm('記事を削除します。')) {
-                  deleteArticle({ variables: { articleId: article.id } });
-                }
-              },
-            },
-          );
-        } else {
-          links.push({ text: '停止する', onClick: () => stopArticle({ variables: { articleId: article.id } }) });
-        }
+      {paging?.hasNext && (
+        <Box pt={2} pb={2} display="flex" justifyContent="center">
+          <Button
+            variant="outlined"
+            onClick={() => {
+              fetchMore({
+                variables: { page: paging.currentPage + 1 },
+                updateQuery: (prev, { fetchMoreResult: data }) => {
+                  if (!data) return prev;
 
-        return {
-          id: article.id,
-          title: article.status === ArticleStatus.Draft ? `[下書き] ${article.title}` : article.title,
-          links,
-        };
-      })}
-    />
+                  return {
+                    myArticles: {
+                      records: [...prev.myArticles.records, ...data.myArticles.records],
+                      paging: data.myArticles.paging,
+                    },
+                  };
+                },
+              });
+            }}
+          >
+            もっとみる
+          </Button>
+        </Box>
+      )}
+    </DashboardContent>
+  );
+};
+
+interface ArticleRowprops {
+  article: DashboardArticlesPageArticleFragment;
+  onPublish: () => void;
+  onStop: () => void;
+  onDelete: () => void;
+}
+
+const ArticleRow = ({ article, onPublish, onStop, onDelete }: ArticleRowprops) => {
+  return (
+    <TableRow>
+      <TableCell component="th" scope="row">
+        <Typography>{article.title}</Typography>
+        <Typography variant="caption">{ArticleStatusText[article.status]}</Typography>
+      </TableCell>
+      <TableCell align="right" scope="row">
+        <Button variant="outlined" href={dashboardPath({ to: 'articleEdit', articleId: article.id })}>
+          編集
+        </Button>
+        <ArticleMenu article={article} onPublish={onPublish} onStop={onStop} onDelete={onDelete} />
+      </TableCell>
+    </TableRow>
+  );
+};
+
+const ArticleMenu = ({ article, onPublish, onStop, onDelete }: ArticleRowprops) => {
+  const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  return (
+    <>
+      <IconButton edge="end" onClick={handleClick}>
+        <MoreVert />
+      </IconButton>
+
+      <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
+        {article.status === ArticleStatus.Draft ? (
+          <>
+            <MenuItem
+              onClick={() => {
+                onPublish();
+                handleClose();
+              }}
+            >
+              公開する
+            </MenuItem>
+            <MenuItem
+              onClick={() => {
+                onDelete();
+                handleClose();
+              }}
+            >
+              削除する
+            </MenuItem>
+          </>
+        ) : (
+          <MenuItem
+            onClick={() => {
+              onStop();
+              handleClose();
+            }}
+          >
+            下書きに戻す
+          </MenuItem>
+        )}
+      </Menu>
+    </>
   );
 };
 

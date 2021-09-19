@@ -5,7 +5,7 @@ type Options =
   | { to: 'actions'; moveId: string }
   | { to: 'attackActionsNew'; moveId: string }
   | { to: 'attackActionEdit'; actionId: string }
-  | { to: 'articles'; params?: { page?: number } }
+  | { to: 'articles' }
   | { to: 'articlesNew' }
   | { to: 'articleEdit'; articleId: string }
   | { to: 'characters' }
@@ -26,14 +26,14 @@ type Options =
   | { to: 'moves'; moveCategoryId: string }
   | { to: 'movesNew'; moveCategoryId: string }
   | { to: 'moveEdit'; moveId: string }
-  | { to: 'organizers'; params?: { page?: number; q?: string } }
+  | { to: 'organizers'; q?: string }
   | { to: 'organizersNew' }
   | { to: 'organizerEdit'; organizerSlug: string }
-  | { to: 'players'; params?: { page?: number; q?: string } }
+  | { to: 'players'; q?: string }
   | { to: 'playersNew' }
   | { to: 'playerEdit'; playerSlug: string }
   | { to: 'profileEdit' }
-  | { to: 'tournaments'; page?: number; q?: string }
+  | { to: 'tournaments'; q?: string }
   | { to: 'tournament'; tournamentId: string }
   | { to: 'tournamentsNew' }
   | { to: 'tournamentEdit'; tournamentId: string }
@@ -53,7 +53,7 @@ export const dashboardPath = (options: Options): string => {
     case 'attackActionEdit':
       return `/dashboard/attack_actions/${options.actionId}/edit`;
     case 'articles':
-      return generatePath('/dashboard/articles', options.params);
+      return '/dashboard/articles';
     case 'articlesNew':
       return '/dashboard/articles/new';
     case 'articleEdit':
@@ -95,13 +95,13 @@ export const dashboardPath = (options: Options): string => {
     case 'moveEdit':
       return `/dashboard/moves/${options.moveId}/edit`;
     case 'organizers':
-      return generatePath('/dashboard/organizers', options.params);
+      return generatePath('/dashboard/organizers', { q: options.q });
     case 'organizersNew':
       return '/dashboard/organizers/new';
     case 'organizerEdit':
       return `/dashboard/organizers/${options.organizerSlug}/edit`;
     case 'players':
-      return generatePath('/dashboard/players', options.params);
+      return generatePath('/dashboard/players', { q: options.q });
     case 'playersNew':
       return '/dashboard/players/new';
     case 'playerEdit':
@@ -109,7 +109,7 @@ export const dashboardPath = (options: Options): string => {
     case 'profileEdit':
       return `/dashboard/profile/edit`;
     case 'tournaments':
-      return generatePath('/dashboard/tournaments', { page: options.page, q: options.q });
+      return generatePath('/dashboard/tournaments', { q: options.q });
     case 'tournament':
       return `/dashboard/tournaments/${options.tournamentId}`;
     case 'tournamentsNew':

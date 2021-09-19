@@ -1,9 +1,37 @@
-query PageDashboardArticles($page: Int, $per: Int) {
-  myArticles(page: $page, per: $per) {
-    records {
+fragment DashboardArticlesPageArticle on Article {
+  id
+  title
+  status
+}
+
+mutation DashboardArticlesPagePublish($articleId: ID!) {
+  publishArticle(input: { articleId: $articleId }) {
+    article {
+      ...DashboardArticlesPageArticle
+    }
+  }
+}
+
+mutation DashboardArticlesPageStop($articleId: ID!) {
+  stopArticle(input: { articleId: $articleId }) {
+    article {
+      ...DashboardArticlesPageArticle
+    }
+  }
+}
+
+mutation DashboardArticlesPageDelete($articleId: ID!) {
+  deleteArticle(input: { articleId: $articleId }) {
+    article {
       id
-      title
-      status
+    }
+  }
+}
+
+query DashboardArticlesPageArticles($page: Int = 1) {
+  myArticles(page: $page, per: 10) {
+    records {
+      ...DashboardArticlesPageArticle
     }
 
     paging {
