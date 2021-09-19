@@ -118,18 +118,6 @@ const LastAttackAction: React.FC<{ action: AttackActionFragment }> = ({ action }
           <OpponentDetail frame={action.counterHitFrame} state={AttackActionStateText[action.counterHitState]} />
         </MoveDetail>
       )}
-
-      {action.cleanHitAvailable && (
-        <MoveDetail label="クリーンヒット">
-          <OpponentDetail frame={action.cleanHitFrame} state={AttackActionStateText[action.cleanHitState]} />
-        </MoveDetail>
-      )}
-
-      {action.crouchingHitAvailable && (
-        <MoveDetail label="しゃがみにヒット">
-          <OpponentDetail frame={action.crouchingHitFrame} state={AttackActionStateText[action.crouchingHitState]} />
-        </MoveDetail>
-      )}
     </>
   );
 };
