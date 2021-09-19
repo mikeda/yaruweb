@@ -24,7 +24,6 @@ export const TournamentVideoPlayer: React.FC<Props> = ({ tournamentVideo }) => {
   const classes = useStyles();
   const router = useRouter();
 
-  //const battleHash = router.query.battle as string | undefined;
   const hashBattleId = router.asPath.split('#battle')[1] ?? '';
 
   const updateBattle = (battle: TournamentPageBattleFragment) => {
@@ -35,8 +34,15 @@ export const TournamentVideoPlayer: React.FC<Props> = ({ tournamentVideo }) => {
 
   useEffect(() => {
     const battle = tournamentVideo.battles.find(b => b.id === hashBattleId);
-    if (battle) setSelectedBattle(battle);
-  }, []);
+    if (battle) updateBattle(battle);
+  }, [hashBattleId]);
+
+  useEffect(() => {
+    if (selectedBattle) {
+      youTubePlayer?.seekTo(selectedBattle.startSec, true);
+      youTubePlayer?.playVideo();
+    }
+  }, [youTubePlayer]);
 
   return (
     <div>
