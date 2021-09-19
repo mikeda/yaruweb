@@ -1865,9 +1865,6 @@ export type ThrowActionAttributes = {
   damage: Scalars['Int'];
   escape: ThrowEscapeEnum;
   throwAvailable: Scalars['Boolean'];
-  throwEscapeAvailable: Scalars['Boolean'];
-  throwEscapeFrame?: Maybe<Scalars['Int']>;
-  throwEscapeState: ThrowActionStateEnum;
   throwFrame?: Maybe<Scalars['Int']>;
   throwState: ThrowActionStateEnum;
   throwType: ThrowTypeEnum;
