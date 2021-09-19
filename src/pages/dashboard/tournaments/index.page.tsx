@@ -26,6 +26,8 @@ import {
 } from '@/lib/graphql/types';
 import { toast } from 'react-toastify';
 import { NO_IMAGE_URL } from '@/lib/Assets';
+import { useRouter } from 'next/router';
+import dayjs from '@/lib/dayjs';
 
 const Page: React.FC = () => {
   const setLoading = useSetRecoilState(loadingState);
@@ -122,8 +124,12 @@ const TournamentRow = ({ tournament, onDelete }: TournamentRowProps) => {
       <TableCell scope="row" width={80}>
         <img src={tournament.mainImageUrl || NO_IMAGE_URL} width={80} />
       </TableCell>
-      <TableCell component="th" scope="row">
+      <TableCell scope="row">
         <Typography>{tournament.name}</Typography>
+        <Typography variant={'caption'}>{`結果${tournament.standingsCount} 動画${tournament.videosCount}`}</Typography>
+      </TableCell>
+      <TableCell scope="row">
+        <Typography variant="body2">{dayjs(tournament.startsAt).format('YYYY/M/D H:mm')}</Typography>
       </TableCell>
       <TableCell align="right" scope="row">
         <Button variant="outlined" href={dashboardPath({ to: 'tournamentEdit', tournamentId: tournament.id })}>
@@ -135,7 +141,8 @@ const TournamentRow = ({ tournament, onDelete }: TournamentRowProps) => {
   );
 };
 
-const TournamentMenu = ({ onDelete }: TournamentRowProps) => {
+const TournamentMenu = ({ tournament, onDelete }: TournamentRowProps) => {
+  const router = useRouter();
   const [anchorEl, setAnchorEl] = useState<HTMLElement | null>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
@@ -153,6 +160,14 @@ const TournamentMenu = ({ onDelete }: TournamentRowProps) => {
       </IconButton>
 
       <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
+        <MenuItem
+          onClick={() => {
+            router.push(dashboardPath({ to: 'tournament', tournamentId: tournament.id }));
+            handleClose();
+          }}
+        >
+          結果・動画を登録
+        </MenuItem>
         <MenuItem
           onClick={() => {
             onDelete();
