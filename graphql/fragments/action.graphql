@@ -32,9 +32,6 @@ fragment throwAction on ThrowAction {
   throwAvailable
   throwState
   throwFrame
-  throwEscapeAvailable
-  throwEscapeState
-  throwEscapeFrame
 }
 
 fragment action on Action {

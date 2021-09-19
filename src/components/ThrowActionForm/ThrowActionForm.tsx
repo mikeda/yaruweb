@@ -42,9 +42,6 @@ export const ThrowActionForm: React.FC<Props> = ({ throwAction, onSubmit }) => {
       throwAvailable: throwAction.throwAvailable,
       throwState: throwAction.throwState,
       throwFrame: throwAction.throwFrame,
-      throwEscapeAvailable: throwAction.throwEscapeAvailable,
-      throwEscapeState: throwAction.throwEscapeState,
-      throwEscapeFrame: throwAction.throwEscapeFrame,
     },
   });
 
@@ -84,20 +81,6 @@ export const ThrowActionForm: React.FC<Props> = ({ throwAction, onSubmit }) => {
           <Input type="number" {...register('throwFrame', { valueAsNumber: true })} placeholder="フレーム" />
 
           <select {...register('throwState')}>
-            <StateSelectOptions />
-          </select>
-        </FormInline>
-      </FormGroup>
-
-      <FormGroup label="投げ抜け後">
-        <FormInline>
-          <CheckBox id="throwEscapeAvailable" label="表示">
-            <input id="throwEscapeAvailable" type="checkbox" {...register('throwEscapeAvailable')} />
-          </CheckBox>
-
-          <Input type="number" {...register('throwEscapeFrame', { valueAsNumber: true })} placeholder="フレーム" />
-
-          <select {...register('throwEscapeState')}>
             <StateSelectOptions />
           </select>
         </FormInline>
