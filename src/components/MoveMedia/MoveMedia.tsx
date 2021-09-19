@@ -142,12 +142,6 @@ const LastThrowAction: React.FC<{ action: ThrowActionFragment }> = ({ action }) 
           <OpponentDetail frame={action.throwFrame} state={ThorwActionStateText[action.throwState]} />
         </MoveDetail>
       )}
-
-      {action.throwEscapeAvailable && (
-        <MoveDetail label="投げ抜け">
-          <OpponentDetail frame={action.throwEscapeFrame} state={ThorwActionStateText[action.throwEscapeState]} />
-        </MoveDetail>
-      )}
     </>
   );
 };
