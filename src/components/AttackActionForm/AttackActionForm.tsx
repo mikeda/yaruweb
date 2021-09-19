@@ -14,8 +14,6 @@ const schema = yup.object().shape({
   blockFrame: nullableNumber,
   hitFrame: nullableNumber,
   counterHitFrame: nullableNumber,
-  cleanHitFrame: nullableNumber,
-  crouchingHitFrame: nullableNumber,
 });
 
 const StateSelectOptions: React.FC = () => (
@@ -53,12 +51,6 @@ export const AttackActionForm: React.FC<Props> = ({ attackAction, onSubmit }) =>
       counterHitAvailable: attackAction.counterHitAvailable,
       counterHitState: attackAction.counterHitState,
       counterHitFrame: attackAction.counterHitFrame,
-      cleanHitAvailable: attackAction.cleanHitAvailable,
-      cleanHitState: attackAction.cleanHitState,
-      cleanHitFrame: attackAction.cleanHitFrame,
-      crouchingHitAvailable: attackAction.crouchingHitAvailable,
-      crouchingHitState: attackAction.crouchingHitState,
-      crouchingHitFrame: attackAction.crouchingHitFrame,
     },
   });
 
@@ -105,20 +97,6 @@ export const AttackActionForm: React.FC<Props> = ({ attackAction, onSubmit }) =>
         </FormInline>
       </FormGroup>
 
-      <FormGroup label="クリーンヒット">
-        <FormInline>
-          <CheckBox id="cleanHitAvailable" label="表示">
-            <input id="cleanHitAvailable" type="checkbox" {...register('cleanHitAvailable')} />
-          </CheckBox>
-
-          <Input {...register('cleanHitFrame')} placeholder="フレーム" />
-
-          <select {...register('cleanHitState')}>
-            <StateSelectOptions />
-          </select>
-        </FormInline>
-      </FormGroup>
-
       <FormGroup label="カウンターヒット">
         <FormInline>
           <CheckBox id="counterHitAvailable" label="表示">
@@ -128,20 +106,6 @@ export const AttackActionForm: React.FC<Props> = ({ attackAction, onSubmit }) =>
           <Input {...register('counterHitFrame')} placeholder="フレーム" />
 
           <select {...register('counterHitState')}>
-            <StateSelectOptions />
-          </select>
-        </FormInline>
-      </FormGroup>
-
-      <FormGroup label="しゃがみにヒット">
-        <FormInline>
-          <CheckBox id="crouchingHitAvailable" label="表示">
-            <input id="crouchingHitAvailable" type="checkbox" {...register('crouchingHitAvailable')} />
-          </CheckBox>
-
-          <Input {...register('crouchingHitFrame')} placeholder="フレーム" />
-
-          <select {...register('crouchingHitState')}>
             <StateSelectOptions />
           </select>
         </FormInline>

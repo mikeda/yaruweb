@@ -15,12 +15,6 @@ fragment attackAction on AttackAction {
   counterHitAvailable
   counterHitState
   counterHitFrame
-  cleanHitAvailable
-  cleanHitState
-  cleanHitFrame
-  crouchingHitAvailable
-  crouchingHitState
-  crouchingHitFrame
 }
 
 fragment throwAction on ThrowAction {
