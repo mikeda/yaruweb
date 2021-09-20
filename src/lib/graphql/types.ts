@@ -148,19 +148,6 @@ export enum AttackActionStateEnum {
   Unspecified = 'unspecified'
 }
 
-export type AttackMove = {
-  __typename?: 'AttackMove';
-  blockFrame?: Maybe<Scalars['Int']>;
-  blockResult: AttackMoveResultEnum;
-  blockState: AttackMoveStateEnum;
-  counterFrame?: Maybe<Scalars['Int']>;
-  counterResult: AttackMoveResultEnum;
-  counterState: AttackMoveStateEnum;
-  hitFrame?: Maybe<Scalars['Int']>;
-  hitResult: AttackMoveResultEnum;
-  hitState: AttackMoveStateEnum;
-};
-
 export type AttackMoveAttributes = {
   blockFrame?: Maybe<Scalars['Int']>;
   blockResult: AttackMoveResultEnum;
@@ -1040,7 +1027,6 @@ export type Move = {
   kana?: Maybe<Scalars['String']>;
   moveCategory: MoveCategory;
   moveVideo?: Maybe<MoveVideo>;
-  moveable: Moveable;
   name: Scalars['String'];
   note?: Maybe<Scalars['String']>;
   opponentState?: Maybe<OpponentStateEnum>;
@@ -1089,8 +1075,6 @@ export type MoveVideo = {
   m3u8Url: Scalars['String'];
   thumbnailUrl: Scalars['String'];
 };
-
-export type Moveable = AttackMove | ThrowMove;
 
 export type Mutation = {
   __typename?: 'Mutation';
@@ -1951,14 +1935,6 @@ export enum ThrowEscapeEnum {
   /** WP */
   Wp = 'wp'
 }
-
-export type ThrowMove = {
-  __typename?: 'ThrowMove';
-  damage: Scalars['Int'];
-  throwEscape: ThrowEscapeEnum;
-  throwResult: ThrowMoveResultEnum;
-  throwType: ThrowTypeEnum;
-};
 
 export type ThrowMoveAttributes = {
   damage: Scalars['Int'];
@@ -2890,7 +2866,7 @@ export type ArticleElementMoveQueryVariables = Exact<{
 }>;
 
 
-export type ArticleElementMoveQuery = { __typename?: 'Query', move: { __typename?: 'Move', id: string, name: string, kana?: Maybe<string>, opponentState?: Maybe<OpponentStateEnum>, startUpFrame?: Maybe<number>, powerCrush: boolean, crouchingStatus: boolean, jumpStatus: boolean, homing: boolean, screw: boolean, wallBound: boolean, note?: Maybe<string>, moveable: { __typename: 'AttackMove' } | { __typename: 'ThrowMove' }, moveCategory: { __typename?: 'MoveCategory', id: string, name: string }, afterState?: Maybe<{ __typename?: 'State', id: string, name: string }>, moveVideo?: Maybe<{ __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string }>, commands: Array<{ __typename?: 'Command', id: string, state: { __typename?: 'State', id: string, name: string }, operations: Array<{ __typename?: 'Operation', id: string, name: string, key: string, icon: boolean }> }>, actions: Array<{ __typename: 'AttackAction', id: string, attackType: AttackTypeEnum, damage: number, blockAvailable: boolean, blockState: AttackActionStateEnum, blockFrame?: Maybe<number>, hitAvailable: boolean, hitState: AttackActionStateEnum, hitFrame?: Maybe<number>, counterHitAvailable: boolean, counterHitState: AttackActionStateEnum, counterHitFrame?: Maybe<number> } | { __typename: 'ThrowAction', id: string, throwType: ThrowTypeEnum, damage: number, escape: ThrowEscapeEnum, throwAvailable: boolean, throwState: ThrowActionStateEnum, throwFrame?: Maybe<number> }>, conditions: Array<{ __typename?: 'Condition', id: string, name: string }> } };
+export type ArticleElementMoveQuery = { __typename?: 'Query', move: { __typename?: 'Move', id: string, name: string, kana?: Maybe<string>, opponentState?: Maybe<OpponentStateEnum>, startUpFrame?: Maybe<number>, powerCrush: boolean, crouchingStatus: boolean, jumpStatus: boolean, homing: boolean, screw: boolean, wallBound: boolean, note?: Maybe<string>, moveCategory: { __typename?: 'MoveCategory', id: string, name: string }, afterState?: Maybe<{ __typename?: 'State', id: string, name: string }>, moveVideo?: Maybe<{ __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string }>, commands: Array<{ __typename?: 'Command', id: string, state: { __typename?: 'State', id: string, name: string }, operations: Array<{ __typename?: 'Operation', id: string, name: string, key: string, icon: boolean }> }>, actions: Array<{ __typename: 'AttackAction', id: string, attackType: AttackTypeEnum, damage: number, blockAvailable: boolean, blockState: AttackActionStateEnum, blockFrame?: Maybe<number>, hitAvailable: boolean, hitState: AttackActionStateEnum, hitFrame?: Maybe<number>, counterHitAvailable: boolean, counterHitState: AttackActionStateEnum, counterHitFrame?: Maybe<number> } | { __typename: 'ThrowAction', id: string, throwType: ThrowTypeEnum, damage: number, escape: ThrowEscapeEnum, throwAvailable: boolean, throwState: ThrowActionStateEnum, throwFrame?: Maybe<number> }>, conditions: Array<{ __typename?: 'Condition', id: string, name: string }> } };
 
 export type ArticleFormArticleFragment = { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: Maybe<string>, category: ArticleCategory, content: string };
 
@@ -2917,7 +2893,7 @@ export type FavButtonArticleQueryVariables = Exact<{
 
 export type FavButtonArticleQuery = { __typename?: 'Query', article: { __typename?: 'Article', faved: boolean } };
 
-export type MoveMediaFragment = { __typename?: 'Move', id: string, name: string, kana?: Maybe<string>, opponentState?: Maybe<OpponentStateEnum>, startUpFrame?: Maybe<number>, powerCrush: boolean, crouchingStatus: boolean, jumpStatus: boolean, homing: boolean, screw: boolean, wallBound: boolean, note?: Maybe<string>, moveable: { __typename: 'AttackMove' } | { __typename: 'ThrowMove' }, moveCategory: { __typename?: 'MoveCategory', id: string, name: string }, afterState?: Maybe<{ __typename?: 'State', id: string, name: string }>, moveVideo?: Maybe<{ __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string }>, commands: Array<{ __typename?: 'Command', id: string, state: { __typename?: 'State', id: string, name: string }, operations: Array<{ __typename?: 'Operation', id: string, name: string, key: string, icon: boolean }> }>, actions: Array<{ __typename: 'AttackAction', id: string, attackType: AttackTypeEnum, damage: number, blockAvailable: boolean, blockState: AttackActionStateEnum, blockFrame?: Maybe<number>, hitAvailable: boolean, hitState: AttackActionStateEnum, hitFrame?: Maybe<number>, counterHitAvailable: boolean, counterHitState: AttackActionStateEnum, counterHitFrame?: Maybe<number> } | { __typename: 'ThrowAction', id: string, throwType: ThrowTypeEnum, damage: number, escape: ThrowEscapeEnum, throwAvailable: boolean, throwState: ThrowActionStateEnum, throwFrame?: Maybe<number> }>, conditions: Array<{ __typename?: 'Condition', id: string, name: string }> };
+export type MoveMediaFragment = { __typename?: 'Move', id: string, name: string, kana?: Maybe<string>, opponentState?: Maybe<OpponentStateEnum>, startUpFrame?: Maybe<number>, powerCrush: boolean, crouchingStatus: boolean, jumpStatus: boolean, homing: boolean, screw: boolean, wallBound: boolean, note?: Maybe<string>, moveCategory: { __typename?: 'MoveCategory', id: string, name: string }, afterState?: Maybe<{ __typename?: 'State', id: string, name: string }>, moveVideo?: Maybe<{ __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string }>, commands: Array<{ __typename?: 'Command', id: string, state: { __typename?: 'State', id: string, name: string }, operations: Array<{ __typename?: 'Operation', id: string, name: string, key: string, icon: boolean }> }>, actions: Array<{ __typename: 'AttackAction', id: string, attackType: AttackTypeEnum, damage: number, blockAvailable: boolean, blockState: AttackActionStateEnum, blockFrame?: Maybe<number>, hitAvailable: boolean, hitState: AttackActionStateEnum, hitFrame?: Maybe<number>, counterHitAvailable: boolean, counterHitState: AttackActionStateEnum, counterHitFrame?: Maybe<number> } | { __typename: 'ThrowAction', id: string, throwType: ThrowTypeEnum, damage: number, escape: ThrowEscapeEnum, throwAvailable: boolean, throwState: ThrowActionStateEnum, throwFrame?: Maybe<number> }>, conditions: Array<{ __typename?: 'Condition', id: string, name: string }> };
 
 export type OrganizerFormFragment = { __typename?: 'Organizer', name: string, slug: string, tonamelId?: Maybe<string>, twitterId?: Maybe<string>, streamingUrl?: Maybe<string>, description?: Maybe<string> };
 
@@ -3014,7 +2990,7 @@ export type CharacterMovesPageQueryVariables = Exact<{
 }>;
 
 
-export type CharacterMovesPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, combosCount: number, movesCount: number, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, moves: Array<{ __typename?: 'Move', id: string, name: string, kana?: Maybe<string>, opponentState?: Maybe<OpponentStateEnum>, startUpFrame?: Maybe<number>, powerCrush: boolean, crouchingStatus: boolean, jumpStatus: boolean, homing: boolean, screw: boolean, wallBound: boolean, note?: Maybe<string>, moveable: { __typename: 'AttackMove' } | { __typename: 'ThrowMove' }, moveCategory: { __typename?: 'MoveCategory', id: string, name: string }, afterState?: Maybe<{ __typename?: 'State', id: string, name: string }>, moveVideo?: Maybe<{ __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string }>, commands: Array<{ __typename?: 'Command', id: string, state: { __typename?: 'State', id: string, name: string }, operations: Array<{ __typename?: 'Operation', id: string, name: string, key: string, icon: boolean }> }>, actions: Array<{ __typename: 'AttackAction', id: string, attackType: AttackTypeEnum, damage: number, blockAvailable: boolean, blockState: AttackActionStateEnum, blockFrame?: Maybe<number>, hitAvailable: boolean, hitState: AttackActionStateEnum, hitFrame?: Maybe<number>, counterHitAvailable: boolean, counterHitState: AttackActionStateEnum, counterHitFrame?: Maybe<number> } | { __typename: 'ThrowAction', id: string, throwType: ThrowTypeEnum, damage: number, escape: ThrowEscapeEnum, throwAvailable: boolean, throwState: ThrowActionStateEnum, throwFrame?: Maybe<number> }>, conditions: Array<{ __typename?: 'Condition', id: string, name: string }> }> }> } };
+export type CharacterMovesPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, combosCount: number, movesCount: number, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, moves: Array<{ __typename?: 'Move', id: string, name: string, kana?: Maybe<string>, opponentState?: Maybe<OpponentStateEnum>, startUpFrame?: Maybe<number>, powerCrush: boolean, crouchingStatus: boolean, jumpStatus: boolean, homing: boolean, screw: boolean, wallBound: boolean, note?: Maybe<string>, moveCategory: { __typename?: 'MoveCategory', id: string, name: string }, afterState?: Maybe<{ __typename?: 'State', id: string, name: string }>, moveVideo?: Maybe<{ __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string }>, commands: Array<{ __typename?: 'Command', id: string, state: { __typename?: 'State', id: string, name: string }, operations: Array<{ __typename?: 'Operation', id: string, name: string, key: string, icon: boolean }> }>, actions: Array<{ __typename: 'AttackAction', id: string, attackType: AttackTypeEnum, damage: number, blockAvailable: boolean, blockState: AttackActionStateEnum, blockFrame?: Maybe<number>, hitAvailable: boolean, hitState: AttackActionStateEnum, hitFrame?: Maybe<number>, counterHitAvailable: boolean, counterHitState: AttackActionStateEnum, counterHitFrame?: Maybe<number> } | { __typename: 'ThrowAction', id: string, throwType: ThrowTypeEnum, damage: number, escape: ThrowEscapeEnum, throwAvailable: boolean, throwState: ThrowActionStateEnum, throwFrame?: Maybe<number> }>, conditions: Array<{ __typename?: 'Condition', id: string, name: string }> }> }> } };
 
 export type CharactersPageQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -3874,9 +3850,6 @@ export const MoveMediaFragmentDoc = gql`
   screw
   wallBound
   note
-  moveable {
-    __typename
-  }
   moveCategory {
     id
     name
