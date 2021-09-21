@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 
-import { DashboardContent, DashboardBreadcrumbs } from '@/components';
+import { DashboardContent, DashboardBreadcrumbs, SearchWord } from '@/components';
 import { dashboardPath } from '@/lib';
 import {
   Box,
@@ -31,7 +31,7 @@ import { DEFAULT_AVATAR_URL } from '@/lib/Assets';
 
 const Page: React.FC = () => {
   const setLoading = useSetRecoilState(loadingState);
-  const { data, loading, fetchMore, updateQuery } = useDashboardPlayersPagePlayersQuery();
+  const { data, loading, fetchMore, updateQuery, refetch } = useDashboardPlayersPagePlayersQuery();
   const [destroy, { loading: deleteLoading }] = useDashboardPlayersPageDeleteMutation({
     onCompleted: data => {
       const player = data.deletePlayer?.player;
@@ -46,6 +46,7 @@ const Page: React.FC = () => {
       toast.success('プレイヤーを削除しました。');
     },
   });
+  const keywordRef = useRef<string>();
 
   setLoading(loading || deleteLoading);
 
@@ -54,6 +55,18 @@ const Page: React.FC = () => {
 
   return (
     <DashboardContent title="プレイヤー" breadcrumb={<DashboardBreadcrumbs to="players" />} actions={<CreateButton />}>
+      <Box mb={2}>
+        <SearchWord
+          onSearch={word => {
+            if (keywordRef.current === word) return;
+
+            keywordRef.current = word;
+            setLoading(true);
+            refetch({ page: 1, keyword: keywordRef.current });
+          }}
+        />
+      </Box>
+
       <TableContainer component={Paper}>
         <Table>
           <TableBody>
