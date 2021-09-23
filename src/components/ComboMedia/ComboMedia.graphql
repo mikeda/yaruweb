@@ -13,10 +13,6 @@ fragment ComboMedia on Combo {
     ...comboVideo
   }
 
-  conditions {
-    ...condition
-  }
-
   operations {
     ...operation
   }

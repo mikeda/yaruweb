@@ -6,11 +6,6 @@ query PageDashboardMoveNew($moveCategoryId: ID!) {
     character {
       slug
       name
-
-      conditions {
-        id
-        name
-      }
     }
   }
 }

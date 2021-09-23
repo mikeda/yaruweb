@@ -11,11 +11,6 @@ query PageDashboardComboNew($comboCategoryId: ID!) {
         id
         name
       }
-
-      conditions {
-        id
-        name
-      }
     }
   }
 }

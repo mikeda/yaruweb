@@ -41,9 +41,4 @@ fragment MoveMedia on Move {
   actions {
     ...action
   }
-
-  conditions {
-    id
-    name
-  }
 }

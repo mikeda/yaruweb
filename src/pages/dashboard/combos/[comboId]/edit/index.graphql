@@ -22,11 +22,6 @@ query PageDashboardComboEdit($comboId: ID!) {
           id
           name
         }
-
-        conditions {
-          id
-          name
-        }
       }
     }
   }

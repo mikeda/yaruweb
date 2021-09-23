@@ -4,13 +4,7 @@ import * as yup from 'yup';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
-import {
-  ConditionFragment,
-  MoveAttributes,
-  MoveFragment,
-  MoveVideoFragment,
-  useCreateMoveVideoMutation,
-} from '@/lib/graphql/types';
+import { MoveAttributes, MoveFragment, MoveVideoFragment, useCreateMoveVideoMutation } from '@/lib/graphql/types';
 import { useForm } from 'react-hook-form';
 import { loadingState } from '@/states/loading';
 import { VideoPlayer } from '../MoveMedia/VideoPlayer';
@@ -25,40 +19,32 @@ const schema = yup.object().shape({
 
 interface Props {
   move?: MoveFragment;
-  conditions: ConditionFragment[];
   onSubmit: (attributes: MoveAttributes) => void;
 }
 
-export const MoveForm: React.FC<Props> = ({ move, conditions, onSubmit }) => {
+export const MoveForm: React.FC<Props> = ({ move, onSubmit }) => {
   const {
     register,
     handleSubmit,
     setValue,
-    watch,
     formState: { errors },
   } = useForm<MoveAttributes>({
     resolver: yupResolver(schema),
     mode: 'onBlur',
-    defaultValues: move
-      ? {
-          moveVideoId: move.moveVideo?.id,
-          name: move.name,
-          kana: move.kana,
-          startUpFrame: move.startUpFrame,
-          powerCrush: move.powerCrush,
-          crouchingStatus: move.crouchingStatus,
-          jumpStatus: move.jumpStatus,
-          homing: move.homing,
-          screw: move.screw,
-          wallBound: move.wallBound,
-          note: move.note,
-          conditionIds: move.conditions.map(m => m.id),
-        }
-      : {
-          conditionIds: [],
-        },
+    defaultValues: move && {
+      moveVideoId: move.moveVideo?.id,
+      name: move.name,
+      kana: move.kana,
+      startUpFrame: move.startUpFrame,
+      powerCrush: move.powerCrush,
+      crouchingStatus: move.crouchingStatus,
+      jumpStatus: move.jumpStatus,
+      homing: move.homing,
+      screw: move.screw,
+      wallBound: move.wallBound,
+      note: move.note,
+    },
   });
-  const conditionIds = watch('conditionIds');
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
@@ -69,31 +55,6 @@ export const MoveForm: React.FC<Props> = ({ move, conditions, onSubmit }) => {
 
       <FormGroup label="カナ">
         <Input {...register('kana')} />
-      </FormGroup>
-
-      <FormGroup label="条件">
-        {conditions.map((condition, i) => {
-          const id = `conditionIdsDummy.${i}` as const;
-
-          return (
-            <CheckBox key={i} id={id} label={condition.name}>
-              <input
-                id={id}
-                type="checkbox"
-                checked={conditionIds.includes(condition.id)}
-                onChange={e => {
-                  let newConditionIds: string[];
-                  if (e.target.checked) {
-                    newConditionIds = [...conditionIds, condition.id];
-                  } else {
-                    newConditionIds = conditionIds.filter(id => id !== condition.id);
-                  }
-                  setValue('conditionIds', newConditionIds);
-                }}
-              />
-            </CheckBox>
-          );
-        })}
       </FormGroup>
 
       <FormGroup label="発生フレーム">
