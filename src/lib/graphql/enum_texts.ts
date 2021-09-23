@@ -35,16 +35,6 @@ export const OrderText: { [key in Types.Order]: string } = {
   new: '新着',
 };
 
-export const OpponentStateEnumText: { [key in Types.OpponentStateEnum]: string } = {
-  to_crouching: 'しゃがみ中',
-  to_down: 'ダウン中',
-  to_air: '空中',
-  to_wall_splat: '壁やられ中',
-  to_left: '左側',
-  to_right: '右側',
-  to_back: '後側',
-};
-
 export const AttackTypeEnumText: { [key in Types.AttackTypeEnum]: string } = {
   h: '上',
   m: '中',

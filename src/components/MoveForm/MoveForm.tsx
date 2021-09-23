@@ -41,9 +41,7 @@ export const MoveForm: React.FC<Props> = ({ move, conditions, onSubmit }) => {
     mode: 'onBlur',
     defaultValues: move
       ? {
-          afterStateId: move.afterState?.id,
           moveVideoId: move.moveVideo?.id,
-          opponentState: move.opponentState,
           name: move.name,
           kana: move.kana,
           startUpFrame: move.startUpFrame,

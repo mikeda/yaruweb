@@ -2,7 +2,6 @@ fragment MoveMedia on Move {
   id
   name
   kana
-  opponentState
   startUpFrame
   powerCrush
   crouchingStatus
@@ -13,11 +12,6 @@ fragment MoveMedia on Move {
   note
 
   moveCategory {
-    id
-    name
-  }
-
-  afterState {
     id
     name
   }
