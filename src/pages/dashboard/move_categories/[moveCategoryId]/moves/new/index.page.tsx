@@ -58,7 +58,7 @@ const PageContent: React.FC<PageDashboardMoveNewQuery> = ({ moveCategory }) => {
 
   setLoading(loading);
 
-  return <MoveForm conditions={moveCategory.character.conditions} onSubmit={onSubmit} />;
+  return <MoveForm onSubmit={onSubmit} />;
 };
 
 export default Page;

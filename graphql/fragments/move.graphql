@@ -27,8 +27,4 @@ fragment move on Move {
   actions {
     ...action
   }
-
-  conditions {
-    ...condition
-  }
 }

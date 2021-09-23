@@ -56,7 +56,7 @@ const MoveContent: React.FC<PageDashboardMoveEditQuery> = ({ move }) => {
   };
 
   setLoading(loading);
-  return <MoveForm move={move} conditions={move.moveCategory.character.conditions} onSubmit={onSubmit} />;
+  return <MoveForm move={move} onSubmit={onSubmit} />;
 };
 
 export default Page;

@@ -1,4 +1,0 @@
-fragment condition on Condition {
-  id
-  name
-}

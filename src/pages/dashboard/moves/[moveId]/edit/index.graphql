@@ -2,11 +2,6 @@ query PageDashboardMoveEdit($moveId: ID!) {
   move(moveId: $moveId) {
     ...move
 
-    conditions {
-      id
-      name
-    }
-
     moveCategory {
       id
       name
@@ -16,11 +11,6 @@ query PageDashboardMoveEdit($moveId: ID!) {
         name
 
         states {
-          id
-          name
-        }
-
-        conditions {
           id
           name
         }
