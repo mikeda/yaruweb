@@ -245,7 +245,7 @@ const AttackLabels: React.FC<{ attack: AttackMoveFragment }> = ({ attack }) => {
       {attack.crouchingStatus && <Chip size="small" label="しゃがステ" />}
       {attack.jumpStatus && <Chip size="small" label="ジャンステ" />}
       {attack.homing && <Chip size="small" label="ホーミング" />}
-      {attack.screw && <Chip size="small" label="パワークラッシュ" />}
+      {attack.screw && <Chip size="small" label="スクリュー" />}
       {attack.wallBound && <Chip size="small" label="ウォールバウンド" />}
     </div>
   );
