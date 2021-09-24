@@ -1,3 +1,43 @@
+fragment moveable on Moveable {
+  __typename
+
+  ... on AttackMove { ...attackMove }
+  ... on ThrowMove { ...throwMove }
+  ... on ReversalMove { ...reversalMove }
+}
+
+fragment CharacterMovesPageMove on Move {
+  id
+  name
+  kana
+  condition
+  note
+
+  moveable {
+    ...moveable
+  }
+
+  commands {
+    id
+
+    state {
+      id
+      name
+    }
+
+    operations {
+      id
+      name
+      key
+      icon
+    }
+  }
+
+  actions {
+    ...action
+  }
+}
+
 query CharacterMovesPage($characterSlug: String!) {
   character(characterSlug: $characterSlug) {
     ...CharacterBreadcrumbs
@@ -7,7 +47,7 @@ query CharacterMovesPage($characterSlug: String!) {
       id
       name
       moves {
-        ...MoveMedia
+        ...CharacterMovesPageMove
       }
     }
   }

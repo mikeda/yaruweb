@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { AttackActionFragment, MoveMediaFragment, ThrowActionFragment } from '@/lib/graphql/types';
+import { AttackActionFragment, AttackMoveFragment, MoveMediaFragment, ThrowActionFragment } from '@/lib/graphql/types';
 import { Command } from '../Command';
 
 import styles from './MoveMedia.module.scss';
@@ -35,13 +35,7 @@ export const MoveMedia: React.FC<Props> = ({ move }) => {
               <Command key={command.id} command={command} />
             ))}
 
-            <AttackLabels move={move} />
-
-            <div className={styles.details}>
-              <MoveDetail label="発生">{`${move.startUpFrame}F`}</MoveDetail>
-            </div>
-
-            <AttackDetails move={move} />
+            {move.moveable.__typename === 'AttackMove' && <AttackDetails move={move} />}
           </div>
 
           {move.moveVideo && <VideoPlayer src={move.moveVideo.m3u8Url} thumnailUrl={move.moveVideo.thumbnailUrl} />}
@@ -51,26 +45,34 @@ export const MoveMedia: React.FC<Props> = ({ move }) => {
   );
 };
 
-const AttackLabels: React.FC<{ move: MoveMediaFragment }> = ({ move }) => {
+const AttackLabels: React.FC<AttackMoveFragment> = attack => {
   return (
     <div className={styles.tags}>
-      {move.powerCrush && <span>パワークラッシュ</span>}
-      {move.crouchingStatus && <span>しゃがステ</span>}
-      {move.jumpStatus && <span>ジャンステ</span>}
-      {move.homing && <span>ホーミング</span>}
-      {move.screw && <span>スクリュー</span>}
-      {move.wallBound && <span>ウォールバウンド</span>}
+      {attack.powerCrush && <span>パワークラッシュ</span>}
+      {attack.crouchingStatus && <span>しゃがステ</span>}
+      {attack.jumpStatus && <span>ジャンステ</span>}
+      {attack.homing && <span>ホーミング</span>}
+      {attack.screw && <span>スクリュー</span>}
+      {attack.wallBound && <span>ウォールバウンド</span>}
     </div>
   );
 };
 
 const AttackDetails: React.FC<{ move: MoveMediaFragment }> = ({ move }) => {
+  if (move.moveable.__typename !== 'AttackMove') return null;
+
   const damages = move.actions.map(a => a.damage);
   const totalDamage = move.actions.map(a => a.damage).reduce((a, b) => a + b, 0);
   const lastAction = move.actions[move.actions.length - 1];
 
   return (
     <>
+      <AttackLabels {...move.moveable} />
+
+      <div className={styles.details}>
+        <MoveDetail label="発生">{`${move.moveable.startUpFrame}F`}</MoveDetail>
+      </div>
+
       <div className={styles.details}>
         <MoveDetail label="判定">
           {move.actions

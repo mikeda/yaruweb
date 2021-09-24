@@ -1,19 +1,55 @@
+fragment attackMove on AttackMove {
+  startUpFrame
+  blockResult
+  blockState
+  blockFrame
+  hitResult
+  hitState
+  hitFrame
+  counterResult
+  counterState
+  counterFrame
+  powerCrush
+  powerCrushFrame
+  crouchingStatus
+  crouchingStatusFrame
+  jumpStatus
+  jumpStatusFrame
+  homing
+  screw
+  wallBound
+}
+
+fragment throwMove on ThrowMove {
+  throwType
+  startUpFrame
+  damage
+  throwEscape
+  throwResult
+}
+
+fragment reversalMove on ReversalMove {
+  reversalType
+  reversalTarget
+}
+
 fragment move on Move {
   id
   name
   kana
-  startUpFrame
-  powerCrush
-  crouchingStatus
-  jumpStatus
-  homing
-  screw
-  wallBound
   note
 
   moveCategory {
     id
     name
+  }
+
+  moveable {
+    __typename
+
+    ... on AttackMove { ...attackMove }
+    ... on ThrowMove { ...throwMove }
+    ... on ReversalMove { ...reversalMove }
   }
 
   moveVideo {

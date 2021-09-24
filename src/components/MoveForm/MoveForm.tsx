@@ -4,7 +4,13 @@ import * as yup from 'yup';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
-import { MoveAttributes, MoveFragment, MoveVideoFragment, useCreateMoveVideoMutation } from '@/lib/graphql/types';
+import {
+  AttackMoveAttributes,
+  MoveAttributes,
+  MoveFragment,
+  MoveVideoFragment,
+  useCreateMoveVideoMutation,
+} from '@/lib/graphql/types';
 import { useForm } from 'react-hook-form';
 import { loadingState } from '@/states/loading';
 import { VideoPlayer } from '../MoveMedia/VideoPlayer';
@@ -14,7 +20,10 @@ import { Button } from '@material-ui/core';
 
 const schema = yup.object().shape({
   name: yup.string().required(),
-  startUpFrame: nullableNumber,
+  'attackMove.startUpFrame': nullableNumber,
+  attackMove: yup.object({
+    startUpFrame: nullableNumber,
+  }),
 });
 
 interface Props {
@@ -28,68 +37,92 @@ export const MoveForm: React.FC<Props> = ({ move, onSubmit }) => {
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm<MoveAttributes>({
+  } = useForm<AttackMoveAttributes>({
     resolver: yupResolver(schema),
     mode: 'onBlur',
     defaultValues: move && {
-      moveVideoId: move.moveVideo?.id,
-      name: move.name,
-      kana: move.kana,
-      startUpFrame: move.startUpFrame,
-      powerCrush: move.powerCrush,
-      crouchingStatus: move.crouchingStatus,
-      jumpStatus: move.jumpStatus,
-      homing: move.homing,
-      screw: move.screw,
-      wallBound: move.wallBound,
-      note: move.note,
+      move: {
+        moveVideoId: move.moveVideo?.id,
+        name: move.name,
+        kana: move.kana,
+        note: move.note,
+      },
+      attack:
+        move.moveable.__typename === 'AttackMove'
+          ? {
+              startUpFrame: move.moveable.startUpFrame,
+              powerCrush: move.moveable.powerCrush,
+              crouchingStatus: move.moveable.crouchingStatus,
+              jumpStatus: move.moveable.jumpStatus,
+              homing: move.moveable.homing,
+              screw: move.moveable.screw,
+              wallBound: move.moveable.wallBound,
+            }
+          : undefined,
+      //throwMove:
+      //  move.moveable.__typename === 'ThrowMove'
+      //    ? {
+      //        startUpFrame: move.moveable.startUpFrame,
+      //        damage: move.moveable.damage,
+      //        throwResult: move.moveable.throwResult,
+      //        throwEscape: move.moveable.throwEscape,
+      //      }
+      //    : undefined,
+      //reversalMove:
+      //  move.moveable.__typename === 'ReversalMove'
+      //    ? {
+      //        reversalTarget: move.moveable.reversalTarget,
+      //        reversalType: move.moveable.reversalType,
+      //      }
+      //    : undefined,
     },
   });
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <FormGroup label="名前" required>
-        <Input {...register('name')} />
-        {errors.name && <span>This field is required</span>}
+        <Input {...register('move.name')} />
+        {errors.move?.name && <span>This field is required</span>}
       </FormGroup>
 
       <FormGroup label="カナ">
-        <Input {...register('kana')} />
+        <Input {...register('move.kana')} />
       </FormGroup>
 
-      <FormGroup label="発生フレーム">
-        <Input {...register('startUpFrame')} />
-        {errors.startUpFrame?.message && <span>{errors.startUpFrame.message}</span>}
-      </FormGroup>
+      <>
+        <FormGroup label="発生フレーム">
+          <Input {...register('attack.startUpFrame')} />
+        </FormGroup>
 
-      <FormGroup label="ステータス">
-        <FormInline>
-          <CheckBox id="powerCrush" label="パワークラッシュ">
-            <input id="powerCrush" type="checkbox" {...register('powerCrush')} />
-          </CheckBox>
-          <CheckBox id="homing" label="ホーミング">
-            <input id="homing" type="checkbox" {...register('homing')} />
-          </CheckBox>
-          <CheckBox id="screw" label="スクリュー">
-            <input id="screw" type="checkbox" {...register('screw')} />
-          </CheckBox>
-          <CheckBox id="wallBound" label="ウォールバウンド">
-            <input id="wallBound" type="checkbox" {...register('wallBound')} />
-          </CheckBox>
-          <CheckBox id="crouchingStatus" label="しゃがみステータス">
-            <input id="crouchingStatus" type="checkbox" {...register('crouchingStatus')} />
-          </CheckBox>
-          <CheckBox id="jumpStatus" label="ジャンプステータス">
-            <input id="jumpStatus" type="checkbox" {...register('jumpStatus')} />
-          </CheckBox>
-        </FormInline>
-      </FormGroup>
+        <FormGroup label="ステータス">
+          <FormInline>
+            <CheckBox id="powerCrush" label="パワークラッシュ">
+              <input id="powerCrush" type="checkbox" {...register('attack.powerCrush')} />
+            </CheckBox>
+            <CheckBox id="homing" label="ホーミング">
+              <input id="homing" type="checkbox" {...register('attack.homing')} />
+            </CheckBox>
+            <CheckBox id="screw" label="スクリュー">
+              <input id="screw" type="checkbox" {...register('attack.screw')} />
+            </CheckBox>
+            <CheckBox id="wallBound" label="ウォールバウンド">
+              <input id="wallBound" type="checkbox" {...register('attack.wallBound')} />
+            </CheckBox>
+            <CheckBox id="crouchingStatus" label="しゃがみステータス">
+              <input id="crouchingStatus" type="checkbox" {...register('attack.crouchingStatus')} />
+            </CheckBox>
+            <CheckBox id="jumpStatus" label="ジャンプステータス">
+              <input id="jumpStatus" type="checkbox" {...register('attack.jumpStatus')} />
+            </CheckBox>
+          </FormInline>
+        </FormGroup>
+      </>
 
       <FormGroup label="動画">
-        <input type="hidden" {...register('moveVideoId')} />
+        <input type="hidden" {...register('move.moveVideoId')} />
         <MoveVideoInput
           onCreate={moveVideo => {
-            setValue('moveVideoId', moveVideo.id);
+            setValue('move.moveVideoId', moveVideo.id);
           }}
         />
 
@@ -99,7 +132,7 @@ export const MoveForm: React.FC<Props> = ({ move, onSubmit }) => {
       </FormGroup>
 
       <FormGroup label="備考">
-        <TextArea {...register('note')} />
+        <TextArea {...register('move.note')} />
       </FormGroup>
 
       <FormGroup>
