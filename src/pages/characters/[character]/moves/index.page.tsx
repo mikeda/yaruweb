@@ -2,13 +2,14 @@ import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
 import {
-  AttackActionFragment,
+  AttackMoveFragment,
   CharacterMovesPageDocument,
+  CharacterMovesPageMoveFragment,
   CharacterMovesPageQuery,
   CharacterPathsDocument,
   CharacterPathsQuery,
-  MoveMediaFragment,
-  ThrowActionFragment,
+  ReversalMoveFragment,
+  ThrowMoveFragment,
 } from '@/lib/graphql/types';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Head } from '@/components/layouts/Head';
@@ -31,7 +32,7 @@ import { Profile } from '../components/Profile';
 import { Tabs } from '../components/Tabs';
 import { ParsedUrlQuery } from 'querystring';
 import { Command } from '@/components';
-import { AttackActionStateText, ThorwActionStateText } from '@/lib/graphql/enum_texts';
+import { AttackMoveResultText, ThrowMoveResultText } from '@/lib/graphql/enum_texts';
 
 const useStyles = makeStyles({
   table: {
@@ -52,43 +53,150 @@ const Page: React.FC<CharacterMovesPageQuery> = ({ character }) => {
         <Tabs character={character} activeTab="moves" />
       </Box>
 
-      {character.moveCategories.map(moveCategory => (
-        <Box key={moveCategory.id} mt={4}>
-          <Typography variant="h3" gutterBottom>
-            {moveCategory.name}
-          </Typography>
+      {character.moveCategories.map(moveCategory => {
+        const { attackMoves, throwMoves, reversalMoves } = moveGroups(moveCategory.moves);
 
-          <TableContainer component={Paper}>
-            <Table className={classes.table} size="small">
-              <TableHead>
-                <TableRow>
-                  <TableCell></TableCell>
-                  <TableCell align="right">発生</TableCell>
-                  <TableCell align="right">ガード</TableCell>
-                  <TableCell align="right">ヒット</TableCell>
-                  <TableCell align="right">カウンター</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {moveCategory.moves.map(move => (
-                  <MoveRow key={move.id} move={move} />
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Box>
-      ))}
+        return (
+          <Box key={moveCategory.id} mt={4}>
+            <Typography variant="h3" gutterBottom>
+              {moveCategory.name}
+            </Typography>
+
+            {attackMoves.length > 0 && (
+              <TableContainer component={Paper}>
+                <Table className={classes.table} size="small">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>コマンド</TableCell>
+                      <TableCell align="right">発生</TableCell>
+                      <TableCell align="right">ガード</TableCell>
+                      <TableCell align="right">ヒット</TableCell>
+                      <TableCell align="right">カウンター</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {attackMoves.map(attackMove => (
+                      <AttackRow key={attackMove.move.id} {...attackMove} />
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            )}
+
+            {throwMoves.length > 0 && (
+              <TableContainer component={Paper}>
+                <Table className={classes.table} size="small">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>コマンド</TableCell>
+                      <TableCell align="right">発生</TableCell>
+                      <TableCell align="right">投げ後</TableCell>
+                      <TableCell align="right">投げ抜け</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {throwMoves.map(throwMove => (
+                      <ThrowRow key={throwMove.move.id} {...throwMove} />
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            )}
+
+            {reversalMoves.length > 0 && (
+              <TableContainer component={Paper}>
+                <Table className={classes.table} size="small">
+                  <TableHead>
+                    <TableRow>
+                      <TableCell>コマンド</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {reversalMoves.map(reversalMove => (
+                      <ReversalRow key={reversalMove.move.id} {...reversalMove} />
+                    ))}
+                  </TableBody>
+                </Table>
+              </TableContainer>
+            )}
+          </Box>
+        );
+      })}
     </Content>
   );
 };
 
-const MoveRow: React.FC<{ move: MoveMediaFragment }> = ({ move }) => {
-  const lastAction = move.actions[move.actions.length - 1];
+interface AttackMove {
+  move: CharacterMovesPageMoveFragment;
+  attack: AttackMoveFragment;
+}
+interface ThrowMove {
+  move: CharacterMovesPageMoveFragment;
+  throw: ThrowMoveFragment;
+}
+interface ReversalMove {
+  move: CharacterMovesPageMoveFragment;
+  reversal: ReversalMoveFragment;
+}
 
+const moveGroups = (moves: CharacterMovesPageMoveFragment[]) => {
+  const attackMoves: AttackMove[] = [];
+  const throwMoves: ThrowMove[] = [];
+  const reversalMoves: ReversalMove[] = [];
+
+  moves.forEach(move => {
+    switch (move.moveable.__typename) {
+      case 'AttackMove':
+        attackMoves.push({ move, attack: move.moveable });
+        break;
+      case 'ThrowMove':
+        throwMoves.push({ move, throw: move.moveable });
+        break;
+      case 'ReversalMove':
+        reversalMoves.push({ move, reversal: move.moveable });
+        break;
+    }
+  });
+
+  return { attackMoves, throwMoves, reversalMoves };
+};
+
+const AttackRow: React.FC<AttackMove> = ({ move, attack }) => {
   return (
     <TableRow>
       <TableCell>
-        <AttackLabels move={move} />
+        <Typography variant="body1" gutterBottom>
+          {move.name}
+        </Typography>
+
+        {move.commands.map(command => (
+          <Command key={command.id} command={command} />
+        ))}
+
+        <AttackLabels attack={attack} />
+      </TableCell>
+
+      <TableCell align="right">{attack.startUpFrame && frameText(attack.startUpFrame)}</TableCell>
+
+      <TableCell align="right">
+        <OpponentDetail frame={attack.blockFrame} state={AttackMoveResultText[attack.blockResult]} />
+      </TableCell>
+
+      <TableCell align="right">
+        <OpponentDetail frame={attack.hitFrame} state={AttackMoveResultText[attack.hitResult]} />
+      </TableCell>
+
+      <TableCell align="right">
+        <OpponentDetail frame={attack.counterFrame} state={AttackMoveResultText[attack.counterResult]} />
+      </TableCell>
+    </TableRow>
+  );
+};
+
+const ThrowRow: React.FC<ThrowMove> = ({ move, throw: thrw }) => {
+  return (
+    <TableRow>
+      <TableCell>
         <Typography variant="body1" gutterBottom>
           {move.name}
         </Typography>
@@ -96,49 +204,25 @@ const MoveRow: React.FC<{ move: MoveMediaFragment }> = ({ move }) => {
           <Command key={command.id} command={command} />
         ))}
       </TableCell>
-      <TableCell align="right">{move.startUpFrame && `${move.startUpFrame}F`}</TableCell>
-      {lastAction && lastAction.__typename === 'AttackAction' && <AttackCells action={lastAction} />}
-      {lastAction && lastAction.__typename === 'ThrowAction' && <ThrowCells action={lastAction} />}
+      <TableCell align="right">{thrw.startUpFrame && frameText(thrw.startUpFrame)}</TableCell>
+      <TableCell align="right">{ThrowMoveResultText[thrw.throwResult]}</TableCell>
+      <TableCell align="right">{thrw.throwEscape}</TableCell>
     </TableRow>
   );
 };
 
-const AttackCells: React.FC<{ action: AttackActionFragment }> = ({ action }) => {
+const ReversalRow: React.FC<ReversalMove> = ({ move }) => {
   return (
-    <>
-      <TableCell align="right">
-        {action.blockAvailable && (
-          <OpponentDetail frame={action.blockFrame} state={AttackActionStateText[action.blockState]} />
-        )}
+    <TableRow>
+      <TableCell>
+        <Typography variant="body1" gutterBottom>
+          {move.name}
+        </Typography>
+        {move.commands.map(command => (
+          <Command key={command.id} command={command} />
+        ))}
       </TableCell>
-
-      <TableCell align="right">
-        {action.hitAvailable && (
-          <OpponentDetail frame={action.hitFrame} state={AttackActionStateText[action.hitState]} />
-        )}
-      </TableCell>
-
-      <TableCell align="right">
-        {action.counterHitAvailable && (
-          <OpponentDetail frame={action.counterHitFrame} state={AttackActionStateText[action.counterHitState]} />
-        )}
-      </TableCell>
-    </>
-  );
-};
-
-const ThrowCells: React.FC<{ action: ThrowActionFragment }> = ({ action }) => {
-  return (
-    <>
-      <TableCell align="right"></TableCell>
-      <TableCell align="right">
-        {action.throwAvailable && (
-          <OpponentDetail frame={action.throwFrame} state={ThorwActionStateText[action.throwState]} />
-        )}
-      </TableCell>
-      <TableCell align="right"></TableCell>
-      <TableCell align="right"></TableCell>
-    </>
+    </TableRow>
   );
 };
 
@@ -154,15 +238,15 @@ const OpponentDetail: React.FC<{ frame?: number | null; state?: string | null }>
   );
 };
 
-const AttackLabels: React.FC<{ move: MoveMediaFragment }> = ({ move }) => {
+const AttackLabels: React.FC<{ attack: AttackMoveFragment }> = ({ attack }) => {
   return (
     <div>
-      {move.powerCrush && <Chip size="small" label="パワークラッシュ" />}
-      {move.crouchingStatus && <Chip size="small" label="しゃがステ" />}
-      {move.jumpStatus && <Chip size="small" label="ジャンステ" />}
-      {move.homing && <Chip size="small" label="ホーミング" />}
-      {move.screw && <Chip size="small" label="パワークラッシュ" />}
-      {move.wallBound && <Chip size="small" label="ウォールバウンド" />}
+      {attack.powerCrush && <Chip size="small" label="パワークラッシュ" />}
+      {attack.crouchingStatus && <Chip size="small" label="しゃがステ" />}
+      {attack.jumpStatus && <Chip size="small" label="ジャンステ" />}
+      {attack.homing && <Chip size="small" label="ホーミング" />}
+      {attack.screw && <Chip size="small" label="パワークラッシュ" />}
+      {attack.wallBound && <Chip size="small" label="ウォールバウンド" />}
     </div>
   );
 };

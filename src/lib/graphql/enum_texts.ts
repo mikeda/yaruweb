@@ -14,6 +14,12 @@ export const ArticleStatusText: { [key in Types.ArticleStatus]: string } = {
   published: '公開中',
 };
 
+export const AttackMoveResultText: { [key in Types.AttackMoveResultEnum]: string } = {
+  normal: '',
+  down: 'ダウン',
+  combo: 'コンボ',
+};
+
 export const AttackActionStateText: { [key in Types.AttackActionStateEnum]: string } = {
   unspecified: '',
   down: 'ダウン',
@@ -51,6 +57,12 @@ export const ThorwActionStateText: { [key in Types.ThrowActionStateEnum]: string
   unspecified: '',
   down: 'ダウン',
   juggle: '空中コンボ',
+};
+
+export const ThrowMoveResultText: { [key in Types.ThrowMoveResultEnum]: string } = {
+  normal: '',
+  down: 'ダウン',
+  combo: 'コンボ',
 };
 
 export const ThrowEscapeEnumText: { [key in Types.ThrowEscapeEnum]: string } = {

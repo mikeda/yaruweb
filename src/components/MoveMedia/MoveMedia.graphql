@@ -2,18 +2,11 @@ fragment MoveMedia on Move {
   id
   name
   kana
-  startUpFrame
-  powerCrush
-  crouchingStatus
-  jumpStatus
-  homing
-  screw
-  wallBound
+  condition
   note
 
-  moveCategory {
-    id
-    name
+  moveable {
+    ...moveable
   }
 
   moveVideo {
