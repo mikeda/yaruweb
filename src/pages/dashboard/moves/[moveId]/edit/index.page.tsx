@@ -1,10 +1,10 @@
 import React from 'react';
 
 import {
-  MoveAttributes,
+  AttackMoveAttributes,
   PageDashboardMoveEditQuery,
   usePageDashboardMoveEditQuery,
-  useUpdateMoveMutation,
+  useUpdateAttackMoveMutation,
 } from '@/lib/graphql/types';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
 import { useRouter } from 'next/router';
@@ -41,7 +41,7 @@ const Page: React.FC = () => {
 const MoveContent: React.FC<PageDashboardMoveEditQuery> = ({ move }) => {
   const router = useRouter();
   const setLoading = useSetRecoilState(loadingState);
-  const [updateMove, { loading }] = useUpdateMoveMutation({
+  const [updateMove, { loading }] = useUpdateAttackMoveMutation({
     onCompleted: () => {
       toast.success('技データを更新しました。');
       router.back();
@@ -51,7 +51,7 @@ const MoveContent: React.FC<PageDashboardMoveEditQuery> = ({ move }) => {
     },
   });
 
-  const onSubmit = (attributes: MoveAttributes) => {
+  const onSubmit = (attributes: AttackMoveAttributes) => {
     updateMove({ variables: { moveId: move.id, attributes } });
   };
 

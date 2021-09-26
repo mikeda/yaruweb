@@ -1,5 +1,7 @@
 fragment attackMove on AttackMove {
   startUpFrame
+  heights
+  damages
   blockResult
   blockState
   blockFrame
@@ -58,9 +60,5 @@ fragment move on Move {
 
   commands {
     ...command
-  }
-
-  actions {
-    ...action
   }
 }

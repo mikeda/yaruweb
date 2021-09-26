@@ -32,10 +32,6 @@ fragment CharacterMovesPageMove on Move {
       icon
     }
   }
-
-  actions {
-    ...action
-  }
 }
 
 query CharacterMovesPage($characterSlug: String!) {

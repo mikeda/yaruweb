@@ -1,19 +1,14 @@
 import React from 'react';
 
-import { AttackActionFragment, AttackMoveFragment, MoveMediaFragment, ThrowActionFragment } from '@/lib/graphql/types';
+import { AttackMoveFragment, MoveMediaFragment } from '@/lib/graphql/types';
 import { Command } from '../Command';
 
 import styles from './MoveMedia.module.scss';
 
-import {
-  AttackActionStateText,
-  AttackTypeEnumText,
-  ThorwActionStateText,
-  ThrowTypeEnumText,
-} from '@/lib/graphql/enum_texts';
 import Link from 'next/link';
 import { VideoPlayer } from './VideoPlayer';
 import { path } from '@/lib';
+import { AttackMoveResultText, AttackTypeEnumText } from '@/lib/graphql/enum_texts';
 
 type Props = {
   move: MoveMediaFragment;
@@ -61,9 +56,7 @@ const AttackLabels: React.FC<AttackMoveFragment> = attack => {
 const AttackDetails: React.FC<{ move: MoveMediaFragment }> = ({ move }) => {
   if (move.moveable.__typename !== 'AttackMove') return null;
 
-  const damages = move.actions.map(a => a.damage);
-  const totalDamage = move.actions.map(a => a.damage).reduce((a, b) => a + b, 0);
-  const lastAction = move.actions[move.actions.length - 1];
+  const totalDamage = move.moveable.damages.reduce((a, b) => a + b, 0);
 
   return (
     <>
@@ -74,64 +67,33 @@ const AttackDetails: React.FC<{ move: MoveMediaFragment }> = ({ move }) => {
       </div>
 
       <div className={styles.details}>
-        <MoveDetail label="判定">
-          {move.actions
-            .map(action => {
-              switch (action.__typename) {
-                case 'AttackAction':
-                  return AttackTypeEnumText[action.attackType];
-                case 'ThrowAction':
-                  return ThrowTypeEnumText[action.throwType];
-              }
-            })
-            .join(', ')}
-        </MoveDetail>
+        {move.moveable.heights.length > 0 && (
+          <MoveDetail label="判定">
+            {move.moveable.heights.map(height => AttackTypeEnumText[height]).join(', ')}
+          </MoveDetail>
+        )}
         <MoveDetail label="ダメージ">
           {totalDamage}
-          {damages.length > 1 && `(${damages.join(', ')})`}
+          {move.moveable.damages.length > 1 && `(${move.moveable.damages.join(', ')})`}
         </MoveDetail>
       </div>
 
       <div className={styles.details}>
-        {lastAction && lastAction.__typename === 'AttackAction' && <LastAttackAction action={lastAction} />}
-        {lastAction && lastAction.__typename === 'ThrowAction' && <LastThrowAction action={lastAction} />}
-      </div>
-    </>
-  );
-};
-
-const LastAttackAction: React.FC<{ action: AttackActionFragment }> = ({ action }) => {
-  return (
-    <>
-      {action.blockAvailable && (
         <MoveDetail label="ガード">
-          <OpponentDetail frame={action.blockFrame} state={AttackActionStateText[action.blockState]} />
+          <OpponentDetail frame={move.moveable.blockFrame} state={AttackMoveResultText[move.moveable.blockResult]} />
         </MoveDetail>
-      )}
 
-      {action.hitAvailable && (
         <MoveDetail label="ヒット">
-          <OpponentDetail frame={action.hitFrame} state={AttackActionStateText[action.hitState]} />
+          <OpponentDetail frame={move.moveable.hitFrame} state={AttackMoveResultText[move.moveable.hitResult]} />
         </MoveDetail>
-      )}
 
-      {action.counterHitAvailable && (
-        <MoveDetail label="カウンターヒット">
-          <OpponentDetail frame={action.counterHitFrame} state={AttackActionStateText[action.counterHitState]} />
+        <MoveDetail label="カウンター">
+          <OpponentDetail
+            frame={move.moveable.counterFrame}
+            state={AttackMoveResultText[move.moveable.counterResult]}
+          />
         </MoveDetail>
-      )}
-    </>
-  );
-};
-
-const LastThrowAction: React.FC<{ action: ThrowActionFragment }> = ({ action }) => {
-  return (
-    <>
-      {action.throwAvailable && (
-        <MoveDetail label="投げ">
-          <OpponentDetail frame={action.throwFrame} state={ThorwActionStateText[action.throwState]} />
-        </MoveDetail>
-      )}
+      </div>
     </>
   );
 };

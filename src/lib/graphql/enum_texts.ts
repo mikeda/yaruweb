@@ -15,25 +15,9 @@ export const ArticleStatusText: { [key in Types.ArticleStatus]: string } = {
 };
 
 export const AttackMoveResultText: { [key in Types.AttackMoveResultEnum]: string } = {
-  normal: '',
+  normal: '-',
   down: 'ダウン',
   combo: 'コンボ',
-};
-
-export const AttackActionStateText: { [key in Types.AttackActionStateEnum]: string } = {
-  unspecified: '',
-  down: 'ダウン',
-  juggle: '空中コンボ',
-  stun: '崩れコンボ',
-  screw: 'スクリューコンボ',
-  smash: '叩きつけコンボ',
-  fall_down: '転びコンボ',
-  crouching: '強制しゃがみ',
-  twist: 'きりもみ',
-  only_block: 'ガード可能な有利',
-  bow: '強制しゃがみ',
-  bend_back: '強制しゃがみ',
-  recoverable_down: '回復可能なよろけダウン',
 };
 
 export const OrderText: { [key in Types.Order]: string } = {
@@ -46,17 +30,19 @@ export const AttackTypeEnumText: { [key in Types.AttackTypeEnum]: string } = {
   m: '中',
   l: '下',
   sm: '特殊中',
-  ubh: '上段ガード不能',
-  ubm: '中段ガード不能',
-  ubl: '下段ガード不能',
-  uba: '空中ガード不能',
-  t: '打撃投げ',
+  ubh: '上ガー不',
+  ubm: '中ガー不',
+  ubl: '下ガー不',
+  uba: '空ガー不',
+  t: '打投',
+  th: '上投',
+  tl: '下投',
 };
 
-export const ThorwActionStateText: { [key in Types.ThrowActionStateEnum]: string } = {
-  unspecified: '',
-  down: 'ダウン',
-  juggle: '空中コンボ',
+export const AttackMoveStateEnumText: { [key in Types.AttackMoveStateEnum]: string } = {
+  crouching: '強制しゃがみ',
+  twist: 'きりもみ',
+  blockable: 'ガード可能な硬直',
 };
 
 export const ThrowMoveResultText: { [key in Types.ThrowMoveResultEnum]: string } = {

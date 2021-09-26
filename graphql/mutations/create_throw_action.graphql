@@ -1,7 +1,0 @@
-mutation CreateThrowAction($moveId: ID!, $attributes: ThrowActionAttributes!) {
-  createThrowAction(input: { moveId: $moveId, attributes: $attributes }) {
-    action {
-      id
-    }
-  }
-}

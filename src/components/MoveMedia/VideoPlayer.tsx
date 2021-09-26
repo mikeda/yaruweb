@@ -6,9 +6,10 @@ import styles from './MoveMedia.module.scss';
 type Props = {
   src: string;
   thumnailUrl: string;
+  width?: string | number;
 };
 
-export const VideoPlayer: React.FC<Props> = ({ src, thumnailUrl }) => {
+export const VideoPlayer: React.FC<Props> = ({ src, thumnailUrl, width = '100%' }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -31,7 +32,7 @@ export const VideoPlayer: React.FC<Props> = ({ src, thumnailUrl }) => {
         hls.destroy();
       }
     };
-  }, [videoRef]);
+  }, [videoRef, src]);
 
-  return <video width="100%" controls ref={videoRef} className={styles.video} poster={thumnailUrl} preload="none" />;
+  return <video width={width} controls ref={videoRef} className={styles.video} poster={thumnailUrl} preload="none" />;
 };
