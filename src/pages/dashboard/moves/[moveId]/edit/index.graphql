@@ -18,3 +18,11 @@ query PageDashboardMoveEdit($moveId: ID!) {
     }
   }
 }
+
+mutation UpdateAttackMove($moveId: ID!, $attributes: AttackMoveAttributes!) {
+  updateAttackMove(input: { moveId: $moveId, attributes: $attributes }) {
+    move {
+      id
+    }
+  }
+}

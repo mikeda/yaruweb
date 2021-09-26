@@ -1,7 +1,0 @@
-mutation UpdateAttackAction($actionId: ID!, $attributes: AttackActionAttributes!) {
-  updateAttackAction(input: { actionId: $actionId, attributes: $attributes }) {
-    action {
-      id
-    }
-  }
-}

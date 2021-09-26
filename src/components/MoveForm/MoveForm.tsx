@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { toast } from 'react-toastify';
@@ -6,36 +6,128 @@ import { useSetRecoilState } from 'recoil';
 
 import {
   AttackMoveAttributes,
-  MoveAttributes,
+  AttackMoveResultEnum,
+  AttackMoveStateEnum,
+  AttackTypeEnum,
   MoveFragment,
   MoveVideoFragment,
   useCreateMoveVideoMutation,
 } from '@/lib/graphql/types';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { loadingState } from '@/states/loading';
 import { VideoPlayer } from '../MoveMedia/VideoPlayer';
 import { nullableNumber } from '@/lib/validators/nullable_number';
-import { CheckBox, TextArea, Input, FormGroup, FormInline } from '@/components';
-import { Button } from '@material-ui/core';
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Checkbox,
+  Chip,
+  createStyles,
+  Divider,
+  FormControl,
+  FormControlLabel,
+  Grid,
+  InputLabel,
+  makeStyles,
+  MenuItem,
+  Select,
+  TextField,
+  Theme,
+  Typography,
+} from '@material-ui/core';
+import { AttackMoveResultText, AttackMoveStateEnumText, AttackTypeEnumText } from '@/lib/graphql/enum_texts';
 
 const schema = yup.object().shape({
-  name: yup.string().required(),
-  'attackMove.startUpFrame': nullableNumber,
-  attackMove: yup.object({
+  move: yup.object({
+    name: yup.string().required(),
+  }),
+  attack: yup.object({
     startUpFrame: nullableNumber,
   }),
 });
 
 interface Props {
   move?: MoveFragment;
-  onSubmit: (attributes: MoveAttributes) => void;
+  onSubmit: (attributes: AttackMoveAttributes) => void;
 }
 
+const frameCols: {
+  label: string;
+  result: 'attack.blockResult' | 'attack.hitResult' | 'attack.counterResult';
+  frame: 'attack.blockFrame' | 'attack.hitFrame' | 'attack.counterFrame';
+  state: 'attack.blockState' | 'attack.hitState' | 'attack.counterState';
+}[] = [
+  {
+    label: 'ガード',
+    result: 'attack.blockResult',
+    frame: 'attack.blockFrame',
+    state: 'attack.blockState',
+  },
+  {
+    label: 'ヒット',
+    result: 'attack.hitResult',
+    frame: 'attack.hitFrame',
+    state: 'attack.hitState',
+  },
+  {
+    label: 'カウンター',
+    result: 'attack.counterResult',
+    frame: 'attack.counterFrame',
+    state: 'attack.counterState',
+  },
+];
+
+const checkboxes = [
+  {
+    label: 'パワークラッシュ',
+    name: 'attack.powerCrush',
+  },
+  {
+    label: 'ホーミング',
+    name: 'attack.homing',
+  },
+  {
+    label: 'スクリュー',
+    name: 'attack.screw',
+  },
+  {
+    label: 'ウォールバウンド',
+    name: 'attack.wallBound',
+  },
+  {
+    label: 'しゃがみステータス',
+    name: 'attack.crouchingStatus',
+  },
+  {
+    label: 'ジャンプステータス',
+    name: 'attack.jumpStatus',
+  },
+] as const;
+
+const useStyles = makeStyles((theme: Theme) =>
+  createStyles({
+    chips: {
+      display: 'flex',
+      alignItems: 'center',
+      '& > *': {
+        margin: theme.spacing(0.5),
+      },
+    },
+  }),
+);
+
 export const MoveForm: React.FC<Props> = ({ move, onSubmit }) => {
+  const [moveVideo, setMoveVideo] = useState(move?.moveVideo);
+  const classes = useStyles();
+
+  move?.moveVideo;
   const {
-    register,
     handleSubmit,
     setValue,
+    watch,
+    control,
     formState: { errors },
   } = useForm<AttackMoveAttributes>({
     resolver: yupResolver(schema),
@@ -51,6 +143,17 @@ export const MoveForm: React.FC<Props> = ({ move, onSubmit }) => {
         move.moveable.__typename === 'AttackMove'
           ? {
               startUpFrame: move.moveable.startUpFrame,
+              heights: move.moveable.heights,
+              damages: move.moveable.damages,
+              blockResult: move.moveable.blockResult,
+              blockFrame: move.moveable.blockFrame,
+              blockState: move.moveable.blockState,
+              hitResult: move.moveable.hitResult,
+              hitFrame: move.moveable.hitFrame,
+              hitState: move.moveable.hitState,
+              counterResult: move.moveable.counterResult,
+              counterFrame: move.moveable.counterFrame,
+              counterState: move.moveable.counterState,
               powerCrush: move.moveable.powerCrush,
               crouchingStatus: move.moveable.crouchingStatus,
               jumpStatus: move.moveable.jumpStatus,
@@ -58,7 +161,13 @@ export const MoveForm: React.FC<Props> = ({ move, onSubmit }) => {
               screw: move.moveable.screw,
               wallBound: move.moveable.wallBound,
             }
-          : undefined,
+          : {
+              heights: [],
+              damages: [],
+              blockResult: AttackMoveResultEnum.Normal,
+              hitResult: AttackMoveResultEnum.Normal,
+              counterResult: AttackMoveResultEnum.Normal,
+            },
       //throwMove:
       //  move.moveable.__typename === 'ThrowMove'
       //    ? {
@@ -77,70 +186,264 @@ export const MoveForm: React.FC<Props> = ({ move, onSubmit }) => {
       //    : undefined,
     },
   });
+  const damageRef = useRef<HTMLInputElement>();
+  const heightRef = useRef<HTMLSelectElement>();
+
+  const heights = watch('attack.heights');
+  const damages = watch('attack.damages');
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <FormGroup label="名前" required>
-        <Input {...register('move.name')} />
-        {errors.move?.name && <span>This field is required</span>}
-      </FormGroup>
+    <Card>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <CardContent>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
+              <Controller
+                name="move.name"
+                control={control}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    label="名前"
+                    error={Boolean(errors.move?.name)}
+                    helperText={errors.move?.name?.message}
+                    fullWidth
+                  />
+                )}
+              />
+            </Grid>
 
-      <FormGroup label="カナ">
-        <Input {...register('move.kana')} />
-      </FormGroup>
+            <Grid item xs={12} sm={6}>
+              <Controller
+                name="move.kana"
+                control={control}
+                render={({ field }) => <TextField {...field} label="カナ" fullWidth />}
+              />
+            </Grid>
+          </Grid>
 
-      <>
-        <FormGroup label="発生フレーム">
-          <Input {...register('attack.startUpFrame')} />
-        </FormGroup>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={4}>
+              <Controller
+                name="attack.startUpFrame"
+                control={control}
+                render={({ field }) => <TextField {...field} type="number" label="発生" fullWidth />}
+              />
+            </Grid>
+          </Grid>
 
-        <FormGroup label="ステータス">
-          <FormInline>
-            <CheckBox id="powerCrush" label="パワークラッシュ">
-              <input id="powerCrush" type="checkbox" {...register('attack.powerCrush')} />
-            </CheckBox>
-            <CheckBox id="homing" label="ホーミング">
-              <input id="homing" type="checkbox" {...register('attack.homing')} />
-            </CheckBox>
-            <CheckBox id="screw" label="スクリュー">
-              <input id="screw" type="checkbox" {...register('attack.screw')} />
-            </CheckBox>
-            <CheckBox id="wallBound" label="ウォールバウンド">
-              <input id="wallBound" type="checkbox" {...register('attack.wallBound')} />
-            </CheckBox>
-            <CheckBox id="crouchingStatus" label="しゃがみステータス">
-              <input id="crouchingStatus" type="checkbox" {...register('attack.crouchingStatus')} />
-            </CheckBox>
-            <CheckBox id="jumpStatus" label="ジャンプステータス">
-              <input id="jumpStatus" type="checkbox" {...register('attack.jumpStatus')} />
-            </CheckBox>
-          </FormInline>
-        </FormGroup>
-      </>
+          <Box mt={4}>
+            <Typography variant="h4" gutterBottom>
+              判定
+            </Typography>
 
-      <FormGroup label="動画">
-        <input type="hidden" {...register('move.moveVideoId')} />
-        <MoveVideoInput
-          onCreate={moveVideo => {
-            setValue('move.moveVideoId', moveVideo.id);
-          }}
-        />
+            <div className={classes.chips}>
+              {heights.map((h, i) => (
+                <Chip variant="outlined" key={i} label={AttackTypeEnumText[h]} />
+              ))}
+            </div>
 
-        {move && move.moveVideo && (
-          <VideoPlayer src={move.moveVideo.m3u8Url} thumnailUrl={move.moveVideo.thumbnailUrl} />
-        )}
-      </FormGroup>
+            <div className={classes.chips}>
+              <FormControl variant="outlined" size="small">
+                <Select defaultValue="h" inputRef={heightRef}>
+                  {Object.entries(AttackTypeEnumText).map(([key, value]) => (
+                    <MenuItem key={key} value={key}>
+                      {value}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
 
-      <FormGroup label="備考">
-        <TextArea {...register('move.note')} />
-      </FormGroup>
+              <Button
+                onClick={() => {
+                  if (!heightRef.current) return;
 
-      <FormGroup>
-        <Button type="submit" variant="contained">
-          登録する
-        </Button>
-      </FormGroup>
-    </form>
+                  const height = heightRef.current.value as AttackTypeEnum;
+                  if (height) {
+                    setValue('attack.heights', [...heights, height]);
+                  }
+                }}
+              >
+                追加
+              </Button>
+
+              <Button
+                onClick={() => {
+                  setValue('attack.heights', heights.slice(0, -1));
+                }}
+              >
+                削除
+              </Button>
+            </div>
+          </Box>
+
+          <Box mt={4}>
+            <Typography variant="h4" gutterBottom>
+              ダメージ
+            </Typography>
+
+            <div className={classes.chips}>
+              {damages.map((d, i) => (
+                <Chip variant="outlined" key={i} label={d} />
+              ))}
+              <Chip label={`合計 ${damages.reduce((a, b) => a + b, 0)}`} />
+            </div>
+
+            <div className={classes.chips}>
+              <TextField inputRef={damageRef} type="number" size="small" defaultValue={10} />
+              <Button
+                onClick={() => {
+                  if (!damageRef.current?.value) return;
+
+                  const damage = Number(damageRef.current.value);
+                  if (damage) {
+                    setValue('attack.damages', [...damages, damage]);
+                  }
+                }}
+              >
+                追加
+              </Button>
+              <Button
+                onClick={() => {
+                  setValue('attack.damages', damages.slice(0, -1));
+                }}
+              >
+                削除
+              </Button>
+            </div>
+          </Box>
+
+          {frameCols.map(({ label, result: resultKey, frame: frameKey, state: stateKey }) => (
+            <Box key={label} mt={4}>
+              <Typography variant="h4" gutterBottom>
+                {label}
+              </Typography>
+
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={4}>
+                  <FormControl fullWidth variant="outlined">
+                    <Controller
+                      control={control}
+                      name={resultKey}
+                      render={({ field }) => (
+                        <Select
+                          {...field}
+                          onChange={e => {
+                            const result = e.target.value as AttackMoveResultEnum;
+                            setValue(resultKey, result);
+                          }}
+                        >
+                          {Object.entries(AttackMoveResultText).map(([key, value]) => (
+                            <MenuItem key={key} value={key}>
+                              {value}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      )}
+                    />
+                  </FormControl>
+                </Grid>
+
+                <Grid item xs={12} sm={4}>
+                  <Controller
+                    name={frameKey}
+                    control={control}
+                    render={({ field }) => <TextField {...field} type="number" label="フレーム" fullWidth />}
+                  />
+                </Grid>
+
+                <Grid item xs={12} sm={4}>
+                  <FormControl fullWidth variant="outlined">
+                    <InputLabel>相手の状態</InputLabel>
+                    <Controller
+                      control={control}
+                      name={stateKey}
+                      render={({ field }) => (
+                        <Select
+                          {...field}
+                          onChange={e => {
+                            const result = e.target.value as AttackMoveStateEnum;
+                            setValue(stateKey, result);
+                          }}
+                        >
+                          {Object.entries(AttackMoveStateEnumText).map(([key, value]) => (
+                            <MenuItem key={key} value={key}>
+                              {value}
+                            </MenuItem>
+                          ))}
+                        </Select>
+                      )}
+                    />
+                  </FormControl>
+                </Grid>
+              </Grid>
+            </Box>
+          ))}
+
+          <Box mt={4}>
+            <Typography variant="h4" gutterBottom>
+              ステータス
+            </Typography>
+            <Grid container spacing={2}>
+              {checkboxes.map(({ label, name }) => (
+                <Grid key={name} item xs={12} sm={4}>
+                  <FormControlLabel
+                    control={
+                      <Controller
+                        name={name}
+                        render={({ field }) => <Checkbox {...field} checked={field.value} />}
+                        control={control}
+                      />
+                    }
+                    label={label}
+                  />
+                </Grid>
+              ))}
+            </Grid>
+          </Box>
+
+          <Box mt={4}>
+            <Typography variant="h4" gutterBottom>
+              動画
+            </Typography>
+            <Box>
+              <MoveVideoInput
+                onCreate={moveVideo => {
+                  setValue('move.moveVideoId', moveVideo.id);
+                  setMoveVideo(null);
+                }}
+              />
+            </Box>
+
+            {moveVideo && (
+              <Box mt={1}>
+                <VideoPlayer src={moveVideo.m3u8Url} thumnailUrl={moveVideo.thumbnailUrl} width={320} />
+              </Box>
+            )}
+          </Box>
+
+          <Box mt={4}>
+            <Grid container spacing={2}>
+              <Grid item xs={12}>
+                <Controller
+                  name="move.note"
+                  control={control}
+                  render={({ field }) => <TextField {...field} label="備考" fullWidth multiline />}
+                />
+              </Grid>
+            </Grid>
+          </Box>
+        </CardContent>
+
+        <Divider />
+
+        <Box m={2} display="flex" justifyContent="center">
+          <Button type="submit" variant="contained">
+            登録する
+          </Button>
+        </Box>
+      </form>
+    </Card>
   );
 };
 
@@ -174,6 +477,7 @@ export const MoveVideoInput: React.FC<MoveVideoInputProps> = ({ onCreate }) => {
           if (!data.createMoveVideo) return;
 
           onCreate(data.createMoveVideo.moveVideo);
+          toast.success('動画をアップロードしました。');
         })
         .catch(() => {
           toast.error('アップロードに失敗しました。');
@@ -187,19 +491,23 @@ export const MoveVideoInput: React.FC<MoveVideoInputProps> = ({ onCreate }) => {
   setLoading(loading);
 
   return (
-    <Input
-      type="file"
-      id="video"
-      accept="video/mp4"
-      onChange={event => {
-        const target = event.target;
-        if (!target.files) return;
-        const file = target.files[0];
-        if (!file) return;
+    <Button variant="contained" component="label">
+      動画をアップロード
+      <input
+        type="file"
+        id="video"
+        accept="video/mp4"
+        hidden
+        onChange={event => {
+          const target = event.target;
+          if (!target.files) return;
+          const file = target.files[0];
+          if (!file) return;
 
-        setFile(file);
-        ceateMoveVideo();
-      }}
-    />
+          setFile(file);
+          ceateMoveVideo();
+        }}
+      />
+    </Button>
   );
 };

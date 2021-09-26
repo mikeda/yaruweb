@@ -1,10 +1,10 @@
 import React from 'react';
 
 import {
-  MoveAttributes,
-  useCreateMoveMutation,
   usePageDashboardMoveNewQuery,
   PageDashboardMoveNewQuery,
+  AttackMoveAttributes,
+  useCreateAttackMoveMutation,
 } from '@/lib/graphql/types';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
 import { useRouter } from 'next/router';
@@ -42,7 +42,7 @@ const Page: React.FC = () => {
 const PageContent: React.FC<PageDashboardMoveNewQuery> = ({ moveCategory }) => {
   const router = useRouter();
   const setLoading = useSetRecoilState(loadingState);
-  const [createMove, { loading }] = useCreateMoveMutation({
+  const [createMove, { loading }] = useCreateAttackMoveMutation({
     onCompleted: () => {
       toast.success('技データを登録しました。');
       router.back();
@@ -52,7 +52,7 @@ const PageContent: React.FC<PageDashboardMoveNewQuery> = ({ moveCategory }) => {
     },
   });
 
-  const onSubmit = (attributes: MoveAttributes) => {
+  const onSubmit = (attributes: AttackMoveAttributes) => {
     createMove({ variables: { moveCategoryId: moveCategory.id, attributes } });
   };
 

@@ -30,8 +30,4 @@ fragment MoveMedia on Move {
       icon
     }
   }
-
-  actions {
-    ...action
-  }
 }

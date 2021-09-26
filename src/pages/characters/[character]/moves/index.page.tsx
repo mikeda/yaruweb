@@ -32,7 +32,12 @@ import { Profile } from '../components/Profile';
 import { Tabs } from '../components/Tabs';
 import { ParsedUrlQuery } from 'querystring';
 import { Command } from '@/components';
-import { AttackMoveResultText, ThrowMoveResultText } from '@/lib/graphql/enum_texts';
+import {
+  AttackMoveResultText,
+  AttackTypeEnumText,
+  ThrowMoveResultText,
+  ThrowTypeEnumText,
+} from '@/lib/graphql/enum_texts';
 
 const useStyles = makeStyles({
   table: {
@@ -173,10 +178,16 @@ const AttackRow: React.FC<AttackMove> = ({ move, attack }) => {
           <Command key={command.id} command={command} />
         ))}
 
+        {attack.heights.length > 0 && attack.damages.length > 0 && (
+          <Typography variant="body2">
+            {attack.heights.map(h => AttackTypeEnumText[h]).join(',')} / {attack.damages.join(',')}
+          </Typography>
+        )}
+
         <AttackLabels attack={attack} />
       </TableCell>
 
-      <TableCell align="right">{attack.startUpFrame && frameText(attack.startUpFrame)}</TableCell>
+      <TableCell align="right">{attack.startUpFrame && `${attack.startUpFrame}F`}</TableCell>
 
       <TableCell align="right">
         <OpponentDetail frame={attack.blockFrame} state={AttackMoveResultText[attack.blockResult]} />
@@ -203,6 +214,9 @@ const ThrowRow: React.FC<ThrowMove> = ({ move, throw: thrw }) => {
         {move.commands.map(command => (
           <Command key={command.id} command={command} />
         ))}
+        <Typography variant="body2">
+          {ThrowTypeEnumText[thrw.throwType]} / {thrw.damage}
+        </Typography>
       </TableCell>
       <TableCell align="right">{thrw.startUpFrame && frameText(thrw.startUpFrame)}</TableCell>
       <TableCell align="right">{ThrowMoveResultText[thrw.throwResult]}</TableCell>

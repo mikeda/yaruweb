@@ -1,3 +1,9 @@
+fragment DashboardMovesPageMove on Move {
+  id
+  name
+  commandsCount
+}
+
 query PageDashboardMoves($moveCategoryId: ID!) {
   moveCategory(moveCategoryId: $moveCategoryId) {
     id
@@ -9,10 +15,7 @@ query PageDashboardMoves($moveCategoryId: ID!) {
     }
 
     moves {
-      id
-      name
-      commandsCount
-      actionsCount
+      ...DashboardMovesPageMove
     }
   }
 }
