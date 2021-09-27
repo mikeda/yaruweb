@@ -1,9 +1,6 @@
 fragment command on Command {
   id
-
-  state {
-    ...state
-  }
+  condition
 
   operations {
     ...operation

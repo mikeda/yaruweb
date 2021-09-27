@@ -2,10 +2,6 @@ query PageDashboardCommandEdit($commandId: ID!) {
   command(commandId: $commandId) {
     ...command
 
-    state {
-      id
-    }
-
     operations {
       id
     }
@@ -21,11 +17,6 @@ query PageDashboardCommandEdit($commandId: ID!) {
         character {
           slug
           name
-
-          states {
-            id
-            name
-          }
         }
       }
     }

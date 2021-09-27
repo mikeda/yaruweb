@@ -19,11 +19,7 @@ fragment CharacterMovesPageMove on Move {
 
   commands {
     id
-
-    state {
-      id
-      name
-    }
+    condition
 
     operations {
       id

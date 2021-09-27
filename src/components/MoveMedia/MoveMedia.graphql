@@ -17,11 +17,7 @@ fragment MoveMedia on Move {
 
   commands {
     id
-
-    state {
-      id
-      name
-    }
+    condition
 
     operations {
       id

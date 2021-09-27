@@ -6,11 +6,6 @@ query PageDashboardComboNew($comboCategoryId: ID!) {
     character {
       slug
       name
-
-      states {
-        id
-        name
-      }
     }
   }
 }

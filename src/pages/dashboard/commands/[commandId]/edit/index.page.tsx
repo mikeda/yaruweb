@@ -55,7 +55,7 @@ const CommandContent: React.FC<PageDashboardCommandEditQuery> = ({ command }) =>
   };
 
   setLoading(loading);
-  return <CommandForm command={command} states={command.move.moveCategory.character.states} onSubmit={onSubmit} />;
+  return <CommandForm command={command} onSubmit={onSubmit} />;
 };
 
 export default Page;
