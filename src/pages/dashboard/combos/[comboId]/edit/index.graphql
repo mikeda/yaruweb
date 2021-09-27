@@ -2,10 +2,6 @@ query PageDashboardComboEdit($comboId: ID!) {
   combo(comboId: $comboId) {
     ...combo
 
-    state {
-      id
-    }
-
     operations {
       id
     }
@@ -17,11 +13,6 @@ query PageDashboardComboEdit($comboId: ID!) {
       character {
         slug
         name
-
-        states {
-          id
-          name
-        }
       }
     }
   }

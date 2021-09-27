@@ -1,5 +1,0 @@
-query States($characterSlug: String!) {
-  states(characterSlug: $characterSlug) {
-    ...state
-  }
-}

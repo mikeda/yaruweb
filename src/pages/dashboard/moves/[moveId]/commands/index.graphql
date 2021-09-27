@@ -14,11 +14,6 @@ query PageDashboardCommands($moveId: ID!) {
       character {
         slug
         name
-
-        states {
-          id
-          name
-        }
       }
     }
   }

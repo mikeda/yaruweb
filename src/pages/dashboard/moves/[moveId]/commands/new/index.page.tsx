@@ -55,7 +55,7 @@ const PageContent: React.FC<PageDashboardCommandNewQuery> = ({ move }) => {
 
   setLoading(loading);
 
-  return <CommandForm states={move.moveCategory.character.states} onSubmit={onSubmit} />;
+  return <CommandForm onSubmit={onSubmit} />;
 };
 
 export default Page;
