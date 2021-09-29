@@ -17,16 +17,9 @@ fragment CharacterMovesPageMove on Move {
     ...moveable
   }
 
-  commands {
-    id
+  commandList {
     condition
-
-    operations {
-      id
-      name
-      key
-      icon
-    }
+    operations
   }
 }
 

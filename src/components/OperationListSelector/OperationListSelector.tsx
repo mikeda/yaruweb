@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { OperationFragment, useOperationsQuery } from '@/lib/graphql/types';
+import { OperationEnum } from '@/lib/graphql/types';
 import { Operations } from '../Command/Operations';
 import { Operation } from '../Command/Operation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,14 +9,12 @@ import { faBackspace } from '@fortawesome/free-solid-svg-icons';
 import styles from './OperationListSelector.module.scss';
 
 interface Props {
-  operations: OperationFragment[];
-  onClickOperation: (operation: OperationFragment) => void;
+  operations: OperationEnum[];
+  onClickOperation: (operation: OperationEnum) => void;
   onDeleteLast: () => void;
 }
 
 export const OperationListSelector: React.FC<Props> = ({ operations, onClickOperation, onDeleteLast }) => {
-  const { data } = useOperationsQuery();
-
   return (
     <>
       <Operations operations={operations} />
@@ -30,18 +28,17 @@ export const OperationListSelector: React.FC<Props> = ({ operations, onClickOper
         }}
       />
 
-      {data &&
-        data.operations.map(operation => (
-          <button
-            key={operation.id}
-            onClick={e => {
-              e.preventDefault();
-              onClickOperation(operation);
-            }}
-          >
-            <Operation operation={operation} />
-          </button>
-        ))}
+      {Object.values(OperationEnum).forEach(operation => (
+        <button
+          key={operation}
+          onClick={e => {
+            e.preventDefault();
+            onClickOperation(operation);
+          }}
+        >
+          <Operation operation={operation} />
+        </button>
+      ))}
     </>
   );
 };

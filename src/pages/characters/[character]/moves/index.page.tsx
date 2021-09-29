@@ -174,8 +174,8 @@ const AttackRow: React.FC<AttackMove> = ({ move, attack }) => {
           {move.name}
         </Typography>
 
-        {move.commands.map(command => (
-          <Command key={command.id} command={command} />
+        {move.commandList.map((command, i) => (
+          <Command key={i} command={command} />
         ))}
 
         {attack.heights.length > 0 && attack.damages.length > 0 && (
@@ -211,8 +211,8 @@ const ThrowRow: React.FC<ThrowMove> = ({ move, throw: thrw }) => {
         <Typography variant="body1" gutterBottom>
           {move.name}
         </Typography>
-        {move.commands.map(command => (
-          <Command key={command.id} command={command} />
+        {move.commandList.map((command, i) => (
+          <Command key={i} command={command} />
         ))}
         <Typography variant="body2">
           {ThrowTypeEnumText[thrw.throwType]} / {thrw.damage}
@@ -232,8 +232,8 @@ const ReversalRow: React.FC<ReversalMove> = ({ move }) => {
         <Typography variant="body1" gutterBottom>
           {move.name}
         </Typography>
-        {move.commands.map(command => (
-          <Command key={command.id} command={command} />
+        {move.commandList.map((command, i) => (
+          <Command key={i} command={command} />
         ))}
       </TableCell>
     </TableRow>

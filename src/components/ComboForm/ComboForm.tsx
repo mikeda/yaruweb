@@ -6,7 +6,7 @@ import {
   ComboAttributes,
   ComboFragment,
   ComboVideoFragment,
-  OperationFragment,
+  OperationEnum,
   useCreateComboVideoMutation,
 } from '@/lib/graphql/types';
 import { useForm } from 'react-hook-form';
@@ -31,7 +31,7 @@ interface Props {
 }
 
 export const ComboForm: React.FC<Props> = ({ combo, onSubmit }) => {
-  const [operations, setOperations] = useState<OperationFragment[]>(combo?.operations || []);
+  const [operations, setOperations] = useState<OperationEnum[]>(combo?.operations || []);
 
   const {
     register,
@@ -45,7 +45,7 @@ export const ComboForm: React.FC<Props> = ({ combo, onSubmit }) => {
       name: combo.name,
       damage: combo.damage,
       note: combo.note,
-      operationIds: combo.operations.map(o => o.id),
+      operations: combo.operations,
       comboVideoId: combo.comboVideo?.id,
     },
   });
@@ -67,18 +67,12 @@ export const ComboForm: React.FC<Props> = ({ combo, onSubmit }) => {
           onClickOperation={operation => {
             const newOperations = [...operations, operation];
             setOperations(newOperations);
-            setValue(
-              'operationIds',
-              newOperations.map(o => o.id),
-            );
+            setValue('operations', newOperations);
           }}
           onDeleteLast={() => {
             const newOperations = operations.slice(0, operations.length - 1);
             setOperations(newOperations);
-            setValue(
-              'operationIds',
-              newOperations.map(o => o.id),
-            );
+            setValue('operations', newOperations);
           }}
         />
       </FormGroup>

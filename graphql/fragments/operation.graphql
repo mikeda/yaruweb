@@ -1,6 +1,0 @@
-fragment operation on Operation {
-  id
-  name
-  key
-  icon
-}

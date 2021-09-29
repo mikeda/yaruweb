@@ -1,7 +1,0 @@
-mutation UpdateCommand($commandId: ID!, $attributes: CommandAttributes!) {
-  updateCommand(input: { commandId: $commandId, attributes: $attributes }) {
-    command {
-      id
-    }
-  }
-}

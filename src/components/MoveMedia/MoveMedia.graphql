@@ -15,15 +15,8 @@ fragment MoveMedia on Move {
     thumbnailUrl
   }
 
-  commands {
-    id
+  commandList {
     condition
-
-    operations {
-      id
-      name
-      key
-      icon
-    }
+    operations
   }
 }

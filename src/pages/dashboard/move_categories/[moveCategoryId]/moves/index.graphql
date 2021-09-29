@@ -1,7 +1,6 @@
 fragment DashboardMovesPageMove on Move {
   id
   name
-  commandsCount
 }
 
 query PageDashboardMoves($moveCategoryId: ID!) {

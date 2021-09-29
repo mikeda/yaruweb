@@ -47,7 +47,7 @@ const Page: React.FC = () => {
   );
 };
 
-type MoveFragment = Pick<Move, 'id' | 'name' | 'commandsCount'>;
+type MoveFragment = Pick<Move, 'id' | 'name'>;
 
 const PageContent: React.FC<{ moves: MoveFragment[] }> = ({ moves }) => {
   const setLoading = useSetRecoilState(loadingState);
@@ -64,10 +64,7 @@ const PageContent: React.FC<{ moves: MoveFragment[] }> = ({ moves }) => {
       items={moves.map(move => ({
         id: move.id,
         title: move.name,
-        links: [
-          { text: '編集する', url: dashboardPath({ to: 'moveEdit', moveId: move.id }) },
-          { text: `コマンド(${move.commandsCount})`, url: dashboardPath({ to: 'commands', moveId: move.id }) },
-        ],
+        links: [{ text: '編集する', url: dashboardPath({ to: 'moveEdit', moveId: move.id }) }],
       }))}
       onMove={(moveId, newPosition) => updateMovePosition({ variables: { moveId, newPosition } })}
     />
