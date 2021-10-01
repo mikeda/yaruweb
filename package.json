@@ -67,7 +67,7 @@
     "@types/react-select": "^4.0.17",
     "@types/youtube-player": "^5.5.4",
     "@types/yup": "^0.29.13",
-    "@typescript-eslint/eslint-plugin": "^4.30.0",
+    "@typescript-eslint/eslint-plugin": "^4.32.0",
     "@typescript-eslint/parser": "^4.29.3",
     "eslint": "^7.32.0",
     "eslint-config-next": "^11.1.2",
