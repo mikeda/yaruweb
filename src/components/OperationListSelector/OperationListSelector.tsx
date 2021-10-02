@@ -1,26 +1,16 @@
 import React, { useEffect, useState } from 'react';
 
 import { CommandAttributes, OperationEnum } from '@/lib/graphql/types';
-import { Operations } from '../Command/Operations';
 import { Operation } from '../Command/Operation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBackspace } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './OperationListSelector.module.scss';
 import { OperationText } from '@/lib/graphql/enum_texts';
-import {
-  Button,
-  createStyles,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  makeStyles,
-  TextField,
-  Theme,
-} from '@material-ui/core';
+import { Button, createStyles, Dialog, DialogActions, DialogContent, makeStyles, TextField } from '@material-ui/core';
 import { Command } from '..';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     buttons: {
       display: 'flex',

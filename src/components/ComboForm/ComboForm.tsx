@@ -2,18 +2,11 @@ import React, { useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import {
-  ComboAttributes,
-  ComboFragment,
-  ComboVideoFragment,
-  OperationEnum,
-  useCreateComboVideoMutation,
-} from '@/lib/graphql/types';
+import { ComboAttributes, ComboFragment, ComboVideoFragment, useCreateComboVideoMutation } from '@/lib/graphql/types';
 import { useForm } from 'react-hook-form';
 import { FormGroup } from '@/components/form/FormGroup';
 import { Input } from '@/components/form/Input';
 import { TextArea } from '../form/TextArea';
-import { OperationListSelector } from '../OperationListSelector';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from '@/states/loading';
 import { toast } from 'react-toastify';
@@ -31,8 +24,6 @@ interface Props {
 }
 
 export const ComboForm: React.FC<Props> = ({ combo, onSubmit }) => {
-  const [operations, setOperations] = useState<OperationEnum[]>(combo?.operations || []);
-
   const {
     register,
     handleSubmit,
@@ -59,22 +50,6 @@ export const ComboForm: React.FC<Props> = ({ combo, onSubmit }) => {
 
       <FormGroup label="ダメージ">
         <Input type="number" {...register('damage', { valueAsNumber: true })} />
-      </FormGroup>
-
-      <FormGroup label="コマンド">
-        <OperationListSelector
-          operations={operations}
-          onClickOperation={operation => {
-            const newOperations = [...operations, operation];
-            setOperations(newOperations);
-            setValue('operations', newOperations);
-          }}
-          onDeleteLast={() => {
-            const newOperations = operations.slice(0, operations.length - 1);
-            setOperations(newOperations);
-            setValue('operations', newOperations);
-          }}
-        />
       </FormGroup>
 
       <FormGroup label="動画">
