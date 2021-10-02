@@ -210,6 +210,7 @@ export const MoveForm: React.FC<Props> = ({ move, onSubmit }) => {
                     label="名前"
                     error={Boolean(errors.move?.name)}
                     helperText={errors.move?.name?.message}
+                    size="small"
                     fullWidth
                   />
                 )}
@@ -220,17 +221,7 @@ export const MoveForm: React.FC<Props> = ({ move, onSubmit }) => {
               <Controller
                 name="move.kana"
                 control={control}
-                render={({ field }) => <TextField {...field} label="カナ" fullWidth />}
-              />
-            </Grid>
-          </Grid>
-
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={4}>
-              <Controller
-                name="attack.startUpFrame"
-                control={control}
-                render={({ field }) => <TextField {...field} type="number" label="発生" fullWidth />}
+                render={({ field }) => <TextField {...field} label="カナ" size="small" fullWidth />}
               />
             </Grid>
           </Grid>
@@ -350,6 +341,22 @@ export const MoveForm: React.FC<Props> = ({ move, onSubmit }) => {
             </div>
           </Box>
 
+          <Box mt={4}>
+            <Typography variant="h4" gutterBottom>
+              発生
+            </Typography>
+
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={4}>
+                <Controller
+                  name="attack.startUpFrame"
+                  control={control}
+                  render={({ field }) => <TextField {...field} type="number" label="フレーム" size="small" fullWidth />}
+                />
+              </Grid>
+            </Grid>
+          </Box>
+
           {frameCols.map(({ label, result: resultKey, frame: frameKey, state: stateKey }) => (
             <Box key={label} mt={4}>
               <Typography variant="h4" gutterBottom>
@@ -358,7 +365,7 @@ export const MoveForm: React.FC<Props> = ({ move, onSubmit }) => {
 
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={4}>
-                  <FormControl fullWidth variant="outlined">
+                  <FormControl fullWidth variant="outlined" size="small">
                     <Controller
                       control={control}
                       name={resultKey}
@@ -385,12 +392,14 @@ export const MoveForm: React.FC<Props> = ({ move, onSubmit }) => {
                   <Controller
                     name={frameKey}
                     control={control}
-                    render={({ field }) => <TextField {...field} type="number" label="フレーム" fullWidth />}
+                    render={({ field }) => (
+                      <TextField {...field} type="number" label="フレーム" size="small" fullWidth />
+                    )}
                   />
                 </Grid>
 
                 <Grid item xs={12} sm={4}>
-                  <FormControl fullWidth variant="outlined">
+                  <FormControl fullWidth variant="outlined" size="small">
                     <InputLabel>相手の状態</InputLabel>
                     <Controller
                       control={control}

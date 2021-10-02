@@ -22,13 +22,10 @@ const useStyles = makeStyles(() =>
 );
 
 interface Props {
-  //operations: OperationEnum[];
-  //onClickOperation: (operation: OperationEnum) => void;
   command: CommandAttributes;
   open: boolean;
   onClose: () => void;
   onChange: (command: CommandAttributes) => void;
-  //onDeleteLast: () => void;
 }
 
 export const OperationListSelector: React.FC<Props> = ({ command: initialCommand, open, onClose, onChange }) => {
