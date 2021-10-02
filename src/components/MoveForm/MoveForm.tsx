@@ -38,6 +38,7 @@ import {
   Typography,
 } from '@material-ui/core';
 import { AttackMoveResultText, AttackMoveStateEnumText, AttackTypeEnumText } from '@/lib/graphql/enum_texts';
+import { CommandForm } from './CommandForm';
 
 const schema = yup.object().shape({
   move: yup.object({
@@ -137,6 +138,7 @@ export const MoveForm: React.FC<Props> = ({ move, onSubmit }) => {
         moveVideoId: move.moveVideo?.id,
         name: move.name,
         kana: move.kana,
+        commandList: move.commandList.map(c => ({ condition: c.condition, operations: c.operations })),
         note: move.note,
       },
       attack:
@@ -191,6 +193,7 @@ export const MoveForm: React.FC<Props> = ({ move, onSubmit }) => {
 
   const heights = watch('attack.heights');
   const damages = watch('attack.damages');
+  const commandList = watch('move.commandList');
 
   return (
     <Card>
@@ -231,6 +234,40 @@ export const MoveForm: React.FC<Props> = ({ move, onSubmit }) => {
               />
             </Grid>
           </Grid>
+
+          <Box mt={4}>
+            <Typography variant="h4" gutterBottom>
+              コマンド
+            </Typography>
+
+            {commandList.map((command, i) => (
+              <CommandForm
+                key={i}
+                command={command}
+                onChange={newCommand => {
+                  setValue(
+                    `move.commandList`,
+                    commandList.map((command, j) => (i === j ? { ...newCommand } : { ...command })),
+                  );
+                }}
+                onDelete={() => {
+                  setValue(
+                    `move.commandList`,
+                    commandList.filter((command, j) => i !== j),
+                  );
+                }}
+              />
+            ))}
+
+            <Button
+              variant="outlined"
+              onClick={() => {
+                setValue(`move.commandList`, [...commandList, { operations: [] }]);
+              }}
+            >
+              Add
+            </Button>
+          </Box>
 
           <Box mt={4}>
             <Typography variant="h4" gutterBottom>

@@ -359,6 +359,11 @@ export type Command = {
   operations: Array<OperationEnum>;
 };
 
+export type CommandAttributes = {
+  condition?: Maybe<Scalars['String']>;
+  operations: Array<OperationEnum>;
+};
+
 export type Country = {
   __typename?: 'Country';
   code: Scalars['String'];
@@ -923,6 +928,7 @@ export type Move = {
 };
 
 export type MoveAttributes = {
+  commandList: Array<CommandAttributes>;
   condition?: Maybe<Scalars['String']>;
   kana?: Maybe<Scalars['String']>;
   moveVideoId?: Maybe<Scalars['ID']>;
@@ -2840,20 +2846,6 @@ export type CreateAttackMoveMutationVariables = Exact<{
 
 
 export type CreateAttackMoveMutation = { __typename?: 'Mutation', createAttackMove?: Maybe<{ __typename?: 'CreateAttackMovePayload', move: { __typename?: 'Move', id: string, name: string } }> };
-
-export type PageDashboardCommandsQueryVariables = Exact<{
-  moveId: Scalars['ID'];
-}>;
-
-
-export type PageDashboardCommandsQuery = { __typename?: 'Query', move: { __typename?: 'Move', id: string, name: string, commandList: Array<{ __typename?: 'Command', condition?: Maybe<string>, operations: Array<OperationEnum> }>, moveCategory: { __typename?: 'MoveCategory', id: string, name: string, character: { __typename?: 'Character', slug: string, name: string } } } };
-
-export type PageDashboardCommandNewQueryVariables = Exact<{
-  moveId: Scalars['ID'];
-}>;
-
-
-export type PageDashboardCommandNewQuery = { __typename?: 'Query', move: { __typename?: 'Move', id: string, name: string, moveCategory: { __typename?: 'MoveCategory', id: string, name: string, character: { __typename?: 'Character', slug: string, name: string } } } };
 
 export type PageDashboardMoveEditQueryVariables = Exact<{
   moveId: Scalars['ID'];
@@ -6743,97 +6735,6 @@ export function useCreateAttackMoveMutation(baseOptions?: Apollo.MutationHookOpt
 export type CreateAttackMoveMutationHookResult = ReturnType<typeof useCreateAttackMoveMutation>;
 export type CreateAttackMoveMutationResult = Apollo.MutationResult<CreateAttackMoveMutation>;
 export type CreateAttackMoveMutationOptions = Apollo.BaseMutationOptions<CreateAttackMoveMutation, CreateAttackMoveMutationVariables>;
-export const PageDashboardCommandsDocument = gql`
-    query PageDashboardCommands($moveId: ID!) {
-  move(moveId: $moveId) {
-    id
-    name
-    commandList {
-      ...command
-    }
-    moveCategory {
-      id
-      name
-      character {
-        slug
-        name
-      }
-    }
-  }
-}
-    ${CommandFragmentDoc}`;
-
-/**
- * __usePageDashboardCommandsQuery__
- *
- * To run a query within a React component, call `usePageDashboardCommandsQuery` and pass it any options that fit your needs.
- * When your component renders, `usePageDashboardCommandsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = usePageDashboardCommandsQuery({
- *   variables: {
- *      moveId: // value for 'moveId'
- *   },
- * });
- */
-export function usePageDashboardCommandsQuery(baseOptions: Apollo.QueryHookOptions<PageDashboardCommandsQuery, PageDashboardCommandsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<PageDashboardCommandsQuery, PageDashboardCommandsQueryVariables>(PageDashboardCommandsDocument, options);
-      }
-export function usePageDashboardCommandsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PageDashboardCommandsQuery, PageDashboardCommandsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<PageDashboardCommandsQuery, PageDashboardCommandsQueryVariables>(PageDashboardCommandsDocument, options);
-        }
-export type PageDashboardCommandsQueryHookResult = ReturnType<typeof usePageDashboardCommandsQuery>;
-export type PageDashboardCommandsLazyQueryHookResult = ReturnType<typeof usePageDashboardCommandsLazyQuery>;
-export type PageDashboardCommandsQueryResult = Apollo.QueryResult<PageDashboardCommandsQuery, PageDashboardCommandsQueryVariables>;
-export const PageDashboardCommandNewDocument = gql`
-    query PageDashboardCommandNew($moveId: ID!) {
-  move(moveId: $moveId) {
-    id
-    name
-    moveCategory {
-      id
-      name
-      character {
-        slug
-        name
-      }
-    }
-  }
-}
-    `;
-
-/**
- * __usePageDashboardCommandNewQuery__
- *
- * To run a query within a React component, call `usePageDashboardCommandNewQuery` and pass it any options that fit your needs.
- * When your component renders, `usePageDashboardCommandNewQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = usePageDashboardCommandNewQuery({
- *   variables: {
- *      moveId: // value for 'moveId'
- *   },
- * });
- */
-export function usePageDashboardCommandNewQuery(baseOptions: Apollo.QueryHookOptions<PageDashboardCommandNewQuery, PageDashboardCommandNewQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<PageDashboardCommandNewQuery, PageDashboardCommandNewQueryVariables>(PageDashboardCommandNewDocument, options);
-      }
-export function usePageDashboardCommandNewLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PageDashboardCommandNewQuery, PageDashboardCommandNewQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<PageDashboardCommandNewQuery, PageDashboardCommandNewQueryVariables>(PageDashboardCommandNewDocument, options);
-        }
-export type PageDashboardCommandNewQueryHookResult = ReturnType<typeof usePageDashboardCommandNewQuery>;
-export type PageDashboardCommandNewLazyQueryHookResult = ReturnType<typeof usePageDashboardCommandNewLazyQuery>;
-export type PageDashboardCommandNewQueryResult = Apollo.QueryResult<PageDashboardCommandNewQuery, PageDashboardCommandNewQueryVariables>;
 export const PageDashboardMoveEditDocument = gql`
     query PageDashboardMoveEdit($moveId: ID!) {
   move(moveId: $moveId) {
