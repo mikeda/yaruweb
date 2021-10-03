@@ -2,7 +2,7 @@ import React from 'react';
 import { ComboMediaFragment } from '@/lib/graphql/types';
 import { Card, CardContent, Typography } from '@material-ui/core';
 import { VideoPlayer } from '../MoveMedia/VideoPlayer';
-import { Operations } from '../Command/Operations';
+import { Command } from '../Command';
 
 interface Props {
   combo: ComboMediaFragment;
@@ -17,7 +17,7 @@ export const ComboMedia: React.FC<Props> = ({ combo }) => {
         <Typography variant="h3" gutterBottom>
           {combo.name}
         </Typography>
-        <Operations operations={combo.operations} />
+        <Command command={combo.command} />
         {combo.note && (
           <Typography variant="caption" component="p">
             {combo.note}

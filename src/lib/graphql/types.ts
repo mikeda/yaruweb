@@ -316,21 +316,19 @@ export type Combo = {
   __typename?: 'Combo';
   comboCategory: ComboCategory;
   comboVideo?: Maybe<ComboVideo>;
-  condition?: Maybe<Scalars['String']>;
+  command: Command;
   damage?: Maybe<Scalars['Int']>;
   id: Scalars['ID'];
   name: Scalars['String'];
   note?: Maybe<Scalars['String']>;
-  operations: Array<OperationEnum>;
 };
 
 export type ComboAttributes = {
   comboVideoId?: Maybe<Scalars['ID']>;
-  condition?: Maybe<Scalars['String']>;
+  command: CommandAttributes;
   damage?: Maybe<Scalars['Int']>;
   name: Scalars['String'];
   note?: Maybe<Scalars['String']>;
-  operations: Array<OperationEnum>;
 };
 
 export type ComboCategory = {
@@ -2336,7 +2334,7 @@ export type ArticleLinkFragment = { __typename?: 'ArticleLink', url: string, tit
 
 export type ArticleSummaryFragment = { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: Maybe<string>, publishedAt?: Maybe<string>, faved: boolean, favsCount: number, status: ArticleStatus, author: { __typename?: 'User', name: string, avatarUrl: string } };
 
-export type ComboFragment = { __typename?: 'Combo', id: string, name: string, damage?: Maybe<number>, operations: Array<OperationEnum>, note?: Maybe<string>, comboCategory: { __typename?: 'ComboCategory', id: string, name: string }, comboVideo?: Maybe<{ __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string }> };
+export type ComboFragment = { __typename?: 'Combo', id: string, name: string, damage?: Maybe<number>, note?: Maybe<string>, command: { __typename?: 'Command', condition?: Maybe<string>, operations: Array<OperationEnum> }, comboCategory: { __typename?: 'ComboCategory', id: string, name: string }, comboVideo?: Maybe<{ __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string }> };
 
 export type ComboCategoryFragment = { __typename?: 'ComboCategory', id: string, name: string };
 
@@ -2670,7 +2668,7 @@ export type ArticleElementComboQueryVariables = Exact<{
 }>;
 
 
-export type ArticleElementComboQuery = { __typename?: 'Query', combo: { __typename?: 'Combo', id: string, name: string, damage?: Maybe<number>, operations: Array<OperationEnum>, note?: Maybe<string>, comboCategory: { __typename?: 'ComboCategory', id: string, name: string }, comboVideo?: Maybe<{ __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string }> } };
+export type ArticleElementComboQuery = { __typename?: 'Query', combo: { __typename?: 'Combo', id: string, name: string, damage?: Maybe<number>, note?: Maybe<string>, command: { __typename?: 'Command', condition?: Maybe<string>, operations: Array<OperationEnum> }, comboCategory: { __typename?: 'ComboCategory', id: string, name: string }, comboVideo?: Maybe<{ __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string }> } };
 
 export type ArticleElementMoveQueryVariables = Exact<{
   moveId: Scalars['ID'];
@@ -2695,7 +2693,7 @@ export type CharacterCardFragment = { __typename?: 'Character', slug: string, lo
 
 export type CharacterFormFragment = { __typename?: 'Character', name: string, nameKana: string, longName: string, longNameKana: string, slug: string, country: string, fightingStyle: string, story: string, description: string, dlc: boolean };
 
-export type ComboMediaFragment = { __typename?: 'Combo', id: string, name: string, damage?: Maybe<number>, operations: Array<OperationEnum>, note?: Maybe<string>, comboCategory: { __typename?: 'ComboCategory', id: string, name: string }, comboVideo?: Maybe<{ __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string }> };
+export type ComboMediaFragment = { __typename?: 'Combo', id: string, name: string, damage?: Maybe<number>, note?: Maybe<string>, command: { __typename?: 'Command', condition?: Maybe<string>, operations: Array<OperationEnum> }, comboCategory: { __typename?: 'ComboCategory', id: string, name: string }, comboVideo?: Maybe<{ __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string }> };
 
 export type FavButtonArticleQueryVariables = Exact<{
   articleId: Scalars['ID'];
@@ -2785,7 +2783,7 @@ export type CharacterCombosPageQueryVariables = Exact<{
 }>;
 
 
-export type CharacterCombosPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, combosCount: number, movesCount: number, comboCategories: Array<{ __typename?: 'ComboCategory', id: string, name: string, combos: Array<{ __typename?: 'Combo', id: string, name: string, damage?: Maybe<number>, operations: Array<OperationEnum>, note?: Maybe<string>, comboCategory: { __typename?: 'ComboCategory', id: string, name: string }, comboVideo?: Maybe<{ __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string }> }> }> } };
+export type CharacterCombosPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, combosCount: number, movesCount: number, comboCategories: Array<{ __typename?: 'ComboCategory', id: string, name: string, combos: Array<{ __typename?: 'Combo', id: string, name: string, damage?: Maybe<number>, note?: Maybe<string>, command: { __typename?: 'Command', condition?: Maybe<string>, operations: Array<OperationEnum> }, comboCategory: { __typename?: 'ComboCategory', id: string, name: string }, comboVideo?: Maybe<{ __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string }> }> }> } };
 
 export type CharacterPageProfileFragment = { __typename?: 'Character', slug: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, combosCount: number, movesCount: number };
 
@@ -2925,7 +2923,7 @@ export type PageDashboardComboEditQueryVariables = Exact<{
 }>;
 
 
-export type PageDashboardComboEditQuery = { __typename?: 'Query', combo: { __typename?: 'Combo', operations: Array<OperationEnum>, id: string, name: string, damage?: Maybe<number>, note?: Maybe<string>, comboCategory: { __typename?: 'ComboCategory', id: string, name: string, character: { __typename?: 'Character', slug: string, name: string } }, comboVideo?: Maybe<{ __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string }> } };
+export type PageDashboardComboEditQuery = { __typename?: 'Query', combo: { __typename?: 'Combo', id: string, name: string, damage?: Maybe<number>, note?: Maybe<string>, comboCategory: { __typename?: 'ComboCategory', id: string, name: string, character: { __typename?: 'Character', slug: string, name: string } }, command: { __typename?: 'Command', condition?: Maybe<string>, operations: Array<OperationEnum> }, comboVideo?: Maybe<{ __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string }> } };
 
 export type PageDashboardMoveCategoryEditQueryVariables = Exact<{
   moveCategoryId: Scalars['ID'];
@@ -3290,6 +3288,12 @@ export const ArticleSummaryFragmentDoc = gql`
   }
 }
     `;
+export const CommandFragmentDoc = gql`
+    fragment command on Command {
+  condition
+  operations
+}
+    `;
 export const ComboVideoFragmentDoc = gql`
     fragment comboVideo on ComboVideo {
   id
@@ -3302,8 +3306,10 @@ export const ComboFragmentDoc = gql`
   id
   name
   damage
-  operations
   note
+  command {
+    ...command
+  }
   comboCategory {
     id
     name
@@ -3312,7 +3318,8 @@ export const ComboFragmentDoc = gql`
     ...comboVideo
   }
 }
-    ${ComboVideoFragmentDoc}`;
+    ${CommandFragmentDoc}
+${ComboVideoFragmentDoc}`;
 export const ComboCategoryFragmentDoc = gql`
     fragment comboCategory on ComboCategory {
   id
@@ -3372,12 +3379,6 @@ export const MoveVideoFragmentDoc = gql`
   id
   m3u8Url
   thumbnailUrl
-}
-    `;
-export const CommandFragmentDoc = gql`
-    fragment command on Command {
-  condition
-  operations
 }
     `;
 export const MoveFragmentDoc = gql`
@@ -3584,8 +3585,10 @@ export const ComboMediaFragmentDoc = gql`
   id
   name
   damage
-  operations
   note
+  command {
+    ...command
+  }
   comboCategory {
     id
     name
@@ -3594,7 +3597,8 @@ export const ComboMediaFragmentDoc = gql`
     ...comboVideo
   }
 }
-    ${ComboVideoFragmentDoc}`;
+    ${CommandFragmentDoc}
+${ComboVideoFragmentDoc}`;
 export const MoveableFragmentDoc = gql`
     fragment moveable on Moveable {
   __typename
@@ -6661,7 +6665,6 @@ export const PageDashboardComboEditDocument = gql`
     query PageDashboardComboEdit($comboId: ID!) {
   combo(comboId: $comboId) {
     ...combo
-    operations
     comboCategory {
       id
       name
