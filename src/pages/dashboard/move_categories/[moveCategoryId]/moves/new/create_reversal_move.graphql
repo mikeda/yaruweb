@@ -1,0 +1,7 @@
+mutation CreateReversalMove($moveCategoryId: ID!, $attributes: ReversalMoveAttributes!) {
+  createReversalMove(input: { moveCategoryId: $moveCategoryId, attributes: $attributes }) {
+    move {
+      ...DashboardMovesPageMove
+    }
+  }
+}

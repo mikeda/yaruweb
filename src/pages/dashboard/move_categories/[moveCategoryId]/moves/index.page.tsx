@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { Move, usePageDashboardMovesQuery, useUpdateMovePositionMutation } from '@/lib/graphql/types';
 import { useRouter } from 'next/router';
@@ -8,7 +8,7 @@ import { DashboardContent, DashboardBreadcrumbs } from '@/components';
 import { toast } from 'react-toastify';
 import { SortableObjectCardList } from '@/components/ObjectCardList';
 import { dashboardPath } from '@/lib';
-import { Button } from '@material-ui/core';
+import { Button, Menu, MenuItem } from '@material-ui/core';
 import { Add } from '@material-ui/icons';
 
 const Page: React.FC = () => {
@@ -31,16 +31,7 @@ const Page: React.FC = () => {
     <DashboardContent
       title={moveCategory.name}
       breadcrumb={<DashboardBreadcrumbs to="moves" moveCategory={moveCategory} />}
-      actions={
-        <Button
-          variant="contained"
-          color="primary"
-          startIcon={<Add />}
-          href={dashboardPath({ to: 'movesNew', moveCategoryId: moveCategory.id })}
-        >
-          作成する
-        </Button>
-      }
+      actions={<MovesNewButton moveCategoryId={moveCategory.id} />}
     >
       <PageContent moves={data.moveCategory.moves} />
     </DashboardContent>
@@ -68,6 +59,55 @@ const PageContent: React.FC<{ moves: MoveFragment[] }> = ({ moves }) => {
       }))}
       onMove={(moveId, newPosition) => updateMovePosition({ variables: { moveId, newPosition } })}
     />
+  );
+};
+
+const MovesNewButton = ({ moveCategoryId }: { moveCategoryId: string }) => {
+  const router = useRouter();
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  return (
+    <>
+      <Button variant="contained" color="primary" startIcon={<Add />} onClick={handleClick}>
+        作成する
+      </Button>
+      <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
+        <MenuItem
+          onClick={() => {
+            handleClose();
+            router.push(dashboardPath({ to: 'movesNew', moveCategoryId, moveType: 'attack' }));
+          }}
+        >
+          打撃
+        </MenuItem>
+
+        <MenuItem
+          onClick={() => {
+            handleClose();
+            router.push(dashboardPath({ to: 'movesNew', moveCategoryId, moveType: 'throw' }));
+          }}
+        >
+          投げ
+        </MenuItem>
+
+        <MenuItem
+          onClick={() => {
+            handleClose();
+            router.push(dashboardPath({ to: 'movesNew', moveCategoryId, moveType: 'reversal' }));
+          }}
+        >
+          返し技
+        </MenuItem>
+      </Menu>
+    </>
   );
 };
 
