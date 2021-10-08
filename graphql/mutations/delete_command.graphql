@@ -1,7 +1,0 @@
-mutation DeleteCommand($commandId: ID!) {
-  deleteCommand(input: { commandId: $commandId }) {
-    command {
-      id
-    }
-  }
-}

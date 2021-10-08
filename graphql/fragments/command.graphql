@@ -1,8 +1,4 @@
 fragment command on Command {
-  id
   condition
-
-  operations {
-    ...operation
-  }
+  operations
 }

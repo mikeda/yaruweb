@@ -2,10 +2,6 @@ query PageDashboardComboEdit($comboId: ID!) {
   combo(comboId: $comboId) {
     ...combo
 
-    operations {
-      id
-    }
-
     comboCategory {
       id
       name

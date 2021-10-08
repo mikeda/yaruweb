@@ -21,9 +21,8 @@ import {
 } from '@material-ui/core';
 import { Profile } from '../components/Profile';
 import { Tabs } from '../components/Tabs';
-import { Content, Head, Breadcrumbs } from '@/components';
+import { Content, Head, Breadcrumbs, Command } from '@/components';
 import { ParsedUrlQuery } from 'querystring';
-import { Operations } from '@/components/Command/Operations';
 
 const useStyles = makeStyles({
   table: {
@@ -59,7 +58,7 @@ const Page: React.FC<CharacterCombosPageQuery> = ({ character }) => {
                       <Typography variant="h3" gutterBottom>
                         {combo.name}
                       </Typography>
-                      <Operations operations={combo.operations} />
+                      <Command command={combo.command} />
                       {combo.note && (
                         <Typography variant="caption" component="p">
                           {combo.note}

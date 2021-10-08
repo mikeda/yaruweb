@@ -4,6 +4,10 @@ fragment ComboMedia on Combo {
   damage
   note
 
+  command {
+    ...command
+  }
+
   comboCategory {
     id
     name
@@ -13,7 +17,4 @@ fragment ComboMedia on Combo {
     ...comboVideo
   }
 
-  operations {
-    ...operation
-  }
 }

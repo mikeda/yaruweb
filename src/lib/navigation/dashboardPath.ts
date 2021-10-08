@@ -24,7 +24,7 @@ type Options =
   | { to: 'moveCategoriesNew'; characterSlug: string }
   | { to: 'moveCategoryEdit'; moveCategoryId: string }
   | { to: 'moves'; moveCategoryId: string }
-  | { to: 'movesNew'; moveCategoryId: string }
+  | { to: 'movesNew'; moveCategoryId: string; moveType: 'attack' | 'throw' | 'reversal' }
   | { to: 'moveEdit'; moveId: string }
   | { to: 'organizers'; q?: string }
   | { to: 'organizersNew' }
@@ -91,7 +91,7 @@ export const dashboardPath = (options: Options): string => {
     case 'moves':
       return `/dashboard/move_categories/${options.moveCategoryId}/moves`;
     case 'movesNew':
-      return `/dashboard/move_categories/${options.moveCategoryId}/moves/new`;
+      return `/dashboard/move_categories/${options.moveCategoryId}/moves/new?move_type=${options.moveType}`;
     case 'moveEdit':
       return `/dashboard/moves/${options.moveId}/edit`;
     case 'organizers':

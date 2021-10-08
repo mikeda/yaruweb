@@ -1,8 +1,6 @@
 import React, { useRef, useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-import { toast } from 'react-toastify';
-import { useSetRecoilState } from 'recoil';
 
 import {
   AttackMoveAttributes,
@@ -10,11 +8,8 @@ import {
   AttackMoveStateEnum,
   AttackTypeEnum,
   MoveFragment,
-  MoveVideoFragment,
-  useCreateMoveVideoMutation,
 } from '@/lib/graphql/types';
 import { Controller, useForm } from 'react-hook-form';
-import { loadingState } from '@/states/loading';
 import { VideoPlayer } from '../MoveMedia/VideoPlayer';
 import { nullableNumber } from '@/lib/validators/nullable_number';
 import {
@@ -38,6 +33,8 @@ import {
   Typography,
 } from '@material-ui/core';
 import { AttackMoveResultText, AttackMoveStateEnumText, AttackTypeEnumText } from '@/lib/graphql/enum_texts';
+import { CommandForm } from './CommandForm';
+import { MoveVideoInput } from './MoveVideoInput';
 
 const schema = yup.object().shape({
   move: yup.object({
@@ -45,6 +42,9 @@ const schema = yup.object().shape({
   }),
   attack: yup.object({
     startUpFrame: nullableNumber,
+    blockFrame: nullableNumber,
+    hitFrame: nullableNumber,
+    counterFrame: nullableNumber,
   }),
 });
 
@@ -56,25 +56,25 @@ interface Props {
 const frameCols: {
   label: string;
   result: 'attack.blockResult' | 'attack.hitResult' | 'attack.counterResult';
-  frame: 'attack.blockFrame' | 'attack.hitFrame' | 'attack.counterFrame';
+  frame: 'blockFrame' | 'hitFrame' | 'counterFrame';
   state: 'attack.blockState' | 'attack.hitState' | 'attack.counterState';
 }[] = [
   {
     label: 'ガード',
     result: 'attack.blockResult',
-    frame: 'attack.blockFrame',
+    frame: 'blockFrame',
     state: 'attack.blockState',
   },
   {
     label: 'ヒット',
     result: 'attack.hitResult',
-    frame: 'attack.hitFrame',
+    frame: 'hitFrame',
     state: 'attack.hitState',
   },
   {
     label: 'カウンター',
     result: 'attack.counterResult',
-    frame: 'attack.counterFrame',
+    frame: 'counterFrame',
     state: 'attack.counterState',
   },
 ];
@@ -118,7 +118,7 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-export const MoveForm: React.FC<Props> = ({ move, onSubmit }) => {
+export const AttackMoveForm: React.FC<Props> = ({ move, onSubmit }) => {
   const [moveVideo, setMoveVideo] = useState(move?.moveVideo);
   const classes = useStyles();
 
@@ -132,65 +132,64 @@ export const MoveForm: React.FC<Props> = ({ move, onSubmit }) => {
   } = useForm<AttackMoveAttributes>({
     resolver: yupResolver(schema),
     mode: 'onBlur',
-    defaultValues: move && {
-      move: {
-        moveVideoId: move.moveVideo?.id,
-        name: move.name,
-        kana: move.kana,
-        note: move.note,
-      },
-      attack:
-        move.moveable.__typename === 'AttackMove'
-          ? {
-              startUpFrame: move.moveable.startUpFrame,
-              heights: move.moveable.heights,
-              damages: move.moveable.damages,
-              blockResult: move.moveable.blockResult,
-              blockFrame: move.moveable.blockFrame,
-              blockState: move.moveable.blockState,
-              hitResult: move.moveable.hitResult,
-              hitFrame: move.moveable.hitFrame,
-              hitState: move.moveable.hitState,
-              counterResult: move.moveable.counterResult,
-              counterFrame: move.moveable.counterFrame,
-              counterState: move.moveable.counterState,
-              powerCrush: move.moveable.powerCrush,
-              crouchingStatus: move.moveable.crouchingStatus,
-              jumpStatus: move.moveable.jumpStatus,
-              homing: move.moveable.homing,
-              screw: move.moveable.screw,
-              wallBound: move.moveable.wallBound,
-            }
-          : {
-              heights: [],
-              damages: [],
-              blockResult: AttackMoveResultEnum.Normal,
-              hitResult: AttackMoveResultEnum.Normal,
-              counterResult: AttackMoveResultEnum.Normal,
-            },
-      //throwMove:
-      //  move.moveable.__typename === 'ThrowMove'
-      //    ? {
-      //        startUpFrame: move.moveable.startUpFrame,
-      //        damage: move.moveable.damage,
-      //        throwResult: move.moveable.throwResult,
-      //        throwEscape: move.moveable.throwEscape,
-      //      }
-      //    : undefined,
-      //reversalMove:
-      //  move.moveable.__typename === 'ReversalMove'
-      //    ? {
-      //        reversalTarget: move.moveable.reversalTarget,
-      //        reversalType: move.moveable.reversalType,
-      //      }
-      //    : undefined,
-    },
+    defaultValues: move
+      ? {
+          move: {
+            moveVideoId: move.moveVideo?.id,
+            name: move.name,
+            kana: move.kana,
+            commandList: move.commandList.map(c => ({ condition: c.condition, operations: c.operations })),
+            note: move.note,
+          },
+          attack:
+            move.moveable.__typename === 'AttackMove'
+              ? {
+                  startUpFrame: move.moveable.startUpFrame,
+                  heights: move.moveable.heights,
+                  damages: move.moveable.damages,
+                  blockResult: move.moveable.blockResult,
+                  blockFrame: move.moveable.blockFrame,
+                  blockState: move.moveable.blockState,
+                  hitResult: move.moveable.hitResult,
+                  hitFrame: move.moveable.hitFrame,
+                  hitState: move.moveable.hitState,
+                  counterResult: move.moveable.counterResult,
+                  counterFrame: move.moveable.counterFrame,
+                  counterState: move.moveable.counterState,
+                  powerCrush: move.moveable.powerCrush,
+                  crouchingStatus: move.moveable.crouchingStatus,
+                  jumpStatus: move.moveable.jumpStatus,
+                  homing: move.moveable.homing,
+                  screw: move.moveable.screw,
+                  wallBound: move.moveable.wallBound,
+                }
+              : undefined,
+        }
+      : {
+          move: {
+            commandList: [],
+          },
+          attack: {
+            heights: [],
+            damages: [],
+            blockResult: AttackMoveResultEnum.Normal,
+            hitResult: AttackMoveResultEnum.Normal,
+            counterResult: AttackMoveResultEnum.Normal,
+            powerCrush: false,
+            crouchingStatus: false,
+            jumpStatus: false,
+            homing: false,
+            screw: false,
+            wallBound: false,
+          },
+        },
   });
   const damageRef = useRef<HTMLInputElement>();
   const heightRef = useRef<HTMLSelectElement>();
 
   const heights = watch('attack.heights');
   const damages = watch('attack.damages');
+  const commandList = watch('move.commandList');
 
   return (
     <Card>
@@ -207,6 +206,7 @@ export const MoveForm: React.FC<Props> = ({ move, onSubmit }) => {
                     label="名前"
                     error={Boolean(errors.move?.name)}
                     helperText={errors.move?.name?.message}
+                    size="small"
                     fullWidth
                   />
                 )}
@@ -217,20 +217,44 @@ export const MoveForm: React.FC<Props> = ({ move, onSubmit }) => {
               <Controller
                 name="move.kana"
                 control={control}
-                render={({ field }) => <TextField {...field} label="カナ" fullWidth />}
+                render={({ field }) => <TextField {...field} label="カナ" size="small" fullWidth />}
               />
             </Grid>
           </Grid>
 
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={4}>
-              <Controller
-                name="attack.startUpFrame"
-                control={control}
-                render={({ field }) => <TextField {...field} type="number" label="発生" fullWidth />}
+          <Box mt={4}>
+            <Typography variant="h4" gutterBottom>
+              コマンド
+            </Typography>
+
+            {commandList.map((command, i) => (
+              <CommandForm
+                key={i}
+                command={command}
+                onChange={newCommand => {
+                  setValue(
+                    `move.commandList`,
+                    commandList.map((command, j) => (i === j ? { ...newCommand } : { ...command })),
+                  );
+                }}
+                onDelete={() => {
+                  setValue(
+                    `move.commandList`,
+                    commandList.filter((command, j) => i !== j),
+                  );
+                }}
               />
-            </Grid>
-          </Grid>
+            ))}
+
+            <Button
+              variant="outlined"
+              onClick={() => {
+                setValue(`move.commandList`, [...commandList, { operations: [] }]);
+              }}
+            >
+              Add
+            </Button>
+          </Box>
 
           <Box mt={4}>
             <Typography variant="h4" gutterBottom>
@@ -313,6 +337,32 @@ export const MoveForm: React.FC<Props> = ({ move, onSubmit }) => {
             </div>
           </Box>
 
+          <Box mt={4}>
+            <Typography variant="h4" gutterBottom>
+              発生
+            </Typography>
+
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={4}>
+                <Controller
+                  name="attack.startUpFrame"
+                  control={control}
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      type="number"
+                      label="フレーム"
+                      size="small"
+                      fullWidth
+                      error={Boolean(errors.attack?.startUpFrame)}
+                      helperText={errors.attack?.startUpFrame?.message}
+                    />
+                  )}
+                />
+              </Grid>
+            </Grid>
+          </Box>
+
           {frameCols.map(({ label, result: resultKey, frame: frameKey, state: stateKey }) => (
             <Box key={label} mt={4}>
               <Typography variant="h4" gutterBottom>
@@ -321,7 +371,7 @@ export const MoveForm: React.FC<Props> = ({ move, onSubmit }) => {
 
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={4}>
-                  <FormControl fullWidth variant="outlined">
+                  <FormControl fullWidth variant="outlined" size="small">
                     <Controller
                       control={control}
                       name={resultKey}
@@ -346,14 +396,24 @@ export const MoveForm: React.FC<Props> = ({ move, onSubmit }) => {
 
                 <Grid item xs={12} sm={4}>
                   <Controller
-                    name={frameKey}
+                    name={`attack.${frameKey}`}
                     control={control}
-                    render={({ field }) => <TextField {...field} type="number" label="フレーム" fullWidth />}
+                    render={({ field }) => (
+                      <TextField
+                        {...field}
+                        type="number"
+                        label="フレーム"
+                        size="small"
+                        fullWidth
+                        error={Boolean(errors.attack && errors.attack[frameKey])}
+                        helperText={errors.attack && errors.attack[frameKey]?.message}
+                      />
+                    )}
                   />
                 </Grid>
 
                 <Grid item xs={12} sm={4}>
-                  <FormControl fullWidth variant="outlined">
+                  <FormControl fullWidth variant="outlined" size="small">
                     <InputLabel>相手の状態</InputLabel>
                     <Controller
                       control={control}
@@ -444,70 +504,5 @@ export const MoveForm: React.FC<Props> = ({ move, onSubmit }) => {
         </Box>
       </form>
     </Card>
-  );
-};
-
-interface MoveVideoInputProps {
-  onCreate: (moveVideo: MoveVideoFragment) => void;
-}
-
-export const MoveVideoInput: React.FC<MoveVideoInputProps> = ({ onCreate }) => {
-  const [file, setFile] = useState<File>();
-  const setLoading = useSetRecoilState(loadingState);
-
-  const [ceateMoveVideo, { loading }] = useCreateMoveVideoMutation({
-    onCompleted: data => {
-      if (!data.createMoveVideo) return;
-      if (!file) return;
-
-      const fields = JSON.parse(data.createMoveVideo.videoUpload.fields);
-
-      const formData = new FormData();
-      for (const key in fields) {
-        formData.append(key, fields[key]);
-      }
-      formData.append('file', file);
-
-      fetch(data.createMoveVideo.videoUpload.url, {
-        method: 'POST',
-        headers: { Accept: 'multipart/form-data' },
-        body: formData,
-      })
-        .then(() => {
-          if (!data.createMoveVideo) return;
-
-          onCreate(data.createMoveVideo.moveVideo);
-          toast.success('動画をアップロードしました。');
-        })
-        .catch(() => {
-          toast.error('アップロードに失敗しました。');
-        });
-    },
-    onError: () => {
-      toast.error('アップロードに失敗しました。');
-    },
-  });
-
-  setLoading(loading);
-
-  return (
-    <Button variant="contained" component="label">
-      動画をアップロード
-      <input
-        type="file"
-        id="video"
-        accept="video/mp4"
-        hidden
-        onChange={event => {
-          const target = event.target;
-          if (!target.files) return;
-          const file = target.files[0];
-          if (!file) return;
-
-          setFile(file);
-          ceateMoveVideo();
-        }}
-      />
-    </Button>
   );
 };

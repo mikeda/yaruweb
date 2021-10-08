@@ -58,7 +58,7 @@ fragment move on Move {
     ...moveVideo
   }
 
-  commands {
+  commandList {
     ...command
   }
 }

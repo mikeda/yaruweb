@@ -2,23 +2,17 @@ import React, { useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import {
-  ComboAttributes,
-  ComboFragment,
-  ComboVideoFragment,
-  OperationFragment,
-  useCreateComboVideoMutation,
-} from '@/lib/graphql/types';
-import { useForm } from 'react-hook-form';
+import { ComboAttributes, ComboFragment, ComboVideoFragment, useCreateComboVideoMutation } from '@/lib/graphql/types';
+import { Controller, useForm } from 'react-hook-form';
 import { FormGroup } from '@/components/form/FormGroup';
 import { Input } from '@/components/form/Input';
 import { TextArea } from '../form/TextArea';
-import { OperationListSelector } from '../OperationListSelector';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from '@/states/loading';
 import { toast } from 'react-toastify';
 import { VideoPlayer } from '../MoveMedia/VideoPlayer';
-import { Button } from '@material-ui/core';
+import { Box, Button, Card, CardContent, Divider, Grid, TextField, Typography } from '@material-ui/core';
+import { CommandForm } from './CommandForm';
 
 const schema = yup.object().shape({
   name: yup.string().required(),
@@ -31,81 +25,98 @@ interface Props {
 }
 
 export const ComboForm: React.FC<Props> = ({ combo, onSubmit }) => {
-  const [operations, setOperations] = useState<OperationFragment[]>(combo?.operations || []);
-
   const {
     register,
     handleSubmit,
     setValue,
+    control,
+    watch,
     formState: { errors },
   } = useForm<ComboAttributes>({
     resolver: yupResolver(schema),
     mode: 'onBlur',
-    defaultValues: combo && {
-      name: combo.name,
-      damage: combo.damage,
-      note: combo.note,
-      operationIds: combo.operations.map(o => o.id),
-      comboVideoId: combo.comboVideo?.id,
-    },
+    defaultValues: combo
+      ? {
+          name: combo.name,
+          command: { condition: combo.command.condition, operations: combo.command.operations },
+          damage: combo.damage,
+          note: combo.note,
+          comboVideoId: combo.comboVideo?.id,
+        }
+      : {
+          command: { operations: [] },
+        },
   });
 
+  const command = watch('command');
+
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <FormGroup label="名前" required>
-        <Input {...register('name')} />
-        {errors.name && <span>This field is required</span>}
-      </FormGroup>
+    <Card>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <CardContent>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
+              <Controller
+                name="name"
+                control={control}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    label="名前"
+                    error={Boolean(errors.name)}
+                    helperText={errors.name?.message}
+                    size="small"
+                    fullWidth
+                  />
+                )}
+              />
+            </Grid>
+          </Grid>
 
-      <FormGroup label="ダメージ">
-        <Input type="number" {...register('damage', { valueAsNumber: true })} />
-      </FormGroup>
+          <Box mt={4}>
+            <Typography variant="h4" gutterBottom>
+              コマンド
+            </Typography>
 
-      <FormGroup label="コマンド">
-        <OperationListSelector
-          operations={operations}
-          onClickOperation={operation => {
-            const newOperations = [...operations, operation];
-            setOperations(newOperations);
-            setValue(
-              'operationIds',
-              newOperations.map(o => o.id),
-            );
-          }}
-          onDeleteLast={() => {
-            const newOperations = operations.slice(0, operations.length - 1);
-            setOperations(newOperations);
-            setValue(
-              'operationIds',
-              newOperations.map(o => o.id),
-            );
-          }}
-        />
-      </FormGroup>
+            <CommandForm
+              command={command}
+              onChange={newCommand => {
+                setValue(`command`, newCommand);
+              }}
+            />
+          </Box>
 
-      <FormGroup label="動画">
-        <input type="hidden" {...register('comboVideoId')} />
-        <ComboVideoInput
-          onCreate={comboVideo => {
-            setValue('comboVideoId', comboVideo.id);
-          }}
-        />
+          <FormGroup label="ダメージ">
+            <Input type="number" {...register('damage', { valueAsNumber: true })} />
+          </FormGroup>
 
-        {combo && combo.comboVideo && (
-          <VideoPlayer src={combo.comboVideo.m3u8Url} thumnailUrl={combo.comboVideo.thumbnailUrl} />
-        )}
-      </FormGroup>
+          <FormGroup label="動画">
+            <input type="hidden" {...register('comboVideoId')} />
+            <ComboVideoInput
+              onCreate={comboVideo => {
+                setValue('comboVideoId', comboVideo.id);
+              }}
+            />
 
-      <FormGroup label="備考">
-        <TextArea {...register('note')} />
-      </FormGroup>
+            {combo && combo.comboVideo && (
+              <VideoPlayer src={combo.comboVideo.m3u8Url} thumnailUrl={combo.comboVideo.thumbnailUrl} />
+            )}
+          </FormGroup>
 
-      <FormGroup>
-        <Button type="submit" variant="contained">
-          登録する
-        </Button>
-      </FormGroup>
-    </form>
+          <FormGroup label="備考">
+            <TextArea {...register('note')} />
+          </FormGroup>
+        </CardContent>
+
+        <Divider />
+
+        <Box m={2} display="flex" justifyContent="center">
+          <Button type="submit" variant="contained">
+            登録する
+          </Button>
+        </Box>
+      </form>
+    </Card>
   );
 };
 

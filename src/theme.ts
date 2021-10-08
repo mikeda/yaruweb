@@ -133,6 +133,9 @@ const theme = createTheme({
     MuiLink: {
       color: 'inherit',
     },
+    MuiPaper: {
+      elevation: 4,
+    },
   },
   typography: {
     button: {

@@ -26,8 +26,8 @@ export const MoveMedia: React.FC<Props> = ({ move }) => {
 
         <div className={styles.cont}>
           <div>
-            {move.commands.map(command => (
-              <Command key={command.id} command={command} />
+            {move.commandList.map((command, i) => (
+              <Command key={i} command={command} />
             ))}
 
             {move.moveable.__typename === 'AttackMove' && <AttackDetails move={move} />}

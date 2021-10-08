@@ -4,6 +4,10 @@ fragment combo on Combo {
   damage
   note
 
+  command {
+    ...command
+  }
+
   comboCategory {
     id
     name
@@ -11,9 +15,5 @@ fragment combo on Combo {
 
   comboVideo {
     ...comboVideo
-  }
-
-  operations {
-    ...operation
   }
 }

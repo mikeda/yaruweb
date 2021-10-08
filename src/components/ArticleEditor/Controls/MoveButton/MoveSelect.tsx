@@ -1,6 +1,6 @@
 import React from 'react';
 import Select from 'react-select';
-import { useMoveSelectOptionsQuery } from '@/lib/graphql/types';
+import { OperationEnum, useMoveSelectOptionsQuery } from '@/lib/graphql/types';
 import { FormGroup } from '@/components/form/FormGroup';
 
 interface Props {
@@ -20,11 +20,11 @@ export const MoveSelect: React.FC<Props> = ({ characterSlug, onChange }) => {
     label: moveCategory.name,
     options: moveCategory.moves.map(move => {
       let label = move.name;
-      if (move.commands.length > 0) {
-        label += `(${move.commands
+      if (move.commandList.length > 0) {
+        label += `(${move.commandList
           .map(c =>
             c.operations
-              .map(o => parseKey(o.key))
+              .map(o => parseKey(o))
               .filter(o => o)
               .join(' '),
           )
@@ -49,7 +49,7 @@ export const MoveSelect: React.FC<Props> = ({ characterSlug, onChange }) => {
   );
 };
 
-const parseKey = (key: string): string | null => {
+const parseKey = (key: OperationEnum): string | null => {
   if (['1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(key)) return key;
   if (['1h', '2h', '3h', '4h', '6h', '7h', '8h', '9h'].includes(key)) return key.replace('h', '');
   if (['lp', 'rp', 'lk', 'rk'].includes(key)) return key.toUpperCase();

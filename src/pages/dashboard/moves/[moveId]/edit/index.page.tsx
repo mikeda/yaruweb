@@ -11,7 +11,7 @@ import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { loadingState } from '@/states/loading';
 import { useSetRecoilState } from 'recoil';
-import { MoveForm } from '@/components/MoveForm';
+import { AttackMoveForm } from '@/components/MoveForm';
 import { DashboardBreadcrumbs } from '@/components';
 
 const Page: React.FC = () => {
@@ -56,7 +56,7 @@ const MoveContent: React.FC<PageDashboardMoveEditQuery> = ({ move }) => {
   };
 
   setLoading(loading);
-  return <MoveForm move={move} onSubmit={onSubmit} />;
+  return <AttackMoveForm move={move} onSubmit={onSubmit} />;
 };
 
 export default Page;
