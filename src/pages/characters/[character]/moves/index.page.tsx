@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
 import {
@@ -18,6 +18,9 @@ import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 import {
   Box,
   Chip,
+  Dialog,
+  DialogContent,
+  IconButton,
   makeStyles,
   Paper,
   Table,
@@ -38,6 +41,8 @@ import {
   ThrowMoveResultText,
   ThrowTypeEnumText,
 } from '@/lib/graphql/enum_texts';
+import { YouTube } from '@material-ui/icons';
+import { VideoPlayer } from '@/components/MoveMedia/VideoPlayer';
 
 const useStyles = makeStyles({
   table: {
@@ -73,10 +78,9 @@ const Page: React.FC<CharacterMovesPageQuery> = ({ character }) => {
                   <TableHead>
                     <TableRow>
                       <TableCell>コマンド</TableCell>
-                      <TableCell align="right">発生</TableCell>
-                      <TableCell align="right">ガード</TableCell>
-                      <TableCell align="right">ヒット</TableCell>
-                      <TableCell align="right">カウンター</TableCell>
+                      <TableCell>発生</TableCell>
+                      <TableCell>ガード/ヒット/カウンター</TableCell>
+                      <TableCell></TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -97,6 +101,7 @@ const Page: React.FC<CharacterMovesPageQuery> = ({ character }) => {
                       <TableCell align="right">発生</TableCell>
                       <TableCell align="right">投げ後</TableCell>
                       <TableCell align="right">投げ抜け</TableCell>
+                      <TableCell></TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -114,6 +119,7 @@ const Page: React.FC<CharacterMovesPageQuery> = ({ character }) => {
                   <TableHead>
                     <TableRow>
                       <TableCell>コマンド</TableCell>
+                      <TableCell></TableCell>
                     </TableRow>
                   </TableHead>
                   <TableBody>
@@ -187,20 +193,41 @@ const AttackRow: React.FC<AttackMove> = ({ move, attack }) => {
         <AttackLabels attack={attack} />
       </TableCell>
 
-      <TableCell align="right">{attack.startUpFrame && `${attack.startUpFrame}F`}</TableCell>
+      <TableCell>{attack.startUpFrame && `${attack.startUpFrame}F`}</TableCell>
 
-      <TableCell align="right">
+      <TableCell>
         <OpponentDetail frame={attack.blockFrame} state={AttackMoveResultText[attack.blockResult]} />
-      </TableCell>
-
-      <TableCell align="right">
+        /
         <OpponentDetail frame={attack.hitFrame} state={AttackMoveResultText[attack.hitResult]} />
-      </TableCell>
-
-      <TableCell align="right">
+        /
         <OpponentDetail frame={attack.counterFrame} state={AttackMoveResultText[attack.counterResult]} />
       </TableCell>
+
+      <MoveCell move={move} />
     </TableRow>
+  );
+};
+
+const MoveCell: React.FC<{ move: CharacterMovesPageMoveFragment }> = ({ move }) => {
+  const [dialogOpen, setDialogOpen] = useState(false);
+
+  return (
+    <TableCell>
+      {move.moveVideo && (
+        <>
+          <IconButton size="small" onClick={() => setDialogOpen(true)}>
+            <YouTube />
+          </IconButton>
+
+          <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)}>
+            <DialogContent>
+              <VideoPlayer src={move.moveVideo.m3u8Url} thumnailUrl={move.moveVideo.thumbnailUrl} />
+            </DialogContent>
+          </Dialog>
+        </>
+      )}
+      {move.note && <Typography variant="caption">{move.note}</Typography>}
+    </TableCell>
   );
 };
 
@@ -221,6 +248,8 @@ const ThrowRow: React.FC<ThrowMove> = ({ move, throw: thrw }) => {
       <TableCell align="right">{thrw.startUpFrame && frameText(thrw.startUpFrame)}</TableCell>
       <TableCell align="right">{ThrowMoveResultText[thrw.throwResult]}</TableCell>
       <TableCell align="right">{thrw.throwEscape}</TableCell>
+
+      <MoveCell move={move} />
     </TableRow>
   );
 };
@@ -236,6 +265,8 @@ const ReversalRow: React.FC<ReversalMove> = ({ move }) => {
           <Command key={i} command={command} />
         ))}
       </TableCell>
+
+      <MoveCell move={move} />
     </TableRow>
   );
 };

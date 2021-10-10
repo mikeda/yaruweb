@@ -2802,14 +2802,14 @@ type Moveable_ThrowMove_Fragment = { __typename: 'ThrowMove', throwType: ThrowTy
 
 export type MoveableFragment = Moveable_AttackMove_Fragment | Moveable_ReversalMove_Fragment | Moveable_ThrowMove_Fragment;
 
-export type CharacterMovesPageMoveFragment = { __typename?: 'Move', id: string, name: string, kana?: Maybe<string>, condition?: Maybe<string>, note?: Maybe<string>, moveable: { __typename: 'AttackMove', startUpFrame?: Maybe<number>, heights: Array<AttackTypeEnum>, damages: Array<number>, blockResult: AttackMoveResultEnum, blockState?: Maybe<AttackMoveStateEnum>, blockFrame?: Maybe<number>, hitResult: AttackMoveResultEnum, hitState?: Maybe<AttackMoveStateEnum>, hitFrame?: Maybe<number>, counterResult: AttackMoveResultEnum, counterState?: Maybe<AttackMoveStateEnum>, counterFrame?: Maybe<number>, powerCrush: boolean, powerCrushFrame?: Maybe<number>, crouchingStatus: boolean, crouchingStatusFrame?: Maybe<number>, jumpStatus: boolean, jumpStatusFrame?: Maybe<number>, homing: boolean, screw: boolean, wallBound: boolean } | { __typename: 'ReversalMove', reversalType: ReversalTypeEnum, reversalTarget: ReversalTargetEnum } | { __typename: 'ThrowMove', throwType: ThrowTypeEnum, startUpFrame?: Maybe<number>, damage: number, throwEscape: ThrowEscapeEnum, throwResult: ThrowMoveResultEnum }, commandList: Array<{ __typename?: 'Command', condition?: Maybe<string>, operations: Array<OperationEnum> }> };
+export type CharacterMovesPageMoveFragment = { __typename?: 'Move', id: string, name: string, kana?: Maybe<string>, condition?: Maybe<string>, note?: Maybe<string>, moveVideo?: Maybe<{ __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string }>, moveable: { __typename: 'AttackMove', startUpFrame?: Maybe<number>, heights: Array<AttackTypeEnum>, damages: Array<number>, blockResult: AttackMoveResultEnum, blockState?: Maybe<AttackMoveStateEnum>, blockFrame?: Maybe<number>, hitResult: AttackMoveResultEnum, hitState?: Maybe<AttackMoveStateEnum>, hitFrame?: Maybe<number>, counterResult: AttackMoveResultEnum, counterState?: Maybe<AttackMoveStateEnum>, counterFrame?: Maybe<number>, powerCrush: boolean, powerCrushFrame?: Maybe<number>, crouchingStatus: boolean, crouchingStatusFrame?: Maybe<number>, jumpStatus: boolean, jumpStatusFrame?: Maybe<number>, homing: boolean, screw: boolean, wallBound: boolean } | { __typename: 'ReversalMove', reversalType: ReversalTypeEnum, reversalTarget: ReversalTargetEnum } | { __typename: 'ThrowMove', throwType: ThrowTypeEnum, startUpFrame?: Maybe<number>, damage: number, throwEscape: ThrowEscapeEnum, throwResult: ThrowMoveResultEnum }, commandList: Array<{ __typename?: 'Command', condition?: Maybe<string>, operations: Array<OperationEnum> }> };
 
 export type CharacterMovesPageQueryVariables = Exact<{
   characterSlug: Scalars['String'];
 }>;
 
 
-export type CharacterMovesPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, combosCount: number, movesCount: number, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, moves: Array<{ __typename?: 'Move', id: string, name: string, kana?: Maybe<string>, condition?: Maybe<string>, note?: Maybe<string>, moveable: { __typename: 'AttackMove', startUpFrame?: Maybe<number>, heights: Array<AttackTypeEnum>, damages: Array<number>, blockResult: AttackMoveResultEnum, blockState?: Maybe<AttackMoveStateEnum>, blockFrame?: Maybe<number>, hitResult: AttackMoveResultEnum, hitState?: Maybe<AttackMoveStateEnum>, hitFrame?: Maybe<number>, counterResult: AttackMoveResultEnum, counterState?: Maybe<AttackMoveStateEnum>, counterFrame?: Maybe<number>, powerCrush: boolean, powerCrushFrame?: Maybe<number>, crouchingStatus: boolean, crouchingStatusFrame?: Maybe<number>, jumpStatus: boolean, jumpStatusFrame?: Maybe<number>, homing: boolean, screw: boolean, wallBound: boolean } | { __typename: 'ReversalMove', reversalType: ReversalTypeEnum, reversalTarget: ReversalTargetEnum } | { __typename: 'ThrowMove', throwType: ThrowTypeEnum, startUpFrame?: Maybe<number>, damage: number, throwEscape: ThrowEscapeEnum, throwResult: ThrowMoveResultEnum }, commandList: Array<{ __typename?: 'Command', condition?: Maybe<string>, operations: Array<OperationEnum> }> }> }> } };
+export type CharacterMovesPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, combosCount: number, movesCount: number, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, moves: Array<{ __typename?: 'Move', id: string, name: string, kana?: Maybe<string>, condition?: Maybe<string>, note?: Maybe<string>, moveVideo?: Maybe<{ __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string }>, moveable: { __typename: 'AttackMove', startUpFrame?: Maybe<number>, heights: Array<AttackTypeEnum>, damages: Array<number>, blockResult: AttackMoveResultEnum, blockState?: Maybe<AttackMoveStateEnum>, blockFrame?: Maybe<number>, hitResult: AttackMoveResultEnum, hitState?: Maybe<AttackMoveStateEnum>, hitFrame?: Maybe<number>, counterResult: AttackMoveResultEnum, counterState?: Maybe<AttackMoveStateEnum>, counterFrame?: Maybe<number>, powerCrush: boolean, powerCrushFrame?: Maybe<number>, crouchingStatus: boolean, crouchingStatusFrame?: Maybe<number>, jumpStatus: boolean, jumpStatusFrame?: Maybe<number>, homing: boolean, screw: boolean, wallBound: boolean } | { __typename: 'ReversalMove', reversalType: ReversalTypeEnum, reversalTarget: ReversalTargetEnum } | { __typename: 'ThrowMove', throwType: ThrowTypeEnum, startUpFrame?: Maybe<number>, damage: number, throwEscape: ThrowEscapeEnum, throwResult: ThrowMoveResultEnum }, commandList: Array<{ __typename?: 'Command', condition?: Maybe<string>, operations: Array<OperationEnum> }> }> }> } };
 
 export type CharactersPageQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -3787,6 +3787,9 @@ export const CharacterMovesPageMoveFragmentDoc = gql`
   kana
   condition
   note
+  moveVideo {
+    ...moveVideo
+  }
   moveable {
     ...moveable
   }
@@ -3795,7 +3798,8 @@ export const CharacterMovesPageMoveFragmentDoc = gql`
     operations
   }
 }
-    ${MoveableFragmentDoc}`;
+    ${MoveVideoFragmentDoc}
+${MoveableFragmentDoc}`;
 export const DashboardArticlesPageArticleFragmentDoc = gql`
     fragment DashboardArticlesPageArticle on Article {
   id
