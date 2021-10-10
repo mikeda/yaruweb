@@ -244,12 +244,7 @@ const OpponentDetail: React.FC<{ frame?: number | null; state?: string | null }>
   let frameClass: string | undefined;
   if (frame && frame <= -10) frameClass = 'el_caution';
 
-  return (
-    <>
-      {frame && <span className={frameClass}>{frameText(frame)}</span>}
-      {state}
-    </>
-  );
+  return <>{frame ? <span className={frameClass}>{frameText(frame)}</span> : state}</>;
 };
 
 const AttackLabels: React.FC<{ attack: AttackMoveFragment }> = ({ attack }) => {
