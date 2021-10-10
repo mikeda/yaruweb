@@ -7,9 +7,10 @@ type Props = {
   src: string;
   thumnailUrl: string;
   width?: string | number;
+  autoPlay?: boolean;
 };
 
-export const VideoPlayer: React.FC<Props> = ({ src, thumnailUrl, width = '100%' }) => {
+export const VideoPlayer: React.FC<Props> = ({ src, thumnailUrl, width = '100%', autoPlay }) => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
@@ -34,5 +35,16 @@ export const VideoPlayer: React.FC<Props> = ({ src, thumnailUrl, width = '100%' 
     };
   }, [videoRef, src]);
 
-  return <video width={width} controls ref={videoRef} className={styles.video} poster={thumnailUrl} preload="none" />;
+  return (
+    <video
+      width={width}
+      controls
+      ref={videoRef}
+      className={styles.video}
+      poster={thumnailUrl}
+      preload="none"
+      autoPlay={autoPlay}
+      muted
+    />
+  );
 };

@@ -13,6 +13,10 @@ fragment CharacterMovesPageMove on Move {
   condition
   note
 
+  moveVideo {
+    ...moveVideo
+  }
+
   moveable {
     ...moveable
   }
