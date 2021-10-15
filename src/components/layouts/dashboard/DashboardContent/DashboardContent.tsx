@@ -82,7 +82,7 @@ export const DashboardContent: React.FC<Props> = ({ children, title, breadcrumb,
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
-            Responsive drawer
+            鉄拳やろうよ.com
           </Typography>
         </Toolbar>
       </AppBar>
