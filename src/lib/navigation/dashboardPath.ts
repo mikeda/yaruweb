@@ -57,7 +57,7 @@ export const dashboardPath = (options: Options): string => {
     case 'articlesNew':
       return '/dashboard/articles/new';
     case 'articleEdit':
-      `/dashboard/articles/${options.articleId}/edit`;
+      return `/dashboard/articles/${options.articleId}/edit`;
     case 'characters':
       return '/dashboard/characters';
     case 'charactersNew':
