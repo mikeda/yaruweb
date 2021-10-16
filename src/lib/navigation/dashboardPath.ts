@@ -2,9 +2,6 @@ import { generatePath } from './generatePath';
 
 type Options =
   | { to: 'top' }
-  | { to: 'actions'; moveId: string }
-  | { to: 'attackActionsNew'; moveId: string }
-  | { to: 'attackActionEdit'; actionId: string }
   | { to: 'articles' }
   | { to: 'articlesNew' }
   | { to: 'articleEdit'; articleId: string }
@@ -14,16 +11,11 @@ type Options =
   | { to: 'comboCategories'; characterSlug: string }
   | { to: 'comboCategoriesNew'; characterSlug: string }
   | { to: 'comboCategoryEdit'; comboCategoryId: string }
-  | { to: 'combos'; comboCategoryId: string }
   | { to: 'combosNew'; comboCategoryId: string }
   | { to: 'comboEdit'; comboId: string }
-  | { to: 'commands'; moveId: string }
-  | { to: 'commandsNew'; moveId: string }
-  | { to: 'commandEdit'; commandId: string }
   | { to: 'moveCategories'; characterSlug: string }
   | { to: 'moveCategoriesNew'; characterSlug: string }
   | { to: 'moveCategoryEdit'; moveCategoryId: string }
-  | { to: 'moves'; moveCategoryId: string }
   | { to: 'movesNew'; moveCategoryId: string; moveType: 'attack' | 'throw' | 'reversal' }
   | { to: 'moveEdit'; moveId: string }
   | { to: 'organizers'; q?: string }
@@ -38,20 +30,12 @@ type Options =
   | { to: 'tournamentsNew' }
   | { to: 'tournamentEdit'; tournamentId: string }
   | { to: 'battles'; tournamentVideoId: string }
-  | { to: 'tournamentEdit'; tournamentId: string }
-  | { to: 'throwActionsNew'; moveId: string }
-  | { to: 'throwActionEdit'; actionId: string };
+  | { to: 'tournamentEdit'; tournamentId: string };
 
 export const dashboardPath = (options: Options): string => {
   switch (options.to) {
     case 'top':
       return '/dashboard';
-    case 'actions':
-      return `/dashboard/moves/${options.moveId}/actions`;
-    case 'attackActionsNew':
-      return `/dashboard/moves/${options.moveId}/attack_actions/new`;
-    case 'attackActionEdit':
-      return `/dashboard/attack_actions/${options.actionId}/edit`;
     case 'articles':
       return '/dashboard/articles';
     case 'articlesNew':
@@ -70,26 +54,16 @@ export const dashboardPath = (options: Options): string => {
       return `/dashboard/characters/${options.characterSlug}/combo_categories/new`;
     case 'comboCategoryEdit':
       `/dashboard/combo_categories/${options.comboCategoryId}/edit`;
-    case 'combos':
-      return `/dashboard/combo_categories/${options.comboCategoryId}/combos`;
     case 'combosNew':
       return `/dashboard/combo_categories/${options.comboCategoryId}/combos/new`;
     case 'comboEdit':
       return `/dashboard/combos/${options.comboId}/edit`;
-    case 'commands':
-      return `/dashboard/moves/${options.moveId}/commands`;
-    case 'commandsNew':
-      return `/dashboard/moves/${options.moveId}/commands/new`;
-    case 'commandEdit':
-      return `/dashboard/commands/${options.commandId}/edit`;
     case 'moveCategories':
       return `/dashboard/characters/${options.characterSlug}/move_categories`;
     case 'moveCategoriesNew':
       return `/dashboard/characters/${options.characterSlug}/move_categories/new`;
     case 'moveCategoryEdit':
       return `/dashboard/move_categories/${options.moveCategoryId}/edit`;
-    case 'moves':
-      return `/dashboard/move_categories/${options.moveCategoryId}/moves`;
     case 'movesNew':
       return `/dashboard/move_categories/${options.moveCategoryId}/moves/new?move_type=${options.moveType}`;
     case 'moveEdit':
@@ -118,9 +92,5 @@ export const dashboardPath = (options: Options): string => {
       return `/dashboard/tournaments/${options.tournamentId}/edit`;
     case 'battles':
       return `/dashboard/tournament_videos/${options.tournamentVideoId}/battles`;
-    case 'throwActionsNew':
-      return `/dashboard/moves/${options.moveId}/throw_actions/new`;
-    case 'throwActionEdit':
-      return `/dashboard/throw_actions/${options.actionId}/edit`;
   }
 };

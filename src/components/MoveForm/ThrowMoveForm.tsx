@@ -1,14 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import { ThrowMoveAttributes, MoveFragment } from '@/lib/graphql/types';
+import { ThrowMoveAttributes, MoveFragment, ThrowMoveResultEnum } from '@/lib/graphql/types';
 import { Controller, useForm } from 'react-hook-form';
-import { VideoPlayer } from '../MoveMedia/VideoPlayer';
 import { nullableNumber } from '@/lib/validators/nullable_number';
 import { Box, Button, Card, CardContent, Divider, Grid, TextField, Typography } from '@material-ui/core';
 import { CommandForm } from './CommandForm';
-import { MoveVideoInput } from './MoveVideoInput';
 
 const schema = yup.object().shape({
   move: yup.object({
@@ -25,8 +23,6 @@ interface Props {
 }
 
 export const ThrowMoveForm: React.FC<Props> = ({ move, onSubmit }) => {
-  const [moveVideo, setMoveVideo] = useState(move?.moveVideo);
-
   move?.moveVideo;
   const {
     handleSubmit,
@@ -37,24 +33,32 @@ export const ThrowMoveForm: React.FC<Props> = ({ move, onSubmit }) => {
   } = useForm<ThrowMoveAttributes>({
     resolver: yupResolver(schema),
     mode: 'onBlur',
-    defaultValues: move && {
-      move: {
-        moveVideoId: move.moveVideo?.id,
-        name: move.name,
-        kana: move.kana,
-        commandList: move.commandList.map(c => ({ condition: c.condition, operations: c.operations })),
-        note: move.note,
-      },
-      throw:
-        move.moveable.__typename === 'ThrowMove'
-          ? {
-              startUpFrame: move.moveable.startUpFrame,
-              damage: move.moveable.damage,
-              throwResult: move.moveable.throwResult,
-              throwEscape: move.moveable.throwEscape,
-            }
-          : undefined,
-    },
+    defaultValues: move
+      ? {
+          move: {
+            name: move.name,
+            kana: move.kana,
+            commandList: move.commandList.map(c => ({ condition: c.condition, operations: c.operations })),
+            note: move.note,
+          },
+          throw:
+            move.moveable.__typename === 'ThrowMove'
+              ? {
+                  startUpFrame: move.moveable.startUpFrame,
+                  damage: move.moveable.damage,
+                  throwResult: move.moveable.throwResult,
+                  throwEscape: move.moveable.throwEscape,
+                }
+              : undefined,
+        }
+      : {
+          move: {
+            commandList: [],
+          },
+          throw: {
+            throwResult: ThrowMoveResultEnum.Down,
+          },
+        },
   });
   const commandList = watch('move.commandList');
 
@@ -137,26 +141,6 @@ export const ThrowMoveForm: React.FC<Props> = ({ move, onSubmit }) => {
                 />
               </Grid>
             </Grid>
-          </Box>
-
-          <Box mt={4}>
-            <Typography variant="h4" gutterBottom>
-              動画
-            </Typography>
-            <Box>
-              <MoveVideoInput
-                onCreate={moveVideo => {
-                  setValue('move.moveVideoId', moveVideo.id);
-                  setMoveVideo(null);
-                }}
-              />
-            </Box>
-
-            {moveVideo && (
-              <Box mt={1}>
-                <VideoPlayer src={moveVideo.m3u8Url} thumnailUrl={moveVideo.thumbnailUrl} width={320} />
-              </Box>
-            )}
           </Box>
 
           <Box mt={4}>
