@@ -1,16 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import { ComboAttributes, ComboFragment, ComboVideoFragment, useCreateComboVideoMutation } from '@/lib/graphql/types';
+import { ComboAttributes, ComboFragment } from '@/lib/graphql/types';
 import { Controller, useForm } from 'react-hook-form';
 import { FormGroup } from '@/components/form/FormGroup';
 import { Input } from '@/components/form/Input';
 import { TextArea } from '../form/TextArea';
-import { useSetRecoilState } from 'recoil';
-import { loadingState } from '@/states/loading';
-import { toast } from 'react-toastify';
-import { VideoPlayer } from '../MoveMedia/VideoPlayer';
 import { Box, Button, Card, CardContent, Divider, Grid, TextField, Typography } from '@material-ui/core';
 import { CommandForm } from './CommandForm';
 
@@ -41,7 +37,6 @@ export const ComboForm: React.FC<Props> = ({ combo, onSubmit }) => {
           command: { condition: combo.command.condition, operations: combo.command.operations },
           damage: combo.damage,
           note: combo.note,
-          comboVideoId: combo.comboVideo?.id,
         }
       : {
           command: { operations: [] },
@@ -90,19 +85,6 @@ export const ComboForm: React.FC<Props> = ({ combo, onSubmit }) => {
             <Input type="number" {...register('damage', { valueAsNumber: true })} />
           </FormGroup>
 
-          <FormGroup label="動画">
-            <input type="hidden" {...register('comboVideoId')} />
-            <ComboVideoInput
-              onCreate={comboVideo => {
-                setValue('comboVideoId', comboVideo.id);
-              }}
-            />
-
-            {combo && combo.comboVideo && (
-              <VideoPlayer src={combo.comboVideo.m3u8Url} thumnailUrl={combo.comboVideo.thumbnailUrl} />
-            )}
-          </FormGroup>
-
           <FormGroup label="備考">
             <TextArea {...register('note')} />
           </FormGroup>
@@ -117,65 +99,5 @@ export const ComboForm: React.FC<Props> = ({ combo, onSubmit }) => {
         </Box>
       </form>
     </Card>
-  );
-};
-
-interface ComboVideoInputProps {
-  onCreate: (comboVideo: ComboVideoFragment) => void;
-}
-
-export const ComboVideoInput: React.FC<ComboVideoInputProps> = ({ onCreate }) => {
-  const [file, setFile] = useState<File>();
-  const setLoading = useSetRecoilState(loadingState);
-
-  const [ceateComboVideo, { loading }] = useCreateComboVideoMutation({
-    onCompleted: data => {
-      if (!data.createComboVideo) return;
-      if (!file) return;
-
-      const fields = JSON.parse(data.createComboVideo.videoUpload.fields);
-
-      const formData = new FormData();
-      for (const key in fields) {
-        formData.append(key, fields[key]);
-      }
-      formData.append('file', file);
-
-      fetch(data.createComboVideo.videoUpload.url, {
-        method: 'POST',
-        headers: { Accept: 'multipart/form-data' },
-        body: formData,
-      })
-        .then(() => {
-          if (!data.createComboVideo) return;
-
-          onCreate(data.createComboVideo.comboVideo);
-        })
-        .catch(() => {
-          toast.error('アップロードに失敗しました。');
-        });
-    },
-    onError: () => {
-      toast.error('アップロードに失敗しました。');
-    },
-  });
-
-  setLoading(loading);
-
-  return (
-    <Input
-      type="file"
-      id="video"
-      accept="video/mp4"
-      onChange={event => {
-        const target = event.target;
-        if (!target.files) return;
-        const file = target.files[0];
-        if (!file) return;
-
-        setFile(file);
-        ceateComboVideo();
-      }}
-    />
   );
 };

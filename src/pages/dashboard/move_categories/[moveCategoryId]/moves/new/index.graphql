@@ -13,7 +13,7 @@ query PageDashboardMoveNew($moveCategoryId: ID!) {
 mutation CreateAttackMove($moveCategoryId: ID!, $attributes: AttackMoveAttributes!) {
   createAttackMove(input: { moveCategoryId: $moveCategoryId, attributes: $attributes }) {
     move {
-      ...DashboardMovesPageMove
+      ...DashboardMoveCategoriesPageMove
     }
   }
 }

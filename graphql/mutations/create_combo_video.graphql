@@ -1,7 +1,7 @@
-mutation CreateComboVideo {
-  createComboVideo(input: {}) {
-    comboVideo {
-      ...comboVideo
+mutation CreateComboVideo($comboId: ID!) {
+  createComboVideo(input: { comboId: $comboId }) {
+    combo {
+      ...DashboardComboCategoriesPageCombo
     }
 
     videoUpload {

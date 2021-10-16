@@ -1,7 +1,23 @@
 fragment DashboardMoveCategoriesPageMoveCategory on MoveCategory {
-    id
-    name
-    movesCount
+  id
+  name
+
+  moves {
+    ...DashboardMoveCategoriesPageMove
+  }
+}
+
+fragment DashboardMoveCategoriesPageMove on Move {
+  id
+  name
+
+  moveVideo {
+    ...moveVideo
+  }
+
+  commandList {
+    ...command
+  }
 }
 
 query DashboardMoveCategoriesPage($characterSlug: String!) {

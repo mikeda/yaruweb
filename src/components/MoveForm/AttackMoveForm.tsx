@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
@@ -10,7 +10,6 @@ import {
   MoveFragment,
 } from '@/lib/graphql/types';
 import { Controller, useForm } from 'react-hook-form';
-import { VideoPlayer } from '../MoveMedia/VideoPlayer';
 import { nullableNumber } from '@/lib/validators/nullable_number';
 import {
   Box,
@@ -34,7 +33,6 @@ import {
 } from '@material-ui/core';
 import { AttackMoveResultText, AttackMoveStateEnumText, AttackTypeEnumText } from '@/lib/graphql/enum_texts';
 import { CommandForm } from './CommandForm';
-import { MoveVideoInput } from './MoveVideoInput';
 
 const schema = yup.object().shape({
   move: yup.object({
@@ -119,7 +117,6 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export const AttackMoveForm: React.FC<Props> = ({ move, onSubmit }) => {
-  const [moveVideo, setMoveVideo] = useState(move?.moveVideo);
   const classes = useStyles();
 
   move?.moveVideo;
@@ -135,7 +132,6 @@ export const AttackMoveForm: React.FC<Props> = ({ move, onSubmit }) => {
     defaultValues: move
       ? {
           move: {
-            moveVideoId: move.moveVideo?.id,
             name: move.name,
             kana: move.kana,
             commandList: move.commandList.map(c => ({ condition: c.condition, operations: c.operations })),
@@ -460,26 +456,6 @@ export const AttackMoveForm: React.FC<Props> = ({ move, onSubmit }) => {
                 </Grid>
               ))}
             </Grid>
-          </Box>
-
-          <Box mt={4}>
-            <Typography variant="h4" gutterBottom>
-              動画
-            </Typography>
-            <Box>
-              <MoveVideoInput
-                onCreate={moveVideo => {
-                  setValue('move.moveVideoId', moveVideo.id);
-                  setMoveVideo(null);
-                }}
-              />
-            </Box>
-
-            {moveVideo && (
-              <Box mt={1}>
-                <VideoPlayer src={moveVideo.m3u8Url} thumnailUrl={moveVideo.thumbnailUrl} width={320} />
-              </Box>
-            )}
           </Box>
 
           <Box mt={4}>

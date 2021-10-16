@@ -14,9 +14,6 @@ import {
 } from './params';
 
 export type DashboardBreadcrumbParams =
-  | { to: 'actions'; move: MoveParam }
-  | { to: 'attackActionsNew'; move: MoveParam }
-  | { to: 'attackActionEdit'; move: MoveParam }
   | { to: 'articles' }
   | { to: 'article'; article: ArticleParam }
   | { to: 'articlesNew' }
@@ -29,19 +26,12 @@ export type DashboardBreadcrumbParams =
   | { to: 'comboCategory'; comboCategory: ComboCategoryParam }
   | { to: 'comboCategoriesNew'; character: CharactersParam }
   | { to: 'comboCategoryEdit'; comboCategory: ComboCategoryParam }
-  | { to: 'combos'; comboCategory: ComboCategoryParam }
-  | { to: 'combo'; combo: ComboParam }
   | { to: 'combosNew'; comboCategory: ComboCategoryParam }
   | { to: 'comboEdit'; combo: ComboParam }
-  | { to: 'commands'; move: MoveParam }
-  | { to: 'commandsNew'; move: MoveParam }
-  | { to: 'commandEdit'; move: MoveParam }
   | { to: 'moveCategories'; character: CharactersParam }
   | { to: 'moveCategory'; moveCategory: MoveCategoryParam }
   | { to: 'moveCategoriesNew'; character: CharactersParam }
   | { to: 'moveCategoryEdit'; moveCategory: MoveCategoryParam }
-  | { to: 'moves'; moveCategory: MoveCategoryParam }
-  | { to: 'move'; move: MoveParam }
   | { to: 'movesNew'; moveCategory: MoveCategoryParam }
   | { to: 'moveEdit'; move: MoveParam }
   | { to: 'organizers' }
@@ -58,22 +48,10 @@ export type DashboardBreadcrumbParams =
   | { to: 'tournamentsNew' }
   | { to: 'tournamentEdit'; tournament: TournamentParam }
   | { to: 'battles'; tournamentVideo: TournamentVideoParam }
-  | { to: 'tournamentVideo'; tournamentVideo: TournamentVideoParam }
-  | { to: 'throwActionsNew'; move: MoveParam }
-  | { to: 'throwActionEdit'; move: MoveParam };
+  | { to: 'tournamentVideo'; tournamentVideo: TournamentVideoParam };
 
 export const breadcrumbChain = (props: DashboardBreadcrumbParams): BreadcrumbChainItem => {
   switch (props.to) {
-    case 'actions':
-      return {
-        name: '判定',
-        url: dashboardPath({ to: 'actions', moveId: props.move.id }),
-        parent: breadcrumbChain({ to: 'move', move: props.move }),
-      };
-    case 'attackActionsNew':
-      return { name: '判定を登録', parent: breadcrumbChain({ to: 'move', move: props.move }) };
-    case 'attackActionEdit':
-      return { name: '編集', parent: breadcrumbChain({ to: 'actions', move: props.move }) };
     case 'articles':
       return { name: '記事', url: dashboardPath({ to: 'articles' }) };
     case 'article':
@@ -108,30 +86,16 @@ export const breadcrumbChain = (props: DashboardBreadcrumbParams): BreadcrumbCha
       };
     case 'comboCategoryEdit':
       return { name: '編集', parent: breadcrumbChain({ to: 'comboCategory', comboCategory: props.comboCategory }) };
-    case 'combos':
+    case 'combosNew':
       return {
-        name: props.comboCategory.name,
-        url: dashboardPath({ to: 'combos', comboCategoryId: props.comboCategory.id }),
+        name: 'コンボを登録',
         parent: breadcrumbChain({ to: 'comboCategories', character: props.comboCategory.character }),
       };
-    case 'combo':
-      return {
-        name: props.combo.name,
-        parent: breadcrumbChain({ to: 'combos', comboCategory: props.combo.comboCategory }),
-      };
-    case 'combosNew':
-      return { name: 'コンボを登録', parent: breadcrumbChain({ to: 'combos', comboCategory: props.comboCategory }) };
     case 'comboEdit':
-      return { name: '編集', parent: breadcrumbChain({ to: 'combos', comboCategory: props.combo.comboCategory }) };
-    case 'commands':
       return {
-        name: 'コマンド',
-        parent: breadcrumbChain({ to: 'move', move: props.move }),
+        name: '編集',
+        parent: breadcrumbChain({ to: 'comboCategories', character: props.combo.comboCategory.character }),
       };
-    case 'commandsNew':
-      return { name: '登録', parent: breadcrumbChain({ to: 'commands', move: props.move }) };
-    case 'commandEdit':
-      return { name: '編集', parent: breadcrumbChain({ to: 'commands', move: props.move }) };
     case 'moveCategories':
       return {
         name: 'コマンドリスト',
@@ -150,21 +114,16 @@ export const breadcrumbChain = (props: DashboardBreadcrumbParams): BreadcrumbCha
       };
     case 'moveCategoryEdit':
       return { name: '編集', parent: breadcrumbChain({ to: 'moveCategory', moveCategory: props.moveCategory }) };
-    case 'moves':
+    case 'movesNew':
       return {
-        name: props.moveCategory.name,
-        url: dashboardPath({ to: 'moves', moveCategoryId: props.moveCategory.id }),
+        name: '技データを登録',
         parent: breadcrumbChain({ to: 'moveCategories', character: props.moveCategory.character }),
       };
-    case 'move':
-      return {
-        name: props.move.name,
-        parent: breadcrumbChain({ to: 'moves', moveCategory: props.move.moveCategory }),
-      };
-    case 'movesNew':
-      return { name: '技データを登録', parent: breadcrumbChain({ to: 'moves', moveCategory: props.moveCategory }) };
     case 'moveEdit':
-      return { name: '編集', parent: breadcrumbChain({ to: 'moves', moveCategory: props.move.moveCategory }) };
+      return {
+        name: '編集',
+        parent: breadcrumbChain({ to: 'moveCategories', character: props.move.moveCategory.character }),
+      };
     case 'profileEdit':
       return { name: 'プロフィール編集' };
     case 'organizers':
@@ -206,9 +165,5 @@ export const breadcrumbChain = (props: DashboardBreadcrumbParams): BreadcrumbCha
         name: props.tournamentVideo.title,
         parent: breadcrumbChain({ to: 'tournament', tournament: props.tournamentVideo.tournament }),
       };
-    case 'throwActionsNew':
-      return { name: '投げ判定を登録', parent: breadcrumbChain({ to: 'move', move: props.move }) };
-    case 'throwActionEdit':
-      return { name: '編集', parent: breadcrumbChain({ to: 'actions', move: props.move }) };
   }
 };

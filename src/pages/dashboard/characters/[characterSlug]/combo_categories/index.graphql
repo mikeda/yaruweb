@@ -1,8 +1,25 @@
 fragment DashboardComboCategoriesPageComboCategory on ComboCategory {
-    id
-    name
-    combosCount
+  id
+  name
+
+  combos {
+    ...DashboardComboCategoriesPageCombo
+  }
 }
+
+fragment DashboardComboCategoriesPageCombo on Combo {
+  id
+  name
+
+  comboVideo {
+    ...comboVideo
+  }
+
+  command {
+    ...command
+  }
+}
+
 
 query DashboardComboCategoriesPage($characterSlug: String!) {
   character(characterSlug: $characterSlug) {
