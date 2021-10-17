@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { ReactNode, useState } from 'react';
 
 import { closestCenter, DndContext, KeyboardSensor, PointerSensor, useSensor, useSensors } from '@dnd-kit/core';
-import { SortableContext, sortableKeyboardCoordinates } from '@dnd-kit/sortable';
+import { arrayMove, SortableContext, sortableKeyboardCoordinates } from '@dnd-kit/sortable';
 
 interface SortableProps {
   ids: string[];
-  onMove: (oldIndex: number, newIndex: number) => void;
+  items: ReactNode[];
+  onMove: (id: string, newIndex: number) => void;
 }
 
-export const SortableCardList: React.FC<SortableProps> = ({ ids, onMove, children }) => {
+export const SortableCardList: React.FC<SortableProps> = ({ ids, items: initItems, onMove }) => {
+  const [items, setItems] = useState(initItems);
   const sensors = useSensors(
     useSensor(PointerSensor),
     useSensor(KeyboardSensor, {
@@ -30,10 +32,11 @@ export const SortableCardList: React.FC<SortableProps> = ({ ids, onMove, childre
 
         const oldIndex = ids.map(id => id).indexOf(active.id);
         const newIndex = ids.map(id => id).indexOf(over.id);
-        onMove(oldIndex, newIndex);
+        onMove(ids[oldIndex], newIndex);
+        setItems(prev => arrayMove(prev, oldIndex, newIndex));
       }}
     >
-      <SortableContext items={ids}>{children}</SortableContext>
+      <SortableContext items={ids}>{items}</SortableContext>
     </DndContext>
   );
 };
