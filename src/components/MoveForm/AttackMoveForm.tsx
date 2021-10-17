@@ -55,25 +55,25 @@ const frameCols: {
   label: string;
   result: 'attack.blockResult' | 'attack.hitResult' | 'attack.counterResult';
   frame: 'blockFrame' | 'hitFrame' | 'counterFrame';
-  state: 'attack.blockState' | 'attack.hitState' | 'attack.counterState';
+  state: 'attack.blockStatus' | 'attack.hitStatus' | 'attack.counterStatus';
 }[] = [
   {
     label: 'ガード',
     result: 'attack.blockResult',
     frame: 'blockFrame',
-    state: 'attack.blockState',
+    state: 'attack.blockStatus',
   },
   {
     label: 'ヒット',
     result: 'attack.hitResult',
     frame: 'hitFrame',
-    state: 'attack.hitState',
+    state: 'attack.hitStatus',
   },
   {
     label: 'カウンター',
     result: 'attack.counterResult',
     frame: 'counterFrame',
-    state: 'attack.counterState',
+    state: 'attack.counterStatus',
   },
 ];
 
@@ -145,13 +145,13 @@ export const AttackMoveForm: React.FC<Props> = ({ move, onSubmit }) => {
                   damages: move.moveable.damages,
                   blockResult: move.moveable.blockResult,
                   blockFrame: move.moveable.blockFrame,
-                  blockState: move.moveable.blockState,
+                  blockStatus: move.moveable.blockStatus,
                   hitResult: move.moveable.hitResult,
                   hitFrame: move.moveable.hitFrame,
-                  hitState: move.moveable.hitState,
+                  hitStatus: move.moveable.hitStatus,
                   counterResult: move.moveable.counterResult,
                   counterFrame: move.moveable.counterFrame,
-                  counterState: move.moveable.counterState,
+                  counterStatus: move.moveable.counterStatus,
                   powerCrush: move.moveable.powerCrush,
                   crouchingStatus: move.moveable.crouchingStatus,
                   jumpStatus: move.moveable.jumpStatus,

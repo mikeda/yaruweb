@@ -3,13 +3,13 @@ fragment attackMove on AttackMove {
   heights
   damages
   blockResult
-  blockState
+  blockStatus
   blockFrame
   hitResult
-  hitState
+  hitStatus
   hitFrame
   counterResult
-  counterState
+  counterStatus
   counterFrame
   powerCrush
   powerCrushFrame
