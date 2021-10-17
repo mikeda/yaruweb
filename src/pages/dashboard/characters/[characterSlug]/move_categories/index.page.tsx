@@ -195,28 +195,20 @@ const VideoButton: React.FC<{ move: DashboardMoveCategoriesPageMoveFragment }> =
         </DialogContent>
 
         <DialogActions>
-          <Button onClick={() => setDialogOpen(false)} color="primary">
-            Cancel
-          </Button>
+          <input
+            type="file"
+            id="video"
+            accept="video/mp4"
+            onChange={event => {
+              const target = event.target;
+              if (!target.files) return;
+              const file = target.files[0];
+              if (!file) return;
 
-          <Button component="label" color="primary">
-            アップロード
-            <input
-              type="file"
-              id="video"
-              accept="video/mp4"
-              hidden
-              onChange={event => {
-                const target = event.target;
-                if (!target.files) return;
-                const file = target.files[0];
-                if (!file) return;
-
-                setFile(file);
-                ceateMoveVideo();
-              }}
-            />
-          </Button>
+              setFile(file);
+              ceateMoveVideo();
+            }}
+          />
         </DialogActions>
       </Dialog>
     </>
