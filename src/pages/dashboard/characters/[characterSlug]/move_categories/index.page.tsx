@@ -17,7 +17,7 @@ import {
   TableRow,
   Typography,
 } from '@material-ui/core';
-import { Add, Add as AddIcon, Delete, Edit, YouTube } from '@material-ui/icons';
+import { Add, Add as AddIcon, Delete, DragHandle, Edit, YouTube } from '@material-ui/icons';
 import { toast } from 'react-toastify';
 
 import {
@@ -25,14 +25,17 @@ import {
   useCreateMoveVideoMutation,
   useDashboardMoveCategoriesPageQuery,
   useDeleteMoveCategoryMutation,
+  useUpdateMovePositionMutation,
 } from '@/lib/graphql/types';
 import { loadingState } from '@/states/loading';
 import { dashboardPath } from '@/lib';
 import { useRouteParams } from './hooks';
-import { DashboardContent, DashboardBreadcrumbs, Command } from '@/components';
+import { DashboardContent, DashboardBreadcrumbs, Command, SortableCardList } from '@/components';
 import { VideoPlayer } from '@/components/MoveMedia/VideoPlayer';
 import { colors } from '@/colors';
 import { useRouter } from 'next/router';
+import { useSortable } from '@dnd-kit/sortable';
+import { CSS } from '@dnd-kit/utilities';
 
 const Page: React.FC = () => {
   const { characterSlug } = useRouteParams();
@@ -56,7 +59,13 @@ const Page: React.FC = () => {
     },
   });
 
-  setLoading(loading || deleteLoading);
+  const [updateMovePosition, { loading: updatePositionloading }] = useUpdateMovePositionMutation({
+    onError: e => {
+      toast.error(e.message);
+    },
+  });
+
+  setLoading(loading || deleteLoading || updatePositionloading);
 
   if (!data) return null;
   const { character, moveCategories } = data;
@@ -85,17 +94,21 @@ const Page: React.FC = () => {
           <TableContainer component={Paper}>
             <Table>
               <TableBody>
-                {moveCategory.moves.map(move => (
-                  <MoveRow
-                    key={move.id}
-                    move={move}
-                    onDelete={() => {
-                      if (window.confirm('削除します。')) {
-                        destroy({ variables: { moveCategoryId: moveCategory.id } });
-                      }
-                    }}
-                  />
-                ))}
+                <SortableCardList
+                  ids={moveCategory.moves.map(m => m.id)}
+                  items={moveCategory.moves.map(move => (
+                    <MoveRow
+                      key={move.id}
+                      move={move}
+                      onDelete={() => {
+                        if (window.confirm('削除します。')) {
+                          destroy({ variables: { moveCategoryId: moveCategory.id } });
+                        }
+                      }}
+                    />
+                  ))}
+                  onMove={(moveId, newPosition) => updateMovePosition({ variables: { moveId, newPosition } })}
+                />
               </TableBody>
             </Table>
           </TableContainer>
@@ -115,8 +128,15 @@ interface MoveRowProps {
 }
 
 const MoveRow = ({ move, onDelete }: MoveRowProps) => {
+  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: move.id });
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  } as React.CSSProperties;
+
   return (
-    <TableRow>
+    <TableRow style={style}>
       <TableCell scope="row">
         <Typography>{move.name}</Typography>
 
@@ -132,8 +152,12 @@ const MoveRow = ({ move, onDelete }: MoveRowProps) => {
           <Edit />
         </IconButton>
 
-        <IconButton edge="end" onClick={onDelete}>
+        <IconButton onClick={onDelete}>
           <Delete />
+        </IconButton>
+
+        <IconButton edge="end" ref={setNodeRef} {...attributes} {...listeners}>
+          <DragHandle />
         </IconButton>
       </TableCell>
     </TableRow>
