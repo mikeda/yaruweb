@@ -15,9 +15,10 @@ import {
   TableCell,
   TableContainer,
   TableRow,
+  Tooltip,
   Typography,
 } from '@material-ui/core';
-import { Add, Add as AddIcon, Delete, DragHandle, Edit, YouTube } from '@material-ui/icons';
+import { Add, Add as AddIcon, Delete, Edit, YouTube } from '@material-ui/icons';
 import { toast } from 'react-toastify';
 
 import {
@@ -25,17 +26,15 @@ import {
   useCreateMoveVideoMutation,
   useDashboardMoveCategoriesPageQuery,
   useDeleteMoveCategoryMutation,
-  useUpdateMovePositionMutation,
+  useDeleteMoveMutation,
 } from '@/lib/graphql/types';
 import { loadingState } from '@/states/loading';
 import { dashboardPath } from '@/lib';
 import { useRouteParams } from './hooks';
-import { DashboardContent, DashboardBreadcrumbs, Command, SortableCardList } from '@/components';
+import { DashboardContent, DashboardBreadcrumbs, Command } from '@/components';
 import { VideoPlayer } from '@/components/MoveMedia/VideoPlayer';
 import { colors } from '@/colors';
 import { useRouter } from 'next/router';
-import { useSortable } from '@dnd-kit/sortable';
-import { CSS } from '@dnd-kit/utilities';
 
 const Page: React.FC = () => {
   const { characterSlug } = useRouteParams();
@@ -59,13 +58,7 @@ const Page: React.FC = () => {
     },
   });
 
-  const [updateMovePosition, { loading: updatePositionloading }] = useUpdateMovePositionMutation({
-    onError: e => {
-      toast.error(e.message);
-    },
-  });
-
-  setLoading(loading || deleteLoading || updatePositionloading);
+  setLoading(loading || deleteLoading);
 
   if (!data) return null;
   const { character, moveCategories } = data;
@@ -81,41 +74,55 @@ const Page: React.FC = () => {
           startIcon={<AddIcon />}
           href={dashboardPath({ to: 'moveCategoriesNew', characterSlug: character.slug })}
         >
-          作成する
+          カテゴリ追加
         </Button>
       }
     >
       {moveCategories.map(moveCategory => (
-        <Box key={moveCategory.id} mb={4}>
-          <Typography variant="h3" gutterBottom>
-            {moveCategory.name}
-          </Typography>
+        <Box key={moveCategory.id} mb={8}>
+          <Box display="flex" alignItems="center" justifyContent="space-between" mb={2}>
+            <Typography variant="h3" gutterBottom>
+              {moveCategory.name}
+            </Typography>
+
+            <div>
+              <MovesNewButton moveCategoryId={moveCategory.id} />
+
+              {moveCategory.moves.length == 0 && (
+                <IconButton
+                  onClick={() => {
+                    if (window.confirm('削除します。')) {
+                      destroy({ variables: { moveCategoryId: moveCategory.id } });
+                    }
+                  }}
+                >
+                  <Delete />
+                </IconButton>
+              )}
+            </div>
+          </Box>
 
           <TableContainer component={Paper}>
             <Table>
               <TableBody>
-                <SortableCardList
-                  ids={moveCategory.moves.map(m => m.id)}
-                  items={moveCategory.moves.map(move => (
-                    <MoveRow
-                      key={move.id}
-                      move={move}
-                      onDelete={() => {
-                        if (window.confirm('削除します。')) {
-                          destroy({ variables: { moveCategoryId: moveCategory.id } });
-                        }
-                      }}
-                    />
-                  ))}
-                  onMove={(moveId, newPosition) => updateMovePosition({ variables: { moveId, newPosition } })}
-                />
+                {moveCategory.moves.map(move => (
+                  <MoveRow
+                    key={move.id}
+                    move={move}
+                    afterDelete={deletedMoveId => {
+                      updateQuery(prev => ({
+                        ...prev,
+                        moveCategories: prev.moveCategories.map(moveCategory => ({
+                          ...moveCategory,
+                          moves: moveCategory.moves.filter(move => move.id !== deletedMoveId),
+                        })),
+                      }));
+                    }}
+                  />
+                ))}
               </TableBody>
             </Table>
           </TableContainer>
-
-          <Box display="flex" justifyContent="center" mt={2}>
-            <MovesNewButton moveCategoryId={moveCategory.id} />
-          </Box>
         </Box>
       ))}
     </DashboardContent>
@@ -124,19 +131,26 @@ const Page: React.FC = () => {
 
 interface MoveRowProps {
   move: DashboardMoveCategoriesPageMoveFragment;
-  onDelete: () => void;
+  afterDelete: (moveId: string) => void;
 }
 
-const MoveRow = ({ move, onDelete }: MoveRowProps) => {
-  const { attributes, listeners, setNodeRef, transform, transition } = useSortable({ id: move.id });
+const MoveRow = ({ move, afterDelete }: MoveRowProps) => {
+  const [destroy, { loading }] = useDeleteMoveMutation({
+    variables: { moveId: move.id },
+    onCompleted: data => {
+      const move = data.deleteMove?.move;
+      if (!move) return;
 
-  const style = {
-    transform: CSS.Transform.toString(transform),
-    transition,
-  } as React.CSSProperties;
+      afterDelete(move.id);
+      toast.success('カテゴリを削除しました。');
+    },
+  });
+  const setLoading = useSetRecoilState(loadingState);
+
+  setLoading(loading);
 
   return (
-    <TableRow style={style}>
+    <TableRow>
       <TableCell scope="row">
         <Typography>{move.name}</Typography>
 
@@ -152,12 +166,14 @@ const MoveRow = ({ move, onDelete }: MoveRowProps) => {
           <Edit />
         </IconButton>
 
-        <IconButton onClick={onDelete}>
+        <IconButton
+          onClick={() => {
+            if (window.confirm('削除します。')) {
+              destroy();
+            }
+          }}
+        >
           <Delete />
-        </IconButton>
-
-        <IconButton edge="end" ref={setNodeRef} {...attributes} {...listeners}>
-          <DragHandle />
         </IconButton>
       </TableCell>
     </TableRow>
@@ -253,9 +269,12 @@ const MovesNewButton = ({ moveCategoryId }: { moveCategoryId: string }) => {
 
   return (
     <>
-      <Button variant="contained" color="primary" startIcon={<Add />} onClick={handleClick}>
-        作成する
-      </Button>
+      <Tooltip title="コマンドを作成">
+        <IconButton onClick={handleClick}>
+          <Add />
+        </IconButton>
+      </Tooltip>
+
       <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
         <MenuItem
           onClick={() => {
