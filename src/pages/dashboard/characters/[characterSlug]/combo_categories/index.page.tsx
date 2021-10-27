@@ -117,8 +117,6 @@ const ComboRow = ({ combo, onDelete }: ComboRowProps) => {
   return (
     <TableRow>
       <TableCell scope="row">
-        <Typography>{combo.name}</Typography>
-
         <Command command={combo.command} />
       </TableCell>
 

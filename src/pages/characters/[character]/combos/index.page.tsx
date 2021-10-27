@@ -55,9 +55,6 @@ const Page: React.FC<CharacterCombosPageQuery> = ({ character }) => {
                 {comboCategory.combos.map(combo => (
                   <TableRow key={combo.id}>
                     <TableCell>
-                      <Typography variant="h3" gutterBottom>
-                        {combo.name}
-                      </Typography>
                       <Command command={combo.command} />
                       {combo.note && (
                         <Typography variant="caption" component="p">

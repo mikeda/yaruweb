@@ -31,7 +31,10 @@ const Page: React.FC = () => {
   const { combo } = data;
 
   return (
-    <DashboardContent title="コンボ編集" breadcrumb={<DashboardBreadcrumbs to="comboEdit" combo={combo} />}>
+    <DashboardContent
+      title="コンボ編集"
+      breadcrumb={<DashboardBreadcrumbs to="comboEdit" comboCategory={combo.comboCategory} />}
+    >
       <ComboContent {...data} />
     </DashboardContent>
   );
@@ -55,7 +58,7 @@ const ComboContent: React.FC<PageDashboardComboEditQuery> = ({ combo }) => {
   };
 
   setLoading(loading);
-  return <ComboForm combo={combo} onSubmit={onSubmit} />;
+  return <ComboForm combo={combo} characterSlug={combo.comboCategory.character.slug} onSubmit={onSubmit} />;
 };
 
 export default Page;
