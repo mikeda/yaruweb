@@ -9,15 +9,16 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  makeStyles,
   Typography,
-} from '@material-ui/core';
+} from '@mui/material';
+
+import makeStyles from '@mui/styles/makeStyles';
 
 import { path } from '@/lib';
 import { Link } from '../Link';
 import { NO_IMAGE_URL } from '@/lib/Assets';
 import dayjs from '@/lib/dayjs';
-import { EmojiEvents, Schedule, YouTube } from '@material-ui/icons';
+import { EmojiEvents, Schedule, YouTube } from '@mui/icons-material';
 import { colors } from '@/colors';
 
 const useStyles = makeStyles({

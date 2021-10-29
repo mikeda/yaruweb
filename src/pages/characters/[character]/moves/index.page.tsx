@@ -21,7 +21,6 @@ import {
   Dialog,
   DialogContent,
   IconButton,
-  makeStyles,
   Paper,
   Table,
   TableBody,
@@ -30,7 +29,8 @@ import {
   TableHead,
   TableRow,
   Typography,
-} from '@material-ui/core';
+} from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import { Profile } from '../components/Profile';
 import { Tabs } from '../components/Tabs';
 import { ParsedUrlQuery } from 'querystring';
@@ -41,7 +41,7 @@ import {
   ThrowMoveResultText,
   ThrowTypeEnumText,
 } from '@/lib/graphql/enum_texts';
-import { YouTube } from '@material-ui/icons';
+import { YouTube } from '@mui/icons-material';
 import { VideoPlayer } from '@/components/MoveMedia/VideoPlayer';
 
 const useStyles = makeStyles({

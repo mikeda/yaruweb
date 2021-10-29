@@ -3,17 +3,17 @@ import React, { useState } from 'react';
 import {
   Avatar,
   Box,
-  createStyles,
   Dialog,
   IconButton,
   ListItem,
   ListItemSecondaryAction,
   ListItemText,
-  makeStyles,
   Theme,
-} from '@material-ui/core';
+} from '@mui/material';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
 import { formatSec } from '@/lib';
-import { Delete, Edit } from '@material-ui/icons';
+import { Delete, Edit } from '@mui/icons-material';
 import { BattleRoundText } from '@/lib/graphql/enum_texts';
 import {
   CharacterSelectOptionFragment,
@@ -95,10 +95,10 @@ export const BattleListItem: React.FC<Props> = ({
         secondary={subTitle}
       />
       <ListItemSecondaryAction>
-        <IconButton onClick={() => setDialogOpen(true)}>
+        <IconButton onClick={() => setDialogOpen(true)} size="large">
           <Edit />
         </IconButton>
-        <IconButton edge="end" onClick={onDestroy}>
+        <IconButton edge="end" onClick={onDestroy} size="large">
           <Delete />
         </IconButton>
       </ListItemSecondaryAction>

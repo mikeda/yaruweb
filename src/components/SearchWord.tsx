@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { makeStyles, Theme, createStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import InputBase from '@material-ui/core/InputBase';
-import IconButton from '@material-ui/core/IconButton';
-import SearchIcon from '@material-ui/icons/Search';
+import { Theme } from '@mui/material/styles';
+import makeStyles from '@mui/styles/makeStyles';
+import createStyles from '@mui/styles/createStyles';
+import Paper from '@mui/material/Paper';
+import InputBase from '@mui/material/InputBase';
+import IconButton from '@mui/material/IconButton';
+import SearchIcon from '@mui/icons-material/Search';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -44,7 +46,10 @@ export const SearchWord: React.FC<Props> = ({ initWord, onSearch }) => {
           }
         }}
       />
-      <IconButton className={classes.iconButton} onClick={() => onSearch(word)}>
+      <IconButton
+        className={classes.iconButton}
+        onClick={() => onSearch(word)}
+        size="large">
         <SearchIcon />
       </IconButton>
     </Paper>

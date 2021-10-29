@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { AppProps } from 'next/app';
-import { CssBaseline } from '@material-ui/core';
-import { ThemeProvider } from '@material-ui/core/styles';
+import { CssBaseline } from '@mui/material';
+import { ThemeProvider, Theme, StyledEngineProvider } from '@mui/material/styles';
 import theme from '@/theme';
 
 import { ToastContainer } from 'react-toastify';
@@ -24,6 +24,13 @@ import { useCurrentUserQuery } from '@/lib/graphql/types';
 import { useRouter } from 'next/router';
 import { Loading } from '@/components/Loading';
 import { loadingState } from '@/states/loading';
+
+
+declare module '@mui/styles/defaultTheme' {
+  // eslint-disable-next-line @typescript-eslint/no-empty-interface
+  interface DefaultTheme extends Theme {}
+}
+
 
 const AppInit = () => {
   const setCurrentUser = useSetRecoilState(currentUserState);
@@ -82,10 +89,12 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <RecoilRoot>
       <ApolloProvider client={client}>
-        <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <Component {...pageProps} />
-        </ThemeProvider>
+        <StyledEngineProvider injectFirst>
+          <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <Component {...pageProps} />
+          </ThemeProvider>
+        </StyledEngineProvider>
 
         <ToastContainer />
         <Loading />

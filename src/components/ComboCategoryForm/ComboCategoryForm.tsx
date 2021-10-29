@@ -4,7 +4,7 @@ import { ComboCategoryAttributes, ComboCategoryFragment } from '@/lib/graphql/ty
 import { useForm } from 'react-hook-form';
 import { FormGroup } from '@/components/form/FormGroup';
 import { Input } from '@/components/form/Input';
-import { Button } from '@material-ui/core';
+import { Button } from '@mui/material';
 
 interface Props {
   comboCategory?: ComboCategoryFragment;

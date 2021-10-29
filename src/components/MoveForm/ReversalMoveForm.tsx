@@ -5,7 +5,7 @@ import * as yup from 'yup';
 import { ReversalMoveAttributes, MoveFragment, ReversalTargetEnum, ReversalTypeEnum } from '@/lib/graphql/types';
 import { Controller, useForm } from 'react-hook-form';
 import { nullableNumber } from '@/lib/validators/nullable_number';
-import { Box, Button, Card, CardContent, Divider, Grid, TextField, Typography } from '@material-ui/core';
+import { Box, Button, Card, CardContent, Divider, Grid, TextField, Typography } from '@mui/material';
 import { CommandForm } from './CommandForm';
 
 const schema = yup.object().shape({

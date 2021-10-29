@@ -10,7 +10,6 @@ import {
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import {
   Box,
-  makeStyles,
   Paper,
   Table,
   TableBody,
@@ -18,7 +17,8 @@ import {
   TableContainer,
   TableRow,
   Typography,
-} from '@material-ui/core';
+} from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import { Profile } from '../components/Profile';
 import { Tabs } from '../components/Tabs';
 import { Content, Head, Breadcrumbs, Command } from '@/components';

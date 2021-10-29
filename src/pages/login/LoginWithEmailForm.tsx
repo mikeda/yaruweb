@@ -12,7 +12,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { UserValidator } from '@/lib/validators/UserValidator';
 import { loadingState } from '@/states/loading';
 import { path } from '@/lib';
-import { Box, Button, Card, CardContent, Divider, TextField } from '@material-ui/core';
+import { Box, Button, Card, CardContent, Divider, TextField } from '@mui/material';
 
 interface SignUpInput {
   email: string;

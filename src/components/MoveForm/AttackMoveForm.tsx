@@ -18,19 +18,19 @@ import {
   CardContent,
   Checkbox,
   Chip,
-  createStyles,
   Divider,
   FormControl,
   FormControlLabel,
   Grid,
   InputLabel,
-  makeStyles,
   MenuItem,
   Select,
   TextField,
   Theme,
   Typography,
-} from '@material-ui/core';
+} from '@mui/material';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
 import { AttackMoveResultText, AttackMoveStateEnumText, AttackTypeEnumText } from '@/lib/graphql/enum_texts';
 import { CommandForm } from './CommandForm';
 

@@ -16,8 +16,8 @@ import {
   MenuItem,
   Select,
   TextField,
-} from '@material-ui/core';
-import { Autocomplete } from '@material-ui/lab';
+} from '@mui/material';
+import { Autocomplete } from '@mui/material';
 
 const schema = yup.object().shape({
   place: yup.number().required().integer().min(1).max(4),

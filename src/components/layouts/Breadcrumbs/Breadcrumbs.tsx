@@ -1,9 +1,9 @@
 import React from 'react';
-import { default as MuiBreadcrumbs } from '@material-ui/core/Breadcrumbs';
+import { default as MuiBreadcrumbs } from '@mui/material/Breadcrumbs';
 
 import { DashboardBreadcrumbParams, breadcrumbChain as dashboardChain } from './DashboardDefinition';
 import { breadcrumbChain, ChainParam } from './Definition';
-import { Typography } from '@material-ui/core';
+import { Typography } from '@mui/material';
 import { Link } from '@/components/Link';
 
 export type BreadcrumbChainItem = {

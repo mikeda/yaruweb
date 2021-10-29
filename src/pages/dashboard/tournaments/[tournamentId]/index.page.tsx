@@ -1,18 +1,9 @@
 import React from 'react';
 
 import { DashboardBreadcrumbs, DashboardContent } from '@/components';
-import {
-  Box,
-  Card,
-  CardContent,
-  CardMedia,
-  createStyles,
-  Grid,
-  makeStyles,
-  Paper,
-  Theme,
-  Typography,
-} from '@material-ui/core';
+import { Box, Card, CardContent, CardMedia, Grid, Paper, Theme, Typography } from '@mui/material';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
 import { useRouter } from 'next/router';
 import { useDashboardTournamentPageQuery } from '@/lib/graphql/types';
 import { NO_IMAGE_URL } from '@/lib/Assets';

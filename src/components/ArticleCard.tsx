@@ -8,9 +8,9 @@ import {
   CardContent,
   CardHeader,
   CardMedia,
-  makeStyles,
   Typography,
-} from '@material-ui/core';
+} from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import dayjs from '@/lib/dayjs';
 import { ArticleCardFragment } from '@/lib/graphql/types';
 import { NO_IMAGE_URL } from '@/lib/Assets';

@@ -1,4 +1,4 @@
-import { createTheme } from '@material-ui/core/styles';
+import { createTheme, adaptV4Theme } from '@mui/material/styles';
 
 const primary = {
   50: '#feefed',
@@ -108,7 +108,7 @@ const error = {
   contrastDefaultColor: 'light',
 };
 
-const theme = createTheme({
+const theme = createTheme(adaptV4Theme({
   palette: {
     primary,
     secondary,
@@ -160,6 +160,6 @@ const theme = createTheme({
       fontSize: '1rem',
     },
   },
-});
+}));
 
 export default theme;

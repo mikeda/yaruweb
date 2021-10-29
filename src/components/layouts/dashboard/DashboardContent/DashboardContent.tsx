@@ -2,18 +2,18 @@ import React, { ReactNode, useState } from 'react';
 
 import {
   AppBar,
-  createStyles,
   Drawer,
   Grid,
   Hidden,
   IconButton,
-  makeStyles,
   Theme,
   Toolbar,
   Typography,
   useTheme,
-} from '@material-ui/core';
-import MenuIcon from '@material-ui/icons/Menu';
+} from '@mui/material';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
+import MenuIcon from '@mui/icons-material/Menu';
 import { DrawerItems } from './DrawerItems';
 import { Head } from '@/components';
 
@@ -78,7 +78,12 @@ export const DashboardContent: React.FC<Props> = ({ children, title, breadcrumb,
       <Head title={title} />
       <AppBar position="fixed" className={classes.appBar}>
         <Toolbar>
-          <IconButton color="inherit" edge="start" onClick={handleDrawerToggle} className={classes.menuButton}>
+          <IconButton
+            color="inherit"
+            edge="start"
+            onClick={handleDrawerToggle}
+            className={classes.menuButton}
+            size="large">
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>
@@ -104,7 +109,7 @@ export const DashboardContent: React.FC<Props> = ({ children, title, breadcrumb,
             <DrawerItems />
           </Drawer>
         </Hidden>
-        <Hidden xsDown implementation="css">
+        <Hidden smDown implementation="css">
           <Drawer
             classes={{
               paper: classes.drawerPaper,
@@ -119,7 +124,7 @@ export const DashboardContent: React.FC<Props> = ({ children, title, breadcrumb,
 
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <Grid container spacing={3} justify="space-between">
+        <Grid container spacing={3} justifyContent="space-between">
           <Grid item>
             <Typography variant="h1">{title}</Typography>
             {breadcrumb && <Grid item>{breadcrumb}</Grid>}

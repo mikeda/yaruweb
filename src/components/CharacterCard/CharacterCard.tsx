@@ -11,13 +11,14 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  makeStyles,
   Typography,
-} from '@material-ui/core';
+} from '@mui/material';
+
+import makeStyles from '@mui/styles/makeStyles';
 
 import { path, dashboardPath } from '@/lib';
 import { Link } from '../Link';
-import { Public, YouTube, SportsKabaddi } from '@material-ui/icons';
+import { Public, YouTube, SportsKabaddi } from '@mui/icons-material';
 import { colors } from '@/colors';
 
 const useStyles = makeStyles({

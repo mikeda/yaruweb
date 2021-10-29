@@ -1,5 +1,7 @@
 import React from 'react';
-import { Avatar, Box, Grid, ListItem, ListItemText, makeStyles, Typography } from '@material-ui/core';
+import { Avatar, Box, Grid, ListItem, ListItemText, Typography } from '@mui/material';
+
+import makeStyles from '@mui/styles/makeStyles';
 
 import { Link } from '@/components';
 import { path } from '@/lib';

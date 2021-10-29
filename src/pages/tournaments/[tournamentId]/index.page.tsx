@@ -20,10 +20,10 @@ import {
   ListItem,
   ListItemAvatar,
   ListItemText,
-  makeStyles,
   Paper,
   Typography,
-} from '@material-ui/core';
+} from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import { DEFAULT_AVATAR_URL, NO_IMAGE_URL, placeIconUrl } from '@/lib/Assets';
 import { path } from '@/lib';
 import { TournamentVideoPlayer } from './components/TournamentVideoPlayer';

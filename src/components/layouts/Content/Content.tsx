@@ -1,7 +1,8 @@
 import React, { ReactNode } from 'react';
 
 import { GlobalHeader, HeaderNav, TabValue } from '@/components';
-import { makeStyles, Typography } from '@material-ui/core';
+import { Typography } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import theme from '@/theme';
 
 const useStyles = makeStyles({

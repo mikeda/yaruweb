@@ -1,5 +1,7 @@
 import React from 'react';
-import { Avatar, makeStyles } from '@material-ui/core';
+import { Avatar } from '@mui/material';
+
+import makeStyles from '@mui/styles/makeStyles';
 
 const useStyles = makeStyles({
   first: {

@@ -1,9 +1,10 @@
 import React from 'react';
 import { DEFAULT_AVATAR_URL } from '@/lib/Assets';
 import { PlayerPageProfileFragment } from '@/lib/graphql/types';
-import { Paper, Typography, makeStyles } from '@material-ui/core';
+import { Paper, Typography } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import theme from '@/theme';
-import { LiveTv, Twitter } from '@material-ui/icons';
+import { LiveTv, Twitter } from '@mui/icons-material';
 import { colors } from '@/colors';
 
 const useStyles = makeStyles({

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { path } from '@/lib';
-import { Paper, Tab, Tabs } from '@material-ui/core';
+import { Paper, Tab, Tabs } from '@mui/material';
 import { useRouter } from 'next/router';
 import { PlayerPageProfileFragment } from '@/lib/graphql/types';
 

@@ -3,7 +3,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Head, Content, Breadcrumbs, BattleListItem, PlayerPageTabs } from '@/components';
-import { Box, Button, List, Paper, Typography } from '@material-ui/core';
+import { Box, Button, List, Paper, Typography } from '@mui/material';
 import {
   BattleListItemFragment,
   PagingFragment,

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { GetStaticProps } from 'next';
-import { Box, Button, Grid } from '@material-ui/core';
+import { Box, Button, Grid } from '@mui/material';
 
 import {
   ArticlesPageArticlesDocument,

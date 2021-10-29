@@ -1,18 +1,11 @@
 import React, { ReactElement } from 'react';
 
-import {
-  createStyles,
-  Divider,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  makeStyles,
-  Theme,
-} from '@material-ui/core';
+import { Divider, List, ListItem, ListItemIcon, ListItemText, Theme } from '@mui/material';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
 import { Link } from '@/components';
 import { dashboardPath } from '@/lib';
-import { EmojiEvents, Person, TagFaces, LibraryBooks, People } from '@material-ui/icons';
+import { EmojiEvents, Person, TagFaces, LibraryBooks, People } from '@mui/icons-material';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({

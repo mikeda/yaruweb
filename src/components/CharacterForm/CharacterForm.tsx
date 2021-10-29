@@ -5,7 +5,7 @@ import * as yup from 'yup';
 
 import { CharacterAttributes, CharacterFormFragment } from '@/lib/graphql/types';
 import { CheckBox, FormGrid, TextArea, Input, FormGroup } from '@/components';
-import { Button } from '@material-ui/core';
+import { Button } from '@mui/material';
 
 const schema = yup.object().shape({
   name: yup.string().required(),

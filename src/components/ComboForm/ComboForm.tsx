@@ -19,7 +19,7 @@ import {
   MenuItem,
   Select,
   Typography,
-} from '@material-ui/core';
+} from '@mui/material';
 import { CommandForm } from './CommandForm';
 import { Controller, useForm } from 'react-hook-form';
 

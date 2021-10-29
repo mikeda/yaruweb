@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar, Chip } from '@material-ui/core';
+import { Avatar, Chip } from '@mui/material';
 import { CharacterBattleCountChipFragment } from '@/lib/graphql/types';
 
 interface Props {

@@ -20,9 +20,10 @@ import {
   Select,
   TextField,
   Tooltip,
-} from '@material-ui/core';
-import { Autocomplete, createFilterOptions } from '@material-ui/lab';
-import { GetApp, PlayArrow, SkipNext, SkipPrevious } from '@material-ui/icons';
+} from '@mui/material';
+import { Autocomplete } from '@mui/material';
+import { createFilterOptions } from '@mui/material/useAutocomplete';
+import { GetApp, PlayArrow, SkipNext, SkipPrevious } from '@mui/icons-material';
 import { BattleRoundText } from '@/lib/graphql/enum_texts';
 
 const schema = yup.object().shape({

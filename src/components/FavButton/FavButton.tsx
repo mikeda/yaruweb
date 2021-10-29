@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 
 import { useFavArticleMutation, useFavButtonArticleQuery, useUnfavArticleMutation } from '@/lib/graphql/types';
-import { Favorite, FavoriteBorder } from '@material-ui/icons';
-import { Badge, IconButton } from '@material-ui/core';
+import { Favorite, FavoriteBorder } from '@mui/icons-material';
+import { Badge, IconButton } from '@mui/material';
 import { useCurrentUser } from '@/hooks/useCurrentUser';
 
 type Props = {
@@ -67,7 +67,7 @@ const UnfavedButton: React.FC<UnfavedButtonProps> = ({ articleId, favsCount, onF
   };
 
   return (
-    <IconButton color="default" onClick={onClick}>
+    <IconButton color="default" onClick={onClick} size="large">
       <Badge badgeContent={favsCount}>
         <FavoriteBorder />
       </Badge>
@@ -98,7 +98,7 @@ const FavedButton: React.FC<FavedButtonProps> = ({ articleId, favsCount, onUnfav
   };
 
   return (
-    <IconButton color="primary" onClick={onClick}>
+    <IconButton color="primary" onClick={onClick} size="large">
       <Badge badgeContent={favsCount}>
         <Favorite />
       </Badge>

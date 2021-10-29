@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
 import { CommandAttributes } from '@/lib/graphql/types';
-import { Box, IconButton, Paper } from '@material-ui/core';
+import { Box, IconButton, Paper } from '@mui/material';
 import { Command, OperationListSelector } from '..';
-import { Edit } from '@material-ui/icons';
+import { Edit } from '@mui/icons-material';
 
 interface Props {
   command: CommandAttributes;
@@ -19,7 +19,7 @@ export const CommandForm: React.FC<Props> = ({ command, onChange }) => {
         <Command command={command} />
 
         <div>
-          <IconButton edge="end" onClick={() => setDialogOpen(true)}>
+          <IconButton edge="end" onClick={() => setDialogOpen(true)} size="large">
             <Edit />
           </IconButton>
         </div>
