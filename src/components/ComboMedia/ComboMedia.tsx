@@ -14,9 +14,6 @@ export const ComboMedia: React.FC<Props> = ({ combo }) => {
       {combo.comboVideo && <VideoPlayer src={combo.comboVideo.m3u8Url} thumnailUrl={combo.comboVideo.thumbnailUrl} />}
 
       <CardContent>
-        <Typography variant="h3" gutterBottom>
-          {combo.name}
-        </Typography>
         <Command command={combo.command} />
         {combo.note && (
           <Typography variant="caption" component="p">

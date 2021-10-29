@@ -6,6 +6,16 @@ query PageDashboardComboNew($comboCategoryId: ID!) {
     character {
       slug
       name
+
+      moveCategories {
+        id
+        name
+
+        moves {
+          id
+          name
+        }
+      }
     }
   }
 }

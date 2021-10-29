@@ -1,8 +1,11 @@
 fragment combo on Combo {
   id
-  name
   damage
   note
+
+  move {
+    id
+  }
 
   command {
     ...command

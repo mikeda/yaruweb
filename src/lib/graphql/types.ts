@@ -319,14 +319,14 @@ export type Combo = {
   command: Command;
   damage?: Maybe<Scalars['Int']>;
   id: Scalars['ID'];
-  name: Scalars['String'];
+  move?: Maybe<Move>;
   note?: Maybe<Scalars['String']>;
 };
 
 export type ComboAttributes = {
   command: CommandAttributes;
   damage?: Maybe<Scalars['Int']>;
-  name: Scalars['String'];
+  moveId?: Maybe<Scalars['ID']>;
   note?: Maybe<Scalars['String']>;
 };
 
@@ -2355,7 +2355,7 @@ export type ArticleLinkFragment = { __typename?: 'ArticleLink', url: string, tit
 
 export type ArticleSummaryFragment = { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null | undefined, publishedAt?: string | null | undefined, faved: boolean, favsCount: number, status: ArticleStatus, author: { __typename?: 'User', name: string, avatarUrl: string } };
 
-export type ComboFragment = { __typename?: 'Combo', id: string, name: string, damage?: number | null | undefined, note?: string | null | undefined, command: { __typename?: 'Command', condition?: string | null | undefined, operations: Array<OperationEnum> }, comboCategory: { __typename?: 'ComboCategory', id: string, name: string }, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null | undefined };
+export type ComboFragment = { __typename?: 'Combo', id: string, damage?: number | null | undefined, note?: string | null | undefined, move?: { __typename?: 'Move', id: string } | null | undefined, command: { __typename?: 'Command', condition?: string | null | undefined, operations: Array<OperationEnum> }, comboCategory: { __typename?: 'ComboCategory', id: string, name: string }, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null | undefined };
 
 export type ComboCategoryFragment = { __typename?: 'ComboCategory', id: string, name: string };
 
@@ -2433,7 +2433,7 @@ export type CreateComboVideoMutationVariables = Exact<{
 }>;
 
 
-export type CreateComboVideoMutation = { __typename?: 'Mutation', createComboVideo?: { __typename?: 'CreateComboVideoPayload', combo: { __typename?: 'Combo', id: string, name: string, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null | undefined, command: { __typename?: 'Command', condition?: string | null | undefined, operations: Array<OperationEnum> } }, videoUpload: { __typename?: 'VideoUpload', url: string, fields: string } } | null | undefined };
+export type CreateComboVideoMutation = { __typename?: 'Mutation', createComboVideo?: { __typename?: 'CreateComboVideoPayload', combo: { __typename?: 'Combo', id: string, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null | undefined, command: { __typename?: 'Command', condition?: string | null | undefined, operations: Array<OperationEnum> } }, videoUpload: { __typename?: 'VideoUpload', url: string, fields: string } } | null | undefined };
 
 export type CreateMoveCategoryMutationVariables = Exact<{
   characterSlug: Scalars['String'];
@@ -2622,7 +2622,7 @@ export type ComboSelectOptionsQueryVariables = Exact<{
 }>;
 
 
-export type ComboSelectOptionsQuery = { __typename?: 'Query', comboCategories: Array<{ __typename?: 'ComboCategory', id: string, name: string, combos: Array<{ __typename?: 'Combo', id: string, name: string }> }> };
+export type ComboSelectOptionsQuery = { __typename?: 'Query', comboCategories: Array<{ __typename?: 'ComboCategory', id: string, name: string, combos: Array<{ __typename?: 'Combo', id: string, command: { __typename?: 'Command', condition?: string | null | undefined, operations: Array<OperationEnum> } }> }> };
 
 export type CountrySelectOptionFragment = { __typename?: 'Country', id: string, name: string, flagEmoji: string };
 
@@ -2693,7 +2693,7 @@ export type ArticleElementComboQueryVariables = Exact<{
 }>;
 
 
-export type ArticleElementComboQuery = { __typename?: 'Query', combo: { __typename?: 'Combo', id: string, name: string, damage?: number | null | undefined, note?: string | null | undefined, command: { __typename?: 'Command', condition?: string | null | undefined, operations: Array<OperationEnum> }, comboCategory: { __typename?: 'ComboCategory', id: string, name: string }, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null | undefined } };
+export type ArticleElementComboQuery = { __typename?: 'Query', combo: { __typename?: 'Combo', id: string, damage?: number | null | undefined, note?: string | null | undefined, command: { __typename?: 'Command', condition?: string | null | undefined, operations: Array<OperationEnum> }, comboCategory: { __typename?: 'ComboCategory', id: string, name: string }, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null | undefined } };
 
 export type ArticleElementMoveQueryVariables = Exact<{
   moveId: Scalars['ID'];
@@ -2718,7 +2718,7 @@ export type CharacterCardFragment = { __typename?: 'Character', slug: string, lo
 
 export type CharacterFormFragment = { __typename?: 'Character', name: string, nameKana: string, longName: string, longNameKana: string, slug: string, country: string, fightingStyle: string, story: string, description: string, dlc: boolean };
 
-export type ComboMediaFragment = { __typename?: 'Combo', id: string, name: string, damage?: number | null | undefined, note?: string | null | undefined, command: { __typename?: 'Command', condition?: string | null | undefined, operations: Array<OperationEnum> }, comboCategory: { __typename?: 'ComboCategory', id: string, name: string }, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null | undefined };
+export type ComboMediaFragment = { __typename?: 'Combo', id: string, damage?: number | null | undefined, note?: string | null | undefined, command: { __typename?: 'Command', condition?: string | null | undefined, operations: Array<OperationEnum> }, comboCategory: { __typename?: 'ComboCategory', id: string, name: string }, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null | undefined };
 
 export type FavButtonArticleQueryVariables = Exact<{
   articleId: Scalars['ID'];
@@ -2808,7 +2808,7 @@ export type CharacterCombosPageQueryVariables = Exact<{
 }>;
 
 
-export type CharacterCombosPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, combosCount: number, movesCount: number, comboCategories: Array<{ __typename?: 'ComboCategory', id: string, name: string, combos: Array<{ __typename?: 'Combo', id: string, name: string, damage?: number | null | undefined, note?: string | null | undefined, command: { __typename?: 'Command', condition?: string | null | undefined, operations: Array<OperationEnum> }, comboCategory: { __typename?: 'ComboCategory', id: string, name: string }, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null | undefined }> }> } };
+export type CharacterCombosPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, combosCount: number, movesCount: number, comboCategories: Array<{ __typename?: 'ComboCategory', id: string, name: string, combos: Array<{ __typename?: 'Combo', id: string, damage?: number | null | undefined, note?: string | null | undefined, command: { __typename?: 'Command', condition?: string | null | undefined, operations: Array<OperationEnum> }, comboCategory: { __typename?: 'ComboCategory', id: string, name: string }, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null | undefined }> }> } };
 
 export type CharacterPageProfileFragment = { __typename?: 'Character', slug: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, combosCount: number, movesCount: number };
 
@@ -2878,16 +2878,16 @@ export type DashboardArticlesPageArticlesQueryVariables = Exact<{
 
 export type DashboardArticlesPageArticlesQuery = { __typename?: 'Query', myArticles: { __typename?: 'ArticleCollection', records: Array<{ __typename?: 'Article', id: string, title: string, status: ArticleStatus }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
 
-export type DashboardComboCategoriesPageComboCategoryFragment = { __typename?: 'ComboCategory', id: string, name: string, combos: Array<{ __typename?: 'Combo', id: string, name: string, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null | undefined, command: { __typename?: 'Command', condition?: string | null | undefined, operations: Array<OperationEnum> } }> };
+export type DashboardComboCategoriesPageComboCategoryFragment = { __typename?: 'ComboCategory', id: string, name: string, combos: Array<{ __typename?: 'Combo', id: string, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null | undefined, command: { __typename?: 'Command', condition?: string | null | undefined, operations: Array<OperationEnum> } }> };
 
-export type DashboardComboCategoriesPageComboFragment = { __typename?: 'Combo', id: string, name: string, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null | undefined, command: { __typename?: 'Command', condition?: string | null | undefined, operations: Array<OperationEnum> } };
+export type DashboardComboCategoriesPageComboFragment = { __typename?: 'Combo', id: string, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null | undefined, command: { __typename?: 'Command', condition?: string | null | undefined, operations: Array<OperationEnum> } };
 
 export type DashboardComboCategoriesPageQueryVariables = Exact<{
   characterSlug: Scalars['String'];
 }>;
 
 
-export type DashboardComboCategoriesPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string }, comboCategories: Array<{ __typename?: 'ComboCategory', id: string, name: string, combos: Array<{ __typename?: 'Combo', id: string, name: string, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null | undefined, command: { __typename?: 'Command', condition?: string | null | undefined, operations: Array<OperationEnum> } }> }> };
+export type DashboardComboCategoriesPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string }, comboCategories: Array<{ __typename?: 'ComboCategory', id: string, name: string, combos: Array<{ __typename?: 'Combo', id: string, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null | undefined, command: { __typename?: 'Command', condition?: string | null | undefined, operations: Array<OperationEnum> } }> }> };
 
 export type PageDashboardComboCategoryNewQueryVariables = Exact<{
   characterSlug: Scalars['String'];
@@ -2931,7 +2931,7 @@ export type PageDashboardComboNewQueryVariables = Exact<{
 }>;
 
 
-export type PageDashboardComboNewQuery = { __typename?: 'Query', comboCategory: { __typename?: 'ComboCategory', id: string, name: string, character: { __typename?: 'Character', slug: string, name: string } } };
+export type PageDashboardComboNewQuery = { __typename?: 'Query', comboCategory: { __typename?: 'ComboCategory', id: string, name: string, character: { __typename?: 'Character', slug: string, name: string, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, moves: Array<{ __typename?: 'Move', id: string, name: string }> }> } } };
 
 export type PageDashboardComboCategoryEditQueryVariables = Exact<{
   comboCategoryId: Scalars['ID'];
@@ -2945,7 +2945,7 @@ export type PageDashboardComboEditQueryVariables = Exact<{
 }>;
 
 
-export type PageDashboardComboEditQuery = { __typename?: 'Query', combo: { __typename?: 'Combo', id: string, name: string, damage?: number | null | undefined, note?: string | null | undefined, comboCategory: { __typename?: 'ComboCategory', id: string, name: string, character: { __typename?: 'Character', slug: string, name: string } }, command: { __typename?: 'Command', condition?: string | null | undefined, operations: Array<OperationEnum> }, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null | undefined } };
+export type PageDashboardComboEditQuery = { __typename?: 'Query', combo: { __typename?: 'Combo', id: string, damage?: number | null | undefined, note?: string | null | undefined, comboCategory: { __typename?: 'ComboCategory', id: string, name: string, character: { __typename?: 'Character', slug: string, name: string } }, move?: { __typename?: 'Move', id: string } | null | undefined, command: { __typename?: 'Command', condition?: string | null | undefined, operations: Array<OperationEnum> }, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null | undefined } };
 
 export type PageDashboardMoveCategoryEditQueryVariables = Exact<{
   moveCategoryId: Scalars['ID'];
@@ -3317,9 +3317,11 @@ export const ComboVideoFragmentDoc = gql`
 export const ComboFragmentDoc = gql`
     fragment combo on Combo {
   id
-  name
   damage
   note
+  move {
+    id
+  }
   command {
     ...command
   }
@@ -3596,7 +3598,6 @@ export const CharacterFormFragmentDoc = gql`
 export const ComboMediaFragmentDoc = gql`
     fragment ComboMedia on Combo {
   id
-  name
   damage
   note
   command {
@@ -3823,7 +3824,6 @@ export const DashboardArticlesPageArticleFragmentDoc = gql`
 export const DashboardComboCategoriesPageComboFragmentDoc = gql`
     fragment DashboardComboCategoriesPageCombo on Combo {
   id
-  name
   comboVideo {
     ...comboVideo
   }
@@ -5216,7 +5216,10 @@ export const ComboSelectOptionsDocument = gql`
     name
     combos {
       id
-      name
+      command {
+        condition
+        operations
+      }
     }
   }
 }
@@ -6588,6 +6591,14 @@ export const PageDashboardComboNewDocument = gql`
     character {
       slug
       name
+      moveCategories {
+        id
+        name
+        moves {
+          id
+          name
+        }
+      }
     }
   }
 }

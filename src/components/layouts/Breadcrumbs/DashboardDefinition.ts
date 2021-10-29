@@ -4,7 +4,6 @@ import {
   ArticleParam,
   CharactersParam,
   ComboCategoryParam,
-  ComboParam,
   MoveCategoryParam,
   MoveParam,
   OrganizerParam,
@@ -27,7 +26,7 @@ export type DashboardBreadcrumbParams =
   | { to: 'comboCategoriesNew'; character: CharactersParam }
   | { to: 'comboCategoryEdit'; comboCategory: ComboCategoryParam }
   | { to: 'combosNew'; comboCategory: ComboCategoryParam }
-  | { to: 'comboEdit'; combo: ComboParam }
+  | { to: 'comboEdit'; comboCategory: ComboCategoryParam }
   | { to: 'moveCategories'; character: CharactersParam }
   | { to: 'moveCategory'; moveCategory: MoveCategoryParam }
   | { to: 'moveCategoriesNew'; character: CharactersParam }
@@ -94,7 +93,7 @@ export const breadcrumbChain = (props: DashboardBreadcrumbParams): BreadcrumbCha
     case 'comboEdit':
       return {
         name: '編集',
-        parent: breadcrumbChain({ to: 'comboCategories', character: props.combo.comboCategory.character }),
+        parent: breadcrumbChain({ to: 'comboCategories', character: props.comboCategory.character }),
       };
     case 'moveCategories':
       return {
