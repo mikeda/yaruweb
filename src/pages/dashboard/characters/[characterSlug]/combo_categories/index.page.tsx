@@ -14,8 +14,8 @@ import {
   TableContainer,
   TableRow,
   Typography,
-} from '@material-ui/core';
-import { Add as AddIcon, Delete, Edit, YouTube } from '@material-ui/icons';
+} from '@mui/material';
+import { Add as AddIcon, Delete, Edit, YouTube } from '@mui/icons-material';
 import { toast } from 'react-toastify';
 
 import {
@@ -123,11 +123,11 @@ const ComboRow = ({ combo, onDelete }: ComboRowProps) => {
       <TableCell align="right" scope="row">
         <VideoButton combo={combo} />
 
-        <IconButton href={dashboardPath({ to: 'comboEdit', comboId: combo.id })}>
+        <IconButton href={dashboardPath({ to: 'comboEdit', comboId: combo.id })} size="large">
           <Edit />
         </IconButton>
 
-        <IconButton edge="end" onClick={onDelete}>
+        <IconButton edge="end" onClick={onDelete} size="large">
           <Delete />
         </IconButton>
       </TableCell>
@@ -176,46 +176,44 @@ const VideoButton: React.FC<{ combo: DashboardComboCategoriesPageComboFragment }
 
   setLoading(loading);
 
-  return (
-    <>
-      <IconButton onClick={() => setDialogOpen(true)}>
-        <YouTube style={combo.comboVideo ? { fill: colors.youtube } : {}} />
-      </IconButton>
+  return <>
+    <IconButton onClick={() => setDialogOpen(true)} size="large">
+      <YouTube style={combo.comboVideo ? { fill: colors.youtube } : {}} />
+    </IconButton>
 
-      <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)}>
-        <DialogContent>
-          {combo.comboVideo && (
-            <VideoPlayer src={combo.comboVideo.m3u8Url} thumnailUrl={combo.comboVideo.thumbnailUrl} autoPlay />
-          )}
-        </DialogContent>
+    <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)}>
+      <DialogContent>
+        {combo.comboVideo && (
+          <VideoPlayer src={combo.comboVideo.m3u8Url} thumnailUrl={combo.comboVideo.thumbnailUrl} autoPlay />
+        )}
+      </DialogContent>
 
-        <DialogActions>
-          <Button onClick={() => setDialogOpen(false)} color="primary">
-            Cancel
-          </Button>
+      <DialogActions>
+        <Button onClick={() => setDialogOpen(false)} color="primary">
+          Cancel
+        </Button>
 
-          <Button component="label" color="primary">
-            アップロード
-            <input
-              type="file"
-              id="video"
-              accept="video/mp4"
-              hidden
-              onChange={event => {
-                const target = event.target;
-                if (!target.files) return;
-                const file = target.files[0];
-                if (!file) return;
+        <Button component="label" color="primary">
+          アップロード
+          <input
+            type="file"
+            id="video"
+            accept="video/mp4"
+            hidden
+            onChange={event => {
+              const target = event.target;
+              if (!target.files) return;
+              const file = target.files[0];
+              if (!file) return;
 
-                setFile(file);
-                ceateComboVideo();
-              }}
-            />
-          </Button>
-        </DialogActions>
-      </Dialog>
-    </>
-  );
+              setFile(file);
+              ceateComboVideo();
+            }}
+          />
+        </Button>
+      </DialogActions>
+    </Dialog>
+  </>;
 };
 
 export default Page;

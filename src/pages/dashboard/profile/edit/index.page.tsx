@@ -14,7 +14,7 @@ import { Input } from '@/components/form/Input';
 import { currentUserState } from '@/states/currentUser';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from '@/states/loading';
-import { Button } from '@material-ui/core';
+import { Button } from '@mui/material';
 
 const Page: React.FC = () => {
   const setLoading = useSetRecoilState(loadingState);

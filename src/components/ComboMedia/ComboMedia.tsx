@@ -1,6 +1,6 @@
 import React from 'react';
 import { ComboMediaFragment } from '@/lib/graphql/types';
-import { Card, CardContent, Typography } from '@material-ui/core';
+import { Card, CardContent, Typography } from '@mui/material';
 import { VideoPlayer } from '../MoveMedia/VideoPlayer';
 import { Command } from '../Command';
 

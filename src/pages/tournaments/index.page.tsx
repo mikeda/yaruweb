@@ -3,7 +3,7 @@ import { GetStaticProps } from 'next';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from '@/states/loading';
-import { Box, Button, Grid } from '@material-ui/core';
+import { Box, Button, Grid } from '@mui/material';
 
 import {
   TournamentsPageTournamentsDocument,

@@ -7,7 +7,8 @@ import { signInFirebaseWithTwitter } from '@/lib/firebase';
 import { currentUserState } from '@/states/currentUser';
 import { useSetRecoilState } from 'recoil';
 import { path } from '@/lib';
-import { Button, makeStyles } from '@material-ui/core';
+import { Button } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import { colors } from '@/colors';
 
 const useStyles = makeStyles({

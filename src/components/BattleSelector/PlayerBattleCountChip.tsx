@@ -1,5 +1,5 @@
 import React from 'react';
-import { Avatar, Chip } from '@material-ui/core';
+import { Avatar, Chip } from '@mui/material';
 import { DEFAULT_AVATAR_URL } from '@/lib/Assets';
 import { PlayerBattleCountChipFragment } from '@/lib/graphql/types';
 

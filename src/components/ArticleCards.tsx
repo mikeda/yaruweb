@@ -2,7 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 
 import { ArticleCard } from './ArticleCard';
-import { Box, Grid, Link as MuiLink, Typography } from '@material-ui/core';
+import { Box, Grid, Link as MuiLink, Typography } from '@mui/material';
 import { ArticleCardFragment } from '@/lib/graphql/types';
 
 type Props = {

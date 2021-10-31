@@ -1,5 +1,5 @@
-import { Avatar, Button, Card, CardActions, CardContent, CardHeader, Typography } from '@material-ui/core';
-import { People, Twitter } from '@material-ui/icons';
+import { Avatar, Button, Card, CardActions, CardContent, CardHeader, Typography } from '@mui/material';
+import { People, Twitter } from '@mui/icons-material';
 import React from 'react';
 
 export const StaffRequirement: React.FC = () => {
@@ -21,7 +21,7 @@ export const StaffRequirement: React.FC = () => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button color="default" href="https://twitter.com/mikeda" target="_blank" startIcon={<Twitter />}>
+        <Button href="https://twitter.com/mikeda" target="_blank" startIcon={<Twitter />}>
           Twitter
         </Button>
       </CardActions>

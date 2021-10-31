@@ -6,7 +6,7 @@ import { Head } from '@/components/layouts/Head';
 import { Content } from '@/components/layouts/Content';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
-import { Box, Button, Grid } from '@material-ui/core';
+import { Box, Button, Grid } from '@mui/material';
 import {
   PlayersPagePlayersDocument,
   PlayersPagePlayersQuery,

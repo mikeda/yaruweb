@@ -8,11 +8,12 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  makeStyles,
   Typography,
-} from '@material-ui/core';
+} from '@mui/material';
 
-import { Public, SportsKabaddi } from '@material-ui/icons';
+import makeStyles from '@mui/styles/makeStyles';
+
+import { Public, SportsKabaddi } from '@mui/icons-material';
 
 const useStyles = makeStyles({
   root: {

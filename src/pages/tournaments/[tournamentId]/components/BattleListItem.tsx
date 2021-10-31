@@ -1,6 +1,9 @@
 import React from 'react';
 import clsx from 'clsx';
-import { Avatar, Box, createStyles, ListItem, ListItemText, makeStyles, Theme } from '@material-ui/core';
+import { Avatar, Box, ListItem, ListItemText, Theme } from '@mui/material';
+
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
 
 import { TournamentPageBattleFragment } from '@/lib/graphql/types';
 import { formatSec } from '@/lib';

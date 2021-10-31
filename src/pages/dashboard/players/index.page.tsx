@@ -16,8 +16,8 @@ import {
   TableContainer,
   TableRow,
   Typography,
-} from '@material-ui/core';
-import { Add as AddIcon, MoreVert } from '@material-ui/icons';
+} from '@mui/material';
+import { Add as AddIcon, MoreVert } from '@mui/icons-material';
 import { PlayerFormSmashgg } from './components/PlayerFormSmashgg';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from '@/states/loading';
@@ -148,24 +148,22 @@ const PlayerMenu = ({ onDelete }: PlayerRowProps) => {
     setAnchorEl(null);
   };
 
-  return (
-    <>
-      <IconButton edge="end" onClick={handleClick}>
-        <MoreVert />
-      </IconButton>
+  return <>
+    <IconButton edge="end" onClick={handleClick} size="large">
+      <MoreVert />
+    </IconButton>
 
-      <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
-        <MenuItem
-          onClick={() => {
-            onDelete();
-            handleClose();
-          }}
-        >
-          削除する
-        </MenuItem>
-      </Menu>
-    </>
-  );
+    <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
+      <MenuItem
+        onClick={() => {
+          onDelete();
+          handleClose();
+        }}
+      >
+        削除する
+      </MenuItem>
+    </Menu>
+  </>;
 };
 
 const CreateButton: React.FC = () => {

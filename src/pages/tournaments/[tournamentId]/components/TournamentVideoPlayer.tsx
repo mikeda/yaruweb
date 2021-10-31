@@ -1,6 +1,7 @@
 import { BattleListItem } from './BattleListItem';
 import { TournamentPageBattleFragment, TournamentPageVideoFragment } from '@/lib/graphql/types';
-import { List, makeStyles, Paper } from '@material-ui/core';
+import { List, Paper } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import React, { useEffect, useState } from 'react';
 import YouTube from 'react-youtube';
 import { YouTubePlayer } from 'youtube-player/dist/types';

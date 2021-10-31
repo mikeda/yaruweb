@@ -1,6 +1,6 @@
 import React from 'react';
 import NextDocument, { Html, Head, Main, NextScript, DocumentInitialProps, DocumentContext } from 'next/document';
-import { ServerStyleSheets } from '@material-ui/core/styles';
+import ServerStyleSheets from '@mui/styles/ServerStyleSheets';
 import theme from '@/theme';
 
 import { GA_TRACKING_ID } from '@/lib/gtag';

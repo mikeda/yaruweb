@@ -23,8 +23,8 @@ import {
   MenuItem,
   Select,
   TextField,
-} from '@material-ui/core';
-import { Autocomplete } from '@material-ui/lab';
+} from '@mui/material';
+import { Autocomplete } from '@mui/material';
 import { BattleRoundText } from '@/lib/graphql/enum_texts';
 
 const schema = yup.object().shape({

@@ -15,14 +15,14 @@ import {
   AccordionSummary,
   Box,
   List,
-  makeStyles,
   Paper,
   Typography,
-} from '@material-ui/core';
+} from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import YouTube from 'react-youtube';
 import { YouTubePlayer } from 'youtube-player/dist/types';
 import { BattleListItem } from './components/BattleListItem';
-import { ExpandMore } from '@material-ui/icons';
+import { ExpandMore } from '@mui/icons-material';
 
 const useStyles = makeStyles({
   list: {

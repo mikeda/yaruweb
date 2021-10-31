@@ -9,13 +9,14 @@ import {
   ListItem,
   ListItemIcon,
   ListItemText,
-  makeStyles,
   Typography,
-} from '@material-ui/core';
+} from '@mui/material';
+
+import makeStyles from '@mui/styles/makeStyles';
 
 import { path } from '@/lib';
 import { NO_IMAGE_URL } from '@/lib/Assets';
-import { EmojiEvents, YouTube } from '@material-ui/icons';
+import { EmojiEvents, YouTube } from '@mui/icons-material';
 import { colors } from '@/colors';
 
 const useStyles = makeStyles({

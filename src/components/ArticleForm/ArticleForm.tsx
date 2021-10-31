@@ -10,7 +10,7 @@ import { Descendant } from 'slate';
 import { useForm } from 'react-hook-form';
 import { FormGroup } from '../form/FormGroup';
 import { Input } from '../form/Input';
-import { Button } from '@material-ui/core';
+import { Button } from '@mui/material';
 
 const schema = yup.object().shape({
   title: yup.string().required(),

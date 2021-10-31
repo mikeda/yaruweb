@@ -17,8 +17,8 @@ import {
   TableRow,
   Tooltip,
   Typography,
-} from '@material-ui/core';
-import { Add, Add as AddIcon, Delete, Edit, YouTube } from '@material-ui/icons';
+} from '@mui/material';
+import { Add, Add as AddIcon, Delete, Edit, YouTube } from '@mui/icons-material';
 import { toast } from 'react-toastify';
 
 import {
@@ -95,7 +95,7 @@ const Page: React.FC = () => {
                       destroy({ variables: { moveCategoryId: moveCategory.id } });
                     }
                   }}
-                >
+                  size="large">
                   <Delete />
                 </IconButton>
               )}
@@ -162,7 +162,7 @@ const MoveRow = ({ move, afterDelete }: MoveRowProps) => {
       <TableCell align="right" scope="row">
         <VideoButton move={move} />
 
-        <IconButton href={dashboardPath({ to: 'moveEdit', moveId: move.id })}>
+        <IconButton href={dashboardPath({ to: 'moveEdit', moveId: move.id })} size="large">
           <Edit />
         </IconButton>
 
@@ -172,7 +172,7 @@ const MoveRow = ({ move, afterDelete }: MoveRowProps) => {
               destroy();
             }
           }}
-        >
+          size="large">
           <Delete />
         </IconButton>
       </TableCell>
@@ -221,38 +221,36 @@ const VideoButton: React.FC<{ move: DashboardMoveCategoriesPageMoveFragment }> =
 
   setLoading(loading);
 
-  return (
-    <>
-      <IconButton onClick={() => setDialogOpen(true)}>
-        <YouTube style={move.moveVideo ? { fill: colors.youtube } : {}} />
-      </IconButton>
+  return <>
+    <IconButton onClick={() => setDialogOpen(true)} size="large">
+      <YouTube style={move.moveVideo ? { fill: colors.youtube } : {}} />
+    </IconButton>
 
-      <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)}>
-        <DialogContent>
-          {move.moveVideo && (
-            <VideoPlayer src={move.moveVideo.m3u8Url} thumnailUrl={move.moveVideo.thumbnailUrl} autoPlay />
-          )}
-        </DialogContent>
+    <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)}>
+      <DialogContent>
+        {move.moveVideo && (
+          <VideoPlayer src={move.moveVideo.m3u8Url} thumnailUrl={move.moveVideo.thumbnailUrl} autoPlay />
+        )}
+      </DialogContent>
 
-        <DialogActions>
-          <input
-            type="file"
-            id="video"
-            accept="video/mp4"
-            onChange={event => {
-              const target = event.target;
-              if (!target.files) return;
-              const file = target.files[0];
-              if (!file) return;
+      <DialogActions>
+        <input
+          type="file"
+          id="video"
+          accept="video/mp4"
+          onChange={event => {
+            const target = event.target;
+            if (!target.files) return;
+            const file = target.files[0];
+            if (!file) return;
 
-              setFile(file);
-              ceateMoveVideo();
-            }}
-          />
-        </DialogActions>
-      </Dialog>
-    </>
-  );
+            setFile(file);
+            ceateMoveVideo();
+          }}
+        />
+      </DialogActions>
+    </Dialog>
+  </>;
 };
 
 const MovesNewButton = ({ moveCategoryId }: { moveCategoryId: string }) => {
@@ -267,44 +265,42 @@ const MovesNewButton = ({ moveCategoryId }: { moveCategoryId: string }) => {
     setAnchorEl(null);
   };
 
-  return (
-    <>
-      <Tooltip title="コマンドを作成">
-        <IconButton onClick={handleClick}>
-          <Add />
-        </IconButton>
-      </Tooltip>
+  return <>
+    <Tooltip title="コマンドを作成">
+      <IconButton onClick={handleClick} size="large">
+        <Add />
+      </IconButton>
+    </Tooltip>
 
-      <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
-        <MenuItem
-          onClick={() => {
-            handleClose();
-            router.push(dashboardPath({ to: 'movesNew', moveCategoryId, moveType: 'attack' }));
-          }}
-        >
-          打撃
-        </MenuItem>
+    <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
+      <MenuItem
+        onClick={() => {
+          handleClose();
+          router.push(dashboardPath({ to: 'movesNew', moveCategoryId, moveType: 'attack' }));
+        }}
+      >
+        打撃
+      </MenuItem>
 
-        <MenuItem
-          onClick={() => {
-            handleClose();
-            router.push(dashboardPath({ to: 'movesNew', moveCategoryId, moveType: 'throw' }));
-          }}
-        >
-          投げ
-        </MenuItem>
+      <MenuItem
+        onClick={() => {
+          handleClose();
+          router.push(dashboardPath({ to: 'movesNew', moveCategoryId, moveType: 'throw' }));
+        }}
+      >
+        投げ
+      </MenuItem>
 
-        <MenuItem
-          onClick={() => {
-            handleClose();
-            router.push(dashboardPath({ to: 'movesNew', moveCategoryId, moveType: 'reversal' }));
-          }}
-        >
-          返し技
-        </MenuItem>
-      </Menu>
-    </>
-  );
+      <MenuItem
+        onClick={() => {
+          handleClose();
+          router.push(dashboardPath({ to: 'movesNew', moveCategoryId, moveType: 'reversal' }));
+        }}
+      >
+        返し技
+      </MenuItem>
+    </Menu>
+  </>;
 };
 
 export default Page;

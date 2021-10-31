@@ -7,7 +7,9 @@ import { faBackspace } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './OperationListSelector.module.scss';
 import { OperationText } from '@/lib/graphql/enum_texts';
-import { Button, createStyles, Dialog, DialogActions, DialogContent, makeStyles, TextField } from '@material-ui/core';
+import { Button, Dialog, DialogActions, DialogContent, TextField } from '@mui/material';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
 import { Command } from '..';
 
 const useStyles = makeStyles(() =>

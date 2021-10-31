@@ -7,7 +7,7 @@ import { signOutFirebase } from '@/lib/firebase';
 import { useCurrentUser } from '@/hooks/useCurrentUser';
 import { currentUserState } from '@/states/currentUser';
 import { dashboardPath, path } from '@/lib';
-import { Avatar, IconButton, Link, Menu, MenuItem } from '@material-ui/core';
+import { Avatar, IconButton, Link, Menu, MenuItem } from '@mui/material';
 
 export const UserMenu: React.FC = () => {
   const { currentUser } = useCurrentUser();
@@ -27,33 +27,35 @@ export const UserMenu: React.FC = () => {
     setAnchorEl(null);
   };
 
-  return (
-    <>
-      <IconButton aria-controls="user-menu" aria-haspopup="true" onClick={handleClick}>
-        <Avatar alt={currentUser.name} src={currentUser.avatarUrl} />
-      </IconButton>
-      <Menu id="user-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
-        <MenuItem
-          onClick={() => {
-            router.push(dashboardPath({ to: 'articles' }));
-            handleClose();
-          }}
-        >
-          マイページ
-        </MenuItem>
-        <MenuItem
-          onClick={() => {
-            signOutFirebase().then(() => {
-              toast.success('ログアウトしました。');
-              setCurrentUser(null);
-              router.push(path({ to: 'top' }));
-            });
-            handleClose();
-          }}
-        >
-          ログアウト
-        </MenuItem>
-      </Menu>
-    </>
-  );
+  return <>
+    <IconButton
+      aria-controls="user-menu"
+      aria-haspopup="true"
+      onClick={handleClick}
+      size="large">
+      <Avatar alt={currentUser.name} src={currentUser.avatarUrl} />
+    </IconButton>
+    <Menu id="user-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
+      <MenuItem
+        onClick={() => {
+          router.push(dashboardPath({ to: 'articles' }));
+          handleClose();
+        }}
+      >
+        マイページ
+      </MenuItem>
+      <MenuItem
+        onClick={() => {
+          signOutFirebase().then(() => {
+            toast.success('ログアウトしました。');
+            setCurrentUser(null);
+            router.push(path({ to: 'top' }));
+          });
+          handleClose();
+        }}
+      >
+        ログアウト
+      </MenuItem>
+    </Menu>
+  </>;
 };

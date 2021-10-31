@@ -3,8 +3,8 @@ import React from 'react';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
 import { NotFound } from '@/components/NotFound';
 import { dashboardPath } from '@/lib';
-import { Button, Grid } from '@material-ui/core';
-import { Add as AddIcon } from '@material-ui/icons';
+import { Button, Grid } from '@mui/material';
+import { Add as AddIcon } from '@mui/icons-material';
 import { CharacterCard, DashboardBreadcrumbs } from '@/components';
 import { useDashboardCharactersPageQuery } from '@/lib/graphql/types';
 

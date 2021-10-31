@@ -16,7 +16,7 @@ import {
   MenuItem,
   Select,
   TextField,
-} from '@material-ui/core';
+} from '@mui/material';
 
 const schema = yup.object().shape({
   name: yup.string().required(),

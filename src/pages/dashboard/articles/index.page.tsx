@@ -27,9 +27,9 @@ import {
   TableContainer,
   TableRow,
   Typography,
-} from '@material-ui/core';
+} from '@mui/material';
 import { ArticleStatusText } from '@/lib/graphql/enum_texts';
-import { MoreVert } from '@material-ui/icons';
+import { MoreVert } from '@mui/icons-material';
 
 const Page: React.FC = () => {
   const setLoading = useSetRecoilState(loadingState);
@@ -149,45 +149,43 @@ const ArticleMenu = ({ article, onPublish, onStop, onDelete }: ArticleRowprops) 
     setAnchorEl(null);
   };
 
-  return (
-    <>
-      <IconButton edge="end" onClick={handleClick}>
-        <MoreVert />
-      </IconButton>
+  return <>
+    <IconButton edge="end" onClick={handleClick} size="large">
+      <MoreVert />
+    </IconButton>
 
-      <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
-        {article.status === ArticleStatus.Draft ? (
-          <>
-            <MenuItem
-              onClick={() => {
-                onPublish();
-                handleClose();
-              }}
-            >
-              公開する
-            </MenuItem>
-            <MenuItem
-              onClick={() => {
-                onDelete();
-                handleClose();
-              }}
-            >
-              削除する
-            </MenuItem>
-          </>
-        ) : (
+    <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
+      {article.status === ArticleStatus.Draft ? (
+        <>
           <MenuItem
             onClick={() => {
-              onStop();
+              onPublish();
               handleClose();
             }}
           >
-            下書きに戻す
+            公開する
           </MenuItem>
-        )}
-      </Menu>
-    </>
-  );
+          <MenuItem
+            onClick={() => {
+              onDelete();
+              handleClose();
+            }}
+          >
+            削除する
+          </MenuItem>
+        </>
+      ) : (
+        <MenuItem
+          onClick={() => {
+            onStop();
+            handleClose();
+          }}
+        >
+          下書きに戻す
+        </MenuItem>
+      )}
+    </Menu>
+  </>;
 };
 
 export default Page;

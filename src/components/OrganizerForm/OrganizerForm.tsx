@@ -4,7 +4,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
 import { OrganizerAttributes, OrganizerFormFragment } from '@/lib/graphql/types';
-import { Box, Button, Card, CardContent, Divider, Grid, TextField } from '@material-ui/core';
+import { Box, Button, Card, CardContent, Divider, Grid, TextField } from '@mui/material';
 
 const schema = yup.object().shape({
   name: yup.string().required(),

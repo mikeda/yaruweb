@@ -7,11 +7,11 @@ import {
   ListItem,
   ListItemSecondaryAction,
   ListItemText,
-  makeStyles,
   Menu,
   MenuItem,
-} from '@material-ui/core';
-import { MoreVert } from '@material-ui/icons';
+} from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
+import { MoreVert } from '@mui/icons-material';
 import { useDashboardTournamentPageVideosQuery } from '@/lib/graphql/types';
 import { useCreateVideoMutation, useDeleteVideoMutation } from '../hooks';
 import { VideoForm } from './VideoForm';
@@ -90,21 +90,24 @@ const MenuButton: React.FC<{ tournamentVideoId: string; onDestroy: () => void }>
     setAnchorEl(null);
   };
 
-  return (
-    <>
-      <IconButton edge="end" aria-controls="video-menu" aria-haspopup="true" onClick={handleClick}>
-        <MoreVert />
-      </IconButton>
-      <Menu id="video-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
-        <MenuItem
-          onClick={() => {
-            router.push(dashboardPath({ to: 'battles', tournamentVideoId }));
-          }}
-        >
-          対戦を登録する
-        </MenuItem>
-        <MenuItem onClick={onDestroy}>削除する</MenuItem>
-      </Menu>
-    </>
-  );
+  return <>
+    <IconButton
+      edge="end"
+      aria-controls="video-menu"
+      aria-haspopup="true"
+      onClick={handleClick}
+      size="large">
+      <MoreVert />
+    </IconButton>
+    <Menu id="video-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
+      <MenuItem
+        onClick={() => {
+          router.push(dashboardPath({ to: 'battles', tournamentVideoId }));
+        }}
+      >
+        対戦を登録する
+      </MenuItem>
+      <MenuItem onClick={onDestroy}>削除する</MenuItem>
+    </Menu>
+  </>;
 };

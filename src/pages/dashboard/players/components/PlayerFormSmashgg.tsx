@@ -3,7 +3,7 @@ import * as yup from 'yup';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@material-ui/core';
+import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
 import { useDashboardPlayersPageCreatePlayerFromSmashggMutation } from '@/lib/graphql/types';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';

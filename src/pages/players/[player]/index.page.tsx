@@ -3,7 +3,8 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Head, Content, Breadcrumbs, PlayerPageTabs } from '@/components';
-import { Box, makeStyles, Paper, Typography } from '@material-ui/core';
+import { Box, Paper, Typography } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import { PlayerPageDocument, PlayerPageQuery, PlayerSlugsDocument, PlayerSlugsQuery } from '@/lib/graphql/types';
 import { Profile } from './components/Profile';
 import theme from '@/theme';

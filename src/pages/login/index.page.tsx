@@ -6,7 +6,7 @@ import { Content } from '@/components/layouts/Content';
 import { Head } from '@/components/layouts/Head';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 import { path } from '@/lib';
-import { Box } from '@material-ui/core';
+import { Box } from '@mui/material';
 import { Link } from '@/components';
 
 const Page: React.FC = () => {

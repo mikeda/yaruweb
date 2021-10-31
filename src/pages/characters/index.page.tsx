@@ -7,7 +7,7 @@ import { Head } from '@/components/layouts/Head';
 import { Content } from '@/components/layouts/Content';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
-import { Grid } from '@material-ui/core';
+import { Grid } from '@mui/material';
 
 const Page: React.FC<CharactersPageQuery> = ({ characters }) => {
   return (
