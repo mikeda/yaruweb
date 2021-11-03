@@ -21,3 +21,19 @@ mutation UpdateAttackMove($moveId: ID!, $attributes: AttackMoveAttributes!) {
     }
   }
 }
+
+mutation UpdateThrowMove($moveId: ID!, $attributes: ThrowMoveAttributes!) {
+  updateThrowMove(input: { moveId: $moveId, attributes: $attributes }) {
+    move {
+      id
+    }
+  }
+}
+
+mutation UpdateReversalMove($moveId: ID!, $attributes: ReversalMoveAttributes!) {
+  updateReversalMove(input: { moveId: $moveId, attributes: $attributes }) {
+    move {
+      id
+    }
+  }
+}
