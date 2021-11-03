@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
 import {
@@ -18,10 +18,14 @@ import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 import {
   Box,
   Chip,
-  Dialog,
-  DialogContent,
-  IconButton,
+  Collapse,
+  Divider,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
   Paper,
+  Stack,
   Table,
   TableBody,
   TableCell,
@@ -30,7 +34,6 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
 import { Profile } from '../components/Profile';
 import { Tabs } from '../components/Tabs';
 import { ParsedUrlQuery } from 'querystring';
@@ -41,18 +44,10 @@ import {
   ThrowMoveResultText,
   ThrowTypeEnumText,
 } from '@/lib/graphql/enum_texts';
-import { YouTube } from '@mui/icons-material';
+import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { VideoPlayer } from '@/components/MoveMedia/VideoPlayer';
 
-const useStyles = makeStyles({
-  table: {
-    minWidth: 640,
-  },
-});
-
 const Page: React.FC<CharacterMovesPageQuery> = ({ character }) => {
-  const classes = useStyles();
-
   return (
     <Content activeTab="characters" breadcrumb={<Breadcrumbs to="characterMoves" character={character} />}>
       <Head title={`${character.longName}のコマンドリスト`} />
@@ -64,71 +59,20 @@ const Page: React.FC<CharacterMovesPageQuery> = ({ character }) => {
       </Box>
 
       {character.moveCategories.map(moveCategory => {
-        const { attackMoves, throwMoves, reversalMoves } = moveGroups(moveCategory.moves);
-
         return (
           <Box key={moveCategory.id} mt={4}>
             <Typography variant="h3" gutterBottom>
               {moveCategory.name}
             </Typography>
 
-            {attackMoves.length > 0 && (
-              <TableContainer component={Paper}>
-                <Table className={classes.table} size="small">
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>コマンド</TableCell>
-                      <TableCell>発生</TableCell>
-                      <TableCell>ガード/ヒット/カウンター</TableCell>
-                      <TableCell></TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {attackMoves.map(attackMove => (
-                      <AttackRow key={attackMove.move.id} {...attackMove} />
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            )}
-
-            {throwMoves.length > 0 && (
-              <TableContainer component={Paper}>
-                <Table className={classes.table} size="small">
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>コマンド</TableCell>
-                      <TableCell align="right">発生</TableCell>
-                      <TableCell align="right">投げ後</TableCell>
-                      <TableCell align="right">投げ抜け</TableCell>
-                      <TableCell></TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {throwMoves.map(throwMove => (
-                      <ThrowRow key={throwMove.move.id} {...throwMove} />
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
-            )}
-
-            {reversalMoves.length > 0 && (
-              <TableContainer component={Paper}>
-                <Table className={classes.table} size="small">
-                  <TableHead>
-                    <TableRow>
-                      <TableCell>コマンド</TableCell>
-                      <TableCell></TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {reversalMoves.map(reversalMove => (
-                      <ReversalRow key={reversalMove.move.id} {...reversalMove} />
-                    ))}
-                  </TableBody>
-                </Table>
-              </TableContainer>
+            {moveCategory.moves.length > 0 && (
+              <Paper>
+                <List>
+                  {moveCategory.moves.map((move, i) => (
+                    <MoveListItem key={move.id} move={move} first={i === 0} />
+                  ))}
+                </List>
+              </Paper>
             )}
           </Box>
         );
@@ -150,144 +94,174 @@ interface ReversalMove {
   reversal: ReversalMoveFragment;
 }
 
-const moveGroups = (moves: CharacterMovesPageMoveFragment[]) => {
-  const attackMoves: AttackMove[] = [];
-  const throwMoves: ThrowMove[] = [];
-  const reversalMoves: ReversalMove[] = [];
+const MoveListItem: React.FC<{ move: CharacterMovesPageMoveFragment; first: boolean }> = ({ move, first }) => {
+  const [open, setOpen] = React.useState(false);
+  const handleClick = () => {
+    setOpen(!open);
+  };
 
-  moves.forEach(move => {
-    switch (move.moveable.__typename) {
-      case 'AttackMove':
-        attackMoves.push({ move, attack: move.moveable });
-        break;
-      case 'ThrowMove':
-        throwMoves.push({ move, throw: move.moveable });
-        break;
-      case 'ReversalMove':
-        reversalMoves.push({ move, reversal: move.moveable });
-        break;
-    }
-  });
+  return (
+    <>
+      {!first && <Divider />}
 
-  return { attackMoves, throwMoves, reversalMoves };
+      <ListItemButton onClick={handleClick}>
+        <ListItemText>
+          <Typography>{move.name}</Typography>
+
+          <Box display="flex">
+            {move.commandList.map((command, i) => (
+              <>
+                {i !== 0 && <Typography sx={{ marginX: 1 }}>/</Typography>}
+                <Command key={i} command={command} />
+              </>
+            ))}
+          </Box>
+        </ListItemText>
+
+        {open ? <ExpandLess /> : <ExpandMore />}
+      </ListItemButton>
+
+      <Collapse in={open} timeout="auto" unmountOnExit>
+        {move.moveable.__typename === 'AttackMove' && <AttackListItem move={move} attack={move.moveable} />}
+        {move.moveable.__typename === 'ThrowMove' && <ThrowListItem move={move} throw={move.moveable} />}
+        {move.moveable.__typename === 'ReversalMove' && <ReversalListItem move={move} reversal={move.moveable} />}
+      </Collapse>
+    </>
+  );
 };
 
-const AttackRow: React.FC<AttackMove> = ({ move, attack }) => {
+const AttackListItem: React.FC<AttackMove> = ({ move, attack }) => {
+  const frames: { label: string; frame: string }[] = [
+    {
+      label: 'ガード',
+      frame: attack.blockFrame ? frameText(attack.blockFrame) : AttackMoveResultText[attack.blockResult],
+    },
+    {
+      label: 'ヒット',
+      frame: attack.hitFrame ? frameText(attack.hitFrame) : AttackMoveResultText[attack.hitResult],
+    },
+    {
+      label: 'カウンター',
+      frame: attack.counterFrame ? frameText(attack.counterFrame) : AttackMoveResultText[attack.blockResult],
+    },
+  ];
+  if (attack.startUpFrame) {
+    frames.unshift({ label: '発生', frame: frameText(attack.startUpFrame) });
+  }
+
   return (
-    <TableRow>
-      <TableCell>
-        <Typography variant="body1" gutterBottom>
-          {move.name}
-        </Typography>
-
-        {move.commandList.map((command, i) => (
-          <Command key={i} command={command} />
-        ))}
-
-        {attack.heights.length > 0 && attack.damages.length > 0 && (
-          <Typography variant="body2">
-            {attack.heights.map(h => AttackTypeEnumText[h]).join(',')} / {attack.damages.join(',')}
-          </Typography>
-        )}
-
+    <ListItem>
+      <Stack spacing={2} sx={{ paddingBottom: 1 }}>
         <AttackLabels attack={attack} />
-      </TableCell>
 
-      <TableCell>{attack.startUpFrame && `${attack.startUpFrame}F`}</TableCell>
-
-      <TableCell>
-        <OpponentDetail frame={attack.blockFrame} state={AttackMoveResultText[attack.blockResult]} />
-        /
-        <OpponentDetail frame={attack.hitFrame} state={AttackMoveResultText[attack.hitResult]} />
-        /
-        <OpponentDetail frame={attack.counterFrame} state={AttackMoveResultText[attack.counterResult]} />
-      </TableCell>
-
-      <MoveCell move={move} />
-    </TableRow>
-  );
-};
-
-const MoveCell: React.FC<{ move: CharacterMovesPageMoveFragment }> = ({ move }) => {
-  const [dialogOpen, setDialogOpen] = useState(false);
-
-  return (
-    <TableCell>
-      {move.moveVideo && (
-        <>
-          <IconButton size="small" onClick={() => setDialogOpen(true)}>
-            <YouTube />
-          </IconButton>
-
-          <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)}>
-            <DialogContent>
-              <VideoPlayer src={move.moveVideo.m3u8Url} thumnailUrl={move.moveVideo.thumbnailUrl} />
-            </DialogContent>
-          </Dialog>
-        </>
-      )}
-      {move.note && <Typography variant="caption">{move.note}</Typography>}
-    </TableCell>
-  );
-};
-
-const ThrowRow: React.FC<ThrowMove> = ({ move, throw: thrw }) => {
-  return (
-    <TableRow>
-      <TableCell>
-        <Typography variant="body1" gutterBottom>
-          {move.name}
-        </Typography>
-        {move.commandList.map((command, i) => (
-          <Command key={i} command={command} />
-        ))}
+        <Typography variant="body2">{attack.heights.map(h => AttackTypeEnumText[h]).join(' > ')}</Typography>
         <Typography variant="body2">
-          {ThrowTypeEnumText[thrw.throwType]} / {thrw.damage}
+          ダメージ {attack.damages.reduce((sum, d) => sum + d)}({attack.damages.join(',')})
         </Typography>
-      </TableCell>
-      <TableCell align="right">{thrw.startUpFrame && frameText(thrw.startUpFrame)}</TableCell>
-      <TableCell align="right">{ThrowMoveResultText[thrw.throwResult]}</TableCell>
-      <TableCell align="right">{thrw.throwEscape}</TableCell>
 
-      <MoveCell move={move} />
-    </TableRow>
+        <TableContainer component={Paper}>
+          <Table size="small">
+            <TableHead>
+              <TableRow>
+                {frames.map(frame => (
+                  <TableCell key={frame.label} sx={{ paddingX: '12px' }}>
+                    {frame.label}
+                  </TableCell>
+                ))}
+              </TableRow>
+            </TableHead>
+
+            <TableBody>
+              <TableRow>
+                {frames.map(frame => (
+                  <TableCell key={frame.label} sx={{ paddingX: '12px' }}>
+                    {frame.frame}
+                  </TableCell>
+                ))}
+              </TableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
+
+        <ListItemFooter move={move} />
+      </Stack>
+    </ListItem>
   );
 };
 
-const ReversalRow: React.FC<ReversalMove> = ({ move }) => {
+const ThrowListItem: React.FC<ThrowMove> = ({ move, throw: thrw }) => {
   return (
-    <TableRow>
-      <TableCell>
-        <Typography variant="body1" gutterBottom>
-          {move.name}
-        </Typography>
-        {move.commandList.map((command, i) => (
-          <Command key={i} command={command} />
-        ))}
-      </TableCell>
+    <ListItem>
+      <Stack spacing={2} sx={{ paddingBottom: 1 }}>
+        <Typography variant="body2">{ThrowTypeEnumText[thrw.throwType]}</Typography>
+        <Typography variant="body2">ダメージ {thrw.damage}</Typography>
 
-      <MoveCell move={move} />
-    </TableRow>
+        <TableContainer component={Paper}>
+          <Table size="small">
+            <TableHead>
+              <TableRow>
+                <TableCell sx={{ paddingX: '12px' }}>発生</TableCell>
+                <TableCell sx={{ paddingX: '12px' }}>ヒット</TableCell>
+                <TableCell sx={{ paddingX: '12px' }}>投げ抜け</TableCell>
+              </TableRow>
+            </TableHead>
+
+            <TableBody>
+              <TableRow>
+                <TableCell sx={{ paddingX: '12px' }}>{thrw.startUpFrame && frameText(thrw.startUpFrame)}</TableCell>
+                <TableCell sx={{ paddingX: '12px' }}>{ThrowMoveResultText[thrw.throwResult]}</TableCell>
+                <TableCell sx={{ paddingX: '12px' }}>{thrw.throwEscape}</TableCell>
+              </TableRow>
+            </TableBody>
+          </Table>
+        </TableContainer>
+
+        <ListItemFooter move={move} />
+      </Stack>
+    </ListItem>
   );
 };
 
-const OpponentDetail: React.FC<{ frame?: number | null; state?: string | null }> = ({ frame, state }) => {
-  let frameClass: string | undefined;
-  if (frame && frame <= -10) frameClass = 'el_caution';
+const ReversalListItem: React.FC<ReversalMove> = ({ move }) => {
+  return (
+    <ListItem>
+      <Stack spacing={2} sx={{ paddingBottom: 1 }}>
+        <ListItemFooter move={move} />
+      </Stack>
+    </ListItem>
+  );
+};
 
-  return <>{frame ? <span className={frameClass}>{frameText(frame)}</span> : state}</>;
+const ListItemFooter: React.FC<{ move: CharacterMovesPageMoveFragment }> = ({ move }) => {
+  return (
+    <>
+      {move.moveVideo && <VideoPlayer src={move.moveVideo.m3u8Url} thumnailUrl={move.moveVideo.thumbnailUrl} />}
+
+      {move.note && (
+        <Typography variant="body2" sx={{ whiteSpace: 'pre-line' }}>
+          {move.note}
+        </Typography>
+      )}
+    </>
+  );
 };
 
 const AttackLabels: React.FC<{ attack: AttackMoveFragment }> = ({ attack }) => {
+  const labels: string[] = [];
+  if (attack.powerCrush) labels.push('パワークラッシュ');
+  if (attack.crouchingStatus) labels.push('しゃがステ');
+  if (attack.jumpStatus) labels.push('ジャンステ');
+  if (attack.homing) labels.push('スクリュー');
+  if (attack.wallBound) labels.push('ウォールバウンド');
+
+  if (labels.length === 0) return null;
+
   return (
-    <div>
-      {attack.powerCrush && <Chip size="small" label="パワークラッシュ" />}
-      {attack.crouchingStatus && <Chip size="small" label="しゃがステ" />}
-      {attack.jumpStatus && <Chip size="small" label="ジャンステ" />}
-      {attack.homing && <Chip size="small" label="ホーミング" />}
-      {attack.screw && <Chip size="small" label="スクリュー" />}
-      {attack.wallBound && <Chip size="small" label="ウォールバウンド" />}
-    </div>
+    <Stack direction="row" spacing={1}>
+      {labels.map(label => (
+        <Chip key={label} size="small" label={label} />
+      ))}
+    </Stack>
   );
 };
 
