@@ -2,7 +2,7 @@ import React from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import { ReversalMoveAttributes, MoveFragment, ReversalTargetEnum, ReversalTypeEnum } from '@/lib/graphql/types';
+import { ReversalMoveAttributes, MoveFragment } from '@/lib/graphql/types';
 import { Controller, useForm } from 'react-hook-form';
 import { nullableNumber } from '@/lib/validators/nullable_number';
 import { Box, Button, Card, CardContent, Divider, Grid, TextField, Typography } from '@mui/material';
@@ -13,7 +13,9 @@ const schema = yup.object().shape({
     name: yup.string().required(),
   }),
   reversal: yup.object({
+    type: yup.string().required(),
     startUpFrame: nullableNumber,
+    finishFrame: nullableNumber,
   }),
 });
 
@@ -44,8 +46,9 @@ export const ReversalMoveForm: React.FC<Props> = ({ move, onSubmit }) => {
           reversal:
             move.moveable.__typename === 'ReversalMove'
               ? {
-                  reversalTarget: move.moveable.reversalTarget,
-                  reversalType: move.moveable.reversalType,
+                  type: move.moveable.type,
+                  startUpFrame: move.moveable.startUpFrame,
+                  finishFrame: move.moveable.finishFrame,
                 }
               : undefined,
         }
@@ -54,8 +57,7 @@ export const ReversalMoveForm: React.FC<Props> = ({ move, onSubmit }) => {
             commandList: [],
           },
           reversal: {
-            reversalTarget: ReversalTargetEnum.HighOrMiddle,
-            reversalType: ReversalTypeEnum.Reversal,
+            type: '',
           },
         },
   });
@@ -93,7 +95,7 @@ export const ReversalMoveForm: React.FC<Props> = ({ move, onSubmit }) => {
             </Grid>
           </Grid>
 
-          <Box mt={4}>
+          <Box mt={4} mb={4}>
             <Typography variant="h4" gutterBottom>
               コマンド
             </Typography>
@@ -126,6 +128,61 @@ export const ReversalMoveForm: React.FC<Props> = ({ move, onSubmit }) => {
               Add
             </Button>
           </Box>
+
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <Controller
+                name="reversal.type"
+                control={control}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    label="種別"
+                    error={Boolean(errors.reversal?.type)}
+                    helperText={errors.reversal?.type?.message}
+                    size="small"
+                    fullWidth
+                  />
+                )}
+              />
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <Controller
+                name="reversal.startUpFrame"
+                control={control}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    type="number"
+                    label="受付開始フレーム"
+                    error={Boolean(errors.reversal?.startUpFrame)}
+                    helperText={errors.reversal?.startUpFrame?.message}
+                    size="small"
+                    fullWidth
+                  />
+                )}
+              />
+            </Grid>
+
+            <Grid item xs={12} sm={6}>
+              <Controller
+                name="reversal.finishFrame"
+                control={control}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    type="number"
+                    label="受付終了フレーム"
+                    error={Boolean(errors.reversal?.startUpFrame)}
+                    helperText={errors.reversal?.startUpFrame?.message}
+                    size="small"
+                    fullWidth
+                  />
+                )}
+              />
+            </Grid>
+          </Grid>
 
           <Box mt={4}>
             <Grid container spacing={2}>

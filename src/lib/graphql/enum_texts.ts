@@ -87,18 +87,6 @@ export const OperationText: { [key in Types.OperationEnum]: { text: string; icon
   next: { text: '▶', icon: true },
 };
 
-export const ReversalTargetEnumText: { [key in Types.ReversalTargetEnum]: string } = {
-  high_or_middle: '上中段',
-  high: '上段',
-  middle: '中段',
-  low: '下段',
-};
-
-export const ReversalTypeEnumText: { [key in Types.ReversalTypeEnum]: string } = {
-  reversal: '返し',
-  parry: 'さばき',
-};
-
 export const ThrowMoveResultText: { [key in Types.ThrowMoveResultEnum]: string } = {
   normal: '',
   down: 'ダウン',

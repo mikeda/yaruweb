@@ -31,8 +31,9 @@ fragment throwMove on ThrowMove {
 }
 
 fragment reversalMove on ReversalMove {
-  reversalType
-  reversalTarget
+  type
+  startUpFrame
+  finishFrame
 }
 
 fragment move on Move {
