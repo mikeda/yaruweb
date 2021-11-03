@@ -2,10 +2,10 @@ import React from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { styled } from '@mui/material/styles';
 
 import { OperationEnum } from '@/lib/graphql/types';
 
-import styles from './Operations.module.scss';
 import { OperationText } from '@/lib/graphql/enum_texts';
 
 interface Props {
@@ -13,7 +13,7 @@ interface Props {
 }
 
 export const Operation: React.FC<Props> = ({ operation }) => {
-  if (operation === OperationEnum.Next) return <FontAwesomeIcon icon={faChevronRight} className={styles.next} />;
+  if (operation === OperationEnum.Next) return <NextOperation icon={faChevronRight} />;
 
   const operationText = OperationText[operation];
   const iconName = operationText.jpKey || operation;
@@ -21,13 +21,26 @@ export const Operation: React.FC<Props> = ({ operation }) => {
   return (
     <>
       {operationText.icon ? (
-        <img
-          className={styles.commandIcon}
-          src={`https://yarouyo.s3-ap-northeast-1.amazonaws.com/site/operations/${iconName}.svg`}
-        />
+        <IconOperation src={`https://yarouyo.s3-ap-northeast-1.amazonaws.com/site/operations/${iconName}.svg`} />
       ) : (
-        <span className={styles.commandText}>{operationText.text}</span>
+        <TextOperation>{operationText.text}</TextOperation>
       )}
     </>
   );
 };
+
+const IconOperation = styled('img')(({ theme }) => ({
+  width: 20,
+  marginRight: theme.spacing(0.5),
+}));
+
+export const TextOperation = styled('span')(({ theme }) => ({
+  display: 'block',
+  marginRight: theme.spacing(0.5),
+  fontSize: '0.75rem',
+}));
+
+const NextOperation = styled(FontAwesomeIcon)(({ theme }) => ({
+  marginRight: theme.spacing(1),
+  marginLeft: theme.spacing(1),
+}));
