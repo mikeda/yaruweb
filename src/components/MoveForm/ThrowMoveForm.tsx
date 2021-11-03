@@ -33,7 +33,9 @@ const schema = yup.object().shape({
     name: yup.string().required(),
   }),
   throw: yup.object({
+    damage: yup.number().required(),
     startUpFrame: nullableNumber,
+    finishFrame: nullableNumber,
   }),
 });
 
@@ -183,6 +185,24 @@ export const ThrowMoveForm: React.FC<Props> = ({ move, onSubmit }) => {
                   control={control}
                   render={({ field }) => (
                     <TextField {...field} type="number" label="発生フレーム" size="small" fullWidth />
+                  )}
+                />
+              </Grid>
+
+              <Grid item xs={12} sm={6}>
+                <Controller
+                  name="throw.damage"
+                  control={control}
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      type="number"
+                      label="ダメージ"
+                      error={Boolean(errors.throw?.damage)}
+                      helperText={errors.throw?.damage?.message}
+                      size="small"
+                      fullWidth
+                    />
                   )}
                 />
               </Grid>

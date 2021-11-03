@@ -41,6 +41,7 @@ import { Command } from '@/components';
 import {
   AttackMoveResultText,
   AttackTypeEnumText,
+  ThrowEscapeEnumText,
   ThrowMoveResultText,
   ThrowTypeEnumText,
 } from '@/lib/graphql/enum_texts';
@@ -210,7 +211,7 @@ const ThrowListItem: React.FC<ThrowMove> = ({ move, throw: thrw }) => {
               <TableRow>
                 <TableCell sx={{ paddingX: '12px' }}>{thrw.startUpFrame && frameText(thrw.startUpFrame)}</TableCell>
                 <TableCell sx={{ paddingX: '12px' }}>{ThrowMoveResultText[thrw.throwResult]}</TableCell>
-                <TableCell sx={{ paddingX: '12px' }}>{thrw.throwEscape}</TableCell>
+                <TableCell sx={{ paddingX: '12px' }}>{ThrowEscapeEnumText[thrw.throwEscape]}</TableCell>
               </TableRow>
             </TableBody>
           </Table>
@@ -222,10 +223,32 @@ const ThrowListItem: React.FC<ThrowMove> = ({ move, throw: thrw }) => {
   );
 };
 
-const ReversalListItem: React.FC<ReversalMove> = ({ move }) => {
+const ReversalListItem: React.FC<ReversalMove> = ({ move, reversal }) => {
   return (
     <ListItem>
       <Stack spacing={2} sx={{ paddingBottom: 1 }}>
+        <Typography variant="body2">{reversal.type}</Typography>
+
+        {(reversal.startUpFrame || reversal.finishFrame) && (
+          <TableContainer component={Paper}>
+            <Table size="small">
+              <TableHead>
+                <TableRow>
+                  <TableCell sx={{ paddingX: '12px' }}>受付フレーム</TableCell>
+                </TableRow>
+              </TableHead>
+
+              <TableBody>
+                <TableRow>
+                  <TableCell sx={{ paddingX: '12px' }}>
+                    {reversal.startUpFrame}〜{reversal.finishFrame}
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+          </TableContainer>
+        )}
+
         <ListItemFooter move={move} />
       </Stack>
     </ListItem>
