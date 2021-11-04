@@ -29,7 +29,7 @@ import {
   Typography,
 } from '@mui/material';
 import { ArticleStatusText } from '@/lib/graphql/enum_texts';
-import { MoreVert } from '@mui/icons-material';
+import { Add, MoreVert } from '@mui/icons-material';
 
 const Page: React.FC = () => {
   const setLoading = useSetRecoilState(loadingState);
@@ -65,7 +65,15 @@ const Page: React.FC = () => {
   const { records: articles, paging } = data.myArticles;
 
   return (
-    <DashboardContent title="記事一覧" breadcrumb={<DashboardBreadcrumbs to="articles" />}>
+    <DashboardContent
+      title="記事一覧"
+      breadcrumb={<DashboardBreadcrumbs to="articles" />}
+      actions={
+        <Button variant="contained" color="primary" startIcon={<Add />} href={dashboardPath({ to: 'articlesNew' })}>
+          記事を書く
+        </Button>
+      }
+    >
       <TableContainer component={Paper}>
         <Table>
           <TableBody>
@@ -149,43 +157,45 @@ const ArticleMenu = ({ article, onPublish, onStop, onDelete }: ArticleRowprops) 
     setAnchorEl(null);
   };
 
-  return <>
-    <IconButton edge="end" onClick={handleClick} size="large">
-      <MoreVert />
-    </IconButton>
+  return (
+    <>
+      <IconButton edge="end" onClick={handleClick} size="large">
+        <MoreVert />
+      </IconButton>
 
-    <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
-      {article.status === ArticleStatus.Draft ? (
-        <>
+      <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
+        {article.status === ArticleStatus.Draft ? (
+          <>
+            <MenuItem
+              onClick={() => {
+                onPublish();
+                handleClose();
+              }}
+            >
+              公開する
+            </MenuItem>
+            <MenuItem
+              onClick={() => {
+                onDelete();
+                handleClose();
+              }}
+            >
+              削除する
+            </MenuItem>
+          </>
+        ) : (
           <MenuItem
             onClick={() => {
-              onPublish();
+              onStop();
               handleClose();
             }}
           >
-            公開する
+            下書きに戻す
           </MenuItem>
-          <MenuItem
-            onClick={() => {
-              onDelete();
-              handleClose();
-            }}
-          >
-            削除する
-          </MenuItem>
-        </>
-      ) : (
-        <MenuItem
-          onClick={() => {
-            onStop();
-            handleClose();
-          }}
-        >
-          下書きに戻す
-        </MenuItem>
-      )}
-    </Menu>
-  </>;
+        )}
+      </Menu>
+    </>
+  );
 };
 
 export default Page;
