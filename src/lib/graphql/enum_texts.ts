@@ -88,14 +88,14 @@ export const OperationText: { [key in Types.OperationEnum]: { text: string; icon
 };
 
 export const ThrowMoveResultText: { [key in Types.ThrowMoveResultEnum]: string } = {
-  normal: '',
+  normal: '立ち',
   down: 'ダウン',
   combo: 'コンボ',
 };
 
 export const ThrowEscapeEnumText: { [key in Types.ThrowEscapeEnum]: string } = {
   lp_or_rp: 'LP or RP',
-  wp: 'LP+RP',
+  wp: 'WP',
   lp: 'LP',
   rp: 'RP',
   inescapable: '不可',
