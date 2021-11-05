@@ -7550,10 +7550,10 @@ slate-history@^0.66.0:
   dependencies:
     is-plain-object "^5.0.0"
 
-slate-react@^0.66.6:
-  version "0.66.6"
-  resolved "https://registry.yarnpkg.com/slate-react/-/slate-react-0.66.6.tgz#375cfa36e5a2fe26d7c39555d219fb0aa2d87c88"
-  integrity sha512-RufGxSyI/V8rjCqO3NDJSb5+jd0ldwSTini4fWekZMzRl0OhnoNhHcTpIYzyCaN5E7U8q2x1uUpj+W/RXWG/ZQ==
+slate-react@^0.69.0:
+  version "0.69.0"
+  resolved "https://registry.yarnpkg.com/slate-react/-/slate-react-0.69.0.tgz#6a444b8f0f854b6ffbfc07ab554a8d497b735baa"
+  integrity sha512-qz3w4dTRuiv9HHBUmQ1mcaaZ1il/7vm8fOCF4ccTqGGsOfwriY9pKX9lTFG06QCqkKaRrSvPHELL+V0oZJIF0g==
   dependencies:
     "@types/is-hotkey" "^0.1.1"
     "@types/lodash" "^4.14.149"
