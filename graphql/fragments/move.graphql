@@ -1,4 +1,5 @@
 fragment attackMove on AttackMove {
+  id
   startUpFrame
   heights
   damages
@@ -23,6 +24,7 @@ fragment attackMove on AttackMove {
 }
 
 fragment throwMove on ThrowMove {
+  id
   throwType
   startUpFrame
   damage
@@ -31,6 +33,7 @@ fragment throwMove on ThrowMove {
 }
 
 fragment reversalMove on ReversalMove {
+  id
   type
   startUpFrame
   finishFrame

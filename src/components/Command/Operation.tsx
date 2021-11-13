@@ -30,7 +30,7 @@ export const Operation: React.FC<Props> = ({ operation }) => {
 };
 
 const IconOperation = styled('img')(({ theme }) => ({
-  width: 20,
+  width: 24,
   marginRight: theme.spacing(0.5),
 }));
 
