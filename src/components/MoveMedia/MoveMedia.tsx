@@ -1,14 +1,19 @@
 import React from 'react';
+import { styled } from '@mui/material/styles';
 
-import { AttackMoveFragment, MoveMediaFragment } from '@/lib/graphql/types';
+import { AttackMoveFragment, MoveMediaFragment, ReversalMoveFragment, ThrowMoveFragment } from '@/lib/graphql/types';
 import { Command } from '../Command';
 
-import styles from './MoveMedia.module.scss';
-
-import Link from 'next/link';
 import { VideoPlayer } from './VideoPlayer';
-import { path } from '@/lib';
-import { AttackMoveResultText, AttackTypeEnumText } from '@/lib/graphql/enum_texts';
+import {
+  AttackMoveResultText,
+  AttackTypeEnumText,
+  ThrowEscapeEnumText,
+  ThrowMoveResultText,
+  ThrowTypeEnumText,
+} from '@/lib/graphql/enum_texts';
+import { Box, Card, CardContent, Chip, Divider, Stack, Typography } from '@mui/material';
+import { ArrowRight } from '@mui/icons-material';
 
 type Props = {
   move: MoveMediaFragment;
@@ -16,106 +21,144 @@ type Props = {
 
 export const MoveMedia: React.FC<Props> = ({ move }) => {
   return (
-    <Link href={path({ to: 'move', moveId: move.id })}>
-      <a className={styles.container}>
-        {move.kana && <div className={styles.kana}>{move.kana}</div>}
+    <Card>
+      <CardContent>
+        <Box mb={2}>
+          <Typography variant="h4" gutterBottom>
+            {move.name}
+          </Typography>
 
-        <div className={styles.header}>
-          <div className={styles.ttl}>{move.name}</div>
-        </div>
-
-        <div className={styles.cont}>
-          <div>
+          <Stack direction="row" divider={<Divider orientation="vertical" flexItem />} spacing={2}>
             {move.commandList.map((command, i) => (
               <Command key={i} command={command} />
             ))}
+          </Stack>
+        </Box>
 
-            {move.moveable.__typename === 'AttackMove' && <AttackDetails move={move} />}
-          </div>
-
-          {move.moveVideo && <VideoPlayer src={move.moveVideo.m3u8Url} thumnailUrl={move.moveVideo.thumbnailUrl} />}
-        </div>
-      </a>
-    </Link>
-  );
-};
-
-const AttackLabels: React.FC<AttackMoveFragment> = attack => {
-  return (
-    <div className={styles.tags}>
-      {attack.powerCrush && <span>パワークラッシュ</span>}
-      {attack.crouchingStatus && <span>しゃがステ</span>}
-      {attack.jumpStatus && <span>ジャンステ</span>}
-      {attack.homing && <span>ホーミング</span>}
-      {attack.screw && <span>スクリュー</span>}
-      {attack.wallBound && <span>ウォールバウンド</span>}
-    </div>
-  );
-};
-
-const AttackDetails: React.FC<{ move: MoveMediaFragment }> = ({ move }) => {
-  if (move.moveable.__typename !== 'AttackMove') return null;
-
-  const totalDamage = move.moveable.damages.reduce((a, b) => a + b, 0);
-
-  return (
-    <>
-      <AttackLabels {...move.moveable} />
-
-      <div className={styles.details}>
-        <MoveDetail label="発生">{`${move.moveable.startUpFrame}F`}</MoveDetail>
-      </div>
-
-      <div className={styles.details}>
-        {move.moveable.heights.length > 0 && (
-          <MoveDetail label="判定">
-            {move.moveable.heights.map(height => AttackTypeEnumText[height]).join(', ')}
-          </MoveDetail>
+        {move.moveVideo && (
+          <Box mb={2}>
+            <VideoPlayer src={move.moveVideo.m3u8Url} thumnailUrl={move.moveVideo.thumbnailUrl} />
+          </Box>
         )}
-        <MoveDetail label="ダメージ">
-          {totalDamage}
-          {move.moveable.damages.length > 1 && `(${move.moveable.damages.join(', ')})`}
-        </MoveDetail>
-      </div>
 
-      <div className={styles.details}>
-        <MoveDetail label="ガード">
-          <OpponentDetail frame={move.moveable.blockFrame} state={AttackMoveResultText[move.moveable.blockResult]} />
-        </MoveDetail>
-
-        <MoveDetail label="ヒット">
-          <OpponentDetail frame={move.moveable.hitFrame} state={AttackMoveResultText[move.moveable.hitResult]} />
-        </MoveDetail>
-
-        <MoveDetail label="カウンター">
-          <OpponentDetail
-            frame={move.moveable.counterFrame}
-            state={AttackMoveResultText[move.moveable.counterResult]}
-          />
-        </MoveDetail>
-      </div>
-    </>
+        {move.moveable.__typename === 'AttackMove' && <AttackListItem move={move} attack={move.moveable} />}
+        {move.moveable.__typename === 'ThrowMove' && <ThrowListItem move={move} throw={move.moveable} />}
+        {move.moveable.__typename === 'ReversalMove' && <ReversalListItem move={move} reversal={move.moveable} />}
+      </CardContent>
+    </Card>
   );
 };
 
-const MoveDetail: React.FC<{ label: string }> = ({ label, children }) => {
+interface AttackMove {
+  move: MoveMediaFragment;
+  attack: AttackMoveFragment;
+}
+interface ThrowMove {
+  move: MoveMediaFragment;
+  throw: ThrowMoveFragment;
+}
+interface ReversalMove {
+  move: MoveMediaFragment;
+  reversal: ReversalMoveFragment;
+}
+
+const AttackListItem: React.FC<AttackMove> = ({ move, attack }) => {
   return (
-    <div className={styles.detail}>
-      <span className={styles.detailTtl}>{label}</span>
-      {children}
-    </div>
+    <Stack spacing={1} sx={{ paddingBottom: 1 }}>
+      <AttackLabels attack={attack} />
+
+      <DetailItem label="判定">
+        <Stack direction="row" divider={<ArrowRight />} spacing={1}>
+          {attack.heights.map((h, i) => (
+            <Typography key={i} variant="body2">
+              {AttackTypeEnumText[h]}
+            </Typography>
+          ))}
+        </Stack>
+      </DetailItem>
+
+      <DetailItem label="ダメージ">
+        {attack.damages.reduce((sum, d) => sum + d)}
+        {attack.damages.length > 1 && `（${attack.damages.join(', ')}）`}
+      </DetailItem>
+
+      <DetailItem label="発生">{`${attack.startUpFrame}F`}</DetailItem>
+
+      <Stack direction="row" divider={<Divider orientation="vertical" flexItem />} spacing={1}>
+        <DetailItem label="ガード">
+          {attack.blockFrame ? frameText(attack.blockFrame) : AttackMoveResultText[attack.blockResult]}
+        </DetailItem>
+        <DetailItem label="ヒット">
+          {attack.hitFrame ? frameText(attack.hitFrame) : AttackMoveResultText[attack.hitResult]}
+        </DetailItem>
+        <DetailItem label="カウンター">
+          {attack.counterFrame ? frameText(attack.counterFrame) : AttackMoveResultText[attack.counterResult]}
+        </DetailItem>
+      </Stack>
+
+      <ListItemFooter move={move} />
+    </Stack>
   );
 };
 
-const OpponentDetail: React.FC<{ frame?: number | null; state?: string | null }> = ({ frame, state }) => {
-  let frameClass: string | undefined;
-  if (frame && frame <= -10) frameClass = 'el_caution';
+const ThrowListItem: React.FC<ThrowMove> = ({ move, throw: thrw }) => {
+  return (
+    <Stack spacing={1} sx={{ paddingBottom: 1 }}>
+      <DetailItem label="種別">{ThrowTypeEnumText[thrw.throwType]}</DetailItem>
+      <DetailItem label="ダメージ">{thrw.damage}</DetailItem>
+      <DetailItem label="発生">{`${thrw.startUpFrame}F`}</DetailItem>
 
+      <Stack direction="row" divider={<Divider orientation="vertical" flexItem />} spacing={1}>
+        <DetailItem label="ヒット">{ThrowMoveResultText[thrw.throwResult]}</DetailItem>
+        <DetailItem label="投げ抜け">{ThrowEscapeEnumText[thrw.throwEscape]}</DetailItem>
+      </Stack>
+
+      <ListItemFooter move={move} />
+    </Stack>
+  );
+};
+
+const ReversalListItem: React.FC<ReversalMove> = ({ move, reversal }) => {
+  return (
+    <Stack spacing={1} sx={{ paddingBottom: 1 }}>
+      <DetailItem label="種別">{reversal.type}</DetailItem>
+      <DetailItem label="受付フレーム">
+        {reversal.startUpFrame}〜{reversal.finishFrame}
+      </DetailItem>
+
+      <ListItemFooter move={move} />
+    </Stack>
+  );
+};
+
+const ListItemFooter: React.FC<{ move: MoveMediaFragment }> = ({ move }) => {
   return (
     <>
-      {frame && <span className={frameClass}>{frameText(frame)}</span>}
-      {state}
+      {move.note && (
+        <Typography variant="body2" sx={{ whiteSpace: 'pre-line' }}>
+          {move.note}
+        </Typography>
+      )}
     </>
+  );
+};
+
+const AttackLabels: React.FC<{ attack: AttackMoveFragment }> = ({ attack }) => {
+  const labels: string[] = [];
+  if (attack.powerCrush) labels.push('パワクラ');
+  if (attack.crouchingStatus) labels.push('しゃがステ');
+  if (attack.jumpStatus) labels.push('ジャンステ');
+  if (attack.homing) labels.push('スクリュー');
+  if (attack.wallBound) labels.push('ウォールバウンド');
+
+  if (labels.length === 0) return null;
+
+  return (
+    <Stack direction="row" spacing={1}>
+      {labels.map(label => (
+        <Chip key={label} size="small" label={label} />
+      ))}
+    </Stack>
   );
 };
 
@@ -124,3 +167,15 @@ const frameText = (frame: number) => {
   if (frame === 0) return `±${0}F`;
   return `${frame}F`;
 };
+
+const DetailItem: React.FC<{ label: string }> = ({ label, children }) => (
+  <Stack direction="row" spacing={1}>
+    <DetailTextLabel variant="body2">{label}</DetailTextLabel>
+    <Typography variant="body2">{children}</Typography>
+  </Stack>
+);
+
+const DetailTextLabel = styled(Typography)(({ theme }) => ({
+  marginRight: theme.spacing(0.25),
+  fontWeight: 'bold',
+}));

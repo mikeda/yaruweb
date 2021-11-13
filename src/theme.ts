@@ -108,58 +108,61 @@ const error = {
   contrastDefaultColor: 'light',
 };
 
-const theme = createTheme(adaptV4Theme({
-  palette: {
-    primary,
-    secondary,
-    info,
-    success,
-    warning,
-    error,
-  },
-  props: {
-    MuiTextField: {
-      variant: 'outlined',
+const theme = createTheme(
+  adaptV4Theme({
+    palette: {
+      primary,
+      secondary,
+      info,
+      success,
+      warning,
+      error,
     },
-    MuiCheckbox: {
-      color: 'primary',
+    props: {
+      MuiTextField: {
+        variant: 'outlined',
+      },
+      MuiCheckbox: {
+        color: 'primary',
+      },
+      MuiRadio: {
+        color: 'primary',
+      },
+      MuiSwitch: {
+        color: 'primary',
+      },
+      MuiLink: {
+        color: 'inherit',
+      },
+      MuiPaper: {
+        elevation: 4,
+      },
     },
-    MuiRadio: {
-      color: 'primary',
+    typography: {
+      button: {
+        textTransform: 'none',
+      },
+      h1: {
+        fontSize: '2rem',
+        fontWeight: 'bold',
+      },
+      h2: {
+        fontSize: '1.75rem',
+      },
+      h3: {
+        fontSize: '1.5rem',
+      },
+      h4: {
+        fontSize: '1.25rem',
+      },
+      h5: {
+        fontSize: '1rem',
+      },
+      h6: {
+        fontSize: '1rem',
+      },
     },
-    MuiSwitch: {
-      color: 'primary',
-    },
-    MuiLink: {
-      color: 'inherit',
-    },
-    MuiPaper: {
-      elevation: 4,
-    },
-  },
-  typography: {
-    button: {
-      textTransform: 'none',
-    },
-    h1: {
-      fontSize: '2rem',
-    },
-    h2: {
-      fontSize: '1.75rem',
-    },
-    h3: {
-      fontSize: '1.5rem',
-    },
-    h4: {
-      fontSize: '1.25rem',
-    },
-    h5: {
-      fontSize: '1rem',
-    },
-    h6: {
-      fontSize: '1rem',
-    },
-  },
-}));
+  }),
+);
 
 export default theme;

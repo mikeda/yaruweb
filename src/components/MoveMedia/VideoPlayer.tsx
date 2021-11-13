@@ -1,8 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import Hls from 'hls.js';
 
-import styles from './MoveMedia.module.scss';
-
 type Props = {
   src: string;
   thumnailUrl: string;
@@ -35,16 +33,5 @@ export const VideoPlayer: React.FC<Props> = ({ src, thumnailUrl, width = '100%',
     };
   }, [videoRef, src]);
 
-  return (
-    <video
-      width={width}
-      controls
-      ref={videoRef}
-      className={styles.video}
-      poster={thumnailUrl}
-      preload="none"
-      autoPlay={autoPlay}
-      muted
-    />
-  );
+  return <video width={width} controls ref={videoRef} poster={thumnailUrl} preload="none" autoPlay={autoPlay} muted />;
 };
