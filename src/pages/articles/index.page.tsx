@@ -69,7 +69,7 @@ const Page: React.FC<ArticlesPageArticlesQuery> = ({ articles: { records: initAr
 export const getStaticProps: GetStaticProps<ArticlesPageArticlesQuery> = async () => {
   const data: ArticlesPageArticlesQuery = await fetchGraphql(ArticlesPageArticlesDocument, { page: 1 });
 
-  return { props: data };
+  return { props: data, revalidate: 300 };
 };
 
 export default Page;
