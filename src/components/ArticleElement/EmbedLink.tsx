@@ -1,6 +1,7 @@
+/** @jsxImportSource @emotion/react */
 import React from 'react';
-
-import styles from './EmbedLink.module.scss';
+import { Card, CardActionArea, CardMedia, CardContent, Typography } from '@mui/material';
+import { css } from '@emotion/react';
 
 interface Props {
   url: string;
@@ -10,24 +11,49 @@ interface Props {
   attributes: { [key: string]: unknown };
 }
 
+const rootStyle = css({
+  display: 'flex',
+});
+
+const contentStyle = css({ flex: 1 });
+
+const mediaStyle = css({
+  height: 160,
+  width: 200,
+  '@media(max-width: 480px)': {
+    height: 140,
+    width: 120,
+  },
+});
+
+const textStyle = css({
+  display: '-webkit-box',
+  WebkitLineClamp: 2,
+  WebkitBoxOrient: 'vertical',
+  overflow: 'hidden',
+});
+
 export const EmbedLink: React.FC<Props> = ({ url, title, description, imageUrl, attributes, children }) => {
   const hostname = new URL(url).hostname;
+
   return (
     <div {...attributes}>
       <div contentEditable={false}>
-        <a href={url} className={styles.link}>
-          <div className={styles.content}>
-            <div className={styles.title}>{title}</div>
-            {description && <div>{description}</div>}
-            <div className={styles.host}>{hostname}</div>
-          </div>
+        <Card>
+          <CardActionArea href={url} css={rootStyle}>
+            <CardContent css={contentStyle}>
+              <Typography gutterBottom variant="h6" css={textStyle}>
+                {title}
+              </Typography>
+              <Typography variant="caption" css={textStyle}>
+                {description}
+              </Typography>
+              <Typography variant="caption">{hostname}</Typography>
+            </CardContent>
 
-          {imageUrl && (
-            <figure className={styles.image}>
-              <img src={imageUrl} />
-            </figure>
-          )}
-        </a>
+            {imageUrl && <CardMedia image={imageUrl} css={mediaStyle} />}
+          </CardActionArea>
+        </Card>
       </div>
       {children}
     </div>
