@@ -5,10 +5,7 @@ query ComboSelectOptions($characterSlug: String!) {
 
     combos {
       id
-      command {
-        condition
-        operations
-      }
+      command
     }
   }
 }

@@ -2,7 +2,7 @@ fragment MoveMedia on Move {
   id
   name
   kana
-  condition
+  command
   note
 
   moveable {
@@ -13,10 +13,5 @@ fragment MoveMedia on Move {
     id
     m3u8Url
     thumbnailUrl
-  }
-
-  commandList {
-    condition
-    operations
   }
 }

@@ -1,14 +1,11 @@
 fragment combo on Combo {
   id
   damage
+  command
   note
 
   move {
     id
-  }
-
-  command {
-    ...command
   }
 
   comboCategory {

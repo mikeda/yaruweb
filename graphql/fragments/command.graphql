@@ -1,4 +1,0 @@
-fragment command on Command {
-  condition
-  operations
-}

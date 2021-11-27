@@ -41,13 +41,13 @@ export const ComboForm: React.FC<Props> = ({ combo, characterSlug, onSubmit }) =
     mode: 'onBlur',
     defaultValues: combo
       ? {
-          command: { condition: combo.command.condition, operations: combo.command.operations },
+          command: combo.command,
           damage: combo.damage,
           moveId: combo.move?.id,
           note: combo.note,
         }
       : {
-          command: { operations: [] },
+          command: [],
         },
   });
 
