@@ -40,7 +40,7 @@ export const ReversalMoveForm: React.FC<Props> = ({ move, onSubmit }) => {
           move: {
             name: move.name,
             kana: move.kana,
-            commandList: move.commandList.map(c => ({ condition: c.condition, operations: c.operations })),
+            command: move.command,
             note: move.note,
           },
           reversal:
@@ -54,7 +54,7 @@ export const ReversalMoveForm: React.FC<Props> = ({ move, onSubmit }) => {
         }
       : {
           move: {
-            commandList: [],
+            command: [],
           },
           reversal: {
             type: '',
@@ -62,7 +62,7 @@ export const ReversalMoveForm: React.FC<Props> = ({ move, onSubmit }) => {
         },
   });
 
-  const commandList = watch('move.commandList');
+  const command = watch('move.command');
 
   return (
     <Card>
@@ -100,33 +100,12 @@ export const ReversalMoveForm: React.FC<Props> = ({ move, onSubmit }) => {
               コマンド
             </Typography>
 
-            {commandList.map((command, i) => (
-              <CommandForm
-                key={i}
-                command={command}
-                onChange={newCommand => {
-                  setValue(
-                    `move.commandList`,
-                    commandList.map((command, j) => (i === j ? { ...newCommand } : { ...command })),
-                  );
-                }}
-                onDelete={() => {
-                  setValue(
-                    `move.commandList`,
-                    commandList.filter((command, j) => i !== j),
-                  );
-                }}
-              />
-            ))}
-
-            <Button
-              variant="outlined"
-              onClick={() => {
-                setValue(`move.commandList`, [...commandList, { operations: [] }]);
+            <CommandForm
+              command={command}
+              onChange={newCommand => {
+                setValue(`move.command`, newCommand);
               }}
-            >
-              Add
-            </Button>
+            />
           </Box>
 
           <Grid container spacing={2}>

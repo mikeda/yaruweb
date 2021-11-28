@@ -10,13 +10,10 @@ fragment DashboardMoveCategoriesPageMoveCategory on MoveCategory {
 fragment DashboardMoveCategoriesPageMove on Move {
   id
   name
+  command
 
   moveVideo {
     ...moveVideo
-  }
-
-  commandList {
-    ...command
   }
 }
 

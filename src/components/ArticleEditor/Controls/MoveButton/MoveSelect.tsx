@@ -1,7 +1,8 @@
 import React from 'react';
 import Select from 'react-select';
-import { OperationEnum, useMoveSelectOptionsQuery } from '@/lib/graphql/types';
+import { useMoveSelectOptionsQuery } from '@/lib/graphql/types';
 import { FormGroup } from '@/components/form/FormGroup';
+import { commandText } from '@/lib';
 
 interface Props {
   characterSlug: string;
@@ -19,17 +20,7 @@ export const MoveSelect: React.FC<Props> = ({ characterSlug, onChange }) => {
   const options = data.moveCategories.map(moveCategory => ({
     label: moveCategory.name,
     options: moveCategory.moves.map(move => {
-      let label = move.name;
-      if (move.commandList.length > 0) {
-        label += `(${move.commandList
-          .map(c =>
-            c.operations
-              .map(o => parseKey(o))
-              .filter(o => o)
-              .join(' '),
-          )
-          .join(' ')})`;
-      }
+      const label = move.name;
       return { label, value: move.id };
     }),
   }));
@@ -47,28 +38,4 @@ export const MoveSelect: React.FC<Props> = ({ characterSlug, onChange }) => {
       />
     </FormGroup>
   );
-};
-
-const parseKey = (key: OperationEnum): string | null => {
-  if (['1', '2', '3', '4', '5', '6', '7', '8', '9'].includes(key)) return key;
-  if (['1h', '2h', '3h', '4h', '6h', '7h', '8h', '9h'].includes(key)) return key.replace('h', '');
-  if (['lp', 'rp', 'lk', 'rk'].includes(key)) return key.toUpperCase();
-  if (
-    [
-      'lp_rp',
-      'lp_lk',
-      'lp_rk',
-      'rp_lk',
-      'rp_rk',
-      'lk_rk',
-      'lp_rp_lk',
-      'lp_rp_rk',
-      'lp_lk_rk',
-      'rp_lk_rk',
-      'lp_rp_lk_rk',
-    ].includes(key)
-  )
-    return key.toUpperCase().replace('_', '+');
-
-  return null;
 };

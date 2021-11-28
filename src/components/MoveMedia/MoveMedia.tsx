@@ -28,11 +28,7 @@ export const MoveMedia: React.FC<Props> = ({ move }) => {
             {move.name}
           </Typography>
 
-          <Stack direction="row" divider={<Divider orientation="vertical" flexItem />} spacing={2}>
-            {move.commandList.map((command, i) => (
-              <Command key={i} command={command} />
-            ))}
-          </Stack>
+          <Command command={move.command} />
         </Box>
 
         {move.moveVideo && (

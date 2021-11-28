@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react';
 
-import { CommandAttributes, OperationEnum } from '@/lib/graphql/types';
 import { Operation } from '../Command/Operation';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBackspace } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './OperationListSelector.module.scss';
-import { OperationText } from '@/lib/graphql/enum_texts';
 import { Button, Dialog, DialogActions, DialogContent, TextField } from '@mui/material';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
 import { Command } from '..';
+import { OperationText } from '@/lib';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -24,10 +23,10 @@ const useStyles = makeStyles(() =>
 );
 
 interface Props {
-  command: CommandAttributes;
+  command: string[];
   open: boolean;
   onClose: () => void;
-  onChange: (command: CommandAttributes) => void;
+  onChange: (command: string[]) => void;
 }
 
 export const OperationListSelector: React.FC<Props> = ({ command: initialCommand, open, onClose, onChange }) => {
@@ -44,34 +43,27 @@ export const OperationListSelector: React.FC<Props> = ({ command: initialCommand
         <DialogContent>
           <Command command={command} />
 
-          <TextField
-            label="条件"
-            placeholder="立ち途中"
-            size="small"
-            value={command.condition}
-            onChange={e => {
-              setCommand(prev => ({ ...prev, condition: e.target.value }));
-            }}
-          />
+          <TextField label="テキスト" placeholder="立ち途中" size="small" />
 
           <FontAwesomeIcon
             className={styles.backspace}
             icon={faBackspace}
             onClick={e => {
               e.preventDefault();
-              setCommand(prev => ({ ...prev, operations: prev.operations.slice(0, -1) }));
+              setCommand(prev => prev.slice(0, -1));
             }}
           />
+
           <div className={classes.buttons}>
             {Object.keys(OperationText).map(operation => {
               return (
                 <Button
                   key={operation}
                   onClick={() => {
-                    setCommand(prev => ({ ...prev, operations: [...prev.operations, operation as OperationEnum] }));
+                    setCommand(prev => [...prev, operation]);
                   }}
                 >
-                  <Operation operation={operation as OperationEnum} />
+                  <Operation operation={operation} />
                 </Button>
               );
             })}

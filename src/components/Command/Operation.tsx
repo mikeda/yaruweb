@@ -4,26 +4,21 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
 import { styled } from '@mui/material/styles';
 
-import { OperationEnum } from '@/lib/graphql/types';
-
-import { OperationText } from '@/lib/graphql/enum_texts';
+import { OperationText } from '@/lib';
 
 interface Props {
-  operation: OperationEnum;
+  operation: string;
 }
 
 export const Operation: React.FC<Props> = ({ operation }) => {
-  if (operation === OperationEnum.Next) return <NextOperation icon={faChevronRight} />;
-
-  const operationText = OperationText[operation];
-  const iconName = operationText.jpKey || operation;
+  if (operation === 'next') return <NextOperation icon={faChevronRight} />;
 
   return (
     <>
-      {operationText.icon ? (
-        <IconOperation src={`https://yarouyo.s3-ap-northeast-1.amazonaws.com/site/operations/${iconName}.svg`} />
+      {OperationText[operation] ? (
+        <IconOperation src={`https://yarouyo.s3-ap-northeast-1.amazonaws.com/site/operations/${operation}.svg`} />
       ) : (
-        <TextOperation>{operationText.text}</TextOperation>
+        <TextOperation>{operation}</TextOperation>
       )}
     </>
   );

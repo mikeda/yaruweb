@@ -10,7 +10,7 @@ fragment CharacterMovesPageMove on Move {
   id
   name
   kana
-  condition
+  command
   note
 
   moveVideo {
@@ -19,11 +19,6 @@ fragment CharacterMovesPageMove on Move {
 
   moveable {
     ...moveable
-  }
-
-  commandList {
-    condition
-    operations
   }
 }
 

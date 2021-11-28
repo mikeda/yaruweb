@@ -43,6 +43,7 @@ fragment move on Move {
   id
   name
   kana
+  command
   note
 
   moveCategory {
@@ -60,9 +61,5 @@ fragment move on Move {
 
   moveVideo {
     ...moveVideo
-  }
-
-  commandList {
-    ...command
   }
 }

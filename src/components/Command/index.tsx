@@ -1,19 +1,16 @@
 import React from 'react';
 import { styled } from '@mui/material/styles';
 
-import { CommandFragment } from '@/lib/graphql/types';
-import { Operation, TextOperation } from './Operation';
+import { Operation } from './Operation';
 
 interface Props {
-  command: CommandFragment;
+  command: string[];
 }
 
 export const Command: React.FC<Props> = ({ command }) => {
   return (
     <Wrapper>
-      {command.condition && <TextOperation>{command.condition}</TextOperation>}
-
-      {command.operations.map((operation, i) => (
+      {command.map((operation, i) => (
         <Operation operation={operation} key={i} />
       ))}
     </Wrapper>

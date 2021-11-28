@@ -9,14 +9,12 @@ fragment DashboardComboCategoriesPageComboCategory on ComboCategory {
 
 fragment DashboardComboCategoriesPageCombo on Combo {
   id
+  command
 
   comboVideo {
     ...comboVideo
   }
 
-  command {
-    ...command
-  }
 }
 
 

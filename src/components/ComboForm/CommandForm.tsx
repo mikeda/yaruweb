@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
 
-import { CommandAttributes } from '@/lib/graphql/types';
 import { Box, IconButton, Paper } from '@mui/material';
 import { Command, OperationListSelector } from '..';
 import { Edit } from '@mui/icons-material';
 
 interface Props {
-  command: CommandAttributes;
-  onChange: (newCommand: CommandAttributes) => void;
+  command: string[];
+  onChange: (newCommand: string[]) => void;
 }
 
 export const CommandForm: React.FC<Props> = ({ command, onChange }) => {

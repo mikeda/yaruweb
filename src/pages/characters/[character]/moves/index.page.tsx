@@ -109,13 +109,8 @@ const MoveListItem: React.FC<{ move: CharacterMovesPageMoveFragment; first: bool
         <ListItemText>
           <Typography>{move.name}</Typography>
 
-          <Box display="flex">
-            {move.commandList.map((command, i) => (
-              <>
-                {i !== 0 && <Typography sx={{ marginX: 1 }}>/</Typography>}
-                <Command key={i} command={command} />
-              </>
-            ))}
+          <Box>
+            <Command command={move.command} />
           </Box>
         </ListItemText>
 
