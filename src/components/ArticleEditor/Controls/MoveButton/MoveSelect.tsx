@@ -2,7 +2,6 @@ import React from 'react';
 import Select from 'react-select';
 import { useMoveSelectOptionsQuery } from '@/lib/graphql/types';
 import { FormGroup } from '@/components/form/FormGroup';
-import { commandText } from '@/lib';
 
 interface Props {
   characterSlug: string;
