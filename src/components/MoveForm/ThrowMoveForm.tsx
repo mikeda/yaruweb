@@ -67,7 +67,7 @@ export const ThrowMoveForm: React.FC<Props> = ({ move, onSubmit }) => {
               ? {
                   throwType: move.moveable.throwType,
                   startUpFrame: move.moveable.startUpFrame,
-                  damage: move.moveable.damage,
+                  damage: move.moveable.damage || undefined,
                   throwResult: move.moveable.throwResult,
                   throwEscape: move.moveable.throwEscape,
                 }
