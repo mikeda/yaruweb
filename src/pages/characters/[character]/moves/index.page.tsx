@@ -151,9 +151,11 @@ const AttackListItem: React.FC<AttackMove> = ({ move, attack }) => {
         <AttackLabels attack={attack} />
 
         <Typography variant="body2">{attack.heights.map(h => AttackTypeEnumText[h]).join(' > ')}</Typography>
-        <Typography variant="body2">
-          ダメージ {attack.damages.reduce((sum, d) => sum + d)}({attack.damages.join(',')})
-        </Typography>
+        {attack.damages.length > 0 && (
+          <Typography variant="body2">
+            ダメージ {attack.damages.reduce((sum, d) => sum + d)}({attack.damages.join(',')})
+          </Typography>
+        )}
 
         <TableContainer component={Paper}>
           <Table size="small">
