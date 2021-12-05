@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBackspace } from '@fortawesome/free-solid-svg-icons';
 
 import styles from './OperationListSelector.module.scss';
-import { Button, Dialog, DialogActions, DialogContent, TextField } from '@mui/material';
+import { Box, Button, Dialog, DialogActions, DialogContent, TextField } from '@mui/material';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
 import { Command } from '..';
@@ -32,6 +32,7 @@ interface Props {
 export const OperationListSelector: React.FC<Props> = ({ command: initialCommand, open, onClose, onChange }) => {
   const classes = useStyles();
   const [command, setCommand] = useState(initialCommand);
+  const [text, setText] = useState('');
 
   useEffect(() => {
     setCommand(initialCommand);
@@ -41,18 +42,37 @@ export const OperationListSelector: React.FC<Props> = ({ command: initialCommand
     <>
       <Dialog open={open} onClose={onClose}>
         <DialogContent>
-          <Command command={command} />
+          <Box>
+            <Command command={command} />
+          </Box>
 
-          <TextField label="テキスト" placeholder="立ち途中" size="small" />
+          <Box>
+            <TextField
+              label="テキスト"
+              placeholder="立ち途中"
+              size="small"
+              value={text}
+              onChange={e => setText(e.target.value)}
+            />
+            <Button
+              onClick={() => {
+                if (text) setCommand(prev => [...prev, text]);
+              }}
+            >
+              追加
+            </Button>
+          </Box>
 
-          <FontAwesomeIcon
-            className={styles.backspace}
-            icon={faBackspace}
-            onClick={e => {
-              e.preventDefault();
-              setCommand(prev => prev.slice(0, -1));
-            }}
-          />
+          <Box>
+            <FontAwesomeIcon
+              className={styles.backspace}
+              icon={faBackspace}
+              onClick={e => {
+                e.preventDefault();
+                setCommand(prev => prev.slice(0, -1));
+              }}
+            />
+          </Box>
 
           <div className={classes.buttons}>
             {Object.keys(OperationText).map(operation => {
