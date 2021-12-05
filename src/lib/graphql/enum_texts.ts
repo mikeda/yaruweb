@@ -36,6 +36,7 @@ export const AttackTypeEnumText: { [key in Types.AttackTypeEnum]: string } = {
   uba: '空ガー不',
   t: '打投',
   th: '上投',
+  tm: '中投',
   tl: '下投',
 };
 
