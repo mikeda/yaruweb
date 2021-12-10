@@ -1,7 +1,7 @@
 import React from 'react';
 import * as yup from 'yup';
 import { Controller, useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
+import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
 
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
 import { useDashboardPlayersPageCreatePlayerFromSmashggMutation } from '@/lib/graphql/types';
