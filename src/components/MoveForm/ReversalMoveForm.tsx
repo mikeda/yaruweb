@@ -1,5 +1,5 @@
 import React from 'react';
-import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
 import { ReversalMoveAttributes, MoveFragment } from '@/lib/graphql/types';

@@ -4,7 +4,7 @@ import * as yup from 'yup';
 import { MoveCategoryAttributes, MoveCategoryFragment } from '@/lib/graphql/types';
 import { Controller, useForm } from 'react-hook-form';
 import { Box, Button, Card, CardContent, Divider, TextField } from '@mui/material';
-import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 interface Props {
   moveCategory?: MoveCategoryFragment;

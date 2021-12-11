@@ -1,5 +1,5 @@
 import React from 'react';
-import { yupResolver } from '@hookform/resolvers/yup/dist/yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
 import { ComboAttributes, ComboFragment, useMoveSelectOptionsQuery } from '@/lib/graphql/types';
