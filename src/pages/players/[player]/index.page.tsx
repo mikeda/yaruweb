@@ -3,19 +3,18 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Head, Content, Breadcrumbs, PlayerPageTabs } from '@/components';
-import { Box, Paper, Typography } from '@mui/material';
+import { Box, Paper, Theme, Typography } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import { PlayerPageDocument, PlayerPageQuery, PlayerSlugsDocument, PlayerSlugsQuery } from '@/lib/graphql/types';
 import { Profile } from './components/Profile';
-import theme from '@/theme';
 import { ParsedUrlQuery } from 'querystring';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme: Theme) => ({
   description: {
     marginTop: theme.spacing(1),
     whiteSpace: 'pre-line',
   },
-});
+}));
 
 const Page: React.FC<PlayerPageQuery> = ({ player }) => {
   const classes = useStyles();

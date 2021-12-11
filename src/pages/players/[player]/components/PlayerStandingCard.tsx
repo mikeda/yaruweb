@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardActionArea, CardContent, CardMedia, Typography } from '@mui/material';
+import { Card, CardActionArea, CardContent, CardMedia, Theme, Typography } from '@mui/material';
 
 import makeStyles from '@mui/styles/makeStyles';
 
@@ -8,9 +8,8 @@ import { path } from '@/lib';
 import { NO_IMAGE_URL, placeIconUrl } from '@/lib/Assets';
 import dayjs from '@/lib/dayjs';
 import { PlayerStandingCardFragment } from '@/lib/graphql/types';
-import theme from '@/theme';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme: Theme) => ({
   media: {
     height: 160,
   },
@@ -20,7 +19,7 @@ const useStyles = makeStyles({
   title: {
     marginLeft: theme.spacing(1),
   },
-});
+}));
 
 interface Props {
   standing: PlayerStandingCardFragment;

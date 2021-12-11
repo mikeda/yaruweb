@@ -1,12 +1,11 @@
 import React from 'react';
-import { Avatar, Box, Grid, ListItem, ListItemText, Typography } from '@mui/material';
+import { Avatar, Box, Grid, ListItem, ListItemText, Theme, Typography } from '@mui/material';
 
 import makeStyles from '@mui/styles/makeStyles';
 
 import { Link } from '@/components';
 import { path } from '@/lib';
 import { BattleListItemFragment } from '@/lib/graphql/types';
-import theme from '@/theme';
 import { BattleRoundText } from '@/lib/graphql/enum_texts';
 import clsx from 'clsx';
 import dayjs from '@/lib/dayjs';
@@ -55,7 +54,7 @@ export const BattleListItem: React.FC<Props> = ({ battle, last }) => {
   );
 };
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme: Theme) => ({
   root: {
     marginBottom: theme.spacing(1),
   },
@@ -77,7 +76,7 @@ const useStyles = makeStyles({
     marginRight: theme.spacing(2),
     fontSize: 32,
   },
-});
+}));
 
 interface PlayerProps {
   name: string;

@@ -1,13 +1,12 @@
 import React from 'react';
 import { DEFAULT_AVATAR_URL } from '@/lib/Assets';
 import { PlayerPageProfileFragment } from '@/lib/graphql/types';
-import { Paper, Typography } from '@mui/material';
+import { Paper, Theme, Typography, useTheme } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
-import theme from '@/theme';
 import { LiveTv, Twitter } from '@mui/icons-material';
 import { colors } from '@/colors';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme: Theme) => ({
   root: {
     padding: theme.spacing(2),
     display: 'flex',
@@ -39,7 +38,7 @@ const useStyles = makeStyles({
       marginLeft: theme.spacing(1),
     },
   },
-});
+}));
 
 interface Props {
   player: PlayerPageProfileFragment;
@@ -47,6 +46,7 @@ interface Props {
 
 export const Profile: React.FC<Props> = ({ player }) => {
   const classes = useStyles();
+  const theme = useTheme();
 
   return (
     <Paper className={classes.root}>

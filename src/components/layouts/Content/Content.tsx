@@ -1,11 +1,10 @@
 import React, { ReactNode } from 'react';
 
 import { GlobalHeader, HeaderNav, TabValue } from '@/components';
-import { Typography } from '@mui/material';
+import { Theme, Typography } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
-import theme from '@/theme';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme: Theme) => ({
   root: {
     boxSizing: 'border-box',
     maxWidth: 730,
@@ -19,7 +18,7 @@ const useStyles = makeStyles({
   title: {
     marginTop: theme.spacing(1),
   },
-});
+}));
 
 interface Props {
   title?: string;

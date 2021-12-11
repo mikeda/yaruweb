@@ -1,15 +1,7 @@
 import React from 'react';
 import { path } from '@/lib';
 
-import {
-  Avatar,
-  Card,
-  CardActionArea,
-  CardContent,
-  CardHeader,
-  CardMedia,
-  Typography,
-} from '@mui/material';
+import { Avatar, Card, CardActionArea, CardContent, CardHeader, CardMedia, Typography } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import dayjs from '@/lib/dayjs';
 import { ArticleCardFragment } from '@/lib/graphql/types';

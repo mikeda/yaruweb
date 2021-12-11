@@ -11,14 +11,13 @@ import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Head } from '@/components/layouts/Head';
 import { Content } from '@/components/layouts/Content';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
-import { Box, Paper, Typography } from '@mui/material';
+import { Box, Paper, Theme, Typography } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
-import theme from '@/theme';
 import { ParsedUrlQuery } from 'querystring';
 import { Profile } from './components/Profile';
 import { Tabs } from './components/Tabs';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme: Theme) => ({
   paper: {
     marginTop: theme.spacing(2),
     padding: theme.spacing(2),
@@ -29,7 +28,7 @@ const useStyles = makeStyles({
   body: {
     whiteSpace: 'pre-line',
   },
-});
+}));
 
 const Page: React.FC<PageCharacterQuery> = ({ character }) => {
   const classes = useStyles();
