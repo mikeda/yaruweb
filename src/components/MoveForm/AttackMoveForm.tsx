@@ -26,13 +26,13 @@ import {
   MenuItem,
   Select,
   TextField,
-  Theme,
   Typography,
 } from '@mui/material';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
 import { AttackMoveResultText, AttackMoveStateEnumText, AttackTypeEnumText } from '@/lib/graphql/enum_texts';
 import { CommandForm } from './CommandForm';
+import theme from '@/theme';
 
 const schema = yup.object().shape({
   move: yup.object({
@@ -104,7 +104,7 @@ const checkboxes = [
   },
 ] as const;
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     chips: {
       display: 'flex',

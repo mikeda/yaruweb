@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { DashboardBreadcrumbs, DashboardContent } from '@/components';
-import { Box, Card, CardContent, CardMedia, Grid, Paper, Theme, Typography } from '@mui/material';
+import { Box, Card, CardContent, CardMedia, Grid, Paper, Typography } from '@mui/material';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
 import { useRouter } from 'next/router';
@@ -10,8 +10,9 @@ import { NO_IMAGE_URL } from '@/lib/Assets';
 import dayjs from '@/lib/dayjs';
 import { StandingList } from './components/StandingList';
 import { VideoList } from './components/VideoList';
+import theme from '@/theme';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     section: {
       marginTop: theme.spacing(4),

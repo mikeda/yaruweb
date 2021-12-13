@@ -1,10 +1,10 @@
 import React from 'react';
-import { Theme } from '@mui/material';
 
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
+import theme from '@/theme';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     root: {
       marginBottom: theme.spacing(1),

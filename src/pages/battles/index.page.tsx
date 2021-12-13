@@ -6,7 +6,7 @@ import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Head } from '@/components/layouts/Head';
 import { Content } from '@/components/layouts/Content';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
-import { Box, Button, List, Paper, Theme } from '@mui/material';
+import { Box, Button, List, Paper } from '@mui/material';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
 import { BattleListItem } from '@/components';
@@ -16,8 +16,9 @@ import { useSetRecoilState } from 'recoil';
 import { loadingState } from '@/states/loading';
 import { toast } from 'react-toastify';
 import { BattleSelector, CharacterChip, PlayerChip } from '@/components/BattleSelector';
+import theme from '@/theme';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     content: {
       paddingTop: theme.spacing(2),
