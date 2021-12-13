@@ -1,15 +1,6 @@
 import React, { useState } from 'react';
 
-import {
-  Avatar,
-  Box,
-  Dialog,
-  IconButton,
-  ListItem,
-  ListItemSecondaryAction,
-  ListItemText,
-  Theme,
-} from '@mui/material';
+import { Avatar, Box, Dialog, IconButton, ListItem, ListItemSecondaryAction, ListItemText } from '@mui/material';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
 import { formatSec } from '@/lib';
@@ -23,8 +14,9 @@ import {
 import clsx from 'clsx';
 import { BattleUpdateForm } from './BattleUpdateForm';
 import { useUpdateMutation } from '../hooks/useUpdateMutation';
+import theme from '@/theme';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     avatar: {
       width: 24,

@@ -1,25 +1,16 @@
 import React, { ReactNode, useState } from 'react';
 
-import {
-  AppBar,
-  Drawer,
-  Grid,
-  Hidden,
-  IconButton,
-  Theme,
-  Toolbar,
-  Typography,
-  useTheme,
-} from '@mui/material';
+import { AppBar, Drawer, Grid, Hidden, IconButton, Toolbar, Typography, useTheme } from '@mui/material';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
 import MenuIcon from '@mui/icons-material/Menu';
 import { DrawerItems } from './DrawerItems';
 import { Head } from '@/components';
+import theme from '@/theme';
 
 const drawerWidth = 240;
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     root: {
       display: 'flex',
@@ -83,7 +74,8 @@ export const DashboardContent: React.FC<Props> = ({ children, title, breadcrumb,
             edge="start"
             onClick={handleDrawerToggle}
             className={classes.menuButton}
-            size="large">
+            size="large"
+          >
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" noWrap>

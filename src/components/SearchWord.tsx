@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import { Theme } from '@mui/material/styles';
 import makeStyles from '@mui/styles/makeStyles';
 import createStyles from '@mui/styles/createStyles';
 import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
+import theme from '@/theme';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     root: {
       padding: '2px 4px',
@@ -46,10 +46,7 @@ export const SearchWord: React.FC<Props> = ({ initWord, onSearch }) => {
           }
         }}
       />
-      <IconButton
-        className={classes.iconButton}
-        onClick={() => onSearch(word)}
-        size="large">
+      <IconButton className={classes.iconButton} onClick={() => onSearch(word)} size="large">
         <SearchIcon />
       </IconButton>
     </Paper>

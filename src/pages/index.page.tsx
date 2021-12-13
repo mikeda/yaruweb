@@ -7,14 +7,15 @@ import { TopPageDocument, TopPageQuery } from '@/lib/graphql/types';
 import { IntroSlides } from './IntroSlides';
 import { Head, Content, BattleListItem, CharacterCard, ArticleCard, Link as LinkComponent } from '@/components';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
-import { Box, Button, Grid, List, Paper, Theme, Typography } from '@mui/material';
+import { Box, Button, Grid, List, Paper, Typography } from '@mui/material';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
 import { TournamentCard } from '@/components/TournamentCard';
 import { PlayerCard } from '@/components/PlayerCard';
 import { path } from '@/lib';
+import theme from '@/theme';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     section: {
       marginTop: theme.spacing(4),
