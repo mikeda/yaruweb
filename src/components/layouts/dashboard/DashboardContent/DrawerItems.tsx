@@ -1,13 +1,14 @@
 import React, { ReactElement } from 'react';
 
-import { Divider, List, ListItem, ListItemIcon, ListItemText, Theme } from '@mui/material';
+import { Divider, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
 import { Link } from '@/components';
 import { dashboardPath } from '@/lib';
 import { EmojiEvents, Person, TagFaces, LibraryBooks, People } from '@mui/icons-material';
+import theme from '@/theme';
 
-const useStyles = makeStyles((theme: Theme) =>
+const useStyles = makeStyles(() =>
   createStyles({
     // necessary for content to be below app bar
     toolbar: theme.mixins.toolbar,

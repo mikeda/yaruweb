@@ -227,6 +227,21 @@ const VideoButton: React.FC<{ move: DashboardMoveCategoriesPageMoveFragment }> =
         <YouTube style={move.moveVideo ? { fill: colors.youtube } : {}} />
       </IconButton>
 
+      <input
+        type="file"
+        id="video"
+        accept="video/mp4"
+        onChange={event => {
+          const target = event.target;
+          if (!target.files) return;
+          const file = target.files[0];
+          if (!file) return;
+
+          setFile(file);
+          ceateMoveVideo();
+        }}
+      />
+
       <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)}>
         <DialogContent>
           {move.moveVideo && (
@@ -234,22 +249,7 @@ const VideoButton: React.FC<{ move: DashboardMoveCategoriesPageMoveFragment }> =
           )}
         </DialogContent>
 
-        <DialogActions>
-          <input
-            type="file"
-            id="video"
-            accept="video/mp4"
-            onChange={event => {
-              const target = event.target;
-              if (!target.files) return;
-              const file = target.files[0];
-              if (!file) return;
-
-              setFile(file);
-              ceateMoveVideo();
-            }}
-          />
-        </DialogActions>
+        <DialogActions></DialogActions>
       </Dialog>
     </>
   );
