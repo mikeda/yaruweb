@@ -88,7 +88,7 @@ const ThrowContent: React.FC<PageDashboardMoveNewQuery> = ({ moveCategory }) => 
 
   setLoading(loading);
 
-  return <ThrowMoveForm onSubmit={onSubmit} />;
+  return <ThrowMoveForm moves={moveCategory.moves} onSubmit={onSubmit} />;
 };
 
 const ReversalContent: React.FC<PageDashboardMoveNewQuery> = ({ moveCategory }) => {
@@ -110,7 +110,7 @@ const ReversalContent: React.FC<PageDashboardMoveNewQuery> = ({ moveCategory }) 
 
   setLoading(loading);
 
-  return <ReversalMoveForm onSubmit={onSubmit} />;
+  return <ReversalMoveForm moves={moveCategory.moves} onSubmit={onSubmit} />;
 };
 
 export default Page;
