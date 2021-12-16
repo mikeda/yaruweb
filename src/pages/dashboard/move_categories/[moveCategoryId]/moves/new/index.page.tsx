@@ -66,7 +66,7 @@ const AttackContent: React.FC<PageDashboardMoveNewQuery> = ({ moveCategory }) =>
 
   setLoading(loading);
 
-  return <AttackMoveForm onSubmit={onSubmit} />;
+  return <AttackMoveForm moves={moveCategory.moves} onSubmit={onSubmit} />;
 };
 
 const ThrowContent: React.FC<PageDashboardMoveNewQuery> = ({ moveCategory }) => {

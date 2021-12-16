@@ -80,6 +80,7 @@ const MoveContent: React.FC<PageDashboardMoveEditQuery> = ({ move }) => {
       return (
         <AttackMoveForm
           move={move}
+          moves={move.moveCategory.moves}
           onSubmit={attributes => {
             updateAttackMove({ variables: { moveId: move.id, attributes } });
           }}

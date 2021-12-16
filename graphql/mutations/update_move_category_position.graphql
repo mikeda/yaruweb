@@ -1,7 +1,0 @@
-mutation UpdateMoveCategoryPosition($moveCategoryId: ID!, $newPosition: Int!) {
-  updateMoveCategoryPosition(input: { moveCategoryId: $moveCategoryId, newPosition: $newPosition }) {
-    moveCategory {
-      id
-    }
-  }
-}
