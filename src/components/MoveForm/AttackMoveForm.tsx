@@ -8,6 +8,7 @@ import {
   AttackMoveStateEnum,
   AttackTypeEnum,
   MoveFragment,
+  MovePositionSelectFragment,
 } from '@/lib/graphql/types';
 import { Controller, useForm } from 'react-hook-form';
 import { nullableNumber } from '@/lib/validators/nullable_number';
@@ -48,6 +49,7 @@ const schema = yup.object().shape({
 
 interface Props {
   move?: MoveFragment;
+  moves: MovePositionSelectFragment[];
   onSubmit: (attributes: AttackMoveAttributes) => void;
 }
 
@@ -116,7 +118,7 @@ const useStyles = makeStyles(() =>
   }),
 );
 
-export const AttackMoveForm: React.FC<Props> = ({ move, onSubmit }) => {
+export const AttackMoveForm: React.FC<Props> = ({ move, moves, onSubmit }) => {
   const classes = useStyles();
 
   move?.moveVideo;
@@ -136,6 +138,7 @@ export const AttackMoveForm: React.FC<Props> = ({ move, onSubmit }) => {
             kana: move.kana,
             command: move.command,
             note: move.note,
+            position: move.position,
           },
           attack:
             move.moveable.__typename === 'AttackMove'
@@ -164,6 +167,7 @@ export const AttackMoveForm: React.FC<Props> = ({ move, onSubmit }) => {
       : {
           move: {
             command: [],
+            position: moves.length,
           },
           attack: {
             heights: [],
@@ -447,6 +451,33 @@ export const AttackMoveForm: React.FC<Props> = ({ move, onSubmit }) => {
                 />
               </Grid>
             </Grid>
+          </Box>
+
+          <Box mt={4}>
+            <FormControl fullWidth variant="outlined" size="small">
+              <InputLabel>表示順</InputLabel>
+              <Controller
+                name="move.position"
+                control={control}
+                render={({ field }) => (
+                  <Select
+                    {...field}
+                    onChange={e => {
+                      const position = Number(e.target.value);
+                      setValue('move.position', position);
+                    }}
+                  >
+                    <MenuItem value={0}>先頭</MenuItem>
+                    {moves.map((m, i) => (
+                      <MenuItem key={m.id} value={m.position + 1}>
+                        {m.name}の後ろ
+                        {i == moves.length && '(最後)'}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                )}
+              />
+            </FormControl>
           </Box>
         </CardContent>
 

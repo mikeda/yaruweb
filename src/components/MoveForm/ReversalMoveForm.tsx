@@ -2,10 +2,23 @@ import React from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import { ReversalMoveAttributes, MoveFragment } from '@/lib/graphql/types';
+import { ReversalMoveAttributes, MoveFragment, MovePositionSelectFragment } from '@/lib/graphql/types';
 import { Controller, useForm } from 'react-hook-form';
 import { nullableNumber } from '@/lib/validators/nullable_number';
-import { Box, Button, Card, CardContent, Divider, Grid, TextField, Typography } from '@mui/material';
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Divider,
+  FormControl,
+  Grid,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+  Typography,
+} from '@mui/material';
 import { CommandForm } from './CommandForm';
 
 const schema = yup.object().shape({
@@ -21,10 +34,11 @@ const schema = yup.object().shape({
 
 interface Props {
   move?: MoveFragment;
+  moves: MovePositionSelectFragment[];
   onSubmit: (attributes: ReversalMoveAttributes) => void;
 }
 
-export const ReversalMoveForm: React.FC<Props> = ({ move, onSubmit }) => {
+export const ReversalMoveForm: React.FC<Props> = ({ move, moves, onSubmit }) => {
   move?.moveVideo;
   const {
     handleSubmit,
@@ -42,6 +56,7 @@ export const ReversalMoveForm: React.FC<Props> = ({ move, onSubmit }) => {
             kana: move.kana,
             command: move.command,
             note: move.note,
+            position: move.position,
           },
           reversal:
             move.moveable.__typename === 'ReversalMove'
@@ -55,6 +70,7 @@ export const ReversalMoveForm: React.FC<Props> = ({ move, onSubmit }) => {
       : {
           move: {
             command: [],
+            position: moves.length,
           },
           reversal: {
             type: '',
@@ -173,6 +189,33 @@ export const ReversalMoveForm: React.FC<Props> = ({ move, onSubmit }) => {
                 />
               </Grid>
             </Grid>
+          </Box>
+
+          <Box mt={4}>
+            <FormControl fullWidth variant="outlined" size="small">
+              <InputLabel>表示順</InputLabel>
+              <Controller
+                name="move.position"
+                control={control}
+                render={({ field }) => (
+                  <Select
+                    {...field}
+                    onChange={e => {
+                      const position = Number(e.target.value);
+                      setValue('move.position', position);
+                    }}
+                  >
+                    <MenuItem value={0}>先頭</MenuItem>
+                    {moves.map((m, i) => (
+                      <MenuItem key={m.id} value={m.position + 1}>
+                        {m.name}の後ろ
+                        {i == moves.length && '(最後)'}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                )}
+              />
+            </FormControl>
           </Box>
         </CardContent>
 

@@ -10,6 +10,10 @@ query PageDashboardMoveEdit($moveId: ID!) {
         slug
         name
       }
+
+      moves {
+        ...MovePositionSelect
+      }
     }
   }
 }
