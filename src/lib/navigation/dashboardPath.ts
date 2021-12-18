@@ -18,6 +18,7 @@ type Options =
   | { to: 'moveCategoryEdit'; moveCategoryId: string }
   | { to: 'movesNew'; moveCategoryId: string; moveType: 'attack' | 'throw' | 'reversal' }
   | { to: 'moveEdit'; moveId: string }
+  | { to: 'moveCopy'; moveId: string }
   | { to: 'organizers'; q?: string }
   | { to: 'organizersNew' }
   | { to: 'organizerEdit'; organizerSlug: string }
@@ -68,6 +69,8 @@ export const dashboardPath = (options: Options): string => {
       return `/dashboard/move_categories/${options.moveCategoryId}/moves/new?move_type=${options.moveType}`;
     case 'moveEdit':
       return `/dashboard/moves/${options.moveId}/edit`;
+    case 'moveCopy':
+      return `/dashboard/moves/${options.moveId}/copy`;
     case 'organizers':
       return generatePath('/dashboard/organizers', { q: options.q });
     case 'organizersNew':

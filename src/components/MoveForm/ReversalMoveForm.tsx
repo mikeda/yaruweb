@@ -36,9 +36,10 @@ interface Props {
   move?: MoveFragment;
   moves: MovePositionSelectFragment[];
   onSubmit: (attributes: ReversalMoveAttributes) => void;
+  copy?: boolean;
 }
 
-export const ReversalMoveForm: React.FC<Props> = ({ move, moves, onSubmit }) => {
+export const ReversalMoveForm: React.FC<Props> = ({ move, moves, onSubmit, copy }) => {
   move?.moveVideo;
   const {
     handleSubmit,
@@ -56,7 +57,7 @@ export const ReversalMoveForm: React.FC<Props> = ({ move, moves, onSubmit }) => 
             kana: move.kana,
             command: move.command,
             note: move.note,
-            position: move.position,
+            position: copy ? move.position + 1 : move.position,
           },
           reversal:
             move.moveable.__typename === 'ReversalMove'

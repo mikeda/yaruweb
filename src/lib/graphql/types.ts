@@ -2732,6 +2732,13 @@ export type PageDashboardMoveCategoryEditQueryVariables = Exact<{
 
 export type PageDashboardMoveCategoryEditQuery = { __typename?: 'Query', moveCategory: { __typename?: 'MoveCategory', id: string, name: string, character: { __typename?: 'Character', slug: string, name: string } } };
 
+export type PageDashboardMoveCopyQueryVariables = Exact<{
+  moveId: Scalars['ID'];
+}>;
+
+
+export type PageDashboardMoveCopyQuery = { __typename?: 'Query', move: { __typename?: 'Move', id: string, name: string, kana?: string | null | undefined, command: Array<string>, note?: string | null | undefined, position: number, moveCategory: { __typename?: 'MoveCategory', id: string, name: string, character: { __typename?: 'Character', slug: string, name: string }, moves: Array<{ __typename?: 'Move', id: string, name: string, position: number }> }, moveable: { __typename: 'AttackMove', id: string, startUpFrame?: number | null | undefined, heights: Array<AttackTypeEnum>, damages: Array<number>, blockResult: AttackMoveResultEnum, blockStatus?: AttackMoveStateEnum | null | undefined, blockFrame?: number | null | undefined, hitResult: AttackMoveResultEnum, hitStatus?: AttackMoveStateEnum | null | undefined, hitFrame?: number | null | undefined, counterResult: AttackMoveResultEnum, counterStatus?: AttackMoveStateEnum | null | undefined, counterFrame?: number | null | undefined, powerCrush: boolean, powerCrushFrame?: number | null | undefined, crouchingStatus: boolean, crouchingStatusFrame?: number | null | undefined, jumpStatus: boolean, jumpStatusFrame?: number | null | undefined, homing: boolean, screw: boolean, wallBound: boolean } | { __typename: 'ReversalMove', id: string, type: string, startUpFrame?: number | null | undefined, finishFrame?: number | null | undefined } | { __typename: 'ThrowMove', id: string, throwType: ThrowTypeEnum, startUpFrame?: number | null | undefined, damage?: number | null | undefined, throwEscape: ThrowEscapeEnum, throwResult: ThrowMoveResultEnum }, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null | undefined } };
+
 export type CreateReversalMoveMutationVariables = Exact<{
   moveCategoryId: Scalars['ID'];
   attributes: ReversalMoveAttributes;
@@ -6378,6 +6385,53 @@ export function usePageDashboardMoveCategoryEditLazyQuery(baseOptions?: Apollo.L
 export type PageDashboardMoveCategoryEditQueryHookResult = ReturnType<typeof usePageDashboardMoveCategoryEditQuery>;
 export type PageDashboardMoveCategoryEditLazyQueryHookResult = ReturnType<typeof usePageDashboardMoveCategoryEditLazyQuery>;
 export type PageDashboardMoveCategoryEditQueryResult = Apollo.QueryResult<PageDashboardMoveCategoryEditQuery, PageDashboardMoveCategoryEditQueryVariables>;
+export const PageDashboardMoveCopyDocument = gql`
+    query PageDashboardMoveCopy($moveId: ID!) {
+  move(moveId: $moveId) {
+    ...move
+    moveCategory {
+      id
+      name
+      character {
+        slug
+        name
+      }
+      moves {
+        ...MovePositionSelect
+      }
+    }
+  }
+}
+    ${MoveFragmentDoc}
+${MovePositionSelectFragmentDoc}`;
+
+/**
+ * __usePageDashboardMoveCopyQuery__
+ *
+ * To run a query within a React component, call `usePageDashboardMoveCopyQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePageDashboardMoveCopyQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePageDashboardMoveCopyQuery({
+ *   variables: {
+ *      moveId: // value for 'moveId'
+ *   },
+ * });
+ */
+export function usePageDashboardMoveCopyQuery(baseOptions: Apollo.QueryHookOptions<PageDashboardMoveCopyQuery, PageDashboardMoveCopyQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PageDashboardMoveCopyQuery, PageDashboardMoveCopyQueryVariables>(PageDashboardMoveCopyDocument, options);
+      }
+export function usePageDashboardMoveCopyLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PageDashboardMoveCopyQuery, PageDashboardMoveCopyQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PageDashboardMoveCopyQuery, PageDashboardMoveCopyQueryVariables>(PageDashboardMoveCopyDocument, options);
+        }
+export type PageDashboardMoveCopyQueryHookResult = ReturnType<typeof usePageDashboardMoveCopyQuery>;
+export type PageDashboardMoveCopyLazyQueryHookResult = ReturnType<typeof usePageDashboardMoveCopyLazyQuery>;
+export type PageDashboardMoveCopyQueryResult = Apollo.QueryResult<PageDashboardMoveCopyQuery, PageDashboardMoveCopyQueryVariables>;
 export const CreateReversalMoveDocument = gql`
     mutation CreateReversalMove($moveCategoryId: ID!, $attributes: ReversalMoveAttributes!) {
   createReversalMove(
