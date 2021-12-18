@@ -44,9 +44,10 @@ interface Props {
   move?: MoveFragment;
   moves: MovePositionSelectFragment[];
   onSubmit: (attributes: ThrowMoveAttributes) => void;
+  copy?: boolean;
 }
 
-export const ThrowMoveForm: React.FC<Props> = ({ move, moves, onSubmit }) => {
+export const ThrowMoveForm: React.FC<Props> = ({ move, moves, onSubmit, copy = false }) => {
   const {
     handleSubmit,
     setValue,
@@ -63,7 +64,7 @@ export const ThrowMoveForm: React.FC<Props> = ({ move, moves, onSubmit }) => {
             kana: move.kana,
             command: move.command,
             note: move.note,
-            position: move.position,
+            position: copy ? move.position + 1 : move.position,
           },
           throw:
             move.moveable.__typename === 'ThrowMove'

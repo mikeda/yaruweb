@@ -51,6 +51,7 @@ interface Props {
   move?: MoveFragment;
   moves: MovePositionSelectFragment[];
   onSubmit: (attributes: AttackMoveAttributes) => void;
+  copy?: boolean;
 }
 
 const frameCols: {
@@ -118,7 +119,7 @@ const useStyles = makeStyles(() =>
   }),
 );
 
-export const AttackMoveForm: React.FC<Props> = ({ move, moves, onSubmit }) => {
+export const AttackMoveForm: React.FC<Props> = ({ move, moves, onSubmit, copy = false }) => {
   const classes = useStyles();
 
   move?.moveVideo;
@@ -138,7 +139,7 @@ export const AttackMoveForm: React.FC<Props> = ({ move, moves, onSubmit }) => {
             kana: move.kana,
             command: move.command,
             note: move.note,
-            position: move.position,
+            position: copy ? move.position + 1 : move.position,
           },
           attack:
             move.moveable.__typename === 'AttackMove'

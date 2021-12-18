@@ -19,6 +19,7 @@ import {
   Typography,
 } from '@mui/material';
 import { Add, Add as AddIcon, Delete, Edit, YouTube } from '@mui/icons-material';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { toast } from 'react-toastify';
 
 import {
@@ -163,6 +164,10 @@ const MoveRow = ({ move, afterDelete }: MoveRowProps) => {
 
         <IconButton href={dashboardPath({ to: 'moveEdit', moveId: move.id })} size="large">
           <Edit />
+        </IconButton>
+
+        <IconButton href={dashboardPath({ to: 'moveCopy', moveId: move.id })} size="large">
+          <ContentCopyIcon />
         </IconButton>
 
         <IconButton

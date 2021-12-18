@@ -1,0 +1,19 @@
+query PageDashboardMoveCopy($moveId: ID!) {
+  move(moveId: $moveId) {
+    ...move
+
+    moveCategory {
+      id
+      name
+
+      character {
+        slug
+        name
+      }
+
+      moves {
+        ...MovePositionSelect
+      }
+    }
+  }
+}
