@@ -187,8 +187,9 @@ const MoveRow = ({ move, afterDelete }: MoveRowProps) => {
 
 const VideoButton: React.FC<{ move: DashboardMoveCategoriesPageMoveFragment }> = ({ move }) => {
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [file, setFile] = useState<File>();
   const setLoading = useSetRecoilState(loadingState);
+
+  let file: File | undefined;
 
   const [ceateMoveVideo, { loading }] = useCreateMoveVideoMutation({
     variables: { moveId: move.id },
@@ -239,10 +240,10 @@ const VideoButton: React.FC<{ move: DashboardMoveCategoriesPageMoveFragment }> =
         onChange={event => {
           const target = event.target;
           if (!target.files) return;
-          const file = target.files[0];
+
+          file = target.files[0];
           if (!file) return;
 
-          setFile(file);
           ceateMoveVideo();
         }}
       />
