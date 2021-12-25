@@ -1,6 +1,6 @@
 fragment CharacterCard on Character {
   slug
-  longName
+  name
   faceImageUrl
   country
   fightingStyle
