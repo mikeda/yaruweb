@@ -58,7 +58,7 @@ export const CharacterCard: React.FC<Props> = ({ character, dashboard = false })
         <CardMedia image={character.faceImageUrl} className={classes.media} />
 
         <CardContent className={classes.content}>
-          <Typography variant="h4">{character.longName}</Typography>
+          <Typography variant="h4">{character.name}</Typography>
 
           <List disablePadding dense>
             <ListItem disableGutters>
