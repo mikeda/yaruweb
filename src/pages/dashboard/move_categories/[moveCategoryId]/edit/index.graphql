@@ -2,10 +2,15 @@ query PageDashboardMoveCategoryEdit($moveCategoryId: ID!) {
   moveCategory(moveCategoryId: $moveCategoryId) {
     id
     name
+    position
 
     character {
       slug
       name
+
+      moveCategories {
+        ...MoveCategoryPositionSelect
+      }
     }
   }
 }

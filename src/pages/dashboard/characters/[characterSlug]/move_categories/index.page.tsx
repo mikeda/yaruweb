@@ -88,6 +88,12 @@ const Page: React.FC = () => {
 
             <div>
               <MovesNewButton moveCategoryId={moveCategory.id} />
+              <IconButton
+                href={dashboardPath({ to: 'moveCategoryEdit', moveCategoryId: moveCategory.id })}
+                size="large"
+              >
+                <Edit />
+              </IconButton>
 
               {moveCategory.moves.length == 0 && (
                 <IconButton

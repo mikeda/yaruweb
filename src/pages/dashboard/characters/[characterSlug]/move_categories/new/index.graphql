@@ -1,5 +1,9 @@
 query DashboardMoveCategoryNewPage($characterSlug: String!) {
   character(characterSlug: $characterSlug) {
     ...CharacterBreadcrumbs
+
+    moveCategories {
+      ...MoveCategoryPositionSelect
+    }
   }
 }

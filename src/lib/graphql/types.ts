@@ -981,10 +981,12 @@ export type MoveCategory = {
   moves: Array<Move>;
   movesCount: Scalars['Int'];
   name: Scalars['String'];
+  position: Scalars['Int'];
 };
 
 export type MoveCategoryAttributes = {
   name: Scalars['String'];
+  position: Scalars['Int'];
 };
 
 export type MoveVideo = {
@@ -2181,7 +2183,7 @@ export type ReversalMoveFragment = { __typename?: 'ReversalMove', id: string, ty
 
 export type MoveFragment = { __typename?: 'Move', id: string, name: string, kana?: string | null | undefined, command: Array<string>, note?: string | null | undefined, position: number, moveCategory: { __typename?: 'MoveCategory', id: string, name: string }, moveable: { __typename: 'AttackMove', id: string, startUpFrame?: number | null | undefined, heights: Array<AttackTypeEnum>, damages: Array<number>, blockResult: AttackMoveResultEnum, blockStatus?: AttackMoveStateEnum | null | undefined, blockFrame?: number | null | undefined, hitResult: AttackMoveResultEnum, hitStatus?: AttackMoveStateEnum | null | undefined, hitFrame?: number | null | undefined, counterResult: AttackMoveResultEnum, counterStatus?: AttackMoveStateEnum | null | undefined, counterFrame?: number | null | undefined, powerCrush: boolean, powerCrushFrame?: number | null | undefined, crouchingStatus: boolean, crouchingStatusFrame?: number | null | undefined, jumpStatus: boolean, jumpStatusFrame?: number | null | undefined, homing: boolean, screw: boolean, wallBound: boolean } | { __typename: 'ReversalMove', id: string, type: string, startUpFrame?: number | null | undefined, finishFrame?: number | null | undefined } | { __typename: 'ThrowMove', id: string, throwType: ThrowTypeEnum, startUpFrame?: number | null | undefined, damage?: number | null | undefined, throwEscape: ThrowEscapeEnum, throwResult: ThrowMoveResultEnum }, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null | undefined };
 
-export type MoveCategoryFragment = { __typename?: 'MoveCategory', id: string, name: string };
+export type MoveCategoryFragment = { __typename?: 'MoveCategory', id: string, name: string, position: number };
 
 export type MoveVideoFragment = { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string };
 
@@ -2503,6 +2505,8 @@ export type FavButtonArticleQueryVariables = Exact<{
 
 export type FavButtonArticleQuery = { __typename?: 'Query', article: { __typename?: 'Article', faved: boolean } };
 
+export type MoveCategoryPositionSelectFragment = { __typename?: 'MoveCategory', id: string, name: string, position: number };
+
 export type MovePositionSelectFragment = { __typename?: 'Move', id: string, name: string, position: number };
 
 export type MoveMediaFragment = { __typename?: 'Move', id: string, name: string, kana?: string | null | undefined, command: Array<string>, note?: string | null | undefined, moveable: { __typename: 'AttackMove', id: string, startUpFrame?: number | null | undefined, heights: Array<AttackTypeEnum>, damages: Array<number>, blockResult: AttackMoveResultEnum, blockStatus?: AttackMoveStateEnum | null | undefined, blockFrame?: number | null | undefined, hitResult: AttackMoveResultEnum, hitStatus?: AttackMoveStateEnum | null | undefined, hitFrame?: number | null | undefined, counterResult: AttackMoveResultEnum, counterStatus?: AttackMoveStateEnum | null | undefined, counterFrame?: number | null | undefined, powerCrush: boolean, powerCrushFrame?: number | null | undefined, crouchingStatus: boolean, crouchingStatusFrame?: number | null | undefined, jumpStatus: boolean, jumpStatusFrame?: number | null | undefined, homing: boolean, screw: boolean, wallBound: boolean } | { __typename: 'ReversalMove', id: string, type: string, startUpFrame?: number | null | undefined, finishFrame?: number | null | undefined } | { __typename: 'ThrowMove', id: string, throwType: ThrowTypeEnum, startUpFrame?: number | null | undefined, damage?: number | null | undefined, throwEscape: ThrowEscapeEnum, throwResult: ThrowMoveResultEnum }, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null | undefined };
@@ -2697,7 +2701,7 @@ export type DashboardMoveCategoryNewPageQueryVariables = Exact<{
 }>;
 
 
-export type DashboardMoveCategoryNewPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string } };
+export type DashboardMoveCategoryNewPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, position: number }> } };
 
 export type DashboardCharactersPageQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2730,7 +2734,7 @@ export type PageDashboardMoveCategoryEditQueryVariables = Exact<{
 }>;
 
 
-export type PageDashboardMoveCategoryEditQuery = { __typename?: 'Query', moveCategory: { __typename?: 'MoveCategory', id: string, name: string, character: { __typename?: 'Character', slug: string, name: string } } };
+export type PageDashboardMoveCategoryEditQuery = { __typename?: 'Query', moveCategory: { __typename?: 'MoveCategory', id: string, name: string, position: number, character: { __typename?: 'Character', slug: string, name: string, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, position: number }> } } };
 
 export type CreateReversalMoveMutationVariables = Exact<{
   moveCategoryId: Scalars['ID'];
@@ -3228,6 +3232,7 @@ export const MoveCategoryFragmentDoc = gql`
     fragment moveCategory on MoveCategory {
   id
   name
+  position
 }
     `;
 export const PagingFragmentDoc = gql`
@@ -3404,6 +3409,13 @@ export const ComboMediaFragmentDoc = gql`
   }
 }
     ${ComboVideoFragmentDoc}`;
+export const MoveCategoryPositionSelectFragmentDoc = gql`
+    fragment MoveCategoryPositionSelect on MoveCategory {
+  id
+  name
+  position
+}
+    `;
 export const MovePositionSelectFragmentDoc = gql`
     fragment MovePositionSelect on Move {
   id
@@ -6147,9 +6159,13 @@ export const DashboardMoveCategoryNewPageDocument = gql`
     query DashboardMoveCategoryNewPage($characterSlug: String!) {
   character(characterSlug: $characterSlug) {
     ...CharacterBreadcrumbs
+    moveCategories {
+      ...MoveCategoryPositionSelect
+    }
   }
 }
-    ${CharacterBreadcrumbsFragmentDoc}`;
+    ${CharacterBreadcrumbsFragmentDoc}
+${MoveCategoryPositionSelectFragmentDoc}`;
 
 /**
  * __useDashboardMoveCategoryNewPageQuery__
@@ -6350,13 +6366,17 @@ export const PageDashboardMoveCategoryEditDocument = gql`
   moveCategory(moveCategoryId: $moveCategoryId) {
     id
     name
+    position
     character {
       slug
       name
+      moveCategories {
+        ...MoveCategoryPositionSelect
+      }
     }
   }
 }
-    `;
+    ${MoveCategoryPositionSelectFragmentDoc}`;
 
 /**
  * __usePageDashboardMoveCategoryEditQuery__
