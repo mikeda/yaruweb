@@ -32,12 +32,15 @@ const Page: React.FC = () => {
 
   return (
     <DashboardContent title="カテゴリ編集">
-      <PageContent moveCategory={moveCategory} />
+      <PageContent moveCategory={moveCategory} moveCategories={moveCategory.character.moveCategories} />
     </DashboardContent>
   );
 };
 
-export const PageContent: React.FC<{ moveCategory: MoveCategoryFragment }> = ({ moveCategory }) => {
+export const PageContent: React.FC<{ moveCategory: MoveCategoryFragment; moveCategories: MoveCategoryFragment[] }> = ({
+  moveCategory,
+  moveCategories,
+}) => {
   const router = useRouter();
   const setLoading = useSetRecoilState(loadingState);
   const [updateMoveCategory, { loading }] = useUpdateMoveCategoryMutation({
@@ -56,7 +59,7 @@ export const PageContent: React.FC<{ moveCategory: MoveCategoryFragment }> = ({ 
 
   setLoading(loading);
 
-  return <MoveCategoryForm moveCategory={moveCategory} onSubmit={onSubmit} />;
+  return <MoveCategoryForm moveCategory={moveCategory} moveCategories={moveCategories} onSubmit={onSubmit} />;
 };
 
 export default Page;

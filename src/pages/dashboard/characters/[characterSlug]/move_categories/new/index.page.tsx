@@ -53,7 +53,7 @@ const PageContent: React.FC<DashboardMoveCategoryNewPageQuery> = ({ character })
 
   setLoading(loading);
 
-  return <MoveCategoryForm onSubmit={onSubmit} />;
+  return <MoveCategoryForm moveCategories={character.moveCategories} onSubmit={onSubmit} />;
 };
 
 export default Page;

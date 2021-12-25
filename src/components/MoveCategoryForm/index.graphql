@@ -1,0 +1,5 @@
+fragment MoveCategoryPositionSelect on MoveCategory {
+  id
+  name
+  position
+}
