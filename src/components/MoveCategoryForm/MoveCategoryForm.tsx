@@ -42,7 +42,7 @@ export const MoveCategoryForm: React.FC<Props> = ({ moveCategory, moveCategories
           position: moveCategory.position,
         }
       : {
-          position: moveCategories.length,
+          position: moveCategories.length > 0 ? moveCategories[moveCategories.length - 1].position + 1 : 0,
         },
   });
 

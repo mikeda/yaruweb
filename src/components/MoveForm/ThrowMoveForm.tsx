@@ -80,7 +80,7 @@ export const ThrowMoveForm: React.FC<Props> = ({ move, moves, onSubmit, copy = f
       : {
           move: {
             command: [],
-            position: moves.length,
+            position: moves.length > 0 ? moves[moves.length - 1].position + 1 : 0,
           },
           throw: {
             throwType: ThrowTypeEnum.High,
