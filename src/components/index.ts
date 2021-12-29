@@ -20,8 +20,6 @@ export * from './MoveCategoryForm';
 export * from './MoveForm';
 export * from './MoveMedia';
 export * from './NotFound';
-export * from './ObjectCard';
-export * from './ObjectCardList';
 export * from './OperationListSelector';
 export * from './OrganizerForm';
 export * from './PlayerPageTabs';
