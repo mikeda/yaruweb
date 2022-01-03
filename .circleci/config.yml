@@ -18,19 +18,16 @@ jobs:
 
       - run:
           name: tsc
-          working_directory: nextjs
           command: yarn tsc --noEmit
           when: always
 
       - run:
           name: eslint
-          working_directory: nextjs
           command: yarn eslint
           when: always
 
       - run:
           name: stylelint
-          working_directory: nextjs
           command: yarn stylelint src/**/*.scss
           when: always
 
