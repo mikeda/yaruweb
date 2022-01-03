@@ -13,10 +13,12 @@ jobs:
     executor: default
     steps:
       - checkout
+
       - node/install:
-        install-yarn: true
+          install-yarn: true
+
       - node/install-packages:
-        pkg-manager: yarn
+          pkg-manager: yarn
 
       - run:
           name: tsc
