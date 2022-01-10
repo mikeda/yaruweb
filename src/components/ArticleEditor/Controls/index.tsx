@@ -7,6 +7,7 @@ import { ImageButton } from './ImageButton';
 import { VideoButton } from './VideoButton';
 import { LinkButton } from './LinkButton';
 import { MoveButton } from './MoveButton';
+import { ComboButton } from './ComboButton';
 import { useCharacterSelectOptionsQuery } from '@/lib/graphql/types';
 
 import styles from './Controls.module.scss';
@@ -26,6 +27,7 @@ export const Controls: React.FC = () => {
       <VideoButton />
       <LinkButton />
       {data && <MoveButton characters={data.characters.records} />}
+      {data && <ComboButton characters={data.characters.records} />}
     </div>
   );
 };

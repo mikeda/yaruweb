@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useSlate } from 'slate-react';
 
-import { MoveSelect } from './MoveSelect';
+import { ComboSelect } from './ComboSelect';
 import { Transforms, Editor } from 'slate';
 import { Character } from '@/lib/graphql/types';
 import { TextButton } from '../TextButton';
@@ -13,7 +13,7 @@ interface Props {
   characters: CharacterFragment[];
 }
 
-export const MoveButton: React.FC<Props> = ({ characters }) => {
+export const ComboButton: React.FC<Props> = ({ characters }) => {
   const [expanded, setExpanded] = useState(false);
   const [characterSlug, setCharacterSlug] = useState('');
 
@@ -29,7 +29,7 @@ export const MoveButton: React.FC<Props> = ({ characters }) => {
           savedSelection.current = editor.selection;
           setExpanded(!expanded);
         }}
-        text="コマンドリスト"
+        text="コンボ"
       />
 
       <Dialog open={expanded} onClose={() => setExpanded(false)}>
@@ -52,15 +52,15 @@ export const MoveButton: React.FC<Props> = ({ characters }) => {
           </FormControl>
 
           {characterSlug && (
-            <MoveSelect
+            <ComboSelect
               characterSlug={characterSlug}
-              onChange={moveId => {
+              onChange={comboId => {
                 if (!editor.selection) {
                   Transforms.select(editor, savedSelection.current ?? Editor.end(editor, []));
                 }
                 editor.insertNode({
-                  type: 'embed-move',
-                  moveId,
+                  type: 'embed-combo',
+                  comboId,
                   children: [{ text: '' }],
                 });
                 editor.insertNode({ type: 'paragraph', children: [{ text: '' }] });

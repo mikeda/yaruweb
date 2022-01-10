@@ -1,7 +1,6 @@
 import React from 'react';
-import Select from 'react-select';
 import { useMoveSelectOptionsQuery } from '@/lib/graphql/types';
-import { FormGroup } from '@/components/form/FormGroup';
+import { Select } from '@mui/material';
 
 interface Props {
   characterSlug: string;
@@ -16,25 +15,28 @@ export const MoveSelect: React.FC<Props> = ({ characterSlug, onChange }) => {
   if (!data) return <p>読み込みに失敗しました。</p>;
   if (data.moveCategories.length === 0) return <p>技データが登録されていません。</p>;
 
-  const options = data.moveCategories.map(moveCategory => ({
-    label: moveCategory.name,
-    options: moveCategory.moves.map(move => {
-      const label = move.name;
-      return { label, value: move.id };
-    }),
-  }));
-
   return (
-    <FormGroup>
-      <Select
-        options={options}
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        onChange={(option: any) => {
-          if (!option) return;
+    <Select
+      onChange={option => {
+        if (!option) return;
 
-          onChange(option.value as string);
-        }}
-      />
-    </FormGroup>
+        onChange(option.target.value as string);
+      }}
+      defaultValue=""
+      native
+    >
+      <option value=""></option>
+
+      {data.moveCategories.map(moveCategory => (
+        <>
+          <optgroup label={moveCategory.name} />
+          {moveCategory.moves.map(move => (
+            <option key={move.id} value={move.id}>
+              {move.name}
+            </option>
+          ))}
+        </>
+      ))}
+    </Select>
   );
 };
