@@ -1,11 +1,21 @@
 import React from 'react';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
 import { CharacterAttributes, CharacterFormFragment } from '@/lib/graphql/types';
-import { CheckBox, FormGrid, TextArea, Input, FormGroup } from '@/components';
-import { Button } from '@mui/material';
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Checkbox,
+  Divider,
+  FormControlLabel,
+  Grid,
+  Stack,
+  TextField,
+} from '@mui/material';
 
 const schema = yup.object().shape({
   name: yup.string().required(),
@@ -31,9 +41,9 @@ interface Props {
 
 export const CharacterForm: React.FC<Props> = ({ character, onSubmit }) => {
   const {
-    register,
     handleSubmit,
     setValue,
+    control,
     formState: { errors },
   } = useForm<CharacterAttributes>({
     resolver: yupResolver(schema),
@@ -53,113 +63,234 @@ export const CharacterForm: React.FC<Props> = ({ character, onSubmit }) => {
   });
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <FormGrid>
-        <FormGroup label="名前" required>
-          <Input {...register('name')} />
-          {errors.name && <span>This field is required</span>}
-        </FormGroup>
+    <Card>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <CardContent>
+          <Grid container spacing={2}>
+            <Grid item xs={12} sm={6}>
+              <Controller
+                name="name"
+                control={control}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    label="名前"
+                    error={Boolean(errors.name)}
+                    helperText={errors.name?.message}
+                    size="small"
+                    fullWidth
+                  />
+                )}
+              />
+            </Grid>
 
-        <FormGroup label="カナ" required>
-          <Input {...register('nameKana')} />
-          {errors.nameKana && <span>This field is required</span>}
-        </FormGroup>
-      </FormGrid>
+            <Grid item xs={12} sm={6}>
+              <Controller
+                name="nameKana"
+                control={control}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    label="カナ"
+                    error={Boolean(errors.nameKana)}
+                    helperText={errors.nameKana?.message}
+                    size="small"
+                    fullWidth
+                  />
+                )}
+              />
+            </Grid>
 
-      <FormGrid>
-        <FormGroup label="正式名称" required>
-          <Input {...register('longName')} />
-          {errors.longName && <span>This field is required</span>}
-        </FormGroup>
+            <Grid item xs={12} sm={6}>
+              <Controller
+                name="longName"
+                control={control}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    label="正式名称"
+                    error={Boolean(errors.longName)}
+                    helperText={errors.longName?.message}
+                    size="small"
+                    fullWidth
+                  />
+                )}
+              />
+            </Grid>
 
-        <FormGroup label="カナ(正式名称)" required>
-          <Input {...register('longNameKana')} />
-          {errors.longNameKana && <span>This field is required</span>}
-        </FormGroup>
-      </FormGrid>
+            <Grid item xs={12} sm={6}>
+              <Controller
+                name="longNameKana"
+                control={control}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    label="正式名称(カナ)"
+                    error={Boolean(errors.longNameKana)}
+                    helperText={errors.longNameKana?.message}
+                    size="small"
+                    fullWidth
+                  />
+                )}
+              />
+            </Grid>
 
-      <FormGrid>
-        <FormGroup label="ID(URLで使う名前)" required>
-          <Input {...register('slug')} />
-          {errors.slug?.message && <span>{errors.slug.message}</span>}
-        </FormGroup>
-      </FormGrid>
+            <Grid item xs={12} sm={6}>
+              <Controller
+                name="slug"
+                control={control}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    label="ID(URLで使う名前)"
+                    error={Boolean(errors.slug)}
+                    helperText={errors.slug?.message}
+                    size="small"
+                    fullWidth
+                  />
+                )}
+              />
+            </Grid>
 
-      <FormGrid>
-        <FormGroup label="国籍" required>
-          <Input {...register('country')} />
-          {errors.country && <span>This field is required</span>}
-        </FormGroup>
+            <Grid item xs={12} sm={6}>
+              <Controller
+                name="country"
+                control={control}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    label="国籍"
+                    error={Boolean(errors.country)}
+                    helperText={errors.country?.message}
+                    size="small"
+                    fullWidth
+                  />
+                )}
+              />
+            </Grid>
 
-        <FormGroup label="格闘スタイル" required>
-          <Input {...register('fightingStyle')} />
-          {errors.fightingStyle && <span>This field is required</span>}
-        </FormGroup>
-      </FormGrid>
+            <Grid item xs={12} sm={6}>
+              <Controller
+                name="fightingStyle"
+                control={control}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    label="格闘スタイル"
+                    error={Boolean(errors.fightingStyle)}
+                    helperText={errors.fightingStyle?.message}
+                    size="small"
+                    fullWidth
+                  />
+                )}
+              />
+            </Grid>
+          </Grid>
 
-      <FormGroup label="公式ストーリー" required>
-        <TextArea {...register('story')} />
-      </FormGroup>
+          <Box mt={4}>
+            <Controller
+              name="story"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  label="公式ストーリー"
+                  error={Boolean(errors.story)}
+                  helperText={errors.story?.message}
+                  size="small"
+                  multiline
+                  fullWidth
+                />
+              )}
+            />
+          </Box>
 
-      <FormGroup label="キャラ解説" required>
-        <TextArea {...register('description')} />
-      </FormGroup>
+          <Box mt={4}>
+            <Controller
+              name="description"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  label="キャラ解説"
+                  error={Boolean(errors.description)}
+                  helperText={errors.description?.message}
+                  size="small"
+                  multiline
+                  fullWidth
+                />
+              )}
+            />
+          </Box>
 
-      <FormGroup label="顔画像">
-        <input
-          type="file"
-          accept="image/*"
-          name="faceImageDummy"
-          onChange={e => {
-            if (!e.target.files) return;
-            const file = e.target.files[0];
-            if (!file) return;
+          <Stack direction="row" spacing={2} mt={4}>
+            <Button component="label" color="primary" variant="outlined">
+              顔画像を選択
+              <input
+                type="file"
+                accept="image/*"
+                hidden
+                onChange={e => {
+                  if (!e.target.files) return;
+                  const file = e.target.files[0];
+                  if (!file) return;
 
-            const reader = new FileReader();
-            reader.onload = e => {
-              if (!e.target) return;
+                  const reader = new FileReader();
+                  reader.onload = e => {
+                    if (!e.target) return;
 
-              setValue('faceImage', e.target.result as string);
-            };
-            reader.readAsDataURL(file);
-          }}
-        />
-        <input type="hidden" name="faceImage" />
-      </FormGroup>
+                    setValue('faceImage', e.target.result as string);
+                  };
+                  reader.readAsDataURL(file);
+                }}
+              />
+            </Button>
 
-      <FormGroup label="全体画像">
-        <input
-          type="file"
-          accept="image/*"
-          name="mainImageDummy"
-          onChange={e => {
-            if (!e.target.files) return;
-            const file = e.target.files[0];
-            if (!file) return;
+            <Button component="label" color="primary" variant="outlined">
+              全体画像を選択
+              <input
+                type="file"
+                accept="image/*"
+                hidden
+                onChange={e => {
+                  if (!e.target.files) return;
+                  const file = e.target.files[0];
+                  if (!file) return;
 
-            const reader = new FileReader();
-            reader.onload = e => {
-              if (!e.target) return;
+                  const reader = new FileReader();
+                  reader.onload = e => {
+                    if (!e.target) return;
 
-              setValue('mainImage', e.target.result as string);
-            };
-            reader.readAsDataURL(file);
-          }}
-        />
-        <input type="hidden" name="mainImage" />
-      </FormGroup>
+                    setValue('mainImage', e.target.result as string);
+                  };
+                  reader.readAsDataURL(file);
+                }}
+              />
+            </Button>
+          </Stack>
 
-      <FormGroup>
-        <CheckBox id="dlc" label="DLC">
-          <input id="dlc" type="checkbox" {...register('dlc')} />
-        </CheckBox>
-      </FormGroup>
+          <Box mt={4}>
+            <FormControlLabel
+              control={
+                <Controller
+                  name="dlc"
+                  render={({ field }) => <Checkbox {...field} checked={field.value} />}
+                  control={control}
+                />
+              }
+              label="DLC"
+            />
+          </Box>
+        </CardContent>
 
-      <FormGroup>
-        <Button type="submit" variant="contained">
-          登録する
-        </Button>
-      </FormGroup>
-    </form>
+        <Divider />
+
+        <Box m={2} display="flex" justifyContent="center">
+          <Button type="submit" variant="contained">
+            登録する
+          </Button>
+        </Box>
+      </form>
+    </Card>
   );
 };
