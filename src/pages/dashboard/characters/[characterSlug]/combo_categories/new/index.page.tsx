@@ -1,10 +1,10 @@
 import React from 'react';
 
 import {
+  DashboardComboCategoryNewPageQuery,
   ComboCategoryAttributes,
-  PageDashboardComboCategoryNewQuery,
   useCreateComboCategoryMutation,
-  usePageDashboardComboCategoryNewQuery,
+  useDashboardComboCategoryNewPageQuery,
 } from '@/lib/graphql/types';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
 import { useRouter } from 'next/router';
@@ -12,19 +12,15 @@ import { toast } from 'react-toastify';
 import { ComboCategoryForm } from '@/components/ComboCategoryForm';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from '@/states/loading';
-import { DashboardBreadcrumbs } from '@/components';
+import { useRouteParams } from './hooks';
 
 const Page: React.FC = () => {
-  const router = useRouter();
+  const { characterSlug } = useRouteParams();
   const setLoading = useSetRecoilState(loadingState);
-  const { characterSlug } = router.query;
-  const { data, loading } = usePageDashboardComboCategoryNewQuery({
+
+  const { data, loading } = useDashboardComboCategoryNewPageQuery({
     variables: { characterSlug: characterSlug as string },
     skip: !characterSlug,
-    fetchPolicy: 'network-only',
-    onError: e => {
-      toast.error(e.message);
-    },
   });
 
   setLoading(loading);
@@ -32,21 +28,18 @@ const Page: React.FC = () => {
   const { character } = data;
 
   return (
-    <DashboardContent
-      title="カテゴリ登録"
-      breadcrumb={<DashboardBreadcrumbs to="comboCategoriesNew" character={character} />}
-    >
+    <DashboardContent title="カテゴリ作成">
       <PageContent character={character} />
     </DashboardContent>
   );
 };
 
-const PageContent: React.FC<PageDashboardComboCategoryNewQuery> = ({ character }) => {
+const PageContent: React.FC<DashboardComboCategoryNewPageQuery> = ({ character }) => {
   const router = useRouter();
   const setLoading = useSetRecoilState(loadingState);
   const [createComboCategory, { loading }] = useCreateComboCategoryMutation({
     onCompleted: () => {
-      toast.success('コンボカテゴリを登録しました。');
+      toast.success('技データカテゴリを登録しました。');
       router.back();
     },
     onError: e => {
@@ -60,7 +53,7 @@ const PageContent: React.FC<PageDashboardComboCategoryNewQuery> = ({ character }
 
   setLoading(loading);
 
-  return <ComboCategoryForm onSubmit={onSubmit} />;
+  return <ComboCategoryForm comboCategories={character.comboCategories} onSubmit={onSubmit} />;
 };
 
 export default Page;

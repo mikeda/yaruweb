@@ -1,39 +1,97 @@
 import React from 'react';
+import * as yup from 'yup';
 
 import { ComboCategoryAttributes, ComboCategoryFragment } from '@/lib/graphql/types';
-import { useForm } from 'react-hook-form';
-import { FormGroup } from '@/components/form/FormGroup';
-import { Input } from '@/components/form/Input';
-import { Button } from '@mui/material';
+import { Controller, useForm } from 'react-hook-form';
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Divider,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from '@mui/material';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 interface Props {
   comboCategory?: ComboCategoryFragment;
+  comboCategories: ComboCategoryFragment[];
   onSubmit: (attributes: ComboCategoryAttributes) => void;
 }
 
-export const ComboCategoryForm: React.FC<Props> = ({ comboCategory, onSubmit }) => {
+const schema = yup.object().shape({
+  name: yup.string().required(),
+});
+
+export const ComboCategoryForm: React.FC<Props> = ({ comboCategory, comboCategories, onSubmit }) => {
   const {
-    register,
     handleSubmit,
+    control,
+    setValue,
     formState: { errors },
   } = useForm<ComboCategoryAttributes>({
-    defaultValues: comboCategory && {
-      name: comboCategory.name,
-    },
+    resolver: yupResolver(schema),
+    mode: 'onBlur',
+    defaultValues: comboCategory
+      ? {
+          name: comboCategory.name,
+          position: comboCategory.position,
+        }
+      : {
+          position: comboCategories.length > 0 ? comboCategories[comboCategories.length - 1].position + 1 : 0,
+        },
   });
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <FormGroup label="名前">
-        <Input {...register('name', { required: true })} />
-        {errors.name && <span>This field is required</span>}
-      </FormGroup>
+    <Card>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <CardContent>
+          <Controller
+            name="name"
+            control={control}
+            render={({ field }) => (
+              <TextField {...field} label="名前" error={Boolean(errors.name)} helperText={errors.name?.message} />
+            )}
+          />
 
-      <FormGroup>
-        <Button type="submit" variant="contained">
-          登録する
-        </Button>
-      </FormGroup>
-    </form>
+          <Box mt={4}>
+            <FormControl fullWidth variant="outlined" size="small">
+              <InputLabel>表示順</InputLabel>
+              <Controller
+                name="position"
+                control={control}
+                render={({ field }) => (
+                  <Select
+                    {...field}
+                    onChange={e => {
+                      const position = Number(e.target.value);
+                      setValue('position', position);
+                    }}
+                  >
+                    <MenuItem value={0}>先頭</MenuItem>
+                    {comboCategories.map((m, i) => (
+                      <MenuItem key={m.id} value={m.position + 1}>
+                        {m.name}の後ろ
+                        {i == comboCategories.length && '(最後)'}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                )}
+              />
+            </FormControl>
+          </Box>
+        </CardContent>
+        <Divider />
+        <Box m={2} justifyContent="flex-end">
+          <Button type="submit" variant="contained">
+            登録する
+          </Button>
+        </Box>
+      </form>
+    </Card>
   );
 };

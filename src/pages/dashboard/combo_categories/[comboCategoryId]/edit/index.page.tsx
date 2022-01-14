@@ -12,7 +12,6 @@ import { toast } from 'react-toastify';
 import { ComboCategoryForm } from '@/components/ComboCategoryForm';
 import { loadingState } from '@/states/loading';
 import { useSetRecoilState } from 'recoil';
-import { DashboardBreadcrumbs } from '@/components';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -32,21 +31,21 @@ const Page: React.FC = () => {
   const { comboCategory } = data;
 
   return (
-    <DashboardContent
-      title="カテゴリ登録"
-      breadcrumb={<DashboardBreadcrumbs to="comboCategoriesNew" character={comboCategory.character} />}
-    >
-      <PageContent comboCategory={comboCategory} />
+    <DashboardContent title="カテゴリ編集">
+      <PageContent comboCategory={comboCategory} comboCategories={comboCategory.character.comboCategories} />
     </DashboardContent>
   );
 };
 
-export const PageContent: React.FC<{ comboCategory: ComboCategoryFragment }> = ({ comboCategory }) => {
+export const PageContent: React.FC<{
+  comboCategory: ComboCategoryFragment;
+  comboCategories: ComboCategoryFragment[];
+}> = ({ comboCategory, comboCategories }) => {
   const router = useRouter();
   const setLoading = useSetRecoilState(loadingState);
   const [updateComboCategory, { loading }] = useUpdateComboCategoryMutation({
     onCompleted: () => {
-      toast.success('コンボカテゴリを更新しました。');
+      toast.success('技データカテゴリを更新しました。');
       router.back();
     },
     onError: e => {
@@ -60,7 +59,7 @@ export const PageContent: React.FC<{ comboCategory: ComboCategoryFragment }> = (
 
   setLoading(loading);
 
-  return <ComboCategoryForm comboCategory={comboCategory} onSubmit={onSubmit} />;
+  return <ComboCategoryForm comboCategory={comboCategory} comboCategories={comboCategories} onSubmit={onSubmit} />;
 };
 
 export default Page;
