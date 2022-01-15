@@ -1,5 +1,9 @@
-query PageDashboardComboCategoryNew($characterSlug: String!) {
+query DashboardComboCategoryNewPage($characterSlug: String!) {
   character(characterSlug: $characterSlug) {
     ...CharacterBreadcrumbs
+
+    comboCategories {
+      ...ComboCategoryPositionSelect
+    }
   }
 }

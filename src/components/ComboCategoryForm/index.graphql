@@ -1,0 +1,5 @@
+fragment ComboCategoryPositionSelect on ComboCategory {
+  id
+  name
+  position
+}

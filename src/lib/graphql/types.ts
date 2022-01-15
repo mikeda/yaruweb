@@ -341,10 +341,12 @@ export type ComboCategory = {
   combosCount: Scalars['Int'];
   id: Scalars['ID'];
   name: Scalars['String'];
+  position: Scalars['Int'];
 };
 
 export type ComboCategoryAttributes = {
   name: Scalars['String'];
+  position: Scalars['Int'];
 };
 
 export type ComboVideo = {
@@ -2169,7 +2171,7 @@ export type ArticleSummaryFragment = { __typename?: 'Article', id: string, title
 
 export type ComboFragment = { __typename?: 'Combo', id: string, damage?: number | null | undefined, command: Array<string>, note?: string | null | undefined, move?: { __typename?: 'Move', id: string } | null | undefined, comboCategory: { __typename?: 'ComboCategory', id: string, name: string }, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null | undefined };
 
-export type ComboCategoryFragment = { __typename?: 'ComboCategory', id: string, name: string };
+export type ComboCategoryFragment = { __typename?: 'ComboCategory', id: string, name: string, position: number };
 
 export type ComboVideoFragment = { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string };
 
@@ -2436,8 +2438,8 @@ export type MyArticleQueryVariables = Exact<{
 export type MyArticleQuery = { __typename?: 'Query', myArticle: { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null | undefined, publishedAt?: string | null | undefined, faved: boolean, favsCount: number, status: ArticleStatus, category: ArticleCategory, content: string, author: { __typename?: 'User', name: string, avatarUrl: string } } };
 
 export type MyArticlesQueryVariables = Exact<{
-  page?: Maybe<Scalars['Int']>;
-  per?: Maybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
+  per?: InputMaybe<Scalars['Int']>;
 }>;
 
 
@@ -2458,7 +2460,7 @@ export type PlayerSelectOptionsQueryVariables = Exact<{ [key: string]: never; }>
 export type PlayerSelectOptionsQuery = { __typename?: 'Query', players: { __typename?: 'PlayerCollection', records: Array<{ __typename?: 'Player', id: string, slug: string, name: string, tonamelId?: string | null | undefined, smashggId?: string | null | undefined }> } };
 
 export type PlayerSlugsQueryVariables = Exact<{
-  per?: Maybe<Scalars['Int']>;
+  per?: InputMaybe<Scalars['Int']>;
 }>;
 
 
@@ -2495,6 +2497,8 @@ export type PlayerChipFragment = { __typename?: 'Player', id: string, slug: stri
 export type CharacterCardFragment = { __typename?: 'Character', slug: string, name: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number };
 
 export type CharacterFormFragment = { __typename?: 'Character', name: string, nameKana: string, longName: string, longNameKana: string, slug: string, country: string, fightingStyle: string, story: string, description: string, dlc: boolean };
+
+export type ComboCategoryPositionSelectFragment = { __typename?: 'ComboCategory', id: string, name: string, position: number };
 
 export type ComboMediaFragment = { __typename?: 'Combo', id: string, damage?: number | null | undefined, command: Array<string>, note?: string | null | undefined, comboCategory: { __typename?: 'ComboCategory', id: string, name: string }, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null | undefined };
 
@@ -2550,7 +2554,7 @@ export type ArticlePageArticleQueryVariables = Exact<{
 export type ArticlePageArticleQuery = { __typename?: 'Query', article: { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null | undefined, publishedAt?: string | null | undefined, favsCount: number, status: ArticleStatus, category: ArticleCategory, content: string, author: { __typename?: 'User', name: string, avatarUrl: string } } };
 
 export type ArticlesPageArticlesQueryVariables = Exact<{
-  page?: Maybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
 }>;
 
 
@@ -2570,7 +2574,7 @@ export type BattlesPageBattlesQuery = { __typename?: 'Query', battles: { __typen
 
 export type CharacterBattlesPageQueryVariables = Exact<{
   characterSlug: Scalars['String'];
-  playerSlug?: Maybe<Scalars['String']>;
+  playerSlug?: InputMaybe<Scalars['String']>;
 }>;
 
 
@@ -2578,7 +2582,7 @@ export type CharacterBattlesPageQuery = { __typename?: 'Query', character: { __t
 
 export type CharacterBattlesPageBattlesQueryVariables = Exact<{
   characterSlug: Scalars['String'];
-  playerSlug?: Maybe<Scalars['String']>;
+  playerSlug?: InputMaybe<Scalars['String']>;
   page: Scalars['Int'];
 }>;
 
@@ -2654,7 +2658,7 @@ export type DashboardArticlesPageDeleteMutationVariables = Exact<{
 export type DashboardArticlesPageDeleteMutation = { __typename?: 'Mutation', deleteArticle?: { __typename?: 'DeleteArticlePayload', article: { __typename?: 'Article', id: string } } | null | undefined };
 
 export type DashboardArticlesPageArticlesQueryVariables = Exact<{
-  page?: Maybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
 }>;
 
 
@@ -2671,12 +2675,12 @@ export type DashboardComboCategoriesPageQueryVariables = Exact<{
 
 export type DashboardComboCategoriesPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string }, comboCategories: Array<{ __typename?: 'ComboCategory', id: string, name: string, combos: Array<{ __typename?: 'Combo', id: string, command: Array<string>, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null | undefined }> }> };
 
-export type PageDashboardComboCategoryNewQueryVariables = Exact<{
+export type DashboardComboCategoryNewPageQueryVariables = Exact<{
   characterSlug: Scalars['String'];
 }>;
 
 
-export type PageDashboardComboCategoryNewQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string } };
+export type DashboardComboCategoryNewPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string, comboCategories: Array<{ __typename?: 'ComboCategory', id: string, name: string, position: number }> } };
 
 export type PageDashboardCharacterEditQueryVariables = Exact<{
   characterSlug: Scalars['String'];
@@ -2720,7 +2724,7 @@ export type PageDashboardComboCategoryEditQueryVariables = Exact<{
 }>;
 
 
-export type PageDashboardComboCategoryEditQuery = { __typename?: 'Query', comboCategory: { __typename?: 'ComboCategory', id: string, name: string, character: { __typename?: 'Character', slug: string, name: string } } };
+export type PageDashboardComboCategoryEditQuery = { __typename?: 'Query', comboCategory: { __typename?: 'ComboCategory', id: string, name: string, position: number, character: { __typename?: 'Character', slug: string, name: string, comboCategories: Array<{ __typename?: 'ComboCategory', id: string, name: string, position: number }> } } };
 
 export type PageDashboardComboEditQueryVariables = Exact<{
   comboId: Scalars['ID'];
@@ -2830,8 +2834,8 @@ export type DashboardOrganizersPageDeleteMutationVariables = Exact<{
 export type DashboardOrganizersPageDeleteMutation = { __typename?: 'Mutation', deleteOrganizer?: { __typename?: 'DeleteOrganizerPayload', organizer: { __typename?: 'Organizer', id: string } } | null | undefined };
 
 export type DashboardOrganizersPageOrganizersQueryVariables = Exact<{
-  page?: Maybe<Scalars['Int']>;
-  keyword?: Maybe<Scalars['String']>;
+  page?: InputMaybe<Scalars['Int']>;
+  keyword?: InputMaybe<Scalars['String']>;
 }>;
 
 
@@ -2862,8 +2866,8 @@ export type DashboardPlayerEditPageUpdatePlayerMutation = { __typename?: 'Mutati
 export type DashboardPlayersPagePlayerFragment = { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null | undefined };
 
 export type DashboardPlayersPagePlayersQueryVariables = Exact<{
-  page?: Maybe<Scalars['Int']>;
-  keyword?: Maybe<Scalars['String']>;
+  page?: InputMaybe<Scalars['Int']>;
+  keyword?: InputMaybe<Scalars['String']>;
 }>;
 
 
@@ -3001,8 +3005,8 @@ export type DashboardTournamentPageDeleteVideoMutation = { __typename?: 'Mutatio
 export type DashboardTournamentsPageTournamentFragment = { __typename?: 'Tournament', id: string, name: string, startsAt: string, videosCount: number, standingsCount: number, mainImageUrl?: string | null | undefined };
 
 export type DashboardTournamentsPageTournamentsQueryVariables = Exact<{
-  page?: Maybe<Scalars['Int']>;
-  keyword?: Maybe<Scalars['String']>;
+  page?: InputMaybe<Scalars['Int']>;
+  keyword?: InputMaybe<Scalars['String']>;
 }>;
 
 
@@ -3015,7 +3019,7 @@ export type TopPageQuery = { __typename?: 'Query', tournaments: { __typename?: '
 
 export type PlayerBattlesPageQueryVariables = Exact<{
   playerSlug: Scalars['String'];
-  page?: Maybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
 }>;
 
 
@@ -3023,7 +3027,7 @@ export type PlayerBattlesPageQuery = { __typename?: 'Query', player: { __typenam
 
 export type PlayerBattlesPageBattlesQueryVariables = Exact<{
   playerSlug: Scalars['String'];
-  characterSlug?: Maybe<Scalars['String']>;
+  characterSlug?: InputMaybe<Scalars['String']>;
   page: Scalars['Int'];
 }>;
 
@@ -3057,8 +3061,8 @@ export type PlayerStandingsPageStandingsQueryVariables = Exact<{
 export type PlayerStandingsPageStandingsQuery = { __typename?: 'Query', standings: { __typename?: 'StandingCollection', records: Array<{ __typename?: 'Standing', id: string, place: number, tournament: { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: string | null | undefined, startsAt: string } }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
 
 export type PlayersPagePlayersQueryVariables = Exact<{
-  page?: Maybe<Scalars['Int']>;
-  keyword?: Maybe<Scalars['String']>;
+  page?: InputMaybe<Scalars['Int']>;
+  keyword?: InputMaybe<Scalars['String']>;
 }>;
 
 
@@ -3076,7 +3080,7 @@ export type TournamentPageQueryVariables = Exact<{
 export type TournamentPageQuery = { __typename?: 'Query', tournament: { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: string | null | undefined, url: string, streamingUrl?: string | null | undefined, description: string, startsAt: string, standings: Array<{ __typename?: 'Standing', id: string, place: number, player: { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null | undefined } }>, videos: Array<{ __typename?: 'TournamentVideo', id: string, youtubeVideoId: string, battles: Array<{ __typename?: 'Battle', id: string, round?: BattleRound | null | undefined, startSec: number, sides: Array<{ __typename?: 'BattleSide', rounds: number, player: { __typename?: 'Player', name: string }, character: { __typename?: 'Character', faceImageUrl: string } }> }> }> } };
 
 export type TournamentsPageTournamentsQueryVariables = Exact<{
-  page?: Maybe<Scalars['Int']>;
+  page?: InputMaybe<Scalars['Int']>;
 }>;
 
 
@@ -3135,6 +3139,7 @@ export const ComboCategoryFragmentDoc = gql`
     fragment comboCategory on ComboCategory {
   id
   name
+  position
 }
     `;
 export const CurrentUserFragmentDoc = gql`
@@ -3392,6 +3397,13 @@ export const CharacterFormFragmentDoc = gql`
   story
   description
   dlc
+}
+    `;
+export const ComboCategoryPositionSelectFragmentDoc = gql`
+    fragment ComboCategoryPositionSelect on ComboCategory {
+  id
+  name
+  position
 }
     `;
 export const ComboMediaFragmentDoc = gql`
@@ -6046,41 +6058,45 @@ export function useDashboardComboCategoriesPageLazyQuery(baseOptions?: Apollo.La
 export type DashboardComboCategoriesPageQueryHookResult = ReturnType<typeof useDashboardComboCategoriesPageQuery>;
 export type DashboardComboCategoriesPageLazyQueryHookResult = ReturnType<typeof useDashboardComboCategoriesPageLazyQuery>;
 export type DashboardComboCategoriesPageQueryResult = Apollo.QueryResult<DashboardComboCategoriesPageQuery, DashboardComboCategoriesPageQueryVariables>;
-export const PageDashboardComboCategoryNewDocument = gql`
-    query PageDashboardComboCategoryNew($characterSlug: String!) {
+export const DashboardComboCategoryNewPageDocument = gql`
+    query DashboardComboCategoryNewPage($characterSlug: String!) {
   character(characterSlug: $characterSlug) {
     ...CharacterBreadcrumbs
+    comboCategories {
+      ...ComboCategoryPositionSelect
+    }
   }
 }
-    ${CharacterBreadcrumbsFragmentDoc}`;
+    ${CharacterBreadcrumbsFragmentDoc}
+${ComboCategoryPositionSelectFragmentDoc}`;
 
 /**
- * __usePageDashboardComboCategoryNewQuery__
+ * __useDashboardComboCategoryNewPageQuery__
  *
- * To run a query within a React component, call `usePageDashboardComboCategoryNewQuery` and pass it any options that fit your needs.
- * When your component renders, `usePageDashboardComboCategoryNewQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useDashboardComboCategoryNewPageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useDashboardComboCategoryNewPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = usePageDashboardComboCategoryNewQuery({
+ * const { data, loading, error } = useDashboardComboCategoryNewPageQuery({
  *   variables: {
  *      characterSlug: // value for 'characterSlug'
  *   },
  * });
  */
-export function usePageDashboardComboCategoryNewQuery(baseOptions: Apollo.QueryHookOptions<PageDashboardComboCategoryNewQuery, PageDashboardComboCategoryNewQueryVariables>) {
+export function useDashboardComboCategoryNewPageQuery(baseOptions: Apollo.QueryHookOptions<DashboardComboCategoryNewPageQuery, DashboardComboCategoryNewPageQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<PageDashboardComboCategoryNewQuery, PageDashboardComboCategoryNewQueryVariables>(PageDashboardComboCategoryNewDocument, options);
+        return Apollo.useQuery<DashboardComboCategoryNewPageQuery, DashboardComboCategoryNewPageQueryVariables>(DashboardComboCategoryNewPageDocument, options);
       }
-export function usePageDashboardComboCategoryNewLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PageDashboardComboCategoryNewQuery, PageDashboardComboCategoryNewQueryVariables>) {
+export function useDashboardComboCategoryNewPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<DashboardComboCategoryNewPageQuery, DashboardComboCategoryNewPageQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<PageDashboardComboCategoryNewQuery, PageDashboardComboCategoryNewQueryVariables>(PageDashboardComboCategoryNewDocument, options);
+          return Apollo.useLazyQuery<DashboardComboCategoryNewPageQuery, DashboardComboCategoryNewPageQueryVariables>(DashboardComboCategoryNewPageDocument, options);
         }
-export type PageDashboardComboCategoryNewQueryHookResult = ReturnType<typeof usePageDashboardComboCategoryNewQuery>;
-export type PageDashboardComboCategoryNewLazyQueryHookResult = ReturnType<typeof usePageDashboardComboCategoryNewLazyQuery>;
-export type PageDashboardComboCategoryNewQueryResult = Apollo.QueryResult<PageDashboardComboCategoryNewQuery, PageDashboardComboCategoryNewQueryVariables>;
+export type DashboardComboCategoryNewPageQueryHookResult = ReturnType<typeof useDashboardComboCategoryNewPageQuery>;
+export type DashboardComboCategoryNewPageLazyQueryHookResult = ReturnType<typeof useDashboardComboCategoryNewPageLazyQuery>;
+export type DashboardComboCategoryNewPageQueryResult = Apollo.QueryResult<DashboardComboCategoryNewPageQuery, DashboardComboCategoryNewPageQueryVariables>;
 export const PageDashboardCharacterEditDocument = gql`
     query PageDashboardCharacterEdit($characterSlug: String!) {
   character(characterSlug: $characterSlug) {
@@ -6283,13 +6299,17 @@ export const PageDashboardComboCategoryEditDocument = gql`
   comboCategory(comboCategoryId: $comboCategoryId) {
     id
     name
+    position
     character {
       slug
       name
+      comboCategories {
+        ...ComboCategoryPositionSelect
+      }
     }
   }
 }
-    `;
+    ${ComboCategoryPositionSelectFragmentDoc}`;
 
 /**
  * __usePageDashboardComboCategoryEditQuery__
