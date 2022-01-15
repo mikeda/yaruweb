@@ -45,7 +45,7 @@ export const PageContent: React.FC<{
   const setLoading = useSetRecoilState(loadingState);
   const [updateComboCategory, { loading }] = useUpdateComboCategoryMutation({
     onCompleted: () => {
-      toast.success('技データカテゴリを更新しました。');
+      toast.success('コンボカテゴリを更新しました。');
       router.back();
     },
     onError: e => {

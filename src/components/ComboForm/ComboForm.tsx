@@ -1,11 +1,9 @@
 import React from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
+import { nullableNumber } from '@/lib/validators/nullable_number';
 
 import { ComboAttributes, ComboFragment, useMoveSelectOptionsQuery } from '@/lib/graphql/types';
-import { FormGroup } from '@/components/form/FormGroup';
-import { Input } from '@/components/form/Input';
-import { TextArea } from '../form/TextArea';
 import {
   Box,
   Button,
@@ -18,13 +16,14 @@ import {
   ListSubheader,
   MenuItem,
   Select,
+  TextField,
   Typography,
 } from '@mui/material';
 import { CommandForm } from './CommandForm';
 import { Controller, useForm } from 'react-hook-form';
 
 const schema = yup.object().shape({
-  startUpFrame: yup.number().integer().min(0),
+  damage: nullableNumber,
 });
 
 interface Props {
@@ -36,7 +35,7 @@ interface Props {
 export const ComboForm: React.FC<Props> = ({ combo, characterSlug, onSubmit }) => {
   const { data } = useMoveSelectOptionsQuery({ variables: { characterSlug } });
 
-  const { register, handleSubmit, setValue, watch, control } = useForm<ComboAttributes>({
+  const { handleSubmit, setValue, watch, control } = useForm<ComboAttributes>({
     resolver: yupResolver(schema),
     mode: 'onBlur',
     defaultValues: combo
@@ -101,13 +100,21 @@ export const ComboForm: React.FC<Props> = ({ combo, characterSlug, onSubmit }) =
             </FormControl>
           </Grid>
 
-          <FormGroup label="ダメージ">
-            <Input type="number" {...register('damage', { valueAsNumber: true })} />
-          </FormGroup>
+          <Box mt={4}>
+            <Controller
+              name="damage"
+              control={control}
+              render={({ field }) => <TextField {...field} type="number" label="ダメージ" size="small" />}
+            />
+          </Box>
 
-          <FormGroup label="備考">
-            <TextArea {...register('note')} />
-          </FormGroup>
+          <Box mt={4}>
+            <Controller
+              name="note"
+              control={control}
+              render={({ field }) => <TextField {...field} label="備考" size="small" multiline fullWidth />}
+            />
+          </Box>
         </CardContent>
 
         <Divider />

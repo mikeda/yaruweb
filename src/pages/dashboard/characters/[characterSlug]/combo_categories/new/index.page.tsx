@@ -39,7 +39,7 @@ const PageContent: React.FC<DashboardComboCategoryNewPageQuery> = ({ character }
   const setLoading = useSetRecoilState(loadingState);
   const [createComboCategory, { loading }] = useCreateComboCategoryMutation({
     onCompleted: () => {
-      toast.success('技データカテゴリを登録しました。');
+      toast.success('コンボカテゴリを登録しました。');
       router.back();
     },
     onError: e => {
