@@ -1,0 +1,5 @@
+query TournamentPaths {
+  allTournaments {
+    id
+  }
+}

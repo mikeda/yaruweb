@@ -1465,6 +1465,7 @@ export type PublishArticlePayload = {
 export type Query = {
   __typename?: 'Query';
   allArticles: Array<Article>;
+  allTournaments: Array<Tournament>;
   article: Article;
   articles: ArticleCollection;
   battleCounts: BattleCountCollection;
@@ -2465,6 +2466,11 @@ export type PlayerSlugsQueryVariables = Exact<{
 
 
 export type PlayerSlugsQuery = { __typename?: 'Query', players: { __typename?: 'PlayerCollection', records: Array<{ __typename?: 'Player', slug: string }> } };
+
+export type TournamentPathsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type TournamentPathsQuery = { __typename?: 'Query', allTournaments: Array<{ __typename?: 'Tournament', id: string }> };
 
 export type ArticleCardFragment = { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null | undefined, publishedAt?: string | null | undefined, faved: boolean, favsCount: number, status: ArticleStatus, author: { __typename?: 'User', name: string, avatarUrl: string } };
 
@@ -5251,6 +5257,40 @@ export function usePlayerSlugsLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
 export type PlayerSlugsQueryHookResult = ReturnType<typeof usePlayerSlugsQuery>;
 export type PlayerSlugsLazyQueryHookResult = ReturnType<typeof usePlayerSlugsLazyQuery>;
 export type PlayerSlugsQueryResult = Apollo.QueryResult<PlayerSlugsQuery, PlayerSlugsQueryVariables>;
+export const TournamentPathsDocument = gql`
+    query TournamentPaths {
+  allTournaments {
+    id
+  }
+}
+    `;
+
+/**
+ * __useTournamentPathsQuery__
+ *
+ * To run a query within a React component, call `useTournamentPathsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTournamentPathsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTournamentPathsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useTournamentPathsQuery(baseOptions?: Apollo.QueryHookOptions<TournamentPathsQuery, TournamentPathsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TournamentPathsQuery, TournamentPathsQueryVariables>(TournamentPathsDocument, options);
+      }
+export function useTournamentPathsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TournamentPathsQuery, TournamentPathsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TournamentPathsQuery, TournamentPathsQueryVariables>(TournamentPathsDocument, options);
+        }
+export type TournamentPathsQueryHookResult = ReturnType<typeof useTournamentPathsQuery>;
+export type TournamentPathsLazyQueryHookResult = ReturnType<typeof useTournamentPathsLazyQuery>;
+export type TournamentPathsQueryResult = Apollo.QueryResult<TournamentPathsQuery, TournamentPathsQueryVariables>;
 export const ArticleElementComboDocument = gql`
     query ArticleElementCombo($comboId: ID!) {
   combo(comboId: $comboId) {
