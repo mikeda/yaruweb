@@ -34,7 +34,6 @@ const Form: React.FC<{ currentUser: CurrentUserFragment }> = ({ currentUser }) =
   const setCurrentUser = useSetRecoilState(currentUserState);
   const setLoading = useSetRecoilState(loadingState);
   const {
-    register,
     handleSubmit,
     setValue,
     control,
