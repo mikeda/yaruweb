@@ -7,14 +7,12 @@ import {
   useUpdateCurrentUserMutation,
 } from '@/lib/graphql/types';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-import { FormGroup } from '@/components/form/FormGroup';
-import { Input } from '@/components/form/Input';
 import { currentUserState } from '@/states/currentUser';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from '@/states/loading';
-import { Button } from '@mui/material';
+import { Box, Button, Card, CardContent, Divider, TextField } from '@mui/material';
 
 const Page: React.FC = () => {
   const setLoading = useSetRecoilState(loadingState);
@@ -36,9 +34,9 @@ const Form: React.FC<{ currentUser: CurrentUserFragment }> = ({ currentUser }) =
   const setCurrentUser = useSetRecoilState(currentUserState);
   const setLoading = useSetRecoilState(loadingState);
   const {
-    register,
     handleSubmit,
     setValue,
+    control,
     formState: { errors },
   } = useForm<CurrentUserAttributes>({
     defaultValues: {
@@ -69,40 +67,51 @@ const Form: React.FC<{ currentUser: CurrentUserFragment }> = ({ currentUser }) =
   setLoading(loading);
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
-      <FormGroup label="名前">
-        <Input {...register('name', { required: true })} />
-        {errors.name && <span>This field is required</span>}
-      </FormGroup>
+    <Card>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <CardContent>
+          <Controller
+            name="name"
+            control={control}
+            render={({ field }) => (
+              <TextField {...field} label="名前" error={Boolean(errors.name)} helperText={errors.name?.message} />
+            )}
+          />
 
-      <FormGroup label="プロフィール画像">
-        <input
-          type="file"
-          accept="image/*"
-          name="avatarDummy"
-          onChange={e => {
-            if (!e.target.files) return;
-            const file = e.target.files[0];
-            if (!file) return;
+          <Box mt={4}>
+            <Button component="label" color="primary" variant="outlined">
+              全体画像を選択
+              <input
+                type="file"
+                accept="image/*"
+                hidden
+                onChange={e => {
+                  if (!e.target.files) return;
+                  const file = e.target.files[0];
+                  if (!file) return;
 
-            const reader = new FileReader();
-            reader.onload = e => {
-              if (!e.target) return;
+                  const reader = new FileReader();
+                  reader.onload = e => {
+                    if (!e.target) return;
 
-              setValue('avatar', e.target.result as string);
-            };
-            reader.readAsDataURL(file);
-          }}
-        />
-        <input type="hidden" name="avatar" />
-      </FormGroup>
+                    setValue('avatar', e.target.result as string);
+                  };
+                  reader.readAsDataURL(file);
+                }}
+              />
+            </Button>
+          </Box>
+        </CardContent>
 
-      <FormGroup>
-        <Button type="submit" variant="contained">
-          更新する
-        </Button>
-      </FormGroup>
-    </form>
+        <Divider />
+
+        <Box m={2} display="flex" justifyContent="center">
+          <Button type="submit" variant="contained">
+            登録する
+          </Button>
+        </Box>
+      </form>
+    </Card>
   );
 };
 
