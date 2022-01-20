@@ -1,7 +1,12 @@
 import React from 'react';
 import Link from 'next/link';
 
-import { TournamentPageDocument, TournamentPageQuery } from '@/lib/graphql/types';
+import {
+  TournamentPageDocument,
+  TournamentPageQuery,
+  TournamentPathsDocument,
+  TournamentPathsQuery,
+} from '@/lib/graphql/types';
 import { Content } from '@/components/layouts/Content';
 import { Head } from '@/components/layouts/Head';
 import { GetStaticPaths, GetStaticProps } from 'next';
@@ -151,10 +156,15 @@ export const getStaticProps: GetStaticProps<TournamentPageQuery, Params> = async
 };
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
-  return {
-    paths: [],
-    fallback: 'blocking',
-  };
+  const data: TournamentPathsQuery = await fetchGraphql(TournamentPathsDocument);
+
+  const paths = data.allTournaments.map(tournament => ({
+    params: {
+      tournamentId: tournament.id,
+    },
+  }));
+
+  return { paths, fallback: 'blocking' };
 };
 
 export default Page;
