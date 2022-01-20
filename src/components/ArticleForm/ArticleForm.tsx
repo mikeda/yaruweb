@@ -3,14 +3,23 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
 import { ArticleCategoryText } from '@/lib/graphql/enum_texts';
-import { ArticleAttributes, ArticleFormArticleFragment } from '@/lib/graphql/types';
+import { ArticleAttributes, ArticleCategory, ArticleFormArticleFragment } from '@/lib/graphql/types';
 import { ReactEditor, Slate } from 'slate-react';
 import { ArticleEditor, createArticleEditor } from '../ArticleEditor';
 import { Descendant } from 'slate';
-import { useForm } from 'react-hook-form';
-import { FormGroup } from '../form/FormGroup';
-import { Input } from '../form/Input';
-import { Button } from '@mui/material';
+import { Controller, useForm } from 'react-hook-form';
+import {
+  Box,
+  Button,
+  Card,
+  CardContent,
+  Divider,
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  TextField,
+} from '@mui/material';
 
 const schema = yup.object().shape({
   title: yup.string().required(),
@@ -37,8 +46,8 @@ export const ArticleForm: React.FC<Props> = ({ article, onSubmit }) => {
         ],
   );
   const {
-    register,
     handleSubmit,
+    control,
     setValue,
     formState: { errors },
   } = useForm<ArticleAttributes>({
@@ -54,56 +63,88 @@ export const ArticleForm: React.FC<Props> = ({ article, onSubmit }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit(onFormSubmit)}>
-      <FormGroup label="タイトル" required>
-        <Input {...register('title')} />
-        {errors.title && <span>This field is required</span>}
-      </FormGroup>
+    <Card>
+      <form onSubmit={handleSubmit(onFormSubmit)}>
+        <CardContent>
+          <Controller
+            name="title"
+            control={control}
+            render={({ field }) => (
+              <TextField
+                {...field}
+                label="タイトル"
+                error={Boolean(errors.title)}
+                helperText={errors.title?.message}
+                fullWidth
+              />
+            )}
+          />
 
-      <FormGroup label="カテゴリ" required>
-        <select {...register('category')}>
-          {Object.entries(ArticleCategoryText).map(([key, value]) => (
-            <option value={key} key={key}>
-              {value}
-            </option>
-          ))}
-        </select>
-      </FormGroup>
+          <Box mt={4}>
+            <FormControl variant="outlined">
+              <InputLabel>カテゴリー</InputLabel>
+              <Controller
+                render={({ field }) => (
+                  <Select
+                    {...field}
+                    onChange={e => {
+                      const category = e.target.value as ArticleCategory;
+                      setValue('category', category);
+                    }}
+                  >
+                    {Object.entries(ArticleCategoryText).map(([key, value]) => (
+                      <MenuItem key={key} value={key}>
+                        {value}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                )}
+                control={control}
+                name="category"
+              />
+            </FormControl>
+          </Box>
 
-      <FormGroup label="メイン画像">
-        <input
-          type="file"
-          accept="image/*"
-          name="mainImageDummy"
-          onChange={e => {
-            if (!e.target.files) return;
-            const file = e.target.files[0];
-            if (!file) return;
+          <Box mt={4}>
+            <Button component="label" color="primary" variant="outlined">
+              メイン画像を選択
+              <input
+                type="file"
+                accept="image/*"
+                hidden
+                onChange={e => {
+                  if (!e.target.files) return;
+                  const file = e.target.files[0];
+                  if (!file) return;
 
-            const reader = new FileReader();
-            reader.onload = e => {
-              if (!e.target) return;
+                  const reader = new FileReader();
+                  reader.onload = e => {
+                    if (!e.target) return;
 
-              setValue('mainImage', e.target.result as string);
-            };
-            reader.readAsDataURL(file);
-          }}
-        />
-        <input type="hidden" name="mainImage" />
-      </FormGroup>
+                    setValue('mainImage', e.target.result as string);
+                  };
+                  reader.readAsDataURL(file);
+                }}
+              />
+            </Button>
+          </Box>
 
-      <FormGroup label="本文">
-        <Slate editor={editor} value={slateValue} onChange={newValue => setSlateValue(newValue)}>
-          <ArticleEditor />
-        </Slate>
-      </FormGroup>
+          <Box mt={4}>
+            <Slate editor={editor} value={slateValue} onChange={newValue => setSlateValue(newValue)}>
+              <ArticleEditor />
+            </Slate>
+          </Box>
+        </CardContent>
 
-      <FormGroup>
-        <Button type="submit" variant="contained">
-          登録する
-        </Button>
-      </FormGroup>
-    </form>
+        <Divider />
+
+        <Box m={2} display="flex" justifyContent="center">
+          <Button type="submit" variant="contained">
+            登録する
+          </Button>
+        </Box>
+      </form>
+    </Card>
   );
 };
 
