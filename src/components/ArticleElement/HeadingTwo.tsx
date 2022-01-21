@@ -1,15 +1,16 @@
 import React from 'react';
-
-import styles from './HeadingTwo.module.scss';
+import { styled } from '@mui/material/styles';
 
 interface Props {
   attributes: { [key: string]: unknown };
 }
 
 export const HeadingTwo: React.FC<Props> = ({ attributes, children }) => {
-  return (
-    <h2 className={styles.heading} {...attributes}>
-      {children}
-    </h2>
-  );
+  return <Container {...attributes}>{children}</Container>;
 };
+
+const Container = styled('h3')(() => ({
+  margin: '2rem 0 1rem',
+  fontSize: '1.25rem',
+  fontWeight: 'bold',
+}));
