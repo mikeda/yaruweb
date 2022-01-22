@@ -14,7 +14,6 @@ import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 config.autoAddCss = false;
 
-import '@/styles/global.scss';
 import 'react-toastify/dist/ReactToastify.css';
 import * as gtag from '@/lib/gtag';
 
@@ -25,12 +24,10 @@ import { useRouter } from 'next/router';
 import { Loading } from '@/components/Loading';
 import { loadingState } from '@/states/loading';
 
-
 declare module '@mui/styles/defaultTheme' {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
   interface DefaultTheme extends Theme {}
 }
-
 
 const AppInit = () => {
   const setCurrentUser = useSetRecoilState(currentUserState);
