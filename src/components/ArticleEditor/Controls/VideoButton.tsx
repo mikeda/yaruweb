@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { useSlate } from 'slate-react';
 
-import { Button } from '../Button';
-import styles from './VideoButton.module.scss';
+import { Button } from './Button';
 import { useCreateArticleVideoMutation } from '@/lib/graphql/types';
 import { YAROUYO_FONT_CODE } from '@/lib/YarouyoFont';
 import { toast } from 'react-toastify';
 import { Transforms } from 'slate';
 import { VideoElement } from '@/custom-types';
+import { HiddenInput } from './HiddenInput';
 
 export const VideoButton: React.FC = () => {
   const editor = useSlate();
@@ -63,10 +63,10 @@ export const VideoButton: React.FC = () => {
           icon={YAROUYO_FONT_CODE.video}
         />
       </label>
-      <input
+
+      <HiddenInput
         type="file"
         id="video"
-        className={styles.input}
         accept="video/mp4"
         onChange={event => {
           const target = event.target;

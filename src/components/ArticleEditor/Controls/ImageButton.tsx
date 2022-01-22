@@ -1,11 +1,11 @@
 import React from 'react';
 import { useSlate } from 'slate-react';
 import { Transforms } from 'slate';
-import { Button } from '../Button';
-import styles from './ImageButton.module.scss';
+import { Button } from './Button';
 import { useCreateArticleImageMutation } from '@/lib/graphql/types';
 import { YAROUYO_FONT_CODE } from '@/lib/YarouyoFont';
 import { ImageElement } from '@/custom-types';
+import { HiddenInput } from './HiddenInput';
 
 export const ImageButton: React.FC = () => {
   const editor = useSlate();
@@ -35,10 +35,10 @@ export const ImageButton: React.FC = () => {
           icon={YAROUYO_FONT_CODE.image}
         />
       </label>
-      <input
+
+      <HiddenInput
         type="file"
         id="image"
-        className={styles.input}
         accept="image/*"
         onChange={event => {
           const target = event.target;

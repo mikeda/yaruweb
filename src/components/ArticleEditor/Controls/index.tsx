@@ -10,13 +10,13 @@ import { MoveButton } from './MoveButton';
 import { ComboButton } from './ComboButton';
 import { useCharacterSelectOptionsQuery } from '@/lib/graphql/types';
 
-import styles from './Controls.module.scss';
+import { styled } from '@mui/material/styles';
 
 export const Controls: React.FC = () => {
   const { data } = useCharacterSelectOptionsQuery();
 
   return (
-    <div className={styles.controls}>
+    <Container>
       <MarkButton format="bold" icon={YAROUYO_FONT_CODE.bold} />
       <BlockButton format="heading-one" icon={YAROUYO_FONT_CODE.h1} />
       <BlockButton format="heading-two" icon={YAROUYO_FONT_CODE.h2} />
@@ -28,6 +28,16 @@ export const Controls: React.FC = () => {
       <LinkButton />
       {data && <MoveButton characters={data.characters.records} />}
       {data && <ComboButton characters={data.characters.records} />}
-    </div>
+    </Container>
   );
 };
+
+const Container = styled('div')(() => ({
+  paddingBottom: '0.5rem',
+  marginBottom: '1rem',
+  lineHeight: '1',
+  borderBottom: '1px solid #d1d8dc',
+  '& > * + *': {
+    marginLeft: '1rem',
+  },
+}));
