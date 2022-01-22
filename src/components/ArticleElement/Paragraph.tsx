@@ -1,15 +1,18 @@
 import React from 'react';
-
-import styles from './Paragraph.module.scss';
+import styled from '@mui/styles/styled';
 
 interface Props {
   attributes: { [key: string]: unknown };
 }
 
 export const Paragraph: React.FC<Props> = ({ attributes, children }) => {
-  return (
-    <p className={styles.paragraph} {...attributes}>
-      {children}
-    </p>
-  );
+  return <Container {...attributes}>{children}</Container>;
 };
+
+const Container = styled('p')(() => ({
+  margin: '1rem 0',
+  lineHeight: 2,
+  '& a': {
+    textDecoration: 'underline',
+  },
+}));

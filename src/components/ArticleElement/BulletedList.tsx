@@ -1,15 +1,18 @@
 import React from 'react';
-
-import styles from './BulletedList.module.scss';
+import styled from '@mui/styles/styled';
 
 interface Props {
   attributes: { [key: string]: unknown };
 }
 
 export const BulletedList: React.FC<Props> = ({ attributes, children }) => {
-  return (
-    <ul className={styles.list} {...attributes}>
-      {children}
-    </ul>
-  );
+  return <Container {...attributes}>{children}</Container>;
 };
+
+const Container = styled('ul')(() => ({
+  paddingLeft: '2rem',
+  listStyle: 'disc',
+  '& a': {
+    textDecoration: 'underline',
+  },
+}));
