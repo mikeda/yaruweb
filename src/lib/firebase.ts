@@ -1,7 +1,17 @@
 import 'firebase/auth';
-import firebase from 'firebase/app';
+import { getApps, getApp as firebaseGetApp, initializeApp, FirebaseApp } from 'firebase/app';
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  onAuthStateChanged,
+  TwitterAuthProvider,
+  signInWithPopup,
+  signOut,
+  User,
+} from 'firebase/auth';
 
-let _app: firebase.app.App | null = null;
+let _app: FirebaseApp | null = null;
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -15,44 +25,45 @@ const firebaseConfig = {
 export function getApp() {
   if (_app) return _app;
 
-  if (firebase.apps.length > 0) {
-    return (_app = firebase.app());
+  if (getApps.length > 0) {
+    return (_app = firebaseGetApp());
   } else {
-    _app = firebase.initializeApp(firebaseConfig);
+    _app = initializeApp(firebaseConfig);
     return _app;
   }
 }
 
-export async function getFirebaseUser(): Promise<firebase.User | null> {
+export async function getFirebaseUser(): Promise<User | null> {
   return new Promise(resolve => {
-    getApp()
-      .auth()
-      .onAuthStateChanged(user => {
-        resolve(user);
-      });
+    const auth = getAuth(getApp());
+    onAuthStateChanged(auth, user => resolve(user));
   });
 }
 
 export async function createFirebaseUserWithEmail(email: string, password: string) {
-  const credential = await getApp().auth().createUserWithEmailAndPassword(email, password);
+  const auth = getAuth(getApp());
+  const credential = await createUserWithEmailAndPassword(auth, email, password);
 
   return credential.user;
 }
 
 export async function signInFirebaseWithEmail(email: string, password: string) {
-  const credential = await getApp().auth().signInWithEmailAndPassword(email, password);
+  const auth = getAuth(getApp());
+  const credential = await signInWithEmailAndPassword(auth, email, password);
 
   return credential.user;
 }
 
 export async function signInFirebaseWithTwitter() {
-  const provider = new firebase.auth.TwitterAuthProvider();
+  const auth = getAuth(getApp());
+  const provider = new TwitterAuthProvider();
 
-  const credential = await getApp().auth().signInWithPopup(provider);
+  const credential = await signInWithPopup(auth, provider);
 
   return credential.user;
 }
 
 export async function signOutFirebase() {
-  await getApp().auth().signOut();
+  const auth = getAuth(getApp());
+  await signOut(auth);
 }
