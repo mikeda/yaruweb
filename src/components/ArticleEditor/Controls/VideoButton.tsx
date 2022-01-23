@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useSlate } from 'slate-react';
 
 import { Button } from './Button';
@@ -11,7 +11,8 @@ import { HiddenInput } from './HiddenInput';
 
 export const VideoButton: React.FC = () => {
   const editor = useSlate();
-  const [file, setFile] = useState<File>();
+  let file: File | undefined;
+
   const [createArticleVideo] = useCreateArticleVideoMutation({
     onCompleted: e => {
       if (!file) return;
@@ -71,10 +72,10 @@ export const VideoButton: React.FC = () => {
         onChange={event => {
           const target = event.target;
           if (!target.files) return;
-          const file = target.files[0];
+
+          file = target.files[0];
           if (!file) return;
 
-          setFile(file);
           createArticleVideo();
         }}
       />
