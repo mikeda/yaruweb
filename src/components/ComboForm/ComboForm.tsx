@@ -3,7 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { nullableNumber } from '@/lib/validators/nullable_number';
 
-import { ComboAttributes, ComboFragment, useMoveSelectOptionsQuery } from '@/lib/graphql/types';
+import { ComboAttributes, ComboFragment, ComboPositionSelectFragment } from '@/lib/graphql/types';
 import {
   Box,
   Button,
@@ -11,9 +11,7 @@ import {
   CardContent,
   Divider,
   FormControl,
-  Grid,
   InputLabel,
-  ListSubheader,
   MenuItem,
   Select,
   TextField,
@@ -21,6 +19,7 @@ import {
 } from '@mui/material';
 import { CommandForm } from './CommandForm';
 import { Controller, useForm } from 'react-hook-form';
+import { Command } from '..';
 
 const schema = yup.object().shape({
   damage: nullableNumber,
@@ -28,13 +27,11 @@ const schema = yup.object().shape({
 
 interface Props {
   combo?: ComboFragment;
-  characterSlug: string;
+  combos: ComboPositionSelectFragment[];
   onSubmit: (attributes: ComboAttributes) => void;
 }
 
-export const ComboForm: React.FC<Props> = ({ combo, characterSlug, onSubmit }) => {
-  const { data } = useMoveSelectOptionsQuery({ variables: { characterSlug } });
-
+export const ComboForm: React.FC<Props> = ({ combo, combos, onSubmit }) => {
   const { handleSubmit, setValue, watch, control } = useForm<ComboAttributes>({
     resolver: yupResolver(schema),
     mode: 'onBlur',
@@ -42,15 +39,14 @@ export const ComboForm: React.FC<Props> = ({ combo, characterSlug, onSubmit }) =
       ? {
           command: combo.command,
           damage: combo.damage,
-          moveId: combo.move?.id,
           note: combo.note,
+          position: combo.position,
         }
       : {
           command: [],
+          position: combos.length > 0 ? combos[combos.length - 1].position + 1 : 0,
         },
   });
-
-  if (!data) return null;
 
   const command = watch('command');
 
@@ -71,35 +67,6 @@ export const ComboForm: React.FC<Props> = ({ combo, characterSlug, onSubmit }) =
             />
           </Box>
 
-          <Grid item xs={12} sm={6}>
-            <FormControl fullWidth variant="outlined">
-              <InputLabel>コンボ始動</InputLabel>
-              <Controller
-                render={({ field }) => (
-                  <Select
-                    {...field}
-                    onChange={e => {
-                      const id = e.target.value as string | undefined;
-                      setValue('moveId', id || null);
-                    }}
-                  >
-                    <MenuItem>指定なし</MenuItem>
-                    {data.moveCategories.map(moveCategory => [
-                      <ListSubheader key={moveCategory.id}>{moveCategory.name}</ListSubheader>,
-                      moveCategory.moves.map(move => (
-                        <MenuItem key={move.id} value={move.id}>
-                          {move.name}
-                        </MenuItem>
-                      )),
-                    ])}
-                  </Select>
-                )}
-                control={control}
-                name="moveId"
-              />
-            </FormControl>
-          </Grid>
-
           <Box mt={4}>
             <Controller
               name="damage"
@@ -114,6 +81,33 @@ export const ComboForm: React.FC<Props> = ({ combo, characterSlug, onSubmit }) =
               control={control}
               render={({ field }) => <TextField {...field} label="備考" size="small" multiline fullWidth />}
             />
+          </Box>
+
+          <Box mt={4}>
+            <FormControl fullWidth variant="outlined" size="small">
+              <InputLabel>表示順</InputLabel>
+              <Controller
+                name="position"
+                control={control}
+                render={({ field }) => (
+                  <Select
+                    {...field}
+                    onChange={e => {
+                      const position = Number(e.target.value);
+                      setValue('position', position);
+                    }}
+                  >
+                    <MenuItem value={0}>先頭</MenuItem>
+                    {combos.map((c, i) => (
+                      <MenuItem key={c.id} value={c.position + 1}>
+                        <Command command={c.command} /> の後ろ
+                        {i == combos.length && '(最後)'}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                )}
+              />
+            </FormControl>
           </Box>
         </CardContent>
 

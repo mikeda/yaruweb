@@ -15,7 +15,7 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
-import { Add as AddIcon, Delete, Edit, YouTube } from '@mui/icons-material';
+import { Add, Add as AddIcon, Delete, Edit, YouTube } from '@mui/icons-material';
 import { toast } from 'react-toastify';
 
 import {
@@ -23,13 +23,14 @@ import {
   useCreateComboVideoMutation,
   useDashboardComboCategoriesPageQuery,
   useDeleteComboCategoryMutation,
+  useDeleteComboMutation,
 } from '@/lib/graphql/types';
 import { loadingState } from '@/states/loading';
 import { dashboardPath } from '@/lib';
 import { useRouteParams } from './hooks';
 import { DashboardContent, DashboardBreadcrumbs, Command } from '@/components';
-import { colors } from '@/colors';
 import { VideoPlayer } from '@/components/MoveMedia/VideoPlayer';
+import { colors } from '@/colors';
 
 const Page: React.FC = () => {
   const { characterSlug } = useRouteParams();
@@ -60,7 +61,7 @@ const Page: React.FC = () => {
 
   return (
     <DashboardContent
-      title="コマンドリスト"
+      title="コンボ"
       breadcrumb={<DashboardBreadcrumbs to="comboCategories" character={character} />}
       actions={
         <Button
@@ -69,15 +70,43 @@ const Page: React.FC = () => {
           startIcon={<AddIcon />}
           href={dashboardPath({ to: 'comboCategoriesNew', characterSlug: character.slug })}
         >
-          作成する
+          カテゴリ追加
         </Button>
       }
     >
       {comboCategories.map(comboCategory => (
-        <Box key={comboCategory.id} mb={4}>
-          <Typography variant="h3" gutterBottom>
-            {comboCategory.name}
-          </Typography>
+        <Box key={comboCategory.id} mb={8}>
+          <Box display="flex" alignItems="center" justifyContent="space-between" mb={2}>
+            <Typography variant="h3" gutterBottom>
+              {comboCategory.name}
+            </Typography>
+
+            <div>
+              <IconButton href={dashboardPath({ to: 'combosNew', comboCategoryId: comboCategory.id })} size="large">
+                <Add />
+              </IconButton>
+
+              <IconButton
+                href={dashboardPath({ to: 'comboCategoryEdit', comboCategoryId: comboCategory.id })}
+                size="large"
+              >
+                <Edit />
+              </IconButton>
+
+              {comboCategory.combos.length == 0 && (
+                <IconButton
+                  onClick={() => {
+                    if (window.confirm('削除します。')) {
+                      destroy({ variables: { comboCategoryId: comboCategory.id } });
+                    }
+                  }}
+                  size="large"
+                >
+                  <Delete />
+                </IconButton>
+              )}
+            </div>
+          </Box>
 
           <TableContainer component={Paper}>
             <Table>
@@ -86,22 +115,20 @@ const Page: React.FC = () => {
                   <ComboRow
                     key={combo.id}
                     combo={combo}
-                    onDelete={() => {
-                      if (window.confirm('削除します。')) {
-                        destroy({ variables: { comboCategoryId: comboCategory.id } });
-                      }
+                    afterDelete={deletedComboId => {
+                      updateQuery(prev => ({
+                        ...prev,
+                        comboCategories: prev.comboCategories.map(comboCategory => ({
+                          ...comboCategory,
+                          combos: comboCategory.combos.filter(combo => combo.id !== deletedComboId),
+                        })),
+                      }));
                     }}
                   />
                 ))}
               </TableBody>
             </Table>
           </TableContainer>
-
-          <Box display="flex" justifyContent="center" mt={2}>
-            <Button variant="outlined" href={dashboardPath({ to: 'combosNew', comboCategoryId: comboCategory.id })}>
-              作成する
-            </Button>
-          </Box>
         </Box>
       ))}
     </DashboardContent>
@@ -110,10 +137,24 @@ const Page: React.FC = () => {
 
 interface ComboRowProps {
   combo: DashboardComboCategoriesPageComboFragment;
-  onDelete: () => void;
+  afterDelete: (comboId: string) => void;
 }
 
-const ComboRow = ({ combo, onDelete }: ComboRowProps) => {
+const ComboRow = ({ combo, afterDelete }: ComboRowProps) => {
+  const [destroy, { loading }] = useDeleteComboMutation({
+    variables: { comboId: combo.id },
+    onCompleted: data => {
+      const combo = data.deleteCombo?.combo;
+      if (!combo) return;
+
+      afterDelete(combo.id);
+      toast.success('カテゴリを削除しました。');
+    },
+  });
+  const setLoading = useSetRecoilState(loadingState);
+
+  setLoading(loading);
+
   return (
     <TableRow>
       <TableCell scope="row">
@@ -127,7 +168,14 @@ const ComboRow = ({ combo, onDelete }: ComboRowProps) => {
           <Edit />
         </IconButton>
 
-        <IconButton edge="end" onClick={onDelete} size="large">
+        <IconButton
+          onClick={() => {
+            if (window.confirm('削除します。')) {
+              destroy();
+            }
+          }}
+          size="large"
+        >
           <Delete />
         </IconButton>
       </TableCell>
@@ -137,8 +185,9 @@ const ComboRow = ({ combo, onDelete }: ComboRowProps) => {
 
 const VideoButton: React.FC<{ combo: DashboardComboCategoriesPageComboFragment }> = ({ combo }) => {
   const [dialogOpen, setDialogOpen] = useState(false);
-  const [file, setFile] = useState<File>();
   const setLoading = useSetRecoilState(loadingState);
+
+  let file: File | undefined;
 
   const [ceateComboVideo, { loading }] = useCreateComboVideoMutation({
     variables: { comboId: combo.id },
@@ -190,28 +239,20 @@ const VideoButton: React.FC<{ combo: DashboardComboCategoriesPageComboFragment }
         </DialogContent>
 
         <DialogActions>
-          <Button onClick={() => setDialogOpen(false)} color="primary">
-            Cancel
-          </Button>
+          <input
+            type="file"
+            id="video"
+            accept="video/mp4"
+            onChange={event => {
+              const target = event.target;
+              if (!target.files) return;
 
-          <Button component="label" color="primary">
-            アップロード
-            <input
-              type="file"
-              id="video"
-              accept="video/mp4"
-              hidden
-              onChange={event => {
-                const target = event.target;
-                if (!target.files) return;
-                const file = target.files[0];
-                if (!file) return;
+              file = target.files[0];
+              if (!file) return;
 
-                setFile(file);
-                ceateComboVideo();
-              }}
-            />
-          </Button>
+              ceateComboVideo();
+            }}
+          />
         </DialogActions>
       </Dialog>
     </>

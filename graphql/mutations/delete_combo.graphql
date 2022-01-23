@@ -1,0 +1,7 @@
+mutation DeleteCombo($comboId: ID!) {
+  deleteCombo(input: { comboId: $comboId }) {
+    combo {
+      id
+    }
+  }
+}

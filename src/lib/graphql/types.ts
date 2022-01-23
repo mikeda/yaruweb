@@ -5,7 +5,7 @@ export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
-const defaultOptions =  {}
+const defaultOptions = {} as const;
 /** All built-in and custom scalars, mapped to their actual values */
 export type Scalars = {
   ID: string;
@@ -323,15 +323,15 @@ export type Combo = {
   command: Array<Scalars['String']>;
   damage?: Maybe<Scalars['Int']>;
   id: Scalars['ID'];
-  move?: Maybe<Move>;
   note?: Maybe<Scalars['String']>;
+  position: Scalars['Int'];
 };
 
 export type ComboAttributes = {
   command: Array<Scalars['String']>;
   damage?: InputMaybe<Scalars['Int']>;
-  moveId?: InputMaybe<Scalars['ID']>;
   note?: InputMaybe<Scalars['String']>;
+  position: Scalars['Int'];
 };
 
 export type ComboCategory = {
@@ -2170,7 +2170,7 @@ export type ArticleLinkFragment = { __typename?: 'ArticleLink', url: string, tit
 
 export type ArticleSummaryFragment = { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null | undefined, publishedAt?: string | null | undefined, faved: boolean, favsCount: number, status: ArticleStatus, author: { __typename?: 'User', name: string, avatarUrl: string } };
 
-export type ComboFragment = { __typename?: 'Combo', id: string, damage?: number | null | undefined, command: Array<string>, note?: string | null | undefined, move?: { __typename?: 'Move', id: string } | null | undefined, comboCategory: { __typename?: 'ComboCategory', id: string, name: string }, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null | undefined };
+export type ComboFragment = { __typename?: 'Combo', id: string, damage?: number | null | undefined, command: Array<string>, note?: string | null | undefined, position: number, comboCategory: { __typename?: 'ComboCategory', id: string, name: string }, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null | undefined };
 
 export type ComboCategoryFragment = { __typename?: 'ComboCategory', id: string, name: string, position: number };
 
@@ -2274,6 +2274,13 @@ export type CreateUserMutationVariables = Exact<{ [key: string]: never; }>;
 
 
 export type CreateUserMutation = { __typename?: 'Mutation', createUser?: { __typename?: 'CreateUserPayload', currentUser: { __typename?: 'CurrentUser', id: string, name: string, role: UserRole, avatarUrl: string } } | null | undefined };
+
+export type DeleteComboMutationVariables = Exact<{
+  comboId: Scalars['ID'];
+}>;
+
+
+export type DeleteComboMutation = { __typename?: 'Mutation', deleteCombo?: { __typename?: 'DeleteComboPayload', combo: { __typename?: 'Combo', id: string } } | null | undefined };
 
 export type DeleteComboCategoryMutationVariables = Exact<{
   comboCategoryId: Scalars['ID'];
@@ -2506,6 +2513,8 @@ export type CharacterFormFragment = { __typename?: 'Character', name: string, na
 
 export type ComboCategoryPositionSelectFragment = { __typename?: 'ComboCategory', id: string, name: string, position: number };
 
+export type ComboPositionSelectFragment = { __typename?: 'Combo', id: string, command: Array<string>, position: number };
+
 export type ComboMediaFragment = { __typename?: 'Combo', id: string, damage?: number | null | undefined, command: Array<string>, note?: string | null | undefined, comboCategory: { __typename?: 'ComboCategory', id: string, name: string }, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null | undefined };
 
 export type FavButtonArticleQueryVariables = Exact<{
@@ -2723,7 +2732,7 @@ export type PageDashboardComboNewQueryVariables = Exact<{
 }>;
 
 
-export type PageDashboardComboNewQuery = { __typename?: 'Query', comboCategory: { __typename?: 'ComboCategory', id: string, name: string, character: { __typename?: 'Character', slug: string, name: string, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, moves: Array<{ __typename?: 'Move', id: string, name: string }> }> } } };
+export type PageDashboardComboNewQuery = { __typename?: 'Query', comboCategory: { __typename?: 'ComboCategory', id: string, name: string, combos: Array<{ __typename?: 'Combo', id: string, command: Array<string>, position: number }>, character: { __typename?: 'Character', slug: string, name: string } } };
 
 export type PageDashboardComboCategoryEditQueryVariables = Exact<{
   comboCategoryId: Scalars['ID'];
@@ -2737,7 +2746,7 @@ export type PageDashboardComboEditQueryVariables = Exact<{
 }>;
 
 
-export type PageDashboardComboEditQuery = { __typename?: 'Query', combo: { __typename?: 'Combo', id: string, damage?: number | null | undefined, command: Array<string>, note?: string | null | undefined, comboCategory: { __typename?: 'ComboCategory', id: string, name: string, character: { __typename?: 'Character', slug: string, name: string } }, move?: { __typename?: 'Move', id: string } | null | undefined, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null | undefined } };
+export type PageDashboardComboEditQuery = { __typename?: 'Query', combo: { __typename?: 'Combo', id: string, damage?: number | null | undefined, command: Array<string>, note?: string | null | undefined, position: number, comboCategory: { __typename?: 'ComboCategory', id: string, name: string, combos: Array<{ __typename?: 'Combo', id: string, command: Array<string>, position: number }>, character: { __typename?: 'Character', slug: string, name: string } }, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null | undefined } };
 
 export type PageDashboardMoveCategoryEditQueryVariables = Exact<{
   moveCategoryId: Scalars['ID'];
@@ -3129,9 +3138,7 @@ export const ComboFragmentDoc = gql`
   damage
   command
   note
-  move {
-    id
-  }
+  position
   comboCategory {
     id
     name
@@ -3409,6 +3416,13 @@ export const ComboCategoryPositionSelectFragmentDoc = gql`
     fragment ComboCategoryPositionSelect on ComboCategory {
   id
   name
+  position
+}
+    `;
+export const ComboPositionSelectFragmentDoc = gql`
+    fragment ComboPositionSelect on Combo {
+  id
+  command
   position
 }
     `;
@@ -4232,6 +4246,41 @@ export function useCreateUserMutation(baseOptions?: Apollo.MutationHookOptions<C
 export type CreateUserMutationHookResult = ReturnType<typeof useCreateUserMutation>;
 export type CreateUserMutationResult = Apollo.MutationResult<CreateUserMutation>;
 export type CreateUserMutationOptions = Apollo.BaseMutationOptions<CreateUserMutation, CreateUserMutationVariables>;
+export const DeleteComboDocument = gql`
+    mutation DeleteCombo($comboId: ID!) {
+  deleteCombo(input: {comboId: $comboId}) {
+    combo {
+      id
+    }
+  }
+}
+    `;
+export type DeleteComboMutationFn = Apollo.MutationFunction<DeleteComboMutation, DeleteComboMutationVariables>;
+
+/**
+ * __useDeleteComboMutation__
+ *
+ * To run a mutation, you first call `useDeleteComboMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteComboMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteComboMutation, { data, loading, error }] = useDeleteComboMutation({
+ *   variables: {
+ *      comboId: // value for 'comboId'
+ *   },
+ * });
+ */
+export function useDeleteComboMutation(baseOptions?: Apollo.MutationHookOptions<DeleteComboMutation, DeleteComboMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteComboMutation, DeleteComboMutationVariables>(DeleteComboDocument, options);
+      }
+export type DeleteComboMutationHookResult = ReturnType<typeof useDeleteComboMutation>;
+export type DeleteComboMutationResult = Apollo.MutationResult<DeleteComboMutation>;
+export type DeleteComboMutationOptions = Apollo.BaseMutationOptions<DeleteComboMutation, DeleteComboMutationVariables>;
 export const DeleteComboCategoryDocument = gql`
     mutation DeleteComboCategory($comboCategoryId: ID!) {
   deleteComboCategory(input: {comboCategoryId: $comboCategoryId}) {
@@ -6291,21 +6340,16 @@ export const PageDashboardComboNewDocument = gql`
   comboCategory(comboCategoryId: $comboCategoryId) {
     id
     name
+    combos {
+      ...ComboPositionSelect
+    }
     character {
       slug
       name
-      moveCategories {
-        id
-        name
-        moves {
-          id
-          name
-        }
-      }
     }
   }
 }
-    `;
+    ${ComboPositionSelectFragmentDoc}`;
 
 /**
  * __usePageDashboardComboNewQuery__
@@ -6385,6 +6429,9 @@ export const PageDashboardComboEditDocument = gql`
     comboCategory {
       id
       name
+      combos {
+        ...ComboPositionSelect
+      }
       character {
         slug
         name
@@ -6392,7 +6439,8 @@ export const PageDashboardComboEditDocument = gql`
     }
   }
 }
-    ${ComboFragmentDoc}`;
+    ${ComboFragmentDoc}
+${ComboPositionSelectFragmentDoc}`;
 
 /**
  * __usePageDashboardComboEditQuery__

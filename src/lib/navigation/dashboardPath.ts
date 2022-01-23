@@ -54,7 +54,7 @@ export const dashboardPath = (options: Options): string => {
     case 'comboCategoriesNew':
       return `/dashboard/characters/${options.characterSlug}/combo_categories/new`;
     case 'comboCategoryEdit':
-      `/dashboard/combo_categories/${options.comboCategoryId}/edit`;
+      return `/dashboard/combo_categories/${options.comboCategoryId}/edit`;
     case 'combosNew':
       return `/dashboard/combo_categories/${options.comboCategoryId}/combos/new`;
     case 'comboEdit':

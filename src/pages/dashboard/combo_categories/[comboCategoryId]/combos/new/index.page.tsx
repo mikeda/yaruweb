@@ -59,7 +59,7 @@ const PageContent: React.FC<PageDashboardComboNewQuery> = ({ comboCategory }) =>
 
   setLoading(loading);
 
-  return <ComboForm characterSlug={comboCategory.character.slug} onSubmit={onSubmit} />;
+  return <ComboForm combos={comboCategory.combos} onSubmit={onSubmit} />;
 };
 
 export default Page;

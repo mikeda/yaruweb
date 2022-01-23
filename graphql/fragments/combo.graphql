@@ -3,10 +3,7 @@ fragment combo on Combo {
   damage
   command
   note
-
-  move {
-    id
-  }
+  position
 
   comboCategory {
     id
