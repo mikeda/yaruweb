@@ -24,7 +24,6 @@ export * from './OperationListSelector';
 export * from './OrganizerForm';
 export * from './PlayerPageTabs';
 export * from './StandingPlaceAvatar';
-export * from './SortableCardList';
 export * from './StaffRequirement';
 export * from './SearchWord';
 export * from './TournamentCard';
