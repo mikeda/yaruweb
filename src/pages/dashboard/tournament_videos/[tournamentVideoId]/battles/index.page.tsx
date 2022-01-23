@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-import { DashboardBreadcrumbs, DashboardContent } from '@/components';
+import { DashboardBreadcrumbs, DashboardContent, YouTubeWrapper } from '@/components';
 import {
   useRouteParams,
   useTournamentVideoQuery,
@@ -9,15 +9,7 @@ import {
   useDeleteMutation,
 } from './hooks';
 import { BattleForm } from './components/BattleForm';
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Box,
-  List,
-  Paper,
-  Typography,
-} from '@mui/material';
+import { Accordion, AccordionDetails, AccordionSummary, Box, List, Paper, Typography } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import YouTube from 'react-youtube';
 import { YouTubePlayer } from 'youtube-player/dist/types';
@@ -47,14 +39,15 @@ const Page: React.FC = () => {
     <DashboardContent title="対戦" breadcrumb={<DashboardBreadcrumbs to="battles" tournamentVideo={tournamentVideo} />}>
       <Box display="flex" justifyContent="center" mb={2}>
         <Box width="100%" maxWidth={640}>
-          <YouTube
-            containerClassName="bl_youtube"
-            videoId={tournamentVideo.youtubeVideoId}
-            opts={{ width: '854', height: '480' }}
-            onReady={event => {
-              setYouTubePlayer(event.target);
-            }}
-          />
+          <YouTubeWrapper>
+            <YouTube
+              videoId={tournamentVideo.youtubeVideoId}
+              opts={{ width: '854', height: '480' }}
+              onReady={event => {
+                setYouTubePlayer(event.target);
+              }}
+            />
+          </YouTubeWrapper>
         </Box>
       </Box>
 

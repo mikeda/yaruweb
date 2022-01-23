@@ -28,4 +28,5 @@ export * from './SortableCardList';
 export * from './StaffRequirement';
 export * from './SearchWord';
 export * from './TournamentCard';
+export * from './YouTubeWrapper';
 export * from './layouts';

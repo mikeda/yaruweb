@@ -6,6 +6,7 @@ import React, { useEffect, useState } from 'react';
 import YouTube from 'react-youtube';
 import { YouTubePlayer } from 'youtube-player/dist/types';
 import { useRouter } from 'next/router';
+import { YouTubeWrapper } from '@/components';
 
 const useStyles = makeStyles({
   list: {
@@ -47,14 +48,15 @@ export const TournamentVideoPlayer: React.FC<Props> = ({ tournamentVideo }) => {
 
   return (
     <div>
-      <YouTube
-        containerClassName="bl_youtube"
-        videoId={tournamentVideo.youtubeVideoId}
-        opts={{ width: '854', height: '480' }}
-        onReady={event => {
-          setYouTubePlayer(event.target);
-        }}
-      />
+      <YouTubeWrapper>
+        <YouTube
+          videoId={tournamentVideo.youtubeVideoId}
+          opts={{ width: '854', height: '480' }}
+          onReady={event => {
+            setYouTubePlayer(event.target);
+          }}
+        />
+      </YouTubeWrapper>
 
       {tournamentVideo.battles.length > 0 && (
         <Paper>
