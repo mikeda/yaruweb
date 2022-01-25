@@ -7,7 +7,7 @@ import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } 
 import { useDashboardPlayersPageCreatePlayerFromSmashggMutation } from '@/lib/graphql/types';
 import { toast } from 'react-toastify';
 import { useRouter } from 'next/router';
-import { dashboardPath } from '@/lib';
+import { pagesPath } from '@/lib/$path';
 
 const schema = yup.object().shape({
   smashggId: yup.string().required(),
@@ -26,7 +26,7 @@ export const PlayerFormSmashgg: React.FC<Props> = ({ open, onClose }) => {
   const router = useRouter();
   const [createFromSmashgg] = useDashboardPlayersPageCreatePlayerFromSmashggMutation({
     onCompleted: () => {
-      router.push(dashboardPath({ to: 'players' }));
+      router.push(pagesPath.dashboard.players.$url());
       onClose();
     },
     onError: e => {

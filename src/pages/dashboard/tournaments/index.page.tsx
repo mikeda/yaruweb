@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 import { DashboardContent, DashboardBreadcrumbs } from '@/components';
-import { dashboardPath } from '@/lib';
 import {
   Box,
   Button,
@@ -28,6 +27,8 @@ import { toast } from 'react-toastify';
 import { NO_IMAGE_URL } from '@/lib/Assets';
 import { useRouter } from 'next/router';
 import dayjs from '@/lib/dayjs';
+import { pagesPath } from '@/lib/$path';
+import { format } from 'url';
 
 const Page: React.FC = () => {
   const setLoading = useSetRecoilState(loadingState);
@@ -61,7 +62,7 @@ const Page: React.FC = () => {
           variant="contained"
           color="primary"
           startIcon={<AddIcon />}
-          href={dashboardPath({ to: 'tournamentsNew' })}
+          href={format(pagesPath.dashboard.tournaments.new.$url())}
         >
           登録する
         </Button>
@@ -132,7 +133,10 @@ const TournamentRow = ({ tournament, onDelete }: TournamentRowProps) => {
         <Typography variant="body2">{dayjs(tournament.startsAt).format('YYYY/M/D H:mm')}</Typography>
       </TableCell>
       <TableCell align="right" scope="row">
-        <Button variant="outlined" href={dashboardPath({ to: 'tournamentEdit', tournamentId: tournament.id })}>
+        <Button
+          variant="outlined"
+          href={format(pagesPath.dashboard.tournaments._tournamentId(tournament.id).edit.$url())}
+        >
           編集
         </Button>
         <TournamentMenu tournament={tournament} onDelete={onDelete} />
@@ -153,30 +157,32 @@ const TournamentMenu = ({ tournament, onDelete }: TournamentRowProps) => {
     setAnchorEl(null);
   };
 
-  return <>
-    <IconButton edge="end" onClick={handleClick} size="large">
-      <MoreVert />
-    </IconButton>
+  return (
+    <>
+      <IconButton edge="end" onClick={handleClick} size="large">
+        <MoreVert />
+      </IconButton>
 
-    <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
-      <MenuItem
-        onClick={() => {
-          router.push(dashboardPath({ to: 'tournament', tournamentId: tournament.id }));
-          handleClose();
-        }}
-      >
-        結果・動画を登録
-      </MenuItem>
-      <MenuItem
-        onClick={() => {
-          onDelete();
-          handleClose();
-        }}
-      >
-        削除する
-      </MenuItem>
-    </Menu>
-  </>;
+      <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
+        <MenuItem
+          onClick={() => {
+            router.push(pagesPath.tournaments._tournamentId(tournament.id).$url());
+            handleClose();
+          }}
+        >
+          結果・動画を登録
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
+            onDelete();
+            handleClose();
+          }}
+        >
+          削除する
+        </MenuItem>
+      </Menu>
+    </>
+  );
 };
 
 export default Page;

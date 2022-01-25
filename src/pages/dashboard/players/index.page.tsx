@@ -2,7 +2,6 @@ import React, { useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 
 import { DashboardContent, DashboardBreadcrumbs, SearchWord } from '@/components';
-import { dashboardPath } from '@/lib';
 import {
   Box,
   Button,
@@ -28,6 +27,8 @@ import {
 } from '@/lib/graphql/types';
 import { toast } from 'react-toastify';
 import { DEFAULT_AVATAR_URL } from '@/lib/Assets';
+import { pagesPath } from '@/lib/$path';
+import { format } from 'url';
 
 const Page: React.FC = () => {
   const setLoading = useSetRecoilState(loadingState);
@@ -128,7 +129,7 @@ const PlayerRow = ({ player, onDelete }: PlayerRowProps) => {
         <Typography>{player.name}</Typography>
       </TableCell>
       <TableCell align="right" scope="row">
-        <Button variant="outlined" href={dashboardPath({ to: 'playerEdit', playerSlug: player.slug })}>
+        <Button variant="outlined" href={format(pagesPath.dashboard.players._playerSlug(player.slug).edit.$url())}>
           編集
         </Button>
         <PlayerMenu player={player} onDelete={onDelete} />
@@ -148,22 +149,24 @@ const PlayerMenu = ({ onDelete }: PlayerRowProps) => {
     setAnchorEl(null);
   };
 
-  return <>
-    <IconButton edge="end" onClick={handleClick} size="large">
-      <MoreVert />
-    </IconButton>
+  return (
+    <>
+      <IconButton edge="end" onClick={handleClick} size="large">
+        <MoreVert />
+      </IconButton>
 
-    <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
-      <MenuItem
-        onClick={() => {
-          onDelete();
-          handleClose();
-        }}
-      >
-        削除する
-      </MenuItem>
-    </Menu>
-  </>;
+      <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
+        <MenuItem
+          onClick={() => {
+            onDelete();
+            handleClose();
+          }}
+        >
+          削除する
+        </MenuItem>
+      </Menu>
+    </>
+  );
 };
 
 const CreateButton: React.FC = () => {
@@ -188,7 +191,7 @@ const CreateButton: React.FC = () => {
       <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
         <MenuItem
           onClick={() => {
-            router.push(dashboardPath({ to: 'playersNew' }));
+            router.push(pagesPath.dashboard.players.new.$url());
           }}
         >
           フォームで登録

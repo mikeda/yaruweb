@@ -1,5 +1,8 @@
 /* eslint-disable */
 // prettier-ignore
+import { Query as Query0 } from '../pages/dashboard/move_categories/[moveCategoryId]/moves/new/index.page'
+
+// prettier-ignore
 export const pagesPath = {
   articles: {
     _articleId: (articleId: string | number) => ({
@@ -86,7 +89,7 @@ export const pagesPath = {
         },
         moves: {
           new: {
-            $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/move_categories/[moveCategoryId]/moves/new' as const, query: { moveCategoryId }, hash: url?.hash })
+            $url: (url: { query: Query0, hash?: string }) => ({ pathname: '/dashboard/move_categories/[moveCategoryId]/moves/new' as const, query: { moveCategoryId, ...url.query }, hash: url.hash })
           }
         }
       })

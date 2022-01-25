@@ -30,12 +30,13 @@ import {
   useDeleteMoveMutation,
 } from '@/lib/graphql/types';
 import { loadingState } from '@/states/loading';
-import { dashboardPath } from '@/lib';
 import { useRouteParams } from './hooks';
 import { DashboardContent, DashboardBreadcrumbs, Command } from '@/components';
 import { VideoPlayer } from '@/components/MoveMedia/VideoPlayer';
 import { colors } from '@/colors';
 import { useRouter } from 'next/router';
+import { pagesPath } from '@/lib/$path';
+import { format } from 'url';
 
 const Page: React.FC = () => {
   const { characterSlug } = useRouteParams();
@@ -73,7 +74,7 @@ const Page: React.FC = () => {
           variant="contained"
           color="primary"
           startIcon={<AddIcon />}
-          href={dashboardPath({ to: 'moveCategoriesNew', characterSlug: character.slug })}
+          href={format(pagesPath.dashboard.characters._characterSlug(character.slug).move_categories.new.$url())}
         >
           カテゴリ追加
         </Button>
@@ -89,7 +90,7 @@ const Page: React.FC = () => {
             <div>
               <MovesNewButton moveCategoryId={moveCategory.id} />
               <IconButton
-                href={dashboardPath({ to: 'moveCategoryEdit', moveCategoryId: moveCategory.id })}
+                href={format(pagesPath.dashboard.move_categories._moveCategoryId(moveCategory.id).edit.$url())}
                 size="large"
               >
                 <Edit />
@@ -168,11 +169,11 @@ const MoveRow = ({ move, afterDelete }: MoveRowProps) => {
       <TableCell align="right" scope="row">
         <VideoButton move={move} />
 
-        <IconButton href={dashboardPath({ to: 'moveEdit', moveId: move.id })} size="large">
+        <IconButton href={format(pagesPath.dashboard.moves._moveId(move.id).edit.$url())} size="large">
           <Edit />
         </IconButton>
 
-        <IconButton href={dashboardPath({ to: 'moveCopy', moveId: move.id })} size="large">
+        <IconButton href={format(pagesPath.dashboard.moves._moveId(move.id).copy.$url())} size="large">
           <ContentCopyIcon />
         </IconButton>
 
@@ -291,7 +292,11 @@ const MovesNewButton = ({ moveCategoryId }: { moveCategoryId: string }) => {
         <MenuItem
           onClick={() => {
             handleClose();
-            router.push(dashboardPath({ to: 'movesNew', moveCategoryId, moveType: 'attack' }));
+            router.push(
+              pagesPath.dashboard.move_categories
+                ._moveCategoryId(moveCategoryId)
+                .moves.new.$url({ query: { move_type: 'attack' } }),
+            );
           }}
         >
           打撃
@@ -300,7 +305,11 @@ const MovesNewButton = ({ moveCategoryId }: { moveCategoryId: string }) => {
         <MenuItem
           onClick={() => {
             handleClose();
-            router.push(dashboardPath({ to: 'movesNew', moveCategoryId, moveType: 'throw' }));
+            router.push(
+              pagesPath.dashboard.move_categories
+                ._moveCategoryId(moveCategoryId)
+                .moves.new.$url({ query: { move_type: 'throw' } }),
+            );
           }}
         >
           投げ
@@ -309,7 +318,11 @@ const MovesNewButton = ({ moveCategoryId }: { moveCategoryId: string }) => {
         <MenuItem
           onClick={() => {
             handleClose();
-            router.push(dashboardPath({ to: 'movesNew', moveCategoryId, moveType: 'reversal' }));
+            router.push(
+              pagesPath.dashboard.move_categories
+                ._moveCategoryId(moveCategoryId)
+                .moves.new.$url({ query: { move_type: 'reversal' } }),
+            );
           }}
         >
           返し技
