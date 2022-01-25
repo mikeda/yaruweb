@@ -133,10 +133,7 @@ const TournamentRow = ({ tournament, onDelete }: TournamentRowProps) => {
         <Typography variant="body2">{dayjs(tournament.startsAt).format('YYYY/M/D H:mm')}</Typography>
       </TableCell>
       <TableCell align="right" scope="row">
-        <Button
-          variant="outlined"
-          href={format(pagesPath.dashboard.tournaments._tournamentId(tournament.id).edit.$url())}
-        >
+        <Button variant="outlined" href={format(pagesPath.dashboard.tournaments._id(tournament.id).edit.$url())}>
           編集
         </Button>
         <TournamentMenu tournament={tournament} onDelete={onDelete} />
@@ -166,7 +163,7 @@ const TournamentMenu = ({ tournament, onDelete }: TournamentRowProps) => {
       <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
         <MenuItem
           onClick={() => {
-            router.push(pagesPath.tournaments._tournamentId(tournament.id).$url());
+            router.push(pagesPath.tournaments._id(tournament.id).$url());
             handleClose();
           }}
         >

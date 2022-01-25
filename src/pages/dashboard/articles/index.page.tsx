@@ -143,7 +143,7 @@ const ArticleRow = ({ article, onPublish, onStop, onDelete }: ArticleRowprops) =
         <Typography variant="caption">{ArticleStatusText[article.status]}</Typography>
       </TableCell>
       <TableCell align="right" scope="row">
-        <Button variant="outlined" href={format(pagesPath.dashboard.articles._articleId(article.id).edit.$url())}>
+        <Button variant="outlined" href={format(pagesPath.dashboard.articles._id(article.id).edit.$url())}>
           編集
         </Button>
         <ArticleMenu article={article} onPublish={onPublish} onStop={onStop} onDelete={onDelete} />

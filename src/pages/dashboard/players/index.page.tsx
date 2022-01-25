@@ -129,7 +129,7 @@ const PlayerRow = ({ player, onDelete }: PlayerRowProps) => {
         <Typography>{player.name}</Typography>
       </TableCell>
       <TableCell align="right" scope="row">
-        <Button variant="outlined" href={format(pagesPath.dashboard.players._playerSlug(player.slug).edit.$url())}>
+        <Button variant="outlined" href={format(pagesPath.dashboard.players._slug(player.slug).edit.$url())}>
           編集
         </Button>
         <PlayerMenu player={player} onDelete={onDelete} />

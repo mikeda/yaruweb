@@ -36,25 +36,25 @@ export const breadcrumbChain = (props: ChainParam): BreadcrumbChainItem => {
     case 'character':
       return {
         name: props.character.name,
-        url: pagesPath.characters._character(props.character.slug).$url(),
+        url: pagesPath.characters._slug(props.character.slug).$url(),
         parent: breadcrumbChain({ to: 'characters' }),
       };
     case 'characterBattles':
       return {
         name: '対戦動画',
-        url: pagesPath.characters._character(props.character.slug).battles.$url(),
+        url: pagesPath.characters._slug(props.character.slug).battles.$url(),
         parent: breadcrumbChain({ to: 'character', character: props.character }),
       };
     case 'characterCombos':
       return {
         name: 'コンボ',
-        url: pagesPath.characters._character(props.character.slug).combos.$url(),
+        url: pagesPath.characters._slug(props.character.slug).combos.$url(),
         parent: breadcrumbChain({ to: 'character', character: props.character }),
       };
     case 'characterMoves':
       return {
         name: 'コマンドリスト',
-        url: pagesPath.characters._character(props.character.slug).moves.$url(),
+        url: pagesPath.characters._slug(props.character.slug).moves.$url(),
         parent: breadcrumbChain({ to: 'character', character: props.character }),
       };
     case 'login':
@@ -68,7 +68,7 @@ export const breadcrumbChain = (props: ChainParam): BreadcrumbChainItem => {
     case 'player':
       return {
         name: props.player.name,
-        url: pagesPath.players._player(props.player.slug).$url(),
+        url: pagesPath.players._slug(props.player.slug).$url(),
         parent: breadcrumbChain({ to: 'players' }),
       };
     case 'playerBattles':
@@ -82,7 +82,7 @@ export const breadcrumbChain = (props: ChainParam): BreadcrumbChainItem => {
     case 'tournament':
       return {
         name: props.tournament.name,
-        url: pagesPath.tournaments._tournamentId(props.tournament.id).$url(),
+        url: pagesPath.tournaments._id(props.tournament.id).$url(),
         parent: breadcrumbChain({ to: 'tournaments' }),
       };
     case 'tournamentVideo':

@@ -48,7 +48,7 @@ export const PlayerCard: React.FC<Props> = ({ player }) => {
 
   return (
     <Card>
-      <CardActionArea href={format(pagesPath.players._player(player.slug).$url())} className={classes.root}>
+      <CardActionArea href={format(pagesPath.players._slug(player.slug).$url())} className={classes.root}>
         <CardMedia image={player.avatarUrl || NO_IMAGE_URL} className={classes.media} />
 
         <CardContent className={classes.content}>

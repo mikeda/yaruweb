@@ -70,7 +70,7 @@ export const breadcrumbChain = (props: DashboardBreadcrumbParams): BreadcrumbCha
     case 'comboCategories':
       return {
         name: 'コンボ',
-        url: pagesPath.dashboard.characters._characterSlug(props.character.slug).combo_categories.$url(),
+        url: pagesPath.dashboard.characters._slug(props.character.slug).combo_categories.$url(),
         parent: breadcrumbChain({ to: 'character', character: props.character }),
       };
     case 'comboCategory':
@@ -98,7 +98,7 @@ export const breadcrumbChain = (props: DashboardBreadcrumbParams): BreadcrumbCha
     case 'moveCategories':
       return {
         name: 'コマンドリスト',
-        url: pagesPath.dashboard.characters._characterSlug(props.character.slug).move_categories.$url(),
+        url: pagesPath.dashboard.characters._slug(props.character.slug).move_categories.$url(),
         parent: breadcrumbChain({ to: 'character', character: props.character }),
       };
     case 'moveCategory':
@@ -146,7 +146,7 @@ export const breadcrumbChain = (props: DashboardBreadcrumbParams): BreadcrumbCha
     case 'tournament':
       return {
         name: props.tournament.name,
-        url: pagesPath.dashboard.tournaments._tournamentId(props.tournament.id).$url(),
+        url: pagesPath.dashboard.tournaments._id(props.tournament.id).$url(),
         parent: breadcrumbChain({ to: 'tournaments' }),
       };
     case 'tournamentsNew':
@@ -156,7 +156,7 @@ export const breadcrumbChain = (props: DashboardBreadcrumbParams): BreadcrumbCha
     case 'battles':
       return {
         name: '対戦',
-        url: pagesPath.dashboard.tournament_videos._tournamentVideoId(props.tournamentVideo.id).battles.$url(),
+        url: pagesPath.dashboard.tournament_videos._id(props.tournamentVideo.id).battles.$url(),
         parent: breadcrumbChain({ to: 'tournamentVideo', tournamentVideo: props.tournamentVideo }),
       };
     case 'tournamentVideo':

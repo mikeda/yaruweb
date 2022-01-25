@@ -28,21 +28,21 @@ export const PlayerPageTabs: React.FC<Props> = ({ player, activeTab }) => {
           value="profile"
           label="プロフィール"
           onClick={() => {
-            router.push(pagesPath.players._player(player.slug).$url());
+            router.push(pagesPath.players._slug(player.slug).$url());
           }}
         />
         <Tab
           value="battles"
           label={`対戦動画 (${player.battlesCount})`}
           onClick={() => {
-            router.push(pagesPath.players._player(player.slug).battles.$url());
+            router.push(pagesPath.players._slug(player.slug).battles.$url());
           }}
         />
         <Tab
           value="standings"
           label={`大会戦績 (${player.standingsCount})`}
           onClick={() => {
-            router.push(pagesPath.players._player(player.slug).standings.$url());
+            router.push(pagesPath.players._slug(player.slug).standings.$url());
           }}
         />
       </Tabs>
