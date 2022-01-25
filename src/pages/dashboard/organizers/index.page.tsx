@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 
 import { DashboardContent, DashboardBreadcrumbs } from '@/components';
-import { dashboardPath } from '@/lib';
 import {
   Box,
   Button,
@@ -26,6 +25,8 @@ import {
 } from '@/lib/graphql/types';
 import { toast } from 'react-toastify';
 import { DEFAULT_AVATAR_URL } from '@/lib/Assets';
+import { pagesPath } from '@/lib/$path';
+import { format } from 'url';
 
 const Page: React.FC = () => {
   const setLoading = useSetRecoilState(loadingState);
@@ -59,7 +60,7 @@ const Page: React.FC = () => {
           variant="contained"
           color="primary"
           startIcon={<AddIcon />}
-          href={dashboardPath({ to: 'organizersNew' })}
+          href={format(pagesPath.dashboard.organizers.new.$url())}
         >
           作成する
         </Button>
@@ -126,7 +127,10 @@ const OrganizerRow = ({ organizer, onDelete }: OrganizerRowProps) => {
         <Typography>{organizer.name}</Typography>
       </TableCell>
       <TableCell align="right" scope="row">
-        <Button variant="outlined" href={dashboardPath({ to: 'organizerEdit', organizerSlug: organizer.slug })}>
+        <Button
+          variant="outlined"
+          href={format(pagesPath.dashboard.organizers._organizerSlug(organizer.slug).edit.$url())}
+        >
           編集
         </Button>
         <OrganizerMenu organizer={organizer} onDelete={onDelete} />
@@ -146,22 +150,24 @@ const OrganizerMenu = ({ onDelete }: OrganizerRowProps) => {
     setAnchorEl(null);
   };
 
-  return <>
-    <IconButton edge="end" onClick={handleClick} size="large">
-      <MoreVert />
-    </IconButton>
+  return (
+    <>
+      <IconButton edge="end" onClick={handleClick} size="large">
+        <MoreVert />
+      </IconButton>
 
-    <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
-      <MenuItem
-        onClick={() => {
-          onDelete();
-          handleClose();
-        }}
-      >
-        削除する
-      </MenuItem>
-    </Menu>
-  </>;
+      <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
+        <MenuItem
+          onClick={() => {
+            onDelete();
+            handleClose();
+          }}
+        >
+          削除する
+        </MenuItem>
+      </Menu>
+    </>
+  );
 };
 
 export default Page;

@@ -14,10 +14,11 @@ import {
 
 import makeStyles from '@mui/styles/makeStyles';
 
-import { path } from '@/lib';
 import { NO_IMAGE_URL } from '@/lib/Assets';
 import { EmojiEvents, YouTube } from '@mui/icons-material';
 import { colors } from '@/colors';
+import { pagesPath } from '@/lib/$path';
+import { format } from 'url';
 
 const useStyles = makeStyles({
   root: {
@@ -47,7 +48,7 @@ export const PlayerCard: React.FC<Props> = ({ player }) => {
 
   return (
     <Card>
-      <CardActionArea href={path({ to: 'player', playerSlug: player.slug })} className={classes.root}>
+      <CardActionArea href={format(pagesPath.players._player(player.slug).$url())} className={classes.root}>
         <CardMedia image={player.avatarUrl || NO_IMAGE_URL} className={classes.media} />
 
         <CardContent className={classes.content}>

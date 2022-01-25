@@ -4,11 +4,11 @@ import { Card, CardActionArea, CardContent, CardMedia, Typography } from '@mui/m
 import makeStyles from '@mui/styles/makeStyles';
 
 import { Link } from '@/components';
-import { path } from '@/lib';
 import { NO_IMAGE_URL, placeIconUrl } from '@/lib/Assets';
 import dayjs from '@/lib/dayjs';
 import { PlayerStandingCardFragment } from '@/lib/graphql/types';
 import theme from '@/theme';
+import { pagesPath } from '@/lib/$path';
 
 const useStyles = makeStyles({
   media: {
@@ -32,7 +32,7 @@ export const PlayerStandingCard: React.FC<Props> = ({ standing }) => {
   return (
     <Card>
       <CardActionArea
-        href={path({ to: 'tournament', tournamentId: standing.tournament.id })}
+        href={pagesPath.tournaments._tournamentId(standing.tournament.id).$url()}
         component={Link}
         color="inherit"
       >

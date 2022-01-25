@@ -30,9 +30,9 @@ import {
 } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import { DEFAULT_AVATAR_URL, NO_IMAGE_URL, placeIconUrl } from '@/lib/Assets';
-import { path } from '@/lib';
 import { TournamentVideoPlayer } from './components/TournamentVideoPlayer';
 import { ParsedUrlQuery } from 'querystring';
+import { pagesPath } from '@/lib/$path';
 
 const useStyles = makeStyles({
   root: {
@@ -91,7 +91,7 @@ const PageContent: React.FC<TournamentPageQuery> = ({ tournament }) => {
               {tournament.standings
                 .sort((a, b) => a.place - b.place)
                 .map(standing => (
-                  <Link key={standing.id} href={path({ to: 'player', playerSlug: standing.player.slug })} passHref>
+                  <Link key={standing.id} href={pagesPath.players._player(standing.player.slug).$url()} passHref>
                     <ListItem button component="a">
                       <ListItemAvatar>
                         <img src={placeIconUrl(standing.place)} width={38} height={44} />

@@ -14,12 +14,12 @@ import {
 
 import makeStyles from '@mui/styles/makeStyles';
 
-import { path } from '@/lib';
 import { Link } from '../Link';
 import { NO_IMAGE_URL } from '@/lib/Assets';
 import dayjs from '@/lib/dayjs';
 import { EmojiEvents, Schedule, YouTube } from '@mui/icons-material';
 import { colors } from '@/colors';
+import { pagesPath } from '@/lib/$path';
 
 const useStyles = makeStyles({
   media: {
@@ -40,7 +40,7 @@ interface Props {
 export const TournamentCard: React.FC<Props> = ({ tournament }) => {
   const classes = useStyles();
 
-  const href = path({ to: 'tournament', tournamentId: tournament.id });
+  const href = pagesPath.tournaments._tournamentId(tournament.id).$url();
 
   return (
     <Card>

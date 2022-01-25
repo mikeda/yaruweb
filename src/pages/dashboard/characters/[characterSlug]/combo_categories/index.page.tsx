@@ -26,11 +26,12 @@ import {
   useDeleteComboMutation,
 } from '@/lib/graphql/types';
 import { loadingState } from '@/states/loading';
-import { dashboardPath } from '@/lib';
 import { useRouteParams } from './hooks';
 import { DashboardContent, DashboardBreadcrumbs, Command } from '@/components';
 import { VideoPlayer } from '@/components/MoveMedia/VideoPlayer';
 import { colors } from '@/colors';
+import { pagesPath } from '@/lib/$path';
+import { format } from 'url';
 
 const Page: React.FC = () => {
   const { characterSlug } = useRouteParams();
@@ -68,7 +69,7 @@ const Page: React.FC = () => {
           variant="contained"
           color="primary"
           startIcon={<AddIcon />}
-          href={dashboardPath({ to: 'comboCategoriesNew', characterSlug: character.slug })}
+          href={format(pagesPath.dashboard.characters._characterSlug(character.slug).combo_categories.new.$url())}
         >
           カテゴリ追加
         </Button>
@@ -82,12 +83,15 @@ const Page: React.FC = () => {
             </Typography>
 
             <div>
-              <IconButton href={dashboardPath({ to: 'combosNew', comboCategoryId: comboCategory.id })} size="large">
+              <IconButton
+                href={format(pagesPath.dashboard.combo_categories._comboCategoryId(comboCategory.id).combos.new.$url())}
+                size="large"
+              >
                 <Add />
               </IconButton>
 
               <IconButton
-                href={dashboardPath({ to: 'comboCategoryEdit', comboCategoryId: comboCategory.id })}
+                href={format(pagesPath.dashboard.combo_categories._comboCategoryId(comboCategory.id).edit.$url())}
                 size="large"
               >
                 <Edit />
@@ -164,7 +168,7 @@ const ComboRow = ({ combo, afterDelete }: ComboRowProps) => {
       <TableCell align="right" scope="row">
         <VideoButton combo={combo} />
 
-        <IconButton href={dashboardPath({ to: 'comboEdit', comboId: combo.id })} size="large">
+        <IconButton href={format(pagesPath.dashboard.combos._comboId(combo.id).edit.$url())} size="large">
           <Edit />
         </IconButton>
 

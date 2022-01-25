@@ -1,4 +1,4 @@
-import { path } from '@/lib';
+import { pagesPath } from '@/lib/$path';
 import { BreadcrumbChainItem } from './Breadcrumbs';
 import { ArticleParam, CharactersParam, PlayerParam, TournamentParam, TournamentVideoParam } from './params';
 
@@ -26,35 +26,35 @@ export type ChainParam =
 export const breadcrumbChain = (props: ChainParam): BreadcrumbChainItem => {
   switch (props.to) {
     case 'articles':
-      return { name: '記事', url: path({ to: 'articles' }) };
+      return { name: '記事', url: pagesPath.articles.$url() };
     case 'article':
       return { name: props.article.title, parent: breadcrumbChain({ to: 'articles' }) };
     case 'battles':
-      return { name: '対戦動画', url: path({ to: 'battles' }) };
+      return { name: '対戦動画', url: pagesPath.battles.$url() };
     case 'characters':
-      return { name: 'キャラクター', url: path({ to: 'characters' }) };
+      return { name: 'キャラクター', url: pagesPath.characters.$url() };
     case 'character':
       return {
         name: props.character.name,
-        url: path({ to: 'character', characterSlug: props.character.slug }),
+        url: pagesPath.characters._character(props.character.slug).$url(),
         parent: breadcrumbChain({ to: 'characters' }),
       };
     case 'characterBattles':
       return {
         name: '対戦動画',
-        url: path({ to: 'characterBattles', characterSlug: props.character.slug }),
+        url: pagesPath.characters._character(props.character.slug).battles.$url(),
         parent: breadcrumbChain({ to: 'character', character: props.character }),
       };
     case 'characterCombos':
       return {
         name: 'コンボ',
-        url: path({ to: 'characterCombos', characterSlug: props.character.slug }),
+        url: pagesPath.characters._character(props.character.slug).combos.$url(),
         parent: breadcrumbChain({ to: 'character', character: props.character }),
       };
     case 'characterMoves':
       return {
         name: 'コマンドリスト',
-        url: path({ to: 'characterMoves', characterSlug: props.character.slug }),
+        url: pagesPath.characters._character(props.character.slug).moves.$url(),
         parent: breadcrumbChain({ to: 'character', character: props.character }),
       };
     case 'login':
@@ -64,11 +64,11 @@ export const breadcrumbChain = (props: ChainParam): BreadcrumbChainItem => {
     case 'passwordReset':
       return { name: 'パスワードリセット' };
     case 'players':
-      return { name: 'プレイヤー', url: path({ to: 'players' }) };
+      return { name: 'プレイヤー', url: pagesPath.players.$url() };
     case 'player':
       return {
         name: props.player.name,
-        url: path({ to: 'player', playerSlug: props.player.slug }),
+        url: pagesPath.players._player(props.player.slug).$url(),
         parent: breadcrumbChain({ to: 'players' }),
       };
     case 'playerBattles':
@@ -78,11 +78,11 @@ export const breadcrumbChain = (props: ChainParam): BreadcrumbChainItem => {
     case 'signup':
       return { name: 'ログイン' };
     case 'tournaments':
-      return { name: '大会', url: path({ to: 'tournaments' }) };
+      return { name: '大会', url: pagesPath.tournaments.$url() };
     case 'tournament':
       return {
         name: props.tournament.name,
-        url: path({ to: 'tournament', tournamentId: props.tournament.id }),
+        url: pagesPath.tournaments._tournamentId(props.tournament.id).$url(),
         parent: breadcrumbChain({ to: 'tournaments' }),
       };
     case 'tournamentVideo':

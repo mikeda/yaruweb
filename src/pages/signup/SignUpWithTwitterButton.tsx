@@ -6,10 +6,10 @@ import { useCreateUserMutation } from '@/lib/graphql/types';
 import { signInFirebaseWithTwitter } from '@/lib/firebase';
 import { currentUserState } from '@/states/currentUser';
 import { useSetRecoilState } from 'recoil';
-import { path } from '@/lib';
 import { Button } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import { colors } from '@/colors';
+import { pagesPath } from '@/lib/$path';
 
 const useStyles = makeStyles({
   root: {
@@ -28,7 +28,7 @@ export const SignUpWithTwitterButton: React.FC = () => {
       setCurrentUser(currentUser);
       toast.success('ユーザー登録が完了しました。');
 
-      router.push(path({ to: 'top' }));
+      router.push(pagesPath.$url());
     },
     onError: error => {
       toast.error(error.message);

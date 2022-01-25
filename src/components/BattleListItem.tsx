@@ -4,12 +4,12 @@ import { Avatar, Box, Grid, ListItem, ListItemText, Typography } from '@mui/mate
 import makeStyles from '@mui/styles/makeStyles';
 
 import { Link } from '@/components';
-import { path } from '@/lib';
 import { BattleListItemFragment } from '@/lib/graphql/types';
 import theme from '@/theme';
 import { BattleRoundText } from '@/lib/graphql/enum_texts';
 import clsx from 'clsx';
 import dayjs from '@/lib/dayjs';
+import { pagesPath } from '@/lib/$path';
 
 interface Props {
   battle: BattleListItemFragment;
@@ -27,7 +27,9 @@ export const BattleListItem: React.FC<Props> = ({ battle, last }) => {
   }
   return (
     <Link
-      href={path({ to: 'tournament', tournamentId: battle.tournamentVideo.tournament.id, battleId: battle.id })}
+      href={pagesPath.tournaments
+        ._tournamentId(battle.tournamentVideo.tournament.id)
+        .$url({ hash: `battle${battle.id}` })}
       passHref
       underline="none"
     >

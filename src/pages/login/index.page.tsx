@@ -5,9 +5,9 @@ import { LoginWithTwitterButton } from './LoginWithTwitterButton';
 import { Content } from '@/components/layouts/Content';
 import { Head } from '@/components/layouts/Head';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
-import { path } from '@/lib';
 import { Box } from '@mui/material';
 import { Link } from '@/components';
+import { pagesPath } from '@/lib/$path';
 
 const Page: React.FC = () => {
   return (
@@ -21,7 +21,7 @@ const Page: React.FC = () => {
           <LoginWithTwitterButton />
         </Box>
         <Box ml={2}>
-          <Link href={path({ to: 'signup' })} color="inherit">
+          <Link href={pagesPath.signup.$url()} color="inherit">
             新規登録はこちら
           </Link>
         </Box>

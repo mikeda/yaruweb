@@ -19,6 +19,10 @@ import { loadingState } from '@/states/loading';
 import { DashboardBreadcrumbs } from '@/components';
 import { ThrowMoveForm } from '@/components/MoveForm/ThrowMoveForm';
 
+export type Query = {
+  move_type: 'attack' | 'throw' | 'reversal';
+};
+
 const Page: React.FC = () => {
   const router = useRouter();
   const { moveCategoryId, move_type: moveType } = router.query;

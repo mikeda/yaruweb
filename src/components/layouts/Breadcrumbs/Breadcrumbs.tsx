@@ -5,14 +5,15 @@ import { DashboardBreadcrumbParams, breadcrumbChain as dashboardChain } from './
 import { breadcrumbChain, ChainParam } from './Definition';
 import { Typography } from '@mui/material';
 import { Link } from '@/components/Link';
+import { UrlObject } from 'url';
 
 export type BreadcrumbChainItem = {
   name: string;
-  url?: string;
+  url?: UrlObject;
   parent?: BreadcrumbChainItem;
 };
 
-type BreadcrumbsItem = { name: string; url?: string };
+type BreadcrumbsItem = { name: string; url?: UrlObject };
 
 export const Breadcrumbs: React.FC<ChainParam> = props => {
   let current = breadcrumbChain(props);

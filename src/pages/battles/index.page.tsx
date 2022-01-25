@@ -10,13 +10,13 @@ import { Box, Button, List, Paper } from '@mui/material';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
 import { BattleListItem } from '@/components';
-import { path } from '@/lib';
 import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from '@/states/loading';
 import { toast } from 'react-toastify';
 import { BattleSelector, CharacterChip, PlayerChip } from '@/components/BattleSelector';
 import theme from '@/theme';
+import { pagesPath } from '@/lib/$path';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -67,7 +67,7 @@ const Page: React.FC<BattlesPageQuery> = ({
               key={player.id}
               player={player}
               onClick={() => {
-                router.push(path({ to: 'playerBattles', player: player.slug }));
+                router.push(pagesPath.players._player(player.slug).battles.$url());
               }}
             />
           ))}
@@ -76,7 +76,7 @@ const Page: React.FC<BattlesPageQuery> = ({
               key={character.id}
               character={character}
               onClick={() => {
-                router.push(path({ to: 'characterBattles', characterSlug: character.slug }));
+                router.push(pagesPath.characters._character(character.slug).battles.$url());
               }}
             />
           ))}
