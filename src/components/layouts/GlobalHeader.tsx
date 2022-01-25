@@ -6,7 +6,7 @@ import { styled } from '@mui/material/styles';
 
 import { UserMenu } from './UserMenu';
 
-import { path } from '@/lib';
+import { pagesPath } from '@/lib/$path';
 
 export const GlobalHeader: React.FC = ({ children }) => {
   return (
@@ -14,7 +14,7 @@ export const GlobalHeader: React.FC = ({ children }) => {
       <Inner>
         <Content>
           <div>
-            <Link href={path({ to: 'top' })} passHref>
+            <Link href={pagesPath.$url()} passHref>
               <Logo>
                 <FontAwesomeIcon icon={faFistRaised} />
                 {' 鉄拳やろうよ.com'}

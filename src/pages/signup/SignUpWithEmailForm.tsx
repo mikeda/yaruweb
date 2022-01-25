@@ -11,8 +11,8 @@ import { currentUserState } from '@/states/currentUser';
 import { useSetRecoilState } from 'recoil';
 import { Controller, useForm } from 'react-hook-form';
 import { loadingState } from '@/states/loading';
-import { path } from '@/lib';
 import { Box, Button, Card, CardContent, Divider, TextField } from '@mui/material';
+import { pagesPath } from '@/lib/$path';
 
 interface SignUpInput {
   email: string;
@@ -43,7 +43,7 @@ export const SignUpWithEmailForm: React.FC = () => {
       setCurrentUser(currentUser);
       toast.success('ユーザー登録が完了しました。');
 
-      router.push(path({ to: 'top' }));
+      router.push(pagesPath.$url());
     },
     onError: error => {
       toast.error(error.message);

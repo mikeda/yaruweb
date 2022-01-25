@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { path } from '@/lib';
 import { Paper, Tab, Tabs } from '@mui/material';
 import { useRouter } from 'next/router';
 import { PlayerPageProfileFragment } from '@/lib/graphql/types';
+import { pagesPath } from '@/lib/$path';
 
 type TabValue = 'profile' | 'battles' | 'standings';
 
@@ -28,21 +28,21 @@ export const PlayerPageTabs: React.FC<Props> = ({ player, activeTab }) => {
           value="profile"
           label="プロフィール"
           onClick={() => {
-            router.push(path({ to: 'player', playerSlug: player.slug }));
+            router.push(pagesPath.players._player(player.slug).$url());
           }}
         />
         <Tab
           value="battles"
           label={`対戦動画 (${player.battlesCount})`}
           onClick={() => {
-            router.push(path({ to: 'playerBattles', player: player.slug }));
+            router.push(pagesPath.players._player(player.slug).battles.$url());
           }}
         />
         <Tab
           value="standings"
           label={`大会戦績 (${player.standingsCount})`}
           onClick={() => {
-            router.push(path({ to: 'playerStandings', playerSlug: player.slug }));
+            router.push(pagesPath.players._player(player.slug).standings.$url());
           }}
         />
       </Tabs>

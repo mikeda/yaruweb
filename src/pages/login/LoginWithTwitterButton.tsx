@@ -6,10 +6,10 @@ import { useCurrentUserLazyQuery } from '@/lib/graphql/types';
 import { signInFirebaseWithTwitter } from '@/lib/firebase';
 import { currentUserState } from '@/states/currentUser';
 import { useSetRecoilState } from 'recoil';
-import { path } from '@/lib';
 import { Button } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import { colors } from '@/colors';
+import { pagesPath } from '@/lib/$path';
 
 const useStyles = makeStyles({
   root: {
@@ -27,7 +27,7 @@ export const LoginWithTwitterButton: React.FC = () => {
 
       setCurrentUser(data.currentUser);
       toast.success('ログインしました。');
-      router.push(path({ to: 'top' }));
+      router.push(pagesPath.$url());
     },
     onError: e => {
       toast.error(e.message);

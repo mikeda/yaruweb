@@ -4,9 +4,10 @@ import { Divider, List, ListItem, ListItemIcon, ListItemText } from '@mui/materi
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
 import { Link } from '@/components';
-import { dashboardPath } from '@/lib';
 import { EmojiEvents, Person, TagFaces, LibraryBooks, People } from '@mui/icons-material';
 import theme from '@/theme';
+import { pagesPath } from '@/lib/$path';
+import { UrlObject } from 'url';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -20,7 +21,7 @@ type MenuKey = 'article' | 'tournament' | 'player' | 'organizer' | 'character' |
 interface ItemProps {
   key: MenuKey;
   label: string;
-  link: string;
+  link: UrlObject;
   icon: ReactElement;
 }
 
@@ -28,35 +29,35 @@ const items: ItemProps[] = [
   {
     key: 'profile',
     label: 'プロフィール',
-    link: dashboardPath({ to: 'profileEdit' }),
+    link: pagesPath.dashboard.profile.edit.$url(),
     icon: <Person />,
   },
-  { key: 'article', label: '記事', link: dashboardPath({ to: 'articles' }), icon: <LibraryBooks /> },
+  { key: 'article', label: '記事', link: pagesPath.dashboard.articles.$url(), icon: <LibraryBooks /> },
 ];
 
 const adminItems: ItemProps[] = [
   {
     key: 'tournament',
     label: '大会',
-    link: dashboardPath({ to: 'tournaments' }),
+    link: pagesPath.dashboard.tournaments.$url(),
     icon: <EmojiEvents />,
   },
   {
     key: 'player',
     label: 'プレイヤー',
-    link: dashboardPath({ to: 'players' }),
+    link: pagesPath.dashboard.players.$url(),
     icon: <People />,
   },
   {
     key: 'organizer',
     label: 'オーガナイザー',
-    link: dashboardPath({ to: 'organizers' }),
+    link: pagesPath.dashboard.organizers.$url(),
     icon: <People />,
   },
   {
     key: 'character',
     label: 'キャラクター',
-    link: dashboardPath({ to: 'characters' }),
+    link: pagesPath.dashboard.characters.$url(),
     icon: <TagFaces />,
   },
 ];

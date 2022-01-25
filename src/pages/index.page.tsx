@@ -12,8 +12,9 @@ import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
 import { TournamentCard } from '@/components/TournamentCard';
 import { PlayerCard } from '@/components/PlayerCard';
-import { path } from '@/lib';
 import theme from '@/theme';
+import { pagesPath } from '@/lib/$path';
+import { format } from 'url';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -53,7 +54,7 @@ const Page: React.FC<TopPageQuery> = ({ tournaments, battles, players, character
         </Grid>
 
         <div className={classes.sectionFooter}>
-          <Button href={path({ to: 'tournaments' })} component={LinkComponent}>
+          <Button href={format(pagesPath.tournaments.$url())} component={LinkComponent}>
             もっとみる
           </Button>
         </div>
@@ -73,7 +74,7 @@ const Page: React.FC<TopPageQuery> = ({ tournaments, battles, players, character
         </Paper>
 
         <div className={classes.sectionFooter}>
-          <Button href={path({ to: 'battles' })} component={LinkComponent}>
+          <Button href={format(pagesPath.battles.$url())} component={LinkComponent}>
             もっとみる
           </Button>
         </div>
@@ -93,7 +94,7 @@ const Page: React.FC<TopPageQuery> = ({ tournaments, battles, players, character
         </Grid>
 
         <div className={classes.sectionFooter}>
-          <Button href={path({ to: 'players' })} component={LinkComponent}>
+          <Button href={format(pagesPath.players.$url())} component={LinkComponent}>
             もっとみる
           </Button>
         </div>
@@ -113,7 +114,7 @@ const Page: React.FC<TopPageQuery> = ({ tournaments, battles, players, character
         </Grid>
 
         <div className={classes.sectionFooter}>
-          <Button href={path({ to: 'characters' })} component={LinkComponent}>
+          <Button href={format(pagesPath.characters.$url())} component={LinkComponent}>
             もっとみる
           </Button>
         </div>
@@ -133,7 +134,7 @@ const Page: React.FC<TopPageQuery> = ({ tournaments, battles, players, character
         </Grid>
 
         <div className={classes.sectionFooter}>
-          <Button href={path({ to: 'articles' })} component={LinkComponent}>
+          <Button href={format(pagesPath.articles.$url())} component={LinkComponent}>
             もっとみる
           </Button>
         </div>

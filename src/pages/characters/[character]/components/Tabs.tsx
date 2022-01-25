@@ -1,9 +1,9 @@
 import React from 'react';
 
-import { path } from '@/lib';
 import { Paper, Tab, Tabs as MuiTabs } from '@mui/material';
 import { useRouter } from 'next/router';
 import { CharacterPageProfileFragment } from '@/lib/graphql/types';
+import { pagesPath } from '@/lib/$path';
 
 type TabValue = 'profile' | 'battles' | 'moves' | 'combos';
 
@@ -22,7 +22,7 @@ export const Tabs: React.FC<Props> = ({ character, activeTab }) => {
           value="profile"
           label="プロフィール"
           onClick={() => {
-            router.push(path({ to: 'character', characterSlug: character.slug }));
+            router.push(pagesPath.characters._character(character.slug).$url());
           }}
         />
 
@@ -30,7 +30,7 @@ export const Tabs: React.FC<Props> = ({ character, activeTab }) => {
           value="battles"
           label={`対戦動画 (${character.battlesCount})`}
           onClick={() => {
-            router.push(path({ to: 'characterBattles', characterSlug: character.slug }));
+            router.push(pagesPath.characters._character(character.slug).battles.$url());
           }}
         />
 
@@ -39,7 +39,7 @@ export const Tabs: React.FC<Props> = ({ character, activeTab }) => {
             value="moves"
             label={`コマンドリスト (${character.movesCount})`}
             onClick={() => {
-              router.push(path({ to: 'characterMoves', characterSlug: character.slug }));
+              router.push(pagesPath.characters._character(character.slug).moves.$url());
             }}
           />
         )}
@@ -49,7 +49,7 @@ export const Tabs: React.FC<Props> = ({ character, activeTab }) => {
             value="combos"
             label={`コンボ (${character.combosCount})`}
             onClick={() => {
-              router.push(path({ to: 'characterCombos', characterSlug: character.slug }));
+              router.push(pagesPath.characters._character(character.slug).combos.$url());
             }}
           />
         )}

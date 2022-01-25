@@ -16,10 +16,11 @@ import {
 
 import makeStyles from '@mui/styles/makeStyles';
 
-import { path, dashboardPath } from '@/lib';
 import { Link } from '../Link';
 import { Public, YouTube, SportsKabaddi } from '@mui/icons-material';
 import { colors } from '@/colors';
+import { pagesPath } from '@/lib/$path';
+import { format } from 'url';
 
 const useStyles = makeStyles({
   root: {
@@ -49,8 +50,8 @@ export const CharacterCard: React.FC<Props> = ({ character, dashboard = false })
   const classes = useStyles();
 
   const href = dashboard
-    ? dashboardPath({ to: 'characterEdit', characterSlug: character.slug })
-    : path({ to: 'character', characterSlug: character.slug });
+    ? pagesPath.dashboard.characters._characterSlug(character.slug).edit.$url()
+    : pagesPath.characters._character(character.slug).$url();
 
   return (
     <Card>
@@ -89,14 +90,15 @@ export const CharacterCard: React.FC<Props> = ({ character, dashboard = false })
         <CardActions disableSpacing>
           <Button
             color="primary"
-            href={dashboardPath({ to: 'moveCategories', characterSlug: character.slug })}
+            href={format(pagesPath.dashboard.characters._characterSlug(character.slug).move_categories.$url())}
             component={Link}
           >
             コマンドリスト
           </Button>
+
           <Button
             color="primary"
-            href={dashboardPath({ to: 'comboCategories', characterSlug: character.slug })}
+            href={format(pagesPath.dashboard.characters._characterSlug(character.slug).combo_categories.$url())}
             component={Link}
           >
             コンボ

@@ -13,7 +13,6 @@ import { toast } from 'react-toastify';
 import { DashboardBreadcrumbs } from '@/components';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from '@/states/loading';
-import { dashboardPath } from '@/lib';
 import {
   Box,
   Button,
@@ -30,6 +29,8 @@ import {
 } from '@mui/material';
 import { ArticleStatusText } from '@/lib/graphql/enum_texts';
 import { Add, MoreVert } from '@mui/icons-material';
+import { pagesPath } from '@/lib/$path';
+import { format } from 'url';
 
 const Page: React.FC = () => {
   const setLoading = useSetRecoilState(loadingState);
@@ -69,7 +70,12 @@ const Page: React.FC = () => {
       title="記事一覧"
       breadcrumb={<DashboardBreadcrumbs to="articles" />}
       actions={
-        <Button variant="contained" color="primary" startIcon={<Add />} href={dashboardPath({ to: 'articlesNew' })}>
+        <Button
+          variant="contained"
+          color="primary"
+          startIcon={<Add />}
+          href={format(pagesPath.dashboard.articles.new.$url())}
+        >
           記事を書く
         </Button>
       }
@@ -137,7 +143,7 @@ const ArticleRow = ({ article, onPublish, onStop, onDelete }: ArticleRowprops) =
         <Typography variant="caption">{ArticleStatusText[article.status]}</Typography>
       </TableCell>
       <TableCell align="right" scope="row">
-        <Button variant="outlined" href={dashboardPath({ to: 'articleEdit', articleId: article.id })}>
+        <Button variant="outlined" href={format(pagesPath.dashboard.articles._articleId(article.id).edit.$url())}>
           編集
         </Button>
         <ArticleMenu article={article} onPublish={onPublish} onStop={onStop} onDelete={onDelete} />

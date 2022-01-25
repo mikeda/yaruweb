@@ -2,18 +2,24 @@ import React from 'react';
 
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
 import { NotFound } from '@/components/NotFound';
-import { dashboardPath } from '@/lib';
 import { Button, Grid } from '@mui/material';
 import { Add as AddIcon } from '@mui/icons-material';
 import { CharacterCard, DashboardBreadcrumbs } from '@/components';
 import { useDashboardCharactersPageQuery } from '@/lib/graphql/types';
+import { pagesPath } from '@/lib/$path';
+import { format } from 'url';
 
 const Page: React.FC = () => (
   <DashboardContent
     title="キャラクター"
     breadcrumb={<DashboardBreadcrumbs to="characters" />}
     actions={
-      <Button variant="contained" color="primary" startIcon={<AddIcon />} href={dashboardPath({ to: 'charactersNew' })}>
+      <Button
+        variant="contained"
+        color="primary"
+        startIcon={<AddIcon />}
+        href={format(pagesPath.dashboard.characters.new.$url())}
+      >
         作成する
       </Button>
     }
