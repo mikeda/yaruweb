@@ -1,12 +1,12 @@
 /* eslint-disable */
 // prettier-ignore
-import { Query as Query0 } from '../pages/dashboard/move_categories/[moveCategoryId]/moves/new/index.page'
+import { Query as Query0 } from '../pages/dashboard/move_categories/[id]/moves/new/index.page'
 
 // prettier-ignore
 export const pagesPath = {
   articles: {
-    _articleId: (articleId: string | number) => ({
-      $url: (url?: { hash?: string }) => ({ pathname: '/articles/[articleId]' as const, query: { articleId }, hash: url?.hash })
+    _id: (id: string | number) => ({
+      $url: (url?: { hash?: string }) => ({ pathname: '/articles/[id]' as const, query: { id }, hash: url?.hash })
     }),
     $url: (url?: { hash?: string }) => ({ pathname: '/articles' as const, hash: url?.hash })
   },
@@ -14,25 +14,25 @@ export const pagesPath = {
     $url: (url?: { hash?: string }) => ({ pathname: '/battles' as const, hash: url?.hash })
   },
   characters: {
-    _character: (character: string | number) => ({
+    _slug: (slug: string | number) => ({
       battles: {
-        $url: (url?: { hash?: string }) => ({ pathname: '/characters/[character]/battles' as const, query: { character }, hash: url?.hash })
+        $url: (url?: { hash?: string }) => ({ pathname: '/characters/[slug]/battles' as const, query: { slug }, hash: url?.hash })
       },
       combos: {
-        $url: (url?: { hash?: string }) => ({ pathname: '/characters/[character]/combos' as const, query: { character }, hash: url?.hash })
+        $url: (url?: { hash?: string }) => ({ pathname: '/characters/[slug]/combos' as const, query: { slug }, hash: url?.hash })
       },
       moves: {
-        $url: (url?: { hash?: string }) => ({ pathname: '/characters/[character]/moves' as const, query: { character }, hash: url?.hash })
+        $url: (url?: { hash?: string }) => ({ pathname: '/characters/[slug]/moves' as const, query: { slug }, hash: url?.hash })
       },
-      $url: (url?: { hash?: string }) => ({ pathname: '/characters/[character]' as const, query: { character }, hash: url?.hash })
+      $url: (url?: { hash?: string }) => ({ pathname: '/characters/[slug]' as const, query: { slug }, hash: url?.hash })
     }),
     $url: (url?: { hash?: string }) => ({ pathname: '/characters' as const, hash: url?.hash })
   },
   dashboard: {
     articles: {
-      _articleId: (articleId: string | number) => ({
+      _id: (id: string | number) => ({
         edit: {
-          $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/articles/[articleId]/edit' as const, query: { articleId }, hash: url?.hash })
+          $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/articles/[id]/edit' as const, query: { id }, hash: url?.hash })
         }
       }),
       new: {
@@ -41,21 +41,21 @@ export const pagesPath = {
       $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/articles' as const, hash: url?.hash })
     },
     characters: {
-      _characterSlug: (characterSlug: string | number) => ({
+      _slug: (slug: string | number) => ({
         combo_categories: {
           new: {
-            $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/characters/[characterSlug]/combo_categories/new' as const, query: { characterSlug }, hash: url?.hash })
+            $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/characters/[slug]/combo_categories/new' as const, query: { slug }, hash: url?.hash })
           },
-          $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/characters/[characterSlug]/combo_categories' as const, query: { characterSlug }, hash: url?.hash })
+          $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/characters/[slug]/combo_categories' as const, query: { slug }, hash: url?.hash })
         },
         edit: {
-          $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/characters/[characterSlug]/edit' as const, query: { characterSlug }, hash: url?.hash })
+          $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/characters/[slug]/edit' as const, query: { slug }, hash: url?.hash })
         },
         move_categories: {
           new: {
-            $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/characters/[characterSlug]/move_categories/new' as const, query: { characterSlug }, hash: url?.hash })
+            $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/characters/[slug]/move_categories/new' as const, query: { slug }, hash: url?.hash })
           },
-          $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/characters/[characterSlug]/move_categories' as const, query: { characterSlug }, hash: url?.hash })
+          $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/characters/[slug]/move_categories' as const, query: { slug }, hash: url?.hash })
         }
       }),
       new: {
@@ -64,50 +64,50 @@ export const pagesPath = {
       $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/characters' as const, hash: url?.hash })
     },
     combo_categories: {
-      _comboCategoryId: (comboCategoryId: string | number) => ({
+      _id: (id: string | number) => ({
         combos: {
           new: {
-            $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/combo_categories/[comboCategoryId]/combos/new' as const, query: { comboCategoryId }, hash: url?.hash })
+            $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/combo_categories/[id]/combos/new' as const, query: { id }, hash: url?.hash })
           }
         },
         edit: {
-          $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/combo_categories/[comboCategoryId]/edit' as const, query: { comboCategoryId }, hash: url?.hash })
+          $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/combo_categories/[id]/edit' as const, query: { id }, hash: url?.hash })
         }
       })
     },
     combos: {
-      _comboId: (comboId: string | number) => ({
+      _id: (id: string | number) => ({
         edit: {
-          $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/combos/[comboId]/edit' as const, query: { comboId }, hash: url?.hash })
+          $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/combos/[id]/edit' as const, query: { id }, hash: url?.hash })
         }
       })
     },
     move_categories: {
-      _moveCategoryId: (moveCategoryId: string | number) => ({
+      _id: (id: string | number) => ({
         edit: {
-          $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/move_categories/[moveCategoryId]/edit' as const, query: { moveCategoryId }, hash: url?.hash })
+          $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/move_categories/[id]/edit' as const, query: { id }, hash: url?.hash })
         },
         moves: {
           new: {
-            $url: (url: { query: Query0, hash?: string }) => ({ pathname: '/dashboard/move_categories/[moveCategoryId]/moves/new' as const, query: { moveCategoryId, ...url.query }, hash: url.hash })
+            $url: (url: { query: Query0, hash?: string }) => ({ pathname: '/dashboard/move_categories/[id]/moves/new' as const, query: { id, ...url.query }, hash: url.hash })
           }
         }
       })
     },
     moves: {
-      _moveId: (moveId: string | number) => ({
+      _id: (id: string | number) => ({
         copy: {
-          $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/moves/[moveId]/copy' as const, query: { moveId }, hash: url?.hash })
+          $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/moves/[id]/copy' as const, query: { id }, hash: url?.hash })
         },
         edit: {
-          $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/moves/[moveId]/edit' as const, query: { moveId }, hash: url?.hash })
+          $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/moves/[id]/edit' as const, query: { id }, hash: url?.hash })
         }
       })
     },
     organizers: {
-      _organizerSlug: (organizerSlug: string | number) => ({
+      _slug: (slug: string | number) => ({
         edit: {
-          $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/organizers/[organizerSlug]/edit' as const, query: { organizerSlug }, hash: url?.hash })
+          $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/organizers/[slug]/edit' as const, query: { slug }, hash: url?.hash })
         }
       }),
       new: {
@@ -116,9 +116,9 @@ export const pagesPath = {
       $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/organizers' as const, hash: url?.hash })
     },
     players: {
-      _playerSlug: (playerSlug: string | number) => ({
+      _slug: (slug: string | number) => ({
         edit: {
-          $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/players/[playerSlug]/edit' as const, query: { playerSlug }, hash: url?.hash })
+          $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/players/[slug]/edit' as const, query: { slug }, hash: url?.hash })
         }
       }),
       new: {
@@ -132,18 +132,18 @@ export const pagesPath = {
       }
     },
     tournament_videos: {
-      _tournamentVideoId: (tournamentVideoId: string | number) => ({
+      _id: (id: string | number) => ({
         battles: {
-          $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/tournament_videos/[tournamentVideoId]/battles' as const, query: { tournamentVideoId }, hash: url?.hash })
+          $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/tournament_videos/[id]/battles' as const, query: { id }, hash: url?.hash })
         }
       })
     },
     tournaments: {
-      _tournamentId: (tournamentId: string | number) => ({
+      _id: (id: string | number) => ({
         edit: {
-          $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/tournaments/[tournamentId]/edit' as const, query: { tournamentId }, hash: url?.hash })
+          $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/tournaments/[id]/edit' as const, query: { id }, hash: url?.hash })
         },
-        $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/tournaments/[tournamentId]' as const, query: { tournamentId }, hash: url?.hash })
+        $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/tournaments/[id]' as const, query: { id }, hash: url?.hash })
       }),
       new: {
         $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/tournaments/new' as const, hash: url?.hash })
@@ -155,14 +155,14 @@ export const pagesPath = {
     $url: (url?: { hash?: string }) => ({ pathname: '/login' as const, hash: url?.hash })
   },
   players: {
-    _player: (player: string | number) => ({
+    _slug: (slug: string | number) => ({
       battles: {
-        $url: (url?: { hash?: string }) => ({ pathname: '/players/[player]/battles' as const, query: { player }, hash: url?.hash })
+        $url: (url?: { hash?: string }) => ({ pathname: '/players/[slug]/battles' as const, query: { slug }, hash: url?.hash })
       },
       standings: {
-        $url: (url?: { hash?: string }) => ({ pathname: '/players/[player]/standings' as const, query: { player }, hash: url?.hash })
+        $url: (url?: { hash?: string }) => ({ pathname: '/players/[slug]/standings' as const, query: { slug }, hash: url?.hash })
       },
-      $url: (url?: { hash?: string }) => ({ pathname: '/players/[player]' as const, query: { player }, hash: url?.hash })
+      $url: (url?: { hash?: string }) => ({ pathname: '/players/[slug]' as const, query: { slug }, hash: url?.hash })
     }),
     $url: (url?: { hash?: string }) => ({ pathname: '/players' as const, hash: url?.hash })
   },
@@ -170,13 +170,13 @@ export const pagesPath = {
     $url: (url?: { hash?: string }) => ({ pathname: '/signup' as const, hash: url?.hash })
   },
   tournament_videos: {
-    _tournamentVideoId: (tournamentVideoId: string | number) => ({
-      $url: (url?: { hash?: string }) => ({ pathname: '/tournament_videos/[tournamentVideoId]' as const, query: { tournamentVideoId }, hash: url?.hash })
+    _id: (id: string | number) => ({
+      $url: (url?: { hash?: string }) => ({ pathname: '/tournament_videos/[id]' as const, query: { id }, hash: url?.hash })
     })
   },
   tournaments: {
-    _tournamentId: (tournamentId: string | number) => ({
-      $url: (url?: { hash?: string }) => ({ pathname: '/tournaments/[tournamentId]' as const, query: { tournamentId }, hash: url?.hash })
+    _id: (id: string | number) => ({
+      $url: (url?: { hash?: string }) => ({ pathname: '/tournaments/[id]' as const, query: { id }, hash: url?.hash })
     }),
     $url: (url?: { hash?: string }) => ({ pathname: '/tournaments' as const, hash: url?.hash })
   },

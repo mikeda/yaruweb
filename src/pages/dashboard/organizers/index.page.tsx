@@ -127,10 +127,7 @@ const OrganizerRow = ({ organizer, onDelete }: OrganizerRowProps) => {
         <Typography>{organizer.name}</Typography>
       </TableCell>
       <TableCell align="right" scope="row">
-        <Button
-          variant="outlined"
-          href={format(pagesPath.dashboard.organizers._organizerSlug(organizer.slug).edit.$url())}
-        >
+        <Button variant="outlined" href={format(pagesPath.dashboard.organizers._slug(organizer.slug).edit.$url())}>
           編集
         </Button>
         <OrganizerMenu organizer={organizer} onDelete={onDelete} />

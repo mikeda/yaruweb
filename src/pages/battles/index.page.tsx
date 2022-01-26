@@ -67,7 +67,7 @@ const Page: React.FC<BattlesPageQuery> = ({
               key={player.id}
               player={player}
               onClick={() => {
-                router.push(pagesPath.players._player(player.slug).battles.$url());
+                router.push(pagesPath.players._slug(player.slug).battles.$url());
               }}
             />
           ))}
@@ -76,7 +76,7 @@ const Page: React.FC<BattlesPageQuery> = ({
               key={character.id}
               character={character}
               onClick={() => {
-                router.push(pagesPath.characters._character(character.slug).battles.$url());
+                router.push(pagesPath.characters._slug(character.slug).battles.$url());
               }}
             />
           ))}

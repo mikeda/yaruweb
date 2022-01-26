@@ -40,7 +40,7 @@ interface Props {
 export const TournamentCard: React.FC<Props> = ({ tournament }) => {
   const classes = useStyles();
 
-  const href = pagesPath.tournaments._tournamentId(tournament.id).$url();
+  const href = pagesPath.tournaments._id(tournament.id).$url();
 
   return (
     <Card>

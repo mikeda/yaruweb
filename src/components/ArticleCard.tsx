@@ -23,7 +23,7 @@ export const ArticleCard: React.FC<Props> = ({ article }) => {
 
   return (
     <Card>
-      <CardActionArea href={url.format(pagesPath.articles._articleId(article.id).$url())}>
+      <CardActionArea href={url.format(pagesPath.articles._id(article.id).$url())}>
         <CardMedia className={classes.media} image={article.mainImageUrl || NO_IMAGE_URL} title={article.title} />
         <CardContent style={{ paddingBottom: 0 }}>
           <Typography variant="h6">{article.title}</Typography>

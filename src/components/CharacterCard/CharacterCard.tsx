@@ -50,8 +50,8 @@ export const CharacterCard: React.FC<Props> = ({ character, dashboard = false })
   const classes = useStyles();
 
   const href = dashboard
-    ? pagesPath.dashboard.characters._characterSlug(character.slug).edit.$url()
-    : pagesPath.characters._character(character.slug).$url();
+    ? pagesPath.dashboard.characters._slug(character.slug).edit.$url()
+    : pagesPath.characters._slug(character.slug).$url();
 
   return (
     <Card>
@@ -90,7 +90,7 @@ export const CharacterCard: React.FC<Props> = ({ character, dashboard = false })
         <CardActions disableSpacing>
           <Button
             color="primary"
-            href={format(pagesPath.dashboard.characters._characterSlug(character.slug).move_categories.$url())}
+            href={format(pagesPath.dashboard.characters._slug(character.slug).move_categories.$url())}
             component={Link}
           >
             コマンドリスト
@@ -98,7 +98,7 @@ export const CharacterCard: React.FC<Props> = ({ character, dashboard = false })
 
           <Button
             color="primary"
-            href={format(pagesPath.dashboard.characters._characterSlug(character.slug).combo_categories.$url())}
+            href={format(pagesPath.dashboard.characters._slug(character.slug).combo_categories.$url())}
             component={Link}
           >
             コンボ
