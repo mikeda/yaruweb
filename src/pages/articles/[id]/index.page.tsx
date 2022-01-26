@@ -67,14 +67,10 @@ export const getStaticProps: GetStaticProps<ArticlePageArticleQuery, Params> = a
   };
 };
 
-export const getStaticPaths: GetStaticPaths = async () => {
+export const getStaticPaths: GetStaticPaths<Params> = async () => {
   const data: ArticlePathsQuery = await fetchGraphql(ArticlePathsDocument);
 
-  const paths = data.allArticles.map(article => ({
-    params: {
-      articleId: article.id,
-    },
-  }));
+  const paths = data.allArticles.map(({ id }) => ({ params: { id } }));
 
   return { paths, fallback: 'blocking' };
 };
