@@ -163,7 +163,7 @@ const TournamentMenu = ({ tournament, onDelete }: TournamentRowProps) => {
       <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
         <MenuItem
           onClick={() => {
-            router.push(pagesPath.tournaments._id(tournament.id).$url());
+            router.push(pagesPath.dashboard.tournaments._id(tournament.id).$url());
             handleClose();
           }}
         >
