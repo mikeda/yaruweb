@@ -1,5 +1,4 @@
 import React from 'react';
-import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
@@ -8,7 +7,8 @@ import { useCurrentUser } from '@/hooks/useCurrentUser';
 import { currentUserState } from '@/states/currentUser';
 import { Avatar, IconButton, Link, Menu, MenuItem } from '@mui/material';
 import { pagesPath } from '@/lib/$path';
-import { format } from 'url';
+import { useRouter } from 'next/router';
+import { resolveUrlObject } from '@/lib';
 
 export const UserMenu: React.FC = () => {
   const { currentUser } = useCurrentUser();
@@ -17,7 +17,7 @@ export const UserMenu: React.FC = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   if (!currentUser) {
-    return <Link href={format(pagesPath.login.$url())}>ログイン</Link>;
+    return <Link href={resolveUrlObject(router, pagesPath.login.$url())}>ログイン</Link>;
   }
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {

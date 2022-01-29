@@ -34,11 +34,12 @@ import { useRouteParams } from './hooks';
 import { DashboardContent, DashboardBreadcrumbs, Command } from '@/components';
 import { VideoPlayer } from '@/components/MoveMedia/VideoPlayer';
 import { colors } from '@/colors';
-import { useRouter } from 'next/router';
 import { pagesPath } from '@/lib/$path';
-import { format } from 'url';
+import { useRouter } from 'next/router';
+import { resolveUrlObject } from '@/lib';
 
 const Page: React.FC = () => {
+  const router = useRouter();
   const { slug } = useRouteParams();
   const setLoading = useSetRecoilState(loadingState);
 
@@ -74,7 +75,10 @@ const Page: React.FC = () => {
           variant="contained"
           color="primary"
           startIcon={<AddIcon />}
-          href={format(pagesPath.dashboard.characters._slug(character.slug).move_categories.new.$url())}
+          href={resolveUrlObject(
+            router,
+            pagesPath.dashboard.characters._slug(character.slug).move_categories.new.$url(),
+          )}
         >
           カテゴリ追加
         </Button>
@@ -90,7 +94,7 @@ const Page: React.FC = () => {
             <div>
               <MovesNewButton moveCategoryId={moveCategory.id} />
               <IconButton
-                href={format(pagesPath.dashboard.move_categories._id(moveCategory.id).edit.$url())}
+                href={resolveUrlObject(router, pagesPath.dashboard.move_categories._id(moveCategory.id).edit.$url())}
                 size="large"
               >
                 <Edit />
@@ -144,6 +148,7 @@ interface MoveRowProps {
 }
 
 const MoveRow = ({ move, afterDelete }: MoveRowProps) => {
+  const router = useRouter();
   const [destroy, { loading }] = useDeleteMoveMutation({
     variables: { moveId: move.id },
     onCompleted: data => {
@@ -169,11 +174,11 @@ const MoveRow = ({ move, afterDelete }: MoveRowProps) => {
       <TableCell align="right" scope="row">
         <VideoButton move={move} />
 
-        <IconButton href={format(pagesPath.dashboard.moves._id(move.id).edit.$url())} size="large">
+        <IconButton href={resolveUrlObject(router, pagesPath.dashboard.moves._id(move.id).edit.$url())} size="large">
           <Edit />
         </IconButton>
 
-        <IconButton href={format(pagesPath.dashboard.moves._id(move.id).copy.$url())} size="large">
+        <IconButton href={resolveUrlObject(router, pagesPath.dashboard.moves._id(move.id).copy.$url())} size="large">
           <ContentCopyIcon />
         </IconButton>
 

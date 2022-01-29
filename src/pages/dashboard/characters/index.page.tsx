@@ -7,26 +7,31 @@ import { Add as AddIcon } from '@mui/icons-material';
 import { CharacterCard, DashboardBreadcrumbs } from '@/components';
 import { useDashboardCharactersPageQuery } from '@/lib/graphql/types';
 import { pagesPath } from '@/lib/$path';
-import { format } from 'url';
+import { useRouter } from 'next/router';
+import { resolveUrlObject } from '@/lib';
 
-const Page: React.FC = () => (
-  <DashboardContent
-    title="キャラクター"
-    breadcrumb={<DashboardBreadcrumbs to="characters" />}
-    actions={
-      <Button
-        variant="contained"
-        color="primary"
-        startIcon={<AddIcon />}
-        href={format(pagesPath.dashboard.characters.new.$url())}
-      >
-        作成する
-      </Button>
-    }
-  >
-    <CharacterList />
-  </DashboardContent>
-);
+const Page: React.FC = () => {
+  const router = useRouter();
+
+  return (
+    <DashboardContent
+      title="キャラクター"
+      breadcrumb={<DashboardBreadcrumbs to="characters" />}
+      actions={
+        <Button
+          variant="contained"
+          color="primary"
+          startIcon={<AddIcon />}
+          href={resolveUrlObject(router, pagesPath.dashboard.characters.new.$url())}
+        >
+          作成する
+        </Button>
+      }
+    >
+      <CharacterList />
+    </DashboardContent>
+  );
+};
 
 const CharacterList: React.FC = () => {
   const { data, loading, error } = useDashboardCharactersPageQuery();

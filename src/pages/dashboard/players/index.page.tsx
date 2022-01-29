@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react';
-import { useRouter } from 'next/router';
 
 import { DashboardContent, DashboardBreadcrumbs, SearchWord } from '@/components';
 import {
@@ -28,7 +27,8 @@ import {
 import { toast } from 'react-toastify';
 import { DEFAULT_AVATAR_URL } from '@/lib/Assets';
 import { pagesPath } from '@/lib/$path';
-import { format } from 'url';
+import { useRouter } from 'next/router';
+import { resolveUrlObject } from '@/lib';
 
 const Page: React.FC = () => {
   const setLoading = useSetRecoilState(loadingState);
@@ -120,6 +120,7 @@ interface PlayerRowProps {
 }
 
 const PlayerRow = ({ player, onDelete }: PlayerRowProps) => {
+  const router = useRouter();
   return (
     <TableRow>
       <TableCell scope="row" width={64}>
@@ -129,7 +130,10 @@ const PlayerRow = ({ player, onDelete }: PlayerRowProps) => {
         <Typography>{player.name}</Typography>
       </TableCell>
       <TableCell align="right" scope="row">
-        <Button variant="outlined" href={format(pagesPath.dashboard.players._slug(player.slug).edit.$url())}>
+        <Button
+          variant="outlined"
+          href={resolveUrlObject(router, pagesPath.dashboard.players._slug(player.slug).edit.$url())}
+        >
           編集
         </Button>
         <PlayerMenu player={player} onDelete={onDelete} />

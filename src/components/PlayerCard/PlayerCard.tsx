@@ -18,7 +18,8 @@ import { NO_IMAGE_URL } from '@/lib/Assets';
 import { EmojiEvents, YouTube } from '@mui/icons-material';
 import { colors } from '@/colors';
 import { pagesPath } from '@/lib/$path';
-import { format } from 'url';
+import { useRouter } from 'next/router';
+import { resolveUrlObject } from '@/lib';
 
 const useStyles = makeStyles({
   root: {
@@ -45,10 +46,14 @@ interface Props {
 
 export const PlayerCard: React.FC<Props> = ({ player }) => {
   const classes = useStyles();
+  const router = useRouter();
 
   return (
     <Card>
-      <CardActionArea href={format(pagesPath.players._slug(player.slug).$url())} className={classes.root}>
+      <CardActionArea
+        href={resolveUrlObject(router, pagesPath.players._slug(player.slug).$url())}
+        className={classes.root}
+      >
         <CardMedia image={player.avatarUrl || NO_IMAGE_URL} className={classes.media} />
 
         <CardContent className={classes.content}>
