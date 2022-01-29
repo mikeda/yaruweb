@@ -31,9 +31,11 @@ import { DashboardContent, DashboardBreadcrumbs, Command } from '@/components';
 import { VideoPlayer } from '@/components/MoveMedia/VideoPlayer';
 import { colors } from '@/colors';
 import { pagesPath } from '@/lib/$path';
-import { format } from 'url';
+import { useRouter } from 'next/router';
+import { resolveUrlObject } from '@/lib';
 
 const Page: React.FC = () => {
+  const router = useRouter();
   const { slug } = useRouteParams();
   const setLoading = useSetRecoilState(loadingState);
 
@@ -69,7 +71,10 @@ const Page: React.FC = () => {
           variant="contained"
           color="primary"
           startIcon={<AddIcon />}
-          href={format(pagesPath.dashboard.characters._slug(character.slug).combo_categories.new.$url())}
+          href={resolveUrlObject(
+            router,
+            pagesPath.dashboard.characters._slug(character.slug).combo_categories.new.$url(),
+          )}
         >
           カテゴリ追加
         </Button>
@@ -84,14 +89,17 @@ const Page: React.FC = () => {
 
             <div>
               <IconButton
-                href={format(pagesPath.dashboard.combo_categories._id(comboCategory.id).combos.new.$url())}
+                href={resolveUrlObject(
+                  router,
+                  pagesPath.dashboard.combo_categories._id(comboCategory.id).combos.new.$url(),
+                )}
                 size="large"
               >
                 <Add />
               </IconButton>
 
               <IconButton
-                href={format(pagesPath.dashboard.combo_categories._id(comboCategory.id).edit.$url())}
+                href={resolveUrlObject(router, pagesPath.dashboard.combo_categories._id(comboCategory.id).edit.$url())}
                 size="large"
               >
                 <Edit />
@@ -145,6 +153,7 @@ interface ComboRowProps {
 }
 
 const ComboRow = ({ combo, afterDelete }: ComboRowProps) => {
+  const router = useRouter();
   const [destroy, { loading }] = useDeleteComboMutation({
     variables: { comboId: combo.id },
     onCompleted: data => {
@@ -168,7 +177,7 @@ const ComboRow = ({ combo, afterDelete }: ComboRowProps) => {
       <TableCell align="right" scope="row">
         <VideoButton combo={combo} />
 
-        <IconButton href={format(pagesPath.dashboard.combos._id(combo.id).edit.$url())} size="large">
+        <IconButton href={resolveUrlObject(router, pagesPath.dashboard.combos._id(combo.id).edit.$url())} size="large">
           <Edit />
         </IconButton>
 

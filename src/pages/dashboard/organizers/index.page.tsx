@@ -26,9 +26,11 @@ import {
 import { toast } from 'react-toastify';
 import { DEFAULT_AVATAR_URL } from '@/lib/Assets';
 import { pagesPath } from '@/lib/$path';
-import { format } from 'url';
+import { useRouter } from 'next/router';
+import { resolveUrlObject } from '@/lib';
 
 const Page: React.FC = () => {
+  const router = useRouter();
   const setLoading = useSetRecoilState(loadingState);
   const { data, loading, fetchMore, updateQuery } = useDashboardOrganizersPageOrganizersQuery();
   const [destroy, { loading: deleteLoading }] = useDashboardOrganizersPageDeleteMutation({
@@ -60,7 +62,7 @@ const Page: React.FC = () => {
           variant="contained"
           color="primary"
           startIcon={<AddIcon />}
-          href={format(pagesPath.dashboard.organizers.new.$url())}
+          href={resolveUrlObject(router, pagesPath.dashboard.organizers.new.$url())}
         >
           作成する
         </Button>
@@ -118,6 +120,7 @@ interface OrganizerRowProps {
 }
 
 const OrganizerRow = ({ organizer, onDelete }: OrganizerRowProps) => {
+  const router = useRouter();
   return (
     <TableRow>
       <TableCell scope="row" width={64}>
@@ -127,7 +130,10 @@ const OrganizerRow = ({ organizer, onDelete }: OrganizerRowProps) => {
         <Typography>{organizer.name}</Typography>
       </TableCell>
       <TableCell align="right" scope="row">
-        <Button variant="outlined" href={format(pagesPath.dashboard.organizers._slug(organizer.slug).edit.$url())}>
+        <Button
+          variant="outlined"
+          href={resolveUrlObject(router, pagesPath.dashboard.organizers._slug(organizer.slug).edit.$url())}
+        >
           編集
         </Button>
         <OrganizerMenu organizer={organizer} onDelete={onDelete} />

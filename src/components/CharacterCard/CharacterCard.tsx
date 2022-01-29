@@ -20,7 +20,8 @@ import { Link } from '../Link';
 import { Public, YouTube, SportsKabaddi } from '@mui/icons-material';
 import { colors } from '@/colors';
 import { pagesPath } from '@/lib/$path';
-import { format } from 'url';
+import { useRouter } from 'next/router';
+import { resolveUrlObject } from '@/lib';
 
 const useStyles = makeStyles({
   root: {
@@ -48,6 +49,7 @@ interface Props {
 
 export const CharacterCard: React.FC<Props> = ({ character, dashboard = false }) => {
   const classes = useStyles();
+  const router = useRouter();
 
   const href = dashboard
     ? pagesPath.dashboard.characters._slug(character.slug).edit.$url()
@@ -90,7 +92,7 @@ export const CharacterCard: React.FC<Props> = ({ character, dashboard = false })
         <CardActions disableSpacing>
           <Button
             color="primary"
-            href={format(pagesPath.dashboard.characters._slug(character.slug).move_categories.$url())}
+            href={resolveUrlObject(router, pagesPath.dashboard.characters._slug(character.slug).move_categories.$url())}
             component={Link}
           >
             コマンドリスト
@@ -98,7 +100,10 @@ export const CharacterCard: React.FC<Props> = ({ character, dashboard = false })
 
           <Button
             color="primary"
-            href={format(pagesPath.dashboard.characters._slug(character.slug).combo_categories.$url())}
+            href={resolveUrlObject(
+              router,
+              pagesPath.dashboard.characters._slug(character.slug).combo_categories.$url(),
+            )}
             component={Link}
           >
             コンボ

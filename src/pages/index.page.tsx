@@ -14,7 +14,8 @@ import { TournamentCard } from '@/components/TournamentCard';
 import { PlayerCard } from '@/components/PlayerCard';
 import theme from '@/theme';
 import { pagesPath } from '@/lib/$path';
-import { format } from 'url';
+import { useRouter } from 'next/router';
+import { resolveUrlObject } from '@/lib';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -31,6 +32,7 @@ const useStyles = makeStyles(() =>
 
 const Page: React.FC<TopPageQuery> = ({ tournaments, battles, players, characters, articles }) => {
   const classes = useStyles();
+  const router = useRouter();
 
   return (
     <Content activeTab="top">
@@ -54,7 +56,7 @@ const Page: React.FC<TopPageQuery> = ({ tournaments, battles, players, character
         </Grid>
 
         <div className={classes.sectionFooter}>
-          <Button href={format(pagesPath.tournaments.$url())} component={LinkComponent}>
+          <Button href={resolveUrlObject(router, pagesPath.tournaments.$url())} component={LinkComponent}>
             もっとみる
           </Button>
         </div>
@@ -74,7 +76,7 @@ const Page: React.FC<TopPageQuery> = ({ tournaments, battles, players, character
         </Paper>
 
         <div className={classes.sectionFooter}>
-          <Button href={format(pagesPath.battles.$url())} component={LinkComponent}>
+          <Button href={resolveUrlObject(router, pagesPath.battles.$url())} component={LinkComponent}>
             もっとみる
           </Button>
         </div>
@@ -94,7 +96,7 @@ const Page: React.FC<TopPageQuery> = ({ tournaments, battles, players, character
         </Grid>
 
         <div className={classes.sectionFooter}>
-          <Button href={format(pagesPath.players.$url())} component={LinkComponent}>
+          <Button href={resolveUrlObject(router, pagesPath.players.$url())} component={LinkComponent}>
             もっとみる
           </Button>
         </div>
@@ -114,7 +116,7 @@ const Page: React.FC<TopPageQuery> = ({ tournaments, battles, players, character
         </Grid>
 
         <div className={classes.sectionFooter}>
-          <Button href={format(pagesPath.characters.$url())} component={LinkComponent}>
+          <Button href={resolveUrlObject(router, pagesPath.characters.$url())} component={LinkComponent}>
             もっとみる
           </Button>
         </div>
@@ -134,7 +136,7 @@ const Page: React.FC<TopPageQuery> = ({ tournaments, battles, players, character
         </Grid>
 
         <div className={classes.sectionFooter}>
-          <Button href={format(pagesPath.articles.$url())} component={LinkComponent}>
+          <Button href={resolveUrlObject(router, pagesPath.articles.$url())} component={LinkComponent}>
             もっとみる
           </Button>
         </div>

@@ -25,12 +25,13 @@ import {
 } from '@/lib/graphql/types';
 import { toast } from 'react-toastify';
 import { NO_IMAGE_URL } from '@/lib/Assets';
-import { useRouter } from 'next/router';
 import dayjs from '@/lib/dayjs';
 import { pagesPath } from '@/lib/$path';
-import { format } from 'url';
+import { useRouter } from 'next/router';
+import { resolveUrlObject } from '@/lib';
 
 const Page: React.FC = () => {
+  const router = useRouter();
   const setLoading = useSetRecoilState(loadingState);
   const { data, loading, fetchMore, updateQuery } = useDashboardTournamentsPageTournamentsQuery();
   const [destroy, { loading: deleteLoading }] = useDeleteTournamentMutation({
@@ -62,7 +63,7 @@ const Page: React.FC = () => {
           variant="contained"
           color="primary"
           startIcon={<AddIcon />}
-          href={format(pagesPath.dashboard.tournaments.new.$url())}
+          href={resolveUrlObject(router, pagesPath.dashboard.tournaments.new.$url())}
         >
           登録する
         </Button>
@@ -120,6 +121,7 @@ interface TournamentRowProps {
 }
 
 const TournamentRow = ({ tournament, onDelete }: TournamentRowProps) => {
+  const router = useRouter();
   return (
     <TableRow>
       <TableCell scope="row" width={80}>
@@ -133,7 +135,10 @@ const TournamentRow = ({ tournament, onDelete }: TournamentRowProps) => {
         <Typography variant="body2">{dayjs(tournament.startsAt).format('YYYY/M/D H:mm')}</Typography>
       </TableCell>
       <TableCell align="right" scope="row">
-        <Button variant="outlined" href={format(pagesPath.dashboard.tournaments._id(tournament.id).edit.$url())}>
+        <Button
+          variant="outlined"
+          href={resolveUrlObject(router, pagesPath.dashboard.tournaments._id(tournament.id).edit.$url())}
+        >
           編集
         </Button>
         <TournamentMenu tournament={tournament} onDelete={onDelete} />

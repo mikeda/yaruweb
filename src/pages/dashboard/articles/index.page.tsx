@@ -30,9 +30,11 @@ import {
 import { ArticleStatusText } from '@/lib/graphql/enum_texts';
 import { Add, MoreVert } from '@mui/icons-material';
 import { pagesPath } from '@/lib/$path';
-import { format } from 'url';
+import { useRouter } from 'next/router';
+import { resolveUrlObject } from '@/lib';
 
 const Page: React.FC = () => {
+  const router = useRouter();
   const setLoading = useSetRecoilState(loadingState);
   const { data, loading, fetchMore, updateQuery } = useDashboardArticlesPageArticlesQuery();
   const [publish, { loading: publishLoading }] = useDashboardArticlesPagePublishMutation({
@@ -74,7 +76,7 @@ const Page: React.FC = () => {
           variant="contained"
           color="primary"
           startIcon={<Add />}
-          href={format(pagesPath.dashboard.articles.new.$url())}
+          href={resolveUrlObject(router, pagesPath.dashboard.articles.new.$url())}
         >
           記事を書く
         </Button>
@@ -136,6 +138,8 @@ interface ArticleRowprops {
 }
 
 const ArticleRow = ({ article, onPublish, onStop, onDelete }: ArticleRowprops) => {
+  const router = useRouter();
+
   return (
     <TableRow>
       <TableCell component="th" scope="row">
@@ -143,7 +147,10 @@ const ArticleRow = ({ article, onPublish, onStop, onDelete }: ArticleRowprops) =
         <Typography variant="caption">{ArticleStatusText[article.status]}</Typography>
       </TableCell>
       <TableCell align="right" scope="row">
-        <Button variant="outlined" href={format(pagesPath.dashboard.articles._id(article.id).edit.$url())}>
+        <Button
+          variant="outlined"
+          href={resolveUrlObject(router, pagesPath.dashboard.articles._id(article.id).edit.$url())}
+        >
           編集
         </Button>
         <ArticleMenu article={article} onPublish={onPublish} onStop={onStop} onDelete={onDelete} />
