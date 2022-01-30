@@ -6,24 +6,29 @@ import {
   CharacterCombosPageQuery,
   CharacterPathsDocument,
   CharacterPathsQuery,
+  ComboMediaFragment,
 } from '@/lib/graphql/types';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
-import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableRow, Typography } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
+import {
+  Box,
+  Collapse,
+  Divider,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  Paper,
+  Stack,
+  Typography,
+} from '@mui/material';
 import { Profile } from '../components/Profile';
 import { Tabs } from '../components/Tabs';
 import { Content, Head, Breadcrumbs, Command } from '@/components';
 import { ParsedUrlQuery } from 'querystring';
-
-const useStyles = makeStyles({
-  table: {
-    minWidth: 640,
-  },
-});
+import { ExpandLess, ExpandMore } from '@mui/icons-material';
+import { VideoPlayer } from '@/components/MoveMedia/VideoPlayer';
 
 const Page: React.FC<CharacterCombosPageQuery> = ({ character }) => {
-  const classes = useStyles();
-
   return (
     <Content activeTab="characters" breadcrumb={<Breadcrumbs to="characterCombos" character={character} />}>
       <Head title={`${character.longName}のコンボ`} />
@@ -34,33 +39,65 @@ const Page: React.FC<CharacterCombosPageQuery> = ({ character }) => {
         <Tabs character={character} activeTab="combos" />
       </Box>
 
-      {character.comboCategories.map(comboCategory => (
-        <Box key={comboCategory.id} mt={4}>
-          <Typography variant="h3" gutterBottom>
-            {comboCategory.name}
-          </Typography>
+      {character.comboCategories.map(comboCategory => {
+        return (
+          <Box key={comboCategory.id} mt={4}>
+            <Typography variant="h3" gutterBottom>
+              {comboCategory.name}
+            </Typography>
 
-          <TableContainer component={Paper}>
-            <Table className={classes.table} size="small">
-              <TableBody>
-                {comboCategory.combos.map(combo => (
-                  <TableRow key={combo.id}>
-                    <TableCell>
-                      <Command command={combo.command} />
-                      {combo.note && (
-                        <Typography variant="caption" component="p">
-                          {combo.note}
-                        </Typography>
-                      )}
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </Box>
-      ))}
+            {comboCategory.combos.length > 0 && (
+              <Paper>
+                <List>
+                  {comboCategory.combos.map((combo, i) => (
+                    <ComboListItem key={combo.id} combo={combo} first={i === 0} />
+                  ))}
+                </List>
+              </Paper>
+            )}
+          </Box>
+        );
+      })}
     </Content>
+  );
+};
+
+const ComboListItem: React.FC<{ combo: ComboMediaFragment; first: boolean }> = ({ combo, first }) => {
+  const [open, setOpen] = React.useState(false);
+  const handleClick = () => {
+    setOpen(!open);
+  };
+
+  return (
+    <>
+      {!first && <Divider />}
+
+      <ListItemButton onClick={handleClick}>
+        <ListItemText>
+          <Box>
+            <Command command={combo.command} />
+          </Box>
+        </ListItemText>
+
+        {open ? <ExpandLess /> : <ExpandMore />}
+      </ListItemButton>
+
+      <Collapse in={open} timeout="auto" unmountOnExit>
+        <ListItem>
+          <Stack spacing={2} sx={{ paddingBottom: 1 }}>
+            {combo.comboVideo && (
+              <VideoPlayer src={combo.comboVideo.m3u8Url} thumnailUrl={combo.comboVideo.thumbnailUrl} />
+            )}
+
+            {combo.note && (
+              <Typography variant="body2" sx={{ whiteSpace: 'pre-line' }}>
+                {combo.note}
+              </Typography>
+            )}
+          </Stack>
+        </ListItem>
+      </Collapse>
+    </>
   );
 };
 
