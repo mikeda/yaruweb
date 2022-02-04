@@ -6880,10 +6880,10 @@ slate-history@^0.66.0:
   dependencies:
     is-plain-object "^5.0.0"
 
-slate-react@^0.72.6:
-  version "0.72.6"
-  resolved "https://registry.yarnpkg.com/slate-react/-/slate-react-0.72.6.tgz#05829d1d53e4332c497e8302ab0a3fb0898f4528"
-  integrity sha512-WIKyWsjrTeQLxLCQWk40edFOrl0vUu4owFVC2MbpjizSiv3RjtIYeYex6ExWFAuSU3Uh/s9A5SphIZbNpiUePQ==
+slate-react@^0.72.8:
+  version "0.72.8"
+  resolved "https://registry.yarnpkg.com/slate-react/-/slate-react-0.72.8.tgz#b6b5d88ce8f89ba26965066b628757c60866cb23"
+  integrity sha512-asgRV/msGqfzm6cPxhrRo2Iuj5RhoDvicfkwpVD63b4K4yfPpL7a8sx0zO5WY7gqggBLjrYnNth6mAbdlHPzMg==
   dependencies:
     "@types/is-hotkey" "^0.1.1"
     "@types/lodash" "^4.14.149"
