@@ -154,6 +154,9 @@ export const pagesPath = {
   login: {
     $url: (url?: { hash?: string }) => ({ pathname: '/login' as const, hash: url?.hash })
   },
+  nagenuke: {
+    $url: (url?: { hash?: string }) => ({ pathname: '/nagenuke' as const, hash: url?.hash })
+  },
   players: {
     _slug: (slug: string | number) => ({
       battles: {
