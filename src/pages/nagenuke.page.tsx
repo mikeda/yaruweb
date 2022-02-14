@@ -4,7 +4,7 @@ import { Button, Stack } from '@mui/material';
 
 type ThrowType = 'LP' | 'RP' | 'WP';
 interface State {
-  type: ThrowType;
+  type?: ThrowType;
   videoEnded: boolean;
   selected: ThrowType | null;
   success: number;
@@ -18,10 +18,7 @@ const videos = {
 };
 
 const Page: React.FC = () => {
-  //const gif = new Image();
-  //gif.src = '/nagenuke/twitter-button.gif';
   const [state, setState] = useState<State>({
-    type: 'LP',
     videoEnded: false,
     selected: null,
     success: 0,
@@ -61,7 +58,7 @@ const Page: React.FC = () => {
       <Head title="投げ抜け練習" description="鉄拳7の投げ抜け練習ツールです。" />
 
       <div style={{ height: 270 }}>
-        {!state.videoEnded && (
+        {state.type && !state.videoEnded && (
           <video
             src={videos[state.type]}
             autoPlay
