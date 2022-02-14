@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { Head, Content } from '@/components';
 import { Button, Stack } from '@mui/material';
 
@@ -28,8 +28,12 @@ const Page: React.FC = () => {
     total: 0,
   });
 
-  useEffect(() => {
-    const interval = setInterval(() => {
+  const intervalRef = useRef<NodeJS.Timer>();
+  const start = useCallback(() => {
+    if (intervalRef.current) {
+      return;
+    }
+    intervalRef.current = setInterval(() => {
       setState(prev => ({
         type: ['LP', 'RP', 'WP'][Math.floor(Math.random() * 3)] as ThrowType,
         videoEnded: false,
@@ -38,16 +42,15 @@ const Page: React.FC = () => {
         total: prev.total + 1,
       }));
     }, 2500);
-    return () => clearInterval(interval);
   }, []);
 
-  const check = (selected: ThrowType) => {
-    //setState(prev => ({
-    //  type: ['LP', 'RP', 'WP'][Math.floor(Math.random() * 3)] as ThrowType,
-    //  success: selected === prev.type ? prev.success + 1 : prev.success,
-    //  total: prev.total + 1,
-    //}));
-  };
+  const stop = useCallback(() => {
+    if (!intervalRef.current) {
+      return;
+    }
+    clearInterval(intervalRef.current);
+    intervalRef.current = undefined;
+  }, []);
 
   const selectLP = () => setState(prev => ({ ...prev, selected: 'LP' }));
   const selectRP = () => setState(prev => ({ ...prev, selected: 'RP' }));
@@ -55,7 +58,7 @@ const Page: React.FC = () => {
 
   return (
     <Content activeTab="top">
-      <Head title="鉄拳やろうよ.com" description="鉄拳やろうよ.comは格闘ゲーム「鉄拳7」を楽しむためのサイトです。" />
+      <Head title="投げ抜け練習" description="鉄拳7の投げ抜け練習ツールです。" />
 
       <div style={{ height: 270 }}>
         {!state.videoEnded && (
@@ -71,15 +74,21 @@ const Page: React.FC = () => {
         )}
       </div>
 
-      <div>{state.type}</div>
       <div>成功 : {state.success}</div>
       <div>失敗 : {state.total - state.success}</div>
-      <Button>Start</Button>
 
-      <Stack direction="row">
-        <Button onClick={selectLP}>LP</Button>
-        <Button onClick={selectRP}>RP</Button>
-        <Button onClick={selectWP}>WP</Button>
+      {intervalRef.current ? <Button onClick={stop}>Stop</Button> : <Button onClick={start}>Start</Button>}
+
+      <Stack direction="row" spacing={1}>
+        <Button onClick={selectLP} size="large" variant="outlined">
+          LP
+        </Button>
+        <Button onClick={selectRP} size="large" variant="outlined">
+          RP
+        </Button>
+        <Button onClick={selectWP} size="large" variant="outlined">
+          WP
+        </Button>
       </Stack>
     </Content>
   );
