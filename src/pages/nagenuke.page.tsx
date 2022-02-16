@@ -1,12 +1,12 @@
-import React, { useCallback, useRef, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Head, Content } from '@/components';
-import { Button, Stack } from '@mui/material';
+import { Box, Button, Stack, Typography } from '@mui/material';
 
 type ThrowType = 'LP' | 'RP' | 'WP';
 interface State {
-  type?: ThrowType;
-  videoEnded: boolean;
-  selected: ThrowType | null;
+  currentType: ThrowType;
+  started: boolean;
+  playing: boolean;
   success: number;
   total: number;
 }
@@ -17,75 +17,114 @@ const videos = {
   WP: 'https://d2ybk292wkc2jl.cloudfront.net/site/nagenuke/wp_test.mp4',
 };
 
+const pickType = () => ['LP', 'RP', 'WP'][Math.floor(Math.random() * 3)] as ThrowType;
+const initState = () => ({
+  currentType: pickType(),
+  started: false,
+  playing: false,
+  success: 0,
+  total: 0,
+});
+
 const Page: React.FC = () => {
-  const [state, setState] = useState<State>({
-    videoEnded: false,
-    selected: null,
-    success: 0,
-    total: 0,
-  });
+  const [state, setState] = useState<State>(initState);
 
   const intervalRef = useRef<NodeJS.Timer>();
-  const start = useCallback(() => {
-    if (intervalRef.current) {
-      return;
-    }
-    intervalRef.current = setInterval(() => {
-      setState(prev => ({
-        type: ['LP', 'RP', 'WP'][Math.floor(Math.random() * 3)] as ThrowType,
-        videoEnded: false,
-        selected: null,
-        success: prev.selected === prev.type ? prev.success + 1 : prev.success,
-        total: prev.total + 1,
-      }));
-    }, 2500);
-  }, []);
+  // クリック時に再renderさせたくないのでRefにする
+  const selectedTypeRef = useRef<ThrowType>();
 
-  const stop = useCallback(() => {
-    if (!intervalRef.current) {
-      return;
-    }
+  const clear = () => {
+    if (!intervalRef.current) return;
+
     clearInterval(intervalRef.current);
     intervalRef.current = undefined;
-  }, []);
+    setState(initState);
+  };
 
-  const selectLP = () => setState(prev => ({ ...prev, selected: 'LP' }));
-  const selectRP = () => setState(prev => ({ ...prev, selected: 'RP' }));
-  const selectWP = () => setState(prev => ({ ...prev, selected: 'WP' }));
+  const videoEnd = () => {
+    setState(prev => ({ ...prev, playing: false }));
+  };
+
+  const next = () => {
+    setState(prev => ({
+      ...prev,
+      currentType: pickType(),
+      playing: true,
+      success: selectedTypeRef.current === prev.currentType ? prev.success + 1 : prev.success,
+      total: prev.total + 1,
+    }));
+  };
+
+  const start = () => {
+    if (intervalRef.current) return;
+
+    setState(prev => ({ ...prev, started: true, playing: true }));
+    intervalRef.current = setInterval(next, 2500);
+  };
+
+  const selectLP = () => (selectedTypeRef.current = 'LP');
+  const selectRP = () => (selectedTypeRef.current = 'RP');
+  const selectWP = () => (selectedTypeRef.current = 'WP');
 
   return (
     <Content activeTab="top">
       <Head title="投げ抜け練習" description="鉄拳7の投げ抜け練習ツールです。" />
 
-      <div style={{ height: 270 }}>
-        {state.type && !state.videoEnded && (
-          <video
-            src={videos[state.type]}
-            autoPlay
-            muted
-            playsInline
-            onEnded={() => {
-              setState(prev => ({ ...prev, videoEnded: true }));
-            }}
-          />
-        )}
-      </div>
+      <Stack spacing={2} alignItems="center" maxWidth={480}>
+        <div style={{ height: 270 }}>
+          {state.playing ? (
+            <video src={videos[state.currentType]} autoPlay muted playsInline onEnded={videoEnd} />
+          ) : (
+            !state.started && <img src="https://d2ybk292wkc2jl.cloudfront.net/site/nagenuke/thumb.jpg" />
+          )}
+        </div>
 
-      <div>成功 : {state.success}</div>
-      <div>失敗 : {state.total - state.success}</div>
+        <Stack direction="row" spacing={1}>
+          <Button onClick={selectLP} size="large" variant="outlined">
+            LP
+          </Button>
+          <Button onClick={selectRP} size="large" variant="outlined">
+            RP
+          </Button>
+          <Button onClick={selectWP} size="large" variant="outlined">
+            WP
+          </Button>
+        </Stack>
 
-      {intervalRef.current ? <Button onClick={stop}>Stop</Button> : <Button onClick={start}>Start</Button>}
+        <div>
+          成功 {state.success} / {state.total}
+        </div>
 
-      <Stack direction="row" spacing={1}>
-        <Button onClick={selectLP} size="large" variant="outlined">
-          LP
-        </Button>
-        <Button onClick={selectRP} size="large" variant="outlined">
-          RP
-        </Button>
-        <Button onClick={selectWP} size="large" variant="outlined">
-          WP
-        </Button>
+        <Stack direction="row" spacing={1} justifyContent="center">
+          {intervalRef.current ? (
+            <Button onClick={clear} size="large">
+              終了
+            </Button>
+          ) : (
+            <Button onClick={start} size="large" variant="contained">
+              開始
+            </Button>
+          )}
+        </Stack>
+      </Stack>
+
+      <Stack spacing={2} maxWidth={480} pt={2}>
+        <Typography variant="h2">モーション確認</Typography>
+
+        <Box pt={1}>
+          <Typography variant="h4">LP投げ</Typography>
+          <video src="https://d2ybk292wkc2jl.cloudfront.net/site/nagenuke/lp_test.mp4" controls muted />
+        </Box>
+
+        <Box pt={1}>
+          <Typography variant="h4">RP投げ</Typography>
+          <video src="https://d2ybk292wkc2jl.cloudfront.net/site/nagenuke/rp_test.mp4" controls muted />
+        </Box>
+
+        <Box pt={1}>
+          <Typography variant="h4">WP投げ</Typography>
+          <video src="https://d2ybk292wkc2jl.cloudfront.net/site/nagenuke/wp_test.mp4" controls muted />
+        </Box>
       </Stack>
     </Content>
   );
