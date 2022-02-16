@@ -70,14 +70,12 @@ const Page: React.FC = () => {
     <Content activeTab="top">
       <Head title="投げ抜け練習" description="鉄拳7の投げ抜け練習ツールです。" />
 
-      <Stack spacing={2} alignItems="center" maxWidth={480}>
-        <div style={{ height: 270 }}>
-          {state.playing ? (
-            <video src={videos[state.currentType]} autoPlay muted playsInline onEnded={videoEnd} />
-          ) : (
-            !state.started && <img src="https://d2ybk292wkc2jl.cloudfront.net/site/nagenuke/thumb.jpg" />
-          )}
-        </div>
+      <Stack spacing={2} alignItems="center">
+        {state.playing ? (
+          <video src={videos[state.currentType]} autoPlay muted playsInline onEnded={videoEnd} width="100%" />
+        ) : (
+          !state.started && <img src="https://d2ybk292wkc2jl.cloudfront.net/site/nagenuke/thumb.jpg" width="100%" />
+        )}
 
         <Stack direction="row" spacing={1}>
           <Button onClick={selectLP} size="large" variant="outlined">
@@ -108,22 +106,40 @@ const Page: React.FC = () => {
         </Stack>
       </Stack>
 
-      <Stack spacing={2} maxWidth={480} pt={2}>
+      <Stack spacing={2} pt={2}>
         <Typography variant="h2">モーション確認</Typography>
 
         <Box pt={1}>
           <Typography variant="h4">LP投げ</Typography>
-          <video src="https://d2ybk292wkc2jl.cloudfront.net/site/nagenuke/lp_test.mp4" controls muted />
+          <video
+            src="https://d2ybk292wkc2jl.cloudfront.net/site/nagenuke/lp_test.mp4"
+            controls
+            muted
+            playsInline
+            width="100%"
+          />
         </Box>
 
         <Box pt={1}>
           <Typography variant="h4">RP投げ</Typography>
-          <video src="https://d2ybk292wkc2jl.cloudfront.net/site/nagenuke/rp_test.mp4" controls muted />
+          <video
+            src="https://d2ybk292wkc2jl.cloudfront.net/site/nagenuke/rp_test.mp4"
+            controls
+            muted
+            playsInline
+            width="100%"
+          />
         </Box>
 
         <Box pt={1}>
           <Typography variant="h4">WP投げ</Typography>
-          <video src="https://d2ybk292wkc2jl.cloudfront.net/site/nagenuke/wp_test.mp4" controls muted />
+          <video
+            src="https://d2ybk292wkc2jl.cloudfront.net/site/nagenuke/wp_test.mp4"
+            controls
+            muted
+            playsInline
+            width="100%"
+          />
         </Box>
       </Stack>
     </Content>
