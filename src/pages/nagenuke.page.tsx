@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { Head, Content } from '@/components';
 import { Box, Button, Stack, Typography } from '@mui/material';
+import { styled } from '@mui/material/styles';
 
 type ThrowType = 'LP' | 'RP' | 'WP';
 interface State {
@@ -25,6 +26,12 @@ const initState = () => ({
   success: 0,
   total: 0,
 });
+
+const BlankVideo = styled('div')(() => ({
+  backgroundColor: '#999',
+  width: '100%',
+  paddingTop: '56.25%',
+}));
 
 const Page: React.FC = () => {
   const [state, setState] = useState<State>(initState);
@@ -71,10 +78,14 @@ const Page: React.FC = () => {
       <Head title="投げ抜け練習" description="鉄拳7の投げ抜け練習ツールです。" />
 
       <Stack spacing={2} alignItems="center">
-        {state.playing ? (
-          <video src={videos[state.currentType]} autoPlay muted playsInline onEnded={videoEnd} width="100%" />
+        {state.started ? (
+          state.playing ? (
+            <video src={videos[state.currentType]} autoPlay muted playsInline onEnded={videoEnd} width="100%" />
+          ) : (
+            <BlankVideo />
+          )
         ) : (
-          !state.started && <img src="https://d2ybk292wkc2jl.cloudfront.net/site/nagenuke/thumb.jpg" width="100%" />
+          <img src="https://d2ybk292wkc2jl.cloudfront.net/site/nagenuke/thumb.jpg" width="100%" />
         )}
 
         <Stack direction="row" spacing={1}>
