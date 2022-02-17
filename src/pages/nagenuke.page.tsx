@@ -8,8 +8,8 @@ interface State {
   currentType: ThrowType;
   started: boolean;
   playing: boolean;
-  success: number;
-  total: number;
+  successCount: number;
+  totalCount: number;
 }
 
 const videos = {
@@ -23,14 +23,14 @@ const initState = () => ({
   currentType: pickType(),
   started: false,
   playing: false,
-  success: 0,
-  total: 0,
+  successCount: 0,
+  totalCount: 0,
 });
 
 const BlankVideo = styled('div')(() => ({
   backgroundColor: '#999',
   width: '100%',
-  paddingTop: '56.25%',
+  aspectRatio: '16 / 9',
 }));
 
 const Page: React.FC = () => {
@@ -57,8 +57,8 @@ const Page: React.FC = () => {
       ...prev,
       currentType: pickType(),
       playing: true,
-      success: selectedTypeRef.current === prev.currentType ? prev.success + 1 : prev.success,
-      total: prev.total + 1,
+      successCount: selectedTypeRef.current === prev.currentType ? prev.successCount + 1 : prev.successCount,
+      totalCount: prev.totalCount + 1,
     }));
   };
 
@@ -78,15 +78,15 @@ const Page: React.FC = () => {
       <Head title="投げ抜け練習" description="鉄拳7の投げ抜け練習ツールです。" />
 
       <Stack spacing={2} alignItems="center">
-        {state.started ? (
-          state.playing ? (
-            <video src={videos[state.currentType]} autoPlay muted playsInline onEnded={videoEnd} width="100%" />
+        <BlankVideo>
+          {state.started ? (
+            state.playing && (
+              <video src={videos[state.currentType]} autoPlay muted playsInline onEnded={videoEnd} width="100%" />
+            )
           ) : (
-            <BlankVideo />
-          )
-        ) : (
-          <img src="https://d2ybk292wkc2jl.cloudfront.net/site/nagenuke/thumb.jpg" width="100%" />
-        )}
+            <img src="https://d2ybk292wkc2jl.cloudfront.net/site/nagenuke/thumb.jpg" width="100%" />
+          )}
+        </BlankVideo>
 
         <Stack direction="row" spacing={1}>
           <Button onClick={selectLP} size="large" variant="outlined">
@@ -101,7 +101,7 @@ const Page: React.FC = () => {
         </Stack>
 
         <div>
-          成功 {state.success} / {state.total}
+          成功 {state.successCount}/{state.totalCount}
         </div>
 
         <Stack direction="row" spacing={1} justifyContent="center">
