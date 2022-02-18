@@ -33,7 +33,16 @@ export const OperationButton: React.FC<Props> = ({ icon }) => {
         icon={icon}
       />
 
-      <Dialog open={expanded} onClose={() => setExpanded(false)}>
+      <Dialog
+        open={expanded}
+        onClose={() => {
+          // モーダル閉じた時にカーソル位置が動かないように
+          // なぜこれがあると動かないかはわからない
+          editor.insertText('');
+
+          setExpanded(false);
+        }}
+      >
         <DialogContent>
           {OPERATIONS.map((codes, i) => (
             <Box key={i}>
