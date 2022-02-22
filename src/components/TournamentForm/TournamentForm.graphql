@@ -1,6 +1,5 @@
 fragment TournamentForm on Tournament {
   organizerId
-  league { id }
   name
   url
   streamingUrl
@@ -12,5 +11,4 @@ query TournamentForm {
   organizers(per: 100) {
     records { ...OrganizerSelectOption }
   }
-  leagues { ...LeagueSelectOption }
 }

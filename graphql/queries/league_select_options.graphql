@@ -1,4 +1,0 @@
-fragment LeagueSelectOption on League {
-  id
-  name
-}
