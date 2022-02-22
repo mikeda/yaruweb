@@ -33,5 +33,16 @@ export const VideoPlayer: React.FC<Props> = ({ src, thumnailUrl, width = '100%',
     };
   }, [videoRef, src]);
 
-  return <video width={width} controls ref={videoRef} poster={thumnailUrl} preload="none" autoPlay={autoPlay} muted />;
+  return (
+    <video
+      width={width}
+      controls
+      ref={videoRef}
+      poster={thumnailUrl}
+      preload="none"
+      autoPlay={autoPlay}
+      muted
+      playsInline
+    />
+  );
 };
