@@ -25,7 +25,7 @@ export const Operation: React.FC<Props> = ({ operation }) => {
 };
 
 const IconOperation = styled('img')(({ theme }) => ({
-  width: 24,
+  width: 20,
   marginRight: theme.spacing(0.5),
 }));
 
@@ -36,6 +36,6 @@ export const TextOperation = styled('span')(({ theme }) => ({
 }));
 
 const NextOperation = styled(FontAwesomeIcon)(({ theme }) => ({
-  marginRight: theme.spacing(1),
-  marginLeft: theme.spacing(1),
+  marginRight: theme.spacing(0.5),
+  marginLeft: theme.spacing(0.5),
 }));

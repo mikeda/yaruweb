@@ -17,20 +17,15 @@ export const Command: React.FC<Props> = ({ command }) => {
   );
 };
 
-const Wrapper: React.FC = ({ children }) => (
-  <Container>
-    <ContainerInner>{children}</ContainerInner>
-  </Container>
-);
-
-const Container = styled('div')(() => ({
-  display: 'inline-block',
-}));
+const Wrapper: React.FC = ({ children }) => <ContainerInner>{children}</ContainerInner>;
 
 const ContainerInner = styled('div')(() => ({
   display: 'flex',
   alignItems: 'center',
-  overflowX: 'auto',
-  whiteSpace: 'nowrap',
+  overflowX: 'scroll',
+  flexWrap: 'wrap',
   cursor: 'grab',
+  '& > *': {
+    minWidth: '10px',
+  },
 }));
