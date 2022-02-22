@@ -10,19 +10,7 @@ import {
   useTournamentFormQuery,
 } from '@/lib/graphql/types';
 import dayjs from '@/lib/dayjs';
-import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  Divider,
-  FormControl,
-  Grid,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-} from '@mui/material';
+import { Box, Button, Card, CardContent, Divider, Grid, TextField } from '@mui/material';
 import { Autocomplete } from '@mui/material';
 
 const schema = yup.object().shape({
