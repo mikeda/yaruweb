@@ -904,14 +904,6 @@ export type FavArticlePayload = {
   clientMutationId?: Maybe<Scalars['String']>;
 };
 
-export type League = {
-  __typename?: 'League';
-  description: Scalars['String'];
-  id: Scalars['ID'];
-  name: Scalars['String'];
-  slug: Scalars['String'];
-};
-
 export type Move = {
   __typename?: 'Move';
   command: Array<Scalars['String']>;
@@ -1400,7 +1392,6 @@ export type Query = {
   combos: Array<Combo>;
   countries: Array<Country>;
   currentUser: CurrentUser;
-  leagues: Array<League>;
   move: Move;
   moveCategories: Array<MoveCategory>;
   moveCategory: MoveCategory;
@@ -1710,7 +1701,6 @@ export type Tournament = {
   __typename?: 'Tournament';
   description: Scalars['String'];
   id: Scalars['ID'];
-  league?: Maybe<League>;
   mainImageUrl?: Maybe<Scalars['String']>;
   name: Scalars['String'];
   organizerId: Scalars['ID'];
@@ -1725,7 +1715,6 @@ export type Tournament = {
 
 export type TournamentAttributes = {
   description: Scalars['String'];
-  leagueId?: InputMaybe<Scalars['ID']>;
   mainImage?: InputMaybe<Scalars['String']>;
   name: Scalars['String'];
   organizerId?: InputMaybe<Scalars['ID']>;
@@ -2314,8 +2303,6 @@ export type CurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type CurrentUserQuery = { __typename?: 'Query', currentUser: { __typename?: 'CurrentUser', id: string, name: string, role: UserRole, avatarUrl: string } };
 
-export type LeagueSelectOptionFragment = { __typename?: 'League', id: string, name: string };
-
 export type MoveCategoryIdsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -2428,12 +2415,12 @@ export type PlayerFormFragment = { __typename?: 'Player', name: string, slug: st
 
 export type TournamentCardFragment = { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: string | null, startsAt: string, videosCount: number, standings: Array<{ __typename?: 'Standing', id: string, place: number, player: { __typename?: 'Player', id: string, name: string } }> };
 
-export type TournamentFormFragment = { __typename?: 'Tournament', organizerId: string, name: string, url: string, streamingUrl?: string | null, startsAt: string, description: string, league?: { __typename?: 'League', id: string } | null };
+export type TournamentFormFragment = { __typename?: 'Tournament', organizerId: string, name: string, url: string, streamingUrl?: string | null, startsAt: string, description: string };
 
 export type TournamentFormQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type TournamentFormQuery = { __typename?: 'Query', organizers: { __typename?: 'OrganizerCollection', records: Array<{ __typename?: 'Organizer', id: string, slug: string, name: string }> }, leagues: Array<{ __typename?: 'League', id: string, name: string }> };
+export type TournamentFormQuery = { __typename?: 'Query', organizers: { __typename?: 'OrganizerCollection', records: Array<{ __typename?: 'Organizer', id: string, slug: string, name: string }> } };
 
 export type CharacterBreadcrumbsFragment = { __typename?: 'Character', slug: string, name: string };
 
@@ -2846,7 +2833,7 @@ export type DashboardTournamentEditPageQueryVariables = Exact<{
 }>;
 
 
-export type DashboardTournamentEditPageQuery = { __typename?: 'Query', tournament: { __typename?: 'Tournament', organizerId: string, name: string, url: string, streamingUrl?: string | null, startsAt: string, description: string, id: string, league?: { __typename?: 'League', id: string } | null } };
+export type DashboardTournamentEditPageQuery = { __typename?: 'Query', tournament: { __typename?: 'Tournament', organizerId: string, name: string, url: string, streamingUrl?: string | null, startsAt: string, description: string, id: string } };
 
 export type DashboardTournamentEditPageUpdateTournamentMutationVariables = Exact<{
   tournamentId: Scalars['ID'];
@@ -2854,7 +2841,7 @@ export type DashboardTournamentEditPageUpdateTournamentMutationVariables = Exact
 }>;
 
 
-export type DashboardTournamentEditPageUpdateTournamentMutation = { __typename?: 'Mutation', updateTournament?: { __typename?: 'UpdateTournamentPayload', tournament: { __typename?: 'Tournament', organizerId: string, name: string, url: string, streamingUrl?: string | null, startsAt: string, description: string, id: string, league?: { __typename?: 'League', id: string } | null } } | null };
+export type DashboardTournamentEditPageUpdateTournamentMutation = { __typename?: 'Mutation', updateTournament?: { __typename?: 'UpdateTournamentPayload', tournament: { __typename?: 'Tournament', organizerId: string, name: string, url: string, streamingUrl?: string | null, startsAt: string, description: string, id: string } } | null };
 
 export type DashboardTournamentPageQueryVariables = Exact<{
   tournamentId: Scalars['ID'];
@@ -3165,12 +3152,6 @@ export const CountrySelectOptionFragmentDoc = gql`
   flagEmoji
 }
     `;
-export const LeagueSelectOptionFragmentDoc = gql`
-    fragment LeagueSelectOption on League {
-  id
-  name
-}
-    `;
 export const OrganizerSelectOptionFragmentDoc = gql`
     fragment OrganizerSelectOption on Organizer {
   id
@@ -3432,9 +3413,6 @@ export const TournamentCardFragmentDoc = gql`
 export const TournamentFormFragmentDoc = gql`
     fragment TournamentForm on Tournament {
   organizerId
-  league {
-    id
-  }
   name
   url
   streamingUrl
@@ -5342,12 +5320,8 @@ export const TournamentFormDocument = gql`
       ...OrganizerSelectOption
     }
   }
-  leagues {
-    ...LeagueSelectOption
-  }
 }
-    ${OrganizerSelectOptionFragmentDoc}
-${LeagueSelectOptionFragmentDoc}`;
+    ${OrganizerSelectOptionFragmentDoc}`;
 
 /**
  * __useTournamentFormQuery__

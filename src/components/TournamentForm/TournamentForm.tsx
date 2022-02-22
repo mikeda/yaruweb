@@ -10,19 +10,7 @@ import {
   useTournamentFormQuery,
 } from '@/lib/graphql/types';
 import dayjs from '@/lib/dayjs';
-import {
-  Box,
-  Button,
-  Card,
-  CardContent,
-  Divider,
-  FormControl,
-  Grid,
-  InputLabel,
-  MenuItem,
-  Select,
-  TextField,
-} from '@mui/material';
+import { Box, Button, Card, CardContent, Divider, Grid, TextField } from '@mui/material';
 import { Autocomplete } from '@mui/material';
 
 const schema = yup.object().shape({
@@ -53,7 +41,6 @@ export const TournamentForm: React.FC<Props> = ({ tournament, onSubmit }) => {
     defaultValues: tournament
       ? {
           organizerId: tournament.organizerId,
-          leagueId: tournament.league?.id,
           name: tournament.name,
           url: tournament.url,
           streamingUrl: tournament.streamingUrl,
@@ -88,32 +75,6 @@ export const TournamentForm: React.FC<Props> = ({ tournament, onSubmit }) => {
                   );
                 }}
               />
-            </Grid>
-
-            <Grid item xs={12} sm={6}>
-              <FormControl fullWidth variant="outlined">
-                <InputLabel>リーグ</InputLabel>
-                <Controller
-                  render={({ field }) => (
-                    <Select
-                      {...field}
-                      onChange={e => {
-                        const id = e.target.value as string | undefined;
-                        setValue('leagueId', id || null);
-                      }}
-                    >
-                      <MenuItem>指定なし</MenuItem>
-                      {data.leagues.map(league => (
-                        <MenuItem key={league.id} value={league.id}>
-                          {league.name}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                  )}
-                  control={control}
-                  name="leagueId"
-                />
-              </FormControl>
             </Grid>
 
             <Grid item xs={12}>
