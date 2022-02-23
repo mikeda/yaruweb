@@ -52,7 +52,9 @@ const Page: React.FC = () => {
           <CardMedia image={tournament.mainImageUrl || NO_IMAGE_URL} className={classes.media} />
           <CardContent>
             <Typography variant="body2">{dayjs(tournament.startsAt).format('YYYY/M/D H:mm')}</Typography>
-            <Typography variant="body2">{tournament.description}</Typography>
+            <Typography variant="body2" sx={{ whiteSpace: 'pre-line' }}>
+              {tournament.description}
+            </Typography>
           </CardContent>
         </Card>
       </Box>

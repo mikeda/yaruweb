@@ -59,7 +59,7 @@ const PageContent: React.FC<TournamentPageQuery> = ({ tournament }) => {
 
           <Box mt={4}>
             <Typography variant="h3">大会概要</Typography>
-            <Typography variant="body2" color="textSecondary" component="p">
+            <Typography variant="body2" color="textSecondary" component="p" sx={{ whiteSpace: 'pre-line' }}>
               {tournament.description}
             </Typography>
           </Box>
