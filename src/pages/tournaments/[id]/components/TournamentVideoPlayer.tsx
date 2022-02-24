@@ -51,7 +51,7 @@ export const TournamentVideoPlayer: React.FC<Props> = ({ tournamentVideo }) => {
       <YouTubeWrapper>
         <YouTube
           videoId={tournamentVideo.youtubeVideoId}
-          opts={{ width: '854', height: '480' }}
+          opts={{ width: '854', height: '480', playerVars: { playsinline: 1 } }}
           onReady={event => {
             setYouTubePlayer(event.target);
           }}

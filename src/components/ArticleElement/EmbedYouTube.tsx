@@ -12,7 +12,10 @@ export const EmbedYouTube: React.FC<Props> = ({ videoId, startSec, attributes, c
   return (
     <div {...attributes}>
       <YouTubeWrapper contentEditable={false}>
-        <YouTube videoId={videoId} opts={{ width: '854', height: '480', playerVars: { start: startSec } }} />
+        <YouTube
+          videoId={videoId}
+          opts={{ width: '854', height: '480', playerVars: { start: startSec, playsinline: 1 } }}
+        />
       </YouTubeWrapper>
       {children}
     </div>
