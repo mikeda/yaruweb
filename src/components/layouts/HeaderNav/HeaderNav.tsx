@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Paper, Tab, Tabs } from '@mui/material';
+import { Tab, Tabs } from '@mui/material';
 import { useRouter } from 'next/router';
 import { UrlObject } from 'url';
 import { pagesPath } from '@/lib/$path';
@@ -20,12 +20,10 @@ export const HeaderNav: React.FC<{ activeTab: TabValue }> = ({ activeTab }) => {
   const router = useRouter();
 
   return (
-    <Paper square>
-      <Tabs value={activeTab} indicatorColor="primary" textColor="primary" variant="scrollable">
-        {Object.entries(tabItems).map(([value, { name, url }]) => (
-          <Tab key={value} value={value} label={name} onClick={() => router.push(url)} style={{ minWidth: 128 }} />
-        ))}
-      </Tabs>
-    </Paper>
+    <Tabs value={activeTab} indicatorColor="primary" textColor="primary" variant="scrollable">
+      {Object.entries(tabItems).map(([value, { name, url }]) => (
+        <Tab key={value} value={value} label={name} onClick={() => router.push(url)} sx={{ minWidth: 0 }} />
+      ))}
+    </Tabs>
   );
 };
