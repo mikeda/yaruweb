@@ -24,8 +24,10 @@ const ContainerInner = styled('div')(() => ({
   alignItems: 'center',
   overflowX: 'scroll',
   flexWrap: 'wrap',
+  margin: '-4px -2px',
   cursor: 'grab',
   '& > *': {
     minWidth: '10px',
+    margin: '4px 2px',
   },
 }));

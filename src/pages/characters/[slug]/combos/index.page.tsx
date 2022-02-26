@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
 import {
@@ -11,22 +11,23 @@ import {
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import {
   Box,
-  Collapse,
+  Dialog,
+  DialogContent,
   Divider,
+  IconButton,
   List,
   ListItem,
-  ListItemButton,
   ListItemText,
   Paper,
-  Stack,
   Typography,
 } from '@mui/material';
 import { Profile } from '../components/Profile';
 import { Tabs } from '../components/Tabs';
 import { Content, Head, Breadcrumbs, Command } from '@/components';
 import { ParsedUrlQuery } from 'querystring';
-import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { VideoPlayer } from '@/components/MoveMedia/VideoPlayer';
+import YouTubeIcon from '@mui/icons-material/YouTube';
+import { colors } from '@/colors';
 
 const Page: React.FC<CharacterCombosPageQuery> = ({ character }) => {
   return (
@@ -63,40 +64,48 @@ const Page: React.FC<CharacterCombosPageQuery> = ({ character }) => {
 };
 
 const ComboListItem: React.FC<{ combo: ComboMediaFragment; first: boolean }> = ({ combo, first }) => {
-  const [open, setOpen] = React.useState(false);
-  const handleClick = () => {
-    setOpen(!open);
-  };
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   return (
     <>
       {!first && <Divider />}
 
-      <ListItemButton onClick={handleClick}>
+      <ListItem>
         <ListItemText>
           <Box>
             <Command command={combo.command} />
           </Box>
+
+          {combo.note && (
+            <Typography variant="body2" sx={{ whiteSpace: 'pre-line', mt: 1 }}>
+              {combo.note}
+            </Typography>
+          )}
         </ListItemText>
 
-        {open ? <ExpandLess /> : <ExpandMore />}
-      </ListItemButton>
+        {combo.comboVideo && (
+          <>
+            <IconButton onClick={() => setDialogOpen(true)} size="large">
+              <YouTubeIcon style={{ fill: colors.youtube }} />
+            </IconButton>
 
-      <Collapse in={open} timeout="auto" unmountOnExit>
-        <ListItem>
-          <Stack spacing={2} sx={{ paddingBottom: 1 }}>
-            {combo.comboVideo && (
-              <VideoPlayer src={combo.comboVideo.m3u8Url} thumnailUrl={combo.comboVideo.thumbnailUrl} />
-            )}
+            <Dialog
+              open={dialogOpen}
+              onClose={() => setDialogOpen(false)}
+              sx={{ margin: 0 }}
+              PaperProps={{ sx: { margin: 1 } }}
+            >
+              <DialogContent sx={{ padding: 2 }}>
+                <VideoPlayer src={combo.comboVideo.m3u8Url} thumnailUrl={combo.comboVideo.thumbnailUrl} autoPlay />
 
-            {combo.note && (
-              <Typography variant="body2" sx={{ whiteSpace: 'pre-line' }}>
-                {combo.note}
-              </Typography>
-            )}
-          </Stack>
-        </ListItem>
-      </Collapse>
+                <Box mt={1}>
+                  <Command command={combo.command} />
+                </Box>
+              </DialogContent>
+            </Dialog>
+          </>
+        )}
+      </ListItem>
     </>
   );
 };
@@ -110,7 +119,7 @@ export const getStaticProps: GetStaticProps<CharacterCombosPageQuery, Params> = 
     characterSlug: params?.slug,
   });
 
-  return { props: data };
+  return { props: data, revalidate: 300 };
 };
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
