@@ -17,7 +17,9 @@ import makeStyles from '@mui/styles/makeStyles';
 import { Link } from '../Link';
 import { NO_IMAGE_URL } from '@/lib/Assets';
 import dayjs from '@/lib/dayjs';
-import { EmojiEvents, Schedule, YouTube } from '@mui/icons-material';
+import YouTubeIcon from '@mui/icons-material/YouTube';
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
+import ScheduleIcon from '@mui/icons-material/Schedule';
 import { colors } from '@/colors';
 import { pagesPath } from '@/lib/$path';
 
@@ -53,7 +55,7 @@ export const TournamentCard: React.FC<Props> = ({ tournament }) => {
           <List disablePadding dense>
             <ListItem disableGutters>
               <ListItemIcon className={classes.listItemIcon}>
-                <Schedule fontSize="small" />
+                <ScheduleIcon fontSize="small" />
               </ListItemIcon>
               <ListItemText
                 primary={dayjs(tournament.startsAt).format('YYYY/M/D H:mm')}
@@ -64,7 +66,7 @@ export const TournamentCard: React.FC<Props> = ({ tournament }) => {
             {tournament.standings.length > 0 && (
               <ListItem disableGutters>
                 <ListItemIcon className={classes.listItemIcon}>
-                  <EmojiEvents fontSize="small" style={{ fill: colors.trophy }} />
+                  <EmojiEventsIcon fontSize="small" style={{ fill: colors.trophy }} />
                 </ListItemIcon>
                 <ListItemText
                   primary={tournament.standings
@@ -79,7 +81,7 @@ export const TournamentCard: React.FC<Props> = ({ tournament }) => {
             {tournament.videosCount > 0 && (
               <ListItem disableGutters>
                 <ListItemIcon className={classes.listItemIcon}>
-                  <YouTube fontSize="small" style={{ fill: colors.youtube }} />
+                  <YouTubeIcon fontSize="small" style={{ fill: colors.youtube }} />
                 </ListItemIcon>
                 <ListItemText primary="動画あり" className={classes.listItemText} />
               </ListItem>

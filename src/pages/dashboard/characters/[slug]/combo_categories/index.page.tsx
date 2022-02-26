@@ -15,7 +15,10 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
-import { Add, Add as AddIcon, Delete, Edit, YouTube } from '@mui/icons-material';
+import YouTubeIcon from '@mui/icons-material/YouTube';
+import AddIcon from '@mui/icons-material/Add';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import { toast } from 'react-toastify';
 
 import {
@@ -95,14 +98,14 @@ const Page: React.FC = () => {
                 )}
                 size="large"
               >
-                <Add />
+                <AddIcon />
               </IconButton>
 
               <IconButton
                 href={resolveUrlObject(router, pagesPath.dashboard.combo_categories._id(comboCategory.id).edit.$url())}
                 size="large"
               >
-                <Edit />
+                <EditIcon />
               </IconButton>
 
               {comboCategory.combos.length == 0 && (
@@ -114,7 +117,7 @@ const Page: React.FC = () => {
                   }}
                   size="large"
                 >
-                  <Delete />
+                  <DeleteIcon />
                 </IconButton>
               )}
             </div>
@@ -178,7 +181,7 @@ const ComboRow = ({ combo, afterDelete }: ComboRowProps) => {
         <VideoButton combo={combo} />
 
         <IconButton href={resolveUrlObject(router, pagesPath.dashboard.combos._id(combo.id).edit.$url())} size="large">
-          <Edit />
+          <EditIcon />
         </IconButton>
 
         <IconButton
@@ -189,7 +192,7 @@ const ComboRow = ({ combo, afterDelete }: ComboRowProps) => {
           }}
           size="large"
         >
-          <Delete />
+          <DeleteIcon />
         </IconButton>
       </TableCell>
     </TableRow>
@@ -241,7 +244,7 @@ const VideoButton: React.FC<{ combo: DashboardComboCategoriesPageComboFragment }
   return (
     <>
       <IconButton onClick={() => setDialogOpen(true)} size="large">
-        <YouTube style={combo.comboVideo ? { fill: colors.youtube } : {}} />
+        <YouTubeIcon style={combo.comboVideo ? { fill: colors.youtube } : {}} />
       </IconButton>
 
       <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)}>

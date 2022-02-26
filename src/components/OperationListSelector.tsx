@@ -7,7 +7,7 @@ import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
 import { Command } from '.';
 import { OperationText } from '@/lib';
-import { Backspace } from '@mui/icons-material';
+import BackspaceIcon from '@mui/icons-material/Backspace';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -51,7 +51,7 @@ export const OperationListSelector: React.FC<Props> = ({ command: initialCommand
                   setCommand(prev => prev.slice(0, -1));
                 }}
               >
-                <Backspace />
+                <BackspaceIcon />
               </IconButton>
             </Box>
 

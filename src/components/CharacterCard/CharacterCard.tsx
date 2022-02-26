@@ -17,7 +17,9 @@ import {
 import makeStyles from '@mui/styles/makeStyles';
 
 import { Link } from '../Link';
-import { Public, YouTube, SportsKabaddi } from '@mui/icons-material';
+import PublicIcon from '@mui/icons-material/Public';
+import YouTubeIcon from '@mui/icons-material/YouTube';
+import SportsKabaddiIcon from '@mui/icons-material/SportsKabaddi';
 import { colors } from '@/colors';
 import { pagesPath } from '@/lib/$path';
 import { useRouter } from 'next/router';
@@ -66,21 +68,21 @@ export const CharacterCard: React.FC<Props> = ({ character, dashboard = false })
           <List disablePadding dense>
             <ListItem disableGutters>
               <ListItemIcon className={classes.listItemIcon}>
-                <Public fontSize="small" />
+                <PublicIcon fontSize="small" />
               </ListItemIcon>
               <ListItemText primary={character.country} className={classes.listItemText} />
             </ListItem>
 
             <ListItem disableGutters>
               <ListItemIcon className={classes.listItemIcon}>
-                <SportsKabaddi fontSize="small" />
+                <SportsKabaddiIcon fontSize="small" />
               </ListItemIcon>
               <ListItemText primary={character.fightingStyle} className={classes.listItemText} />
             </ListItem>
 
             <ListItem disableGutters>
               <ListItemIcon className={classes.listItemIcon}>
-                <YouTube fontSize="small" style={{ fill: colors.youtube }} />
+                <YouTubeIcon fontSize="small" style={{ fill: colors.youtube }} />
               </ListItemIcon>
               <ListItemText primary={`対戦動画 ${character.battlesCount}`} className={classes.listItemText} />
             </ListItem>

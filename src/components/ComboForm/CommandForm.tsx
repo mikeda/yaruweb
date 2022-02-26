@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { Box, IconButton, Paper } from '@mui/material';
 import { Command, OperationListSelector } from '..';
-import { Edit } from '@mui/icons-material';
+import EditIcon from '@mui/icons-material/Edit';
 
 interface Props {
   command: string[];
@@ -19,7 +19,7 @@ export const CommandForm: React.FC<Props> = ({ command, onChange }) => {
 
         <div>
           <IconButton edge="end" onClick={() => setDialogOpen(true)} size="large">
-            <Edit />
+            <EditIcon />
           </IconButton>
         </div>
       </Box>

@@ -15,7 +15,8 @@ import {
 import makeStyles from '@mui/styles/makeStyles';
 
 import { NO_IMAGE_URL } from '@/lib/Assets';
-import { EmojiEvents, YouTube } from '@mui/icons-material';
+import YouTubeIcon from '@mui/icons-material/YouTube';
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import { colors } from '@/colors';
 import { pagesPath } from '@/lib/$path';
 import { useRouter } from 'next/router';
@@ -64,14 +65,14 @@ export const PlayerCard: React.FC<Props> = ({ player }) => {
           <List disablePadding dense>
             <ListItem disableGutters>
               <ListItemIcon className={classes.listItemIcon}>
-                <EmojiEvents fontSize="small" style={{ fill: colors.trophy }} />
+                <EmojiEventsIcon fontSize="small" style={{ fill: colors.trophy }} />
               </ListItemIcon>
               <ListItemText primary={`大会戦績 ${player.standingsCount}`} className={classes.listItemText} />
             </ListItem>
 
             <ListItem disableGutters>
               <ListItemIcon className={classes.listItemIcon}>
-                <YouTube fontSize="small" style={{ fill: colors.youtube }} />
+                <YouTubeIcon fontSize="small" style={{ fill: colors.youtube }} />
               </ListItemIcon>
               <ListItemText primary={`対戦動画 ${player.battlesCount}`} className={classes.listItemText} />
             </ListItem>

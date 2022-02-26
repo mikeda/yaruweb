@@ -4,7 +4,8 @@ import { Avatar, Box, Dialog, IconButton, ListItem, ListItemSecondaryAction, Lis
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
 import { formatSec } from '@/lib';
-import { Delete, Edit } from '@mui/icons-material';
+import EditIcon from '@mui/icons-material/Edit';
+import DeleteIcon from '@mui/icons-material/Delete';
 import { BattleRoundText } from '@/lib/graphql/enum_texts';
 import {
   CharacterSelectOptionFragment,
@@ -88,10 +89,10 @@ export const BattleListItem: React.FC<Props> = ({
       />
       <ListItemSecondaryAction>
         <IconButton onClick={() => setDialogOpen(true)} size="large">
-          <Edit />
+          <EditIcon />
         </IconButton>
         <IconButton edge="end" onClick={onDestroy} size="large">
-          <Delete />
+          <DeleteIcon />
         </IconButton>
       </ListItemSecondaryAction>
     </ListItem>

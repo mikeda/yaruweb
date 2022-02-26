@@ -18,7 +18,10 @@ import {
   Tooltip,
   Typography,
 } from '@mui/material';
-import { Add, Add as AddIcon, Delete, Edit, YouTube } from '@mui/icons-material';
+import YouTubeIcon from '@mui/icons-material/YouTube';
+import AddIcon from '@mui/icons-material/Add';
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { toast } from 'react-toastify';
 
@@ -97,7 +100,7 @@ const Page: React.FC = () => {
                 href={resolveUrlObject(router, pagesPath.dashboard.move_categories._id(moveCategory.id).edit.$url())}
                 size="large"
               >
-                <Edit />
+                <EditIcon />
               </IconButton>
 
               {moveCategory.moves.length == 0 && (
@@ -109,7 +112,7 @@ const Page: React.FC = () => {
                   }}
                   size="large"
                 >
-                  <Delete />
+                  <DeleteIcon />
                 </IconButton>
               )}
             </div>
@@ -175,7 +178,7 @@ const MoveRow = ({ move, afterDelete }: MoveRowProps) => {
         <VideoButton move={move} />
 
         <IconButton href={resolveUrlObject(router, pagesPath.dashboard.moves._id(move.id).edit.$url())} size="large">
-          <Edit />
+          <EditIcon />
         </IconButton>
 
         <IconButton href={resolveUrlObject(router, pagesPath.dashboard.moves._id(move.id).copy.$url())} size="large">
@@ -190,7 +193,7 @@ const MoveRow = ({ move, afterDelete }: MoveRowProps) => {
           }}
           size="large"
         >
-          <Delete />
+          <DeleteIcon />
         </IconButton>
       </TableCell>
     </TableRow>
@@ -242,7 +245,7 @@ const VideoButton: React.FC<{ move: DashboardMoveCategoriesPageMoveFragment }> =
   return (
     <>
       <IconButton onClick={() => setDialogOpen(true)} size="large">
-        <YouTube style={move.moveVideo ? { fill: colors.youtube } : {}} />
+        <YouTubeIcon style={move.moveVideo ? { fill: colors.youtube } : {}} />
       </IconButton>
 
       <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)}>
@@ -289,7 +292,7 @@ const MovesNewButton = ({ moveCategoryId }: { moveCategoryId: string }) => {
     <>
       <Tooltip title="コマンドを作成">
         <IconButton onClick={handleClick} size="large">
-          <Add />
+          <AddIcon />
         </IconButton>
       </Tooltip>
 

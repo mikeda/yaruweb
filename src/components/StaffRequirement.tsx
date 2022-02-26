@@ -1,5 +1,6 @@
 import { Avatar, Button, Card, CardActions, CardContent, CardHeader, Typography } from '@mui/material';
-import { People, Twitter } from '@mui/icons-material';
+import PeopleIcon from '@mui/icons-material/People';
+import TwitterIcon from '@mui/icons-material/Twitter';
 import React from 'react';
 
 export const StaffRequirement: React.FC = () => {
@@ -8,7 +9,7 @@ export const StaffRequirement: React.FC = () => {
       <CardHeader
         avatar={
           <Avatar>
-            <People />
+            <PeopleIcon />
           </Avatar>
         }
         title="運営テケナー募集中"
@@ -21,7 +22,7 @@ export const StaffRequirement: React.FC = () => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button href="https://twitter.com/mikeda" target="_blank" startIcon={<Twitter />}>
+        <Button href="https://twitter.com/mikeda" target="_blank" startIcon={<TwitterIcon />}>
           Twitter
         </Button>
       </CardActions>
