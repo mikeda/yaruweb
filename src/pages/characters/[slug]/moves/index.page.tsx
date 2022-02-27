@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
 import {
@@ -18,20 +18,15 @@ import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 import {
   Box,
   Chip,
-  Collapse,
+  Dialog,
+  DialogContent,
   Divider,
+  IconButton,
   List,
   ListItem,
-  ListItemButton,
   ListItemText,
   Paper,
   Stack,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableHead,
-  TableRow,
   Typography,
 } from '@mui/material';
 import { Profile } from '../components/Profile';
@@ -45,8 +40,9 @@ import {
   ThrowMoveResultText,
   ThrowTypeEnumText,
 } from '@/lib/graphql/enum_texts';
-import { ExpandLess, ExpandMore } from '@mui/icons-material';
 import { VideoPlayer } from '@/components/MoveMedia/VideoPlayer';
+import YouTubeIcon from '@mui/icons-material/YouTube';
+import { colors } from '@/colors';
 
 const Page: React.FC<CharacterMovesPageQuery> = ({ character }) => {
   return (
@@ -96,32 +92,54 @@ interface ReversalMove {
 }
 
 const MoveListItem: React.FC<{ move: CharacterMovesPageMoveFragment; first: boolean }> = ({ move, first }) => {
-  const [open, setOpen] = React.useState(false);
-  const handleClick = () => {
-    setOpen(!open);
-  };
+  const [dialogOpen, setDialogOpen] = useState(false);
 
   return (
     <>
       {!first && <Divider />}
 
-      <ListItemButton onClick={handleClick}>
+      <ListItem
+        secondaryAction={
+          <>
+            {move.moveVideo && (
+              <>
+                <IconButton onClick={() => setDialogOpen(true)} size="large">
+                  <YouTubeIcon style={{ fill: colors.youtube }} />
+                </IconButton>
+
+                <Dialog
+                  open={dialogOpen}
+                  onClose={() => setDialogOpen(false)}
+                  sx={{ margin: 0 }}
+                  PaperProps={{ sx: { margin: 1 } }}
+                >
+                  <DialogContent sx={{ padding: 2 }}>
+                    <VideoPlayer src={move.moveVideo.m3u8Url} thumnailUrl={move.moveVideo.thumbnailUrl} autoPlay />
+
+                    <Box mt={1}>
+                      <Command command={move.command} />
+                    </Box>
+                  </DialogContent>
+                </Dialog>
+              </>
+            )}
+          </>
+        }
+      >
         <ListItemText>
           <Typography>{move.name}</Typography>
 
-          <Box>
+          <Box mt={1}>
             <Command command={move.command} />
           </Box>
         </ListItemText>
+      </ListItem>
 
-        {open ? <ExpandLess /> : <ExpandMore />}
-      </ListItemButton>
-
-      <Collapse in={open} timeout="auto" unmountOnExit>
+      <ListItem>
         {move.moveable.__typename === 'AttackMove' && <AttackListItem move={move} attack={move.moveable} />}
         {move.moveable.__typename === 'ThrowMove' && <ThrowListItem move={move} throw={move.moveable} />}
         {move.moveable.__typename === 'ReversalMove' && <ReversalListItem move={move} reversal={move.moveable} />}
-      </Collapse>
+      </ListItem>
     </>
   );
 };
@@ -129,15 +147,15 @@ const MoveListItem: React.FC<{ move: CharacterMovesPageMoveFragment; first: bool
 const AttackListItem: React.FC<AttackMove> = ({ move, attack }) => {
   const frames: { label: string; frame: string }[] = [
     {
-      label: 'ガード',
+      label: 'G',
       frame: attack.blockFrame ? frameText(attack.blockFrame) : AttackMoveResultText[attack.blockResult],
     },
     {
-      label: 'ヒット',
+      label: 'H',
       frame: attack.hitFrame ? frameText(attack.hitFrame) : AttackMoveResultText[attack.hitResult],
     },
     {
-      label: 'カウンター',
+      label: 'C',
       frame: attack.counterFrame ? frameText(attack.counterFrame) : AttackMoveResultText[attack.blockResult],
     },
   ];
@@ -146,119 +164,56 @@ const AttackListItem: React.FC<AttackMove> = ({ move, attack }) => {
   }
 
   return (
-    <ListItem>
-      <Stack spacing={2} sx={{ paddingBottom: 1 }}>
-        <AttackLabels attack={attack} />
+    <Stack spacing={1} mt={1}>
+      <AttackLabels attack={attack} />
 
-        <Typography variant="body2">{attack.heights.map(h => AttackTypeEnumText[h]).join(' > ')}</Typography>
-        {attack.damages.length > 0 && (
-          <Typography variant="body2">
-            ダメージ {attack.damages.reduce((sum, d) => sum + d)}({attack.damages.join(',')})
-          </Typography>
-        )}
+      <Typography variant="body2">
+        {attack.heights.map(h => AttackTypeEnumText[h]).join(',')}
+        {attack.damages.length > 0 && ` / ダメージ ${attack.damages.join(',')}`}
+      </Typography>
 
-        <TableContainer component={Paper}>
-          <Table size="small">
-            <TableHead>
-              <TableRow>
-                {frames.map(frame => (
-                  <TableCell key={frame.label} sx={{ paddingX: '12px' }}>
-                    {frame.label}
-                  </TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
+      <Typography variant="body2">{frames.map(frame => `${frame.label} ${frame.frame}`).join(' / ')}</Typography>
 
-            <TableBody>
-              <TableRow>
-                {frames.map(frame => (
-                  <TableCell key={frame.label} sx={{ paddingX: '12px' }}>
-                    {frame.frame}
-                  </TableCell>
-                ))}
-              </TableRow>
-            </TableBody>
-          </Table>
-        </TableContainer>
-
-        <ListItemFooter move={move} />
-      </Stack>
-    </ListItem>
+      <ListItemFooter move={move} />
+    </Stack>
   );
 };
 
 const ThrowListItem: React.FC<ThrowMove> = ({ move, throw: thrw }) => {
   return (
-    <ListItem>
-      <Stack spacing={2} sx={{ paddingBottom: 1 }}>
-        <Typography variant="body2">{ThrowTypeEnumText[thrw.throwType]}</Typography>
-        <Typography variant="body2">ダメージ {thrw.damage}</Typography>
+    <Stack spacing={2} sx={{ paddingBottom: 1 }}>
+      <Typography variant="body2">{`${ThrowTypeEnumText[thrw.throwType]} / ダメージ ${thrw.damage} / 投げ抜け ${
+        ThrowEscapeEnumText[thrw.throwEscape]
+      }`}</Typography>
 
-        <TableContainer component={Paper}>
-          <Table size="small">
-            <TableHead>
-              <TableRow>
-                <TableCell sx={{ paddingX: '12px' }}>発生</TableCell>
-                <TableCell sx={{ paddingX: '12px' }}>ヒット</TableCell>
-                <TableCell sx={{ paddingX: '12px' }}>投げ抜け</TableCell>
-              </TableRow>
-            </TableHead>
+      <Typography variant="body2">{`発生 ${thrw.startUpFrame && frameText(thrw.startUpFrame)} / H ${
+        ThrowMoveResultText[thrw.throwResult]
+      }`}</Typography>
 
-            <TableBody>
-              <TableRow>
-                <TableCell sx={{ paddingX: '12px' }}>{thrw.startUpFrame && frameText(thrw.startUpFrame)}</TableCell>
-                <TableCell sx={{ paddingX: '12px' }}>{ThrowMoveResultText[thrw.throwResult]}</TableCell>
-                <TableCell sx={{ paddingX: '12px' }}>{ThrowEscapeEnumText[thrw.throwEscape]}</TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-        </TableContainer>
-
-        <ListItemFooter move={move} />
-      </Stack>
-    </ListItem>
+      <ListItemFooter move={move} />
+    </Stack>
   );
 };
 
 const ReversalListItem: React.FC<ReversalMove> = ({ move, reversal }) => {
   return (
-    <ListItem>
-      <Stack spacing={2} sx={{ paddingBottom: 1 }}>
-        <Typography variant="body2">{reversal.type}</Typography>
+    <Stack spacing={2} sx={{ paddingBottom: 1 }}>
+      <Typography variant="body2">{reversal.type}</Typography>
 
-        {(reversal.startUpFrame || reversal.finishFrame) && (
-          <TableContainer component={Paper}>
-            <Table size="small">
-              <TableHead>
-                <TableRow>
-                  <TableCell sx={{ paddingX: '12px' }}>受付フレーム</TableCell>
-                </TableRow>
-              </TableHead>
+      {(reversal.startUpFrame || reversal.finishFrame) && (
+        <Typography variant="body2">{`受付フレーム ${reversal.startUpFrame}F〜${reversal.finishFrame}F`}</Typography>
+      )}
 
-              <TableBody>
-                <TableRow>
-                  <TableCell sx={{ paddingX: '12px' }}>
-                    {reversal.startUpFrame}〜{reversal.finishFrame}
-                  </TableCell>
-                </TableRow>
-              </TableBody>
-            </Table>
-          </TableContainer>
-        )}
-
-        <ListItemFooter move={move} />
-      </Stack>
-    </ListItem>
+      <ListItemFooter move={move} />
+    </Stack>
   );
 };
 
 const ListItemFooter: React.FC<{ move: CharacterMovesPageMoveFragment }> = ({ move }) => {
   return (
     <>
-      {move.moveVideo && <VideoPlayer src={move.moveVideo.m3u8Url} thumnailUrl={move.moveVideo.thumbnailUrl} />}
-
       {move.note && (
-        <Typography variant="body2" sx={{ whiteSpace: 'pre-line' }}>
+        <Typography component={Paper} p={0.5} variant="caption" sx={{ whiteSpace: 'pre-line' }}>
           {move.note}
         </Typography>
       )}

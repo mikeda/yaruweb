@@ -77,7 +77,7 @@ const ComboListItem: React.FC<{ combo: ComboMediaFragment; first: boolean }> = (
           </Box>
 
           {combo.note && (
-            <Typography variant="body2" sx={{ whiteSpace: 'pre-line', mt: 1 }}>
+            <Typography component={Paper} variant="caption" sx={{ whiteSpace: 'pre-line', mt: 1 }}>
               {combo.note}
             </Typography>
           )}

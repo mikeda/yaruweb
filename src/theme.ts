@@ -135,7 +135,7 @@ const theme = createTheme(
         color: 'inherit',
       },
       MuiPaper: {
-        elevation: 4,
+        elevation: 2,
       },
     },
     typography: {
