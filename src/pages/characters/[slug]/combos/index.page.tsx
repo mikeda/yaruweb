@@ -70,42 +70,48 @@ const ComboListItem: React.FC<{ combo: ComboMediaFragment; first: boolean }> = (
     <>
       {!first && <Divider />}
 
-      <ListItem>
+      <ListItem
+        secondaryAction={
+          <>
+            {combo.comboVideo && (
+              <>
+                <IconButton onClick={() => setDialogOpen(true)} size="large">
+                  <YouTubeIcon style={{ fill: colors.youtube }} />
+                </IconButton>
+
+                <Dialog
+                  open={dialogOpen}
+                  onClose={() => setDialogOpen(false)}
+                  sx={{ margin: 0 }}
+                  PaperProps={{ sx: { margin: 1 } }}
+                >
+                  <DialogContent sx={{ padding: 2 }}>
+                    <VideoPlayer src={combo.comboVideo.m3u8Url} thumnailUrl={combo.comboVideo.thumbnailUrl} autoPlay />
+
+                    <Box mt={1}>
+                      <Command command={combo.command} />
+                    </Box>
+                  </DialogContent>
+                </Dialog>
+              </>
+            )}
+          </>
+        }
+      >
         <ListItemText>
           <Box>
             <Command command={combo.command} />
           </Box>
-
-          {combo.note && (
-            <Typography component={Paper} variant="caption" sx={{ whiteSpace: 'pre-line', mt: 1 }}>
-              {combo.note}
-            </Typography>
-          )}
         </ListItemText>
-
-        {combo.comboVideo && (
-          <>
-            <IconButton onClick={() => setDialogOpen(true)} size="large">
-              <YouTubeIcon style={{ fill: colors.youtube }} />
-            </IconButton>
-
-            <Dialog
-              open={dialogOpen}
-              onClose={() => setDialogOpen(false)}
-              sx={{ margin: 0 }}
-              PaperProps={{ sx: { margin: 1 } }}
-            >
-              <DialogContent sx={{ padding: 2 }}>
-                <VideoPlayer src={combo.comboVideo.m3u8Url} thumnailUrl={combo.comboVideo.thumbnailUrl} autoPlay />
-
-                <Box mt={1}>
-                  <Command command={combo.command} />
-                </Box>
-              </DialogContent>
-            </Dialog>
-          </>
-        )}
       </ListItem>
+
+      {combo.note && (
+        <ListItem>
+          <Typography component={Paper} p={0.5} variant="caption" sx={{ whiteSpace: 'pre-line' }}>
+            {combo.note}
+          </Typography>
+        </ListItem>
+      )}
     </>
   );
 };
