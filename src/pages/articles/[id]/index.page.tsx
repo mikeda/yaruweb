@@ -11,10 +11,10 @@ import { Head } from '@/components/layouts/Head';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { Content } from '@/components/layouts/Content';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
-import { Avatar, Box, Typography } from '@mui/material';
+import { Avatar, Box, Grid, Typography } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import dayjs from '@/lib/dayjs';
-import { ArticleBody, FavButton } from '@/components';
+import { ArticleBody, ArticleCard, FavButton } from '@/components';
 import { NO_IMAGE_URL } from '@/lib/Assets';
 import { ParsedUrlQuery } from 'querystring';
 
@@ -49,6 +49,20 @@ const Page: React.FC<ArticlePageArticleQuery> = ({ article }) => {
       </Box>
 
       <ArticleBody content={article.content} />
+
+      <Box mt={4}>
+        <Typography variant="h2" gutterBottom>
+          関連記事
+        </Typography>
+
+        <Grid container spacing={2}>
+          {article.relatedArticles.map(article => (
+            <Grid item key={article.id} xs={12} sm={6} md={4}>
+              <ArticleCard article={article} />
+            </Grid>
+          ))}
+        </Grid>
+      </Box>
     </Content>
   );
 };
