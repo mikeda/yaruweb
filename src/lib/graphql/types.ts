@@ -28,6 +28,7 @@ export type Article = {
   id: Scalars['ID'];
   mainImageUrl?: Maybe<Scalars['String']>;
   publishedAt?: Maybe<Scalars['ISO8601DateTime']>;
+  relatedArticles: Array<Article>;
   status: ArticleStatus;
   title: Scalars['String'];
 };
@@ -2436,14 +2437,14 @@ export type PlayerBreadcrumbsFragment = { __typename?: 'Player', slug: string, n
 
 export type TournamentBreadcrumbsFragment = { __typename?: 'Tournament', id: string, name: string };
 
-export type ArticlePageArticleFragment = { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, favsCount: number, status: ArticleStatus, category: ArticleCategory, content: string, author: { __typename?: 'User', name: string, avatarUrl: string } };
+export type ArticlePageArticleFragment = { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, favsCount: number, status: ArticleStatus, category: ArticleCategory, content: string, author: { __typename?: 'User', name: string, avatarUrl: string }, relatedArticles: Array<{ __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, faved: boolean, favsCount: number, status: ArticleStatus, author: { __typename?: 'User', name: string, avatarUrl: string } }> };
 
 export type ArticlePageArticleQueryVariables = Exact<{
   articleId: Scalars['ID'];
 }>;
 
 
-export type ArticlePageArticleQuery = { __typename?: 'Query', article: { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, favsCount: number, status: ArticleStatus, category: ArticleCategory, content: string, author: { __typename?: 'User', name: string, avatarUrl: string } } };
+export type ArticlePageArticleQuery = { __typename?: 'Query', article: { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, favsCount: number, status: ArticleStatus, category: ArticleCategory, content: string, author: { __typename?: 'User', name: string, avatarUrl: string }, relatedArticles: Array<{ __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, faved: boolean, favsCount: number, status: ArticleStatus, author: { __typename?: 'User', name: string, avatarUrl: string } }> } };
 
 export type ArticlesPageArticlesQueryVariables = Exact<{
   page?: InputMaybe<Scalars['Int']>;
@@ -3168,22 +3169,6 @@ export const PlayerSelectOptionFragmentDoc = gql`
   smashggId
 }
     `;
-export const ArticleCardFragmentDoc = gql`
-    fragment ArticleCard on Article {
-  id
-  title
-  description
-  mainImageUrl
-  publishedAt
-  faved
-  favsCount
-  status
-  author {
-    name
-    avatarUrl
-  }
-}
-    `;
 export const ArticleFormArticleFragmentDoc = gql`
     fragment ArticleFormArticle on Article {
   id
@@ -3471,6 +3456,22 @@ export const TournamentBreadcrumbsFragmentDoc = gql`
   name
 }
     `;
+export const ArticleCardFragmentDoc = gql`
+    fragment ArticleCard on Article {
+  id
+  title
+  description
+  mainImageUrl
+  publishedAt
+  faved
+  favsCount
+  status
+  author {
+    name
+    avatarUrl
+  }
+}
+    `;
 export const ArticlePageArticleFragmentDoc = gql`
     fragment ArticlePageArticle on Article {
   id
@@ -3486,8 +3487,11 @@ export const ArticlePageArticleFragmentDoc = gql`
     name
     avatarUrl
   }
+  relatedArticles {
+    ...ArticleCard
+  }
 }
-    `;
+    ${ArticleCardFragmentDoc}`;
 export const CharacterPageProfileFragmentDoc = gql`
     fragment CharacterPageProfile on Character {
   slug

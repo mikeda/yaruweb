@@ -13,6 +13,10 @@ fragment ArticlePageArticle on Article {
     name
     avatarUrl
   }
+
+  relatedArticles {
+    ...ArticleCard
+  }
 }
 
 query ArticlePageArticle($articleId: ID!) {
