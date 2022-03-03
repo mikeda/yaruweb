@@ -13,9 +13,9 @@ import {
   PlayerSelectOptionFragment,
 } from '@/lib/graphql/types';
 import clsx from 'clsx';
-import { BattleUpdateForm } from './BattleUpdateForm';
 import { useUpdateMutation } from '../hooks/useUpdateMutation';
 import theme from '@/theme';
+import { BattleForm } from './BattleForm';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -36,18 +36,18 @@ const useStyles = makeStyles(() =>
 interface Props {
   battle: DashboardBattlesPageBattleReslutFragment;
   tournamentVideoId: string;
+  youtubeVideoId: string;
   players: PlayerSelectOptionFragment[];
   characters: CharacterSelectOptionFragment[];
-  onClick: () => void;
   onDestroy: () => void;
 }
 
 export const BattleListItem: React.FC<Props> = ({
   battle,
   tournamentVideoId,
+  youtubeVideoId,
   players,
   characters,
-  onClick,
   onDestroy,
 }) => {
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -61,18 +61,20 @@ export const BattleListItem: React.FC<Props> = ({
     subTitle = `${subTitle} ${BattleRoundText[battle.round]}`;
   }
   return (
-    <ListItem button onClick={onClick}>
-      <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)}>
-        <BattleUpdateForm
-          battle={battle}
+    <ListItem>
+      <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)} maxWidth="md">
+        <BattleForm
+          youtubeVideoId={youtubeVideoId}
           players={players}
           characters={characters}
+          battle={battle}
           onSubmit={attributes => {
             update({ variables: { battleId: battle.id, attributes: { ...attributes, tournamentVideoId } } });
             setDialogOpen(false);
           }}
         />
       </Dialog>
+
       <ListItemText
         primary={
           <Box display="flex" alignItems="center">
@@ -87,6 +89,7 @@ export const BattleListItem: React.FC<Props> = ({
         }
         secondary={subTitle}
       />
+
       <ListItemSecondaryAction>
         <IconButton onClick={() => setDialogOpen(true)} size="large">
           <EditIcon />
