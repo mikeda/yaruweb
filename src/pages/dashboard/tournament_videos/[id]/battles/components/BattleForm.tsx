@@ -180,7 +180,7 @@ export const BattleForm: React.FC<Props> = ({ youtubeVideoId, players, character
             </Grid>
           </Grid>
 
-          <Grid container spacing={2}>
+          <Grid container spacing={2} mt={1}>
             <SideForm
               index={0}
               side={battle?.sides[0]}
