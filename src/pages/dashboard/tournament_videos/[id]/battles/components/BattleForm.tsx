@@ -137,6 +137,7 @@ export const BattleForm: React.FC<Props> = ({ youtubeVideoId, players, character
                   <TextField
                     {...field}
                     size="small"
+                    type="number"
                     label="開始時間"
                     error={Boolean(errors.startSec)}
                     helperText={errors.startSec?.message}
