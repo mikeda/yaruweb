@@ -5,6 +5,11 @@ import * as yup from 'yup';
 import YouTube from 'react-youtube';
 import { YouTubePlayer } from 'youtube-player/dist/types';
 
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
+import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
+
 import {
   CharacterSelectOptionFragment,
   PlayerSelectOptionFragment,
@@ -28,7 +33,7 @@ import {
 } from '@mui/material';
 import { Autocomplete } from '@mui/material';
 import { createFilterOptions } from '@mui/material/useAutocomplete';
-import { GetApp, PlayArrow, SkipNext, SkipPrevious } from '@mui/icons-material';
+import { GetApp, PlayArrow } from '@mui/icons-material';
 import { BattleRoundText } from '@/lib/graphql/enum_texts';
 import { YouTubeWrapper } from '@/components';
 
@@ -75,6 +80,18 @@ export const BattleForm: React.FC<Props> = ({ youtubeVideoId, players, character
 
   const onClickSetPlayerTime = () => {
     youTubePlayer?.seekTo(getValues('startSec'), true);
+  };
+
+  const onClick5SecAgo = () => {
+    if (!youTubePlayer) return;
+
+    youTubePlayer.seekTo(youTubePlayer.getCurrentTime() - 5, true);
+  };
+
+  const onClick5SecLater = () => {
+    if (!youTubePlayer) return;
+
+    youTubePlayer.seekTo(youTubePlayer.getCurrentTime() + 5, true);
   };
 
   const onClick15SecAgo = () => {
@@ -142,13 +159,25 @@ export const BattleForm: React.FC<Props> = ({ youtubeVideoId, players, character
 
               <Tooltip title="15秒戻る">
                 <IconButton size="small" onClick={onClick15SecAgo}>
-                  <SkipPrevious />
+                  <KeyboardDoubleArrowLeftIcon />
+                </IconButton>
+              </Tooltip>
+
+              <Tooltip title="5秒戻る">
+                <IconButton size="small" onClick={onClick5SecAgo}>
+                  <KeyboardArrowLeftIcon />
+                </IconButton>
+              </Tooltip>
+
+              <Tooltip title="5秒進む">
+                <IconButton size="small" onClick={onClick5SecLater}>
+                  <KeyboardArrowRightIcon />
                 </IconButton>
               </Tooltip>
 
               <Tooltip title="15秒進む">
                 <IconButton size="small" onClick={onClick15SecLater}>
-                  <SkipNext />
+                  <KeyboardDoubleArrowRightIcon />
                 </IconButton>
               </Tooltip>
             </Grid>
