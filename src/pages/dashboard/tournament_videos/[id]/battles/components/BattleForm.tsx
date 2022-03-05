@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Control, Controller, useForm, UseFormSetValue } from 'react-hook-form';
+import { Control, Controller, useForm, UseFormGetValues, UseFormSetValue } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import YouTube from 'react-youtube';
@@ -9,6 +9,7 @@ import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
+import SwapVertIcon from '@mui/icons-material/SwapVert';
 
 import {
   CharacterSelectOptionFragment,
@@ -16,7 +17,6 @@ import {
   BattleAttributes,
   BattleRound,
   DashboardBattlesPageBattleReslutFragment,
-  DashboardBattlesPageSideFragment,
 } from '@/lib/graphql/types';
 import {
   Box,
@@ -60,15 +60,23 @@ export const BattleForm: React.FC<Props> = ({ youtubeVideoId, players, character
   } = useForm<BattleAttributes>({
     resolver: yupResolver(schema),
     mode: 'onBlur',
-    defaultValues: battle && {
-      startSec: battle.startSec,
-      round: battle.round,
-      sides: battle.sides.map(s => ({
-        playerId: s.player.id,
-        characterId: s.character.id,
-        rounds: s.rounds,
-      })),
-    },
+    defaultValues: battle
+      ? {
+          startSec: battle.startSec,
+          round: battle.round,
+          sides: battle.sides.map(s => ({
+            playerId: s.player.id,
+            characterId: s.character.id,
+            rounds: s.rounds,
+          })),
+        }
+      : {
+          startSec: 0,
+          sides: [
+            { playerId: players[0].id, characterId: characters[0].id, rounds: 3 },
+            { playerId: players[0].id, characterId: characters[0].id, rounds: 3 },
+          ],
+        },
   });
 
   const onClickGetPlayerTime = () => {
@@ -104,6 +112,13 @@ export const BattleForm: React.FC<Props> = ({ youtubeVideoId, players, character
     if (!youTubePlayer) return;
 
     youTubePlayer.seekTo(youTubePlayer.getCurrentTime() + 15, true);
+  };
+
+  const onClickSwapSides = () => {
+    const left = getValues('sides.0');
+    const right = getValues('sides.1');
+    setValue('sides.0', { ...right });
+    setValue('sides.1', { ...left });
   };
 
   return (
@@ -181,6 +196,12 @@ export const BattleForm: React.FC<Props> = ({ youtubeVideoId, players, character
                   <KeyboardDoubleArrowRightIcon />
                 </IconButton>
               </Tooltip>
+
+              <Tooltip title="サイド入れ替え">
+                <IconButton size="small" onClick={onClickSwapSides}>
+                  <SwapVertIcon />
+                </IconButton>
+              </Tooltip>
             </Grid>
 
             <Grid item xs={4}>
@@ -213,18 +234,22 @@ export const BattleForm: React.FC<Props> = ({ youtubeVideoId, players, character
           <Grid container spacing={2} mt={1}>
             <SideForm
               index={0}
-              side={battle?.sides[0]}
               players={players}
               characters={characters}
               control={control}
+              playerId={getValues(`sides.0.playerId`)}
+              characterId={getValues(`sides.0.characterId`)}
+              getValues={getValues}
               setValue={setValue}
             />
             <SideForm
               index={1}
-              side={battle?.sides[1]}
               players={players}
               characters={characters}
               control={control}
+              playerId={getValues(`sides.1.playerId`)}
+              characterId={getValues(`sides.1.characterId`)}
+              getValues={getValues}
               setValue={setValue}
             />
           </Grid>
@@ -242,55 +267,82 @@ export const BattleForm: React.FC<Props> = ({ youtubeVideoId, players, character
 
 interface SideFormProps {
   index: 0 | 1;
-  side?: DashboardBattlesPageSideFragment;
+  characterId?: string;
+  playerId?: string;
   players: PlayerSelectOptionFragment[];
   characters: CharacterSelectOptionFragment[];
   control: Control<BattleAttributes>;
+  getValues: UseFormGetValues<BattleAttributes>;
   setValue: UseFormSetValue<BattleAttributes>;
 }
 
-export const SideForm: React.FC<SideFormProps> = ({ index, side, players, characters, control, setValue }) => {
-  const player = side && players.filter(p => p.id === side.player.id)[0];
-  const character = side && characters.filter(c => c.id === side.character.id)[0];
-
+export const SideForm: React.FC<SideFormProps> = ({ index, players, characters, control, setValue }) => {
   return (
     <>
       <Grid item xs={5}>
-        <Autocomplete<PlayerSelectOptionFragment, undefined, true>
-          options={players}
-          defaultValue={player}
-          getOptionLabel={player => `${player.name}(${player.slug})`}
-          filterOptions={createFilterOptions({
-            stringify: player => {
-              const targets = [player.name, player.slug];
-              if (player.tonamelId) targets.push(player.tonamelId);
-              if (player.smashggId) targets.push(player.smashggId);
+        <Controller
+          control={control}
+          name={`sides.${index}.playerId`}
+          defaultValue={players[0].id}
+          render={({ field }) => {
+            const playerId = field.value;
+            const player = playerId && players.filter(p => p.id === playerId)[0];
 
-              return targets.join(' ');
-            },
-          })}
-          onChange={(e, player) => {
-            if (player) setValue(`sides.${index}.playerId`, player.id);
+            return (
+              <Autocomplete<PlayerSelectOptionFragment, undefined, true>
+                {...field}
+                value={player || undefined}
+                options={players}
+                getOptionLabel={player => `${player.name}(${player.slug})`}
+                filterOptions={createFilterOptions({
+                  stringify: player => {
+                    const targets = [player.name, player.slug];
+                    if (player.tonamelId) targets.push(player.tonamelId);
+                    if (player.smashggId) targets.push(player.smashggId);
+
+                    return targets.join(' ');
+                  },
+                })}
+                onChange={(e, player) => {
+                  if (player) setValue(`sides.${index}.playerId`, player.id);
+                }}
+                style={{ width: 300 }}
+                renderInput={params => (
+                  <TextField {...params} label="プレイヤー" variant="outlined" fullWidth size="small" />
+                )}
+                disableClearable
+              />
+            );
           }}
-          style={{ width: 300 }}
-          renderInput={params => <TextField {...params} label="プレイヤー" variant="outlined" fullWidth size="small" />}
-          disableClearable
         />
       </Grid>
 
       <Grid item xs={5}>
-        <Autocomplete<CharacterSelectOptionFragment, undefined, true>
-          options={characters}
-          defaultValue={character}
-          getOptionLabel={character => `${character.name}(${character.slug})`}
-          onChange={(e, character) => {
-            if (character) setValue(`sides.${index}.characterId`, character.id);
+        <Controller
+          control={control}
+          name={`sides.${index}.characterId`}
+          defaultValue={characters[0].id}
+          render={({ field }) => {
+            const characterId = field.value;
+            const character = characterId && characters.filter(c => c.id === characterId)[0];
+
+            return (
+              <Autocomplete<CharacterSelectOptionFragment, undefined, true>
+                {...field}
+                value={character || undefined}
+                options={characters}
+                getOptionLabel={character => `${character.name}(${character.slug})`}
+                onChange={(e, character) => {
+                  if (character) setValue(`sides.${index}.characterId`, character.id);
+                }}
+                style={{ width: 300 }}
+                renderInput={params => (
+                  <TextField {...params} label="キャラクター" variant="outlined" fullWidth size="small" />
+                )}
+                disableClearable
+              />
+            );
           }}
-          style={{ width: 300 }}
-          renderInput={params => (
-            <TextField {...params} label="キャラクター" variant="outlined" fullWidth size="small" />
-          )}
-          disableClearable
         />
       </Grid>
 
