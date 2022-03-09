@@ -18,22 +18,22 @@ const setTocLinks = (slateContent: Descendant[]): TocRow[] => {
   slateContent.forEach(element => {
     if (!(element.type === 'heading-one' || element.type === 'heading-two')) return;
 
-    const text = element.children
+    const title = element.children
       .filter(e => e.text && !e.icon)
       .map(e => e.text)
       .join();
 
-    let title: string;
-    if (counts[text]) {
-      counts[text] += 1;
-      title = `${text}-${counts[text]}`;
+    let id: string;
+    if (counts[title]) {
+      counts[title] += 1;
+      id = `${title}-${counts[title]}`;
     } else {
-      counts[text] = 1;
-      title = text;
+      counts[title] = 1;
+      id = title;
     }
 
-    element.id = title;
-    tocRows.push({ title, lebel: element.type === 'heading-one' ? 1 : 2 });
+    element.id = id;
+    tocRows.push({ title, id, lebel: element.type === 'heading-one' ? 1 : 2 });
   });
 
   return tocRows;
@@ -46,7 +46,7 @@ const Toc: React.FC<{ tocRows: TocRow[] }> = ({ tocRows }) => {
 
       <List component="nav" dense>
         {tocRows.map((tocRow, i) => (
-          <ListItemButton key={i} component="a" href={`#${tocRow.title}`} sx={{ pl: tocRow.lebel === 2 ? 4 : 0 }}>
+          <ListItemButton key={i} component="a" href={`#${tocRow.id}`} sx={{ pl: tocRow.lebel === 2 ? 4 : 0 }}>
             {tocRow.title}
           </ListItemButton>
         ))}
@@ -57,6 +57,7 @@ const Toc: React.FC<{ tocRows: TocRow[] }> = ({ tocRows }) => {
 
 export interface TocRow {
   title: string;
+  id: string;
   lebel: 1 | 2;
 }
 
