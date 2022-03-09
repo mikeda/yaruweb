@@ -4,8 +4,8 @@ import { HistoryEditor } from 'slate-history';
 
 export type BlockQuoteElement = { type: 'block-quote'; children: Descendant[] };
 export type BulletedListElement = { type: 'bulleted-list'; children: Descendant[] };
-export type HeadingOneElement = { type: 'heading-one'; children: CustomText[] };
-export type HeadingTwoElement = { type: 'heading-two'; children: CustomText[] };
+export type HeadingOneElement = { type: 'heading-one'; id?: string; children: CustomText[] };
+export type HeadingTwoElement = { type: 'heading-two'; id?: string; children: CustomText[] };
 export type ImageElement = { type: 'image'; url: string; children: CustomText[] };
 export type LinkElement = { type: 'link'; url: string; children: CustomText[] };
 export type ListItemElement = { type: 'list-item'; children: Descendant[] };
