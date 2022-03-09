@@ -25,9 +25,17 @@ export const Element: React.FC<Props> = ({ attributes, children, element }) => {
     case 'block-quote':
       return <blockquote {...attributes}>{children}</blockquote>;
     case 'heading-one':
-      return <HeadingOne attributes={attributes}>{children}</HeadingOne>;
+      return (
+        <HeadingOne attributes={attributes} id={element.id}>
+          {children}
+        </HeadingOne>
+      );
     case 'heading-two':
-      return <HeadingTwo attributes={attributes}>{children}</HeadingTwo>;
+      return (
+        <HeadingTwo attributes={attributes} id={element.id}>
+          {children}
+        </HeadingTwo>
+      );
     case 'bulleted-list':
       return <BulletedList attributes={attributes}>{children}</BulletedList>;
     case 'list-item':
