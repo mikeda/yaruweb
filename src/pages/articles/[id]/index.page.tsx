@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
 import {
@@ -17,7 +17,6 @@ import dayjs from '@/lib/dayjs';
 import { ArticleBody, ArticleCard, FavButton } from '@/components';
 import { NO_IMAGE_URL } from '@/lib/Assets';
 import { ParsedUrlQuery } from 'querystring';
-import { Descendant } from 'slate';
 
 const useStyles = makeStyles({
   mainImage: {
@@ -29,7 +28,6 @@ const useStyles = makeStyles({
 
 const Page: React.FC<ArticlePageArticleQuery> = ({ article }) => {
   const classes = useStyles();
-  const slateContent = useMemo<Descendant[]>(() => JSON.parse(article.content), []);
 
   return (
     <Content activeTab="articles" title={article.title} breadcrumb={<Breadcrumbs to="article" article={article} />}>
@@ -50,7 +48,7 @@ const Page: React.FC<ArticlePageArticleQuery> = ({ article }) => {
         <FavButton articleId={article.id} favsCount={article.favsCount} />
       </Box>
 
-      <ArticleBody slateContent={slateContent} />
+      <ArticleBody content={article.content} />
 
       <Box mt={4}>
         <Typography variant="h2" gutterBottom>

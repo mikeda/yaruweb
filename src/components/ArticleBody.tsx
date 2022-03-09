@@ -8,7 +8,7 @@ import { Leaf } from './ArticleElement/Leaf';
 import theme from '@/theme';
 
 interface Props {
-  slateContent: Descendant[];
+  content: string;
 }
 
 const setTocLinks = (slateContent: Descendant[]): TocRow[] => {
@@ -60,13 +60,13 @@ export interface TocRow {
   lebel: 1 | 2;
 }
 
-export const ArticleBody: React.FC<Props> = ({ slateContent }) => {
+export const ArticleBody: React.FC<Props> = ({ content }) => {
   const renderElement = useCallback(props => <Element {...props} />, []);
   const renderLeaf = useCallback(props => <Leaf {...props} />, []);
   const onChange = useCallback(() => {}, []);
-  const value = useMemo<Descendant[]>(() => slateContent, []);
+  const value = useMemo<Descendant[]>(() => JSON.parse(content), []);
   const editor = useMemo(() => withReact(createEditor()), []);
-  const tocRows = useMemo(() => setTocLinks(slateContent), []);
+  const tocRows = useMemo(() => setTocLinks(value), []);
 
   return (
     <>
