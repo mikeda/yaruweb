@@ -61,25 +61,27 @@ interface ReversalMove {
 const AttackListItem: React.FC<AttackMove> = ({ move, attack }) => {
   return (
     <Stack spacing={1} sx={{ paddingBottom: 1 }}>
-      <AttackLabels attack={attack} />
-
-      <DetailItem label="判定">
-        <Stack direction="row" divider={<ArrowRight />} spacing={1}>
-          {attack.heights.map((h, i) => (
-            <Typography key={i} variant="body2">
-              {AttackTypeEnumText[h]}
-            </Typography>
-          ))}
-        </Stack>
-      </DetailItem>
-
-      {attack.damages.length > 1 && (
-        <DetailItem label="ダメージ">
-          {attack.damages.reduce((sum, d) => sum + d)}（{attack.damages.join(', ')}）
+      <Stack direction="row" divider={<Divider orientation="vertical" flexItem />} spacing={1}>
+        <DetailItem label="判定">
+          <Stack direction="row" divider={<ArrowRight />} spacing={1}>
+            {attack.heights.map((h, i) => (
+              <Typography key={i} variant="body2">
+                {AttackTypeEnumText[h]}
+              </Typography>
+            ))}
+          </Stack>
         </DetailItem>
-      )}
 
-      <DetailItem label="発生">{attack.startUpFrame ? `${attack.startUpFrame}F` : '-'}</DetailItem>
+        {attack.damages.length > 1 && (
+          <DetailItem label="ダメージ">
+            {attack.damages.reduce((sum, d) => sum + d)}（{attack.damages.join(', ')}）
+          </DetailItem>
+        )}
+
+        <DetailItem label="発生">{attack.startUpFrame ? `${attack.startUpFrame}F` : '-'}</DetailItem>
+
+        {attack.reach && <DetailItem label="リーチ">{attack.reach}</DetailItem>}
+      </Stack>
 
       <Stack direction="row" divider={<Divider orientation="vertical" flexItem />} spacing={1}>
         <DetailItem label="ガード">
@@ -92,6 +94,8 @@ const AttackListItem: React.FC<AttackMove> = ({ move, attack }) => {
           {attack.counterFrame ? frameText(attack.counterFrame) : AttackMoveResultText[attack.counterResult]}
         </DetailItem>
       </Stack>
+
+      <AttackLabels attack={attack} />
 
       <ListItemFooter move={move} />
     </Stack>
