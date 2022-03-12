@@ -3,6 +3,7 @@ fragment attackMove on AttackMove {
   startUpFrame
   heights
   damages
+  reach
   blockResult
   blockStatus
   blockFrame

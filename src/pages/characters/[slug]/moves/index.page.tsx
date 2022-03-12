@@ -159,12 +159,9 @@ const AttackListItem: React.FC<AttackMove> = ({ move, attack }) => {
       frame: attack.counterFrame ? frameText(attack.counterFrame) : AttackMoveResultText[attack.blockResult],
     },
   ];
-  if (attack.startUpFrame) {
-    frames.unshift({ label: '発生', frame: frameText(attack.startUpFrame) });
-  }
 
   return (
-    <Stack spacing={1} mt={1}>
+    <Stack spacing={1}>
       <AttackLabels attack={attack} />
 
       <Typography variant="body2">
@@ -172,6 +169,9 @@ const AttackListItem: React.FC<AttackMove> = ({ move, attack }) => {
         {attack.damages.length > 0 && ` / ダメージ ${attack.damages.join(',')}`}
       </Typography>
 
+      <Typography variant="body2">
+        発生 {attack.startUpFrame ? frameText(attack.startUpFrame) : '-'} / リーチ {attack.reach ? attack.reach : '-'}
+      </Typography>
       <Typography variant="body2">{frames.map(frame => `${frame.label} ${frame.frame}`).join(' / ')}</Typography>
 
       <ListItemFooter move={move} />

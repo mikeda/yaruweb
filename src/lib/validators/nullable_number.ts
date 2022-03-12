@@ -5,3 +5,8 @@ export const nullableNumber = yup
   .integer()
   .nullable()
   .transform((value, originalValue) => (originalValue === '' ? null : value));
+
+export const nullableFloat = yup
+  .number()
+  .nullable()
+  .transform((value, originalValue) => (originalValue === '' ? null : value));
