@@ -11,7 +11,7 @@ import {
   MovePositionSelectFragment,
 } from '@/lib/graphql/types';
 import { Controller, useForm } from 'react-hook-form';
-import { nullableNumber } from '@/lib/validators/nullable_number';
+import { nullableFloat, nullableNumber } from '@/lib/validators/nullable_number';
 import {
   Box,
   Button,
@@ -40,6 +40,7 @@ const schema = yup.object().shape({
     name: yup.string().required(),
   }),
   attack: yup.object({
+    reach: nullableFloat,
     startUpFrame: nullableNumber,
     blockFrame: nullableNumber,
     hitFrame: nullableNumber,
@@ -147,6 +148,7 @@ export const AttackMoveForm: React.FC<Props> = ({ move, moves, onSubmit, copy = 
                   startUpFrame: move.moveable.startUpFrame,
                   heights: move.moveable.heights,
                   damages: move.moveable.damages,
+                  reach: move.moveable.reach,
                   blockResult: move.moveable.blockResult,
                   blockFrame: move.moveable.blockFrame,
                   blockStatus: move.moveable.blockStatus,
@@ -318,12 +320,12 @@ export const AttackMoveForm: React.FC<Props> = ({ move, moves, onSubmit, copy = 
           </Box>
 
           <Box mt={4}>
-            <Typography variant="h4" gutterBottom>
-              発生
-            </Typography>
-
             <Grid container spacing={2}>
               <Grid item xs={12} sm={4}>
+                <Typography variant="h4" gutterBottom>
+                  発生
+                </Typography>
+
                 <Controller
                   name="attack.startUpFrame"
                   control={control}
@@ -336,6 +338,27 @@ export const AttackMoveForm: React.FC<Props> = ({ move, moves, onSubmit, copy = 
                       fullWidth
                       error={Boolean(errors.attack?.startUpFrame)}
                       helperText={errors.attack?.startUpFrame?.message}
+                    />
+                  )}
+                />
+              </Grid>
+
+              <Grid item xs={12} sm={4}>
+                <Typography variant="h4" gutterBottom>
+                  リーチ
+                </Typography>
+
+                <Controller
+                  name="attack.reach"
+                  control={control}
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      type="number"
+                      size="small"
+                      fullWidth
+                      error={Boolean(errors.attack?.reach)}
+                      helperText={errors.attack?.reach?.message}
                     />
                   )}
                 />
