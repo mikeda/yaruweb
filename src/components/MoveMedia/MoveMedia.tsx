@@ -72,6 +72,7 @@ const AttackListItem: React.FC<AttackMove> = ({ move, attack }) => {
           </Stack>
         </DetailItem>
 
+        {attack.damages.length === 1 && <DetailItem label="ダメージ">{attack.damages[0]}</DetailItem>}
         {attack.damages.length > 1 && (
           <DetailItem label="ダメージ">
             {attack.damages.reduce((sum, d) => sum + d)}（{attack.damages.join(', ')}）
