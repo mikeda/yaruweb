@@ -2109,10 +2109,10 @@
   dependencies:
     "@types/node" "*"
 
-"@types/youtube-player@^5.5.5":
-  version "5.5.5"
-  resolved "https://registry.yarnpkg.com/@types/youtube-player/-/youtube-player-5.5.5.tgz#4a9ae54a3bab14844ddce7284b72f942d7b1153b"
-  integrity sha512-BuasP4ZumO2W/MSrL2eOFD5wG35kBRpkoFSwuCvdwAcjTyJAgMWBodu2KW6jud6o3IE03MoeOSRNHmWyC5LeNA==
+"@types/youtube-player@^5.5.6":
+  version "5.5.6"
+  resolved "https://registry.yarnpkg.com/@types/youtube-player/-/youtube-player-5.5.6.tgz#d9ee9c8c6cc6f313cd7d52ef94d303148791c7b9"
+  integrity sha512-RcWWUEuAZZX24dG55Xk558/HHCZxYf798/xPnV6wTwDlUF8HZNAmqyXyi+4QgN2l9juP9GRjCwILxXLSPKQBBw==
 
 "@types/yup@^0.29.13":
   version "0.29.13"
