@@ -30,7 +30,6 @@ import {
 } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import { DEFAULT_AVATAR_URL, NO_IMAGE_URL, placeIconUrl } from '@/lib/Assets';
-import { TournamentVideoPlayer } from './components/TournamentVideoPlayer';
 import { ParsedUrlQuery } from 'querystring';
 import { pagesPath } from '@/lib/$path';
 
@@ -112,19 +111,24 @@ const PageContent: React.FC<TournamentPageQuery> = ({ tournament }) => {
 
       <Box mt={4}>
         <Typography variant="h2" gutterBottom>
-          大会動画
+          動画
         </Typography>
 
         {tournament.videos.length === 0 ? (
           <NotFound>動画が登録されていません。</NotFound>
         ) : (
-          <>
+          <List>
             {tournament.videos.map(tournamentVideo => (
-              <Box key={tournamentVideo.id} mb={4}>
-                <TournamentVideoPlayer tournamentVideo={tournamentVideo} />
-              </Box>
+              <Link key={tournamentVideo.id} href={pagesPath.tournament_videos._id(tournamentVideo.id).$url()} passHref>
+                <ListItem component="a" href="aaa">
+                  <ListItemText
+                    primary={tournamentVideo.title}
+                    secondary={`対戦登録 ${tournamentVideo.battlesCount}`}
+                  />
+                </ListItem>
+              </Link>
             ))}
-          </>
+          </List>
         )}
       </Box>
     </>
