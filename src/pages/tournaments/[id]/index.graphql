@@ -1,24 +1,3 @@
-fragment TournamentPageBattle on Battle {
-  id
-  round
-  startSec
-
-  sides {
-    player { name }
-    character { faceImageUrl }
-    rounds
-  }
-}
-
-fragment TournamentPageVideo on TournamentVideo {
-  id
-  youtubeVideoId
-
-  battles {
-    ...TournamentPageBattle
-  }
-}
-
 query TournamentPage($tournamentId: ID!) {
   tournament(tournamentId: $tournamentId) {
     id
@@ -42,7 +21,9 @@ query TournamentPage($tournamentId: ID!) {
     }
 
     videos {
-      ...TournamentPageVideo
+      id
+      title
+      battlesCount
     }
   }
 }

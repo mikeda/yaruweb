@@ -5,7 +5,7 @@ import { Avatar, Box, ListItem, ListItemText } from '@mui/material';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
 
-import { TournamentPageBattleFragment } from '@/lib/graphql/types';
+import { TournamentVideoPageBattleFragment } from '@/lib/graphql/types';
 import { formatSec } from '@/lib';
 import { BattleRoundText } from '@/lib/graphql/enum_texts';
 import theme from '@/theme';
@@ -27,7 +27,7 @@ const useStyles = makeStyles(() =>
 );
 
 interface Props {
-  battle: TournamentPageBattleFragment;
+  battle: TournamentVideoPageBattleFragment;
   selected: boolean;
   onClick: () => void;
 }
