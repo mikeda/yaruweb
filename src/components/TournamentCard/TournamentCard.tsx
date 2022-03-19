@@ -77,15 +77,6 @@ export const TournamentCard: React.FC<Props> = ({ tournament }) => {
                 />
               </ListItem>
             )}
-
-            {tournament.videosCount > 0 && (
-              <ListItem disableGutters>
-                <ListItemIcon className={classes.listItemIcon}>
-                  <YouTubeIcon fontSize="small" style={{ fill: colors.youtube }} />
-                </ListItemIcon>
-                <ListItemText primary="動画あり" className={classes.listItemText} />
-              </ListItem>
-            )}
           </List>
         </CardContent>
       </CardActionArea>
