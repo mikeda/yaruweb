@@ -82,8 +82,9 @@ export const BattleForm: React.FC<Props> = ({ youtubeVideoId, players, character
   const onClickGetPlayerTime = () => {
     if (!youTubePlayer) return;
 
-    const playerSec = youTubePlayer.getCurrentTime();
-    setValue('startSec', Math.floor(playerSec));
+    youTubePlayer.getCurrentTime().then(playerSec => {
+      setValue('startSec', Math.floor(playerSec));
+    });
   };
 
   const onClickSetPlayerTime = () => {
@@ -93,25 +94,33 @@ export const BattleForm: React.FC<Props> = ({ youtubeVideoId, players, character
   const onClick5SecAgo = () => {
     if (!youTubePlayer) return;
 
-    youTubePlayer.seekTo(youTubePlayer.getCurrentTime() - 5, true);
+    youTubePlayer.getCurrentTime().then(playerSec => {
+      youTubePlayer.seekTo(playerSec - 5, true);
+    });
   };
 
   const onClick5SecLater = () => {
     if (!youTubePlayer) return;
 
-    youTubePlayer.seekTo(youTubePlayer.getCurrentTime() + 5, true);
+    youTubePlayer.getCurrentTime().then(playerSec => {
+      youTubePlayer.seekTo(playerSec + 5, true);
+    });
   };
 
   const onClick15SecAgo = () => {
     if (!youTubePlayer) return;
 
-    youTubePlayer.seekTo(youTubePlayer.getCurrentTime() - 15, true);
+    youTubePlayer.getCurrentTime().then(playerSec => {
+      youTubePlayer.seekTo(playerSec - 15, true);
+    });
   };
 
   const onClick15SecLater = () => {
     if (!youTubePlayer) return;
 
-    youTubePlayer.seekTo(youTubePlayer.getCurrentTime() + 15, true);
+    youTubePlayer.getCurrentTime().then(playerSec => {
+      youTubePlayer.seekTo(playerSec + 15, true);
+    });
   };
 
   const onClickSwapSides = () => {
