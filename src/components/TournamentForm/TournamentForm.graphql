@@ -1,4 +1,5 @@
 fragment TournamentForm on Tournament {
+  id
   organizerId
   name
   url

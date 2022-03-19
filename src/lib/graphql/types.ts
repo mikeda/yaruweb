@@ -1739,6 +1739,8 @@ export type TournamentVideo = {
   battlesCount: Scalars['Int'];
   channel: Channel;
   id: Scalars['ID'];
+  label?: Maybe<Scalars['String']>;
+  publishedAt?: Maybe<Scalars['ISO8601DateTime']>;
   thumbnailUrl: Scalars['String'];
   title: Scalars['String'];
   tournament: Tournament;
@@ -1747,6 +1749,8 @@ export type TournamentVideo = {
 };
 
 export type TournamentVideoAttributes = {
+  label?: InputMaybe<Scalars['String']>;
+  publishedAt: Scalars['String'];
   title: Scalars['String'];
 };
 
@@ -2445,6 +2449,8 @@ export type PlayerBreadcrumbsFragment = { __typename?: 'Player', slug: string, n
 
 export type TournamentBreadcrumbsFragment = { __typename?: 'Tournament', id: string, name: string };
 
+export type TournamentVideoBreadcrumbsFragment = { __typename?: 'TournamentVideo', id: string, label?: string | null, tournament: { __typename?: 'Tournament', id: string, name: string } };
+
 export type ArticlePageArticleFragment = { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, favsCount: number, status: ArticleStatus, category: ArticleCategory, content: string, author: { __typename?: 'User', name: string, avatarUrl: string }, relatedArticles: Array<{ __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, faved: boolean, favsCount: number, status: ArticleStatus, author: { __typename?: 'User', name: string, avatarUrl: string } }> };
 
 export type ArticlePageArticleQueryVariables = Exact<{
@@ -2836,6 +2842,23 @@ export type DashboardBattlesPageBattlesQueryVariables = Exact<{
 
 
 export type DashboardBattlesPageBattlesQuery = { __typename?: 'Query', battles: { __typename?: 'BattleCollection', records: Array<{ __typename?: 'Battle', id: string, round?: BattleRound | null, startSec: number, sides: Array<{ __typename?: 'BattleSide', rounds: number, player: { __typename?: 'Player', id: string, name: string }, character: { __typename?: 'Character', id: string, faceImageUrl: string } }> }> } };
+
+export type DashboardTournamentVideoEditPageQueryVariables = Exact<{
+  tournamentVideoId: Scalars['ID'];
+}>;
+
+
+export type DashboardTournamentVideoEditPageQuery = { __typename?: 'Query', tournamentVideo: { __typename?: 'TournamentVideo', title: string, label?: string | null, publishedAt?: string | null, id: string, tournament: { __typename?: 'Tournament', id: string, name: string } } };
+
+export type TournamentVideoFormFragment = { __typename?: 'TournamentVideo', title: string, label?: string | null, publishedAt?: string | null };
+
+export type DashboardTournamentVideoEditPageUpdateMutationVariables = Exact<{
+  tournamentVideoId: Scalars['ID'];
+  attributes: TournamentVideoAttributes;
+}>;
+
+
+export type DashboardTournamentVideoEditPageUpdateMutation = { __typename?: 'Mutation', updateTournamentVideo?: { __typename?: 'UpdateTournamentVideoPayload', tournamentVideo: { __typename?: 'TournamentVideo', title: string, label?: string | null, publishedAt?: string | null } } | null };
 
 export type DashboardTournamentEditPageQueryVariables = Exact<{
   tournamentId: Scalars['ID'];
@@ -3470,6 +3493,15 @@ export const TournamentBreadcrumbsFragmentDoc = gql`
   name
 }
     `;
+export const TournamentVideoBreadcrumbsFragmentDoc = gql`
+    fragment TournamentVideoBreadcrumbs on TournamentVideo {
+  id
+  label
+  tournament {
+    ...TournamentBreadcrumbs
+  }
+}
+    ${TournamentBreadcrumbsFragmentDoc}`;
 export const ArticleCardFragmentDoc = gql`
     fragment ArticleCard on Article {
   id
@@ -3636,6 +3668,13 @@ export const DashboardBattlesPageBattleReslutFragmentDoc = gql`
   }
 }
     ${DashboardBattlesPageSideFragmentDoc}`;
+export const TournamentVideoFormFragmentDoc = gql`
+    fragment TournamentVideoForm on TournamentVideo {
+  title
+  label
+  publishedAt
+}
+    `;
 export const DashboardTournamentsPageTournamentFragmentDoc = gql`
     fragment DashboardTournamentsPageTournament on Tournament {
   id
@@ -7383,6 +7422,81 @@ export function useDashboardBattlesPageBattlesLazyQuery(baseOptions?: Apollo.Laz
 export type DashboardBattlesPageBattlesQueryHookResult = ReturnType<typeof useDashboardBattlesPageBattlesQuery>;
 export type DashboardBattlesPageBattlesLazyQueryHookResult = ReturnType<typeof useDashboardBattlesPageBattlesLazyQuery>;
 export type DashboardBattlesPageBattlesQueryResult = Apollo.QueryResult<DashboardBattlesPageBattlesQuery, DashboardBattlesPageBattlesQueryVariables>;
+export const DashboardTournamentVideoEditPageDocument = gql`
+    query DashboardTournamentVideoEditPage($tournamentVideoId: ID!) {
+  tournamentVideo(tournamentVideoId: $tournamentVideoId) {
+    ...TournamentVideoForm
+    ...TournamentVideoBreadcrumbs
+  }
+}
+    ${TournamentVideoFormFragmentDoc}
+${TournamentVideoBreadcrumbsFragmentDoc}`;
+
+/**
+ * __useDashboardTournamentVideoEditPageQuery__
+ *
+ * To run a query within a React component, call `useDashboardTournamentVideoEditPageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useDashboardTournamentVideoEditPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useDashboardTournamentVideoEditPageQuery({
+ *   variables: {
+ *      tournamentVideoId: // value for 'tournamentVideoId'
+ *   },
+ * });
+ */
+export function useDashboardTournamentVideoEditPageQuery(baseOptions: Apollo.QueryHookOptions<DashboardTournamentVideoEditPageQuery, DashboardTournamentVideoEditPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<DashboardTournamentVideoEditPageQuery, DashboardTournamentVideoEditPageQueryVariables>(DashboardTournamentVideoEditPageDocument, options);
+      }
+export function useDashboardTournamentVideoEditPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<DashboardTournamentVideoEditPageQuery, DashboardTournamentVideoEditPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<DashboardTournamentVideoEditPageQuery, DashboardTournamentVideoEditPageQueryVariables>(DashboardTournamentVideoEditPageDocument, options);
+        }
+export type DashboardTournamentVideoEditPageQueryHookResult = ReturnType<typeof useDashboardTournamentVideoEditPageQuery>;
+export type DashboardTournamentVideoEditPageLazyQueryHookResult = ReturnType<typeof useDashboardTournamentVideoEditPageLazyQuery>;
+export type DashboardTournamentVideoEditPageQueryResult = Apollo.QueryResult<DashboardTournamentVideoEditPageQuery, DashboardTournamentVideoEditPageQueryVariables>;
+export const DashboardTournamentVideoEditPageUpdateDocument = gql`
+    mutation DashboardTournamentVideoEditPageUpdate($tournamentVideoId: ID!, $attributes: TournamentVideoAttributes!) {
+  updateTournamentVideo(
+    input: {tournamentVideoId: $tournamentVideoId, attributes: $attributes}
+  ) {
+    tournamentVideo {
+      ...TournamentVideoForm
+    }
+  }
+}
+    ${TournamentVideoFormFragmentDoc}`;
+export type DashboardTournamentVideoEditPageUpdateMutationFn = Apollo.MutationFunction<DashboardTournamentVideoEditPageUpdateMutation, DashboardTournamentVideoEditPageUpdateMutationVariables>;
+
+/**
+ * __useDashboardTournamentVideoEditPageUpdateMutation__
+ *
+ * To run a mutation, you first call `useDashboardTournamentVideoEditPageUpdateMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDashboardTournamentVideoEditPageUpdateMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [dashboardTournamentVideoEditPageUpdateMutation, { data, loading, error }] = useDashboardTournamentVideoEditPageUpdateMutation({
+ *   variables: {
+ *      tournamentVideoId: // value for 'tournamentVideoId'
+ *      attributes: // value for 'attributes'
+ *   },
+ * });
+ */
+export function useDashboardTournamentVideoEditPageUpdateMutation(baseOptions?: Apollo.MutationHookOptions<DashboardTournamentVideoEditPageUpdateMutation, DashboardTournamentVideoEditPageUpdateMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DashboardTournamentVideoEditPageUpdateMutation, DashboardTournamentVideoEditPageUpdateMutationVariables>(DashboardTournamentVideoEditPageUpdateDocument, options);
+      }
+export type DashboardTournamentVideoEditPageUpdateMutationHookResult = ReturnType<typeof useDashboardTournamentVideoEditPageUpdateMutation>;
+export type DashboardTournamentVideoEditPageUpdateMutationResult = Apollo.MutationResult<DashboardTournamentVideoEditPageUpdateMutation>;
+export type DashboardTournamentVideoEditPageUpdateMutationOptions = Apollo.BaseMutationOptions<DashboardTournamentVideoEditPageUpdateMutation, DashboardTournamentVideoEditPageUpdateMutationVariables>;
 export const DashboardTournamentEditPageDocument = gql`
     query DashboardTournamentEditPage($tournamentId: ID!) {
   tournament(tournamentId: $tournamentId) {

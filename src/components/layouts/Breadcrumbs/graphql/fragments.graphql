@@ -44,3 +44,12 @@ fragment TournamentBreadcrumbs on Tournament {
   id
   name
 }
+
+fragment TournamentVideoBreadcrumbs on TournamentVideo {
+  id
+  label
+
+  tournament {
+    ...TournamentBreadcrumbs
+  }
+}
