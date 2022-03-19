@@ -17,7 +17,6 @@ import makeStyles from '@mui/styles/makeStyles';
 import { Link } from '../Link';
 import { NO_IMAGE_URL } from '@/lib/Assets';
 import dayjs from '@/lib/dayjs';
-import YouTubeIcon from '@mui/icons-material/YouTube';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import ScheduleIcon from '@mui/icons-material/Schedule';
 import { colors } from '@/colors';
