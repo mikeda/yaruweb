@@ -98,6 +98,13 @@ const MenuButton: React.FC<{ tournamentVideoId: string; onDestroy: () => void }>
       <Menu id="video-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
         <MenuItem
           onClick={() => {
+            router.push(pagesPath.dashboard.tournament_videos._id(tournamentVideoId).edit.$url());
+          }}
+        >
+          編集する
+        </MenuItem>
+        <MenuItem
+          onClick={() => {
             router.push(pagesPath.dashboard.tournament_videos._id(tournamentVideoId).battles.$url());
           }}
         >

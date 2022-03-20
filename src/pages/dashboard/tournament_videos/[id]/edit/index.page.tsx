@@ -1,0 +1,35 @@
+import React from 'react';
+
+import { TournamentVideoAttributes } from '@/lib/graphql/types';
+import { useRouter } from 'next/router';
+import { TournamentVideoEditForm } from './components/TournamentVideoEditForm';
+import { DashboardContent, DashboardBreadcrumbs } from '@/components';
+import { useTournamentVideo } from './hooks/useTournamentVideo';
+import { useUpdate } from './hooks/useUpdate';
+
+const Page: React.FC = () => {
+  const router = useRouter();
+  const tournamentVideoId = router.query.id as string | undefined;
+
+  const { tournamentVideo } = useTournamentVideo(tournamentVideoId);
+  const { update } = useUpdate(() => {
+    router.back();
+  });
+
+  if (!tournamentVideo) return null;
+
+  const onSubmit = (attributes: TournamentVideoAttributes) => {
+    update({ variables: { tournamentVideoId: tournamentVideo.id, attributes } });
+  };
+
+  return (
+    <DashboardContent
+      title="大会を編集"
+      breadcrumb={<DashboardBreadcrumbs to="tournamentVideoEdit" tournamentVideo={tournamentVideo} />}
+    >
+      <TournamentVideoEditForm tournamentVideo={tournamentVideo} onSubmit={onSubmit} />
+    </DashboardContent>
+  );
+};
+
+export default Page;

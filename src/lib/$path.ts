@@ -135,6 +135,9 @@ export const pagesPath = {
       _id: (id: string | number) => ({
         battles: {
           $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/tournament_videos/[id]/battles' as const, query: { id }, hash: url?.hash })
+        },
+        edit: {
+          $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/tournament_videos/[id]/edit' as const, query: { id }, hash: url?.hash })
         }
       })
     },
