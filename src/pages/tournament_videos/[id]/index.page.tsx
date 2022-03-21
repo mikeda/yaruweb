@@ -11,9 +11,9 @@ import {
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { useRouter } from 'next/router';
 import { YouTubePlayer } from 'youtube-player/dist/types';
-import { Breadcrumbs, Content, Head, YouTubeWrapper } from '@/components';
+import { Breadcrumbs, Content, Head, NotFound, YouTubeWrapper } from '@/components';
 import YouTube from 'react-youtube';
-import { Box, IconButton, List, Paper, Tooltip } from '@mui/material';
+import { Box, IconButton, List, Paper, Tooltip, Typography } from '@mui/material';
 import { BattleListItem } from './components/BattleListItem';
 import makeStyles from '@mui/styles/makeStyles';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
@@ -33,15 +33,18 @@ const PageContent: React.FC<TournamentVideoPageQuery> = ({ tournamentVideo }) =>
   const classes = useStyles();
 
   const hashBattleId = router.asPath.split('#battle_')[1] ?? '';
+  const noBattle = tournamentVideo.battles.length === 0;
 
   const updateBattle = (index: number) => {
+    if (noBattle) return;
+
     setBattleIndex(index);
     youTubePlayer?.seekTo(tournamentVideo.battles[index].startSec, true);
     youTubePlayer?.playVideo();
   };
 
   const onClickSkipPrevious = () => {
-    if (!youTubePlayer) return;
+    if (noBattle || !youTubePlayer) return;
 
     const newIndex = battleIndex + 1;
     if (newIndex >= tournamentVideo.battles.length) return;
@@ -51,7 +54,7 @@ const PageContent: React.FC<TournamentVideoPageQuery> = ({ tournamentVideo }) =>
   };
 
   const onClickSkipNext = () => {
-    if (!youTubePlayer) return;
+    if (noBattle || !youTubePlayer) return;
 
     const newIndex = battleIndex - 1;
     if (newIndex < 0) return;
@@ -61,11 +64,15 @@ const PageContent: React.FC<TournamentVideoPageQuery> = ({ tournamentVideo }) =>
   };
 
   useEffect(() => {
+    if (noBattle) return;
+
     const index = tournamentVideo.battles.findIndex(b => b.id === hashBattleId);
     if (index !== -1) updateBattle(index);
   }, [hashBattleId]);
 
   useEffect(() => {
+    if (noBattle) return;
+
     youTubePlayer?.seekTo(tournamentVideo.battles[battleIndex].startSec, true);
   }, [youTubePlayer]);
 
@@ -81,8 +88,14 @@ const PageContent: React.FC<TournamentVideoPageQuery> = ({ tournamentVideo }) =>
         />
       </YouTubeWrapper>
 
-      {tournamentVideo.battles.length > 0 && (
-        <>
+      <Box mt={4}>
+        <Typography variant="h2" gutterBottom>
+          対戦結果
+        </Typography>
+
+        {tournamentVideo.battles.length > 0 ? (
+          <NotFound>対戦結果が登録されていません。</NotFound>
+        ) : (
           <Box component={Paper}>
             <BattleListItem battle={tournamentVideo.battles[battleIndex]} onClick={() => updateBattle(battleIndex)} />
 
@@ -100,21 +113,8 @@ const PageContent: React.FC<TournamentVideoPageQuery> = ({ tournamentVideo }) =>
               </Tooltip>
             </Box>
           </Box>
-
-          <Box mt={2} component={Paper}>
-            <List className={classes.list}>
-              {tournamentVideo.battles.map((battle, i) => (
-                <BattleListItem
-                  key={battle.id}
-                  battle={battle}
-                  selected={i === battleIndex}
-                  onClick={() => updateBattle(i)}
-                />
-              ))}
-            </List>
-          </Box>
-        </>
-      )}
+        )}
+      </Box>
     </div>
   );
 };

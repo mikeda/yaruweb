@@ -109,9 +109,9 @@ const PageContent: React.FC<TournamentPageQuery> = ({ tournament }) => {
         )}
       </Box>
 
-      <Box mt={4}>
+      <Box mt={4} p={2} component={Paper}>
         <Typography variant="h2" gutterBottom>
-          動画
+          対戦動画
         </Typography>
 
         {tournament.videos.length === 0 ? (
@@ -120,7 +120,7 @@ const PageContent: React.FC<TournamentPageQuery> = ({ tournament }) => {
           <List>
             {tournament.videos.map(tournamentVideo => (
               <Link key={tournamentVideo.id} href={pagesPath.tournament_videos._id(tournamentVideo.id).$url()} passHref>
-                <ListItem component="a" href="aaa">
+                <ListItem component="a">
                   <ListItemText
                     primary={tournamentVideo.title}
                     secondary={`対戦登録 ${tournamentVideo.battlesCount}`}

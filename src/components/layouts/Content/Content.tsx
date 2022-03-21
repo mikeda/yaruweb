@@ -47,7 +47,6 @@ export const Content: React.FC<Props> = ({ title, breadcrumb, activeTab, childre
         </div>
         {children}
       </div>
-      ;
     </>
   );
 };
