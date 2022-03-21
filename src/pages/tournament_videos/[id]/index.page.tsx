@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { ParsedUrlQuery } from 'querystring';
 import {
-  TournamentVideoPageBattleFragment,
   TournamentVideoPageDocument,
   TournamentVideoPageQuery,
   TournamentVideoPathsDocument,
@@ -14,9 +13,11 @@ import { useRouter } from 'next/router';
 import { YouTubePlayer } from 'youtube-player/dist/types';
 import { Breadcrumbs, Content, Head, YouTubeWrapper } from '@/components';
 import YouTube from 'react-youtube';
-import { List, Paper } from '@mui/material';
+import { Box, IconButton, List, Paper, Tooltip } from '@mui/material';
 import { BattleListItem } from './components/BattleListItem';
 import makeStyles from '@mui/styles/makeStyles';
+import SkipNextIcon from '@mui/icons-material/SkipNext';
+import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
 
 const useStyles = makeStyles({
   list: {
@@ -27,28 +28,45 @@ const useStyles = makeStyles({
 
 const PageContent: React.FC<TournamentVideoPageQuery> = ({ tournamentVideo }) => {
   const [youTubePlayer, setYouTubePlayer] = useState<YouTubePlayer>();
-  const [selectedBattle, setSelectedBattle] = useState<TournamentVideoPageBattleFragment>();
+  const [battleIndex, setBattleIndex] = useState<number>(tournamentVideo.battles.length - 1);
   const router = useRouter();
   const classes = useStyles();
 
-  const hashBattleId = router.asPath.split('#battle')[1] ?? '';
+  const hashBattleId = router.asPath.split('#battle_')[1] ?? '';
 
-  const updateBattle = (battle: TournamentVideoPageBattleFragment) => {
-    setSelectedBattle(battle);
-    youTubePlayer?.seekTo(battle.startSec, true);
+  const updateBattle = (index: number) => {
+    setBattleIndex(index);
+    youTubePlayer?.seekTo(tournamentVideo.battles[index].startSec, true);
     youTubePlayer?.playVideo();
   };
 
+  const onClickSkipPrevious = () => {
+    if (!youTubePlayer) return;
+
+    const newIndex = battleIndex + 1;
+    if (newIndex >= tournamentVideo.battles.length) return;
+
+    setBattleIndex(newIndex);
+    youTubePlayer?.seekTo(tournamentVideo.battles[newIndex].startSec, true);
+  };
+
+  const onClickSkipNext = () => {
+    if (!youTubePlayer) return;
+
+    const newIndex = battleIndex - 1;
+    if (newIndex < 0) return;
+
+    setBattleIndex(newIndex);
+    youTubePlayer?.seekTo(tournamentVideo.battles[newIndex].startSec, true);
+  };
+
   useEffect(() => {
-    const battle = tournamentVideo.battles.find(b => b.id === hashBattleId);
-    if (battle) updateBattle(battle);
+    const index = tournamentVideo.battles.findIndex(b => b.id === hashBattleId);
+    if (index !== -1) updateBattle(index);
   }, [hashBattleId]);
 
   useEffect(() => {
-    if (selectedBattle) {
-      youTubePlayer?.seekTo(selectedBattle.startSec, true);
-      youTubePlayer?.playVideo();
-    }
+    youTubePlayer?.seekTo(tournamentVideo.battles[battleIndex].startSec, true);
   }, [youTubePlayer]);
 
   return (
@@ -56,7 +74,7 @@ const PageContent: React.FC<TournamentVideoPageQuery> = ({ tournamentVideo }) =>
       <YouTubeWrapper>
         <YouTube
           videoId={tournamentVideo.youtubeVideoId}
-          opts={{ width: '854', height: '480', playerVars: { playsinline: 1 } }}
+          opts={{ width: '854', height: '480', playerVars: { playsinline: 1, mute: 1 } }}
           onReady={event => {
             setYouTubePlayer(event.target);
           }}
@@ -64,18 +82,38 @@ const PageContent: React.FC<TournamentVideoPageQuery> = ({ tournamentVideo }) =>
       </YouTubeWrapper>
 
       {tournamentVideo.battles.length > 0 && (
-        <Paper>
-          <List className={classes.list}>
-            {tournamentVideo.battles.map(battle => (
-              <BattleListItem
-                key={battle.id}
-                battle={battle}
-                selected={selectedBattle?.id === battle.id}
-                onClick={() => updateBattle(battle)}
-              />
-            ))}
-          </List>
-        </Paper>
+        <>
+          <Box component={Paper}>
+            <BattleListItem battle={tournamentVideo.battles[battleIndex]} onClick={() => updateBattle(battleIndex)} />
+
+            <Box display="flex">
+              <Tooltip title="1つ前の対戦に移動" sx={{ flexGrow: 1 }}>
+                <IconButton size="small" onClick={onClickSkipPrevious}>
+                  <SkipPreviousIcon />
+                </IconButton>
+              </Tooltip>
+
+              <Tooltip title="次の対戦に移動" sx={{ flexGrow: 1 }}>
+                <IconButton size="small" onClick={onClickSkipNext}>
+                  <SkipNextIcon />
+                </IconButton>
+              </Tooltip>
+            </Box>
+          </Box>
+
+          <Box mt={2} component={Paper}>
+            <List className={classes.list}>
+              {tournamentVideo.battles.map((battle, i) => (
+                <BattleListItem
+                  key={battle.id}
+                  battle={battle}
+                  selected={i === battleIndex}
+                  onClick={() => updateBattle(i)}
+                />
+              ))}
+            </List>
+          </Box>
+        </>
       )}
     </div>
   );

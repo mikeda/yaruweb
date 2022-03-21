@@ -27,7 +27,7 @@ export const BattleListItem: React.FC<Props> = ({ battle, last }) => {
   }
   return (
     <Link
-      href={pagesPath.tournament_videos._id(video.id).$url({ hash: `battle${battle.id}` })}
+      href={pagesPath.tournament_videos._id(video.id).$url({ hash: `battle_${battle.id}` })}
       passHref
       underline="none"
     >

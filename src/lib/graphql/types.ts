@@ -2428,7 +2428,7 @@ export type PlayerFormFragment = { __typename?: 'Player', name: string, slug: st
 
 export type TournamentCardFragment = { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: string | null, startsAt: string, videosCount: number, standings: Array<{ __typename?: 'Standing', id: string, place: number, player: { __typename?: 'Player', id: string, name: string } }> };
 
-export type TournamentFormFragment = { __typename?: 'Tournament', organizerId: string, name: string, url: string, streamingUrl?: string | null, startsAt: string, description: string };
+export type TournamentFormFragment = { __typename?: 'Tournament', id: string, organizerId: string, name: string, url: string, streamingUrl?: string | null, startsAt: string, description: string };
 
 export type TournamentFormQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2848,9 +2848,9 @@ export type DashboardTournamentVideoEditPageQueryVariables = Exact<{
 }>;
 
 
-export type DashboardTournamentVideoEditPageQuery = { __typename?: 'Query', tournamentVideo: { __typename?: 'TournamentVideo', title: string, label?: string | null, publishedAt?: string | null, id: string, tournament: { __typename?: 'Tournament', id: string, name: string } } };
+export type DashboardTournamentVideoEditPageQuery = { __typename?: 'Query', tournamentVideo: { __typename?: 'TournamentVideo', id: string, title: string, label?: string | null, publishedAt?: string | null, tournament: { __typename?: 'Tournament', id: string, name: string } } };
 
-export type TournamentVideoFormFragment = { __typename?: 'TournamentVideo', title: string, label?: string | null, publishedAt?: string | null };
+export type TournamentVideoFormFragment = { __typename?: 'TournamentVideo', id: string, title: string, label?: string | null, publishedAt?: string | null };
 
 export type DashboardTournamentVideoEditPageUpdateMutationVariables = Exact<{
   tournamentVideoId: Scalars['ID'];
@@ -2858,14 +2858,14 @@ export type DashboardTournamentVideoEditPageUpdateMutationVariables = Exact<{
 }>;
 
 
-export type DashboardTournamentVideoEditPageUpdateMutation = { __typename?: 'Mutation', updateTournamentVideo?: { __typename?: 'UpdateTournamentVideoPayload', tournamentVideo: { __typename?: 'TournamentVideo', title: string, label?: string | null, publishedAt?: string | null } } | null };
+export type DashboardTournamentVideoEditPageUpdateMutation = { __typename?: 'Mutation', updateTournamentVideo?: { __typename?: 'UpdateTournamentVideoPayload', tournamentVideo: { __typename?: 'TournamentVideo', id: string, title: string, label?: string | null, publishedAt?: string | null } } | null };
 
 export type DashboardTournamentEditPageQueryVariables = Exact<{
   tournamentId: Scalars['ID'];
 }>;
 
 
-export type DashboardTournamentEditPageQuery = { __typename?: 'Query', tournament: { __typename?: 'Tournament', organizerId: string, name: string, url: string, streamingUrl?: string | null, startsAt: string, description: string, id: string } };
+export type DashboardTournamentEditPageQuery = { __typename?: 'Query', tournament: { __typename?: 'Tournament', id: string, organizerId: string, name: string, url: string, streamingUrl?: string | null, startsAt: string, description: string } };
 
 export type DashboardTournamentEditPageUpdateTournamentMutationVariables = Exact<{
   tournamentId: Scalars['ID'];
@@ -2873,7 +2873,7 @@ export type DashboardTournamentEditPageUpdateTournamentMutationVariables = Exact
 }>;
 
 
-export type DashboardTournamentEditPageUpdateTournamentMutation = { __typename?: 'Mutation', updateTournament?: { __typename?: 'UpdateTournamentPayload', tournament: { __typename?: 'Tournament', organizerId: string, name: string, url: string, streamingUrl?: string | null, startsAt: string, description: string, id: string } } | null };
+export type DashboardTournamentEditPageUpdateTournamentMutation = { __typename?: 'Mutation', updateTournament?: { __typename?: 'UpdateTournamentPayload', tournament: { __typename?: 'Tournament', id: string, organizerId: string, name: string, url: string, streamingUrl?: string | null, startsAt: string, description: string } } | null };
 
 export type DashboardTournamentPageQueryVariables = Exact<{
   tournamentId: Scalars['ID'];
@@ -2993,6 +2993,8 @@ export type PlayersPagePlayersQueryVariables = Exact<{
 export type PlayersPagePlayersQuery = { __typename?: 'Query', players: { __typename?: 'PlayerCollection', records: Array<{ __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null, standingsCount: number, battlesCount: number }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
 
 export type TournamentVideoPageBattleFragment = { __typename?: 'Battle', id: string, round?: BattleRound | null, startSec: number, sides: Array<{ __typename?: 'BattleSide', rounds: number, player: { __typename?: 'Player', name: string }, character: { __typename?: 'Character', faceImageUrl: string } }> };
+
+export type TournamentVideoPageBattleSideFragment = { __typename?: 'BattleSide', rounds: number, player: { __typename?: 'Player', name: string }, character: { __typename?: 'Character', faceImageUrl: string } };
 
 export type TournamentVideoPageQueryVariables = Exact<{
   tournamentVideoId: Scalars['ID'];
@@ -3434,6 +3436,7 @@ export const TournamentCardFragmentDoc = gql`
     `;
 export const TournamentFormFragmentDoc = gql`
     fragment TournamentForm on Tournament {
+  id
   organizerId
   name
   url
@@ -3670,6 +3673,7 @@ export const DashboardBattlesPageBattleReslutFragmentDoc = gql`
     ${DashboardBattlesPageSideFragmentDoc}`;
 export const TournamentVideoFormFragmentDoc = gql`
     fragment TournamentVideoForm on TournamentVideo {
+  id
   title
   label
   publishedAt
@@ -3709,22 +3713,27 @@ export const PlayerPageProfileFragmentDoc = gql`
   battlesCount
 }
     `;
+export const TournamentVideoPageBattleSideFragmentDoc = gql`
+    fragment TournamentVideoPageBattleSide on BattleSide {
+  player {
+    name
+  }
+  character {
+    faceImageUrl
+  }
+  rounds
+}
+    `;
 export const TournamentVideoPageBattleFragmentDoc = gql`
     fragment TournamentVideoPageBattle on Battle {
   id
   round
   startSec
   sides {
-    player {
-      name
-    }
-    character {
-      faceImageUrl
-    }
-    rounds
+    ...TournamentVideoPageBattleSide
   }
 }
-    `;
+    ${TournamentVideoPageBattleSideFragmentDoc}`;
 export const CreateArticleDocument = gql`
     mutation CreateArticle($attributes: ArticleAttributes!) {
   createArticle(input: {attributes: $attributes}) {

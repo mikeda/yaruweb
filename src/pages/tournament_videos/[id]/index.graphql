@@ -4,10 +4,14 @@ fragment TournamentVideoPageBattle on Battle {
   startSec
 
   sides {
-    player { name }
-    character { faceImageUrl }
-    rounds
+    ...TournamentVideoPageBattleSide
   }
+}
+
+fragment TournamentVideoPageBattleSide on BattleSide {
+  player { name }
+  character { faceImageUrl }
+  rounds
 }
 
 query TournamentVideoPage($tournamentVideoId: ID!) {
