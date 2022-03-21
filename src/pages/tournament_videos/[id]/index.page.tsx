@@ -15,16 +15,8 @@ import { Breadcrumbs, Content, Head, NotFound, YouTubeWrapper } from '@/componen
 import YouTube from 'react-youtube';
 import { Box, IconButton, Paper, Tooltip, Typography } from '@mui/material';
 import { BattleListItem } from './components/BattleListItem';
-import makeStyles from '@mui/styles/makeStyles';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
 import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
-
-const useStyles = makeStyles({
-  list: {
-    maxHeight: 320,
-    overflowY: 'auto',
-  },
-});
 
 const PageContent: React.FC<TournamentVideoPageQuery> = ({ tournamentVideo }) => {
   const [youTubePlayer, setYouTubePlayer] = useState<YouTubePlayer>();
