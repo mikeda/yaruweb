@@ -13,7 +13,7 @@ import { useRouter } from 'next/router';
 import { YouTubePlayer } from 'youtube-player/dist/types';
 import { Breadcrumbs, Content, Head, NotFound, YouTubeWrapper } from '@/components';
 import YouTube from 'react-youtube';
-import { Box, IconButton, Paper, Tooltip, Typography } from '@mui/material';
+import { Box, IconButton, List, Paper, Tooltip, Typography } from '@mui/material';
 import { BattleListItem } from './components/BattleListItem';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
 import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
@@ -84,26 +84,41 @@ const PageContent: React.FC<TournamentVideoPageQuery> = ({ tournamentVideo }) =>
           対戦結果
         </Typography>
 
-        {tournamentVideo.battles.length > 0 ? (
+        {tournamentVideo.battles.length === 0 ? (
           <NotFound>対戦結果が登録されていません。</NotFound>
         ) : (
-          <Box component={Paper}>
-            <BattleListItem battle={tournamentVideo.battles[battleIndex]} onClick={() => updateBattle(battleIndex)} />
+          <>
+            <Box component={Paper}>
+              <BattleListItem battle={tournamentVideo.battles[battleIndex]} onClick={() => updateBattle(battleIndex)} />
 
-            <Box display="flex">
-              <Tooltip title="1つ前の対戦に移動" sx={{ flexGrow: 1 }}>
-                <IconButton size="small" onClick={onClickSkipPrevious}>
-                  <SkipPreviousIcon />
-                </IconButton>
-              </Tooltip>
+              <Box display="flex">
+                <Tooltip title="1つ前の対戦に移動" sx={{ flexGrow: 1 }}>
+                  <IconButton size="small" onClick={onClickSkipPrevious}>
+                    <SkipPreviousIcon />
+                  </IconButton>
+                </Tooltip>
 
-              <Tooltip title="次の対戦に移動" sx={{ flexGrow: 1 }}>
-                <IconButton size="small" onClick={onClickSkipNext}>
-                  <SkipNextIcon />
-                </IconButton>
-              </Tooltip>
+                <Tooltip title="次の対戦に移動" sx={{ flexGrow: 1 }}>
+                  <IconButton size="small" onClick={onClickSkipNext}>
+                    <SkipNextIcon />
+                  </IconButton>
+                </Tooltip>
+              </Box>
             </Box>
-          </Box>
+
+            <Box mt={2} component={Paper}>
+              <List>
+                {tournamentVideo.battles.map((battle, i) => (
+                  <BattleListItem
+                    key={battle.id}
+                    battle={battle}
+                    selected={i === battleIndex}
+                    onClick={() => updateBattle(i)}
+                  />
+                ))}
+              </List>
+            </Box>
+          </>
         )}
       </Box>
     </div>
