@@ -13,7 +13,7 @@ import { useRouter } from 'next/router';
 import { YouTubePlayer } from 'youtube-player/dist/types';
 import { Breadcrumbs, Content, Head, NotFound, YouTubeWrapper } from '@/components';
 import YouTube from 'react-youtube';
-import { Box, IconButton, List, Paper, Tooltip, Typography } from '@mui/material';
+import { Box, IconButton, Paper, Tooltip, Typography } from '@mui/material';
 import { BattleListItem } from './components/BattleListItem';
 import makeStyles from '@mui/styles/makeStyles';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
@@ -30,7 +30,6 @@ const PageContent: React.FC<TournamentVideoPageQuery> = ({ tournamentVideo }) =>
   const [youTubePlayer, setYouTubePlayer] = useState<YouTubePlayer>();
   const [battleIndex, setBattleIndex] = useState<number>(tournamentVideo.battles.length - 1);
   const router = useRouter();
-  const classes = useStyles();
 
   const hashBattleId = router.asPath.split('#battle_')[1] ?? '';
   const noBattle = tournamentVideo.battles.length === 0;
