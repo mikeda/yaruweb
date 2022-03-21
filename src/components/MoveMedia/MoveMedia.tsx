@@ -80,8 +80,6 @@ const AttackListItem: React.FC<AttackMove> = ({ move, attack }) => {
         )}
 
         <DetailItem label="発生">{attack.startUpFrame ? `${attack.startUpFrame}F` : '-'}</DetailItem>
-
-        {attack.reach && <DetailItem label="リーチ">{attack.reach}</DetailItem>}
       </Stack>
 
       <Stack direction="row" divider={<Divider orientation="vertical" flexItem />} spacing={1}>
