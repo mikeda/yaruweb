@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 
 import {
   ArticleStatus,
@@ -10,7 +10,7 @@ import {
 } from '@/lib/graphql/types';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
 import { toast } from 'react-toastify';
-import { DashboardBreadcrumbs } from '@/components';
+import { DashboardBreadcrumbs, SearchWord } from '@/components';
 import { useSetRecoilState } from 'recoil';
 import { loadingState } from '@/states/loading';
 import {
@@ -36,7 +36,7 @@ import { resolveUrlObject } from '@/lib';
 const Page: React.FC = () => {
   const router = useRouter();
   const setLoading = useSetRecoilState(loadingState);
-  const { data, loading, fetchMore, updateQuery } = useDashboardArticlesPageArticlesQuery();
+  const { data, loading, fetchMore, updateQuery, refetch } = useDashboardArticlesPageArticlesQuery();
   const [publish, { loading: publishLoading }] = useDashboardArticlesPagePublishMutation({
     onCompleted: () => {
       toast.success('記事を公開しました。');
@@ -61,6 +61,7 @@ const Page: React.FC = () => {
       toast.success('記事を削除しました。');
     },
   });
+  const keywordRef = useRef<string>();
 
   setLoading(loading || publishLoading || stopLoading || deleteLoading);
 
@@ -82,6 +83,18 @@ const Page: React.FC = () => {
         </Button>
       }
     >
+      <Box mb={2}>
+        <SearchWord
+          onSearch={word => {
+            if (keywordRef.current === word) return;
+
+            keywordRef.current = word;
+            setLoading(true);
+            refetch({ page: 1, keyword: keywordRef.current });
+          }}
+        />
+      </Box>
+
       <TableContainer component={Paper}>
         <Table>
           <TableBody>
