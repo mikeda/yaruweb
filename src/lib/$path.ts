@@ -1,8 +1,5 @@
-/* eslint-disable */
-// prettier-ignore
-import { Query as Query0 } from '../pages/dashboard/move_categories/[id]/moves/new/index.page'
+import type { Query as Query0 } from '../pages/dashboard/move_categories/[id]/moves/new/index.page'
 
-// prettier-ignore
 export const pagesPath = {
   articles: {
     _id: (id: string | number) => ({
@@ -189,5 +186,4 @@ export const pagesPath = {
   $url: (url?: { hash?: string }) => ({ pathname: '/' as const, hash: url?.hash })
 }
 
-// prettier-ignore
 export type PagesPath = typeof pagesPath

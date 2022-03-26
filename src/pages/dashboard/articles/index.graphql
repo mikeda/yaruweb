@@ -28,8 +28,8 @@ mutation DashboardArticlesPageDelete($articleId: ID!) {
   }
 }
 
-query DashboardArticlesPageArticles($page: Int = 1) {
-  myArticles(page: $page, per: 10) {
+query DashboardArticlesPageArticles($page: Int = 1, , $keyword: String) {
+  myArticles(page: $page, per: 10, , keyword: $keyword) {
     records {
       ...DashboardArticlesPageArticle
     }
