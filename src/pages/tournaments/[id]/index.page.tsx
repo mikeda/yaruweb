@@ -56,21 +56,20 @@ const PageContent: React.FC<TournamentPageQuery> = ({ tournament }) => {
             {dayjs(tournament.startsAt).format('YYYY/M/D H:mm')}
           </Typography>
 
-          <Box mt={4}>
+          <Box mt={2}>
             <Typography variant="h3">大会概要</Typography>
             <Typography variant="body2" color="textSecondary" component="p" sx={{ whiteSpace: 'pre-line' }}>
               {tournament.description}
             </Typography>
           </Box>
 
-          <Box mt={4}>
-            <Typography variant="h3">リンク</Typography>
+          <Box mt={2}>
             <Button href={tournament.url} target="_blank" color="primary">
-              大会情報
+              大会URL
             </Button>
             {tournament.streamingUrl && (
               <Button href={tournament.streamingUrl} target="_blank" color="primary">
-                配信
+                配信URL
               </Button>
             )}
           </Box>
@@ -109,7 +108,7 @@ const PageContent: React.FC<TournamentPageQuery> = ({ tournament }) => {
         )}
       </Box>
 
-      <Box mt={4} p={2} component={Paper}>
+      <Box mt={4}>
         <Typography variant="h2" gutterBottom>
           対戦動画
         </Typography>
@@ -117,18 +116,24 @@ const PageContent: React.FC<TournamentPageQuery> = ({ tournament }) => {
         {tournament.videos.length === 0 ? (
           <NotFound>動画が登録されていません。</NotFound>
         ) : (
-          <List>
-            {tournament.videos.map(tournamentVideo => (
-              <Link key={tournamentVideo.id} href={pagesPath.tournament_videos._id(tournamentVideo.id).$url()} passHref>
-                <ListItem component="a">
-                  <ListItemText
-                    primary={tournamentVideo.title}
-                    secondary={`対戦登録 ${tournamentVideo.battlesCount}`}
-                  />
-                </ListItem>
-              </Link>
-            ))}
-          </List>
+          <Box component={Paper}>
+            <List>
+              {tournament.videos.map(tournamentVideo => (
+                <Link
+                  key={tournamentVideo.id}
+                  href={pagesPath.tournament_videos._id(tournamentVideo.id).$url()}
+                  passHref
+                >
+                  <ListItem>
+                    <ListItemText
+                      primary={tournamentVideo.title}
+                      secondary={`対戦登録 ${tournamentVideo.battlesCount}`}
+                    />
+                  </ListItem>
+                </Link>
+              ))}
+            </List>
+          </Box>
         )}
       </Box>
     </>
