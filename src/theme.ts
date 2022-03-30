@@ -143,17 +143,17 @@ const theme = createTheme(
         textTransform: 'none',
       },
       h1: {
-        fontSize: '2rem',
+        fontSize: '1.5rem',
         fontWeight: 'bold',
       },
       h2: {
-        fontSize: '1.75rem',
+        fontSize: '1.25rem',
       },
       h3: {
-        fontSize: '1.5rem',
+        fontSize: '1.125rem',
       },
       h4: {
-        fontSize: '1.25rem',
+        fontSize: '1rem',
       },
       h5: {
         fontSize: '1rem',
