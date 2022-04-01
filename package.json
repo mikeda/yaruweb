@@ -42,7 +42,7 @@
     "recoil": "^0.7.0",
     "slate": "^0.75.0",
     "slate-history": "^0.66.0",
-    "slate-react": "^0.75.0",
+    "slate-react": "^0.76.0",
     "slick-carousel": "^1.8.1",
     "youtube-player": "^5.5.2",
     "yup": "^0.32.11"
