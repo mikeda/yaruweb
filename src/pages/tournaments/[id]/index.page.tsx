@@ -126,7 +126,7 @@ const PageContent: React.FC<TournamentPageQuery> = ({ tournament }) => {
                 >
                   <ListItem>
                     <ListItemText
-                      primary={tournamentVideo.title}
+                      primary={tournamentVideo.label || tournament.name}
                       secondary={`対戦登録 ${tournamentVideo.battlesCount}`}
                     />
                   </ListItem>

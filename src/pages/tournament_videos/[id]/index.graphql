@@ -17,7 +17,7 @@ fragment TournamentVideoPageBattleSide on BattleSide {
 query TournamentVideoPage($tournamentVideoId: ID!) {
   tournamentVideo(tournamentVideoId: $tournamentVideoId) {
     id
-    title
+    label
     youtubeVideoId
 
     tournament {

@@ -22,7 +22,7 @@ query TournamentPage($tournamentId: ID!) {
 
     videos {
       id
-      title
+      label
       battlesCount
     }
   }

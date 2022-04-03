@@ -17,6 +17,7 @@ import { Box, IconButton, List, Paper, Tooltip, Typography } from '@mui/material
 import { BattleListItem } from './components/BattleListItem';
 import SkipNextIcon from '@mui/icons-material/SkipNext';
 import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
+import { TournamentVideoDomain } from '@/domains';
 
 const PageContent: React.FC<TournamentVideoPageQuery> = ({ tournamentVideo }) => {
   const [youTubePlayer, setYouTubePlayer] = useState<YouTubePlayer>();
@@ -126,13 +127,15 @@ const PageContent: React.FC<TournamentVideoPageQuery> = ({ tournamentVideo }) =>
 };
 
 const Page: React.FC<TournamentVideoPageQuery> = ({ tournamentVideo }) => {
+  const title = `${TournamentVideoDomain.title(tournamentVideo)}の対戦動画`;
+
   return (
     <Content
       activeTab="tournaments"
-      title={tournamentVideo.title}
+      title={title}
       breadcrumb={<Breadcrumbs to="tournamentVideo" tournamentVideo={tournamentVideo} />}
     >
-      <Head title={tournamentVideo.title} image={tournamentVideo.tournament.mainImageUrl} />
+      <Head title={title} image={tournamentVideo.tournament.mainImageUrl} />
 
       <PageContent tournamentVideo={tournamentVideo} />
     </Content>
