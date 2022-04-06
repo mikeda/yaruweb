@@ -87,7 +87,7 @@ export const breadcrumbChain = (props: ChainParam): BreadcrumbChainItem => {
       };
     case 'tournamentVideo':
       return {
-        name: props.tournamentVideo.title,
+        name: props.tournamentVideo.label ? `${props.tournamentVideo.label}の対戦動画` : '対戦動画',
         parent: breadcrumbChain({ to: 'tournament', tournament: props.tournamentVideo.tournament }),
       };
   }

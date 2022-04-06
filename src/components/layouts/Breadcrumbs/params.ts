@@ -12,7 +12,7 @@ import {
 
 export type ArticleParam = Pick<Article, 'id' | 'title'>;
 export type TournamentParam = Pick<Tournament, 'id' | 'name'>;
-export type TournamentVideoParam = Pick<TournamentVideo, 'id' | 'title'> & { tournament: TournamentParam };
+export type TournamentVideoParam = Pick<TournamentVideo, 'id' | 'label'> & { tournament: TournamentParam };
 export type CharactersParam = Pick<Character, 'slug' | 'name'>;
 export type ComboCategoryParam = Pick<ComboCategory, 'id' | 'name'> & { character: CharactersParam };
 export type MoveCategoryParam = Pick<MoveCategory, 'id' | 'name'> & { character: CharactersParam };
