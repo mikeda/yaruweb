@@ -24,7 +24,7 @@
     "@mui/material": "^5.5.0",
     "@mui/styles": "^5.5.3",
     "@sentry/react": "^6.16.1",
-    "@sentry/tracing": "^6.16.1",
+    "@sentry/tracing": "^6.19.6",
     "clsx": "^1.1.1",
     "dayjs": "^1.11.0",
     "firebase": "^9.6.10",
