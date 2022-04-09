@@ -82,4 +82,5 @@ export const BattleRoundText: { [key in Types.BattleRound]: string } = {
   losers_semifinal: 'Losers Semifinal',
   final: 'Final',
   semifinal: 'Semifinal',
+  third_place: '3位決定戦',
 };
