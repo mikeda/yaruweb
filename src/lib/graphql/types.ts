@@ -231,6 +231,8 @@ export enum BattleRound {
   LosersSemifinal = 'losers_semifinal',
   /** Semifinal */
   Semifinal = 'semifinal',
+  /** 3位決定戦 */
+  ThirdPlace = 'third_place',
   /** Winners Final */
   WinnersFinal = 'winners_final',
   /** Winners Semifinal */
