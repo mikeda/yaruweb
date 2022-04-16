@@ -5,7 +5,7 @@ import { MoveSelect } from './MoveSelect';
 import { Transforms, Editor } from 'slate';
 import { Character } from '@/lib/graphql/types';
 import { TextButton } from '../TextButton';
-import { Dialog, DialogContent, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import { Autocomplete, Dialog, DialogContent, Stack, TextField } from '@mui/material';
 
 type CharacterFragment = Pick<Character, 'slug' | 'name'>;
 
@@ -15,7 +15,7 @@ interface Props {
 
 export const MoveButton: React.FC<Props> = ({ characters }) => {
   const [expanded, setExpanded] = useState(false);
-  const [characterSlug, setCharacterSlug] = useState('');
+  const [character, setCharacter] = useState<CharacterFragment>();
 
   const editor = useSlate();
   const savedSelection = React.useRef(editor.selection);
@@ -33,41 +33,39 @@ export const MoveButton: React.FC<Props> = ({ characters }) => {
       />
 
       <Dialog open={expanded} onClose={() => setExpanded(false)}>
-        <DialogContent>
-          <FormControl sx={{ m: 1, minWidth: 200 }}>
-            <InputLabel>キャラクター</InputLabel>
-
-            <Select
-              placeholder="キャラクター"
-              onChange={item => {
-                if (item) setCharacterSlug(item.target.value as string);
+        <DialogContent sx={{ width: 300 }}>
+          <Stack spacing={1}>
+            <Autocomplete<CharacterFragment, undefined, true>
+              options={characters}
+              value={character}
+              getOptionLabel={option => option.name}
+              onChange={(e, option) => {
+                setCharacter(option);
               }}
-            >
-              {characters.map(c => (
-                <MenuItem key={c.slug} value={c.slug}>
-                  {c.name}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-
-          {characterSlug && (
-            <MoveSelect
-              characterSlug={characterSlug}
-              onChange={moveId => {
-                if (!editor.selection) {
-                  Transforms.select(editor, savedSelection.current ?? Editor.end(editor, []));
-                }
-                editor.insertNode({
-                  type: 'embed-move',
-                  moveId,
-                  children: [{ text: '' }],
-                });
-                editor.insertNode({ type: 'paragraph', children: [{ text: '' }] });
-                setExpanded(false);
-              }}
+              renderInput={params => (
+                <TextField {...params} label="キャラクター" variant="outlined" fullWidth size="small" />
+              )}
+              disableClearable
             />
-          )}
+
+            {character && (
+              <MoveSelect
+                characterSlug={character.slug}
+                onChange={moveId => {
+                  if (!editor.selection) {
+                    Transforms.select(editor, savedSelection.current ?? Editor.end(editor, []));
+                  }
+                  editor.insertNode({
+                    type: 'embed-move',
+                    moveId,
+                    children: [{ text: '' }],
+                  });
+                  editor.insertNode({ type: 'paragraph', children: [{ text: '' }] });
+                  setExpanded(false);
+                }}
+              />
+            )}
+          </Stack>
         </DialogContent>
       </Dialog>
     </>
