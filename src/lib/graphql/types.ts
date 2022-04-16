@@ -920,6 +920,7 @@ export type Move = {
   name: Scalars['String'];
   note?: Maybe<Scalars['String']>;
   position: Scalars['Int'];
+  statusAfter: Scalars['String'];
 };
 
 export type MoveAttributes = {
