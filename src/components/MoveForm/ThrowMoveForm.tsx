@@ -63,6 +63,7 @@ export const ThrowMoveForm: React.FC<Props> = ({ move, moves, onSubmit, copy = f
             name: move.name,
             kana: move.kana,
             command: move.command,
+            statusAfter: move.statusAfter,
             note: move.note,
             position: copy ? move.position + 1 : move.position,
           },
@@ -133,6 +134,14 @@ export const ThrowMoveForm: React.FC<Props> = ({ move, moves, onSubmit, copy = f
               onChange={newCommand => {
                 setValue(`move.command`, newCommand);
               }}
+            />
+          </Box>
+
+          <Box mt={4}>
+            <Controller
+              name="move.statusAfter"
+              control={control}
+              render={({ field }) => <TextField {...field} type="text" label="技後の状態" size="small" fullWidth />}
             />
           </Box>
 

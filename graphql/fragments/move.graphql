@@ -45,6 +45,7 @@ fragment move on Move {
   name
   kana
   command
+  statusAfter
   note
   position
 
