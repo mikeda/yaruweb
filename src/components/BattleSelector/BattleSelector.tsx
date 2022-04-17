@@ -18,7 +18,11 @@ const useStyles = makeStyles(() =>
   }),
 );
 
-export const BattleSelector: React.FC = ({ children }) => {
+interface Props {
+  children: React.ReactNode;
+}
+
+export const BattleSelector: React.FC<Props> = ({ children }) => {
   const classes = useStyles();
 
   return <div className={classes.root}>{children}</div>;

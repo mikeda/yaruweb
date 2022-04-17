@@ -6,7 +6,7 @@ interface Props {
   attributes: { [key: string]: unknown };
 }
 
-export const Image: React.FC<Props> = ({ url, attributes, children }) => {
+export const Image: React.FC<Props> = ({ url, attributes }) => {
   const selected = useSelected();
   const focused = useFocused();
   return (
@@ -22,7 +22,6 @@ export const Image: React.FC<Props> = ({ url, attributes, children }) => {
           }}
         />
       </div>
-      {children}
     </div>
   );
 };

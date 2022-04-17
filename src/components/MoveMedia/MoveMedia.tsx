@@ -168,7 +168,7 @@ const frameText = (frame: number) => {
   return `${frame}F`;
 };
 
-const DetailItem: React.FC<{ label: string }> = ({ label, children }) => (
+const DetailItem: React.FC<{ children: React.ReactNode; label: string }> = ({ label, children }) => (
   <Stack direction="row" spacing={1}>
     <DetailTextLabel variant="body2">{label}</DetailTextLabel>
     <Typography variant="body2">{children}</Typography>

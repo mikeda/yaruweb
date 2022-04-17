@@ -7,7 +7,7 @@ interface Props {
   attributes: { [key: string]: unknown };
 }
 
-export const Combo: React.FC<Props> = ({ comboId, attributes, children }) => {
+export const Combo: React.FC<Props> = ({ comboId, attributes }) => {
   const { data } = useArticleElementComboQuery({ variables: { comboId } });
 
   return (
@@ -15,7 +15,6 @@ export const Combo: React.FC<Props> = ({ comboId, attributes, children }) => {
       <div style={{ userSelect: 'none' }} contentEditable={false}>
         {data && <ComboMedia combo={data.combo} />}
       </div>
-      {children}
     </div>
   );
 };

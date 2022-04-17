@@ -2,7 +2,7 @@ import { List, ListItemButton, Paper, Typography } from '@mui/material';
 import React, { useCallback, useMemo } from 'react';
 
 import { createEditor, Descendant } from 'slate';
-import { Editable, Slate, withReact } from 'slate-react';
+import { Editable, RenderElementProps, RenderLeafProps, Slate, withReact } from 'slate-react';
 import { Element } from './ArticleElement';
 import { Leaf } from './ArticleElement/Leaf';
 import theme from '@/theme';
@@ -62,8 +62,8 @@ export interface TocRow {
 }
 
 export const ArticleBody: React.FC<Props> = ({ content }) => {
-  const renderElement = useCallback(props => <Element {...props} />, []);
-  const renderLeaf = useCallback(props => <Leaf {...props} />, []);
+  const renderElement = useCallback((props: RenderElementProps) => <Element {...props} />, []);
+  const renderLeaf = useCallback((props: RenderLeafProps) => <Leaf {...props} />, []);
   const onChange = useCallback(() => {}, []);
   const value = useMemo<Descendant[]>(() => JSON.parse(content), []);
   const editor = useMemo(() => withReact(createEditor()), []);

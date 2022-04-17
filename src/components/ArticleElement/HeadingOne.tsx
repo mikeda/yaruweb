@@ -3,6 +3,7 @@ import React from 'react';
 import { styled } from '@mui/material/styles';
 
 interface Props {
+  children: React.ReactNode;
   id?: string;
   attributes: { [key: string]: unknown };
 }
