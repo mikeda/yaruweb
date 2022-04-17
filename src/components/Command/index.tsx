@@ -17,7 +17,7 @@ export const Command: React.FC<Props> = ({ command }) => {
   );
 };
 
-const Wrapper: React.FC = ({ children }) => <ContainerInner>{children}</ContainerInner>;
+const Wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => <ContainerInner>{children}</ContainerInner>;
 
 const ContainerInner = styled('div')(() => ({
   display: 'flex',

@@ -1,5 +1,5 @@
 import React, { useCallback } from 'react';
-import { Editable, useSlate, withReact } from 'slate-react';
+import { Editable, RenderElementProps, RenderLeafProps, useSlate, withReact } from 'slate-react';
 import { withHistory } from 'slate-history';
 
 import { Element } from '@/components/ArticleElement';
@@ -20,8 +20,8 @@ export const createArticleEditor = () => {
 
 export const ArticleEditor: React.FC = () => {
   const editor = useSlate();
-  const renderElement = useCallback(props => <Element {...props} />, []);
-  const renderLeaf = useCallback(props => <Leaf {...props} />, []);
+  const renderElement = useCallback((props: RenderElementProps) => <Element {...props} />, []);
+  const renderLeaf = useCallback((props: RenderLeafProps) => <Leaf {...props} />, []);
   const onKeyDown = useCallback((event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.key === 'Enter') {
       if (event.shiftKey) {

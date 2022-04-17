@@ -3,6 +3,7 @@ import { styled } from '@mui/material/styles';
 import { useMediaQuery, useTheme } from '@mui/material';
 
 interface Props {
+  children: React.ReactNode;
   imageUrl: string;
 }
 

@@ -50,6 +50,7 @@ const useStyles = makeStyles(() =>
 );
 
 interface Props {
+  children: React.ReactNode;
   title: string;
   breadcrumb?: ReactNode;
   actions?: ReactNode;

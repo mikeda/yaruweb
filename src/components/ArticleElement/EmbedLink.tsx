@@ -33,7 +33,7 @@ const textStyle = css({
   overflow: 'hidden',
 });
 
-export const EmbedLink: React.FC<Props> = ({ url, title, description, imageUrl, attributes, children }) => {
+export const EmbedLink: React.FC<Props> = ({ url, title, description, imageUrl, attributes }) => {
   const hostname = new URL(url).hostname;
 
   return (
@@ -55,7 +55,6 @@ export const EmbedLink: React.FC<Props> = ({ url, title, description, imageUrl, 
           </CardActionArea>
         </Card>
       </div>
-      {children}
     </div>
   );
 };

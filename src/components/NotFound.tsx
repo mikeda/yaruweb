@@ -1,7 +1,11 @@
 import React from 'react';
 import { styled } from '@mui/material/styles';
 
-export const NotFound: React.FC = ({ children }) => {
+interface Props {
+  children: React.ReactNode;
+}
+
+export const NotFound: React.FC<Props> = ({ children }) => {
   return <Container>{children}</Container>;
 };
 

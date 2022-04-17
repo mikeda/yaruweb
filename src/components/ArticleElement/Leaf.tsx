@@ -1,6 +1,7 @@
 import React from 'react';
 
 interface Props {
+  children: React.ReactNode;
   attributes: { [key: string]: unknown };
   leaf: {
     bold?: boolean;

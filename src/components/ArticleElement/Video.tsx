@@ -7,13 +7,12 @@ interface Props {
   attributes: { [key: string]: unknown };
 }
 
-export const Video: React.FC<Props> = ({ m3u8Url, thumbnailUrl, attributes, children }) => {
+export const Video: React.FC<Props> = ({ m3u8Url, thumbnailUrl, attributes }) => {
   return (
     <div {...attributes}>
       <div style={{ userSelect: 'none' }} contentEditable={false}>
         <VideoPlayer src={m3u8Url} thumnailUrl={thumbnailUrl} />
       </div>
-      {children}
     </div>
   );
 };

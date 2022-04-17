@@ -14,6 +14,7 @@ import { HeadingTwo } from './HeadingTwo';
 import { Combo } from './Combo';
 
 interface Props {
+  children: React.ReactNode;
   attributes: { [key: string]: unknown };
   element: SlateElement;
 }
@@ -41,17 +42,9 @@ export const Element: React.FC<Props> = ({ attributes, children, element }) => {
     case 'list-item':
       return <li {...attributes}>{children}</li>;
     case 'image':
-      return (
-        <Image url={element.url} attributes={attributes}>
-          {children}
-        </Image>
-      );
+      return <Image url={element.url} attributes={attributes} />;
     case 'video':
-      return (
-        <Video m3u8Url={element.m3u8Url} thumbnailUrl={element.thumbnailUrl} attributes={attributes}>
-          {children}
-        </Video>
-      );
+      return <Video m3u8Url={element.m3u8Url} thumbnailUrl={element.thumbnailUrl} attributes={attributes} />;
     case 'link':
       return (
         <a {...attributes} href={element.url}>
@@ -66,34 +59,16 @@ export const Element: React.FC<Props> = ({ attributes, children, element }) => {
           description={element.description}
           imageUrl={element.imageUrl}
           attributes={attributes}
-        >
-          {children}
-        </EmbedLink>
+        />
       );
     case 'embed-youtube':
-      return (
-        <EmbedYouTube videoId={element.videoId} startSec={element.startSec} attributes={attributes}>
-          {children}
-        </EmbedYouTube>
-      );
+      return <EmbedYouTube videoId={element.videoId} startSec={element.startSec} attributes={attributes} />;
     case 'embed-tweet':
-      return (
-        <EmbedTweet tweetId={element.tweetId} attributes={attributes}>
-          {children}
-        </EmbedTweet>
-      );
+      return <EmbedTweet tweetId={element.tweetId} attributes={attributes} />;
     case 'embed-move':
-      return (
-        <Move moveId={element.moveId} attributes={attributes}>
-          {children}
-        </Move>
-      );
+      return <Move moveId={element.moveId} attributes={attributes} />;
     case 'embed-combo':
-      return (
-        <Combo comboId={element.comboId} attributes={attributes}>
-          {children}
-        </Combo>
-      );
+      return <Combo comboId={element.comboId} attributes={attributes} />;
     default:
       return <p {...attributes}>存在しないTypeが指定されました。{children}</p>;
   }

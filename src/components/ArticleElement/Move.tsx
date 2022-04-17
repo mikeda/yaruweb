@@ -7,7 +7,7 @@ interface Props {
   attributes: { [key: string]: unknown };
 }
 
-export const Move: React.FC<Props> = ({ moveId, attributes, children }) => {
+export const Move: React.FC<Props> = ({ moveId, attributes }) => {
   const { data } = useArticleElementMoveQuery({ variables: { moveId } });
 
   return (
@@ -15,7 +15,6 @@ export const Move: React.FC<Props> = ({ moveId, attributes, children }) => {
       <div style={{ userSelect: 'none' }} contentEditable={false}>
         {data && <MoveMedia move={data.move} />}
       </div>
-      {children}
     </div>
   );
 };

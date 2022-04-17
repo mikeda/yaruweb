@@ -8,7 +8,11 @@ import { UserMenu } from './UserMenu';
 
 import { pagesPath } from '@/lib/$path';
 
-export const GlobalHeader: React.FC = ({ children }) => {
+interface Props {
+  children: React.ReactNode;
+}
+
+export const GlobalHeader: React.FC<Props> = ({ children }) => {
   return (
     <Wrapper>
       <Inner>
