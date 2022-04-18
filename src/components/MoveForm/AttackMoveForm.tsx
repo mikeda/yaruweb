@@ -42,6 +42,7 @@ const schema = yup.object().shape({
   attack: yup.object({
     reach: nullableFloat,
     startUpFrame: nullableNumber,
+    duration: nullableNumber,
     blockFrame: nullableNumber,
     hitFrame: nullableNumber,
     counterFrame: nullableNumber,
@@ -147,6 +148,7 @@ export const AttackMoveForm: React.FC<Props> = ({ move, moves, onSubmit, copy = 
             move.moveable.__typename === 'AttackMove'
               ? {
                   startUpFrame: move.moveable.startUpFrame,
+                  duration: move.moveable.duration,
                   heights: move.moveable.heights,
                   damages: move.moveable.damages,
                   reach: move.moveable.reach,
@@ -347,6 +349,28 @@ export const AttackMoveForm: React.FC<Props> = ({ move, moves, onSubmit, copy = 
                       fullWidth
                       error={Boolean(errors.attack?.startUpFrame)}
                       helperText={errors.attack?.startUpFrame?.message}
+                    />
+                  )}
+                />
+              </Grid>
+
+              <Grid item xs={12} sm={4}>
+                <Typography variant="h4" gutterBottom>
+                  持続
+                </Typography>
+
+                <Controller
+                  name="attack.duration"
+                  control={control}
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      type="number"
+                      label="フレーム"
+                      size="small"
+                      fullWidth
+                      error={Boolean(errors.attack?.duration)}
+                      helperText={errors.attack?.duration?.message}
                     />
                   )}
                 />

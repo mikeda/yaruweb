@@ -169,7 +169,10 @@ const AttackListItem: React.FC<AttackMove> = ({ move, attack }) => {
         {attack.damages.length > 0 && ` / ダメージ ${attack.damages.join(',')}`}
       </Typography>
 
-      <Typography variant="body2">発生 {attack.startUpFrame ? frameText(attack.startUpFrame) : '-'}</Typography>
+      <Typography variant="body2">
+        発生 {attack.startUpFrame ? frameText(attack.startUpFrame) : '-'}
+        {attack.duration && `（持続 ${attack.duration}F）`}
+      </Typography>
       <Typography variant="body2">{frames.map(frame => `${frame.label} ${frame.frame}`).join(' / ')}</Typography>
 
       <ListItemFooter move={move} />
