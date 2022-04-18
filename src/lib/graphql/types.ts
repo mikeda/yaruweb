@@ -92,6 +92,7 @@ export type AttackAttributes = {
   counterStatus?: InputMaybe<AttackMoveStateEnum>;
   crouchingStatus: Scalars['Boolean'];
   damages: Array<Scalars['Int']>;
+  duration?: InputMaybe<Scalars['Int']>;
   heights: Array<AttackTypeEnum>;
   hitFrame?: InputMaybe<Scalars['Int']>;
   hitResult: AttackMoveResultEnum;
@@ -116,6 +117,7 @@ export type AttackMove = {
   crouchingStatus: Scalars['Boolean'];
   crouchingStatusFrame?: Maybe<Scalars['Int']>;
   damages: Array<Scalars['Int']>;
+  duration?: Maybe<Scalars['Int']>;
   heights: Array<AttackTypeEnum>;
   hitFrame?: Maybe<Scalars['Int']>;
   hitResult: AttackMoveResultEnum;
