@@ -1,6 +1,7 @@
 fragment attackMove on AttackMove {
   id
   startUpFrame
+  duration
   heights
   damages
   reach
