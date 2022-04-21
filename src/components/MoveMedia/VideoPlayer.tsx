@@ -36,6 +36,7 @@ export const VideoPlayer: React.FC<Props> = ({ src, thumnailUrl, width = '100%',
   return (
     <video
       width={width}
+      style={{ maxWidth: 680 }}
       controls
       ref={videoRef}
       poster={thumnailUrl}
