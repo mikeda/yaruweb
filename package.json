@@ -20,7 +20,7 @@
     "@fortawesome/react-fontawesome": "latest",
     "@hookform/resolvers": "^2.8.8",
     "@mui/icons-material": "^5.6.1",
-    "@mui/lab": "^5.0.0-alpha.73",
+    "@mui/lab": "^5.0.0-alpha.78",
     "@mui/material": "^5.5.0",
     "@mui/styles": "^5.5.3",
     "@sentry/react": "^6.19.6",
