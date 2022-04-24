@@ -2,8 +2,8 @@ import React from 'react';
 import styled from '@mui/styles/styled';
 
 interface Props {
-  children: React.ReactNode;
   attributes: { [key: string]: unknown };
+  children: React.ReactNode;
 }
 
 export const Paragraph: React.FC<Props> = ({ attributes, children }) => {
