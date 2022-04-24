@@ -42,9 +42,17 @@ export const Element: React.FC<Props> = ({ attributes, children, element }) => {
     case 'list-item':
       return <li {...attributes}>{children}</li>;
     case 'image':
-      return <Image url={element.url} attributes={attributes} />;
+      return (
+        <Image url={element.url} attributes={attributes}>
+          {children}
+        </Image>
+      );
     case 'video':
-      return <Video m3u8Url={element.m3u8Url} thumbnailUrl={element.thumbnailUrl} attributes={attributes} />;
+      return (
+        <Video m3u8Url={element.m3u8Url} thumbnailUrl={element.thumbnailUrl} attributes={attributes}>
+          {children}
+        </Video>
+      );
     case 'link':
       return (
         <a {...attributes} href={element.url}>
@@ -59,16 +67,34 @@ export const Element: React.FC<Props> = ({ attributes, children, element }) => {
           description={element.description}
           imageUrl={element.imageUrl}
           attributes={attributes}
-        />
+        >
+          {children}
+        </EmbedLink>
       );
     case 'embed-youtube':
-      return <EmbedYouTube videoId={element.videoId} startSec={element.startSec} attributes={attributes} />;
+      return (
+        <EmbedYouTube videoId={element.videoId} startSec={element.startSec} attributes={attributes}>
+          {children}
+        </EmbedYouTube>
+      );
     case 'embed-tweet':
-      return <EmbedTweet tweetId={element.tweetId} attributes={attributes} />;
+      return (
+        <EmbedTweet tweetId={element.tweetId} attributes={attributes}>
+          {children}
+        </EmbedTweet>
+      );
     case 'embed-move':
-      return <Move moveId={element.moveId} attributes={attributes} />;
+      return (
+        <Move moveId={element.moveId} attributes={attributes}>
+          {children}
+        </Move>
+      );
     case 'embed-combo':
-      return <Combo comboId={element.comboId} attributes={attributes} />;
+      return (
+        <Combo comboId={element.comboId} attributes={attributes}>
+          {children}
+        </Combo>
+      );
     default:
       return <p {...attributes}>存在しないTypeが指定されました。{children}</p>;
   }

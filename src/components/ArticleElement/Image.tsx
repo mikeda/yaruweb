@@ -4,9 +4,10 @@ import { useFocused, useSelected } from 'slate-react';
 interface Props {
   url: string;
   attributes: { [key: string]: unknown };
+  children: React.ReactNode;
 }
 
-export const Image: React.FC<Props> = ({ url, attributes }) => {
+export const Image: React.FC<Props> = ({ url, attributes, children }) => {
   const selected = useSelected();
   const focused = useFocused();
   return (
@@ -22,6 +23,7 @@ export const Image: React.FC<Props> = ({ url, attributes }) => {
           }}
         />
       </div>
+      {children}
     </div>
   );
 };

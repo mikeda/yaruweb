@@ -9,6 +9,7 @@ interface Props {
   description?: string | null;
   imageUrl?: string | null;
   attributes: { [key: string]: unknown };
+  children: React.ReactNode;
 }
 
 const rootStyle = css({
@@ -33,7 +34,7 @@ const textStyle = css({
   overflow: 'hidden',
 });
 
-export const EmbedLink: React.FC<Props> = ({ url, title, description, imageUrl, attributes }) => {
+export const EmbedLink: React.FC<Props> = ({ url, title, description, imageUrl, attributes, children }) => {
   const hostname = new URL(url).hostname;
 
   return (
@@ -55,6 +56,7 @@ export const EmbedLink: React.FC<Props> = ({ url, title, description, imageUrl, 
           </CardActionArea>
         </Card>
       </div>
+      {children}
     </div>
   );
 };
