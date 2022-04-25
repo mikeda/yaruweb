@@ -11,6 +11,7 @@ export * from './ComboCategoryForm';
 export * from './ComboForm';
 export * from './ComboMedia';
 export * from './Command';
+export * from './CustomText';
 export * from './TournamentForm';
 export * from './FavButton';
 export * from './IntroSlide';

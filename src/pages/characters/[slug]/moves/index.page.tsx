@@ -32,7 +32,7 @@ import {
 import { Profile } from '../components/Profile';
 import { Tabs } from '../components/Tabs';
 import { ParsedUrlQuery } from 'querystring';
-import { Command } from '@/components';
+import { Command, CustomText } from '@/components';
 import {
   AttackMoveResultText,
   AttackTypeEnumText,
@@ -211,14 +211,12 @@ const ReversalListItem: React.FC<ReversalMove> = ({ move, reversal }) => {
 };
 
 const ListItemFooter: React.FC<{ move: CharacterMovesPageMoveFragment }> = ({ move }) => {
+  if (!move.note) return null;
+
   return (
-    <>
-      {move.note && (
-        <Typography component={Paper} p={0.5} variant="caption" sx={{ whiteSpace: 'pre-line' }}>
-          {move.note}
-        </Typography>
-      )}
-    </>
+    <Typography component={Paper} p={0.5} variant="caption" sx={{ whiteSpace: 'pre-line' }}>
+      <CustomText text={move.note} />
+    </Typography>
   );
 };
 
