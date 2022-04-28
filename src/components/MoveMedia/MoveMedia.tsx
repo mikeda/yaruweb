@@ -14,6 +14,7 @@ import {
 } from '@/lib/graphql/enum_texts';
 import { Box, Card, CardContent, Chip, Divider, Stack, Typography } from '@mui/material';
 import { ArrowRight } from '@mui/icons-material';
+import { CustomText } from '../CustomText';
 
 type Props = {
   move: MoveMediaFragment;
@@ -135,14 +136,12 @@ const ReversalListItem: React.FC<ReversalMove> = ({ move, reversal }) => {
 };
 
 const ListItemFooter: React.FC<{ move: MoveMediaFragment }> = ({ move }) => {
+  if (!move.note) return null;
+
   return (
-    <>
-      {move.note && (
-        <Typography variant="body2" sx={{ whiteSpace: 'pre-line' }}>
-          {move.note}
-        </Typography>
-      )}
-    </>
+    <Typography variant="body2" sx={{ whiteSpace: 'pre-line' }}>
+      <CustomText text={move.note} />
+    </Typography>
   );
 };
 
