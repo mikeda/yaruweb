@@ -58,7 +58,14 @@ const ComboContent: React.FC<PageDashboardComboEditQuery> = ({ combo }) => {
   };
 
   setLoading(loading);
-  return <ComboForm combo={combo} combos={combo.comboCategory.combos} onSubmit={onSubmit} />;
+  return (
+    <ComboForm
+      combo={combo}
+      combos={combo.comboCategory.combos}
+      moveCategories={combo.comboCategory.character.moveCategories}
+      onSubmit={onSubmit}
+    />
+  );
 };
 
 export default Page;

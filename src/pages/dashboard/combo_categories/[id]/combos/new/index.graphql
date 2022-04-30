@@ -1,3 +1,13 @@
+fragment MoveSelectOption on MoveCategory {
+  id
+  name
+
+  moves {
+    id
+    name
+  }
+}
+
 query PageDashboardComboNew($comboCategoryId: ID!) {
   comboCategory(comboCategoryId: $comboCategoryId) {
     id
@@ -11,6 +21,10 @@ query PageDashboardComboNew($comboCategoryId: ID!) {
     character {
       slug
       name
+
+      moveCategories {
+        ...MoveSelectOption
+      }
     }
   }
 }
