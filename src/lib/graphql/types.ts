@@ -149,10 +149,14 @@ export enum AttackMoveResultEnum {
 }
 
 export enum AttackMoveStateEnum {
+  /** 強制後ろ向き */
+  Backward = 'backward',
   /** ガード可能な硬直 */
   Blockable = 'blockable',
   /** 強制しゃがみ */
   Crouching = 'crouching',
+  /** 強制横向き */
+  Sideways = 'sideways',
   /** きりもみ */
   Twist = 'twist'
 }
@@ -319,6 +323,7 @@ export type Combo = {
   command: Array<Scalars['String']>;
   damage?: Maybe<Scalars['Int']>;
   id: Scalars['ID'];
+  move?: Maybe<Move>;
   note?: Maybe<Scalars['String']>;
   position: Scalars['Int'];
 };
@@ -326,6 +331,7 @@ export type Combo = {
 export type ComboAttributes = {
   command: Array<Scalars['String']>;
   damage?: InputMaybe<Scalars['Int']>;
+  moveId?: InputMaybe<Scalars['ID']>;
   note?: InputMaybe<Scalars['String']>;
   position: Scalars['Int'];
 };
@@ -913,6 +919,8 @@ export type FavArticlePayload = {
 
 export type Move = {
   __typename?: 'Move';
+  combos: Array<Combo>;
+  combosCount: Scalars['Int'];
   command: Array<Scalars['String']>;
   id: Scalars['ID'];
   kana?: Maybe<Scalars['String']>;
@@ -2064,7 +2072,7 @@ export type ArticleLinkFragment = { __typename?: 'ArticleLink', url: string, tit
 
 export type ArticleSummaryFragment = { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, faved: boolean, favsCount: number, status: ArticleStatus, author: { __typename?: 'User', name: string, avatarUrl: string } };
 
-export type ComboFragment = { __typename?: 'Combo', id: string, damage?: number | null, command: Array<string>, note?: string | null, position: number, comboCategory: { __typename?: 'ComboCategory', id: string, name: string }, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null };
+export type ComboFragment = { __typename?: 'Combo', id: string, damage?: number | null, command: Array<string>, note?: string | null, position: number, move?: { __typename?: 'Move', id: string, name: string } | null, comboCategory: { __typename?: 'ComboCategory', id: string, name: string }, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null };
 
 export type ComboCategoryFragment = { __typename?: 'ComboCategory', id: string, name: string, position: number };
 
@@ -2627,12 +2635,14 @@ export type DashboardCharactersPageQueryVariables = Exact<{ [key: string]: never
 
 export type DashboardCharactersPageQuery = { __typename?: 'Query', characters: { __typename?: 'CharacterCollection', records: Array<{ __typename?: 'Character', slug: string, name: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number }> } };
 
+export type MoveSelectOptionFragment = { __typename?: 'MoveCategory', id: string, name: string, moves: Array<{ __typename?: 'Move', id: string, name: string }> };
+
 export type PageDashboardComboNewQueryVariables = Exact<{
   comboCategoryId: Scalars['ID'];
 }>;
 
 
-export type PageDashboardComboNewQuery = { __typename?: 'Query', comboCategory: { __typename?: 'ComboCategory', id: string, name: string, combos: Array<{ __typename?: 'Combo', id: string, command: Array<string>, position: number }>, character: { __typename?: 'Character', slug: string, name: string } } };
+export type PageDashboardComboNewQuery = { __typename?: 'Query', comboCategory: { __typename?: 'ComboCategory', id: string, name: string, combos: Array<{ __typename?: 'Combo', id: string, command: Array<string>, position: number }>, character: { __typename?: 'Character', slug: string, name: string, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, moves: Array<{ __typename?: 'Move', id: string, name: string }> }> } } };
 
 export type PageDashboardComboCategoryEditQueryVariables = Exact<{
   comboCategoryId: Scalars['ID'];
@@ -2646,7 +2656,7 @@ export type PageDashboardComboEditQueryVariables = Exact<{
 }>;
 
 
-export type PageDashboardComboEditQuery = { __typename?: 'Query', combo: { __typename?: 'Combo', id: string, damage?: number | null, command: Array<string>, note?: string | null, position: number, comboCategory: { __typename?: 'ComboCategory', id: string, name: string, combos: Array<{ __typename?: 'Combo', id: string, command: Array<string>, position: number }>, character: { __typename?: 'Character', slug: string, name: string } }, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null } };
+export type PageDashboardComboEditQuery = { __typename?: 'Query', combo: { __typename?: 'Combo', id: string, damage?: number | null, command: Array<string>, note?: string | null, position: number, comboCategory: { __typename?: 'ComboCategory', id: string, name: string, combos: Array<{ __typename?: 'Combo', id: string, command: Array<string>, position: number }>, character: { __typename?: 'Character', slug: string, name: string, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, moves: Array<{ __typename?: 'Move', id: string, name: string }> }> } }, move?: { __typename?: 'Move', id: string, name: string } | null, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null } };
 
 export type PageDashboardMoveCategoryEditQueryVariables = Exact<{
   moveCategoryId: Scalars['ID'];
@@ -3063,6 +3073,10 @@ export const ComboFragmentDoc = gql`
   command
   note
   position
+  move {
+    id
+    name
+  }
   comboCategory {
     id
     name
@@ -3623,6 +3637,16 @@ export const DashboardMoveCategoriesPageMoveCategoryFragmentDoc = gql`
   }
 }
     ${DashboardMoveCategoriesPageMoveFragmentDoc}`;
+export const MoveSelectOptionFragmentDoc = gql`
+    fragment MoveSelectOption on MoveCategory {
+  id
+  name
+  moves {
+    id
+    name
+  }
+}
+    `;
 export const DashboardOrganizersPageOrganizerFragmentDoc = gql`
     fragment DashboardOrganizersPageOrganizer on Organizer {
   id
@@ -6312,10 +6336,14 @@ export const PageDashboardComboNewDocument = gql`
     character {
       slug
       name
+      moveCategories {
+        ...MoveSelectOption
+      }
     }
   }
 }
-    ${ComboPositionSelectFragmentDoc}`;
+    ${ComboPositionSelectFragmentDoc}
+${MoveSelectOptionFragmentDoc}`;
 
 /**
  * __usePageDashboardComboNewQuery__
@@ -6401,12 +6429,16 @@ export const PageDashboardComboEditDocument = gql`
       character {
         slug
         name
+        moveCategories {
+          ...MoveSelectOption
+        }
       }
     }
   }
 }
     ${ComboFragmentDoc}
-${ComboPositionSelectFragmentDoc}`;
+${ComboPositionSelectFragmentDoc}
+${MoveSelectOptionFragmentDoc}`;
 
 /**
  * __usePageDashboardComboEditQuery__

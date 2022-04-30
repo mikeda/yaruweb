@@ -42,6 +42,8 @@ export const AttackTypeEnumText: { [key in Types.AttackTypeEnum]: string } = {
 
 export const AttackMoveStateEnumText: { [key in Types.AttackMoveStateEnum]: string } = {
   crouching: '強制しゃがみ',
+  sideways: '強制横向き',
+  backward: '強制後ろ向き',
   twist: 'きりもみ',
   blockable: 'ガード可能な硬直',
 };

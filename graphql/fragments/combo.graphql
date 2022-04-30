@@ -5,6 +5,11 @@ fragment combo on Combo {
   note
   position
 
+  move {
+    id
+    name
+  }
+
   comboCategory {
     id
     name

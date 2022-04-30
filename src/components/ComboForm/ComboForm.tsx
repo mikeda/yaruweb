@@ -3,8 +3,14 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { nullableNumber } from '@/lib/validators/nullable_number';
 
-import { ComboAttributes, ComboFragment, ComboPositionSelectFragment } from '@/lib/graphql/types';
 import {
+  ComboAttributes,
+  ComboFragment,
+  ComboPositionSelectFragment,
+  MoveSelectOptionFragment,
+} from '@/lib/graphql/types';
+import {
+  Autocomplete,
   Box,
   Button,
   Card,
@@ -25,18 +31,26 @@ const schema = yup.object().shape({
   damage: nullableNumber,
 });
 
+interface Option {
+  id: string;
+  name: string;
+  categoryName: string;
+}
+
 interface Props {
   combo?: ComboFragment;
   combos: ComboPositionSelectFragment[];
+  moveCategories: MoveSelectOptionFragment[];
   onSubmit: (attributes: ComboAttributes) => void;
 }
 
-export const ComboForm: React.FC<Props> = ({ combo, combos, onSubmit }) => {
+export const ComboForm: React.FC<Props> = ({ combo, combos, moveCategories, onSubmit }) => {
   const { handleSubmit, setValue, watch, control } = useForm<ComboAttributes>({
     resolver: yupResolver(schema),
     mode: 'onBlur',
     defaultValues: combo
       ? {
+          moveId: combo.move?.id,
           command: combo.command,
           damage: combo.damage,
           note: combo.note,
@@ -49,6 +63,17 @@ export const ComboForm: React.FC<Props> = ({ combo, combos, onSubmit }) => {
   });
 
   const command = watch('command');
+
+  const options: Option[] = [];
+  moveCategories.forEach(moveCategory => {
+    moveCategory.moves.forEach(move => {
+      options.push({
+        id: move.id,
+        name: move.name,
+        categoryName: moveCategory.name,
+      });
+    });
+  });
 
   return (
     <Card>
@@ -80,6 +105,22 @@ export const ComboForm: React.FC<Props> = ({ combo, combos, onSubmit }) => {
               name="note"
               control={control}
               render={({ field }) => <TextField {...field} label="備考" size="small" multiline fullWidth />}
+            />
+          </Box>
+
+          <Box mt={4}>
+            <Autocomplete<Option, undefined, true>
+              defaultValue={combo?.move ? options.filter(o => o.id === combo?.move?.id)[0] : undefined}
+              options={options}
+              getOptionLabel={option => option.name}
+              groupBy={option => option.categoryName}
+              onChange={(e, option) => {
+                setValue('moveId', option.id);
+              }}
+              renderInput={params => (
+                <TextField {...params} label="コンボ始動技" variant="outlined" fullWidth size="small" />
+              )}
+              disableClearable
             />
           </Box>
 
