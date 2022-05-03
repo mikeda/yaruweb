@@ -18,15 +18,15 @@ import {
 import { Add as AddIcon, MoreVert } from '@mui/icons-material';
 import { toast } from 'react-toastify';
 
-import { loadingState } from '@/lib/states/loadingState';
 import {
   DashboardPlayersPagePlayerFragment,
   useDashboardPlayersPageDeleteMutation,
   useDashboardPlayersPagePlayersQuery,
-} from '@/lib/$types';
-import { DEFAULT_AVATAR_URL } from '@/lib/placeIconUrl';
-import { pagesPath } from '@/lib/$path';
-import { resolveUrlObject } from '@/lib';
+  loadingState,
+  DEFAULT_AVATAR_URL,
+  pagesPath,
+  resolveUrlObject,
+} from '@/lib';
 
 import { DashboardContent, DashboardBreadcrumbs, SearchWord } from '@/components';
 

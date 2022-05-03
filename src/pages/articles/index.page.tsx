@@ -8,9 +8,9 @@ import {
   ArticlesPageArticlesDocument,
   ArticlesPageArticlesQuery,
   useArticlesPageArticlesLazyQuery,
-} from '@/lib/$types';
-import { fetchGraphql } from '@/lib/fetchGraphql';
-import { loadingState } from '@/lib/states/loadingState';
+  fetchGraphql,
+  loadingState,
+} from '@/lib';
 
 import { Content, Breadcrumbs, Head, ArticleCard } from '@/components';
 

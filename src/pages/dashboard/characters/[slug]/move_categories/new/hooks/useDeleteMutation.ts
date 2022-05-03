@@ -1,5 +1,5 @@
-import { useDeleteMoveCategoryMutation } from '@/lib/$types';
-import { loadingState } from '@/lib/states/loadingState';
+import { useDeleteMoveCategoryMutation } from '@/lib';
+import { loadingState } from '@/lib';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 

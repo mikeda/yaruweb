@@ -15,13 +15,14 @@ import {
   CharacterPathsQuery,
   PagingFragment,
   useCharacterBattlesPageBattlesLazyQuery,
-} from '@/lib/$types';
-import { fetchGraphql } from '@/lib/fetchGraphql';
-import { loadingState } from '@/lib/states/loadingState';
-import theme from '@/theme';
+  fetchGraphql,
+  loadingState,
+  theme,
+} from '@/lib';
 
 import { BattleListItem, Breadcrumbs, Content, Head } from '@/components';
 import { BattleSelector, PlayerBattleCountChip } from '@/components/BattleSelector';
+
 import { Profile } from '../components/Profile';
 import { Tabs } from '../components/Tabs';
 

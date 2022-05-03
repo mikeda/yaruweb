@@ -2,9 +2,9 @@ import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-
-import { OrganizerAttributes, OrganizerFormFragment } from '@/lib/$types';
 import { Box, Button, Card, CardContent, Divider, Grid, TextField } from '@mui/material';
+
+import { OrganizerAttributes, OrganizerFormFragment } from '@/lib';
 
 const schema = yup.object().shape({
   name: yup.string().required(),

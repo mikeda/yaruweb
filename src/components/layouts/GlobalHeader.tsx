@@ -6,7 +6,7 @@ import { styled } from '@mui/material/styles';
 
 import { UserMenu } from './UserMenu';
 
-import { pagesPath } from '@/lib/$path';
+import { pagesPath } from '@/lib';
 
 interface Props {
   children: React.ReactNode;

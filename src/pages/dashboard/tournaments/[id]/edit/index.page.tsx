@@ -1,9 +1,10 @@
 import React from 'react';
-
-import { TournamentAttributes } from '@/lib/$types';
 import { useRouter } from 'next/router';
-import { TournamentForm } from '@/components/TournamentForm';
-import { DashboardContent, DashboardBreadcrumbs } from '@/components';
+
+import { TournamentAttributes } from '@/lib';
+
+import { DashboardContent, DashboardBreadcrumbs, TournamentForm } from '@/components';
+
 import { useTournament } from './hooks/useTournament';
 import { useUpdate } from './hooks/useUpdate';
 

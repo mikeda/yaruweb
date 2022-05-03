@@ -4,9 +4,14 @@ import { Box, Paper, Typography } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import { ParsedUrlQuery } from 'querystring';
 
-import { CharacterPathsDocument, CharacterPathsQuery, PageCharacterDocument, PageCharacterQuery } from '@/lib/$types';
-import { fetchGraphql } from '@/lib/fetchGraphql';
-import theme from '@/theme';
+import {
+  CharacterPathsDocument,
+  CharacterPathsQuery,
+  PageCharacterDocument,
+  PageCharacterQuery,
+  fetchGraphql,
+  theme,
+} from '@/lib';
 
 import { Breadcrumbs, Content, Head } from '@/components';
 

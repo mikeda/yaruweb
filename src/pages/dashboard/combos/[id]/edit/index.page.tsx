@@ -8,8 +8,8 @@ import {
   PageDashboardComboEditQuery,
   usePageDashboardComboEditQuery,
   useUpdateComboMutation,
-} from '@/lib/$types';
-import { loadingState } from '@/lib/states/loadingState';
+  loadingState,
+} from '@/lib';
 
 import { ComboForm, DashboardContent, DashboardBreadcrumbs } from '@/components';
 

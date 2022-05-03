@@ -8,8 +8,8 @@ import {
   MoveCategoryFragment,
   usePageDashboardMoveCategoryEditQuery,
   useUpdateMoveCategoryMutation,
-} from '@/lib/$types';
-import { loadingState } from '@/lib/states/loadingState';
+  loadingState,
+} from '@/lib';
 
 import { DashboardContent, MoveCategoryForm } from '@/components';
 

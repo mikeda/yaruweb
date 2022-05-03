@@ -3,8 +3,7 @@ import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
-import { TournamentAttributes, useCreateTournamentMutation } from '@/lib/$types';
-import { loadingState } from '@/lib/states/loadingState';
+import { TournamentAttributes, useCreateTournamentMutation, loadingState } from '@/lib';
 
 import { DashboardBreadcrumbs, DashboardContent, TournamentForm } from '@/components';
 

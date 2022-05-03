@@ -5,10 +5,13 @@ import { Avatar, Box, ListItem, ListItemText, Typography } from '@mui/material';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
 
-import { TournamentVideoPageBattleFragment, TournamentVideoPageBattleSideFragment } from '@/lib/$types';
-import { formatSec } from '@/lib';
-import { BattleRoundText } from '@/lib/EnumText';
-import theme from '@/theme';
+import {
+  TournamentVideoPageBattleFragment,
+  TournamentVideoPageBattleSideFragment,
+  formatSec,
+  BattleRoundText,
+  theme,
+} from '@/lib';
 
 const useStyles = makeStyles(() =>
   createStyles({

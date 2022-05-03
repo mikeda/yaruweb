@@ -8,8 +8,8 @@ import {
   ComboCategoryFragment,
   usePageDashboardComboCategoryEditQuery,
   useUpdateComboCategoryMutation,
-} from '@/lib/$types';
-import { loadingState } from '@/lib/states/loadingState';
+  loadingState,
+} from '@/lib';
 
 import { DashboardContent, ComboCategoryForm } from '@/components';
 

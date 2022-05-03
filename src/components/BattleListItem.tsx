@@ -4,12 +4,10 @@ import { Avatar, Box, Grid, ListItem, ListItemText, Typography } from '@mui/mate
 import makeStyles from '@mui/styles/makeStyles';
 
 import { Link } from '@/components';
-import { BattleListItemFragment } from '@/lib/$types';
-import theme from '@/theme';
-import { BattleRoundText } from '@/lib/EnumText';
+import { BattleListItemFragment, theme, dayjs } from '@/lib';
+import { BattleRoundText } from '@/lib';
 import clsx from 'clsx';
-import dayjs from '@/lib/dayjs';
-import { pagesPath } from '@/lib/$path';
+import { pagesPath } from '@/lib';
 
 interface Props {
   battle: BattleListItemFragment;

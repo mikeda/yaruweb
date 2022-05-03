@@ -1,6 +1,6 @@
-import { useDashboardOrganizerEditPageQuery } from '@/lib/$types';
-import { loadingState } from '@/lib/states/loadingState';
 import { useSetRecoilState } from 'recoil';
+
+import { useDashboardOrganizerEditPageQuery, loadingState } from '@/lib';
 
 export const useOrganizer = (organizerSlug?: string) => {
   const setLoading = useSetRecoilState(loadingState);

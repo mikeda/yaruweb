@@ -1,7 +1,7 @@
-import { useDashboardOrganizerEditPageUpdateOrganizerMutation } from '@/lib/$types';
-import { loadingState } from '@/lib/states/loadingState';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
+
+import { useDashboardOrganizerEditPageUpdateOrganizerMutation, loadingState } from '@/lib';
 
 export const useUpdate = (onUpdate: () => void) => {
   const setLoading = useSetRecoilState(loadingState);

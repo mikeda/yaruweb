@@ -1,6 +1,5 @@
-import { useDashboardPlayerEditPageQuery } from '@/lib/$types';
-import { loadingState } from '@/lib/states/loadingState';
 import { useSetRecoilState } from 'recoil';
+import { useDashboardPlayerEditPageQuery, loadingState } from '@/lib';
 
 export const usePlayer = (playerSlug?: string) => {
   const setLoading = useSetRecoilState(loadingState);

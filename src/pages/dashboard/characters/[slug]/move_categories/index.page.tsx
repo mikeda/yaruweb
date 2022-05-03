@@ -32,10 +32,10 @@ import {
   useDashboardMoveCategoriesPageQuery,
   useDeleteMoveCategoryMutation,
   useDeleteMoveMutation,
-} from '@/lib/$types';
-import { loadingState } from '@/lib/states/loadingState';
-import { colors } from '@/colors';
-import { pagesPath } from '@/lib/$path';
+} from '@/lib';
+import { loadingState } from '@/lib';
+import { colors } from '@/lib';
+import { pagesPath } from '@/lib';
 import { resolveUrlObject } from '@/lib';
 
 import { DashboardContent, DashboardBreadcrumbs, Command, VideoPlayer } from '@/components';

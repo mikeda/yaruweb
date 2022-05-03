@@ -5,7 +5,7 @@ import { createEditor, Descendant } from 'slate';
 import { Editable, RenderElementProps, RenderLeafProps, Slate, withReact } from 'slate-react';
 import { Element } from './ArticleElement';
 import { Leaf } from './ArticleElement/Leaf';
-import theme from '@/theme';
+import { theme } from '@/lib';
 
 interface Props {
   content: string;

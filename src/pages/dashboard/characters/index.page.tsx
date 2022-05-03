@@ -3,9 +3,7 @@ import { useRouter } from 'next/router';
 import { Button, Grid } from '@mui/material';
 import { Add as AddIcon } from '@mui/icons-material';
 
-import { useDashboardCharactersPageQuery } from '@/lib/$types';
-import { pagesPath } from '@/lib/$path';
-import { resolveUrlObject } from '@/lib';
+import { useDashboardCharactersPageQuery, pagesPath, resolveUrlObject } from '@/lib';
 
 import { CharacterCard, DashboardBreadcrumbs, DashboardContent, NotFound } from '@/components';
 

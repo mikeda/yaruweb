@@ -1,17 +1,7 @@
 import React, { useRef } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-
-import {
-  AttackMoveAttributes,
-  AttackMoveResultEnum,
-  AttackMoveStateEnum,
-  AttackTypeEnum,
-  MoveFragment,
-  MovePositionSelectFragment,
-} from '@/lib/$types';
 import { Controller, useForm } from 'react-hook-form';
-import { NullableFloatSchema, NullableNumberSchema } from '@/lib/yup/CustomSchema';
 import {
   Box,
   Button,
@@ -31,9 +21,22 @@ import {
 } from '@mui/material';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
-import { AttackMoveResultText, AttackMoveStateEnumText, AttackTypeEnumText } from '@/lib/EnumText';
+
+import {
+  AttackMoveAttributes,
+  AttackMoveResultEnum,
+  AttackMoveStateEnum,
+  AttackTypeEnum,
+  MoveFragment,
+  MovePositionSelectFragment,
+  NullableFloatSchema,
+  NullableNumberSchema,
+  theme,
+  AttackMoveResultText,
+  AttackMoveStateEnumText,
+  AttackTypeEnumText,
+} from '@/lib';
 import { CommandForm } from './CommandForm';
-import theme from '@/theme';
 
 const schema = yup.object().shape({
   move: yup.object({

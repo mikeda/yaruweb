@@ -25,11 +25,11 @@ import {
   useDashboardArticlesPageDeleteMutation,
   useDashboardArticlesPagePublishMutation,
   useDashboardArticlesPageStopMutation,
-} from '@/lib/$types';
-import { loadingState } from '@/lib/states/loadingState';
-import { ArticleStatusText } from '@/lib/EnumText';
-import { pagesPath } from '@/lib/$path';
-import { resolveUrlObject } from '@/lib';
+  loadingState,
+  ArticleStatusText,
+  pagesPath,
+  resolveUrlObject,
+} from '@/lib';
 
 import { DashboardBreadcrumbs, DashboardContent, SearchWord } from '@/components';
 

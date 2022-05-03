@@ -1,19 +1,22 @@
 import React from 'react';
 import { styled } from '@mui/material/styles';
+import { Box, Card, CardContent, Chip, Divider, Stack, Typography } from '@mui/material';
+import { ArrowRight } from '@mui/icons-material';
 
-import { AttackMoveFragment, MoveMediaFragment, ReversalMoveFragment, ThrowMoveFragment } from '@/lib/$types';
-import { Command } from '../Command';
-
-import { VideoPlayer } from '../VideoPlayer';
 import {
+  AttackMoveFragment,
+  MoveMediaFragment,
+  ReversalMoveFragment,
+  ThrowMoveFragment,
   AttackMoveResultText,
   AttackTypeEnumText,
   ThrowEscapeEnumText,
   ThrowMoveResultText,
   ThrowTypeEnumText,
-} from '@/lib/EnumText';
-import { Box, Card, CardContent, Chip, Divider, Stack, Typography } from '@mui/material';
-import { ArrowRight } from '@mui/icons-material';
+} from '@/lib';
+
+import { Command } from '../Command';
+import { VideoPlayer } from '../VideoPlayer';
 import { CustomText } from '../CustomText';
 
 type Props = {

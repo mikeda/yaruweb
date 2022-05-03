@@ -1,4 +1,4 @@
-import { Tournament, TournamentVideo } from '@/lib/$types';
+import { Tournament, TournamentVideo } from '@/lib';
 
 type TitleArgs = Pick<TournamentVideo, 'label'> & { tournament: Pick<Tournament, 'name'> };
 

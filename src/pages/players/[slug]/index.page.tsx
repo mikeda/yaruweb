@@ -4,9 +4,7 @@ import { ParsedUrlQuery } from 'querystring';
 import { Box, Paper, Typography } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 
-import { fetchGraphql } from '@/lib/fetchGraphql';
-import { PlayerPageDocument, PlayerPageQuery, PlayerSlugsDocument, PlayerSlugsQuery } from '@/lib/$types';
-import theme from '@/theme';
+import { PlayerPageDocument, PlayerPageQuery, PlayerSlugsDocument, PlayerSlugsQuery, fetchGraphql, theme } from '@/lib';
 
 import { Head, Content, Breadcrumbs, PlayerPageTabs } from '@/components';
 import { Profile } from './components/Profile';

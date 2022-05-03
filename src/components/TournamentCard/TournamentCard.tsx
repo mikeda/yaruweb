@@ -1,5 +1,5 @@
 import React from 'react';
-import { TournamentCardFragment } from '@/lib/$types';
+import { TournamentCardFragment } from '@/lib';
 import {
   Card,
   CardActionArea,
@@ -13,14 +13,11 @@ import {
 } from '@mui/material';
 
 import makeStyles from '@mui/styles/makeStyles';
-
-import { Link } from '../Link';
-import { NO_IMAGE_URL } from '@/lib/placeIconUrl';
-import dayjs from '@/lib/dayjs';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import ScheduleIcon from '@mui/icons-material/Schedule';
-import { colors } from '@/colors';
-import { pagesPath } from '@/lib/$path';
+
+import { Link } from '../Link';
+import { NO_IMAGE_URL, dayjs, colors, pagesPath } from '@/lib';
 
 const useStyles = makeStyles({
   media: {

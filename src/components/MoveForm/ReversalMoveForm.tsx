@@ -1,10 +1,7 @@
 import React from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-
-import { ReversalMoveAttributes, MoveFragment, MovePositionSelectFragment } from '@/lib/$types';
 import { Controller, useForm } from 'react-hook-form';
-import { NullableNumberSchema } from '@/lib/yup/CustomSchema';
 import {
   Box,
   Button,
@@ -19,6 +16,9 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+
+import { ReversalMoveAttributes, MoveFragment, MovePositionSelectFragment, NullableNumberSchema } from '@/lib';
+
 import { CommandForm } from './CommandForm';
 
 const schema = yup.object().shape({

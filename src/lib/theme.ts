@@ -108,7 +108,7 @@ const error = {
   contrastDefaultColor: 'light',
 };
 
-const theme = createTheme(
+export const theme = createTheme(
   adaptV4Theme({
     palette: {
       primary,
@@ -164,5 +164,3 @@ const theme = createTheme(
     },
   }),
 );
-
-export default theme;

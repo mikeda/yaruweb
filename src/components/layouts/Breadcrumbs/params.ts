@@ -8,7 +8,7 @@ import {
   Player,
   Tournament,
   TournamentVideo,
-} from '@/lib/$types';
+} from '@/lib';
 
 export type ArticleParam = Pick<Article, 'id' | 'title'>;
 export type TournamentParam = Pick<Tournament, 'id' | 'name'>;

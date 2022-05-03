@@ -1,7 +1,6 @@
-import { useDashboardTournamentPageDeleteStandingMutation } from '@/lib/$types';
-import { loadingState } from '@/lib/states/loadingState';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
+import { useDashboardTournamentPageDeleteStandingMutation, loadingState } from '@/lib';
 
 interface Props {
   onDelete: () => void;

@@ -5,15 +5,15 @@ import { toast } from 'react-toastify';
 import { ParsedUrlQuery } from 'querystring';
 import { Box, Button, Grid, Typography } from '@mui/material';
 
-import { fetchGraphql } from '@/lib/fetchGraphql';
 import {
   PlayerSlugsDocument,
   PlayerSlugsQuery,
   PlayerStandingsPageDocument,
   PlayerStandingsPageQuery,
   usePlayerStandingsPageStandingsLazyQuery,
-} from '@/lib/$types';
-import { loadingState } from '@/lib/states/loadingState';
+  fetchGraphql,
+  loadingState,
+} from '@/lib';
 
 import { Head, Content, Breadcrumbs, PlayerPageTabs } from '@/components';
 

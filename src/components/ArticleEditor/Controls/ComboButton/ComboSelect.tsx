@@ -1,6 +1,7 @@
 import React from 'react';
-import { useComboSelectOptionsQuery } from '@/lib/$types';
 import { Select } from '@mui/material';
+
+import { useComboSelectOptionsQuery } from '@/lib';
 
 interface Props {
   characterSlug: string;

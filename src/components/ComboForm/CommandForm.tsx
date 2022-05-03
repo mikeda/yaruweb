@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
-
 import { Box, IconButton, Paper } from '@mui/material';
-import { Command, OperationListSelector } from '..';
 import EditIcon from '@mui/icons-material/Edit';
+
+import { Command } from '../Command';
+import { OperationListSelector } from '../OperationListSelector';
 
 interface Props {
   command: string[];

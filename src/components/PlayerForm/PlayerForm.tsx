@@ -3,7 +3,6 @@ import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import { PlayerAttributes, PlayerFormFragment, useCountrySelectOptionsQuery } from '@/lib/$types';
 import {
   Box,
   Button,
@@ -17,6 +16,7 @@ import {
   Select,
   TextField,
 } from '@mui/material';
+import { PlayerAttributes, PlayerFormFragment, useCountrySelectOptionsQuery } from '@/lib';
 
 const schema = yup.object().shape({
   name: yup.string().required(),

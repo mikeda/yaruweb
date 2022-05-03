@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 
-import { TournamentVideoAttributes } from '@/lib/$types';
+import { TournamentVideoAttributes } from '@/lib';
 import { DashboardContent, DashboardBreadcrumbs } from '@/components';
 
 import { TournamentVideoEditForm } from './components/TournamentVideoEditForm';

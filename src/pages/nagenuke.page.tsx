@@ -1,7 +1,8 @@
 import React, { useRef, useState } from 'react';
-import { Head, Content } from '@/components';
 import { Box, Button, Stack, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
+
+import { Head, Content } from '@/components';
 
 type ThrowType = 'LP' | 'RP' | 'WP';
 interface State {

@@ -9,8 +9,8 @@ import {
   useUpdateAttackMoveMutation,
   useUpdateReversalMoveMutation,
   useUpdateThrowMoveMutation,
-} from '@/lib/$types';
-import { loadingState } from '@/lib/states/loadingState';
+  loadingState,
+} from '@/lib';
 
 import { DashboardBreadcrumbs, DashboardContent, AttackMoveForm, ReversalMoveForm, ThrowMoveForm } from '@/components';
 

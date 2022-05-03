@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useSlate } from 'slate-react';
+import { Transforms, Editor } from 'slate';
+import { Autocomplete, Dialog, DialogContent, Stack, TextField } from '@mui/material';
 
 import { MoveSelect } from './MoveSelect';
-import { Transforms, Editor } from 'slate';
-import { Character } from '@/lib/$types';
+import { Character } from '@/lib';
 import { TextButton } from '../TextButton';
-import { Autocomplete, Dialog, DialogContent, Stack, TextField } from '@mui/material';
 
 type CharacterFragment = Pick<Character, 'slug' | 'name'>;
 

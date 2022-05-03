@@ -12,8 +12,8 @@ import {
   useCreateThrowMoveMutation,
   useCreateReversalMoveMutation,
   ReversalMoveAttributes,
-} from '@/lib/$types';
-import { loadingState } from '@/lib/states/loadingState';
+  loadingState,
+} from '@/lib';
 
 import { DashboardBreadcrumbs, DashboardContent, AttackMoveForm, ThrowMoveForm, ReversalMoveForm } from '@/components';
 

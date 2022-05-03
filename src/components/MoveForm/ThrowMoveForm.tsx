@@ -1,17 +1,7 @@
 import React from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-
-import {
-  ThrowMoveAttributes,
-  MoveFragment,
-  ThrowMoveResultEnum,
-  ThrowTypeEnum,
-  ThrowEscapeEnum,
-  MovePositionSelectFragment,
-} from '@/lib/$types';
 import { Controller, useForm } from 'react-hook-form';
-import { NullableNumberSchema } from '@/lib/yup/CustomSchema';
 import {
   Box,
   Button,
@@ -26,8 +16,20 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+
+import {
+  ThrowMoveAttributes,
+  MoveFragment,
+  ThrowMoveResultEnum,
+  ThrowTypeEnum,
+  ThrowEscapeEnum,
+  MovePositionSelectFragment,
+  NullableNumberSchema,
+  ThrowEscapeEnumText,
+  ThrowMoveResultText,
+  ThrowTypeEnumText,
+} from '@/lib';
 import { CommandForm } from './CommandForm';
-import { ThrowEscapeEnumText, ThrowMoveResultText, ThrowTypeEnumText } from '@/lib/EnumText';
 
 const schema = yup.object().shape({
   move: yup.object({

@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 
-import { PlayerAttributes } from '@/lib/$types';
+import { PlayerAttributes } from '@/lib';
 
 import { DashboardContent, DashboardBreadcrumbs, PlayerForm } from '@/components';
 

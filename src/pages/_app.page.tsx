@@ -16,12 +16,8 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 config.autoAddCss = false;
 
 import * as gtag from '@/lib/gtag';
-import theme from '@/theme';
 
-import { apolloClient } from '@/lib/apolloClient';
-import { useCurrentUserQuery } from '@/lib/$types';
-import { currentUserState } from '@/lib/states/currentUserState';
-import { loadingState } from '@/lib/states/loadingState';
+import { apolloClient, theme, useCurrentUserQuery, currentUserState, loadingState } from '@/lib';
 
 import { Loading } from '@/components';
 

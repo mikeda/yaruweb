@@ -1,6 +1,6 @@
-import { useDashboardTournamentEditPageQuery } from '@/lib/$types';
-import { loadingState } from '@/lib/states/loadingState';
 import { useSetRecoilState } from 'recoil';
+
+import { useDashboardTournamentEditPageQuery, loadingState } from '@/lib';
 
 export const useTournament = (tournamentId?: string) => {
   const setLoading = useSetRecoilState(loadingState);

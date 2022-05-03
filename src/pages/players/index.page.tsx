@@ -4,9 +4,13 @@ import { useSetRecoilState } from 'recoil';
 import { toast } from 'react-toastify';
 import { Box, Button, Grid } from '@mui/material';
 
-import { loadingState } from '@/lib/states/loadingState';
-import { fetchGraphql } from '@/lib/fetchGraphql';
-import { PlayersPagePlayersDocument, PlayersPagePlayersQuery, usePlayersPagePlayersLazyQuery } from '@/lib/$types';
+import {
+  PlayersPagePlayersDocument,
+  PlayersPagePlayersQuery,
+  usePlayersPagePlayersLazyQuery,
+  fetchGraphql,
+  loadingState,
+} from '@/lib';
 
 import { Breadcrumbs, Content, Head, PlayerCard, SearchWord } from '@/components';
 
