@@ -1,10 +1,10 @@
 import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import { getFirebaseUser } from '../firebase';
+import { getFirebaseUser } from './firebase';
 
 const endpoint = process.env.NEXT_PUBLIC_GRAPHQL_ENDOPOINT;
 
-export const httpLink = createHttpLink({
+const httpLink = createHttpLink({
   uri: endpoint,
 });
 
@@ -22,7 +22,7 @@ const authLink = setContext(async (_, { headers }) => {
   };
 });
 
-export const client = new ApolloClient({
+export const apolloClient = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache({
     possibleTypes: {

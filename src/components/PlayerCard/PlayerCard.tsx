@@ -1,5 +1,5 @@
 import React from 'react';
-import { PlayerCardFragment } from '@/lib/graphql/types';
+import { PlayerCardFragment } from '@/lib/$types';
 import {
   Card,
   CardActionArea,
@@ -14,7 +14,7 @@ import {
 
 import makeStyles from '@mui/styles/makeStyles';
 
-import { NO_IMAGE_URL } from '@/lib/Assets';
+import { NO_IMAGE_URL } from '@/lib/placeIconUrl';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import { colors } from '@/colors';

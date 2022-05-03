@@ -1,15 +1,6 @@
 import React from 'react';
-import { CharacterPageProfileFragment } from '@/lib/graphql/types';
-import {
-  Card,
-  CardContent,
-  CardMedia,
-  List,
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  Typography,
-} from '@mui/material';
+import { CharacterPageProfileFragment } from '@/lib/$types';
+import { Card, CardContent, CardMedia, List, ListItem, ListItemIcon, ListItemText, Typography } from '@mui/material';
 
 import makeStyles from '@mui/styles/makeStyles';
 

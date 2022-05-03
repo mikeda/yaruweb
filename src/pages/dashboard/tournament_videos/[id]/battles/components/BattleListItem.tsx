@@ -6,12 +6,12 @@ import makeStyles from '@mui/styles/makeStyles';
 import { formatSec } from '@/lib';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { BattleRoundText } from '@/lib/graphql/enum_texts';
+import { BattleRoundText } from '@/lib/EnumText';
 import {
   CharacterSelectOptionFragment,
   DashboardBattlesPageBattleReslutFragment,
   PlayerSelectOptionFragment,
-} from '@/lib/graphql/types';
+} from '@/lib/$types';
 import clsx from 'clsx';
 import { useUpdateMutation } from '../hooks/useUpdateMutation';
 import theme from '@/theme';

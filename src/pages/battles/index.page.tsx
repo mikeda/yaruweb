@@ -7,9 +7,9 @@ import { Box, Button, List, Paper } from '@mui/material';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
 
-import { BattlesPageDocument, BattlesPageQuery, useBattlesPageBattlesLazyQuery } from '@/lib/graphql/types';
-import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
-import { loadingState } from '@/states/loading';
+import { BattlesPageDocument, BattlesPageQuery, useBattlesPageBattlesLazyQuery } from '@/lib/$types';
+import { fetchGraphql } from '@/lib/fetchGraphql';
+import { loadingState } from '@/lib/states/loadingState';
 import theme from '@/theme';
 import { pagesPath } from '@/lib/$path';
 

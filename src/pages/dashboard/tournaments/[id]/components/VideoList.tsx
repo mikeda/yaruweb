@@ -12,7 +12,7 @@ import {
 } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import { MoreVert } from '@mui/icons-material';
-import { useDashboardTournamentPageVideosQuery } from '@/lib/graphql/types';
+import { useDashboardTournamentPageVideosQuery } from '@/lib/$types';
 import { useCreateVideoMutation, useDeleteVideoMutation } from '../hooks';
 import { VideoForm } from './VideoForm';
 import { useRouter } from 'next/router';

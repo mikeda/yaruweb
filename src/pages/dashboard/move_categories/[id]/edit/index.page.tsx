@@ -8,8 +8,8 @@ import {
   MoveCategoryFragment,
   usePageDashboardMoveCategoryEditQuery,
   useUpdateMoveCategoryMutation,
-} from '@/lib/graphql/types';
-import { loadingState } from '@/states/loading';
+} from '@/lib/$types';
+import { loadingState } from '@/lib/states/loadingState';
 
 import { DashboardContent, MoveCategoryForm } from '@/components';
 

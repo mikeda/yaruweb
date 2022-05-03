@@ -9,8 +9,8 @@ import {
   CharacterPathsDocument,
   CharacterPathsQuery,
   ComboMediaFragment,
-} from '@/lib/graphql/types';
-import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
+} from '@/lib/$types';
+import { fetchGraphql } from '@/lib/fetchGraphql';
 import {
   Box,
   Dialog,

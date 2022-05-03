@@ -1,5 +1,5 @@
 import React from 'react';
-import { useMoveSelectOptionsQuery } from '@/lib/graphql/types';
+import { useMoveSelectOptionsQuery } from '@/lib/$types';
 import { TextField } from '@mui/material';
 import { Autocomplete } from '@mui/material';
 

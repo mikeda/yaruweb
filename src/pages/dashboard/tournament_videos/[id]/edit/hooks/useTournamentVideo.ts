@@ -1,5 +1,5 @@
-import { useDashboardTournamentVideoEditPageQuery } from '@/lib/graphql/types';
-import { loadingState } from '@/states/loading';
+import { useDashboardTournamentVideoEditPageQuery } from '@/lib/$types';
+import { loadingState } from '@/lib/states/loadingState';
 import { useSetRecoilState } from 'recoil';
 
 export const useTournamentVideo = (tournamentVideoId?: string) => {

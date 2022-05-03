@@ -15,9 +15,9 @@ import {
   CharacterPathsQuery,
   PagingFragment,
   useCharacterBattlesPageBattlesLazyQuery,
-} from '@/lib/graphql/types';
-import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
-import { loadingState } from '@/states/loading';
+} from '@/lib/$types';
+import { fetchGraphql } from '@/lib/fetchGraphql';
+import { loadingState } from '@/lib/states/loadingState';
 import theme from '@/theme';
 
 import { BattleListItem, Breadcrumbs, Content, Head } from '@/components';

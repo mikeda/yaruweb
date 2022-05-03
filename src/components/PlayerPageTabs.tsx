@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Paper, Tab, Tabs } from '@mui/material';
 import { useRouter } from 'next/router';
-import { PlayerPageProfileFragment } from '@/lib/graphql/types';
+import { PlayerPageProfileFragment } from '@/lib/$types';
 import { pagesPath } from '@/lib/$path';
 
 type TabValue = 'profile' | 'battles' | 'standings';

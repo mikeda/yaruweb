@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { TournamentAttributes } from '@/lib/graphql/types';
+import { TournamentAttributes } from '@/lib/$types';
 import { useRouter } from 'next/router';
 import { TournamentForm } from '@/components/TournamentForm';
 import { DashboardContent, DashboardBreadcrumbs } from '@/components';

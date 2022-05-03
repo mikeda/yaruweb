@@ -9,9 +9,9 @@ import {
   AttackTypeEnum,
   MoveFragment,
   MovePositionSelectFragment,
-} from '@/lib/graphql/types';
+} from '@/lib/$types';
 import { Controller, useForm } from 'react-hook-form';
-import { nullableFloat, nullableNumber } from '@/lib/validators/nullable_number';
+import { NullableFloatSchema, NullableNumberSchema } from '@/lib/yup/CustomSchema';
 import {
   Box,
   Button,
@@ -31,7 +31,7 @@ import {
 } from '@mui/material';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
-import { AttackMoveResultText, AttackMoveStateEnumText, AttackTypeEnumText } from '@/lib/graphql/enum_texts';
+import { AttackMoveResultText, AttackMoveStateEnumText, AttackTypeEnumText } from '@/lib/EnumText';
 import { CommandForm } from './CommandForm';
 import theme from '@/theme';
 
@@ -40,12 +40,12 @@ const schema = yup.object().shape({
     name: yup.string().required(),
   }),
   attack: yup.object({
-    reach: nullableFloat,
-    startUpFrame: nullableNumber,
-    duration: nullableNumber,
-    blockFrame: nullableNumber,
-    hitFrame: nullableNumber,
-    counterFrame: nullableNumber,
+    reach: NullableFloatSchema,
+    startUpFrame: NullableNumberSchema,
+    duration: NullableNumberSchema,
+    blockFrame: NullableNumberSchema,
+    hitFrame: NullableNumberSchema,
+    counterFrame: NullableNumberSchema,
   }),
 });
 

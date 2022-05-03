@@ -3,8 +3,8 @@ import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
-import { ArticleAttributes, useCreateArticleMutation } from '@/lib/graphql/types';
-import { loadingState } from '@/states/loading';
+import { ArticleAttributes, useCreateArticleMutation } from '@/lib/$types';
+import { loadingState } from '@/lib/states/loadingState';
 
 import { ArticleForm, DashboardBreadcrumbs, DashboardContent } from '@/components';
 

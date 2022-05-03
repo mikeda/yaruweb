@@ -8,7 +8,7 @@ import {
   TournamentAttributes,
   TournamentFormFragment,
   useTournamentFormQuery,
-} from '@/lib/graphql/types';
+} from '@/lib/$types';
 import dayjs from '@/lib/dayjs';
 import { Box, Button, Card, CardContent, Divider, Grid, TextField } from '@mui/material';
 import { Autocomplete } from '@mui/material';

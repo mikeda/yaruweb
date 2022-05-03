@@ -18,13 +18,13 @@ import { Add as AddIcon, MoreVert } from '@mui/icons-material';
 import { useSetRecoilState } from 'recoil';
 import { toast } from 'react-toastify';
 
-import { loadingState } from '@/states/loading';
+import { loadingState } from '@/lib/states/loadingState';
 import {
   DashboardOrganizersPageOrganizerFragment,
   useDashboardOrganizersPageDeleteMutation,
   useDashboardOrganizersPageOrganizersQuery,
-} from '@/lib/graphql/types';
-import { DEFAULT_AVATAR_URL } from '@/lib/Assets';
+} from '@/lib/$types';
+import { DEFAULT_AVATAR_URL } from '@/lib/placeIconUrl';
 import { pagesPath } from '@/lib/$path';
 import { resolveUrlObject } from '@/lib';
 

@@ -9,9 +9,9 @@ import {
   CurrentUserFragment,
   useCurrentUserQuery,
   useUpdateCurrentUserMutation,
-} from '@/lib/graphql/types';
-import { currentUserState } from '@/states/currentUser';
-import { loadingState } from '@/states/loading';
+} from '@/lib/$types';
+import { currentUserState } from '@/lib/states/currentUserState';
+import { loadingState } from '@/lib/states/loadingState';
 
 import { DashboardContent } from '@/components';
 

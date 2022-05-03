@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 
-import { useFavArticleMutation, useFavButtonArticleQuery, useUnfavArticleMutation } from '@/lib/graphql/types';
+import { useFavArticleMutation, useFavButtonArticleQuery, useUnfavArticleMutation } from '@/lib/$types';
 import { Favorite, FavoriteBorder } from '@mui/icons-material';
 import { Badge, IconButton } from '@mui/material';
-import { useCurrentUser } from '@/hooks/useCurrentUser';
+import { useCurrentUser } from '@/lib/hooks/useCurrentUser';
 
 type Props = {
   articleId: string;

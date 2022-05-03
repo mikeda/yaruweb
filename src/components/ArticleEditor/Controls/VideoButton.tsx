@@ -2,7 +2,7 @@ import React from 'react';
 import { useSlate } from 'slate-react';
 
 import { Button } from './Button';
-import { useCreateArticleVideoMutation } from '@/lib/graphql/types';
+import { useCreateArticleVideoMutation } from '@/lib/$types';
 import { YAROUYO_FONT_CODE } from '@/lib/YarouyoFont';
 import { toast } from 'react-toastify';
 import { Transforms } from 'slate';

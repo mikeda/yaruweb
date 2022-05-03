@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 
-import { OrganizerAttributes } from '@/lib/graphql/types';
+import { OrganizerAttributes } from '@/lib/$types';
 
 import { DashboardContent, DashboardBreadcrumbs, OrganizerForm } from '@/components';
 

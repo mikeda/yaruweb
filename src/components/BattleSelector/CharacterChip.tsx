@@ -1,6 +1,6 @@
 import React from 'react';
 import { Avatar, Chip } from '@mui/material';
-import { CharacterChipFragment } from '@/lib/graphql/types';
+import { CharacterChipFragment } from '@/lib/$types';
 
 interface Props {
   character: CharacterChipFragment;

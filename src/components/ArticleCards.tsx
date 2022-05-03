@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 import { ArticleCard } from './ArticleCard';
 import { Box, Grid, Link as MuiLink, Typography } from '@mui/material';
-import { ArticleCardFragment } from '@/lib/graphql/types';
+import { ArticleCardFragment } from '@/lib/$types';
 
 type Props = {
   articles: ArticleCardFragment[];

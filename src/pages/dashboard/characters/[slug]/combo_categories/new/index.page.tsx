@@ -8,8 +8,8 @@ import {
   ComboCategoryAttributes,
   useCreateComboCategoryMutation,
   useDashboardComboCategoryNewPageQuery,
-} from '@/lib/graphql/types';
-import { loadingState } from '@/states/loading';
+} from '@/lib/$types';
+import { loadingState } from '@/lib/states/loadingState';
 
 import { ComboCategoryForm, DashboardContent } from '@/components';
 

@@ -4,9 +4,9 @@ import { Card, CardActionArea, CardContent, CardMedia, Typography } from '@mui/m
 import makeStyles from '@mui/styles/makeStyles';
 
 import { Link } from '@/components';
-import { NO_IMAGE_URL, placeIconUrl } from '@/lib/Assets';
+import { NO_IMAGE_URL, placeIconUrl } from '@/lib/placeIconUrl';
 import dayjs from '@/lib/dayjs';
-import { PlayerStandingCardFragment } from '@/lib/graphql/types';
+import { PlayerStandingCardFragment } from '@/lib/$types';
 import theme from '@/theme';
 import { pagesPath } from '@/lib/$path';
 

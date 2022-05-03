@@ -1,5 +1,5 @@
 import React from 'react';
-import { useArticleElementComboQuery } from '@/lib/graphql/types';
+import { useArticleElementComboQuery } from '@/lib/$types';
 import { ComboMedia } from '@/components/ComboMedia';
 
 interface Props {

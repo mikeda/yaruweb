@@ -2,16 +2,16 @@ import React, { useState } from 'react';
 import { GetStaticProps } from 'next';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
-import { loadingState } from '@/states/loading';
+import { loadingState } from '@/lib/states/loadingState';
 import { Box, Button, Grid } from '@mui/material';
 
 import {
   TournamentsPageTournamentsDocument,
   TournamentsPageTournamentsQuery,
   useTournamentsPageTournamentsLazyQuery,
-} from '@/lib/graphql/types';
+} from '@/lib/$types';
 import { Head, Content, Breadcrumbs, TournamentCard } from '@/components';
-import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
+import { fetchGraphql } from '@/lib/fetchGraphql';
 
 const Page: React.FC<TournamentsPageTournamentsQuery> = ({
   tournaments: { records: initTournaments, paging: initPaging },

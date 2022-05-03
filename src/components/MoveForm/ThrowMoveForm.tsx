@@ -9,9 +9,9 @@ import {
   ThrowTypeEnum,
   ThrowEscapeEnum,
   MovePositionSelectFragment,
-} from '@/lib/graphql/types';
+} from '@/lib/$types';
 import { Controller, useForm } from 'react-hook-form';
-import { nullableNumber } from '@/lib/validators/nullable_number';
+import { NullableNumberSchema } from '@/lib/yup/CustomSchema';
 import {
   Box,
   Button,
@@ -27,7 +27,7 @@ import {
   Typography,
 } from '@mui/material';
 import { CommandForm } from './CommandForm';
-import { ThrowEscapeEnumText, ThrowMoveResultText, ThrowTypeEnumText } from '@/lib/graphql/enum_texts';
+import { ThrowEscapeEnumText, ThrowMoveResultText, ThrowTypeEnumText } from '@/lib/EnumText';
 
 const schema = yup.object().shape({
   move: yup.object({
@@ -35,8 +35,8 @@ const schema = yup.object().shape({
   }),
   throw: yup.object({
     damage: yup.number().required(),
-    startUpFrame: nullableNumber,
-    finishFrame: nullableNumber,
+    startUpFrame: NullableNumberSchema,
+    finishFrame: NullableNumberSchema,
   }),
 });
 

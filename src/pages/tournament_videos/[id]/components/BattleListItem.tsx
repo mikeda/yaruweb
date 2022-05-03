@@ -5,9 +5,9 @@ import { Avatar, Box, ListItem, ListItemText, Typography } from '@mui/material';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
 
-import { TournamentVideoPageBattleFragment, TournamentVideoPageBattleSideFragment } from '@/lib/graphql/types';
+import { TournamentVideoPageBattleFragment, TournamentVideoPageBattleSideFragment } from '@/lib/$types';
 import { formatSec } from '@/lib';
-import { BattleRoundText } from '@/lib/graphql/enum_texts';
+import { BattleRoundText } from '@/lib/EnumText';
 import theme from '@/theme';
 
 const useStyles = makeStyles(() =>

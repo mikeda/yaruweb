@@ -1,5 +1,5 @@
 import React from 'react';
-import { ComboMediaFragment } from '@/lib/graphql/types';
+import { ComboMediaFragment } from '@/lib/$types';
 import { Card, CardContent, Typography } from '@mui/material';
 import { VideoPlayer } from '../VideoPlayer';
 import { Command } from '../Command';

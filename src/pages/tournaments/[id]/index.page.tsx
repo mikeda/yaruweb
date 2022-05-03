@@ -6,11 +6,11 @@ import {
   TournamentPageQuery,
   TournamentPathsDocument,
   TournamentPathsQuery,
-} from '@/lib/graphql/types';
+} from '@/lib/$types';
 import { Content } from '@/components/layouts/Content';
 import { Head } from '@/components/layouts/Head';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
+import { fetchGraphql } from '@/lib/fetchGraphql';
 import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 import { NotFound } from '@/components';
 import dayjs from '@/lib/dayjs';
@@ -29,7 +29,7 @@ import {
   Typography,
 } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
-import { DEFAULT_AVATAR_URL, NO_IMAGE_URL, placeIconUrl } from '@/lib/Assets';
+import { DEFAULT_AVATAR_URL, NO_IMAGE_URL, placeIconUrl } from '@/lib/placeIconUrl';
 import { ParsedUrlQuery } from 'querystring';
 import { pagesPath } from '@/lib/$path';
 

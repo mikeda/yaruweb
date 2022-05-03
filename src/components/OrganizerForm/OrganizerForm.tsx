@@ -3,7 +3,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import { OrganizerAttributes, OrganizerFormFragment } from '@/lib/graphql/types';
+import { OrganizerAttributes, OrganizerFormFragment } from '@/lib/$types';
 import { Box, Button, Card, CardContent, Divider, Grid, TextField } from '@mui/material';
 
 const schema = yup.object().shape({

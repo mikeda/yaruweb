@@ -2,8 +2,8 @@ import React, { useRef, useState } from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import { ArticleCategoryText } from '@/lib/graphql/enum_texts';
-import { ArticleAttributes, ArticleCategory, ArticleFormArticleFragment } from '@/lib/graphql/types';
+import { ArticleCategoryText } from '@/lib/EnumText';
+import { ArticleAttributes, ArticleCategory, ArticleFormArticleFragment } from '@/lib/$types';
 import { ReactEditor, Slate } from 'slate-react';
 import { ArticleEditor, createArticleEditor } from '../ArticleEditor';
 import { Descendant } from 'slate';

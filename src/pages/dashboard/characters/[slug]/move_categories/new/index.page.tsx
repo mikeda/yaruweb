@@ -5,13 +5,13 @@ import {
   MoveCategoryAttributes,
   useCreateMoveCategoryMutation,
   useDashboardMoveCategoryNewPageQuery,
-} from '@/lib/graphql/types';
+} from '@/lib/$types';
 import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { MoveCategoryForm } from '@/components/MoveCategoryForm';
 import { useSetRecoilState } from 'recoil';
-import { loadingState } from '@/states/loading';
+import { loadingState } from '@/lib/states/loadingState';
 import { useRouteParams } from './hooks';
 
 const Page: React.FC = () => {

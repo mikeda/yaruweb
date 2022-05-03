@@ -4,9 +4,9 @@ import { Avatar, Box, Grid, ListItem, ListItemText, Typography } from '@mui/mate
 import makeStyles from '@mui/styles/makeStyles';
 
 import { Link } from '@/components';
-import { BattleListItemFragment } from '@/lib/graphql/types';
+import { BattleListItemFragment } from '@/lib/$types';
 import theme from '@/theme';
-import { BattleRoundText } from '@/lib/graphql/enum_texts';
+import { BattleRoundText } from '@/lib/EnumText';
 import clsx from 'clsx';
 import dayjs from '@/lib/dayjs';
 import { pagesPath } from '@/lib/$path';

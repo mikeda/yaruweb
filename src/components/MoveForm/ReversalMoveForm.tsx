@@ -2,9 +2,9 @@ import React from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import { ReversalMoveAttributes, MoveFragment, MovePositionSelectFragment } from '@/lib/graphql/types';
+import { ReversalMoveAttributes, MoveFragment, MovePositionSelectFragment } from '@/lib/$types';
 import { Controller, useForm } from 'react-hook-form';
-import { nullableNumber } from '@/lib/validators/nullable_number';
+import { NullableNumberSchema } from '@/lib/yup/CustomSchema';
 import {
   Box,
   Button,
@@ -27,8 +27,8 @@ const schema = yup.object().shape({
   }),
   reversal: yup.object({
     type: yup.string().required(),
-    startUpFrame: nullableNumber,
-    finishFrame: nullableNumber,
+    startUpFrame: NullableNumberSchema,
+    finishFrame: NullableNumberSchema,
   }),
 });
 

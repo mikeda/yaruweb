@@ -1,6 +1,6 @@
 import React from 'react';
-import { DEFAULT_AVATAR_URL } from '@/lib/Assets';
-import { PlayerPageProfileFragment } from '@/lib/graphql/types';
+import { DEFAULT_AVATAR_URL } from '@/lib/placeIconUrl';
+import { PlayerPageProfileFragment } from '@/lib/$types';
 import { Paper, Typography } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import theme from '@/theme';

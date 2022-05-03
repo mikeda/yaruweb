@@ -1,4 +1,4 @@
-import { CurrentUserFragment } from '@/lib/graphql/types';
+import { CurrentUserFragment } from '@/lib/$types';
 import { atom } from 'recoil';
 
 // undefined : まだログイン確認が完了していない状態とする

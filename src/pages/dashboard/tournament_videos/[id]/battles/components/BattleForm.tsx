@@ -17,7 +17,7 @@ import {
   BattleAttributes,
   BattleRound,
   DashboardBattlesPageBattleReslutFragment,
-} from '@/lib/graphql/types';
+} from '@/lib/$types';
 import {
   Box,
   Button,
@@ -34,7 +34,7 @@ import {
 import { Autocomplete } from '@mui/material';
 import { createFilterOptions } from '@mui/material/useAutocomplete';
 import { GetApp, PlayArrow } from '@mui/icons-material';
-import { BattleRoundText } from '@/lib/graphql/enum_texts';
+import { BattleRoundText } from '@/lib/EnumText';
 import { YouTubeWrapper } from '@/components';
 
 const schema = yup.object().shape({

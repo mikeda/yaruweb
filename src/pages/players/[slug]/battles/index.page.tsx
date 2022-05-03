@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 import { ParsedUrlQuery } from 'querystring';
 
-import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
+import { fetchGraphql } from '@/lib/fetchGraphql';
 import {
   BattleListItemFragment,
   PagingFragment,
@@ -14,8 +14,8 @@ import {
   PlayerSlugsDocument,
   PlayerSlugsQuery,
   usePlayerBattlesPageBattlesLazyQuery,
-} from '@/lib/graphql/types';
-import { loadingState } from '@/states/loading';
+} from '@/lib/$types';
+import { loadingState } from '@/lib/states/loadingState';
 
 import { Head, Content, Breadcrumbs, BattleListItem, PlayerPageTabs } from '@/components';
 import { CharacterBattleCountChip, BattleSelector } from '@/components/BattleSelector';

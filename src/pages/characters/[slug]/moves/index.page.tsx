@@ -26,15 +26,15 @@ import {
   CharacterPathsQuery,
   ReversalMoveFragment,
   ThrowMoveFragment,
-} from '@/lib/graphql/types';
-import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
+} from '@/lib/$types';
+import { fetchGraphql } from '@/lib/fetchGraphql';
 import {
   AttackMoveResultText,
   AttackTypeEnumText,
   ThrowEscapeEnumText,
   ThrowMoveResultText,
   ThrowTypeEnumText,
-} from '@/lib/graphql/enum_texts';
+} from '@/lib/EnumText';
 import { colors } from '@/colors';
 
 import { Breadcrumbs, Command, Content, CustomText, Head, VideoPlayer } from '@/components';

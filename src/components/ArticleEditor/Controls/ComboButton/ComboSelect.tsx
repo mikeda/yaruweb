@@ -1,5 +1,5 @@
 import React from 'react';
-import { useComboSelectOptionsQuery } from '@/lib/graphql/types';
+import { useComboSelectOptionsQuery } from '@/lib/$types';
 import { Select } from '@mui/material';
 
 interface Props {

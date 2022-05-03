@@ -1,5 +1,5 @@
 import React from 'react';
-import { useArticleElementMoveQuery } from '@/lib/graphql/types';
+import { useArticleElementMoveQuery } from '@/lib/$types';
 import { MoveMedia } from '@/components/MoveMedia';
 
 interface Props {

@@ -4,13 +4,13 @@ import { toast } from 'react-toastify';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import { useCurrentUserLazyQuery } from '@/lib/graphql/types';
+import { useCurrentUserLazyQuery } from '@/lib/$types';
 import { signInFirebaseWithEmail } from '@/lib/firebase';
-import { currentUserState } from '@/states/currentUser';
+import { currentUserState } from '@/lib/states/currentUserState';
 import { useSetRecoilState } from 'recoil';
 import { Controller, useForm } from 'react-hook-form';
-import { UserValidator } from '@/lib/validators/UserValidator';
-import { loadingState } from '@/states/loading';
+import { UserValidator } from '@/lib/yup/UserValidator';
+import { loadingState } from '@/lib/states/loadingState';
 import { Box, Button, Card, CardContent, Divider, TextField } from '@mui/material';
 import { pagesPath } from '@/lib/$path';
 

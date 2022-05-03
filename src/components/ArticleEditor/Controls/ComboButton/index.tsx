@@ -3,7 +3,7 @@ import { useSlate } from 'slate-react';
 
 import { ComboSelect } from './ComboSelect';
 import { Transforms, Editor } from 'slate';
-import { Character } from '@/lib/graphql/types';
+import { Character } from '@/lib/$types';
 import { TextButton } from '../TextButton';
 import { Dialog, DialogContent, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
 

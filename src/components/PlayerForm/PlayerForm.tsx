@@ -3,7 +3,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import { PlayerAttributes, PlayerFormFragment, useCountrySelectOptionsQuery } from '@/lib/graphql/types';
+import { PlayerAttributes, PlayerFormFragment, useCountrySelectOptionsQuery } from '@/lib/$types';
 import {
   Box,
   Button,

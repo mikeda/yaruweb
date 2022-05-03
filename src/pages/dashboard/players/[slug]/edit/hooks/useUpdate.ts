@@ -1,5 +1,5 @@
-import { useDashboardPlayerEditPageUpdatePlayerMutation } from '@/lib/graphql/types';
-import { loadingState } from '@/states/loading';
+import { useDashboardPlayerEditPageUpdatePlayerMutation } from '@/lib/$types';
+import { loadingState } from '@/lib/states/loadingState';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 

@@ -8,7 +8,7 @@ import { VideoButton } from './VideoButton';
 import { LinkButton } from './LinkButton';
 import { MoveButton } from './MoveButton';
 import { ComboButton } from './ComboButton';
-import { useCharacterSelectOptionsQuery } from '@/lib/graphql/types';
+import { useCharacterSelectOptionsQuery } from '@/lib/$types';
 
 import { styled } from '@mui/material/styles';
 

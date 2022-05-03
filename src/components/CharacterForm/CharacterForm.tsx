@@ -3,7 +3,7 @@ import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 
-import { CharacterAttributes, CharacterFormFragment } from '@/lib/graphql/types';
+import { CharacterAttributes, CharacterFormFragment } from '@/lib/$types';
 import {
   Box,
   Button,

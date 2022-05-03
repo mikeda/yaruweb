@@ -6,8 +6,8 @@ import { Box, Button, Grid, List, Paper, Typography } from '@mui/material';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
 
-import { TopPageDocument, TopPageQuery } from '@/lib/graphql/types';
-import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
+import { TopPageDocument, TopPageQuery } from '@/lib/$types';
+import { fetchGraphql } from '@/lib/fetchGraphql';
 import { pagesPath } from '@/lib/$path';
 import { resolveUrlObject } from '@/lib';
 

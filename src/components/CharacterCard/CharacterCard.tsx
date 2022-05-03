@@ -1,5 +1,5 @@
 import React from 'react';
-import { CharacterCardFragment } from '@/lib/graphql/types';
+import { CharacterCardFragment } from '@/lib/$types';
 import {
   Button,
   Card,

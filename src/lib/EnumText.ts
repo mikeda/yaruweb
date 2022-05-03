@@ -1,4 +1,4 @@
-import * as Types from './types';
+import * as Types from './$types';
 
 export const ArticleCategoryText: { [key in Types.ArticleCategory]: string } = {
   intro: '入門',

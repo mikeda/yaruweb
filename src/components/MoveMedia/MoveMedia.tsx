@@ -1,7 +1,7 @@
 import React from 'react';
 import { styled } from '@mui/material/styles';
 
-import { AttackMoveFragment, MoveMediaFragment, ReversalMoveFragment, ThrowMoveFragment } from '@/lib/graphql/types';
+import { AttackMoveFragment, MoveMediaFragment, ReversalMoveFragment, ThrowMoveFragment } from '@/lib/$types';
 import { Command } from '../Command';
 
 import { VideoPlayer } from '../VideoPlayer';
@@ -11,7 +11,7 @@ import {
   ThrowEscapeEnumText,
   ThrowMoveResultText,
   ThrowTypeEnumText,
-} from '@/lib/graphql/enum_texts';
+} from '@/lib/EnumText';
 import { Box, Card, CardContent, Chip, Divider, Stack, Typography } from '@mui/material';
 import { ArrowRight } from '@mui/icons-material';
 import { CustomText } from '../CustomText';

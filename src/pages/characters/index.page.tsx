@@ -2,8 +2,8 @@ import React from 'react';
 import { GetStaticProps } from 'next';
 import { Grid } from '@mui/material';
 
-import { CharactersPageDocument, CharactersPageQuery } from '@/lib/graphql/types';
-import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
+import { CharactersPageDocument, CharactersPageQuery } from '@/lib/$types';
+import { fetchGraphql } from '@/lib/fetchGraphql';
 
 import { Breadcrumbs, CharacterCard, Content, Head } from '@/components';
 

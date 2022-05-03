@@ -3,8 +3,8 @@ import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
 import { signOutFirebase } from '@/lib/firebase';
-import { useCurrentUser } from '@/hooks/useCurrentUser';
-import { currentUserState } from '@/states/currentUser';
+import { useCurrentUser } from '@/lib/hooks/useCurrentUser';
+import { currentUserState } from '@/lib/states/currentUserState';
 import { Avatar, IconButton, Link, Menu, MenuItem } from '@mui/material';
 import { pagesPath } from '@/lib/$path';
 import { useRouter } from 'next/router';

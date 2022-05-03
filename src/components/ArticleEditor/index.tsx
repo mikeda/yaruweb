@@ -9,7 +9,7 @@ import { createEditor, Transforms, Node } from 'slate';
 import { withLink } from './LinkHelper';
 import { getYoutubeNode, isYoutubeUrl } from './YoutubeHelper';
 import { getTweetNode, isTweetUrl } from './TweetHelper';
-import { useCreateArticleLinkMutation } from '@/lib/graphql/types';
+import { useCreateArticleLinkMutation } from '@/lib/$types';
 import isUrl from 'is-url';
 import { Controls } from './Controls';
 import { EmbedLinkElement } from '@/custom-types';

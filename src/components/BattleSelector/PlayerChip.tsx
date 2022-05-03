@@ -1,7 +1,7 @@
 import React from 'react';
 import { Avatar, Chip } from '@mui/material';
-import { DEFAULT_AVATAR_URL } from '@/lib/Assets';
-import { PlayerChipFragment } from '@/lib/graphql/types';
+import { DEFAULT_AVATAR_URL } from '@/lib/placeIconUrl';
+import { PlayerChipFragment } from '@/lib/$types';
 
 interface Props {
   player: PlayerChipFragment;

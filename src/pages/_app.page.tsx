@@ -18,10 +18,10 @@ config.autoAddCss = false;
 import * as gtag from '@/lib/gtag';
 import theme from '@/theme';
 
-import { client } from '@/lib/graphql/client';
-import { useCurrentUserQuery } from '@/lib/graphql/types';
-import { currentUserState } from '@/states/currentUser';
-import { loadingState } from '@/states/loading';
+import { apolloClient } from '@/lib/apolloClient';
+import { useCurrentUserQuery } from '@/lib/$types';
+import { currentUserState } from '@/lib/states/currentUserState';
+import { loadingState } from '@/lib/states/loadingState';
 
 import { Loading } from '@/components';
 
@@ -86,7 +86,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
   return (
     <RecoilRoot>
-      <ApolloProvider client={client}>
+      <ApolloProvider client={apolloClient}>
         <StyledEngineProvider injectFirst>
           <ThemeProvider theme={theme}>
             <CssBaseline />

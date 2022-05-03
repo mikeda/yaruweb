@@ -12,8 +12,8 @@ import {
   useCreateThrowMoveMutation,
   useCreateReversalMoveMutation,
   ReversalMoveAttributes,
-} from '@/lib/graphql/types';
-import { loadingState } from '@/states/loading';
+} from '@/lib/$types';
+import { loadingState } from '@/lib/states/loadingState';
 
 import { DashboardBreadcrumbs, DashboardContent, AttackMoveForm, ReversalMoveForm, ThrowMoveForm } from '@/components';
 

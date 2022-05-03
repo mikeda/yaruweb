@@ -2,7 +2,7 @@ import React from 'react';
 import { useSlate } from 'slate-react';
 import { Transforms } from 'slate';
 import { Button } from './Button';
-import { useCreateArticleImageMutation } from '@/lib/graphql/types';
+import { useCreateArticleImageMutation } from '@/lib/$types';
 import { YAROUYO_FONT_CODE } from '@/lib/YarouyoFont';
 import { ImageElement } from '@/custom-types';
 import { HiddenInput } from './HiddenInput';

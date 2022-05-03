@@ -1,5 +1,5 @@
 import React from 'react';
-import { TournamentCardFragment } from '@/lib/graphql/types';
+import { TournamentCardFragment } from '@/lib/$types';
 import {
   Card,
   CardActionArea,
@@ -15,7 +15,7 @@ import {
 import makeStyles from '@mui/styles/makeStyles';
 
 import { Link } from '../Link';
-import { NO_IMAGE_URL } from '@/lib/Assets';
+import { NO_IMAGE_URL } from '@/lib/placeIconUrl';
 import dayjs from '@/lib/dayjs';
 import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 import ScheduleIcon from '@mui/icons-material/Schedule';

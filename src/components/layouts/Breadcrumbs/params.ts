@@ -8,7 +8,7 @@ import {
   Player,
   Tournament,
   TournamentVideo,
-} from '@/lib/graphql/types';
+} from '@/lib/$types';
 
 export type ArticleParam = Pick<Article, 'id' | 'title'>;
 export type TournamentParam = Pick<Tournament, 'id' | 'name'>;

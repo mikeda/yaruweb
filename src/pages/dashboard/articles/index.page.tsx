@@ -25,9 +25,9 @@ import {
   useDashboardArticlesPageDeleteMutation,
   useDashboardArticlesPagePublishMutation,
   useDashboardArticlesPageStopMutation,
-} from '@/lib/graphql/types';
-import { loadingState } from '@/states/loading';
-import { ArticleStatusText } from '@/lib/graphql/enum_texts';
+} from '@/lib/$types';
+import { loadingState } from '@/lib/states/loadingState';
+import { ArticleStatusText } from '@/lib/EnumText';
 import { pagesPath } from '@/lib/$path';
 import { resolveUrlObject } from '@/lib';
 

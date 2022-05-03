@@ -32,8 +32,8 @@ import {
   useDashboardMoveCategoriesPageQuery,
   useDeleteMoveCategoryMutation,
   useDeleteMoveMutation,
-} from '@/lib/graphql/types';
-import { loadingState } from '@/states/loading';
+} from '@/lib/$types';
+import { loadingState } from '@/lib/states/loadingState';
 import { colors } from '@/colors';
 import { pagesPath } from '@/lib/$path';
 import { resolveUrlObject } from '@/lib';

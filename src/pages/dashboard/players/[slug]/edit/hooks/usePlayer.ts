@@ -1,5 +1,5 @@
-import { useDashboardPlayerEditPageQuery } from '@/lib/graphql/types';
-import { loadingState } from '@/states/loading';
+import { useDashboardPlayerEditPageQuery } from '@/lib/$types';
+import { loadingState } from '@/lib/states/loadingState';
 import { useSetRecoilState } from 'recoil';
 
 export const usePlayer = (playerSlug?: string) => {
