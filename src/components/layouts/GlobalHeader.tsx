@@ -1,8 +1,9 @@
 import React from 'react';
-import Link from 'next/link';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 import { faFistRaised } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { styled } from '@mui/material/styles';
+import Link from 'next/link';
 
 import { UserMenu } from './UserMenu';
 

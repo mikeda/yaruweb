@@ -1,6 +1,8 @@
 import React from 'react';
+
 import { Editor } from 'slate';
 import { useSlate } from 'slate-react';
+
 import { Button } from './Button';
 
 type Format = 'bold' | 'italic' | 'code' | 'icon';

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
-import { GetStaticProps } from 'next';
-import { useSetRecoilState } from 'recoil';
-import { toast } from 'react-toastify';
-import { Box, Button, Grid } from '@mui/material';
 
+import { Box, Button, Grid } from '@mui/material';
+import { GetStaticProps } from 'next';
+import { toast } from 'react-toastify';
+import { useSetRecoilState } from 'recoil';
+
+import { Content, Breadcrumbs, Head, ArticleCard } from '@/components';
 import {
   ArticlesPageArticlesDocument,
   ArticlesPageArticlesQuery,
@@ -12,7 +14,6 @@ import {
   loadingState,
 } from '@/lib';
 
-import { Content, Breadcrumbs, Head, ArticleCard } from '@/components';
 
 const Page: React.FC<ArticlesPageArticlesQuery> = ({ articles: { records: initArticles, paging: initPaging } }) => {
   const [state, setState] = useState({

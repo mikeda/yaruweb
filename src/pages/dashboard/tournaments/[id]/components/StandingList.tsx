@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+
+import { Delete } from '@mui/icons-material';
 import {
   Avatar,
   Box,
@@ -11,13 +13,14 @@ import {
   ListItemText,
 } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
-import { Delete } from '@mui/icons-material';
 
-import { PlayerSelectOptionFragment, useDashboardTournamentPageStandingsQuery, DEFAULT_AVATAR_URL } from '@/lib';
 
 import { useCreateStandingMutation, useDeleteStandingMutation } from '../hooks';
+
 import { StandingForm } from './StandingForm';
 import { StandingPlaceAvatar } from './StandingPlaceAvatar';
+
+import { PlayerSelectOptionFragment, useDashboardTournamentPageStandingsQuery, DEFAULT_AVATAR_URL } from '@/lib';
 
 const useStyles = makeStyles({
   list: {

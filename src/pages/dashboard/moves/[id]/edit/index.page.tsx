@@ -1,8 +1,10 @@
 import React from 'react';
+
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
+import { DashboardBreadcrumbs, DashboardContent, AttackMoveForm, ReversalMoveForm, ThrowMoveForm } from '@/components';
 import {
   PageDashboardMoveEditQuery,
   usePageDashboardMoveEditQuery,
@@ -12,7 +14,6 @@ import {
   loadingState,
 } from '@/lib';
 
-import { DashboardBreadcrumbs, DashboardContent, AttackMoveForm, ReversalMoveForm, ThrowMoveForm } from '@/components';
 
 const Page: React.FC = () => {
   const router = useRouter();

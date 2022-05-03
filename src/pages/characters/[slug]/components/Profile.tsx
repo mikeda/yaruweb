@@ -1,7 +1,8 @@
 import React from 'react';
-import makeStyles from '@mui/styles/makeStyles';
-import { Card, CardContent, CardMedia, List, ListItem, ListItemIcon, ListItemText, Typography } from '@mui/material';
+
 import { Public, SportsKabaddi } from '@mui/icons-material';
+import { Card, CardContent, CardMedia, List, ListItem, ListItemIcon, ListItemText, Typography } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 
 import { CharacterPageProfileFragment } from '@/lib';
 

@@ -1,11 +1,12 @@
 import React from 'react';
-import { useRouter } from 'next/router';
-import { Button, Grid } from '@mui/material';
-import { Add as AddIcon } from '@mui/icons-material';
 
-import { useDashboardCharactersPageQuery, pagesPath, resolveUrlObject } from '@/lib';
+import { Add as AddIcon } from '@mui/icons-material';
+import { Button, Grid } from '@mui/material';
+import { useRouter } from 'next/router';
 
 import { CharacterCard, DashboardBreadcrumbs, DashboardContent, NotFound } from '@/components';
+import { useDashboardCharactersPageQuery, pagesPath, resolveUrlObject } from '@/lib';
+
 
 const Page: React.FC = () => {
   const router = useRouter();

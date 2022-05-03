@@ -1,15 +1,16 @@
 import React from 'react';
-import { useRouter } from 'next/router';
+
+import { Box, Card, CardContent, CardMedia, Grid, Paper, Typography } from '@mui/material';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
-import { Box, Card, CardContent, CardMedia, Grid, Paper, Typography } from '@mui/material';
+import { useRouter } from 'next/router';
 
-import { useDashboardTournamentPageQuery, dayjs, theme, NO_IMAGE_URL } from '@/lib';
-
-import { DashboardBreadcrumbs, DashboardContent } from '@/components';
 
 import { StandingList } from './components/StandingList';
 import { VideoList } from './components/VideoList';
+
+import { DashboardBreadcrumbs, DashboardContent } from '@/components';
+import { useDashboardTournamentPageQuery, dayjs, theme, NO_IMAGE_URL } from '@/lib';
 
 const useStyles = makeStyles(() =>
   createStyles({

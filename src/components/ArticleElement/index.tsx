@@ -1,17 +1,18 @@
 import React from 'react';
+
 import { Element as SlateElement } from 'slate';
 
-import { Image } from './Image';
-import { Video } from './Video';
-import { EmbedLink } from './EmbedLink';
 import { BulletedList } from './BulletedList';
-import { Move } from './Move';
-import { EmbedYouTube } from './EmbedYouTube';
+import { Combo } from './Combo';
+import { EmbedLink } from './EmbedLink';
 import { EmbedTweet } from './EmbedTweet';
-import { Paragraph } from './Paragraph';
+import { EmbedYouTube } from './EmbedYouTube';
 import { HeadingOne } from './HeadingOne';
 import { HeadingTwo } from './HeadingTwo';
-import { Combo } from './Combo';
+import { Image } from './Image';
+import { Move } from './Move';
+import { Paragraph } from './Paragraph';
+import { Video } from './Video';
 
 interface Props {
   children: React.ReactNode;

@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
+
+import { Box, Button, Grid } from '@mui/material';
 import { GetStaticProps } from 'next';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
-import { Box, Button, Grid } from '@mui/material';
 
+import { Head, Content, Breadcrumbs, TournamentCard } from '@/components';
 import {
   TournamentsPageTournamentsDocument,
   TournamentsPageTournamentsQuery,
@@ -12,7 +14,6 @@ import {
   fetchGraphql,
 } from '@/lib';
 
-import { Head, Content, Breadcrumbs, TournamentCard } from '@/components';
 
 const Page: React.FC<TournamentsPageTournamentsQuery> = ({
   tournaments: { records: initTournaments, paging: initPaging },

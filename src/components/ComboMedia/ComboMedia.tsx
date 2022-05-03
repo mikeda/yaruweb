@@ -1,8 +1,11 @@
 import React from 'react';
+
 import { Card, CardContent, Typography } from '@mui/material';
-import { ComboMediaFragment } from '@/lib';
-import { VideoPlayer } from '../VideoPlayer';
+
 import { Command } from '../Command';
+import { VideoPlayer } from '../VideoPlayer';
+
+import { ComboMediaFragment } from '@/lib';
 
 interface Props {
   combo: ComboMediaFragment;

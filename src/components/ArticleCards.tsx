@@ -1,8 +1,10 @@
 import React from 'react';
+
+import { Box, Grid, Link as MuiLink, Typography } from '@mui/material';
 import Link from 'next/link';
 
 import { ArticleCard } from './ArticleCard';
-import { Box, Grid, Link as MuiLink, Typography } from '@mui/material';
+
 import { ArticleCardFragment } from '@/lib';
 
 type Props = {

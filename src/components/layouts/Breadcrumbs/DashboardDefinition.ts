@@ -1,4 +1,3 @@
-import { pagesPath } from '@/lib';
 import { BreadcrumbChainItem } from './Breadcrumbs';
 import {
   ArticleParam,
@@ -11,6 +10,8 @@ import {
   TournamentParam,
   TournamentVideoParam,
 } from './params';
+
+import { pagesPath } from '@/lib';
 
 export type DashboardBreadcrumbParams =
   | { to: 'articles' }

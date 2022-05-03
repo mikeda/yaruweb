@@ -1,11 +1,12 @@
 import React from 'react';
+
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
+import { CharacterForm, DashboardContent } from '@/components';
 import { CharacterAttributes, useCreateCharacterMutation, loadingState } from '@/lib';
 
-import { CharacterForm, DashboardContent } from '@/components';
 
 const Page: React.FC = () => {
   const router = useRouter();

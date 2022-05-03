@@ -1,9 +1,9 @@
 import React from 'react';
-import * as yup from 'yup';
-import { Controller, useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
 
+import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
+import { Controller, useForm } from 'react-hook-form';
+import * as yup from 'yup';
 
 const schema = yup.object().shape({
   url: yup.string().required().url(),

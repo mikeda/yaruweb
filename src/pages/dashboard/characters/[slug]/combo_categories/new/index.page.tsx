@@ -1,8 +1,12 @@
 import React from 'react';
+
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
+import { useRouteParams } from './hooks';
+
+import { ComboCategoryForm, DashboardContent } from '@/components';
 import {
   DashboardComboCategoryNewPageQuery,
   ComboCategoryAttributes,
@@ -11,9 +15,7 @@ import {
   loadingState,
 } from '@/lib';
 
-import { ComboCategoryForm, DashboardContent } from '@/components';
 
-import { useRouteParams } from './hooks';
 
 const Page: React.FC = () => {
   const { slug } = useRouteParams();

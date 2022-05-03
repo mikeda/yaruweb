@@ -1,11 +1,12 @@
 import React from 'react';
+
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
+import { DashboardBreadcrumbs, DashboardContent, OrganizerForm } from '@/components';
 import { OrganizerAttributes, useDashboardOrganizersNewPageCreateOrganizerMutation, loadingState } from '@/lib';
 
-import { DashboardBreadcrumbs, DashboardContent, OrganizerForm } from '@/components';
 
 const Page: React.FC = () => {
   const router = useRouter();

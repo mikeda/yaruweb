@@ -2,6 +2,7 @@ import React from 'react';
 
 import { Paper, Tab, Tabs } from '@mui/material';
 import { useRouter } from 'next/router';
+
 import { PlayerPageProfileFragment } from '@/lib';
 import { pagesPath } from '@/lib';
 

@@ -1,9 +1,13 @@
-import React from 'react';
-import { GetStaticPaths, GetStaticProps } from 'next';
 import { ParsedUrlQuery } from 'querystring';
+
+import React from 'react';
+
 import { Avatar, Box, Grid, Typography } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
+import { GetStaticPaths, GetStaticProps } from 'next';
 
+
+import { ArticleBody, ArticleCard, Breadcrumbs, Content, FavButton, Head } from '@/components';
 import {
   ArticlePageArticleDocument,
   ArticlePageArticleQuery,
@@ -13,8 +17,6 @@ import {
   fetchGraphql,
   NO_IMAGE_URL,
 } from '@/lib';
-
-import { ArticleBody, ArticleCard, Breadcrumbs, Content, FavButton, Head } from '@/components';
 
 const useStyles = makeStyles({
   mainImage: {

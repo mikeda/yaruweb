@@ -1,5 +1,8 @@
+import { ParsedUrlQuery } from 'querystring';
+
 import React, { useState } from 'react';
-import { GetStaticPaths, GetStaticProps } from 'next';
+
+import YouTubeIcon from '@mui/icons-material/YouTube';
 import {
   Box,
   Chip,
@@ -14,9 +17,14 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import { ParsedUrlQuery } from 'querystring';
-import YouTubeIcon from '@mui/icons-material/YouTube';
+import { GetStaticPaths, GetStaticProps } from 'next';
 
+
+
+import { Profile } from '../components/Profile';
+import { Tabs } from '../components/Tabs';
+
+import { Breadcrumbs, Command, Content, CustomText, Head, VideoPlayer } from '@/components';
 import {
   AttackMoveFragment,
   CharacterMovesPageDocument,
@@ -34,11 +42,6 @@ import {
   ThrowTypeEnumText,
   colors,
 } from '@/lib';
-
-import { Breadcrumbs, Command, Content, CustomText, Head, VideoPlayer } from '@/components';
-
-import { Profile } from '../components/Profile';
-import { Tabs } from '../components/Tabs';
 
 const Page: React.FC<CharacterMovesPageQuery> = ({ character }) => {
   return (

@@ -1,8 +1,10 @@
+import { UrlObject } from 'url';
+
 import React from 'react';
 
 import { Tab, Tabs } from '@mui/material';
 import { useRouter } from 'next/router';
-import { UrlObject } from 'url';
+
 import { pagesPath } from '@/lib';
 
 export type TabValue = 'top' | 'characters' | 'battles' | 'articles' | 'tournaments' | 'players';

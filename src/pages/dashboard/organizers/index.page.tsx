@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { useRouter } from 'next/router';
+
+import { Add as AddIcon, MoreVert } from '@mui/icons-material';
 import {
   Box,
   Button,
@@ -14,10 +15,11 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
-import { Add as AddIcon, MoreVert } from '@mui/icons-material';
-import { useSetRecoilState } from 'recoil';
+import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
+import { useSetRecoilState } from 'recoil';
 
+import { DashboardContent, DashboardBreadcrumbs } from '@/components';
 import {
   DashboardOrganizersPageOrganizerFragment,
   useDashboardOrganizersPageDeleteMutation,
@@ -28,7 +30,6 @@ import {
   resolveUrlObject,
 } from '@/lib';
 
-import { DashboardContent, DashboardBreadcrumbs } from '@/components';
 
 const Page: React.FC = () => {
   const router = useRouter();

@@ -1,7 +1,7 @@
-import React from 'react';
-import { GetStaticPaths, GetStaticProps } from 'next';
-import Link from 'next/link';
 import { ParsedUrlQuery } from 'querystring';
+
+import React from 'react';
+
 import {
   Avatar,
   Box,
@@ -17,7 +17,10 @@ import {
   Typography,
 } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
+import { GetStaticPaths, GetStaticProps } from 'next';
+import Link from 'next/link';
 
+import { NotFound, Content, Head, Breadcrumbs } from '@/components';
 import {
   TournamentPageDocument,
   TournamentPageQuery,
@@ -31,7 +34,6 @@ import {
   placeIconUrl,
 } from '@/lib';
 
-import { NotFound, Content, Head, Breadcrumbs } from '@/components';
 
 const useStyles = makeStyles({
   root: {

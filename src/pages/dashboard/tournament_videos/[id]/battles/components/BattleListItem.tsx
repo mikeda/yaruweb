@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
 
+import DeleteIcon from '@mui/icons-material/Delete';
+import EditIcon from '@mui/icons-material/Edit';
 import { Avatar, Box, Dialog, IconButton, ListItem, ListItemSecondaryAction, ListItemText } from '@mui/material';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
 import clsx from 'clsx';
-import EditIcon from '@mui/icons-material/Edit';
-import DeleteIcon from '@mui/icons-material/Delete';
+
+import { useUpdateMutation } from '../hooks/useUpdateMutation';
+
+import { BattleForm } from './BattleForm';
 
 import { BattleRoundText } from '@/lib';
 import {
@@ -16,8 +20,6 @@ import {
   formatSec,
 } from '@/lib';
 
-import { useUpdateMutation } from '../hooks/useUpdateMutation';
-import { BattleForm } from './BattleForm';
 
 const useStyles = makeStyles(() =>
   createStyles({

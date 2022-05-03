@@ -1,7 +1,8 @@
 import React from 'react';
+
+import { LiveTv, Twitter } from '@mui/icons-material';
 import { Paper, Typography } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
-import { LiveTv, Twitter } from '@mui/icons-material';
 
 import { PlayerPageProfileFragment, DEFAULT_AVATAR_URL, colors, theme } from '@/lib';
 

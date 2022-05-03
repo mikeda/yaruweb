@@ -1,24 +1,24 @@
 import React, { useState } from 'react';
-import { GetStaticProps } from 'next';
-import { useRouter } from 'next/router';
-import { useSetRecoilState } from 'recoil';
-import { toast } from 'react-toastify';
+
 import { Box, Button, List, Paper } from '@mui/material';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
+import { GetStaticProps } from 'next';
+import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
+import { useSetRecoilState } from 'recoil';
 
+import { BattleListItem, Breadcrumbs, Content, Head } from '@/components';
+import { BattleSelector, CharacterChip, PlayerChip } from '@/components/BattleSelector';
 import {
   BattlesPageDocument,
   BattlesPageQuery,
-  useBattlesPageBattlesLazyQuery,
   fetchGraphql,
+  useBattlesPageBattlesLazyQuery,
   loadingState,
   pagesPath,
   theme,
 } from '@/lib';
-
-import { BattleListItem, Breadcrumbs, Content, Head } from '@/components';
-import { BattleSelector, CharacterChip, PlayerChip } from '@/components/BattleSelector';
 
 const useStyles = makeStyles(() =>
   createStyles({

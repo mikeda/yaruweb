@@ -1,9 +1,9 @@
 import React from 'react';
-import clsx from 'clsx';
-import { Avatar, Box, ListItem, ListItemText, Typography } from '@mui/material';
 
+import { Avatar, Box, ListItem, ListItemText, Typography } from '@mui/material';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
+import clsx from 'clsx';
 
 import {
   TournamentVideoPageBattleFragment,

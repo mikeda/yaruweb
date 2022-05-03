@@ -1,9 +1,11 @@
 import React from 'react';
+
+import { Box, Button, Card, CardContent, Divider, TextField } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
-import { Box, Button, Card, CardContent, Divider, TextField } from '@mui/material';
 
+import { DashboardContent } from '@/components';
 import {
   CurrentUserAttributes,
   CurrentUserFragment,
@@ -13,7 +15,6 @@ import {
   loadingState,
 } from '@/lib';
 
-import { DashboardContent } from '@/components';
 
 const Page: React.FC = () => {
   const setLoading = useSetRecoilState(loadingState);

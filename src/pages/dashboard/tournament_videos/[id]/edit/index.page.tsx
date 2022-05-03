@@ -1,12 +1,14 @@
 import React from 'react';
+
 import { useRouter } from 'next/router';
 
-import { TournamentVideoAttributes } from '@/lib';
-import { DashboardContent, DashboardBreadcrumbs } from '@/components';
 
 import { TournamentVideoEditForm } from './components/TournamentVideoEditForm';
 import { useTournamentVideo } from './hooks/useTournamentVideo';
 import { useUpdate } from './hooks/useUpdate';
+
+import { DashboardContent, DashboardBreadcrumbs } from '@/components';
+import { TournamentVideoAttributes } from '@/lib';
 
 const Page: React.FC = () => {
   const router = useRouter();

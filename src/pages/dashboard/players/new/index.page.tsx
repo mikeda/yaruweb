@@ -1,11 +1,12 @@
 import React from 'react';
+
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
+import { DashboardBreadcrumbs, DashboardContent, PlayerForm } from '@/components';
 import { PlayerAttributes, useDashboardPlayersNewPageCreatePlayerMutation, loadingState } from '@/lib';
 
-import { DashboardBreadcrumbs, DashboardContent, PlayerForm } from '@/components';
 
 const Page: React.FC = () => {
   const router = useRouter();

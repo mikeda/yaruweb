@@ -1,13 +1,15 @@
 import React from 'react';
-import { useSlate } from 'slate-react';
+
 import { toast } from 'react-toastify';
 import { Transforms } from 'slate';
+import { useSlate } from 'slate-react';
 
-import { useCreateArticleVideoMutation, YAROUYO_FONT_CODE } from '@/lib';
-import { VideoElement } from '@/custom-types';
 
 import { Button } from './Button';
 import { HiddenInput } from './HiddenInput';
+
+import { VideoElement } from '@/custom-types';
+import { useCreateArticleVideoMutation, YAROUYO_FONT_CODE } from '@/lib';
 
 export const VideoButton: React.FC = () => {
   const editor = useSlate();

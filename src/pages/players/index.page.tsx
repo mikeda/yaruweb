@@ -1,9 +1,11 @@
 import React, { useRef, useState } from 'react';
-import { GetStaticProps } from 'next';
-import { useSetRecoilState } from 'recoil';
-import { toast } from 'react-toastify';
-import { Box, Button, Grid } from '@mui/material';
 
+import { Box, Button, Grid } from '@mui/material';
+import { GetStaticProps } from 'next';
+import { toast } from 'react-toastify';
+import { useSetRecoilState } from 'recoil';
+
+import { Breadcrumbs, Content, Head, PlayerCard, SearchWord } from '@/components';
 import {
   PlayersPagePlayersDocument,
   PlayersPagePlayersQuery,
@@ -12,7 +14,6 @@ import {
   loadingState,
 } from '@/lib';
 
-import { Breadcrumbs, Content, Head, PlayerCard, SearchWord } from '@/components';
 
 const Page: React.FC<PlayersPagePlayersQuery> = ({ players: { records: initPlayers, paging: initPaging } }) => {
   const [state, setState] = useState({ players: initPlayers, paging: initPaging });

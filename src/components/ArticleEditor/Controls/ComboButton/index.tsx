@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
-import { useSlate } from 'slate-react';
-import { Transforms, Editor } from 'slate';
+
 import { Dialog, DialogContent, FormControl, InputLabel, MenuItem, Select } from '@mui/material';
+import { Transforms, Editor } from 'slate';
+import { useSlate } from 'slate-react';
+
+import { TextButton } from '../TextButton';
+
+import { ComboSelect } from './ComboSelect';
 
 import { Character } from '@/lib';
 
-import { ComboSelect } from './ComboSelect';
-import { TextButton } from '../TextButton';
 
 type CharacterFragment = Pick<Character, 'slug' | 'name'>;
 

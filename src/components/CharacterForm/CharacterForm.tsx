@@ -1,9 +1,6 @@
 import React from 'react';
-import { Controller, useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
 
-import { CharacterAttributes, CharacterFormFragment } from '@/lib';
+import { yupResolver } from '@hookform/resolvers/yup';
 import {
   Box,
   Button,
@@ -16,6 +13,11 @@ import {
   Stack,
   TextField,
 } from '@mui/material';
+import { Controller, useForm } from 'react-hook-form';
+import * as yup from 'yup';
+
+import { CharacterAttributes, CharacterFormFragment } from '@/lib';
+
 
 const schema = yup.object().shape({
   name: yup.string().required(),

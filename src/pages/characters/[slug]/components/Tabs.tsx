@@ -1,6 +1,7 @@
 import React from 'react';
-import { useRouter } from 'next/router';
+
 import { Paper, Tab, Tabs as MuiTabs } from '@mui/material';
+import { useRouter } from 'next/router';
 
 import { CharacterPageProfileFragment, pagesPath } from '@/lib';
 

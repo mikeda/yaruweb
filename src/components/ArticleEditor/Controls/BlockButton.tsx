@@ -1,6 +1,7 @@
 import React from 'react';
-import { useSlate } from 'slate-react';
+
 import { Editor, Element as SlateElement, Transforms } from 'slate';
+import { useSlate } from 'slate-react';
 
 import { Button } from './Button';
 

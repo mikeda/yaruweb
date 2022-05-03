@@ -1,5 +1,6 @@
-import { useSetRecoilState } from 'recoil';
 import { toast } from 'react-toastify';
+import { useSetRecoilState } from 'recoil';
+
 import { useCreateBattleMutation, loadingState } from '@/lib';
 
 export const useCreateMutation = (onCreate: () => void) => {

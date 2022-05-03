@@ -1,9 +1,11 @@
 import React from 'react';
+
 import { Box, List, Paper } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 
-import { DashboardBreadcrumbs, DashboardContent } from '@/components';
 
+import { BattleForm } from './components/BattleForm';
+import { BattleListItem } from './components/BattleListItem';
 import {
   useRouteParams,
   useTournamentVideoQuery,
@@ -11,8 +13,8 @@ import {
   useCreateMutation,
   useDeleteMutation,
 } from './hooks';
-import { BattleForm } from './components/BattleForm';
-import { BattleListItem } from './components/BattleListItem';
+
+import { DashboardBreadcrumbs, DashboardContent } from '@/components';
 
 const useStyles = makeStyles({
   list: {

@@ -1,7 +1,6 @@
 import React from 'react';
+
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import { Controller, useForm } from 'react-hook-form';
 import {
   Box,
   Button,
@@ -16,6 +15,10 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import { Controller, useForm } from 'react-hook-form';
+import * as yup from 'yup';
+
+import { CommandForm } from './CommandForm';
 
 import {
   ThrowMoveAttributes,
@@ -29,7 +32,6 @@ import {
   ThrowMoveResultText,
   ThrowTypeEnumText,
 } from '@/lib';
-import { CommandForm } from './CommandForm';
 
 const schema = yup.object().shape({
   move: yup.object({

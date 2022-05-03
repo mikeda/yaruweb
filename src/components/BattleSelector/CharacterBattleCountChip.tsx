@@ -1,5 +1,7 @@
 import React from 'react';
+
 import { Avatar, Chip } from '@mui/material';
+
 import { CharacterBattleCountChipFragment } from '@/lib';
 
 interface Props {

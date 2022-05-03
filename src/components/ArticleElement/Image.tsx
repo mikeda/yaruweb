@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { useFocused, useSelected } from 'slate-react';
 
 interface Props {

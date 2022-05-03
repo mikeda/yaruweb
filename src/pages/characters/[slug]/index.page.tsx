@@ -1,9 +1,17 @@
-import React from 'react';
-import { GetStaticPaths, GetStaticProps } from 'next';
-import { Box, Paper, Typography } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
 import { ParsedUrlQuery } from 'querystring';
 
+import React from 'react';
+
+import { Box, Paper, Typography } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
+import { GetStaticPaths, GetStaticProps } from 'next';
+
+
+
+import { Profile } from './components/Profile';
+import { Tabs } from './components/Tabs';
+
+import { Breadcrumbs, Content, Head } from '@/components';
 import {
   CharacterPathsDocument,
   CharacterPathsQuery,
@@ -12,11 +20,6 @@ import {
   fetchGraphql,
   theme,
 } from '@/lib';
-
-import { Breadcrumbs, Content, Head } from '@/components';
-
-import { Profile } from './components/Profile';
-import { Tabs } from './components/Tabs';
 
 const useStyles = makeStyles({
   paper: {

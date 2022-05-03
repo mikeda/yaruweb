@@ -1,9 +1,11 @@
 import React from 'react';
-import { useRecoilValue } from 'recoil';
-import { loadingState } from '@/lib';
 
 import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';
+import { useRecoilValue } from 'recoil';
+
+import { loadingState } from '@/lib';
+
 
 export const Loading: React.FC = () => {
   const loading = useRecoilValue(loadingState);

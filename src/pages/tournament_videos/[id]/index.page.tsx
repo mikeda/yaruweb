@@ -1,13 +1,19 @@
-import React, { useEffect, useState } from 'react';
-import { GetStaticPaths, GetStaticProps } from 'next';
-import { useRouter } from 'next/router';
-import { YouTubePlayer } from 'youtube-player/dist/types';
 import { ParsedUrlQuery } from 'querystring';
-import YouTube from 'react-youtube';
-import { Box, IconButton, List, Paper, Tooltip, Typography } from '@mui/material';
+
+import React, { useEffect, useState } from 'react';
+
 import SkipNextIcon from '@mui/icons-material/SkipNext';
 import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
+import { Box, IconButton, List, Paper, Tooltip, Typography } from '@mui/material';
+import { GetStaticPaths, GetStaticProps } from 'next';
+import { useRouter } from 'next/router';
+import YouTube from 'react-youtube';
+import { YouTubePlayer } from 'youtube-player/dist/types';
 
+import { BattleListItem } from './components/BattleListItem';
+
+import { Breadcrumbs, Content, Head, NotFound, YouTubeWrapper } from '@/components';
+import { TournamentVideoDomain } from '@/domains';
 import {
   TournamentVideoPageDocument,
   TournamentVideoPageQuery,
@@ -15,11 +21,8 @@ import {
   TournamentVideoPathsQuery,
   fetchGraphql,
 } from '@/lib';
-import { TournamentVideoDomain } from '@/domains';
 
-import { Breadcrumbs, Content, Head, NotFound, YouTubeWrapper } from '@/components';
 
-import { BattleListItem } from './components/BattleListItem';
 
 const PageContent: React.FC<TournamentVideoPageQuery> = ({ tournamentVideo }) => {
   const [youTubePlayer, setYouTubePlayer] = useState<YouTubePlayer>();

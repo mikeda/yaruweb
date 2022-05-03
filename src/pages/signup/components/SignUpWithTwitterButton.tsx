@@ -1,9 +1,10 @@
 import React from 'react';
+
+import { Button } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
-import { Button } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
 
 import { useCreateUserMutation, signInFirebaseWithTwitter, currentUserState, colors, pagesPath } from '@/lib';
 

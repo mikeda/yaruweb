@@ -1,4 +1,5 @@
 import { useSetRecoilState } from 'recoil';
+
 import { useDashboardBattlesPageBattlesQuery, loadingState } from '@/lib';
 
 export const useBattlesQuery = (tournamentVideoId: string | undefined) => {
