@@ -1,4 +1,7 @@
 import React from 'react';
+import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
+import { useSetRecoilState } from 'recoil';
 
 import {
   usePageDashboardMoveNewQuery,
@@ -10,14 +13,9 @@ import {
   useCreateReversalMoveMutation,
   ReversalMoveAttributes,
 } from '@/lib/graphql/types';
-import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { useRouter } from 'next/router';
-import { toast } from 'react-toastify';
-import { AttackMoveForm, ReversalMoveForm } from '@/components/MoveForm';
-import { useSetRecoilState } from 'recoil';
 import { loadingState } from '@/states/loading';
-import { DashboardBreadcrumbs } from '@/components';
-import { ThrowMoveForm } from '@/components/MoveForm/ThrowMoveForm';
+
+import { DashboardBreadcrumbs, DashboardContent, AttackMoveForm, ThrowMoveForm, ReversalMoveForm } from '@/components';
 
 export type Query = {
   move_type: 'attack' | 'throw' | 'reversal';

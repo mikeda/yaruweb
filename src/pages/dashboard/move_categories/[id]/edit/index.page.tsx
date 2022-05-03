@@ -1,4 +1,7 @@
 import React from 'react';
+import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
+import { useSetRecoilState } from 'recoil';
 
 import {
   MoveCategoryAttributes,
@@ -6,12 +9,9 @@ import {
   usePageDashboardMoveCategoryEditQuery,
   useUpdateMoveCategoryMutation,
 } from '@/lib/graphql/types';
-import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { useRouter } from 'next/router';
-import { toast } from 'react-toastify';
-import { MoveCategoryForm } from '@/components/MoveCategoryForm';
 import { loadingState } from '@/states/loading';
-import { useSetRecoilState } from 'recoil';
+
+import { DashboardContent, MoveCategoryForm } from '@/components';
 
 const Page: React.FC = () => {
   const router = useRouter();

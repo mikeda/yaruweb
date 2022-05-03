@@ -1,4 +1,7 @@
 import React from 'react';
+import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
+import { useSetRecoilState } from 'recoil';
 
 import {
   ArticleAttributes,
@@ -6,13 +9,9 @@ import {
   useMyArticleQuery,
   useUpdateArticleMutation,
 } from '@/lib/graphql/types';
-import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { useRouter } from 'next/router';
-import { toast } from 'react-toastify';
 import { loadingState } from '@/states/loading';
-import { useSetRecoilState } from 'recoil';
-import { ArticleForm } from '@/components/ArticleForm';
-import { DashboardBreadcrumbs } from '@/components';
+
+import { ArticleForm, DashboardBreadcrumbs, DashboardContent } from '@/components';
 
 const Page: React.FC = () => {
   const router = useRouter();

@@ -1,8 +1,10 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 
 import { OrganizerAttributes } from '@/lib/graphql/types';
-import { useRouter } from 'next/router';
+
 import { DashboardContent, DashboardBreadcrumbs, OrganizerForm } from '@/components';
+
 import { useOrganizer } from './hooks/useOrganizer';
 import { useUpdate } from './hooks/useUpdate';
 

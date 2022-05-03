@@ -1,9 +1,10 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 
 import { TournamentVideoAttributes } from '@/lib/graphql/types';
-import { useRouter } from 'next/router';
-import { TournamentVideoEditForm } from './components/TournamentVideoEditForm';
 import { DashboardContent, DashboardBreadcrumbs } from '@/components';
+
+import { TournamentVideoEditForm } from './components/TournamentVideoEditForm';
 import { useTournamentVideo } from './hooks/useTournamentVideo';
 import { useUpdate } from './hooks/useUpdate';
 

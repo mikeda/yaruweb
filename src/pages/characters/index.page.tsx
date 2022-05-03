@@ -1,13 +1,11 @@
 import React from 'react';
 import { GetStaticProps } from 'next';
-
-import { CharacterCard } from '@/components/CharacterCard';
-import { CharactersPageDocument, CharactersPageQuery } from '@/lib/graphql/types';
-import { Head } from '@/components/layouts/Head';
-import { Content } from '@/components/layouts/Content';
-import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
-import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 import { Grid } from '@mui/material';
+
+import { CharactersPageDocument, CharactersPageQuery } from '@/lib/graphql/types';
+import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
+
+import { Breadcrumbs, CharacterCard, Content, Head } from '@/components';
 
 const Page: React.FC<CharactersPageQuery> = ({ characters }) => {
   return (

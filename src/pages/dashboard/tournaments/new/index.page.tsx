@@ -1,13 +1,12 @@
 import React from 'react';
-
-import { TournamentAttributes, useCreateTournamentMutation } from '@/lib/graphql/types';
-import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
-import { TournamentForm } from '@/components/TournamentForm';
 import { useSetRecoilState } from 'recoil';
+
+import { TournamentAttributes, useCreateTournamentMutation } from '@/lib/graphql/types';
 import { loadingState } from '@/states/loading';
-import { DashboardBreadcrumbs } from '@/components';
+
+import { DashboardBreadcrumbs, DashboardContent, TournamentForm } from '@/components';
 
 const Page: React.FC = () => {
   const router = useRouter();

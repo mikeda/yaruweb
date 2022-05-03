@@ -1,4 +1,8 @@
 import React from 'react';
+import { GetServerSideProps } from 'next';
+import { useRouter } from 'next/router';
+import { useSetRecoilState } from 'recoil';
+import { toast } from 'react-toastify';
 
 import {
   CharacterAttributes,
@@ -6,15 +10,10 @@ import {
   PageDashboardCharacterEditQuery,
   useUpdateCharacterMutation,
 } from '@/lib/graphql/types';
-import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { useRouter } from 'next/router';
-import { GetServerSideProps } from 'next';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
-import { toast } from 'react-toastify';
-import { CharacterForm } from '@/components/CharacterForm';
 import { loadingState } from '@/states/loading';
-import { useSetRecoilState } from 'recoil';
-import { DashboardBreadcrumbs } from '@/components';
+
+import { CharacterForm, DashboardBreadcrumbs, DashboardContent } from '@/components';
 
 const Page: React.FC<PageDashboardCharacterEditQuery> = ({ character }) => {
   const router = useRouter();

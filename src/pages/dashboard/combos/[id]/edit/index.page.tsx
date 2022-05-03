@@ -1,4 +1,7 @@
 import React from 'react';
+import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
+import { useSetRecoilState } from 'recoil';
 
 import {
   ComboAttributes,
@@ -6,12 +9,9 @@ import {
   usePageDashboardComboEditQuery,
   useUpdateComboMutation,
 } from '@/lib/graphql/types';
-import { useRouter } from 'next/router';
-import { toast } from 'react-toastify';
 import { loadingState } from '@/states/loading';
-import { useSetRecoilState } from 'recoil';
-import { ComboForm } from '@/components/ComboForm';
-import { DashboardContent, DashboardBreadcrumbs } from '@/components';
+
+import { ComboForm, DashboardContent, DashboardBreadcrumbs } from '@/components';
 
 const Page: React.FC = () => {
   const router = useRouter();

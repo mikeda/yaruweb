@@ -1,13 +1,12 @@
 import React from 'react';
-
-import { ArticleAttributes, useCreateArticleMutation } from '@/lib/graphql/types';
-import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
-import { loadingState } from '@/states/loading';
 import { useSetRecoilState } from 'recoil';
-import { ArticleForm } from '@/components/ArticleForm';
-import { DashboardBreadcrumbs } from '@/components';
+
+import { ArticleAttributes, useCreateArticleMutation } from '@/lib/graphql/types';
+import { loadingState } from '@/states/loading';
+
+import { ArticleForm, DashboardBreadcrumbs, DashboardContent } from '@/components';
 
 const Page: React.FC = () => {
   const router = useRouter();

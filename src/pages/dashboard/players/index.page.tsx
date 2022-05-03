@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
-
-import { DashboardContent, DashboardBreadcrumbs, SearchWord } from '@/components';
+import { useSetRecoilState } from 'recoil';
+import { useRouter } from 'next/router';
 import {
   Box,
   Button,
@@ -16,19 +16,21 @@ import {
   Typography,
 } from '@mui/material';
 import { Add as AddIcon, MoreVert } from '@mui/icons-material';
-import { PlayerFormSmashgg } from './components/PlayerFormSmashgg';
-import { useSetRecoilState } from 'recoil';
+import { toast } from 'react-toastify';
+
 import { loadingState } from '@/states/loading';
 import {
   DashboardPlayersPagePlayerFragment,
   useDashboardPlayersPageDeleteMutation,
   useDashboardPlayersPagePlayersQuery,
 } from '@/lib/graphql/types';
-import { toast } from 'react-toastify';
 import { DEFAULT_AVATAR_URL } from '@/lib/Assets';
 import { pagesPath } from '@/lib/$path';
-import { useRouter } from 'next/router';
 import { resolveUrlObject } from '@/lib';
+
+import { DashboardContent, DashboardBreadcrumbs, SearchWord } from '@/components';
+
+import { PlayerFormSmashgg } from './components/PlayerFormSmashgg';
 
 const Page: React.FC = () => {
   const setLoading = useSetRecoilState(loadingState);

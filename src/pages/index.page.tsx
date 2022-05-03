@@ -1,21 +1,29 @@
 import React from 'react';
 import { GetStaticProps } from 'next';
-
-import { StaffRequirement } from '@/components/StaffRequirement';
-
-import { TopPageDocument, TopPageQuery } from '@/lib/graphql/types';
-import { IntroSlides } from './IntroSlides';
-import { Head, Content, BattleListItem, CharacterCard, ArticleCard, Link as LinkComponent } from '@/components';
-import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
+import { useRouter } from 'next/router';
+import theme from '@/theme';
 import { Box, Button, Grid, List, Paper, Typography } from '@mui/material';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
-import { TournamentCard } from '@/components/TournamentCard';
-import { PlayerCard } from '@/components/PlayerCard';
-import theme from '@/theme';
+
+import { TopPageDocument, TopPageQuery } from '@/lib/graphql/types';
+import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { pagesPath } from '@/lib/$path';
-import { useRouter } from 'next/router';
 import { resolveUrlObject } from '@/lib';
+
+import {
+  ArticleCard,
+  BattleListItem,
+  CharacterCard,
+  Content,
+  Head,
+  Link as LinkComponent,
+  PlayerCard,
+  TournamentCard,
+} from '@/components';
+
+import { StaffRequirement } from './components/StaffRequirement';
+import { IntroSlides } from './components/IntroSlides';
 
 const useStyles = makeStyles(() =>
   createStyles({

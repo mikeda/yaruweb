@@ -1,18 +1,8 @@
 import React, { useRef, useState } from 'react';
-
-import {
-  ArticleStatus,
-  DashboardArticlesPageArticleFragment,
-  useDashboardArticlesPageArticlesQuery,
-  useDashboardArticlesPageDeleteMutation,
-  useDashboardArticlesPagePublishMutation,
-  useDashboardArticlesPageStopMutation,
-} from '@/lib/graphql/types';
-import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
 import { toast } from 'react-toastify';
-import { DashboardBreadcrumbs, SearchWord } from '@/components';
 import { useSetRecoilState } from 'recoil';
-import { loadingState } from '@/states/loading';
+import { useRouter } from 'next/router';
+import { Add, MoreVert } from '@mui/icons-material';
 import {
   Box,
   Button,
@@ -27,11 +17,21 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
+
+import {
+  ArticleStatus,
+  DashboardArticlesPageArticleFragment,
+  useDashboardArticlesPageArticlesQuery,
+  useDashboardArticlesPageDeleteMutation,
+  useDashboardArticlesPagePublishMutation,
+  useDashboardArticlesPageStopMutation,
+} from '@/lib/graphql/types';
+import { loadingState } from '@/states/loading';
 import { ArticleStatusText } from '@/lib/graphql/enum_texts';
-import { Add, MoreVert } from '@mui/icons-material';
 import { pagesPath } from '@/lib/$path';
-import { useRouter } from 'next/router';
 import { resolveUrlObject } from '@/lib';
+
+import { DashboardBreadcrumbs, DashboardContent, SearchWord } from '@/components';
 
 const Page: React.FC = () => {
   const router = useRouter();

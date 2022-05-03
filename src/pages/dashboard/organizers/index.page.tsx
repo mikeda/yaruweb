@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-
-import { DashboardContent, DashboardBreadcrumbs } from '@/components';
+import { useRouter } from 'next/router';
 import {
   Box,
   Button,
@@ -17,17 +16,19 @@ import {
 } from '@mui/material';
 import { Add as AddIcon, MoreVert } from '@mui/icons-material';
 import { useSetRecoilState } from 'recoil';
+import { toast } from 'react-toastify';
+
 import { loadingState } from '@/states/loading';
 import {
   DashboardOrganizersPageOrganizerFragment,
   useDashboardOrganizersPageDeleteMutation,
   useDashboardOrganizersPageOrganizersQuery,
 } from '@/lib/graphql/types';
-import { toast } from 'react-toastify';
 import { DEFAULT_AVATAR_URL } from '@/lib/Assets';
 import { pagesPath } from '@/lib/$path';
-import { useRouter } from 'next/router';
 import { resolveUrlObject } from '@/lib';
+
+import { DashboardContent, DashboardBreadcrumbs } from '@/components';
 
 const Page: React.FC = () => {
   const router = useRouter();

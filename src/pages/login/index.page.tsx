@@ -1,13 +1,12 @@
 import React from 'react';
-
-import { LoginWithEmailForm } from './LoginWithEmailForm';
-import { LoginWithTwitterButton } from './LoginWithTwitterButton';
-import { Content } from '@/components/layouts/Content';
-import { Head } from '@/components/layouts/Head';
-import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 import { Box } from '@mui/material';
-import { Link } from '@/components';
+
 import { pagesPath } from '@/lib/$path';
+
+import { Breadcrumbs, Content, Head, Link } from '@/components';
+
+import { LoginWithEmailForm } from './components/LoginWithEmailForm';
+import { LoginWithTwitterButton } from './components/LoginWithTwitterButton';
 
 const Page: React.FC = () => {
   return (

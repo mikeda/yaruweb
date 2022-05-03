@@ -1,9 +1,10 @@
 import React from 'react';
+import { useRouter } from 'next/router';
 
 import { PlayerAttributes } from '@/lib/graphql/types';
-import { useRouter } from 'next/router';
-import { PlayerForm } from '@/components/PlayerForm';
-import { DashboardContent, DashboardBreadcrumbs } from '@/components';
+
+import { DashboardContent, DashboardBreadcrumbs, PlayerForm } from '@/components';
+
 import { usePlayer } from './hooks/usePlayer';
 import { useUpdate } from './hooks/useUpdate';
 

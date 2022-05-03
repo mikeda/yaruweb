@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
+import { Box, Button, List, Paper, Typography } from '@mui/material';
+import { toast } from 'react-toastify';
+import { useSetRecoilState } from 'recoil';
+import { ParsedUrlQuery } from 'querystring';
 
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
-import { Head, Content, Breadcrumbs, BattleListItem, PlayerPageTabs } from '@/components';
-import { Box, Button, List, Paper, Typography } from '@mui/material';
 import {
   BattleListItemFragment,
   PagingFragment,
@@ -13,12 +15,12 @@ import {
   PlayerSlugsQuery,
   usePlayerBattlesPageBattlesLazyQuery,
 } from '@/lib/graphql/types';
-import { Profile } from '../components/Profile';
-import { toast } from 'react-toastify';
-import { useSetRecoilState } from 'recoil';
 import { loadingState } from '@/states/loading';
+
+import { Head, Content, Breadcrumbs, BattleListItem, PlayerPageTabs } from '@/components';
 import { CharacterBattleCountChip, BattleSelector } from '@/components/BattleSelector';
-import { ParsedUrlQuery } from 'querystring';
+
+import { Profile } from '../components/Profile';
 
 interface State {
   battles: BattleListItemFragment[];

@@ -1,4 +1,8 @@
 import React from 'react';
+import { Controller, useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
+import { useSetRecoilState } from 'recoil';
+import { Box, Button, Card, CardContent, Divider, TextField } from '@mui/material';
 
 import {
   CurrentUserAttributes,
@@ -6,13 +10,10 @@ import {
   useCurrentUserQuery,
   useUpdateCurrentUserMutation,
 } from '@/lib/graphql/types';
-import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { Controller, useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
 import { currentUserState } from '@/states/currentUser';
-import { useSetRecoilState } from 'recoil';
 import { loadingState } from '@/states/loading';
-import { Box, Button, Card, CardContent, Divider, TextField } from '@mui/material';
+
+import { DashboardContent } from '@/components';
 
 const Page: React.FC = () => {
   const setLoading = useSetRecoilState(loadingState);

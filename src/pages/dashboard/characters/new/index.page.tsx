@@ -1,12 +1,12 @@
 import React from 'react';
-
-import { CharacterAttributes, useCreateCharacterMutation } from '@/lib/graphql/types';
-import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
-import { CharacterForm } from '@/components/CharacterForm';
 import { useSetRecoilState } from 'recoil';
+
+import { CharacterAttributes, useCreateCharacterMutation } from '@/lib/graphql/types';
 import { loadingState } from '@/states/loading';
+
+import { CharacterForm, DashboardContent } from '@/components';
 
 const Page: React.FC = () => {
   const router = useRouter();

@@ -1,20 +1,5 @@
 import React, { useState } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
-
-import {
-  AttackMoveFragment,
-  CharacterMovesPageDocument,
-  CharacterMovesPageMoveFragment,
-  CharacterMovesPageQuery,
-  CharacterPathsDocument,
-  CharacterPathsQuery,
-  ReversalMoveFragment,
-  ThrowMoveFragment,
-} from '@/lib/graphql/types';
-import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
-import { Head } from '@/components/layouts/Head';
-import { Content } from '@/components/layouts/Content';
-import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
 import {
   Box,
   Chip,
@@ -29,10 +14,20 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import { Profile } from '../components/Profile';
-import { Tabs } from '../components/Tabs';
 import { ParsedUrlQuery } from 'querystring';
-import { Command, CustomText } from '@/components';
+import YouTubeIcon from '@mui/icons-material/YouTube';
+
+import {
+  AttackMoveFragment,
+  CharacterMovesPageDocument,
+  CharacterMovesPageMoveFragment,
+  CharacterMovesPageQuery,
+  CharacterPathsDocument,
+  CharacterPathsQuery,
+  ReversalMoveFragment,
+  ThrowMoveFragment,
+} from '@/lib/graphql/types';
+import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import {
   AttackMoveResultText,
   AttackTypeEnumText,
@@ -40,9 +35,12 @@ import {
   ThrowMoveResultText,
   ThrowTypeEnumText,
 } from '@/lib/graphql/enum_texts';
-import { VideoPlayer } from '@/components/MoveMedia/VideoPlayer';
-import YouTubeIcon from '@mui/icons-material/YouTube';
 import { colors } from '@/colors';
+
+import { Breadcrumbs, Command, Content, CustomText, Head, VideoPlayer } from '@/components';
+
+import { Profile } from '../components/Profile';
+import { Tabs } from '../components/Tabs';
 
 const Page: React.FC<CharacterMovesPageQuery> = ({ character }) => {
   return (

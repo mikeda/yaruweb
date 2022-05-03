@@ -1,5 +1,8 @@
 import React from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
+import { ParsedUrlQuery } from 'querystring';
+import { Avatar, Box, Grid, Typography } from '@mui/material';
+import makeStyles from '@mui/styles/makeStyles';
 
 import {
   ArticlePageArticleDocument,
@@ -7,16 +10,11 @@ import {
   ArticlePathsDocument,
   ArticlePathsQuery,
 } from '@/lib/graphql/types';
-import { Head } from '@/components/layouts/Head';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
-import { Content } from '@/components/layouts/Content';
-import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
-import { Avatar, Box, Grid, Typography } from '@mui/material';
-import makeStyles from '@mui/styles/makeStyles';
-import dayjs from '@/lib/dayjs';
-import { ArticleBody, ArticleCard, FavButton } from '@/components';
 import { NO_IMAGE_URL } from '@/lib/Assets';
-import { ParsedUrlQuery } from 'querystring';
+import dayjs from '@/lib/dayjs';
+
+import { ArticleBody, ArticleCard, Breadcrumbs, Content, FavButton, Head } from '@/components';
 
 const useStyles = makeStyles({
   mainImage: {

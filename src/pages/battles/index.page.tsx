@@ -1,22 +1,20 @@
 import React, { useState } from 'react';
 import { GetStaticProps } from 'next';
-
-import { BattlesPageDocument, BattlesPageQuery, useBattlesPageBattlesLazyQuery } from '@/lib/graphql/types';
-import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
-import { Head } from '@/components/layouts/Head';
-import { Content } from '@/components/layouts/Content';
-import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
+import { useRouter } from 'next/router';
+import { useSetRecoilState } from 'recoil';
+import { toast } from 'react-toastify';
 import { Box, Button, List, Paper } from '@mui/material';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
-import { BattleListItem } from '@/components';
-import { useRouter } from 'next/router';
-import { useSetRecoilState } from 'recoil';
+
+import { BattlesPageDocument, BattlesPageQuery, useBattlesPageBattlesLazyQuery } from '@/lib/graphql/types';
+import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import { loadingState } from '@/states/loading';
-import { toast } from 'react-toastify';
-import { BattleSelector, CharacterChip, PlayerChip } from '@/components/BattleSelector';
 import theme from '@/theme';
 import { pagesPath } from '@/lib/$path';
+
+import { BattleListItem, Breadcrumbs, Content, Head } from '@/components';
+import { BattleSelector, CharacterChip, PlayerChip } from '@/components/BattleSelector';
 
 const useStyles = makeStyles(() =>
   createStyles({

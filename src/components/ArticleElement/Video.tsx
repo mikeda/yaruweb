@@ -1,5 +1,5 @@
 import React from 'react';
-import { VideoPlayer } from '../MoveMedia/VideoPlayer';
+import { VideoPlayer } from '../VideoPlayer';
 
 interface Props {
   m3u8Url: string;

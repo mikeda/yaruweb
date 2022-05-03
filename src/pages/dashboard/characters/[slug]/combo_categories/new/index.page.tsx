@@ -1,4 +1,7 @@
 import React from 'react';
+import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
+import { useSetRecoilState } from 'recoil';
 
 import {
   DashboardComboCategoryNewPageQuery,
@@ -6,12 +9,10 @@ import {
   useCreateComboCategoryMutation,
   useDashboardComboCategoryNewPageQuery,
 } from '@/lib/graphql/types';
-import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { useRouter } from 'next/router';
-import { toast } from 'react-toastify';
-import { ComboCategoryForm } from '@/components/ComboCategoryForm';
-import { useSetRecoilState } from 'recoil';
 import { loadingState } from '@/states/loading';
+
+import { ComboCategoryForm, DashboardContent } from '@/components';
+
 import { useRouteParams } from './hooks';
 
 const Page: React.FC = () => {

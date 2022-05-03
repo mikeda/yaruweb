@@ -1,16 +1,18 @@
 import React from 'react';
-
-import { DashboardBreadcrumbs, DashboardContent } from '@/components';
-import { Box, Card, CardContent, CardMedia, Grid, Paper, Typography } from '@mui/material';
+import { useRouter } from 'next/router';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
-import { useRouter } from 'next/router';
+import { Box, Card, CardContent, CardMedia, Grid, Paper, Typography } from '@mui/material';
+
 import { useDashboardTournamentPageQuery } from '@/lib/graphql/types';
 import { NO_IMAGE_URL } from '@/lib/Assets';
 import dayjs from '@/lib/dayjs';
+import theme from '@/theme';
+
+import { DashboardBreadcrumbs, DashboardContent } from '@/components';
+
 import { StandingList } from './components/StandingList';
 import { VideoList } from './components/VideoList';
-import theme from '@/theme';
 
 const useStyles = makeStyles(() =>
   createStyles({

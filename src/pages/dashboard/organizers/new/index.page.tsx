@@ -1,12 +1,12 @@
 import React from 'react';
-
-import { OrganizerAttributes, useDashboardOrganizersNewPageCreateOrganizerMutation } from '@/lib/graphql/types';
-import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
+
+import { OrganizerAttributes, useDashboardOrganizersNewPageCreateOrganizerMutation } from '@/lib/graphql/types';
 import { loadingState } from '@/states/loading';
-import { DashboardBreadcrumbs, OrganizerForm } from '@/components';
+
+import { DashboardBreadcrumbs, DashboardContent, OrganizerForm } from '@/components';
 
 const Page: React.FC = () => {
   const router = useRouter();

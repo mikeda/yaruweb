@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
+import { useSetRecoilState } from 'recoil';
+import { toast } from 'react-toastify';
+import { ParsedUrlQuery } from 'querystring';
+import { Box, Button, Grid, Typography } from '@mui/material';
 
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
-import { Head, Content, Breadcrumbs, PlayerPageTabs } from '@/components';
-import { Box, Button, Grid, Typography } from '@mui/material';
 import {
   PlayerSlugsDocument,
   PlayerSlugsQuery,
@@ -11,12 +13,12 @@ import {
   PlayerStandingsPageQuery,
   usePlayerStandingsPageStandingsLazyQuery,
 } from '@/lib/graphql/types';
+import { loadingState } from '@/states/loading';
+
+import { Head, Content, Breadcrumbs, PlayerPageTabs } from '@/components';
+
 import { Profile } from '../components/Profile';
 import { PlayerStandingCard } from '../components/PlayerStandingCard';
-import { loadingState } from '@/states/loading';
-import { useSetRecoilState } from 'recoil';
-import { toast } from 'react-toastify';
-import { ParsedUrlQuery } from 'querystring';
 
 const Page: React.FC<PlayerStandingsPageQuery> = ({
   player,

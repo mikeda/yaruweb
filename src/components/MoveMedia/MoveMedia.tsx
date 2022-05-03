@@ -4,7 +4,7 @@ import { styled } from '@mui/material/styles';
 import { AttackMoveFragment, MoveMediaFragment, ReversalMoveFragment, ThrowMoveFragment } from '@/lib/graphql/types';
 import { Command } from '../Command';
 
-import { VideoPlayer } from './VideoPlayer';
+import { VideoPlayer } from '../VideoPlayer';
 import {
   AttackMoveResultText,
   AttackTypeEnumText,

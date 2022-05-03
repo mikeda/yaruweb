@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { GetStaticProps } from 'next';
+import { useSetRecoilState } from 'recoil';
+import { toast } from 'react-toastify';
 import { Box, Button, Grid } from '@mui/material';
 
 import {
@@ -7,11 +9,10 @@ import {
   ArticlesPageArticlesQuery,
   useArticlesPageArticlesLazyQuery,
 } from '@/lib/graphql/types';
-import { Content, Breadcrumbs, Head, ArticleCard } from '@/components';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
-import { useSetRecoilState } from 'recoil';
 import { loadingState } from '@/states/loading';
-import { toast } from 'react-toastify';
+
+import { Content, Breadcrumbs, Head, ArticleCard } from '@/components';
 
 const Page: React.FC<ArticlesPageArticlesQuery> = ({ articles: { records: initArticles, paging: initPaging } }) => {
   const [state, setState] = useState({

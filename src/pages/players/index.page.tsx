@@ -1,21 +1,18 @@
 import React, { useRef, useState } from 'react';
 import { GetStaticProps } from 'next';
-
-import { PlayerCard } from '@/components/PlayerCard';
-import { Head } from '@/components/layouts/Head';
-import { Content } from '@/components/layouts/Content';
-import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
-import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
+import { useSetRecoilState } from 'recoil';
+import { toast } from 'react-toastify';
 import { Box, Button, Grid } from '@mui/material';
+
+import { loadingState } from '@/states/loading';
+import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
 import {
   PlayersPagePlayersDocument,
   PlayersPagePlayersQuery,
   usePlayersPagePlayersLazyQuery,
 } from '@/lib/graphql/types';
-import { SearchWord } from '@/components';
-import { useSetRecoilState } from 'recoil';
-import { loadingState } from '@/states/loading';
-import { toast } from 'react-toastify';
+
+import { Breadcrumbs, Content, Head, PlayerCard, SearchWord } from '@/components';
 
 const Page: React.FC<PlayersPagePlayersQuery> = ({ players: { records: initPlayers, paging: initPaging } }) => {
   const [state, setState] = useState({ players: initPlayers, paging: initPaging });

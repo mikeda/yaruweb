@@ -1,5 +1,11 @@
 import React, { useState } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
+import { Box, Button, List, Paper } from '@mui/material';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
+import { useSetRecoilState } from 'recoil';
+import { ParsedUrlQuery } from 'querystring';
+import { toast } from 'react-toastify';
 
 import {
   BattleListItemFragment,
@@ -11,21 +17,13 @@ import {
   useCharacterBattlesPageBattlesLazyQuery,
 } from '@/lib/graphql/types';
 import { fetchGraphql } from '@/lib/graphql/fetchGraphql';
-import { Head } from '@/components/layouts/Head';
-import { Content } from '@/components/layouts/Content';
-import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
-import { Box, Button, List, Paper } from '@mui/material';
-import createStyles from '@mui/styles/createStyles';
-import makeStyles from '@mui/styles/makeStyles';
-import { BattleListItem } from '@/components';
-import { useSetRecoilState } from 'recoil';
 import { loadingState } from '@/states/loading';
-import { toast } from 'react-toastify';
+import theme from '@/theme';
+
+import { BattleListItem, Breadcrumbs, Content, Head } from '@/components';
 import { BattleSelector, PlayerBattleCountChip } from '@/components/BattleSelector';
-import { ParsedUrlQuery } from 'querystring';
 import { Profile } from '../components/Profile';
 import { Tabs } from '../components/Tabs';
-import theme from '@/theme';
 
 const useStyles = makeStyles(() =>
   createStyles({

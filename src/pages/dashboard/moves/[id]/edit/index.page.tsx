@@ -1,4 +1,7 @@
 import React from 'react';
+import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
+import { useSetRecoilState } from 'recoil';
 
 import {
   PageDashboardMoveEditQuery,
@@ -7,13 +10,9 @@ import {
   useUpdateReversalMoveMutation,
   useUpdateThrowMoveMutation,
 } from '@/lib/graphql/types';
-import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { useRouter } from 'next/router';
-import { toast } from 'react-toastify';
 import { loadingState } from '@/states/loading';
-import { useSetRecoilState } from 'recoil';
-import { AttackMoveForm, ReversalMoveForm, ThrowMoveForm } from '@/components/MoveForm';
-import { DashboardBreadcrumbs } from '@/components';
+
+import { DashboardBreadcrumbs, DashboardContent, AttackMoveForm, ReversalMoveForm, ThrowMoveForm } from '@/components';
 
 const Page: React.FC = () => {
   const router = useRouter();

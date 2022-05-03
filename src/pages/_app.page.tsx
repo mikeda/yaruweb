@@ -1,28 +1,29 @@
 import React, { useEffect } from 'react';
 import { AppProps } from 'next/app';
+import { useRouter } from 'next/router';
 import { CssBaseline } from '@mui/material';
 import { ThemeProvider, Theme, StyledEngineProvider } from '@mui/material/styles';
-import theme from '@/theme';
-
-import { ToastContainer } from 'react-toastify';
 import { ApolloProvider } from '@apollo/client';
 import { RecoilRoot, useSetRecoilState } from 'recoil';
 import * as Sentry from '@sentry/react';
 import { Integrations } from '@sentry/tracing';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 config.autoAddCss = false;
 
-import 'react-toastify/dist/ReactToastify.css';
 import * as gtag from '@/lib/gtag';
+import theme from '@/theme';
 
 import { client } from '@/lib/graphql/client';
-import { currentUserState } from '@/states/currentUser';
 import { useCurrentUserQuery } from '@/lib/graphql/types';
-import { useRouter } from 'next/router';
-import { Loading } from '@/components/Loading';
+import { currentUserState } from '@/states/currentUser';
 import { loadingState } from '@/states/loading';
+
+import { Loading } from '@/components';
 
 declare module '@mui/styles/defaultTheme' {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface

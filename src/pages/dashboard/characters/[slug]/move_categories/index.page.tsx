@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
 import {
   Box,
@@ -33,13 +34,13 @@ import {
   useDeleteMoveMutation,
 } from '@/lib/graphql/types';
 import { loadingState } from '@/states/loading';
-import { useRouteParams } from './hooks';
-import { DashboardContent, DashboardBreadcrumbs, Command } from '@/components';
-import { VideoPlayer } from '@/components/MoveMedia/VideoPlayer';
 import { colors } from '@/colors';
 import { pagesPath } from '@/lib/$path';
-import { useRouter } from 'next/router';
 import { resolveUrlObject } from '@/lib';
+
+import { DashboardContent, DashboardBreadcrumbs, Command, VideoPlayer } from '@/components';
+
+import { useRouteParams } from './hooks';
 
 const Page: React.FC = () => {
   const router = useRouter();

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-
-import { DashboardContent, DashboardBreadcrumbs } from '@/components';
+import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
+import { useSetRecoilState } from 'recoil';
 import {
   Box,
   Button,
@@ -16,19 +17,19 @@ import {
   Typography,
 } from '@mui/material';
 import { Add as AddIcon, MoreVert } from '@mui/icons-material';
-import { useSetRecoilState } from 'recoil';
+
 import { loadingState } from '@/states/loading';
 import {
   DashboardTournamentsPageTournamentFragment,
   useDashboardTournamentsPageTournamentsQuery,
   useDeleteTournamentMutation,
 } from '@/lib/graphql/types';
-import { toast } from 'react-toastify';
 import { NO_IMAGE_URL } from '@/lib/Assets';
 import dayjs from '@/lib/dayjs';
 import { pagesPath } from '@/lib/$path';
-import { useRouter } from 'next/router';
 import { resolveUrlObject } from '@/lib';
+
+import { DashboardContent, DashboardBreadcrumbs } from '@/components';
 
 const Page: React.FC = () => {
   const router = useRouter();

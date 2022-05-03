@@ -1,14 +1,13 @@
 import React from 'react';
-
-import { DashboardContent } from '@/components/layouts/dashboard/DashboardContent';
-import { NotFound } from '@/components/NotFound';
+import { useRouter } from 'next/router';
 import { Button, Grid } from '@mui/material';
 import { Add as AddIcon } from '@mui/icons-material';
-import { CharacterCard, DashboardBreadcrumbs } from '@/components';
+
 import { useDashboardCharactersPageQuery } from '@/lib/graphql/types';
 import { pagesPath } from '@/lib/$path';
-import { useRouter } from 'next/router';
 import { resolveUrlObject } from '@/lib';
+
+import { CharacterCard, DashboardBreadcrumbs, DashboardContent, NotFound } from '@/components';
 
 const Page: React.FC = () => {
   const router = useRouter();

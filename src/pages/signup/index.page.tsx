@@ -1,10 +1,9 @@
 import React from 'react';
 
-import { SignUpWithEmailForm } from './SignUpWithEmailForm';
-import { SignUpWithTwitterButton } from './SignUpWithTwitterButton';
-import { Content } from '@/components/layouts/Content';
-import { Head } from '@/components/layouts/Head';
-import { Breadcrumbs } from '@/components/layouts/Breadcrumbs';
+import { Breadcrumbs, Content, Head } from '@/components';
+
+import { SignUpWithEmailForm } from './components/SignUpWithEmailForm';
+import { SignUpWithTwitterButton } from './components/SignUpWithTwitterButton';
 
 const Page: React.FC = () => {
   const title = 'プレイヤー登録';
