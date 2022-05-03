@@ -36,13 +36,11 @@ import {
   useDashboardMoveCategoriesPageQuery,
   useDeleteMoveCategoryMutation,
   useDeleteMoveMutation,
+  loadingState,
+  colors,
+  pagesPath,
+  resolveUrlObject,
 } from '@/lib';
-import { loadingState } from '@/lib';
-import { colors } from '@/lib';
-import { pagesPath } from '@/lib';
-import { resolveUrlObject } from '@/lib';
-
-
 
 const Page: React.FC = () => {
   const router = useRouter();

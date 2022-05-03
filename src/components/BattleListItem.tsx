@@ -5,9 +5,7 @@ import makeStyles from '@mui/styles/makeStyles';
 import clsx from 'clsx';
 
 import { Link } from '@/components';
-import { BattleListItemFragment, theme, dayjs } from '@/lib';
-import { BattleRoundText } from '@/lib';
-import { pagesPath } from '@/lib';
+import { BattleListItemFragment, theme, dayjs, BattleRoundText, pagesPath } from '@/lib';
 
 interface Props {
   battle: BattleListItemFragment;

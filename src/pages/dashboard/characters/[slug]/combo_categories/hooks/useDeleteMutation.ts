@@ -1,8 +1,7 @@
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
-import { useDeleteMoveCategoryMutation } from '@/lib';
-import { loadingState } from '@/lib';
+import { useDeleteMoveCategoryMutation, loadingState } from '@/lib';
 
 export const useDeleteMutation = (onDestroy: () => void) => {
   const setLoading = useSetRecoilState(loadingState);
