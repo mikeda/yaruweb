@@ -1,7 +1,7 @@
-import { useDashboardTournamentPageCreateVideoMutation } from '@/lib/$types';
-import { loadingState } from '@/lib/states/loadingState';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
+
+import { useDashboardTournamentPageCreateVideoMutation, loadingState } from '@/lib';
 
 interface Props {
   onCreate: () => void;

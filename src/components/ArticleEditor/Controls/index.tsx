@@ -1,16 +1,16 @@
 import React from 'react';
+import { styled } from '@mui/material/styles';
+
+import { useCharacterSelectOptionsQuery, YAROUYO_FONT_CODE } from '@/lib';
+
+import { OperationButton } from './OperationButton';
 import { BlockButton } from './BlockButton';
 import { MarkButton } from './MarkButton';
-import { YAROUYO_FONT_CODE } from '@/lib/YarouyoFont';
-import { OperationButton } from './OperationButton';
 import { ImageButton } from './ImageButton';
 import { VideoButton } from './VideoButton';
 import { LinkButton } from './LinkButton';
 import { MoveButton } from './MoveButton';
 import { ComboButton } from './ComboButton';
-import { useCharacterSelectOptionsQuery } from '@/lib/$types';
-
-import { styled } from '@mui/material/styles';
 
 export const Controls: React.FC = () => {
   const { data } = useCharacterSelectOptionsQuery();

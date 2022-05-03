@@ -7,11 +7,15 @@ import { Box, Button, List, Paper } from '@mui/material';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
 
-import { BattlesPageDocument, BattlesPageQuery, useBattlesPageBattlesLazyQuery } from '@/lib/$types';
-import { fetchGraphql } from '@/lib/fetchGraphql';
-import { loadingState } from '@/lib/states/loadingState';
-import theme from '@/theme';
-import { pagesPath } from '@/lib/$path';
+import {
+  BattlesPageDocument,
+  BattlesPageQuery,
+  useBattlesPageBattlesLazyQuery,
+  fetchGraphql,
+  loadingState,
+  pagesPath,
+  theme,
+} from '@/lib';
 
 import { BattleListItem, Breadcrumbs, Content, Head } from '@/components';
 import { BattleSelector, CharacterChip, PlayerChip } from '@/components/BattleSelector';

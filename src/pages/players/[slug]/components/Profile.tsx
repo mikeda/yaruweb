@@ -1,11 +1,9 @@
 import React from 'react';
-import { DEFAULT_AVATAR_URL } from '@/lib/placeIconUrl';
-import { PlayerPageProfileFragment } from '@/lib/$types';
 import { Paper, Typography } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
-import theme from '@/theme';
 import { LiveTv, Twitter } from '@mui/icons-material';
-import { colors } from '@/colors';
+
+import { PlayerPageProfileFragment, DEFAULT_AVATAR_URL, colors, theme } from '@/lib';
 
 const useStyles = makeStyles({
   root: {

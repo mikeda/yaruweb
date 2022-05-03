@@ -3,18 +3,20 @@ import React, { useState } from 'react';
 import { Avatar, Box, Dialog, IconButton, ListItem, ListItemSecondaryAction, ListItemText } from '@mui/material';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
-import { formatSec } from '@/lib';
+import clsx from 'clsx';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
-import { BattleRoundText } from '@/lib/EnumText';
+
+import { BattleRoundText } from '@/lib';
 import {
   CharacterSelectOptionFragment,
   DashboardBattlesPageBattleReslutFragment,
   PlayerSelectOptionFragment,
-} from '@/lib/$types';
-import clsx from 'clsx';
+  theme,
+  formatSec,
+} from '@/lib';
+
 import { useUpdateMutation } from '../hooks/useUpdateMutation';
-import theme from '@/theme';
 import { BattleForm } from './BattleForm';
 
 const useStyles = makeStyles(() =>

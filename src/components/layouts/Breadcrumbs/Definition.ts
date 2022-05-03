@@ -1,4 +1,4 @@
-import { pagesPath } from '@/lib/$path';
+import { pagesPath } from '@/lib';
 import { BreadcrumbChainItem } from './Breadcrumbs';
 import { ArticleParam, CharactersParam, PlayerParam, TournamentParam, TournamentVideoParam } from './params';
 

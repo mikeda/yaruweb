@@ -4,13 +4,13 @@ import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
-import { loadingState } from '@/lib/states/loadingState';
 import {
   ComboAttributes,
   PageDashboardComboNewQuery,
   useCreateComboMutation,
   usePageDashboardComboNewQuery,
-} from '@/lib/$types';
+  loadingState,
+} from '@/lib';
 
 import { ComboForm, DashboardBreadcrumbs, DashboardContent } from '@/components';
 

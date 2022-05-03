@@ -1,5 +1,5 @@
 import React from 'react';
-import { PlayerCardFragment } from '@/lib/$types';
+import { useRouter } from 'next/router';
 import {
   Card,
   CardActionArea,
@@ -11,16 +11,12 @@ import {
   ListItemText,
   Typography,
 } from '@mui/material';
+import YouTubeIcon from '@mui/icons-material/YouTube';
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
 
 import makeStyles from '@mui/styles/makeStyles';
 
-import { NO_IMAGE_URL } from '@/lib/placeIconUrl';
-import YouTubeIcon from '@mui/icons-material/YouTube';
-import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
-import { colors } from '@/colors';
-import { pagesPath } from '@/lib/$path';
-import { useRouter } from 'next/router';
-import { resolveUrlObject } from '@/lib';
+import { PlayerCardFragment, NO_IMAGE_URL, colors, pagesPath, resolveUrlObject } from '@/lib';
 
 const useStyles = makeStyles({
   root: {

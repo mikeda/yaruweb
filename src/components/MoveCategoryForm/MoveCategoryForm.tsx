@@ -1,7 +1,6 @@
 import React from 'react';
 import * as yup from 'yup';
 
-import { MoveCategoryAttributes, MoveCategoryFragment } from '@/lib/$types';
 import { Controller, useForm } from 'react-hook-form';
 import {
   Box,
@@ -16,6 +15,8 @@ import {
   TextField,
 } from '@mui/material';
 import { yupResolver } from '@hookform/resolvers/yup';
+
+import { MoveCategoryAttributes, MoveCategoryFragment } from '@/lib';
 
 interface Props {
   moveCategory?: MoveCategoryFragment;

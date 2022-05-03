@@ -1,15 +1,11 @@
 import React from 'react';
 import { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
-import theme from '@/theme';
 import { Box, Button, Grid, List, Paper, Typography } from '@mui/material';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
 
-import { TopPageDocument, TopPageQuery } from '@/lib/$types';
-import { fetchGraphql } from '@/lib/fetchGraphql';
-import { pagesPath } from '@/lib/$path';
-import { resolveUrlObject } from '@/lib';
+import { TopPageDocument, TopPageQuery, theme, fetchGraphql, pagesPath, resolveUrlObject } from '@/lib';
 
 import {
   ArticleCard,

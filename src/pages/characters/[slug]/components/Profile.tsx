@@ -1,10 +1,9 @@
 import React from 'react';
-import { CharacterPageProfileFragment } from '@/lib/$types';
-import { Card, CardContent, CardMedia, List, ListItem, ListItemIcon, ListItemText, Typography } from '@mui/material';
-
 import makeStyles from '@mui/styles/makeStyles';
-
+import { Card, CardContent, CardMedia, List, ListItem, ListItemIcon, ListItemText, Typography } from '@mui/material';
 import { Public, SportsKabaddi } from '@mui/icons-material';
+
+import { CharacterPageProfileFragment } from '@/lib';
 
 const useStyles = makeStyles({
   root: {

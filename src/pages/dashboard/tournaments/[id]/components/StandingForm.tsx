@@ -2,9 +2,8 @@ import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-
-import { PlayerSelectOptionFragment, StandingAttributes } from '@/lib/$types';
 import {
+  Autocomplete,
   Box,
   Button,
   Dialog,
@@ -17,7 +16,8 @@ import {
   Select,
   TextField,
 } from '@mui/material';
-import { Autocomplete } from '@mui/material';
+
+import { PlayerSelectOptionFragment, StandingAttributes } from '@/lib';
 
 const schema = yup.object().shape({
   place: yup.number().required().integer().min(1).max(4),

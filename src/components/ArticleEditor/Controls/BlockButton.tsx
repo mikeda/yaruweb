@@ -1,7 +1,8 @@
 import React from 'react';
 import { useSlate } from 'slate-react';
-import { Button } from './Button';
 import { Editor, Element as SlateElement, Transforms } from 'slate';
+
+import { Button } from './Button';
 
 type Format = 'heading-one' | 'heading-two' | 'bulleted-list';
 interface Props {

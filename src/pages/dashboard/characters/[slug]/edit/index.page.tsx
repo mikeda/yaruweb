@@ -9,9 +9,9 @@ import {
   PageDashboardCharacterEditDocument,
   PageDashboardCharacterEditQuery,
   useUpdateCharacterMutation,
-} from '@/lib/$types';
-import { fetchGraphql } from '@/lib/fetchGraphql';
-import { loadingState } from '@/lib/states/loadingState';
+  fetchGraphql,
+  loadingState,
+} from '@/lib';
 
 import { CharacterForm, DashboardBreadcrumbs, DashboardContent } from '@/components';
 

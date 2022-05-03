@@ -8,8 +8,8 @@ import {
   ArticleFormArticleFragment,
   useMyArticleQuery,
   useUpdateArticleMutation,
-} from '@/lib/$types';
-import { loadingState } from '@/lib/states/loadingState';
+  loadingState,
+} from '@/lib';
 
 import { ArticleForm, DashboardBreadcrumbs, DashboardContent } from '@/components';
 

@@ -13,9 +13,9 @@ import {
   TournamentVideoPageQuery,
   TournamentVideoPathsDocument,
   TournamentVideoPathsQuery,
-} from '@/lib/$types';
+  fetchGraphql,
+} from '@/lib';
 import { TournamentVideoDomain } from '@/domains';
-import { fetchGraphql } from '@/lib/fetchGraphql';
 
 import { Breadcrumbs, Content, Head, NotFound, YouTubeWrapper } from '@/components';
 

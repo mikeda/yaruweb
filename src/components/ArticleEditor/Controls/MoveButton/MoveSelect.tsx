@@ -1,7 +1,8 @@
 import React from 'react';
-import { useMoveSelectOptionsQuery } from '@/lib/$types';
 import { TextField } from '@mui/material';
 import { Autocomplete } from '@mui/material';
+
+import { useMoveSelectOptionsQuery } from '@/lib';
 
 interface Props {
   characterSlug: string;

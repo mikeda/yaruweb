@@ -18,16 +18,16 @@ import {
 } from '@mui/material';
 import { Add as AddIcon, MoreVert } from '@mui/icons-material';
 
-import { loadingState } from '@/lib/states/loadingState';
 import {
   DashboardTournamentsPageTournamentFragment,
   useDashboardTournamentsPageTournamentsQuery,
   useDeleteTournamentMutation,
-} from '@/lib/$types';
-import { NO_IMAGE_URL } from '@/lib/placeIconUrl';
-import dayjs from '@/lib/dayjs';
-import { pagesPath } from '@/lib/$path';
-import { resolveUrlObject } from '@/lib';
+  NO_IMAGE_URL,
+  dayjs,
+  pagesPath,
+  resolveUrlObject,
+  loadingState,
+} from '@/lib';
 
 import { DashboardContent, DashboardBreadcrumbs } from '@/components';
 

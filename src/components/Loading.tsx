@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRecoilValue } from 'recoil';
-import { loadingState } from '@/lib/states/loadingState';
+import { loadingState } from '@/lib';
 
 import { keyframes } from '@emotion/react';
 import styled from '@emotion/styled';

@@ -9,9 +9,9 @@ import {
   CurrentUserFragment,
   useCurrentUserQuery,
   useUpdateCurrentUserMutation,
-} from '@/lib/$types';
-import { currentUserState } from '@/lib/states/currentUserState';
-import { loadingState } from '@/lib/states/loadingState';
+  currentUserState,
+  loadingState,
+} from '@/lib';
 
 import { DashboardContent } from '@/components';
 

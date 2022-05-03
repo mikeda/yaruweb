@@ -12,8 +12,9 @@ import {
 } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import { Delete } from '@mui/icons-material';
-import { PlayerSelectOptionFragment, useDashboardTournamentPageStandingsQuery } from '@/lib/$types';
-import { DEFAULT_AVATAR_URL } from '@/lib/placeIconUrl';
+
+import { PlayerSelectOptionFragment, useDashboardTournamentPageStandingsQuery, DEFAULT_AVATAR_URL } from '@/lib';
+
 import { useCreateStandingMutation, useDeleteStandingMutation } from '../hooks';
 import { StandingForm } from './StandingForm';
 import { StandingPlaceAvatar } from './StandingPlaceAvatar';

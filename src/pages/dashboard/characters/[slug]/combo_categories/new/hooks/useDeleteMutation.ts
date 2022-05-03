@@ -1,5 +1,5 @@
-import { useDeleteComboCategoryMutation } from '@/lib/$types';
-import { loadingState } from '@/lib/states/loadingState';
+import { useDeleteComboCategoryMutation } from '@/lib';
+import { loadingState } from '@/lib';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 

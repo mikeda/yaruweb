@@ -3,8 +3,7 @@ import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
-import { CharacterAttributes, useCreateCharacterMutation } from '@/lib/$types';
-import { loadingState } from '@/lib/states/loadingState';
+import { CharacterAttributes, useCreateCharacterMutation, loadingState } from '@/lib';
 
 import { CharacterForm, DashboardContent } from '@/components';
 

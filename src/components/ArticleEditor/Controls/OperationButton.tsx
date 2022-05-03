@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useSlate } from 'slate-react';
-
-import { Button } from './Button';
-import { YAROUYO_FONT_CODE } from '@/lib/YarouyoFont';
 import { Box, Dialog, DialogContent } from '@mui/material';
 import styled from '@mui/styles/styled';
+
+import { YAROUYO_FONT_CODE } from '@/lib';
+import { Button } from './Button';
 
 const OPERATIONS: (keyof typeof YAROUYO_FONT_CODE)[][] = [
   ['lever_7', 'lever_8', 'lever_9', 'lever_4', 'lever_N', 'lever_6', 'lever_1', 'lever_2', 'lever_3'],

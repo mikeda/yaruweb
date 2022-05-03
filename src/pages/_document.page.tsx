@@ -1,9 +1,8 @@
 import React from 'react';
 import NextDocument, { Html, Head, Main, NextScript, DocumentInitialProps, DocumentContext } from 'next/document';
 import ServerStyleSheets from '@mui/styles/ServerStyleSheets';
-import theme from '@/theme';
 
-import { GA_TRACKING_ID } from '@/lib/gtag';
+import { GA_TRACKING_ID, theme } from '@/lib';
 
 class Document extends NextDocument {
   render() {

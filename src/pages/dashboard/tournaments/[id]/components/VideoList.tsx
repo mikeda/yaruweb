@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
 import {
   Box,
   Button,
@@ -12,11 +13,10 @@ import {
 } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import { MoreVert } from '@mui/icons-material';
-import { useDashboardTournamentPageVideosQuery } from '@/lib/$types';
+import { useDashboardTournamentPageVideosQuery, pagesPath } from '@/lib';
+
 import { useCreateVideoMutation, useDeleteVideoMutation } from '../hooks';
 import { VideoForm } from './VideoForm';
-import { useRouter } from 'next/router';
-import { pagesPath } from '@/lib/$path';
 
 const useStyles = makeStyles({
   list: {

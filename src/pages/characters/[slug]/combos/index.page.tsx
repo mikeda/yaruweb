@@ -1,16 +1,6 @@
 import React, { useState } from 'react';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { ParsedUrlQuery } from 'querystring';
-import YouTubeIcon from '@mui/icons-material/YouTube';
-
-import {
-  CharacterCombosPageDocument,
-  CharacterCombosPageQuery,
-  CharacterPathsDocument,
-  CharacterPathsQuery,
-  ComboMediaFragment,
-} from '@/lib/$types';
-import { fetchGraphql } from '@/lib/fetchGraphql';
 import {
   Box,
   Dialog,
@@ -23,7 +13,17 @@ import {
   Paper,
   Typography,
 } from '@mui/material';
-import { colors } from '@/colors';
+import YouTubeIcon from '@mui/icons-material/YouTube';
+
+import {
+  CharacterCombosPageDocument,
+  CharacterCombosPageQuery,
+  CharacterPathsDocument,
+  CharacterPathsQuery,
+  ComboMediaFragment,
+  fetchGraphql,
+  colors,
+} from '@/lib';
 
 import { Content, Head, Breadcrumbs, Command, VideoPlayer } from '@/components';
 

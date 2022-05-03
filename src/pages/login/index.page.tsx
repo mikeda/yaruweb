@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box } from '@mui/material';
 
-import { pagesPath } from '@/lib/$path';
+import { pagesPath } from '@/lib';
 
 import { Breadcrumbs, Content, Head, Link } from '@/components';
 

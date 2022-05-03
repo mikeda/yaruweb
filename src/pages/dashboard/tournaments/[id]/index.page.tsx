@@ -4,10 +4,7 @@ import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
 import { Box, Card, CardContent, CardMedia, Grid, Paper, Typography } from '@mui/material';
 
-import { useDashboardTournamentPageQuery } from '@/lib/$types';
-import { NO_IMAGE_URL } from '@/lib/placeIconUrl';
-import dayjs from '@/lib/dayjs';
-import theme from '@/theme';
+import { useDashboardTournamentPageQuery, dayjs, theme, NO_IMAGE_URL } from '@/lib';
 
 import { DashboardBreadcrumbs, DashboardContent } from '@/components';
 

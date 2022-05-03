@@ -28,11 +28,11 @@ import {
   useDashboardComboCategoriesPageQuery,
   useDeleteComboCategoryMutation,
   useDeleteComboMutation,
-} from '@/lib/$types';
-import { loadingState } from '@/lib/states/loadingState';
-import { colors } from '@/colors';
-import { pagesPath } from '@/lib/$path';
-import { resolveUrlObject } from '@/lib';
+  colors,
+  loadingState,
+  pagesPath,
+  resolveUrlObject,
+} from '@/lib';
 
 import { DashboardContent, DashboardBreadcrumbs, Command, VideoPlayer } from '@/components';
 

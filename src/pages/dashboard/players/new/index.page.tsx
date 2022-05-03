@@ -3,8 +3,7 @@ import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
-import { PlayerAttributes, useDashboardPlayersNewPageCreatePlayerMutation } from '@/lib/$types';
-import { loadingState } from '@/lib/states/loadingState';
+import { PlayerAttributes, useDashboardPlayersNewPageCreatePlayerMutation, loadingState } from '@/lib';
 
 import { DashboardBreadcrumbs, DashboardContent, PlayerForm } from '@/components';
 

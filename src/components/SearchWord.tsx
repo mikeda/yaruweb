@@ -5,7 +5,7 @@ import Paper from '@mui/material/Paper';
 import InputBase from '@mui/material/InputBase';
 import IconButton from '@mui/material/IconButton';
 import SearchIcon from '@mui/icons-material/Search';
-import theme from '@/theme';
+import { theme } from '@/lib';
 
 const useStyles = makeStyles(() =>
   createStyles({

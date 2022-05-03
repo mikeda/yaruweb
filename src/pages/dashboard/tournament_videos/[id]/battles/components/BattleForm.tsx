@@ -4,21 +4,15 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import YouTube from 'react-youtube';
 import { YouTubePlayer } from 'youtube-player/dist/types';
-
+import { createFilterOptions } from '@mui/material/useAutocomplete';
+import { GetApp, PlayArrow } from '@mui/icons-material';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
 import KeyboardDoubleArrowLeftIcon from '@mui/icons-material/KeyboardDoubleArrowLeft';
 import KeyboardDoubleArrowRightIcon from '@mui/icons-material/KeyboardDoubleArrowRight';
 import SwapVertIcon from '@mui/icons-material/SwapVert';
-
 import {
-  CharacterSelectOptionFragment,
-  PlayerSelectOptionFragment,
-  BattleAttributes,
-  BattleRound,
-  DashboardBattlesPageBattleReslutFragment,
-} from '@/lib/$types';
-import {
+  Autocomplete,
   Box,
   Button,
   FormControl,
@@ -31,10 +25,16 @@ import {
   TextField,
   Tooltip,
 } from '@mui/material';
-import { Autocomplete } from '@mui/material';
-import { createFilterOptions } from '@mui/material/useAutocomplete';
-import { GetApp, PlayArrow } from '@mui/icons-material';
-import { BattleRoundText } from '@/lib/EnumText';
+
+import {
+  CharacterSelectOptionFragment,
+  PlayerSelectOptionFragment,
+  BattleAttributes,
+  BattleRound,
+  DashboardBattlesPageBattleReslutFragment,
+  BattleRoundText,
+} from '@/lib';
+
 import { YouTubeWrapper } from '@/components';
 
 const schema = yup.object().shape({

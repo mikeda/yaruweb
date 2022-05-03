@@ -1,6 +1,6 @@
 import React from 'react';
-import { useArticleElementComboQuery } from '@/lib/$types';
-import { ComboMedia } from '@/components/ComboMedia';
+import { useArticleElementComboQuery } from '@/lib';
+import { ComboMedia } from '@/components';
 
 interface Props {
   comboId: string;

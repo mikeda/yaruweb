@@ -1,18 +1,19 @@
 import React, { useCallback } from 'react';
+import { createEditor, Transforms, Node } from 'slate';
 import { Editable, RenderElementProps, RenderLeafProps, useSlate, withReact } from 'slate-react';
 import { withHistory } from 'slate-history';
+import isUrl from 'is-url';
 
 import { Element } from '@/components/ArticleElement';
+import { useCreateArticleLinkMutation } from '@/lib';
+import { EmbedLinkElement } from '@/custom-types';
+
 import { Leaf } from '../ArticleElement/Leaf';
 import { withIcon } from './IconHelper';
-import { createEditor, Transforms, Node } from 'slate';
 import { withLink } from './LinkHelper';
 import { getYoutubeNode, isYoutubeUrl } from './YoutubeHelper';
 import { getTweetNode, isTweetUrl } from './TweetHelper';
-import { useCreateArticleLinkMutation } from '@/lib/$types';
-import isUrl from 'is-url';
 import { Controls } from './Controls';
-import { EmbedLinkElement } from '@/custom-types';
 
 export const createArticleEditor = () => {
   return withIcon(withLink(withHistory(withReact(createEditor()))));

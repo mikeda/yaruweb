@@ -1,10 +1,11 @@
 import React from 'react';
 import { useSlate } from 'slate-react';
 import { Transforms } from 'slate';
-import { Button } from './Button';
-import { useCreateArticleImageMutation } from '@/lib/$types';
-import { YAROUYO_FONT_CODE } from '@/lib/YarouyoFont';
+
+import { useCreateArticleImageMutation, YAROUYO_FONT_CODE } from '@/lib';
 import { ImageElement } from '@/custom-types';
+
+import { Button } from './Button';
 import { HiddenInput } from './HiddenInput';
 
 export const ImageButton: React.FC = () => {

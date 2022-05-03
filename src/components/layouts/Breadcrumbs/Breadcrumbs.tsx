@@ -1,11 +1,12 @@
 import React from 'react';
 import { default as MuiBreadcrumbs } from '@mui/material/Breadcrumbs';
+import { Typography } from '@mui/material';
+import { UrlObject } from 'url';
+
+import { Link } from '@/components';
 
 import { DashboardBreadcrumbParams, breadcrumbChain as dashboardChain } from './DashboardDefinition';
 import { breadcrumbChain, ChainParam } from './Definition';
-import { Typography } from '@mui/material';
-import { Link } from '@/components/Link';
-import { UrlObject } from 'url';
 
 export type BreadcrumbChainItem = {
   name: string;

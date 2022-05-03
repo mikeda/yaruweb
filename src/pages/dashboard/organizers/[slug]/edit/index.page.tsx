@@ -1,7 +1,7 @@
 import React from 'react';
 import { useRouter } from 'next/router';
 
-import { OrganizerAttributes } from '@/lib/$types';
+import { OrganizerAttributes } from '@/lib';
 
 import { DashboardContent, DashboardBreadcrumbs, OrganizerForm } from '@/components';
 

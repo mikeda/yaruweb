@@ -1,6 +1,6 @@
 import React from 'react';
-import { useArticleElementMoveQuery } from '@/lib/$types';
-import { MoveMedia } from '@/components/MoveMedia';
+import { useArticleElementMoveQuery } from '@/lib';
+import { MoveMedia } from '@/components';
 
 interface Props {
   moveId: string;

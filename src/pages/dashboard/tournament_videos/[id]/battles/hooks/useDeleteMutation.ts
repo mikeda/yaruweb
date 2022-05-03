@@ -1,7 +1,6 @@
-import { useDeleteBattleMutation } from '@/lib/$types';
-import { loadingState } from '@/lib/states/loadingState';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
+import { useDeleteBattleMutation, loadingState } from '@/lib';
 
 export const useDeleteMutation = (onDestroy: () => void) => {
   const setLoading = useSetRecoilState(loadingState);

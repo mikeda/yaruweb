@@ -9,10 +9,10 @@ import {
   ArticlePageArticleQuery,
   ArticlePathsDocument,
   ArticlePathsQuery,
-} from '@/lib/$types';
-import { fetchGraphql } from '@/lib/fetchGraphql';
-import { NO_IMAGE_URL } from '@/lib/placeIconUrl';
-import dayjs from '@/lib/dayjs';
+  dayjs,
+  fetchGraphql,
+  NO_IMAGE_URL,
+} from '@/lib';
 
 import { ArticleBody, ArticleCard, Breadcrumbs, Content, FavButton, Head } from '@/components';
 

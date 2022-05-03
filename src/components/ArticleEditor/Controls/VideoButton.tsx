@@ -1,12 +1,12 @@
 import React from 'react';
 import { useSlate } from 'slate-react';
-
-import { Button } from './Button';
-import { useCreateArticleVideoMutation } from '@/lib/$types';
-import { YAROUYO_FONT_CODE } from '@/lib/YarouyoFont';
 import { toast } from 'react-toastify';
 import { Transforms } from 'slate';
+
+import { useCreateArticleVideoMutation, YAROUYO_FONT_CODE } from '@/lib';
 import { VideoElement } from '@/custom-types';
+
+import { Button } from './Button';
 import { HiddenInput } from './HiddenInput';
 
 export const VideoButton: React.FC = () => {

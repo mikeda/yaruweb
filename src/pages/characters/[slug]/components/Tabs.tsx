@@ -1,9 +1,8 @@
 import React from 'react';
-
-import { Paper, Tab, Tabs as MuiTabs } from '@mui/material';
 import { useRouter } from 'next/router';
-import { CharacterPageProfileFragment } from '@/lib/$types';
-import { pagesPath } from '@/lib/$path';
+import { Paper, Tab, Tabs as MuiTabs } from '@mui/material';
+
+import { CharacterPageProfileFragment, pagesPath } from '@/lib';
 
 type TabValue = 'profile' | 'battles' | 'moves' | 'combos';
 

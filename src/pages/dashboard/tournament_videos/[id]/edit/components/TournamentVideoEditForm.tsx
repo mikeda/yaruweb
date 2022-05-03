@@ -2,10 +2,9 @@ import React from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
-
-import { TournamentVideoAttributes, TournamentVideoFormFragment } from '@/lib/$types';
-import dayjs from '@/lib/dayjs';
 import { Box, Button, Card, CardContent, Divider, Grid, TextField } from '@mui/material';
+
+import { TournamentVideoAttributes, TournamentVideoFormFragment, dayjs } from '@/lib';
 
 const schema = yup.object().shape({
   title: yup.string().required(),

@@ -1,6 +1,6 @@
 import React from 'react';
-import { ComboMediaFragment } from '@/lib/$types';
 import { Card, CardContent, Typography } from '@mui/material';
+import { ComboMediaFragment } from '@/lib';
 import { VideoPlayer } from '../VideoPlayer';
 import { Command } from '../Command';
 
