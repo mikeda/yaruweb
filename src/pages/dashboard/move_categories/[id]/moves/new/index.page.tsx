@@ -1,8 +1,10 @@
 import React from 'react';
+
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
+import { DashboardBreadcrumbs, DashboardContent, AttackMoveForm, ThrowMoveForm, ReversalMoveForm } from '@/components';
 import {
   usePageDashboardMoveNewQuery,
   PageDashboardMoveNewQuery,
@@ -15,7 +17,6 @@ import {
   loadingState,
 } from '@/lib';
 
-import { DashboardBreadcrumbs, DashboardContent, AttackMoveForm, ThrowMoveForm, ReversalMoveForm } from '@/components';
 
 export type Query = {
   move_type: 'attack' | 'throw' | 'reversal';

@@ -1,6 +1,7 @@
-import { Element as SlateElement, Transforms, Editor, Range } from 'slate';
-import { LinkElement } from '@/custom-types';
 import isUrl from 'is-url';
+import { Element as SlateElement, Transforms, Editor, Range } from 'slate';
+
+import { LinkElement } from '@/custom-types';
 
 export const withLink = (editor: Editor) => {
   const { insertData, insertText, isInline } = editor;

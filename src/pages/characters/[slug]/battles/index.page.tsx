@@ -1,12 +1,21 @@
+import { ParsedUrlQuery } from 'querystring';
+
 import React, { useState } from 'react';
-import { GetStaticPaths, GetStaticProps } from 'next';
+
 import { Box, Button, List, Paper } from '@mui/material';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
-import { useSetRecoilState } from 'recoil';
-import { ParsedUrlQuery } from 'querystring';
+import { GetStaticPaths, GetStaticProps } from 'next';
 import { toast } from 'react-toastify';
+import { useSetRecoilState } from 'recoil';
 
+
+
+import { Profile } from '../components/Profile';
+import { Tabs } from '../components/Tabs';
+
+import { BattleListItem, Breadcrumbs, Content, Head } from '@/components';
+import { BattleSelector, PlayerBattleCountChip } from '@/components/BattleSelector';
 import {
   BattleListItemFragment,
   CharacterBattlesPageDocument,
@@ -19,12 +28,6 @@ import {
   loadingState,
   theme,
 } from '@/lib';
-
-import { BattleListItem, Breadcrumbs, Content, Head } from '@/components';
-import { BattleSelector, PlayerBattleCountChip } from '@/components/BattleSelector';
-
-import { Profile } from '../components/Profile';
-import { Tabs } from '../components/Tabs';
 
 const useStyles = makeStyles(() =>
   createStyles({

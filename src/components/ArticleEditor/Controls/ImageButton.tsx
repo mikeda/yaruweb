@@ -1,12 +1,14 @@
 import React from 'react';
-import { useSlate } from 'slate-react';
-import { Transforms } from 'slate';
 
-import { useCreateArticleImageMutation, YAROUYO_FONT_CODE } from '@/lib';
-import { ImageElement } from '@/custom-types';
+import { Transforms } from 'slate';
+import { useSlate } from 'slate-react';
+
 
 import { Button } from './Button';
 import { HiddenInput } from './HiddenInput';
+
+import { ImageElement } from '@/custom-types';
+import { useCreateArticleImageMutation, YAROUYO_FONT_CODE } from '@/lib';
 
 export const ImageButton: React.FC = () => {
   const editor = useSlate();

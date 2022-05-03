@@ -1,5 +1,7 @@
 import React from 'react';
-import { useRouter } from 'next/router';
+
+import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
+import YouTubeIcon from '@mui/icons-material/YouTube';
 import {
   Card,
   CardActionArea,
@@ -11,10 +13,8 @@ import {
   ListItemText,
   Typography,
 } from '@mui/material';
-import YouTubeIcon from '@mui/icons-material/YouTube';
-import EmojiEventsIcon from '@mui/icons-material/EmojiEvents';
-
 import makeStyles from '@mui/styles/makeStyles';
+import { useRouter } from 'next/router';
 
 import { PlayerCardFragment, NO_IMAGE_URL, colors, pagesPath, resolveUrlObject } from '@/lib';
 

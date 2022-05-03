@@ -1,7 +1,5 @@
 import React, { useRef, useState } from 'react';
-import { toast } from 'react-toastify';
-import { useSetRecoilState } from 'recoil';
-import { useRouter } from 'next/router';
+
 import { Add, MoreVert } from '@mui/icons-material';
 import {
   Box,
@@ -17,7 +15,11 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
+import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
+import { useSetRecoilState } from 'recoil';
 
+import { DashboardBreadcrumbs, DashboardContent, SearchWord } from '@/components';
 import {
   ArticleStatus,
   DashboardArticlesPageArticleFragment,
@@ -31,7 +33,6 @@ import {
   resolveUrlObject,
 } from '@/lib';
 
-import { DashboardBreadcrumbs, DashboardContent, SearchWord } from '@/components';
 
 const Page: React.FC = () => {
   const router = useRouter();

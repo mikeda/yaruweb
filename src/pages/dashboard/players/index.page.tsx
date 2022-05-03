@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react';
-import { useSetRecoilState } from 'recoil';
-import { useRouter } from 'next/router';
+
+import { Add as AddIcon, MoreVert } from '@mui/icons-material';
 import {
   Box,
   Button,
@@ -15,9 +15,14 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
-import { Add as AddIcon, MoreVert } from '@mui/icons-material';
+import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
+import { useSetRecoilState } from 'recoil';
 
+
+import { PlayerFormSmashgg } from './components/PlayerFormSmashgg';
+
+import { DashboardContent, DashboardBreadcrumbs, SearchWord } from '@/components';
 import {
   DashboardPlayersPagePlayerFragment,
   useDashboardPlayersPageDeleteMutation,
@@ -27,10 +32,6 @@ import {
   pagesPath,
   resolveUrlObject,
 } from '@/lib';
-
-import { DashboardContent, DashboardBreadcrumbs, SearchWord } from '@/components';
-
-import { PlayerFormSmashgg } from './components/PlayerFormSmashgg';
 
 const Page: React.FC = () => {
   const setLoading = useSetRecoilState(loadingState);

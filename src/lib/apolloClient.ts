@@ -1,5 +1,6 @@
 import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
+
 import { getFirebaseUser } from './firebase';
 
 const endpoint = process.env.NEXT_PUBLIC_GRAPHQL_ENDOPOINT;

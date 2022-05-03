@@ -1,12 +1,14 @@
 import React from 'react';
+
 import { useRouter } from 'next/router';
 
-import { TournamentAttributes } from '@/lib';
 
-import { DashboardContent, DashboardBreadcrumbs, TournamentForm } from '@/components';
 
 import { useTournament } from './hooks/useTournament';
 import { useUpdate } from './hooks/useUpdate';
+
+import { DashboardContent, DashboardBreadcrumbs, TournamentForm } from '@/components';
+import { TournamentAttributes } from '@/lib';
 
 const Page: React.FC = () => {
   const router = useRouter();

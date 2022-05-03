@@ -1,7 +1,6 @@
 import React from 'react';
+
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import { Controller, useForm } from 'react-hook-form';
 import {
   Autocomplete,
   Box,
@@ -16,6 +15,12 @@ import {
   TextField,
   Typography,
 } from '@mui/material';
+import { Controller, useForm } from 'react-hook-form';
+import * as yup from 'yup';
+
+import { Command } from '../Command';
+
+import { CommandForm } from './CommandForm';
 
 import {
   ComboAttributes,
@@ -25,8 +30,6 @@ import {
   NullableNumberSchema,
 } from '@/lib';
 
-import { CommandForm } from './CommandForm';
-import { Command } from '../Command';
 
 const schema = yup.object().shape({
   damage: NullableNumberSchema,

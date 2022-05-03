@@ -1,7 +1,6 @@
 import React from 'react';
-import * as yup from 'yup';
 
-import { Controller, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import {
   Box,
   Button,
@@ -14,7 +13,9 @@ import {
   Select,
   TextField,
 } from '@mui/material';
-import { yupResolver } from '@hookform/resolvers/yup';
+import { Controller, useForm } from 'react-hook-form';
+import * as yup from 'yup';
+
 
 import { ComboCategoryAttributes, ComboCategoryFragment } from '@/lib';
 

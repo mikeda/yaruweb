@@ -1,7 +1,8 @@
-import { useDeleteComboCategoryMutation } from '@/lib';
-import { loadingState } from '@/lib';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
+
+import { useDeleteComboCategoryMutation } from '@/lib';
+import { loadingState } from '@/lib';
 
 export const useDeleteMutation = (onDestroy: () => void) => {
   const setLoading = useSetRecoilState(loadingState);

@@ -1,9 +1,6 @@
 import React, { useRef, useState } from 'react';
+
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import { Descendant } from 'slate';
-import { ReactEditor, Slate } from 'slate-react';
-import { Controller, useForm } from 'react-hook-form';
 import {
   Box,
   Button,
@@ -16,9 +13,14 @@ import {
   Select,
   TextField,
 } from '@mui/material';
+import { Controller, useForm } from 'react-hook-form';
+import { Descendant } from 'slate';
+import { ReactEditor, Slate } from 'slate-react';
+import * as yup from 'yup';
+
+import { ArticleEditor, createArticleEditor } from '../ArticleEditor';
 
 import { ArticleAttributes, ArticleCategory, ArticleFormArticleFragment, ArticleCategoryText } from '@/lib';
-import { ArticleEditor, createArticleEditor } from '../ArticleEditor';
 
 const schema = yup.object().shape({
   title: yup.string().required(),

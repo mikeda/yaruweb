@@ -1,6 +1,7 @@
-import { pagesPath } from '@/lib';
 import { BreadcrumbChainItem } from './Breadcrumbs';
 import { ArticleParam, CharactersParam, PlayerParam, TournamentParam, TournamentVideoParam } from './params';
+
+import { pagesPath } from '@/lib';
 
 export type ChainParam =
   | { to: 'articles' }

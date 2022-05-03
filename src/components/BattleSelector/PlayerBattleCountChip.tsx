@@ -1,5 +1,7 @@
 import React from 'react';
+
 import { Avatar, Chip } from '@mui/material';
+
 import { PlayerBattleCountChipFragment, DEFAULT_AVATAR_URL } from '@/lib';
 
 interface Props {

@@ -1,13 +1,10 @@
 import React from 'react';
-import { useRouter } from 'next/router';
 
 import { Avatar, Card, CardActionArea, CardContent, CardHeader, CardMedia, Typography } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
-import { dayjs } from '@/lib';
-import { ArticleCardFragment } from '@/lib';
-import { NO_IMAGE_URL } from '@/lib';
-import { pagesPath } from '@/lib';
-import { resolveUrlObject } from '@/lib';
+import { useRouter } from 'next/router';
+
+import { dayjs, ArticleCardFragment, NO_IMAGE_URL, pagesPath, resolveUrlObject } from '@/lib';
 
 const useStyles = makeStyles({
   media: {

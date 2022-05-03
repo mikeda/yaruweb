@@ -1,7 +1,6 @@
 import React from 'react';
-import { Controller, useForm } from 'react-hook-form';
+
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
 import {
   Autocomplete,
   Box,
@@ -16,6 +15,8 @@ import {
   Select,
   TextField,
 } from '@mui/material';
+import { Controller, useForm } from 'react-hook-form';
+import * as yup from 'yup';
 
 import { PlayerSelectOptionFragment, StandingAttributes } from '@/lib';
 

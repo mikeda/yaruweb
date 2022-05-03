@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
+import { ComboForm, DashboardBreadcrumbs, DashboardContent } from '@/components';
 import {
   ComboAttributes,
   PageDashboardComboNewQuery,
@@ -12,7 +13,6 @@ import {
   loadingState,
 } from '@/lib';
 
-import { ComboForm, DashboardBreadcrumbs, DashboardContent } from '@/components';
 
 const Page: React.FC = () => {
   const router = useRouter();

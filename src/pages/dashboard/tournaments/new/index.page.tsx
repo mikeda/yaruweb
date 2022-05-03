@@ -1,11 +1,12 @@
 import React from 'react';
+
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
+import { DashboardBreadcrumbs, DashboardContent, TournamentForm } from '@/components';
 import { TournamentAttributes, useCreateTournamentMutation, loadingState } from '@/lib';
 
-import { DashboardBreadcrumbs, DashboardContent, TournamentForm } from '@/components';
 
 const Page: React.FC = () => {
   const router = useRouter();

@@ -1,13 +1,11 @@
 import React from 'react';
-import { Avatar, Box, Grid, ListItem, ListItemText, Typography } from '@mui/material';
 
+import { Avatar, Box, Grid, ListItem, ListItemText, Typography } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
+import clsx from 'clsx';
 
 import { Link } from '@/components';
-import { BattleListItemFragment, theme, dayjs } from '@/lib';
-import { BattleRoundText } from '@/lib';
-import clsx from 'clsx';
-import { pagesPath } from '@/lib';
+import { BattleListItemFragment, theme, dayjs, BattleRoundText, pagesPath } from '@/lib';
 
 interface Props {
   battle: BattleListItemFragment;

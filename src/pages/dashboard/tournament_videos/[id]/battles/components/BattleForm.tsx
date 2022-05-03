@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
-import { Control, Controller, useForm, UseFormGetValues, UseFormSetValue } from 'react-hook-form';
+
 import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import YouTube from 'react-youtube';
-import { YouTubePlayer } from 'youtube-player/dist/types';
-import { createFilterOptions } from '@mui/material/useAutocomplete';
 import { GetApp, PlayArrow } from '@mui/icons-material';
 import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
 import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
@@ -25,7 +21,14 @@ import {
   TextField,
   Tooltip,
 } from '@mui/material';
+import { createFilterOptions } from '@mui/material/useAutocomplete';
+import { Control, Controller, useForm, UseFormGetValues, UseFormSetValue } from 'react-hook-form';
+import YouTube from 'react-youtube';
+import { YouTubePlayer } from 'youtube-player/dist/types';
+import * as yup from 'yup';
 
+
+import { YouTubeWrapper } from '@/components';
 import {
   CharacterSelectOptionFragment,
   PlayerSelectOptionFragment,
@@ -34,8 +37,6 @@ import {
   DashboardBattlesPageBattleReslutFragment,
   BattleRoundText,
 } from '@/lib';
-
-import { YouTubeWrapper } from '@/components';
 
 const schema = yup.object().shape({
   startSec: yup.number().required(),

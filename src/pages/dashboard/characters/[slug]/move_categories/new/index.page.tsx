@@ -1,18 +1,20 @@
 import React from 'react';
 
+import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
+import { useSetRecoilState } from 'recoil';
+
+import { useRouteParams } from './hooks';
+
+import { MoveCategoryForm } from '@/components';
+import { DashboardContent } from '@/components';
+import { loadingState } from '@/lib';
 import {
   DashboardMoveCategoryNewPageQuery,
   MoveCategoryAttributes,
   useCreateMoveCategoryMutation,
   useDashboardMoveCategoryNewPageQuery,
 } from '@/lib';
-import { DashboardContent } from '@/components';
-import { useRouter } from 'next/router';
-import { toast } from 'react-toastify';
-import { MoveCategoryForm } from '@/components';
-import { useSetRecoilState } from 'recoil';
-import { loadingState } from '@/lib';
-import { useRouteParams } from './hooks';
 
 const Page: React.FC = () => {
   const { slug } = useRouteParams();

@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
-import makeStyles from '@mui/styles/makeStyles';
-import createStyles from '@mui/styles/createStyles';
-import Paper from '@mui/material/Paper';
-import InputBase from '@mui/material/InputBase';
-import IconButton from '@mui/material/IconButton';
+
 import SearchIcon from '@mui/icons-material/Search';
+import IconButton from '@mui/material/IconButton';
+import InputBase from '@mui/material/InputBase';
+import Paper from '@mui/material/Paper';
+import createStyles from '@mui/styles/createStyles';
+import makeStyles from '@mui/styles/makeStyles';
+
 import { theme } from '@/lib';
 
 const useStyles = makeStyles(() =>

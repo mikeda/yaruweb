@@ -1,5 +1,6 @@
-import { useSetRecoilState } from 'recoil';
 import { toast } from 'react-toastify';
+import { useSetRecoilState } from 'recoil';
+
 import { useDashboardTournamentEditPageUpdateTournamentMutation, loadingState } from '@/lib';
 
 export const useUpdate = (onUpdate: () => void) => {

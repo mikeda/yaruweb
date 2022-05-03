@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { useRouter } from 'next/router';
-import { toast } from 'react-toastify';
-import { useSetRecoilState } from 'recoil';
+
+import { Add as AddIcon, MoreVert } from '@mui/icons-material';
 import {
   Box,
   Button,
@@ -16,8 +15,11 @@ import {
   TableRow,
   Typography,
 } from '@mui/material';
-import { Add as AddIcon, MoreVert } from '@mui/icons-material';
+import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
+import { useSetRecoilState } from 'recoil';
 
+import { DashboardContent, DashboardBreadcrumbs } from '@/components';
 import {
   DashboardTournamentsPageTournamentFragment,
   useDashboardTournamentsPageTournamentsQuery,
@@ -29,7 +31,6 @@ import {
   loadingState,
 } from '@/lib';
 
-import { DashboardContent, DashboardBreadcrumbs } from '@/components';
 
 const Page: React.FC = () => {
   const router = useRouter();

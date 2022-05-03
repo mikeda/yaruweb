@@ -1,9 +1,10 @@
 import React, { ReactNode } from 'react';
+
 import { Typography } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 
-import { theme } from '@/lib';
 import { GlobalHeader, HeaderNav, TabValue } from '@/components';
+import { theme } from '@/lib';
 
 const useStyles = makeStyles({
   root: {

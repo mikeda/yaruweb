@@ -1,7 +1,8 @@
 /** @jsxImportSource @emotion/react */
 import React from 'react';
-import { Card, CardActionArea, CardMedia, CardContent, Typography } from '@mui/material';
+
 import { css } from '@emotion/react';
+import { Card, CardActionArea, CardMedia, CardContent, Typography } from '@mui/material';
 
 interface Props {
   url: string;

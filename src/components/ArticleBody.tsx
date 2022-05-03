@@ -1,10 +1,12 @@
-import { List, ListItemButton, Paper, Typography } from '@mui/material';
 import React, { useCallback, useMemo } from 'react';
 
+import { List, ListItemButton, Paper, Typography } from '@mui/material';
 import { createEditor, Descendant } from 'slate';
 import { Editable, RenderElementProps, RenderLeafProps, Slate, withReact } from 'slate-react';
+
 import { Element } from './ArticleElement';
 import { Leaf } from './ArticleElement/Leaf';
+
 import { theme } from '@/lib';
 
 interface Props {

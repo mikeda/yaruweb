@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
-import { GetStaticPaths, GetStaticProps } from 'next';
 import { ParsedUrlQuery } from 'querystring';
+
+import React, { useState } from 'react';
+
+import YouTubeIcon from '@mui/icons-material/YouTube';
 import {
   Box,
   Dialog,
@@ -13,8 +15,14 @@ import {
   Paper,
   Typography,
 } from '@mui/material';
-import YouTubeIcon from '@mui/icons-material/YouTube';
+import { GetStaticPaths, GetStaticProps } from 'next';
 
+
+
+import { Profile } from '../components/Profile';
+import { Tabs } from '../components/Tabs';
+
+import { Content, Head, Breadcrumbs, Command, VideoPlayer } from '@/components';
 import {
   CharacterCombosPageDocument,
   CharacterCombosPageQuery,
@@ -24,11 +32,6 @@ import {
   fetchGraphql,
   colors,
 } from '@/lib';
-
-import { Content, Head, Breadcrumbs, Command, VideoPlayer } from '@/components';
-
-import { Profile } from '../components/Profile';
-import { Tabs } from '../components/Tabs';
 
 const Page: React.FC<CharacterCombosPageQuery> = ({ character }) => {
   return (

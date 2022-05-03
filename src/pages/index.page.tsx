@@ -1,11 +1,15 @@
 import React from 'react';
-import { GetStaticProps } from 'next';
-import { useRouter } from 'next/router';
+
 import { Box, Button, Grid, List, Paper, Typography } from '@mui/material';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
+import { GetStaticProps } from 'next';
+import { useRouter } from 'next/router';
 
-import { TopPageDocument, TopPageQuery, theme, fetchGraphql, pagesPath, resolveUrlObject } from '@/lib';
+
+
+import { IntroSlides } from './components/IntroSlides';
+import { StaffRequirement } from './components/StaffRequirement';
 
 import {
   ArticleCard,
@@ -17,9 +21,7 @@ import {
   PlayerCard,
   TournamentCard,
 } from '@/components';
-
-import { StaffRequirement } from './components/StaffRequirement';
-import { IntroSlides } from './components/IntroSlides';
+import { TopPageDocument, TopPageQuery, theme, fetchGraphql, pagesPath, resolveUrlObject } from '@/lib';
 
 const useStyles = makeStyles(() =>
   createStyles({

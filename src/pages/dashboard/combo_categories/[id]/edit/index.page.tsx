@@ -1,8 +1,10 @@
 import React from 'react';
+
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
+import { DashboardContent, ComboCategoryForm } from '@/components';
 import {
   ComboCategoryAttributes,
   ComboCategoryFragment,
@@ -11,7 +13,6 @@ import {
   loadingState,
 } from '@/lib';
 
-import { DashboardContent, ComboCategoryForm } from '@/components';
 
 const Page: React.FC = () => {
   const router = useRouter();

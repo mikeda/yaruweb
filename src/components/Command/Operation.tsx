@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { styled } from '@mui/material/styles';
 
 import { OperationText } from '@/lib';

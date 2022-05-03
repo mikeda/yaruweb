@@ -1,10 +1,16 @@
-import React, { useState } from 'react';
-import { GetStaticPaths, GetStaticProps } from 'next';
-import { useSetRecoilState } from 'recoil';
-import { toast } from 'react-toastify';
 import { ParsedUrlQuery } from 'querystring';
-import { Box, Button, Grid, Typography } from '@mui/material';
 
+import React, { useState } from 'react';
+
+import { Box, Button, Grid, Typography } from '@mui/material';
+import { GetStaticPaths, GetStaticProps } from 'next';
+import { toast } from 'react-toastify';
+import { useSetRecoilState } from 'recoil';
+
+import { PlayerStandingCard } from '../components/PlayerStandingCard';
+import { Profile } from '../components/Profile';
+
+import { Head, Content, Breadcrumbs, PlayerPageTabs } from '@/components';
 import {
   PlayerSlugsDocument,
   PlayerSlugsQuery,
@@ -15,10 +21,7 @@ import {
   loadingState,
 } from '@/lib';
 
-import { Head, Content, Breadcrumbs, PlayerPageTabs } from '@/components';
 
-import { Profile } from '../components/Profile';
-import { PlayerStandingCard } from '../components/PlayerStandingCard';
 
 const Page: React.FC<PlayerStandingsPageQuery> = ({
   player,

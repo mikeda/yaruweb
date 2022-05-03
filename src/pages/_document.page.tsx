@@ -1,6 +1,7 @@
 import React from 'react';
-import NextDocument, { Html, Head, Main, NextScript, DocumentInitialProps, DocumentContext } from 'next/document';
+
 import ServerStyleSheets from '@mui/styles/ServerStyleSheets';
+import NextDocument, { Html, Head, Main, NextScript, DocumentInitialProps, DocumentContext } from 'next/document';
 
 import { GA_TRACKING_ID, theme } from '@/lib';
 

@@ -1,12 +1,14 @@
 import React from 'react';
+
 import { useRouter } from 'next/router';
 
-import { OrganizerAttributes } from '@/lib';
 
-import { DashboardContent, DashboardBreadcrumbs, OrganizerForm } from '@/components';
 
 import { useOrganizer } from './hooks/useOrganizer';
 import { useUpdate } from './hooks/useUpdate';
+
+import { DashboardContent, DashboardBreadcrumbs, OrganizerForm } from '@/components';
+import { OrganizerAttributes } from '@/lib';
 
 const Page: React.FC = () => {
   const router = useRouter();

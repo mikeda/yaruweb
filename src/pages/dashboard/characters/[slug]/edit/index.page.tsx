@@ -1,9 +1,11 @@
 import React from 'react';
+
 import { GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
-import { useSetRecoilState } from 'recoil';
 import { toast } from 'react-toastify';
+import { useSetRecoilState } from 'recoil';
 
+import { CharacterForm, DashboardBreadcrumbs, DashboardContent } from '@/components';
 import {
   CharacterAttributes,
   PageDashboardCharacterEditDocument,
@@ -13,7 +15,6 @@ import {
   loadingState,
 } from '@/lib';
 
-import { CharacterForm, DashboardBreadcrumbs, DashboardContent } from '@/components';
 
 const Page: React.FC<PageDashboardCharacterEditQuery> = ({ character }) => {
   const router = useRouter();

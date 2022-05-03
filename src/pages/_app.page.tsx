@@ -1,25 +1,26 @@
 import React, { useEffect } from 'react';
-import { AppProps } from 'next/app';
-import { useRouter } from 'next/router';
+
+import { ApolloProvider } from '@apollo/client';
+import { config } from '@fortawesome/fontawesome-svg-core';
 import { CssBaseline } from '@mui/material';
 import { ThemeProvider, Theme, StyledEngineProvider } from '@mui/material/styles';
-import { ApolloProvider } from '@apollo/client';
-import { RecoilRoot, useSetRecoilState } from 'recoil';
 import * as Sentry from '@sentry/react';
 import { Integrations } from '@sentry/tracing';
-
+import { AppProps } from 'next/app';
+import { useRouter } from 'next/router';
 import { ToastContainer } from 'react-toastify';
+import { RecoilRoot, useSetRecoilState } from 'recoil';
+
 import 'react-toastify/dist/ReactToastify.css';
 
-import { config } from '@fortawesome/fontawesome-svg-core';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 config.autoAddCss = false;
 
+import { Loading } from '@/components';
+import { apolloClient, theme, useCurrentUserQuery, currentUserState, loadingState } from '@/lib';
 import * as gtag from '@/lib/gtag';
 
-import { apolloClient, theme, useCurrentUserQuery, currentUserState, loadingState } from '@/lib';
 
-import { Loading } from '@/components';
 
 declare module '@mui/styles/defaultTheme' {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface

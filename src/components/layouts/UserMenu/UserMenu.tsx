@@ -1,8 +1,9 @@
 import React from 'react';
-import { toast } from 'react-toastify';
-import { useSetRecoilState } from 'recoil';
+
 import { Avatar, IconButton, Link, Menu, MenuItem } from '@mui/material';
 import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
+import { useSetRecoilState } from 'recoil';
 
 import { signOutFirebase, useCurrentUser, currentUserState, pagesPath, resolveUrlObject } from '@/lib';
 

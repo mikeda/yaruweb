@@ -1,7 +1,8 @@
 import React from 'react';
-import { Avatar, Button, Card, CardActions, CardContent, CardHeader, Typography } from '@mui/material';
+
 import PeopleIcon from '@mui/icons-material/People';
 import TwitterIcon from '@mui/icons-material/Twitter';
+import { Avatar, Button, Card, CardActions, CardContent, CardHeader, Typography } from '@mui/material';
 
 export const StaffRequirement: React.FC = () => {
   return (
