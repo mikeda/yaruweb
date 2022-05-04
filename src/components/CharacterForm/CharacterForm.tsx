@@ -16,8 +16,7 @@ import {
 import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
-import { CharacterAttributes, CharacterFormFragment } from '@/lib';
-
+import { CharacterAttributes, CharacterFormFragment } from '@/generated/graphql';
 
 const schema = yup.object().shape({
   name: yup.string().required(),

@@ -27,11 +27,8 @@ import {
   ThrowTypeEnum,
   ThrowEscapeEnum,
   MovePositionSelectFragment,
-  NullableNumberSchema,
-  ThrowEscapeEnumText,
-  ThrowMoveResultText,
-  ThrowTypeEnumText,
-} from '@/lib';
+} from '@/generated/graphql';
+import { NullableNumberSchema, ThrowEscapeEnumText, ThrowMoveResultText, ThrowTypeEnumText } from '@/lib';
 
 const schema = yup.object().shape({
   move: yup.object({

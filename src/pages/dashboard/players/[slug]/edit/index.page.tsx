@@ -2,13 +2,11 @@ import React from 'react';
 
 import { useRouter } from 'next/router';
 
-
-
 import { usePlayer } from './hooks/usePlayer';
 import { useUpdate } from './hooks/useUpdate';
 
 import { DashboardContent, DashboardBreadcrumbs, PlayerForm } from '@/components';
-import { PlayerAttributes } from '@/lib';
+import { PlayerAttributes } from '@/generated/graphql';
 
 const Page: React.FC = () => {
   const router = useRouter();

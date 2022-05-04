@@ -14,9 +14,8 @@ import {
   useCreateThrowMoveMutation,
   useCreateReversalMoveMutation,
   ReversalMoveAttributes,
-  loadingState,
-} from '@/lib';
-
+} from '@/generated/graphql';
+import { loadingState } from '@/lib';
 
 export type Query = {
   move_type: 'attack' | 'throw' | 'reversal';

@@ -1,6 +1,7 @@
 import { useSetRecoilState } from 'recoil';
 
-import { useDashboardBattlesPageBattlesQuery, loadingState } from '@/lib';
+import { useDashboardBattlesPageBattlesQuery } from '@/generated/graphql';
+import { loadingState } from '@/lib';
 
 export const useBattlesQuery = (tournamentVideoId: string | undefined) => {
   const setLoading = useSetRecoilState(loadingState);

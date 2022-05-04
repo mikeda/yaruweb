@@ -11,10 +11,8 @@ import {
   CurrentUserFragment,
   useCurrentUserQuery,
   useUpdateCurrentUserMutation,
-  currentUserState,
-  loadingState,
-} from '@/lib';
-
+} from '@/generated/graphql';
+import { currentUserState, loadingState } from '@/lib';
 
 const Page: React.FC = () => {
   const setLoading = useSetRecoilState(loadingState);

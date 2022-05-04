@@ -1,12 +1,11 @@
+import React from 'react';
+
 import { ParsedUrlQuery } from 'querystring';
 
-import React from 'react';
 
 import { Box, Paper, Typography } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import { GetStaticPaths, GetStaticProps } from 'next';
-
-
 
 import { Profile } from './components/Profile';
 import { Tabs } from './components/Tabs';
@@ -17,9 +16,8 @@ import {
   CharacterPathsQuery,
   PageCharacterDocument,
   PageCharacterQuery,
-  fetchGraphql,
-  theme,
-} from '@/lib';
+} from '@/generated/graphql';
+import { fetchGraphql, theme } from '@/lib';
 
 const useStyles = makeStyles({
   paper: {

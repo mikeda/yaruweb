@@ -1,6 +1,6 @@
-import { ParsedUrlQuery } from 'querystring';
-
 import React, { useEffect, useState } from 'react';
+
+import { ParsedUrlQuery } from 'querystring';
 
 import SkipNextIcon from '@mui/icons-material/SkipNext';
 import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
@@ -19,10 +19,8 @@ import {
   TournamentVideoPageQuery,
   TournamentVideoPathsDocument,
   TournamentVideoPathsQuery,
-  fetchGraphql,
-} from '@/lib';
-
-
+} from '@/generated/graphql';
+import { fetchGraphql } from '@/lib';
 
 const PageContent: React.FC<TournamentVideoPageQuery> = ({ tournamentVideo }) => {
   const [youTubePlayer, setYouTubePlayer] = useState<YouTubePlayer>();

@@ -5,8 +5,9 @@ import { Button, Grid } from '@mui/material';
 import { useRouter } from 'next/router';
 
 import { CharacterCard, DashboardBreadcrumbs, DashboardContent, NotFound } from '@/components';
-import { useDashboardCharactersPageQuery, pagesPath, resolveUrlObject } from '@/lib';
-
+import { pagesPath } from '@/generated/$path';
+import { useDashboardCharactersPageQuery } from '@/generated/graphql';
+import { resolveUrlObject } from '@/lib';
 
 const Page: React.FC = () => {
   const router = useRouter();

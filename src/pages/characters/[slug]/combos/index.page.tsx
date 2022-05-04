@@ -1,6 +1,6 @@
-import { ParsedUrlQuery } from 'querystring';
-
 import React, { useState } from 'react';
+
+import { ParsedUrlQuery } from 'querystring';
 
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import {
@@ -17,8 +17,6 @@ import {
 } from '@mui/material';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
-
-
 import { Profile } from '../components/Profile';
 import { Tabs } from '../components/Tabs';
 
@@ -29,9 +27,8 @@ import {
   CharacterPathsDocument,
   CharacterPathsQuery,
   ComboMediaFragment,
-  fetchGraphql,
-  colors,
-} from '@/lib';
+} from '@/generated/graphql';
+import { fetchGraphql, colors } from '@/lib';
 
 const Page: React.FC<CharacterCombosPageQuery> = ({ character }) => {
   return (

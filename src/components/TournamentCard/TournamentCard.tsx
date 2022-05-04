@@ -17,8 +17,9 @@ import makeStyles from '@mui/styles/makeStyles';
 
 import { Link } from '../Link';
 
-import { TournamentCardFragment } from '@/lib';
-import { NO_IMAGE_URL, dayjs, colors, pagesPath } from '@/lib';
+import { pagesPath } from '@/generated/$path';
+import { TournamentCardFragment } from '@/generated/graphql';
+import { NO_IMAGE_URL, dayjs, colors } from '@/lib';
 
 const useStyles = makeStyles({
   media: {

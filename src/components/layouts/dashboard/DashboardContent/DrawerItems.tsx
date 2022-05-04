@@ -1,6 +1,7 @@
+import React, { ReactElement } from 'react';
+
 import { UrlObject } from 'url';
 
-import React, { ReactElement } from 'react';
 
 import { EmojiEvents, Person, TagFaces, LibraryBooks, People } from '@mui/icons-material';
 import { Divider, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
@@ -8,8 +9,8 @@ import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
 
 import { Link } from '@/components';
-import { theme, pagesPath } from '@/lib';
-
+import { pagesPath } from '@/generated/$path';
+import { theme } from '@/lib';
 
 const useStyles = makeStyles(() =>
   createStyles({

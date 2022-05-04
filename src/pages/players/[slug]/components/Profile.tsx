@@ -4,7 +4,8 @@ import { LiveTv, Twitter } from '@mui/icons-material';
 import { Paper, Typography } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 
-import { PlayerPageProfileFragment, DEFAULT_AVATAR_URL, colors, theme } from '@/lib';
+import { PlayerPageProfileFragment } from '@/generated/graphql';
+import { DEFAULT_AVATAR_URL, colors, theme } from '@/lib';
 
 const useStyles = makeStyles({
   root: {

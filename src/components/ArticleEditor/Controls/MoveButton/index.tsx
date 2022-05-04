@@ -8,7 +8,7 @@ import { TextButton } from '../TextButton';
 
 import { MoveSelect } from './MoveSelect';
 
-import { Character } from '@/lib';
+import { Character } from '@/generated/graphql';
 
 type CharacterFragment = Pick<Character, 'slug' | 'name'>;
 

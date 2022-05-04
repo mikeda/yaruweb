@@ -4,8 +4,8 @@ import { Grid } from '@mui/material';
 import { GetStaticProps } from 'next';
 
 import { Breadcrumbs, CharacterCard, Content, Head } from '@/components';
-import { CharactersPageDocument, CharactersPageQuery, fetchGraphql } from '@/lib';
-
+import { CharactersPageDocument, CharactersPageQuery } from '@/generated/graphql';
+import { fetchGraphql } from '@/lib';
 
 const Page: React.FC<CharactersPageQuery> = ({ characters }) => {
   return (

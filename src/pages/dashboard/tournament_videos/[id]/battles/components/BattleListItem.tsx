@@ -11,15 +11,13 @@ import { useUpdateMutation } from '../hooks/useUpdateMutation';
 
 import { BattleForm } from './BattleForm';
 
-import { BattleRoundText } from '@/lib';
 import {
   CharacterSelectOptionFragment,
   DashboardBattlesPageBattleReslutFragment,
   PlayerSelectOptionFragment,
-  theme,
-  formatSec,
-} from '@/lib';
-
+} from '@/generated/graphql';
+import { BattleRoundText } from '@/lib';
+import { theme, formatSec } from '@/lib';
 
 const useStyles = makeStyles(() =>
   createStyles({

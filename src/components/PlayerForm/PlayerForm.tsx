@@ -17,7 +17,7 @@ import {
 import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
-import { PlayerAttributes, PlayerFormFragment, useCountrySelectOptionsQuery } from '@/lib';
+import { PlayerAttributes, PlayerFormFragment, useCountrySelectOptionsQuery } from '@/generated/graphql';
 
 const schema = yup.object().shape({
   name: yup.string().required(),

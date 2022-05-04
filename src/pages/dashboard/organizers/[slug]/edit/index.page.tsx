@@ -2,13 +2,11 @@ import React from 'react';
 
 import { useRouter } from 'next/router';
 
-
-
 import { useOrganizer } from './hooks/useOrganizer';
 import { useUpdate } from './hooks/useUpdate';
 
 import { DashboardContent, DashboardBreadcrumbs, OrganizerForm } from '@/components';
-import { OrganizerAttributes } from '@/lib';
+import { OrganizerAttributes } from '@/generated/graphql';
 
 const Page: React.FC = () => {
   const router = useRouter();

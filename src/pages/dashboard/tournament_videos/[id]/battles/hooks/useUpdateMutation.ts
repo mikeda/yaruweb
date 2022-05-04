@@ -1,7 +1,8 @@
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
-import { useUpdateBattleMutation, loadingState } from '@/lib';
+import { useUpdateBattleMutation } from '@/generated/graphql';
+import { loadingState } from '@/lib';
 
 export const useUpdateMutation = () => {
   const setLoading = useSetRecoilState(loadingState);

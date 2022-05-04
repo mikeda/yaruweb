@@ -27,7 +27,6 @@ import YouTube from 'react-youtube';
 import { YouTubePlayer } from 'youtube-player/dist/types';
 import * as yup from 'yup';
 
-
 import { YouTubeWrapper } from '@/components';
 import {
   CharacterSelectOptionFragment,
@@ -35,8 +34,8 @@ import {
   BattleAttributes,
   BattleRound,
   DashboardBattlesPageBattleReslutFragment,
-  BattleRoundText,
-} from '@/lib';
+} from '@/generated/graphql';
+import { BattleRoundText } from '@/lib';
 
 const schema = yup.object().shape({
   startSec: yup.number().required(),

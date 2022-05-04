@@ -1,7 +1,8 @@
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
-import { useDashboardTournamentVideoEditPageUpdateMutation, loadingState } from '@/lib';
+import { useDashboardTournamentVideoEditPageUpdateMutation } from '@/generated/graphql';
+import { loadingState } from '@/lib';
 
 export const useUpdate = (onUpdate: () => void) => {
   const setLoading = useSetRecoilState(loadingState);

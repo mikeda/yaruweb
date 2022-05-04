@@ -4,7 +4,9 @@ import { Card, CardActionArea, CardContent, CardMedia, Typography } from '@mui/m
 import makeStyles from '@mui/styles/makeStyles';
 
 import { Link } from '@/components';
-import { NO_IMAGE_URL, placeIconUrl, PlayerStandingCardFragment, theme, pagesPath, dayjs } from '@/lib';
+import { pagesPath } from '@/generated/$path';
+import { PlayerStandingCardFragment } from '@/generated/graphql';
+import { NO_IMAGE_URL, placeIconUrl, theme, dayjs } from '@/lib';
 
 const useStyles = makeStyles({
   media: {

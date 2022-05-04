@@ -10,10 +10,8 @@ import {
   PlayersPagePlayersDocument,
   PlayersPagePlayersQuery,
   usePlayersPagePlayersLazyQuery,
-  fetchGraphql,
-  loadingState,
-} from '@/lib';
-
+} from '@/generated/graphql';
+import { fetchGraphql, loadingState } from '@/lib';
 
 const Page: React.FC<PlayersPagePlayersQuery> = ({ players: { records: initPlayers, paging: initPaging } }) => {
   const [state, setState] = useState({ players: initPlayers, paging: initPaging });

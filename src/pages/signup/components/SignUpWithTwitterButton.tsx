@@ -6,7 +6,9 @@ import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
-import { useCreateUserMutation, signInFirebaseWithTwitter, currentUserState, colors, pagesPath } from '@/lib';
+import { pagesPath } from '@/generated/$path';
+import { useCreateUserMutation } from '@/generated/graphql';
+import { signInFirebaseWithTwitter, currentUserState, colors } from '@/lib';
 
 const useStyles = makeStyles({
   root: {

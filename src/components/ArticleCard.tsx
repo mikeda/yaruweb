@@ -4,7 +4,9 @@ import { Avatar, Card, CardActionArea, CardContent, CardHeader, CardMedia, Typog
 import makeStyles from '@mui/styles/makeStyles';
 import { useRouter } from 'next/router';
 
-import { dayjs, ArticleCardFragment, NO_IMAGE_URL, pagesPath, resolveUrlObject } from '@/lib';
+import { pagesPath } from '@/generated/$path';
+import { ArticleCardFragment } from '@/generated/graphql';
+import { dayjs, NO_IMAGE_URL, resolveUrlObject } from '@/lib';
 
 const useStyles = makeStyles({
   media: {

@@ -3,7 +3,7 @@ import React from 'react';
 import { TextField } from '@mui/material';
 import { Autocomplete } from '@mui/material';
 
-import { useMoveSelectOptionsQuery } from '@/lib';
+import { useMoveSelectOptionsQuery } from '@/generated/graphql';
 
 interface Props {
   characterSlug: string;

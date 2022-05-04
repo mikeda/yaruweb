@@ -1,6 +1,7 @@
+import React from 'react';
+
 import { UrlObject } from 'url';
 
-import React from 'react';
 
 import { Typography } from '@mui/material';
 import { default as MuiBreadcrumbs } from '@mui/material/Breadcrumbs';

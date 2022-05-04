@@ -20,8 +20,8 @@ import * as yup from 'yup';
 
 import { CommandForm } from './CommandForm';
 
-import { ReversalMoveAttributes, MoveFragment, MovePositionSelectFragment, NullableNumberSchema } from '@/lib';
-
+import { ReversalMoveAttributes, MoveFragment, MovePositionSelectFragment } from '@/generated/graphql';
+import { NullableNumberSchema } from '@/lib';
 
 const schema = yup.object().shape({
   move: yup.object({

@@ -17,10 +17,9 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 config.autoAddCss = false;
 
 import { Loading } from '@/components';
-import { apolloClient, theme, useCurrentUserQuery, currentUserState, loadingState } from '@/lib';
+import { useCurrentUserQuery } from '@/generated/graphql';
+import { apolloClient, theme, currentUserState, loadingState } from '@/lib';
 import * as gtag from '@/lib/gtag';
-
-
 
 declare module '@mui/styles/defaultTheme' {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface

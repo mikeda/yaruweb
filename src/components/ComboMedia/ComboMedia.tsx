@@ -5,7 +5,7 @@ import { Card, CardContent, Typography } from '@mui/material';
 import { Command } from '../Command';
 import { VideoPlayer } from '../VideoPlayer';
 
-import { ComboMediaFragment } from '@/lib';
+import { ComboMediaFragment } from '@/generated/graphql';
 
 interface Props {
   combo: ComboMediaFragment;

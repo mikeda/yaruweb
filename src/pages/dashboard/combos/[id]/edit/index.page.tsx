@@ -10,9 +10,8 @@ import {
   PageDashboardComboEditQuery,
   usePageDashboardComboEditQuery,
   useUpdateComboMutation,
-  loadingState,
-} from '@/lib';
-
+} from '@/generated/graphql';
+import { loadingState } from '@/lib';
 
 const Page: React.FC = () => {
   const router = useRouter();

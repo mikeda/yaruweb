@@ -7,7 +7,7 @@ import Link from 'next/link';
 
 import { UserMenu } from './UserMenu';
 
-import { pagesPath } from '@/lib';
+import { pagesPath } from '@/generated/$path';
 
 interface Props {
   children: React.ReactNode;

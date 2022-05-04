@@ -14,13 +14,13 @@ import {
 } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 
-
 import { useCreateStandingMutation, useDeleteStandingMutation } from '../hooks';
 
 import { StandingForm } from './StandingForm';
 import { StandingPlaceAvatar } from './StandingPlaceAvatar';
 
-import { PlayerSelectOptionFragment, useDashboardTournamentPageStandingsQuery, DEFAULT_AVATAR_URL } from '@/lib';
+import { PlayerSelectOptionFragment, useDashboardTournamentPageStandingsQuery } from '@/generated/graphql';
+import { DEFAULT_AVATAR_URL } from '@/lib';
 
 const useStyles = makeStyles({
   list: {

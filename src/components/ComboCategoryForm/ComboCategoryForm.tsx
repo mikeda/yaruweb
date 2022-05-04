@@ -16,8 +16,7 @@ import {
 import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
-
-import { ComboCategoryAttributes, ComboCategoryFragment } from '@/lib';
+import { ComboCategoryAttributes, ComboCategoryFragment } from '@/generated/graphql';
 
 interface Props {
   comboCategory?: ComboCategoryFragment;

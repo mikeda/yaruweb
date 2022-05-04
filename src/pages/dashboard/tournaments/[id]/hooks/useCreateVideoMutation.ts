@@ -1,7 +1,8 @@
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
-import { useDashboardTournamentPageCreateVideoMutation, loadingState } from '@/lib';
+import { useDashboardTournamentPageCreateVideoMutation } from '@/generated/graphql';
+import { loadingState } from '@/lib';
 
 interface Props {
   onCreate: () => void;

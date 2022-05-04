@@ -30,17 +30,15 @@ import { useSetRecoilState } from 'recoil';
 import { useRouteParams } from './hooks';
 
 import { DashboardContent, DashboardBreadcrumbs, Command, VideoPlayer } from '@/components';
+import { pagesPath } from '@/generated/$path';
 import {
   DashboardMoveCategoriesPageMoveFragment,
   useCreateMoveVideoMutation,
   useDashboardMoveCategoriesPageQuery,
   useDeleteMoveCategoryMutation,
   useDeleteMoveMutation,
-  loadingState,
-  colors,
-  pagesPath,
-  resolveUrlObject,
-} from '@/lib';
+} from '@/generated/graphql';
+import { loadingState, colors, resolveUrlObject } from '@/lib';
 
 const Page: React.FC = () => {
   const router = useRouter();

@@ -20,16 +20,13 @@ import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
 import { DashboardContent, DashboardBreadcrumbs } from '@/components';
+import { pagesPath } from '@/generated/$path';
 import {
   DashboardOrganizersPageOrganizerFragment,
   useDashboardOrganizersPageDeleteMutation,
   useDashboardOrganizersPageOrganizersQuery,
-  loadingState,
-  pagesPath,
-  DEFAULT_AVATAR_URL,
-  resolveUrlObject,
-} from '@/lib';
-
+} from '@/generated/graphql';
+import { loadingState, DEFAULT_AVATAR_URL, resolveUrlObject } from '@/lib';
 
 const Page: React.FC = () => {
   const router = useRouter();

@@ -7,7 +7,8 @@ import { Controller, useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
 import * as yup from 'yup';
 
-import { useDashboardPlayersPageCreatePlayerFromSmashggMutation, pagesPath } from '@/lib';
+import { pagesPath } from '@/generated/$path';
+import { useDashboardPlayersPageCreatePlayerFromSmashggMutation } from '@/generated/graphql';
 
 const schema = yup.object().shape({
   smashggId: yup.string().required(),

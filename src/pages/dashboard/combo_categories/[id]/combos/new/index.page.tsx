@@ -10,9 +10,8 @@ import {
   PageDashboardComboNewQuery,
   useCreateComboMutation,
   usePageDashboardComboNewQuery,
-  loadingState,
-} from '@/lib';
-
+} from '@/generated/graphql';
+import { loadingState } from '@/lib';
 
 const Page: React.FC = () => {
   const router = useRouter();

@@ -20,17 +20,13 @@ import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
 import { DashboardContent, DashboardBreadcrumbs } from '@/components';
+import { pagesPath } from '@/generated/$path';
 import {
   DashboardTournamentsPageTournamentFragment,
   useDashboardTournamentsPageTournamentsQuery,
   useDeleteTournamentMutation,
-  NO_IMAGE_URL,
-  dayjs,
-  pagesPath,
-  resolveUrlObject,
-  loadingState,
-} from '@/lib';
-
+} from '@/generated/graphql';
+import { NO_IMAGE_URL, dayjs, resolveUrlObject, loadingState } from '@/lib';
 
 const Page: React.FC = () => {
   const router = useRouter();

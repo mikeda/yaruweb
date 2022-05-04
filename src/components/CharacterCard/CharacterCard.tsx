@@ -21,7 +21,9 @@ import { useRouter } from 'next/router';
 
 import { Link } from '../Link';
 
-import { CharacterCardFragment, colors, pagesPath, resolveUrlObject } from '@/lib';
+import { pagesPath } from '@/generated/$path';
+import { CharacterCardFragment } from '@/generated/graphql';
+import { colors, resolveUrlObject } from '@/lib';
 
 const useStyles = makeStyles({
   root: {

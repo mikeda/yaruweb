@@ -2,7 +2,6 @@ import React from 'react';
 
 import { styled } from '@mui/material/styles';
 
-
 import { BlockButton } from './BlockButton';
 import { ComboButton } from './ComboButton';
 import { ImageButton } from './ImageButton';
@@ -12,7 +11,8 @@ import { MoveButton } from './MoveButton';
 import { OperationButton } from './OperationButton';
 import { VideoButton } from './VideoButton';
 
-import { useCharacterSelectOptionsQuery, YAROUYO_FONT_CODE } from '@/lib';
+import { useCharacterSelectOptionsQuery } from '@/generated/graphql';
+import { YAROUYO_FONT_CODE } from '@/lib';
 
 export const Controls: React.FC = () => {
   const { data } = useCharacterSelectOptionsQuery();

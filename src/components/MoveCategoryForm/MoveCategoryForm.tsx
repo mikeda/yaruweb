@@ -16,8 +16,7 @@ import {
 import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
-
-import { MoveCategoryAttributes, MoveCategoryFragment } from '@/lib';
+import { MoveCategoryAttributes, MoveCategoryFragment } from '@/generated/graphql';
 
 interface Props {
   moveCategory?: MoveCategoryFragment;

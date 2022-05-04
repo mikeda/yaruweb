@@ -5,8 +5,8 @@ import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
 import { DashboardBreadcrumbs, DashboardContent, OrganizerForm } from '@/components';
-import { OrganizerAttributes, useDashboardOrganizersNewPageCreateOrganizerMutation, loadingState } from '@/lib';
-
+import { OrganizerAttributes, useDashboardOrganizersNewPageCreateOrganizerMutation } from '@/generated/graphql';
+import { loadingState } from '@/lib';
 
 const Page: React.FC = () => {
   const router = useRouter();

@@ -5,7 +5,7 @@ import Link from 'next/link';
 
 import { ArticleCard } from './ArticleCard';
 
-import { ArticleCardFragment } from '@/lib';
+import { ArticleCardFragment } from '@/generated/graphql';
 
 type Props = {
   articles: ArticleCardFragment[];

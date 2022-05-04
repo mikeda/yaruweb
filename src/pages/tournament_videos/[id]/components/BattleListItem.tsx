@@ -5,13 +5,8 @@ import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
 import clsx from 'clsx';
 
-import {
-  TournamentVideoPageBattleFragment,
-  TournamentVideoPageBattleSideFragment,
-  formatSec,
-  BattleRoundText,
-  theme,
-} from '@/lib';
+import { TournamentVideoPageBattleFragment, TournamentVideoPageBattleSideFragment } from '@/generated/graphql';
+import { formatSec, BattleRoundText, theme } from '@/lib';
 
 const useStyles = makeStyles(() =>
   createStyles({

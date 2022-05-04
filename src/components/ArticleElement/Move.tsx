@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { MoveMedia } from '@/components';
-import { useArticleElementMoveQuery } from '@/lib';
+import { useArticleElementMoveQuery } from '@/generated/graphql';
 
 interface Props {
   moveId: string;

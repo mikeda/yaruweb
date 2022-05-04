@@ -5,8 +5,8 @@ import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
 import { DashboardBreadcrumbs, DashboardContent, PlayerForm } from '@/components';
-import { PlayerAttributes, useDashboardPlayersNewPageCreatePlayerMutation, loadingState } from '@/lib';
-
+import { PlayerAttributes, useDashboardPlayersNewPageCreatePlayerMutation } from '@/generated/graphql';
+import { loadingState } from '@/lib';
 
 const Page: React.FC = () => {
   const router = useRouter();

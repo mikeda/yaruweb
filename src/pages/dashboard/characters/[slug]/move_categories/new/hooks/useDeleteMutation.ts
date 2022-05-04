@@ -1,7 +1,7 @@
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
-import { useDeleteMoveCategoryMutation } from '@/lib';
+import { useDeleteMoveCategoryMutation } from '@/generated/graphql';
 import { loadingState } from '@/lib';
 
 export const useDeleteMutation = (onDestroy: () => void) => {

@@ -3,7 +3,8 @@ import React from 'react';
 import { Paper, Tab, Tabs } from '@mui/material';
 import { useRouter } from 'next/router';
 
-import { PlayerPageProfileFragment, pagesPath } from '@/lib';
+import { pagesPath } from '@/generated/$path';
+import { PlayerPageProfileFragment } from '@/generated/graphql';
 
 type TabValue = 'profile' | 'battles' | 'standings';
 

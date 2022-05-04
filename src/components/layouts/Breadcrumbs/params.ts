@@ -8,7 +8,7 @@ import {
   Player,
   Tournament,
   TournamentVideo,
-} from '@/lib';
+} from '@/generated/graphql';
 
 export type ArticleParam = Pick<Article, 'id' | 'title'>;
 export type TournamentParam = Pick<Tournament, 'id' | 'name'>;

@@ -1,7 +1,8 @@
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
-import { useDashboardTournamentEditPageUpdateTournamentMutation, loadingState } from '@/lib';
+import { useDashboardTournamentEditPageUpdateTournamentMutation } from '@/generated/graphql';
+import { loadingState } from '@/lib';
 
 export const useUpdate = (onUpdate: () => void) => {
   const setLoading = useSetRecoilState(loadingState);

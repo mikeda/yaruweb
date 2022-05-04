@@ -20,6 +20,7 @@ import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
 import { DashboardBreadcrumbs, DashboardContent, SearchWord } from '@/components';
+import { pagesPath } from '@/generated/$path';
 import {
   ArticleStatus,
   DashboardArticlesPageArticleFragment,
@@ -27,12 +28,8 @@ import {
   useDashboardArticlesPageDeleteMutation,
   useDashboardArticlesPagePublishMutation,
   useDashboardArticlesPageStopMutation,
-  loadingState,
-  ArticleStatusText,
-  pagesPath,
-  resolveUrlObject,
-} from '@/lib';
-
+} from '@/generated/graphql';
+import { loadingState, ArticleStatusText, resolveUrlObject } from '@/lib';
 
 const Page: React.FC = () => {
   const router = useRouter();

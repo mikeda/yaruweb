@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 import { Favorite, FavoriteBorder } from '@mui/icons-material';
 import { Badge, IconButton } from '@mui/material';
 
-import { useFavArticleMutation, useFavButtonArticleQuery, useUnfavArticleMutation, useCurrentUser } from '@/lib';
+import { useFavArticleMutation, useFavButtonArticleQuery, useUnfavArticleMutation } from '@/generated/graphql';
+import { useCurrentUser } from '@/lib';
 
 type Props = {
   articleId: string;

@@ -1,6 +1,6 @@
-import { ParsedUrlQuery } from 'querystring';
-
 import React, { useState } from 'react';
+
+import { ParsedUrlQuery } from 'querystring';
 
 import { Box, Button, Grid, Typography } from '@mui/material';
 import { GetStaticPaths, GetStaticProps } from 'next';
@@ -17,11 +17,8 @@ import {
   PlayerStandingsPageDocument,
   PlayerStandingsPageQuery,
   usePlayerStandingsPageStandingsLazyQuery,
-  fetchGraphql,
-  loadingState,
-} from '@/lib';
-
-
+} from '@/generated/graphql';
+import { fetchGraphql, loadingState } from '@/lib';
 
 const Page: React.FC<PlayerStandingsPageQuery> = ({
   player,

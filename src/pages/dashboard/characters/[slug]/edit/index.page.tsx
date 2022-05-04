@@ -11,10 +11,8 @@ import {
   PageDashboardCharacterEditDocument,
   PageDashboardCharacterEditQuery,
   useUpdateCharacterMutation,
-  fetchGraphql,
-  loadingState,
-} from '@/lib';
-
+} from '@/generated/graphql';
+import { fetchGraphql, loadingState } from '@/lib';
 
 const Page: React.FC<PageDashboardCharacterEditQuery> = ({ character }) => {
   const router = useRouter();

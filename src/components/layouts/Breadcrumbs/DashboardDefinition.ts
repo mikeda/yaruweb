@@ -11,7 +11,7 @@ import {
   TournamentVideoParam,
 } from './params';
 
-import { pagesPath } from '@/lib';
+import { pagesPath } from '@/generated/$path';
 
 export type DashboardBreadcrumbParams =
   | { to: 'articles' }

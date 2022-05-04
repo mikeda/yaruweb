@@ -10,10 +10,8 @@ import {
   ArticlesPageArticlesDocument,
   ArticlesPageArticlesQuery,
   useArticlesPageArticlesLazyQuery,
-  fetchGraphql,
-  loadingState,
-} from '@/lib';
-
+} from '@/generated/graphql';
+import { fetchGraphql, loadingState } from '@/lib';
 
 const Page: React.FC<ArticlesPageArticlesQuery> = ({ articles: { records: initArticles, paging: initPaging } }) => {
   const [state, setState] = useState({

@@ -15,7 +15,7 @@ import { getYoutubeNode, isYoutubeUrl } from './YoutubeHelper';
 
 import { Element } from '@/components/ArticleElement';
 import { EmbedLinkElement } from '@/custom-types';
-import { useCreateArticleLinkMutation } from '@/lib';
+import { useCreateArticleLinkMutation } from '@/generated/graphql';
 
 export const createArticleEditor = () => {
   return withIcon(withLink(withHistory(withReact(createEditor()))));
