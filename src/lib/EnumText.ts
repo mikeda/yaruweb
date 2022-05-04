@@ -1,6 +1,17 @@
-import * as Types from '@/generated/graphql';
+import {
+  ArticleCategory,
+  ArticleStatus,
+  AttackMoveResultEnum,
+  AttackMoveStateEnum,
+  AttackTypeEnum,
+  BattleRound,
+  Order,
+  ThrowEscapeEnum,
+  ThrowMoveResultEnum,
+  ThrowTypeEnum,
+} from '@/generated/graphql';
 
-export const ArticleCategoryText: { [key in Types.ArticleCategory]: string } = {
+export const ArticleCategoryText: { [key in ArticleCategory]: string } = {
   intro: '入門',
   theory: '解説・戦略',
   event: 'イベント',
@@ -9,23 +20,23 @@ export const ArticleCategoryText: { [key in Types.ArticleCategory]: string } = {
   blog: '雑談',
 };
 
-export const ArticleStatusText: { [key in Types.ArticleStatus]: string } = {
+export const ArticleStatusText: { [key in ArticleStatus]: string } = {
   draft: '下書き',
   published: '公開中',
 };
 
-export const AttackMoveResultText: { [key in Types.AttackMoveResultEnum]: string } = {
+export const AttackMoveResultText: { [key in AttackMoveResultEnum]: string } = {
   normal: '-',
   down: 'ダウン',
   combo: 'コンボ',
 };
 
-export const OrderText: { [key in Types.Order]: string } = {
+export const OrderText: { [key in Order]: string } = {
   popular: '人気',
   new: '新着',
 };
 
-export const AttackTypeEnumText: { [key in Types.AttackTypeEnum]: string } = {
+export const AttackTypeEnumText: { [key in AttackTypeEnum]: string } = {
   h: '上',
   m: '中',
   l: '下',
@@ -40,7 +51,7 @@ export const AttackTypeEnumText: { [key in Types.AttackTypeEnum]: string } = {
   tl: '下投',
 };
 
-export const AttackMoveStateEnumText: { [key in Types.AttackMoveStateEnum]: string } = {
+export const AttackMoveStateEnumText: { [key in AttackMoveStateEnum]: string } = {
   crouching: '強制しゃがみ',
   sideways: '強制横向き',
   backward: '強制後ろ向き',
@@ -48,13 +59,13 @@ export const AttackMoveStateEnumText: { [key in Types.AttackMoveStateEnum]: stri
   blockable: 'ガード可能な硬直',
 };
 
-export const ThrowMoveResultText: { [key in Types.ThrowMoveResultEnum]: string } = {
+export const ThrowMoveResultText: { [key in ThrowMoveResultEnum]: string } = {
   normal: '立ち',
   down: 'ダウン',
   combo: 'コンボ',
 };
 
-export const ThrowEscapeEnumText: { [key in Types.ThrowEscapeEnum]: string } = {
+export const ThrowEscapeEnumText: { [key in ThrowEscapeEnum]: string } = {
   lp_or_rp: 'LP or RP',
   wp: 'WP',
   lp: 'LP',
@@ -62,7 +73,7 @@ export const ThrowEscapeEnumText: { [key in Types.ThrowEscapeEnum]: string } = {
   inescapable: '不可',
 };
 
-export const ThrowTypeEnumText: { [key in Types.ThrowTypeEnum]: string } = {
+export const ThrowTypeEnumText: { [key in ThrowTypeEnum]: string } = {
   high: '上段投げ',
   middle: '中段投げ',
   low: '下段投げ',
@@ -75,7 +86,7 @@ export const ThrowTypeEnumText: { [key in Types.ThrowTypeEnum]: string } = {
   back: '背面投げ',
 };
 
-export const BattleRoundText: { [key in Types.BattleRound]: string } = {
+export const BattleRoundText: { [key in BattleRound]: string } = {
   grand_final: 'Grand Final',
   grand_final_reset: 'Grand Final(リセット)',
   winners_final: 'Winners Final',
