@@ -6,15 +6,14 @@ import { useSetRecoilState } from 'recoil';
 
 import { useRouteParams } from './hooks';
 
-import { MoveCategoryForm } from '@/components';
-import { DashboardContent } from '@/components';
-import { loadingState } from '@/lib';
+import { MoveCategoryForm, DashboardContent } from '@/components';
 import {
   DashboardMoveCategoryNewPageQuery,
   MoveCategoryAttributes,
   useCreateMoveCategoryMutation,
   useDashboardMoveCategoryNewPageQuery,
-} from '@/lib';
+} from '@/generated/graphql';
+import { loadingState } from '@/lib';
 
 const Page: React.FC = () => {
   const { slug } = useRouteParams();

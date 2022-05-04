@@ -23,22 +23,18 @@ import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
-
-
 import { useRouteParams } from './hooks';
 
 import { DashboardContent, DashboardBreadcrumbs, Command, VideoPlayer } from '@/components';
+import { pagesPath } from '@/generated/$path';
 import {
   DashboardComboCategoriesPageComboFragment,
   useCreateComboVideoMutation,
   useDashboardComboCategoriesPageQuery,
   useDeleteComboCategoryMutation,
   useDeleteComboMutation,
-  colors,
-  loadingState,
-  pagesPath,
-  resolveUrlObject,
-} from '@/lib';
+} from '@/generated/graphql';
+import { colors, loadingState, resolveUrlObject } from '@/lib';
 
 const Page: React.FC = () => {
   const router = useRouter();

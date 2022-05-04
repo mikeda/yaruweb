@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { ComboMedia } from '@/components';
-import { useArticleElementComboQuery } from '@/lib';
+import { useArticleElementComboQuery } from '@/generated/graphql';
 
 interface Props {
   comboId: string;

@@ -1,4 +1,4 @@
-import { Tournament, TournamentVideo } from '@/lib';
+import { Tournament, TournamentVideo } from '@/generated/graphql';
 
 type TitleArgs = Pick<TournamentVideo, 'label'> & { tournament: Pick<Tournament, 'name'> };
 

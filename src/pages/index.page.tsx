@@ -6,8 +6,6 @@ import makeStyles from '@mui/styles/makeStyles';
 import { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 
-
-
 import { IntroSlides } from './components/IntroSlides';
 import { StaffRequirement } from './components/StaffRequirement';
 
@@ -21,7 +19,9 @@ import {
   PlayerCard,
   TournamentCard,
 } from '@/components';
-import { TopPageDocument, TopPageQuery, theme, fetchGraphql, pagesPath, resolveUrlObject } from '@/lib';
+import { pagesPath } from '@/generated/$path';
+import { TopPageDocument, TopPageQuery } from '@/generated/graphql';
+import { theme, fetchGraphql, resolveUrlObject } from '@/lib';
 
 const useStyles = makeStyles(() =>
   createStyles({

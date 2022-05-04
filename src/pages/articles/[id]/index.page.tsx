@@ -1,11 +1,10 @@
-import { ParsedUrlQuery } from 'querystring';
-
 import React from 'react';
+
+import { ParsedUrlQuery } from 'querystring';
 
 import { Avatar, Box, Grid, Typography } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import { GetStaticPaths, GetStaticProps } from 'next';
-
 
 import { ArticleBody, ArticleCard, Breadcrumbs, Content, FavButton, Head } from '@/components';
 import {
@@ -13,10 +12,8 @@ import {
   ArticlePageArticleQuery,
   ArticlePathsDocument,
   ArticlePathsQuery,
-  dayjs,
-  fetchGraphql,
-  NO_IMAGE_URL,
-} from '@/lib';
+} from '@/generated/graphql';
+import { dayjs, fetchGraphql, NO_IMAGE_URL } from '@/lib';
 
 const useStyles = makeStyles({
   mainImage: {

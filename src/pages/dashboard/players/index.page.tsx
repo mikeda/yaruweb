@@ -19,19 +19,16 @@ import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
-
 import { PlayerFormSmashgg } from './components/PlayerFormSmashgg';
 
 import { DashboardContent, DashboardBreadcrumbs, SearchWord } from '@/components';
+import { pagesPath } from '@/generated/$path';
 import {
   DashboardPlayersPagePlayerFragment,
   useDashboardPlayersPageDeleteMutation,
   useDashboardPlayersPagePlayersQuery,
-  loadingState,
-  DEFAULT_AVATAR_URL,
-  pagesPath,
-  resolveUrlObject,
-} from '@/lib';
+} from '@/generated/graphql';
+import { loadingState, DEFAULT_AVATAR_URL, resolveUrlObject } from '@/lib';
 
 const Page: React.FC = () => {
   const setLoading = useSetRecoilState(loadingState);

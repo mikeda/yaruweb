@@ -8,14 +8,9 @@ import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 import * as yup from 'yup';
 
-import {
-  useCreateUserMutation,
-  UserValidator,
-  createFirebaseUserWithEmail,
-  currentUserState,
-  loadingState,
-  pagesPath,
-} from '@/lib';
+import { pagesPath } from '@/generated/$path';
+import { useCreateUserMutation } from '@/generated/graphql';
+import { UserValidator, createFirebaseUserWithEmail, currentUserState, loadingState } from '@/lib';
 
 interface SignUpInput {
   email: string;

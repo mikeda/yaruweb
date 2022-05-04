@@ -1,6 +1,7 @@
+import React, { useState } from 'react';
+
 import { ParsedUrlQuery } from 'querystring';
 
-import React, { useState } from 'react';
 
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import {
@@ -19,8 +20,6 @@ import {
 } from '@mui/material';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
-
-
 import { Profile } from '../components/Profile';
 import { Tabs } from '../components/Tabs';
 
@@ -34,6 +33,8 @@ import {
   CharacterPathsQuery,
   ReversalMoveFragment,
   ThrowMoveFragment,
+} from '@/generated/graphql';
+import {
   fetchGraphql,
   AttackMoveResultText,
   AttackTypeEnumText,

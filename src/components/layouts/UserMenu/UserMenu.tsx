@@ -5,7 +5,8 @@ import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
-import { signOutFirebase, useCurrentUser, currentUserState, pagesPath, resolveUrlObject } from '@/lib';
+import { pagesPath } from '@/generated/$path';
+import { signOutFirebase, useCurrentUser, currentUserState, resolveUrlObject } from '@/lib';
 
 export const UserMenu: React.FC = () => {
   const { currentUser } = useCurrentUser();

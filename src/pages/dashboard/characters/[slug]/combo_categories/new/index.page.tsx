@@ -12,10 +12,8 @@ import {
   ComboCategoryAttributes,
   useCreateComboCategoryMutation,
   useDashboardComboCategoryNewPageQuery,
-  loadingState,
-} from '@/lib';
-
-
+} from '@/generated/graphql';
+import { loadingState } from '@/lib';
 
 const Page: React.FC = () => {
   const { slug } = useRouteParams();

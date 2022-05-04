@@ -1,6 +1,7 @@
 import { useSetRecoilState } from 'recoil';
 
-import { useDashboardOrganizerEditPageQuery, loadingState } from '@/lib';
+import { useDashboardOrganizerEditPageQuery } from '@/generated/graphql';
+import { loadingState } from '@/lib';
 
 export const useOrganizer = (organizerSlug?: string) => {
   const setLoading = useSetRecoilState(loadingState);

@@ -8,8 +8,7 @@ import { TextButton } from '../TextButton';
 
 import { ComboSelect } from './ComboSelect';
 
-import { Character } from '@/lib';
-
+import { Character } from '@/generated/graphql';
 
 type CharacterFragment = Pick<Character, 'slug' | 'name'>;
 

@@ -2094,13 +2094,6 @@ export type MoveVideoFragment = { __typename?: 'MoveVideo', id: string, m3u8Url:
 
 export type PagingFragment = { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean };
 
-export type CreateArticleMutationVariables = Exact<{
-  attributes: ArticleAttributes;
-}>;
-
-
-export type CreateArticleMutation = { __typename?: 'Mutation', createArticle?: { __typename?: 'CreateArticlePayload', article: { __typename?: 'Article', id: string } } | null };
-
 export type CreateArticleImageMutationVariables = Exact<{
   image: Scalars['String'];
 }>;
@@ -2586,6 +2579,13 @@ export type DashboardArticlesPageArticlesQueryVariables = Exact<{
 
 
 export type DashboardArticlesPageArticlesQuery = { __typename?: 'Query', myArticles: { __typename?: 'ArticleCollection', records: Array<{ __typename?: 'Article', id: string, title: string, status: ArticleStatus }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
+
+export type CreateArticleMutationVariables = Exact<{
+  attributes: ArticleAttributes;
+}>;
+
+
+export type CreateArticleMutation = { __typename?: 'Mutation', createArticle?: { __typename?: 'CreateArticlePayload', article: { __typename?: 'Article', id: string } } | null };
 
 export type DashboardComboCategoriesPageComboCategoryFragment = { __typename?: 'ComboCategory', id: string, name: string, combos: Array<{ __typename?: 'Combo', id: string, command: Array<string>, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> };
 
@@ -3768,41 +3768,6 @@ export const TournamentVideoPageBattleFragmentDoc = gql`
   }
 }
     ${TournamentVideoPageBattleSideFragmentDoc}`;
-export const CreateArticleDocument = gql`
-    mutation CreateArticle($attributes: ArticleAttributes!) {
-  createArticle(input: {attributes: $attributes}) {
-    article {
-      id
-    }
-  }
-}
-    `;
-export type CreateArticleMutationFn = Apollo.MutationFunction<CreateArticleMutation, CreateArticleMutationVariables>;
-
-/**
- * __useCreateArticleMutation__
- *
- * To run a mutation, you first call `useCreateArticleMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useCreateArticleMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [createArticleMutation, { data, loading, error }] = useCreateArticleMutation({
- *   variables: {
- *      attributes: // value for 'attributes'
- *   },
- * });
- */
-export function useCreateArticleMutation(baseOptions?: Apollo.MutationHookOptions<CreateArticleMutation, CreateArticleMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<CreateArticleMutation, CreateArticleMutationVariables>(CreateArticleDocument, options);
-      }
-export type CreateArticleMutationHookResult = ReturnType<typeof useCreateArticleMutation>;
-export type CreateArticleMutationResult = Apollo.MutationResult<CreateArticleMutation>;
-export type CreateArticleMutationOptions = Apollo.BaseMutationOptions<CreateArticleMutation, CreateArticleMutationVariables>;
 export const CreateArticleImageDocument = gql`
     mutation CreateArticleImage($image: String!) {
   createArticleImage(input: {image: $image}) {
@@ -6098,6 +6063,41 @@ export function useDashboardArticlesPageArticlesLazyQuery(baseOptions?: Apollo.L
 export type DashboardArticlesPageArticlesQueryHookResult = ReturnType<typeof useDashboardArticlesPageArticlesQuery>;
 export type DashboardArticlesPageArticlesLazyQueryHookResult = ReturnType<typeof useDashboardArticlesPageArticlesLazyQuery>;
 export type DashboardArticlesPageArticlesQueryResult = Apollo.QueryResult<DashboardArticlesPageArticlesQuery, DashboardArticlesPageArticlesQueryVariables>;
+export const CreateArticleDocument = gql`
+    mutation CreateArticle($attributes: ArticleAttributes!) {
+  createArticle(input: {attributes: $attributes}) {
+    article {
+      id
+    }
+  }
+}
+    `;
+export type CreateArticleMutationFn = Apollo.MutationFunction<CreateArticleMutation, CreateArticleMutationVariables>;
+
+/**
+ * __useCreateArticleMutation__
+ *
+ * To run a mutation, you first call `useCreateArticleMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateArticleMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createArticleMutation, { data, loading, error }] = useCreateArticleMutation({
+ *   variables: {
+ *      attributes: // value for 'attributes'
+ *   },
+ * });
+ */
+export function useCreateArticleMutation(baseOptions?: Apollo.MutationHookOptions<CreateArticleMutation, CreateArticleMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateArticleMutation, CreateArticleMutationVariables>(CreateArticleDocument, options);
+      }
+export type CreateArticleMutationHookResult = ReturnType<typeof useCreateArticleMutation>;
+export type CreateArticleMutationResult = Apollo.MutationResult<CreateArticleMutation>;
+export type CreateArticleMutationOptions = Apollo.BaseMutationOptions<CreateArticleMutation, CreateArticleMutationVariables>;
 export const DashboardComboCategoriesPageDocument = gql`
     query DashboardComboCategoriesPage($characterSlug: String!) {
   character(characterSlug: $characterSlug) {

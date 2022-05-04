@@ -1,6 +1,7 @@
+import React from 'react';
+
 import { ParsedUrlQuery } from 'querystring';
 
-import React from 'react';
 
 import {
   Avatar,
@@ -21,19 +22,14 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import Link from 'next/link';
 
 import { NotFound, Content, Head, Breadcrumbs } from '@/components';
+import { pagesPath } from '@/generated/$path';
 import {
   TournamentPageDocument,
   TournamentPageQuery,
   TournamentPathsDocument,
   TournamentPathsQuery,
-  dayjs,
-  fetchGraphql,
-  pagesPath,
-  DEFAULT_AVATAR_URL,
-  NO_IMAGE_URL,
-  placeIconUrl,
-} from '@/lib';
-
+} from '@/generated/graphql';
+import { dayjs, fetchGraphql, DEFAULT_AVATAR_URL, NO_IMAGE_URL, placeIconUrl } from '@/lib';
 
 const useStyles = makeStyles({
   root: {

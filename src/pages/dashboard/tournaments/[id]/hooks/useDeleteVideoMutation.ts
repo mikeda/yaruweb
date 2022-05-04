@@ -1,7 +1,8 @@
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
-import { useDashboardTournamentPageDeleteVideoMutation, loadingState } from '@/lib';
+import { useDashboardTournamentPageDeleteVideoMutation } from '@/generated/graphql';
+import { loadingState } from '@/lib';
 
 interface Props {
   onDelete: () => void;

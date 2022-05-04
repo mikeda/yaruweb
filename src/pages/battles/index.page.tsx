@@ -10,15 +10,9 @@ import { useSetRecoilState } from 'recoil';
 
 import { BattleListItem, Breadcrumbs, Content, Head } from '@/components';
 import { BattleSelector, CharacterChip, PlayerChip } from '@/components/BattleSelector';
-import {
-  BattlesPageDocument,
-  BattlesPageQuery,
-  fetchGraphql,
-  useBattlesPageBattlesLazyQuery,
-  loadingState,
-  pagesPath,
-  theme,
-} from '@/lib';
+import { pagesPath } from '@/generated/$path';
+import { BattlesPageDocument, BattlesPageQuery, useBattlesPageBattlesLazyQuery } from '@/generated/graphql';
+import { fetchGraphql, loadingState, theme } from '@/lib';
 
 const useStyles = makeStyles(() =>
   createStyles({

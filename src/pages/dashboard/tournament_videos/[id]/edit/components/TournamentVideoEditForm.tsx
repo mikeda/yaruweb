@@ -5,7 +5,8 @@ import { Box, Button, Card, CardContent, Divider, Grid, TextField } from '@mui/m
 import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
-import { TournamentVideoAttributes, TournamentVideoFormFragment, dayjs } from '@/lib';
+import { TournamentVideoAttributes, TournamentVideoFormFragment } from '@/generated/graphql';
+import { dayjs } from '@/lib';
 
 const schema = yup.object().shape({
   title: yup.string().required(),

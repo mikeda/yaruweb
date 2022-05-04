@@ -19,9 +19,8 @@ import { useCreateVideoMutation, useDeleteVideoMutation } from '../hooks';
 
 import { VideoForm } from './VideoForm';
 
-import { useDashboardTournamentPageVideosQuery, pagesPath } from '@/lib';
-
-
+import { pagesPath } from '@/generated/$path';
+import { useDashboardTournamentPageVideosQuery } from '@/generated/graphql';
 
 const useStyles = makeStyles({
   list: {

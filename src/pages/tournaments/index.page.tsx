@@ -10,10 +10,8 @@ import {
   TournamentsPageTournamentsDocument,
   TournamentsPageTournamentsQuery,
   useTournamentsPageTournamentsLazyQuery,
-  loadingState,
-  fetchGraphql,
-} from '@/lib';
-
+} from '@/generated/graphql';
+import { loadingState, fetchGraphql } from '@/lib';
 
 const Page: React.FC<TournamentsPageTournamentsQuery> = ({
   tournaments: { records: initTournaments, paging: initPaging },

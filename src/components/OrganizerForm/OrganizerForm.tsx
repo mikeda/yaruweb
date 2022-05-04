@@ -5,7 +5,7 @@ import { Box, Button, Card, CardContent, Divider, Grid, TextField } from '@mui/m
 import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
-import { OrganizerAttributes, OrganizerFormFragment } from '@/lib';
+import { OrganizerAttributes, OrganizerFormFragment } from '@/generated/graphql';
 
 const schema = yup.object().shape({
   name: yup.string().required(),

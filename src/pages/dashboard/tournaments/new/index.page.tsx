@@ -5,8 +5,8 @@ import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
 import { DashboardBreadcrumbs, DashboardContent, TournamentForm } from '@/components';
-import { TournamentAttributes, useCreateTournamentMutation, loadingState } from '@/lib';
-
+import { TournamentAttributes, useCreateTournamentMutation } from '@/generated/graphql';
+import { loadingState } from '@/lib';
 
 const Page: React.FC = () => {
   const router = useRouter();

@@ -27,9 +27,8 @@ import {
   ComboFragment,
   ComboPositionSelectFragment,
   MoveSelectOptionFragment,
-  NullableNumberSchema,
-} from '@/lib';
-
+} from '@/generated/graphql';
+import { NullableNumberSchema } from '@/lib';
 
 const schema = yup.object().shape({
   damage: NullableNumberSchema,

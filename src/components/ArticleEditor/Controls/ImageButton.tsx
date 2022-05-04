@@ -3,12 +3,12 @@ import React from 'react';
 import { Transforms } from 'slate';
 import { useSlate } from 'slate-react';
 
-
 import { Button } from './Button';
 import { HiddenInput } from './HiddenInput';
 
 import { ImageElement } from '@/custom-types';
-import { useCreateArticleImageMutation, YAROUYO_FONT_CODE } from '@/lib';
+import { useCreateArticleImageMutation } from '@/generated/graphql';
+import { YAROUYO_FONT_CODE } from '@/lib';
 
 export const ImageButton: React.FC = () => {
   const editor = useSlate();

@@ -5,8 +5,8 @@
   "scripts": {
     "dev": "run-p dev:*",
     "dev:next": "next dev",
-    "dev:path": "pathpida --ignorePath .gitignore --watch",
-    "build": "pathpida --ignorePath .gitignore && next build",
+    "dev:path": "pathpida --output src/generated --ignorePath .gitignore --watch",
+    "build": "pathpida --output src/generated --ignorePath .gitignore && next build",
     "eslint": "npx eslint --ext ts,tsx --max-warnings 0 src"
   },
   "dependencies": {

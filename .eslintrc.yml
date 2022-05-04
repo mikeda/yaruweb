@@ -34,6 +34,6 @@ rules:
       'newlines-between': 'always'
       'pathGroups':
         - 'pattern': 'react'
-          'group': 'external'
+          'group': 'builtin'
           'position': 'before'
       'pathGroupsExcludedImportTypes': ['react']

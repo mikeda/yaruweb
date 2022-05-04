@@ -20,7 +20,8 @@ import * as yup from 'yup';
 
 import { ArticleEditor, createArticleEditor } from '../ArticleEditor';
 
-import { ArticleAttributes, ArticleCategory, ArticleFormArticleFragment, ArticleCategoryText } from '@/lib';
+import { ArticleAttributes, ArticleCategory, ArticleFormArticleFragment } from '@/generated/graphql';
+import { ArticleCategoryText } from '@/lib';
 
 const schema = yup.object().shape({
   title: yup.string().required(),

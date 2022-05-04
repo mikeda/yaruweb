@@ -5,8 +5,8 @@ import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
 import { ArticleForm, DashboardBreadcrumbs, DashboardContent } from '@/components';
-import { ArticleAttributes, useCreateArticleMutation, loadingState } from '@/lib';
-
+import { ArticleAttributes, useCreateArticleMutation } from '@/generated/graphql';
+import { loadingState } from '@/lib';
 
 const Page: React.FC = () => {
   const router = useRouter();

@@ -11,8 +11,8 @@ import {
   TournamentAttributes,
   TournamentFormFragment,
   useTournamentFormQuery,
-  dayjs,
-} from '@/lib';
+} from '@/generated/graphql';
+import { dayjs } from '@/lib';
 
 const schema = yup.object().shape({
   organizerId: yup.string().required(),

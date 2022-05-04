@@ -32,6 +32,8 @@ import {
   AttackTypeEnum,
   MoveFragment,
   MovePositionSelectFragment,
+} from '@/generated/graphql';
+import {
   NullableFloatSchema,
   NullableNumberSchema,
   theme,

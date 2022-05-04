@@ -1,6 +1,7 @@
 import { useSetRecoilState } from 'recoil';
 
-import { useDashboardPlayerEditPageQuery, loadingState } from '@/lib';
+import { useDashboardPlayerEditPageQuery } from '@/generated/graphql';
+import { loadingState } from '@/lib';
 
 export const usePlayer = (playerSlug?: string) => {
   const setLoading = useSetRecoilState(loadingState);

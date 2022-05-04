@@ -1,6 +1,6 @@
-import { ParsedUrlQuery } from 'querystring';
-
 import React, { useState } from 'react';
+
+import { ParsedUrlQuery } from 'querystring';
 
 import { Box, Button, List, Paper, Typography } from '@mui/material';
 import { GetStaticPaths, GetStaticProps } from 'next';
@@ -8,7 +8,6 @@ import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
 import { Profile } from '../components/Profile';
-
 
 import { Head, Content, Breadcrumbs, BattleListItem, PlayerPageTabs } from '@/components';
 import { CharacterBattleCountChip, BattleSelector } from '@/components/BattleSelector';
@@ -20,9 +19,8 @@ import {
   PlayerSlugsDocument,
   PlayerSlugsQuery,
   usePlayerBattlesPageBattlesLazyQuery,
-  fetchGraphql,
-  loadingState,
-} from '@/lib';
+} from '@/generated/graphql';
+import { fetchGraphql, loadingState } from '@/lib';
 
 interface State {
   battles: BattleListItemFragment[];

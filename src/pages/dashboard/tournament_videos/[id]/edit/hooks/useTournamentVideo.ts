@@ -1,6 +1,7 @@
 import { useSetRecoilState } from 'recoil';
 
-import { useDashboardTournamentVideoEditPageQuery, loadingState } from '@/lib';
+import { useDashboardTournamentVideoEditPageQuery } from '@/generated/graphql';
+import { loadingState } from '@/lib';
 
 export const useTournamentVideo = (tournamentVideoId?: string) => {
   const setLoading = useSetRecoilState(loadingState);

@@ -16,7 +16,9 @@ import {
 import makeStyles from '@mui/styles/makeStyles';
 import { useRouter } from 'next/router';
 
-import { PlayerCardFragment, NO_IMAGE_URL, colors, pagesPath, resolveUrlObject } from '@/lib';
+import { pagesPath } from '@/generated/$path';
+import { PlayerCardFragment } from '@/generated/graphql';
+import { NO_IMAGE_URL, colors, resolveUrlObject } from '@/lib';
 
 const useStyles = makeStyles({
   root: {

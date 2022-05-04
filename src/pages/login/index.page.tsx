@@ -2,13 +2,11 @@ import React from 'react';
 
 import { Box } from '@mui/material';
 
-
-
 import { LoginWithEmailForm } from './components/LoginWithEmailForm';
 import { LoginWithTwitterButton } from './components/LoginWithTwitterButton';
 
 import { Breadcrumbs, Content, Head, Link } from '@/components';
-import { pagesPath } from '@/lib';
+import { pagesPath } from '@/generated/$path';
 
 const Page: React.FC = () => {
   return (

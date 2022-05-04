@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Select } from '@mui/material';
 
-import { useComboSelectOptionsQuery } from '@/lib';
+import { useComboSelectOptionsQuery } from '@/generated/graphql';
 
 interface Props {
   characterSlug: string;

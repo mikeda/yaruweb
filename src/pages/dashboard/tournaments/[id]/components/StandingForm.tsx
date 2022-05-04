@@ -18,7 +18,7 @@ import {
 import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
-import { PlayerSelectOptionFragment, StandingAttributes } from '@/lib';
+import { PlayerSelectOptionFragment, StandingAttributes } from '@/generated/graphql';
 
 const schema = yup.object().shape({
   place: yup.number().required().integer().min(1).max(4),

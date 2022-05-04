@@ -1,16 +1,16 @@
-import { ParsedUrlQuery } from 'querystring';
-
 import React from 'react';
+
+import { ParsedUrlQuery } from 'querystring';
 
 import { Box, Paper, Typography } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
-
 import { Profile } from './components/Profile';
 
 import { Head, Content, Breadcrumbs, PlayerPageTabs } from '@/components';
-import { PlayerPageDocument, PlayerPageQuery, PlayerSlugsDocument, PlayerSlugsQuery, fetchGraphql, theme } from '@/lib';
+import { PlayerPageDocument, PlayerPageQuery, PlayerSlugsDocument, PlayerSlugsQuery } from '@/generated/graphql';
+import { fetchGraphql, theme } from '@/lib';
 
 const useStyles = makeStyles({
   description: {

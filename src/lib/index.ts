@@ -1,5 +1,3 @@
-export * from './$path';
-export * from './$types';
 export * from './apolloClient';
 export * from './colors';
 export * from './commandText';

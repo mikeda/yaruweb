@@ -2,7 +2,8 @@ import React from 'react';
 
 import { Avatar, Chip } from '@mui/material';
 
-import { PlayerBattleCountChipFragment, DEFAULT_AVATAR_URL } from '@/lib';
+import { PlayerBattleCountChipFragment } from '@/generated/graphql';
+import { DEFAULT_AVATAR_URL } from '@/lib';
 
 interface Props {
   battleCount: PlayerBattleCountChipFragment;
