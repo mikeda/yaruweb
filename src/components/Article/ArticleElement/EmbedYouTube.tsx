@@ -2,7 +2,7 @@ import React from 'react';
 
 import YouTube from 'react-youtube';
 
-import { YouTubeWrapper } from '../YouTubeWrapper';
+import { YouTubeWrapper } from '@/components';
 
 interface Props {
   videoId: string;

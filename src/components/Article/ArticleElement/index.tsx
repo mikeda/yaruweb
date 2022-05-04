@@ -20,7 +20,7 @@ interface Props {
   element: SlateElement;
 }
 
-export const Element: React.FC<Props> = ({ attributes, children, element }) => {
+export const ArticleElement: React.FC<Props> = ({ attributes, children, element }) => {
   switch (element.type) {
     case 'paragraph':
       return <Paragraph attributes={attributes}>{children}</Paragraph>;

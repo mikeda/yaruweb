@@ -2,19 +2,19 @@ import React from 'react';
 
 import { styled } from '@mui/material/styles';
 
-import { BlockButton } from './BlockButton';
-import { ComboButton } from './ComboButton';
-import { ImageButton } from './ImageButton';
-import { LinkButton } from './LinkButton';
-import { MarkButton } from './MarkButton';
-import { MoveButton } from './MoveButton';
-import { OperationButton } from './OperationButton';
-import { VideoButton } from './VideoButton';
+import { BlockButton } from './buttons/BlockButton';
+import { ComboButton } from './buttons/ComboButton';
+import { ImageButton } from './buttons/ImageButton';
+import { LinkButton } from './buttons/LinkButton';
+import { MarkButton } from './buttons/MarkButton';
+import { MoveButton } from './buttons/MoveButton';
+import { OperationButton } from './buttons/OperationButton';
+import { VideoButton } from './buttons/VideoButton';
 
 import { useCharacterSelectOptionsQuery } from '@/generated/graphql';
 import { YAROUYO_FONT_CODE } from '@/lib';
 
-export const Controls: React.FC = () => {
+export const ControlButtons: React.FC = () => {
   const { data } = useCharacterSelectOptionsQuery();
 
   return (
