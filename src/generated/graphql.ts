@@ -270,6 +270,7 @@ export type Character = {
   __typename?: 'Character';
   battlesCount: Scalars['Int'];
   comboCategories: Array<ComboCategory>;
+  comboStarters: Array<Move>;
   combosCount: Scalars['Int'];
   country: Scalars['String'];
   description: Scalars['String'];
@@ -2121,13 +2122,6 @@ export type MoveSelectOptionsQueryVariables = Exact<{
 
 export type MoveSelectOptionsQuery = { __typename?: 'Query', moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, moves: Array<{ __typename?: 'Move', id: string, name: string, command: Array<string> }> }> };
 
-export type MyArticleQueryVariables = Exact<{
-  articleId: Scalars['ID'];
-}>;
-
-
-export type MyArticleQuery = { __typename?: 'Query', myArticle: { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, faved: boolean, favsCount: number, status: ArticleStatus, category: ArticleCategory, content: string, author: { __typename?: 'User', name: string, avatarUrl: string } } };
-
 export type OrganizerSelectOptionFragment = { __typename?: 'Organizer', id: string, slug: string, name: string };
 
 export type PlayerSelectOptionFragment = { __typename?: 'Player', id: string, slug: string, name: string, tonamelId?: string | null, smashggId?: string | null };
@@ -2188,14 +2182,6 @@ export type ArticleFormArticleFragment = { __typename?: 'Article', id: string, t
 
 export type BattleListItemFragment = { __typename?: 'Battle', id: string, round?: BattleRound | null, tournamentVideo: { __typename?: 'TournamentVideo', id: string, tournament: { __typename?: 'Tournament', id: string, name: string, startsAt: string } }, sides: Array<{ __typename?: 'BattleSide', rounds: number, player: { __typename?: 'Player', name: string }, character: { __typename?: 'Character', faceImageUrl: string } }> };
 
-export type CharacterBattleCountChipFragment = { __typename?: 'BattleCount', id: string, count: number, character: { __typename?: 'Character', id: string, slug: string, name: string, faceImageUrl: string } };
-
-export type CharacterChipFragment = { __typename?: 'Character', id: string, slug: string, name: string, faceImageUrl: string, battlesCount: number };
-
-export type PlayerBattleCountChipFragment = { __typename?: 'BattleCount', id: string, count: number, player: { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null } };
-
-export type PlayerChipFragment = { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null, battlesCount: number };
-
 export type CharacterCardFragment = { __typename?: 'Character', slug: string, name: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number };
 
 export type CharacterFormFragment = { __typename?: 'Character', name: string, nameKana: string, longName: string, longNameKana: string, slug: string, country: string, fightingStyle: string, story: string, description: string, dlc: boolean };
@@ -2246,6 +2232,14 @@ export type OrganizerFormFragment = { __typename?: 'Organizer', name: string, sl
 export type PlayerCardFragment = { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null, standingsCount: number, battlesCount: number };
 
 export type PlayerFormFragment = { __typename?: 'Player', name: string, slug: string, tonamelId?: string | null, smashggId?: string | null, twitterId?: string | null, streamingUrl?: string | null, description?: string | null, country?: { __typename?: 'Country', id: string } | null };
+
+export type CharacterBattleCountChipFragment = { __typename?: 'BattleCount', id: string, count: number, character: { __typename?: 'Character', id: string, slug: string, name: string, faceImageUrl: string } };
+
+export type CharacterChipFragment = { __typename?: 'Character', id: string, slug: string, name: string, faceImageUrl: string, battlesCount: number };
+
+export type PlayerBattleCountChipFragment = { __typename?: 'BattleCount', id: string, count: number, player: { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null } };
+
+export type PlayerChipFragment = { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null, battlesCount: number };
 
 export type TournamentCardFragment = { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: string | null, startsAt: string, videosCount: number, standings: Array<{ __typename?: 'Standing', id: string, place: number, player: { __typename?: 'Player', id: string, name: string } }> };
 
@@ -2317,12 +2311,14 @@ export type CharacterBattlesPageBattlesQueryVariables = Exact<{
 
 export type CharacterBattlesPageBattlesQuery = { __typename?: 'Query', battles: { __typename?: 'BattleCollection', records: Array<{ __typename?: 'Battle', id: string, round?: BattleRound | null, tournamentVideo: { __typename?: 'TournamentVideo', id: string, tournament: { __typename?: 'Tournament', id: string, name: string, startsAt: string } }, sides: Array<{ __typename?: 'BattleSide', rounds: number, player: { __typename?: 'Player', name: string }, character: { __typename?: 'Character', faceImageUrl: string } }> }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
 
+export type ComboListItemFragment = { __typename?: 'Combo', id: string, damage?: number | null, command: Array<string>, note?: string | null, move?: { __typename?: 'Move', id: string } | null, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null };
+
 export type CharacterCombosPageQueryVariables = Exact<{
   characterSlug: Scalars['String'];
 }>;
 
 
-export type CharacterCombosPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, combosCount: number, movesCount: number, comboCategories: Array<{ __typename?: 'ComboCategory', id: string, name: string, combos: Array<{ __typename?: 'Combo', id: string, damage?: number | null, command: Array<string>, note?: string | null, comboCategory: { __typename?: 'ComboCategory', id: string, name: string }, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> }> } };
+export type CharacterCombosPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, combosCount: number, movesCount: number, comboCategories: Array<{ __typename?: 'ComboCategory', id: string, name: string, combos: Array<{ __typename?: 'Combo', id: string, damage?: number | null, command: Array<string>, note?: string | null, move?: { __typename?: 'Move', id: string } | null, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> }>, comboStarters: Array<{ __typename?: 'Move', id: string, name: string, combosCount: number }> } };
 
 export type CharacterPageProfileFragment = { __typename?: 'Character', slug: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, combosCount: number, movesCount: number };
 
@@ -2361,6 +2357,13 @@ export type DashboardArticlePageArticleQueryVariables = Exact<{
 
 
 export type DashboardArticlePageArticleQuery = { __typename?: 'Query', article: { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, category: ArticleCategory, content: string } };
+
+export type MyArticleQueryVariables = Exact<{
+  articleId: Scalars['ID'];
+}>;
+
+
+export type MyArticleQuery = { __typename?: 'Query', myArticle: { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, faved: boolean, favsCount: number, status: ArticleStatus, category: ArticleCategory, content: string, author: { __typename?: 'User', name: string, avatarUrl: string } } };
 
 export type UpdateArticleMutationVariables = Exact<{
   articleId: Scalars['ID'];
@@ -3066,48 +3069,6 @@ export const BattleListItemFragmentDoc = gql`
   }
 }
     `;
-export const CharacterBattleCountChipFragmentDoc = gql`
-    fragment CharacterBattleCountChip on BattleCount {
-  id
-  count
-  character {
-    id
-    slug
-    name
-    faceImageUrl
-  }
-}
-    `;
-export const CharacterChipFragmentDoc = gql`
-    fragment CharacterChip on Character {
-  id
-  slug
-  name
-  faceImageUrl
-  battlesCount
-}
-    `;
-export const PlayerBattleCountChipFragmentDoc = gql`
-    fragment PlayerBattleCountChip on BattleCount {
-  id
-  count
-  player {
-    id
-    slug
-    name
-    avatarUrl
-  }
-}
-    `;
-export const PlayerChipFragmentDoc = gql`
-    fragment PlayerChip on Player {
-  id
-  slug
-  name
-  avatarUrl
-  battlesCount
-}
-    `;
 export const CharacterCardFragmentDoc = gql`
     fragment CharacterCard on Character {
   slug
@@ -3350,6 +3311,48 @@ export const PlayerFormFragmentDoc = gql`
   }
 }
     `;
+export const CharacterBattleCountChipFragmentDoc = gql`
+    fragment CharacterBattleCountChip on BattleCount {
+  id
+  count
+  character {
+    id
+    slug
+    name
+    faceImageUrl
+  }
+}
+    `;
+export const CharacterChipFragmentDoc = gql`
+    fragment CharacterChip on Character {
+  id
+  slug
+  name
+  faceImageUrl
+  battlesCount
+}
+    `;
+export const PlayerBattleCountChipFragmentDoc = gql`
+    fragment PlayerBattleCountChip on BattleCount {
+  id
+  count
+  player {
+    id
+    slug
+    name
+    avatarUrl
+  }
+}
+    `;
+export const PlayerChipFragmentDoc = gql`
+    fragment PlayerChip on Player {
+  id
+  slug
+  name
+  avatarUrl
+  battlesCount
+}
+    `;
 export const TournamentCardFragmentDoc = gql`
     fragment TournamentCard on Tournament {
   id
@@ -3474,6 +3477,22 @@ export const ArticlePageArticleFragmentDoc = gql`
   }
 }
     ${ArticleCardFragmentDoc}`;
+export const ComboListItemFragmentDoc = gql`
+    fragment ComboListItem on Combo {
+  id
+  damage
+  command
+  note
+  move {
+    id
+  }
+  comboVideo {
+    id
+    m3u8Url
+    thumbnailUrl
+  }
+}
+    `;
 export const CharacterPageProfileFragmentDoc = gql`
     fragment CharacterPageProfile on Character {
   slug
@@ -3937,54 +3956,6 @@ export function useMoveSelectOptionsLazyQuery(baseOptions?: Apollo.LazyQueryHook
 export type MoveSelectOptionsQueryHookResult = ReturnType<typeof useMoveSelectOptionsQuery>;
 export type MoveSelectOptionsLazyQueryHookResult = ReturnType<typeof useMoveSelectOptionsLazyQuery>;
 export type MoveSelectOptionsQueryResult = Apollo.QueryResult<MoveSelectOptionsQuery, MoveSelectOptionsQueryVariables>;
-export const MyArticleDocument = gql`
-    query MyArticle($articleId: ID!) {
-  myArticle(articleId: $articleId) {
-    id
-    title
-    description
-    mainImageUrl
-    publishedAt
-    faved
-    favsCount
-    status
-    category
-    content
-    author {
-      name
-      avatarUrl
-    }
-  }
-}
-    `;
-
-/**
- * __useMyArticleQuery__
- *
- * To run a query within a React component, call `useMyArticleQuery` and pass it any options that fit your needs.
- * When your component renders, `useMyArticleQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useMyArticleQuery({
- *   variables: {
- *      articleId: // value for 'articleId'
- *   },
- * });
- */
-export function useMyArticleQuery(baseOptions: Apollo.QueryHookOptions<MyArticleQuery, MyArticleQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<MyArticleQuery, MyArticleQueryVariables>(MyArticleDocument, options);
-      }
-export function useMyArticleLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MyArticleQuery, MyArticleQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<MyArticleQuery, MyArticleQueryVariables>(MyArticleDocument, options);
-        }
-export type MyArticleQueryHookResult = ReturnType<typeof useMyArticleQuery>;
-export type MyArticleLazyQueryHookResult = ReturnType<typeof useMyArticleLazyQuery>;
-export type MyArticleQueryResult = Apollo.QueryResult<MyArticleQuery, MyArticleQueryVariables>;
 export const PlayerSlugsDocument = gql`
     query PlayerSlugs($per: Int) {
   players(per: $per) {
@@ -4692,14 +4663,19 @@ export const CharacterCombosPageDocument = gql`
       id
       name
       combos {
-        ...ComboMedia
+        ...ComboListItem
       }
+    }
+    comboStarters {
+      id
+      name
+      combosCount
     }
   }
 }
     ${CharacterBreadcrumbsFragmentDoc}
 ${CharacterPageProfileFragmentDoc}
-${ComboMediaFragmentDoc}`;
+${ComboListItemFragmentDoc}`;
 
 /**
  * __useCharacterCombosPageQuery__
@@ -4889,6 +4865,54 @@ export function useDashboardArticlePageArticleLazyQuery(baseOptions?: Apollo.Laz
 export type DashboardArticlePageArticleQueryHookResult = ReturnType<typeof useDashboardArticlePageArticleQuery>;
 export type DashboardArticlePageArticleLazyQueryHookResult = ReturnType<typeof useDashboardArticlePageArticleLazyQuery>;
 export type DashboardArticlePageArticleQueryResult = Apollo.QueryResult<DashboardArticlePageArticleQuery, DashboardArticlePageArticleQueryVariables>;
+export const MyArticleDocument = gql`
+    query MyArticle($articleId: ID!) {
+  myArticle(articleId: $articleId) {
+    id
+    title
+    description
+    mainImageUrl
+    publishedAt
+    faved
+    favsCount
+    status
+    category
+    content
+    author {
+      name
+      avatarUrl
+    }
+  }
+}
+    `;
+
+/**
+ * __useMyArticleQuery__
+ *
+ * To run a query within a React component, call `useMyArticleQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMyArticleQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMyArticleQuery({
+ *   variables: {
+ *      articleId: // value for 'articleId'
+ *   },
+ * });
+ */
+export function useMyArticleQuery(baseOptions: Apollo.QueryHookOptions<MyArticleQuery, MyArticleQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<MyArticleQuery, MyArticleQueryVariables>(MyArticleDocument, options);
+      }
+export function useMyArticleLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MyArticleQuery, MyArticleQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<MyArticleQuery, MyArticleQueryVariables>(MyArticleDocument, options);
+        }
+export type MyArticleQueryHookResult = ReturnType<typeof useMyArticleQuery>;
+export type MyArticleLazyQueryHookResult = ReturnType<typeof useMyArticleLazyQuery>;
+export type MyArticleQueryResult = Apollo.QueryResult<MyArticleQuery, MyArticleQueryVariables>;
 export const UpdateArticleDocument = gql`
     mutation UpdateArticle($articleId: ID!, $attributes: ArticleAttributes!) {
   updateArticle(input: {articleId: $articleId, attributes: $attributes}) {

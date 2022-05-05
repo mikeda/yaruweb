@@ -9,8 +9,15 @@ import { useSetRecoilState } from 'recoil';
 
 import { Profile } from '../components/Profile';
 
-import { Head, Content, Breadcrumbs, BattleListItem, PlayerPageTabs } from '@/components';
-import { CharacterBattleCountChip, BattleSelector } from '@/components/BattleSelector';
+import {
+  Head,
+  Content,
+  Breadcrumbs,
+  BattleListItem,
+  PlayerPageTabs,
+  CharacterBattleCountChip,
+  SelectChipContainer,
+} from '@/components';
 import {
   BattleListItemFragment,
   PagingFragment,
@@ -82,7 +89,7 @@ const Page: React.FC<PlayerBattlesPageQuery> = ({
           対戦動画
         </Typography>
 
-        <BattleSelector>
+        <SelectChipContainer>
           {battleCounts.records.map(bc => (
             <CharacterBattleCountChip
               key={bc.id}
@@ -93,7 +100,7 @@ const Page: React.FC<PlayerBattlesPageQuery> = ({
               }}
             />
           ))}
-        </BattleSelector>
+        </SelectChipContainer>
 
         <Paper>
           <List>

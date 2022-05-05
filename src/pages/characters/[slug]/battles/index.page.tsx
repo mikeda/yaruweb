@@ -12,8 +12,7 @@ import { useSetRecoilState } from 'recoil';
 import { Profile } from '../components/Profile';
 import { Tabs } from '../components/Tabs';
 
-import { BattleListItem, Breadcrumbs, Content, Head } from '@/components';
-import { BattleSelector, PlayerBattleCountChip } from '@/components/BattleSelector';
+import { BattleListItem, Breadcrumbs, Content, Head, SelectChipContainer, PlayerBattleCountChip } from '@/components';
 import {
   BattleListItemFragment,
   CharacterBattlesPageDocument,
@@ -92,7 +91,7 @@ const Page: React.FC<CharacterBattlesPageQuery> = ({
       </Box>
 
       <Paper className={classes.content}>
-        <BattleSelector>
+        <SelectChipContainer>
           {battleCounts.records.map(bc => (
             <PlayerBattleCountChip
               key={bc.id}
@@ -103,7 +102,7 @@ const Page: React.FC<CharacterBattlesPageQuery> = ({
               }}
             />
           ))}
-        </BattleSelector>
+        </SelectChipContainer>
 
         <List>
           {battles.map((battle, i) => (
