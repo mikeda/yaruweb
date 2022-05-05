@@ -7,7 +7,7 @@ import { useSetRecoilState } from 'recoil';
 import { DashboardContent, ComboCategoryForm } from '@/components';
 import {
   ComboCategoryAttributes,
-  ComboCategoryFragment,
+  ComboCategoryPositionSelectFragment,
   usePageDashboardComboCategoryEditQuery,
   useUpdateComboCategoryMutation,
 } from '@/generated/graphql';
@@ -32,15 +32,20 @@ const Page: React.FC = () => {
 
   return (
     <DashboardContent title="カテゴリ編集">
-      <PageContent comboCategory={comboCategory} comboCategories={comboCategory.character.comboCategories} />
+      <PageContent
+        comboCategoryId={comboCategory.id}
+        comboCategory={comboCategory}
+        comboCategories={comboCategory.character.comboCategories}
+      />
     </DashboardContent>
   );
 };
 
 export const PageContent: React.FC<{
-  comboCategory: ComboCategoryFragment;
-  comboCategories: ComboCategoryFragment[];
-}> = ({ comboCategory, comboCategories }) => {
+  comboCategoryId: string;
+  comboCategory: ComboCategoryAttributes;
+  comboCategories: ComboCategoryPositionSelectFragment[];
+}> = ({ comboCategoryId, comboCategory, comboCategories }) => {
   const router = useRouter();
   const setLoading = useSetRecoilState(loadingState);
   const [updateComboCategory, { loading }] = useUpdateComboCategoryMutation({
@@ -54,7 +59,7 @@ export const PageContent: React.FC<{
   });
 
   const onSubmit = (attributes: ComboCategoryAttributes) => {
-    updateComboCategory({ variables: { comboCategoryId: comboCategory.id, attributes } });
+    updateComboCategory({ variables: { comboCategoryId, attributes } });
   };
 
   setLoading(loading);

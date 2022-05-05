@@ -1,5 +1,0 @@
-fragment ComboPositionSelect on Combo {
-  id
-  command
-  position
-}

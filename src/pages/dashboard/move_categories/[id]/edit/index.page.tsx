@@ -7,7 +7,7 @@ import { useSetRecoilState } from 'recoil';
 import { DashboardContent, MoveCategoryForm } from '@/components';
 import {
   MoveCategoryAttributes,
-  MoveCategoryFragment,
+  MoveCategoryPositionSelectFragment,
   usePageDashboardMoveCategoryEditQuery,
   useUpdateMoveCategoryMutation,
 } from '@/generated/graphql';
@@ -32,15 +32,20 @@ const Page: React.FC = () => {
 
   return (
     <DashboardContent title="カテゴリ編集">
-      <PageContent moveCategory={moveCategory} moveCategories={moveCategory.character.moveCategories} />
+      <PageContent
+        moveCategoryId={moveCategory.id}
+        moveCategory={moveCategory}
+        moveCategories={moveCategory.character.moveCategories}
+      />
     </DashboardContent>
   );
 };
 
-export const PageContent: React.FC<{ moveCategory: MoveCategoryFragment; moveCategories: MoveCategoryFragment[] }> = ({
-  moveCategory,
-  moveCategories,
-}) => {
+export const PageContent: React.FC<{
+  moveCategoryId: string;
+  moveCategory: MoveCategoryAttributes;
+  moveCategories: MoveCategoryPositionSelectFragment[];
+}> = ({ moveCategoryId, moveCategory, moveCategories }) => {
   const router = useRouter();
   const setLoading = useSetRecoilState(loadingState);
   const [updateMoveCategory, { loading }] = useUpdateMoveCategoryMutation({
@@ -54,7 +59,7 @@ export const PageContent: React.FC<{ moveCategory: MoveCategoryFragment; moveCat
   });
 
   const onSubmit = (attributes: MoveCategoryAttributes) => {
-    updateMoveCategory({ variables: { moveCategoryId: moveCategory.id, attributes } });
+    updateMoveCategory({ variables: { moveCategoryId, attributes } });
   };
 
   setLoading(loading);

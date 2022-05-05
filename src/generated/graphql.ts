@@ -2070,10 +2070,6 @@ export type VideoUpload = {
 
 export type CurrentUserFragment = { __typename?: 'CurrentUser', id: string, name: string, role: UserRole, avatarUrl: string };
 
-export type ComboFragment = { __typename?: 'Combo', id: string, damage?: number | null, command: Array<string>, note?: string | null, position: number, move?: { __typename?: 'Move', id: string, name: string } | null, comboCategory: { __typename?: 'ComboCategory', id: string, name: string }, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null };
-
-export type ComboCategoryFragment = { __typename?: 'ComboCategory', id: string, name: string, position: number };
-
 export type AttackMoveFragment = { __typename?: 'AttackMove', id: string, startUpFrame?: number | null, duration?: number | null, heights: Array<AttackTypeEnum>, damages: Array<number>, reach?: number | null, blockResult: AttackMoveResultEnum, blockStatus?: AttackMoveStateEnum | null, blockFrame?: number | null, hitResult: AttackMoveResultEnum, hitStatus?: AttackMoveStateEnum | null, hitFrame?: number | null, counterResult: AttackMoveResultEnum, counterStatus?: AttackMoveStateEnum | null, counterFrame?: number | null, powerCrush: boolean, powerCrushFrame?: number | null, crouchingStatus: boolean, crouchingStatusFrame?: number | null, jumpStatus: boolean, jumpStatusFrame?: number | null, homing: boolean, screw: boolean, wallBound: boolean };
 
 export type ThrowMoveFragment = { __typename?: 'ThrowMove', id: string, throwType: ThrowTypeEnum, startUpFrame?: number | null, damage?: number | null, throwEscape: ThrowEscapeEnum, throwResult: ThrowMoveResultEnum };
@@ -2081,8 +2077,6 @@ export type ThrowMoveFragment = { __typename?: 'ThrowMove', id: string, throwTyp
 export type ReversalMoveFragment = { __typename?: 'ReversalMove', id: string, type: string, startUpFrame?: number | null, finishFrame?: number | null };
 
 export type MoveFragment = { __typename?: 'Move', id: string, name: string, kana?: string | null, command: Array<string>, statusAfter?: string | null, note?: string | null, position: number, moveCategory: { __typename?: 'MoveCategory', id: string, name: string }, moveable: { __typename: 'AttackMove', id: string, startUpFrame?: number | null, duration?: number | null, heights: Array<AttackTypeEnum>, damages: Array<number>, reach?: number | null, blockResult: AttackMoveResultEnum, blockStatus?: AttackMoveStateEnum | null, blockFrame?: number | null, hitResult: AttackMoveResultEnum, hitStatus?: AttackMoveStateEnum | null, hitFrame?: number | null, counterResult: AttackMoveResultEnum, counterStatus?: AttackMoveStateEnum | null, counterFrame?: number | null, powerCrush: boolean, powerCrushFrame?: number | null, crouchingStatus: boolean, crouchingStatusFrame?: number | null, jumpStatus: boolean, jumpStatusFrame?: number | null, homing: boolean, screw: boolean, wallBound: boolean } | { __typename: 'ReversalMove', id: string, type: string, startUpFrame?: number | null, finishFrame?: number | null } | { __typename: 'ThrowMove', id: string, throwType: ThrowTypeEnum, startUpFrame?: number | null, damage?: number | null, throwEscape: ThrowEscapeEnum, throwResult: ThrowMoveResultEnum }, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null };
-
-export type MoveCategoryFragment = { __typename?: 'MoveCategory', id: string, name: string, position: number };
 
 export type PagingFragment = { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean };
 
@@ -2401,7 +2395,11 @@ export type CharacterCardFragment = { __typename?: 'Character', slug: string, na
 
 export type CharacterFormFragment = { __typename?: 'Character', name: string, nameKana: string, longName: string, longNameKana: string, slug: string, country: string, fightingStyle: string, story: string, description: string, dlc: boolean };
 
+export type ComboCategoryFormFragment = { __typename?: 'ComboCategory', id: string, name: string, position: number };
+
 export type ComboCategoryPositionSelectFragment = { __typename?: 'ComboCategory', id: string, name: string, position: number };
+
+export type ComboFormFragment = { __typename?: 'Combo', id: string, command: Array<string>, damage?: number | null, note?: string | null, position: number, move?: { __typename?: 'Move', id: string } | null };
 
 export type ComboPositionSelectFragment = { __typename?: 'Combo', id: string, command: Array<string>, position: number };
 
@@ -2413,6 +2411,8 @@ export type FavButtonArticleQueryVariables = Exact<{
 
 
 export type FavButtonArticleQuery = { __typename?: 'Query', article: { __typename?: 'Article', faved: boolean } };
+
+export type MoveCategoryFormFragment = { __typename?: 'MoveCategory', id: string, name: string, position: number };
 
 export type MoveCategoryPositionSelectFragment = { __typename?: 'MoveCategory', id: string, name: string, position: number };
 
@@ -2648,7 +2648,7 @@ export type PageDashboardComboEditQueryVariables = Exact<{
 }>;
 
 
-export type PageDashboardComboEditQuery = { __typename?: 'Query', combo: { __typename?: 'Combo', id: string, damage?: number | null, command: Array<string>, note?: string | null, position: number, comboCategory: { __typename?: 'ComboCategory', id: string, name: string, combos: Array<{ __typename?: 'Combo', id: string, command: Array<string>, position: number }>, character: { __typename?: 'Character', slug: string, name: string, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, moves: Array<{ __typename?: 'Move', id: string, name: string }> }> } }, move?: { __typename?: 'Move', id: string, name: string } | null, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null } };
+export type PageDashboardComboEditQuery = { __typename?: 'Query', combo: { __typename?: 'Combo', id: string, command: Array<string>, damage?: number | null, note?: string | null, position: number, comboCategory: { __typename?: 'ComboCategory', id: string, name: string, combos: Array<{ __typename?: 'Combo', id: string, command: Array<string>, position: number }>, character: { __typename?: 'Character', slug: string, name: string, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, moves: Array<{ __typename?: 'Move', id: string, name: string }> }> } }, move?: { __typename?: 'Move', id: string } | null } };
 
 export type PageDashboardMoveCategoryEditQueryVariables = Exact<{
   moveCategoryId: Scalars['ID'];
@@ -3035,35 +3035,6 @@ export const CurrentUserFragmentDoc = gql`
   avatarUrl
 }
     `;
-export const ComboFragmentDoc = gql`
-    fragment combo on Combo {
-  id
-  damage
-  command
-  note
-  position
-  move {
-    id
-    name
-  }
-  comboCategory {
-    id
-    name
-  }
-  comboVideo {
-    id
-    m3u8Url
-    thumbnailUrl
-  }
-}
-    `;
-export const ComboCategoryFragmentDoc = gql`
-    fragment comboCategory on ComboCategory {
-  id
-  name
-  position
-}
-    `;
 export const AttackMoveFragmentDoc = gql`
     fragment attackMove on AttackMove {
   id
@@ -3144,13 +3115,6 @@ export const MoveFragmentDoc = gql`
     ${AttackMoveFragmentDoc}
 ${ThrowMoveFragmentDoc}
 ${ReversalMoveFragmentDoc}`;
-export const MoveCategoryFragmentDoc = gql`
-    fragment moveCategory on MoveCategory {
-  id
-  name
-  position
-}
-    `;
 export const PagingFragmentDoc = gql`
     fragment paging on Paging {
   currentPage
@@ -3288,11 +3252,30 @@ export const CharacterFormFragmentDoc = gql`
   dlc
 }
     `;
+export const ComboCategoryFormFragmentDoc = gql`
+    fragment ComboCategoryForm on ComboCategory {
+  id
+  name
+  position
+}
+    `;
 export const ComboCategoryPositionSelectFragmentDoc = gql`
     fragment ComboCategoryPositionSelect on ComboCategory {
   id
   name
   position
+}
+    `;
+export const ComboFormFragmentDoc = gql`
+    fragment ComboForm on Combo {
+  id
+  command
+  damage
+  note
+  position
+  move {
+    id
+  }
 }
     `;
 export const ComboPositionSelectFragmentDoc = gql`
@@ -3317,6 +3300,13 @@ export const ComboMediaFragmentDoc = gql`
     m3u8Url
     thumbnailUrl
   }
+}
+    `;
+export const MoveCategoryFormFragmentDoc = gql`
+    fragment MoveCategoryForm on MoveCategory {
+  id
+  name
+  position
 }
     `;
 export const MoveCategoryPositionSelectFragmentDoc = gql`
@@ -6396,7 +6386,7 @@ export type PageDashboardComboCategoryEditQueryResult = Apollo.QueryResult<PageD
 export const PageDashboardComboEditDocument = gql`
     query PageDashboardComboEdit($comboId: ID!) {
   combo(comboId: $comboId) {
-    ...combo
+    ...ComboForm
     comboCategory {
       id
       name
@@ -6413,7 +6403,7 @@ export const PageDashboardComboEditDocument = gql`
     }
   }
 }
-    ${ComboFragmentDoc}
+    ${ComboFormFragmentDoc}
 ${ComboPositionSelectFragmentDoc}
 ${MoveSelectOptionFragmentDoc}`;
 
@@ -6447,9 +6437,7 @@ export type PageDashboardComboEditQueryResult = Apollo.QueryResult<PageDashboard
 export const PageDashboardMoveCategoryEditDocument = gql`
     query PageDashboardMoveCategoryEdit($moveCategoryId: ID!) {
   moveCategory(moveCategoryId: $moveCategoryId) {
-    id
-    name
-    position
+    ...MoveCategoryForm
     character {
       slug
       name
@@ -6459,7 +6447,8 @@ export const PageDashboardMoveCategoryEditDocument = gql`
     }
   }
 }
-    ${MoveCategoryPositionSelectFragmentDoc}`;
+    ${MoveCategoryFormFragmentDoc}
+${MoveCategoryPositionSelectFragmentDoc}`;
 
 /**
  * __usePageDashboardMoveCategoryEditQuery__

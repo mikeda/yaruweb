@@ -1,6 +1,6 @@
 query PageDashboardComboEdit($comboId: ID!) {
   combo(comboId: $comboId) {
-    ...combo
+    ...ComboForm
 
     comboCategory {
       id

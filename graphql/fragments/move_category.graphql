@@ -1,5 +1,0 @@
-fragment moveCategory on MoveCategory {
-  id
-  name
-  position
-}
