@@ -28,3 +28,11 @@ query PageDashboardComboNew($comboCategoryId: ID!) {
     }
   }
 }
+
+mutation CreateCombo($comboCategoryId: ID!, $attributes: ComboAttributes!) {
+  createCombo(input: { comboCategoryId: $comboCategoryId, attributes: $attributes }) {
+    combo {
+      id
+    }
+  }
+}

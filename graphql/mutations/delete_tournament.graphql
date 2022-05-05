@@ -1,7 +1,0 @@
-mutation DeleteTournament($tournamentId: ID!) {
-  deleteTournament(input: { tournamentId: $tournamentId }) {
-    tournament {
-      id
-    }
-  }
-}

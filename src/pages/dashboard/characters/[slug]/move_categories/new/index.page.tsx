@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
-import { useRouteParams } from './hooks';
+import { useRouteParams } from './hooks/useRouteParams';
 
 import { MoveCategoryForm, DashboardContent } from '@/components';
 import {

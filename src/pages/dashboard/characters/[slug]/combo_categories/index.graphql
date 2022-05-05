@@ -19,7 +19,6 @@ fragment DashboardComboCategoriesPageCombo on Combo {
 
 }
 
-
 query DashboardComboCategoriesPage($characterSlug: String!) {
   character(characterSlug: $characterSlug) {
     ...CharacterBreadcrumbs
@@ -27,5 +26,26 @@ query DashboardComboCategoriesPage($characterSlug: String!) {
 
   comboCategories(characterSlug: $characterSlug) {
     ...DashboardComboCategoriesPageComboCategory
+  }
+}
+
+mutation CreateComboVideo($comboId: ID!) {
+  createComboVideo(input: { comboId: $comboId }) {
+    combo {
+      ...DashboardComboCategoriesPageCombo
+    }
+
+    videoUpload {
+      url
+      fields
+    }
+  }
+}
+
+mutation DeleteCombo($comboId: ID!) {
+  deleteCombo(input: { comboId: $comboId }) {
+    combo {
+      id
+    }
   }
 }

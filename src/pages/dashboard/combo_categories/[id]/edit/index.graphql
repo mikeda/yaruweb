@@ -14,3 +14,11 @@ query PageDashboardComboCategoryEdit($comboCategoryId: ID!) {
     }
   }
 }
+
+mutation UpdateComboCategory($comboCategoryId: ID!, $attributes: ComboCategoryAttributes!) {
+  updateComboCategory(input: { comboCategoryId: $comboCategoryId, attributes: $attributes }) {
+    comboCategory {
+      id
+    }
+  }
+}
