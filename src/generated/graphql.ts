@@ -2084,8 +2084,6 @@ export type MoveFragment = { __typename?: 'Move', id: string, name: string, kana
 
 export type MoveCategoryFragment = { __typename?: 'MoveCategory', id: string, name: string, position: number };
 
-export type MoveVideoFragment = { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string };
-
 export type PagingFragment = { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean };
 
 export type CreateArticleImageMutationVariables = Exact<{
@@ -3112,13 +3110,6 @@ export const ReversalMoveFragmentDoc = gql`
   finishFrame
 }
     `;
-export const MoveVideoFragmentDoc = gql`
-    fragment moveVideo on MoveVideo {
-  id
-  m3u8Url
-  thumbnailUrl
-}
-    `;
 export const MoveFragmentDoc = gql`
     fragment move on Move {
   id
@@ -3145,13 +3136,14 @@ export const MoveFragmentDoc = gql`
     }
   }
   moveVideo {
-    ...moveVideo
+    id
+    m3u8Url
+    thumbnailUrl
   }
 }
     ${AttackMoveFragmentDoc}
 ${ThrowMoveFragmentDoc}
-${ReversalMoveFragmentDoc}
-${MoveVideoFragmentDoc}`;
+${ReversalMoveFragmentDoc}`;
 export const MoveCategoryFragmentDoc = gql`
     fragment moveCategory on MoveCategory {
   id
@@ -3552,14 +3544,15 @@ export const CharacterMovesPageMoveFragmentDoc = gql`
   command
   note
   moveVideo {
-    ...moveVideo
+    id
+    m3u8Url
+    thumbnailUrl
   }
   moveable {
     ...moveable
   }
 }
-    ${MoveVideoFragmentDoc}
-${MoveableFragmentDoc}`;
+    ${MoveableFragmentDoc}`;
 export const DashboardArticlesPageArticleFragmentDoc = gql`
     fragment DashboardArticlesPageArticle on Article {
   id
@@ -3593,10 +3586,12 @@ export const DashboardMoveCategoriesPageMoveFragmentDoc = gql`
   name
   command
   moveVideo {
-    ...moveVideo
+    id
+    m3u8Url
+    thumbnailUrl
   }
 }
-    ${MoveVideoFragmentDoc}`;
+    `;
 export const DashboardMoveCategoriesPageMoveCategoryFragmentDoc = gql`
     fragment DashboardMoveCategoriesPageMoveCategory on MoveCategory {
   id

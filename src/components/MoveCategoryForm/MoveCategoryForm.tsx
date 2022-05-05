@@ -16,11 +16,11 @@ import {
 import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
-import { MoveCategoryAttributes, MoveCategoryFragment } from '@/generated/graphql';
+import { MoveCategoryAttributes, MoveCategoryFragment, MoveCategoryPositionSelectFragment } from '@/generated/graphql';
 
 interface Props {
   moveCategory?: MoveCategoryFragment;
-  moveCategories: MoveCategoryFragment[];
+  moveCategories: MoveCategoryPositionSelectFragment[];
   onSubmit: (attributes: MoveCategoryAttributes) => void;
 }
 

@@ -1,5 +1,0 @@
-fragment moveVideo on MoveVideo {
-  id
-  m3u8Url
-  thumbnailUrl
-}
