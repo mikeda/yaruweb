@@ -49,3 +49,11 @@ mutation DeleteMove($moveId: ID!) {
     }
   }
 }
+
+mutation DeleteMoveCategory($moveCategoryId: ID!) {
+  deleteMoveCategory(input: { moveCategoryId: $moveCategoryId }) {
+    moveCategory {
+      id
+    }
+  }
+}
