@@ -24,6 +24,7 @@ export * from './PlayerCard';
 export * from './PlayerForm';
 export * from './PlayerPageTabs';
 export * from './SearchWord';
+export * from './SelectChip';
 export * from './TournamentCard';
 export * from './YouTubeWrapper';
 export * from './VideoPlayer';

@@ -23,7 +23,7 @@ interface Props {
   children: React.ReactNode;
 }
 
-export const BattleSelector: React.FC<Props> = ({ children }) => {
+export const SelectChipContainer: React.FC<Props> = ({ children }) => {
   const classes = useStyles();
 
   return <div className={classes.root}>{children}</div>;

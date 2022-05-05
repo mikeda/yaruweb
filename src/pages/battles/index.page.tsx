@@ -8,8 +8,15 @@ import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
-import { BattleListItem, Breadcrumbs, Content, Head } from '@/components';
-import { BattleSelector, CharacterChip, PlayerChip } from '@/components/BattleSelector';
+import {
+  BattleListItem,
+  Breadcrumbs,
+  Content,
+  Head,
+  SelectChipContainer,
+  CharacterChip,
+  PlayerChip,
+} from '@/components';
 import { pagesPath } from '@/generated/$path';
 import { BattlesPageDocument, BattlesPageQuery, useBattlesPageBattlesLazyQuery } from '@/generated/graphql';
 import { fetchGraphql, loadingState, theme } from '@/lib';
@@ -57,7 +64,7 @@ const Page: React.FC<BattlesPageQuery> = ({
       <Head title="対戦動画" />
 
       <Paper className={classes.content}>
-        <BattleSelector>
+        <SelectChipContainer>
           {players.records.map(player => (
             <PlayerChip
               key={player.id}
@@ -76,7 +83,7 @@ const Page: React.FC<BattlesPageQuery> = ({
               }}
             />
           ))}
-        </BattleSelector>
+        </SelectChipContainer>
 
         <List>
           {battles.map((battle, i) => (

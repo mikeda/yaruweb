@@ -15,22 +15,34 @@ import {
   Paper,
   Typography,
 } from '@mui/material';
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 
 import { Profile } from '../components/Profile';
 import { Tabs } from '../components/Tabs';
 
-import { Content, Head, Breadcrumbs, Command, VideoPlayer } from '@/components';
+import { Content, Head, Breadcrumbs, Command, VideoPlayer, SelectChip, SelectChipContainer } from '@/components';
 import {
   CharacterCombosPageDocument,
   CharacterCombosPageQuery,
   CharacterPathsDocument,
   CharacterPathsQuery,
-  ComboMediaFragment,
+  ComboListItemFragment,
 } from '@/generated/graphql';
 import { fetchGraphql, colors } from '@/lib';
 
-const Page: React.FC<CharacterCombosPageQuery> = ({ character }) => {
+const Page: NextPage<CharacterCombosPageQuery> = ({ character }) => {
+  const [comboStarterId, setComboStarterId] = useState<string>();
+
+  let comboCategories = character.comboCategories;
+  if (comboStarterId) {
+    comboCategories = comboCategories
+      .map(comboCategory => ({
+        ...comboCategory,
+        combos: comboCategory.combos.filter(combo => combo.move?.id === comboStarterId),
+      }))
+      .filter(comboCategory => comboCategory.combos.length);
+  }
+
   return (
     <Content activeTab="characters" breadcrumb={<Breadcrumbs to="characterCombos" character={character} />}>
       <Head title={`${character.longName}のコンボ`} />
@@ -41,7 +53,25 @@ const Page: React.FC<CharacterCombosPageQuery> = ({ character }) => {
         <Tabs character={character} activeTab="combos" />
       </Box>
 
-      {character.comboCategories.map(comboCategory => {
+      {character.comboStarters.length > 0 && (
+        <Box mt={2}>
+          <SelectChipContainer>
+            {character.comboStarters.map(move => (
+              <SelectChip
+                key={move.id}
+                label={move.name}
+                count={move.combosCount}
+                active={move.id === comboStarterId}
+                onClick={() => {
+                  setComboStarterId(move.id === comboStarterId ? undefined : move.id);
+                }}
+              />
+            ))}
+          </SelectChipContainer>
+        </Box>
+      )}
+
+      {comboCategories.map(comboCategory => {
         return (
           <Box key={comboCategory.id} mt={4}>
             <Typography variant="h3" gutterBottom>
@@ -64,7 +94,7 @@ const Page: React.FC<CharacterCombosPageQuery> = ({ character }) => {
   );
 };
 
-const ComboListItem: React.FC<{ combo: ComboMediaFragment; first: boolean }> = ({ combo, first }) => {
+const ComboListItem: React.FC<{ combo: ComboListItemFragment; first: boolean }> = ({ combo, first }) => {
   const [dialogOpen, setDialogOpen] = useState(false);
 
   return (
