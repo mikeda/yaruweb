@@ -4,6 +4,26 @@ query DashboardArticlePageArticle($articleId: ID!) {
   }
 }
 
+query MyArticle($articleId: ID!) {
+  myArticle(articleId: $articleId) {
+    id
+    title
+    description
+    mainImageUrl
+    publishedAt
+    faved
+    favsCount
+    status
+    category
+    content
+
+    author {
+      name
+      avatarUrl
+    }
+  }
+}
+
 mutation UpdateArticle($articleId: ID!, $attributes: ArticleAttributes!) {
   updateArticle(input: { articleId: $articleId, attributes: $attributes }) {
     article {
