@@ -27,7 +27,6 @@ import {
   CharacterPathsDocument,
   CharacterPathsQuery,
   ComboListItemFragment,
-  ComboMediaFragment,
 } from '@/generated/graphql';
 import { fetchGraphql, colors } from '@/lib';
 
