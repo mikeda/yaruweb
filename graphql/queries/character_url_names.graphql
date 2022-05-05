@@ -1,7 +1,0 @@
-query CharacterSlugs {
-  characters {
-    records {
-      slug
-    }
-  }
-}
