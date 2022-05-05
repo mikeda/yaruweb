@@ -20,7 +20,7 @@ import * as yup from 'yup';
 
 import { CommandForm } from './CommandForm';
 
-import { ReversalMoveAttributes, MoveFragment, MovePositionSelectFragment } from '@/generated/graphql';
+import { ReversalMoveAttributes, MoveFormFragment, MovePositionSelectFragment } from '@/generated/graphql';
 import { NullableNumberSchema } from '@/lib';
 
 const schema = yup.object().shape({
@@ -35,7 +35,7 @@ const schema = yup.object().shape({
 });
 
 interface Props {
-  move?: MoveFragment;
+  move?: MoveFormFragment;
   moves: MovePositionSelectFragment[];
   onSubmit: (attributes: ReversalMoveAttributes) => void;
   copy?: boolean;

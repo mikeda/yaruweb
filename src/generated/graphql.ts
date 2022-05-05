@@ -2076,8 +2076,6 @@ export type ThrowMoveFragment = { __typename?: 'ThrowMove', id: string, throwTyp
 
 export type ReversalMoveFragment = { __typename?: 'ReversalMove', id: string, type: string, startUpFrame?: number | null, finishFrame?: number | null };
 
-export type MoveFragment = { __typename?: 'Move', id: string, name: string, kana?: string | null, command: Array<string>, statusAfter?: string | null, note?: string | null, position: number, moveCategory: { __typename?: 'MoveCategory', id: string, name: string }, moveable: { __typename: 'AttackMove', id: string, startUpFrame?: number | null, duration?: number | null, heights: Array<AttackTypeEnum>, damages: Array<number>, reach?: number | null, blockResult: AttackMoveResultEnum, blockStatus?: AttackMoveStateEnum | null, blockFrame?: number | null, hitResult: AttackMoveResultEnum, hitStatus?: AttackMoveStateEnum | null, hitFrame?: number | null, counterResult: AttackMoveResultEnum, counterStatus?: AttackMoveStateEnum | null, counterFrame?: number | null, powerCrush: boolean, powerCrushFrame?: number | null, crouchingStatus: boolean, crouchingStatusFrame?: number | null, jumpStatus: boolean, jumpStatusFrame?: number | null, homing: boolean, screw: boolean, wallBound: boolean } | { __typename: 'ReversalMove', id: string, type: string, startUpFrame?: number | null, finishFrame?: number | null } | { __typename: 'ThrowMove', id: string, throwType: ThrowTypeEnum, startUpFrame?: number | null, damage?: number | null, throwEscape: ThrowEscapeEnum, throwResult: ThrowMoveResultEnum }, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null };
-
 export type PagingFragment = { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean };
 
 export type CreateArticleImageMutationVariables = Exact<{
@@ -2375,7 +2373,7 @@ export type ArticleElementMoveQueryVariables = Exact<{
 }>;
 
 
-export type ArticleElementMoveQuery = { __typename?: 'Query', move: { __typename?: 'Move', id: string, name: string, kana?: string | null, command: Array<string>, statusAfter?: string | null, note?: string | null, position: number, moveCategory: { __typename?: 'MoveCategory', id: string, name: string }, moveable: { __typename: 'AttackMove', id: string, startUpFrame?: number | null, duration?: number | null, heights: Array<AttackTypeEnum>, damages: Array<number>, reach?: number | null, blockResult: AttackMoveResultEnum, blockStatus?: AttackMoveStateEnum | null, blockFrame?: number | null, hitResult: AttackMoveResultEnum, hitStatus?: AttackMoveStateEnum | null, hitFrame?: number | null, counterResult: AttackMoveResultEnum, counterStatus?: AttackMoveStateEnum | null, counterFrame?: number | null, powerCrush: boolean, powerCrushFrame?: number | null, crouchingStatus: boolean, crouchingStatusFrame?: number | null, jumpStatus: boolean, jumpStatusFrame?: number | null, homing: boolean, screw: boolean, wallBound: boolean } | { __typename: 'ReversalMove', id: string, type: string, startUpFrame?: number | null, finishFrame?: number | null } | { __typename: 'ThrowMove', id: string, throwType: ThrowTypeEnum, startUpFrame?: number | null, damage?: number | null, throwEscape: ThrowEscapeEnum, throwResult: ThrowMoveResultEnum }, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null } };
+export type ArticleElementMoveQuery = { __typename?: 'Query', move: { __typename?: 'Move', id: string, name: string, kana?: string | null, command: Array<string>, note?: string | null, moveable: { __typename: 'AttackMove', id: string, startUpFrame?: number | null, duration?: number | null, heights: Array<AttackTypeEnum>, damages: Array<number>, reach?: number | null, blockResult: AttackMoveResultEnum, blockStatus?: AttackMoveStateEnum | null, blockFrame?: number | null, hitResult: AttackMoveResultEnum, hitStatus?: AttackMoveStateEnum | null, hitFrame?: number | null, counterResult: AttackMoveResultEnum, counterStatus?: AttackMoveStateEnum | null, counterFrame?: number | null, powerCrush: boolean, powerCrushFrame?: number | null, crouchingStatus: boolean, crouchingStatusFrame?: number | null, jumpStatus: boolean, jumpStatusFrame?: number | null, homing: boolean, screw: boolean, wallBound: boolean } | { __typename: 'ReversalMove', id: string, type: string, startUpFrame?: number | null, finishFrame?: number | null } | { __typename: 'ThrowMove', id: string, throwType: ThrowTypeEnum, startUpFrame?: number | null, damage?: number | null, throwEscape: ThrowEscapeEnum, throwResult: ThrowMoveResultEnum }, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null } };
 
 export type ArticleCardFragment = { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, faved: boolean, favsCount: number, status: ArticleStatus, author: { __typename?: 'User', name: string, avatarUrl: string } };
 
@@ -2415,6 +2413,8 @@ export type FavButtonArticleQuery = { __typename?: 'Query', article: { __typenam
 export type MoveCategoryFormFragment = { __typename?: 'MoveCategory', id: string, name: string, position: number };
 
 export type MoveCategoryPositionSelectFragment = { __typename?: 'MoveCategory', id: string, name: string, position: number };
+
+export type MoveFormFragment = { __typename?: 'Move', id: string, name: string, kana?: string | null, command: Array<string>, statusAfter?: string | null, note?: string | null, position: number, moveCategory: { __typename?: 'MoveCategory', id: string, name: string }, moveable: { __typename: 'AttackMove', id: string, startUpFrame?: number | null, duration?: number | null, heights: Array<AttackTypeEnum>, damages: Array<number>, reach?: number | null, blockResult: AttackMoveResultEnum, blockStatus?: AttackMoveStateEnum | null, blockFrame?: number | null, hitResult: AttackMoveResultEnum, hitStatus?: AttackMoveStateEnum | null, hitFrame?: number | null, counterResult: AttackMoveResultEnum, counterStatus?: AttackMoveStateEnum | null, counterFrame?: number | null, powerCrush: boolean, powerCrushFrame?: number | null, crouchingStatus: boolean, crouchingStatusFrame?: number | null, jumpStatus: boolean, jumpStatusFrame?: number | null, homing: boolean, screw: boolean, wallBound: boolean } | { __typename: 'ReversalMove', id: string, type: string, startUpFrame?: number | null, finishFrame?: number | null } | { __typename: 'ThrowMove', id: string, throwType: ThrowTypeEnum, startUpFrame?: number | null, damage?: number | null, throwEscape: ThrowEscapeEnum, throwResult: ThrowMoveResultEnum }, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null };
 
 export type MovePositionSelectFragment = { __typename?: 'Move', id: string, name: string, position: number };
 
@@ -3035,86 +3035,6 @@ export const CurrentUserFragmentDoc = gql`
   avatarUrl
 }
     `;
-export const AttackMoveFragmentDoc = gql`
-    fragment attackMove on AttackMove {
-  id
-  startUpFrame
-  duration
-  heights
-  damages
-  reach
-  blockResult
-  blockStatus
-  blockFrame
-  hitResult
-  hitStatus
-  hitFrame
-  counterResult
-  counterStatus
-  counterFrame
-  powerCrush
-  powerCrushFrame
-  crouchingStatus
-  crouchingStatusFrame
-  jumpStatus
-  jumpStatusFrame
-  homing
-  screw
-  wallBound
-}
-    `;
-export const ThrowMoveFragmentDoc = gql`
-    fragment throwMove on ThrowMove {
-  id
-  throwType
-  startUpFrame
-  damage
-  throwEscape
-  throwResult
-}
-    `;
-export const ReversalMoveFragmentDoc = gql`
-    fragment reversalMove on ReversalMove {
-  id
-  type
-  startUpFrame
-  finishFrame
-}
-    `;
-export const MoveFragmentDoc = gql`
-    fragment move on Move {
-  id
-  name
-  kana
-  command
-  statusAfter
-  note
-  position
-  moveCategory {
-    id
-    name
-  }
-  moveable {
-    __typename
-    ... on AttackMove {
-      ...attackMove
-    }
-    ... on ThrowMove {
-      ...throwMove
-    }
-    ... on ReversalMove {
-      ...reversalMove
-    }
-  }
-  moveVideo {
-    id
-    m3u8Url
-    thumbnailUrl
-  }
-}
-    ${AttackMoveFragmentDoc}
-${ThrowMoveFragmentDoc}
-${ReversalMoveFragmentDoc}`;
 export const PagingFragmentDoc = gql`
     fragment paging on Paging {
   currentPage
@@ -3316,6 +3236,86 @@ export const MoveCategoryPositionSelectFragmentDoc = gql`
   position
 }
     `;
+export const AttackMoveFragmentDoc = gql`
+    fragment attackMove on AttackMove {
+  id
+  startUpFrame
+  duration
+  heights
+  damages
+  reach
+  blockResult
+  blockStatus
+  blockFrame
+  hitResult
+  hitStatus
+  hitFrame
+  counterResult
+  counterStatus
+  counterFrame
+  powerCrush
+  powerCrushFrame
+  crouchingStatus
+  crouchingStatusFrame
+  jumpStatus
+  jumpStatusFrame
+  homing
+  screw
+  wallBound
+}
+    `;
+export const ThrowMoveFragmentDoc = gql`
+    fragment throwMove on ThrowMove {
+  id
+  throwType
+  startUpFrame
+  damage
+  throwEscape
+  throwResult
+}
+    `;
+export const ReversalMoveFragmentDoc = gql`
+    fragment reversalMove on ReversalMove {
+  id
+  type
+  startUpFrame
+  finishFrame
+}
+    `;
+export const MoveFormFragmentDoc = gql`
+    fragment MoveForm on Move {
+  id
+  name
+  kana
+  command
+  statusAfter
+  note
+  position
+  moveCategory {
+    id
+    name
+  }
+  moveable {
+    __typename
+    ... on AttackMove {
+      ...attackMove
+    }
+    ... on ThrowMove {
+      ...throwMove
+    }
+    ... on ReversalMove {
+      ...reversalMove
+    }
+  }
+  moveVideo {
+    id
+    m3u8Url
+    thumbnailUrl
+  }
+}
+    ${AttackMoveFragmentDoc}
+${ThrowMoveFragmentDoc}
+${ReversalMoveFragmentDoc}`;
 export const MovePositionSelectFragmentDoc = gql`
     fragment MovePositionSelect on Move {
   id
@@ -5303,10 +5303,10 @@ export type ArticleElementComboQueryResult = Apollo.QueryResult<ArticleElementCo
 export const ArticleElementMoveDocument = gql`
     query ArticleElementMove($moveId: ID!) {
   move(moveId: $moveId) {
-    ...move
+    ...MoveMedia
   }
 }
-    ${MoveFragmentDoc}`;
+    ${MoveMediaFragmentDoc}`;
 
 /**
  * __useArticleElementMoveQuery__
@@ -6637,7 +6637,7 @@ export type CreateAttackMoveMutationOptions = Apollo.BaseMutationOptions<CreateA
 export const PageDashboardMoveCopyDocument = gql`
     query PageDashboardMoveCopy($moveId: ID!) {
   move(moveId: $moveId) {
-    ...move
+    ...MoveForm
     moveCategory {
       id
       name
@@ -6651,7 +6651,7 @@ export const PageDashboardMoveCopyDocument = gql`
     }
   }
 }
-    ${MoveFragmentDoc}
+    ${MoveFormFragmentDoc}
 ${MovePositionSelectFragmentDoc}`;
 
 /**
@@ -6684,7 +6684,7 @@ export type PageDashboardMoveCopyQueryResult = Apollo.QueryResult<PageDashboardM
 export const PageDashboardMoveEditDocument = gql`
     query PageDashboardMoveEdit($moveId: ID!) {
   move(moveId: $moveId) {
-    ...move
+    ...MoveForm
     moveCategory {
       id
       name
@@ -6698,7 +6698,7 @@ export const PageDashboardMoveEditDocument = gql`
     }
   }
 }
-    ${MoveFragmentDoc}
+    ${MoveFormFragmentDoc}
 ${MovePositionSelectFragmentDoc}`;
 
 /**

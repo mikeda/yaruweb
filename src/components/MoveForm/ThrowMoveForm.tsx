@@ -22,7 +22,7 @@ import { CommandForm } from './CommandForm';
 
 import {
   ThrowMoveAttributes,
-  MoveFragment,
+  MoveFormFragment,
   ThrowMoveResultEnum,
   ThrowTypeEnum,
   ThrowEscapeEnum,
@@ -42,7 +42,7 @@ const schema = yup.object().shape({
 });
 
 interface Props {
-  move?: MoveFragment;
+  move?: MoveFormFragment;
   moves: MovePositionSelectFragment[];
   onSubmit: (attributes: ThrowMoveAttributes) => void;
   copy?: boolean;

@@ -30,7 +30,7 @@ import {
   AttackMoveResultEnum,
   AttackMoveStateEnum,
   AttackTypeEnum,
-  MoveFragment,
+  MoveFormFragment,
   MovePositionSelectFragment,
 } from '@/generated/graphql';
 import {
@@ -57,7 +57,7 @@ const schema = yup.object().shape({
 });
 
 interface Props {
-  move?: MoveFragment;
+  move?: MoveFormFragment;
   moves: MovePositionSelectFragment[];
   onSubmit: (attributes: AttackMoveAttributes) => void;
   copy?: boolean;

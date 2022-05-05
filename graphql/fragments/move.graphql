@@ -40,32 +40,3 @@ fragment reversalMove on ReversalMove {
   startUpFrame
   finishFrame
 }
-
-fragment move on Move {
-  id
-  name
-  kana
-  command
-  statusAfter
-  note
-  position
-
-  moveCategory {
-    id
-    name
-  }
-
-  moveable {
-    __typename
-
-    ... on AttackMove { ...attackMove }
-    ... on ThrowMove { ...throwMove }
-    ... on ReversalMove { ...reversalMove }
-  }
-
-  moveVideo {
-    id
-    m3u8Url
-    thumbnailUrl
-  }
-}

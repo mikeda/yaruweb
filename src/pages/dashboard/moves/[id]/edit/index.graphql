@@ -1,6 +1,6 @@
 query PageDashboardMoveEdit($moveId: ID!) {
   move(moveId: $moveId) {
-    ...move
+    ...MoveForm
 
     moveCategory {
       id
