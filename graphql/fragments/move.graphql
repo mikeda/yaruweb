@@ -64,6 +64,8 @@ fragment move on Move {
   }
 
   moveVideo {
-    ...moveVideo
+    id
+    m3u8Url
+    thumbnailUrl
   }
 }

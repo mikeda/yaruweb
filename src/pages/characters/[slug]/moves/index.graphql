@@ -14,7 +14,9 @@ fragment CharacterMovesPageMove on Move {
   note
 
   moveVideo {
-    ...moveVideo
+    id
+    m3u8Url
+    thumbnailUrl
   }
 
   moveable {

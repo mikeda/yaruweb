@@ -1,7 +1,7 @@
 mutation UpdateCurrentUser($attributes: CurrentUserAttributes!) {
   updateCurrentUser(input: { attributes: $attributes }) {
     currentUser {
-      ...currentUser
+      ...CurrentUser
     }
   }
 }

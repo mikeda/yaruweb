@@ -13,7 +13,9 @@ fragment DashboardMoveCategoriesPageMove on Move {
   command
 
   moveVideo {
-    ...moveVideo
+    id
+    m3u8Url
+    thumbnailUrl
   }
 }
 

@@ -1,7 +1,19 @@
 query MyArticles($page: Int, $per: Int) {
   myArticles(page: $page, per: $per) {
     records {
-      ...articleSummary
+      id
+      title
+      description
+      mainImageUrl
+      publishedAt
+      faved
+      favsCount
+      status
+
+      author {
+        name
+        avatarUrl
+      }
     }
 
     paging {
