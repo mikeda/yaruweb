@@ -3,11 +3,3 @@ fragment OrganizerSelectOption on Organizer {
   slug
   name
 }
-
-query OrganizerSelectOptions {
-  organizers(per: 500) {
-    records {
-      ...OrganizerSelectOption
-    }
-  }
-}

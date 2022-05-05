@@ -2196,13 +2196,6 @@ export type FavArticleMutationVariables = Exact<{
 
 export type FavArticleMutation = { __typename?: 'Mutation', favArticle?: { __typename?: 'FavArticlePayload', article: { __typename?: 'Article', id: string } } | null };
 
-export type SetUserAvatarMutationVariables = Exact<{
-  avatar: Scalars['String'];
-}>;
-
-
-export type SetUserAvatarMutation = { __typename?: 'Mutation', setUserAvatar?: { __typename?: 'SetUserAvatarPayload', user: { __typename?: 'User', avatarUrl: string } } | null };
-
 export type UnfavArticleMutationVariables = Exact<{
   articleId: Scalars['ID'];
 }>;
@@ -2274,16 +2267,6 @@ export type CharacterSelectOptionsQueryVariables = Exact<{ [key: string]: never;
 
 export type CharacterSelectOptionsQuery = { __typename?: 'Query', characters: { __typename?: 'CharacterCollection', records: Array<{ __typename?: 'Character', id: string, slug: string, name: string }> } };
 
-export type CharacterSlugsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type CharacterSlugsQuery = { __typename?: 'Query', characters: { __typename?: 'CharacterCollection', records: Array<{ __typename?: 'Character', slug: string }> } };
-
-export type ComboCategoryIdsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type ComboCategoryIdsQuery = { __typename?: 'Query', comboCategories: Array<{ __typename?: 'ComboCategory', id: string }> };
-
 export type ComboSelectOptionsQueryVariables = Exact<{
   characterSlug: Scalars['String'];
 }>;
@@ -2303,11 +2286,6 @@ export type CurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type CurrentUserQuery = { __typename?: 'Query', currentUser: { __typename?: 'CurrentUser', id: string, name: string, role: UserRole, avatarUrl: string } };
 
-export type MoveCategoryIdsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type MoveCategoryIdsQuery = { __typename?: 'Query', moveCategories: Array<{ __typename?: 'MoveCategory', id: string }> };
-
 export type MoveSelectOptionsQueryVariables = Exact<{
   characterSlug: Scalars['String'];
 }>;
@@ -2322,27 +2300,9 @@ export type MyArticleQueryVariables = Exact<{
 
 export type MyArticleQuery = { __typename?: 'Query', myArticle: { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, faved: boolean, favsCount: number, status: ArticleStatus, category: ArticleCategory, content: string, author: { __typename?: 'User', name: string, avatarUrl: string } } };
 
-export type MyArticlesQueryVariables = Exact<{
-  page?: InputMaybe<Scalars['Int']>;
-  per?: InputMaybe<Scalars['Int']>;
-}>;
-
-
-export type MyArticlesQuery = { __typename?: 'Query', myArticles: { __typename?: 'ArticleCollection', records: Array<{ __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, faved: boolean, favsCount: number, status: ArticleStatus, author: { __typename?: 'User', name: string, avatarUrl: string } }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
-
 export type OrganizerSelectOptionFragment = { __typename?: 'Organizer', id: string, slug: string, name: string };
 
-export type OrganizerSelectOptionsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type OrganizerSelectOptionsQuery = { __typename?: 'Query', organizers: { __typename?: 'OrganizerCollection', records: Array<{ __typename?: 'Organizer', id: string, slug: string, name: string }> } };
-
 export type PlayerSelectOptionFragment = { __typename?: 'Player', id: string, slug: string, name: string, tonamelId?: string | null, smashggId?: string | null };
-
-export type PlayerSelectOptionsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type PlayerSelectOptionsQuery = { __typename?: 'Query', players: { __typename?: 'PlayerCollection', records: Array<{ __typename?: 'Player', id: string, slug: string, name: string, tonamelId?: string | null, smashggId?: string | null }> } };
 
 export type PlayerSlugsQueryVariables = Exact<{
   per?: InputMaybe<Scalars['Int']>;
@@ -4337,41 +4297,6 @@ export function useFavArticleMutation(baseOptions?: Apollo.MutationHookOptions<F
 export type FavArticleMutationHookResult = ReturnType<typeof useFavArticleMutation>;
 export type FavArticleMutationResult = Apollo.MutationResult<FavArticleMutation>;
 export type FavArticleMutationOptions = Apollo.BaseMutationOptions<FavArticleMutation, FavArticleMutationVariables>;
-export const SetUserAvatarDocument = gql`
-    mutation SetUserAvatar($avatar: String!) {
-  setUserAvatar(input: {avatar: $avatar}) {
-    user {
-      avatarUrl
-    }
-  }
-}
-    `;
-export type SetUserAvatarMutationFn = Apollo.MutationFunction<SetUserAvatarMutation, SetUserAvatarMutationVariables>;
-
-/**
- * __useSetUserAvatarMutation__
- *
- * To run a mutation, you first call `useSetUserAvatarMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useSetUserAvatarMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [setUserAvatarMutation, { data, loading, error }] = useSetUserAvatarMutation({
- *   variables: {
- *      avatar: // value for 'avatar'
- *   },
- * });
- */
-export function useSetUserAvatarMutation(baseOptions?: Apollo.MutationHookOptions<SetUserAvatarMutation, SetUserAvatarMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<SetUserAvatarMutation, SetUserAvatarMutationVariables>(SetUserAvatarDocument, options);
-      }
-export type SetUserAvatarMutationHookResult = ReturnType<typeof useSetUserAvatarMutation>;
-export type SetUserAvatarMutationResult = Apollo.MutationResult<SetUserAvatarMutation>;
-export type SetUserAvatarMutationOptions = Apollo.BaseMutationOptions<SetUserAvatarMutation, SetUserAvatarMutationVariables>;
 export const UnfavArticleDocument = gql`
     mutation UnfavArticle($articleId: ID!) {
   unfavArticle(input: {articleId: $articleId}) {
@@ -4735,76 +4660,6 @@ export function useCharacterSelectOptionsLazyQuery(baseOptions?: Apollo.LazyQuer
 export type CharacterSelectOptionsQueryHookResult = ReturnType<typeof useCharacterSelectOptionsQuery>;
 export type CharacterSelectOptionsLazyQueryHookResult = ReturnType<typeof useCharacterSelectOptionsLazyQuery>;
 export type CharacterSelectOptionsQueryResult = Apollo.QueryResult<CharacterSelectOptionsQuery, CharacterSelectOptionsQueryVariables>;
-export const CharacterSlugsDocument = gql`
-    query CharacterSlugs {
-  characters {
-    records {
-      slug
-    }
-  }
-}
-    `;
-
-/**
- * __useCharacterSlugsQuery__
- *
- * To run a query within a React component, call `useCharacterSlugsQuery` and pass it any options that fit your needs.
- * When your component renders, `useCharacterSlugsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useCharacterSlugsQuery({
- *   variables: {
- *   },
- * });
- */
-export function useCharacterSlugsQuery(baseOptions?: Apollo.QueryHookOptions<CharacterSlugsQuery, CharacterSlugsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<CharacterSlugsQuery, CharacterSlugsQueryVariables>(CharacterSlugsDocument, options);
-      }
-export function useCharacterSlugsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CharacterSlugsQuery, CharacterSlugsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<CharacterSlugsQuery, CharacterSlugsQueryVariables>(CharacterSlugsDocument, options);
-        }
-export type CharacterSlugsQueryHookResult = ReturnType<typeof useCharacterSlugsQuery>;
-export type CharacterSlugsLazyQueryHookResult = ReturnType<typeof useCharacterSlugsLazyQuery>;
-export type CharacterSlugsQueryResult = Apollo.QueryResult<CharacterSlugsQuery, CharacterSlugsQueryVariables>;
-export const ComboCategoryIdsDocument = gql`
-    query ComboCategoryIds {
-  comboCategories {
-    id
-  }
-}
-    `;
-
-/**
- * __useComboCategoryIdsQuery__
- *
- * To run a query within a React component, call `useComboCategoryIdsQuery` and pass it any options that fit your needs.
- * When your component renders, `useComboCategoryIdsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useComboCategoryIdsQuery({
- *   variables: {
- *   },
- * });
- */
-export function useComboCategoryIdsQuery(baseOptions?: Apollo.QueryHookOptions<ComboCategoryIdsQuery, ComboCategoryIdsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<ComboCategoryIdsQuery, ComboCategoryIdsQueryVariables>(ComboCategoryIdsDocument, options);
-      }
-export function useComboCategoryIdsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ComboCategoryIdsQuery, ComboCategoryIdsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<ComboCategoryIdsQuery, ComboCategoryIdsQueryVariables>(ComboCategoryIdsDocument, options);
-        }
-export type ComboCategoryIdsQueryHookResult = ReturnType<typeof useComboCategoryIdsQuery>;
-export type ComboCategoryIdsLazyQueryHookResult = ReturnType<typeof useComboCategoryIdsLazyQuery>;
-export type ComboCategoryIdsQueryResult = Apollo.QueryResult<ComboCategoryIdsQuery, ComboCategoryIdsQueryVariables>;
 export const ComboSelectOptionsDocument = gql`
     query ComboSelectOptions($characterSlug: String!) {
   comboCategories(characterSlug: $characterSlug) {
@@ -4913,40 +4768,6 @@ export function useCurrentUserLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
 export type CurrentUserQueryHookResult = ReturnType<typeof useCurrentUserQuery>;
 export type CurrentUserLazyQueryHookResult = ReturnType<typeof useCurrentUserLazyQuery>;
 export type CurrentUserQueryResult = Apollo.QueryResult<CurrentUserQuery, CurrentUserQueryVariables>;
-export const MoveCategoryIdsDocument = gql`
-    query MoveCategoryIds {
-  moveCategories {
-    id
-  }
-}
-    `;
-
-/**
- * __useMoveCategoryIdsQuery__
- *
- * To run a query within a React component, call `useMoveCategoryIdsQuery` and pass it any options that fit your needs.
- * When your component renders, `useMoveCategoryIdsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useMoveCategoryIdsQuery({
- *   variables: {
- *   },
- * });
- */
-export function useMoveCategoryIdsQuery(baseOptions?: Apollo.QueryHookOptions<MoveCategoryIdsQuery, MoveCategoryIdsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<MoveCategoryIdsQuery, MoveCategoryIdsQueryVariables>(MoveCategoryIdsDocument, options);
-      }
-export function useMoveCategoryIdsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MoveCategoryIdsQuery, MoveCategoryIdsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<MoveCategoryIdsQuery, MoveCategoryIdsQueryVariables>(MoveCategoryIdsDocument, options);
-        }
-export type MoveCategoryIdsQueryHookResult = ReturnType<typeof useMoveCategoryIdsQuery>;
-export type MoveCategoryIdsLazyQueryHookResult = ReturnType<typeof useMoveCategoryIdsLazyQuery>;
-export type MoveCategoryIdsQueryResult = Apollo.QueryResult<MoveCategoryIdsQuery, MoveCategoryIdsQueryVariables>;
 export const MoveSelectOptionsDocument = gql`
     query MoveSelectOptions($characterSlug: String!) {
   moveCategories(characterSlug: $characterSlug) {
@@ -5036,130 +4857,6 @@ export function useMyArticleLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<
 export type MyArticleQueryHookResult = ReturnType<typeof useMyArticleQuery>;
 export type MyArticleLazyQueryHookResult = ReturnType<typeof useMyArticleLazyQuery>;
 export type MyArticleQueryResult = Apollo.QueryResult<MyArticleQuery, MyArticleQueryVariables>;
-export const MyArticlesDocument = gql`
-    query MyArticles($page: Int, $per: Int) {
-  myArticles(page: $page, per: $per) {
-    records {
-      id
-      title
-      description
-      mainImageUrl
-      publishedAt
-      faved
-      favsCount
-      status
-      author {
-        name
-        avatarUrl
-      }
-    }
-    paging {
-      ...paging
-    }
-  }
-}
-    ${PagingFragmentDoc}`;
-
-/**
- * __useMyArticlesQuery__
- *
- * To run a query within a React component, call `useMyArticlesQuery` and pass it any options that fit your needs.
- * When your component renders, `useMyArticlesQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useMyArticlesQuery({
- *   variables: {
- *      page: // value for 'page'
- *      per: // value for 'per'
- *   },
- * });
- */
-export function useMyArticlesQuery(baseOptions?: Apollo.QueryHookOptions<MyArticlesQuery, MyArticlesQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<MyArticlesQuery, MyArticlesQueryVariables>(MyArticlesDocument, options);
-      }
-export function useMyArticlesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MyArticlesQuery, MyArticlesQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<MyArticlesQuery, MyArticlesQueryVariables>(MyArticlesDocument, options);
-        }
-export type MyArticlesQueryHookResult = ReturnType<typeof useMyArticlesQuery>;
-export type MyArticlesLazyQueryHookResult = ReturnType<typeof useMyArticlesLazyQuery>;
-export type MyArticlesQueryResult = Apollo.QueryResult<MyArticlesQuery, MyArticlesQueryVariables>;
-export const OrganizerSelectOptionsDocument = gql`
-    query OrganizerSelectOptions {
-  organizers(per: 500) {
-    records {
-      ...OrganizerSelectOption
-    }
-  }
-}
-    ${OrganizerSelectOptionFragmentDoc}`;
-
-/**
- * __useOrganizerSelectOptionsQuery__
- *
- * To run a query within a React component, call `useOrganizerSelectOptionsQuery` and pass it any options that fit your needs.
- * When your component renders, `useOrganizerSelectOptionsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useOrganizerSelectOptionsQuery({
- *   variables: {
- *   },
- * });
- */
-export function useOrganizerSelectOptionsQuery(baseOptions?: Apollo.QueryHookOptions<OrganizerSelectOptionsQuery, OrganizerSelectOptionsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<OrganizerSelectOptionsQuery, OrganizerSelectOptionsQueryVariables>(OrganizerSelectOptionsDocument, options);
-      }
-export function useOrganizerSelectOptionsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<OrganizerSelectOptionsQuery, OrganizerSelectOptionsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<OrganizerSelectOptionsQuery, OrganizerSelectOptionsQueryVariables>(OrganizerSelectOptionsDocument, options);
-        }
-export type OrganizerSelectOptionsQueryHookResult = ReturnType<typeof useOrganizerSelectOptionsQuery>;
-export type OrganizerSelectOptionsLazyQueryHookResult = ReturnType<typeof useOrganizerSelectOptionsLazyQuery>;
-export type OrganizerSelectOptionsQueryResult = Apollo.QueryResult<OrganizerSelectOptionsQuery, OrganizerSelectOptionsQueryVariables>;
-export const PlayerSelectOptionsDocument = gql`
-    query PlayerSelectOptions {
-  players(per: 500) {
-    records {
-      ...PlayerSelectOption
-    }
-  }
-}
-    ${PlayerSelectOptionFragmentDoc}`;
-
-/**
- * __usePlayerSelectOptionsQuery__
- *
- * To run a query within a React component, call `usePlayerSelectOptionsQuery` and pass it any options that fit your needs.
- * When your component renders, `usePlayerSelectOptionsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = usePlayerSelectOptionsQuery({
- *   variables: {
- *   },
- * });
- */
-export function usePlayerSelectOptionsQuery(baseOptions?: Apollo.QueryHookOptions<PlayerSelectOptionsQuery, PlayerSelectOptionsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<PlayerSelectOptionsQuery, PlayerSelectOptionsQueryVariables>(PlayerSelectOptionsDocument, options);
-      }
-export function usePlayerSelectOptionsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PlayerSelectOptionsQuery, PlayerSelectOptionsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<PlayerSelectOptionsQuery, PlayerSelectOptionsQueryVariables>(PlayerSelectOptionsDocument, options);
-        }
-export type PlayerSelectOptionsQueryHookResult = ReturnType<typeof usePlayerSelectOptionsQuery>;
-export type PlayerSelectOptionsLazyQueryHookResult = ReturnType<typeof usePlayerSelectOptionsLazyQuery>;
-export type PlayerSelectOptionsQueryResult = Apollo.QueryResult<PlayerSelectOptionsQuery, PlayerSelectOptionsQueryVariables>;
 export const PlayerSlugsDocument = gql`
     query PlayerSlugs($per: Int) {
   players(per: $per) {
