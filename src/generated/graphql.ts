@@ -2068,17 +2068,11 @@ export type VideoUpload = {
   url: Scalars['String'];
 };
 
-export type ArticleLinkFragment = { __typename?: 'ArticleLink', url: string, title: string, description?: string | null, imageUrl?: string | null };
-
-export type ArticleSummaryFragment = { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, faved: boolean, favsCount: number, status: ArticleStatus, author: { __typename?: 'User', name: string, avatarUrl: string } };
+export type CurrentUserFragment = { __typename?: 'CurrentUser', id: string, name: string, role: UserRole, avatarUrl: string };
 
 export type ComboFragment = { __typename?: 'Combo', id: string, damage?: number | null, command: Array<string>, note?: string | null, position: number, move?: { __typename?: 'Move', id: string, name: string } | null, comboCategory: { __typename?: 'ComboCategory', id: string, name: string }, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null };
 
 export type ComboCategoryFragment = { __typename?: 'ComboCategory', id: string, name: string, position: number };
-
-export type ComboVideoFragment = { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string };
-
-export type CurrentUserFragment = { __typename?: 'CurrentUser', id: string, name: string, role: UserRole, avatarUrl: string };
 
 export type AttackMoveFragment = { __typename?: 'AttackMove', id: string, startUpFrame?: number | null, duration?: number | null, heights: Array<AttackTypeEnum>, damages: Array<number>, reach?: number | null, blockResult: AttackMoveResultEnum, blockStatus?: AttackMoveStateEnum | null, blockFrame?: number | null, hitResult: AttackMoveResultEnum, hitStatus?: AttackMoveStateEnum | null, hitFrame?: number | null, counterResult: AttackMoveResultEnum, counterStatus?: AttackMoveStateEnum | null, counterFrame?: number | null, powerCrush: boolean, powerCrushFrame?: number | null, crouchingStatus: boolean, crouchingStatusFrame?: number | null, jumpStatus: boolean, jumpStatusFrame?: number | null, homing: boolean, screw: boolean, wallBound: boolean };
 
@@ -2377,8 +2371,6 @@ export type TournamentVideoPathsQueryVariables = Exact<{ [key: string]: never; }
 
 export type TournamentVideoPathsQuery = { __typename?: 'Query', allTournamentVideos: Array<{ __typename?: 'TournamentVideo', id: string }> };
 
-export type ArticleCardFragment = { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, faved: boolean, favsCount: number, status: ArticleStatus, author: { __typename?: 'User', name: string, avatarUrl: string } };
-
 export type ArticleElementComboQueryVariables = Exact<{
   comboId: Scalars['ID'];
 }>;
@@ -2392,6 +2384,8 @@ export type ArticleElementMoveQueryVariables = Exact<{
 
 
 export type ArticleElementMoveQuery = { __typename?: 'Query', move: { __typename?: 'Move', id: string, name: string, kana?: string | null, command: Array<string>, statusAfter?: string | null, note?: string | null, position: number, moveCategory: { __typename?: 'MoveCategory', id: string, name: string }, moveable: { __typename: 'AttackMove', id: string, startUpFrame?: number | null, duration?: number | null, heights: Array<AttackTypeEnum>, damages: Array<number>, reach?: number | null, blockResult: AttackMoveResultEnum, blockStatus?: AttackMoveStateEnum | null, blockFrame?: number | null, hitResult: AttackMoveResultEnum, hitStatus?: AttackMoveStateEnum | null, hitFrame?: number | null, counterResult: AttackMoveResultEnum, counterStatus?: AttackMoveStateEnum | null, counterFrame?: number | null, powerCrush: boolean, powerCrushFrame?: number | null, crouchingStatus: boolean, crouchingStatusFrame?: number | null, jumpStatus: boolean, jumpStatusFrame?: number | null, homing: boolean, screw: boolean, wallBound: boolean } | { __typename: 'ReversalMove', id: string, type: string, startUpFrame?: number | null, finishFrame?: number | null } | { __typename: 'ThrowMove', id: string, throwType: ThrowTypeEnum, startUpFrame?: number | null, damage?: number | null, throwEscape: ThrowEscapeEnum, throwResult: ThrowMoveResultEnum }, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null } };
+
+export type ArticleCardFragment = { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, faved: boolean, favsCount: number, status: ArticleStatus, author: { __typename?: 'User', name: string, avatarUrl: string } };
 
 export type ArticleFormArticleFragment = { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, category: ArticleCategory, content: string };
 
@@ -3035,35 +3029,12 @@ export type TournamentsPageTournamentsQueryVariables = Exact<{
 
 export type TournamentsPageTournamentsQuery = { __typename?: 'Query', tournaments: { __typename?: 'TournamentCollection', records: Array<{ __typename?: 'Tournament', id: string, name: string, mainImageUrl?: string | null, startsAt: string, videosCount: number, standings: Array<{ __typename?: 'Standing', id: string, place: number, player: { __typename?: 'Player', id: string, name: string } }> }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
 
-export const ArticleLinkFragmentDoc = gql`
-    fragment articleLink on ArticleLink {
-  url
-  title
-  description
-  imageUrl
-}
-    `;
-export const ArticleSummaryFragmentDoc = gql`
-    fragment articleSummary on Article {
+export const CurrentUserFragmentDoc = gql`
+    fragment CurrentUser on CurrentUser {
   id
-  title
-  description
-  mainImageUrl
-  publishedAt
-  faved
-  favsCount
-  status
-  author {
-    name
-    avatarUrl
-  }
-}
-    `;
-export const ComboVideoFragmentDoc = gql`
-    fragment comboVideo on ComboVideo {
-  id
-  m3u8Url
-  thumbnailUrl
+  name
+  role
+  avatarUrl
 }
     `;
 export const ComboFragmentDoc = gql`
@@ -3082,23 +3053,17 @@ export const ComboFragmentDoc = gql`
     name
   }
   comboVideo {
-    ...comboVideo
+    id
+    m3u8Url
+    thumbnailUrl
   }
 }
-    ${ComboVideoFragmentDoc}`;
+    `;
 export const ComboCategoryFragmentDoc = gql`
     fragment comboCategory on ComboCategory {
   id
   name
   position
-}
-    `;
-export const CurrentUserFragmentDoc = gql`
-    fragment currentUser on CurrentUser {
-  id
-  name
-  role
-  avatarUrl
 }
     `;
 export const AttackMoveFragmentDoc = gql`
@@ -3356,10 +3321,12 @@ export const ComboMediaFragmentDoc = gql`
     name
   }
   comboVideo {
-    ...comboVideo
+    id
+    m3u8Url
+    thumbnailUrl
   }
 }
-    ${ComboVideoFragmentDoc}`;
+    `;
 export const MoveCategoryPositionSelectFragmentDoc = gql`
     fragment MoveCategoryPositionSelect on MoveCategory {
   id
@@ -3605,10 +3572,12 @@ export const DashboardComboCategoriesPageComboFragmentDoc = gql`
   id
   command
   comboVideo {
-    ...comboVideo
+    id
+    m3u8Url
+    thumbnailUrl
   }
 }
-    ${ComboVideoFragmentDoc}`;
+    `;
 export const DashboardComboCategoriesPageComboCategoryFragmentDoc = gql`
     fragment DashboardComboCategoriesPageComboCategory on ComboCategory {
   id
@@ -3805,11 +3774,14 @@ export const CreateArticleLinkDocument = gql`
     mutation CreateArticleLink($url: String!) {
   createArticleLink(input: {url: $url}) {
     articleLink {
-      ...articleLink
+      url
+      title
+      description
+      imageUrl
     }
   }
 }
-    ${ArticleLinkFragmentDoc}`;
+    `;
 export type CreateArticleLinkMutationFn = Apollo.MutationFunction<CreateArticleLinkMutation, CreateArticleLinkMutationVariables>;
 
 /**
@@ -4140,7 +4112,7 @@ export const CreateUserDocument = gql`
     mutation CreateUser {
   createUser(input: {}) {
     currentUser {
-      ...currentUser
+      ...CurrentUser
     }
   }
 }
@@ -4603,7 +4575,7 @@ export const UpdateCurrentUserDocument = gql`
     mutation UpdateCurrentUser($attributes: CurrentUserAttributes!) {
   updateCurrentUser(input: {attributes: $attributes}) {
     currentUser {
-      ...currentUser
+      ...CurrentUser
     }
   }
 }
@@ -4925,7 +4897,7 @@ export type CountrySelectOptionsQueryResult = Apollo.QueryResult<CountrySelectOp
 export const CurrentUserDocument = gql`
     query CurrentUser {
   currentUser {
-    ...currentUser
+    ...CurrentUser
   }
 }
     ${CurrentUserFragmentDoc}`;
@@ -5083,15 +5055,25 @@ export const MyArticlesDocument = gql`
     query MyArticles($page: Int, $per: Int) {
   myArticles(page: $page, per: $per) {
     records {
-      ...articleSummary
+      id
+      title
+      description
+      mainImageUrl
+      publishedAt
+      faved
+      favsCount
+      status
+      author {
+        name
+        avatarUrl
+      }
     }
     paging {
       ...paging
     }
   }
 }
-    ${ArticleSummaryFragmentDoc}
-${PagingFragmentDoc}`;
+    ${PagingFragmentDoc}`;
 
 /**
  * __useMyArticlesQuery__

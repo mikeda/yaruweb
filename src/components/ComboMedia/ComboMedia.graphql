@@ -11,7 +11,8 @@ fragment ComboMedia on Combo {
   }
 
   comboVideo {
-    ...comboVideo
+    id
+    m3u8Url
+    thumbnailUrl
   }
-
 }

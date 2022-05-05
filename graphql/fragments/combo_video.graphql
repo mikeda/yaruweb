@@ -1,5 +1,0 @@
-fragment comboVideo on ComboVideo {
-  id
-  m3u8Url
-  thumbnailUrl
-}

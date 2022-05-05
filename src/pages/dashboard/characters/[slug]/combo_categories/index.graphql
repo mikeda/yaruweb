@@ -12,7 +12,9 @@ fragment DashboardComboCategoriesPageCombo on Combo {
   command
 
   comboVideo {
-    ...comboVideo
+    id
+    m3u8Url
+    thumbnailUrl
   }
 
 }
