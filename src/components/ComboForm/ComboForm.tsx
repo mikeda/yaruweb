@@ -24,7 +24,7 @@ import { CommandForm } from './CommandForm';
 
 import {
   ComboAttributes,
-  ComboFragment,
+  ComboFormFragment,
   ComboPositionSelectFragment,
   MoveSelectOptionFragment,
 } from '@/generated/graphql';
@@ -41,7 +41,7 @@ interface Option {
 }
 
 interface Props {
-  combo?: ComboFragment;
+  combo?: ComboFormFragment;
   combos: ComboPositionSelectFragment[];
   moveCategories: MoveSelectOptionFragment[];
   onSubmit: (attributes: ComboAttributes) => void;

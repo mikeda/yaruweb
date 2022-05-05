@@ -16,11 +16,11 @@ import {
 import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
-import { ComboCategoryAttributes, ComboCategoryFragment } from '@/generated/graphql';
+import { ComboCategoryAttributes, ComboCategoryPositionSelectFragment } from '@/generated/graphql';
 
 interface Props {
-  comboCategory?: ComboCategoryFragment;
-  comboCategories: ComboCategoryFragment[];
+  comboCategory?: ComboCategoryAttributes;
+  comboCategories: ComboCategoryPositionSelectFragment[];
   onSubmit: (attributes: ComboCategoryAttributes) => void;
 }
 

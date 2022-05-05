@@ -1,5 +1,0 @@
-fragment MovePositionSelect on Move {
-  id
-  name
-  position
-}
