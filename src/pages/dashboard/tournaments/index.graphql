@@ -18,3 +18,11 @@ query DashboardTournamentsPageTournaments($page: Int = 1, $keyword: String) {
     }
   }
 }
+
+mutation DeleteTournament($tournamentId: ID!) {
+  deleteTournament(input: { tournamentId: $tournamentId }) {
+    tournament {
+      id
+    }
+  }
+}

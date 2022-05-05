@@ -7,3 +7,19 @@ query DashboardComboCategoryNewPage($characterSlug: String!) {
     }
   }
 }
+
+mutation CreateComboCategory($characterSlug: String!, $attributes: ComboCategoryAttributes!) {
+  createComboCategory(input: { characterSlug: $characterSlug, attributes: $attributes }) {
+    comboCategory {
+      id
+    }
+  }
+}
+
+mutation DeleteComboCategory($comboCategoryId: ID!) {
+  deleteComboCategory(input: { comboCategoryId: $comboCategoryId }) {
+    comboCategory {
+      id
+    }
+  }
+}

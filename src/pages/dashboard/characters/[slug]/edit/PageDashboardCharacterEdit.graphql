@@ -1,5 +1,0 @@
-query PageDashboardCharacterEdit($characterSlug: String!) {
-  character(characterSlug: $characterSlug) {
-    ...CharacterForm
-  }
-}

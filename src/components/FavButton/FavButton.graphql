@@ -3,3 +3,19 @@ query FavButtonArticle($articleId: ID!) {
     faved
   }
 }
+
+mutation FavArticle($articleId: ID!) {
+  favArticle(input: { articleId: $articleId }) {
+    article {
+      id
+    }
+  }
+}
+
+mutation UnfavArticle($articleId: ID!) {
+  unfavArticle(input: { articleId: $articleId }) {
+    article {
+      id
+    }
+  }
+}

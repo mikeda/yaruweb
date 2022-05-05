@@ -1,7 +1,0 @@
-mutation DeleteMove($moveId: ID!) {
-  deleteMove(input: { moveId: $moveId }) {
-    move {
-      id
-    }
-  }
-}

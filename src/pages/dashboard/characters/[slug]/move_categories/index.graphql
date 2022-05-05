@@ -28,3 +28,32 @@ query DashboardMoveCategoriesPage($characterSlug: String!) {
     ...DashboardMoveCategoriesPageMoveCategory
   }
 }
+
+mutation CreateMoveVideo($moveId: ID!) {
+  createMoveVideo(input: { moveId: $moveId }) {
+    move {
+      ...DashboardMoveCategoriesPageMove
+    }
+
+    videoUpload {
+      url
+      fields
+    }
+  }
+}
+
+mutation DeleteMove($moveId: ID!) {
+  deleteMove(input: { moveId: $moveId }) {
+    move {
+      id
+    }
+  }
+}
+
+mutation DeleteMoveCategory($moveCategoryId: ID!) {
+  deleteMoveCategory(input: { moveCategoryId: $moveCategoryId }) {
+    moveCategory {
+      id
+    }
+  }
+}

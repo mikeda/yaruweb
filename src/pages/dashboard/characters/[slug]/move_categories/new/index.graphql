@@ -7,3 +7,11 @@ query DashboardMoveCategoryNewPage($characterSlug: String!) {
     }
   }
 }
+
+mutation CreateMoveCategory($characterSlug: String!, $attributes: MoveCategoryAttributes!) {
+  createMoveCategory(input: { characterSlug: $characterSlug, attributes: $attributes }) {
+    moveCategory {
+      id
+    }
+  }
+}

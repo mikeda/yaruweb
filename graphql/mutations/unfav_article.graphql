@@ -1,7 +1,0 @@
-mutation UnfavArticle($articleId: ID!) {
-  unfavArticle(input: { articleId: $articleId }) {
-    article {
-      id
-    }
-  }
-}
