@@ -9,7 +9,7 @@ interface Props {
   };
 }
 
-export const Leaf: React.FC<Props> = ({ attributes, children, leaf }) => {
+export const ArticleLeaf: React.FC<Props> = ({ attributes, children, leaf }) => {
   if (leaf.bold) {
     children = <strong>{children}</strong>;
   }
@@ -17,10 +17,6 @@ export const Leaf: React.FC<Props> = ({ attributes, children, leaf }) => {
   if (leaf.icon) {
     children = <span style={{ fontFamily: 'YarouyoSymbols' }}>{children}</span>;
   }
-
-  //if (leaf.code) {
-  //  children = <code>{children}</code>;
-  //}
 
   //if (leaf.italic) {
   //  children = <em>{children}</em>;

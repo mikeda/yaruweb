@@ -5,15 +5,15 @@ import { createEditor, Transforms, Node } from 'slate';
 import { withHistory } from 'slate-history';
 import { Editable, RenderElementProps, RenderLeafProps, useSlate, withReact } from 'slate-react';
 
-import { Leaf } from '../ArticleElement/Leaf';
+import { ArticleElement } from '../ArticleElement';
+import { ArticleLeaf } from '../ArticleLeaf';
 
-import { Controls } from './Controls';
-import { withIcon } from './IconHelper';
-import { withLink } from './LinkHelper';
-import { getTweetNode, isTweetUrl } from './TweetHelper';
-import { getYoutubeNode, isYoutubeUrl } from './YoutubeHelper';
+import { ControlButtons } from './ControlButtons';
+import { withIcon } from './helpers/IconHelper';
+import { withLink } from './helpers/LinkHelper';
+import { getTweetNode, isTweetUrl } from './helpers/TweetHelper';
+import { getYoutubeNode, isYoutubeUrl } from './helpers/YoutubeHelper';
 
-import { Element } from '@/components/ArticleElement';
 import { EmbedLinkElement } from '@/custom-types';
 import { useCreateArticleLinkMutation } from '@/generated/graphql';
 
@@ -23,8 +23,8 @@ export const createArticleEditor = () => {
 
 export const ArticleEditor: React.FC = () => {
   const editor = useSlate();
-  const renderElement = useCallback((props: RenderElementProps) => <Element {...props} />, []);
-  const renderLeaf = useCallback((props: RenderLeafProps) => <Leaf {...props} />, []);
+  const renderElement = useCallback((props: RenderElementProps) => <ArticleElement {...props} />, []);
+  const renderLeaf = useCallback((props: RenderLeafProps) => <ArticleLeaf {...props} />, []);
   const onKeyDown = useCallback((event: React.KeyboardEvent<HTMLDivElement>) => {
     if (event.key === 'Enter') {
       if (event.shiftKey) {
@@ -123,7 +123,7 @@ export const ArticleEditor: React.FC = () => {
 
   return (
     <div style={{ border: '1px solid #d1d8dc', padding: 8 }}>
-      <Controls />
+      <ControlButtons />
 
       <Editable
         placeholder="本文"

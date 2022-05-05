@@ -2,12 +2,11 @@ import React from 'react';
 
 import { useSlate } from 'slate-react';
 
-import { insertLink, isLinkActive } from '../LinkHelper';
+import { insertLink, isLinkActive } from '../../helpers/LinkHelper';
 
 import { Button } from './Button';
 
 import { YAROUYO_FONT_CODE } from '@/lib';
-
 
 export const LinkButton: React.FC = () => {
   const editor = useSlate();

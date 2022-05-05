@@ -18,8 +18,7 @@ import { Descendant } from 'slate';
 import { ReactEditor, Slate } from 'slate-react';
 import * as yup from 'yup';
 
-import { ArticleEditor, createArticleEditor } from '../ArticleEditor';
-
+import { ArticleEditor, createArticleEditor } from '@/components';
 import { ArticleAttributes, ArticleCategory, ArticleFormArticleFragment } from '@/generated/graphql';
 import { ArticleCategoryText } from '@/lib';
 
