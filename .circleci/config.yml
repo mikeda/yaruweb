@@ -1,24 +1,31 @@
 version: 2.1
 
-orbs:
-  node: circleci/node@5.0.0
-
 executors:
   default:
     docker:
       - image: cimg/node:16.13.1
 
+commands:
+  # 不要なキャッシュ保存やキャッシュ肥大化を防ぐためorbsを使わない
+  yarn-install:
+    steps:
+      - restore_cache:
+          key: yarn-deps-v2-{{ checksum "yarn.lock" }}
+      - run:
+          name: yarn
+          command: yarn
+      - save_cache:
+          paths:
+            - node_modules
+          key: yarn-deps-v2-{{ checksum "yarn.lock" }}
+
 jobs:
-  build:
+  lint:
     executor: default
+
     steps:
       - checkout
-
-      - node/install:
-          install-yarn: true
-
-      - node/install-packages:
-          pkg-manager: yarn
+      - yarn-install
 
       - run:
           name: tsc
@@ -34,4 +41,4 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - build
+      - lint
