@@ -49,7 +49,7 @@ export const TournamentForm: React.FC<Props> = ({ tournament, onSubmit }) => {
           description: tournament.description,
         }
       : {
-          startsAt: dayjs().add(1, 'date').hour(18).minute(0).second(0).format('YYYY-MM-DDTHH:mm'),
+          startsAt: dayjs().add(1, 'day').hour(18).minute(0).second(0).format('YYYY-MM-DDTHH:mm'),
         },
   });
   const organizerId = getValues('organizerId');
