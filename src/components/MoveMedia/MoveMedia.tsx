@@ -61,6 +61,12 @@ interface ReversalMove {
 }
 
 const AttackListItem: React.FC<AttackMove> = ({ move, attack }) => {
+  if (!attack) {
+    // eslint-disable-next-line no-console
+    console.log({ move, attack });
+    return <div>コマンド取得失敗</div>;
+  }
+
   return (
     <Stack spacing={1} sx={{ paddingBottom: 1 }}>
       <Stack direction="row" divider={<Divider orientation="vertical" flexItem />} spacing={1}>
