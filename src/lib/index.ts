@@ -2,6 +2,7 @@ export * from './apolloClient';
 export * from './colors';
 export * from './commandText';
 export * from './dayjs';
+export * from './domains';
 export * from './EnumText';
 export * from './firebase';
 export * from './fetchGraphql';

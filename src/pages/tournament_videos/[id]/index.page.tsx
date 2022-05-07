@@ -13,14 +13,13 @@ import { YouTubePlayer } from 'youtube-player/dist/types';
 import { BattleListItem } from './components/BattleListItem';
 
 import { Breadcrumbs, Content, Head, NotFound, YouTubeWrapper } from '@/components';
-import { TournamentVideoDomain } from '@/domains';
 import {
   TournamentVideoPageDocument,
   TournamentVideoPageQuery,
   TournamentVideoPathsDocument,
   TournamentVideoPathsQuery,
 } from '@/generated/graphql';
-import { fetchGraphql } from '@/lib';
+import { fetchGraphql, TournamentVideoDomain } from '@/lib';
 
 const PageContent: React.FC<TournamentVideoPageQuery> = ({ tournamentVideo }) => {
   const [youTubePlayer, setYouTubePlayer] = useState<YouTubePlayer>();
