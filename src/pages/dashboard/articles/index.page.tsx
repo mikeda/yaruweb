@@ -34,7 +34,12 @@ import { loadingState, ArticleStatusText, resolveUrlObject } from '@/lib';
 const Page: React.FC = () => {
   const router = useRouter();
   const setLoading = useSetRecoilState(loadingState);
-  const { data, loading, fetchMore, updateQuery, refetch } = useDashboardArticlesPageArticlesQuery();
+  const { data, loading, fetchMore, updateQuery, refetch } = useDashboardArticlesPageArticlesQuery({
+    onCompleted: () => {
+      setLoading(false);
+    },
+    notifyOnNetworkStatusChange: true,
+  });
   const [publish, { loading: publishLoading }] = useDashboardArticlesPagePublishMutation({
     onCompleted: () => {
       toast.success('記事を公開しました。');

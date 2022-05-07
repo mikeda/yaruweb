@@ -32,7 +32,12 @@ import { loadingState, DEFAULT_AVATAR_URL, resolveUrlObject } from '@/lib';
 
 const Page: React.FC = () => {
   const setLoading = useSetRecoilState(loadingState);
-  const { data, loading, fetchMore, updateQuery, refetch } = useDashboardPlayersPagePlayersQuery();
+  const { data, loading, fetchMore, updateQuery, refetch } = useDashboardPlayersPagePlayersQuery({
+    onCompleted: () => {
+      setLoading(false);
+    },
+    notifyOnNetworkStatusChange: true,
+  });
   const [destroy, { loading: deleteLoading }] = useDashboardPlayersPageDeleteMutation({
     onCompleted: data => {
       const player = data.deletePlayer?.player;
