@@ -3,10 +3,15 @@ fragment MoveMedia on Move {
   name
   kana
   command
+  statusAfter
   note
 
   moveable {
-    ...moveable
+    __typename
+
+    ... on AttackMove { ...attackMove }
+    ... on ThrowMove { ...throwMove }
+    ... on ReversalMove { ...reversalMove }
   }
 
   moveVideo {
