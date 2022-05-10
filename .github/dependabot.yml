@@ -7,4 +7,4 @@ updates:
       day: saturday
       time: '06:00'
       timezone: Asia/Tokyo
-    open-pull-requests-limit: 10
+    open-pull-requests-limit: 20
