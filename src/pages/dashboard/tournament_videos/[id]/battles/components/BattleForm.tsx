@@ -276,7 +276,7 @@ interface SideFormProps {
   setValue: UseFormSetValue<BattleAttributes>;
 }
 
-export const SideForm: React.FC<SideFormProps> = ({ index, players, characters, control, setValue }) => {
+const SideForm: React.FC<SideFormProps> = ({ index, players, characters, control, setValue }) => {
   return (
     <>
       <Grid item xs={5}>

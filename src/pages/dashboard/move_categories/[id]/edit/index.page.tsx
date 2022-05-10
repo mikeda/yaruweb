@@ -41,7 +41,7 @@ const Page: React.FC = () => {
   );
 };
 
-export const PageContent: React.FC<{
+const PageContent: React.FC<{
   moveCategoryId: string;
   moveCategory: MoveCategoryAttributes;
   moveCategories: MoveCategoryPositionSelectFragment[];

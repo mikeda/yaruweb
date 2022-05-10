@@ -17,10 +17,6 @@ import {
 } from '@/generated/graphql';
 import { loadingState } from '@/lib';
 
-export type Query = {
-  move_type: 'attack' | 'throw' | 'reversal';
-};
-
 const Page: React.FC = () => {
   const router = useRouter();
   const { id, move_type: moveType } = router.query;

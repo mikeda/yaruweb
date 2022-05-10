@@ -14,7 +14,7 @@ interface NextLinkComposedProps
   href?: NextLinkProps['href'];
 }
 
-export const NextLinkComposed = React.forwardRef<HTMLAnchorElement, NextLinkComposedProps>(function NextLinkComposed(
+const NextLinkComposed = React.forwardRef<HTMLAnchorElement, NextLinkComposedProps>(function NextLinkComposed(
   props,
   ref,
 ) {
@@ -37,7 +37,7 @@ export const NextLinkComposed = React.forwardRef<HTMLAnchorElement, NextLinkComp
   );
 });
 
-export type LinkProps = {
+type LinkProps = {
   activeClassName?: string;
   as?: NextLinkProps['as'];
   href: NextLinkProps['href'];
@@ -47,7 +47,7 @@ export type LinkProps = {
 
 // A styled version of the Next.js Link component:
 // https://nextjs.org/docs/#with-link
-const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(function Link(props, ref) {
+export const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(function Link(props, ref) {
   const {
     activeClassName = 'active',
     as: linkAs,
@@ -81,5 +81,3 @@ const Link = React.forwardRef<HTMLAnchorElement, LinkProps>(function Link(props,
 
   return <MuiLink component={NextLinkComposed} linkAs={linkAs} className={className} ref={ref} to={href} {...other} />;
 });
-
-export default Link;
