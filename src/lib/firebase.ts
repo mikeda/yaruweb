@@ -22,7 +22,7 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
-export function getApp() {
+function getApp() {
   if (_app) return _app;
 
   if (getApps.length > 0) {
