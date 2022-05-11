@@ -17,8 +17,9 @@ interface Props {
 export const BattleListItem: React.FC<Props> = ({ battle, last }) => {
   const video = battle.tournamentVideo;
   const tournament = video.tournament;
-  const left = battle.sides[0];
-  const right = battle.sides[1];
+  const [left, right] = battle.sides;
+  if (!left || !right) return null;
+
   let subTitle = tournament.name;
   if (battle.round) {
     subTitle = `${subTitle} ${BattleRoundText[battle.round]}`;

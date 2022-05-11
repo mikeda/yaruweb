@@ -43,7 +43,8 @@ export const ComboCategoryForm: React.FC<Props> = ({ comboCategory, comboCategor
           position: comboCategory.position,
         }
       : {
-          position: comboCategories.length > 0 ? comboCategories[comboCategories.length - 1].position + 1 : 0,
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          position: comboCategories.length > 0 ? comboCategories[comboCategories.length - 1]!.position + 1 : 0,
         },
   });
 

@@ -180,7 +180,8 @@ export const AttackMoveForm: React.FC<Props> = ({ move, moves, onSubmit, copy = 
       : {
           move: {
             command: [],
-            position: moves.length > 0 ? moves[moves.length - 1].position + 1 : 0,
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            position: moves.length > 0 ? moves[moves.length - 1]!.position + 1 : 0,
           },
           attack: {
             heights: [],

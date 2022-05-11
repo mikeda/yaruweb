@@ -31,8 +31,9 @@ interface Props {
 }
 
 export const BattleListItem: React.FC<Props> = ({ battle, selected = false, onClick }) => {
-  const left = battle.sides[0];
-  const right = battle.sides[1];
+  const [left, right] = battle.sides;
+  if (!left || !right) return null;
+
   let subTitle = formatSec(battle.startSec);
   if (battle.round) {
     subTitle = `${subTitle} ${BattleRoundText[battle.round]}`;

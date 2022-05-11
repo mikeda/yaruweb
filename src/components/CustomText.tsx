@@ -44,7 +44,10 @@ export const CustomText: React.FC<{ text: string }> = ({ text }) => {
     const m = s.match(/\[cmd:([a-z1-9_]*)\]/);
 
     if (m) {
-      return <OperationIcon>{String.fromCharCode(YAROUYO_FONT_CODE[OPERATIONS[m[1]]])}</OperationIcon>;
+      const cmd = m[1] as string;
+      const key = OPERATIONS[m[1] as string];
+
+      return key ? <OperationIcon>{String.fromCharCode(YAROUYO_FONT_CODE[key])}</OperationIcon> : cmd;
     } else {
       return s;
     }

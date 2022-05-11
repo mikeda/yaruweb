@@ -43,7 +43,8 @@ export const MoveCategoryForm: React.FC<Props> = ({ moveCategory, moveCategories
           position: moveCategory.position,
         }
       : {
-          position: moveCategories.length > 0 ? moveCategories[moveCategories.length - 1].position + 1 : 0,
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          position: moveCategories.length > 0 ? moveCategories[moveCategories.length - 1]!.position + 1 : 0,
         },
   });
 

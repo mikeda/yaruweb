@@ -32,8 +32,12 @@ const PageContent: React.FC<TournamentVideoPageQuery> = ({ tournamentVideo }) =>
   const updateBattle = (index: number) => {
     if (noBattle) return;
 
+    const battle = tournamentVideo.battles[index];
+    if (!battle) return;
+
     setBattleIndex(index);
-    youTubePlayer?.seekTo(tournamentVideo.battles[index].startSec, true);
+
+    youTubePlayer?.seekTo(battle.startSec, true);
     youTubePlayer?.playVideo();
   };
 
@@ -43,8 +47,11 @@ const PageContent: React.FC<TournamentVideoPageQuery> = ({ tournamentVideo }) =>
     const newIndex = battleIndex + 1;
     if (newIndex >= tournamentVideo.battles.length) return;
 
+    const battle = tournamentVideo.battles[newIndex];
+    if (!battle) return;
+
     setBattleIndex(newIndex);
-    youTubePlayer?.seekTo(tournamentVideo.battles[newIndex].startSec, true);
+    youTubePlayer?.seekTo(battle.startSec, true);
   };
 
   const onClickSkipNext = () => {
@@ -53,8 +60,11 @@ const PageContent: React.FC<TournamentVideoPageQuery> = ({ tournamentVideo }) =>
     const newIndex = battleIndex - 1;
     if (newIndex < 0) return;
 
+    const battle = tournamentVideo.battles[newIndex];
+    if (!battle) return;
+
     setBattleIndex(newIndex);
-    youTubePlayer?.seekTo(tournamentVideo.battles[newIndex].startSec, true);
+    youTubePlayer?.seekTo(battle.startSec, true);
   };
 
   useEffect(() => {
@@ -67,8 +77,14 @@ const PageContent: React.FC<TournamentVideoPageQuery> = ({ tournamentVideo }) =>
   useEffect(() => {
     if (noBattle) return;
 
-    youTubePlayer?.seekTo(tournamentVideo.battles[battleIndex].startSec, true);
+    const battle = tournamentVideo.battles[battleIndex];
+    if (!battle) return;
+
+    youTubePlayer?.seekTo(battle.startSec, true);
   }, [youTubePlayer]);
+
+  const battle = tournamentVideo.battles[battleIndex];
+  if (!battle) return null;
 
   return (
     <div>
@@ -90,38 +106,40 @@ const PageContent: React.FC<TournamentVideoPageQuery> = ({ tournamentVideo }) =>
         {tournamentVideo.battles.length === 0 ? (
           <NotFound>対戦結果が登録されていません。</NotFound>
         ) : (
-          <>
-            <Box component={Paper}>
-              <BattleListItem battle={tournamentVideo.battles[battleIndex]} onClick={() => updateBattle(battleIndex)} />
+          battle && (
+            <>
+              <Box component={Paper}>
+                <BattleListItem battle={battle} onClick={() => updateBattle(battleIndex)} />
 
-              <Box display="flex">
-                <Tooltip title="1つ前の対戦に移動" sx={{ flexGrow: 1 }}>
-                  <IconButton size="small" onClick={onClickSkipPrevious}>
-                    <SkipPreviousIcon />
-                  </IconButton>
-                </Tooltip>
+                <Box display="flex">
+                  <Tooltip title="1つ前の対戦に移動" sx={{ flexGrow: 1 }}>
+                    <IconButton size="small" onClick={onClickSkipPrevious}>
+                      <SkipPreviousIcon />
+                    </IconButton>
+                  </Tooltip>
 
-                <Tooltip title="次の対戦に移動" sx={{ flexGrow: 1 }}>
-                  <IconButton size="small" onClick={onClickSkipNext}>
-                    <SkipNextIcon />
-                  </IconButton>
-                </Tooltip>
+                  <Tooltip title="次の対戦に移動" sx={{ flexGrow: 1 }}>
+                    <IconButton size="small" onClick={onClickSkipNext}>
+                      <SkipNextIcon />
+                    </IconButton>
+                  </Tooltip>
+                </Box>
               </Box>
-            </Box>
 
-            <Box mt={2} component={Paper}>
-              <List>
-                {tournamentVideo.battles.map((battle, i) => (
-                  <BattleListItem
-                    key={battle.id}
-                    battle={battle}
-                    selected={i === battleIndex}
-                    onClick={() => updateBattle(i)}
-                  />
-                ))}
-              </List>
-            </Box>
-          </>
+              <Box mt={2} component={Paper}>
+                <List>
+                  {tournamentVideo.battles.map((battle, i) => (
+                    <BattleListItem
+                      key={battle.id}
+                      battle={battle}
+                      selected={i === battleIndex}
+                      onClick={() => updateBattle(i)}
+                    />
+                  ))}
+                </List>
+              </Box>
+            </>
+          )
         )}
       </Box>
     </div>
