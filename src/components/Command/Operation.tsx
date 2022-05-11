@@ -29,7 +29,7 @@ const IconOperation = styled('img')(({ theme }) => ({
   marginRight: theme.spacing(0.5),
 }));
 
-export const TextOperation = styled('span')(({ theme }) => ({
+const TextOperation = styled('span')(({ theme }) => ({
   display: 'block',
   marginRight: theme.spacing(0.5),
   fontSize: '0.75rem',

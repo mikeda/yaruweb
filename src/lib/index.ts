@@ -1,6 +1,6 @@
 export * from './apolloClient';
 export * from './colors';
-export * from './commandText';
+export * from './OperationText';
 export * from './dayjs';
 export * from './domains';
 export * from './EnumText';

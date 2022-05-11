@@ -41,7 +41,7 @@ const Page: React.FC = () => {
   );
 };
 
-export const PageContent: React.FC<{
+const PageContent: React.FC<{
   comboCategoryId: string;
   comboCategory: ComboCategoryAttributes;
   comboCategories: ComboCategoryPositionSelectFragment[];

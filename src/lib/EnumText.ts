@@ -5,7 +5,6 @@ import {
   AttackMoveStateEnum,
   AttackTypeEnum,
   BattleRound,
-  Order,
   ThrowEscapeEnum,
   ThrowMoveResultEnum,
   ThrowTypeEnum,
@@ -29,11 +28,6 @@ export const AttackMoveResultText: { [key in AttackMoveResultEnum]: string } = {
   normal: '-',
   down: 'ダウン',
   combo: 'コンボ',
-};
-
-export const OrderText: { [key in Order]: string } = {
-  popular: '人気',
-  new: '新着',
 };
 
 export const AttackTypeEnumText: { [key in AttackTypeEnum]: string } = {

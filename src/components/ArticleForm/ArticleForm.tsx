@@ -148,5 +148,3 @@ export const ArticleForm: React.FC<Props> = ({ article, onSubmit }) => {
     </Card>
   );
 };
-
-export default ArticleForm;

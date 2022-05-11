@@ -100,5 +100,3 @@ export const ArticleElement: React.FC<Props> = ({ attributes, children, element 
       return <p {...attributes}>存在しないTypeが指定されました。{children}</p>;
   }
 };
-
-export * from './Image';

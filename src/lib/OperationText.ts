@@ -35,7 +35,3 @@ export const OperationText: { [name: string]: string } = {
   r_bracket: '】',
   next: '▶',
 };
-
-export const commandText = (command: string[]) => {
-  return command.map(o => OperationText[o] || o).join(' ');
-};
