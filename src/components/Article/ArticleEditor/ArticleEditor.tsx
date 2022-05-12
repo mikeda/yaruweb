@@ -11,7 +11,7 @@ import { ArticleLeaf } from '../ArticleLeaf';
 import { ControlButtons } from './ControlButtons';
 import { withIcon } from './helpers/IconHelper';
 import { withLink } from './helpers/LinkHelper';
-import { getTweetNode, isTweetUrl } from './helpers/TweetHelper';
+import { getTweetNode } from './helpers/TweetHelper';
 import { getYoutubeNode, isYoutubeUrl } from './helpers/YoutubeHelper';
 
 import { EmbedLinkElement } from '@/custom-types';
@@ -106,12 +106,12 @@ export const ArticleEditor: React.FC = () => {
           editor.insertNode({ type: 'paragraph', children: [{ text: '' }] });
         }
         return;
-      } else if (isTweetUrl(url)) {
-        const tweetNode = getTweetNode(url);
-        if (tweetNode) {
-          editor.insertNode(tweetNode);
-          editor.insertNode({ type: 'paragraph', children: [{ text: '' }] });
-        }
+      }
+
+      const tweetNode = getTweetNode(url);
+      if (tweetNode) {
+        editor.insertNode(tweetNode);
+        editor.insertNode({ type: 'paragraph', children: [{ text: '' }] });
         return;
       }
 

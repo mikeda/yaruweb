@@ -61,7 +61,8 @@ export const ComboForm: React.FC<Props> = ({ combo, combos, moveCategories, onSu
         }
       : {
           command: [],
-          position: combos.length > 0 ? combos[combos.length - 1].position + 1 : 0,
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          position: combos.length > 0 ? combos[combos.length - 1]!.position + 1 : 0,
         },
   });
 

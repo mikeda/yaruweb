@@ -73,8 +73,8 @@ export const BattleForm: React.FC<Props> = ({ youtubeVideoId, players, character
       : {
           startSec: 0,
           sides: [
-            { playerId: players[0].id, characterId: characters[0].id, rounds: 3 },
-            { playerId: players[0].id, characterId: characters[0].id, rounds: 3 },
+            { playerId: players[0]?.id, characterId: characters[0]?.id, rounds: 3 },
+            { playerId: players[0]?.id, characterId: characters[0]?.id, rounds: 3 },
           ],
         },
   });
@@ -283,7 +283,7 @@ const SideForm: React.FC<SideFormProps> = ({ index, players, characters, control
         <Controller
           control={control}
           name={`sides.${index}.playerId`}
-          defaultValue={players[0].id}
+          defaultValue={players[0]?.id}
           render={({ field }) => {
             const playerId = field.value;
             const player = playerId && players.filter(p => p.id === playerId)[0];
@@ -321,7 +321,7 @@ const SideForm: React.FC<SideFormProps> = ({ index, players, characters, control
         <Controller
           control={control}
           name={`sides.${index}.characterId`}
-          defaultValue={characters[0].id}
+          defaultValue={characters[0]?.id}
           render={({ field }) => {
             const characterId = field.value;
             const character = characterId && characters.filter(c => c.id === characterId)[0];
