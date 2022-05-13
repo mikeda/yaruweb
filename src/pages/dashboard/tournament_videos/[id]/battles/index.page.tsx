@@ -3,9 +3,7 @@ import React from 'react';
 import { Box, List, Paper } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 
-
-import { BattleForm } from './components/BattleForm';
-import { BattleListItem } from './components/BattleListItem';
+import { BattleForm, BattleListItem } from './components';
 import {
   useRouteParams,
   useTournamentVideoQuery,

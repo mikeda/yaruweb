@@ -1,1 +1,1 @@
-export * from './PlayerPageTabs';
+export { PlayerPageTabs } from './PlayerPageTabs';

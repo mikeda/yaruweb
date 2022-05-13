@@ -19,7 +19,7 @@ import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
-import { PlayerFormSmashgg } from './components/PlayerFormSmashgg';
+import { PlayerFormSmashgg } from './components';
 
 import { DashboardContent, DashboardBreadcrumbs, SearchWord } from '@/components';
 import { pagesPath } from '@/generated/$path';

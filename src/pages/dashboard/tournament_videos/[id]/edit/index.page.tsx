@@ -2,7 +2,7 @@ import React from 'react';
 
 import { useRouter } from 'next/router';
 
-import { TournamentVideoEditForm } from './components/TournamentVideoEditForm';
+import { TournamentVideoEditForm } from './components';
 import { useTournamentVideo } from './hooks/useTournamentVideo';
 import { useUpdate } from './hooks/useUpdate';
 

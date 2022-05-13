@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 
 import { ParsedUrlQuery } from 'querystring';
 
-
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import {
   Box,
@@ -20,8 +19,7 @@ import {
 } from '@mui/material';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
-import { Profile } from '../components/Profile';
-import { Tabs } from '../components/Tabs';
+import { Profile, Tabs } from '../components';
 
 import { Breadcrumbs, Command, Content, CustomText, Head, VideoPlayer } from '@/components';
 import {

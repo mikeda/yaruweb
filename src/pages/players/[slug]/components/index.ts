@@ -1,2 +1,2 @@
-export * from './PlayerStandingCard';
-export * from './Profile';
+export { PlayerStandingCard } from './PlayerStandingCard';
+export { Profile } from './Profile';

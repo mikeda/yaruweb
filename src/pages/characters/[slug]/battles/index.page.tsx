@@ -9,8 +9,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
-import { Profile } from '../components/Profile';
-import { Tabs } from '../components/Tabs';
+import { Profile, Tabs } from '../components';
 
 import { BattleListItem, Breadcrumbs, Content, Head, SelectChipContainer, PlayerBattleCountChip } from '@/components';
 import {

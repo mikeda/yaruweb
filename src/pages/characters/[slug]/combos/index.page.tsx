@@ -17,8 +17,7 @@ import {
 } from '@mui/material';
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 
-import { Profile } from '../components/Profile';
-import { Tabs } from '../components/Tabs';
+import { Profile, Tabs } from '../components';
 
 import { Content, Head, Breadcrumbs, Command, VideoPlayer, SelectChip, SelectChipContainer } from '@/components';
 import {

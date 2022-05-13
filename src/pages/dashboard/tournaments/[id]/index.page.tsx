@@ -5,8 +5,7 @@ import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
 import { useRouter } from 'next/router';
 
-import { StandingList } from './components/StandingList';
-import { VideoList } from './components/VideoList';
+import { StandingList, VideoList } from './components';
 
 import { DashboardBreadcrumbs, DashboardContent } from '@/components';
 import { useDashboardTournamentPageQuery } from '@/generated/graphql';

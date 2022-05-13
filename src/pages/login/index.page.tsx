@@ -2,8 +2,7 @@ import React from 'react';
 
 import { Box } from '@mui/material';
 
-import { LoginWithEmailForm } from './components/LoginWithEmailForm';
-import { LoginWithTwitterButton } from './components/LoginWithTwitterButton';
+import { LoginWithEmailForm, LoginWithTwitterButton } from './components';
 
 import { Breadcrumbs, Content, Head, Link } from '@/components';
 import { pagesPath } from '@/generated/$path';

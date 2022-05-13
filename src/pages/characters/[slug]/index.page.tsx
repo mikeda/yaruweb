@@ -2,13 +2,11 @@ import React from 'react';
 
 import { ParsedUrlQuery } from 'querystring';
 
-
 import { Box, Paper, Typography } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
-import { Profile } from './components/Profile';
-import { Tabs } from './components/Tabs';
+import { Profile, Tabs } from './components';
 
 import { Breadcrumbs, Content, Head } from '@/components';
 import {

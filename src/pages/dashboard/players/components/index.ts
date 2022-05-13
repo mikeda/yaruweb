@@ -1,0 +1,1 @@
+export { PlayerFormSmashgg } from './PlayerFormSmashgg';

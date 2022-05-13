@@ -1,8 +1,6 @@
 import React from 'react';
 
-
-import { SignUpWithEmailForm } from './components/SignUpWithEmailForm';
-import { SignUpWithTwitterButton } from './components/SignUpWithTwitterButton';
+import { SignUpWithEmailForm, SignUpWithTwitterButton } from './components';
 
 import { Breadcrumbs, Content, Head } from '@/components';
 

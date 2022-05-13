@@ -6,8 +6,7 @@ import makeStyles from '@mui/styles/makeStyles';
 import { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 
-import { IntroSlides } from './components/IntroSlides';
-import { StaffRequirement } from './components/StaffRequirement';
+import { IntroSlides, StaffRequirement } from './components';
 
 import {
   ArticleCard,
