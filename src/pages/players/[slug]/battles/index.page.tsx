@@ -7,14 +7,14 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
-import { Profile } from '../components/Profile';
+import { PlayerPageTabs } from '../../components';
+import { Profile } from '../components';
 
 import {
   Head,
   Content,
   Breadcrumbs,
   BattleListItem,
-  PlayerPageTabs,
   CharacterBattleCountChip,
   SelectChipContainer,
 } from '@/components';

@@ -22,7 +22,6 @@ export * from './OperationListSelector';
 export * from './OrganizerForm';
 export * from './PlayerCard';
 export * from './PlayerForm';
-export * from './PlayerPageTabs';
 export * from './SearchWord';
 export * from './SelectChip';
 export * from './TournamentCard';

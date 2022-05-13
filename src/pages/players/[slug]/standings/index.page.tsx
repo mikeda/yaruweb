@@ -7,10 +7,10 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
-import { PlayerStandingCard } from '../components/PlayerStandingCard';
-import { Profile } from '../components/Profile';
+import { PlayerPageTabs } from '../../components';
+import { PlayerStandingCard, Profile } from '../components';
 
-import { Head, Content, Breadcrumbs, PlayerPageTabs } from '@/components';
+import { Head, Content, Breadcrumbs } from '@/components';
 import {
   PlayerSlugsDocument,
   PlayerSlugsQuery,
