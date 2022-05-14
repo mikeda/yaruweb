@@ -40,6 +40,7 @@ import {
   ThrowMoveResultText,
   ThrowTypeEnumText,
   colors,
+  frameDiffText,
 } from '@/lib';
 
 const Page: React.FC<CharacterMovesPageQuery> = ({ character }) => {
@@ -146,15 +147,15 @@ const AttackListItem: React.FC<AttackMove> = ({ move, attack }) => {
   const frames: { label: string; frame: string }[] = [
     {
       label: 'G',
-      frame: attack.blockFrame ? frameText(attack.blockFrame) : AttackMoveResultText[attack.blockResult],
+      frame: attack.blockFrame ? frameDiffText(attack.blockFrame) : AttackMoveResultText[attack.blockResult],
     },
     {
       label: 'H',
-      frame: attack.hitFrame ? frameText(attack.hitFrame) : AttackMoveResultText[attack.hitResult],
+      frame: attack.hitFrame ? frameDiffText(attack.hitFrame) : AttackMoveResultText[attack.hitResult],
     },
     {
       label: 'C',
-      frame: attack.counterFrame ? frameText(attack.counterFrame) : AttackMoveResultText[attack.blockResult],
+      frame: attack.counterFrame ? frameDiffText(attack.counterFrame) : AttackMoveResultText[attack.blockResult],
     },
   ];
 
@@ -168,7 +169,7 @@ const AttackListItem: React.FC<AttackMove> = ({ move, attack }) => {
       </Typography>
 
       <Typography variant="body2">
-        発生 {attack.startUpFrame ? frameText(attack.startUpFrame) : '-'}
+        発生 {attack.startUpFrame ? frameDiffText(attack.startUpFrame) : '-'}
         {attack.duration && `（持続 ${attack.duration}F）`}
       </Typography>
       <Typography variant="body2">{frames.map(frame => `${frame.label} ${frame.frame}`).join(' / ')}</Typography>
@@ -185,7 +186,7 @@ const ThrowListItem: React.FC<ThrowMove> = ({ move, throw: thrw }) => {
         ThrowEscapeEnumText[thrw.throwEscape]
       }`}</Typography>
 
-      <Typography variant="body2">{`発生 ${thrw.startUpFrame ? frameText(thrw.startUpFrame) : '-'} / H ${
+      <Typography variant="body2">{`発生 ${thrw.startUpFrame ? frameDiffText(thrw.startUpFrame) : '-'} / H ${
         ThrowMoveResultText[thrw.throwResult]
       }`}</Typography>
 
@@ -235,12 +236,6 @@ const AttackLabels: React.FC<{ attack: AttackMoveFragment }> = ({ attack }) => {
       ))}
     </Stack>
   );
-};
-
-const frameText = (frame: number) => {
-  if (frame > 0) return `+${frame}F`;
-  if (frame === 0) return `±${0}F`;
-  return `${frame}F`;
 };
 
 interface Params extends ParsedUrlQuery {

@@ -1,3 +1,4 @@
+// 秒数をHH:MM:SS形式にする
 export const formatSec = (seconds: number) => {
   const times: number[] = [];
 
