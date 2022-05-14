@@ -7,7 +7,7 @@ import { DetailItem } from './DetailItem';
 import { ListItemFooter } from './ListItemFooter';
 
 import { AttackMoveFragment, MoveMediaFragment } from '@/generated/graphql';
-import { AttackMoveResultText, AttackTypeEnumText } from '@/lib';
+import { AttackMoveResultText, AttackTypeEnumText, frameDiffText } from '@/lib';
 
 interface Props {
   move: MoveMediaFragment;
@@ -43,13 +43,13 @@ export const AttackListItem: React.FC<Props> = ({ move, attack }) => {
 
       <Stack direction="row" divider={<Divider orientation="vertical" flexItem />} spacing={1}>
         <DetailItem label="ガード">
-          {attack.blockFrame ? frameText(attack.blockFrame) : AttackMoveResultText[attack.blockResult]}
+          {attack.blockFrame ? frameDiffText(attack.blockFrame) : AttackMoveResultText[attack.blockResult]}
         </DetailItem>
         <DetailItem label="ヒット">
-          {attack.hitFrame ? frameText(attack.hitFrame) : AttackMoveResultText[attack.hitResult]}
+          {attack.hitFrame ? frameDiffText(attack.hitFrame) : AttackMoveResultText[attack.hitResult]}
         </DetailItem>
         <DetailItem label="カウンター">
-          {attack.counterFrame ? frameText(attack.counterFrame) : AttackMoveResultText[attack.counterResult]}
+          {attack.counterFrame ? frameDiffText(attack.counterFrame) : AttackMoveResultText[attack.counterResult]}
         </DetailItem>
       </Stack>
 
@@ -77,10 +77,4 @@ const AttackLabels: React.FC<{ attack: AttackMoveFragment }> = ({ attack }) => {
       ))}
     </Stack>
   );
-};
-
-const frameText = (frame: number) => {
-  if (frame > 0) return `+${frame}F`;
-  if (frame === 0) return `±${0}F`;
-  return `${frame}F`;
 };
