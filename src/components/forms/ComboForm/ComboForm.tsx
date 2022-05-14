@@ -18,10 +18,9 @@ import {
 import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
-import { Command } from '../../Command';
-
 import { CommandForm } from './CommandForm';
 
+import { Command } from '@/components';
 import {
   ComboAttributes,
   ComboFormFragment,

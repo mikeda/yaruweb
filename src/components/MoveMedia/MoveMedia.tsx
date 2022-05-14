@@ -4,10 +4,7 @@ import { ArrowRight } from '@mui/icons-material';
 import { Box, Card, CardContent, Chip, Divider, Stack, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
-import { Command } from '../Command';
-import { CustomText } from '../CustomText';
-import { VideoPlayer } from '../VideoPlayer';
-
+import { Command, CustomText, VideoPlayer } from '@/components';
 import { AttackMoveFragment, MoveMediaFragment, ReversalMoveFragment, ThrowMoveFragment } from '@/generated/graphql';
 import {
   AttackMoveResultText,

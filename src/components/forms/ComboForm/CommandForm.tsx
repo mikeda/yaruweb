@@ -3,8 +3,7 @@ import React, { useState } from 'react';
 import EditIcon from '@mui/icons-material/Edit';
 import { Box, IconButton, Paper } from '@mui/material';
 
-import { Command } from '../../Command';
-import { OperationListSelector } from '../../OperationListSelector';
+import { Command, OperationListSelector } from '@/components';
 
 interface Props {
   command: string[];
