@@ -1,4 +1,4 @@
-import { createTheme, adaptV4Theme } from '@mui/material/styles';
+import { createTheme } from '@mui/material/styles';
 
 const primary = {
   50: '#feefed',
@@ -108,59 +108,69 @@ const error = {
   contrastDefaultColor: 'light',
 };
 
-export const theme = createTheme(
-  adaptV4Theme({
-    palette: {
-      primary,
-      secondary,
-      info,
-      success,
-      warning,
-      error,
-    },
-    props: {
-      MuiTextField: {
+export const theme = createTheme({
+  palette: {
+    primary,
+    secondary,
+    info,
+    success,
+    warning,
+    error,
+  },
+  components: {
+    MuiTextField: {
+      defaultProps: {
         variant: 'outlined',
       },
-      MuiCheckbox: {
+    },
+    MuiCheckbox: {
+      defaultProps: {
         color: 'primary',
       },
-      MuiRadio: {
+    },
+    MuiRadio: {
+      defaultProps: {
         color: 'primary',
       },
-      MuiSwitch: {
+    },
+    MuiSwitch: {
+      defaultProps: {
         color: 'primary',
       },
-      MuiLink: {
+    },
+    MuiLink: {
+      defaultProps: {
         color: 'inherit',
       },
-      MuiPaper: {
+    },
+    MuiPaper: {
+      defaultProps: {
         elevation: 2,
       },
     },
-    typography: {
-      button: {
-        textTransform: 'none',
-      },
-      h1: {
-        fontSize: '1.5rem',
-        fontWeight: 'bold',
-      },
-      h2: {
-        fontSize: '1.25rem',
-      },
-      h3: {
-        fontSize: '1.125rem',
-      },
-      h4: {
-        fontSize: '1rem',
-      },
-      h5: {
-        fontSize: '1rem',
-      },
-      h6: {
-        fontSize: '1rem',
-      },
+  },
+  typography: {
+    button: {
+      textTransform: 'none',
     },
-  }),
-);
+    h1: {
+      fontSize: '1.5rem',
+      fontWeight: 'bold',
+    },
+    h2: {
+      fontSize: '1.25rem',
+    },
+    h3: {
+      fontSize: '1.125rem',
+    },
+    h4: {
+      fontSize: '1rem',
+    },
+    h5: {
+      fontSize: '1rem',
+    },
+    h6: {
+      fontSize: '1rem',
+    },
+  },
+});
