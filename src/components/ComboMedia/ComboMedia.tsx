@@ -2,9 +2,7 @@ import React from 'react';
 
 import { Card, CardContent, Typography } from '@mui/material';
 
-import { Command } from '../Command';
-import { VideoPlayer } from '../VideoPlayer';
-
+import { Command, VideoPlayer } from '@/components';
 import { ComboMediaFragment } from '@/generated/graphql';
 
 interface Props {
