@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Command Snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="css-1nlwwb3"
+  >
+    <span
+      class="css-h587ij"
+    >
+      レイジ中
+    </span>
+    <img
+      class="css-8geszw"
+      src="https://yarouyo.s3-ap-northeast-1.amazonaws.com/site/operations/df.svg"
+    />
+    <img
+      class="css-8geszw"
+      src="https://yarouyo.s3-ap-northeast-1.amazonaws.com/site/operations/lp_rp.svg"
+    />
+  </div>
+</DocumentFragment>
+`;
