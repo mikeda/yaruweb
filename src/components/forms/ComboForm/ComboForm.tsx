@@ -18,7 +18,7 @@ import {
 import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
-import { Command } from '../Command';
+import { Command } from '../../Command';
 
 import { CommandForm } from './CommandForm';
 

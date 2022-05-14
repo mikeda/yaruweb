@@ -15,8 +15,7 @@ import {
 } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 
-import { Link } from '../Link';
-
+import { Link } from '@/components';
 import { pagesPath } from '@/generated/$path';
 import { TournamentCardFragment } from '@/generated/graphql';
 import { NO_IMAGE_URL, dayjs, colors } from '@/lib';
