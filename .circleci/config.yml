@@ -11,9 +11,11 @@ commands:
     steps:
       - restore_cache:
           key: yarn-deps-v2-{{ checksum "yarn.lock" }}
+
       - run:
           name: yarn
           command: yarn
+
       - save_cache:
           paths:
             - node_modules
@@ -30,6 +32,11 @@ jobs:
       - run:
           name: tsc
           command: yarn tsc --noEmit
+          when: always
+
+      - run:
+          name: jest
+          command: yarn jest
           when: always
 
       - run:
