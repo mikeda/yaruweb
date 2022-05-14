@@ -19,8 +19,7 @@ import {
 import makeStyles from '@mui/styles/makeStyles';
 import { useRouter } from 'next/router';
 
-import { Link } from '../Link';
-
+import { Link } from '@/components';
 import { pagesPath } from '@/generated/$path';
 import { CharacterCardFragment } from '@/generated/graphql';
 import { colors, resolveUrlObject } from '@/lib';
