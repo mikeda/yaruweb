@@ -4,6 +4,8 @@ executors:
   default:
     docker:
       - image: cimg/node:16.13.1
+        environment:
+          TZ: Asia/Tokyo
 
 commands:
   # 不要なキャッシュ保存やキャッシュ肥大化を防ぐためorbsを使わない
