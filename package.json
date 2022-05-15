@@ -7,6 +7,7 @@
     "dev:next": "next dev",
     "dev:path": "pathpida --output src/generated --ignorePath .gitignore --watch",
     "build": "pathpida --output src/generated --ignorePath .gitignore && next build",
+    "test": "jest --watch",
     "eslint": "npx eslint --ext ts,tsx --max-warnings 0 src"
   },
   "dependencies": {
@@ -26,6 +27,7 @@
     "@sentry/react": "^6.19.7",
     "@sentry/tracing": "^6.19.7",
     "clsx": "^1.1.1",
+    "cross-fetch": "^3.1.5",
     "dayjs": "^1.11.2",
     "firebase": "^9.8.1",
     "graphql": "^16.5.0",
@@ -54,6 +56,8 @@
     "@graphql-codegen/typescript-operations": "^2.4.0",
     "@graphql-codegen/typescript-react-apollo": "^3.2.14",
     "@graphql-codegen/typescript-resolvers": "^2.6.4",
+    "@testing-library/jest-dom": "^5.16.4",
+    "@testing-library/react": "12.1.5",
     "@types/gtag.js": "^0.0.10",
     "@types/is-url": "^1.2.30",
     "@types/node": "^17.0.33",
@@ -71,6 +75,7 @@
     "eslint-plugin-jest": "^26.1.5",
     "eslint-plugin-prettier": "^4.0.0",
     "eslint-plugin-react": "^7.29.4",
+    "jest": "27.5.1",
     "npm-run-all": "^4.1.5",
     "pathpida": "^0.18.1",
     "prettier": "^2.6.2",
