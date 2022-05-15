@@ -7,6 +7,7 @@ import { Command } from '@/components';
 describe(Command, () => {
   test('Snapshot', () => {
     const { asFragment } = render(<Command command={['レイジ中', 'df', 'lp_rp']} />);
+
     expect(asFragment()).toMatchSnapshot();
   });
 

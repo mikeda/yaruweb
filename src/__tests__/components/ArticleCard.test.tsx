@@ -22,6 +22,7 @@ describe(ArticleCard, () => {
         }}
       />,
     );
+
     expect(asFragment()).toMatchSnapshot();
   });
 });

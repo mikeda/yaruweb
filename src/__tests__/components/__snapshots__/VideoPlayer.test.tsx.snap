@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VideoPlayer Snapshot 1`] = `
+<DocumentFragment>
+  <video
+    autoplay=""
+    controls=""
+    playsinline=""
+    poster="https://example.com/main.jpg"
+    preload="none"
+    style="max-width: 680px;"
+    width="400"
+  />
+</DocumentFragment>
+`;

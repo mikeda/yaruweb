@@ -11,10 +11,10 @@ import { theme, dayjs, BattleRoundText } from '@/lib';
 
 interface Props {
   battle: BattleListItemFragment;
-  last: boolean;
+  last?: boolean;
 }
 
-export const BattleListItem: React.FC<Props> = ({ battle, last }) => {
+export const BattleListItem: React.FC<Props> = ({ battle, last = false }) => {
   const video = battle.tournamentVideo;
   const tournament = video.tournament;
   const [left, right] = battle.sides;
@@ -24,6 +24,7 @@ export const BattleListItem: React.FC<Props> = ({ battle, last }) => {
   if (battle.round) {
     subTitle = `${subTitle} ${BattleRoundText[battle.round]}`;
   }
+
   return (
     <Link
       href={pagesPath.tournament_videos._id(video.id).$url({ hash: `battle_${battle.id}` })}
@@ -35,10 +36,10 @@ export const BattleListItem: React.FC<Props> = ({ battle, last }) => {
           primary={
             <Grid container spacing={2}>
               <Grid item xs={6}>
-                <PLayer name={left.player.name} rounds={left.rounds} faceImageUrl={left.character.faceImageUrl} />
+                <Player name={left.player.name} rounds={left.rounds} faceImageUrl={left.character.faceImageUrl} />
               </Grid>
               <Grid item xs={6}>
-                <PLayer name={right.player.name} rounds={right.rounds} faceImageUrl={right.character.faceImageUrl} />
+                <Player name={right.player.name} rounds={right.rounds} faceImageUrl={right.character.faceImageUrl} />
               </Grid>
             </Grid>
           }
@@ -84,7 +85,7 @@ interface PlayerProps {
   faceImageUrl: string;
 }
 
-const PLayer: React.FC<PlayerProps> = ({ name, rounds, faceImageUrl }) => {
+const Player: React.FC<PlayerProps> = ({ name, rounds, faceImageUrl }) => {
   const classes = useStyles();
 
   return (
