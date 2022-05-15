@@ -3,7 +3,6 @@ export * from './layouts';
 export * from './slate';
 
 export * from './ArticleCard';
-export * from './ArticleCards';
 export * from './BattleListItem';
 export * from './CharacterCard';
 export * from './ComboMedia';
