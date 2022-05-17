@@ -38,7 +38,7 @@ jobs:
 
       - run:
           name: jest
-          command: yarn jest
+          command: yarn jest --runInBand
           when: always
 
       - run:
