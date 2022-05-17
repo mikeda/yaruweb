@@ -4,6 +4,8 @@ import { render } from '@testing-library/react';
 
 import { TournamentCard } from '@/components';
 
+jest.mock('next/router', () => require('next-router-mock'));
+
 describe(TournamentCard, () => {
   test('Snapshot', () => {
     const { asFragment } = render(

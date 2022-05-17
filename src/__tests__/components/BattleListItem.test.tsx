@@ -5,6 +5,8 @@ import { render } from '@testing-library/react';
 import { BattleListItem } from '@/components';
 import { BattleRound } from '@/generated/graphql';
 
+jest.mock('next/router', () => require('next-router-mock'));
+
 describe(BattleListItem, () => {
   test('Snapshot', () => {
     const { asFragment } = render(
