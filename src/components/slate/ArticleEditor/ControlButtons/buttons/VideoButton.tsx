@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 import { toast } from 'react-toastify';
 import { Transforms } from 'slate';
@@ -13,11 +13,11 @@ import { YAROUYO_FONT_CODE } from '@/lib';
 
 export const VideoButton: React.FC = () => {
   const editor = useSlate();
-  let file: File | undefined;
+  const fileRef = useRef<File>();
 
   const [createArticleVideo] = useCreateArticleVideoMutation({
     onCompleted: e => {
-      if (!file) return;
+      if (!fileRef.current) return;
       const res = e.createArticleVideo;
       if (!res) return;
 
@@ -28,7 +28,7 @@ export const VideoButton: React.FC = () => {
       for (const key in fields) {
         formData.append(key, fields[key]);
       }
-      formData.append('file', file);
+      formData.append('file', fileRef.current);
 
       fetch(uploadUrl, {
         method: 'POST',
@@ -61,6 +61,7 @@ export const VideoButton: React.FC = () => {
         <Button
           active={false}
           onMouseDown={event => {
+            fileRef.current = undefined;
             event.preventDefault();
           }}
           icon={YAROUYO_FONT_CODE.video}
@@ -75,8 +76,8 @@ export const VideoButton: React.FC = () => {
           const target = event.target;
           if (!target.files) return;
 
-          file = target.files[0];
-          if (!file) return;
+          fileRef.current = target.files[0];
+          if (!fileRef.current) return;
 
           createArticleVideo();
         }}
