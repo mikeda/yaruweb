@@ -41,7 +41,7 @@
     "react-toastify": "^9.0.1",
     "react-twitter-widgets": "^1.10.0",
     "react-youtube": "^7.14.0",
-    "recoil": "^0.7.0",
+    "recoil": "^0.7.3",
     "slate": "^0.80.0",
     "slate-history": "^0.66.0",
     "slate-react": "^0.80.0",
