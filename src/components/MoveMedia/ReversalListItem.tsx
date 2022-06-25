@@ -15,7 +15,7 @@ interface Props {
 export const ReversalListItem: React.FC<Props> = ({ move, reversal }) => {
   return (
     <Stack spacing={1} sx={{ paddingBottom: 1 }}>
-      <DetailItem label="種別">{reversal.type}</DetailItem>
+      <DetailItem label="種別">{reversal.kind}</DetailItem>
       <DetailItem label="受付フレーム">
         {reversal.startUpFrame}〜{reversal.finishFrame}
       </DetailItem>

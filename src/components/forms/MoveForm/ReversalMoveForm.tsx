@@ -65,7 +65,7 @@ export const ReversalMoveForm: React.FC<Props> = ({ move, moves, onSubmit, copy 
           reversal:
             move.moveable.__typename === 'ReversalMove'
               ? {
-                  type: move.moveable.type,
+                  kind: move.moveable.kind,
                   startUpFrame: move.moveable.startUpFrame,
                   finishFrame: move.moveable.finishFrame,
                 }
@@ -78,7 +78,7 @@ export const ReversalMoveForm: React.FC<Props> = ({ move, moves, onSubmit, copy 
             position: moves.length > 0 ? moves[moves.length - 1]!.position + 1 : 0,
           },
           reversal: {
-            type: '',
+            kind: '',
           },
         },
   });
@@ -140,14 +140,14 @@ export const ReversalMoveForm: React.FC<Props> = ({ move, moves, onSubmit, copy 
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <Controller
-                name="reversal.type"
+                name="reversal.kind"
                 control={control}
                 render={({ field }) => (
                   <TextField
                     {...field}
                     label="種別"
-                    error={Boolean(errors.reversal?.type)}
-                    helperText={errors.reversal?.type?.message}
+                    error={Boolean(errors.reversal?.kind)}
+                    helperText={errors.reversal?.kind?.message}
                     size="small"
                     fullWidth
                   />
