@@ -19,6 +19,7 @@ jobs:
           node-version: '16.x'
           cache: 'yarn'
 
+      - run: yarn
       - run: yarn tsc --noEmit
       - run: yarn jest --runInBand
       - run: yarn eslint
