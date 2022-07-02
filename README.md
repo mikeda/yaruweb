@@ -1,7 +1,5 @@
 # yaruweb
 
-[![CircleCI](https://circleci.com/gh/mikeda/yaruweb.svg?style=svg&circle-token=dbcf5356a23d1581dfa3fc1aedce199fba7f6043)](https://circleci.com/gh/mikeda/yaruweb)
-
 [鉄拳やろうよ.com](https://tekken.yarouyo.com/)のフロントエンド
 
 - TypeScript
@@ -15,7 +13,7 @@
 
 ## 開発環境構築(Mac)
 
-### GraphQLサーバーを起動
+### GraphQL サーバーを起動
 
 https://github.com/mikeda/yarouyo
 
@@ -28,7 +26,7 @@ yarn dev
 
 ### graphql-codegen
 
-GraphQLのクエリ追加、サーバーサイドでのスキーマ変更があった場合は型定義を更新する。
+GraphQL のクエリ追加、サーバーサイドでのスキーマ変更があった場合は型定義を更新する。
 
 ```bash
 yarn graphql-codegen
