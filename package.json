@@ -22,7 +22,7 @@
     "@hookform/resolvers": "^2.9.3",
     "@mui/icons-material": "^5.8.4",
     "@mui/lab": "^5.0.0-alpha.88",
-    "@mui/material": "^5.8.6",
+    "@mui/material": "^5.8.7",
     "@mui/styles": "^5.8.6",
     "@sentry/react": "^7.4.1",
     "@sentry/tracing": "^7.4.1",
