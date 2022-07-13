@@ -91,8 +91,9 @@ const PageContent: React.FC<TournamentVideoPageQuery> = ({ tournamentVideo }) =>
       <YouTubeWrapper>
         <YouTube
           videoId={tournamentVideo.youtubeVideoId}
-          opts={{ width: '854', height: '480', playerVars: { playsinline: 1, mute: 1 } }}
+          opts={{ width: '854', height: '480', playerVars: { playsinline: 1 } }}
           onReady={event => {
+            event.target.mute();
             setYouTubePlayer(event.target);
           }}
         />
