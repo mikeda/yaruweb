@@ -5,7 +5,11 @@ import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
 import clsx from 'clsx';
 
-import { TournamentVideoPageBattleFragment, TournamentVideoPageBattleSideFragment } from '@/generated/graphql';
+import {
+  BattleRound,
+  TournamentVideoPageBattleFragment,
+  TournamentVideoPageBattleSideFragment,
+} from '@/generated/graphql';
 import { formatSec, BattleRoundText, theme } from '@/lib';
 
 const useStyles = makeStyles(() =>
@@ -35,7 +39,7 @@ export const BattleListItem: React.FC<Props> = ({ battle, selected = false, onCl
   if (!left || !right) return null;
 
   let subTitle = formatSec(battle.startSec);
-  if (battle.round) {
+  if (battle.round !== BattleRound.Unspecified) {
     subTitle = `${subTitle} ${BattleRoundText[battle.round]}`;
   }
 

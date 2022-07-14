@@ -72,6 +72,7 @@ export const BattleForm: React.FC<Props> = ({ youtubeVideoId, players, character
         }
       : {
           startSec: 0,
+          round: BattleRound.Unspecified,
           sides: [
             { playerId: players[0]?.id, characterId: characters[0]?.id, rounds: 3 },
             { playerId: players[0]?.id, characterId: characters[0]?.id, rounds: 3 },
@@ -212,11 +213,10 @@ export const BattleForm: React.FC<Props> = ({ youtubeVideoId, players, character
                     <Select
                       {...field}
                       onChange={e => {
-                        const round = e.target.value as BattleRound | undefined;
-                        setValue('round', round || null);
+                        const round = e.target.value as BattleRound;
+                        setValue('round', round);
                       }}
                     >
-                      <MenuItem>指定なし</MenuItem>
                       {Object.entries(BattleRoundText).map(([key, value]) => (
                         <MenuItem key={key} value={key}>
                           {value}

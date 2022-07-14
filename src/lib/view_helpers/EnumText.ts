@@ -81,6 +81,7 @@ export const ThrowTypeEnumText: { [key in ThrowTypeEnum]: string } = {
 };
 
 export const BattleRoundText: { [key in BattleRound]: string } = {
+  unspecified: '指定なし',
   grand_final: 'Grand Final',
   grand_final_reset: 'Grand Final(リセット)',
   winners_final: 'Winners Final',

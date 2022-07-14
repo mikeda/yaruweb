@@ -6,7 +6,7 @@ import clsx from 'clsx';
 
 import { Link } from '@/components';
 import { pagesPath } from '@/generated/$path';
-import { BattleListItemFragment } from '@/generated/graphql';
+import { BattleListItemFragment, BattleRound } from '@/generated/graphql';
 import { theme, dayjs, BattleRoundText } from '@/lib';
 
 interface Props {
@@ -21,7 +21,7 @@ export const BattleListItem: React.FC<Props> = ({ battle, last = false }) => {
   if (!left || !right) return null;
 
   let subTitle = tournament.name;
-  if (battle.round) {
+  if (battle.round !== BattleRound.Unspecified) {
     subTitle = `${subTitle} ${BattleRoundText[battle.round]}`;
   }
 

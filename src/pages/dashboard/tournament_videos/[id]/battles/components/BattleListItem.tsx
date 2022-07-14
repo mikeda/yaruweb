@@ -12,6 +12,7 @@ import { useUpdateMutation } from '../hooks/useUpdateMutation';
 import { BattleForm } from './BattleForm';
 
 import {
+  BattleRound,
   CharacterSelectOptionFragment,
   DashboardBattlesPageBattleReslutFragment,
   PlayerSelectOptionFragment,
@@ -60,7 +61,7 @@ export const BattleListItem: React.FC<Props> = ({
   if (!left || !right) return null;
 
   let subTitle = formatSec(battle.startSec);
-  if (battle.round) {
+  if (battle.round !== BattleRound.Unspecified) {
     subTitle = `${subTitle} ${BattleRoundText[battle.round]}`;
   }
   return (
