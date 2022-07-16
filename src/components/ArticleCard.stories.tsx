@@ -8,9 +8,6 @@ import { ArticleStatus } from '@/generated/graphql';
 export default {
   title: 'Example/ArticleCard',
   component: ArticleCard,
-  argTypes: {
-    backgroundColor: { control: 'color' },
-  },
 } as ComponentMeta<typeof ArticleCard>;
 
 const Template: ComponentStory<typeof ArticleCard> = args => <ArticleCard {...args} />;
