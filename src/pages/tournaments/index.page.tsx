@@ -6,18 +6,12 @@ import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
 import { Head, Content, Breadcrumbs, TournamentCard } from '@/components';
-import {
-  TournamentsPageTournamentsDocument,
-  TournamentsPageTournamentsQuery,
-  useTournamentsPageTournamentsLazyQuery,
-} from '@/generated/graphql';
+import { TournamentsPageDocument, TournamentsPageQuery, useTournamentsPageLazyQuery } from '@/generated/graphql';
 import { loadingState, fetchGraphql } from '@/lib';
 
-const Page: React.FC<TournamentsPageTournamentsQuery> = ({
-  tournaments: { records: initTournaments, paging: initPaging },
-}) => {
+const Page: React.FC<TournamentsPageQuery> = ({ tournaments: { records: initTournaments, paging: initPaging } }) => {
   const [state, setState] = useState({ tournaments: initTournaments, paging: initPaging });
-  const [fetch] = useTournamentsPageTournamentsLazyQuery({
+  const [fetch] = useTournamentsPageLazyQuery({
     onCompleted: data => {
       setState(prev => ({
         tournaments: [...prev.tournaments, ...data.tournaments.records],
@@ -64,8 +58,8 @@ const Page: React.FC<TournamentsPageTournamentsQuery> = ({
   );
 };
 
-export const getStaticProps: GetStaticProps<TournamentsPageTournamentsQuery> = async () => {
-  const data: TournamentsPageTournamentsQuery = await fetchGraphql(TournamentsPageTournamentsDocument, { page: 1 });
+export const getStaticProps: GetStaticProps<TournamentsPageQuery> = async () => {
+  const data: TournamentsPageQuery = await fetchGraphql(TournamentsPageDocument, { page: 1 });
 
   return { props: data, revalidate: 300 };
 };

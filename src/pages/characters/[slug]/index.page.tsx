@@ -12,8 +12,8 @@ import { Breadcrumbs, Content, Head } from '@/components';
 import {
   CharacterPathsDocument,
   CharacterPathsQuery,
-  PageCharacterDocument,
-  PageCharacterQuery,
+  CharacterPageDocument,
+  CharacterPageQuery,
 } from '@/generated/graphql';
 import { fetchGraphql, theme } from '@/lib';
 
@@ -30,7 +30,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Page: React.FC<PageCharacterQuery> = ({ character }) => {
+const Page: React.FC<CharacterPageQuery> = ({ character }) => {
   const classes = useStyles();
 
   return (
@@ -64,9 +64,9 @@ interface Params extends ParsedUrlQuery {
   slug: string;
 }
 
-export const getStaticProps: GetStaticProps<PageCharacterQuery, Params> = async ({ params }) => {
+export const getStaticProps: GetStaticProps<CharacterPageQuery, Params> = async ({ params }) => {
   const characterSlug = params?.slug;
-  const data: PageCharacterQuery = await fetchGraphql(PageCharacterDocument, { characterSlug });
+  const data: CharacterPageQuery = await fetchGraphql(CharacterPageDocument, { characterSlug });
 
   return { props: data };
 };

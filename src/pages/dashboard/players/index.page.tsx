@@ -26,13 +26,13 @@ import { pagesPath } from '@/generated/$path';
 import {
   DashboardPlayersPagePlayerFragment,
   useDashboardPlayersPageDeleteMutation,
-  useDashboardPlayersPagePlayersQuery,
+  useDashboardPlayersPageQuery,
 } from '@/generated/graphql';
 import { loadingState, DEFAULT_AVATAR_URL, resolveUrlObject } from '@/lib';
 
 const Page: React.FC = () => {
   const setLoading = useSetRecoilState(loadingState);
-  const { data, loading, fetchMore, updateQuery, refetch } = useDashboardPlayersPagePlayersQuery({
+  const { data, loading, fetchMore, updateQuery, refetch } = useDashboardPlayersPageQuery({
     onCompleted: () => {
       setLoading(false);
     },
