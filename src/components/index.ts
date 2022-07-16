@@ -8,7 +8,6 @@ export * from './CharacterCard';
 export * from './ComboMedia';
 export * from './Command';
 export * from './CustomText';
-export * from './FavButton';
 export * from './Link';
 export * from './Loading';
 export * from './forms/MoveForm';

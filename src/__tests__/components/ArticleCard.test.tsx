@@ -15,8 +15,6 @@ describe(ArticleCard, () => {
           description: '本文',
           mainImageUrl: 'https://example.com/main.jpg',
           publishedAt: '2022-05-05T17:04:40+09:00',
-          faved: true,
-          favsCount: 1,
           status: ArticleStatus.Published,
           author: { __typename: 'User', name: '著者', avatarUrl: 'https://example.com/avatar.jpg' },
         }}

@@ -11,8 +11,6 @@ query MyArticle($articleId: ID!) {
     description
     mainImageUrl
     publishedAt
-    faved
-    favsCount
     status
     category
     content
