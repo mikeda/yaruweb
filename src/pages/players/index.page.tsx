@@ -6,17 +6,13 @@ import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
 import { Breadcrumbs, Content, Head, PlayerCard, SearchWord } from '@/components';
-import {
-  PlayersPagePlayersDocument,
-  PlayersPagePlayersQuery,
-  usePlayersPagePlayersLazyQuery,
-} from '@/generated/graphql';
+import { PlayersPageDocument, PlayersPageQuery, usePlayersPageLazyQuery } from '@/generated/graphql';
 import { fetchGraphql, loadingState } from '@/lib';
 
-const Page: React.FC<PlayersPagePlayersQuery> = ({ players: { records: initPlayers, paging: initPaging } }) => {
+const Page: React.FC<PlayersPageQuery> = ({ players: { records: initPlayers, paging: initPaging } }) => {
   const [state, setState] = useState({ players: initPlayers, paging: initPaging });
   const keywordRef = useRef<string>();
-  const [fetch] = usePlayersPagePlayersLazyQuery({
+  const [fetch] = usePlayersPageLazyQuery({
     onCompleted: data => {
       setState(prev => ({
         players: [...prev.players, ...data.players.records],
@@ -77,8 +73,8 @@ const Page: React.FC<PlayersPagePlayersQuery> = ({ players: { records: initPlaye
   );
 };
 
-export const getStaticProps: GetStaticProps<PlayersPagePlayersQuery> = async () => {
-  const data: PlayersPagePlayersQuery = await fetchGraphql(PlayersPagePlayersDocument, { page: 1 });
+export const getStaticProps: GetStaticProps<PlayersPageQuery> = async () => {
+  const data: PlayersPageQuery = await fetchGraphql(PlayersPageDocument, { page: 1 });
 
   return { props: data, revalidate: 300 };
 };

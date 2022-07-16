@@ -1,4 +1,4 @@
-fragment ArticlePageArticle on Article {
+fragment ArticlePage on Article {
   id
   title
   description
@@ -18,8 +18,8 @@ fragment ArticlePageArticle on Article {
   }
 }
 
-query ArticlePageArticle($articleId: ID!) {
+query ArticlePage($articleId: ID!) {
   article(articleId: $articleId) {
-    ...ArticlePageArticle
+    ...ArticlePage
   }
 }

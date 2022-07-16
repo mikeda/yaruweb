@@ -1,4 +1,3 @@
-
 query BattlesPage {
   players(per: 10) {
     records { ... PlayerChip }
@@ -14,10 +13,3 @@ query BattlesPage {
   }
 }
 
-query BattlesPageBattles($page: Int!) {
-
-  battles(page: $page, per: 10) {
-    records { ...BattleListItem }
-    paging { ...paging }
-  }
-}

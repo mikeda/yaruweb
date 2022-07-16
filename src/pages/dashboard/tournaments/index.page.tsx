@@ -23,7 +23,7 @@ import { DashboardContent, DashboardBreadcrumbs } from '@/components';
 import { pagesPath } from '@/generated/$path';
 import {
   DashboardTournamentsPageTournamentFragment,
-  useDashboardTournamentsPageTournamentsQuery,
+  useDashboardTournamentsPageQuery,
   useDeleteTournamentMutation,
 } from '@/generated/graphql';
 import { NO_IMAGE_URL, dayjs, resolveUrlObject, loadingState } from '@/lib';
@@ -31,7 +31,7 @@ import { NO_IMAGE_URL, dayjs, resolveUrlObject, loadingState } from '@/lib';
 const Page: React.FC = () => {
   const router = useRouter();
   const setLoading = useSetRecoilState(loadingState);
-  const { data, loading, fetchMore, updateQuery } = useDashboardTournamentsPageTournamentsQuery();
+  const { data, loading, fetchMore, updateQuery } = useDashboardTournamentsPageQuery();
   const [destroy, { loading: deleteLoading }] = useDeleteTournamentMutation({
     onCompleted: data => {
       const tournament = data.deleteTournament?.tournament;

@@ -24,7 +24,7 @@ import { pagesPath } from '@/generated/$path';
 import {
   ArticleStatus,
   DashboardArticlesPageArticleFragment,
-  useDashboardArticlesPageArticlesQuery,
+  useDashboardArticlesPageQuery,
   useDashboardArticlesPageDeleteMutation,
   useDashboardArticlesPagePublishMutation,
   useDashboardArticlesPageStopMutation,
@@ -34,7 +34,7 @@ import { loadingState, ArticleStatusText, resolveUrlObject } from '@/lib';
 const Page: React.FC = () => {
   const router = useRouter();
   const setLoading = useSetRecoilState(loadingState);
-  const { data, loading, fetchMore, updateQuery, refetch } = useDashboardArticlesPageArticlesQuery({
+  const { data, loading, fetchMore, updateQuery, refetch } = useDashboardArticlesPageQuery({
     onCompleted: () => {
       setLoading(false);
     },

@@ -1,0 +1,14 @@
+fragment ComboListItem on Combo {
+  id
+  damage
+  command
+  note
+
+  move { id }
+
+  comboVideo {
+    id
+    m3u8Url
+    thumbnailUrl
+  }
+}
