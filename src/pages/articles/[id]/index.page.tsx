@@ -6,7 +6,7 @@ import { Avatar, Box, Grid, Typography } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
-import { ArticleBody, ArticleCard, Breadcrumbs, Content, FavButton, Head } from '@/components';
+import { ArticleBody, ArticleCard, Breadcrumbs, Content, Head } from '@/components';
 import {
   ArticlePageArticleDocument,
   ArticlePageArticleQuery,
@@ -42,7 +42,6 @@ const Page: React.FC<ArticlePageArticleQuery> = ({ article }) => {
             <Typography variant="caption">{dayjs(article.publishedAt).format('YYYY/M/D H:mm')}</Typography>
           )}
         </Box>
-        <FavButton articleId={article.id} favsCount={article.favsCount} />
       </Box>
 
       <ArticleBody content={article.content} />

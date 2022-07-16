@@ -4,7 +4,6 @@ fragment ArticlePageArticle on Article {
   description
   mainImageUrl
   publishedAt
-  favsCount
   status
   category
   content

@@ -4,8 +4,6 @@ fragment ArticleCard on Article {
   description
   mainImageUrl
   publishedAt
-  faved
-  favsCount
   status
 
   author {
