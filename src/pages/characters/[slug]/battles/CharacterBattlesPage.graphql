@@ -1,4 +1,3 @@
-
 query CharacterBattlesPage($characterSlug: String!, $playerSlug: String) {
   character(characterSlug: $characterSlug) {
     ...CharacterBreadcrumbs
@@ -10,19 +9,6 @@ query CharacterBattlesPage($characterSlug: String!, $playerSlug: String) {
   }
 
   battles(characterSlug: $characterSlug, playerSlug: $playerSlug, per: 10) {
-    records {
-      ...BattleListItem
-    }
-
-    paging {
-      ...paging
-    }
-  }
-}
-
-query CharacterBattlesPageBattles($characterSlug: String!, $playerSlug: String, $page: Int!) {
-
-  battles(characterSlug: $characterSlug, playerSlug: $playerSlug, page: $page, per: 10) {
     records {
       ...BattleListItem
     }

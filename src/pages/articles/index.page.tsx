@@ -6,19 +6,15 @@ import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
 import { Content, Breadcrumbs, Head, ArticleCard } from '@/components';
-import {
-  ArticlesPageArticlesDocument,
-  ArticlesPageArticlesQuery,
-  useArticlesPageArticlesLazyQuery,
-} from '@/generated/graphql';
+import { ArticlesPageDocument, ArticlesPageQuery, useArticlesPageLazyQuery } from '@/generated/graphql';
 import { fetchGraphql, loadingState } from '@/lib';
 
-const Page: React.FC<ArticlesPageArticlesQuery> = ({ articles: { records: initArticles, paging: initPaging } }) => {
+const Page: React.FC<ArticlesPageQuery> = ({ articles: { records: initArticles, paging: initPaging } }) => {
   const [state, setState] = useState({
     articles: initArticles,
     paging: initPaging,
   });
-  const [fetch] = useArticlesPageArticlesLazyQuery({
+  const [fetch] = useArticlesPageLazyQuery({
     onCompleted: data => {
       setState(prev => ({
         articles: [...prev.articles, ...data.articles.records],
@@ -66,8 +62,8 @@ const Page: React.FC<ArticlesPageArticlesQuery> = ({ articles: { records: initAr
   );
 };
 
-export const getStaticProps: GetStaticProps<ArticlesPageArticlesQuery> = async () => {
-  const data: ArticlesPageArticlesQuery = await fetchGraphql(ArticlesPageArticlesDocument, { page: 1 });
+export const getStaticProps: GetStaticProps<ArticlesPageQuery> = async () => {
+  const data: ArticlesPageQuery = await fetchGraphql(ArticlesPageDocument, { page: 1 });
 
   return { props: data, revalidate: 300 };
 };

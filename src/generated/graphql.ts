@@ -2104,6 +2104,8 @@ export type BattleListItemFragment = { __typename?: 'Battle', id: string, round:
 
 export type CharacterCardFragment = { __typename?: 'Character', slug: string, name: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number };
 
+export type ComboListItemFragment = { __typename?: 'Combo', id: string, damage?: number | null, command: Array<string>, note?: string | null, move?: { __typename?: 'Move', id: string } | null, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null };
+
 export type ComboMediaFragment = { __typename?: 'Combo', id: string, damage?: number | null, command: Array<string>, note?: string | null, comboCategory: { __typename?: 'ComboCategory', id: string, name: string }, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null };
 
 export type MoveMediaFragment = { __typename?: 'Move', id: string, name: string, kana?: string | null, command: Array<string>, statusAfter?: string | null, note?: string | null, moveable: { __typename: 'AttackMove', id: string, startUpFrame?: number | null, duration?: number | null, heights: Array<AttackTypeEnum>, damages: Array<number>, reach?: number | null, blockResult: AttackMoveResultEnum, blockStatus?: AttackMoveStateEnum | null, blockFrame?: number | null, hitResult: AttackMoveResultEnum, hitStatus?: AttackMoveStateEnum | null, hitFrame?: number | null, counterResult: AttackMoveResultEnum, counterStatus?: AttackMoveStateEnum | null, counterFrame?: number | null, powerCrush: boolean, powerCrushFrame?: number | null, crouchingStatus: boolean, crouchingStatusFrame?: number | null, jumpStatus: boolean, jumpStatusFrame?: number | null, homing: boolean, screw: boolean, wallBound: boolean } | { __typename: 'ReversalMove', id: string, kind: string, startUpFrame?: number | null, finishFrame?: number | null } | { __typename: 'ThrowMove', id: string, throwType: ThrowTypeEnum, startUpFrame?: number | null, damage?: number | null, throwEscape: ThrowEscapeEnum, throwResult: ThrowMoveResultEnum }, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null };
@@ -2200,21 +2202,21 @@ export type ArticleElementMoveQueryVariables = Exact<{
 
 export type ArticleElementMoveQuery = { __typename?: 'Query', move: { __typename?: 'Move', id: string, name: string, kana?: string | null, command: Array<string>, statusAfter?: string | null, note?: string | null, moveable: { __typename: 'AttackMove', id: string, startUpFrame?: number | null, duration?: number | null, heights: Array<AttackTypeEnum>, damages: Array<number>, reach?: number | null, blockResult: AttackMoveResultEnum, blockStatus?: AttackMoveStateEnum | null, blockFrame?: number | null, hitResult: AttackMoveResultEnum, hitStatus?: AttackMoveStateEnum | null, hitFrame?: number | null, counterResult: AttackMoveResultEnum, counterStatus?: AttackMoveStateEnum | null, counterFrame?: number | null, powerCrush: boolean, powerCrushFrame?: number | null, crouchingStatus: boolean, crouchingStatusFrame?: number | null, jumpStatus: boolean, jumpStatusFrame?: number | null, homing: boolean, screw: boolean, wallBound: boolean } | { __typename: 'ReversalMove', id: string, kind: string, startUpFrame?: number | null, finishFrame?: number | null } | { __typename: 'ThrowMove', id: string, throwType: ThrowTypeEnum, startUpFrame?: number | null, damage?: number | null, throwEscape: ThrowEscapeEnum, throwResult: ThrowMoveResultEnum }, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null } };
 
-export type ArticlePageArticleFragment = { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, category: ArticleCategory, content: string, author: { __typename?: 'User', name: string, avatarUrl: string }, relatedArticles: Array<{ __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, author: { __typename?: 'User', name: string, avatarUrl: string } }> };
-
-export type ArticlePageArticleQueryVariables = Exact<{
-  articleId: Scalars['ID'];
-}>;
-
-
-export type ArticlePageArticleQuery = { __typename?: 'Query', article: { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, category: ArticleCategory, content: string, author: { __typename?: 'User', name: string, avatarUrl: string }, relatedArticles: Array<{ __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, author: { __typename?: 'User', name: string, avatarUrl: string } }> } };
-
-export type ArticlesPageArticlesQueryVariables = Exact<{
+export type ArticlesPageQueryVariables = Exact<{
   page?: InputMaybe<Scalars['Int']>;
 }>;
 
 
-export type ArticlesPageArticlesQuery = { __typename?: 'Query', articles: { __typename?: 'ArticleCollection', records: Array<{ __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, author: { __typename?: 'User', name: string, avatarUrl: string } }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
+export type ArticlesPageQuery = { __typename?: 'Query', articles: { __typename?: 'ArticleCollection', records: Array<{ __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, author: { __typename?: 'User', name: string, avatarUrl: string } }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
+
+export type ArticlePageFragment = { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, category: ArticleCategory, content: string, author: { __typename?: 'User', name: string, avatarUrl: string }, relatedArticles: Array<{ __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, author: { __typename?: 'User', name: string, avatarUrl: string } }> };
+
+export type ArticlePageQueryVariables = Exact<{
+  articleId: Scalars['ID'];
+}>;
+
+
+export type ArticlePageQuery = { __typename?: 'Query', article: { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, category: ArticleCategory, content: string, author: { __typename?: 'User', name: string, avatarUrl: string }, relatedArticles: Array<{ __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, author: { __typename?: 'User', name: string, avatarUrl: string } }> } };
 
 export type BattlesPageQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2244,8 +2246,6 @@ export type CharacterBattlesPageBattlesQueryVariables = Exact<{
 
 
 export type CharacterBattlesPageBattlesQuery = { __typename?: 'Query', battles: { __typename?: 'BattleCollection', records: Array<{ __typename?: 'Battle', id: string, round: BattleRound, tournamentVideo: { __typename?: 'TournamentVideo', id: string, tournament: { __typename?: 'Tournament', id: string, name: string, startsAt: string } }, sides: Array<{ __typename?: 'BattleSide', rounds: number, player: { __typename?: 'Player', name: string }, character: { __typename?: 'Character', faceImageUrl: string } }> }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
-
-export type ComboListItemFragment = { __typename?: 'Combo', id: string, damage?: number | null, command: Array<string>, note?: string | null, move?: { __typename?: 'Move', id: string } | null, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null };
 
 export type CharacterCombosPageQueryVariables = Exact<{
   characterSlug: Scalars['String'];
@@ -2285,12 +2285,12 @@ export type CharactersPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type CharactersPageQuery = { __typename?: 'Query', characters: { __typename?: 'CharacterCollection', records: Array<{ __typename?: 'Character', slug: string, name: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number }> } };
 
-export type DashboardArticlePageArticleQueryVariables = Exact<{
+export type DashboardArticlePageQueryVariables = Exact<{
   articleId: Scalars['ID'];
 }>;
 
 
-export type DashboardArticlePageArticleQuery = { __typename?: 'Query', article: { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, category: ArticleCategory, content: string } };
+export type DashboardArticlePageQuery = { __typename?: 'Query', article: { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, category: ArticleCategory, content: string } };
 
 export type MyArticleQueryVariables = Exact<{
   articleId: Scalars['ID'];
@@ -2330,13 +2330,13 @@ export type DashboardArticlesPageDeleteMutationVariables = Exact<{
 
 export type DashboardArticlesPageDeleteMutation = { __typename?: 'Mutation', deleteArticle?: { __typename?: 'DeleteArticlePayload', article: { __typename?: 'Article', id: string } } | null };
 
-export type DashboardArticlesPageArticlesQueryVariables = Exact<{
+export type DashboardArticlesPageQueryVariables = Exact<{
   page?: InputMaybe<Scalars['Int']>;
   keyword?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type DashboardArticlesPageArticlesQuery = { __typename?: 'Query', myArticles: { __typename?: 'ArticleCollection', records: Array<{ __typename?: 'Article', id: string, title: string, status: ArticleStatus }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
+export type DashboardArticlesPageQuery = { __typename?: 'Query', myArticles: { __typename?: 'ArticleCollection', records: Array<{ __typename?: 'Article', id: string, title: string, status: ArticleStatus }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
 
 export type CreateArticleMutationVariables = Exact<{
   attributes: ArticleAttributes;
@@ -3003,6 +3003,22 @@ export const CharacterCardFragmentDoc = gql`
   battlesCount
 }
     `;
+export const ComboListItemFragmentDoc = gql`
+    fragment ComboListItem on Combo {
+  id
+  damage
+  command
+  note
+  move {
+    id
+  }
+  comboVideo {
+    id
+    m3u8Url
+    thumbnailUrl
+  }
+}
+    `;
 export const ComboMediaFragmentDoc = gql`
     fragment ComboMedia on Combo {
   id
@@ -3385,8 +3401,8 @@ export const ArticleCardFragmentDoc = gql`
   }
 }
     `;
-export const ArticlePageArticleFragmentDoc = gql`
-    fragment ArticlePageArticle on Article {
+export const ArticlePageFragmentDoc = gql`
+    fragment ArticlePage on Article {
   id
   title
   description
@@ -3404,22 +3420,6 @@ export const ArticlePageArticleFragmentDoc = gql`
   }
 }
     ${ArticleCardFragmentDoc}`;
-export const ComboListItemFragmentDoc = gql`
-    fragment ComboListItem on Combo {
-  id
-  damage
-  command
-  note
-  move {
-    id
-  }
-  comboVideo {
-    id
-    m3u8Url
-    thumbnailUrl
-  }
-}
-    `;
 export const CharacterPageProfileFragmentDoc = gql`
     fragment CharacterPageProfile on Character {
   slug
@@ -4221,43 +4221,8 @@ export function useArticleElementMoveLazyQuery(baseOptions?: Apollo.LazyQueryHoo
 export type ArticleElementMoveQueryHookResult = ReturnType<typeof useArticleElementMoveQuery>;
 export type ArticleElementMoveLazyQueryHookResult = ReturnType<typeof useArticleElementMoveLazyQuery>;
 export type ArticleElementMoveQueryResult = Apollo.QueryResult<ArticleElementMoveQuery, ArticleElementMoveQueryVariables>;
-export const ArticlePageArticleDocument = gql`
-    query ArticlePageArticle($articleId: ID!) {
-  article(articleId: $articleId) {
-    ...ArticlePageArticle
-  }
-}
-    ${ArticlePageArticleFragmentDoc}`;
-
-/**
- * __useArticlePageArticleQuery__
- *
- * To run a query within a React component, call `useArticlePageArticleQuery` and pass it any options that fit your needs.
- * When your component renders, `useArticlePageArticleQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useArticlePageArticleQuery({
- *   variables: {
- *      articleId: // value for 'articleId'
- *   },
- * });
- */
-export function useArticlePageArticleQuery(baseOptions: Apollo.QueryHookOptions<ArticlePageArticleQuery, ArticlePageArticleQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<ArticlePageArticleQuery, ArticlePageArticleQueryVariables>(ArticlePageArticleDocument, options);
-      }
-export function useArticlePageArticleLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ArticlePageArticleQuery, ArticlePageArticleQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<ArticlePageArticleQuery, ArticlePageArticleQueryVariables>(ArticlePageArticleDocument, options);
-        }
-export type ArticlePageArticleQueryHookResult = ReturnType<typeof useArticlePageArticleQuery>;
-export type ArticlePageArticleLazyQueryHookResult = ReturnType<typeof useArticlePageArticleLazyQuery>;
-export type ArticlePageArticleQueryResult = Apollo.QueryResult<ArticlePageArticleQuery, ArticlePageArticleQueryVariables>;
-export const ArticlesPageArticlesDocument = gql`
-    query ArticlesPageArticles($page: Int) {
+export const ArticlesPageDocument = gql`
+    query ArticlesPage($page: Int) {
   articles(page: $page, per: 12) {
     records {
       ...ArticleCard
@@ -4271,32 +4236,67 @@ export const ArticlesPageArticlesDocument = gql`
 ${PagingFragmentDoc}`;
 
 /**
- * __useArticlesPageArticlesQuery__
+ * __useArticlesPageQuery__
  *
- * To run a query within a React component, call `useArticlesPageArticlesQuery` and pass it any options that fit your needs.
- * When your component renders, `useArticlesPageArticlesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useArticlesPageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useArticlesPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useArticlesPageArticlesQuery({
+ * const { data, loading, error } = useArticlesPageQuery({
  *   variables: {
  *      page: // value for 'page'
  *   },
  * });
  */
-export function useArticlesPageArticlesQuery(baseOptions?: Apollo.QueryHookOptions<ArticlesPageArticlesQuery, ArticlesPageArticlesQueryVariables>) {
+export function useArticlesPageQuery(baseOptions?: Apollo.QueryHookOptions<ArticlesPageQuery, ArticlesPageQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<ArticlesPageArticlesQuery, ArticlesPageArticlesQueryVariables>(ArticlesPageArticlesDocument, options);
+        return Apollo.useQuery<ArticlesPageQuery, ArticlesPageQueryVariables>(ArticlesPageDocument, options);
       }
-export function useArticlesPageArticlesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ArticlesPageArticlesQuery, ArticlesPageArticlesQueryVariables>) {
+export function useArticlesPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ArticlesPageQuery, ArticlesPageQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<ArticlesPageArticlesQuery, ArticlesPageArticlesQueryVariables>(ArticlesPageArticlesDocument, options);
+          return Apollo.useLazyQuery<ArticlesPageQuery, ArticlesPageQueryVariables>(ArticlesPageDocument, options);
         }
-export type ArticlesPageArticlesQueryHookResult = ReturnType<typeof useArticlesPageArticlesQuery>;
-export type ArticlesPageArticlesLazyQueryHookResult = ReturnType<typeof useArticlesPageArticlesLazyQuery>;
-export type ArticlesPageArticlesQueryResult = Apollo.QueryResult<ArticlesPageArticlesQuery, ArticlesPageArticlesQueryVariables>;
+export type ArticlesPageQueryHookResult = ReturnType<typeof useArticlesPageQuery>;
+export type ArticlesPageLazyQueryHookResult = ReturnType<typeof useArticlesPageLazyQuery>;
+export type ArticlesPageQueryResult = Apollo.QueryResult<ArticlesPageQuery, ArticlesPageQueryVariables>;
+export const ArticlePageDocument = gql`
+    query ArticlePage($articleId: ID!) {
+  article(articleId: $articleId) {
+    ...ArticlePage
+  }
+}
+    ${ArticlePageFragmentDoc}`;
+
+/**
+ * __useArticlePageQuery__
+ *
+ * To run a query within a React component, call `useArticlePageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useArticlePageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useArticlePageQuery({
+ *   variables: {
+ *      articleId: // value for 'articleId'
+ *   },
+ * });
+ */
+export function useArticlePageQuery(baseOptions: Apollo.QueryHookOptions<ArticlePageQuery, ArticlePageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ArticlePageQuery, ArticlePageQueryVariables>(ArticlePageDocument, options);
+      }
+export function useArticlePageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ArticlePageQuery, ArticlePageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ArticlePageQuery, ArticlePageQueryVariables>(ArticlePageDocument, options);
+        }
+export type ArticlePageQueryHookResult = ReturnType<typeof useArticlePageQuery>;
+export type ArticlePageLazyQueryHookResult = ReturnType<typeof useArticlePageLazyQuery>;
+export type ArticlePageQueryResult = Apollo.QueryResult<ArticlePageQuery, ArticlePageQueryVariables>;
 export const BattlesPageDocument = gql`
     query BattlesPage {
   players(per: 10) {
@@ -4668,8 +4668,8 @@ export function useCharactersPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOpt
 export type CharactersPageQueryHookResult = ReturnType<typeof useCharactersPageQuery>;
 export type CharactersPageLazyQueryHookResult = ReturnType<typeof useCharactersPageLazyQuery>;
 export type CharactersPageQueryResult = Apollo.QueryResult<CharactersPageQuery, CharactersPageQueryVariables>;
-export const DashboardArticlePageArticleDocument = gql`
-    query DashboardArticlePageArticle($articleId: ID!) {
+export const DashboardArticlePageDocument = gql`
+    query DashboardArticlePage($articleId: ID!) {
   article(articleId: $articleId) {
     ...ArticleFormArticle
   }
@@ -4677,32 +4677,32 @@ export const DashboardArticlePageArticleDocument = gql`
     ${ArticleFormArticleFragmentDoc}`;
 
 /**
- * __useDashboardArticlePageArticleQuery__
+ * __useDashboardArticlePageQuery__
  *
- * To run a query within a React component, call `useDashboardArticlePageArticleQuery` and pass it any options that fit your needs.
- * When your component renders, `useDashboardArticlePageArticleQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useDashboardArticlePageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useDashboardArticlePageQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useDashboardArticlePageArticleQuery({
+ * const { data, loading, error } = useDashboardArticlePageQuery({
  *   variables: {
  *      articleId: // value for 'articleId'
  *   },
  * });
  */
-export function useDashboardArticlePageArticleQuery(baseOptions: Apollo.QueryHookOptions<DashboardArticlePageArticleQuery, DashboardArticlePageArticleQueryVariables>) {
+export function useDashboardArticlePageQuery(baseOptions: Apollo.QueryHookOptions<DashboardArticlePageQuery, DashboardArticlePageQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<DashboardArticlePageArticleQuery, DashboardArticlePageArticleQueryVariables>(DashboardArticlePageArticleDocument, options);
+        return Apollo.useQuery<DashboardArticlePageQuery, DashboardArticlePageQueryVariables>(DashboardArticlePageDocument, options);
       }
-export function useDashboardArticlePageArticleLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<DashboardArticlePageArticleQuery, DashboardArticlePageArticleQueryVariables>) {
+export function useDashboardArticlePageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<DashboardArticlePageQuery, DashboardArticlePageQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<DashboardArticlePageArticleQuery, DashboardArticlePageArticleQueryVariables>(DashboardArticlePageArticleDocument, options);
+          return Apollo.useLazyQuery<DashboardArticlePageQuery, DashboardArticlePageQueryVariables>(DashboardArticlePageDocument, options);
         }
-export type DashboardArticlePageArticleQueryHookResult = ReturnType<typeof useDashboardArticlePageArticleQuery>;
-export type DashboardArticlePageArticleLazyQueryHookResult = ReturnType<typeof useDashboardArticlePageArticleLazyQuery>;
-export type DashboardArticlePageArticleQueryResult = Apollo.QueryResult<DashboardArticlePageArticleQuery, DashboardArticlePageArticleQueryVariables>;
+export type DashboardArticlePageQueryHookResult = ReturnType<typeof useDashboardArticlePageQuery>;
+export type DashboardArticlePageLazyQueryHookResult = ReturnType<typeof useDashboardArticlePageLazyQuery>;
+export type DashboardArticlePageQueryResult = Apollo.QueryResult<DashboardArticlePageQuery, DashboardArticlePageQueryVariables>;
 export const MyArticleDocument = gql`
     query MyArticle($articleId: ID!) {
   myArticle(articleId: $articleId) {
@@ -4890,8 +4890,8 @@ export function useDashboardArticlesPageDeleteMutation(baseOptions?: Apollo.Muta
 export type DashboardArticlesPageDeleteMutationHookResult = ReturnType<typeof useDashboardArticlesPageDeleteMutation>;
 export type DashboardArticlesPageDeleteMutationResult = Apollo.MutationResult<DashboardArticlesPageDeleteMutation>;
 export type DashboardArticlesPageDeleteMutationOptions = Apollo.BaseMutationOptions<DashboardArticlesPageDeleteMutation, DashboardArticlesPageDeleteMutationVariables>;
-export const DashboardArticlesPageArticlesDocument = gql`
-    query DashboardArticlesPageArticles($page: Int = 1, $keyword: String) {
+export const DashboardArticlesPageDocument = gql`
+    query DashboardArticlesPage($page: Int = 1, $keyword: String) {
   myArticles(page: $page, per: 10, keyword: $keyword) {
     records {
       ...DashboardArticlesPageArticle
@@ -4905,33 +4905,33 @@ export const DashboardArticlesPageArticlesDocument = gql`
 ${PagingFragmentDoc}`;
 
 /**
- * __useDashboardArticlesPageArticlesQuery__
+ * __useDashboardArticlesPageQuery__
  *
- * To run a query within a React component, call `useDashboardArticlesPageArticlesQuery` and pass it any options that fit your needs.
- * When your component renders, `useDashboardArticlesPageArticlesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useDashboardArticlesPageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useDashboardArticlesPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useDashboardArticlesPageArticlesQuery({
+ * const { data, loading, error } = useDashboardArticlesPageQuery({
  *   variables: {
  *      page: // value for 'page'
  *      keyword: // value for 'keyword'
  *   },
  * });
  */
-export function useDashboardArticlesPageArticlesQuery(baseOptions?: Apollo.QueryHookOptions<DashboardArticlesPageArticlesQuery, DashboardArticlesPageArticlesQueryVariables>) {
+export function useDashboardArticlesPageQuery(baseOptions?: Apollo.QueryHookOptions<DashboardArticlesPageQuery, DashboardArticlesPageQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<DashboardArticlesPageArticlesQuery, DashboardArticlesPageArticlesQueryVariables>(DashboardArticlesPageArticlesDocument, options);
+        return Apollo.useQuery<DashboardArticlesPageQuery, DashboardArticlesPageQueryVariables>(DashboardArticlesPageDocument, options);
       }
-export function useDashboardArticlesPageArticlesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<DashboardArticlesPageArticlesQuery, DashboardArticlesPageArticlesQueryVariables>) {
+export function useDashboardArticlesPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<DashboardArticlesPageQuery, DashboardArticlesPageQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<DashboardArticlesPageArticlesQuery, DashboardArticlesPageArticlesQueryVariables>(DashboardArticlesPageArticlesDocument, options);
+          return Apollo.useLazyQuery<DashboardArticlesPageQuery, DashboardArticlesPageQueryVariables>(DashboardArticlesPageDocument, options);
         }
-export type DashboardArticlesPageArticlesQueryHookResult = ReturnType<typeof useDashboardArticlesPageArticlesQuery>;
-export type DashboardArticlesPageArticlesLazyQueryHookResult = ReturnType<typeof useDashboardArticlesPageArticlesLazyQuery>;
-export type DashboardArticlesPageArticlesQueryResult = Apollo.QueryResult<DashboardArticlesPageArticlesQuery, DashboardArticlesPageArticlesQueryVariables>;
+export type DashboardArticlesPageQueryHookResult = ReturnType<typeof useDashboardArticlesPageQuery>;
+export type DashboardArticlesPageLazyQueryHookResult = ReturnType<typeof useDashboardArticlesPageLazyQuery>;
+export type DashboardArticlesPageQueryResult = Apollo.QueryResult<DashboardArticlesPageQuery, DashboardArticlesPageQueryVariables>;
 export const CreateArticleDocument = gql`
     mutation CreateArticle($attributes: ArticleAttributes!) {
   createArticle(input: {attributes: $attributes}) {

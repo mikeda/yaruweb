@@ -7,12 +7,7 @@ import makeStyles from '@mui/styles/makeStyles';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
 import { ArticleBody, ArticleCard, Breadcrumbs, Content, Head } from '@/components';
-import {
-  ArticlePageArticleDocument,
-  ArticlePageArticleQuery,
-  ArticlePathsDocument,
-  ArticlePathsQuery,
-} from '@/generated/graphql';
+import { ArticlePageDocument, ArticlePageQuery, ArticlePathsDocument, ArticlePathsQuery } from '@/generated/graphql';
 import { dayjs, fetchGraphql, NO_IMAGE_URL } from '@/lib';
 
 const useStyles = makeStyles({
@@ -23,7 +18,7 @@ const useStyles = makeStyles({
   },
 });
 
-const Page: React.FC<ArticlePageArticleQuery> = ({ article }) => {
+const Page: React.FC<ArticlePageQuery> = ({ article }) => {
   const classes = useStyles();
 
   return (
@@ -67,9 +62,9 @@ interface Params extends ParsedUrlQuery {
   id: string;
 }
 
-export const getStaticProps: GetStaticProps<ArticlePageArticleQuery, Params> = async ({ params }) => {
+export const getStaticProps: GetStaticProps<ArticlePageQuery, Params> = async ({ params }) => {
   const articleId = params?.id;
-  const data: ArticlePageArticleQuery = await fetchGraphql(ArticlePageArticleDocument, { articleId });
+  const data: ArticlePageQuery = await fetchGraphql(ArticlePageDocument, { articleId });
 
   return {
     props: data,

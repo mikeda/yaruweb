@@ -1,4 +1,4 @@
-query DashboardArticlePageArticle($articleId: ID!) {
+query DashboardArticlePage($articleId: ID!) {
   article(articleId: $articleId) {
     ...ArticleFormArticle
   }

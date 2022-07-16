@@ -6,6 +6,7 @@ export * from './ArticleCard';
 export * from './BattleListItem';
 export * from './CharacterCard';
 export * from './ComboMedia';
+export * from './ComboListItem';
 export * from './Command';
 export * from './CustomText';
 export * from './Link';

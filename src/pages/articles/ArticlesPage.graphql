@@ -1,4 +1,4 @@
-query ArticlesPageArticles($page: Int) {
+query ArticlesPage($page: Int) {
   articles(page: $page, per: 12) {
     records {
       ...ArticleCard

@@ -1,0 +1,6 @@
+query BattlesPageBattles($page: Int!) {
+  battles(page: $page, per: 10) {
+    records { ...BattleListItem }
+    paging { ...paging }
+  }
+}
