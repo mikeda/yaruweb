@@ -27,7 +27,8 @@ fragment CharacterMovesPageMove on Move {
 query CharacterMovesPage($characterSlug: String!) {
   character(characterSlug: $characterSlug) {
     ...CharacterBreadcrumbs
-    ...CharacterPageProfile
+    ...CharacterProfile
+    ...CharacterTabs
 
     moveCategories {
       id

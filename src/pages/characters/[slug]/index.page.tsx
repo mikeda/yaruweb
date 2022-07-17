@@ -6,9 +6,7 @@ import { Box, Paper, Typography } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
-import { Profile, Tabs } from './components';
-
-import { Breadcrumbs, Content, Head } from '@/components';
+import { Breadcrumbs, Content, Head, CharacterProfile, CharacterTabs } from '@/components';
 import {
   CharacterPathsDocument,
   CharacterPathsQuery,
@@ -37,10 +35,10 @@ const Page: React.FC<CharacterPageQuery> = ({ character }) => {
     <Content activeTab="characters" breadcrumb={<Breadcrumbs to="character" character={character} />}>
       <Head title={character.longName} />
 
-      <Profile character={character} />
+      <CharacterProfile character={character} />
 
       <Box mt={2}>
-        <Tabs character={character} activeTab="profile" />
+        <CharacterTabs character={character} activeTab="profile" />
       </Box>
 
       <Paper className={classes.paper}>

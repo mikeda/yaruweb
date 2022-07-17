@@ -1,7 +1,8 @@
 query CharacterPage($characterSlug: String!) {
   character(characterSlug: $characterSlug) {
     ...CharacterBreadcrumbs
-    ...CharacterPageProfile
+    ...CharacterProfile
+    ...CharacterTabs
 
     story
     description

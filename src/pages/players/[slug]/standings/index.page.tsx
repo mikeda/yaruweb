@@ -7,10 +7,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
-import { PlayerPageTabs } from '../../components';
-import { PlayerStandingCard, Profile } from '../components';
-
-import { Head, Content, Breadcrumbs } from '@/components';
+import { Head, Content, Breadcrumbs, PlayerStandingCard, PlayerProfile, PlayerTabs } from '@/components';
 import {
   PlayerSlugsDocument,
   PlayerSlugsQuery,
@@ -50,9 +47,9 @@ const Page: React.FC<PlayerStandingsPageQuery> = ({
     <Content activeTab="players" breadcrumb={<Breadcrumbs to="playerStandings" player={player} />}>
       <Head title={`${player.name}の大会戦績`} />
 
-      <Profile player={player} />
+      <PlayerProfile player={player} />
 
-      <PlayerPageTabs activeTab="standings" player={player} />
+      <PlayerTabs activeTab="standings" player={player} />
 
       <Box mt={4}>
         <Typography variant="h2" gutterBottom>

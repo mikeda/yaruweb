@@ -7,9 +7,6 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
-import { PlayerPageTabs } from '../../components';
-import { Profile } from '../components';
-
 import {
   Head,
   Content,
@@ -17,6 +14,8 @@ import {
   BattleListItem,
   CharacterBattleCountChip,
   SelectChipContainer,
+  PlayerProfile,
+  PlayerTabs,
 } from '@/components';
 import {
   BattleListItemFragment,
@@ -80,9 +79,9 @@ const Page: React.FC<PlayerBattlesPageQuery> = ({
     <Content activeTab="players" breadcrumb={<Breadcrumbs to="playerBattles" player={player} />}>
       <Head title={`${player.name}の対戦動画`} />
 
-      <Profile player={player} />
+      <PlayerProfile player={player} />
 
-      <PlayerPageTabs activeTab="battles" player={player} />
+      <PlayerTabs activeTab="battles" player={player} />
 
       <Box mt={4}>
         <Typography variant="h3" gutterBottom>

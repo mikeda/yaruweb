@@ -4,7 +4,7 @@ import { Public, SportsKabaddi } from '@mui/icons-material';
 import { Card, CardContent, CardMedia, List, ListItem, ListItemIcon, ListItemText, Typography } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 
-import { CharacterPageProfileFragment } from '@/generated/graphql';
+import { CharacterProfileFragment } from '@/generated/graphql';
 
 const useStyles = makeStyles({
   root: {
@@ -26,10 +26,10 @@ const useStyles = makeStyles({
 });
 
 interface Props {
-  character: CharacterPageProfileFragment;
+  character: CharacterProfileFragment;
 }
 
-export const Profile: React.FC<Props> = ({ character }) => {
+export const CharacterProfile: React.FC<Props> = ({ character }) => {
   const classes = useStyles();
 
   return (

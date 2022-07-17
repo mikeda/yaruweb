@@ -1,0 +1,6 @@
+fragment CharacterTabs on Character {
+  slug
+  battlesCount
+  combosCount
+  movesCount
+}

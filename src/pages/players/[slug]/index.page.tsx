@@ -6,11 +6,7 @@ import { Box, Paper, Typography } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
-import { PlayerPageTabs } from '../components';
-
-import { Profile } from './components';
-
-import { Head, Content, Breadcrumbs } from '@/components';
+import { Head, Content, Breadcrumbs, PlayerProfile, PlayerTabs } from '@/components';
 import { PlayerPageDocument, PlayerPageQuery, PlayerSlugsDocument, PlayerSlugsQuery } from '@/generated/graphql';
 import { fetchGraphql, theme } from '@/lib';
 
@@ -28,9 +24,9 @@ const Page: React.FC<PlayerPageQuery> = ({ player }) => {
     <Content activeTab="players" breadcrumb={<Breadcrumbs to="player" player={player} />}>
       <Head title={player.name} />
 
-      <Profile player={player} />
+      <PlayerProfile player={player} />
 
-      <PlayerPageTabs activeTab="profile" player={player} />
+      <PlayerTabs activeTab="profile" player={player} />
 
       <Paper>
         <Box p={2}>

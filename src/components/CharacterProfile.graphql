@@ -1,0 +1,7 @@
+fragment CharacterProfile on Character {
+  slug
+  longName
+  faceImageUrl
+  country
+  fightingStyle
+}

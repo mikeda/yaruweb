@@ -1,0 +1,8 @@
+fragment PlayerProfile on Player {
+  id
+  name
+  slug
+  avatarUrl
+  twitterId
+  streamingUrl
+}

@@ -4,16 +4,16 @@ import { Paper, Tab, Tabs as MuiTabs } from '@mui/material';
 import { useRouter } from 'next/router';
 
 import { pagesPath } from '@/generated/$path';
-import { CharacterPageProfileFragment } from '@/generated/graphql';
+import { CharacterTabsFragment } from '@/generated/graphql';
 
 type TabValue = 'profile' | 'battles' | 'moves' | 'combos';
 
 interface Props {
-  character: CharacterPageProfileFragment;
+  character: CharacterTabsFragment;
   activeTab: TabValue;
 }
 
-export const Tabs: React.FC<Props> = ({ character, activeTab }) => {
+export const CharacterTabs: React.FC<Props> = ({ character, activeTab }) => {
   const router = useRouter();
 
   return (

@@ -1,7 +1,8 @@
 query CharacterCombosPage($characterSlug: String!) {
   character(characterSlug: $characterSlug) {
     ...CharacterBreadcrumbs
-    ...CharacterPageProfile
+    ...CharacterProfile
+    ...CharacterTabs
 
     comboCategories {
       id

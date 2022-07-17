@@ -1,7 +1,8 @@
 query PlayerBattlesPage($playerSlug: String!, $page: Int) {
   player(playerSlug: $playerSlug) {
     ...PlayerBreadcrumbs
-    ...PlayerPageProfile
+    ...PlayerProfile
+    ...PlayerTabs
   }
 
   battleCounts(playerSlug: $playerSlug, per: 10) {
