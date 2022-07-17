@@ -8,9 +8,6 @@ import { BattleRound } from '@/generated/graphql';
 export default {
   title: 'Example/BattleListItem',
   component: BattleListItem,
-  argTypes: {
-    backgroundColor: { control: 'color' },
-  },
 } as ComponentMeta<typeof BattleListItem>;
 
 const Template: ComponentStory<typeof BattleListItem> = args => <BattleListItem {...args} />;
