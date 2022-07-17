@@ -5,7 +5,7 @@ import { Typography } from '@mui/material';
 import { CustomText } from '@/components';
 import { MoveMediaFragment } from '@/generated/graphql';
 
-export const ListItemFooter: React.FC<{ move: MoveMediaFragment }> = ({ move }) => {
+export const DetailFooter: React.FC<{ move: MoveMediaFragment }> = ({ move }) => {
   if (!move.note) return null;
 
   return (

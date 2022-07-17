@@ -3,18 +3,18 @@ import React from 'react';
 import { ArrowRight } from '@mui/icons-material';
 import { Chip, Divider, Stack, Typography } from '@mui/material';
 
+import { DetailFooter } from './DetailFooter';
 import { DetailItem } from './DetailItem';
-import { ListItemFooter } from './ListItemFooter';
 
-import { AttackMoveFragment, MoveMediaFragment } from '@/generated/graphql';
+import { MoveMediaAttackFragment, MoveMediaFragment } from '@/generated/graphql';
 import { AttackMoveResultText, AttackTypeEnumText, frameDiffText } from '@/lib';
 
 interface Props {
   move: MoveMediaFragment;
-  attack: AttackMoveFragment;
+  attack: MoveMediaAttackFragment;
 }
 
-export const AttackListItem: React.FC<Props> = ({ move, attack }) => {
+export const AttackDeteil: React.FC<Props> = ({ move, attack }) => {
   return (
     <Stack spacing={1} sx={{ paddingBottom: 1 }}>
       <Stack direction="row" divider={<Divider orientation="vertical" flexItem />} spacing={1}>
@@ -55,17 +55,18 @@ export const AttackListItem: React.FC<Props> = ({ move, attack }) => {
 
       <AttackLabels attack={attack} />
 
-      <ListItemFooter move={move} />
+      <DetailFooter move={move} />
     </Stack>
   );
 };
 
-const AttackLabels: React.FC<{ attack: AttackMoveFragment }> = ({ attack }) => {
+const AttackLabels: React.FC<{ attack: MoveMediaAttackFragment }> = ({ attack }) => {
   const labels: string[] = [];
   if (attack.powerCrush) labels.push('パワクラ');
   if (attack.crouchingStatus) labels.push('しゃがステ');
   if (attack.jumpStatus) labels.push('ジャンステ');
-  if (attack.homing) labels.push('スクリュー');
+  if (attack.homing) labels.push('ホーミング');
+  if (attack.screw) labels.push('スクリュー');
   if (attack.wallBound) labels.push('ウォールバウンド');
 
   if (labels.length === 0) return null;

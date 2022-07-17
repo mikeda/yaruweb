@@ -2,17 +2,17 @@ import React from 'react';
 
 import { Stack } from '@mui/material';
 
+import { DetailFooter } from './DetailFooter';
 import { DetailItem } from './DetailItem';
-import { ListItemFooter } from './ListItemFooter';
 
-import { MoveMediaFragment, ReversalMoveFragment } from '@/generated/graphql';
+import { MoveMediaFragment, MoveMediaReversalFragment } from '@/generated/graphql';
 
 interface Props {
   move: MoveMediaFragment;
-  reversal: ReversalMoveFragment;
+  reversal: MoveMediaReversalFragment;
 }
 
-export const ReversalListItem: React.FC<Props> = ({ move, reversal }) => {
+export const ReversaDeteil: React.FC<Props> = ({ move, reversal }) => {
   return (
     <Stack spacing={1} sx={{ paddingBottom: 1 }}>
       <DetailItem label="種別">{reversal.kind}</DetailItem>
@@ -20,7 +20,7 @@ export const ReversalListItem: React.FC<Props> = ({ move, reversal }) => {
         {reversal.startUpFrame}〜{reversal.finishFrame}
       </DetailItem>
 
-      <ListItemFooter move={move} />
+      <DetailFooter move={move} />
     </Stack>
   );
 };

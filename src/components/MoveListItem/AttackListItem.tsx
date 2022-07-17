@@ -23,7 +23,7 @@ export const AttackListItem: React.FC<AttackMove> = ({ move, attack }) => {
     },
     {
       label: 'C',
-      frame: attack.counterFrame ? frameDiffText(attack.counterFrame) : AttackMoveResultText[attack.blockResult],
+      frame: attack.counterFrame ? frameDiffText(attack.counterFrame) : AttackMoveResultText[attack.counterResult],
     },
   ];
 
