@@ -5,7 +5,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ComboListItem } from '@/components';
 
 export default {
-  title: 'Example/ComboListItem',
+  title: 'components/ComboListItem',
   component: ComboListItem,
 } as ComponentMeta<typeof ComboListItem>;
 

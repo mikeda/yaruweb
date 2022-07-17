@@ -6,7 +6,7 @@ import { MoveListItem } from '@/components';
 import { AttackMoveResultEnum, AttackTypeEnum } from '@/generated/graphql';
 
 export default {
-  title: 'Example/MoveListItem',
+  title: 'components/MoveListItem',
   component: MoveListItem,
 } as ComponentMeta<typeof MoveListItem>;
 

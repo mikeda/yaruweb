@@ -6,7 +6,7 @@ import { ArticleCard } from '@/components';
 import { ArticleStatus } from '@/generated/graphql';
 
 export default {
-  title: 'Example/ArticleCard',
+  title: 'components/ArticleCard',
   component: ArticleCard,
 } as ComponentMeta<typeof ArticleCard>;
 

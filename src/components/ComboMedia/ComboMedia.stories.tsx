@@ -5,7 +5,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ComboMedia } from '@/components';
 
 export default {
-  title: 'Example/ComboMedia',
+  title: 'components/ComboMedia',
   component: ComboMedia,
 } as ComponentMeta<typeof ComboMedia>;
 
