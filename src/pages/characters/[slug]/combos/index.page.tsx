@@ -5,9 +5,16 @@ import { ParsedUrlQuery } from 'querystring';
 import { Box, List, Paper, Typography } from '@mui/material';
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 
-import { Profile, Tabs } from '../components';
-
-import { Content, Head, Breadcrumbs, SelectChip, SelectChipContainer, ComboListItem } from '@/components';
+import {
+  Content,
+  Head,
+  Breadcrumbs,
+  SelectChip,
+  SelectChipContainer,
+  ComboListItem,
+  CharacterProfile,
+  CharacterTabs,
+} from '@/components';
 import {
   CharacterCombosPageDocument,
   CharacterCombosPageQuery,
@@ -33,10 +40,10 @@ const Page: NextPage<CharacterCombosPageQuery> = ({ character }) => {
     <Content activeTab="characters" breadcrumb={<Breadcrumbs to="characterCombos" character={character} />}>
       <Head title={`${character.longName}のコンボ`} />
 
-      <Profile character={character} />
+      <CharacterProfile character={character} />
 
       <Box mt={2}>
-        <Tabs character={character} activeTab="combos" />
+        <CharacterTabs character={character} activeTab="combos" />
       </Box>
 
       {character.comboStarters.length > 0 && (

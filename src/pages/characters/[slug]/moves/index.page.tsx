@@ -19,9 +19,16 @@ import {
 } from '@mui/material';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
-import { Profile, Tabs } from '../components';
-
-import { Breadcrumbs, Command, Content, CustomText, Head, VideoPlayer } from '@/components';
+import {
+  Breadcrumbs,
+  Command,
+  Content,
+  CustomText,
+  Head,
+  VideoPlayer,
+  CharacterProfile,
+  CharacterTabs,
+} from '@/components';
 import {
   AttackMoveFragment,
   CharacterMovesPageDocument,
@@ -48,10 +55,10 @@ const Page: React.FC<CharacterMovesPageQuery> = ({ character }) => {
     <Content activeTab="characters" breadcrumb={<Breadcrumbs to="characterMoves" character={character} />}>
       <Head title={`${character.longName}のコマンドリスト`} />
 
-      <Profile character={character} />
+      <CharacterProfile character={character} />
 
       <Box mt={2}>
-        <Tabs character={character} activeTab="moves" />
+        <CharacterTabs character={character} activeTab="moves" />
       </Box>
 
       {character.moveCategories.map(moveCategory => {

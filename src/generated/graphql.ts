@@ -2104,6 +2104,10 @@ export type BattleListItemFragment = { __typename?: 'Battle', id: string, round:
 
 export type CharacterCardFragment = { __typename?: 'Character', slug: string, name: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number };
 
+export type CharacterProfileFragment = { __typename?: 'Character', slug: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string };
+
+export type CharacterTabsFragment = { __typename?: 'Character', slug: string, battlesCount: number, combosCount: number, movesCount: number };
+
 export type ComboListItemFragment = { __typename?: 'Combo', id: string, damage?: number | null, command: Array<string>, note?: string | null, move?: { __typename?: 'Move', id: string } | null, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null };
 
 export type ComboMediaFragment = { __typename?: 'Combo', id: string, damage?: number | null, command: Array<string>, note?: string | null, comboCategory: { __typename?: 'ComboCategory', id: string, name: string }, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null };
@@ -2111,6 +2115,12 @@ export type ComboMediaFragment = { __typename?: 'Combo', id: string, damage?: nu
 export type MoveMediaFragment = { __typename?: 'Move', id: string, name: string, kana?: string | null, command: Array<string>, statusAfter?: string | null, note?: string | null, moveable: { __typename: 'AttackMove', id: string, startUpFrame?: number | null, duration?: number | null, heights: Array<AttackTypeEnum>, damages: Array<number>, reach?: number | null, blockResult: AttackMoveResultEnum, blockStatus?: AttackMoveStateEnum | null, blockFrame?: number | null, hitResult: AttackMoveResultEnum, hitStatus?: AttackMoveStateEnum | null, hitFrame?: number | null, counterResult: AttackMoveResultEnum, counterStatus?: AttackMoveStateEnum | null, counterFrame?: number | null, powerCrush: boolean, powerCrushFrame?: number | null, crouchingStatus: boolean, crouchingStatusFrame?: number | null, jumpStatus: boolean, jumpStatusFrame?: number | null, homing: boolean, screw: boolean, wallBound: boolean } | { __typename: 'ReversalMove', id: string, kind: string, startUpFrame?: number | null, finishFrame?: number | null } | { __typename: 'ThrowMove', id: string, throwType: ThrowTypeEnum, startUpFrame?: number | null, damage?: number | null, throwEscape: ThrowEscapeEnum, throwResult: ThrowMoveResultEnum }, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null };
 
 export type PlayerCardFragment = { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null, standingsCount: number, battlesCount: number };
+
+export type PlayerProfileFragment = { __typename?: 'Player', id: string, name: string, slug: string, avatarUrl?: string | null, twitterId?: string | null, streamingUrl?: string | null };
+
+export type PlayerStandingCardFragment = { __typename?: 'Standing', id: string, place: number, tournament: { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: string | null, startsAt: string } };
+
+export type PlayerTabsFragment = { __typename?: 'Player', slug: string, battlesCount: number, standingsCount: number };
 
 export type CharacterBattleCountChipFragment = { __typename?: 'BattleCount', id: string, count: number, character: { __typename?: 'Character', id: string, slug: string, name: string, faceImageUrl: string } };
 
@@ -2265,8 +2275,6 @@ export type CharacterCombosPageQueryVariables = Exact<{
 
 
 export type CharacterCombosPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, combosCount: number, movesCount: number, comboCategories: Array<{ __typename?: 'ComboCategory', id: string, name: string, combos: Array<{ __typename?: 'Combo', id: string, damage?: number | null, command: Array<string>, note?: string | null, move?: { __typename?: 'Move', id: string } | null, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> }>, comboStarters: Array<{ __typename?: 'Move', id: string, name: string, combosCount: number }> } };
-
-export type CharacterPageProfileFragment = { __typename?: 'Character', slug: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, combosCount: number, movesCount: number };
 
 type Moveable_AttackMove_Fragment = { __typename: 'AttackMove', id: string, startUpFrame?: number | null, duration?: number | null, heights: Array<AttackTypeEnum>, damages: Array<number>, reach?: number | null, blockResult: AttackMoveResultEnum, blockStatus?: AttackMoveStateEnum | null, blockFrame?: number | null, hitResult: AttackMoveResultEnum, hitStatus?: AttackMoveStateEnum | null, hitFrame?: number | null, counterResult: AttackMoveResultEnum, counterStatus?: AttackMoveStateEnum | null, counterFrame?: number | null, powerCrush: boolean, powerCrushFrame?: number | null, crouchingStatus: boolean, crouchingStatusFrame?: number | null, jumpStatus: boolean, jumpStatusFrame?: number | null, homing: boolean, screw: boolean, wallBound: boolean };
 
@@ -2857,7 +2865,7 @@ export type PlayerBattlesPageQueryVariables = Exact<{
 }>;
 
 
-export type PlayerBattlesPageQuery = { __typename?: 'Query', player: { __typename?: 'Player', slug: string, name: string, id: string, avatarUrl?: string | null, twitterId?: string | null, streamingUrl?: string | null, standingsCount: number, battlesCount: number }, battleCounts: { __typename?: 'BattleCountCollection', records: Array<{ __typename?: 'BattleCount', id: string, count: number, character: { __typename?: 'Character', id: string, slug: string, name: string, faceImageUrl: string } }> }, battles: { __typename?: 'BattleCollection', records: Array<{ __typename?: 'Battle', id: string, round: BattleRound, tournamentVideo: { __typename?: 'TournamentVideo', id: string, tournament: { __typename?: 'Tournament', id: string, name: string, startsAt: string } }, sides: Array<{ __typename?: 'BattleSide', rounds: number, player: { __typename?: 'Player', name: string }, character: { __typename?: 'Character', faceImageUrl: string } }> }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
+export type PlayerBattlesPageQuery = { __typename?: 'Query', player: { __typename?: 'Player', slug: string, name: string, id: string, avatarUrl?: string | null, twitterId?: string | null, streamingUrl?: string | null, battlesCount: number, standingsCount: number }, battleCounts: { __typename?: 'BattleCountCollection', records: Array<{ __typename?: 'BattleCount', id: string, count: number, character: { __typename?: 'Character', id: string, slug: string, name: string, faceImageUrl: string } }> }, battles: { __typename?: 'BattleCollection', records: Array<{ __typename?: 'Battle', id: string, round: BattleRound, tournamentVideo: { __typename?: 'TournamentVideo', id: string, tournament: { __typename?: 'Tournament', id: string, name: string, startsAt: string } }, sides: Array<{ __typename?: 'BattleSide', rounds: number, player: { __typename?: 'Player', name: string }, character: { __typename?: 'Character', faceImageUrl: string } }> }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
 
 export type PlayerBattlesPageBattlesQueryVariables = Exact<{
   playerSlug: Scalars['String'];
@@ -2868,23 +2876,19 @@ export type PlayerBattlesPageBattlesQueryVariables = Exact<{
 
 export type PlayerBattlesPageBattlesQuery = { __typename?: 'Query', battles: { __typename?: 'BattleCollection', records: Array<{ __typename?: 'Battle', id: string, round: BattleRound, tournamentVideo: { __typename?: 'TournamentVideo', id: string, tournament: { __typename?: 'Tournament', id: string, name: string, startsAt: string } }, sides: Array<{ __typename?: 'BattleSide', rounds: number, player: { __typename?: 'Player', name: string }, character: { __typename?: 'Character', faceImageUrl: string } }> }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
 
-export type PlayerStandingCardFragment = { __typename?: 'Standing', id: string, place: number, tournament: { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: string | null, startsAt: string } };
-
-export type PlayerPageProfileFragment = { __typename?: 'Player', id: string, name: string, slug: string, avatarUrl?: string | null, twitterId?: string | null, streamingUrl?: string | null, standingsCount: number, battlesCount: number };
-
 export type PlayerPageQueryVariables = Exact<{
   playerSlug: Scalars['String'];
 }>;
 
 
-export type PlayerPageQuery = { __typename?: 'Query', player: { __typename?: 'Player', description?: string | null, slug: string, name: string, id: string, avatarUrl?: string | null, twitterId?: string | null, streamingUrl?: string | null, standingsCount: number, battlesCount: number } };
+export type PlayerPageQuery = { __typename?: 'Query', player: { __typename?: 'Player', description?: string | null, slug: string, name: string, id: string, avatarUrl?: string | null, twitterId?: string | null, streamingUrl?: string | null, battlesCount: number, standingsCount: number } };
 
 export type PlayerStandingsPageQueryVariables = Exact<{
   playerSlug: Scalars['String'];
 }>;
 
 
-export type PlayerStandingsPageQuery = { __typename?: 'Query', player: { __typename?: 'Player', slug: string, name: string, id: string, avatarUrl?: string | null, twitterId?: string | null, streamingUrl?: string | null, standingsCount: number, battlesCount: number }, standings: { __typename?: 'StandingCollection', records: Array<{ __typename?: 'Standing', id: string, place: number, tournament: { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: string | null, startsAt: string } }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
+export type PlayerStandingsPageQuery = { __typename?: 'Query', player: { __typename?: 'Player', slug: string, name: string, id: string, avatarUrl?: string | null, twitterId?: string | null, streamingUrl?: string | null, battlesCount: number, standingsCount: number }, standings: { __typename?: 'StandingCollection', records: Array<{ __typename?: 'Standing', id: string, place: number, tournament: { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: string | null, startsAt: string } }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
 
 export type PlayerStandingsPageStandingsQueryVariables = Exact<{
   playerSlug: Scalars['String'];
@@ -3003,6 +3007,23 @@ export const CharacterCardFragmentDoc = gql`
   battlesCount
 }
     `;
+export const CharacterProfileFragmentDoc = gql`
+    fragment CharacterProfile on Character {
+  slug
+  longName
+  faceImageUrl
+  country
+  fightingStyle
+}
+    `;
+export const CharacterTabsFragmentDoc = gql`
+    fragment CharacterTabs on Character {
+  slug
+  battlesCount
+  combosCount
+  movesCount
+}
+    `;
 export const ComboListItemFragmentDoc = gql`
     fragment ComboListItem on Combo {
   id
@@ -3119,6 +3140,35 @@ export const PlayerCardFragmentDoc = gql`
   avatarUrl
   standingsCount
   battlesCount
+}
+    `;
+export const PlayerProfileFragmentDoc = gql`
+    fragment PlayerProfile on Player {
+  id
+  name
+  slug
+  avatarUrl
+  twitterId
+  streamingUrl
+}
+    `;
+export const PlayerStandingCardFragmentDoc = gql`
+    fragment PlayerStandingCard on Standing {
+  id
+  place
+  tournament {
+    id
+    name
+    mainImageUrl
+    startsAt
+  }
+}
+    `;
+export const PlayerTabsFragmentDoc = gql`
+    fragment PlayerTabs on Player {
+  slug
+  battlesCount
+  standingsCount
 }
     `;
 export const CharacterBattleCountChipFragmentDoc = gql`
@@ -3420,18 +3470,6 @@ export const ArticlePageFragmentDoc = gql`
   }
 }
     ${ArticleCardFragmentDoc}`;
-export const CharacterPageProfileFragmentDoc = gql`
-    fragment CharacterPageProfile on Character {
-  slug
-  longName
-  faceImageUrl
-  country
-  fightingStyle
-  battlesCount
-  combosCount
-  movesCount
-}
-    `;
 export const MoveableFragmentDoc = gql`
     fragment moveable on Moveable {
   __typename
@@ -3597,30 +3635,6 @@ export const DashboardTournamentsPageTournamentFragmentDoc = gql`
   videosCount
   standingsCount
   mainImageUrl
-}
-    `;
-export const PlayerStandingCardFragmentDoc = gql`
-    fragment PlayerStandingCard on Standing {
-  id
-  place
-  tournament {
-    id
-    name
-    mainImageUrl
-    startsAt
-  }
-}
-    `;
-export const PlayerPageProfileFragmentDoc = gql`
-    fragment PlayerPageProfile on Player {
-  id
-  name
-  slug
-  avatarUrl
-  twitterId
-  streamingUrl
-  standingsCount
-  battlesCount
 }
     `;
 export const TournamentVideoPageBattleSideFragmentDoc = gql`
@@ -4430,7 +4444,8 @@ export const CharacterPageDocument = gql`
     query CharacterPage($characterSlug: String!) {
   character(characterSlug: $characterSlug) {
     ...CharacterBreadcrumbs
-    ...CharacterPageProfile
+    ...CharacterProfile
+    ...CharacterTabs
     story
     description
   }
@@ -4441,7 +4456,8 @@ export const CharacterPageDocument = gql`
   }
 }
     ${CharacterBreadcrumbsFragmentDoc}
-${CharacterPageProfileFragmentDoc}
+${CharacterProfileFragmentDoc}
+${CharacterTabsFragmentDoc}
 ${PlayerBattleCountChipFragmentDoc}`;
 
 /**
@@ -4475,7 +4491,8 @@ export const CharacterBattlesPageDocument = gql`
     query CharacterBattlesPage($characterSlug: String!, $playerSlug: String) {
   character(characterSlug: $characterSlug) {
     ...CharacterBreadcrumbs
-    ...CharacterPageProfile
+    ...CharacterProfile
+    ...CharacterTabs
   }
   battleCounts(characterSlug: $characterSlug, per: 10) {
     records {
@@ -4492,7 +4509,8 @@ export const CharacterBattlesPageDocument = gql`
   }
 }
     ${CharacterBreadcrumbsFragmentDoc}
-${CharacterPageProfileFragmentDoc}
+${CharacterProfileFragmentDoc}
+${CharacterTabsFragmentDoc}
 ${PlayerBattleCountChipFragmentDoc}
 ${BattleListItemFragmentDoc}
 ${PagingFragmentDoc}`;
@@ -4577,7 +4595,8 @@ export const CharacterCombosPageDocument = gql`
     query CharacterCombosPage($characterSlug: String!) {
   character(characterSlug: $characterSlug) {
     ...CharacterBreadcrumbs
-    ...CharacterPageProfile
+    ...CharacterProfile
+    ...CharacterTabs
     comboCategories {
       id
       name
@@ -4593,7 +4612,8 @@ export const CharacterCombosPageDocument = gql`
   }
 }
     ${CharacterBreadcrumbsFragmentDoc}
-${CharacterPageProfileFragmentDoc}
+${CharacterProfileFragmentDoc}
+${CharacterTabsFragmentDoc}
 ${ComboListItemFragmentDoc}`;
 
 /**
@@ -4627,7 +4647,8 @@ export const CharacterMovesPageDocument = gql`
     query CharacterMovesPage($characterSlug: String!) {
   character(characterSlug: $characterSlug) {
     ...CharacterBreadcrumbs
-    ...CharacterPageProfile
+    ...CharacterProfile
+    ...CharacterTabs
     moveCategories {
       id
       name
@@ -4638,7 +4659,8 @@ export const CharacterMovesPageDocument = gql`
   }
 }
     ${CharacterBreadcrumbsFragmentDoc}
-${CharacterPageProfileFragmentDoc}
+${CharacterProfileFragmentDoc}
+${CharacterTabsFragmentDoc}
 ${CharacterMovesPageMoveFragmentDoc}`;
 
 /**
@@ -7541,7 +7563,8 @@ export const PlayerBattlesPageDocument = gql`
     query PlayerBattlesPage($playerSlug: String!, $page: Int) {
   player(playerSlug: $playerSlug) {
     ...PlayerBreadcrumbs
-    ...PlayerPageProfile
+    ...PlayerProfile
+    ...PlayerTabs
   }
   battleCounts(playerSlug: $playerSlug, per: 10) {
     records {
@@ -7558,7 +7581,8 @@ export const PlayerBattlesPageDocument = gql`
   }
 }
     ${PlayerBreadcrumbsFragmentDoc}
-${PlayerPageProfileFragmentDoc}
+${PlayerProfileFragmentDoc}
+${PlayerTabsFragmentDoc}
 ${CharacterBattleCountChipFragmentDoc}
 ${BattleListItemFragmentDoc}
 ${PagingFragmentDoc}`;
@@ -7643,12 +7667,14 @@ export const PlayerPageDocument = gql`
     query PlayerPage($playerSlug: String!) {
   player(playerSlug: $playerSlug) {
     ...PlayerBreadcrumbs
-    ...PlayerPageProfile
+    ...PlayerProfile
+    ...PlayerTabs
     description
   }
 }
     ${PlayerBreadcrumbsFragmentDoc}
-${PlayerPageProfileFragmentDoc}`;
+${PlayerProfileFragmentDoc}
+${PlayerTabsFragmentDoc}`;
 
 /**
  * __usePlayerPageQuery__
@@ -7681,7 +7707,8 @@ export const PlayerStandingsPageDocument = gql`
     query PlayerStandingsPage($playerSlug: String!) {
   player(playerSlug: $playerSlug) {
     ...PlayerBreadcrumbs
-    ...PlayerPageProfile
+    ...PlayerProfile
+    ...PlayerTabs
   }
   standings(playerSlug: $playerSlug, per: 10) {
     records {
@@ -7693,7 +7720,8 @@ export const PlayerStandingsPageDocument = gql`
   }
 }
     ${PlayerBreadcrumbsFragmentDoc}
-${PlayerPageProfileFragmentDoc}
+${PlayerProfileFragmentDoc}
+${PlayerTabsFragmentDoc}
 ${PlayerStandingCardFragmentDoc}
 ${PagingFragmentDoc}`;
 

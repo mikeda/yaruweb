@@ -1,7 +1,8 @@
 query PlayerStandingsPage($playerSlug: String!) {
   player(playerSlug: $playerSlug) {
     ...PlayerBreadcrumbs
-    ...PlayerPageProfile
+    ...PlayerProfile
+    ...PlayerTabs
   }
 
   standings(playerSlug: $playerSlug, per: 10) {

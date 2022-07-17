@@ -4,7 +4,7 @@ import { LiveTv, Twitter } from '@mui/icons-material';
 import { Paper, Typography } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 
-import { PlayerPageProfileFragment } from '@/generated/graphql';
+import { PlayerProfileFragment } from '@/generated/graphql';
 import { DEFAULT_AVATAR_URL, colors, theme } from '@/lib';
 
 const useStyles = makeStyles({
@@ -42,10 +42,10 @@ const useStyles = makeStyles({
 });
 
 interface Props {
-  player: PlayerPageProfileFragment;
+  player: PlayerProfileFragment;
 }
 
-export const Profile: React.FC<Props> = ({ player }) => {
+export const PlayerProfile: React.FC<Props> = ({ player }) => {
   const classes = useStyles();
 
   return (
