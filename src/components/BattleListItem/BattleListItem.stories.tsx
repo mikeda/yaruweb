@@ -6,7 +6,7 @@ import { BattleListItem } from '@/components';
 import { BattleRound } from '@/generated/graphql';
 
 export default {
-  title: 'Example/BattleListItem',
+  title: 'components/BattleListItem',
   component: BattleListItem,
 } as ComponentMeta<typeof BattleListItem>;
 

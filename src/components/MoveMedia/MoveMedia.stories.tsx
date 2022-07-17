@@ -6,7 +6,7 @@ import { MoveMedia } from '@/components';
 import { AttackMoveResultEnum, AttackTypeEnum } from '@/generated/graphql';
 
 export default {
-  title: 'Example/MoveMedia',
+  title: 'components/MoveMedia',
   component: MoveMedia,
 } as ComponentMeta<typeof MoveMedia>;
 
