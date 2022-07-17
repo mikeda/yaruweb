@@ -7,13 +7,14 @@ fragment AttackListItem on AttackMove {
   hitFrame
   hitResult
   counterFrame
-  blockResult
+  counterResult
   heights
   damages
   powerCrush
   crouchingStatus
   jumpStatus
   homing
+  screw
   wallBound
 }
 

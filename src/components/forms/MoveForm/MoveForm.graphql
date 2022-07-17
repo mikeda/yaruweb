@@ -1,14 +1,17 @@
-fragment MoveMediaAttack on AttackMove {
+fragment MoveFormAttack on AttackMove {
   id
   startUpFrame
   duration
+  reach
   blockFrame
   blockResult
+  blockStatus
   hitFrame
   hitResult
+  hitStatus
   counterFrame
   counterResult
-  blockResult
+  counterStatus
   heights
   damages
   powerCrush
@@ -19,7 +22,7 @@ fragment MoveMediaAttack on AttackMove {
   wallBound
 }
 
-fragment MoveMediaThrow on ThrowMove {
+fragment MoveFormThrow on ThrowMove {
   id
   throwType
   throwResult
@@ -28,27 +31,33 @@ fragment MoveMediaThrow on ThrowMove {
   damage
 }
 
-fragment MoveMediaReversal on ReversalMove {
+fragment MoveFormReversal on ReversalMove {
   id
   kind
   startUpFrame
   finishFrame
 }
 
-fragment MoveMedia on Move {
+fragment MoveForm on Move {
   id
   name
   kana
   command
   statusAfter
   note
+  position
+
+  moveCategory {
+    id
+    name
+  }
 
   moveable {
     __typename
 
-    ... on AttackMove { ...MoveMediaAttack }
-    ... on ThrowMove { ...MoveMediaThrow }
-    ... on ReversalMove { ...MoveMediaReversal }
+    ... on AttackMove { ...MoveFormAttack }
+    ... on ThrowMove { ...MoveFormThrow }
+    ... on ReversalMove { ...MoveFormReversal }
   }
 
   moveVideo {
@@ -56,4 +65,10 @@ fragment MoveMedia on Move {
     m3u8Url
     thumbnailUrl
   }
+}
+
+fragment MovePositionSelect on Move {
+  id
+  name
+  position
 }

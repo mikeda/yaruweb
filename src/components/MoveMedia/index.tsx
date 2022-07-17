@@ -2,9 +2,9 @@ import React from 'react';
 
 import { Box, Card, CardContent, Typography } from '@mui/material';
 
-import { AttackListItem } from './AttackListItem';
-import { ReversalListItem } from './ReversalListItem';
-import { ThrowListItem } from './ThrowListItem';
+import { AttackDeteil } from './AttackDeteil';
+import { ReversaDeteil } from './ReversaDeteil';
+import { ThrowDetail } from './ThrowDetail';
 
 import { Command, VideoPlayer } from '@/components';
 import { MoveMediaFragment } from '@/generated/graphql';
@@ -31,9 +31,9 @@ export const MoveMedia: React.FC<Props> = ({ move }) => {
           </Box>
         )}
 
-        {move.moveable.__typename === 'AttackMove' && <AttackListItem move={move} attack={move.moveable} />}
-        {move.moveable.__typename === 'ThrowMove' && <ThrowListItem move={move} throw={move.moveable} />}
-        {move.moveable.__typename === 'ReversalMove' && <ReversalListItem move={move} reversal={move.moveable} />}
+        {move.moveable.__typename === 'AttackMove' && <AttackDeteil move={move} attack={move.moveable} />}
+        {move.moveable.__typename === 'ThrowMove' && <ThrowDetail move={move} throw={move.moveable} />}
+        {move.moveable.__typename === 'ReversalMove' && <ReversaDeteil move={move} reversal={move.moveable} />}
       </CardContent>
     </Card>
   );
