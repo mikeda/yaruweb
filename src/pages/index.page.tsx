@@ -6,8 +6,6 @@ import makeStyles from '@mui/styles/makeStyles';
 import { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 
-import { IntroSlides, StaffRequirement } from './components';
-
 import {
   ArticleCard,
   BattleListItem,
@@ -17,6 +15,8 @@ import {
   Link as LinkComponent,
   PlayerCard,
   TournamentCard,
+  IntroSlides,
+  StaffRequirement,
 } from '@/components';
 import { pagesPath } from '@/generated/$path';
 import { TopPageDocument, TopPageQuery } from '@/generated/graphql';
