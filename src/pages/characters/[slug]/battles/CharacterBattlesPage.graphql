@@ -19,3 +19,15 @@ query CharacterBattlesPage($characterSlug: String!, $playerSlug: String) {
     }
   }
 }
+
+query CharacterBattlesPageBattles($characterSlug: String!, $playerSlug: String, $page: Int!) {
+  battles(characterSlug: $characterSlug, playerSlug: $playerSlug, page: $page, per: 10) {
+    records {
+      ...BattleListItem
+    }
+
+    paging {
+      ...paging
+    }
+  }
+}

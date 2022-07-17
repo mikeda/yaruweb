@@ -5,12 +5,10 @@ import { Box, Button, Dialog, DialogActions, DialogContent, IconButton, Stack, T
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
 
-import { Operation } from './Command/Operation';
-
-import { Command } from '.';
+import { Command } from '..';
+import { Operation } from '../Command/Operation';
 
 import { OperationText } from '@/lib';
-
 
 const useStyles = makeStyles(() =>
   createStyles({
