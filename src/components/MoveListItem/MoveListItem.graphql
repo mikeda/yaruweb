@@ -1,0 +1,60 @@
+fragment AttackListItem on AttackMove {
+  id
+  startUpFrame
+  duration
+  blockFrame
+  blockResult
+  hitFrame
+  hitResult
+  counterFrame
+  blockResult
+  heights
+  damages
+  powerCrush
+  crouchingStatus
+  jumpStatus
+  homing
+  wallBound
+}
+
+fragment ThrowListItem on ThrowMove {
+  id
+  throwType
+  throwResult
+  throwEscape
+  startUpFrame
+  damage
+}
+
+fragment ReversalListItem on ReversalMove {
+  id
+  kind
+  startUpFrame
+  finishFrame
+}
+
+fragment MoveListItemMoveable on Moveable {
+  __typename
+
+  ... on AttackMove { ...AttackListItem }
+  ... on ThrowMove { ...ThrowListItem }
+  ... on ReversalMove { ...ReversalListItem }
+}
+
+fragment MoveListItem on Move {
+  id
+  name
+  kana
+  command
+  note
+
+  moveVideo {
+    id
+    m3u8Url
+    thumbnailUrl
+  }
+
+  moveable {
+    ...MoveListItemMoveable
+  }
+}

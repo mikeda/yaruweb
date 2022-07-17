@@ -14,6 +14,7 @@ export * from './CustomText';
 export * from './Link';
 export * from './Loading';
 export * from './forms/MoveForm';
+export * from './MoveListItem';
 export * from './MoveMedia';
 export * from './NotFound';
 export * from './OperationListSelector';

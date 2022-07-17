@@ -1,0 +1,15 @@
+query CharacterMovesPage($characterSlug: String!) {
+  character(characterSlug: $characterSlug) {
+    ...CharacterBreadcrumbs
+    ...CharacterProfile
+    ...CharacterTabs
+
+    moveCategories {
+      id
+      name
+      moves {
+        ...MoveListItem
+      }
+    }
+  }
+}

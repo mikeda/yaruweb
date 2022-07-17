@@ -2112,6 +2112,22 @@ export type ComboListItemFragment = { __typename?: 'Combo', id: string, damage?:
 
 export type ComboMediaFragment = { __typename?: 'Combo', id: string, damage?: number | null, command: Array<string>, note?: string | null, comboCategory: { __typename?: 'ComboCategory', id: string, name: string }, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null };
 
+export type AttackListItemFragment = { __typename?: 'AttackMove', id: string, startUpFrame?: number | null, duration?: number | null, blockFrame?: number | null, blockResult: AttackMoveResultEnum, hitFrame?: number | null, hitResult: AttackMoveResultEnum, counterFrame?: number | null, heights: Array<AttackTypeEnum>, damages: Array<number>, powerCrush: boolean, crouchingStatus: boolean, jumpStatus: boolean, homing: boolean, wallBound: boolean };
+
+export type ThrowListItemFragment = { __typename?: 'ThrowMove', id: string, throwType: ThrowTypeEnum, throwResult: ThrowMoveResultEnum, throwEscape: ThrowEscapeEnum, startUpFrame?: number | null, damage?: number | null };
+
+export type ReversalListItemFragment = { __typename?: 'ReversalMove', id: string, kind: string, startUpFrame?: number | null, finishFrame?: number | null };
+
+type MoveListItemMoveable_AttackMove_Fragment = { __typename: 'AttackMove', id: string, startUpFrame?: number | null, duration?: number | null, blockFrame?: number | null, blockResult: AttackMoveResultEnum, hitFrame?: number | null, hitResult: AttackMoveResultEnum, counterFrame?: number | null, heights: Array<AttackTypeEnum>, damages: Array<number>, powerCrush: boolean, crouchingStatus: boolean, jumpStatus: boolean, homing: boolean, wallBound: boolean };
+
+type MoveListItemMoveable_ReversalMove_Fragment = { __typename: 'ReversalMove', id: string, kind: string, startUpFrame?: number | null, finishFrame?: number | null };
+
+type MoveListItemMoveable_ThrowMove_Fragment = { __typename: 'ThrowMove', id: string, throwType: ThrowTypeEnum, throwResult: ThrowMoveResultEnum, throwEscape: ThrowEscapeEnum, startUpFrame?: number | null, damage?: number | null };
+
+export type MoveListItemMoveableFragment = MoveListItemMoveable_AttackMove_Fragment | MoveListItemMoveable_ReversalMove_Fragment | MoveListItemMoveable_ThrowMove_Fragment;
+
+export type MoveListItemFragment = { __typename?: 'Move', id: string, name: string, kana?: string | null, command: Array<string>, note?: string | null, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null, moveable: { __typename: 'AttackMove', id: string, startUpFrame?: number | null, duration?: number | null, blockFrame?: number | null, blockResult: AttackMoveResultEnum, hitFrame?: number | null, hitResult: AttackMoveResultEnum, counterFrame?: number | null, heights: Array<AttackTypeEnum>, damages: Array<number>, powerCrush: boolean, crouchingStatus: boolean, jumpStatus: boolean, homing: boolean, wallBound: boolean } | { __typename: 'ReversalMove', id: string, kind: string, startUpFrame?: number | null, finishFrame?: number | null } | { __typename: 'ThrowMove', id: string, throwType: ThrowTypeEnum, throwResult: ThrowMoveResultEnum, throwEscape: ThrowEscapeEnum, startUpFrame?: number | null, damage?: number | null } };
+
 export type MoveMediaFragment = { __typename?: 'Move', id: string, name: string, kana?: string | null, command: Array<string>, statusAfter?: string | null, note?: string | null, moveable: { __typename: 'AttackMove', id: string, startUpFrame?: number | null, duration?: number | null, heights: Array<AttackTypeEnum>, damages: Array<number>, reach?: number | null, blockResult: AttackMoveResultEnum, blockStatus?: AttackMoveStateEnum | null, blockFrame?: number | null, hitResult: AttackMoveResultEnum, hitStatus?: AttackMoveStateEnum | null, hitFrame?: number | null, counterResult: AttackMoveResultEnum, counterStatus?: AttackMoveStateEnum | null, counterFrame?: number | null, powerCrush: boolean, powerCrushFrame?: number | null, crouchingStatus: boolean, crouchingStatusFrame?: number | null, jumpStatus: boolean, jumpStatusFrame?: number | null, homing: boolean, screw: boolean, wallBound: boolean } | { __typename: 'ReversalMove', id: string, kind: string, startUpFrame?: number | null, finishFrame?: number | null } | { __typename: 'ThrowMove', id: string, throwType: ThrowTypeEnum, startUpFrame?: number | null, damage?: number | null, throwEscape: ThrowEscapeEnum, throwResult: ThrowMoveResultEnum }, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null };
 
 export type PlayerCardFragment = { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null, standingsCount: number, battlesCount: number };
@@ -2276,22 +2292,12 @@ export type CharacterCombosPageQueryVariables = Exact<{
 
 export type CharacterCombosPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, combosCount: number, movesCount: number, comboCategories: Array<{ __typename?: 'ComboCategory', id: string, name: string, combos: Array<{ __typename?: 'Combo', id: string, damage?: number | null, command: Array<string>, note?: string | null, move?: { __typename?: 'Move', id: string } | null, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> }>, comboStarters: Array<{ __typename?: 'Move', id: string, name: string, combosCount: number }> } };
 
-type Moveable_AttackMove_Fragment = { __typename: 'AttackMove', id: string, startUpFrame?: number | null, duration?: number | null, heights: Array<AttackTypeEnum>, damages: Array<number>, reach?: number | null, blockResult: AttackMoveResultEnum, blockStatus?: AttackMoveStateEnum | null, blockFrame?: number | null, hitResult: AttackMoveResultEnum, hitStatus?: AttackMoveStateEnum | null, hitFrame?: number | null, counterResult: AttackMoveResultEnum, counterStatus?: AttackMoveStateEnum | null, counterFrame?: number | null, powerCrush: boolean, powerCrushFrame?: number | null, crouchingStatus: boolean, crouchingStatusFrame?: number | null, jumpStatus: boolean, jumpStatusFrame?: number | null, homing: boolean, screw: boolean, wallBound: boolean };
-
-type Moveable_ReversalMove_Fragment = { __typename: 'ReversalMove', id: string, kind: string, startUpFrame?: number | null, finishFrame?: number | null };
-
-type Moveable_ThrowMove_Fragment = { __typename: 'ThrowMove', id: string, throwType: ThrowTypeEnum, startUpFrame?: number | null, damage?: number | null, throwEscape: ThrowEscapeEnum, throwResult: ThrowMoveResultEnum };
-
-export type MoveableFragment = Moveable_AttackMove_Fragment | Moveable_ReversalMove_Fragment | Moveable_ThrowMove_Fragment;
-
-export type CharacterMovesPageMoveFragment = { __typename?: 'Move', id: string, name: string, kana?: string | null, command: Array<string>, note?: string | null, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null, moveable: { __typename: 'AttackMove', id: string, startUpFrame?: number | null, duration?: number | null, heights: Array<AttackTypeEnum>, damages: Array<number>, reach?: number | null, blockResult: AttackMoveResultEnum, blockStatus?: AttackMoveStateEnum | null, blockFrame?: number | null, hitResult: AttackMoveResultEnum, hitStatus?: AttackMoveStateEnum | null, hitFrame?: number | null, counterResult: AttackMoveResultEnum, counterStatus?: AttackMoveStateEnum | null, counterFrame?: number | null, powerCrush: boolean, powerCrushFrame?: number | null, crouchingStatus: boolean, crouchingStatusFrame?: number | null, jumpStatus: boolean, jumpStatusFrame?: number | null, homing: boolean, screw: boolean, wallBound: boolean } | { __typename: 'ReversalMove', id: string, kind: string, startUpFrame?: number | null, finishFrame?: number | null } | { __typename: 'ThrowMove', id: string, throwType: ThrowTypeEnum, startUpFrame?: number | null, damage?: number | null, throwEscape: ThrowEscapeEnum, throwResult: ThrowMoveResultEnum } };
-
 export type CharacterMovesPageQueryVariables = Exact<{
   characterSlug: Scalars['String'];
 }>;
 
 
-export type CharacterMovesPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, combosCount: number, movesCount: number, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, moves: Array<{ __typename?: 'Move', id: string, name: string, kana?: string | null, command: Array<string>, note?: string | null, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null, moveable: { __typename: 'AttackMove', id: string, startUpFrame?: number | null, duration?: number | null, heights: Array<AttackTypeEnum>, damages: Array<number>, reach?: number | null, blockResult: AttackMoveResultEnum, blockStatus?: AttackMoveStateEnum | null, blockFrame?: number | null, hitResult: AttackMoveResultEnum, hitStatus?: AttackMoveStateEnum | null, hitFrame?: number | null, counterResult: AttackMoveResultEnum, counterStatus?: AttackMoveStateEnum | null, counterFrame?: number | null, powerCrush: boolean, powerCrushFrame?: number | null, crouchingStatus: boolean, crouchingStatusFrame?: number | null, jumpStatus: boolean, jumpStatusFrame?: number | null, homing: boolean, screw: boolean, wallBound: boolean } | { __typename: 'ReversalMove', id: string, kind: string, startUpFrame?: number | null, finishFrame?: number | null } | { __typename: 'ThrowMove', id: string, throwType: ThrowTypeEnum, startUpFrame?: number | null, damage?: number | null, throwEscape: ThrowEscapeEnum, throwResult: ThrowMoveResultEnum } }> }> } };
+export type CharacterMovesPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, combosCount: number, movesCount: number, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, moves: Array<{ __typename?: 'Move', id: string, name: string, kana?: string | null, command: Array<string>, note?: string | null, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null, moveable: { __typename: 'AttackMove', id: string, startUpFrame?: number | null, duration?: number | null, blockFrame?: number | null, blockResult: AttackMoveResultEnum, hitFrame?: number | null, hitResult: AttackMoveResultEnum, counterFrame?: number | null, heights: Array<AttackTypeEnum>, damages: Array<number>, powerCrush: boolean, crouchingStatus: boolean, jumpStatus: boolean, homing: boolean, wallBound: boolean } | { __typename: 'ReversalMove', id: string, kind: string, startUpFrame?: number | null, finishFrame?: number | null } | { __typename: 'ThrowMove', id: string, throwType: ThrowTypeEnum, throwResult: ThrowMoveResultEnum, throwEscape: ThrowEscapeEnum, startUpFrame?: number | null, damage?: number | null } }> }> } };
 
 export type DashboardArticlePageQueryVariables = Exact<{
   articleId: Scalars['ID'];
@@ -3057,6 +3063,77 @@ export const ComboMediaFragmentDoc = gql`
   }
 }
     `;
+export const AttackListItemFragmentDoc = gql`
+    fragment AttackListItem on AttackMove {
+  id
+  startUpFrame
+  duration
+  blockFrame
+  blockResult
+  hitFrame
+  hitResult
+  counterFrame
+  blockResult
+  heights
+  damages
+  powerCrush
+  crouchingStatus
+  jumpStatus
+  homing
+  wallBound
+}
+    `;
+export const ThrowListItemFragmentDoc = gql`
+    fragment ThrowListItem on ThrowMove {
+  id
+  throwType
+  throwResult
+  throwEscape
+  startUpFrame
+  damage
+}
+    `;
+export const ReversalListItemFragmentDoc = gql`
+    fragment ReversalListItem on ReversalMove {
+  id
+  kind
+  startUpFrame
+  finishFrame
+}
+    `;
+export const MoveListItemMoveableFragmentDoc = gql`
+    fragment MoveListItemMoveable on Moveable {
+  __typename
+  ... on AttackMove {
+    ...AttackListItem
+  }
+  ... on ThrowMove {
+    ...ThrowListItem
+  }
+  ... on ReversalMove {
+    ...ReversalListItem
+  }
+}
+    ${AttackListItemFragmentDoc}
+${ThrowListItemFragmentDoc}
+${ReversalListItemFragmentDoc}`;
+export const MoveListItemFragmentDoc = gql`
+    fragment MoveListItem on Move {
+  id
+  name
+  kana
+  command
+  note
+  moveVideo {
+    id
+    m3u8Url
+    thumbnailUrl
+  }
+  moveable {
+    ...MoveListItemMoveable
+  }
+}
+    ${MoveListItemMoveableFragmentDoc}`;
 export const AttackMoveFragmentDoc = gql`
     fragment attackMove on AttackMove {
   id
@@ -3470,39 +3547,6 @@ export const ArticlePageFragmentDoc = gql`
   }
 }
     ${ArticleCardFragmentDoc}`;
-export const MoveableFragmentDoc = gql`
-    fragment moveable on Moveable {
-  __typename
-  ... on AttackMove {
-    ...attackMove
-  }
-  ... on ThrowMove {
-    ...throwMove
-  }
-  ... on ReversalMove {
-    ...reversalMove
-  }
-}
-    ${AttackMoveFragmentDoc}
-${ThrowMoveFragmentDoc}
-${ReversalMoveFragmentDoc}`;
-export const CharacterMovesPageMoveFragmentDoc = gql`
-    fragment CharacterMovesPageMove on Move {
-  id
-  name
-  kana
-  command
-  note
-  moveVideo {
-    id
-    m3u8Url
-    thumbnailUrl
-  }
-  moveable {
-    ...moveable
-  }
-}
-    ${MoveableFragmentDoc}`;
 export const DashboardArticlesPageArticleFragmentDoc = gql`
     fragment DashboardArticlesPageArticle on Article {
   id
@@ -4653,7 +4697,7 @@ export const CharacterMovesPageDocument = gql`
       id
       name
       moves {
-        ...CharacterMovesPageMove
+        ...MoveListItem
       }
     }
   }
@@ -4661,7 +4705,7 @@ export const CharacterMovesPageDocument = gql`
     ${CharacterBreadcrumbsFragmentDoc}
 ${CharacterProfileFragmentDoc}
 ${CharacterTabsFragmentDoc}
-${CharacterMovesPageMoveFragmentDoc}`;
+${MoveListItemFragmentDoc}`;
 
 /**
  * __useCharacterMovesPageQuery__
