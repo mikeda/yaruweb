@@ -3,7 +3,6 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { ArticleForm } from '@/components';
-import { ArticleStatus } from '@/generated/graphql';
 
 export default {
   title: 'components/forms/ArticleForm',
