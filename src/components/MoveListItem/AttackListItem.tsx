@@ -52,7 +52,8 @@ const AttackLabels: React.FC<{ attack: AttackListItemFragment }> = ({ attack }) 
   if (attack.powerCrush) labels.push('パワークラッシュ');
   if (attack.crouchingStatus) labels.push('しゃがステ');
   if (attack.jumpStatus) labels.push('ジャンステ');
-  if (attack.homing) labels.push('スクリュー');
+  if (attack.homing) labels.push('ホーミング');
+  if (attack.screw) labels.push('スクリュー');
   if (attack.wallBound) labels.push('ウォールバウンド');
 
   if (labels.length === 0) return null;
