@@ -45,7 +45,7 @@ export const UserMenu: React.FC = () => {
         {currentUser.role === UserRole.Admin && (
           <MenuItem
             onClick={() => {
-              router.push(pagesPath.admin.characters.$url());
+              router.push(pagesPath.admin.tournaments.$url());
               handleClose();
             }}
           >
