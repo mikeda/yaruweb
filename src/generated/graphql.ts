@@ -1690,7 +1690,6 @@ export enum ThrowTypeEnum {
 
 export type Tournament = {
   __typename?: 'Tournament';
-  battles: Array<Battle>;
   battlesCount: Scalars['Int'];
   description: Scalars['String'];
   id: Scalars['ID'];
@@ -2917,7 +2916,7 @@ export type TournamentBattlesPageQueryVariables = Exact<{
 }>;
 
 
-export type TournamentBattlesPageQuery = { __typename?: 'Query', tournament: { __typename?: 'Tournament', id: string, name: string, battlesCount: number, battles: Array<{ __typename?: 'Battle', id: string, round: BattleRound, startSec: number, tournamentVideo: { __typename?: 'TournamentVideo', id: string, youtubeVideoId: string, tournament: { __typename?: 'Tournament', id: string, name: string, startsAt: string } }, sides: Array<{ __typename?: 'BattleSide', rounds: number, player: { __typename?: 'Player', name: string }, character: { __typename?: 'Character', faceImageUrl: string } }> }> } };
+export type TournamentBattlesPageQuery = { __typename?: 'Query', tournament: { __typename?: 'Tournament', id: string, name: string, battlesCount: number } };
 
 export const CurrentUserFragmentDoc = gql`
     fragment CurrentUser on CurrentUser {
@@ -7806,14 +7805,10 @@ export const TournamentBattlesPageDocument = gql`
   tournament(tournamentId: $tournamentId) {
     ...TournamentBreadcrumbs
     ...TournamentTabs
-    battles {
-      ...BattleListItem
-    }
   }
 }
     ${TournamentBreadcrumbsFragmentDoc}
-${TournamentTabsFragmentDoc}
-${BattleListItemFragmentDoc}`;
+${TournamentTabsFragmentDoc}`;
 
 /**
  * __useTournamentBattlesPageQuery__
