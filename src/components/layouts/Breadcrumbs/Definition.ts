@@ -7,7 +7,6 @@ import { pagesPath } from '@/generated/$path';
 export type ChainParam =
   | { to: 'articles' }
   | { to: 'article'; article: ArticleParam }
-  | { to: 'battles' }
   | { to: 'characters' }
   | { to: 'character'; character: CharactersParam }
   | { to: 'characterBattles'; character: CharactersParam }
@@ -23,6 +22,7 @@ export type ChainParam =
   | { to: 'signup' }
   | { to: 'tournaments' }
   | { to: 'tournament'; tournament: TournamentParam }
+  | { to: 'tournamentBattles'; tournament: TournamentParam }
   | { to: 'tournamentVideo'; tournamentVideo: TournamentVideoParam };
 
 export const breadcrumbChain = (props: ChainParam): BreadcrumbChainItem => {
@@ -31,8 +31,6 @@ export const breadcrumbChain = (props: ChainParam): BreadcrumbChainItem => {
       return { name: '記事', url: pagesPath.articles.$url() };
     case 'article':
       return { name: props.article.title, parent: breadcrumbChain({ to: 'articles' }) };
-    case 'battles':
-      return { name: '対戦動画', url: pagesPath.battles.$url() };
     case 'characters':
       return { name: 'キャラクター', url: pagesPath.characters.$url() };
     case 'character':
@@ -87,6 +85,8 @@ export const breadcrumbChain = (props: ChainParam): BreadcrumbChainItem => {
         url: pagesPath.tournaments._id(props.tournament.id).$url(),
         parent: breadcrumbChain({ to: 'tournaments' }),
       };
+    case 'tournamentBattles':
+      return { name: '対戦動画', parent: breadcrumbChain({ to: 'tournament', tournament: props.tournament }) };
     case 'tournamentVideo':
       return {
         name: props.tournamentVideo.label ? `${props.tournamentVideo.label}の対戦動画` : '対戦動画',

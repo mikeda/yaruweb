@@ -1,0 +1,51 @@
+import React from 'react';
+
+import { ParsedUrlQuery } from 'querystring';
+
+import { Box } from '@mui/material';
+import { GetStaticPaths, GetStaticProps } from 'next';
+
+import { Breadcrumbs, Content, Head, TournamentTabs, BattleList } from '@/components';
+import {
+  TournamentBattlesPageDocument,
+  TournamentBattlesPageQuery,
+  TournamentPathsDocument,
+  TournamentPathsQuery,
+} from '@/generated/graphql';
+import { fetchGraphql } from '@/lib';
+
+const Page: React.FC<TournamentBattlesPageQuery> = ({ tournament }) => {
+  return (
+    <Content activeTab="tournaments" breadcrumb={<Breadcrumbs to="tournamentBattles" tournament={tournament} />}>
+      <Head title={`${tournament.name}の対戦動画`} />
+
+      <Box mt={2}>
+        <TournamentTabs tournament={tournament} activeTab="battles" />
+      </Box>
+
+      <BattleList tournamentId={tournament.id} />
+    </Content>
+  );
+};
+
+interface Params extends ParsedUrlQuery {
+  id: string;
+}
+
+export const getStaticProps: GetStaticProps<TournamentBattlesPageQuery, Params> = async ({ params }) => {
+  const data: TournamentBattlesPageQuery = await fetchGraphql(TournamentBattlesPageDocument, {
+    tournamentId: params?.id,
+  });
+
+  return { props: data, revalidate: 300 };
+};
+
+export const getStaticPaths: GetStaticPaths<Params> = async () => {
+  const data: TournamentPathsQuery = await fetchGraphql(TournamentPathsDocument);
+
+  const paths = data.allTournaments.map(({ id }) => ({ params: { id } }));
+
+  return { paths, fallback: 'blocking' };
+};
+
+export default Page;
