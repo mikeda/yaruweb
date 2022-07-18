@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 import SkipNextIcon from '@mui/icons-material/SkipNext';
 import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
 import { Box, Button, IconButton, List, Paper, Tooltip } from '@mui/material';
-import { useRouter } from 'next/router';
 import YouTube from 'react-youtube';
 import { useSetRecoilState } from 'recoil';
 import { YouTubePlayer } from 'youtube-player/dist/types';
@@ -24,9 +23,6 @@ export const BattleList: React.FC<Props> = ({ tournamentId, playerSlug, characte
   const [youTubePlayer, setYouTubePlayer] = useState<YouTubePlayer>();
   const [battleIndex, setBattleIndex] = useState<number>(0);
   const setLoading = useSetRecoilState(loadingState);
-  const router = useRouter();
-
-  const hashBattleId = router.asPath.split('#battle_')[1] ?? '';
 
   const { data, fetchMore } = useBattleListQuery({
     variables: { tournamentId, playerSlug, characterSlug },
@@ -63,11 +59,6 @@ export const BattleList: React.FC<Props> = ({ tournamentId, playerSlug, characte
 
     updateBattle(newIndex);
   };
-
-  useEffect(() => {
-    const index = battles.findIndex(b => b.id === hashBattleId);
-    if (index !== -1) updateBattle(index);
-  }, [hashBattleId]);
 
   if (!data) return null;
 
