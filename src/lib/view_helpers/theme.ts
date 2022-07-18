@@ -123,6 +123,11 @@ export const theme = createTheme({
         variant: 'outlined',
       },
     },
+    MuiCard: {
+      defaultProps: {
+        elevation: 3,
+      },
+    },
     MuiCheckbox: {
       defaultProps: {
         color: 'primary',

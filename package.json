@@ -94,6 +94,7 @@
     "pathpida": "^0.18.1",
     "prettier": "^2.7.1",
     "storybook-addon-apollo-client": "^4.0.12",
+    "storybook-addon-next-router": "^4.0.0",
     "ts-unused-exports": "^8.0.0",
     "typescript": "^4.7.4"
   }

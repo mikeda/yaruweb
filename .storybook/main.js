@@ -7,6 +7,7 @@ module.exports = {
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
     'storybook-addon-apollo-client',
+    'storybook-addon-next-router',
   ],
   framework: '@storybook/react',
   core: {

@@ -1,4 +1,3 @@
-import { BreadcrumbChainItem } from './Breadcrumbs';
 import {
   ArticleParam,
   CharactersParam,
@@ -10,6 +9,8 @@ import {
   TournamentParam,
   TournamentVideoParam,
 } from './params';
+
+import { BreadcrumbChainItem } from '.';
 
 import { pagesPath } from '@/generated/$path';
 
