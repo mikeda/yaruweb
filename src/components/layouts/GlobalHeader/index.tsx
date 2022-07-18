@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { styled } from '@mui/material/styles';
 import Link from 'next/link';
 
-import { UserMenu } from './UserMenu';
+import { UserMenu } from '../UserMenu';
 
 import { pagesPath } from '@/generated/$path';
 

@@ -2,7 +2,6 @@ import React, { ReactElement } from 'react';
 
 import { UrlObject } from 'url';
 
-
 import { EmojiEvents, Person, TagFaces, LibraryBooks, People } from '@mui/icons-material';
 import { Divider, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import createStyles from '@mui/styles/createStyles';

@@ -1,12 +1,5 @@
-import { addDecorator } from '@storybook/react';
-import { MemoryRouterProvider } from 'next-router-mock/MemoryRouterProvider';
+import { RouterContext } from 'next/dist/shared/lib/router-context';
 import { MockedProvider } from '@apollo/client/testing';
-
-addDecorator(Story => (
-  <MemoryRouterProvider>
-    <Story />
-  </MemoryRouterProvider>
-));
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -18,5 +11,8 @@ export const parameters = {
   },
   apolloClient: {
     MockedProvider,
+  },
+  nextRouter: {
+    Provider: RouterContext.Provider,
   },
 };

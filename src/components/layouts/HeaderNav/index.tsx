@@ -2,7 +2,6 @@ import React from 'react';
 
 import { UrlObject } from 'url';
 
-
 import { Tab, Tabs } from '@mui/material';
 import { useRouter } from 'next/router';
 

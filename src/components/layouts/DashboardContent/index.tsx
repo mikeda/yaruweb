@@ -10,7 +10,6 @@ import { DrawerItems } from './DrawerItems';
 import { Head } from '@/components';
 import { theme } from '@/lib';
 
-
 const drawerWidth = 240;
 
 const useStyles = makeStyles(() =>
