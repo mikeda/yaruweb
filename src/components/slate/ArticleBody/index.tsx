@@ -4,8 +4,8 @@ import { List, ListItemButton, Paper, Typography } from '@mui/material';
 import { createEditor, Descendant } from 'slate';
 import { Editable, RenderElementProps, RenderLeafProps, Slate, withReact } from 'slate-react';
 
-import { ArticleElement } from './ArticleElement';
-import { ArticleLeaf } from './ArticleLeaf';
+import { ArticleElement } from '../ArticleElement';
+import { ArticleLeaf } from '../ArticleLeaf';
 
 import { theme } from '@/lib';
 
