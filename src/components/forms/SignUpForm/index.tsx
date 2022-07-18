@@ -8,6 +8,8 @@ import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 import * as yup from 'yup';
 
+import { SignUpWithTwitterButton } from './SignUpWithTwitterButton';
+
 import { pagesPath } from '@/generated/$path';
 import { useCreateUserMutation } from '@/generated/graphql';
 import { UserValidator, createFirebaseUserWithEmail, currentUserState, loadingState } from '@/lib';
@@ -22,7 +24,7 @@ const schema = yup.object().shape({
   password: UserValidator.password,
 });
 
-export const SignUpWithEmailForm: React.FC = () => {
+export const SignUpForm: React.FC = () => {
   const {
     handleSubmit,
     control,
@@ -61,48 +63,54 @@ export const SignUpWithEmailForm: React.FC = () => {
   setLoading(isSubmitting || loading);
 
   return (
-    <Card>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <CardContent>
-          <Controller
-            name="email"
-            control={control}
-            render={({ field }) => (
-              <TextField
-                {...field}
-                label="メールアドレス"
-                error={Boolean(errors.email)}
-                helperText={errors.email?.message}
-              />
-            )}
-          />
-        </CardContent>
+    <>
+      <Card>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <CardContent>
+            <Controller
+              name="email"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  label="メールアドレス"
+                  error={Boolean(errors.email)}
+                  helperText={errors.email?.message}
+                />
+              )}
+            />
+          </CardContent>
 
-        <CardContent>
-          <Controller
-            name="password"
-            control={control}
-            render={({ field }) => (
-              <TextField
-                {...field}
-                type="password["
-                label="パスワード"
-                placeholder="8文字以上"
-                error={Boolean(errors.password)}
-                helperText={errors.password?.message}
-              />
-            )}
-          />
-        </CardContent>
+          <CardContent>
+            <Controller
+              name="password"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  type="password["
+                  label="パスワード"
+                  placeholder="8文字以上"
+                  error={Boolean(errors.password)}
+                  helperText={errors.password?.message}
+                />
+              )}
+            />
+          </CardContent>
 
-        <Divider />
+          <Divider />
 
-        <Box m={2} justifyContent="flex-end">
-          <Button type="submit" variant="contained">
-            登録する
-          </Button>
-        </Box>
-      </form>
-    </Card>
+          <Box m={2} justifyContent="flex-end">
+            <Button type="submit" variant="contained">
+              登録する
+            </Button>
+          </Box>
+        </form>
+      </Card>
+
+      <Box mt={2}>
+        <SignUpWithTwitterButton />
+      </Box>
+    </>
   );
 };
