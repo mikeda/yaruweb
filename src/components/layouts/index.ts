@@ -1,3 +1,4 @@
+export * from './AdminContent';
 export * from './Breadcrumbs';
 export * from './Content';
 export * from './DashboardContent';

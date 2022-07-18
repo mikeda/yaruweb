@@ -53,7 +53,7 @@ export const CharacterCard: React.FC<Props> = ({ character, dashboard = false })
   const router = useRouter();
 
   const href = dashboard
-    ? pagesPath.dashboard.characters._slug(character.slug).edit.$url()
+    ? pagesPath.admin.characters._slug(character.slug).edit.$url()
     : pagesPath.characters._slug(character.slug).$url();
 
   return (
@@ -93,7 +93,7 @@ export const CharacterCard: React.FC<Props> = ({ character, dashboard = false })
         <CardActions disableSpacing>
           <Button
             color="primary"
-            href={resolveUrlObject(router, pagesPath.dashboard.characters._slug(character.slug).move_categories.$url())}
+            href={resolveUrlObject(router, pagesPath.admin.characters._slug(character.slug).move_categories.$url())}
             component={Link}
           >
             コマンドリスト
@@ -101,10 +101,7 @@ export const CharacterCard: React.FC<Props> = ({ character, dashboard = false })
 
           <Button
             color="primary"
-            href={resolveUrlObject(
-              router,
-              pagesPath.dashboard.characters._slug(character.slug).combo_categories.$url(),
-            )}
+            href={resolveUrlObject(router, pagesPath.admin.characters._slug(character.slug).combo_categories.$url())}
             component={Link}
           >
             コンボ

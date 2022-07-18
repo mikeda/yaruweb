@@ -1,0 +1,45 @@
+query AdminBattlesPage($tournamentVideoId: ID!) {
+  tournamentVideo(tournamentVideoId: $tournamentVideoId) {
+    id
+    title
+    youtubeVideoId
+
+    tournament {
+      id
+      name
+    }
+  }
+
+  players(per: 500) {
+    records {
+      ...PlayerSelectOption
+    }
+  }
+
+  characters {
+    records { ...CharacterSelectOption }
+  }
+}
+
+fragment AdminBattlesPageSide on BattleSide {
+  player { id name }
+  character { id faceImageUrl }
+  rounds
+}
+
+fragment AdminBattlesPageBattleReslut on Battle {
+  id
+  round
+  startSec
+
+  sides {
+    ...AdminBattlesPageSide
+  }
+}
+query AdminBattlesPageBattles($tournamentVideoId: ID!) {
+  battles(tournamentVideoId: $tournamentVideoId, per: 200) {
+    records {
+      ...AdminBattlesPageBattleReslut
+    }
+  }
+}

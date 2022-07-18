@@ -5,6 +5,7 @@ import { UrlObject } from 'url';
 import { Typography } from '@mui/material';
 import { default as MuiBreadcrumbs } from '@mui/material/Breadcrumbs';
 
+import { AdminBreadcrumbParams, breadcrumbChain as adminChain } from './AdminDefinition';
 import { DashboardBreadcrumbParams, breadcrumbChain as dashboardChain } from './DashboardDefinition';
 import { breadcrumbChain, ChainParam } from './Definition';
 
@@ -34,6 +35,20 @@ export const Breadcrumbs: React.FC<ChainParam> = props => {
 
 export const DashboardBreadcrumbs: React.FC<DashboardBreadcrumbParams> = props => {
   let current = dashboardChain(props);
+  const items: BreadcrumbsItem[] = [{ name: current.name }];
+
+  while (current) {
+    if (!current.parent) break;
+
+    current = current.parent;
+    items.unshift({ name: current.name, url: current.url });
+  }
+
+  return <BreadcrumbList items={items} />;
+};
+
+export const AdminBreadcrumbs: React.FC<AdminBreadcrumbParams> = props => {
+  let current = adminChain(props);
   const items: BreadcrumbsItem[] = [{ name: current.name }];
 
   while (current) {

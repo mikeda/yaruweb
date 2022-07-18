@@ -1,0 +1,37 @@
+import React from 'react';
+
+import { useRouter } from 'next/router';
+import { toast } from 'react-toastify';
+import { useSetRecoilState } from 'recoil';
+
+import { AdminBreadcrumbs, AdminContent, TournamentForm } from '@/components';
+import { TournamentAttributes, useCreateTournamentMutation } from '@/generated/graphql';
+import { loadingState } from '@/lib';
+
+const Page: React.FC = () => {
+  const router = useRouter();
+  const setLoading = useSetRecoilState(loadingState);
+  const [createTournament, { loading }] = useCreateTournamentMutation({
+    onCompleted: () => {
+      toast.success('大会情報を登録しました。');
+      router.back();
+    },
+    onError: e => {
+      toast.error(e.message);
+    },
+  });
+
+  const onSubmit = (attributes: TournamentAttributes) => {
+    createTournament({ variables: { attributes } });
+  };
+
+  setLoading(loading);
+
+  return (
+    <AdminContent title="大会登録" breadcrumb={<AdminBreadcrumbs to="tournamentsNew" />}>
+      <TournamentForm onSubmit={onSubmit} />
+    </AdminContent>
+  );
+};
+
+export default Page;

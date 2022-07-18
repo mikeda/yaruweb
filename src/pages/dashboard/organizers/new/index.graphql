@@ -1,7 +1,0 @@
-mutation DashboardOrganizersNewPageCreateOrganizer($attributes: OrganizerAttributes!) {
-  createOrganizer(input: { attributes: $attributes }) {
-    organizer {
-      id
-    }
-  }
-}
