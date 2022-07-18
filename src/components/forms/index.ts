@@ -2,6 +2,7 @@ export * from './ArticleForm';
 export * from './CharacterForm';
 export * from './ComboCategoryForm';
 export * from './ComboForm';
+export * from './LoginForm';
 export * from './MoveCategoryForm';
 export * from './MoveForm';
 export * from './OrganizerForm';
