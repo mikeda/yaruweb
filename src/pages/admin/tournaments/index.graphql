@@ -1,0 +1,28 @@
+fragment AdminTournamentsPageTournament on Tournament {
+  id
+  name
+  startsAt
+  videosCount
+  standingsCount
+  mainImageUrl
+}
+
+query AdminTournamentsPage($page: Int = 1, $keyword: String) {
+  tournaments(page: $page, per: 10, keyword: $keyword) {
+    records {
+      ...AdminTournamentsPageTournament
+    }
+
+    paging {
+      ...paging
+    }
+  }
+}
+
+mutation DeleteTournament($tournamentId: ID!) {
+  deleteTournament(input: { tournamentId: $tournamentId }) {
+    tournament {
+      id
+    }
+  }
+}

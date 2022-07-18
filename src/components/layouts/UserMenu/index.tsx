@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
 import { pagesPath } from '@/generated/$path';
+import { UserRole } from '@/generated/graphql';
 import { signOutFirebase, useCurrentUser, currentUserState, resolveUrlObject } from '@/lib';
 
 export const UserMenu: React.FC = () => {
@@ -40,6 +41,18 @@ export const UserMenu: React.FC = () => {
         >
           マイページ
         </MenuItem>
+
+        {currentUser.role === UserRole.Admin && (
+          <MenuItem
+            onClick={() => {
+              router.push(pagesPath.admin.tournaments.$url());
+              handleClose();
+            }}
+          >
+            管理
+          </MenuItem>
+        )}
+
         <MenuItem
           onClick={() => {
             signOutFirebase().then(() => {

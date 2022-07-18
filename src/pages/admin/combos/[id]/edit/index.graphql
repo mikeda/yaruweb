@@ -1,0 +1,34 @@
+query PageAdminComboEdit($comboId: ID!) {
+  combo(comboId: $comboId) {
+    ...ComboForm
+
+    comboCategory {
+      id
+      name
+
+      combos {
+        ...ComboPositionSelect
+      }
+
+      character {
+        slug
+        name
+
+        moveCategories {
+          ...MoveSelectOption
+        }
+      }
+    }
+  }
+}
+
+mutation UpdateCombo($comboId: ID!, $attributes: ComboAttributes!) {
+  updateCombo(input: { comboId: $comboId, attributes: $attributes }) {
+    combo {
+      id
+      comboCategory {
+        id
+      }
+    }
+  }
+}

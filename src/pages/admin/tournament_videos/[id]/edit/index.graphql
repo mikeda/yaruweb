@@ -1,0 +1,21 @@
+query AdminTournamentVideoEditPage($tournamentVideoId: ID!) {
+  tournamentVideo(tournamentVideoId: $tournamentVideoId) {
+    ...TournamentVideoForm
+    ...TournamentVideoBreadcrumbs
+  }
+}
+
+fragment TournamentVideoForm on TournamentVideo {
+  id
+  title
+  label
+  publishedAt
+}
+
+mutation AdminTournamentVideoEditPageUpdate($tournamentVideoId: ID!, $attributes: TournamentVideoAttributes!) {
+  updateTournamentVideo(input: { tournamentVideoId: $tournamentVideoId, attributes: $attributes }) {
+    tournamentVideo {
+      ...TournamentVideoForm
+    }
+  }
+}

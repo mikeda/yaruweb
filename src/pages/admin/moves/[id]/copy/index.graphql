@@ -1,0 +1,19 @@
+query PageAdminMoveCopy($moveId: ID!) {
+  move(moveId: $moveId) {
+    ...MoveForm
+
+    moveCategory {
+      id
+      name
+
+      character {
+        slug
+        name
+      }
+
+      moves {
+        ...MovePositionSelect
+      }
+    }
+  }
+}

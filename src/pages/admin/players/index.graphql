@@ -1,0 +1,34 @@
+fragment AdminPlayersPagePlayer on Player {
+  id
+  slug
+  name
+  avatarUrl
+}
+
+query AdminPlayersPage($page: Int = 1, $keyword: String) {
+  players(page: $page, per: 10, keyword: $keyword) {
+    records {
+      ...AdminPlayersPagePlayer
+    }
+
+    paging {
+      ...paging
+    }
+  }
+}
+
+mutation AdminPlayersPageDelete($playerSlug: String!) {
+  deletePlayer(input: { playerSlug: $playerSlug }) {
+    player {
+      id
+    }
+  }
+}
+
+mutation AdminPlayersPageCreatePlayerFromSmashgg($smashggId: String!) {
+  createPlayerFromSmashgg(input: { smashggId: $smashggId }) {
+    player {
+      id
+    }
+  }
+}

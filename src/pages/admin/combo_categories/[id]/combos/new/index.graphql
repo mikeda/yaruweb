@@ -1,0 +1,38 @@
+fragment MoveSelectOption on MoveCategory {
+  id
+  name
+
+  moves {
+    id
+    name
+  }
+}
+
+query PageAdminComboNew($comboCategoryId: ID!) {
+  comboCategory(comboCategoryId: $comboCategoryId) {
+    id
+    name
+
+    combos {
+      ...ComboPositionSelect
+    }
+
+
+    character {
+      slug
+      name
+
+      moveCategories {
+        ...MoveSelectOption
+      }
+    }
+  }
+}
+
+mutation CreateCombo($comboCategoryId: ID!, $attributes: ComboAttributes!) {
+  createCombo(input: { comboCategoryId: $comboCategoryId, attributes: $attributes }) {
+    combo {
+      id
+    }
+  }
+}

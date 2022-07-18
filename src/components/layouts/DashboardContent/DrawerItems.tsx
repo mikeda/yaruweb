@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 
 import { UrlObject } from 'url';
 
-import { EmojiEvents, Person, TagFaces, LibraryBooks, People } from '@mui/icons-material';
+import { Person, LibraryBooks } from '@mui/icons-material';
 import { Divider, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
@@ -37,33 +37,6 @@ const items: ItemProps[] = [
   { key: 'article', label: '記事', link: pagesPath.dashboard.articles.$url(), icon: <LibraryBooks /> },
 ];
 
-const adminItems: ItemProps[] = [
-  {
-    key: 'tournament',
-    label: '大会',
-    link: pagesPath.dashboard.tournaments.$url(),
-    icon: <EmojiEvents />,
-  },
-  {
-    key: 'player',
-    label: 'プレイヤー',
-    link: pagesPath.dashboard.players.$url(),
-    icon: <People />,
-  },
-  {
-    key: 'organizer',
-    label: 'オーガナイザー',
-    link: pagesPath.dashboard.organizers.$url(),
-    icon: <People />,
-  },
-  {
-    key: 'character',
-    label: 'キャラクター',
-    link: pagesPath.dashboard.characters.$url(),
-    icon: <TagFaces />,
-  },
-];
-
 export const DrawerItems: React.FC = () => {
   const classes = useStyles();
 
@@ -73,12 +46,6 @@ export const DrawerItems: React.FC = () => {
       <Divider />
       <List>
         {items.map(item => (
-          <Item key={item.key} item={item} />
-        ))}
-      </List>
-      <Divider />
-      <List>
-        {adminItems.map(item => (
           <Item key={item.key} item={item} />
         ))}
       </List>

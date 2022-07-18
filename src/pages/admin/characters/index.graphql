@@ -1,0 +1,5 @@
+query AdminCharactersPage {
+  characters {
+    records { ...CharacterCard }
+  }
+}

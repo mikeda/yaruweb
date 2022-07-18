@@ -1,5 +1,0 @@
-query DashboardCharactersPage {
-  characters {
-    records { ...CharacterCard }
-  }
-}
