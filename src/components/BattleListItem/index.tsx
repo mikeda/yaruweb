@@ -39,7 +39,6 @@ export const BattleListItem: React.FC<Props> = ({ battle, onClick }) => {
             {battle.round !== BattleRound.Unspecified && (
               <Typography variant="body2">{BattleRoundText[battle.round]}</Typography>
             )}
-            <Typography variant="body2">{`${battle.tournamentVideo.id} ${battle.startSec}`}</Typography>
           </>
         }
       />
