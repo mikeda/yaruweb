@@ -1,0 +1,4 @@
+fragment TournamentTabs on Tournament {
+  id
+  battlesCount
+}

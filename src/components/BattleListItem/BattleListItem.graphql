@@ -1,9 +1,11 @@
 fragment BattleListItem on Battle {
   id
   round
+  startSec
 
   tournamentVideo {
     id
+    youtubeVideoId
 
     tournament {
       id

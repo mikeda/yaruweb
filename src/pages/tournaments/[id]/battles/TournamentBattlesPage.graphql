@@ -1,0 +1,6 @@
+query TournamentBattlesPage($tournamentId: ID!) {
+  tournament(tournamentId: $tournamentId) {
+    ...TournamentBreadcrumbs
+    ...TournamentTabs
+  }
+}

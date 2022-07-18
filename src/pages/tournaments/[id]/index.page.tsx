@@ -2,7 +2,6 @@ import React from 'react';
 
 import { ParsedUrlQuery } from 'querystring';
 
-
 import {
   Avatar,
   Box,
@@ -21,7 +20,7 @@ import makeStyles from '@mui/styles/makeStyles';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Link from 'next/link';
 
-import { NotFound, Content, Head, Breadcrumbs } from '@/components';
+import { NotFound, Content, Head, Breadcrumbs, TournamentTabs } from '@/components';
 import { pagesPath } from '@/generated/$path';
 import {
   TournamentPageDocument,
@@ -80,7 +79,7 @@ const PageContent: React.FC<TournamentPageQuery> = ({ tournament }) => {
         </Typography>
 
         {tournament.standings.length === 0 ? (
-          <NotFound>結果が登録されていません。</NotFound>
+          <NotFound>対戦動画が登録されていません。</NotFound>
         ) : (
           <Paper>
             <List component="div">
@@ -105,35 +104,6 @@ const PageContent: React.FC<TournamentPageQuery> = ({ tournament }) => {
           </Paper>
         )}
       </Box>
-
-      <Box mt={4}>
-        <Typography variant="h2" gutterBottom>
-          対戦動画
-        </Typography>
-
-        {tournament.videos.length === 0 ? (
-          <NotFound>動画が登録されていません。</NotFound>
-        ) : (
-          <Box component={Paper}>
-            <List>
-              {tournament.videos.map(tournamentVideo => (
-                <Link
-                  key={tournamentVideo.id}
-                  href={pagesPath.tournament_videos._id(tournamentVideo.id).$url()}
-                  passHref
-                >
-                  <ListItem>
-                    <ListItemText
-                      primary={tournamentVideo.label || tournament.name}
-                      secondary={`対戦登録 ${tournamentVideo.battlesCount}`}
-                    />
-                  </ListItem>
-                </Link>
-              ))}
-            </List>
-          </Box>
-        )}
-      </Box>
     </>
   );
 };
@@ -146,6 +116,8 @@ const Page: React.FC<TournamentPageQuery> = ({ tournament }) => {
       breadcrumb={<Breadcrumbs to="tournament" tournament={tournament} />}
     >
       <Head title={tournament.name} image={tournament.mainImageUrl} />
+
+      <TournamentTabs activeTab="top" tournament={tournament} />
 
       <PageContent tournament={tournament} />
     </Content>

@@ -7,9 +7,6 @@ export const pagesPath = {
     }),
     $url: (url?: { hash?: string }) => ({ pathname: '/articles' as const, hash: url?.hash })
   },
-  "battles": {
-    $url: (url?: { hash?: string }) => ({ pathname: '/battles' as const, hash: url?.hash })
-  },
   "characters": {
     _slug: (slug: string | number) => ({
       "battles": {
@@ -172,13 +169,11 @@ export const pagesPath = {
   "signup": {
     $url: (url?: { hash?: string }) => ({ pathname: '/signup' as const, hash: url?.hash })
   },
-  "tournament_videos": {
-    _id: (id: string | number) => ({
-      $url: (url?: { hash?: string }) => ({ pathname: '/tournament_videos/[id]' as const, query: { id }, hash: url?.hash })
-    })
-  },
   "tournaments": {
     _id: (id: string | number) => ({
+      "battles": {
+        $url: (url?: { hash?: string }) => ({ pathname: '/tournaments/[id]/battles' as const, query: { id }, hash: url?.hash })
+      },
       $url: (url?: { hash?: string }) => ({ pathname: '/tournaments/[id]' as const, query: { id }, hash: url?.hash })
     }),
     $url: (url?: { hash?: string }) => ({ pathname: '/tournaments' as const, hash: url?.hash })

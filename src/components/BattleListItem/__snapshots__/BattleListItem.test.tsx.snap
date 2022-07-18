@@ -2,97 +2,92 @@
 
 exports[`BattleListItem Snapshot 1`] = `
 <DocumentFragment>
-  <a
-    class="MuiTypography-root MuiTypography-inherit MuiLink-root MuiLink-underlineNone css-1cmksfb-MuiTypography-root-MuiLink-root"
-    href="/tournament_videos/222#battle_111"
+  <div
+    class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider MuiListItem-button css-1ghby9w-MuiButtonBase-root-MuiListItem-root"
+    role="button"
+    tabindex="0"
   >
     <div
-      class="MuiButtonBase-root MuiListItem-root MuiListItem-gutters MuiListItem-padding MuiListItem-divider MuiListItem-button css-1ghby9w-MuiButtonBase-root-MuiListItem-root"
-      role="button"
-      tabindex="0"
+      class="MuiListItemText-root MuiListItemText-multiline css-konndc-MuiListItemText-root"
     >
-      <div
-        class="MuiListItemText-root MuiListItemText-multiline css-konndc-MuiListItemText-root"
+      <span
+        class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-10hburv-MuiTypography-root"
       >
-        <span
-          class="MuiTypography-root MuiTypography-body1 MuiListItemText-primary css-10hburv-MuiTypography-root"
+        <div
+          class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-mhc70k-MuiGrid-root"
         >
           <div
-            class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-2 css-mhc70k-MuiGrid-root"
+            class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6 css-1osj8n2-MuiGrid-root"
           >
             <div
-              class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6 css-1osj8n2-MuiGrid-root"
+              class="makeStyles-root-1 MuiBox-root css-70qvj9"
             >
               <div
-                class="makeStyles-root-1 MuiBox-root css-70qvj9"
+                class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault makeStyles-avatar-3 makeStyles-win-4 css-2s90m6-MuiAvatar-root"
               >
-                <div
-                  class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault makeStyles-avatar-3 makeStyles-win-4 css-2s90m6-MuiAvatar-root"
-                >
-                  3
-                </div>
-                <div
-                  class="MuiAvatar-root MuiAvatar-circular makeStyles-avatar-3 css-1wlk0hk-MuiAvatar-root"
-                >
-                  <img
-                    class="MuiAvatar-img css-1pqm26d-MuiAvatar-img"
-                    src="https://example.com/face.jpg"
-                  />
-                </div>
-                <p
-                  class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
-                >
-                  対戦者名1
-                </p>
+                3
               </div>
-            </div>
-            <div
-              class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6 css-1osj8n2-MuiGrid-root"
-            >
               <div
-                class="makeStyles-root-1 MuiBox-root css-70qvj9"
+                class="MuiAvatar-root MuiAvatar-circular makeStyles-avatar-3 css-1wlk0hk-MuiAvatar-root"
               >
-                <div
-                  class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault makeStyles-avatar-3 css-2s90m6-MuiAvatar-root"
-                >
-                  1
-                </div>
-                <div
-                  class="MuiAvatar-root MuiAvatar-circular makeStyles-avatar-3 css-1wlk0hk-MuiAvatar-root"
-                >
-                  <img
-                    class="MuiAvatar-img css-1pqm26d-MuiAvatar-img"
-                    src="https://example.com/face.jpg"
-                  />
-                </div>
-                <p
-                  class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
-                >
-                  対戦者名2
-                </p>
+                <img
+                  class="MuiAvatar-img css-1pqm26d-MuiAvatar-img"
+                  src="https://example.com/face.jpg"
+                />
               </div>
+              <p
+                class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+              >
+                対戦者名1
+              </p>
             </div>
           </div>
-        </span>
-        <p
-          class="MuiTypography-root MuiTypography-body2 MuiListItemText-secondary css-83ijpv-MuiTypography-root"
-        />
-        <h6
-          class="MuiTypography-root MuiTypography-h6 css-2ulfj5-MuiTypography-root"
-        >
-          動画名 Grand Final(リセット)
-        </h6>
-        <p
-          class="MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root"
-        >
-          2022/5/5
-        </p>
-        <p />
-      </div>
-      <span
-        class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+          <div
+            class="MuiGrid-root MuiGrid-item MuiGrid-grid-xs-6 css-1osj8n2-MuiGrid-root"
+          >
+            <div
+              class="makeStyles-root-1 MuiBox-root css-70qvj9"
+            >
+              <div
+                class="MuiAvatar-root MuiAvatar-circular MuiAvatar-colorDefault makeStyles-avatar-3 css-2s90m6-MuiAvatar-root"
+              >
+                1
+              </div>
+              <div
+                class="MuiAvatar-root MuiAvatar-circular makeStyles-avatar-3 css-1wlk0hk-MuiAvatar-root"
+              >
+                <img
+                  class="MuiAvatar-img css-1pqm26d-MuiAvatar-img"
+                  src="https://example.com/face.jpg"
+                />
+              </div>
+              <p
+                class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
+              >
+                対戦者名2
+              </p>
+            </div>
+          </div>
+        </div>
+      </span>
+      <p
+        class="MuiTypography-root MuiTypography-body2 MuiListItemText-secondary css-83ijpv-MuiTypography-root"
       />
+      <p
+        class="MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root"
+      >
+        動画名 | 2022/5/5
+      </p>
+      <p
+        class="MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root"
+      >
+        Grand Final(リセット)
+      </p>
+      <p />
     </div>
-  </a>
+    <span
+      class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+    />
+  </div>
 </DocumentFragment>
 `;

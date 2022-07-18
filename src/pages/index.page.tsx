@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Box, Button, Grid, List, Paper, Typography } from '@mui/material';
+import { Box, Button, Grid, Typography } from '@mui/material';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
 import { GetStaticProps } from 'next';
@@ -8,7 +8,6 @@ import { useRouter } from 'next/router';
 
 import {
   ArticleCard,
-  BattleListItem,
   CharacterCard,
   Content,
   Head,
@@ -35,7 +34,7 @@ const useStyles = makeStyles(() =>
   }),
 );
 
-const Page: React.FC<TopPageQuery> = ({ tournaments, battles, players, characters, articles }) => {
+const Page: React.FC<TopPageQuery> = ({ tournaments, players, characters, articles }) => {
   const classes = useStyles();
   const router = useRouter();
 
@@ -62,26 +61,6 @@ const Page: React.FC<TopPageQuery> = ({ tournaments, battles, players, character
 
         <div className={classes.sectionFooter}>
           <Button href={resolveUrlObject(router, pagesPath.tournaments.$url())} component={LinkComponent}>
-            もっとみる
-          </Button>
-        </div>
-      </Box>
-
-      <Box mt={4}>
-        <Typography variant="h2" gutterBottom>
-          対戦動画
-        </Typography>
-
-        <Paper>
-          <List>
-            {battles.records.map((battle, i) => (
-              <BattleListItem key={battle.id} battle={battle} last={battles.records.length === i + 1} />
-            ))}
-          </List>
-        </Paper>
-
-        <div className={classes.sectionFooter}>
-          <Button href={resolveUrlObject(router, pagesPath.battles.$url())} component={LinkComponent}>
             もっとみる
           </Button>
         </div>

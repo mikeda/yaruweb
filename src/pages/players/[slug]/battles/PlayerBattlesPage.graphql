@@ -1,25 +1,7 @@
-query PlayerBattlesPage($playerSlug: String!, $page: Int) {
+query PlayerBattlesPage($playerSlug: String!) {
   player(playerSlug: $playerSlug) {
     ...PlayerBreadcrumbs
     ...PlayerProfile
     ...PlayerTabs
-  }
-
-  battleCounts(playerSlug: $playerSlug, per: 10) {
-    records { ...CharacterBattleCountChip }
-  }
-
-
-  battles(playerSlug: $playerSlug, page: $page, per: 10) {
-    records { ...BattleListItem }
-    paging { ...paging }
-  }
-}
-
-query PlayerBattlesPageBattles($playerSlug: String!, $characterSlug: String, $page: Int!) {
-
-  battles(playerSlug: $playerSlug, characterSlug: $characterSlug, page: $page, per: 10) {
-    records { ...BattleListItem }
-    paging { ...paging }
   }
 }

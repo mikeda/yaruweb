@@ -14,9 +14,11 @@ describe(BattleListItem, () => {
         battle={{
           id: '111',
           round: BattleRound.GrandFinalReset,
+          startSec: 10,
           tournamentVideo: {
             __typename: 'TournamentVideo',
             id: '222',
+            youtubeVideoId: 'HdS-PSdSPok',
             tournament: { __typename: 'Tournament', id: '111', name: '動画名', startsAt: '2022-05-05T17:00:00+09:00' },
           },
           sides: [
@@ -34,6 +36,7 @@ describe(BattleListItem, () => {
             },
           ],
         }}
+        onClick={() => {}}
       />,
     );
 

@@ -52,13 +52,13 @@ const BreadcrumbList: React.FC<{ items: BreadcrumbsItem[] }> = ({ items }) => {
       <Link href="/" color="inherit">
         TOP
       </Link>
-      {items.map(({ name, url }) =>
+      {items.map(({ name, url }, i) =>
         url ? (
-          <Link href={url} color="inherit">
+          <Link href={url} color="inherit" key={i}>
             {name}
           </Link>
         ) : (
-          <Typography>{name}</Typography>
+          <Typography key={i}>{name}</Typography>
         ),
       )}
     </MuiBreadcrumbs>

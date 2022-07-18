@@ -17,8 +17,10 @@ Primary.args = {
   battle: {
     id: 'id',
     round: BattleRound.GrandFinalReset,
+    startSec: 10,
     tournamentVideo: {
       id: 'id',
+      youtubeVideoId: 'HdS-PSdSPok',
       tournament: {
         id: 'id',
         name: 'トーナメント名',
