@@ -1,2 +1,4 @@
 export * from './ArticleBody';
-export * from './ArticleEditor';
+export * from './ArticleBody';
+export * from './ArticleElement';
+export * from './ArticleLeaf';
