@@ -3,8 +3,8 @@ import React from 'react';
 import { Transforms } from 'slate';
 import { useSlate } from 'slate-react';
 
-import { Button } from './Button';
-import { HiddenInput } from './HiddenInput';
+import { Button } from '../Button';
+import { HiddenInput } from '../HiddenInput';
 
 import { ImageElement } from '@/custom-types';
 import { useCreateArticleImageMutation } from '@/generated/graphql';
