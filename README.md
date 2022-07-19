@@ -6,16 +6,12 @@
 - React
 - Next.js
 - Vercel
-- Sass + CSS Module
+- MUI
 - GraphQL (Apollo Client)
 - Firebase Authentication
 - [Slate](https://github.com/ianstormtaylor/slate)
 
 ## 開発環境構築(Mac)
-
-### GraphQL サーバーを起動
-
-https://github.com/mikeda/yarouyo
 
 ### Next.js
 
@@ -24,7 +20,20 @@ yarn
 yarn dev
 ```
 
-### graphql-codegen
+http://localhost:3000/
+
+### GraphQL
+
+#### サーバーを起動
+
+サーバーサイドは別レポジトリ
+
+https://github.com/mikeda/yarouyo
+
+- GraphiQL : http://localhost:5000/graphiql
+- GraphQL : http://localhost:5000/graphql
+
+#### graphql-codegen
 
 GraphQL のクエリ追加、サーバーサイドでのスキーマ変更があった場合は型定義を更新する。
 
@@ -32,8 +41,30 @@ GraphQL のクエリ追加、サーバーサイドでのスキーマ変更があ
 yarn graphql-codegen
 ```
 
-### URL
+### テスト / Lint 実行
 
-- フロントエンド : http://localhost:3000/
-- GraphiQL : http://localhost:5000/graphiql
-- GraphQL : http://localhost:5000/graphql
+TypeScript チェック
+
+```bash
+yarn tsc --noEmit
+```
+
+テスト
+
+```bash
+yarn jest
+```
+
+eslint
+
+```bash
+yarn eslint
+```
+
+### Storybook
+
+```bash
+yarn storybook
+```
+
+http://localhost:6006/
