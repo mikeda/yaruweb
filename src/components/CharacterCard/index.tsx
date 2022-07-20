@@ -4,10 +4,8 @@ import PublicIcon from '@mui/icons-material/Public';
 import SportsKabaddiIcon from '@mui/icons-material/SportsKabaddi';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import {
-  Button,
   Card,
   CardActionArea,
-  CardActions,
   CardContent,
   CardMedia,
   List,
@@ -17,12 +15,11 @@ import {
   Typography,
 } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
-import { useRouter } from 'next/router';
 
 import { Link } from '@/components';
 import { pagesPath } from '@/generated/$path';
 import { CharacterCardFragment } from '@/generated/graphql';
-import { colors, resolveUrlObject } from '@/lib';
+import { colors } from '@/lib';
 
 const useStyles = makeStyles({
   root: {
@@ -45,20 +42,19 @@ const useStyles = makeStyles({
 
 interface Props {
   character: CharacterCardFragment;
-  dashboard?: boolean;
 }
 
-export const CharacterCard: React.FC<Props> = ({ character, dashboard = false }) => {
+export const CharacterCard: React.FC<Props> = ({ character }) => {
   const classes = useStyles();
-  const router = useRouter();
-
-  const href = dashboard
-    ? pagesPath.admin.characters._slug(character.slug).edit.$url()
-    : pagesPath.characters._slug(character.slug).$url();
 
   return (
     <Card>
-      <CardActionArea className={classes.root} href={href} component={Link} color="inherit">
+      <CardActionArea
+        className={classes.root}
+        href={pagesPath.characters._slug(character.slug).$url()}
+        component={Link}
+        color="inherit"
+      >
         <CardMedia image={character.faceImageUrl} className={classes.media} />
 
         <CardContent className={classes.content}>
@@ -88,26 +84,6 @@ export const CharacterCard: React.FC<Props> = ({ character, dashboard = false })
           </List>
         </CardContent>
       </CardActionArea>
-
-      {dashboard && (
-        <CardActions disableSpacing>
-          <Button
-            color="primary"
-            href={resolveUrlObject(router, pagesPath.admin.characters._slug(character.slug).move_categories.$url())}
-            component={Link}
-          >
-            コマンドリスト
-          </Button>
-
-          <Button
-            color="primary"
-            href={resolveUrlObject(router, pagesPath.admin.characters._slug(character.slug).combo_categories.$url())}
-            component={Link}
-          >
-            コンボ
-          </Button>
-        </CardActions>
-      )}
     </Card>
   );
 };

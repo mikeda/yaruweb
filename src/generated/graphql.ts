@@ -1436,6 +1436,7 @@ export type QueryCharacterArgs = {
 
 
 export type QueryCharactersArgs = {
+  keyword?: InputMaybe<Scalars['String']>;
   order?: InputMaybe<CharacterOrder>;
   page?: InputMaybe<Scalars['Int']>;
   per?: InputMaybe<Scalars['Int']>;
@@ -2161,6 +2162,16 @@ export type PlayerChipFragment = { __typename?: 'Player', id: string, slug: stri
 export type TournamentCardFragment = { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: string | null, startsAt: string, videosCount: number, standings: Array<{ __typename?: 'Standing', id: string, place: number, player: { __typename?: 'Player', id: string, name: string } }> };
 
 export type TournamentTabsFragment = { __typename?: 'Tournament', id: string, battlesCount: number };
+
+export type CharacterTableRowFragment = { __typename?: 'Character', id: string, slug: string, name: string, faceImageUrl: string, movesCount: number, combosCount: number };
+
+export type CharacterTableRowsQueryVariables = Exact<{
+  page?: InputMaybe<Scalars['Int']>;
+  keyword?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type CharacterTableRowsQuery = { __typename?: 'Query', characters: { __typename?: 'CharacterCollection', records: Array<{ __typename?: 'Character', id: string, slug: string, name: string, faceImageUrl: string, movesCount: number, combosCount: number }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
 
 export type PlayerTableRowFragment = { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null };
 
@@ -3294,6 +3305,16 @@ export const TournamentTabsFragmentDoc = gql`
   battlesCount
 }
     `;
+export const CharacterTableRowFragmentDoc = gql`
+    fragment CharacterTableRow on Character {
+  id
+  slug
+  name
+  faceImageUrl
+  movesCount
+  combosCount
+}
+    `;
 export const PlayerTableRowFragmentDoc = gql`
     fragment PlayerTableRow on Player {
   id
@@ -4121,6 +4142,48 @@ export function useBattleListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions
 export type BattleListQueryHookResult = ReturnType<typeof useBattleListQuery>;
 export type BattleListLazyQueryHookResult = ReturnType<typeof useBattleListLazyQuery>;
 export type BattleListQueryResult = Apollo.QueryResult<BattleListQuery, BattleListQueryVariables>;
+export const CharacterTableRowsDocument = gql`
+    query CharacterTableRows($page: Int = 1, $keyword: String) {
+  characters(page: $page, per: 10, keyword: $keyword) {
+    records {
+      ...CharacterTableRow
+    }
+    paging {
+      ...paging
+    }
+  }
+}
+    ${CharacterTableRowFragmentDoc}
+${PagingFragmentDoc}`;
+
+/**
+ * __useCharacterTableRowsQuery__
+ *
+ * To run a query within a React component, call `useCharacterTableRowsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCharacterTableRowsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCharacterTableRowsQuery({
+ *   variables: {
+ *      page: // value for 'page'
+ *      keyword: // value for 'keyword'
+ *   },
+ * });
+ */
+export function useCharacterTableRowsQuery(baseOptions?: Apollo.QueryHookOptions<CharacterTableRowsQuery, CharacterTableRowsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<CharacterTableRowsQuery, CharacterTableRowsQueryVariables>(CharacterTableRowsDocument, options);
+      }
+export function useCharacterTableRowsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CharacterTableRowsQuery, CharacterTableRowsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<CharacterTableRowsQuery, CharacterTableRowsQueryVariables>(CharacterTableRowsDocument, options);
+        }
+export type CharacterTableRowsQueryHookResult = ReturnType<typeof useCharacterTableRowsQuery>;
+export type CharacterTableRowsLazyQueryHookResult = ReturnType<typeof useCharacterTableRowsLazyQuery>;
+export type CharacterTableRowsQueryResult = Apollo.QueryResult<CharacterTableRowsQuery, CharacterTableRowsQueryVariables>;
 export const PlayerTableRowsDocument = gql`
     query PlayerTableRows($page: Int = 1, $keyword: String) {
   players(page: $page, per: 10, keyword: $keyword) {

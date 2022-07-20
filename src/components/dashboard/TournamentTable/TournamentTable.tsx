@@ -34,7 +34,10 @@ export const TournamentTable: React.FC = () => {
     refetch({ page: 1, keyword });
   }, []);
 
-  const onClickMore = useCallback(() => {
+  if (!data) return null;
+  const { records: tournaments, paging } = data.tournaments;
+
+  const onClickMore = () => {
     fetchMore({
       variables: { page: paging.currentPage + 1 },
       updateQuery: (prev, { fetchMoreResult: data }) => {
@@ -48,13 +51,9 @@ export const TournamentTable: React.FC = () => {
         };
       },
     });
-  }, []);
+  };
 
   setLoading(loading || deleteLoading);
-
-  if (!data) return null;
-  const { records: tournaments, paging } = data.tournaments;
-
   return (
     <>
       <DashboardTableSearch onClickSearch={onClickSearch} />

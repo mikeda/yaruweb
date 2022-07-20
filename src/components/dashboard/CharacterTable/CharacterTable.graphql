@@ -1,0 +1,16 @@
+fragment CharacterTableRow on Character {
+  id
+  slug
+  name
+  faceImageUrl
+  movesCount
+  combosCount
+}
+
+query CharacterTableRows($keyword: String) {
+  characters(page: $page, per: 10, keyword: $keyword) {
+    records {
+      ...CharacterTableRow
+    }
+  }
+}
