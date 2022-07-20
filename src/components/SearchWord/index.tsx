@@ -47,7 +47,14 @@ export const SearchWord: React.FC<Props> = ({ initWord, onSearch }) => {
           }
         }}
       />
-      <IconButton className={classes.iconButton} onClick={() => onSearch(word)} size="large">
+      <IconButton
+        className={classes.iconButton}
+        onClick={e => {
+          e.preventDefault();
+          onSearch(word);
+        }}
+        size="large"
+      >
         <SearchIcon />
       </IconButton>
     </Paper>
