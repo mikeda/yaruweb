@@ -14,11 +14,7 @@ import {
   IconButton,
   Menu,
   MenuItem,
-  Paper,
-  Table,
-  TableBody,
   TableCell,
-  TableContainer,
   TableRow,
   Tooltip,
   Typography,
@@ -29,7 +25,7 @@ import { useSetRecoilState } from 'recoil';
 
 import { useRouteParams } from './hooks';
 
-import { AdminContent, AdminBreadcrumbs, Command, VideoPlayer } from '@/components';
+import { AdminContent, AdminBreadcrumbs, Command, VideoPlayer, DashboardTable } from '@/components';
 import { pagesPath } from '@/generated/$path';
 import {
   AdminMoveCategoriesPageMoveFragment,
@@ -114,27 +110,23 @@ const Page: React.FC = () => {
             </div>
           </Box>
 
-          <TableContainer component={Paper}>
-            <Table>
-              <TableBody>
-                {moveCategory.moves.map(move => (
-                  <MoveRow
-                    key={move.id}
-                    move={move}
-                    afterDelete={deletedMoveId => {
-                      updateQuery(prev => ({
-                        ...prev,
-                        moveCategories: prev.moveCategories.map(moveCategory => ({
-                          ...moveCategory,
-                          moves: moveCategory.moves.filter(move => move.id !== deletedMoveId),
-                        })),
-                      }));
-                    }}
-                  />
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
+          <DashboardTable>
+            {moveCategory.moves.map(move => (
+              <MoveRow
+                key={move.id}
+                move={move}
+                afterDelete={deletedMoveId => {
+                  updateQuery(prev => ({
+                    ...prev,
+                    moveCategories: prev.moveCategories.map(moveCategory => ({
+                      ...moveCategory,
+                      moves: moveCategory.moves.filter(move => move.id !== deletedMoveId),
+                    })),
+                  }));
+                }}
+              />
+            ))}
+          </DashboardTable>
         </Box>
       ))}
     </AdminContent>

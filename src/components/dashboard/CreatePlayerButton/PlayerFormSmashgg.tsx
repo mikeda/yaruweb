@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 import * as yup from 'yup';
 
 import { pagesPath } from '@/generated/$path';
-import { useAdminPlayersPageCreatePlayerFromSmashggMutation } from '@/generated/graphql';
+import { useCreatePlayerFromSmashggMutation } from '@/generated/graphql';
 
 const schema = yup.object().shape({
   smashggId: yup.string().required(),
@@ -25,7 +25,7 @@ interface Props {
 
 export const PlayerFormSmashgg: React.FC<Props> = ({ open, onClose }) => {
   const router = useRouter();
-  const [createFromSmashgg] = useAdminPlayersPageCreatePlayerFromSmashggMutation({
+  const [createFromSmashgg] = useCreatePlayerFromSmashggMutation({
     onCompleted: () => {
       router.push(pagesPath.admin.players.$url());
       onClose();

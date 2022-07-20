@@ -1,25 +1,12 @@
 import React, { useRef, useState } from 'react';
 
 import { Add, MoreVert } from '@mui/icons-material';
-import {
-  Box,
-  Button,
-  IconButton,
-  Menu,
-  MenuItem,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableRow,
-  Typography,
-} from '@mui/material';
+import { Box, Button, IconButton, Menu, MenuItem, TableCell, TableRow, Typography } from '@mui/material';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
-import { DashboardBreadcrumbs, DashboardContent, SearchWord } from '@/components';
+import { DashboardBreadcrumbs, DashboardContent, DashboardTable, DashboardTablePaging, SearchWord } from '@/components';
 import { pagesPath } from '@/generated/$path';
 import {
   ArticleStatus,
@@ -98,49 +85,40 @@ const Page: React.FC = () => {
         />
       </Box>
 
-      <TableContainer component={Paper}>
-        <Table>
-          <TableBody>
-            {articles.map(article => (
-              <ArticleRow
-                key={article.id}
-                article={article}
-                onPublish={() => publish({ variables: { articleId: article.id } })}
-                onStop={() => stop({ variables: { articleId: article.id } })}
-                onDelete={() => {
-                  if (window.confirm('削除します。')) {
-                    destroy({ variables: { articleId: article.id } });
-                  }
-                }}
-              />
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <DashboardTable>
+        {articles.map(article => (
+          <ArticleRow
+            key={article.id}
+            article={article}
+            onPublish={() => publish({ variables: { articleId: article.id } })}
+            onStop={() => stop({ variables: { articleId: article.id } })}
+            onDelete={() => {
+              if (window.confirm('削除します。')) {
+                destroy({ variables: { articleId: article.id } });
+              }
+            }}
+          />
+        ))}
+      </DashboardTable>
 
       {paging?.hasNext && (
-        <Box pt={2} pb={2} display="flex" justifyContent="center">
-          <Button
-            variant="outlined"
-            onClick={() => {
-              fetchMore({
-                variables: { page: paging.currentPage + 1 },
-                updateQuery: (prev, { fetchMoreResult: data }) => {
-                  if (!data) return prev;
+        <DashboardTablePaging
+          onClick={() => {
+            fetchMore({
+              variables: { page: paging.currentPage + 1 },
+              updateQuery: (prev, { fetchMoreResult: data }) => {
+                if (!data) return prev;
 
-                  return {
-                    myArticles: {
-                      records: [...prev.myArticles.records, ...data.myArticles.records],
-                      paging: data.myArticles.paging,
-                    },
-                  };
-                },
-              });
-            }}
-          >
-            もっとみる
-          </Button>
-        </Box>
+                return {
+                  myArticles: {
+                    records: [...prev.myArticles.records, ...data.myArticles.records],
+                    paging: data.myArticles.paging,
+                  },
+                };
+              },
+            });
+          }}
+        />
       )}
     </DashboardContent>
   );

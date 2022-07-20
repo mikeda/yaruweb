@@ -1,14 +1,14 @@
-fragment AdminPlayersPagePlayer on Player {
+fragment PlayerTableRow on Player {
   id
   slug
   name
   avatarUrl
 }
 
-query AdminPlayersPage($page: Int = 1, $keyword: String) {
+query PlayerTableRows($page: Int = 1, $keyword: String) {
   players(page: $page, per: 10, keyword: $keyword) {
     records {
-      ...AdminPlayersPagePlayer
+      ...PlayerTableRow
     }
 
     paging {
@@ -17,7 +17,7 @@ query AdminPlayersPage($page: Int = 1, $keyword: String) {
   }
 }
 
-mutation AdminPlayersPageDelete($playerSlug: String!) {
+mutation deletePlayer($playerSlug: String!) {
   deletePlayer(input: { playerSlug: $playerSlug }) {
     player {
       id
@@ -25,7 +25,7 @@ mutation AdminPlayersPageDelete($playerSlug: String!) {
   }
 }
 
-mutation AdminPlayersPageCreatePlayerFromSmashgg($smashggId: String!) {
+mutation createPlayerFromSmashgg($smashggId: String!) {
   createPlayerFromSmashgg(input: { smashggId: $smashggId }) {
     player {
       id

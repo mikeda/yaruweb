@@ -11,11 +11,7 @@ import {
   DialogActions,
   DialogContent,
   IconButton,
-  Paper,
-  Table,
-  TableBody,
   TableCell,
-  TableContainer,
   TableRow,
   Typography,
 } from '@mui/material';
@@ -25,7 +21,7 @@ import { useSetRecoilState } from 'recoil';
 
 import { useRouteParams } from './hooks';
 
-import { AdminContent, AdminBreadcrumbs, Command, VideoPlayer } from '@/components';
+import { AdminContent, AdminBreadcrumbs, Command, VideoPlayer, DashboardTable } from '@/components';
 import { pagesPath } from '@/generated/$path';
 import {
   AdminComboCategoriesPageComboFragment,
@@ -119,27 +115,23 @@ const Page: React.FC = () => {
             </div>
           </Box>
 
-          <TableContainer component={Paper}>
-            <Table>
-              <TableBody>
-                {comboCategory.combos.map(combo => (
-                  <ComboRow
-                    key={combo.id}
-                    combo={combo}
-                    afterDelete={deletedComboId => {
-                      updateQuery(prev => ({
-                        ...prev,
-                        comboCategories: prev.comboCategories.map(comboCategory => ({
-                          ...comboCategory,
-                          combos: comboCategory.combos.filter(combo => combo.id !== deletedComboId),
-                        })),
-                      }));
-                    }}
-                  />
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
+          <DashboardTable>
+            {comboCategory.combos.map(combo => (
+              <ComboRow
+                key={combo.id}
+                combo={combo}
+                afterDelete={deletedComboId => {
+                  updateQuery(prev => ({
+                    ...prev,
+                    comboCategories: prev.comboCategories.map(comboCategory => ({
+                      ...comboCategory,
+                      combos: comboCategory.combos.filter(combo => combo.id !== deletedComboId),
+                    })),
+                  }));
+                }}
+              />
+            ))}
+          </DashboardTable>
         </Box>
       ))}
     </AdminContent>

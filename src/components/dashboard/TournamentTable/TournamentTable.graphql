@@ -1,4 +1,4 @@
-fragment AdminTournamentsPageTournament on Tournament {
+fragment TournamentTableRow on Tournament {
   id
   name
   startsAt
@@ -7,10 +7,10 @@ fragment AdminTournamentsPageTournament on Tournament {
   mainImageUrl
 }
 
-query AdminTournamentsPage($page: Int = 1, $keyword: String) {
+query TournamentTableRows($page: Int = 1, $keyword: String) {
   tournaments(page: $page, per: 10, keyword: $keyword) {
     records {
-      ...AdminTournamentsPageTournament
+      ...TournamentTableRow
     }
 
     paging {

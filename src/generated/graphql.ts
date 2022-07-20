@@ -2162,6 +2162,47 @@ export type TournamentCardFragment = { __typename?: 'Tournament', id: string, na
 
 export type TournamentTabsFragment = { __typename?: 'Tournament', id: string, battlesCount: number };
 
+export type PlayerTableRowFragment = { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null };
+
+export type PlayerTableRowsQueryVariables = Exact<{
+  page?: InputMaybe<Scalars['Int']>;
+  keyword?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type PlayerTableRowsQuery = { __typename?: 'Query', players: { __typename?: 'PlayerCollection', records: Array<{ __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
+
+export type DeletePlayerMutationVariables = Exact<{
+  playerSlug: Scalars['String'];
+}>;
+
+
+export type DeletePlayerMutation = { __typename?: 'Mutation', deletePlayer?: { __typename?: 'DeletePlayerPayload', player: { __typename?: 'Player', id: string } } | null };
+
+export type CreatePlayerFromSmashggMutationVariables = Exact<{
+  smashggId: Scalars['String'];
+}>;
+
+
+export type CreatePlayerFromSmashggMutation = { __typename?: 'Mutation', createPlayerFromSmashgg?: { __typename?: 'CreatePlayerFromSmashggPayload', player: { __typename?: 'Player', id: string } } | null };
+
+export type TournamentTableRowFragment = { __typename?: 'Tournament', id: string, name: string, startsAt: string, videosCount: number, standingsCount: number, mainImageUrl?: string | null };
+
+export type TournamentTableRowsQueryVariables = Exact<{
+  page?: InputMaybe<Scalars['Int']>;
+  keyword?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type TournamentTableRowsQuery = { __typename?: 'Query', tournaments: { __typename?: 'TournamentCollection', records: Array<{ __typename?: 'Tournament', id: string, name: string, startsAt: string, videosCount: number, standingsCount: number, mainImageUrl?: string | null }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
+
+export type DeleteTournamentMutationVariables = Exact<{
+  tournamentId: Scalars['ID'];
+}>;
+
+
+export type DeleteTournamentMutation = { __typename?: 'Mutation', deleteTournament?: { __typename?: 'DeleteTournamentPayload', tournament: { __typename?: 'Tournament', id: string } } | null };
+
 export type ArticleFormArticleFragment = { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, category: ArticleCategory, content: string };
 
 export type CharacterFormFragment = { __typename?: 'Character', name: string, nameKana: string, longName: string, longNameKana: string, slug: string, country: string, fightingStyle: string, story: string, description: string, dlc: boolean };
@@ -2559,30 +2600,6 @@ export type AdminPlayerEditPageUpdatePlayerMutationVariables = Exact<{
 
 export type AdminPlayerEditPageUpdatePlayerMutation = { __typename?: 'Mutation', updatePlayer?: { __typename?: 'UpdatePlayerPayload', player: { __typename?: 'Player', name: string, slug: string, tonamelId?: string | null, smashggId?: string | null, twitterId?: string | null, streamingUrl?: string | null, description?: string | null, country?: { __typename?: 'Country', id: string } | null } } | null };
 
-export type AdminPlayersPagePlayerFragment = { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null };
-
-export type AdminPlayersPageQueryVariables = Exact<{
-  page?: InputMaybe<Scalars['Int']>;
-  keyword?: InputMaybe<Scalars['String']>;
-}>;
-
-
-export type AdminPlayersPageQuery = { __typename?: 'Query', players: { __typename?: 'PlayerCollection', records: Array<{ __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
-
-export type AdminPlayersPageDeleteMutationVariables = Exact<{
-  playerSlug: Scalars['String'];
-}>;
-
-
-export type AdminPlayersPageDeleteMutation = { __typename?: 'Mutation', deletePlayer?: { __typename?: 'DeletePlayerPayload', player: { __typename?: 'Player', id: string } } | null };
-
-export type AdminPlayersPageCreatePlayerFromSmashggMutationVariables = Exact<{
-  smashggId: Scalars['String'];
-}>;
-
-
-export type AdminPlayersPageCreatePlayerFromSmashggMutation = { __typename?: 'Mutation', createPlayerFromSmashgg?: { __typename?: 'CreatePlayerFromSmashggPayload', player: { __typename?: 'Player', id: string } } | null };
-
 export type AdminPlayersNewPageCreatePlayerMutationVariables = Exact<{
   attributes: PlayerAttributes;
 }>;
@@ -2714,23 +2731,6 @@ export type AdminTournamentPageDeleteVideoMutationVariables = Exact<{
 
 
 export type AdminTournamentPageDeleteVideoMutation = { __typename?: 'Mutation', deleteTournamentVideo?: { __typename?: 'DeleteTournamentVideoPayload', tournamentVideo: { __typename?: 'TournamentVideo', id: string } } | null };
-
-export type AdminTournamentsPageTournamentFragment = { __typename?: 'Tournament', id: string, name: string, startsAt: string, videosCount: number, standingsCount: number, mainImageUrl?: string | null };
-
-export type AdminTournamentsPageQueryVariables = Exact<{
-  page?: InputMaybe<Scalars['Int']>;
-  keyword?: InputMaybe<Scalars['String']>;
-}>;
-
-
-export type AdminTournamentsPageQuery = { __typename?: 'Query', tournaments: { __typename?: 'TournamentCollection', records: Array<{ __typename?: 'Tournament', id: string, name: string, startsAt: string, videosCount: number, standingsCount: number, mainImageUrl?: string | null }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
-
-export type DeleteTournamentMutationVariables = Exact<{
-  tournamentId: Scalars['ID'];
-}>;
-
-
-export type DeleteTournamentMutation = { __typename?: 'Mutation', deleteTournament?: { __typename?: 'DeleteTournamentPayload', tournament: { __typename?: 'Tournament', id: string } } | null };
 
 export type CreateTournamentMutationVariables = Exact<{
   attributes: TournamentAttributes;
@@ -3294,6 +3294,24 @@ export const TournamentTabsFragmentDoc = gql`
   battlesCount
 }
     `;
+export const PlayerTableRowFragmentDoc = gql`
+    fragment PlayerTableRow on Player {
+  id
+  slug
+  name
+  avatarUrl
+}
+    `;
+export const TournamentTableRowFragmentDoc = gql`
+    fragment TournamentTableRow on Tournament {
+  id
+  name
+  startsAt
+  videosCount
+  standingsCount
+  mainImageUrl
+}
+    `;
 export const ArticleFormArticleFragmentDoc = gql`
     fragment ArticleFormArticle on Article {
   id
@@ -3603,14 +3621,6 @@ export const AdminOrganizersPageOrganizerFragmentDoc = gql`
   avatarUrl
 }
     `;
-export const AdminPlayersPagePlayerFragmentDoc = gql`
-    fragment AdminPlayersPagePlayer on Player {
-  id
-  slug
-  name
-  avatarUrl
-}
-    `;
 export const BattleFormFragmentDoc = gql`
     fragment BattleForm on Battle {
   id
@@ -3659,16 +3669,6 @@ export const TournamentVideoFormFragmentDoc = gql`
   title
   label
   publishedAt
-}
-    `;
-export const AdminTournamentsPageTournamentFragmentDoc = gql`
-    fragment AdminTournamentsPageTournament on Tournament {
-  id
-  name
-  startsAt
-  videosCount
-  standingsCount
-  mainImageUrl
 }
     `;
 export const ArticleCardFragmentDoc = gql`
@@ -4121,6 +4121,195 @@ export function useBattleListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions
 export type BattleListQueryHookResult = ReturnType<typeof useBattleListQuery>;
 export type BattleListLazyQueryHookResult = ReturnType<typeof useBattleListLazyQuery>;
 export type BattleListQueryResult = Apollo.QueryResult<BattleListQuery, BattleListQueryVariables>;
+export const PlayerTableRowsDocument = gql`
+    query PlayerTableRows($page: Int = 1, $keyword: String) {
+  players(page: $page, per: 10, keyword: $keyword) {
+    records {
+      ...PlayerTableRow
+    }
+    paging {
+      ...paging
+    }
+  }
+}
+    ${PlayerTableRowFragmentDoc}
+${PagingFragmentDoc}`;
+
+/**
+ * __usePlayerTableRowsQuery__
+ *
+ * To run a query within a React component, call `usePlayerTableRowsQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePlayerTableRowsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePlayerTableRowsQuery({
+ *   variables: {
+ *      page: // value for 'page'
+ *      keyword: // value for 'keyword'
+ *   },
+ * });
+ */
+export function usePlayerTableRowsQuery(baseOptions?: Apollo.QueryHookOptions<PlayerTableRowsQuery, PlayerTableRowsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PlayerTableRowsQuery, PlayerTableRowsQueryVariables>(PlayerTableRowsDocument, options);
+      }
+export function usePlayerTableRowsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PlayerTableRowsQuery, PlayerTableRowsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PlayerTableRowsQuery, PlayerTableRowsQueryVariables>(PlayerTableRowsDocument, options);
+        }
+export type PlayerTableRowsQueryHookResult = ReturnType<typeof usePlayerTableRowsQuery>;
+export type PlayerTableRowsLazyQueryHookResult = ReturnType<typeof usePlayerTableRowsLazyQuery>;
+export type PlayerTableRowsQueryResult = Apollo.QueryResult<PlayerTableRowsQuery, PlayerTableRowsQueryVariables>;
+export const DeletePlayerDocument = gql`
+    mutation deletePlayer($playerSlug: String!) {
+  deletePlayer(input: {playerSlug: $playerSlug}) {
+    player {
+      id
+    }
+  }
+}
+    `;
+export type DeletePlayerMutationFn = Apollo.MutationFunction<DeletePlayerMutation, DeletePlayerMutationVariables>;
+
+/**
+ * __useDeletePlayerMutation__
+ *
+ * To run a mutation, you first call `useDeletePlayerMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeletePlayerMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deletePlayerMutation, { data, loading, error }] = useDeletePlayerMutation({
+ *   variables: {
+ *      playerSlug: // value for 'playerSlug'
+ *   },
+ * });
+ */
+export function useDeletePlayerMutation(baseOptions?: Apollo.MutationHookOptions<DeletePlayerMutation, DeletePlayerMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeletePlayerMutation, DeletePlayerMutationVariables>(DeletePlayerDocument, options);
+      }
+export type DeletePlayerMutationHookResult = ReturnType<typeof useDeletePlayerMutation>;
+export type DeletePlayerMutationResult = Apollo.MutationResult<DeletePlayerMutation>;
+export type DeletePlayerMutationOptions = Apollo.BaseMutationOptions<DeletePlayerMutation, DeletePlayerMutationVariables>;
+export const CreatePlayerFromSmashggDocument = gql`
+    mutation createPlayerFromSmashgg($smashggId: String!) {
+  createPlayerFromSmashgg(input: {smashggId: $smashggId}) {
+    player {
+      id
+    }
+  }
+}
+    `;
+export type CreatePlayerFromSmashggMutationFn = Apollo.MutationFunction<CreatePlayerFromSmashggMutation, CreatePlayerFromSmashggMutationVariables>;
+
+/**
+ * __useCreatePlayerFromSmashggMutation__
+ *
+ * To run a mutation, you first call `useCreatePlayerFromSmashggMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreatePlayerFromSmashggMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createPlayerFromSmashggMutation, { data, loading, error }] = useCreatePlayerFromSmashggMutation({
+ *   variables: {
+ *      smashggId: // value for 'smashggId'
+ *   },
+ * });
+ */
+export function useCreatePlayerFromSmashggMutation(baseOptions?: Apollo.MutationHookOptions<CreatePlayerFromSmashggMutation, CreatePlayerFromSmashggMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreatePlayerFromSmashggMutation, CreatePlayerFromSmashggMutationVariables>(CreatePlayerFromSmashggDocument, options);
+      }
+export type CreatePlayerFromSmashggMutationHookResult = ReturnType<typeof useCreatePlayerFromSmashggMutation>;
+export type CreatePlayerFromSmashggMutationResult = Apollo.MutationResult<CreatePlayerFromSmashggMutation>;
+export type CreatePlayerFromSmashggMutationOptions = Apollo.BaseMutationOptions<CreatePlayerFromSmashggMutation, CreatePlayerFromSmashggMutationVariables>;
+export const TournamentTableRowsDocument = gql`
+    query TournamentTableRows($page: Int = 1, $keyword: String) {
+  tournaments(page: $page, per: 10, keyword: $keyword) {
+    records {
+      ...TournamentTableRow
+    }
+    paging {
+      ...paging
+    }
+  }
+}
+    ${TournamentTableRowFragmentDoc}
+${PagingFragmentDoc}`;
+
+/**
+ * __useTournamentTableRowsQuery__
+ *
+ * To run a query within a React component, call `useTournamentTableRowsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTournamentTableRowsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useTournamentTableRowsQuery({
+ *   variables: {
+ *      page: // value for 'page'
+ *      keyword: // value for 'keyword'
+ *   },
+ * });
+ */
+export function useTournamentTableRowsQuery(baseOptions?: Apollo.QueryHookOptions<TournamentTableRowsQuery, TournamentTableRowsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TournamentTableRowsQuery, TournamentTableRowsQueryVariables>(TournamentTableRowsDocument, options);
+      }
+export function useTournamentTableRowsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TournamentTableRowsQuery, TournamentTableRowsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TournamentTableRowsQuery, TournamentTableRowsQueryVariables>(TournamentTableRowsDocument, options);
+        }
+export type TournamentTableRowsQueryHookResult = ReturnType<typeof useTournamentTableRowsQuery>;
+export type TournamentTableRowsLazyQueryHookResult = ReturnType<typeof useTournamentTableRowsLazyQuery>;
+export type TournamentTableRowsQueryResult = Apollo.QueryResult<TournamentTableRowsQuery, TournamentTableRowsQueryVariables>;
+export const DeleteTournamentDocument = gql`
+    mutation DeleteTournament($tournamentId: ID!) {
+  deleteTournament(input: {tournamentId: $tournamentId}) {
+    tournament {
+      id
+    }
+  }
+}
+    `;
+export type DeleteTournamentMutationFn = Apollo.MutationFunction<DeleteTournamentMutation, DeleteTournamentMutationVariables>;
+
+/**
+ * __useDeleteTournamentMutation__
+ *
+ * To run a mutation, you first call `useDeleteTournamentMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteTournamentMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteTournamentMutation, { data, loading, error }] = useDeleteTournamentMutation({
+ *   variables: {
+ *      tournamentId: // value for 'tournamentId'
+ *   },
+ * });
+ */
+export function useDeleteTournamentMutation(baseOptions?: Apollo.MutationHookOptions<DeleteTournamentMutation, DeleteTournamentMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteTournamentMutation, DeleteTournamentMutationVariables>(DeleteTournamentDocument, options);
+      }
+export type DeleteTournamentMutationHookResult = ReturnType<typeof useDeleteTournamentMutation>;
+export type DeleteTournamentMutationResult = Apollo.MutationResult<DeleteTournamentMutation>;
+export type DeleteTournamentMutationOptions = Apollo.BaseMutationOptions<DeleteTournamentMutation, DeleteTournamentMutationVariables>;
 export const CreateUserDocument = gql`
     mutation CreateUser {
   createUser(input: {}) {
@@ -5921,118 +6110,6 @@ export function useAdminPlayerEditPageUpdatePlayerMutation(baseOptions?: Apollo.
 export type AdminPlayerEditPageUpdatePlayerMutationHookResult = ReturnType<typeof useAdminPlayerEditPageUpdatePlayerMutation>;
 export type AdminPlayerEditPageUpdatePlayerMutationResult = Apollo.MutationResult<AdminPlayerEditPageUpdatePlayerMutation>;
 export type AdminPlayerEditPageUpdatePlayerMutationOptions = Apollo.BaseMutationOptions<AdminPlayerEditPageUpdatePlayerMutation, AdminPlayerEditPageUpdatePlayerMutationVariables>;
-export const AdminPlayersPageDocument = gql`
-    query AdminPlayersPage($page: Int = 1, $keyword: String) {
-  players(page: $page, per: 10, keyword: $keyword) {
-    records {
-      ...AdminPlayersPagePlayer
-    }
-    paging {
-      ...paging
-    }
-  }
-}
-    ${AdminPlayersPagePlayerFragmentDoc}
-${PagingFragmentDoc}`;
-
-/**
- * __useAdminPlayersPageQuery__
- *
- * To run a query within a React component, call `useAdminPlayersPageQuery` and pass it any options that fit your needs.
- * When your component renders, `useAdminPlayersPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useAdminPlayersPageQuery({
- *   variables: {
- *      page: // value for 'page'
- *      keyword: // value for 'keyword'
- *   },
- * });
- */
-export function useAdminPlayersPageQuery(baseOptions?: Apollo.QueryHookOptions<AdminPlayersPageQuery, AdminPlayersPageQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<AdminPlayersPageQuery, AdminPlayersPageQueryVariables>(AdminPlayersPageDocument, options);
-      }
-export function useAdminPlayersPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AdminPlayersPageQuery, AdminPlayersPageQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<AdminPlayersPageQuery, AdminPlayersPageQueryVariables>(AdminPlayersPageDocument, options);
-        }
-export type AdminPlayersPageQueryHookResult = ReturnType<typeof useAdminPlayersPageQuery>;
-export type AdminPlayersPageLazyQueryHookResult = ReturnType<typeof useAdminPlayersPageLazyQuery>;
-export type AdminPlayersPageQueryResult = Apollo.QueryResult<AdminPlayersPageQuery, AdminPlayersPageQueryVariables>;
-export const AdminPlayersPageDeleteDocument = gql`
-    mutation AdminPlayersPageDelete($playerSlug: String!) {
-  deletePlayer(input: {playerSlug: $playerSlug}) {
-    player {
-      id
-    }
-  }
-}
-    `;
-export type AdminPlayersPageDeleteMutationFn = Apollo.MutationFunction<AdminPlayersPageDeleteMutation, AdminPlayersPageDeleteMutationVariables>;
-
-/**
- * __useAdminPlayersPageDeleteMutation__
- *
- * To run a mutation, you first call `useAdminPlayersPageDeleteMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useAdminPlayersPageDeleteMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [adminPlayersPageDeleteMutation, { data, loading, error }] = useAdminPlayersPageDeleteMutation({
- *   variables: {
- *      playerSlug: // value for 'playerSlug'
- *   },
- * });
- */
-export function useAdminPlayersPageDeleteMutation(baseOptions?: Apollo.MutationHookOptions<AdminPlayersPageDeleteMutation, AdminPlayersPageDeleteMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<AdminPlayersPageDeleteMutation, AdminPlayersPageDeleteMutationVariables>(AdminPlayersPageDeleteDocument, options);
-      }
-export type AdminPlayersPageDeleteMutationHookResult = ReturnType<typeof useAdminPlayersPageDeleteMutation>;
-export type AdminPlayersPageDeleteMutationResult = Apollo.MutationResult<AdminPlayersPageDeleteMutation>;
-export type AdminPlayersPageDeleteMutationOptions = Apollo.BaseMutationOptions<AdminPlayersPageDeleteMutation, AdminPlayersPageDeleteMutationVariables>;
-export const AdminPlayersPageCreatePlayerFromSmashggDocument = gql`
-    mutation AdminPlayersPageCreatePlayerFromSmashgg($smashggId: String!) {
-  createPlayerFromSmashgg(input: {smashggId: $smashggId}) {
-    player {
-      id
-    }
-  }
-}
-    `;
-export type AdminPlayersPageCreatePlayerFromSmashggMutationFn = Apollo.MutationFunction<AdminPlayersPageCreatePlayerFromSmashggMutation, AdminPlayersPageCreatePlayerFromSmashggMutationVariables>;
-
-/**
- * __useAdminPlayersPageCreatePlayerFromSmashggMutation__
- *
- * To run a mutation, you first call `useAdminPlayersPageCreatePlayerFromSmashggMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useAdminPlayersPageCreatePlayerFromSmashggMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [adminPlayersPageCreatePlayerFromSmashggMutation, { data, loading, error }] = useAdminPlayersPageCreatePlayerFromSmashggMutation({
- *   variables: {
- *      smashggId: // value for 'smashggId'
- *   },
- * });
- */
-export function useAdminPlayersPageCreatePlayerFromSmashggMutation(baseOptions?: Apollo.MutationHookOptions<AdminPlayersPageCreatePlayerFromSmashggMutation, AdminPlayersPageCreatePlayerFromSmashggMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<AdminPlayersPageCreatePlayerFromSmashggMutation, AdminPlayersPageCreatePlayerFromSmashggMutationVariables>(AdminPlayersPageCreatePlayerFromSmashggDocument, options);
-      }
-export type AdminPlayersPageCreatePlayerFromSmashggMutationHookResult = ReturnType<typeof useAdminPlayersPageCreatePlayerFromSmashggMutation>;
-export type AdminPlayersPageCreatePlayerFromSmashggMutationResult = Apollo.MutationResult<AdminPlayersPageCreatePlayerFromSmashggMutation>;
-export type AdminPlayersPageCreatePlayerFromSmashggMutationOptions = Apollo.BaseMutationOptions<AdminPlayersPageCreatePlayerFromSmashggMutation, AdminPlayersPageCreatePlayerFromSmashggMutationVariables>;
 export const AdminPlayersNewPageCreatePlayerDocument = gql`
     mutation AdminPlayersNewPageCreatePlayer($attributes: PlayerAttributes!) {
   createPlayer(input: {attributes: $attributes}) {
@@ -6693,83 +6770,6 @@ export function useAdminTournamentPageDeleteVideoMutation(baseOptions?: Apollo.M
 export type AdminTournamentPageDeleteVideoMutationHookResult = ReturnType<typeof useAdminTournamentPageDeleteVideoMutation>;
 export type AdminTournamentPageDeleteVideoMutationResult = Apollo.MutationResult<AdminTournamentPageDeleteVideoMutation>;
 export type AdminTournamentPageDeleteVideoMutationOptions = Apollo.BaseMutationOptions<AdminTournamentPageDeleteVideoMutation, AdminTournamentPageDeleteVideoMutationVariables>;
-export const AdminTournamentsPageDocument = gql`
-    query AdminTournamentsPage($page: Int = 1, $keyword: String) {
-  tournaments(page: $page, per: 10, keyword: $keyword) {
-    records {
-      ...AdminTournamentsPageTournament
-    }
-    paging {
-      ...paging
-    }
-  }
-}
-    ${AdminTournamentsPageTournamentFragmentDoc}
-${PagingFragmentDoc}`;
-
-/**
- * __useAdminTournamentsPageQuery__
- *
- * To run a query within a React component, call `useAdminTournamentsPageQuery` and pass it any options that fit your needs.
- * When your component renders, `useAdminTournamentsPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useAdminTournamentsPageQuery({
- *   variables: {
- *      page: // value for 'page'
- *      keyword: // value for 'keyword'
- *   },
- * });
- */
-export function useAdminTournamentsPageQuery(baseOptions?: Apollo.QueryHookOptions<AdminTournamentsPageQuery, AdminTournamentsPageQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<AdminTournamentsPageQuery, AdminTournamentsPageQueryVariables>(AdminTournamentsPageDocument, options);
-      }
-export function useAdminTournamentsPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AdminTournamentsPageQuery, AdminTournamentsPageQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<AdminTournamentsPageQuery, AdminTournamentsPageQueryVariables>(AdminTournamentsPageDocument, options);
-        }
-export type AdminTournamentsPageQueryHookResult = ReturnType<typeof useAdminTournamentsPageQuery>;
-export type AdminTournamentsPageLazyQueryHookResult = ReturnType<typeof useAdminTournamentsPageLazyQuery>;
-export type AdminTournamentsPageQueryResult = Apollo.QueryResult<AdminTournamentsPageQuery, AdminTournamentsPageQueryVariables>;
-export const DeleteTournamentDocument = gql`
-    mutation DeleteTournament($tournamentId: ID!) {
-  deleteTournament(input: {tournamentId: $tournamentId}) {
-    tournament {
-      id
-    }
-  }
-}
-    `;
-export type DeleteTournamentMutationFn = Apollo.MutationFunction<DeleteTournamentMutation, DeleteTournamentMutationVariables>;
-
-/**
- * __useDeleteTournamentMutation__
- *
- * To run a mutation, you first call `useDeleteTournamentMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useDeleteTournamentMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [deleteTournamentMutation, { data, loading, error }] = useDeleteTournamentMutation({
- *   variables: {
- *      tournamentId: // value for 'tournamentId'
- *   },
- * });
- */
-export function useDeleteTournamentMutation(baseOptions?: Apollo.MutationHookOptions<DeleteTournamentMutation, DeleteTournamentMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<DeleteTournamentMutation, DeleteTournamentMutationVariables>(DeleteTournamentDocument, options);
-      }
-export type DeleteTournamentMutationHookResult = ReturnType<typeof useDeleteTournamentMutation>;
-export type DeleteTournamentMutationResult = Apollo.MutationResult<DeleteTournamentMutation>;
-export type DeleteTournamentMutationOptions = Apollo.BaseMutationOptions<DeleteTournamentMutation, DeleteTournamentMutationVariables>;
 export const CreateTournamentDocument = gql`
     mutation CreateTournament($attributes: TournamentAttributes!) {
   createTournament(input: {attributes: $attributes}) {

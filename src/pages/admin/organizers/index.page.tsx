@@ -1,25 +1,12 @@
 import React, { useState } from 'react';
 
 import { Add as AddIcon, MoreVert } from '@mui/icons-material';
-import {
-  Box,
-  Button,
-  IconButton,
-  Menu,
-  MenuItem,
-  Paper,
-  Table,
-  TableBody,
-  TableCell,
-  TableContainer,
-  TableRow,
-  Typography,
-} from '@mui/material';
+import { Button, IconButton, Menu, MenuItem, TableCell, TableRow, Typography } from '@mui/material';
 import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
-import { AdminContent, AdminBreadcrumbs } from '@/components';
+import { AdminContent, AdminBreadcrumbs, DashboardTable, DashboardTablePaging } from '@/components';
 import { pagesPath } from '@/generated/$path';
 import {
   AdminOrganizersPageOrganizerFragment,
@@ -67,47 +54,38 @@ const Page: React.FC = () => {
         </Button>
       }
     >
-      <TableContainer component={Paper}>
-        <Table>
-          <TableBody>
-            {organizers.map(organizer => (
-              <OrganizerRow
-                key={organizer.id}
-                organizer={organizer}
-                onDelete={() => {
-                  if (window.confirm('削除します。')) {
-                    destroy({ variables: { organizerSlug: organizer.slug } });
-                  }
-                }}
-              />
-            ))}
-          </TableBody>
-        </Table>
-      </TableContainer>
+      <DashboardTable>
+        {organizers.map(organizer => (
+          <OrganizerRow
+            key={organizer.id}
+            organizer={organizer}
+            onDelete={() => {
+              if (window.confirm('削除します。')) {
+                destroy({ variables: { organizerSlug: organizer.slug } });
+              }
+            }}
+          />
+        ))}
+      </DashboardTable>
 
       {paging?.hasNext && (
-        <Box pt={2} pb={2} display="flex" justifyContent="center">
-          <Button
-            variant="outlined"
-            onClick={() => {
-              fetchMore({
-                variables: { page: paging.currentPage + 1 },
-                updateQuery: (prev, { fetchMoreResult: data }) => {
-                  if (!data) return prev;
+        <DashboardTablePaging
+          onClick={() => {
+            fetchMore({
+              variables: { page: paging.currentPage + 1 },
+              updateQuery: (prev, { fetchMoreResult: data }) => {
+                if (!data) return prev;
 
-                  return {
-                    organizers: {
-                      records: [...prev.organizers.records, ...data.organizers.records],
-                      paging: data.organizers.paging,
-                    },
-                  };
-                },
-              });
-            }}
-          >
-            もっとみる
-          </Button>
-        </Box>
+                return {
+                  organizers: {
+                    records: [...prev.organizers.records, ...data.organizers.records],
+                    paging: data.organizers.paging,
+                  },
+                };
+              },
+            });
+          }}
+        />
       )}
     </AdminContent>
   );
