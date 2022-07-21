@@ -16,7 +16,7 @@ export const CharacterTable: React.FC = () => {
   const setLoading = useSetRecoilState(loadingState);
 
   const onClickSearch = useCallback((keyword: string) => {
-    refetch({ page: 1, keyword });
+    refetch({ keyword });
   }, []);
 
   setLoading(loading);

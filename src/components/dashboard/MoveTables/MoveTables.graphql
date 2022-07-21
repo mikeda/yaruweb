@@ -1,0 +1,55 @@
+fragment MoveTable on MoveCategory {
+  id
+  name
+
+  moves {
+    ...MoveTableRow
+  }
+}
+
+fragment MoveTableRow on Move {
+  id
+  name
+  command
+
+  moveVideo {
+    id
+    m3u8Url
+    thumbnailUrl
+  }
+}
+
+query MoveTables($characterSlug: String!) {
+  moveCategories(characterSlug: $characterSlug) {
+    ...MoveTable
+  }
+}
+
+mutation CreateMoveVideo($moveId: ID!) {
+  createMoveVideo(input: { moveId: $moveId }) {
+    move {
+      ...MoveTableRow
+    }
+
+    videoUpload {
+      url
+      fields
+    }
+  }
+}
+
+mutation DeleteMove($moveId: ID!) {
+  deleteMove(input: { moveId: $moveId }) {
+    move {
+      id
+    }
+  }
+}
+
+mutation DeleteMoveCategory($moveCategoryId: ID!) {
+  deleteMoveCategory(input: { moveCategoryId: $moveCategoryId }) {
+    moveCategory {
+      id
+    }
+  }
+}
