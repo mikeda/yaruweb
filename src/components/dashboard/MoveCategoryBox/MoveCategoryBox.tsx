@@ -1,52 +1,40 @@
 import React from 'react';
 
 import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
-import { Box, IconButton, Typography } from '@mui/material';
-import { useRouter } from 'next/router';
+import { IconButton, Stack, Typography } from '@mui/material';
+
+import { UpdateButton } from './UpdateButton';
 
 import { MoveTable } from '@/components';
-import { pagesPath } from '@/generated/$path';
-import { MoveCategoryBoxFragment } from '@/generated/graphql';
-import { resolveUrlObject } from '@/lib';
+import { MoveCategoryBoxFragment, MoveCategoryPositionSelectFragment } from '@/generated/graphql';
 
 interface Props {
   moveCategory: MoveCategoryBoxFragment;
+  moveCategories: MoveCategoryPositionSelectFragment[];
   onClickDelete: (moveCategoryId: string) => void;
 }
 
-export const MoveCategoryBox: React.FC<Props> = ({ moveCategory, onClickDelete }) => {
-  const router = useRouter();
-
+export const MoveCategoryBox: React.FC<Props> = ({ moveCategory, moveCategories, onClickDelete }) => {
   return (
-    <Box mb={8}>
-      <Box display="flex" alignItems="center" justifyContent="space-between" mb={2}>
-        <Typography variant="h3" gutterBottom>
-          {moveCategory.name}
-        </Typography>
+    <Stack spacing={1}>
+      <Stack direction="row" alignItems="center" spacing={2}>
+        <Typography variant="h2">{moveCategory.name}</Typography>
 
-        <div>
-          <IconButton
-            href={resolveUrlObject(router, pagesPath.admin.move_categories._id(moveCategory.id).edit.$url())}
-            size="large"
-          >
-            <EditIcon />
-          </IconButton>
+        <UpdateButton moveCategoryId={moveCategory.id} moveCategories={moveCategories} />
 
-          <IconButton
-            onClick={() => {
-              if (window.confirm('削除します。')) {
-                onClickDelete(moveCategory.id);
-              }
-            }}
-            size="large"
-          >
-            <DeleteIcon />
-          </IconButton>
-        </div>
-      </Box>
+        <IconButton
+          onClick={() => {
+            if (window.confirm('削除します。')) {
+              onClickDelete(moveCategory.id);
+            }
+          }}
+          size="large"
+        >
+          <DeleteIcon />
+        </IconButton>
+      </Stack>
 
       <MoveTable moveCategoryId={moveCategory.id} />
-    </Box>
+    </Stack>
   );
 };

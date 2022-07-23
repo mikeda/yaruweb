@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { Box, Divider, Stack } from '@mui/material';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
@@ -67,17 +68,31 @@ export const MoveCategoryBoxes: React.FC<Props> = ({ characterSlug }) => {
   setLoading(loading || createLoading || updateLoading || deleteLoading);
 
   if (!data) return null;
-  const { moveCategories } = data;
+  const moveCategories = [...data.moveCategories].sort((a, b) => a.position - b.position);
 
   return (
     <>
-      {moveCategories.map(moveCategory => (
-        <MoveCategoryBox key={moveCategory.id} moveCategory={moveCategory} onClickDelete={() => {}} />
-      ))}
-      <CreateButton
-        moveCategories={moveCategories}
-        onSubmit={attributes => create({ variables: { characterSlug, attributes } })}
-      />
+      <Stack divider={<Divider />} spacing={2}>
+        {moveCategories.map(moveCategory => (
+          <MoveCategoryBox
+            key={moveCategory.id}
+            moveCategory={moveCategory}
+            moveCategories={moveCategories}
+            onClickDelete={() => {
+              del({ variables: { moveCategoryId: moveCategory.id } });
+            }}
+          />
+        ))}
+      </Stack>
+
+      <Divider sx={{ mt: 2, mb: 2 }} />
+
+      <Box display="flex" justifyContent="center">
+        <CreateButton
+          moveCategories={moveCategories}
+          onSubmit={attributes => create({ variables: { characterSlug, attributes } })}
+        />
+      </Box>
     </>
   );
 };

@@ -9,3 +9,10 @@ fragment MoveCategoryPositionSelect on MoveCategory {
   name
   position
 }
+
+query MoveCategoryForm($moveCategoryId: ID!) {
+  moveCategory(moveCategoryId: $moveCategoryId) {
+    ...MoveCategoryForm
+  }
+}
+

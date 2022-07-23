@@ -17,10 +17,17 @@ export const CreateButton: React.FC<Props> = ({ moveCategories, onSubmit }) => {
   return (
     <>
       <Button variant="contained" color="primary" startIcon={<AddIcon />} onClick={() => setOpen(true)}>
-        作成する
+        カテゴリを追加
       </Button>
       <Dialog open={open} onClose={() => setOpen(false)}>
-        <MoveCategoryForm moveCategories={moveCategories} onSubmit={onSubmit} />;
+        <MoveCategoryForm
+          moveCategories={moveCategories}
+          onSubmit={attributes => {
+            onSubmit(attributes);
+            setOpen(false);
+          }}
+        />
+        ;
       </Dialog>
     </>
   );

@@ -2284,6 +2284,13 @@ export type MoveCategoryFormFragment = { __typename?: 'MoveCategory', id: string
 
 export type MoveCategoryPositionSelectFragment = { __typename?: 'MoveCategory', id: string, name: string, position: number };
 
+export type MoveCategoryFormQueryVariables = Exact<{
+  moveCategoryId: Scalars['ID'];
+}>;
+
+
+export type MoveCategoryFormQuery = { __typename?: 'Query', moveCategory: { __typename?: 'MoveCategory', id: string, name: string, position: number } };
+
 export type MoveFormAttackFragment = { __typename?: 'AttackMove', id: string, startUpFrame?: number | null, duration?: number | null, reach?: number | null, blockFrame?: number | null, blockResult: AttackMoveResultEnum, blockStatus?: AttackMoveStateEnum | null, hitFrame?: number | null, hitResult: AttackMoveResultEnum, hitStatus?: AttackMoveStateEnum | null, counterFrame?: number | null, counterResult: AttackMoveResultEnum, counterStatus?: AttackMoveStateEnum | null, heights: Array<AttackTypeEnum>, damages: Array<number>, powerCrush: boolean, crouchingStatus: boolean, jumpStatus: boolean, homing: boolean, screw: boolean, wallBound: boolean };
 
 export type MoveFormThrowFragment = { __typename?: 'ThrowMove', id: string, throwType: ThrowTypeEnum, throwResult: ThrowMoveResultEnum, throwEscape: ThrowEscapeEnum, startUpFrame?: number | null, damage?: number | null };
@@ -2427,13 +2434,6 @@ export type DashboardCharacterMovesPageQueryVariables = Exact<{
 
 
 export type DashboardCharacterMovesPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string } };
-
-export type AdminMoveCategoryNewPageQueryVariables = Exact<{
-  characterSlug: Scalars['String'];
-}>;
-
-
-export type AdminMoveCategoryNewPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, position: number }> } };
 
 export type CreateCharacterMutationVariables = Exact<{
   attributes: CharacterAttributes;
@@ -4629,6 +4629,41 @@ export function useDeleteTournamentMutation(baseOptions?: Apollo.MutationHookOpt
 export type DeleteTournamentMutationHookResult = ReturnType<typeof useDeleteTournamentMutation>;
 export type DeleteTournamentMutationResult = Apollo.MutationResult<DeleteTournamentMutation>;
 export type DeleteTournamentMutationOptions = Apollo.BaseMutationOptions<DeleteTournamentMutation, DeleteTournamentMutationVariables>;
+export const MoveCategoryFormDocument = gql`
+    query MoveCategoryForm($moveCategoryId: ID!) {
+  moveCategory(moveCategoryId: $moveCategoryId) {
+    ...MoveCategoryForm
+  }
+}
+    ${MoveCategoryFormFragmentDoc}`;
+
+/**
+ * __useMoveCategoryFormQuery__
+ *
+ * To run a query within a React component, call `useMoveCategoryFormQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMoveCategoryFormQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMoveCategoryFormQuery({
+ *   variables: {
+ *      moveCategoryId: // value for 'moveCategoryId'
+ *   },
+ * });
+ */
+export function useMoveCategoryFormQuery(baseOptions: Apollo.QueryHookOptions<MoveCategoryFormQuery, MoveCategoryFormQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<MoveCategoryFormQuery, MoveCategoryFormQueryVariables>(MoveCategoryFormDocument, options);
+      }
+export function useMoveCategoryFormLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MoveCategoryFormQuery, MoveCategoryFormQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<MoveCategoryFormQuery, MoveCategoryFormQueryVariables>(MoveCategoryFormDocument, options);
+        }
+export type MoveCategoryFormQueryHookResult = ReturnType<typeof useMoveCategoryFormQuery>;
+export type MoveCategoryFormLazyQueryHookResult = ReturnType<typeof useMoveCategoryFormLazyQuery>;
+export type MoveCategoryFormQueryResult = Apollo.QueryResult<MoveCategoryFormQuery, MoveCategoryFormQueryVariables>;
 export const CreateUserDocument = gql`
     mutation CreateUser {
   createUser(input: {}) {
@@ -5211,45 +5246,6 @@ export function useDashboardCharacterMovesPageLazyQuery(baseOptions?: Apollo.Laz
 export type DashboardCharacterMovesPageQueryHookResult = ReturnType<typeof useDashboardCharacterMovesPageQuery>;
 export type DashboardCharacterMovesPageLazyQueryHookResult = ReturnType<typeof useDashboardCharacterMovesPageLazyQuery>;
 export type DashboardCharacterMovesPageQueryResult = Apollo.QueryResult<DashboardCharacterMovesPageQuery, DashboardCharacterMovesPageQueryVariables>;
-export const AdminMoveCategoryNewPageDocument = gql`
-    query AdminMoveCategoryNewPage($characterSlug: String!) {
-  character(characterSlug: $characterSlug) {
-    ...CharacterBreadcrumbs
-    moveCategories {
-      ...MoveCategoryPositionSelect
-    }
-  }
-}
-    ${CharacterBreadcrumbsFragmentDoc}
-${MoveCategoryPositionSelectFragmentDoc}`;
-
-/**
- * __useAdminMoveCategoryNewPageQuery__
- *
- * To run a query within a React component, call `useAdminMoveCategoryNewPageQuery` and pass it any options that fit your needs.
- * When your component renders, `useAdminMoveCategoryNewPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useAdminMoveCategoryNewPageQuery({
- *   variables: {
- *      characterSlug: // value for 'characterSlug'
- *   },
- * });
- */
-export function useAdminMoveCategoryNewPageQuery(baseOptions: Apollo.QueryHookOptions<AdminMoveCategoryNewPageQuery, AdminMoveCategoryNewPageQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<AdminMoveCategoryNewPageQuery, AdminMoveCategoryNewPageQueryVariables>(AdminMoveCategoryNewPageDocument, options);
-      }
-export function useAdminMoveCategoryNewPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AdminMoveCategoryNewPageQuery, AdminMoveCategoryNewPageQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<AdminMoveCategoryNewPageQuery, AdminMoveCategoryNewPageQueryVariables>(AdminMoveCategoryNewPageDocument, options);
-        }
-export type AdminMoveCategoryNewPageQueryHookResult = ReturnType<typeof useAdminMoveCategoryNewPageQuery>;
-export type AdminMoveCategoryNewPageLazyQueryHookResult = ReturnType<typeof useAdminMoveCategoryNewPageLazyQuery>;
-export type AdminMoveCategoryNewPageQueryResult = Apollo.QueryResult<AdminMoveCategoryNewPageQuery, AdminMoveCategoryNewPageQueryVariables>;
 export const CreateCharacterDocument = gql`
     mutation CreateCharacter($attributes: CharacterAttributes!) {
   createCharacter(input: {attributes: $attributes}) {
