@@ -5,10 +5,10 @@ import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
 import { CreateButton } from './CreateButton';
-import { MoveCategoryBox } from './MoveCategoryBox';
+import { DashboardMoveCategory } from './DashboardMoveCategory';
 
 import {
-  useMoveCategoryBoxesQuery,
+  useDashboardMoveCategoriesQuery,
   useDeleteMoveCategoryMutation,
   useCreateMoveCategoryMutation,
   useUpdateMoveCategoryMutation,
@@ -24,10 +24,10 @@ interface Props {
 // レスポンスとしては作成・更新したレコードのデータしか受け取っていないため、
 // 並び順がおかしくなる場合があるので内部キャッシュ更新ではなく毎回全データをrefetchしている。
 // 効率悪いのでやりかたを考える。
-export const MoveCategoryBoxes: React.FC<Props> = ({ characterSlug }) => {
+export const DashboardMoveCategories: React.FC<Props> = ({ characterSlug }) => {
   const setLoading = useSetRecoilState(loadingState);
 
-  const { data, loading, refetch } = useMoveCategoryBoxesQuery({
+  const { data, loading, refetch } = useDashboardMoveCategoriesQuery({
     variables: { characterSlug },
     notifyOnNetworkStatusChange: true,
   });
@@ -83,7 +83,7 @@ export const MoveCategoryBoxes: React.FC<Props> = ({ characterSlug }) => {
     <>
       <Stack divider={<Divider />} spacing={2}>
         {moveCategories.map(moveCategory => (
-          <MoveCategoryBox
+          <DashboardMoveCategory
             key={moveCategory.id}
             moveCategory={moveCategory}
             moveCategories={moveCategories}

@@ -8,18 +8,23 @@ import { UpdateButton } from './UpdateButton';
 import { MoveTable } from '@/components';
 import {
   MoveCategoryAttributes,
-  MoveCategoryBoxFragment,
+  DashboardMoveCategoryFragment,
   MoveCategoryPositionSelectFragment,
 } from '@/generated/graphql';
 
 interface Props {
-  moveCategory: MoveCategoryBoxFragment;
+  moveCategory: DashboardMoveCategoryFragment;
   moveCategories: MoveCategoryPositionSelectFragment[];
   onClickUpdate: (moveCategoryId: string, attributes: MoveCategoryAttributes) => void;
   onClickDelete: (moveCategoryId: string) => void;
 }
 
-export const MoveCategoryBox: React.FC<Props> = ({ moveCategory, moveCategories, onClickUpdate, onClickDelete }) => {
+export const DashboardMoveCategory: React.FC<Props> = ({
+  moveCategory,
+  moveCategories,
+  onClickUpdate,
+  onClickDelete,
+}) => {
   return (
     <Stack spacing={1}>
       <Stack direction="row" alignItems="center" spacing={2}>

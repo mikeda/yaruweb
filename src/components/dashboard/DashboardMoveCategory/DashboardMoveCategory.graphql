@@ -1,19 +1,19 @@
-fragment MoveCategoryBox on MoveCategory {
+fragment DashboardMoveCategory on MoveCategory {
   id
   name
   ...MoveCategoryForm
 }
 
-query MoveCategoryBoxes($characterSlug: String!) {
+query DashboardMoveCategories($characterSlug: String!) {
   moveCategories(characterSlug: $characterSlug) {
-    ...MoveCategoryBox
+    ...DashboardMoveCategory
   }
 }
 
 mutation CreateMoveCategory($characterSlug: String!, $attributes: MoveCategoryAttributes!) {
   createMoveCategory(input: { characterSlug: $characterSlug, attributes: $attributes }) {
     moveCategory {
-      ...MoveCategoryBox
+      ...DashboardMoveCategory
     }
   }
 }
@@ -21,7 +21,7 @@ mutation CreateMoveCategory($characterSlug: String!, $attributes: MoveCategoryAt
 mutation UpdateMoveCategory($moveCategoryId: ID!, $attributes: MoveCategoryAttributes!) {
   updateMoveCategory(input: { moveCategoryId: $moveCategoryId, attributes: $attributes }) {
     moveCategory {
-      ...MoveCategoryBox
+      ...DashboardMoveCategory
     }
   }
 }

@@ -2172,14 +2172,14 @@ export type CharacterTableRowsQueryVariables = Exact<{
 
 export type CharacterTableRowsQuery = { __typename?: 'Query', characters: { __typename?: 'CharacterCollection', records: Array<{ __typename?: 'Character', id: string, slug: string, name: string, faceImageUrl: string, movesCount: number, combosCount: number }> } };
 
-export type MoveCategoryBoxFragment = { __typename?: 'MoveCategory', id: string, name: string, position: number };
+export type DashboardMoveCategoryFragment = { __typename?: 'MoveCategory', id: string, name: string, position: number };
 
-export type MoveCategoryBoxesQueryVariables = Exact<{
+export type DashboardMoveCategoriesQueryVariables = Exact<{
   characterSlug: Scalars['String'];
 }>;
 
 
-export type MoveCategoryBoxesQuery = { __typename?: 'Query', moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, position: number }> };
+export type DashboardMoveCategoriesQuery = { __typename?: 'Query', moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, position: number }> };
 
 export type CreateMoveCategoryMutationVariables = Exact<{
   characterSlug: Scalars['String'];
@@ -3330,8 +3330,8 @@ export const MoveCategoryFormFragmentDoc = gql`
   position
 }
     `;
-export const MoveCategoryBoxFragmentDoc = gql`
-    fragment MoveCategoryBox on MoveCategory {
+export const DashboardMoveCategoryFragmentDoc = gql`
+    fragment DashboardMoveCategory on MoveCategory {
   id
   name
   ...MoveCategoryForm
@@ -4185,52 +4185,52 @@ export function useCharacterTableRowsLazyQuery(baseOptions?: Apollo.LazyQueryHoo
 export type CharacterTableRowsQueryHookResult = ReturnType<typeof useCharacterTableRowsQuery>;
 export type CharacterTableRowsLazyQueryHookResult = ReturnType<typeof useCharacterTableRowsLazyQuery>;
 export type CharacterTableRowsQueryResult = Apollo.QueryResult<CharacterTableRowsQuery, CharacterTableRowsQueryVariables>;
-export const MoveCategoryBoxesDocument = gql`
-    query MoveCategoryBoxes($characterSlug: String!) {
+export const DashboardMoveCategoriesDocument = gql`
+    query DashboardMoveCategories($characterSlug: String!) {
   moveCategories(characterSlug: $characterSlug) {
-    ...MoveCategoryBox
+    ...DashboardMoveCategory
   }
 }
-    ${MoveCategoryBoxFragmentDoc}`;
+    ${DashboardMoveCategoryFragmentDoc}`;
 
 /**
- * __useMoveCategoryBoxesQuery__
+ * __useDashboardMoveCategoriesQuery__
  *
- * To run a query within a React component, call `useMoveCategoryBoxesQuery` and pass it any options that fit your needs.
- * When your component renders, `useMoveCategoryBoxesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useDashboardMoveCategoriesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useDashboardMoveCategoriesQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useMoveCategoryBoxesQuery({
+ * const { data, loading, error } = useDashboardMoveCategoriesQuery({
  *   variables: {
  *      characterSlug: // value for 'characterSlug'
  *   },
  * });
  */
-export function useMoveCategoryBoxesQuery(baseOptions: Apollo.QueryHookOptions<MoveCategoryBoxesQuery, MoveCategoryBoxesQueryVariables>) {
+export function useDashboardMoveCategoriesQuery(baseOptions: Apollo.QueryHookOptions<DashboardMoveCategoriesQuery, DashboardMoveCategoriesQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<MoveCategoryBoxesQuery, MoveCategoryBoxesQueryVariables>(MoveCategoryBoxesDocument, options);
+        return Apollo.useQuery<DashboardMoveCategoriesQuery, DashboardMoveCategoriesQueryVariables>(DashboardMoveCategoriesDocument, options);
       }
-export function useMoveCategoryBoxesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MoveCategoryBoxesQuery, MoveCategoryBoxesQueryVariables>) {
+export function useDashboardMoveCategoriesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<DashboardMoveCategoriesQuery, DashboardMoveCategoriesQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<MoveCategoryBoxesQuery, MoveCategoryBoxesQueryVariables>(MoveCategoryBoxesDocument, options);
+          return Apollo.useLazyQuery<DashboardMoveCategoriesQuery, DashboardMoveCategoriesQueryVariables>(DashboardMoveCategoriesDocument, options);
         }
-export type MoveCategoryBoxesQueryHookResult = ReturnType<typeof useMoveCategoryBoxesQuery>;
-export type MoveCategoryBoxesLazyQueryHookResult = ReturnType<typeof useMoveCategoryBoxesLazyQuery>;
-export type MoveCategoryBoxesQueryResult = Apollo.QueryResult<MoveCategoryBoxesQuery, MoveCategoryBoxesQueryVariables>;
+export type DashboardMoveCategoriesQueryHookResult = ReturnType<typeof useDashboardMoveCategoriesQuery>;
+export type DashboardMoveCategoriesLazyQueryHookResult = ReturnType<typeof useDashboardMoveCategoriesLazyQuery>;
+export type DashboardMoveCategoriesQueryResult = Apollo.QueryResult<DashboardMoveCategoriesQuery, DashboardMoveCategoriesQueryVariables>;
 export const CreateMoveCategoryDocument = gql`
     mutation CreateMoveCategory($characterSlug: String!, $attributes: MoveCategoryAttributes!) {
   createMoveCategory(
     input: {characterSlug: $characterSlug, attributes: $attributes}
   ) {
     moveCategory {
-      ...MoveCategoryBox
+      ...DashboardMoveCategory
     }
   }
 }
-    ${MoveCategoryBoxFragmentDoc}`;
+    ${DashboardMoveCategoryFragmentDoc}`;
 export type CreateMoveCategoryMutationFn = Apollo.MutationFunction<CreateMoveCategoryMutation, CreateMoveCategoryMutationVariables>;
 
 /**
@@ -4264,11 +4264,11 @@ export const UpdateMoveCategoryDocument = gql`
     input: {moveCategoryId: $moveCategoryId, attributes: $attributes}
   ) {
     moveCategory {
-      ...MoveCategoryBox
+      ...DashboardMoveCategory
     }
   }
 }
-    ${MoveCategoryBoxFragmentDoc}`;
+    ${DashboardMoveCategoryFragmentDoc}`;
 export type UpdateMoveCategoryMutationFn = Apollo.MutationFunction<UpdateMoveCategoryMutation, UpdateMoveCategoryMutationVariables>;
 
 /**
