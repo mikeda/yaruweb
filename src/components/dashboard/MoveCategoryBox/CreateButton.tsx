@@ -7,11 +7,12 @@ import { MoveCategoryForm } from '@/components';
 import { MoveCategoryAttributes, MoveCategoryPositionSelectFragment } from '@/generated/graphql';
 
 interface Props {
+  characterSlug: string;
   moveCategories: MoveCategoryPositionSelectFragment[];
-  onSubmit: (attributes: MoveCategoryAttributes) => void;
+  onClickCreate: (characterSlug: string, attributes: MoveCategoryAttributes) => void;
 }
 
-export const CreateButton: React.FC<Props> = ({ moveCategories, onSubmit }) => {
+export const CreateButton: React.FC<Props> = ({ characterSlug, moveCategories, onClickCreate }) => {
   const [open, setOpen] = useState(false);
 
   return (
@@ -23,7 +24,7 @@ export const CreateButton: React.FC<Props> = ({ moveCategories, onSubmit }) => {
         <MoveCategoryForm
           moveCategories={moveCategories}
           onSubmit={attributes => {
-            onSubmit(attributes);
+            onClickCreate(characterSlug, attributes);
             setOpen(false);
           }}
         />

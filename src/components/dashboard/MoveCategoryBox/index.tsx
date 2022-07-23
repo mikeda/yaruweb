@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import { Box, Divider, Stack } from '@mui/material';
 import { toast } from 'react-toastify';
@@ -12,6 +12,7 @@ import {
   useDeleteMoveCategoryMutation,
   useCreateMoveCategoryMutation,
   useUpdateMoveCategoryMutation,
+  MoveCategoryAttributes,
 } from '@/generated/graphql';
 import { loadingState } from '@/lib';
 
@@ -19,24 +20,22 @@ interface Props {
   characterSlug: string;
 }
 
+// 作成・更新したレコード以外のデータについても内部的にpositionが更新される。
+// レスポンスとしては作成・更新したレコードのデータしか受け取っていないため、
+// 並び順がおかしくなる場合があるので内部キャッシュ更新ではなく毎回全データをrefetchしている。
+// 効率悪いのでやりかたを考える。
 export const MoveCategoryBoxes: React.FC<Props> = ({ characterSlug }) => {
   const setLoading = useSetRecoilState(loadingState);
 
-  const { data, loading, updateQuery } = useMoveCategoryBoxesQuery({
+  const { data, loading, refetch } = useMoveCategoryBoxesQuery({
     variables: { characterSlug },
     notifyOnNetworkStatusChange: true,
   });
 
   const [create, { loading: createLoading }] = useCreateMoveCategoryMutation({
-    onCompleted: data => {
-      const moveCategory = data.createMoveCategory?.moveCategory;
-      if (!moveCategory) return;
-
-      updateQuery(prev => ({
-        ...prev,
-        moveCategories: [...prev.moveCategories, moveCategory],
-      }));
-      toast.success('カテゴリを追加しました。');
+    onCompleted: () => {
+      refetch();
+      toast.success('カテゴリを作成しました。');
     },
     onError: e => {
       toast.error(e.message);
@@ -45,6 +44,7 @@ export const MoveCategoryBoxes: React.FC<Props> = ({ characterSlug }) => {
 
   const [update, { loading: updateLoading }] = useUpdateMoveCategoryMutation({
     onCompleted: () => {
+      refetch();
       toast.success('カテゴリを更新しました。');
     },
     onError: e => {
@@ -53,22 +53,31 @@ export const MoveCategoryBoxes: React.FC<Props> = ({ characterSlug }) => {
   });
 
   const [del, { loading: deleteLoading }] = useDeleteMoveCategoryMutation({
-    onCompleted: data => {
-      const moveCategory = data.deleteMoveCategory?.moveCategory;
-      if (!moveCategory) return;
-
-      updateQuery(prev => ({
-        ...prev,
-        moveCategories: prev.moveCategories.filter(t => t.id !== moveCategory.id),
-      }));
+    onCompleted: () => {
+      refetch();
       toast.success('カテゴリを削除しました。');
     },
+    onError: e => {
+      toast.error(e.message);
+    },
   });
+
+  const onClickCreate = useCallback((characterSlug: string, attributes: MoveCategoryAttributes) => {
+    create({ variables: { characterSlug, attributes } });
+  }, []);
+
+  const onClickUpdate = useCallback((moveCategoryId: string, attributes: MoveCategoryAttributes) => {
+    update({ variables: { moveCategoryId, attributes } });
+  }, []);
+
+  const onClickDelete = useCallback((moveCategoryId: string) => {
+    del({ variables: { moveCategoryId } });
+  }, []);
 
   setLoading(loading || createLoading || updateLoading || deleteLoading);
 
   if (!data) return null;
-  const moveCategories = [...data.moveCategories].sort((a, b) => a.position - b.position);
+  const { moveCategories } = data;
 
   return (
     <>
@@ -78,9 +87,8 @@ export const MoveCategoryBoxes: React.FC<Props> = ({ characterSlug }) => {
             key={moveCategory.id}
             moveCategory={moveCategory}
             moveCategories={moveCategories}
-            onClickDelete={() => {
-              del({ variables: { moveCategoryId: moveCategory.id } });
-            }}
+            onClickUpdate={onClickUpdate}
+            onClickDelete={onClickDelete}
           />
         ))}
       </Stack>
@@ -88,10 +96,7 @@ export const MoveCategoryBoxes: React.FC<Props> = ({ characterSlug }) => {
       <Divider sx={{ mt: 2, mb: 2 }} />
 
       <Box display="flex" justifyContent="center">
-        <CreateButton
-          moveCategories={moveCategories}
-          onSubmit={attributes => create({ variables: { characterSlug, attributes } })}
-        />
+        <CreateButton characterSlug={characterSlug} moveCategories={moveCategories} onClickCreate={onClickCreate} />
       </Box>
     </>
   );

@@ -7,55 +7,56 @@ import { useSetRecoilState } from 'recoil';
 
 import { MoveCategoryForm } from '@/components';
 import {
+  MoveCategoryAttributes,
+  MoveCategoryFormFragment,
   MoveCategoryPositionSelectFragment,
-  useMoveCategoryFormQuery,
-  useUpdateMoveCategoryMutation,
+  useMoveCategoryFormLazyQuery,
 } from '@/generated/graphql';
 import { loadingState } from '@/lib';
 
 interface Props {
   moveCategoryId: string;
   moveCategories: MoveCategoryPositionSelectFragment[];
+  onClickUpdate: (moveCategoryId: string, attributes: MoveCategoryAttributes) => void;
 }
 
-export const UpdateButton: React.FC<Props> = ({ moveCategoryId, moveCategories }) => {
+export const UpdateButton: React.FC<Props> = ({ moveCategoryId, moveCategories, onClickUpdate }) => {
   const [open, setOpen] = useState(false);
+  const [moveCategory, setMoveCategory] = useState<MoveCategoryFormFragment>();
   const setLoading = useSetRecoilState(loadingState);
 
-  const { data, loading } = useMoveCategoryFormQuery({
+  const [fetch, { loading }] = useMoveCategoryFormLazyQuery({
     variables: { moveCategoryId },
-    fetchPolicy: 'network-only',
-  });
-
-  const [update, { loading: updateLoading }] = useUpdateMoveCategoryMutation({
-    onCompleted: () => {
-      toast.success('カテゴリを更新しました。');
+    onCompleted: data => {
+      setMoveCategory(data.moveCategory);
     },
     onError: e => {
       toast.error(e.message);
     },
   });
 
-  setLoading(loading || updateLoading);
-
-  if (!data) return null;
-  const { moveCategory } = data;
+  setLoading(loading);
 
   return (
     <>
-      <IconButton size="large" onClick={() => setOpen(true)}>
+      <IconButton
+        size="large"
+        onClick={() => {
+          fetch().then(() => setOpen(true));
+        }}
+      >
         <EditIcon />
       </IconButton>
+
       <Dialog open={open} onClose={() => setOpen(false)}>
         <MoveCategoryForm
           moveCategory={moveCategory}
           moveCategories={moveCategories}
           onSubmit={attributes => {
-            update({ variables: { moveCategoryId, attributes } });
+            onClickUpdate(moveCategoryId, attributes);
             setOpen(false);
           }}
         />
-        ;
       </Dialog>
     </>
   );

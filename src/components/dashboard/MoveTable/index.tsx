@@ -1,19 +1,12 @@
 import React from 'react';
 
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
-import { Box, IconButton, Typography } from '@mui/material';
-import { useRouter } from 'next/router';
-import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
-import { MovesNewButton } from './MovesNewButton';
 import { MoveTableRow } from './MoveTableRow';
 
 import { DashboardTable } from '@/components';
-import { pagesPath } from '@/generated/$path';
 import { useMoveTableRowsQuery } from '@/generated/graphql';
-import { loadingState, resolveUrlObject } from '@/lib';
+import { loadingState } from '@/lib';
 
 interface Props {
   moveCategoryId: string;
