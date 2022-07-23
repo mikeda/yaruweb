@@ -1,12 +1,3 @@
-fragment MoveTable on MoveCategory {
-  id
-  name
-
-  moves {
-    ...MoveTableRow
-  }
-}
-
 fragment MoveTableRow on Move {
   id
   name
@@ -19,9 +10,9 @@ fragment MoveTableRow on Move {
   }
 }
 
-query MoveTables($characterSlug: String!) {
-  moveCategories(characterSlug: $characterSlug) {
-    ...MoveTable
+query MoveTableRows($moveCategoryId: ID!) {
+  moves(moveCategoryId: $moveCategoryId) {
+    ...MoveTableRow
   }
 }
 
@@ -41,14 +32,6 @@ mutation CreateMoveVideo($moveId: ID!) {
 mutation DeleteMove($moveId: ID!) {
   deleteMove(input: { moveId: $moveId }) {
     move {
-      id
-    }
-  }
-}
-
-mutation DeleteMoveCategory($moveCategoryId: ID!) {
-  deleteMoveCategory(input: { moveCategoryId: $moveCategoryId }) {
-    moveCategory {
       id
     }
   }

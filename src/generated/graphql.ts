@@ -2172,16 +2172,46 @@ export type CharacterTableRowsQueryVariables = Exact<{
 
 export type CharacterTableRowsQuery = { __typename?: 'Query', characters: { __typename?: 'CharacterCollection', records: Array<{ __typename?: 'Character', id: string, slug: string, name: string, faceImageUrl: string, movesCount: number, combosCount: number }> } };
 
-export type MoveTableFragment = { __typename?: 'MoveCategory', id: string, name: string, moves: Array<{ __typename?: 'Move', id: string, name: string, command: Array<string>, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> };
+export type MoveCategoryBoxFragment = { __typename?: 'MoveCategory', id: string, name: string, position: number };
 
-export type MoveTableRowFragment = { __typename?: 'Move', id: string, name: string, command: Array<string>, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null };
-
-export type MoveTablesQueryVariables = Exact<{
+export type MoveCategoryBoxesQueryVariables = Exact<{
   characterSlug: Scalars['String'];
 }>;
 
 
-export type MoveTablesQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string }, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, moves: Array<{ __typename?: 'Move', id: string, name: string, command: Array<string>, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> }> };
+export type MoveCategoryBoxesQuery = { __typename?: 'Query', moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, position: number }> };
+
+export type CreateMoveCategoryMutationVariables = Exact<{
+  characterSlug: Scalars['String'];
+  attributes: MoveCategoryAttributes;
+}>;
+
+
+export type CreateMoveCategoryMutation = { __typename?: 'Mutation', createMoveCategory?: { __typename?: 'CreateMoveCategoryPayload', moveCategory: { __typename?: 'MoveCategory', id: string, name: string, position: number } } | null };
+
+export type UpdateMoveCategoryMutationVariables = Exact<{
+  moveCategoryId: Scalars['ID'];
+  attributes: MoveCategoryAttributes;
+}>;
+
+
+export type UpdateMoveCategoryMutation = { __typename?: 'Mutation', updateMoveCategory?: { __typename?: 'UpdateMoveCategoryPayload', moveCategory: { __typename?: 'MoveCategory', id: string, name: string, position: number } } | null };
+
+export type DeleteMoveCategoryMutationVariables = Exact<{
+  moveCategoryId: Scalars['ID'];
+}>;
+
+
+export type DeleteMoveCategoryMutation = { __typename?: 'Mutation', deleteMoveCategory?: { __typename?: 'DeleteMoveCategoryPayload', moveCategory: { __typename?: 'MoveCategory', id: string } } | null };
+
+export type MoveTableRowFragment = { __typename?: 'Move', id: string, name: string, command: Array<string>, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null };
+
+export type MoveTableRowsQueryVariables = Exact<{
+  moveCategoryId: Scalars['ID'];
+}>;
+
+
+export type MoveTableRowsQuery = { __typename?: 'Query', moves: Array<{ __typename?: 'Move', id: string, name: string, command: Array<string>, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> };
 
 export type CreateMoveVideoMutationVariables = Exact<{
   moveId: Scalars['ID'];
@@ -2196,13 +2226,6 @@ export type DeleteMoveMutationVariables = Exact<{
 
 
 export type DeleteMoveMutation = { __typename?: 'Mutation', deleteMove?: { __typename?: 'DeleteMovePayload', move: { __typename?: 'Move', id: string } } | null };
-
-export type DeleteMoveCategoryMutationVariables = Exact<{
-  moveCategoryId: Scalars['ID'];
-}>;
-
-
-export type DeleteMoveCategoryMutation = { __typename?: 'Mutation', deleteMoveCategory?: { __typename?: 'DeleteMoveCategoryPayload', moveCategory: { __typename?: 'MoveCategory', id: string } } | null };
 
 export type PlayerTableRowFragment = { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null };
 
@@ -2412,14 +2435,6 @@ export type AdminMoveCategoryNewPageQueryVariables = Exact<{
 
 export type AdminMoveCategoryNewPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, position: number }> } };
 
-export type CreateMoveCategoryMutationVariables = Exact<{
-  characterSlug: Scalars['String'];
-  attributes: MoveCategoryAttributes;
-}>;
-
-
-export type CreateMoveCategoryMutation = { __typename?: 'Mutation', createMoveCategory?: { __typename?: 'CreateMoveCategoryPayload', moveCategory: { __typename?: 'MoveCategory', id: string } } | null };
-
 export type CreateCharacterMutationVariables = Exact<{
   attributes: CharacterAttributes;
 }>;
@@ -2480,14 +2495,6 @@ export type PageAdminMoveCategoryEditQueryVariables = Exact<{
 
 
 export type PageAdminMoveCategoryEditQuery = { __typename?: 'Query', moveCategory: { __typename?: 'MoveCategory', id: string, name: string, position: number, character: { __typename?: 'Character', slug: string, name: string, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, position: number }> } } };
-
-export type UpdateMoveCategoryMutationVariables = Exact<{
-  moveCategoryId: Scalars['ID'];
-  attributes: MoveCategoryAttributes;
-}>;
-
-
-export type UpdateMoveCategoryMutation = { __typename?: 'Mutation', updateMoveCategory?: { __typename?: 'UpdateMoveCategoryPayload', moveCategory: { __typename?: 'MoveCategory', id: string } } | null };
 
 export type CreateReversalMoveMutationVariables = Exact<{
   moveCategoryId: Scalars['ID'];
@@ -3316,6 +3323,20 @@ export const CharacterTableRowFragmentDoc = gql`
   combosCount
 }
     `;
+export const MoveCategoryFormFragmentDoc = gql`
+    fragment MoveCategoryForm on MoveCategory {
+  id
+  name
+  position
+}
+    `;
+export const MoveCategoryBoxFragmentDoc = gql`
+    fragment MoveCategoryBox on MoveCategory {
+  id
+  name
+  ...MoveCategoryForm
+}
+    ${MoveCategoryFormFragmentDoc}`;
 export const MoveTableRowFragmentDoc = gql`
     fragment MoveTableRow on Move {
   id
@@ -3328,15 +3349,6 @@ export const MoveTableRowFragmentDoc = gql`
   }
 }
     `;
-export const MoveTableFragmentDoc = gql`
-    fragment MoveTable on MoveCategory {
-  id
-  name
-  moves {
-    ...MoveTableRow
-  }
-}
-    ${MoveTableRowFragmentDoc}`;
 export const PlayerTableRowFragmentDoc = gql`
     fragment PlayerTableRow on Player {
   id
@@ -3409,13 +3421,6 @@ export const ComboPositionSelectFragmentDoc = gql`
     fragment ComboPositionSelect on Combo {
   id
   command
-  position
-}
-    `;
-export const MoveCategoryFormFragmentDoc = gql`
-    fragment MoveCategoryForm on MoveCategory {
-  id
-  name
   position
 }
     `;
@@ -4180,45 +4185,187 @@ export function useCharacterTableRowsLazyQuery(baseOptions?: Apollo.LazyQueryHoo
 export type CharacterTableRowsQueryHookResult = ReturnType<typeof useCharacterTableRowsQuery>;
 export type CharacterTableRowsLazyQueryHookResult = ReturnType<typeof useCharacterTableRowsLazyQuery>;
 export type CharacterTableRowsQueryResult = Apollo.QueryResult<CharacterTableRowsQuery, CharacterTableRowsQueryVariables>;
-export const MoveTablesDocument = gql`
-    query MoveTables($characterSlug: String!) {
-  character(characterSlug: $characterSlug) {
-    ...CharacterBreadcrumbs
-  }
+export const MoveCategoryBoxesDocument = gql`
+    query MoveCategoryBoxes($characterSlug: String!) {
   moveCategories(characterSlug: $characterSlug) {
-    ...MoveTable
+    ...MoveCategoryBox
   }
 }
-    ${CharacterBreadcrumbsFragmentDoc}
-${MoveTableFragmentDoc}`;
+    ${MoveCategoryBoxFragmentDoc}`;
 
 /**
- * __useMoveTablesQuery__
+ * __useMoveCategoryBoxesQuery__
  *
- * To run a query within a React component, call `useMoveTablesQuery` and pass it any options that fit your needs.
- * When your component renders, `useMoveTablesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useMoveCategoryBoxesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMoveCategoryBoxesQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useMoveTablesQuery({
+ * const { data, loading, error } = useMoveCategoryBoxesQuery({
  *   variables: {
  *      characterSlug: // value for 'characterSlug'
  *   },
  * });
  */
-export function useMoveTablesQuery(baseOptions: Apollo.QueryHookOptions<MoveTablesQuery, MoveTablesQueryVariables>) {
+export function useMoveCategoryBoxesQuery(baseOptions: Apollo.QueryHookOptions<MoveCategoryBoxesQuery, MoveCategoryBoxesQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<MoveTablesQuery, MoveTablesQueryVariables>(MoveTablesDocument, options);
+        return Apollo.useQuery<MoveCategoryBoxesQuery, MoveCategoryBoxesQueryVariables>(MoveCategoryBoxesDocument, options);
       }
-export function useMoveTablesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MoveTablesQuery, MoveTablesQueryVariables>) {
+export function useMoveCategoryBoxesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MoveCategoryBoxesQuery, MoveCategoryBoxesQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<MoveTablesQuery, MoveTablesQueryVariables>(MoveTablesDocument, options);
+          return Apollo.useLazyQuery<MoveCategoryBoxesQuery, MoveCategoryBoxesQueryVariables>(MoveCategoryBoxesDocument, options);
         }
-export type MoveTablesQueryHookResult = ReturnType<typeof useMoveTablesQuery>;
-export type MoveTablesLazyQueryHookResult = ReturnType<typeof useMoveTablesLazyQuery>;
-export type MoveTablesQueryResult = Apollo.QueryResult<MoveTablesQuery, MoveTablesQueryVariables>;
+export type MoveCategoryBoxesQueryHookResult = ReturnType<typeof useMoveCategoryBoxesQuery>;
+export type MoveCategoryBoxesLazyQueryHookResult = ReturnType<typeof useMoveCategoryBoxesLazyQuery>;
+export type MoveCategoryBoxesQueryResult = Apollo.QueryResult<MoveCategoryBoxesQuery, MoveCategoryBoxesQueryVariables>;
+export const CreateMoveCategoryDocument = gql`
+    mutation CreateMoveCategory($characterSlug: String!, $attributes: MoveCategoryAttributes!) {
+  createMoveCategory(
+    input: {characterSlug: $characterSlug, attributes: $attributes}
+  ) {
+    moveCategory {
+      ...MoveCategoryBox
+    }
+  }
+}
+    ${MoveCategoryBoxFragmentDoc}`;
+export type CreateMoveCategoryMutationFn = Apollo.MutationFunction<CreateMoveCategoryMutation, CreateMoveCategoryMutationVariables>;
+
+/**
+ * __useCreateMoveCategoryMutation__
+ *
+ * To run a mutation, you first call `useCreateMoveCategoryMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateMoveCategoryMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createMoveCategoryMutation, { data, loading, error }] = useCreateMoveCategoryMutation({
+ *   variables: {
+ *      characterSlug: // value for 'characterSlug'
+ *      attributes: // value for 'attributes'
+ *   },
+ * });
+ */
+export function useCreateMoveCategoryMutation(baseOptions?: Apollo.MutationHookOptions<CreateMoveCategoryMutation, CreateMoveCategoryMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateMoveCategoryMutation, CreateMoveCategoryMutationVariables>(CreateMoveCategoryDocument, options);
+      }
+export type CreateMoveCategoryMutationHookResult = ReturnType<typeof useCreateMoveCategoryMutation>;
+export type CreateMoveCategoryMutationResult = Apollo.MutationResult<CreateMoveCategoryMutation>;
+export type CreateMoveCategoryMutationOptions = Apollo.BaseMutationOptions<CreateMoveCategoryMutation, CreateMoveCategoryMutationVariables>;
+export const UpdateMoveCategoryDocument = gql`
+    mutation UpdateMoveCategory($moveCategoryId: ID!, $attributes: MoveCategoryAttributes!) {
+  updateMoveCategory(
+    input: {moveCategoryId: $moveCategoryId, attributes: $attributes}
+  ) {
+    moveCategory {
+      ...MoveCategoryBox
+    }
+  }
+}
+    ${MoveCategoryBoxFragmentDoc}`;
+export type UpdateMoveCategoryMutationFn = Apollo.MutationFunction<UpdateMoveCategoryMutation, UpdateMoveCategoryMutationVariables>;
+
+/**
+ * __useUpdateMoveCategoryMutation__
+ *
+ * To run a mutation, you first call `useUpdateMoveCategoryMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateMoveCategoryMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateMoveCategoryMutation, { data, loading, error }] = useUpdateMoveCategoryMutation({
+ *   variables: {
+ *      moveCategoryId: // value for 'moveCategoryId'
+ *      attributes: // value for 'attributes'
+ *   },
+ * });
+ */
+export function useUpdateMoveCategoryMutation(baseOptions?: Apollo.MutationHookOptions<UpdateMoveCategoryMutation, UpdateMoveCategoryMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateMoveCategoryMutation, UpdateMoveCategoryMutationVariables>(UpdateMoveCategoryDocument, options);
+      }
+export type UpdateMoveCategoryMutationHookResult = ReturnType<typeof useUpdateMoveCategoryMutation>;
+export type UpdateMoveCategoryMutationResult = Apollo.MutationResult<UpdateMoveCategoryMutation>;
+export type UpdateMoveCategoryMutationOptions = Apollo.BaseMutationOptions<UpdateMoveCategoryMutation, UpdateMoveCategoryMutationVariables>;
+export const DeleteMoveCategoryDocument = gql`
+    mutation DeleteMoveCategory($moveCategoryId: ID!) {
+  deleteMoveCategory(input: {moveCategoryId: $moveCategoryId}) {
+    moveCategory {
+      id
+    }
+  }
+}
+    `;
+export type DeleteMoveCategoryMutationFn = Apollo.MutationFunction<DeleteMoveCategoryMutation, DeleteMoveCategoryMutationVariables>;
+
+/**
+ * __useDeleteMoveCategoryMutation__
+ *
+ * To run a mutation, you first call `useDeleteMoveCategoryMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteMoveCategoryMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteMoveCategoryMutation, { data, loading, error }] = useDeleteMoveCategoryMutation({
+ *   variables: {
+ *      moveCategoryId: // value for 'moveCategoryId'
+ *   },
+ * });
+ */
+export function useDeleteMoveCategoryMutation(baseOptions?: Apollo.MutationHookOptions<DeleteMoveCategoryMutation, DeleteMoveCategoryMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteMoveCategoryMutation, DeleteMoveCategoryMutationVariables>(DeleteMoveCategoryDocument, options);
+      }
+export type DeleteMoveCategoryMutationHookResult = ReturnType<typeof useDeleteMoveCategoryMutation>;
+export type DeleteMoveCategoryMutationResult = Apollo.MutationResult<DeleteMoveCategoryMutation>;
+export type DeleteMoveCategoryMutationOptions = Apollo.BaseMutationOptions<DeleteMoveCategoryMutation, DeleteMoveCategoryMutationVariables>;
+export const MoveTableRowsDocument = gql`
+    query MoveTableRows($moveCategoryId: ID!) {
+  moves(moveCategoryId: $moveCategoryId) {
+    ...MoveTableRow
+  }
+}
+    ${MoveTableRowFragmentDoc}`;
+
+/**
+ * __useMoveTableRowsQuery__
+ *
+ * To run a query within a React component, call `useMoveTableRowsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMoveTableRowsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMoveTableRowsQuery({
+ *   variables: {
+ *      moveCategoryId: // value for 'moveCategoryId'
+ *   },
+ * });
+ */
+export function useMoveTableRowsQuery(baseOptions: Apollo.QueryHookOptions<MoveTableRowsQuery, MoveTableRowsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<MoveTableRowsQuery, MoveTableRowsQueryVariables>(MoveTableRowsDocument, options);
+      }
+export function useMoveTableRowsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MoveTableRowsQuery, MoveTableRowsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<MoveTableRowsQuery, MoveTableRowsQueryVariables>(MoveTableRowsDocument, options);
+        }
+export type MoveTableRowsQueryHookResult = ReturnType<typeof useMoveTableRowsQuery>;
+export type MoveTableRowsLazyQueryHookResult = ReturnType<typeof useMoveTableRowsLazyQuery>;
+export type MoveTableRowsQueryResult = Apollo.QueryResult<MoveTableRowsQuery, MoveTableRowsQueryVariables>;
 export const CreateMoveVideoDocument = gql`
     mutation CreateMoveVideo($moveId: ID!) {
   createMoveVideo(input: {moveId: $moveId}) {
@@ -4293,41 +4440,6 @@ export function useDeleteMoveMutation(baseOptions?: Apollo.MutationHookOptions<D
 export type DeleteMoveMutationHookResult = ReturnType<typeof useDeleteMoveMutation>;
 export type DeleteMoveMutationResult = Apollo.MutationResult<DeleteMoveMutation>;
 export type DeleteMoveMutationOptions = Apollo.BaseMutationOptions<DeleteMoveMutation, DeleteMoveMutationVariables>;
-export const DeleteMoveCategoryDocument = gql`
-    mutation DeleteMoveCategory($moveCategoryId: ID!) {
-  deleteMoveCategory(input: {moveCategoryId: $moveCategoryId}) {
-    moveCategory {
-      id
-    }
-  }
-}
-    `;
-export type DeleteMoveCategoryMutationFn = Apollo.MutationFunction<DeleteMoveCategoryMutation, DeleteMoveCategoryMutationVariables>;
-
-/**
- * __useDeleteMoveCategoryMutation__
- *
- * To run a mutation, you first call `useDeleteMoveCategoryMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useDeleteMoveCategoryMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [deleteMoveCategoryMutation, { data, loading, error }] = useDeleteMoveCategoryMutation({
- *   variables: {
- *      moveCategoryId: // value for 'moveCategoryId'
- *   },
- * });
- */
-export function useDeleteMoveCategoryMutation(baseOptions?: Apollo.MutationHookOptions<DeleteMoveCategoryMutation, DeleteMoveCategoryMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<DeleteMoveCategoryMutation, DeleteMoveCategoryMutationVariables>(DeleteMoveCategoryDocument, options);
-      }
-export type DeleteMoveCategoryMutationHookResult = ReturnType<typeof useDeleteMoveCategoryMutation>;
-export type DeleteMoveCategoryMutationResult = Apollo.MutationResult<DeleteMoveCategoryMutation>;
-export type DeleteMoveCategoryMutationOptions = Apollo.BaseMutationOptions<DeleteMoveCategoryMutation, DeleteMoveCategoryMutationVariables>;
 export const PlayerTableRowsDocument = gql`
     query PlayerTableRows($page: Int = 1, $keyword: String) {
   players(page: $page, per: 10, keyword: $keyword) {
@@ -5138,44 +5250,6 @@ export function useAdminMoveCategoryNewPageLazyQuery(baseOptions?: Apollo.LazyQu
 export type AdminMoveCategoryNewPageQueryHookResult = ReturnType<typeof useAdminMoveCategoryNewPageQuery>;
 export type AdminMoveCategoryNewPageLazyQueryHookResult = ReturnType<typeof useAdminMoveCategoryNewPageLazyQuery>;
 export type AdminMoveCategoryNewPageQueryResult = Apollo.QueryResult<AdminMoveCategoryNewPageQuery, AdminMoveCategoryNewPageQueryVariables>;
-export const CreateMoveCategoryDocument = gql`
-    mutation CreateMoveCategory($characterSlug: String!, $attributes: MoveCategoryAttributes!) {
-  createMoveCategory(
-    input: {characterSlug: $characterSlug, attributes: $attributes}
-  ) {
-    moveCategory {
-      id
-    }
-  }
-}
-    `;
-export type CreateMoveCategoryMutationFn = Apollo.MutationFunction<CreateMoveCategoryMutation, CreateMoveCategoryMutationVariables>;
-
-/**
- * __useCreateMoveCategoryMutation__
- *
- * To run a mutation, you first call `useCreateMoveCategoryMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useCreateMoveCategoryMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [createMoveCategoryMutation, { data, loading, error }] = useCreateMoveCategoryMutation({
- *   variables: {
- *      characterSlug: // value for 'characterSlug'
- *      attributes: // value for 'attributes'
- *   },
- * });
- */
-export function useCreateMoveCategoryMutation(baseOptions?: Apollo.MutationHookOptions<CreateMoveCategoryMutation, CreateMoveCategoryMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<CreateMoveCategoryMutation, CreateMoveCategoryMutationVariables>(CreateMoveCategoryDocument, options);
-      }
-export type CreateMoveCategoryMutationHookResult = ReturnType<typeof useCreateMoveCategoryMutation>;
-export type CreateMoveCategoryMutationResult = Apollo.MutationResult<CreateMoveCategoryMutation>;
-export type CreateMoveCategoryMutationOptions = Apollo.BaseMutationOptions<CreateMoveCategoryMutation, CreateMoveCategoryMutationVariables>;
 export const CreateCharacterDocument = gql`
     mutation CreateCharacter($attributes: CharacterAttributes!) {
   createCharacter(input: {attributes: $attributes}) {
@@ -5509,44 +5583,6 @@ export function usePageAdminMoveCategoryEditLazyQuery(baseOptions?: Apollo.LazyQ
 export type PageAdminMoveCategoryEditQueryHookResult = ReturnType<typeof usePageAdminMoveCategoryEditQuery>;
 export type PageAdminMoveCategoryEditLazyQueryHookResult = ReturnType<typeof usePageAdminMoveCategoryEditLazyQuery>;
 export type PageAdminMoveCategoryEditQueryResult = Apollo.QueryResult<PageAdminMoveCategoryEditQuery, PageAdminMoveCategoryEditQueryVariables>;
-export const UpdateMoveCategoryDocument = gql`
-    mutation UpdateMoveCategory($moveCategoryId: ID!, $attributes: MoveCategoryAttributes!) {
-  updateMoveCategory(
-    input: {moveCategoryId: $moveCategoryId, attributes: $attributes}
-  ) {
-    moveCategory {
-      id
-    }
-  }
-}
-    `;
-export type UpdateMoveCategoryMutationFn = Apollo.MutationFunction<UpdateMoveCategoryMutation, UpdateMoveCategoryMutationVariables>;
-
-/**
- * __useUpdateMoveCategoryMutation__
- *
- * To run a mutation, you first call `useUpdateMoveCategoryMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useUpdateMoveCategoryMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [updateMoveCategoryMutation, { data, loading, error }] = useUpdateMoveCategoryMutation({
- *   variables: {
- *      moveCategoryId: // value for 'moveCategoryId'
- *      attributes: // value for 'attributes'
- *   },
- * });
- */
-export function useUpdateMoveCategoryMutation(baseOptions?: Apollo.MutationHookOptions<UpdateMoveCategoryMutation, UpdateMoveCategoryMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<UpdateMoveCategoryMutation, UpdateMoveCategoryMutationVariables>(UpdateMoveCategoryDocument, options);
-      }
-export type UpdateMoveCategoryMutationHookResult = ReturnType<typeof useUpdateMoveCategoryMutation>;
-export type UpdateMoveCategoryMutationResult = Apollo.MutationResult<UpdateMoveCategoryMutation>;
-export type UpdateMoveCategoryMutationOptions = Apollo.BaseMutationOptions<UpdateMoveCategoryMutation, UpdateMoveCategoryMutationVariables>;
 export const CreateReversalMoveDocument = gql`
     mutation CreateReversalMove($moveCategoryId: ID!, $attributes: ReversalMoveAttributes!) {
   createReversalMove(

@@ -14,9 +14,6 @@ export const pagesPath = {
           $url: (url?: { hash?: string }) => ({ pathname: '/admin/characters/[slug]/edit' as const, query: { slug }, hash: url?.hash })
         },
         "move_categories": {
-          "new": {
-            $url: (url?: { hash?: string }) => ({ pathname: '/admin/characters/[slug]/move_categories/new' as const, query: { slug }, hash: url?.hash })
-          },
           $url: (url?: { hash?: string }) => ({ pathname: '/admin/characters/[slug]/move_categories' as const, query: { slug }, hash: url?.hash })
         }
       }),
