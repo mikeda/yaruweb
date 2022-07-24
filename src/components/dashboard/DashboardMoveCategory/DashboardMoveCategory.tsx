@@ -1,50 +1,59 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 
 import DeleteIcon from '@mui/icons-material/Delete';
 import { IconButton, Stack, Typography } from '@mui/material';
+import { toast } from 'react-toastify';
+import { useSetRecoilState } from 'recoil';
 
 import { UpdateButton } from './UpdateButton';
 
 import { MoveTable } from '@/components';
 import {
-  MoveCategoryAttributes,
   DashboardMoveCategoryFragment,
   MoveCategoryPositionSelectFragment,
+  useDeleteMoveCategoryMutation,
 } from '@/generated/graphql';
+import { loadingState } from '@/lib';
 
 interface Props {
   moveCategory: DashboardMoveCategoryFragment;
   moveCategories: MoveCategoryPositionSelectFragment[];
-  onClickUpdate: (moveCategoryId: string, attributes: MoveCategoryAttributes) => void;
-  onClickDelete: (moveCategoryId: string) => void;
 }
 
-export const DashboardMoveCategory: React.FC<Props> = ({
-  moveCategory,
-  moveCategories,
-  onClickUpdate,
-  onClickDelete,
-}) => {
+export const DashboardMoveCategory: React.FC<Props> = ({ moveCategory, moveCategories }) => {
+  const setLoading = useSetRecoilState(loadingState);
+
+  const [del, { loading }] = useDeleteMoveCategoryMutation({
+    variables: { moveCategoryId: moveCategory.id },
+    onCompleted: () => {
+      toast.success('カテゴリを削除しました。');
+    },
+    onError: e => {
+      toast.error(e.message);
+    },
+  });
+
+  const onClickDelete = useCallback(() => {
+    if (window.confirm('削除します。')) {
+      del();
+    }
+  }, []);
+
+  setLoading(loading);
+
   return (
     <Stack spacing={1}>
       <Stack direction="row" alignItems="center" spacing={2}>
         <Typography variant="h2">{moveCategory.name}</Typography>
 
-        <UpdateButton moveCategoryId={moveCategory.id} moveCategories={moveCategories} onClickUpdate={onClickUpdate} />
+        <UpdateButton moveCategoryId={moveCategory.id} moveCategories={moveCategories} />
 
-        <IconButton
-          onClick={() => {
-            if (window.confirm('削除します。')) {
-              onClickDelete(moveCategory.id);
-            }
-          }}
-          size="large"
-        >
+        <IconButton onClick={onClickDelete} size="large">
           <DeleteIcon />
         </IconButton>
       </Stack>
 
-      <MoveTable moveCategoryId={moveCategory.id} />
+      <MoveTable moveCategoryId={moveCategory.id} moves={moveCategory.moves} />
     </Stack>
   );
 };

@@ -1,5 +1,3 @@
-import type { Query as Query0 } from '../pages/admin/move_categories/[id]/moves/new/index.page'
-
 export const pagesPath = {
   "admin": {
     "characters": {
@@ -45,11 +43,6 @@ export const pagesPath = {
       _id: (id: string | number) => ({
         "edit": {
           $url: (url?: { hash?: string }) => ({ pathname: '/admin/move_categories/[id]/edit' as const, query: { id }, hash: url?.hash })
-        },
-        "moves": {
-          "new": {
-            $url: (url: { query: Query0, hash?: string }) => ({ pathname: '/admin/move_categories/[id]/moves/new' as const, query: { id, ...url.query }, hash: url.hash })
-          }
         }
       })
     },

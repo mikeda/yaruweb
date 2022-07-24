@@ -1,7 +1,0 @@
-mutation CreateThrowMove($moveCategoryId: ID!, $attributes: ThrowMoveAttributes!) {
-  createThrowMove(input: { moveCategoryId: $moveCategoryId, attributes: $attributes }) {
-    move {
-      ...MoveTableRow
-    }
-  }
-}

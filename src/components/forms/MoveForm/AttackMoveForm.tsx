@@ -4,11 +4,10 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import {
   Box,
   Button,
-  Card,
-  CardContent,
   Checkbox,
   Chip,
-  Divider,
+  DialogActions,
+  DialogContent,
   FormControl,
   FormControlLabel,
   Grid,
@@ -206,354 +205,350 @@ export const AttackMoveForm: React.FC<Props> = ({ move, moves, onSubmit, copy = 
   const command = watch('move.command');
 
   return (
-    <Card>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <CardContent>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <DialogContent dividers>
+        <Grid container spacing={2}>
+          <Grid item xs={12} sm={6}>
+            <Controller
+              name="move.name"
+              control={control}
+              render={({ field }) => (
+                <TextField
+                  {...field}
+                  label="名前"
+                  error={Boolean(errors.move?.name)}
+                  helperText={errors.move?.name?.message}
+                  size="small"
+                  fullWidth
+                />
+              )}
+            />
+          </Grid>
+
+          <Grid item xs={12} sm={6}>
+            <Controller
+              name="move.kana"
+              control={control}
+              render={({ field }) => <TextField {...field} label="カナ" size="small" fullWidth />}
+            />
+          </Grid>
+        </Grid>
+
+        <Box mt={4}>
+          <Typography variant="h4" gutterBottom>
+            コマンド
+          </Typography>
+
+          <CommandForm
+            command={command}
+            onChange={newCommand => {
+              setValue(`move.command`, newCommand);
+            }}
+          />
+        </Box>
+
+        <Box mt={4}>
+          <Controller
+            name="move.statusAfter"
+            control={control}
+            render={({ field }) => <TextField {...field} type="text" label="技後の状態" size="small" fullWidth />}
+          />
+        </Box>
+
+        <Box mt={4}>
+          <Typography variant="h4" gutterBottom>
+            判定
+          </Typography>
+
+          <div className={classes.chips}>
+            {heights.map((h, i) => (
+              <Chip variant="outlined" key={i} label={AttackTypeEnumText[h]} />
+            ))}
+          </div>
+
+          <div className={classes.chips}>
+            <FormControl variant="outlined" size="small">
+              <Select defaultValue="h" inputRef={heightRef}>
+                {Object.entries(AttackTypeEnumText).map(([key, value]) => (
+                  <MenuItem key={key} value={key}>
+                    {value}
+                  </MenuItem>
+                ))}
+              </Select>
+            </FormControl>
+
+            <Button
+              onClick={() => {
+                if (!heightRef.current) return;
+
+                const height = heightRef.current.value as AttackTypeEnum;
+                if (height) {
+                  setValue('attack.heights', [...heights, height]);
+                }
+              }}
+            >
+              追加
+            </Button>
+
+            <Button
+              onClick={() => {
+                setValue('attack.heights', heights.slice(0, -1));
+              }}
+            >
+              削除
+            </Button>
+          </div>
+        </Box>
+
+        <Box mt={4}>
+          <Typography variant="h4" gutterBottom>
+            ダメージ
+          </Typography>
+
+          <div className={classes.chips}>
+            {damages.map((d, i) => (
+              <Chip variant="outlined" key={i} label={d} />
+            ))}
+            <Chip label={`合計 ${damages.reduce((a, b) => a + b, 0)}`} />
+          </div>
+
+          <div className={classes.chips}>
+            <TextField inputRef={damageRef} type="number" size="small" defaultValue={10} />
+            <Button
+              onClick={() => {
+                if (!damageRef.current?.value) return;
+
+                const damage = Number(damageRef.current.value);
+                if (damage) {
+                  setValue('attack.damages', [...damages, damage]);
+                }
+              }}
+            >
+              追加
+            </Button>
+            <Button
+              onClick={() => {
+                setValue('attack.damages', damages.slice(0, -1));
+              }}
+            >
+              削除
+            </Button>
+          </div>
+        </Box>
+
+        <Box mt={4}>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={4}>
+              <Typography variant="h4" gutterBottom>
+                発生
+              </Typography>
+
               <Controller
-                name="move.name"
+                name="attack.startUpFrame"
                 control={control}
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    label="名前"
-                    error={Boolean(errors.move?.name)}
-                    helperText={errors.move?.name?.message}
+                    type="number"
+                    label="フレーム"
                     size="small"
                     fullWidth
+                    error={Boolean(errors.attack?.startUpFrame)}
+                    helperText={errors.attack?.startUpFrame?.message}
                   />
                 )}
               />
             </Grid>
 
-            <Grid item xs={12} sm={6}>
+            <Grid item xs={12} sm={4}>
+              <Typography variant="h4" gutterBottom>
+                持続
+              </Typography>
+
               <Controller
-                name="move.kana"
+                name="attack.duration"
                 control={control}
-                render={({ field }) => <TextField {...field} label="カナ" size="small" fullWidth />}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    type="number"
+                    label="フレーム"
+                    size="small"
+                    fullWidth
+                    error={Boolean(errors.attack?.duration)}
+                    helperText={errors.attack?.duration?.message}
+                  />
+                )}
+              />
+            </Grid>
+
+            <Grid item xs={12} sm={4}>
+              <Typography variant="h4" gutterBottom>
+                リーチ
+              </Typography>
+
+              <Controller
+                name="attack.reach"
+                control={control}
+                render={({ field }) => (
+                  <TextField
+                    {...field}
+                    type="number"
+                    size="small"
+                    fullWidth
+                    error={Boolean(errors.attack?.reach)}
+                    helperText={errors.attack?.reach?.message}
+                  />
+                )}
               />
             </Grid>
           </Grid>
+        </Box>
 
-          <Box mt={4}>
+        {frameCols.map(({ label, result: resultKey, frame: frameKey, state: stateKey }) => (
+          <Box key={label} mt={4}>
             <Typography variant="h4" gutterBottom>
-              コマンド
+              {label}
             </Typography>
 
-            <CommandForm
-              command={command}
-              onChange={newCommand => {
-                setValue(`move.command`, newCommand);
-              }}
-            />
-          </Box>
+            <Grid container spacing={2}>
+              <Grid item xs={12} sm={4}>
+                <FormControl fullWidth variant="outlined" size="small">
+                  <Controller
+                    control={control}
+                    name={resultKey}
+                    render={({ field }) => (
+                      <Select
+                        {...field}
+                        onChange={e => {
+                          const result = e.target.value as AttackMoveResultEnum;
+                          setValue(resultKey, result);
+                        }}
+                      >
+                        {Object.entries(AttackMoveResultText).map(([key, value]) => (
+                          <MenuItem key={key} value={key}>
+                            {value}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    )}
+                  />
+                </FormControl>
+              </Grid>
 
-          <Box mt={4}>
+              <Grid item xs={12} sm={4}>
+                <Controller
+                  name={`attack.${frameKey}`}
+                  control={control}
+                  render={({ field }) => (
+                    <TextField
+                      {...field}
+                      type="number"
+                      label="フレーム"
+                      size="small"
+                      fullWidth
+                      error={Boolean(errors.attack && errors.attack[frameKey])}
+                      helperText={errors.attack && errors.attack[frameKey]?.message}
+                    />
+                  )}
+                />
+              </Grid>
+
+              <Grid item xs={12} sm={4}>
+                <FormControl fullWidth variant="outlined" size="small">
+                  <InputLabel>相手の状態</InputLabel>
+                  <Controller
+                    control={control}
+                    name={stateKey}
+                    render={({ field }) => (
+                      <Select
+                        {...field}
+                        onChange={e => {
+                          const result = e.target.value as AttackMoveStateEnum;
+                          setValue(stateKey, result);
+                        }}
+                      >
+                        {Object.entries(AttackMoveStateEnumText).map(([key, value]) => (
+                          <MenuItem key={key} value={key}>
+                            {value}
+                          </MenuItem>
+                        ))}
+                      </Select>
+                    )}
+                  />
+                </FormControl>
+              </Grid>
+            </Grid>
+          </Box>
+        ))}
+
+        <Box mt={4}>
+          <Typography variant="h4" gutterBottom>
+            ステータス
+          </Typography>
+          <Grid container spacing={2}>
+            {checkboxes.map(({ label, name }) => (
+              <Grid key={name} item xs={12} sm={4}>
+                <FormControlLabel
+                  control={
+                    <Controller
+                      name={name}
+                      render={({ field }) => <Checkbox {...field} checked={field.value} />}
+                      control={control}
+                    />
+                  }
+                  label={label}
+                />
+              </Grid>
+            ))}
+          </Grid>
+        </Box>
+
+        <Box mt={4}>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <Controller
+                name="move.note"
+                control={control}
+                render={({ field }) => <TextField {...field} label="備考" fullWidth multiline />}
+              />
+            </Grid>
+          </Grid>
+        </Box>
+
+        <Box mt={4}>
+          <FormControl fullWidth variant="outlined" size="small">
+            <InputLabel>表示順</InputLabel>
             <Controller
-              name="move.statusAfter"
+              name="move.position"
               control={control}
-              render={({ field }) => <TextField {...field} type="text" label="技後の状態" size="small" fullWidth />}
-            />
-          </Box>
-
-          <Box mt={4}>
-            <Typography variant="h4" gutterBottom>
-              判定
-            </Typography>
-
-            <div className={classes.chips}>
-              {heights.map((h, i) => (
-                <Chip variant="outlined" key={i} label={AttackTypeEnumText[h]} />
-              ))}
-            </div>
-
-            <div className={classes.chips}>
-              <FormControl variant="outlined" size="small">
-                <Select defaultValue="h" inputRef={heightRef}>
-                  {Object.entries(AttackTypeEnumText).map(([key, value]) => (
-                    <MenuItem key={key} value={key}>
-                      {value}
+              render={({ field }) => (
+                <Select
+                  {...field}
+                  onChange={e => {
+                    const position = Number(e.target.value);
+                    setValue('move.position', position);
+                  }}
+                >
+                  <MenuItem value={0}>先頭</MenuItem>
+                  {moves.map((m, i) => (
+                    <MenuItem key={m.id} value={m.position + 1}>
+                      {m.name}の後ろ
+                      {i == moves.length && '(最後)'}
                     </MenuItem>
                   ))}
                 </Select>
-              </FormControl>
-
-              <Button
-                onClick={() => {
-                  if (!heightRef.current) return;
-
-                  const height = heightRef.current.value as AttackTypeEnum;
-                  if (height) {
-                    setValue('attack.heights', [...heights, height]);
-                  }
-                }}
-              >
-                追加
-              </Button>
-
-              <Button
-                onClick={() => {
-                  setValue('attack.heights', heights.slice(0, -1));
-                }}
-              >
-                削除
-              </Button>
-            </div>
-          </Box>
-
-          <Box mt={4}>
-            <Typography variant="h4" gutterBottom>
-              ダメージ
-            </Typography>
-
-            <div className={classes.chips}>
-              {damages.map((d, i) => (
-                <Chip variant="outlined" key={i} label={d} />
-              ))}
-              <Chip label={`合計 ${damages.reduce((a, b) => a + b, 0)}`} />
-            </div>
-
-            <div className={classes.chips}>
-              <TextField inputRef={damageRef} type="number" size="small" defaultValue={10} />
-              <Button
-                onClick={() => {
-                  if (!damageRef.current?.value) return;
-
-                  const damage = Number(damageRef.current.value);
-                  if (damage) {
-                    setValue('attack.damages', [...damages, damage]);
-                  }
-                }}
-              >
-                追加
-              </Button>
-              <Button
-                onClick={() => {
-                  setValue('attack.damages', damages.slice(0, -1));
-                }}
-              >
-                削除
-              </Button>
-            </div>
-          </Box>
-
-          <Box mt={4}>
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={4}>
-                <Typography variant="h4" gutterBottom>
-                  発生
-                </Typography>
-
-                <Controller
-                  name="attack.startUpFrame"
-                  control={control}
-                  render={({ field }) => (
-                    <TextField
-                      {...field}
-                      type="number"
-                      label="フレーム"
-                      size="small"
-                      fullWidth
-                      error={Boolean(errors.attack?.startUpFrame)}
-                      helperText={errors.attack?.startUpFrame?.message}
-                    />
-                  )}
-                />
-              </Grid>
-
-              <Grid item xs={12} sm={4}>
-                <Typography variant="h4" gutterBottom>
-                  持続
-                </Typography>
-
-                <Controller
-                  name="attack.duration"
-                  control={control}
-                  render={({ field }) => (
-                    <TextField
-                      {...field}
-                      type="number"
-                      label="フレーム"
-                      size="small"
-                      fullWidth
-                      error={Boolean(errors.attack?.duration)}
-                      helperText={errors.attack?.duration?.message}
-                    />
-                  )}
-                />
-              </Grid>
-
-              <Grid item xs={12} sm={4}>
-                <Typography variant="h4" gutterBottom>
-                  リーチ
-                </Typography>
-
-                <Controller
-                  name="attack.reach"
-                  control={control}
-                  render={({ field }) => (
-                    <TextField
-                      {...field}
-                      type="number"
-                      size="small"
-                      fullWidth
-                      error={Boolean(errors.attack?.reach)}
-                      helperText={errors.attack?.reach?.message}
-                    />
-                  )}
-                />
-              </Grid>
-            </Grid>
-          </Box>
-
-          {frameCols.map(({ label, result: resultKey, frame: frameKey, state: stateKey }) => (
-            <Box key={label} mt={4}>
-              <Typography variant="h4" gutterBottom>
-                {label}
-              </Typography>
-
-              <Grid container spacing={2}>
-                <Grid item xs={12} sm={4}>
-                  <FormControl fullWidth variant="outlined" size="small">
-                    <Controller
-                      control={control}
-                      name={resultKey}
-                      render={({ field }) => (
-                        <Select
-                          {...field}
-                          onChange={e => {
-                            const result = e.target.value as AttackMoveResultEnum;
-                            setValue(resultKey, result);
-                          }}
-                        >
-                          {Object.entries(AttackMoveResultText).map(([key, value]) => (
-                            <MenuItem key={key} value={key}>
-                              {value}
-                            </MenuItem>
-                          ))}
-                        </Select>
-                      )}
-                    />
-                  </FormControl>
-                </Grid>
-
-                <Grid item xs={12} sm={4}>
-                  <Controller
-                    name={`attack.${frameKey}`}
-                    control={control}
-                    render={({ field }) => (
-                      <TextField
-                        {...field}
-                        type="number"
-                        label="フレーム"
-                        size="small"
-                        fullWidth
-                        error={Boolean(errors.attack && errors.attack[frameKey])}
-                        helperText={errors.attack && errors.attack[frameKey]?.message}
-                      />
-                    )}
-                  />
-                </Grid>
-
-                <Grid item xs={12} sm={4}>
-                  <FormControl fullWidth variant="outlined" size="small">
-                    <InputLabel>相手の状態</InputLabel>
-                    <Controller
-                      control={control}
-                      name={stateKey}
-                      render={({ field }) => (
-                        <Select
-                          {...field}
-                          onChange={e => {
-                            const result = e.target.value as AttackMoveStateEnum;
-                            setValue(stateKey, result);
-                          }}
-                        >
-                          {Object.entries(AttackMoveStateEnumText).map(([key, value]) => (
-                            <MenuItem key={key} value={key}>
-                              {value}
-                            </MenuItem>
-                          ))}
-                        </Select>
-                      )}
-                    />
-                  </FormControl>
-                </Grid>
-              </Grid>
-            </Box>
-          ))}
-
-          <Box mt={4}>
-            <Typography variant="h4" gutterBottom>
-              ステータス
-            </Typography>
-            <Grid container spacing={2}>
-              {checkboxes.map(({ label, name }) => (
-                <Grid key={name} item xs={12} sm={4}>
-                  <FormControlLabel
-                    control={
-                      <Controller
-                        name={name}
-                        render={({ field }) => <Checkbox {...field} checked={field.value} />}
-                        control={control}
-                      />
-                    }
-                    label={label}
-                  />
-                </Grid>
-              ))}
-            </Grid>
-          </Box>
-
-          <Box mt={4}>
-            <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <Controller
-                  name="move.note"
-                  control={control}
-                  render={({ field }) => <TextField {...field} label="備考" fullWidth multiline />}
-                />
-              </Grid>
-            </Grid>
-          </Box>
-
-          <Box mt={4}>
-            <FormControl fullWidth variant="outlined" size="small">
-              <InputLabel>表示順</InputLabel>
-              <Controller
-                name="move.position"
-                control={control}
-                render={({ field }) => (
-                  <Select
-                    {...field}
-                    onChange={e => {
-                      const position = Number(e.target.value);
-                      setValue('move.position', position);
-                    }}
-                  >
-                    <MenuItem value={0}>先頭</MenuItem>
-                    {moves.map((m, i) => (
-                      <MenuItem key={m.id} value={m.position + 1}>
-                        {m.name}の後ろ
-                        {i == moves.length && '(最後)'}
-                      </MenuItem>
-                    ))}
-                  </Select>
-                )}
-              />
-            </FormControl>
-          </Box>
-        </CardContent>
-
-        <Divider />
-
-        <Box m={2} display="flex" justifyContent="center">
-          <Button type="submit" variant="contained">
-            登録する
-          </Button>
+              )}
+            />
+          </FormControl>
         </Box>
-      </form>
-    </Card>
+      </DialogContent>
+
+      <DialogActions>
+        <Button type="submit" variant="contained">
+          登録する
+        </Button>
+      </DialogActions>
+    </form>
   );
 };

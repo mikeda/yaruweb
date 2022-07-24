@@ -1,0 +1,76 @@
+fragment MoveTableRow on Move {
+  id
+  name
+  command
+
+  ...MovePositionSelect
+
+  moveVideo {
+    id
+    m3u8Url
+    thumbnailUrl
+  }
+}
+
+mutation CreateAttackMove($moveCategoryId: ID!, $attributes: AttackMoveAttributes!) {
+  createAttackMove(input: { moveCategoryId: $moveCategoryId, attributes: $attributes }) {
+    move {
+      ...MoveTableRow
+
+      moveCategory {
+        id
+        moves { id }
+      }
+    }
+  }
+}
+
+mutation CreateThrowMove($moveCategoryId: ID!, $attributes: ThrowMoveAttributes!) {
+  createThrowMove(input: { moveCategoryId: $moveCategoryId, attributes: $attributes }) {
+    move {
+      ...MoveTableRow
+
+      moveCategory {
+        id
+        moves { id }
+      }
+    }
+  }
+}
+
+mutation CreateReversalMove($moveCategoryId: ID!, $attributes: ReversalMoveAttributes!) {
+  createReversalMove(input: { moveCategoryId: $moveCategoryId, attributes: $attributes }) {
+    move {
+      ...MoveTableRow
+
+      moveCategory {
+        id
+        moves { id }
+      }
+    }
+  }
+}
+
+mutation DeleteMove($moveId: ID!) {
+  deleteMove(input: { moveId: $moveId }) {
+    move {
+      moveCategory {
+        id
+        moves { id }
+      }
+    }
+  }
+}
+
+mutation CreateMoveVideo($moveId: ID!) {
+  createMoveVideo(input: { moveId: $moveId }) {
+    move {
+      ...MoveTableRow
+    }
+
+    videoUpload {
+      url
+      fields
+    }
+  }
+}

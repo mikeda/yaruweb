@@ -5,36 +5,19 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import YouTubeIcon from '@mui/icons-material/YouTube';
 import { Dialog, DialogActions, DialogContent, IconButton, TableCell, TableRow, Typography } from '@mui/material';
-import { useRouter } from 'next/router';
 import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
 import { Command, VideoPlayer } from '@/components';
-import { pagesPath } from '@/generated/$path';
-import { MoveTableRowFragment, useCreateMoveVideoMutation, useDeleteMoveMutation } from '@/generated/graphql';
-import { loadingState, colors, resolveUrlObject } from '@/lib';
+import { MoveTableRowFragment, useCreateMoveVideoMutation } from '@/generated/graphql';
+import { loadingState, colors } from '@/lib';
 
 interface Props {
   move: MoveTableRowFragment;
-  afterDelete: (moveId: string) => void;
+  onClickDelete: (moveId: string) => void;
 }
 
-export const MoveTableRow: React.FC<Props> = ({ move, afterDelete }) => {
-  const router = useRouter();
-  const [destroy, { loading }] = useDeleteMoveMutation({
-    variables: { moveId: move.id },
-    onCompleted: data => {
-      const move = data.deleteMove?.move;
-      if (!move) return;
-
-      afterDelete(move.id);
-      toast.success('カテゴリを削除しました。');
-    },
-  });
-  const setLoading = useSetRecoilState(loadingState);
-
-  setLoading(loading);
-
+export const MoveTableRow: React.FC<Props> = ({ move, onClickDelete }) => {
   return (
     <TableRow>
       <TableCell scope="row">
@@ -46,18 +29,18 @@ export const MoveTableRow: React.FC<Props> = ({ move, afterDelete }) => {
       <TableCell align="right" scope="row">
         <VideoButton move={move} />
 
-        <IconButton href={resolveUrlObject(router, pagesPath.admin.moves._id(move.id).edit.$url())} size="large">
+        <IconButton size="large">
           <EditIcon />
         </IconButton>
 
-        <IconButton href={resolveUrlObject(router, pagesPath.admin.moves._id(move.id).copy.$url())} size="large">
+        <IconButton size="large">
           <ContentCopyIcon />
         </IconButton>
 
         <IconButton
           onClick={() => {
             if (window.confirm('削除します。')) {
-              destroy();
+              onClickDelete(move.id);
             }
           }}
           size="large"
