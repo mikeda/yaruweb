@@ -1,6 +1,5 @@
 import React, { useCallback } from 'react';
 
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import DeleteIcon from '@mui/icons-material/Delete';
 import { IconButton, TableCell, TableRow, Typography } from '@mui/material';
 import { toast } from 'react-toastify';
