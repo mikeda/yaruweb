@@ -1,59 +1,6 @@
-fragment AdminMoveCategoriesPageMoveCategory on MoveCategory {
-  id
-  name
-
-  moves {
-    ...AdminMoveCategoriesPageMove
-  }
-}
-
-fragment AdminMoveCategoriesPageMove on Move {
-  id
-  name
-  command
-
-  moveVideo {
-    id
-    m3u8Url
-    thumbnailUrl
-  }
-}
-
-query AdminMoveCategoriesPage($characterSlug: String!) {
+query DashboardCharacterMovesPage($characterSlug: String!) {
   character(characterSlug: $characterSlug) {
     ...CharacterBreadcrumbs
-  }
-
-  moveCategories(characterSlug: $characterSlug) {
-    ...AdminMoveCategoriesPageMoveCategory
-  }
-}
-
-mutation CreateMoveVideo($moveId: ID!) {
-  createMoveVideo(input: { moveId: $moveId }) {
-    move {
-      ...AdminMoveCategoriesPageMove
-    }
-
-    videoUpload {
-      url
-      fields
-    }
-  }
-}
-
-mutation DeleteMove($moveId: ID!) {
-  deleteMove(input: { moveId: $moveId }) {
-    move {
-      id
-    }
-  }
-}
-
-mutation DeleteMoveCategory($moveCategoryId: ID!) {
-  deleteMoveCategory(input: { moveCategoryId: $moveCategoryId }) {
-    moveCategory {
-      id
-    }
+    ...DashboardMoveCategories
   }
 }

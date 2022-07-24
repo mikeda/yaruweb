@@ -1,5 +1,3 @@
-import type { Query as Query0 } from '../pages/admin/move_categories/[id]/moves/new/index.page'
-
 export const pagesPath = {
   "admin": {
     "characters": {
@@ -14,9 +12,6 @@ export const pagesPath = {
           $url: (url?: { hash?: string }) => ({ pathname: '/admin/characters/[slug]/edit' as const, query: { slug }, hash: url?.hash })
         },
         "move_categories": {
-          "new": {
-            $url: (url?: { hash?: string }) => ({ pathname: '/admin/characters/[slug]/move_categories/new' as const, query: { slug }, hash: url?.hash })
-          },
           $url: (url?: { hash?: string }) => ({ pathname: '/admin/characters/[slug]/move_categories' as const, query: { slug }, hash: url?.hash })
         }
       }),
@@ -41,28 +36,6 @@ export const pagesPath = {
       _id: (id: string | number) => ({
         "edit": {
           $url: (url?: { hash?: string }) => ({ pathname: '/admin/combos/[id]/edit' as const, query: { id }, hash: url?.hash })
-        }
-      })
-    },
-    "move_categories": {
-      _id: (id: string | number) => ({
-        "edit": {
-          $url: (url?: { hash?: string }) => ({ pathname: '/admin/move_categories/[id]/edit' as const, query: { id }, hash: url?.hash })
-        },
-        "moves": {
-          "new": {
-            $url: (url: { query: Query0, hash?: string }) => ({ pathname: '/admin/move_categories/[id]/moves/new' as const, query: { id, ...url.query }, hash: url.hash })
-          }
-        }
-      })
-    },
-    "moves": {
-      _id: (id: string | number) => ({
-        "copy": {
-          $url: (url?: { hash?: string }) => ({ pathname: '/admin/moves/[id]/copy' as const, query: { id }, hash: url?.hash })
-        },
-        "edit": {
-          $url: (url?: { hash?: string }) => ({ pathname: '/admin/moves/[id]/edit' as const, query: { id }, hash: url?.hash })
         }
       })
     },

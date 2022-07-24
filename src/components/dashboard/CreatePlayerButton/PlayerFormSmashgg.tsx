@@ -30,9 +30,7 @@ export const PlayerFormSmashgg: React.FC<Props> = ({ open, onClose }) => {
       router.push(pagesPath.admin.players.$url());
       onClose();
     },
-    onError: e => {
-      toast.error(e.message);
-    },
+    onError: e => toast.error(e.message),
   });
 
   const {

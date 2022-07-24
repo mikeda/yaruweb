@@ -8,4 +8,11 @@
   "editor.codeActionsOnSave": {
     "source.fixAll.eslint": true
   },
+  "files.exclude": {
+    ".next/": true,
+    ".vercel/": true,
+    "node_modules/": true,
+    "tsconfig.tsbuildinfo": true,
+    "yarn-error.log": true
+  },
 }

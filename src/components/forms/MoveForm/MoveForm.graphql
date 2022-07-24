@@ -67,6 +67,12 @@ fragment MoveForm on Move {
   }
 }
 
+query MoveForm($moveId: ID!) {
+  move(moveId: $moveId) {
+    ...MoveForm
+  }
+}
+
 fragment MovePositionSelect on Move {
   id
   name

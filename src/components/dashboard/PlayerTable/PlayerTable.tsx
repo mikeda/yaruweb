@@ -34,7 +34,12 @@ export const PlayerTable: React.FC = () => {
     refetch({ page: 1, keyword });
   }, []);
 
-  const onClickMore = useCallback(() => {
+  setLoading(loading || deleteLoading);
+
+  if (!data) return null;
+  const { records: players, paging } = data.players;
+
+  const onClickMore = () => {
     fetchMore({
       variables: { page: paging.currentPage + 1 },
       updateQuery: (prev, { fetchMoreResult: data }) => {
@@ -48,12 +53,7 @@ export const PlayerTable: React.FC = () => {
         };
       },
     });
-  }, []);
-
-  setLoading(loading || deleteLoading);
-
-  if (!data) return null;
-  const { records: players, paging } = data.players;
+  };
 
   return (
     <>
