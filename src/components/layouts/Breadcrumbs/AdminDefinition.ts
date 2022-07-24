@@ -1,8 +1,6 @@
 import {
   CharactersParam,
   ComboCategoryParam,
-  MoveCategoryParam,
-  MoveParam,
   OrganizerParam,
   PlayerParam,
   TournamentParam,
@@ -24,12 +22,7 @@ export type AdminBreadcrumbParams =
   | { to: 'comboCategoryEdit'; comboCategory: ComboCategoryParam }
   | { to: 'combosNew'; comboCategory: ComboCategoryParam }
   | { to: 'comboEdit'; comboCategory: ComboCategoryParam }
-  | { to: 'moveCategories'; character: CharactersParam }
-  | { to: 'moveCategory'; moveCategory: MoveCategoryParam }
-  | { to: 'moveCategoriesNew'; character: CharactersParam }
-  | { to: 'moveCategoryEdit'; moveCategory: MoveCategoryParam }
-  | { to: 'movesNew'; moveCategory: MoveCategoryParam }
-  | { to: 'moveEdit'; move: MoveParam }
+  | { to: 'moves'; character: CharactersParam }
   | { to: 'organizers' }
   | { to: 'organizer'; organizer: OrganizerParam }
   | { to: 'organizersNew' }
@@ -84,33 +77,11 @@ export const breadcrumbChain = (props: AdminBreadcrumbParams): BreadcrumbChainIt
         name: '編集',
         parent: breadcrumbChain({ to: 'comboCategories', character: props.comboCategory.character }),
       };
-    case 'moveCategories':
+    case 'moves':
       return {
         name: 'コマンドリスト',
         url: pagesPath.admin.characters._slug(props.character.slug).moves.$url(),
         parent: breadcrumbChain({ to: 'character', character: props.character }),
-      };
-    case 'moveCategory':
-      return {
-        name: props.moveCategory.name,
-        parent: breadcrumbChain({ to: 'moveCategories', character: props.moveCategory.character }),
-      };
-    case 'moveCategoriesNew':
-      return {
-        name: 'カテゴリを登録',
-        parent: breadcrumbChain({ to: 'moveCategories', character: props.character }),
-      };
-    case 'moveCategoryEdit':
-      return { name: '編集', parent: breadcrumbChain({ to: 'moveCategory', moveCategory: props.moveCategory }) };
-    case 'movesNew':
-      return {
-        name: '技データを登録',
-        parent: breadcrumbChain({ to: 'moveCategories', character: props.moveCategory.character }),
-      };
-    case 'moveEdit':
-      return {
-        name: '編集',
-        parent: breadcrumbChain({ to: 'moveCategories', character: props.move.moveCategory.character }),
       };
     case 'organizers':
       return { name: 'オーガナイザー', url: pagesPath.admin.organizers.$url() };

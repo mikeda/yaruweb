@@ -24,7 +24,7 @@ const Page: React.FC = () => {
   const { character } = data;
 
   return (
-    <AdminContent title="コマンドリスト" breadcrumb={<AdminBreadcrumbs to="moveCategories" character={character} />}>
+    <AdminContent title="コマンドリスト" breadcrumb={<AdminBreadcrumbs to="moves" character={character} />}>
       <DashboardMoveCategories character={character} />
     </AdminContent>
   );
