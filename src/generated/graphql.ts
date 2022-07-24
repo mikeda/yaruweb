@@ -2172,6 +2172,67 @@ export type CharacterTableRowsQueryVariables = Exact<{
 
 export type CharacterTableRowsQuery = { __typename?: 'Query', characters: { __typename?: 'CharacterCollection', records: Array<{ __typename?: 'Character', id: string, slug: string, name: string, faceImageUrl: string, movesCount: number, combosCount: number }> } };
 
+export type ComboDashboardCategoryFragment = { __typename?: 'ComboCategory', id: string, name: string, position: number, combos: Array<{ __typename?: 'Combo', id: string, command: Array<string>, position: number, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> };
+
+export type ComboDashboardFragment = { __typename?: 'Character', id: string, slug: string, comboCategories: Array<{ __typename?: 'ComboCategory', id: string, name: string, position: number, combos: Array<{ __typename?: 'Combo', id: string, command: Array<string>, position: number, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> }>, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, moves: Array<{ __typename?: 'Move', id: string, name: string }> }> };
+
+export type CreateComboCategoryMutationVariables = Exact<{
+  characterSlug: Scalars['String'];
+  attributes: ComboCategoryAttributes;
+}>;
+
+
+export type CreateComboCategoryMutation = { __typename?: 'Mutation', createComboCategory?: { __typename?: 'CreateComboCategoryPayload', comboCategory: { __typename?: 'ComboCategory', id: string, name: string, position: number, character: { __typename?: 'Character', id: string, comboCategories: Array<{ __typename?: 'ComboCategory', id: string, position: number }> }, combos: Array<{ __typename?: 'Combo', id: string, command: Array<string>, position: number, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> } } | null };
+
+export type UpdateComboCategoryMutationVariables = Exact<{
+  comboCategoryId: Scalars['ID'];
+  attributes: ComboCategoryAttributes;
+}>;
+
+
+export type UpdateComboCategoryMutation = { __typename?: 'Mutation', updateComboCategory?: { __typename?: 'UpdateComboCategoryPayload', comboCategory: { __typename?: 'ComboCategory', id: string, name: string, position: number, character: { __typename?: 'Character', id: string, comboCategories: Array<{ __typename?: 'ComboCategory', id: string, position: number }> }, combos: Array<{ __typename?: 'Combo', id: string, command: Array<string>, position: number, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> } } | null };
+
+export type DeleteComboCategoryMutationVariables = Exact<{
+  comboCategoryId: Scalars['ID'];
+}>;
+
+
+export type DeleteComboCategoryMutation = { __typename?: 'Mutation', deleteComboCategory?: { __typename?: 'DeleteComboCategoryPayload', comboCategory: { __typename?: 'ComboCategory', id: string, name: string, position: number, character: { __typename?: 'Character', id: string, comboCategories: Array<{ __typename?: 'ComboCategory', id: string, position: number }> }, combos: Array<{ __typename?: 'Combo', id: string, command: Array<string>, position: number, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> } } | null };
+
+export type ComboTableRowFragment = { __typename?: 'Combo', id: string, command: Array<string>, position: number, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null };
+
+export type CreateComboMutationVariables = Exact<{
+  comboCategoryId: Scalars['ID'];
+  attributes: ComboAttributes;
+}>;
+
+
+export type CreateComboMutation = { __typename?: 'Mutation', createCombo?: { __typename?: 'CreateComboPayload', combo: { __typename?: 'Combo', id: string, command: Array<string>, position: number, comboCategory: { __typename?: 'ComboCategory', id: string, combos: Array<{ __typename?: 'Combo', id: string, position: number }> }, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null } } | null };
+
+export type UpdateComboMutationVariables = Exact<{
+  comboId: Scalars['ID'];
+  attributes: ComboAttributes;
+}>;
+
+
+export type UpdateComboMutation = { __typename?: 'Mutation', updateCombo?: { __typename?: 'UpdateComboPayload', combo: { __typename?: 'Combo', id: string, command: Array<string>, position: number, comboCategory: { __typename?: 'ComboCategory', id: string, combos: Array<{ __typename?: 'Combo', id: string, position: number }> }, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null } } | null };
+
+export type DeleteComboMutationVariables = Exact<{
+  comboId: Scalars['ID'];
+}>;
+
+
+export type DeleteComboMutation = { __typename?: 'Mutation', deleteCombo?: { __typename?: 'DeleteComboPayload', combo: { __typename?: 'Combo', comboCategory: { __typename?: 'ComboCategory', id: string, combos: Array<{ __typename?: 'Combo', id: string }> } } } | null };
+
+export type CreateComboVideoMutationVariables = Exact<{
+  comboId: Scalars['ID'];
+}>;
+
+
+export type CreateComboVideoMutation = { __typename?: 'Mutation', createComboVideo?: { __typename?: 'CreateComboVideoPayload', combo: { __typename?: 'Combo', id: string, command: Array<string>, position: number, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }, videoUpload: { __typename?: 'VideoUpload', url: string, fields: string } } | null };
+
+export type MoveSelectOptionFragment = { __typename?: 'MoveCategory', id: string, name: string, moves: Array<{ __typename?: 'Move', id: string, name: string }> };
+
 export type MoveDashboardCategoryFragment = { __typename?: 'MoveCategory', id: string, name: string, position: number, moves: Array<{ __typename?: 'Move', id: string, name: string, command: Array<string>, position: number, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> };
 
 export type MoveDashboardFragment = { __typename?: 'Character', id: string, slug: string, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, position: number, moves: Array<{ __typename?: 'Move', id: string, name: string, command: Array<string>, position: number, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> }> };
@@ -2312,9 +2373,23 @@ export type ComboCategoryFormFragment = { __typename?: 'ComboCategory', id: stri
 
 export type ComboCategoryPositionSelectFragment = { __typename?: 'ComboCategory', id: string, name: string, position: number };
 
+export type ComboCategoryFormQueryVariables = Exact<{
+  comboCategoryId: Scalars['ID'];
+}>;
+
+
+export type ComboCategoryFormQuery = { __typename?: 'Query', comboCategory: { __typename?: 'ComboCategory', id: string, name: string, position: number } };
+
 export type ComboFormFragment = { __typename?: 'Combo', id: string, command: Array<string>, damage?: number | null, note?: string | null, position: number, move?: { __typename?: 'Move', id: string } | null };
 
 export type ComboPositionSelectFragment = { __typename?: 'Combo', id: string, command: Array<string>, position: number };
+
+export type ComboFormQueryVariables = Exact<{
+  comboId: Scalars['ID'];
+}>;
+
+
+export type ComboFormQuery = { __typename?: 'Query', combo: { __typename?: 'Combo', id: string, command: Array<string>, damage?: number | null, note?: string | null, position: number, move?: { __typename?: 'Move', id: string } | null } };
 
 export type MoveCategoryFormFragment = { __typename?: 'MoveCategory', id: string, name: string, position: number };
 
@@ -2409,52 +2484,12 @@ export type ArticleElementMoveQueryVariables = Exact<{
 
 export type ArticleElementMoveQuery = { __typename?: 'Query', move: { __typename?: 'Move', id: string, name: string, kana?: string | null, command: Array<string>, statusAfter?: string | null, note?: string | null, moveable: { __typename: 'AttackMove', id: string, startUpFrame?: number | null, duration?: number | null, blockFrame?: number | null, blockResult: AttackMoveResultEnum, hitFrame?: number | null, hitResult: AttackMoveResultEnum, counterFrame?: number | null, counterResult: AttackMoveResultEnum, heights: Array<AttackTypeEnum>, damages: Array<number>, powerCrush: boolean, crouchingStatus: boolean, jumpStatus: boolean, homing: boolean, screw: boolean, wallBound: boolean } | { __typename: 'ReversalMove', id: string, kind: string, startUpFrame?: number | null, finishFrame?: number | null } | { __typename: 'ThrowMove', id: string, throwType: ThrowTypeEnum, throwResult: ThrowMoveResultEnum, throwEscape: ThrowEscapeEnum, startUpFrame?: number | null, damage?: number | null }, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null } };
 
-export type AdminComboCategoriesPageComboCategoryFragment = { __typename?: 'ComboCategory', id: string, name: string, combos: Array<{ __typename?: 'Combo', id: string, command: Array<string>, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> };
-
-export type AdminComboCategoriesPageComboFragment = { __typename?: 'Combo', id: string, command: Array<string>, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null };
-
-export type AdminComboCategoriesPageQueryVariables = Exact<{
+export type DashboardCharacterCombosPageQueryVariables = Exact<{
   characterSlug: Scalars['String'];
 }>;
 
 
-export type AdminComboCategoriesPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string }, comboCategories: Array<{ __typename?: 'ComboCategory', id: string, name: string, combos: Array<{ __typename?: 'Combo', id: string, command: Array<string>, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> }> };
-
-export type CreateComboVideoMutationVariables = Exact<{
-  comboId: Scalars['ID'];
-}>;
-
-
-export type CreateComboVideoMutation = { __typename?: 'Mutation', createComboVideo?: { __typename?: 'CreateComboVideoPayload', combo: { __typename?: 'Combo', id: string, command: Array<string>, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }, videoUpload: { __typename?: 'VideoUpload', url: string, fields: string } } | null };
-
-export type DeleteComboMutationVariables = Exact<{
-  comboId: Scalars['ID'];
-}>;
-
-
-export type DeleteComboMutation = { __typename?: 'Mutation', deleteCombo?: { __typename?: 'DeleteComboPayload', combo: { __typename?: 'Combo', id: string } } | null };
-
-export type AdminComboCategoryNewPageQueryVariables = Exact<{
-  characterSlug: Scalars['String'];
-}>;
-
-
-export type AdminComboCategoryNewPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string, comboCategories: Array<{ __typename?: 'ComboCategory', id: string, name: string, position: number }> } };
-
-export type CreateComboCategoryMutationVariables = Exact<{
-  characterSlug: Scalars['String'];
-  attributes: ComboCategoryAttributes;
-}>;
-
-
-export type CreateComboCategoryMutation = { __typename?: 'Mutation', createComboCategory?: { __typename?: 'CreateComboCategoryPayload', comboCategory: { __typename?: 'ComboCategory', id: string } } | null };
-
-export type DeleteComboCategoryMutationVariables = Exact<{
-  comboCategoryId: Scalars['ID'];
-}>;
-
-
-export type DeleteComboCategoryMutation = { __typename?: 'Mutation', deleteComboCategory?: { __typename?: 'DeleteComboCategoryPayload', comboCategory: { __typename?: 'ComboCategory', id: string } } | null };
+export type DashboardCharacterCombosPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string, id: string, comboCategories: Array<{ __typename?: 'ComboCategory', id: string, name: string, position: number, combos: Array<{ __typename?: 'Combo', id: string, command: Array<string>, position: number, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> }>, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, moves: Array<{ __typename?: 'Move', id: string, name: string }> }> } };
 
 export type PageAdminCharacterEditQueryVariables = Exact<{
   characterSlug: Scalars['String'];
@@ -2484,53 +2519,6 @@ export type CreateCharacterMutationVariables = Exact<{
 
 
 export type CreateCharacterMutation = { __typename?: 'Mutation', createCharacter?: { __typename?: 'CreateCharacterPayload', character: { __typename?: 'Character', id: string } } | null };
-
-export type MoveSelectOptionFragment = { __typename?: 'MoveCategory', id: string, name: string, moves: Array<{ __typename?: 'Move', id: string, name: string }> };
-
-export type PageAdminComboNewQueryVariables = Exact<{
-  comboCategoryId: Scalars['ID'];
-}>;
-
-
-export type PageAdminComboNewQuery = { __typename?: 'Query', comboCategory: { __typename?: 'ComboCategory', id: string, name: string, combos: Array<{ __typename?: 'Combo', id: string, command: Array<string>, position: number }>, character: { __typename?: 'Character', slug: string, name: string, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, moves: Array<{ __typename?: 'Move', id: string, name: string }> }> } } };
-
-export type CreateComboMutationVariables = Exact<{
-  comboCategoryId: Scalars['ID'];
-  attributes: ComboAttributes;
-}>;
-
-
-export type CreateComboMutation = { __typename?: 'Mutation', createCombo?: { __typename?: 'CreateComboPayload', combo: { __typename?: 'Combo', id: string } } | null };
-
-export type PageAdminComboCategoryEditQueryVariables = Exact<{
-  comboCategoryId: Scalars['ID'];
-}>;
-
-
-export type PageAdminComboCategoryEditQuery = { __typename?: 'Query', comboCategory: { __typename?: 'ComboCategory', id: string, name: string, position: number, character: { __typename?: 'Character', slug: string, name: string, comboCategories: Array<{ __typename?: 'ComboCategory', id: string, name: string, position: number }> } } };
-
-export type UpdateComboCategoryMutationVariables = Exact<{
-  comboCategoryId: Scalars['ID'];
-  attributes: ComboCategoryAttributes;
-}>;
-
-
-export type UpdateComboCategoryMutation = { __typename?: 'Mutation', updateComboCategory?: { __typename?: 'UpdateComboCategoryPayload', comboCategory: { __typename?: 'ComboCategory', id: string } } | null };
-
-export type PageAdminComboEditQueryVariables = Exact<{
-  comboId: Scalars['ID'];
-}>;
-
-
-export type PageAdminComboEditQuery = { __typename?: 'Query', combo: { __typename?: 'Combo', id: string, command: Array<string>, damage?: number | null, note?: string | null, position: number, comboCategory: { __typename?: 'ComboCategory', id: string, name: string, combos: Array<{ __typename?: 'Combo', id: string, command: Array<string>, position: number }>, character: { __typename?: 'Character', slug: string, name: string, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, moves: Array<{ __typename?: 'Move', id: string, name: string }> }> } }, move?: { __typename?: 'Move', id: string } | null } };
-
-export type UpdateComboMutationVariables = Exact<{
-  comboId: Scalars['ID'];
-  attributes: ComboAttributes;
-}>;
-
-
-export type UpdateComboMutation = { __typename?: 'Mutation', updateCombo?: { __typename?: 'UpdateComboPayload', combo: { __typename?: 'Combo', id: string, comboCategory: { __typename?: 'ComboCategory', id: string } } } | null };
 
 export type AdminOrganizerEditPageQueryVariables = Exact<{
   organizerSlug: Scalars['String'];
@@ -3290,6 +3278,66 @@ export const CharacterTableRowFragmentDoc = gql`
   combosCount
 }
     `;
+export const ComboCategoryFormFragmentDoc = gql`
+    fragment ComboCategoryForm on ComboCategory {
+  id
+  name
+  position
+}
+    `;
+export const ComboPositionSelectFragmentDoc = gql`
+    fragment ComboPositionSelect on Combo {
+  id
+  command
+  position
+}
+    `;
+export const ComboTableRowFragmentDoc = gql`
+    fragment ComboTableRow on Combo {
+  id
+  command
+  comboVideo {
+    id
+    m3u8Url
+    thumbnailUrl
+  }
+  ...ComboPositionSelect
+}
+    ${ComboPositionSelectFragmentDoc}`;
+export const ComboDashboardCategoryFragmentDoc = gql`
+    fragment ComboDashboardCategory on ComboCategory {
+  id
+  name
+  ...ComboCategoryForm
+  combos {
+    ...ComboTableRow
+  }
+}
+    ${ComboCategoryFormFragmentDoc}
+${ComboTableRowFragmentDoc}`;
+export const MoveSelectOptionFragmentDoc = gql`
+    fragment MoveSelectOption on MoveCategory {
+  id
+  name
+  moves {
+    id
+    name
+  }
+}
+    `;
+export const ComboDashboardFragmentDoc = gql`
+    fragment ComboDashboard on Character {
+  id
+  slug
+  comboCategories {
+    ...ComboDashboardCategory
+  }
+  moveCategories {
+    ...MoveSelectOption
+  }
+}
+    ${ComboDashboardCategoryFragmentDoc}
+${MoveSelectOptionFragmentDoc}`;
 export const MoveCategoryFormFragmentDoc = gql`
     fragment MoveCategoryForm on MoveCategory {
   id
@@ -3379,13 +3427,6 @@ export const CharacterFormFragmentDoc = gql`
   dlc
 }
     `;
-export const ComboCategoryFormFragmentDoc = gql`
-    fragment ComboCategoryForm on ComboCategory {
-  id
-  name
-  position
-}
-    `;
 export const ComboCategoryPositionSelectFragmentDoc = gql`
     fragment ComboCategoryPositionSelect on ComboCategory {
   id
@@ -3403,13 +3444,6 @@ export const ComboFormFragmentDoc = gql`
   move {
     id
   }
-}
-    `;
-export const ComboPositionSelectFragmentDoc = gql`
-    fragment ComboPositionSelect on Combo {
-  id
-  command
-  position
 }
     `;
 export const MoveCategoryPositionSelectFragmentDoc = gql`
@@ -3591,36 +3625,6 @@ export const TournamentVideoBreadcrumbsFragmentDoc = gql`
   }
 }
     ${TournamentBreadcrumbsFragmentDoc}`;
-export const AdminComboCategoriesPageComboFragmentDoc = gql`
-    fragment AdminComboCategoriesPageCombo on Combo {
-  id
-  command
-  comboVideo {
-    id
-    m3u8Url
-    thumbnailUrl
-  }
-}
-    `;
-export const AdminComboCategoriesPageComboCategoryFragmentDoc = gql`
-    fragment AdminComboCategoriesPageComboCategory on ComboCategory {
-  id
-  name
-  combos {
-    ...AdminComboCategoriesPageCombo
-  }
-}
-    ${AdminComboCategoriesPageComboFragmentDoc}`;
-export const MoveSelectOptionFragmentDoc = gql`
-    fragment MoveSelectOption on MoveCategory {
-  id
-  name
-  moves {
-    id
-    name
-  }
-}
-    `;
 export const AdminOrganizersPageOrganizerFragmentDoc = gql`
     fragment AdminOrganizersPageOrganizer on Organizer {
   id
@@ -4166,6 +4170,303 @@ export function useCharacterTableRowsLazyQuery(baseOptions?: Apollo.LazyQueryHoo
 export type CharacterTableRowsQueryHookResult = ReturnType<typeof useCharacterTableRowsQuery>;
 export type CharacterTableRowsLazyQueryHookResult = ReturnType<typeof useCharacterTableRowsLazyQuery>;
 export type CharacterTableRowsQueryResult = Apollo.QueryResult<CharacterTableRowsQuery, CharacterTableRowsQueryVariables>;
+export const CreateComboCategoryDocument = gql`
+    mutation CreateComboCategory($characterSlug: String!, $attributes: ComboCategoryAttributes!) {
+  createComboCategory(
+    input: {characterSlug: $characterSlug, attributes: $attributes}
+  ) {
+    comboCategory {
+      ...ComboDashboardCategory
+      character {
+        id
+        comboCategories {
+          id
+          position
+        }
+      }
+    }
+  }
+}
+    ${ComboDashboardCategoryFragmentDoc}`;
+export type CreateComboCategoryMutationFn = Apollo.MutationFunction<CreateComboCategoryMutation, CreateComboCategoryMutationVariables>;
+
+/**
+ * __useCreateComboCategoryMutation__
+ *
+ * To run a mutation, you first call `useCreateComboCategoryMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateComboCategoryMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createComboCategoryMutation, { data, loading, error }] = useCreateComboCategoryMutation({
+ *   variables: {
+ *      characterSlug: // value for 'characterSlug'
+ *      attributes: // value for 'attributes'
+ *   },
+ * });
+ */
+export function useCreateComboCategoryMutation(baseOptions?: Apollo.MutationHookOptions<CreateComboCategoryMutation, CreateComboCategoryMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateComboCategoryMutation, CreateComboCategoryMutationVariables>(CreateComboCategoryDocument, options);
+      }
+export type CreateComboCategoryMutationHookResult = ReturnType<typeof useCreateComboCategoryMutation>;
+export type CreateComboCategoryMutationResult = Apollo.MutationResult<CreateComboCategoryMutation>;
+export type CreateComboCategoryMutationOptions = Apollo.BaseMutationOptions<CreateComboCategoryMutation, CreateComboCategoryMutationVariables>;
+export const UpdateComboCategoryDocument = gql`
+    mutation UpdateComboCategory($comboCategoryId: ID!, $attributes: ComboCategoryAttributes!) {
+  updateComboCategory(
+    input: {comboCategoryId: $comboCategoryId, attributes: $attributes}
+  ) {
+    comboCategory {
+      ...ComboDashboardCategory
+      character {
+        id
+        comboCategories {
+          id
+          position
+        }
+      }
+    }
+  }
+}
+    ${ComboDashboardCategoryFragmentDoc}`;
+export type UpdateComboCategoryMutationFn = Apollo.MutationFunction<UpdateComboCategoryMutation, UpdateComboCategoryMutationVariables>;
+
+/**
+ * __useUpdateComboCategoryMutation__
+ *
+ * To run a mutation, you first call `useUpdateComboCategoryMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateComboCategoryMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateComboCategoryMutation, { data, loading, error }] = useUpdateComboCategoryMutation({
+ *   variables: {
+ *      comboCategoryId: // value for 'comboCategoryId'
+ *      attributes: // value for 'attributes'
+ *   },
+ * });
+ */
+export function useUpdateComboCategoryMutation(baseOptions?: Apollo.MutationHookOptions<UpdateComboCategoryMutation, UpdateComboCategoryMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateComboCategoryMutation, UpdateComboCategoryMutationVariables>(UpdateComboCategoryDocument, options);
+      }
+export type UpdateComboCategoryMutationHookResult = ReturnType<typeof useUpdateComboCategoryMutation>;
+export type UpdateComboCategoryMutationResult = Apollo.MutationResult<UpdateComboCategoryMutation>;
+export type UpdateComboCategoryMutationOptions = Apollo.BaseMutationOptions<UpdateComboCategoryMutation, UpdateComboCategoryMutationVariables>;
+export const DeleteComboCategoryDocument = gql`
+    mutation DeleteComboCategory($comboCategoryId: ID!) {
+  deleteComboCategory(input: {comboCategoryId: $comboCategoryId}) {
+    comboCategory {
+      ...ComboDashboardCategory
+      character {
+        id
+        comboCategories {
+          id
+          position
+        }
+      }
+    }
+  }
+}
+    ${ComboDashboardCategoryFragmentDoc}`;
+export type DeleteComboCategoryMutationFn = Apollo.MutationFunction<DeleteComboCategoryMutation, DeleteComboCategoryMutationVariables>;
+
+/**
+ * __useDeleteComboCategoryMutation__
+ *
+ * To run a mutation, you first call `useDeleteComboCategoryMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteComboCategoryMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteComboCategoryMutation, { data, loading, error }] = useDeleteComboCategoryMutation({
+ *   variables: {
+ *      comboCategoryId: // value for 'comboCategoryId'
+ *   },
+ * });
+ */
+export function useDeleteComboCategoryMutation(baseOptions?: Apollo.MutationHookOptions<DeleteComboCategoryMutation, DeleteComboCategoryMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteComboCategoryMutation, DeleteComboCategoryMutationVariables>(DeleteComboCategoryDocument, options);
+      }
+export type DeleteComboCategoryMutationHookResult = ReturnType<typeof useDeleteComboCategoryMutation>;
+export type DeleteComboCategoryMutationResult = Apollo.MutationResult<DeleteComboCategoryMutation>;
+export type DeleteComboCategoryMutationOptions = Apollo.BaseMutationOptions<DeleteComboCategoryMutation, DeleteComboCategoryMutationVariables>;
+export const CreateComboDocument = gql`
+    mutation CreateCombo($comboCategoryId: ID!, $attributes: ComboAttributes!) {
+  createCombo(input: {comboCategoryId: $comboCategoryId, attributes: $attributes}) {
+    combo {
+      ...ComboTableRow
+      comboCategory {
+        id
+        combos {
+          id
+          position
+        }
+      }
+    }
+  }
+}
+    ${ComboTableRowFragmentDoc}`;
+export type CreateComboMutationFn = Apollo.MutationFunction<CreateComboMutation, CreateComboMutationVariables>;
+
+/**
+ * __useCreateComboMutation__
+ *
+ * To run a mutation, you first call `useCreateComboMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateComboMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createComboMutation, { data, loading, error }] = useCreateComboMutation({
+ *   variables: {
+ *      comboCategoryId: // value for 'comboCategoryId'
+ *      attributes: // value for 'attributes'
+ *   },
+ * });
+ */
+export function useCreateComboMutation(baseOptions?: Apollo.MutationHookOptions<CreateComboMutation, CreateComboMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateComboMutation, CreateComboMutationVariables>(CreateComboDocument, options);
+      }
+export type CreateComboMutationHookResult = ReturnType<typeof useCreateComboMutation>;
+export type CreateComboMutationResult = Apollo.MutationResult<CreateComboMutation>;
+export type CreateComboMutationOptions = Apollo.BaseMutationOptions<CreateComboMutation, CreateComboMutationVariables>;
+export const UpdateComboDocument = gql`
+    mutation UpdateCombo($comboId: ID!, $attributes: ComboAttributes!) {
+  updateCombo(input: {comboId: $comboId, attributes: $attributes}) {
+    combo {
+      ...ComboTableRow
+      comboCategory {
+        id
+        combos {
+          id
+          position
+        }
+      }
+    }
+  }
+}
+    ${ComboTableRowFragmentDoc}`;
+export type UpdateComboMutationFn = Apollo.MutationFunction<UpdateComboMutation, UpdateComboMutationVariables>;
+
+/**
+ * __useUpdateComboMutation__
+ *
+ * To run a mutation, you first call `useUpdateComboMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateComboMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateComboMutation, { data, loading, error }] = useUpdateComboMutation({
+ *   variables: {
+ *      comboId: // value for 'comboId'
+ *      attributes: // value for 'attributes'
+ *   },
+ * });
+ */
+export function useUpdateComboMutation(baseOptions?: Apollo.MutationHookOptions<UpdateComboMutation, UpdateComboMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateComboMutation, UpdateComboMutationVariables>(UpdateComboDocument, options);
+      }
+export type UpdateComboMutationHookResult = ReturnType<typeof useUpdateComboMutation>;
+export type UpdateComboMutationResult = Apollo.MutationResult<UpdateComboMutation>;
+export type UpdateComboMutationOptions = Apollo.BaseMutationOptions<UpdateComboMutation, UpdateComboMutationVariables>;
+export const DeleteComboDocument = gql`
+    mutation DeleteCombo($comboId: ID!) {
+  deleteCombo(input: {comboId: $comboId}) {
+    combo {
+      comboCategory {
+        id
+        combos {
+          id
+        }
+      }
+    }
+  }
+}
+    `;
+export type DeleteComboMutationFn = Apollo.MutationFunction<DeleteComboMutation, DeleteComboMutationVariables>;
+
+/**
+ * __useDeleteComboMutation__
+ *
+ * To run a mutation, you first call `useDeleteComboMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteComboMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteComboMutation, { data, loading, error }] = useDeleteComboMutation({
+ *   variables: {
+ *      comboId: // value for 'comboId'
+ *   },
+ * });
+ */
+export function useDeleteComboMutation(baseOptions?: Apollo.MutationHookOptions<DeleteComboMutation, DeleteComboMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteComboMutation, DeleteComboMutationVariables>(DeleteComboDocument, options);
+      }
+export type DeleteComboMutationHookResult = ReturnType<typeof useDeleteComboMutation>;
+export type DeleteComboMutationResult = Apollo.MutationResult<DeleteComboMutation>;
+export type DeleteComboMutationOptions = Apollo.BaseMutationOptions<DeleteComboMutation, DeleteComboMutationVariables>;
+export const CreateComboVideoDocument = gql`
+    mutation CreateComboVideo($comboId: ID!) {
+  createComboVideo(input: {comboId: $comboId}) {
+    combo {
+      ...ComboTableRow
+    }
+    videoUpload {
+      url
+      fields
+    }
+  }
+}
+    ${ComboTableRowFragmentDoc}`;
+export type CreateComboVideoMutationFn = Apollo.MutationFunction<CreateComboVideoMutation, CreateComboVideoMutationVariables>;
+
+/**
+ * __useCreateComboVideoMutation__
+ *
+ * To run a mutation, you first call `useCreateComboVideoMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateComboVideoMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createComboVideoMutation, { data, loading, error }] = useCreateComboVideoMutation({
+ *   variables: {
+ *      comboId: // value for 'comboId'
+ *   },
+ * });
+ */
+export function useCreateComboVideoMutation(baseOptions?: Apollo.MutationHookOptions<CreateComboVideoMutation, CreateComboVideoMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateComboVideoMutation, CreateComboVideoMutationVariables>(CreateComboVideoDocument, options);
+      }
+export type CreateComboVideoMutationHookResult = ReturnType<typeof useCreateComboVideoMutation>;
+export type CreateComboVideoMutationResult = Apollo.MutationResult<CreateComboVideoMutation>;
+export type CreateComboVideoMutationOptions = Apollo.BaseMutationOptions<CreateComboVideoMutation, CreateComboVideoMutationVariables>;
 export const CreateMoveCategoryDocument = gql`
     mutation CreateMoveCategory($characterSlug: String!, $attributes: MoveCategoryAttributes!) {
   createMoveCategory(
@@ -4830,6 +5131,76 @@ export function useDeleteTournamentMutation(baseOptions?: Apollo.MutationHookOpt
 export type DeleteTournamentMutationHookResult = ReturnType<typeof useDeleteTournamentMutation>;
 export type DeleteTournamentMutationResult = Apollo.MutationResult<DeleteTournamentMutation>;
 export type DeleteTournamentMutationOptions = Apollo.BaseMutationOptions<DeleteTournamentMutation, DeleteTournamentMutationVariables>;
+export const ComboCategoryFormDocument = gql`
+    query ComboCategoryForm($comboCategoryId: ID!) {
+  comboCategory(comboCategoryId: $comboCategoryId) {
+    ...ComboCategoryForm
+  }
+}
+    ${ComboCategoryFormFragmentDoc}`;
+
+/**
+ * __useComboCategoryFormQuery__
+ *
+ * To run a query within a React component, call `useComboCategoryFormQuery` and pass it any options that fit your needs.
+ * When your component renders, `useComboCategoryFormQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useComboCategoryFormQuery({
+ *   variables: {
+ *      comboCategoryId: // value for 'comboCategoryId'
+ *   },
+ * });
+ */
+export function useComboCategoryFormQuery(baseOptions: Apollo.QueryHookOptions<ComboCategoryFormQuery, ComboCategoryFormQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ComboCategoryFormQuery, ComboCategoryFormQueryVariables>(ComboCategoryFormDocument, options);
+      }
+export function useComboCategoryFormLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ComboCategoryFormQuery, ComboCategoryFormQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ComboCategoryFormQuery, ComboCategoryFormQueryVariables>(ComboCategoryFormDocument, options);
+        }
+export type ComboCategoryFormQueryHookResult = ReturnType<typeof useComboCategoryFormQuery>;
+export type ComboCategoryFormLazyQueryHookResult = ReturnType<typeof useComboCategoryFormLazyQuery>;
+export type ComboCategoryFormQueryResult = Apollo.QueryResult<ComboCategoryFormQuery, ComboCategoryFormQueryVariables>;
+export const ComboFormDocument = gql`
+    query ComboForm($comboId: ID!) {
+  combo(comboId: $comboId) {
+    ...ComboForm
+  }
+}
+    ${ComboFormFragmentDoc}`;
+
+/**
+ * __useComboFormQuery__
+ *
+ * To run a query within a React component, call `useComboFormQuery` and pass it any options that fit your needs.
+ * When your component renders, `useComboFormQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useComboFormQuery({
+ *   variables: {
+ *      comboId: // value for 'comboId'
+ *   },
+ * });
+ */
+export function useComboFormQuery(baseOptions: Apollo.QueryHookOptions<ComboFormQuery, ComboFormQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ComboFormQuery, ComboFormQueryVariables>(ComboFormDocument, options);
+      }
+export function useComboFormLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ComboFormQuery, ComboFormQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ComboFormQuery, ComboFormQueryVariables>(ComboFormDocument, options);
+        }
+export type ComboFormQueryHookResult = ReturnType<typeof useComboFormQuery>;
+export type ComboFormLazyQueryHookResult = ReturnType<typeof useComboFormLazyQuery>;
+export type ComboFormQueryResult = Apollo.QueryResult<ComboFormQuery, ComboFormQueryVariables>;
 export const MoveCategoryFormDocument = gql`
     query MoveCategoryForm($moveCategoryId: ID!) {
   moveCategory(moveCategoryId: $moveCategoryId) {
@@ -5151,231 +5522,43 @@ export function useArticleElementMoveLazyQuery(baseOptions?: Apollo.LazyQueryHoo
 export type ArticleElementMoveQueryHookResult = ReturnType<typeof useArticleElementMoveQuery>;
 export type ArticleElementMoveLazyQueryHookResult = ReturnType<typeof useArticleElementMoveLazyQuery>;
 export type ArticleElementMoveQueryResult = Apollo.QueryResult<ArticleElementMoveQuery, ArticleElementMoveQueryVariables>;
-export const AdminComboCategoriesPageDocument = gql`
-    query AdminComboCategoriesPage($characterSlug: String!) {
+export const DashboardCharacterCombosPageDocument = gql`
+    query DashboardCharacterCombosPage($characterSlug: String!) {
   character(characterSlug: $characterSlug) {
     ...CharacterBreadcrumbs
-  }
-  comboCategories(characterSlug: $characterSlug) {
-    ...AdminComboCategoriesPageComboCategory
+    ...ComboDashboard
   }
 }
     ${CharacterBreadcrumbsFragmentDoc}
-${AdminComboCategoriesPageComboCategoryFragmentDoc}`;
+${ComboDashboardFragmentDoc}`;
 
 /**
- * __useAdminComboCategoriesPageQuery__
+ * __useDashboardCharacterCombosPageQuery__
  *
- * To run a query within a React component, call `useAdminComboCategoriesPageQuery` and pass it any options that fit your needs.
- * When your component renders, `useAdminComboCategoriesPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useDashboardCharacterCombosPageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useDashboardCharacterCombosPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useAdminComboCategoriesPageQuery({
+ * const { data, loading, error } = useDashboardCharacterCombosPageQuery({
  *   variables: {
  *      characterSlug: // value for 'characterSlug'
  *   },
  * });
  */
-export function useAdminComboCategoriesPageQuery(baseOptions: Apollo.QueryHookOptions<AdminComboCategoriesPageQuery, AdminComboCategoriesPageQueryVariables>) {
+export function useDashboardCharacterCombosPageQuery(baseOptions: Apollo.QueryHookOptions<DashboardCharacterCombosPageQuery, DashboardCharacterCombosPageQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<AdminComboCategoriesPageQuery, AdminComboCategoriesPageQueryVariables>(AdminComboCategoriesPageDocument, options);
+        return Apollo.useQuery<DashboardCharacterCombosPageQuery, DashboardCharacterCombosPageQueryVariables>(DashboardCharacterCombosPageDocument, options);
       }
-export function useAdminComboCategoriesPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AdminComboCategoriesPageQuery, AdminComboCategoriesPageQueryVariables>) {
+export function useDashboardCharacterCombosPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<DashboardCharacterCombosPageQuery, DashboardCharacterCombosPageQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<AdminComboCategoriesPageQuery, AdminComboCategoriesPageQueryVariables>(AdminComboCategoriesPageDocument, options);
+          return Apollo.useLazyQuery<DashboardCharacterCombosPageQuery, DashboardCharacterCombosPageQueryVariables>(DashboardCharacterCombosPageDocument, options);
         }
-export type AdminComboCategoriesPageQueryHookResult = ReturnType<typeof useAdminComboCategoriesPageQuery>;
-export type AdminComboCategoriesPageLazyQueryHookResult = ReturnType<typeof useAdminComboCategoriesPageLazyQuery>;
-export type AdminComboCategoriesPageQueryResult = Apollo.QueryResult<AdminComboCategoriesPageQuery, AdminComboCategoriesPageQueryVariables>;
-export const CreateComboVideoDocument = gql`
-    mutation CreateComboVideo($comboId: ID!) {
-  createComboVideo(input: {comboId: $comboId}) {
-    combo {
-      ...AdminComboCategoriesPageCombo
-    }
-    videoUpload {
-      url
-      fields
-    }
-  }
-}
-    ${AdminComboCategoriesPageComboFragmentDoc}`;
-export type CreateComboVideoMutationFn = Apollo.MutationFunction<CreateComboVideoMutation, CreateComboVideoMutationVariables>;
-
-/**
- * __useCreateComboVideoMutation__
- *
- * To run a mutation, you first call `useCreateComboVideoMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useCreateComboVideoMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [createComboVideoMutation, { data, loading, error }] = useCreateComboVideoMutation({
- *   variables: {
- *      comboId: // value for 'comboId'
- *   },
- * });
- */
-export function useCreateComboVideoMutation(baseOptions?: Apollo.MutationHookOptions<CreateComboVideoMutation, CreateComboVideoMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<CreateComboVideoMutation, CreateComboVideoMutationVariables>(CreateComboVideoDocument, options);
-      }
-export type CreateComboVideoMutationHookResult = ReturnType<typeof useCreateComboVideoMutation>;
-export type CreateComboVideoMutationResult = Apollo.MutationResult<CreateComboVideoMutation>;
-export type CreateComboVideoMutationOptions = Apollo.BaseMutationOptions<CreateComboVideoMutation, CreateComboVideoMutationVariables>;
-export const DeleteComboDocument = gql`
-    mutation DeleteCombo($comboId: ID!) {
-  deleteCombo(input: {comboId: $comboId}) {
-    combo {
-      id
-    }
-  }
-}
-    `;
-export type DeleteComboMutationFn = Apollo.MutationFunction<DeleteComboMutation, DeleteComboMutationVariables>;
-
-/**
- * __useDeleteComboMutation__
- *
- * To run a mutation, you first call `useDeleteComboMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useDeleteComboMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [deleteComboMutation, { data, loading, error }] = useDeleteComboMutation({
- *   variables: {
- *      comboId: // value for 'comboId'
- *   },
- * });
- */
-export function useDeleteComboMutation(baseOptions?: Apollo.MutationHookOptions<DeleteComboMutation, DeleteComboMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<DeleteComboMutation, DeleteComboMutationVariables>(DeleteComboDocument, options);
-      }
-export type DeleteComboMutationHookResult = ReturnType<typeof useDeleteComboMutation>;
-export type DeleteComboMutationResult = Apollo.MutationResult<DeleteComboMutation>;
-export type DeleteComboMutationOptions = Apollo.BaseMutationOptions<DeleteComboMutation, DeleteComboMutationVariables>;
-export const AdminComboCategoryNewPageDocument = gql`
-    query AdminComboCategoryNewPage($characterSlug: String!) {
-  character(characterSlug: $characterSlug) {
-    ...CharacterBreadcrumbs
-    comboCategories {
-      ...ComboCategoryPositionSelect
-    }
-  }
-}
-    ${CharacterBreadcrumbsFragmentDoc}
-${ComboCategoryPositionSelectFragmentDoc}`;
-
-/**
- * __useAdminComboCategoryNewPageQuery__
- *
- * To run a query within a React component, call `useAdminComboCategoryNewPageQuery` and pass it any options that fit your needs.
- * When your component renders, `useAdminComboCategoryNewPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useAdminComboCategoryNewPageQuery({
- *   variables: {
- *      characterSlug: // value for 'characterSlug'
- *   },
- * });
- */
-export function useAdminComboCategoryNewPageQuery(baseOptions: Apollo.QueryHookOptions<AdminComboCategoryNewPageQuery, AdminComboCategoryNewPageQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<AdminComboCategoryNewPageQuery, AdminComboCategoryNewPageQueryVariables>(AdminComboCategoryNewPageDocument, options);
-      }
-export function useAdminComboCategoryNewPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AdminComboCategoryNewPageQuery, AdminComboCategoryNewPageQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<AdminComboCategoryNewPageQuery, AdminComboCategoryNewPageQueryVariables>(AdminComboCategoryNewPageDocument, options);
-        }
-export type AdminComboCategoryNewPageQueryHookResult = ReturnType<typeof useAdminComboCategoryNewPageQuery>;
-export type AdminComboCategoryNewPageLazyQueryHookResult = ReturnType<typeof useAdminComboCategoryNewPageLazyQuery>;
-export type AdminComboCategoryNewPageQueryResult = Apollo.QueryResult<AdminComboCategoryNewPageQuery, AdminComboCategoryNewPageQueryVariables>;
-export const CreateComboCategoryDocument = gql`
-    mutation CreateComboCategory($characterSlug: String!, $attributes: ComboCategoryAttributes!) {
-  createComboCategory(
-    input: {characterSlug: $characterSlug, attributes: $attributes}
-  ) {
-    comboCategory {
-      id
-    }
-  }
-}
-    `;
-export type CreateComboCategoryMutationFn = Apollo.MutationFunction<CreateComboCategoryMutation, CreateComboCategoryMutationVariables>;
-
-/**
- * __useCreateComboCategoryMutation__
- *
- * To run a mutation, you first call `useCreateComboCategoryMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useCreateComboCategoryMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [createComboCategoryMutation, { data, loading, error }] = useCreateComboCategoryMutation({
- *   variables: {
- *      characterSlug: // value for 'characterSlug'
- *      attributes: // value for 'attributes'
- *   },
- * });
- */
-export function useCreateComboCategoryMutation(baseOptions?: Apollo.MutationHookOptions<CreateComboCategoryMutation, CreateComboCategoryMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<CreateComboCategoryMutation, CreateComboCategoryMutationVariables>(CreateComboCategoryDocument, options);
-      }
-export type CreateComboCategoryMutationHookResult = ReturnType<typeof useCreateComboCategoryMutation>;
-export type CreateComboCategoryMutationResult = Apollo.MutationResult<CreateComboCategoryMutation>;
-export type CreateComboCategoryMutationOptions = Apollo.BaseMutationOptions<CreateComboCategoryMutation, CreateComboCategoryMutationVariables>;
-export const DeleteComboCategoryDocument = gql`
-    mutation DeleteComboCategory($comboCategoryId: ID!) {
-  deleteComboCategory(input: {comboCategoryId: $comboCategoryId}) {
-    comboCategory {
-      id
-    }
-  }
-}
-    `;
-export type DeleteComboCategoryMutationFn = Apollo.MutationFunction<DeleteComboCategoryMutation, DeleteComboCategoryMutationVariables>;
-
-/**
- * __useDeleteComboCategoryMutation__
- *
- * To run a mutation, you first call `useDeleteComboCategoryMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useDeleteComboCategoryMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [deleteComboCategoryMutation, { data, loading, error }] = useDeleteComboCategoryMutation({
- *   variables: {
- *      comboCategoryId: // value for 'comboCategoryId'
- *   },
- * });
- */
-export function useDeleteComboCategoryMutation(baseOptions?: Apollo.MutationHookOptions<DeleteComboCategoryMutation, DeleteComboCategoryMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<DeleteComboCategoryMutation, DeleteComboCategoryMutationVariables>(DeleteComboCategoryDocument, options);
-      }
-export type DeleteComboCategoryMutationHookResult = ReturnType<typeof useDeleteComboCategoryMutation>;
-export type DeleteComboCategoryMutationResult = Apollo.MutationResult<DeleteComboCategoryMutation>;
-export type DeleteComboCategoryMutationOptions = Apollo.BaseMutationOptions<DeleteComboCategoryMutation, DeleteComboCategoryMutationVariables>;
+export type DashboardCharacterCombosPageQueryHookResult = ReturnType<typeof useDashboardCharacterCombosPageQuery>;
+export type DashboardCharacterCombosPageLazyQueryHookResult = ReturnType<typeof useDashboardCharacterCombosPageLazyQuery>;
+export type DashboardCharacterCombosPageQueryResult = Apollo.QueryResult<DashboardCharacterCombosPageQuery, DashboardCharacterCombosPageQueryVariables>;
 export const PageAdminCharacterEditDocument = gql`
     query PageAdminCharacterEdit($characterSlug: String!) {
   character(characterSlug: $characterSlug) {
@@ -5519,261 +5702,6 @@ export function useCreateCharacterMutation(baseOptions?: Apollo.MutationHookOpti
 export type CreateCharacterMutationHookResult = ReturnType<typeof useCreateCharacterMutation>;
 export type CreateCharacterMutationResult = Apollo.MutationResult<CreateCharacterMutation>;
 export type CreateCharacterMutationOptions = Apollo.BaseMutationOptions<CreateCharacterMutation, CreateCharacterMutationVariables>;
-export const PageAdminComboNewDocument = gql`
-    query PageAdminComboNew($comboCategoryId: ID!) {
-  comboCategory(comboCategoryId: $comboCategoryId) {
-    id
-    name
-    combos {
-      ...ComboPositionSelect
-    }
-    character {
-      slug
-      name
-      moveCategories {
-        ...MoveSelectOption
-      }
-    }
-  }
-}
-    ${ComboPositionSelectFragmentDoc}
-${MoveSelectOptionFragmentDoc}`;
-
-/**
- * __usePageAdminComboNewQuery__
- *
- * To run a query within a React component, call `usePageAdminComboNewQuery` and pass it any options that fit your needs.
- * When your component renders, `usePageAdminComboNewQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = usePageAdminComboNewQuery({
- *   variables: {
- *      comboCategoryId: // value for 'comboCategoryId'
- *   },
- * });
- */
-export function usePageAdminComboNewQuery(baseOptions: Apollo.QueryHookOptions<PageAdminComboNewQuery, PageAdminComboNewQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<PageAdminComboNewQuery, PageAdminComboNewQueryVariables>(PageAdminComboNewDocument, options);
-      }
-export function usePageAdminComboNewLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PageAdminComboNewQuery, PageAdminComboNewQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<PageAdminComboNewQuery, PageAdminComboNewQueryVariables>(PageAdminComboNewDocument, options);
-        }
-export type PageAdminComboNewQueryHookResult = ReturnType<typeof usePageAdminComboNewQuery>;
-export type PageAdminComboNewLazyQueryHookResult = ReturnType<typeof usePageAdminComboNewLazyQuery>;
-export type PageAdminComboNewQueryResult = Apollo.QueryResult<PageAdminComboNewQuery, PageAdminComboNewQueryVariables>;
-export const CreateComboDocument = gql`
-    mutation CreateCombo($comboCategoryId: ID!, $attributes: ComboAttributes!) {
-  createCombo(input: {comboCategoryId: $comboCategoryId, attributes: $attributes}) {
-    combo {
-      id
-    }
-  }
-}
-    `;
-export type CreateComboMutationFn = Apollo.MutationFunction<CreateComboMutation, CreateComboMutationVariables>;
-
-/**
- * __useCreateComboMutation__
- *
- * To run a mutation, you first call `useCreateComboMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useCreateComboMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [createComboMutation, { data, loading, error }] = useCreateComboMutation({
- *   variables: {
- *      comboCategoryId: // value for 'comboCategoryId'
- *      attributes: // value for 'attributes'
- *   },
- * });
- */
-export function useCreateComboMutation(baseOptions?: Apollo.MutationHookOptions<CreateComboMutation, CreateComboMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<CreateComboMutation, CreateComboMutationVariables>(CreateComboDocument, options);
-      }
-export type CreateComboMutationHookResult = ReturnType<typeof useCreateComboMutation>;
-export type CreateComboMutationResult = Apollo.MutationResult<CreateComboMutation>;
-export type CreateComboMutationOptions = Apollo.BaseMutationOptions<CreateComboMutation, CreateComboMutationVariables>;
-export const PageAdminComboCategoryEditDocument = gql`
-    query PageAdminComboCategoryEdit($comboCategoryId: ID!) {
-  comboCategory(comboCategoryId: $comboCategoryId) {
-    id
-    name
-    position
-    character {
-      slug
-      name
-      comboCategories {
-        ...ComboCategoryPositionSelect
-      }
-    }
-  }
-}
-    ${ComboCategoryPositionSelectFragmentDoc}`;
-
-/**
- * __usePageAdminComboCategoryEditQuery__
- *
- * To run a query within a React component, call `usePageAdminComboCategoryEditQuery` and pass it any options that fit your needs.
- * When your component renders, `usePageAdminComboCategoryEditQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = usePageAdminComboCategoryEditQuery({
- *   variables: {
- *      comboCategoryId: // value for 'comboCategoryId'
- *   },
- * });
- */
-export function usePageAdminComboCategoryEditQuery(baseOptions: Apollo.QueryHookOptions<PageAdminComboCategoryEditQuery, PageAdminComboCategoryEditQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<PageAdminComboCategoryEditQuery, PageAdminComboCategoryEditQueryVariables>(PageAdminComboCategoryEditDocument, options);
-      }
-export function usePageAdminComboCategoryEditLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PageAdminComboCategoryEditQuery, PageAdminComboCategoryEditQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<PageAdminComboCategoryEditQuery, PageAdminComboCategoryEditQueryVariables>(PageAdminComboCategoryEditDocument, options);
-        }
-export type PageAdminComboCategoryEditQueryHookResult = ReturnType<typeof usePageAdminComboCategoryEditQuery>;
-export type PageAdminComboCategoryEditLazyQueryHookResult = ReturnType<typeof usePageAdminComboCategoryEditLazyQuery>;
-export type PageAdminComboCategoryEditQueryResult = Apollo.QueryResult<PageAdminComboCategoryEditQuery, PageAdminComboCategoryEditQueryVariables>;
-export const UpdateComboCategoryDocument = gql`
-    mutation UpdateComboCategory($comboCategoryId: ID!, $attributes: ComboCategoryAttributes!) {
-  updateComboCategory(
-    input: {comboCategoryId: $comboCategoryId, attributes: $attributes}
-  ) {
-    comboCategory {
-      id
-    }
-  }
-}
-    `;
-export type UpdateComboCategoryMutationFn = Apollo.MutationFunction<UpdateComboCategoryMutation, UpdateComboCategoryMutationVariables>;
-
-/**
- * __useUpdateComboCategoryMutation__
- *
- * To run a mutation, you first call `useUpdateComboCategoryMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useUpdateComboCategoryMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [updateComboCategoryMutation, { data, loading, error }] = useUpdateComboCategoryMutation({
- *   variables: {
- *      comboCategoryId: // value for 'comboCategoryId'
- *      attributes: // value for 'attributes'
- *   },
- * });
- */
-export function useUpdateComboCategoryMutation(baseOptions?: Apollo.MutationHookOptions<UpdateComboCategoryMutation, UpdateComboCategoryMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<UpdateComboCategoryMutation, UpdateComboCategoryMutationVariables>(UpdateComboCategoryDocument, options);
-      }
-export type UpdateComboCategoryMutationHookResult = ReturnType<typeof useUpdateComboCategoryMutation>;
-export type UpdateComboCategoryMutationResult = Apollo.MutationResult<UpdateComboCategoryMutation>;
-export type UpdateComboCategoryMutationOptions = Apollo.BaseMutationOptions<UpdateComboCategoryMutation, UpdateComboCategoryMutationVariables>;
-export const PageAdminComboEditDocument = gql`
-    query PageAdminComboEdit($comboId: ID!) {
-  combo(comboId: $comboId) {
-    ...ComboForm
-    comboCategory {
-      id
-      name
-      combos {
-        ...ComboPositionSelect
-      }
-      character {
-        slug
-        name
-        moveCategories {
-          ...MoveSelectOption
-        }
-      }
-    }
-  }
-}
-    ${ComboFormFragmentDoc}
-${ComboPositionSelectFragmentDoc}
-${MoveSelectOptionFragmentDoc}`;
-
-/**
- * __usePageAdminComboEditQuery__
- *
- * To run a query within a React component, call `usePageAdminComboEditQuery` and pass it any options that fit your needs.
- * When your component renders, `usePageAdminComboEditQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = usePageAdminComboEditQuery({
- *   variables: {
- *      comboId: // value for 'comboId'
- *   },
- * });
- */
-export function usePageAdminComboEditQuery(baseOptions: Apollo.QueryHookOptions<PageAdminComboEditQuery, PageAdminComboEditQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<PageAdminComboEditQuery, PageAdminComboEditQueryVariables>(PageAdminComboEditDocument, options);
-      }
-export function usePageAdminComboEditLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PageAdminComboEditQuery, PageAdminComboEditQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<PageAdminComboEditQuery, PageAdminComboEditQueryVariables>(PageAdminComboEditDocument, options);
-        }
-export type PageAdminComboEditQueryHookResult = ReturnType<typeof usePageAdminComboEditQuery>;
-export type PageAdminComboEditLazyQueryHookResult = ReturnType<typeof usePageAdminComboEditLazyQuery>;
-export type PageAdminComboEditQueryResult = Apollo.QueryResult<PageAdminComboEditQuery, PageAdminComboEditQueryVariables>;
-export const UpdateComboDocument = gql`
-    mutation UpdateCombo($comboId: ID!, $attributes: ComboAttributes!) {
-  updateCombo(input: {comboId: $comboId, attributes: $attributes}) {
-    combo {
-      id
-      comboCategory {
-        id
-      }
-    }
-  }
-}
-    `;
-export type UpdateComboMutationFn = Apollo.MutationFunction<UpdateComboMutation, UpdateComboMutationVariables>;
-
-/**
- * __useUpdateComboMutation__
- *
- * To run a mutation, you first call `useUpdateComboMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useUpdateComboMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [updateComboMutation, { data, loading, error }] = useUpdateComboMutation({
- *   variables: {
- *      comboId: // value for 'comboId'
- *      attributes: // value for 'attributes'
- *   },
- * });
- */
-export function useUpdateComboMutation(baseOptions?: Apollo.MutationHookOptions<UpdateComboMutation, UpdateComboMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<UpdateComboMutation, UpdateComboMutationVariables>(UpdateComboDocument, options);
-      }
-export type UpdateComboMutationHookResult = ReturnType<typeof useUpdateComboMutation>;
-export type UpdateComboMutationResult = Apollo.MutationResult<UpdateComboMutation>;
-export type UpdateComboMutationOptions = Apollo.BaseMutationOptions<UpdateComboMutation, UpdateComboMutationVariables>;
 export const AdminOrganizerEditPageDocument = gql`
     query AdminOrganizerEditPage($organizerSlug: String!) {
   organizer(organizerSlug: $organizerSlug) {

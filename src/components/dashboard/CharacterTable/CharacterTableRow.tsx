@@ -45,7 +45,7 @@ export const CharacterTableRow = ({ character }: Props) => {
             {
               label: 'コンボ登録',
               onClick: () => {
-                router.push(pagesPath.admin.characters._slug(character.slug).combo_categories.$url());
+                router.push(pagesPath.admin.characters._slug(character.slug).combos.$url());
               },
             },
           ]}

@@ -1,11 +1,4 @@
-import {
-  CharactersParam,
-  ComboCategoryParam,
-  OrganizerParam,
-  PlayerParam,
-  TournamentParam,
-  TournamentVideoParam,
-} from './params';
+import { CharactersParam, OrganizerParam, PlayerParam, TournamentParam, TournamentVideoParam } from './params';
 
 import { BreadcrumbChainItem } from '.';
 
@@ -16,12 +9,7 @@ export type AdminBreadcrumbParams =
   | { to: 'character'; character: CharactersParam }
   | { to: 'charactersNew' }
   | { to: 'characterEdit'; character: CharactersParam }
-  | { to: 'comboCategories'; character: CharactersParam }
-  | { to: 'comboCategory'; comboCategory: ComboCategoryParam }
-  | { to: 'comboCategoriesNew'; character: CharactersParam }
-  | { to: 'comboCategoryEdit'; comboCategory: ComboCategoryParam }
-  | { to: 'combosNew'; comboCategory: ComboCategoryParam }
-  | { to: 'comboEdit'; comboCategory: ComboCategoryParam }
+  | { to: 'combos'; character: CharactersParam }
   | { to: 'moves'; character: CharactersParam }
   | { to: 'organizers' }
   | { to: 'organizer'; organizer: OrganizerParam }
@@ -49,33 +37,11 @@ export const breadcrumbChain = (props: AdminBreadcrumbParams): BreadcrumbChainIt
       return { name: 'キャラクターを登録', parent: breadcrumbChain({ to: 'characters' }) };
     case 'characterEdit':
       return { name: '編集', parent: breadcrumbChain({ to: 'character', character: props.character }) };
-    case 'comboCategories':
+    case 'combos':
       return {
         name: 'コンボ',
-        url: pagesPath.admin.characters._slug(props.character.slug).combo_categories.$url(),
+        url: pagesPath.admin.characters._slug(props.character.slug).combos.$url(),
         parent: breadcrumbChain({ to: 'character', character: props.character }),
-      };
-    case 'comboCategory':
-      return {
-        name: props.comboCategory.name,
-        parent: breadcrumbChain({ to: 'comboCategories', character: props.comboCategory.character }),
-      };
-    case 'comboCategoriesNew':
-      return {
-        name: 'カテゴリを登録',
-        parent: breadcrumbChain({ to: 'comboCategories', character: props.character }),
-      };
-    case 'comboCategoryEdit':
-      return { name: '編集', parent: breadcrumbChain({ to: 'comboCategory', comboCategory: props.comboCategory }) };
-    case 'combosNew':
-      return {
-        name: 'コンボを登録',
-        parent: breadcrumbChain({ to: 'comboCategories', character: props.comboCategory.character }),
-      };
-    case 'comboEdit':
-      return {
-        name: '編集',
-        parent: breadcrumbChain({ to: 'comboCategories', character: props.comboCategory.character }),
       };
     case 'moves':
       return {
