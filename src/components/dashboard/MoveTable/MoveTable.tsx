@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Box } from '@mui/material';
+import { Box, TableCell, TableRow } from '@mui/material';
 
 import { CreateButton } from './CreateButton';
 import { MoveTableRow } from './MoveTableRow';
@@ -20,11 +20,14 @@ export const MoveTable: React.FC<Props> = ({ moveCategoryId, moves }) => {
         {moves.map(move => (
           <MoveTableRow key={move.id} move={move} moveCategoryId={moveCategoryId} moves={moves} />
         ))}
+        <TableRow>
+          <TableCell scope="row" colSpan={10}>
+            <Box display="flex" justifyContent="center">
+              <CreateButton moveCategoryId={moveCategoryId} moves={moves} />
+            </Box>
+          </TableCell>
+        </TableRow>
       </DashboardTable>
-
-      <Box display="flex" justifyContent="center" mt={2}>
-        <CreateButton moveCategoryId={moveCategoryId} moves={moves} />
-      </Box>
     </>
   );
 };
