@@ -1,0 +1,78 @@
+fragment ComboTableRow on Combo {
+  id
+  command
+
+  comboVideo {
+    id
+    m3u8Url
+    thumbnailUrl
+  }
+
+  ...ComboPositionSelect
+}
+
+mutation CreateCombo($comboCategoryId: ID!, $attributes: ComboAttributes!) {
+  createCombo(input: { comboCategoryId: $comboCategoryId, attributes: $attributes }) {
+    combo {
+      ...ComboTableRow
+
+      comboCategory {
+        id
+        combos {
+          id
+          position
+        }
+      }
+    }
+  }
+}
+
+mutation UpdateCombo($comboId: ID!, $attributes: ComboAttributes!) {
+  updateCombo(input: { comboId: $comboId, attributes: $attributes }) {
+    combo {
+      ...ComboTableRow
+
+      comboCategory {
+        id
+        combos {
+          id
+          position
+        }
+      }
+    }
+  }
+}
+
+mutation DeleteCombo($comboId: ID!) {
+  deleteCombo(input: { comboId: $comboId }) {
+    combo {
+      comboCategory {
+        id
+        combos { id }
+      }
+    }
+  }
+}
+
+mutation CreateComboVideo($comboId: ID!) {
+  createComboVideo(input: { comboId: $comboId }) {
+    combo {
+      ...ComboTableRow
+    }
+
+    videoUpload {
+      url
+      fields
+    }
+  }
+}
+
+fragment MoveSelectOption on MoveCategory {
+  id
+  name
+
+  moves {
+    id
+    name
+  }
+}

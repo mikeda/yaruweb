@@ -15,4 +15,3 @@ query MoveCategoryForm($moveCategoryId: ID!) {
     ...MoveCategoryForm
   }
 }
-

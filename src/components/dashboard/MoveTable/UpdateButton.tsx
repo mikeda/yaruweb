@@ -36,7 +36,7 @@ export const UpdateButton: React.FC<Props> = ({ moveId, moves }) => {
   });
 
   const [updateAttack, { loading: attackLoading }] = useUpdateAttackMoveMutation({
-    onCompleted: () => toast.success('技データを更新しました。'),
+    onCompleted: () => toast.success('コマンドを更新しました。'),
     onError: e => toast.error(e.message),
   });
   const onClickUpdateAttack = useCallback((attributes: AttackMoveAttributes) => {
@@ -45,7 +45,7 @@ export const UpdateButton: React.FC<Props> = ({ moveId, moves }) => {
   }, []);
 
   const [updateThrow, { loading: throwLoading }] = useUpdateThrowMoveMutation({
-    onCompleted: () => toast.success('技データを更新しました。'),
+    onCompleted: () => toast.success('コマンドを更新しました。'),
     onError: e => toast.error(e.message),
   });
   const onClickUpdateThrow = useCallback((attributes: ThrowMoveAttributes) => {
@@ -54,7 +54,7 @@ export const UpdateButton: React.FC<Props> = ({ moveId, moves }) => {
   }, []);
 
   const [updateReversal, { loading: reversalLoading }] = useUpdateReversalMoveMutation({
-    onCompleted: () => toast.success('技データを更新しました。'),
+    onCompleted: () => toast.success('コマンドを更新しました。'),
     onError: e => toast.error(e.message),
   });
   const onClickUpdateReversal = useCallback((attributes: ReversalMoveAttributes) => {

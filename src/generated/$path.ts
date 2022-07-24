@@ -2,11 +2,8 @@ export const pagesPath = {
   "admin": {
     "characters": {
       _slug: (slug: string | number) => ({
-        "combo_categories": {
-          "new": {
-            $url: (url?: { hash?: string }) => ({ pathname: '/admin/characters/[slug]/combo_categories/new' as const, query: { slug }, hash: url?.hash })
-          },
-          $url: (url?: { hash?: string }) => ({ pathname: '/admin/characters/[slug]/combo_categories' as const, query: { slug }, hash: url?.hash })
+        "combos": {
+          $url: (url?: { hash?: string }) => ({ pathname: '/admin/characters/[slug]/combos' as const, query: { slug }, hash: url?.hash })
         },
         "edit": {
           $url: (url?: { hash?: string }) => ({ pathname: '/admin/characters/[slug]/edit' as const, query: { slug }, hash: url?.hash })
@@ -19,25 +16,6 @@ export const pagesPath = {
         $url: (url?: { hash?: string }) => ({ pathname: '/admin/characters/new' as const, hash: url?.hash })
       },
       $url: (url?: { hash?: string }) => ({ pathname: '/admin/characters' as const, hash: url?.hash })
-    },
-    "combo_categories": {
-      _id: (id: string | number) => ({
-        "combos": {
-          "new": {
-            $url: (url?: { hash?: string }) => ({ pathname: '/admin/combo_categories/[id]/combos/new' as const, query: { id }, hash: url?.hash })
-          }
-        },
-        "edit": {
-          $url: (url?: { hash?: string }) => ({ pathname: '/admin/combo_categories/[id]/edit' as const, query: { id }, hash: url?.hash })
-        }
-      })
-    },
-    "combos": {
-      _id: (id: string | number) => ({
-        "edit": {
-          $url: (url?: { hash?: string }) => ({ pathname: '/admin/combos/[id]/edit' as const, query: { id }, hash: url?.hash })
-        }
-      })
     },
     "organizers": {
       _slug: (slug: string | number) => ({

@@ -15,7 +15,7 @@ export const ComboSelect: React.FC<Props> = ({ characterSlug, onChange }) => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>読み込みに失敗しました。</p>;
   if (!data) return <p>読み込みに失敗しました。</p>;
-  if (data.comboCategories.length === 0) return <p>技データが登録されていません。</p>;
+  if (data.comboCategories.length === 0) return <p>コマンドが登録されていません。</p>;
 
   return (
     <Select

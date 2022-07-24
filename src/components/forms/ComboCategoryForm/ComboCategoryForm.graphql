@@ -9,3 +9,9 @@ fragment ComboCategoryPositionSelect on ComboCategory {
   name
   position
 }
+
+query ComboCategoryForm($comboCategoryId: ID!) {
+  comboCategory(comboCategoryId: $comboCategoryId) {
+    ...ComboCategoryForm
+  }
+}

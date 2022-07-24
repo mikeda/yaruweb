@@ -1,0 +1,6 @@
+query DashboardCharacterCombosPage($characterSlug: String!) {
+  character(characterSlug: $characterSlug) {
+    ...CharacterBreadcrumbs
+    ...ComboDashboard
+  }
+}

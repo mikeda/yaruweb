@@ -12,3 +12,9 @@ fragment ComboPositionSelect on Combo {
   command
   position
 }
+
+query ComboForm($comboId: ID!) {
+  combo(comboId: $comboId) {
+    ...ComboForm
+  }
+}
