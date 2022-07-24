@@ -39,23 +39,6 @@ export const pagesPath = {
         }
       })
     },
-    "move_categories": {
-      _id: (id: string | number) => ({
-        "edit": {
-          $url: (url?: { hash?: string }) => ({ pathname: '/admin/move_categories/[id]/edit' as const, query: { id }, hash: url?.hash })
-        }
-      })
-    },
-    "moves": {
-      _id: (id: string | number) => ({
-        "copy": {
-          $url: (url?: { hash?: string }) => ({ pathname: '/admin/moves/[id]/copy' as const, query: { id }, hash: url?.hash })
-        },
-        "edit": {
-          $url: (url?: { hash?: string }) => ({ pathname: '/admin/moves/[id]/edit' as const, query: { id }, hash: url?.hash })
-        }
-      })
-    },
     "organizers": {
       _slug: (slug: string | number) => ({
         "edit": {

@@ -19,7 +19,10 @@ mutation CreateAttackMove($moveCategoryId: ID!, $attributes: AttackMoveAttribute
 
       moveCategory {
         id
-        moves { id }
+        moves {
+          id
+          position
+        }
       }
     }
   }
@@ -32,7 +35,10 @@ mutation CreateThrowMove($moveCategoryId: ID!, $attributes: ThrowMoveAttributes!
 
       moveCategory {
         id
-        moves { id }
+        moves {
+          id
+          position
+        }
       }
     }
   }
@@ -45,7 +51,58 @@ mutation CreateReversalMove($moveCategoryId: ID!, $attributes: ReversalMoveAttri
 
       moveCategory {
         id
-        moves { id }
+        moves {
+          id
+          position
+        }
+      }
+    }
+  }
+}
+
+mutation UpdateAttackMove($moveId: ID!, $attributes: AttackMoveAttributes!) {
+  updateAttackMove(input: { moveId: $moveId, attributes: $attributes }) {
+    move {
+      ...MoveTableRow
+
+      moveCategory {
+        id
+        moves {
+          id
+          position
+        }
+      }
+    }
+  }
+}
+
+mutation UpdateThrowMove($moveId: ID!, $attributes: ThrowMoveAttributes!) {
+  updateThrowMove(input: { moveId: $moveId, attributes: $attributes }) {
+    move {
+      ...MoveTableRow
+
+      moveCategory {
+        id
+        moves {
+          id
+          position
+        }
+      }
+    }
+  }
+}
+
+mutation UpdateReversalMove($moveId: ID!, $attributes: ReversalMoveAttributes!) {
+  updateReversalMove(input: { moveId: $moveId, attributes: $attributes }) {
+    move {
+      id
+
+      moveCategory {
+        id
+        moves {
+          id
+          position
+        }
       }
     }
   }

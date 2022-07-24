@@ -30,18 +30,12 @@ export const UpdateButton: React.FC<Props> = ({ moveCategoryId, moveCategories }
     onCompleted: data => {
       setMoveCategory(data.moveCategory);
     },
-    onError: e => {
-      toast.error(e.message);
-    },
+    onError: e => toast.error(e.message),
   });
 
   const [update, { loading: updateLoading }] = useUpdateMoveCategoryMutation({
-    onCompleted: () => {
-      toast.success('カテゴリを更新しました。');
-    },
-    onError: e => {
-      toast.error(e.message);
-    },
+    onCompleted: () => toast.success('カテゴリを更新しました。'),
+    onError: e => toast.error(e.message),
   });
 
   const onClickUpdate = useCallback((attributes: MoveCategoryAttributes) => {

@@ -2205,7 +2205,7 @@ export type CreateAttackMoveMutationVariables = Exact<{
 }>;
 
 
-export type CreateAttackMoveMutation = { __typename?: 'Mutation', createAttackMove?: { __typename?: 'CreateAttackMovePayload', move: { __typename?: 'Move', id: string, name: string, command: Array<string>, position: number, moveCategory: { __typename?: 'MoveCategory', id: string, moves: Array<{ __typename?: 'Move', id: string }> }, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null } } | null };
+export type CreateAttackMoveMutation = { __typename?: 'Mutation', createAttackMove?: { __typename?: 'CreateAttackMovePayload', move: { __typename?: 'Move', id: string, name: string, command: Array<string>, position: number, moveCategory: { __typename?: 'MoveCategory', id: string, moves: Array<{ __typename?: 'Move', id: string, position: number }> }, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null } } | null };
 
 export type CreateThrowMoveMutationVariables = Exact<{
   moveCategoryId: Scalars['ID'];
@@ -2213,7 +2213,7 @@ export type CreateThrowMoveMutationVariables = Exact<{
 }>;
 
 
-export type CreateThrowMoveMutation = { __typename?: 'Mutation', createThrowMove?: { __typename?: 'CreateThrowMovePayload', move: { __typename?: 'Move', id: string, name: string, command: Array<string>, position: number, moveCategory: { __typename?: 'MoveCategory', id: string, moves: Array<{ __typename?: 'Move', id: string }> }, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null } } | null };
+export type CreateThrowMoveMutation = { __typename?: 'Mutation', createThrowMove?: { __typename?: 'CreateThrowMovePayload', move: { __typename?: 'Move', id: string, name: string, command: Array<string>, position: number, moveCategory: { __typename?: 'MoveCategory', id: string, moves: Array<{ __typename?: 'Move', id: string, position: number }> }, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null } } | null };
 
 export type CreateReversalMoveMutationVariables = Exact<{
   moveCategoryId: Scalars['ID'];
@@ -2221,7 +2221,31 @@ export type CreateReversalMoveMutationVariables = Exact<{
 }>;
 
 
-export type CreateReversalMoveMutation = { __typename?: 'Mutation', createReversalMove?: { __typename?: 'CreateReversalMovePayload', move: { __typename?: 'Move', id: string, name: string, command: Array<string>, position: number, moveCategory: { __typename?: 'MoveCategory', id: string, moves: Array<{ __typename?: 'Move', id: string }> }, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null } } | null };
+export type CreateReversalMoveMutation = { __typename?: 'Mutation', createReversalMove?: { __typename?: 'CreateReversalMovePayload', move: { __typename?: 'Move', id: string, name: string, command: Array<string>, position: number, moveCategory: { __typename?: 'MoveCategory', id: string, moves: Array<{ __typename?: 'Move', id: string, position: number }> }, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null } } | null };
+
+export type UpdateAttackMoveMutationVariables = Exact<{
+  moveId: Scalars['ID'];
+  attributes: AttackMoveAttributes;
+}>;
+
+
+export type UpdateAttackMoveMutation = { __typename?: 'Mutation', updateAttackMove?: { __typename?: 'UpdateAttackMovePayload', move: { __typename?: 'Move', id: string, name: string, command: Array<string>, position: number, moveCategory: { __typename?: 'MoveCategory', id: string, moves: Array<{ __typename?: 'Move', id: string, position: number }> }, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null } } | null };
+
+export type UpdateThrowMoveMutationVariables = Exact<{
+  moveId: Scalars['ID'];
+  attributes: ThrowMoveAttributes;
+}>;
+
+
+export type UpdateThrowMoveMutation = { __typename?: 'Mutation', updateThrowMove?: { __typename?: 'UpdateThrowMovePayload', move: { __typename?: 'Move', id: string, name: string, command: Array<string>, position: number, moveCategory: { __typename?: 'MoveCategory', id: string, moves: Array<{ __typename?: 'Move', id: string, position: number }> }, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null } } | null };
+
+export type UpdateReversalMoveMutationVariables = Exact<{
+  moveId: Scalars['ID'];
+  attributes: ReversalMoveAttributes;
+}>;
+
+
+export type UpdateReversalMoveMutation = { __typename?: 'Mutation', updateReversalMove?: { __typename?: 'UpdateReversalMovePayload', move: { __typename?: 'Move', id: string, moveCategory: { __typename?: 'MoveCategory', id: string, moves: Array<{ __typename?: 'Move', id: string, position: number }> } } } | null };
 
 export type DeleteMoveMutationVariables = Exact<{
   moveId: Scalars['ID'];
@@ -2308,6 +2332,13 @@ export type MoveFormThrowFragment = { __typename?: 'ThrowMove', id: string, thro
 export type MoveFormReversalFragment = { __typename?: 'ReversalMove', id: string, kind: string, startUpFrame?: number | null, finishFrame?: number | null };
 
 export type MoveFormFragment = { __typename?: 'Move', id: string, name: string, kana?: string | null, command: Array<string>, statusAfter?: string | null, note?: string | null, position: number, moveCategory: { __typename?: 'MoveCategory', id: string, name: string }, moveable: { __typename: 'AttackMove', id: string, startUpFrame?: number | null, duration?: number | null, reach?: number | null, blockFrame?: number | null, blockResult: AttackMoveResultEnum, blockStatus?: AttackMoveStateEnum | null, hitFrame?: number | null, hitResult: AttackMoveResultEnum, hitStatus?: AttackMoveStateEnum | null, counterFrame?: number | null, counterResult: AttackMoveResultEnum, counterStatus?: AttackMoveStateEnum | null, heights: Array<AttackTypeEnum>, damages: Array<number>, powerCrush: boolean, crouchingStatus: boolean, jumpStatus: boolean, homing: boolean, screw: boolean, wallBound: boolean } | { __typename: 'ReversalMove', id: string, kind: string, startUpFrame?: number | null, finishFrame?: number | null } | { __typename: 'ThrowMove', id: string, throwType: ThrowTypeEnum, throwResult: ThrowMoveResultEnum, throwEscape: ThrowEscapeEnum, startUpFrame?: number | null, damage?: number | null }, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null };
+
+export type MoveFormQueryVariables = Exact<{
+  moveId: Scalars['ID'];
+}>;
+
+
+export type MoveFormQuery = { __typename?: 'Query', move: { __typename?: 'Move', id: string, name: string, kana?: string | null, command: Array<string>, statusAfter?: string | null, note?: string | null, position: number, moveCategory: { __typename?: 'MoveCategory', id: string, name: string }, moveable: { __typename: 'AttackMove', id: string, startUpFrame?: number | null, duration?: number | null, reach?: number | null, blockFrame?: number | null, blockResult: AttackMoveResultEnum, blockStatus?: AttackMoveStateEnum | null, hitFrame?: number | null, hitResult: AttackMoveResultEnum, hitStatus?: AttackMoveStateEnum | null, counterFrame?: number | null, counterResult: AttackMoveResultEnum, counterStatus?: AttackMoveStateEnum | null, heights: Array<AttackTypeEnum>, damages: Array<number>, powerCrush: boolean, crouchingStatus: boolean, jumpStatus: boolean, homing: boolean, screw: boolean, wallBound: boolean } | { __typename: 'ReversalMove', id: string, kind: string, startUpFrame?: number | null, finishFrame?: number | null } | { __typename: 'ThrowMove', id: string, throwType: ThrowTypeEnum, throwResult: ThrowMoveResultEnum, throwEscape: ThrowEscapeEnum, startUpFrame?: number | null, damage?: number | null }, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null } };
 
 export type MovePositionSelectFragment = { __typename?: 'Move', id: string, name: string, position: number };
 
@@ -2498,51 +2529,6 @@ export type UpdateComboMutationVariables = Exact<{
 
 
 export type UpdateComboMutation = { __typename?: 'Mutation', updateCombo?: { __typename?: 'UpdateComboPayload', combo: { __typename?: 'Combo', id: string, comboCategory: { __typename?: 'ComboCategory', id: string } } } | null };
-
-export type PageAdminMoveCategoryEditQueryVariables = Exact<{
-  moveCategoryId: Scalars['ID'];
-}>;
-
-
-export type PageAdminMoveCategoryEditQuery = { __typename?: 'Query', moveCategory: { __typename?: 'MoveCategory', id: string, name: string, position: number, character: { __typename?: 'Character', slug: string, name: string, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, position: number }> } } };
-
-export type PageAdminMoveCopyQueryVariables = Exact<{
-  moveId: Scalars['ID'];
-}>;
-
-
-export type PageAdminMoveCopyQuery = { __typename?: 'Query', move: { __typename?: 'Move', id: string, name: string, kana?: string | null, command: Array<string>, statusAfter?: string | null, note?: string | null, position: number, moveCategory: { __typename?: 'MoveCategory', id: string, name: string, character: { __typename?: 'Character', slug: string, name: string }, moves: Array<{ __typename?: 'Move', id: string, name: string, position: number }> }, moveable: { __typename: 'AttackMove', id: string, startUpFrame?: number | null, duration?: number | null, reach?: number | null, blockFrame?: number | null, blockResult: AttackMoveResultEnum, blockStatus?: AttackMoveStateEnum | null, hitFrame?: number | null, hitResult: AttackMoveResultEnum, hitStatus?: AttackMoveStateEnum | null, counterFrame?: number | null, counterResult: AttackMoveResultEnum, counterStatus?: AttackMoveStateEnum | null, heights: Array<AttackTypeEnum>, damages: Array<number>, powerCrush: boolean, crouchingStatus: boolean, jumpStatus: boolean, homing: boolean, screw: boolean, wallBound: boolean } | { __typename: 'ReversalMove', id: string, kind: string, startUpFrame?: number | null, finishFrame?: number | null } | { __typename: 'ThrowMove', id: string, throwType: ThrowTypeEnum, throwResult: ThrowMoveResultEnum, throwEscape: ThrowEscapeEnum, startUpFrame?: number | null, damage?: number | null }, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null } };
-
-export type PageAdminMoveEditQueryVariables = Exact<{
-  moveId: Scalars['ID'];
-}>;
-
-
-export type PageAdminMoveEditQuery = { __typename?: 'Query', move: { __typename?: 'Move', id: string, name: string, kana?: string | null, command: Array<string>, statusAfter?: string | null, note?: string | null, position: number, moveCategory: { __typename?: 'MoveCategory', id: string, name: string, character: { __typename?: 'Character', slug: string, name: string }, moves: Array<{ __typename?: 'Move', id: string, name: string, position: number }> }, moveable: { __typename: 'AttackMove', id: string, startUpFrame?: number | null, duration?: number | null, reach?: number | null, blockFrame?: number | null, blockResult: AttackMoveResultEnum, blockStatus?: AttackMoveStateEnum | null, hitFrame?: number | null, hitResult: AttackMoveResultEnum, hitStatus?: AttackMoveStateEnum | null, counterFrame?: number | null, counterResult: AttackMoveResultEnum, counterStatus?: AttackMoveStateEnum | null, heights: Array<AttackTypeEnum>, damages: Array<number>, powerCrush: boolean, crouchingStatus: boolean, jumpStatus: boolean, homing: boolean, screw: boolean, wallBound: boolean } | { __typename: 'ReversalMove', id: string, kind: string, startUpFrame?: number | null, finishFrame?: number | null } | { __typename: 'ThrowMove', id: string, throwType: ThrowTypeEnum, throwResult: ThrowMoveResultEnum, throwEscape: ThrowEscapeEnum, startUpFrame?: number | null, damage?: number | null }, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null } };
-
-export type UpdateAttackMoveMutationVariables = Exact<{
-  moveId: Scalars['ID'];
-  attributes: AttackMoveAttributes;
-}>;
-
-
-export type UpdateAttackMoveMutation = { __typename?: 'Mutation', updateAttackMove?: { __typename?: 'UpdateAttackMovePayload', move: { __typename?: 'Move', id: string } } | null };
-
-export type UpdateThrowMoveMutationVariables = Exact<{
-  moveId: Scalars['ID'];
-  attributes: ThrowMoveAttributes;
-}>;
-
-
-export type UpdateThrowMoveMutation = { __typename?: 'Mutation', updateThrowMove?: { __typename?: 'UpdateThrowMovePayload', move: { __typename?: 'Move', id: string } } | null };
-
-export type UpdateReversalMoveMutationVariables = Exact<{
-  moveId: Scalars['ID'];
-  attributes: ReversalMoveAttributes;
-}>;
-
-
-export type UpdateReversalMoveMutation = { __typename?: 'Mutation', updateReversalMove?: { __typename?: 'UpdateReversalMovePayload', move: { __typename?: 'Move', id: string } } | null };
 
 export type AdminOrganizerEditPageQueryVariables = Exact<{
   organizerSlug: Scalars['String'];
@@ -4312,6 +4298,7 @@ export const CreateAttackMoveDocument = gql`
         id
         moves {
           id
+          position
         }
       }
     }
@@ -4356,6 +4343,7 @@ export const CreateThrowMoveDocument = gql`
         id
         moves {
           id
+          position
         }
       }
     }
@@ -4400,6 +4388,7 @@ export const CreateReversalMoveDocument = gql`
         id
         moves {
           id
+          position
         }
       }
     }
@@ -4433,6 +4422,135 @@ export function useCreateReversalMoveMutation(baseOptions?: Apollo.MutationHookO
 export type CreateReversalMoveMutationHookResult = ReturnType<typeof useCreateReversalMoveMutation>;
 export type CreateReversalMoveMutationResult = Apollo.MutationResult<CreateReversalMoveMutation>;
 export type CreateReversalMoveMutationOptions = Apollo.BaseMutationOptions<CreateReversalMoveMutation, CreateReversalMoveMutationVariables>;
+export const UpdateAttackMoveDocument = gql`
+    mutation UpdateAttackMove($moveId: ID!, $attributes: AttackMoveAttributes!) {
+  updateAttackMove(input: {moveId: $moveId, attributes: $attributes}) {
+    move {
+      ...MoveTableRow
+      moveCategory {
+        id
+        moves {
+          id
+          position
+        }
+      }
+    }
+  }
+}
+    ${MoveTableRowFragmentDoc}`;
+export type UpdateAttackMoveMutationFn = Apollo.MutationFunction<UpdateAttackMoveMutation, UpdateAttackMoveMutationVariables>;
+
+/**
+ * __useUpdateAttackMoveMutation__
+ *
+ * To run a mutation, you first call `useUpdateAttackMoveMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateAttackMoveMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateAttackMoveMutation, { data, loading, error }] = useUpdateAttackMoveMutation({
+ *   variables: {
+ *      moveId: // value for 'moveId'
+ *      attributes: // value for 'attributes'
+ *   },
+ * });
+ */
+export function useUpdateAttackMoveMutation(baseOptions?: Apollo.MutationHookOptions<UpdateAttackMoveMutation, UpdateAttackMoveMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateAttackMoveMutation, UpdateAttackMoveMutationVariables>(UpdateAttackMoveDocument, options);
+      }
+export type UpdateAttackMoveMutationHookResult = ReturnType<typeof useUpdateAttackMoveMutation>;
+export type UpdateAttackMoveMutationResult = Apollo.MutationResult<UpdateAttackMoveMutation>;
+export type UpdateAttackMoveMutationOptions = Apollo.BaseMutationOptions<UpdateAttackMoveMutation, UpdateAttackMoveMutationVariables>;
+export const UpdateThrowMoveDocument = gql`
+    mutation UpdateThrowMove($moveId: ID!, $attributes: ThrowMoveAttributes!) {
+  updateThrowMove(input: {moveId: $moveId, attributes: $attributes}) {
+    move {
+      ...MoveTableRow
+      moveCategory {
+        id
+        moves {
+          id
+          position
+        }
+      }
+    }
+  }
+}
+    ${MoveTableRowFragmentDoc}`;
+export type UpdateThrowMoveMutationFn = Apollo.MutationFunction<UpdateThrowMoveMutation, UpdateThrowMoveMutationVariables>;
+
+/**
+ * __useUpdateThrowMoveMutation__
+ *
+ * To run a mutation, you first call `useUpdateThrowMoveMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateThrowMoveMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateThrowMoveMutation, { data, loading, error }] = useUpdateThrowMoveMutation({
+ *   variables: {
+ *      moveId: // value for 'moveId'
+ *      attributes: // value for 'attributes'
+ *   },
+ * });
+ */
+export function useUpdateThrowMoveMutation(baseOptions?: Apollo.MutationHookOptions<UpdateThrowMoveMutation, UpdateThrowMoveMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateThrowMoveMutation, UpdateThrowMoveMutationVariables>(UpdateThrowMoveDocument, options);
+      }
+export type UpdateThrowMoveMutationHookResult = ReturnType<typeof useUpdateThrowMoveMutation>;
+export type UpdateThrowMoveMutationResult = Apollo.MutationResult<UpdateThrowMoveMutation>;
+export type UpdateThrowMoveMutationOptions = Apollo.BaseMutationOptions<UpdateThrowMoveMutation, UpdateThrowMoveMutationVariables>;
+export const UpdateReversalMoveDocument = gql`
+    mutation UpdateReversalMove($moveId: ID!, $attributes: ReversalMoveAttributes!) {
+  updateReversalMove(input: {moveId: $moveId, attributes: $attributes}) {
+    move {
+      id
+      moveCategory {
+        id
+        moves {
+          id
+          position
+        }
+      }
+    }
+  }
+}
+    `;
+export type UpdateReversalMoveMutationFn = Apollo.MutationFunction<UpdateReversalMoveMutation, UpdateReversalMoveMutationVariables>;
+
+/**
+ * __useUpdateReversalMoveMutation__
+ *
+ * To run a mutation, you first call `useUpdateReversalMoveMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateReversalMoveMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateReversalMoveMutation, { data, loading, error }] = useUpdateReversalMoveMutation({
+ *   variables: {
+ *      moveId: // value for 'moveId'
+ *      attributes: // value for 'attributes'
+ *   },
+ * });
+ */
+export function useUpdateReversalMoveMutation(baseOptions?: Apollo.MutationHookOptions<UpdateReversalMoveMutation, UpdateReversalMoveMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateReversalMoveMutation, UpdateReversalMoveMutationVariables>(UpdateReversalMoveDocument, options);
+      }
+export type UpdateReversalMoveMutationHookResult = ReturnType<typeof useUpdateReversalMoveMutation>;
+export type UpdateReversalMoveMutationResult = Apollo.MutationResult<UpdateReversalMoveMutation>;
+export type UpdateReversalMoveMutationOptions = Apollo.BaseMutationOptions<UpdateReversalMoveMutation, UpdateReversalMoveMutationVariables>;
 export const DeleteMoveDocument = gql`
     mutation DeleteMove($moveId: ID!) {
   deleteMove(input: {moveId: $moveId}) {
@@ -4736,6 +4854,41 @@ export function useMoveCategoryFormLazyQuery(baseOptions?: Apollo.LazyQueryHookO
 export type MoveCategoryFormQueryHookResult = ReturnType<typeof useMoveCategoryFormQuery>;
 export type MoveCategoryFormLazyQueryHookResult = ReturnType<typeof useMoveCategoryFormLazyQuery>;
 export type MoveCategoryFormQueryResult = Apollo.QueryResult<MoveCategoryFormQuery, MoveCategoryFormQueryVariables>;
+export const MoveFormDocument = gql`
+    query MoveForm($moveId: ID!) {
+  move(moveId: $moveId) {
+    ...MoveForm
+  }
+}
+    ${MoveFormFragmentDoc}`;
+
+/**
+ * __useMoveFormQuery__
+ *
+ * To run a query within a React component, call `useMoveFormQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMoveFormQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMoveFormQuery({
+ *   variables: {
+ *      moveId: // value for 'moveId'
+ *   },
+ * });
+ */
+export function useMoveFormQuery(baseOptions: Apollo.QueryHookOptions<MoveFormQuery, MoveFormQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<MoveFormQuery, MoveFormQueryVariables>(MoveFormDocument, options);
+      }
+export function useMoveFormLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MoveFormQuery, MoveFormQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<MoveFormQuery, MoveFormQueryVariables>(MoveFormDocument, options);
+        }
+export type MoveFormQueryHookResult = ReturnType<typeof useMoveFormQuery>;
+export type MoveFormLazyQueryHookResult = ReturnType<typeof useMoveFormLazyQuery>;
+export type MoveFormQueryResult = Apollo.QueryResult<MoveFormQuery, MoveFormQueryVariables>;
 export const CreateUserDocument = gql`
     mutation CreateUser {
   createUser(input: {}) {
@@ -5612,251 +5765,6 @@ export function useUpdateComboMutation(baseOptions?: Apollo.MutationHookOptions<
 export type UpdateComboMutationHookResult = ReturnType<typeof useUpdateComboMutation>;
 export type UpdateComboMutationResult = Apollo.MutationResult<UpdateComboMutation>;
 export type UpdateComboMutationOptions = Apollo.BaseMutationOptions<UpdateComboMutation, UpdateComboMutationVariables>;
-export const PageAdminMoveCategoryEditDocument = gql`
-    query PageAdminMoveCategoryEdit($moveCategoryId: ID!) {
-  moveCategory(moveCategoryId: $moveCategoryId) {
-    ...MoveCategoryForm
-    character {
-      slug
-      name
-      moveCategories {
-        ...MoveCategoryPositionSelect
-      }
-    }
-  }
-}
-    ${MoveCategoryFormFragmentDoc}
-${MoveCategoryPositionSelectFragmentDoc}`;
-
-/**
- * __usePageAdminMoveCategoryEditQuery__
- *
- * To run a query within a React component, call `usePageAdminMoveCategoryEditQuery` and pass it any options that fit your needs.
- * When your component renders, `usePageAdminMoveCategoryEditQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = usePageAdminMoveCategoryEditQuery({
- *   variables: {
- *      moveCategoryId: // value for 'moveCategoryId'
- *   },
- * });
- */
-export function usePageAdminMoveCategoryEditQuery(baseOptions: Apollo.QueryHookOptions<PageAdminMoveCategoryEditQuery, PageAdminMoveCategoryEditQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<PageAdminMoveCategoryEditQuery, PageAdminMoveCategoryEditQueryVariables>(PageAdminMoveCategoryEditDocument, options);
-      }
-export function usePageAdminMoveCategoryEditLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PageAdminMoveCategoryEditQuery, PageAdminMoveCategoryEditQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<PageAdminMoveCategoryEditQuery, PageAdminMoveCategoryEditQueryVariables>(PageAdminMoveCategoryEditDocument, options);
-        }
-export type PageAdminMoveCategoryEditQueryHookResult = ReturnType<typeof usePageAdminMoveCategoryEditQuery>;
-export type PageAdminMoveCategoryEditLazyQueryHookResult = ReturnType<typeof usePageAdminMoveCategoryEditLazyQuery>;
-export type PageAdminMoveCategoryEditQueryResult = Apollo.QueryResult<PageAdminMoveCategoryEditQuery, PageAdminMoveCategoryEditQueryVariables>;
-export const PageAdminMoveCopyDocument = gql`
-    query PageAdminMoveCopy($moveId: ID!) {
-  move(moveId: $moveId) {
-    ...MoveForm
-    moveCategory {
-      id
-      name
-      character {
-        slug
-        name
-      }
-      moves {
-        ...MovePositionSelect
-      }
-    }
-  }
-}
-    ${MoveFormFragmentDoc}
-${MovePositionSelectFragmentDoc}`;
-
-/**
- * __usePageAdminMoveCopyQuery__
- *
- * To run a query within a React component, call `usePageAdminMoveCopyQuery` and pass it any options that fit your needs.
- * When your component renders, `usePageAdminMoveCopyQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = usePageAdminMoveCopyQuery({
- *   variables: {
- *      moveId: // value for 'moveId'
- *   },
- * });
- */
-export function usePageAdminMoveCopyQuery(baseOptions: Apollo.QueryHookOptions<PageAdminMoveCopyQuery, PageAdminMoveCopyQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<PageAdminMoveCopyQuery, PageAdminMoveCopyQueryVariables>(PageAdminMoveCopyDocument, options);
-      }
-export function usePageAdminMoveCopyLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PageAdminMoveCopyQuery, PageAdminMoveCopyQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<PageAdminMoveCopyQuery, PageAdminMoveCopyQueryVariables>(PageAdminMoveCopyDocument, options);
-        }
-export type PageAdminMoveCopyQueryHookResult = ReturnType<typeof usePageAdminMoveCopyQuery>;
-export type PageAdminMoveCopyLazyQueryHookResult = ReturnType<typeof usePageAdminMoveCopyLazyQuery>;
-export type PageAdminMoveCopyQueryResult = Apollo.QueryResult<PageAdminMoveCopyQuery, PageAdminMoveCopyQueryVariables>;
-export const PageAdminMoveEditDocument = gql`
-    query PageAdminMoveEdit($moveId: ID!) {
-  move(moveId: $moveId) {
-    ...MoveForm
-    moveCategory {
-      id
-      name
-      character {
-        slug
-        name
-      }
-      moves {
-        ...MovePositionSelect
-      }
-    }
-  }
-}
-    ${MoveFormFragmentDoc}
-${MovePositionSelectFragmentDoc}`;
-
-/**
- * __usePageAdminMoveEditQuery__
- *
- * To run a query within a React component, call `usePageAdminMoveEditQuery` and pass it any options that fit your needs.
- * When your component renders, `usePageAdminMoveEditQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = usePageAdminMoveEditQuery({
- *   variables: {
- *      moveId: // value for 'moveId'
- *   },
- * });
- */
-export function usePageAdminMoveEditQuery(baseOptions: Apollo.QueryHookOptions<PageAdminMoveEditQuery, PageAdminMoveEditQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<PageAdminMoveEditQuery, PageAdminMoveEditQueryVariables>(PageAdminMoveEditDocument, options);
-      }
-export function usePageAdminMoveEditLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PageAdminMoveEditQuery, PageAdminMoveEditQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<PageAdminMoveEditQuery, PageAdminMoveEditQueryVariables>(PageAdminMoveEditDocument, options);
-        }
-export type PageAdminMoveEditQueryHookResult = ReturnType<typeof usePageAdminMoveEditQuery>;
-export type PageAdminMoveEditLazyQueryHookResult = ReturnType<typeof usePageAdminMoveEditLazyQuery>;
-export type PageAdminMoveEditQueryResult = Apollo.QueryResult<PageAdminMoveEditQuery, PageAdminMoveEditQueryVariables>;
-export const UpdateAttackMoveDocument = gql`
-    mutation UpdateAttackMove($moveId: ID!, $attributes: AttackMoveAttributes!) {
-  updateAttackMove(input: {moveId: $moveId, attributes: $attributes}) {
-    move {
-      id
-    }
-  }
-}
-    `;
-export type UpdateAttackMoveMutationFn = Apollo.MutationFunction<UpdateAttackMoveMutation, UpdateAttackMoveMutationVariables>;
-
-/**
- * __useUpdateAttackMoveMutation__
- *
- * To run a mutation, you first call `useUpdateAttackMoveMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useUpdateAttackMoveMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [updateAttackMoveMutation, { data, loading, error }] = useUpdateAttackMoveMutation({
- *   variables: {
- *      moveId: // value for 'moveId'
- *      attributes: // value for 'attributes'
- *   },
- * });
- */
-export function useUpdateAttackMoveMutation(baseOptions?: Apollo.MutationHookOptions<UpdateAttackMoveMutation, UpdateAttackMoveMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<UpdateAttackMoveMutation, UpdateAttackMoveMutationVariables>(UpdateAttackMoveDocument, options);
-      }
-export type UpdateAttackMoveMutationHookResult = ReturnType<typeof useUpdateAttackMoveMutation>;
-export type UpdateAttackMoveMutationResult = Apollo.MutationResult<UpdateAttackMoveMutation>;
-export type UpdateAttackMoveMutationOptions = Apollo.BaseMutationOptions<UpdateAttackMoveMutation, UpdateAttackMoveMutationVariables>;
-export const UpdateThrowMoveDocument = gql`
-    mutation UpdateThrowMove($moveId: ID!, $attributes: ThrowMoveAttributes!) {
-  updateThrowMove(input: {moveId: $moveId, attributes: $attributes}) {
-    move {
-      id
-    }
-  }
-}
-    `;
-export type UpdateThrowMoveMutationFn = Apollo.MutationFunction<UpdateThrowMoveMutation, UpdateThrowMoveMutationVariables>;
-
-/**
- * __useUpdateThrowMoveMutation__
- *
- * To run a mutation, you first call `useUpdateThrowMoveMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useUpdateThrowMoveMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [updateThrowMoveMutation, { data, loading, error }] = useUpdateThrowMoveMutation({
- *   variables: {
- *      moveId: // value for 'moveId'
- *      attributes: // value for 'attributes'
- *   },
- * });
- */
-export function useUpdateThrowMoveMutation(baseOptions?: Apollo.MutationHookOptions<UpdateThrowMoveMutation, UpdateThrowMoveMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<UpdateThrowMoveMutation, UpdateThrowMoveMutationVariables>(UpdateThrowMoveDocument, options);
-      }
-export type UpdateThrowMoveMutationHookResult = ReturnType<typeof useUpdateThrowMoveMutation>;
-export type UpdateThrowMoveMutationResult = Apollo.MutationResult<UpdateThrowMoveMutation>;
-export type UpdateThrowMoveMutationOptions = Apollo.BaseMutationOptions<UpdateThrowMoveMutation, UpdateThrowMoveMutationVariables>;
-export const UpdateReversalMoveDocument = gql`
-    mutation UpdateReversalMove($moveId: ID!, $attributes: ReversalMoveAttributes!) {
-  updateReversalMove(input: {moveId: $moveId, attributes: $attributes}) {
-    move {
-      id
-    }
-  }
-}
-    `;
-export type UpdateReversalMoveMutationFn = Apollo.MutationFunction<UpdateReversalMoveMutation, UpdateReversalMoveMutationVariables>;
-
-/**
- * __useUpdateReversalMoveMutation__
- *
- * To run a mutation, you first call `useUpdateReversalMoveMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useUpdateReversalMoveMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [updateReversalMoveMutation, { data, loading, error }] = useUpdateReversalMoveMutation({
- *   variables: {
- *      moveId: // value for 'moveId'
- *      attributes: // value for 'attributes'
- *   },
- * });
- */
-export function useUpdateReversalMoveMutation(baseOptions?: Apollo.MutationHookOptions<UpdateReversalMoveMutation, UpdateReversalMoveMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<UpdateReversalMoveMutation, UpdateReversalMoveMutationVariables>(UpdateReversalMoveDocument, options);
-      }
-export type UpdateReversalMoveMutationHookResult = ReturnType<typeof useUpdateReversalMoveMutation>;
-export type UpdateReversalMoveMutationResult = Apollo.MutationResult<UpdateReversalMoveMutation>;
-export type UpdateReversalMoveMutationOptions = Apollo.BaseMutationOptions<UpdateReversalMoveMutation, UpdateReversalMoveMutationVariables>;
 export const AdminOrganizerEditPageDocument = gql`
     query AdminOrganizerEditPage($organizerSlug: String!) {
   organizer(organizerSlug: $organizerSlug) {

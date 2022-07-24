@@ -25,12 +25,8 @@ export const DashboardMoveCategory: React.FC<Props> = ({ moveCategory, moveCateg
 
   const [del, { loading }] = useDeleteMoveCategoryMutation({
     variables: { moveCategoryId: moveCategory.id },
-    onCompleted: () => {
-      toast.success('カテゴリを削除しました。');
-    },
-    onError: e => {
-      toast.error(e.message);
-    },
+    onCompleted: () => toast.success('カテゴリを削除しました。'),
+    onError: e => toast.error(e.message),
   });
 
   const onClickDelete = useCallback(() => {

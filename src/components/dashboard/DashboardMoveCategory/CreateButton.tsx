@@ -21,13 +21,10 @@ interface Props {
 export const CreateButton: React.FC<Props> = ({ characterSlug, moveCategories }) => {
   const [open, setOpen] = useState(false);
   const setLoading = useSetRecoilState(loadingState);
+
   const [create, { loading }] = useCreateMoveCategoryMutation({
-    onCompleted: () => {
-      toast.success('カテゴリを作成しました。');
-    },
-    onError: e => {
-      toast.error(e.message);
-    },
+    onCompleted: () => toast.success('カテゴリを作成しました。'),
+    onError: e => toast.error(e.message),
   });
 
   const onClickCreate = useCallback((attributes: MoveCategoryAttributes) => {
