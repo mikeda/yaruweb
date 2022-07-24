@@ -87,7 +87,7 @@ export const breadcrumbChain = (props: AdminBreadcrumbParams): BreadcrumbChainIt
     case 'moveCategories':
       return {
         name: 'コマンドリスト',
-        url: pagesPath.admin.characters._slug(props.character.slug).move_categories.$url(),
+        url: pagesPath.admin.characters._slug(props.character.slug).moves.$url(),
         parent: breadcrumbChain({ to: 'character', character: props.character }),
       };
     case 'moveCategory':

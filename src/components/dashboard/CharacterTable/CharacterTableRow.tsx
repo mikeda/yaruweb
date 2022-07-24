@@ -39,7 +39,7 @@ export const CharacterTableRow = ({ character }: Props) => {
             {
               label: 'コマンド登録',
               onClick: () => {
-                router.push(pagesPath.admin.characters._slug(character.slug).move_categories.$url());
+                router.push(pagesPath.admin.characters._slug(character.slug).moves.$url());
               },
             },
             {
