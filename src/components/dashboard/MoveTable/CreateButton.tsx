@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react';
 
+import { ApolloError } from '@apollo/client';
 import AddIcon from '@mui/icons-material/Add';
 import { Dialog, IconButton, Menu, MenuItem, Tooltip } from '@mui/material';
 import { toast } from 'react-toastify';
@@ -24,33 +25,32 @@ interface Props {
 
 export const CreateButton: React.FC<Props> = ({ moveCategoryId, moves }) => {
   const setLoading = useSetRecoilState(loadingState);
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [moveType, setMoveType] = useState<null | 'attack' | 'throw' | 'reversal'>(null);
 
-  const [createAttack, { loading: createAttackLoading }] = useCreateAttackMoveMutation({
-    onCompleted: () => toast.success('コマンドを登録しました。'),
-    onError: e => toast.error(e.message),
-  });
+  const onCompleted = () => {
+    setMoveType(null);
+    toast.success('コマンドを登録しました。');
+  };
+
+  const onError = (e: ApolloError) => {
+    toast.error(e.message);
+  };
+
+  const [createAttack, { loading: createAttackLoading }] = useCreateAttackMoveMutation({ onCompleted, onError });
   const onClickCreateAttack = useCallback((attributes: AttackMoveAttributes) => {
     createAttack({ variables: { moveCategoryId, attributes } });
   }, []);
 
-  const [createThrow, { loading: createThrowLoading }] = useCreateThrowMoveMutation({
-    onCompleted: () => toast.success('コマンドを登録しました。'),
-    onError: e => toast.error(e.message),
-  });
+  const [createThrow, { loading: createThrowLoading }] = useCreateThrowMoveMutation({ onCompleted, onError });
   const onClickCreateThrow = useCallback((attributes: ThrowMoveAttributes) => {
     createThrow({ variables: { moveCategoryId, attributes } });
   }, []);
 
-  const [createReversal, { loading: createReversalLoading }] = useCreateReversalMoveMutation({
-    onCompleted: () => toast.success('コマンドを登録しました。'),
-    onError: e => toast.error(e.message),
-  });
+  const [createReversal, { loading: createReversalLoading }] = useCreateReversalMoveMutation({ onCompleted, onError });
   const onClickCreateReversal = useCallback((attributes: ReversalMoveAttributes) => {
     createReversal({ variables: { moveCategoryId, attributes } });
   }, []);
-
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const [moveType, setMoveType] = useState<null | 'attack' | 'throw' | 'reversal'>(null);
 
   const openMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);

@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react';
 
+import { ApolloError } from '@apollo/client';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { Dialog, IconButton } from '@mui/material';
 import { toast } from 'react-toastify';
@@ -36,26 +37,26 @@ export const CopyButton: React.FC<Props> = ({ moveId, moveCategoryId, moves }) =
     onError: e => toast.error(e.message),
   });
 
-  const [createAttack, { loading: createAttackLoading }] = useCreateAttackMoveMutation({
-    onCompleted: () => toast.success('コマンドを登録しました。'),
-    onError: e => toast.error(e.message),
-  });
+  const onCompleted = () => {
+    setOpen(false);
+    toast.success('コマンドを登録しました。');
+  };
+
+  const onError = (e: ApolloError) => {
+    toast.error(e.message);
+  };
+
+  const [createAttack, { loading: createAttackLoading }] = useCreateAttackMoveMutation({ onCompleted, onError });
   const onClickCreateAttack = useCallback((attributes: AttackMoveAttributes) => {
     createAttack({ variables: { moveCategoryId, attributes } });
   }, []);
 
-  const [createThrow, { loading: createThrowLoading }] = useCreateThrowMoveMutation({
-    onCompleted: () => toast.success('コマンドを登録しました。'),
-    onError: e => toast.error(e.message),
-  });
+  const [createThrow, { loading: createThrowLoading }] = useCreateThrowMoveMutation({ onCompleted, onError });
   const onClickCreateThrow = useCallback((attributes: ThrowMoveAttributes) => {
     createThrow({ variables: { moveCategoryId, attributes } });
   }, []);
 
-  const [createReversal, { loading: createReversalLoading }] = useCreateReversalMoveMutation({
-    onCompleted: () => toast.success('コマンドを登録しました。'),
-    onError: e => toast.error(e.message),
-  });
+  const [createReversal, { loading: createReversalLoading }] = useCreateReversalMoveMutation({ onCompleted, onError });
   const onClickCreateReversal = useCallback((attributes: ReversalMoveAttributes) => {
     createReversal({ variables: { moveCategoryId, attributes } });
   }, []);
