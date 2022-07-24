@@ -3,7 +3,7 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
 
-import { AdminContent, AdminBreadcrumbs, DashboardMoveCategories } from '@/components';
+import { AdminContent, AdminBreadcrumbs, MoveDashboard } from '@/components';
 import { useDashboardCharacterMovesPageQuery } from '@/generated/graphql';
 import { loadingState } from '@/lib';
 
@@ -25,7 +25,7 @@ const Page: React.FC = () => {
 
   return (
     <AdminContent title="コマンドリスト" breadcrumb={<AdminBreadcrumbs to="moves" character={character} />}>
-      <DashboardMoveCategories character={character} />
+      <MoveDashboard character={character} />
     </AdminContent>
   );
 };

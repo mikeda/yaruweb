@@ -2172,9 +2172,9 @@ export type CharacterTableRowsQueryVariables = Exact<{
 
 export type CharacterTableRowsQuery = { __typename?: 'Query', characters: { __typename?: 'CharacterCollection', records: Array<{ __typename?: 'Character', id: string, slug: string, name: string, faceImageUrl: string, movesCount: number, combosCount: number }> } };
 
-export type DashboardMoveCategoryFragment = { __typename?: 'MoveCategory', id: string, name: string, position: number, moves: Array<{ __typename?: 'Move', id: string, name: string, command: Array<string>, position: number, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> };
+export type MoveDashboardCategoryFragment = { __typename?: 'MoveCategory', id: string, name: string, position: number, moves: Array<{ __typename?: 'Move', id: string, name: string, command: Array<string>, position: number, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> };
 
-export type DashboardMoveCategoriesFragment = { __typename?: 'Character', id: string, slug: string, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, position: number, moves: Array<{ __typename?: 'Move', id: string, name: string, command: Array<string>, position: number, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> }> };
+export type MoveDashboardFragment = { __typename?: 'Character', id: string, slug: string, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, position: number, moves: Array<{ __typename?: 'Move', id: string, name: string, command: Array<string>, position: number, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> }> };
 
 export type CreateMoveCategoryMutationVariables = Exact<{
   characterSlug: Scalars['String'];
@@ -3317,8 +3317,8 @@ export const MoveTableRowFragmentDoc = gql`
   }
 }
     ${MovePositionSelectFragmentDoc}`;
-export const DashboardMoveCategoryFragmentDoc = gql`
-    fragment DashboardMoveCategory on MoveCategory {
+export const MoveDashboardCategoryFragmentDoc = gql`
+    fragment MoveDashboardCategory on MoveCategory {
   id
   name
   ...MoveCategoryForm
@@ -3328,15 +3328,15 @@ export const DashboardMoveCategoryFragmentDoc = gql`
 }
     ${MoveCategoryFormFragmentDoc}
 ${MoveTableRowFragmentDoc}`;
-export const DashboardMoveCategoriesFragmentDoc = gql`
-    fragment DashboardMoveCategories on Character {
+export const MoveDashboardFragmentDoc = gql`
+    fragment MoveDashboard on Character {
   id
   slug
   moveCategories {
-    ...DashboardMoveCategory
+    ...MoveDashboardCategory
   }
 }
-    ${DashboardMoveCategoryFragmentDoc}`;
+    ${MoveDashboardCategoryFragmentDoc}`;
 export const PlayerTableRowFragmentDoc = gql`
     fragment PlayerTableRow on Player {
   id
@@ -4172,7 +4172,7 @@ export const CreateMoveCategoryDocument = gql`
     input: {characterSlug: $characterSlug, attributes: $attributes}
   ) {
     moveCategory {
-      ...DashboardMoveCategory
+      ...MoveDashboardCategory
       character {
         id
         moveCategories {
@@ -4183,7 +4183,7 @@ export const CreateMoveCategoryDocument = gql`
     }
   }
 }
-    ${DashboardMoveCategoryFragmentDoc}`;
+    ${MoveDashboardCategoryFragmentDoc}`;
 export type CreateMoveCategoryMutationFn = Apollo.MutationFunction<CreateMoveCategoryMutation, CreateMoveCategoryMutationVariables>;
 
 /**
@@ -4217,7 +4217,7 @@ export const UpdateMoveCategoryDocument = gql`
     input: {moveCategoryId: $moveCategoryId, attributes: $attributes}
   ) {
     moveCategory {
-      ...DashboardMoveCategory
+      ...MoveDashboardCategory
       character {
         id
         moveCategories {
@@ -4228,7 +4228,7 @@ export const UpdateMoveCategoryDocument = gql`
     }
   }
 }
-    ${DashboardMoveCategoryFragmentDoc}`;
+    ${MoveDashboardCategoryFragmentDoc}`;
 export type UpdateMoveCategoryMutationFn = Apollo.MutationFunction<UpdateMoveCategoryMutation, UpdateMoveCategoryMutationVariables>;
 
 /**
@@ -4260,7 +4260,7 @@ export const DeleteMoveCategoryDocument = gql`
     mutation DeleteMoveCategory($moveCategoryId: ID!) {
   deleteMoveCategory(input: {moveCategoryId: $moveCategoryId}) {
     moveCategory {
-      ...DashboardMoveCategory
+      ...MoveDashboardCategory
       character {
         id
         moveCategories {
@@ -4271,7 +4271,7 @@ export const DeleteMoveCategoryDocument = gql`
     }
   }
 }
-    ${DashboardMoveCategoryFragmentDoc}`;
+    ${MoveDashboardCategoryFragmentDoc}`;
 export type DeleteMoveCategoryMutationFn = Apollo.MutationFunction<DeleteMoveCategoryMutation, DeleteMoveCategoryMutationVariables>;
 
 /**
@@ -5451,11 +5451,11 @@ export const DashboardCharacterMovesPageDocument = gql`
     query DashboardCharacterMovesPage($characterSlug: String!) {
   character(characterSlug: $characterSlug) {
     ...CharacterBreadcrumbs
-    ...DashboardMoveCategories
+    ...MoveDashboard
   }
 }
     ${CharacterBreadcrumbsFragmentDoc}
-${DashboardMoveCategoriesFragmentDoc}`;
+${MoveDashboardFragmentDoc}`;
 
 /**
  * __useDashboardCharacterMovesPageQuery__

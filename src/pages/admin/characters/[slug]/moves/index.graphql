@@ -1,6 +1,6 @@
 query DashboardCharacterMovesPage($characterSlug: String!) {
   character(characterSlug: $characterSlug) {
     ...CharacterBreadcrumbs
-    ...DashboardMoveCategories
+    ...MoveDashboard
   }
 }

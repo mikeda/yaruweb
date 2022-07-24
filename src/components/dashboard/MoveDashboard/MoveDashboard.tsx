@@ -3,20 +3,20 @@ import React from 'react';
 import { Box, Divider, Stack } from '@mui/material';
 
 import { CreateButton } from './CreateButton';
-import { DashboardMoveCategory } from './DashboardMoveCategory';
+import { MoveDashboardCategory } from './MoveDashboardCategory';
 
-import { DashboardMoveCategoriesFragment } from '@/generated/graphql';
+import { MoveDashboardFragment } from '@/generated/graphql';
 
 interface Props {
-  character: DashboardMoveCategoriesFragment;
+  character: MoveDashboardFragment;
 }
 
-export const DashboardMoveCategories: React.FC<Props> = ({ character: { slug, moveCategories } }) => {
+export const MoveDashboard: React.FC<Props> = ({ character: { slug, moveCategories } }) => {
   return (
     <>
       <Stack divider={<Divider />} spacing={2}>
         {moveCategories.map(moveCategory => (
-          <DashboardMoveCategory key={moveCategory.id} moveCategory={moveCategory} moveCategories={moveCategories} />
+          <MoveDashboardCategory key={moveCategory.id} moveCategory={moveCategory} moveCategories={moveCategories} />
         ))}
       </Stack>
 

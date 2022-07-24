@@ -9,18 +9,18 @@ import { UpdateButton } from './UpdateButton';
 
 import { MoveTable } from '@/components';
 import {
-  DashboardMoveCategoryFragment,
+  MoveDashboardCategoryFragment,
   MoveCategoryPositionSelectFragment,
   useDeleteMoveCategoryMutation,
 } from '@/generated/graphql';
 import { loadingState } from '@/lib';
 
 interface Props {
-  moveCategory: DashboardMoveCategoryFragment;
+  moveCategory: MoveDashboardCategoryFragment;
   moveCategories: MoveCategoryPositionSelectFragment[];
 }
 
-export const DashboardMoveCategory: React.FC<Props> = ({ moveCategory, moveCategories }) => {
+export const MoveDashboardCategory: React.FC<Props> = ({ moveCategory, moveCategories }) => {
   const setLoading = useSetRecoilState(loadingState);
 
   const [del, { loading }] = useDeleteMoveCategoryMutation({
