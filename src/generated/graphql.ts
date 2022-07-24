@@ -2174,6 +2174,8 @@ export type CharacterTableRowsQuery = { __typename?: 'Query', characters: { __ty
 
 export type DashboardMoveCategoryFragment = { __typename?: 'MoveCategory', id: string, name: string, position: number, moves: Array<{ __typename?: 'Move', id: string, name: string, command: Array<string>, position: number, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> };
 
+export type DashboardMoveCategoriesFragment = { __typename?: 'Character', id: string, slug: string, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, position: number, moves: Array<{ __typename?: 'Move', id: string, name: string, command: Array<string>, position: number, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> }> };
+
 export type CreateMoveCategoryMutationVariables = Exact<{
   characterSlug: Scalars['String'];
   attributes: MoveCategoryAttributes;
@@ -2474,7 +2476,7 @@ export type DashboardCharacterMovesPageQueryVariables = Exact<{
 }>;
 
 
-export type DashboardCharacterMovesPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, position: number, moves: Array<{ __typename?: 'Move', id: string, name: string, command: Array<string>, position: number, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> }> } };
+export type DashboardCharacterMovesPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string, id: string, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, position: number, moves: Array<{ __typename?: 'Move', id: string, name: string, command: Array<string>, position: number, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> }> } };
 
 export type CreateCharacterMutationVariables = Exact<{
   attributes: CharacterAttributes;
@@ -3326,6 +3328,15 @@ export const DashboardMoveCategoryFragmentDoc = gql`
 }
     ${MoveCategoryFormFragmentDoc}
 ${MoveTableRowFragmentDoc}`;
+export const DashboardMoveCategoriesFragmentDoc = gql`
+    fragment DashboardMoveCategories on Character {
+  id
+  slug
+  moveCategories {
+    ...DashboardMoveCategory
+  }
+}
+    ${DashboardMoveCategoryFragmentDoc}`;
 export const PlayerTableRowFragmentDoc = gql`
     fragment PlayerTableRow on Player {
   id
@@ -5440,13 +5451,11 @@ export const DashboardCharacterMovesPageDocument = gql`
     query DashboardCharacterMovesPage($characterSlug: String!) {
   character(characterSlug: $characterSlug) {
     ...CharacterBreadcrumbs
-    moveCategories {
-      ...DashboardMoveCategory
-    }
+    ...DashboardMoveCategories
   }
 }
     ${CharacterBreadcrumbsFragmentDoc}
-${DashboardMoveCategoryFragmentDoc}`;
+${DashboardMoveCategoriesFragmentDoc}`;
 
 /**
  * __useDashboardCharacterMovesPageQuery__

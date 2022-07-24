@@ -49,10 +49,6 @@ export const MoveTableRow: React.FC<Props> = ({ move, moveCategoryId, moves }) =
 
         <UpdateButton moveId={move.id} moves={moves} />
 
-        <IconButton size="large">
-          <ContentCopyIcon />
-        </IconButton>
-
         <CopyButton moveId={move.id} moveCategoryId={moveCategoryId} moves={moves} />
 
         <IconButton onClick={onClickDelete} size="large">

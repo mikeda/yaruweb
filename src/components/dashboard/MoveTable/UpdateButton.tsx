@@ -64,8 +64,6 @@ export const UpdateButton: React.FC<Props> = ({ moveId, moves }) => {
 
   setLoading(loading || attackLoading || throwLoading || reversalLoading);
 
-  if (!move) return null;
-
   return (
     <>
       <IconButton
@@ -78,13 +76,13 @@ export const UpdateButton: React.FC<Props> = ({ moveId, moves }) => {
       </IconButton>
 
       <Dialog open={open} onClose={() => setOpen(false)}>
-        {move.moveable.__typename === 'AttackMove' && (
+        {move?.moveable.__typename === 'AttackMove' && (
           <AttackMoveForm move={move} moves={moves} onSubmit={onClickUpdateAttack} />
         )}
-        {move.moveable.__typename === 'ThrowMove' && (
+        {move?.moveable.__typename === 'ThrowMove' && (
           <ThrowMoveForm move={move} moves={moves} onSubmit={onClickUpdateThrow} />
         )}
-        {move.moveable.__typename === 'ReversalMove' && (
+        {move?.moveable.__typename === 'ReversalMove' && (
           <ReversalMoveForm move={move} moves={moves} onSubmit={onClickUpdateReversal} />
         )}
       </Dialog>

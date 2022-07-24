@@ -8,6 +8,15 @@ fragment DashboardMoveCategory on MoveCategory {
   }
 }
 
+fragment DashboardMoveCategories on Character {
+    id
+    slug
+
+    moveCategories {
+      ...DashboardMoveCategory
+    }
+}
+
 mutation CreateMoveCategory($characterSlug: String!, $attributes: MoveCategoryAttributes!) {
   createMoveCategory(input: { characterSlug: $characterSlug, attributes: $attributes }) {
     moveCategory {

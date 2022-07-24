@@ -5,14 +5,13 @@ import { Box, Divider, Stack } from '@mui/material';
 import { CreateButton } from './CreateButton';
 import { DashboardMoveCategory } from './DashboardMoveCategory';
 
-import { DashboardMoveCategoryFragment } from '@/generated/graphql';
+import { DashboardMoveCategoriesFragment } from '@/generated/graphql';
 
 interface Props {
-  characterSlug: string;
-  moveCategories: DashboardMoveCategoryFragment[];
+  character: DashboardMoveCategoriesFragment;
 }
 
-export const DashboardMoveCategories: React.FC<Props> = ({ characterSlug, moveCategories }) => {
+export const DashboardMoveCategories: React.FC<Props> = ({ character: { slug, moveCategories } }) => {
   return (
     <>
       <Stack divider={<Divider />} spacing={2}>
@@ -24,7 +23,7 @@ export const DashboardMoveCategories: React.FC<Props> = ({ characterSlug, moveCa
       <Divider sx={{ mt: 2, mb: 2 }} />
 
       <Box display="flex" justifyContent="center">
-        <CreateButton characterSlug={characterSlug} moveCategories={moveCategories} />
+        <CreateButton characterSlug={slug} moveCategories={moveCategories} />
       </Box>
     </>
   );
