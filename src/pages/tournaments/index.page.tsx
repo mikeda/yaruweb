@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { Box, Button, Grid } from '@mui/material';
 import { GetStaticProps } from 'next';
@@ -6,34 +6,28 @@ import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
 import { Head, Content, Breadcrumbs, TournamentCard } from '@/components';
-import { TournamentsPageDocument, TournamentsPageQuery, useTournamentsPageLazyQuery } from '@/generated/graphql';
+import {
+  TournamentCardFragment,
+  TournamentsPageDocument,
+  TournamentsPageQuery,
+  useTournamentCardsQuery,
+} from '@/generated/graphql';
 import { loadingState, fetchGraphql } from '@/lib';
 
-const Page: React.FC<TournamentsPageQuery> = ({ tournaments: { records: initTournaments, paging: initPaging } }) => {
-  const [state, setState] = useState({ tournaments: initTournaments, paging: initPaging });
-  const [fetch] = useTournamentsPageLazyQuery({
-    onCompleted: data => {
-      setState(prev => ({
-        tournaments: [...prev.tournaments, ...data.tournaments.records],
-        paging: data.tournaments.paging,
-      }));
-      setLoading(false);
-    },
-    onError: e => {
-      toast.error(e.message);
-      setLoading(false);
-    },
+const Page: React.FC<TournamentsPageQuery> = ssrData => {
+  const { data, loading, fetchMore } = useTournamentCardsQuery({
+    onError: e => toast.error(e.message),
   });
   const setLoading = useSetRecoilState(loadingState);
+  setLoading(loading);
 
-  const { tournaments, paging } = state;
-
-  const fetchMore = () => {
-    if (!paging.hasNext) return;
-
-    setLoading(true);
-    fetch({ variables: { page: paging.currentPage + 1 } });
-  };
+  let tournaments: TournamentCardFragment[];
+  if (data) {
+    tournaments = data.tournaments.edges.map(edge => edge.node);
+  } else {
+    tournaments = ssrData.tournaments.nodes;
+  }
+  const pageInfo = data?.tournaments.pageInfo;
 
   return (
     <Content activeTab="tournaments" title="大会" breadcrumb={<Breadcrumbs to="tournaments" />}>
@@ -47,9 +41,14 @@ const Page: React.FC<TournamentsPageQuery> = ({ tournaments: { records: initTour
         ))}
       </Grid>
 
-      {paging.hasNext && (
+      {pageInfo?.hasNextPage && (
         <Box pt={2} pb={2} display="flex" justifyContent="center">
-          <Button variant="outlined" onClick={fetchMore}>
+          <Button
+            variant="outlined"
+            onClick={() => {
+              fetchMore({ variables: { after: pageInfo.endCursor } });
+            }}
+          >
             もっとみる
           </Button>
         </Box>

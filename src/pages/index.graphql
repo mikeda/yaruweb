@@ -1,6 +1,6 @@
 query TopPage {
-  tournaments(thisWeek: true, per: 3) {
-    records { ...TournamentCard }
+  tournaments(thisWeek: true, first: 3) {
+    nodes { ...TournamentCard }
   }
 
   players(per: 4) {

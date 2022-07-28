@@ -1,11 +1,5 @@
-query TournamentsPage($page: Int) {
-  tournaments(page: $page, per: 12) {
-    records {
-      ...TournamentCard
-    }
-
-    paging {
-      ...paging
-    }
+query TournamentsPage {
+  tournaments(first: 12) {
+    nodes { ...TournamentCard }
   }
 }
