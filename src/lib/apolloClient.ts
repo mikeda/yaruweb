@@ -1,5 +1,6 @@
 import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
+import { relayStylePagination } from '@apollo/client/utilities';
 import fetch from 'cross-fetch';
 
 import { getFirebaseUser } from './firebase';
@@ -30,6 +31,13 @@ export const apolloClient = new ApolloClient({
   cache: new InMemoryCache({
     possibleTypes: {
       Action: ['AttackAction', 'ThrowAction'],
+    },
+    typePolicies: {
+      Query: {
+        fields: {
+          tournaments: relayStylePagination(),
+        },
+      },
     },
   }),
   connectToDevTools: process.env.NODE_ENV === 'development',

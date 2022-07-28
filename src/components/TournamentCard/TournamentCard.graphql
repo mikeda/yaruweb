@@ -15,3 +15,14 @@ fragment TournamentCard on Tournament {
     }
   }
 }
+
+query TournamentCards($after: String, $keyword: String) {
+  tournaments(first: 12, after: $after, keyword: $keyword) {
+    edges {
+      node { ...TournamentCard }
+      cursor
+    }
+
+    pageInfo { ...Pagination }
+  }
+}

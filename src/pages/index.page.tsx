@@ -52,7 +52,7 @@ const Page: React.FC<TopPageQuery> = ({ tournaments, players, characters, articl
         </Typography>
 
         <Grid container spacing={2}>
-          {tournaments.records.map(tournament => (
+          {tournaments.nodes.map(tournament => (
             <Grid item key={tournament.id} xs={12} sm={6} md={4}>
               <TournamentCard tournament={tournament} />
             </Grid>

@@ -7,15 +7,14 @@ fragment TournamentTableRow on Tournament {
   mainImageUrl
 }
 
-query TournamentTableRows($page: Int = 1, $keyword: String) {
-  tournaments(page: $page, per: 10, keyword: $keyword) {
-    records {
-      ...TournamentTableRow
+query TournamentTableRows($after: String, $keyword: String) {
+  tournaments(first: 10, after: $after, keyword: $keyword) {
+    edges {
+      node { ...TournamentTableRow }
+      cursor
     }
 
-    paging {
-      ...paging
-    }
+    pageInfo { ...Pagination }
   }
 }
 

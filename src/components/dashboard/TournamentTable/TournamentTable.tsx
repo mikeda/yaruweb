@@ -21,7 +21,7 @@ export const TournamentTable: React.FC = () => {
       updateQuery(prev => ({
         tournaments: {
           ...prev.tournaments,
-          records: prev.tournaments.records.filter(t => t.id !== tournament.id),
+          edges: prev.tournaments.edges.filter(edge => edge.node.id !== tournament.id),
         },
       }));
       toast.success('大会を削除しました。');
@@ -31,26 +31,15 @@ export const TournamentTable: React.FC = () => {
   const setLoading = useSetRecoilState(loadingState);
 
   const onClickSearch = useCallback((keyword: string) => {
-    refetch({ page: 1, keyword });
+    refetch({ keyword });
   }, []);
 
   if (!data) return null;
-  const { records: tournaments, paging } = data.tournaments;
+  const { edges, pageInfo } = data.tournaments;
+  const tournaments = edges.map(edge => edge.node);
 
   const onClickMore = () => {
-    fetchMore({
-      variables: { page: paging.currentPage + 1 },
-      updateQuery: (prev, { fetchMoreResult: data }) => {
-        if (!data) return prev;
-
-        return {
-          tournaments: {
-            ...data.tournaments,
-            records: [...prev.tournaments.records, ...data.tournaments.records],
-          },
-        };
-      },
-    });
+    fetchMore({ variables: { after: pageInfo.endCursor } });
   };
 
   setLoading(loading || deleteLoading);
@@ -72,7 +61,7 @@ export const TournamentTable: React.FC = () => {
         ))}
       </DashboardTable>
 
-      {paging?.hasNext && <DashboardTablePaging onClick={onClickMore} />}
+      {pageInfo.hasNextPage && <DashboardTablePaging onClick={onClickMore} />}
     </>
   );
 };
