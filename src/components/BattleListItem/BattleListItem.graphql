@@ -15,8 +15,17 @@ fragment BattleListItem on Battle {
   }
 
   sides {
-    player { name }
-    character { faceImageUrl }
+    id
     rounds
+
+    player {
+      id
+      name
+    }
+
+    character {
+      id
+      faceImageUrl
+    }
   }
 }

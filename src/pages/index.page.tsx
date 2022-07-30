@@ -72,7 +72,7 @@ const Page: React.FC<TopPageQuery> = ({ tournaments, players, characters, articl
         </Typography>
 
         <Grid container spacing={2}>
-          {players.records.map(player => (
+          {players.nodes.map(player => (
             <Grid item key={player.slug} xs={12} sm={6}>
               <PlayerCard player={player} />
             </Grid>
@@ -92,7 +92,7 @@ const Page: React.FC<TopPageQuery> = ({ tournaments, players, characters, articl
         </Typography>
 
         <Grid container spacing={2}>
-          {characters.records.map(character => (
+          {characters.nodes.map(character => (
             <Grid item key={character.slug} xs={12} sm={6}>
               <CharacterCard character={character} />
             </Grid>
@@ -112,7 +112,7 @@ const Page: React.FC<TopPageQuery> = ({ tournaments, players, characters, articl
         </Typography>
 
         <Grid container spacing={2}>
-          {articles.records.map(article => (
+          {articles.nodes.map(article => (
             <Grid item key={article.id} xs={12} sm={6} md={4}>
               <ArticleCard article={article} />
             </Grid>

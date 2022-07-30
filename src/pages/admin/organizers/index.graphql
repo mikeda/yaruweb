@@ -13,14 +13,13 @@ mutation AdminOrganizersPageDelete($organizerSlug: String!) {
   }
 }
 
-query AdminOrganizersPageOrganizers($page: Int = 1, $keyword: String) {
-  organizers(page: $page, per: 10, keyword: $keyword) {
-    records {
-      ...AdminOrganizersPageOrganizer
+query AdminOrganizersPageOrganizers($after: String, $keyword: String) {
+  organizers(first: 10, after: $after, keyword: $keyword) {
+    edges {
+      node { ...AdminOrganizersPageOrganizer }
+      cursor
     }
 
-    paging {
-      ...paging
-    }
+    pageInfo { ...Pagination }
   }
 }

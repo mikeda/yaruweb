@@ -55,6 +55,7 @@ export const TournamentForm: React.FC<Props> = ({ tournament, onSubmit }) => {
   const organizerId = getValues('organizerId');
 
   if (!data) return null;
+  const organizers = data.organizers.nodes;
 
   return (
     <Card>
@@ -63,12 +64,12 @@ export const TournamentForm: React.FC<Props> = ({ tournament, onSubmit }) => {
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <Autocomplete<OrganizerSelectOptionFragment>
-                options={data.organizers.records}
+                options={organizers}
                 getOptionLabel={organizer => `${organizer.name}(${organizer.slug})`}
                 onChange={(e, organizer) => {
                   if (organizer) setValue('organizerId', organizer.id);
                 }}
-                defaultValue={data.organizers.records.filter(o => o.id === organizerId)[0]}
+                defaultValue={organizers.filter(o => o.id === organizerId)[0]}
                 style={{ width: 300 }}
                 renderInput={params => {
                   return (

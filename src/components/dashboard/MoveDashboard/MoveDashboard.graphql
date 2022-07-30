@@ -2,6 +2,7 @@ fragment MoveDashboardCategory on MoveCategory {
   id
   name
   ...MoveCategoryForm
+  ...MoveCategoryPositionSelect
 
   moves {
     ...MoveTableRow
@@ -9,12 +10,12 @@ fragment MoveDashboardCategory on MoveCategory {
 }
 
 fragment MoveDashboard on Character {
-    id
-    slug
+  id
+  slug
 
-    moveCategories {
-      ...MoveDashboardCategory
-    }
+  moveCategories {
+    ...MoveDashboardCategory
+  }
 }
 
 mutation CreateMoveCategory($characterSlug: String!, $attributes: MoveCategoryAttributes!) {

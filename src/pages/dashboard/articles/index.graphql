@@ -28,14 +28,13 @@ mutation DashboardArticlesPageDelete($articleId: ID!) {
   }
 }
 
-query DashboardArticlesPage($page: Int = 1, , $keyword: String) {
-  myArticles(page: $page, per: 10, , keyword: $keyword) {
-    records {
-      ...DashboardArticlesPageArticle
+query DashboardArticlesPage($after: String, $keyword: String) {
+  myArticles(first: 10, after: $after, keyword: $keyword) {
+    edges {
+      node { ...DashboardArticlesPageArticle }
+      cursor
     }
 
-    paging {
-      ...paging
-    }
+    pageInfo { ...Pagination }
   }
 }

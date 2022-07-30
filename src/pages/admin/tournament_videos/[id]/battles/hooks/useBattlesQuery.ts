@@ -13,5 +13,5 @@ export const useBattlesQuery = (tournamentVideoId: string | undefined) => {
 
   setLoading(loading);
 
-  return { battles: data?.battles?.records, refetch };
+  return { battles: data?.battles?.nodes, refetch };
 };

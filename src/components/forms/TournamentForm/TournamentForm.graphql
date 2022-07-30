@@ -9,7 +9,7 @@ fragment TournamentForm on Tournament {
 }
 
 query TournamentForm {
-  organizers(per: 100) {
-    records { ...OrganizerSelectOption }
+  organizers(first: 100) {
+    nodes { ...OrganizerSelectOption }
   }
 }

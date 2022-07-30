@@ -9,6 +9,7 @@ fragment ArticlePage on Article {
   content
 
   author {
+    id
     name
     avatarUrl
   }

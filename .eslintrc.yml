@@ -37,3 +37,9 @@ rules:
           'group': 'builtin'
           'position': 'before'
       'pathGroupsExcludedImportTypes': ['react']
+overrides:
+  - files:
+      - 'src/**/*.graphql'
+    parserOptions:
+      schema: 'schema.graphql'
+    extends: 'plugin:@graphql-eslint/operations-recommended'

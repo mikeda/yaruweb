@@ -7,10 +7,11 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 
 import { Breadcrumbs, Content, Head, TournamentTabs, BattleList } from '@/components';
 import {
+  SsgTournamentPathsDocument,
+  SsgTournamentPathsQuery,
   TournamentBattlesPageDocument,
   TournamentBattlesPageQuery,
-  TournamentPathsDocument,
-  TournamentPathsQuery,
+  TournamentBattlesPageQueryVariables,
 } from '@/generated/graphql';
 import { fetchGraphql } from '@/lib';
 
@@ -33,17 +34,17 @@ interface Params extends ParsedUrlQuery {
 }
 
 export const getStaticProps: GetStaticProps<TournamentBattlesPageQuery, Params> = async ({ params }) => {
-  const data: TournamentBattlesPageQuery = await fetchGraphql(TournamentBattlesPageDocument, {
-    tournamentId: params?.id,
-  });
+  const tournamentId = params?.id as string;
+  const variables: TournamentBattlesPageQueryVariables = { tournamentId };
+  const data: TournamentBattlesPageQuery = await fetchGraphql(TournamentBattlesPageDocument, variables);
 
   return { props: data, revalidate: 300 };
 };
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
-  const data: TournamentPathsQuery = await fetchGraphql(TournamentPathsDocument);
+  const data: SsgTournamentPathsQuery = await fetchGraphql(SsgTournamentPathsDocument);
 
-  const paths = data.allTournaments.map(({ id }) => ({ params: { id } }));
+  const paths = data.tournaments.nodes.map(({ id }) => ({ params: { id } }));
 
   return { paths, fallback: 'blocking' };
 };

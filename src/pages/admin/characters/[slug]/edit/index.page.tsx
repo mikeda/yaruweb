@@ -10,6 +10,7 @@ import {
   CharacterAttributes,
   PageAdminCharacterEditDocument,
   PageAdminCharacterEditQuery,
+  PageAdminCharacterEditQueryVariables,
   useUpdateCharacterMutation,
 } from '@/generated/graphql';
 import { fetchGraphql, loadingState } from '@/lib';
@@ -42,9 +43,8 @@ const Page: React.FC<PageAdminCharacterEditQuery> = ({ character }) => {
 
 export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const characterSlug = params?.slug as string;
-  const data: PageAdminCharacterEditQuery = await fetchGraphql(PageAdminCharacterEditDocument, {
-    characterSlug,
-  });
+  const variables: PageAdminCharacterEditQueryVariables = { characterSlug };
+  const data: PageAdminCharacterEditQuery = await fetchGraphql(PageAdminCharacterEditDocument, variables);
 
   return { props: data };
 };

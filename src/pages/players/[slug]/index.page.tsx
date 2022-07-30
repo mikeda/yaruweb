@@ -7,7 +7,13 @@ import makeStyles from '@mui/styles/makeStyles';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
 import { Head, Content, Breadcrumbs, PlayerProfile, PlayerTabs } from '@/components';
-import { PlayerPageDocument, PlayerPageQuery, PlayerSlugsDocument, PlayerSlugsQuery } from '@/generated/graphql';
+import {
+  PlayerPageDocument,
+  PlayerPageQuery,
+  PlayerPageQueryVariables,
+  SsgPlayerPathsDocument,
+  SsgPlayerPathsQuery,
+} from '@/generated/graphql';
 import { fetchGraphql, theme } from '@/lib';
 
 const useStyles = makeStyles({
@@ -48,17 +54,18 @@ interface Params extends ParsedUrlQuery {
 }
 
 export const getStaticProps: GetStaticProps<PlayerPageQuery, Params> = async ({ params }) => {
-  const playerSlug = params?.slug;
-  const data: PlayerPageQuery = await fetchGraphql(PlayerPageDocument, { playerSlug });
+  const playerSlug = params?.slug as string;
+  const variables: PlayerPageQueryVariables = { playerSlug };
+  const data: PlayerPageQuery = await fetchGraphql(PlayerPageDocument, variables);
 
   return { props: data, revalidate: 300 };
 };
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
-  const data: PlayerSlugsQuery = await fetchGraphql(PlayerSlugsDocument, { per: 50 });
+  const data: SsgPlayerPathsQuery = await fetchGraphql(SsgPlayerPathsDocument);
 
   return {
-    paths: data.players.records.map(({ slug }) => ({ params: { slug } })),
+    paths: data.players.nodes.map(({ slug }) => ({ params: { slug } })),
     fallback: 'blocking',
   };
 };

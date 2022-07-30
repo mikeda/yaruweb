@@ -1,58 +1,25 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 
 import { Box, Button, Grid } from '@mui/material';
 import { GetStaticProps } from 'next';
-import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
-import { Breadcrumbs, Content, Head, PlayerCard, SearchWord } from '@/components';
-import { PlayersPageDocument, PlayersPageQuery, usePlayersPageLazyQuery } from '@/generated/graphql';
-import { fetchGraphql, loadingState } from '@/lib';
+import { Breadcrumbs, Content, Head, PlayerCard } from '@/components';
+import { PlayersPageDocument, PlayersPageQuery, usePlayerCardsQuery } from '@/generated/graphql';
+import { fetchGraphql, handleApolloError, loadingState } from '@/lib';
 
-const Page: React.FC<PlayersPageQuery> = ({ players: { records: initPlayers, paging: initPaging } }) => {
-  const [state, setState] = useState({ players: initPlayers, paging: initPaging });
-  const keywordRef = useRef<string>();
-  const [fetch] = usePlayersPageLazyQuery({
-    onCompleted: data => {
-      setState(prev => ({
-        players: [...prev.players, ...data.players.records],
-        paging: data.players.paging,
-      }));
-      setLoading(false);
-    },
-    onError: e => {
-      toast.error(e.message);
-      setLoading(false);
-    },
-    fetchPolicy: 'network-only',
-  });
+// TODO: キーワード検索
+const Page: React.FC<PlayersPageQuery> = ssrData => {
+  const { data, loading, fetchMore } = usePlayerCardsQuery({ onError: handleApolloError });
   const setLoading = useSetRecoilState(loadingState);
+  setLoading(loading);
 
-  const { players, paging } = state;
-
-  const fetchMore = () => {
-    if (!paging.hasNext) return;
-
-    setLoading(true);
-    fetch({ variables: { page: paging.currentPage + 1, keyword: keywordRef.current } });
-  };
+  const players = data ? data.players.edges.map(e => e.node) : ssrData.players.nodes;
+  const pageInfo = data?.players.pageInfo;
 
   return (
     <Content activeTab="players" title="プレイヤー" breadcrumb={<Breadcrumbs to="players" />}>
       <Head title="プレイヤー一覧" description="鉄拳7のプレイヤー一覧です。" />
-
-      <Box mb={2}>
-        <SearchWord
-          onSearch={word => {
-            if (keywordRef.current === word) return;
-
-            keywordRef.current = word;
-            setState(prev => ({ ...prev, players: [] }));
-            setLoading(true);
-            fetch({ variables: { page: 1, keyword: keywordRef.current } });
-          }}
-        />
-      </Box>
 
       <Grid container spacing={2}>
         {players.map(player => (
@@ -62,9 +29,14 @@ const Page: React.FC<PlayersPageQuery> = ({ players: { records: initPlayers, pag
         ))}
       </Grid>
 
-      {paging.hasNext && (
+      {pageInfo?.hasNextPage && (
         <Box pt={2} pb={2} display="flex" justifyContent="center">
-          <Button variant="outlined" onClick={fetchMore}>
+          <Button
+            variant="outlined"
+            onClick={() => {
+              fetchMore({ variables: { after: pageInfo.endCursor } });
+            }}
+          >
             もっとみる
           </Button>
         </Box>
@@ -74,7 +46,7 @@ const Page: React.FC<PlayersPageQuery> = ({ players: { records: initPlayers, pag
 };
 
 export const getStaticProps: GetStaticProps<PlayersPageQuery> = async () => {
-  const data: PlayersPageQuery = await fetchGraphql(PlayersPageDocument, { page: 1 });
+  const data: PlayersPageQuery = await fetchGraphql(PlayersPageDocument);
 
   return { props: data, revalidate: 300 };
 };

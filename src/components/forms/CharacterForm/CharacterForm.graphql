@@ -1,4 +1,5 @@
 fragment CharacterForm on Character {
+  id
   name
   nameKana
   longName

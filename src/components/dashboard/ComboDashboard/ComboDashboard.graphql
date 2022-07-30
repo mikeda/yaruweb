@@ -2,6 +2,7 @@ fragment ComboDashboardCategory on ComboCategory {
   id
   name
   ...ComboCategoryForm
+  ...ComboCategoryPositionSelect
 
   combos {
     ...ComboTableRow
@@ -9,16 +10,16 @@ fragment ComboDashboardCategory on ComboCategory {
 }
 
 fragment ComboDashboard on Character {
-    id
-    slug
+  id
+  slug
 
-    comboCategories {
-      ...ComboDashboardCategory
-    }
+  comboCategories {
+    ...ComboDashboardCategory
+  }
 
-    moveCategories {
-      ...MoveSelectOption
-    }
+  moveCategories {
+    ...MoveSelectOption
+  }
 }
 
 mutation CreateComboCategory($characterSlug: String!, $attributes: ComboCategoryAttributes!) {

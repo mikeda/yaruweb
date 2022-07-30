@@ -36,8 +36,8 @@ const Page: React.FC = () => {
     <AdminContent title="対戦" breadcrumb={<AdminBreadcrumbs to="battles" tournamentVideo={tournamentVideo} />}>
       <BattleForm
         youtubeVideoId={tournamentVideo.youtubeVideoId}
-        players={players.records}
-        characters={characters.records}
+        players={players.nodes}
+        characters={characters.nodes}
         onSubmit={attributes =>
           create({ variables: { attributes: { ...attributes, tournamentVideoId: tournamentVideo.id } } })
         }
@@ -54,8 +54,8 @@ const Page: React.FC = () => {
                     battle={battle}
                     tournamentVideoId={tournamentVideo.id}
                     youtubeVideoId={tournamentVideo.youtubeVideoId}
-                    players={players.records}
-                    characters={characters.records}
+                    players={players.nodes}
+                    characters={characters.nodes}
                     onDestroy={() => {
                       destroy({ variables: { battleId: battle.id } });
                     }}

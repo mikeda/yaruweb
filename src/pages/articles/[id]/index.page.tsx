@@ -7,7 +7,13 @@ import makeStyles from '@mui/styles/makeStyles';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
 import { ArticleBody, ArticleCard, Breadcrumbs, Content, Head } from '@/components';
-import { ArticlePageDocument, ArticlePageQuery, ArticlePathsDocument, ArticlePathsQuery } from '@/generated/graphql';
+import {
+  ArticlePageDocument,
+  ArticlePageQuery,
+  ArticlePageQueryVariables,
+  SsgArticlePathsDocument,
+  SsgArticlePathsQuery,
+} from '@/generated/graphql';
 import { dayjs, fetchGraphql, NO_IMAGE_URL } from '@/lib';
 
 const useStyles = makeStyles({
@@ -63,8 +69,9 @@ interface Params extends ParsedUrlQuery {
 }
 
 export const getStaticProps: GetStaticProps<ArticlePageQuery, Params> = async ({ params }) => {
-  const articleId = params?.id;
-  const data: ArticlePageQuery = await fetchGraphql(ArticlePageDocument, { articleId });
+  const articleId = params?.id as string;
+  const variables: ArticlePageQueryVariables = { articleId };
+  const data: ArticlePageQuery = await fetchGraphql(ArticlePageDocument, variables);
 
   return {
     props: data,
@@ -73,9 +80,9 @@ export const getStaticProps: GetStaticProps<ArticlePageQuery, Params> = async ({
 };
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
-  const data: ArticlePathsQuery = await fetchGraphql(ArticlePathsDocument);
+  const data: SsgArticlePathsQuery = await fetchGraphql(SsgArticlePathsDocument);
 
-  const paths = data.allArticles.map(({ id }) => ({ params: { id } }));
+  const paths = data.articles.nodes.map(({ id }) => ({ params: { id } }));
 
   return { paths, fallback: 'blocking' };
 };

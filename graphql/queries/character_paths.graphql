@@ -1,7 +1,0 @@
-query CharacterPaths {
-  characters {
-    records {
-      slug
-    }
-  }
-}

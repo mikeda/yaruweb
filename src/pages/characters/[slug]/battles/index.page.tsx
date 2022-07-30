@@ -8,8 +8,9 @@ import { Breadcrumbs, Content, Head, CharacterProfile, CharacterTabs, BattleList
 import {
   CharacterBattlesPageDocument,
   CharacterBattlesPageQuery,
-  CharacterPathsDocument,
-  CharacterPathsQuery,
+  CharacterBattlesPageQueryVariables,
+  SsgCharacterPathsDocument,
+  SsgCharacterPathsQuery,
 } from '@/generated/graphql';
 import { fetchGraphql } from '@/lib';
 
@@ -32,16 +33,17 @@ interface Params extends ParsedUrlQuery {
 }
 
 export const getStaticProps: GetStaticProps<CharacterBattlesPageQuery, Params> = async ({ params }) => {
-  const characterSlug = params?.slug;
-  const data: CharacterBattlesPageQuery = await fetchGraphql(CharacterBattlesPageDocument, { characterSlug });
+  const characterSlug = params?.slug as string;
+  const variables: CharacterBattlesPageQueryVariables = { characterSlug };
+  const data: CharacterBattlesPageQuery = await fetchGraphql(CharacterBattlesPageDocument, variables);
 
   return { props: data, revalidate: 300 };
 };
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
-  const data: CharacterPathsQuery = await fetchGraphql(CharacterPathsDocument);
+  const data: SsgCharacterPathsQuery = await fetchGraphql(SsgCharacterPathsDocument);
 
-  const paths = data.characters.records.map(({ slug }) => ({ params: { slug } }));
+  const paths = data.characters.nodes.map(({ slug }) => ({ params: { slug } }));
 
   return { paths, fallback: false };
 };

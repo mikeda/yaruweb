@@ -8,7 +8,7 @@ query CharacterPage($characterSlug: String!) {
     description
   }
 
-  battleCounts(characterSlug: $characterSlug, per: 10) {
-    records { ...PlayerBattleCountChip }
+  battleCounts(characterSlug: $characterSlug, first: 10) {
+    nodes { ...PlayerBattleCountChip }
   }
 }

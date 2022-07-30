@@ -1,0 +1,5 @@
+query SsgArticlePaths {
+  articles(first: 50) {
+    nodes { id }
+  }
+}

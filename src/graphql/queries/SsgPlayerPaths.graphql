@@ -1,0 +1,8 @@
+query SsgPlayerPaths {
+  players(first: 50) {
+    nodes {
+      id
+      slug
+    }
+  }
+}

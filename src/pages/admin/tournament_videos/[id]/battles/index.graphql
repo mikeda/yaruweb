@@ -10,21 +10,23 @@ query AdminBattlesPage($tournamentVideoId: ID!) {
     }
   }
 
-  players(per: 500) {
-    records {
+  players(first: 500) {
+    nodes {
       ...PlayerSelectOption
     }
   }
 
-  characters {
-    records { ...CharacterSelectOption }
+  characters(first: 100) {
+    nodes { ...CharacterSelectOption }
   }
 }
 
 fragment AdminBattlesPageSide on BattleSide {
+  id
+  rounds
+
   player { id name }
   character { id faceImageUrl }
-  rounds
 }
 
 fragment AdminBattlesPageBattleReslut on Battle {
@@ -37,8 +39,8 @@ fragment AdminBattlesPageBattleReslut on Battle {
   }
 }
 query AdminBattlesPageBattles($tournamentVideoId: ID!) {
-  battles(tournamentVideoId: $tournamentVideoId, per: 200) {
-    records {
+  battles(tournamentVideoId: $tournamentVideoId, first: 200) {
+    nodes {
       ...AdminBattlesPageBattleReslut
     }
   }

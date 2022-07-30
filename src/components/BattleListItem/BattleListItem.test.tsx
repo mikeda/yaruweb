@@ -24,15 +24,17 @@ describe(BattleListItem, () => {
           sides: [
             {
               __typename: 'BattleSide',
+              id: '1',
               rounds: 3,
-              player: { __typename: 'Player', name: '対戦者名1' },
-              character: { __typename: 'Character', faceImageUrl: 'https://example.com/face.jpg' },
+              player: { __typename: 'Player', id: '1', name: '対戦者名1' },
+              character: { __typename: 'Character', id: '1', faceImageUrl: 'https://example.com/face.jpg' },
             },
             {
               __typename: 'BattleSide',
+              id: '2',
               rounds: 1,
-              player: { __typename: 'Player', name: '対戦者名2' },
-              character: { __typename: 'Character', faceImageUrl: 'https://example.com/face.jpg' },
+              player: { __typename: 'Player', id: '2', name: '対戦者名2' },
+              character: { __typename: 'Character', id: '2', faceImageUrl: 'https://example.com/face.jpg' },
             },
           ],
         }}
