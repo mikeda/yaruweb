@@ -45,7 +45,7 @@ const Page: React.FC<TournamentsPageQuery> = ssrData => {
 };
 
 export const getStaticProps: GetStaticProps<TournamentsPageQuery> = async () => {
-  const data: TournamentsPageQuery = await fetchGraphql(TournamentsPageDocument, { page: 1 });
+  const data: TournamentsPageQuery = await fetchGraphql(TournamentsPageDocument);
 
   return { props: data, revalidate: 300 };
 };

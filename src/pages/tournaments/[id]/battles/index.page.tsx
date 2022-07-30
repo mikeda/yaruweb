@@ -9,6 +9,7 @@ import { Breadcrumbs, Content, Head, TournamentTabs, BattleList } from '@/compon
 import {
   TournamentBattlesPageDocument,
   TournamentBattlesPageQuery,
+  TournamentBattlesPageQueryVariables,
   TournamentPathsDocument,
   TournamentPathsQuery,
 } from '@/generated/graphql';
@@ -33,9 +34,9 @@ interface Params extends ParsedUrlQuery {
 }
 
 export const getStaticProps: GetStaticProps<TournamentBattlesPageQuery, Params> = async ({ params }) => {
-  const data: TournamentBattlesPageQuery = await fetchGraphql(TournamentBattlesPageDocument, {
-    tournamentId: params?.id,
-  });
+  const tournamentId = params?.id as string;
+  const variables: TournamentBattlesPageQueryVariables = { tournamentId };
+  const data: TournamentBattlesPageQuery = await fetchGraphql(TournamentBattlesPageDocument, variables);
 
   return { props: data, revalidate: 300 };
 };

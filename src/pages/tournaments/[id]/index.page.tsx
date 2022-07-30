@@ -25,6 +25,7 @@ import { pagesPath } from '@/generated/$path';
 import {
   TournamentPageDocument,
   TournamentPageQuery,
+  TournamentPageQueryVariables,
   TournamentPathsDocument,
   TournamentPathsQuery,
 } from '@/generated/graphql';
@@ -129,7 +130,9 @@ interface Params extends ParsedUrlQuery {
 }
 
 export const getStaticProps: GetStaticProps<TournamentPageQuery, Params> = async ({ params }) => {
-  const data: TournamentPageQuery = await fetchGraphql(TournamentPageDocument, { tournamentId: params?.id });
+  const tournamentId = params?.id as string;
+  const variables: TournamentPageQueryVariables = { tournamentId };
+  const data: TournamentPageQuery = await fetchGraphql(TournamentPageDocument, variables);
 
   return { props: data, revalidate: 300 };
 };

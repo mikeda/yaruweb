@@ -10,8 +10,10 @@ import { Head, Content, Breadcrumbs, PlayerStandingCard, PlayerProfile, PlayerTa
 import {
   PlayerSlugsDocument,
   PlayerSlugsQuery,
+  PlayerSlugsQueryVariables,
   PlayerStandingsPageDocument,
   PlayerStandingsPageQuery,
+  PlayerStandingsPageQueryVariables,
   usePlayerStandingCardsQuery,
 } from '@/generated/graphql';
 import { fetchGraphql, handleApolloError, loadingState } from '@/lib';
@@ -71,14 +73,16 @@ interface Params extends ParsedUrlQuery {
 }
 
 export const getStaticProps: GetStaticProps<PlayerStandingsPageQuery, Params> = async ({ params }) => {
-  const playerSlug = params?.slug;
-  const data: PlayerStandingsPageQuery = await fetchGraphql(PlayerStandingsPageDocument, { playerSlug });
+  const playerSlug = params?.slug as string;
+  const variables: PlayerStandingsPageQueryVariables = { playerSlug };
+  const data: PlayerStandingsPageQuery = await fetchGraphql(PlayerStandingsPageDocument, variables);
 
   return { props: data, revalidate: 300 };
 };
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
-  const data: PlayerSlugsQuery = await fetchGraphql(PlayerSlugsDocument, { per: 50 });
+  const variables: PlayerSlugsQueryVariables = { first: 50 };
+  const data: PlayerSlugsQuery = await fetchGraphql(PlayerSlugsDocument, variables);
 
   return {
     paths: data.players.nodes.map(({ slug }) => ({ params: { slug } })),

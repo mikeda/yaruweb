@@ -8,6 +8,7 @@ import { Breadcrumbs, Content, Head, CharacterProfile, CharacterTabs, BattleList
 import {
   CharacterBattlesPageDocument,
   CharacterBattlesPageQuery,
+  CharacterBattlesPageQueryVariables,
   CharacterPathsDocument,
   CharacterPathsQuery,
 } from '@/generated/graphql';
@@ -32,8 +33,9 @@ interface Params extends ParsedUrlQuery {
 }
 
 export const getStaticProps: GetStaticProps<CharacterBattlesPageQuery, Params> = async ({ params }) => {
-  const characterSlug = params?.slug;
-  const data: CharacterBattlesPageQuery = await fetchGraphql(CharacterBattlesPageDocument, { characterSlug });
+  const characterSlug = params?.slug as string;
+  const variables: CharacterBattlesPageQueryVariables = { characterSlug };
+  const data: CharacterBattlesPageQuery = await fetchGraphql(CharacterBattlesPageDocument, variables);
 
   return { props: data, revalidate: 300 };
 };

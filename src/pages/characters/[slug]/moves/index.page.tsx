@@ -9,6 +9,7 @@ import { Breadcrumbs, Content, Head, CharacterProfile, CharacterTabs, MoveListIt
 import {
   CharacterMovesPageDocument,
   CharacterMovesPageQuery,
+  CharacterMovesPageQueryVariables,
   CharacterPathsDocument,
   CharacterPathsQuery,
 } from '@/generated/graphql';
@@ -53,9 +54,9 @@ interface Params extends ParsedUrlQuery {
 }
 
 export const getStaticProps: GetStaticProps<CharacterMovesPageQuery, Params> = async ({ params }) => {
-  const data: CharacterMovesPageQuery = await fetchGraphql(CharacterMovesPageDocument, {
-    characterSlug: params?.slug,
-  });
+  const characterSlug = params?.slug as string;
+  const variables: CharacterMovesPageQueryVariables = { characterSlug };
+  const data: CharacterMovesPageQuery = await fetchGraphql(CharacterMovesPageDocument, variables);
 
   return { props: data };
 };

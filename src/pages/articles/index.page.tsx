@@ -45,7 +45,7 @@ const Page: React.FC<ArticlesPageQuery> = ssrData => {
 };
 
 export const getStaticProps: GetStaticProps<ArticlesPageQuery> = async () => {
-  const data: ArticlesPageQuery = await fetchGraphql(ArticlesPageDocument, { page: 1 });
+  const data: ArticlesPageQuery = await fetchGraphql(ArticlesPageDocument);
 
   return { props: data, revalidate: 300 };
 };

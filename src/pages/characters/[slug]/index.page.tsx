@@ -12,6 +12,7 @@ import {
   CharacterPathsQuery,
   CharacterPageDocument,
   CharacterPageQuery,
+  CharacterPageQueryVariables,
 } from '@/generated/graphql';
 import { fetchGraphql, theme } from '@/lib';
 
@@ -63,8 +64,9 @@ interface Params extends ParsedUrlQuery {
 }
 
 export const getStaticProps: GetStaticProps<CharacterPageQuery, Params> = async ({ params }) => {
-  const characterSlug = params?.slug;
-  const data: CharacterPageQuery = await fetchGraphql(CharacterPageDocument, { characterSlug });
+  const characterSlug = params?.slug as string;
+  const variables: CharacterPageQueryVariables = { characterSlug };
+  const data: CharacterPageQuery = await fetchGraphql(CharacterPageDocument, variables);
 
   return { props: data };
 };

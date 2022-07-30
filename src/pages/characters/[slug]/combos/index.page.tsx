@@ -18,6 +18,7 @@ import {
 import {
   CharacterCombosPageDocument,
   CharacterCombosPageQuery,
+  CharacterCombosPageQueryVariables,
   CharacterPathsDocument,
   CharacterPathsQuery,
 } from '@/generated/graphql';
@@ -92,9 +93,9 @@ interface Params extends ParsedUrlQuery {
 }
 
 export const getStaticProps: GetStaticProps<CharacterCombosPageQuery, Params> = async ({ params }) => {
-  const data: CharacterCombosPageQuery = await fetchGraphql(CharacterCombosPageDocument, {
-    characterSlug: params?.slug,
-  });
+  const characterSlug = params?.slug as string;
+  const variables: CharacterCombosPageQueryVariables = { characterSlug };
+  const data: CharacterCombosPageQuery = await fetchGraphql(CharacterCombosPageDocument, variables);
 
   return { props: data, revalidate: 300 };
 };
