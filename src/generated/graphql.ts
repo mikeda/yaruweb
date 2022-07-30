@@ -2315,6 +2315,14 @@ export type PlayerProfileFragment = { __typename?: 'Player', id: string, name: s
 
 export type PlayerStandingCardFragment = { __typename?: 'Standing', id: string, place: number, tournament: { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: string | null, startsAt: string } };
 
+export type PlayerStandingCardsQueryVariables = Exact<{
+  playerSlug: Scalars['String'];
+  after?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type PlayerStandingCardsQuery = { __typename?: 'Query', standings: { __typename?: 'StandingConnection', edges: Array<{ __typename?: 'StandingEdge', cursor: string, node: { __typename?: 'Standing', id: string, place: number, tournament: { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: string | null, startsAt: string } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null } } };
+
 export type PlayerTabsFragment = { __typename?: 'Player', slug: string, battlesCount: number, standingsCount: number };
 
 export type CharacterBattleCountChipFragment = { __typename?: 'BattleCount', id: string, count: number, character: { __typename?: 'Character', id: string, slug: string, name: string, faceImageUrl: string } };
@@ -3030,15 +3038,7 @@ export type PlayerStandingsPageQueryVariables = Exact<{
 }>;
 
 
-export type PlayerStandingsPageQuery = { __typename?: 'Query', player: { __typename?: 'Player', slug: string, name: string, id: string, avatarUrl?: string | null, twitterId?: string | null, streamingUrl?: string | null, battlesCount: number, standingsCount: number }, standings: { __typename?: 'StandingConnection', edges: Array<{ __typename?: 'StandingEdge', cursor: string, node: { __typename?: 'Standing', id: string, place: number, tournament: { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: string | null, startsAt: string } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null } } };
-
-export type PlayerStandingsPageStandingsQueryVariables = Exact<{
-  playerSlug: Scalars['String'];
-  after?: InputMaybe<Scalars['String']>;
-}>;
-
-
-export type PlayerStandingsPageStandingsQuery = { __typename?: 'Query', standings: { __typename?: 'StandingConnection', edges: Array<{ __typename?: 'StandingEdge', cursor: string, node: { __typename?: 'Standing', id: string, place: number, tournament: { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: string | null, startsAt: string } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null } } };
+export type PlayerStandingsPageQuery = { __typename?: 'Query', player: { __typename?: 'Player', slug: string, name: string, id: string, avatarUrl?: string | null, twitterId?: string | null, streamingUrl?: string | null, battlesCount: number, standingsCount: number }, standings: { __typename?: 'StandingConnection', nodes: Array<{ __typename?: 'Standing', id: string, place: number, tournament: { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: string | null, startsAt: string } }> } };
 
 export type TournamentsPageQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -4390,6 +4390,51 @@ export function usePlayerCardsLazyQuery(baseOptions?: Apollo.LazyQueryHookOption
 export type PlayerCardsQueryHookResult = ReturnType<typeof usePlayerCardsQuery>;
 export type PlayerCardsLazyQueryHookResult = ReturnType<typeof usePlayerCardsLazyQuery>;
 export type PlayerCardsQueryResult = Apollo.QueryResult<PlayerCardsQuery, PlayerCardsQueryVariables>;
+export const PlayerStandingCardsDocument = gql`
+    query PlayerStandingCards($playerSlug: String!, $after: String) {
+  standings(playerSlug: $playerSlug, first: 10, after: $after) {
+    edges {
+      node {
+        ...PlayerStandingCard
+      }
+      cursor
+    }
+    pageInfo {
+      ...Pagination
+    }
+  }
+}
+    ${PlayerStandingCardFragmentDoc}
+${PaginationFragmentDoc}`;
+
+/**
+ * __usePlayerStandingCardsQuery__
+ *
+ * To run a query within a React component, call `usePlayerStandingCardsQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePlayerStandingCardsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePlayerStandingCardsQuery({
+ *   variables: {
+ *      playerSlug: // value for 'playerSlug'
+ *      after: // value for 'after'
+ *   },
+ * });
+ */
+export function usePlayerStandingCardsQuery(baseOptions: Apollo.QueryHookOptions<PlayerStandingCardsQuery, PlayerStandingCardsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PlayerStandingCardsQuery, PlayerStandingCardsQueryVariables>(PlayerStandingCardsDocument, options);
+      }
+export function usePlayerStandingCardsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PlayerStandingCardsQuery, PlayerStandingCardsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PlayerStandingCardsQuery, PlayerStandingCardsQueryVariables>(PlayerStandingCardsDocument, options);
+        }
+export type PlayerStandingCardsQueryHookResult = ReturnType<typeof usePlayerStandingCardsQuery>;
+export type PlayerStandingCardsLazyQueryHookResult = ReturnType<typeof usePlayerStandingCardsLazyQuery>;
+export type PlayerStandingCardsQueryResult = Apollo.QueryResult<PlayerStandingCardsQuery, PlayerStandingCardsQueryVariables>;
 export const TournamentCardsDocument = gql`
     query TournamentCards($after: String, $keyword: String) {
   tournaments(first: 12, after: $after, keyword: $keyword) {
@@ -7776,22 +7821,15 @@ export const PlayerStandingsPageDocument = gql`
     ...PlayerTabs
   }
   standings(playerSlug: $playerSlug, first: 10) {
-    edges {
-      node {
-        ...PlayerStandingCard
-      }
-      cursor
-    }
-    pageInfo {
-      ...Pagination
+    nodes {
+      ...PlayerStandingCard
     }
   }
 }
     ${PlayerBreadcrumbsFragmentDoc}
 ${PlayerProfileFragmentDoc}
 ${PlayerTabsFragmentDoc}
-${PlayerStandingCardFragmentDoc}
-${PaginationFragmentDoc}`;
+${PlayerStandingCardFragmentDoc}`;
 
 /**
  * __usePlayerStandingsPageQuery__
@@ -7820,51 +7858,6 @@ export function usePlayerStandingsPageLazyQuery(baseOptions?: Apollo.LazyQueryHo
 export type PlayerStandingsPageQueryHookResult = ReturnType<typeof usePlayerStandingsPageQuery>;
 export type PlayerStandingsPageLazyQueryHookResult = ReturnType<typeof usePlayerStandingsPageLazyQuery>;
 export type PlayerStandingsPageQueryResult = Apollo.QueryResult<PlayerStandingsPageQuery, PlayerStandingsPageQueryVariables>;
-export const PlayerStandingsPageStandingsDocument = gql`
-    query PlayerStandingsPageStandings($playerSlug: String!, $after: String) {
-  standings(playerSlug: $playerSlug, after: $after, first: 10) {
-    edges {
-      node {
-        ...PlayerStandingCard
-      }
-      cursor
-    }
-    pageInfo {
-      ...Pagination
-    }
-  }
-}
-    ${PlayerStandingCardFragmentDoc}
-${PaginationFragmentDoc}`;
-
-/**
- * __usePlayerStandingsPageStandingsQuery__
- *
- * To run a query within a React component, call `usePlayerStandingsPageStandingsQuery` and pass it any options that fit your needs.
- * When your component renders, `usePlayerStandingsPageStandingsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = usePlayerStandingsPageStandingsQuery({
- *   variables: {
- *      playerSlug: // value for 'playerSlug'
- *      after: // value for 'after'
- *   },
- * });
- */
-export function usePlayerStandingsPageStandingsQuery(baseOptions: Apollo.QueryHookOptions<PlayerStandingsPageStandingsQuery, PlayerStandingsPageStandingsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<PlayerStandingsPageStandingsQuery, PlayerStandingsPageStandingsQueryVariables>(PlayerStandingsPageStandingsDocument, options);
-      }
-export function usePlayerStandingsPageStandingsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PlayerStandingsPageStandingsQuery, PlayerStandingsPageStandingsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<PlayerStandingsPageStandingsQuery, PlayerStandingsPageStandingsQueryVariables>(PlayerStandingsPageStandingsDocument, options);
-        }
-export type PlayerStandingsPageStandingsQueryHookResult = ReturnType<typeof usePlayerStandingsPageStandingsQuery>;
-export type PlayerStandingsPageStandingsLazyQueryHookResult = ReturnType<typeof usePlayerStandingsPageStandingsLazyQuery>;
-export type PlayerStandingsPageStandingsQueryResult = Apollo.QueryResult<PlayerStandingsPageStandingsQuery, PlayerStandingsPageStandingsQueryVariables>;
 export const TournamentsPageDocument = gql`
     query TournamentsPage {
   tournaments(first: 12) {

@@ -1,10 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { ParsedUrlQuery } from 'querystring';
 
 import { Box, Button, Grid, Typography } from '@mui/material';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
 import { Head, Content, Breadcrumbs, PlayerStandingCard, PlayerProfile, PlayerTabs } from '@/components';
@@ -13,35 +12,21 @@ import {
   PlayerSlugsQuery,
   PlayerStandingsPageDocument,
   PlayerStandingsPageQuery,
-  usePlayerStandingsPageStandingsLazyQuery,
+  usePlayerStandingCardsQuery,
 } from '@/generated/graphql';
-import { fetchGraphql, loadingState } from '@/lib';
+import { fetchGraphql, handleApolloError, loadingState } from '@/lib';
 
-const Page: React.FC<PlayerStandingsPageQuery> = ({
-  player,
-  standings: { records: initStandings, paging: initPaging },
-}) => {
-  const [standings, setStandings] = useState(initStandings);
-  const [paging, setPaging] = useState(initPaging);
-  const [fetchBattles] = usePlayerStandingsPageStandingsLazyQuery({
-    onCompleted: data => {
-      setStandings(prev => [...prev, ...data.standings.records]);
-      setPaging(data.standings.paging);
-      setLoading(false);
-    },
-    onError: e => {
-      toast.error(e.message);
-      setLoading(false);
-    },
+const Page: React.FC<PlayerStandingsPageQuery> = ssrData => {
+  const { data, loading, fetchMore } = usePlayerStandingCardsQuery({
+    variables: { playerSlug: ssrData.player.slug },
+    onError: handleApolloError,
   });
   const setLoading = useSetRecoilState(loadingState);
+  setLoading(loading);
 
-  const fetchMore = () => {
-    if (!paging.hasNext) return;
-
-    setLoading(true);
-    fetchBattles({ variables: { playerSlug: player.slug, page: paging.currentPage + 1 } });
-  };
+  const player = ssrData.player;
+  const standings = data ? data.standings.edges.map(e => e.node) : ssrData.standings.nodes;
+  const pageInfo = data?.standings.pageInfo;
 
   return (
     <Content activeTab="players" breadcrumb={<Breadcrumbs to="playerStandings" player={player} />}>
@@ -64,9 +49,14 @@ const Page: React.FC<PlayerStandingsPageQuery> = ({
           ))}
         </Grid>
 
-        {paging.hasNext && (
+        {pageInfo?.hasNextPage && (
           <Box pt={2} pb={2} display="flex" justifyContent="center">
-            <Button variant="outlined" onClick={fetchMore}>
+            <Button
+              variant="outlined"
+              onClick={() => {
+                fetchMore({ variables: { after: pageInfo.endCursor } });
+              }}
+            >
               もっとみる
             </Button>
           </Box>

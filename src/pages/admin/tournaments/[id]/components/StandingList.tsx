@@ -46,7 +46,7 @@ export const StandingList: React.FC<Props> = ({ tournamentId, players }) => {
   return (
     <>
       <List className={classes.list}>
-        {data.standings.records.map(standing => (
+        {data.standings.nodes.map(standing => (
           <ListItem key={standing.id}>
             <ListItemAvatar>
               <StandingPlaceAvatar place={standing.place} />
