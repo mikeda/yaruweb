@@ -1,10 +1,7 @@
-query ArticlesPage($after: String) {
-  articles(first: 12, after: $after) {
-    edges {
-      node { ...ArticleCard }
-      cursor
+query ArticlesPage {
+  articles(first: 12) {
+    nodes {
+      ...ArticleCard
     }
-
-    pageInfo { ...Pagination }
   }
 }

@@ -2248,6 +2248,13 @@ export type TournamentVideoPathsQuery = { __typename?: 'Query', allTournamentVid
 
 export type ArticleCardFragment = { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, author: { __typename?: 'User', name: string, avatarUrl: string } };
 
+export type ArticleCardsQueryVariables = Exact<{
+  after?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type ArticleCardsQuery = { __typename?: 'Query', articles: { __typename?: 'ArticleConnection', edges: Array<{ __typename?: 'ArticleEdge', cursor: string, node: { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, author: { __typename?: 'User', name: string, avatarUrl: string } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null } } };
+
 export type BattleListQueryVariables = Exact<{
   tournamentId?: InputMaybe<Scalars['ID']>;
   playerSlug?: InputMaybe<Scalars['String']>;
@@ -2880,12 +2887,10 @@ export type CreateTournamentMutationVariables = Exact<{
 
 export type CreateTournamentMutation = { __typename?: 'Mutation', createTournament?: { __typename?: 'CreateTournamentPayload', tournament: { __typename?: 'Tournament', id: string } } | null };
 
-export type ArticlesPageQueryVariables = Exact<{
-  after?: InputMaybe<Scalars['String']>;
-}>;
+export type ArticlesPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ArticlesPageQuery = { __typename?: 'Query', articles: { __typename?: 'ArticleConnection', edges: Array<{ __typename?: 'ArticleEdge', cursor: string, node: { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, author: { __typename?: 'User', name: string, avatarUrl: string } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null } } };
+export type ArticlesPageQuery = { __typename?: 'Query', articles: { __typename?: 'ArticleConnection', nodes: Array<{ __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, author: { __typename?: 'User', name: string, avatarUrl: string } }> } };
 
 export type ArticlePageFragment = { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, category: ArticleCategory, content: string, author: { __typename?: 'User', name: string, avatarUrl: string }, relatedArticles: Array<{ __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, author: { __typename?: 'User', name: string, avatarUrl: string } }> };
 
@@ -4243,6 +4248,50 @@ export function useTournamentVideoPathsLazyQuery(baseOptions?: Apollo.LazyQueryH
 export type TournamentVideoPathsQueryHookResult = ReturnType<typeof useTournamentVideoPathsQuery>;
 export type TournamentVideoPathsLazyQueryHookResult = ReturnType<typeof useTournamentVideoPathsLazyQuery>;
 export type TournamentVideoPathsQueryResult = Apollo.QueryResult<TournamentVideoPathsQuery, TournamentVideoPathsQueryVariables>;
+export const ArticleCardsDocument = gql`
+    query ArticleCards($after: String) {
+  articles(first: 12, after: $after) {
+    edges {
+      node {
+        ...ArticleCard
+      }
+      cursor
+    }
+    pageInfo {
+      ...Pagination
+    }
+  }
+}
+    ${ArticleCardFragmentDoc}
+${PaginationFragmentDoc}`;
+
+/**
+ * __useArticleCardsQuery__
+ *
+ * To run a query within a React component, call `useArticleCardsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useArticleCardsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useArticleCardsQuery({
+ *   variables: {
+ *      after: // value for 'after'
+ *   },
+ * });
+ */
+export function useArticleCardsQuery(baseOptions?: Apollo.QueryHookOptions<ArticleCardsQuery, ArticleCardsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ArticleCardsQuery, ArticleCardsQueryVariables>(ArticleCardsDocument, options);
+      }
+export function useArticleCardsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ArticleCardsQuery, ArticleCardsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ArticleCardsQuery, ArticleCardsQueryVariables>(ArticleCardsDocument, options);
+        }
+export type ArticleCardsQueryHookResult = ReturnType<typeof useArticleCardsQuery>;
+export type ArticleCardsLazyQueryHookResult = ReturnType<typeof useArticleCardsLazyQuery>;
+export type ArticleCardsQueryResult = Apollo.QueryResult<ArticleCardsQuery, ArticleCardsQueryVariables>;
 export const BattleListDocument = gql`
     query BattleList($tournamentId: ID, $playerSlug: String, $characterSlug: String, $after: String) {
   battles(
@@ -6922,21 +6971,14 @@ export type CreateTournamentMutationHookResult = ReturnType<typeof useCreateTour
 export type CreateTournamentMutationResult = Apollo.MutationResult<CreateTournamentMutation>;
 export type CreateTournamentMutationOptions = Apollo.BaseMutationOptions<CreateTournamentMutation, CreateTournamentMutationVariables>;
 export const ArticlesPageDocument = gql`
-    query ArticlesPage($after: String) {
-  articles(first: 12, after: $after) {
-    edges {
-      node {
-        ...ArticleCard
-      }
-      cursor
-    }
-    pageInfo {
-      ...Pagination
+    query ArticlesPage {
+  articles(first: 12) {
+    nodes {
+      ...ArticleCard
     }
   }
 }
-    ${ArticleCardFragmentDoc}
-${PaginationFragmentDoc}`;
+    ${ArticleCardFragmentDoc}`;
 
 /**
  * __useArticlesPageQuery__
@@ -6950,7 +6992,6 @@ ${PaginationFragmentDoc}`;
  * @example
  * const { data, loading, error } = useArticlesPageQuery({
  *   variables: {
- *      after: // value for 'after'
  *   },
  * });
  */

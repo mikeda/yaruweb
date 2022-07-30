@@ -42,7 +42,7 @@ export const getStaticPaths: GetStaticPaths<Params> = async () => {
   const data: PlayerSlugsQuery = await fetchGraphql(PlayerSlugsDocument);
 
   return {
-    paths: data.players.records.map(({ slug }) => ({ params: { slug } })),
+    paths: data.players.nodes.map(({ slug }) => ({ params: { slug } })),
     fallback: 'blocking',
   };
 };

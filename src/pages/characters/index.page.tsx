@@ -13,7 +13,7 @@ const Page: React.FC<CharactersPageQuery> = ({ characters }) => {
       <Head title="キャラクター一覧" description="鉄拳7のキャラクター一覧です。" />
 
       <Grid container spacing={2}>
-        {characters.records.map(character => (
+        {characters.nodes.map(character => (
           <Grid item key={character.slug} xs={12} sm={6}>
             <CharacterCard character={character} />
           </Grid>

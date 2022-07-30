@@ -5,12 +5,7 @@ import { GetStaticProps } from 'next';
 import { useSetRecoilState } from 'recoil';
 
 import { Head, Content, Breadcrumbs, TournamentCard } from '@/components';
-import {
-  TournamentCardFragment,
-  TournamentsPageDocument,
-  TournamentsPageQuery,
-  useTournamentCardsQuery,
-} from '@/generated/graphql';
+import { TournamentsPageDocument, TournamentsPageQuery, useTournamentCardsQuery } from '@/generated/graphql';
 import { loadingState, fetchGraphql, handleApolloError } from '@/lib';
 
 const Page: React.FC<TournamentsPageQuery> = ssrData => {

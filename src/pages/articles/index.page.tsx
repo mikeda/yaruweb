@@ -1,43 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { Box, Button, Grid } from '@mui/material';
 import { GetStaticProps } from 'next';
-import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
 import { Content, Breadcrumbs, Head, ArticleCard } from '@/components';
-import { ArticlesPageDocument, ArticlesPageQuery, useArticlesPageLazyQuery } from '@/generated/graphql';
-import { fetchGraphql, loadingState } from '@/lib';
+import { ArticlesPageDocument, ArticlesPageQuery, useArticleCardsQuery } from '@/generated/graphql';
+import { fetchGraphql, handleApolloError, loadingState } from '@/lib';
 
-const Page: React.FC<ArticlesPageQuery> = ({ articles: { records: initArticles, paging: initPaging } }) => {
-  const [state, setState] = useState({
-    articles: initArticles,
-    paging: initPaging,
-  });
-  const [fetch] = useArticlesPageLazyQuery({
-    onCompleted: data => {
-      setState(prev => ({
-        articles: [...prev.articles, ...data.articles.records],
-        paging: data.articles.paging,
-      }));
-      setLoading(false);
-    },
-    onError: e => {
-      toast.error(e.message);
-      setLoading(false);
-    },
-    fetchPolicy: 'network-only',
-  });
+const Page: React.FC<ArticlesPageQuery> = ssrData => {
+  const { data, loading, fetchMore } = useArticleCardsQuery({ onError: handleApolloError });
   const setLoading = useSetRecoilState(loadingState);
+  setLoading(loading);
 
-  const { articles, paging } = state;
-
-  const fetchMore = () => {
-    if (!paging.hasNext) return;
-
-    setLoading(true);
-    fetch({ variables: { page: paging.currentPage + 1 } });
-  };
+  const articles = data ? data.articles.edges.map(e => e.node) : ssrData.articles.nodes;
+  const pageInfo = data?.articles.pageInfo;
 
   return (
     <Content activeTab="articles" title="記事一覧" breadcrumb={<Breadcrumbs to="articles" />}>
@@ -51,9 +28,14 @@ const Page: React.FC<ArticlesPageQuery> = ({ articles: { records: initArticles, 
         ))}
       </Grid>
 
-      {paging.hasNext && (
+      {pageInfo?.hasNextPage && (
         <Box pt={2} pb={2} display="flex" justifyContent="center">
-          <Button variant="outlined" onClick={fetchMore}>
+          <Button
+            variant="outlined"
+            onClick={() => {
+              fetchMore({ variables: { after: pageInfo.endCursor } });
+            }}
+          >
             もっとみる
           </Button>
         </Box>

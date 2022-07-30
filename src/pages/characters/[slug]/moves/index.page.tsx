@@ -63,7 +63,7 @@ export const getStaticProps: GetStaticProps<CharacterMovesPageQuery, Params> = a
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
   const data: CharacterPathsQuery = await fetchGraphql(CharacterPathsDocument);
 
-  const paths = data.characters.records.map(({ slug }) => ({ params: { slug } }));
+  const paths = data.characters.nodes.map(({ slug }) => ({ params: { slug } }));
 
   return { paths, fallback: false };
 };

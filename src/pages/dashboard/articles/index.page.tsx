@@ -16,26 +16,23 @@ import {
   useDashboardArticlesPagePublishMutation,
   useDashboardArticlesPageStopMutation,
 } from '@/generated/graphql';
-import { loadingState, ArticleStatusText, resolveUrlObject } from '@/lib';
+import { loadingState, ArticleStatusText, resolveUrlObject, handleApolloError } from '@/lib';
 
 const Page: React.FC = () => {
   const router = useRouter();
   const setLoading = useSetRecoilState(loadingState);
   const { data, loading, fetchMore, updateQuery, refetch } = useDashboardArticlesPageQuery({
-    onCompleted: () => {
-      setLoading(false);
-    },
+    onCompleted: () => setLoading(false),
+    onError: handleApolloError,
     notifyOnNetworkStatusChange: true,
   });
   const [publish, { loading: publishLoading }] = useDashboardArticlesPagePublishMutation({
-    onCompleted: () => {
-      toast.success('記事を公開しました。');
-    },
+    onCompleted: () => toast.success('記事を公開しました。'),
+    onError: handleApolloError,
   });
   const [stop, { loading: stopLoading }] = useDashboardArticlesPageStopMutation({
-    onCompleted: () => {
-      toast.success('公開を停止しました。');
-    },
+    onCompleted: () => toast.success('公開を停止しました。'),
+    onError: handleApolloError,
   });
   const [destroy, { loading: deleteLoading }] = useDashboardArticlesPageDeleteMutation({
     onCompleted: data => {
@@ -45,18 +42,20 @@ const Page: React.FC = () => {
       updateQuery(prev => ({
         myArticles: {
           ...prev.myArticles,
-          records: prev.myArticles.records.filter(a => a.id !== article.id),
+          edges: prev.myArticles.edges.filter(e => e.node.id !== article.id),
         },
       }));
       toast.success('記事を削除しました。');
     },
+    onError: handleApolloError,
   });
   const keywordRef = useRef<string>();
 
   setLoading(loading || publishLoading || stopLoading || deleteLoading);
 
   if (!data) return null;
-  const { records: articles, paging } = data.myArticles;
+  const articles = data.myArticles.edges.map(e => e.node);
+  const pageInfo = data.myArticles.pageInfo;
 
   return (
     <DashboardContent
@@ -80,7 +79,7 @@ const Page: React.FC = () => {
 
             keywordRef.current = word;
             setLoading(true);
-            refetch({ page: 1, keyword: keywordRef.current });
+            refetch({ after: undefined, keyword: keywordRef.current });
           }}
         />
       </Box>
@@ -101,22 +100,10 @@ const Page: React.FC = () => {
         ))}
       </DashboardTable>
 
-      {paging?.hasNext && (
+      {pageInfo.hasNextPage && (
         <DashboardTablePaging
           onClick={() => {
-            fetchMore({
-              variables: { page: paging.currentPage + 1 },
-              updateQuery: (prev, { fetchMoreResult: data }) => {
-                if (!data) return prev;
-
-                return {
-                  myArticles: {
-                    records: [...prev.myArticles.records, ...data.myArticles.records],
-                    paging: data.myArticles.paging,
-                  },
-                };
-              },
-            });
+            fetchMore({ variables: { after: pageInfo.endCursor } });
           }}
         />
       )}

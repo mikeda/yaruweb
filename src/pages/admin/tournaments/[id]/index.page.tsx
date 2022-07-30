@@ -62,7 +62,7 @@ const Page: React.FC = () => {
               <Typography variant="h3">結果</Typography>
             </Box>
 
-            <StandingList tournamentId={tournament.id} players={players.records} />
+            <StandingList tournamentId={tournament.id} players={players.nodes} />
           </Paper>
         </Grid>
 
