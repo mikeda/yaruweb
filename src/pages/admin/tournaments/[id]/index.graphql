@@ -15,16 +15,16 @@ query AdminTournamentPage($tournamentId: ID!) {
     }
   }
 
-  players(per: 500) {
-    records {
+  players(first: 500) {
+    nodes {
       ...PlayerSelectOption
     }
   }
 }
 
 query AdminTournamentPageStandings($tournamentId: ID!) {
-  standings(tournamentId: $tournamentId, per: 100) {
-    records {
+  standings(tournamentId: $tournamentId, first: 100) {
+    nodes {
       id
       place
 
@@ -39,7 +39,7 @@ query AdminTournamentPageStandings($tournamentId: ID!) {
 
 query AdminTournamentPageVideos($tournamentId: ID!) {
   tournamentVideos(tournamentId: $tournamentId) {
-    records {
+    nodes {
       id
       title
       thumbnailUrl

@@ -52,10 +52,24 @@ export enum ArticleCategory {
   Theory = 'theory'
 }
 
-export type ArticleCollection = {
-  __typename?: 'ArticleCollection';
-  paging: Paging;
-  records: Array<Article>;
+/** The connection type for Article. */
+export type ArticleConnection = {
+  __typename?: 'ArticleConnection';
+  /** A list of edges. */
+  edges: Array<ArticleEdge>;
+  /** A list of nodes. */
+  nodes: Array<Article>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+};
+
+/** An edge in a connection. */
+export type ArticleEdge = {
+  __typename?: 'ArticleEdge';
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String'];
+  /** The item at the end of the edge. */
+  node: Article;
 };
 
 export type ArticleLink = {
@@ -201,10 +215,15 @@ export type BattleAttributes = {
   tournamentVideoId: Scalars['ID'];
 };
 
-export type BattleCollection = {
-  __typename?: 'BattleCollection';
-  paging: Paging;
-  records: Array<Battle>;
+/** The connection type for Battle. */
+export type BattleConnection = {
+  __typename?: 'BattleConnection';
+  /** A list of edges. */
+  edges: Array<BattleEdge>;
+  /** A list of nodes. */
+  nodes: Array<Battle>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
 };
 
 export type BattleCount = {
@@ -215,10 +234,33 @@ export type BattleCount = {
   player: Player;
 };
 
-export type BattleCountCollection = {
-  __typename?: 'BattleCountCollection';
-  paging: Paging;
-  records: Array<BattleCount>;
+/** The connection type for BattleCount. */
+export type BattleCountConnection = {
+  __typename?: 'BattleCountConnection';
+  /** A list of edges. */
+  edges: Array<BattleCountEdge>;
+  /** A list of nodes. */
+  nodes: Array<BattleCount>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+};
+
+/** An edge in a connection. */
+export type BattleCountEdge = {
+  __typename?: 'BattleCountEdge';
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String'];
+  /** The item at the end of the edge. */
+  node: BattleCount;
+};
+
+/** An edge in a connection. */
+export type BattleEdge = {
+  __typename?: 'BattleEdge';
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String'];
+  /** The item at the end of the edge. */
+  node: Battle;
 };
 
 export enum BattleRound {
@@ -303,10 +345,24 @@ export type CharacterAttributes = {
   story: Scalars['String'];
 };
 
-export type CharacterCollection = {
-  __typename?: 'CharacterCollection';
-  paging: Paging;
-  records: Array<Character>;
+/** The connection type for Character. */
+export type CharacterConnection = {
+  __typename?: 'CharacterConnection';
+  /** A list of edges. */
+  edges: Array<CharacterEdge>;
+  /** A list of nodes. */
+  nodes: Array<Character>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+};
+
+/** An edge in a connection. */
+export type CharacterEdge = {
+  __typename?: 'CharacterEdge';
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String'];
+  /** The item at the end of the edge. */
+  node: Character;
 };
 
 export enum CharacterOrder {
@@ -1300,10 +1356,24 @@ export type OrganizerAttributes = {
   twitterId?: InputMaybe<Scalars['String']>;
 };
 
-export type OrganizerCollection = {
-  __typename?: 'OrganizerCollection';
-  paging: Paging;
-  records: Array<Organizer>;
+/** The connection type for Organizer. */
+export type OrganizerConnection = {
+  __typename?: 'OrganizerConnection';
+  /** A list of edges. */
+  edges: Array<OrganizerEdge>;
+  /** A list of nodes. */
+  nodes: Array<Organizer>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+};
+
+/** An edge in a connection. */
+export type OrganizerEdge = {
+  __typename?: 'OrganizerEdge';
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String'];
+  /** The item at the end of the edge. */
+  node: Organizer;
 };
 
 /** Information about pagination in a connection. */
@@ -1317,14 +1387,6 @@ export type PageInfo = {
   hasPreviousPage: Scalars['Boolean'];
   /** When paginating backwards, the cursor to continue. */
   startCursor?: Maybe<Scalars['String']>;
-};
-
-export type Paging = {
-  __typename?: 'Paging';
-  currentPage: Scalars['Int'];
-  hasNext: Scalars['Boolean'];
-  totalCount: Scalars['Int'];
-  totalPages: Scalars['Int'];
 };
 
 export type Player = {
@@ -1356,10 +1418,24 @@ export type PlayerAttributes = {
   twitterId?: InputMaybe<Scalars['String']>;
 };
 
-export type PlayerCollection = {
-  __typename?: 'PlayerCollection';
-  paging: Paging;
-  records: Array<Player>;
+/** The connection type for Player. */
+export type PlayerConnection = {
+  __typename?: 'PlayerConnection';
+  /** A list of edges. */
+  edges: Array<PlayerEdge>;
+  /** A list of nodes. */
+  nodes: Array<Player>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+};
+
+/** An edge in a connection. */
+export type PlayerEdge = {
+  __typename?: 'PlayerEdge';
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String'];
+  /** The item at the end of the edge. */
+  node: Player;
 };
 
 /** Autogenerated input type of PublishArticle */
@@ -1383,11 +1459,11 @@ export type Query = {
   allTournamentVideos: Array<TournamentVideo>;
   allTournaments: Array<Tournament>;
   article: Article;
-  articles: ArticleCollection;
-  battleCounts: BattleCountCollection;
-  battles: BattleCollection;
+  articles: ArticleConnection;
+  battleCounts: BattleCountConnection;
+  battles: BattleConnection;
   character: Character;
-  characters: CharacterCollection;
+  characters: CharacterConnection;
   combo: Combo;
   comboCategories: Array<ComboCategory>;
   comboCategory: ComboCategory;
@@ -1399,15 +1475,15 @@ export type Query = {
   moveCategory: MoveCategory;
   moves: Array<Move>;
   myArticle: Article;
-  myArticles: ArticleCollection;
+  myArticles: ArticleConnection;
   organizer: Organizer;
-  organizers: OrganizerCollection;
+  organizers: OrganizerConnection;
   player: Player;
-  players: PlayerCollection;
-  standings: StandingCollection;
+  players: PlayerConnection;
+  standings: StandingConnection;
   tournament: Tournament;
   tournamentVideo: TournamentVideo;
-  tournamentVideos: TournamentVideoCollection;
+  tournamentVideos: TournamentVideoConnection;
   tournaments: TournamentConnection;
 };
 
@@ -1418,25 +1494,31 @@ export type QueryArticleArgs = {
 
 
 export type QueryArticlesArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
   category?: InputMaybe<ArticleCategory>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
   order?: InputMaybe<Order>;
-  page?: InputMaybe<Scalars['Int']>;
-  per?: InputMaybe<Scalars['Int']>;
 };
 
 
 export type QueryBattleCountsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
   characterSlug?: InputMaybe<Scalars['String']>;
-  page?: InputMaybe<Scalars['Int']>;
-  per?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
   playerSlug?: InputMaybe<Scalars['String']>;
 };
 
 
 export type QueryBattlesArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
   characterSlug?: InputMaybe<Scalars['String']>;
-  page?: InputMaybe<Scalars['Int']>;
-  per?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
   playerSlug?: InputMaybe<Scalars['String']>;
   tournamentId?: InputMaybe<Scalars['ID']>;
   tournamentVideoId?: InputMaybe<Scalars['ID']>;
@@ -1449,10 +1531,12 @@ export type QueryCharacterArgs = {
 
 
 export type QueryCharactersArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
   keyword?: InputMaybe<Scalars['String']>;
+  last?: InputMaybe<Scalars['Int']>;
   order?: InputMaybe<CharacterOrder>;
-  page?: InputMaybe<Scalars['Int']>;
-  per?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -1502,9 +1586,11 @@ export type QueryMyArticleArgs = {
 
 
 export type QueryMyArticlesArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
   keyword?: InputMaybe<Scalars['String']>;
-  page?: InputMaybe<Scalars['Int']>;
-  per?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -1514,9 +1600,11 @@ export type QueryOrganizerArgs = {
 
 
 export type QueryOrganizersArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
   keyword?: InputMaybe<Scalars['String']>;
-  page?: InputMaybe<Scalars['Int']>;
-  per?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -1526,15 +1614,19 @@ export type QueryPlayerArgs = {
 
 
 export type QueryPlayersArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
   keyword?: InputMaybe<Scalars['String']>;
-  page?: InputMaybe<Scalars['Int']>;
-  per?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
 };
 
 
 export type QueryStandingsArgs = {
-  page?: InputMaybe<Scalars['Int']>;
-  per?: InputMaybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
   playerSlug?: InputMaybe<Scalars['String']>;
   tournamentId?: InputMaybe<Scalars['ID']>;
 };
@@ -1551,8 +1643,10 @@ export type QueryTournamentVideoArgs = {
 
 
 export type QueryTournamentVideosArgs = {
-  page?: InputMaybe<Scalars['Int']>;
-  per?: InputMaybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
   tournamentId?: InputMaybe<Scalars['ID']>;
 };
 
@@ -1615,10 +1709,24 @@ export type StandingAttributes = {
   playerId: Scalars['ID'];
 };
 
-export type StandingCollection = {
-  __typename?: 'StandingCollection';
-  paging: Paging;
-  records: Array<Standing>;
+/** The connection type for Standing. */
+export type StandingConnection = {
+  __typename?: 'StandingConnection';
+  /** A list of edges. */
+  edges: Array<StandingEdge>;
+  /** A list of nodes. */
+  nodes: Array<Standing>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+};
+
+/** An edge in a connection. */
+export type StandingEdge = {
+  __typename?: 'StandingEdge';
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String'];
+  /** The item at the end of the edge. */
+  node: Standing;
 };
 
 /** Autogenerated input type of StopArticle */
@@ -1772,10 +1880,24 @@ export type TournamentVideoAttributes = {
   title: Scalars['String'];
 };
 
-export type TournamentVideoCollection = {
-  __typename?: 'TournamentVideoCollection';
-  paging: Paging;
-  records: Array<TournamentVideo>;
+/** The connection type for TournamentVideo. */
+export type TournamentVideoConnection = {
+  __typename?: 'TournamentVideoConnection';
+  /** A list of edges. */
+  edges: Array<TournamentVideoEdge>;
+  /** A list of nodes. */
+  nodes: Array<TournamentVideo>;
+  /** Information to aid in pagination. */
+  pageInfo: PageInfo;
+};
+
+/** An edge in a connection. */
+export type TournamentVideoEdge = {
+  __typename?: 'TournamentVideoEdge';
+  /** A cursor for use in pagination. */
+  cursor: Scalars['String'];
+  /** The item at the end of the edge. */
+  node: TournamentVideo;
 };
 
 /** Autogenerated input type of UpdateArticle */
@@ -2060,8 +2182,6 @@ export type CurrentUserFragment = { __typename?: 'CurrentUser', id: string, name
 
 export type PaginationFragment = { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null };
 
-export type PagingFragment = { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean };
-
 export type ArticlePathsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -2070,14 +2190,14 @@ export type ArticlePathsQuery = { __typename?: 'Query', allArticles: Array<{ __t
 export type CharacterPathsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CharacterPathsQuery = { __typename?: 'Query', characters: { __typename?: 'CharacterCollection', records: Array<{ __typename?: 'Character', slug: string }> } };
+export type CharacterPathsQuery = { __typename?: 'Query', characters: { __typename?: 'CharacterConnection', nodes: Array<{ __typename?: 'Character', slug: string }> } };
 
 export type CharacterSelectOptionFragment = { __typename?: 'Character', id: string, slug: string, name: string };
 
 export type CharacterSelectOptionsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CharacterSelectOptionsQuery = { __typename?: 'Query', characters: { __typename?: 'CharacterCollection', records: Array<{ __typename?: 'Character', id: string, slug: string, name: string }> } };
+export type CharacterSelectOptionsQuery = { __typename?: 'Query', characters: { __typename?: 'CharacterConnection', nodes: Array<{ __typename?: 'Character', id: string, slug: string, name: string }> } };
 
 export type ComboSelectOptionsQueryVariables = Exact<{
   characterSlug: Scalars['String'];
@@ -2110,11 +2230,11 @@ export type OrganizerSelectOptionFragment = { __typename?: 'Organizer', id: stri
 export type PlayerSelectOptionFragment = { __typename?: 'Player', id: string, slug: string, name: string, tonamelId?: string | null, smashggId?: string | null };
 
 export type PlayerSlugsQueryVariables = Exact<{
-  per?: InputMaybe<Scalars['Int']>;
+  first?: InputMaybe<Scalars['Int']>;
 }>;
 
 
-export type PlayerSlugsQuery = { __typename?: 'Query', players: { __typename?: 'PlayerCollection', records: Array<{ __typename?: 'Player', slug: string }> } };
+export type PlayerSlugsQuery = { __typename?: 'Query', players: { __typename?: 'PlayerConnection', nodes: Array<{ __typename?: 'Player', slug: string }> } };
 
 export type TournamentPathsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2132,11 +2252,11 @@ export type BattleListQueryVariables = Exact<{
   tournamentId?: InputMaybe<Scalars['ID']>;
   playerSlug?: InputMaybe<Scalars['String']>;
   characterSlug?: InputMaybe<Scalars['String']>;
-  page?: InputMaybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type BattleListQuery = { __typename?: 'Query', battles: { __typename?: 'BattleCollection', records: Array<{ __typename?: 'Battle', id: string, round: BattleRound, startSec: number, tournamentVideo: { __typename?: 'TournamentVideo', id: string, youtubeVideoId: string, tournament: { __typename?: 'Tournament', id: string, name: string, startsAt: string } }, sides: Array<{ __typename?: 'BattleSide', rounds: number, player: { __typename?: 'Player', name: string }, character: { __typename?: 'Character', faceImageUrl: string } }> }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
+export type BattleListQuery = { __typename?: 'Query', battles: { __typename?: 'BattleConnection', edges: Array<{ __typename?: 'BattleEdge', cursor: string, node: { __typename?: 'Battle', id: string, round: BattleRound, startSec: number, tournamentVideo: { __typename?: 'TournamentVideo', id: string, youtubeVideoId: string, tournament: { __typename?: 'Tournament', id: string, name: string, startsAt: string } }, sides: Array<{ __typename?: 'BattleSide', rounds: number, player: { __typename?: 'Player', name: string }, character: { __typename?: 'Character', faceImageUrl: string } }> } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null } } };
 
 export type BattleListItemFragment = { __typename?: 'Battle', id: string, round: BattleRound, startSec: number, tournamentVideo: { __typename?: 'TournamentVideo', id: string, youtubeVideoId: string, tournament: { __typename?: 'Tournament', id: string, name: string, startsAt: string } }, sides: Array<{ __typename?: 'BattleSide', rounds: number, player: { __typename?: 'Player', name: string }, character: { __typename?: 'Character', faceImageUrl: string } }> };
 
@@ -2209,7 +2329,7 @@ export type CharacterTableRowsQueryVariables = Exact<{
 }>;
 
 
-export type CharacterTableRowsQuery = { __typename?: 'Query', characters: { __typename?: 'CharacterCollection', records: Array<{ __typename?: 'Character', id: string, slug: string, name: string, faceImageUrl: string, movesCount: number, combosCount: number }> } };
+export type CharacterTableRowsQuery = { __typename?: 'Query', characters: { __typename?: 'CharacterConnection', nodes: Array<{ __typename?: 'Character', id: string, slug: string, name: string, faceImageUrl: string, movesCount: number, combosCount: number }> } };
 
 export type ComboDashboardCategoryFragment = { __typename?: 'ComboCategory', id: string, name: string, position: number, combos: Array<{ __typename?: 'Combo', id: string, command: Array<string>, position: number, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> };
 
@@ -2366,12 +2486,12 @@ export type CreateMoveVideoMutation = { __typename?: 'Mutation', createMoveVideo
 export type PlayerTableRowFragment = { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null };
 
 export type PlayerTableRowsQueryVariables = Exact<{
-  page?: InputMaybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
   keyword?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type PlayerTableRowsQuery = { __typename?: 'Query', players: { __typename?: 'PlayerCollection', records: Array<{ __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
+export type PlayerTableRowsQuery = { __typename?: 'Query', players: { __typename?: 'PlayerConnection', edges: Array<{ __typename?: 'PlayerEdge', cursor: string, node: { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null } } };
 
 export type DeletePlayerMutationVariables = Exact<{
   playerSlug: Scalars['String'];
@@ -2472,7 +2592,7 @@ export type TournamentFormFragment = { __typename?: 'Tournament', id: string, or
 export type TournamentFormQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type TournamentFormQuery = { __typename?: 'Query', organizers: { __typename?: 'OrganizerCollection', records: Array<{ __typename?: 'Organizer', id: string, slug: string, name: string }> } };
+export type TournamentFormQuery = { __typename?: 'Query', organizers: { __typename?: 'OrganizerConnection', nodes: Array<{ __typename?: 'Organizer', id: string, slug: string, name: string }> } };
 
 export type CharacterBreadcrumbsFragment = { __typename?: 'Character', slug: string, name: string };
 
@@ -2584,12 +2704,12 @@ export type AdminOrganizersPageDeleteMutationVariables = Exact<{
 export type AdminOrganizersPageDeleteMutation = { __typename?: 'Mutation', deleteOrganizer?: { __typename?: 'DeleteOrganizerPayload', organizer: { __typename?: 'Organizer', id: string } } | null };
 
 export type AdminOrganizersPageOrganizersQueryVariables = Exact<{
-  page?: InputMaybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
   keyword?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type AdminOrganizersPageOrganizersQuery = { __typename?: 'Query', organizers: { __typename?: 'OrganizerCollection', records: Array<{ __typename?: 'Organizer', id: string, slug: string, name: string, avatarUrl?: string | null }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
+export type AdminOrganizersPageOrganizersQuery = { __typename?: 'Query', organizers: { __typename?: 'OrganizerConnection', edges: Array<{ __typename?: 'OrganizerEdge', cursor: string, node: { __typename?: 'Organizer', id: string, slug: string, name: string, avatarUrl?: string | null } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null } } };
 
 export type AdminOrganizersNewPageCreateOrganizerMutationVariables = Exact<{
   attributes: OrganizerAttributes;
@@ -2649,7 +2769,7 @@ export type AdminBattlesPageQueryVariables = Exact<{
 }>;
 
 
-export type AdminBattlesPageQuery = { __typename?: 'Query', tournamentVideo: { __typename?: 'TournamentVideo', id: string, title: string, youtubeVideoId: string, tournament: { __typename?: 'Tournament', id: string, name: string } }, players: { __typename?: 'PlayerCollection', records: Array<{ __typename?: 'Player', id: string, slug: string, name: string, tonamelId?: string | null, smashggId?: string | null }> }, characters: { __typename?: 'CharacterCollection', records: Array<{ __typename?: 'Character', id: string, slug: string, name: string }> } };
+export type AdminBattlesPageQuery = { __typename?: 'Query', tournamentVideo: { __typename?: 'TournamentVideo', id: string, title: string, youtubeVideoId: string, tournament: { __typename?: 'Tournament', id: string, name: string } }, players: { __typename?: 'PlayerConnection', nodes: Array<{ __typename?: 'Player', id: string, slug: string, name: string, tonamelId?: string | null, smashggId?: string | null }> }, characters: { __typename?: 'CharacterConnection', nodes: Array<{ __typename?: 'Character', id: string, slug: string, name: string }> } };
 
 export type AdminBattlesPageSideFragment = { __typename?: 'BattleSide', rounds: number, player: { __typename?: 'Player', id: string, name: string }, character: { __typename?: 'Character', id: string, faceImageUrl: string } };
 
@@ -2660,7 +2780,7 @@ export type AdminBattlesPageBattlesQueryVariables = Exact<{
 }>;
 
 
-export type AdminBattlesPageBattlesQuery = { __typename?: 'Query', battles: { __typename?: 'BattleCollection', records: Array<{ __typename?: 'Battle', id: string, round: BattleRound, startSec: number, sides: Array<{ __typename?: 'BattleSide', rounds: number, player: { __typename?: 'Player', id: string, name: string }, character: { __typename?: 'Character', id: string, faceImageUrl: string } }> }> } };
+export type AdminBattlesPageBattlesQuery = { __typename?: 'Query', battles: { __typename?: 'BattleConnection', nodes: Array<{ __typename?: 'Battle', id: string, round: BattleRound, startSec: number, sides: Array<{ __typename?: 'BattleSide', rounds: number, player: { __typename?: 'Player', id: string, name: string }, character: { __typename?: 'Character', id: string, faceImageUrl: string } }> }> } };
 
 export type AdminTournamentVideoEditPageQueryVariables = Exact<{
   tournamentVideoId: Scalars['ID'];
@@ -2699,21 +2819,21 @@ export type AdminTournamentPageQueryVariables = Exact<{
 }>;
 
 
-export type AdminTournamentPageQuery = { __typename?: 'Query', tournament: { __typename?: 'Tournament', id: string, name: string, description: string, mainImageUrl?: string | null, startsAt: string, standingsCount: number, videosCount: number, videos: Array<{ __typename?: 'TournamentVideo', id: string, title: string, youtubeVideoId: string }> }, players: { __typename?: 'PlayerCollection', records: Array<{ __typename?: 'Player', id: string, slug: string, name: string, tonamelId?: string | null, smashggId?: string | null }> } };
+export type AdminTournamentPageQuery = { __typename?: 'Query', tournament: { __typename?: 'Tournament', id: string, name: string, description: string, mainImageUrl?: string | null, startsAt: string, standingsCount: number, videosCount: number, videos: Array<{ __typename?: 'TournamentVideo', id: string, title: string, youtubeVideoId: string }> }, players: { __typename?: 'PlayerConnection', nodes: Array<{ __typename?: 'Player', id: string, slug: string, name: string, tonamelId?: string | null, smashggId?: string | null }> } };
 
 export type AdminTournamentPageStandingsQueryVariables = Exact<{
   tournamentId: Scalars['ID'];
 }>;
 
 
-export type AdminTournamentPageStandingsQuery = { __typename?: 'Query', standings: { __typename?: 'StandingCollection', records: Array<{ __typename?: 'Standing', id: string, place: number, player: { __typename?: 'Player', id: string, name: string, avatarUrl?: string | null } }> } };
+export type AdminTournamentPageStandingsQuery = { __typename?: 'Query', standings: { __typename?: 'StandingConnection', nodes: Array<{ __typename?: 'Standing', id: string, place: number, player: { __typename?: 'Player', id: string, name: string, avatarUrl?: string | null } }> } };
 
 export type AdminTournamentPageVideosQueryVariables = Exact<{
   tournamentId: Scalars['ID'];
 }>;
 
 
-export type AdminTournamentPageVideosQuery = { __typename?: 'Query', tournamentVideos: { __typename?: 'TournamentVideoCollection', records: Array<{ __typename?: 'TournamentVideo', id: string, title: string, thumbnailUrl: string, battlesCount: number, channel: { __typename?: 'Channel', id: string, name: string } }> } };
+export type AdminTournamentPageVideosQuery = { __typename?: 'Query', tournamentVideos: { __typename?: 'TournamentVideoConnection', nodes: Array<{ __typename?: 'TournamentVideo', id: string, title: string, thumbnailUrl: string, battlesCount: number, channel: { __typename?: 'Channel', id: string, name: string } }> } };
 
 export type AdminTournamentPageCreateStandingMutationVariables = Exact<{
   tournamentId: Scalars['ID'];
@@ -2753,11 +2873,11 @@ export type CreateTournamentMutationVariables = Exact<{
 export type CreateTournamentMutation = { __typename?: 'Mutation', createTournament?: { __typename?: 'CreateTournamentPayload', tournament: { __typename?: 'Tournament', id: string } } | null };
 
 export type ArticlesPageQueryVariables = Exact<{
-  page?: InputMaybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type ArticlesPageQuery = { __typename?: 'Query', articles: { __typename?: 'ArticleCollection', records: Array<{ __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, author: { __typename?: 'User', name: string, avatarUrl: string } }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
+export type ArticlesPageQuery = { __typename?: 'Query', articles: { __typename?: 'ArticleConnection', edges: Array<{ __typename?: 'ArticleEdge', cursor: string, node: { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, author: { __typename?: 'User', name: string, avatarUrl: string } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null } } };
 
 export type ArticlePageFragment = { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, category: ArticleCategory, content: string, author: { __typename?: 'User', name: string, avatarUrl: string }, relatedArticles: Array<{ __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, author: { __typename?: 'User', name: string, avatarUrl: string } }> };
 
@@ -2771,14 +2891,14 @@ export type ArticlePageQuery = { __typename?: 'Query', article: { __typename?: '
 export type CharactersPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CharactersPageQuery = { __typename?: 'Query', characters: { __typename?: 'CharacterCollection', records: Array<{ __typename?: 'Character', slug: string, name: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number }> } };
+export type CharactersPageQuery = { __typename?: 'Query', characters: { __typename?: 'CharacterConnection', nodes: Array<{ __typename?: 'Character', slug: string, name: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number }> } };
 
 export type CharacterPageQueryVariables = Exact<{
   characterSlug: Scalars['String'];
 }>;
 
 
-export type CharacterPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', story: string, description: string, slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, combosCount: number, movesCount: number }, battleCounts: { __typename?: 'BattleCountCollection', records: Array<{ __typename?: 'BattleCount', id: string, count: number, player: { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null } }> } };
+export type CharacterPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', story: string, description: string, slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, combosCount: number, movesCount: number }, battleCounts: { __typename?: 'BattleCountConnection', nodes: Array<{ __typename?: 'BattleCount', id: string, count: number, player: { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null } }> } };
 
 export type CharacterBattlesPageQueryVariables = Exact<{
   characterSlug: Scalars['String'];
@@ -2847,12 +2967,12 @@ export type DashboardArticlesPageDeleteMutationVariables = Exact<{
 export type DashboardArticlesPageDeleteMutation = { __typename?: 'Mutation', deleteArticle?: { __typename?: 'DeleteArticlePayload', article: { __typename?: 'Article', id: string } } | null };
 
 export type DashboardArticlesPageQueryVariables = Exact<{
-  page?: InputMaybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
   keyword?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type DashboardArticlesPageQuery = { __typename?: 'Query', myArticles: { __typename?: 'ArticleCollection', records: Array<{ __typename?: 'Article', id: string, title: string, status: ArticleStatus }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
+export type DashboardArticlesPageQuery = { __typename?: 'Query', myArticles: { __typename?: 'ArticleConnection', edges: Array<{ __typename?: 'ArticleEdge', cursor: string, node: { __typename?: 'Article', id: string, title: string, status: ArticleStatus } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null } } };
 
 export type CreateArticleMutationVariables = Exact<{
   attributes: ArticleAttributes;
@@ -2871,15 +2991,15 @@ export type UpdateCurrentUserMutation = { __typename?: 'Mutation', updateCurrent
 export type TopPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type TopPageQuery = { __typename?: 'Query', tournaments: { __typename?: 'TournamentConnection', nodes: Array<{ __typename?: 'Tournament', id: string, name: string, mainImageUrl?: string | null, startsAt: string, videosCount: number, standings: Array<{ __typename?: 'Standing', id: string, place: number, player: { __typename?: 'Player', id: string, name: string } }> }> }, players: { __typename?: 'PlayerCollection', records: Array<{ __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null, standingsCount: number, battlesCount: number }> }, characters: { __typename?: 'CharacterCollection', records: Array<{ __typename?: 'Character', slug: string, name: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number }> }, articles: { __typename?: 'ArticleCollection', records: Array<{ __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, author: { __typename?: 'User', name: string, avatarUrl: string } }> } };
+export type TopPageQuery = { __typename?: 'Query', tournaments: { __typename?: 'TournamentConnection', nodes: Array<{ __typename?: 'Tournament', id: string, name: string, mainImageUrl?: string | null, startsAt: string, videosCount: number, standings: Array<{ __typename?: 'Standing', id: string, place: number, player: { __typename?: 'Player', id: string, name: string } }> }> }, players: { __typename?: 'PlayerConnection', nodes: Array<{ __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null, standingsCount: number, battlesCount: number }> }, characters: { __typename?: 'CharacterConnection', nodes: Array<{ __typename?: 'Character', slug: string, name: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number }> }, articles: { __typename?: 'ArticleConnection', nodes: Array<{ __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, author: { __typename?: 'User', name: string, avatarUrl: string } }> } };
 
 export type PlayersPageQueryVariables = Exact<{
-  page?: InputMaybe<Scalars['Int']>;
+  after?: InputMaybe<Scalars['String']>;
   keyword?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type PlayersPageQuery = { __typename?: 'Query', players: { __typename?: 'PlayerCollection', records: Array<{ __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null, standingsCount: number, battlesCount: number }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
+export type PlayersPageQuery = { __typename?: 'Query', players: { __typename?: 'PlayerConnection', edges: Array<{ __typename?: 'PlayerEdge', cursor: string, node: { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null, standingsCount: number, battlesCount: number } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null } } };
 
 export type PlayerPageQueryVariables = Exact<{
   playerSlug: Scalars['String'];
@@ -2900,15 +3020,15 @@ export type PlayerStandingsPageQueryVariables = Exact<{
 }>;
 
 
-export type PlayerStandingsPageQuery = { __typename?: 'Query', player: { __typename?: 'Player', slug: string, name: string, id: string, avatarUrl?: string | null, twitterId?: string | null, streamingUrl?: string | null, battlesCount: number, standingsCount: number }, standings: { __typename?: 'StandingCollection', records: Array<{ __typename?: 'Standing', id: string, place: number, tournament: { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: string | null, startsAt: string } }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
+export type PlayerStandingsPageQuery = { __typename?: 'Query', player: { __typename?: 'Player', slug: string, name: string, id: string, avatarUrl?: string | null, twitterId?: string | null, streamingUrl?: string | null, battlesCount: number, standingsCount: number }, standings: { __typename?: 'StandingConnection', edges: Array<{ __typename?: 'StandingEdge', cursor: string, node: { __typename?: 'Standing', id: string, place: number, tournament: { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: string | null, startsAt: string } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null } } };
 
 export type PlayerStandingsPageStandingsQueryVariables = Exact<{
   playerSlug: Scalars['String'];
-  page: Scalars['Int'];
+  after?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type PlayerStandingsPageStandingsQuery = { __typename?: 'Query', standings: { __typename?: 'StandingCollection', records: Array<{ __typename?: 'Standing', id: string, place: number, tournament: { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: string | null, startsAt: string } }>, paging: { __typename?: 'Paging', currentPage: number, totalCount: number, totalPages: number, hasNext: boolean } } };
+export type PlayerStandingsPageStandingsQuery = { __typename?: 'Query', standings: { __typename?: 'StandingConnection', edges: Array<{ __typename?: 'StandingEdge', cursor: string, node: { __typename?: 'Standing', id: string, place: number, tournament: { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: string | null, startsAt: string } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null } } };
 
 export type TournamentsPageQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2941,14 +3061,6 @@ export const PaginationFragmentDoc = gql`
     fragment Pagination on PageInfo {
   hasNextPage
   endCursor
-}
-    `;
-export const PagingFragmentDoc = gql`
-    fragment paging on Paging {
-  currentPage
-  totalCount
-  totalPages
-  hasNext
 }
     `;
 export const CharacterSelectOptionFragmentDoc = gql`
@@ -3802,8 +3914,8 @@ export type ArticlePathsLazyQueryHookResult = ReturnType<typeof useArticlePathsL
 export type ArticlePathsQueryResult = Apollo.QueryResult<ArticlePathsQuery, ArticlePathsQueryVariables>;
 export const CharacterPathsDocument = gql`
     query CharacterPaths {
-  characters {
-    records {
+  characters(first: 100) {
+    nodes {
       slug
     }
   }
@@ -3838,8 +3950,8 @@ export type CharacterPathsLazyQueryHookResult = ReturnType<typeof useCharacterPa
 export type CharacterPathsQueryResult = Apollo.QueryResult<CharacterPathsQuery, CharacterPathsQueryVariables>;
 export const CharacterSelectOptionsDocument = gql`
     query CharacterSelectOptions {
-  characters {
-    records {
+  characters(first: 100) {
+    nodes {
       ...CharacterSelectOption
     }
   }
@@ -4022,9 +4134,9 @@ export type MoveSelectOptionsQueryHookResult = ReturnType<typeof useMoveSelectOp
 export type MoveSelectOptionsLazyQueryHookResult = ReturnType<typeof useMoveSelectOptionsLazyQuery>;
 export type MoveSelectOptionsQueryResult = Apollo.QueryResult<MoveSelectOptionsQuery, MoveSelectOptionsQueryVariables>;
 export const PlayerSlugsDocument = gql`
-    query PlayerSlugs($per: Int) {
-  players(per: $per) {
-    records {
+    query PlayerSlugs($first: Int) {
+  players(first: $first) {
+    nodes {
       slug
     }
   }
@@ -4043,7 +4155,7 @@ export const PlayerSlugsDocument = gql`
  * @example
  * const { data, loading, error } = usePlayerSlugsQuery({
  *   variables: {
- *      per: // value for 'per'
+ *      first: // value for 'first'
  *   },
  * });
  */
@@ -4127,24 +4239,27 @@ export type TournamentVideoPathsQueryHookResult = ReturnType<typeof useTournamen
 export type TournamentVideoPathsLazyQueryHookResult = ReturnType<typeof useTournamentVideoPathsLazyQuery>;
 export type TournamentVideoPathsQueryResult = Apollo.QueryResult<TournamentVideoPathsQuery, TournamentVideoPathsQueryVariables>;
 export const BattleListDocument = gql`
-    query BattleList($tournamentId: ID, $playerSlug: String, $characterSlug: String, $page: Int) {
+    query BattleList($tournamentId: ID, $playerSlug: String, $characterSlug: String, $after: String) {
   battles(
     tournamentId: $tournamentId
     playerSlug: $playerSlug
     characterSlug: $characterSlug
-    page: $page
-    per: 10
+    after: $after
+    first: 10
   ) {
-    records {
-      ...BattleListItem
+    edges {
+      node {
+        ...BattleListItem
+      }
+      cursor
     }
-    paging {
-      ...paging
+    pageInfo {
+      ...Pagination
     }
   }
 }
     ${BattleListItemFragmentDoc}
-${PagingFragmentDoc}`;
+${PaginationFragmentDoc}`;
 
 /**
  * __useBattleListQuery__
@@ -4161,7 +4276,7 @@ ${PagingFragmentDoc}`;
  *      tournamentId: // value for 'tournamentId'
  *      playerSlug: // value for 'playerSlug'
  *      characterSlug: // value for 'characterSlug'
- *      page: // value for 'page'
+ *      after: // value for 'after'
  *   },
  * });
  */
@@ -4223,8 +4338,8 @@ export type TournamentCardsLazyQueryHookResult = ReturnType<typeof useTournament
 export type TournamentCardsQueryResult = Apollo.QueryResult<TournamentCardsQuery, TournamentCardsQueryVariables>;
 export const CharacterTableRowsDocument = gql`
     query CharacterTableRows($keyword: String) {
-  characters(keyword: $keyword) {
-    records {
+  characters(first: 100, keyword: $keyword) {
+    nodes {
       ...CharacterTableRow
     }
   }
@@ -5031,18 +5146,21 @@ export type CreateMoveVideoMutationHookResult = ReturnType<typeof useCreateMoveV
 export type CreateMoveVideoMutationResult = Apollo.MutationResult<CreateMoveVideoMutation>;
 export type CreateMoveVideoMutationOptions = Apollo.BaseMutationOptions<CreateMoveVideoMutation, CreateMoveVideoMutationVariables>;
 export const PlayerTableRowsDocument = gql`
-    query PlayerTableRows($page: Int = 1, $keyword: String) {
-  players(page: $page, per: 10, keyword: $keyword) {
-    records {
-      ...PlayerTableRow
+    query PlayerTableRows($after: String, $keyword: String) {
+  players(first: 10, after: $after, keyword: $keyword) {
+    edges {
+      node {
+        ...PlayerTableRow
+      }
+      cursor
     }
-    paging {
-      ...paging
+    pageInfo {
+      ...Pagination
     }
   }
 }
     ${PlayerTableRowFragmentDoc}
-${PagingFragmentDoc}`;
+${PaginationFragmentDoc}`;
 
 /**
  * __usePlayerTableRowsQuery__
@@ -5056,7 +5174,7 @@ ${PagingFragmentDoc}`;
  * @example
  * const { data, loading, error } = usePlayerTableRowsQuery({
  *   variables: {
- *      page: // value for 'page'
+ *      after: // value for 'after'
  *      keyword: // value for 'keyword'
  *   },
  * });
@@ -5398,8 +5516,8 @@ export type CreateUserMutationResult = Apollo.MutationResult<CreateUserMutation>
 export type CreateUserMutationOptions = Apollo.BaseMutationOptions<CreateUserMutation, CreateUserMutationVariables>;
 export const TournamentFormDocument = gql`
     query TournamentForm {
-  organizers(per: 100) {
-    records {
+  organizers(first: 100) {
+    nodes {
       ...OrganizerSelectOption
     }
   }
@@ -5904,18 +6022,21 @@ export type AdminOrganizersPageDeleteMutationHookResult = ReturnType<typeof useA
 export type AdminOrganizersPageDeleteMutationResult = Apollo.MutationResult<AdminOrganizersPageDeleteMutation>;
 export type AdminOrganizersPageDeleteMutationOptions = Apollo.BaseMutationOptions<AdminOrganizersPageDeleteMutation, AdminOrganizersPageDeleteMutationVariables>;
 export const AdminOrganizersPageOrganizersDocument = gql`
-    query AdminOrganizersPageOrganizers($page: Int = 1, $keyword: String) {
-  organizers(page: $page, per: 10, keyword: $keyword) {
-    records {
-      ...AdminOrganizersPageOrganizer
+    query AdminOrganizersPageOrganizers($after: String, $keyword: String) {
+  organizers(first: 10, after: $after, keyword: $keyword) {
+    edges {
+      node {
+        ...AdminOrganizersPageOrganizer
+      }
+      cursor
     }
-    paging {
-      ...paging
+    pageInfo {
+      ...Pagination
     }
   }
 }
     ${AdminOrganizersPageOrganizerFragmentDoc}
-${PagingFragmentDoc}`;
+${PaginationFragmentDoc}`;
 
 /**
  * __useAdminOrganizersPageOrganizersQuery__
@@ -5929,7 +6050,7 @@ ${PagingFragmentDoc}`;
  * @example
  * const { data, loading, error } = useAdminOrganizersPageOrganizersQuery({
  *   variables: {
- *      page: // value for 'page'
+ *      after: // value for 'after'
  *      keyword: // value for 'keyword'
  *   },
  * });
@@ -6207,13 +6328,13 @@ export const AdminBattlesPageDocument = gql`
       name
     }
   }
-  players(per: 500) {
-    records {
+  players(first: 500) {
+    nodes {
       ...PlayerSelectOption
     }
   }
-  characters {
-    records {
+  characters(first: 100) {
+    nodes {
       ...CharacterSelectOption
     }
   }
@@ -6250,8 +6371,8 @@ export type AdminBattlesPageLazyQueryHookResult = ReturnType<typeof useAdminBatt
 export type AdminBattlesPageQueryResult = Apollo.QueryResult<AdminBattlesPageQuery, AdminBattlesPageQueryVariables>;
 export const AdminBattlesPageBattlesDocument = gql`
     query AdminBattlesPageBattles($tournamentVideoId: ID!) {
-  battles(tournamentVideoId: $tournamentVideoId, per: 200) {
-    records {
+  battles(tournamentVideoId: $tournamentVideoId, first: 200) {
+    nodes {
       ...AdminBattlesPageBattleReslut
     }
   }
@@ -6451,8 +6572,8 @@ export const AdminTournamentPageDocument = gql`
       youtubeVideoId
     }
   }
-  players(per: 500) {
-    records {
+  players(first: 500) {
+    nodes {
       ...PlayerSelectOption
     }
   }
@@ -6488,8 +6609,8 @@ export type AdminTournamentPageLazyQueryHookResult = ReturnType<typeof useAdminT
 export type AdminTournamentPageQueryResult = Apollo.QueryResult<AdminTournamentPageQuery, AdminTournamentPageQueryVariables>;
 export const AdminTournamentPageStandingsDocument = gql`
     query AdminTournamentPageStandings($tournamentId: ID!) {
-  standings(tournamentId: $tournamentId, per: 100) {
-    records {
+  standings(tournamentId: $tournamentId, first: 100) {
+    nodes {
       id
       place
       player {
@@ -6532,7 +6653,7 @@ export type AdminTournamentPageStandingsQueryResult = Apollo.QueryResult<AdminTo
 export const AdminTournamentPageVideosDocument = gql`
     query AdminTournamentPageVideos($tournamentId: ID!) {
   tournamentVideos(tournamentId: $tournamentId) {
-    records {
+    nodes {
       id
       title
       thumbnailUrl
@@ -6751,18 +6872,21 @@ export type CreateTournamentMutationHookResult = ReturnType<typeof useCreateTour
 export type CreateTournamentMutationResult = Apollo.MutationResult<CreateTournamentMutation>;
 export type CreateTournamentMutationOptions = Apollo.BaseMutationOptions<CreateTournamentMutation, CreateTournamentMutationVariables>;
 export const ArticlesPageDocument = gql`
-    query ArticlesPage($page: Int) {
-  articles(page: $page, per: 12) {
-    records {
-      ...ArticleCard
+    query ArticlesPage($after: String) {
+  articles(first: 12, after: $after) {
+    edges {
+      node {
+        ...ArticleCard
+      }
+      cursor
     }
-    paging {
-      ...paging
+    pageInfo {
+      ...Pagination
     }
   }
 }
     ${ArticleCardFragmentDoc}
-${PagingFragmentDoc}`;
+${PaginationFragmentDoc}`;
 
 /**
  * __useArticlesPageQuery__
@@ -6776,7 +6900,7 @@ ${PagingFragmentDoc}`;
  * @example
  * const { data, loading, error } = useArticlesPageQuery({
  *   variables: {
- *      page: // value for 'page'
+ *      after: // value for 'after'
  *   },
  * });
  */
@@ -6828,8 +6952,8 @@ export type ArticlePageLazyQueryHookResult = ReturnType<typeof useArticlePageLaz
 export type ArticlePageQueryResult = Apollo.QueryResult<ArticlePageQuery, ArticlePageQueryVariables>;
 export const CharactersPageDocument = gql`
     query CharactersPage {
-  characters {
-    records {
+  characters(first: 100) {
+    nodes {
       ...CharacterCard
     }
   }
@@ -6871,8 +6995,8 @@ export const CharacterPageDocument = gql`
     story
     description
   }
-  battleCounts(characterSlug: $characterSlug, per: 10) {
-    records {
+  battleCounts(characterSlug: $characterSlug, first: 10) {
+    nodes {
       ...PlayerBattleCountChip
     }
   }
@@ -7270,18 +7394,21 @@ export type DashboardArticlesPageDeleteMutationHookResult = ReturnType<typeof us
 export type DashboardArticlesPageDeleteMutationResult = Apollo.MutationResult<DashboardArticlesPageDeleteMutation>;
 export type DashboardArticlesPageDeleteMutationOptions = Apollo.BaseMutationOptions<DashboardArticlesPageDeleteMutation, DashboardArticlesPageDeleteMutationVariables>;
 export const DashboardArticlesPageDocument = gql`
-    query DashboardArticlesPage($page: Int = 1, $keyword: String) {
-  myArticles(page: $page, per: 10, keyword: $keyword) {
-    records {
-      ...DashboardArticlesPageArticle
+    query DashboardArticlesPage($after: String, $keyword: String) {
+  myArticles(first: 10, after: $after, keyword: $keyword) {
+    edges {
+      node {
+        ...DashboardArticlesPageArticle
+      }
+      cursor
     }
-    paging {
-      ...paging
+    pageInfo {
+      ...Pagination
     }
   }
 }
     ${DashboardArticlesPageArticleFragmentDoc}
-${PagingFragmentDoc}`;
+${PaginationFragmentDoc}`;
 
 /**
  * __useDashboardArticlesPageQuery__
@@ -7295,7 +7422,7 @@ ${PagingFragmentDoc}`;
  * @example
  * const { data, loading, error } = useDashboardArticlesPageQuery({
  *   variables: {
- *      page: // value for 'page'
+ *      after: // value for 'after'
  *      keyword: // value for 'keyword'
  *   },
  * });
@@ -7383,23 +7510,23 @@ export type UpdateCurrentUserMutationResult = Apollo.MutationResult<UpdateCurren
 export type UpdateCurrentUserMutationOptions = Apollo.BaseMutationOptions<UpdateCurrentUserMutation, UpdateCurrentUserMutationVariables>;
 export const TopPageDocument = gql`
     query TopPage {
-  tournaments(thisWeek: true, first: 3) {
+  tournaments(first: 3, thisWeek: true) {
     nodes {
       ...TournamentCard
     }
   }
-  players(per: 4) {
-    records {
+  players(first: 4) {
+    nodes {
       ...PlayerCard
     }
   }
-  characters(order: use_rate, per: 4) {
-    records {
+  characters(first: 4, order: use_rate) {
+    nodes {
       ...CharacterCard
     }
   }
-  articles(per: 3) {
-    records {
+  articles(first: 3) {
+    nodes {
       ...ArticleCard
     }
   }
@@ -7436,18 +7563,21 @@ export type TopPageQueryHookResult = ReturnType<typeof useTopPageQuery>;
 export type TopPageLazyQueryHookResult = ReturnType<typeof useTopPageLazyQuery>;
 export type TopPageQueryResult = Apollo.QueryResult<TopPageQuery, TopPageQueryVariables>;
 export const PlayersPageDocument = gql`
-    query PlayersPage($page: Int, $keyword: String) {
-  players(page: $page, per: 20, keyword: $keyword) {
-    records {
-      ...PlayerCard
+    query PlayersPage($after: String, $keyword: String) {
+  players(first: 20, after: $after, keyword: $keyword) {
+    edges {
+      node {
+        ...PlayerCard
+      }
+      cursor
     }
-    paging {
-      ...paging
+    pageInfo {
+      ...Pagination
     }
   }
 }
     ${PlayerCardFragmentDoc}
-${PagingFragmentDoc}`;
+${PaginationFragmentDoc}`;
 
 /**
  * __usePlayersPageQuery__
@@ -7461,7 +7591,7 @@ ${PagingFragmentDoc}`;
  * @example
  * const { data, loading, error } = usePlayersPageQuery({
  *   variables: {
- *      page: // value for 'page'
+ *      after: // value for 'after'
  *      keyword: // value for 'keyword'
  *   },
  * });
@@ -7563,12 +7693,15 @@ export const PlayerStandingsPageDocument = gql`
     ...PlayerProfile
     ...PlayerTabs
   }
-  standings(playerSlug: $playerSlug, per: 10) {
-    records {
-      ...PlayerStandingCard
+  standings(playerSlug: $playerSlug, first: 10) {
+    edges {
+      node {
+        ...PlayerStandingCard
+      }
+      cursor
     }
-    paging {
-      ...paging
+    pageInfo {
+      ...Pagination
     }
   }
 }
@@ -7576,7 +7709,7 @@ export const PlayerStandingsPageDocument = gql`
 ${PlayerProfileFragmentDoc}
 ${PlayerTabsFragmentDoc}
 ${PlayerStandingCardFragmentDoc}
-${PagingFragmentDoc}`;
+${PaginationFragmentDoc}`;
 
 /**
  * __usePlayerStandingsPageQuery__
@@ -7606,18 +7739,21 @@ export type PlayerStandingsPageQueryHookResult = ReturnType<typeof usePlayerStan
 export type PlayerStandingsPageLazyQueryHookResult = ReturnType<typeof usePlayerStandingsPageLazyQuery>;
 export type PlayerStandingsPageQueryResult = Apollo.QueryResult<PlayerStandingsPageQuery, PlayerStandingsPageQueryVariables>;
 export const PlayerStandingsPageStandingsDocument = gql`
-    query PlayerStandingsPageStandings($playerSlug: String!, $page: Int!) {
-  standings(playerSlug: $playerSlug, page: $page, per: 10) {
-    records {
-      ...PlayerStandingCard
+    query PlayerStandingsPageStandings($playerSlug: String!, $after: String) {
+  standings(playerSlug: $playerSlug, after: $after, first: 10) {
+    edges {
+      node {
+        ...PlayerStandingCard
+      }
+      cursor
     }
-    paging {
-      ...paging
+    pageInfo {
+      ...Pagination
     }
   }
 }
     ${PlayerStandingCardFragmentDoc}
-${PagingFragmentDoc}`;
+${PaginationFragmentDoc}`;
 
 /**
  * __usePlayerStandingsPageStandingsQuery__
@@ -7632,7 +7768,7 @@ ${PagingFragmentDoc}`;
  * const { data, loading, error } = usePlayerStandingsPageStandingsQuery({
  *   variables: {
  *      playerSlug: // value for 'playerSlug'
- *      page: // value for 'page'
+ *      after: // value for 'after'
  *   },
  * });
  */

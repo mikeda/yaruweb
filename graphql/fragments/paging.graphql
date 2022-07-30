@@ -1,6 +1,0 @@
-fragment paging on Paging {
-  currentPage
-  totalCount
-  totalPages
-  hasNext
-}

@@ -5,15 +5,23 @@ query PlayerStandingsPage($playerSlug: String!) {
     ...PlayerTabs
   }
 
-  standings(playerSlug: $playerSlug, per: 10) {
-    records { ...PlayerStandingCard }
-    paging { ...paging }
+  standings(playerSlug: $playerSlug, first: 10) {
+    edges {
+      node { ...PlayerStandingCard }
+      cursor
+    }
+
+    pageInfo { ...Pagination }
   }
 }
 
-query PlayerStandingsPageStandings($playerSlug: String!, $page: Int!) {
-  standings(playerSlug: $playerSlug, page: $page, per: 10) {
-    records { ...PlayerStandingCard }
-    paging { ...paging }
+query PlayerStandingsPageStandings($playerSlug: String!, $after: String) {
+  standings(playerSlug: $playerSlug, after: $after, first: 10) {
+    edges {
+      node { ...PlayerStandingCard }
+      cursor
+    }
+
+    pageInfo { ...Pagination }
   }
 }

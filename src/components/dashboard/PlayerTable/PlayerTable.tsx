@@ -22,7 +22,7 @@ export const PlayerTable: React.FC = () => {
       updateQuery(prev => ({
         players: {
           ...prev.players,
-          records: prev.players.records.filter(t => t.id !== player.id),
+          edges: prev.players.edges.filter(edge => edge.node.id !== player.id),
         },
       }));
       toast.success('プレイヤーを削除しました。');
@@ -31,28 +31,17 @@ export const PlayerTable: React.FC = () => {
 
   const setLoading = useSetRecoilState(loadingState);
   const onClickSearch = useCallback((keyword: string) => {
-    refetch({ page: 1, keyword });
+    refetch({ keyword });
   }, []);
 
   setLoading(loading || deleteLoading);
 
   if (!data) return null;
-  const { records: players, paging } = data.players;
+  const players = data.players.edges.map(edge => edge.node);
+  const pageInfo = data.players.pageInfo;
 
   const onClickMore = () => {
-    fetchMore({
-      variables: { page: paging.currentPage + 1 },
-      updateQuery: (prev, { fetchMoreResult: data }) => {
-        if (!data) return prev;
-
-        return {
-          players: {
-            ...data.players,
-            records: [...prev.players.records, ...data.players.records],
-          },
-        };
-      },
-    });
+    fetchMore({ variables: { after: pageInfo.endCursor } });
   };
 
   return (
@@ -73,7 +62,7 @@ export const PlayerTable: React.FC = () => {
         ))}
       </DashboardTable>
 
-      {paging?.hasNext && <DashboardTablePaging onClick={onClickMore} />}
+      {pageInfo.hasNextPage && <DashboardTablePaging onClick={onClickMore} />}
     </>
   );
 };

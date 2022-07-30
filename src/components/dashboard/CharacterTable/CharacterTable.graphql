@@ -8,9 +8,7 @@ fragment CharacterTableRow on Character {
 }
 
 query CharacterTableRows($keyword: String) {
-  characters(keyword: $keyword) {
-    records {
-      ...CharacterTableRow
-    }
+  characters(first: 100, keyword: $keyword) {
+    nodes { ...CharacterTableRow }
   }
 }

@@ -1,7 +1,5 @@
 query CharacterPaths {
-  characters {
-    records {
-      slug
-    }
+  characters(first: 100) {
+    nodes { slug }
   }
 }

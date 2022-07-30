@@ -35,6 +35,7 @@ export const apolloClient = new ApolloClient({
     typePolicies: {
       Query: {
         fields: {
+          battles: relayStylePagination(),
           tournaments: relayStylePagination(),
         },
       },
