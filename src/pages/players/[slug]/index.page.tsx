@@ -11,9 +11,8 @@ import {
   PlayerPageDocument,
   PlayerPageQuery,
   PlayerPageQueryVariables,
-  PlayerSlugsDocument,
-  PlayerSlugsQuery,
-  PlayerSlugsQueryVariables,
+  SsgPlayerPathsDocument,
+  SsgPlayerPathsQuery,
 } from '@/generated/graphql';
 import { fetchGraphql, theme } from '@/lib';
 
@@ -63,8 +62,7 @@ export const getStaticProps: GetStaticProps<PlayerPageQuery, Params> = async ({ 
 };
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
-  const variables: PlayerSlugsQueryVariables = { first: 50 };
-  const data: PlayerSlugsQuery = await fetchGraphql(PlayerSlugsDocument, variables);
+  const data: SsgPlayerPathsQuery = await fetchGraphql(SsgPlayerPathsDocument);
 
   return {
     paths: data.players.nodes.map(({ slug }) => ({ params: { slug } })),

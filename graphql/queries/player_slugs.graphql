@@ -1,5 +1,0 @@
-query PlayerSlugs($first: Int) {
-  players(first: $first) {
-    nodes { slug }
-  }
-}

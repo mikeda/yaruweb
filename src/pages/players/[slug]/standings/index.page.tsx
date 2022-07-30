@@ -8,12 +8,11 @@ import { useSetRecoilState } from 'recoil';
 
 import { Head, Content, Breadcrumbs, PlayerStandingCard, PlayerProfile, PlayerTabs } from '@/components';
 import {
-  PlayerSlugsDocument,
-  PlayerSlugsQuery,
-  PlayerSlugsQueryVariables,
   PlayerStandingsPageDocument,
   PlayerStandingsPageQuery,
   PlayerStandingsPageQueryVariables,
+  SsgPlayerPathsDocument,
+  SsgPlayerPathsQuery,
   usePlayerStandingCardsQuery,
 } from '@/generated/graphql';
 import { fetchGraphql, handleApolloError, loadingState } from '@/lib';
@@ -81,8 +80,7 @@ export const getStaticProps: GetStaticProps<PlayerStandingsPageQuery, Params> = 
 };
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
-  const variables: PlayerSlugsQueryVariables = { first: 50 };
-  const data: PlayerSlugsQuery = await fetchGraphql(PlayerSlugsDocument, variables);
+  const data: SsgPlayerPathsQuery = await fetchGraphql(SsgPlayerPathsDocument);
 
   return {
     paths: data.players.nodes.map(({ slug }) => ({ params: { slug } })),

@@ -7,11 +7,11 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 
 import { Breadcrumbs, Content, Head, TournamentTabs, BattleList } from '@/components';
 import {
+  SsgTournamentPathsDocument,
+  SsgTournamentPathsQuery,
   TournamentBattlesPageDocument,
   TournamentBattlesPageQuery,
   TournamentBattlesPageQueryVariables,
-  TournamentPathsDocument,
-  TournamentPathsQuery,
 } from '@/generated/graphql';
 import { fetchGraphql } from '@/lib';
 
@@ -42,9 +42,9 @@ export const getStaticProps: GetStaticProps<TournamentBattlesPageQuery, Params> 
 };
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
-  const data: TournamentPathsQuery = await fetchGraphql(TournamentPathsDocument);
+  const data: SsgTournamentPathsQuery = await fetchGraphql(SsgTournamentPathsDocument);
 
-  const paths = data.allTournaments.map(({ id }) => ({ params: { id } }));
+  const paths = data.tournaments.nodes.map(({ id }) => ({ params: { id } }));
 
   return { paths, fallback: 'blocking' };
 };

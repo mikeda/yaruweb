@@ -1,0 +1,5 @@
+query SsgTournamentPaths {
+  tournaments(first: 50) {
+    nodes { id }
+  }
+}

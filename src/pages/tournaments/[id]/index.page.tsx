@@ -23,11 +23,11 @@ import Link from 'next/link';
 import { NotFound, Content, Head, Breadcrumbs, TournamentTabs } from '@/components';
 import { pagesPath } from '@/generated/$path';
 import {
+  SsgTournamentPathsDocument,
+  SsgTournamentPathsQuery,
   TournamentPageDocument,
   TournamentPageQuery,
   TournamentPageQueryVariables,
-  TournamentPathsDocument,
-  TournamentPathsQuery,
 } from '@/generated/graphql';
 import { dayjs, fetchGraphql, DEFAULT_AVATAR_URL, NO_IMAGE_URL, placeIconUrl } from '@/lib';
 
@@ -138,9 +138,9 @@ export const getStaticProps: GetStaticProps<TournamentPageQuery, Params> = async
 };
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
-  const data: TournamentPathsQuery = await fetchGraphql(TournamentPathsDocument);
+  const data: SsgTournamentPathsQuery = await fetchGraphql(SsgTournamentPathsDocument);
 
-  const paths = data.allTournaments.map(({ id }) => ({ params: { id } }));
+  const paths = data.tournaments.nodes.map(({ id }) => ({ params: { id } }));
 
   return { paths, fallback: 'blocking' };
 };

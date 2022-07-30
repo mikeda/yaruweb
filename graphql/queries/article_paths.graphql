@@ -1,5 +1,0 @@
-query ArticlePaths {
-  allArticles {
-    id
-  }
-}

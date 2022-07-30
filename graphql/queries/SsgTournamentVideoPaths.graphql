@@ -1,0 +1,5 @@
+query SsgTournamentVideoPaths {
+  tournamentVideos(first: 50) {
+    nodes { id }
+  }
+}

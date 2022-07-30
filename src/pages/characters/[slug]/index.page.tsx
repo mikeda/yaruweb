@@ -8,8 +8,8 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 
 import { Breadcrumbs, Content, Head, CharacterProfile, CharacterTabs } from '@/components';
 import {
-  CharacterPathsDocument,
-  CharacterPathsQuery,
+  SsgCharacterPathsDocument,
+  SsgCharacterPathsQuery,
   CharacterPageDocument,
   CharacterPageQuery,
   CharacterPageQueryVariables,
@@ -72,7 +72,7 @@ export const getStaticProps: GetStaticProps<CharacterPageQuery, Params> = async 
 };
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
-  const data: CharacterPathsQuery = await fetchGraphql(CharacterPathsDocument);
+  const data: SsgCharacterPathsQuery = await fetchGraphql(SsgCharacterPathsDocument);
 
   const paths = data.characters.nodes.map(({ slug }) => ({ params: { slug } }));
 
