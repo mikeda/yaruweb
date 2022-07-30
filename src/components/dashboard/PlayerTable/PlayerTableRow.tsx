@@ -29,7 +29,7 @@ export const PlayerTableRow: React.FC<Props> = ({ player, onClickDelete }) => {
       <TableCell align="right" scope="row">
         <Button
           variant="outlined"
-          href={resolveUrlObject(router, pagesPath.admin.players._slug(player.slug).edit.$url())}
+          href={resolveUrlObject(router, pagesPath.dashboard.players._slug(player.slug).edit.$url())}
         >
           編集
         </Button>

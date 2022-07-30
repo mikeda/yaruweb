@@ -2,14 +2,15 @@ import React, { ReactElement } from 'react';
 
 import { UrlObject } from 'url';
 
-import { Person, LibraryBooks } from '@mui/icons-material';
+import { Person, LibraryBooks, EmojiEvents, TagFaces, People } from '@mui/icons-material';
 import { Divider, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
 
 import { Link } from '@/components';
 import { pagesPath } from '@/generated/$path';
-import { theme } from '@/lib';
+import { UserRole } from '@/generated/graphql';
+import { theme, useCurrentUser } from '@/lib';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -37,18 +38,60 @@ const items: ItemProps[] = [
   { key: 'article', label: '記事', link: pagesPath.dashboard.articles.$url(), icon: <LibraryBooks /> },
 ];
 
+const adminItems: ItemProps[] = [
+  {
+    key: 'tournament',
+    label: '大会',
+    link: pagesPath.dashboard.tournaments.$url(),
+    icon: <EmojiEvents />,
+  },
+  {
+    key: 'player',
+    label: 'プレイヤー',
+    link: pagesPath.dashboard.players.$url(),
+    icon: <People />,
+  },
+  {
+    key: 'organizer',
+    label: 'オーガナイザー',
+    link: pagesPath.dashboard.organizers.$url(),
+    icon: <People />,
+  },
+  {
+    key: 'character',
+    label: 'キャラクター',
+    link: pagesPath.dashboard.characters.$url(),
+    icon: <TagFaces />,
+  },
+];
+
 export const DrawerItems: React.FC = () => {
   const classes = useStyles();
+  const { currentUser } = useCurrentUser();
 
   return (
     <div>
       <div className={classes.toolbar} />
+
       <Divider />
+
       <List>
         {items.map(item => (
           <Item key={item.key} item={item} />
         ))}
       </List>
+
+      {currentUser?.role === UserRole.Admin && (
+        <>
+          <Divider />
+
+          <List>
+            {adminItems.map(item => (
+              <Item key={item.key} item={item} />
+            ))}
+          </List>
+        </>
+      )}
     </div>
   );
 };

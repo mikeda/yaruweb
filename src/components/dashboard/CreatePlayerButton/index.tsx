@@ -30,7 +30,7 @@ export const CreatePlayerButton: React.FC = () => {
       <Menu anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
         <MenuItem
           onClick={() => {
-            router.push(pagesPath.admin.players.new.$url());
+            router.push(pagesPath.dashboard.players.new.$url());
           }}
         >
           フォームで登録
