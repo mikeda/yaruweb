@@ -23,7 +23,7 @@ import Link from 'next/link';
 import { NotFound, Content, Head, Breadcrumbs, TournamentTabs } from '@/components';
 import { pagesPath } from '@/generated/$path';
 import {
-  SsgArticlePathsDocument,
+  SsgTournamentPathsDocument,
   SsgTournamentPathsQuery,
   TournamentPageDocument,
   TournamentPageQuery,
@@ -138,7 +138,7 @@ export const getStaticProps: GetStaticProps<TournamentPageQuery, Params> = async
 };
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
-  const data: SsgTournamentPathsQuery = await fetchGraphql(SsgArticlePathsDocument);
+  const data: SsgTournamentPathsQuery = await fetchGraphql(SsgTournamentPathsDocument);
 
   const paths = data.tournaments.nodes.map(({ id }) => ({ params: { id } }));
 
