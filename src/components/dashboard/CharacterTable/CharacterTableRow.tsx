@@ -29,7 +29,7 @@ export const CharacterTableRow = ({ character }: Props) => {
       <TableCell align="right" scope="row">
         <Button
           variant="outlined"
-          href={resolveUrlObject(router, pagesPath.admin.characters._slug(character.slug).edit.$url())}
+          href={resolveUrlObject(router, pagesPath.dashboard.characters._slug(character.slug).edit.$url())}
         >
           編集
         </Button>
@@ -39,13 +39,13 @@ export const CharacterTableRow = ({ character }: Props) => {
             {
               label: 'コマンド登録',
               onClick: () => {
-                router.push(pagesPath.admin.characters._slug(character.slug).moves.$url());
+                router.push(pagesPath.dashboard.characters._slug(character.slug).moves.$url());
               },
             },
             {
               label: 'コンボ登録',
               onClick: () => {
-                router.push(pagesPath.admin.characters._slug(character.slug).combos.$url());
+                router.push(pagesPath.dashboard.characters._slug(character.slug).combos.$url());
               },
             },
           ]}

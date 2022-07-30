@@ -34,7 +34,7 @@ export const TournamentTableRow = ({ tournament, onClickDelete }: Props) => {
       <TableCell align="right" scope="row">
         <Button
           variant="outlined"
-          href={resolveUrlObject(router, pagesPath.admin.tournaments._id(tournament.id).edit.$url())}
+          href={resolveUrlObject(router, pagesPath.dashboard.tournaments._id(tournament.id).edit.$url())}
         >
           編集
         </Button>
@@ -44,7 +44,7 @@ export const TournamentTableRow = ({ tournament, onClickDelete }: Props) => {
             {
               label: '結果・動画を登録',
               onClick: () => {
-                router.push(pagesPath.admin.tournaments._id(tournament.id).$url());
+                router.push(pagesPath.dashboard.tournaments._id(tournament.id).$url());
               },
             },
             {

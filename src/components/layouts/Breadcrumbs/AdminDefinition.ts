@@ -30,7 +30,7 @@ export type AdminBreadcrumbParams =
 export const breadcrumbChain = (props: AdminBreadcrumbParams): BreadcrumbChainItem => {
   switch (props.to) {
     case 'characters':
-      return { name: 'キャラクター', url: pagesPath.admin.characters.$url() };
+      return { name: 'キャラクター', url: pagesPath.dashboard.characters.$url() };
     case 'character':
       return { name: props.character.name, parent: breadcrumbChain({ to: 'characters' }) };
     case 'charactersNew':
@@ -40,17 +40,17 @@ export const breadcrumbChain = (props: AdminBreadcrumbParams): BreadcrumbChainIt
     case 'combos':
       return {
         name: 'コンボ',
-        url: pagesPath.admin.characters._slug(props.character.slug).combos.$url(),
+        url: pagesPath.dashboard.characters._slug(props.character.slug).combos.$url(),
         parent: breadcrumbChain({ to: 'character', character: props.character }),
       };
     case 'moves':
       return {
         name: 'コマンドリスト',
-        url: pagesPath.admin.characters._slug(props.character.slug).moves.$url(),
+        url: pagesPath.dashboard.characters._slug(props.character.slug).moves.$url(),
         parent: breadcrumbChain({ to: 'character', character: props.character }),
       };
     case 'organizers':
-      return { name: 'オーガナイザー', url: pagesPath.admin.organizers.$url() };
+      return { name: 'オーガナイザー', url: pagesPath.dashboard.organizers.$url() };
     case 'organizer':
       return { name: props.organizer.name, parent: breadcrumbChain({ to: 'organizers' }) };
     case 'organizersNew':
@@ -58,7 +58,7 @@ export const breadcrumbChain = (props: AdminBreadcrumbParams): BreadcrumbChainIt
     case 'organizerEdit':
       return { name: 'オーガナイザーを編集', parent: breadcrumbChain({ to: 'organizer', organizer: props.organizer }) };
     case 'players':
-      return { name: 'プレイヤー', url: pagesPath.admin.players.$url() };
+      return { name: 'プレイヤー', url: pagesPath.dashboard.players.$url() };
     case 'player':
       return { name: props.player.name, parent: breadcrumbChain({ to: 'players' }) };
     case 'playersNew':
@@ -66,11 +66,11 @@ export const breadcrumbChain = (props: AdminBreadcrumbParams): BreadcrumbChainIt
     case 'playerEdit':
       return { name: 'プレイヤーを編集', parent: breadcrumbChain({ to: 'player', player: props.player }) };
     case 'tournaments':
-      return { name: '大会', url: pagesPath.admin.tournaments.$url() };
+      return { name: '大会', url: pagesPath.dashboard.tournaments.$url() };
     case 'tournament':
       return {
         name: props.tournament.name,
-        url: pagesPath.admin.tournaments._id(props.tournament.id).$url(),
+        url: pagesPath.dashboard.tournaments._id(props.tournament.id).$url(),
         parent: breadcrumbChain({ to: 'tournaments' }),
       };
     case 'tournamentsNew':
@@ -80,7 +80,7 @@ export const breadcrumbChain = (props: AdminBreadcrumbParams): BreadcrumbChainIt
     case 'battles':
       return {
         name: '対戦',
-        url: pagesPath.admin.tournament_videos._id(props.tournamentVideo.id).battles.$url(),
+        url: pagesPath.dashboard.tournament_videos._id(props.tournamentVideo.id).battles.$url(),
         parent: breadcrumbChain({ to: 'tournamentVideo', tournamentVideo: props.tournamentVideo }),
       };
     case 'tournamentVideo':

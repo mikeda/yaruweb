@@ -27,7 +27,7 @@ export const PlayerFormSmashgg: React.FC<Props> = ({ open, onClose }) => {
   const router = useRouter();
   const [createFromSmashgg] = useCreatePlayerFromSmashggMutation({
     onCompleted: () => {
-      router.push(pagesPath.admin.players.$url());
+      router.push(pagesPath.dashboard.players.$url());
       onClose();
     },
     onError: e => toast.error(e.message),
