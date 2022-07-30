@@ -1,10 +1,5 @@
-query PlayersPage($after: String, $keyword: String) {
-  players(first: 20, after: $after, keyword: $keyword) {
-    edges {
-      node { ...PlayerCard }
-      cursor
-    }
-
-    pageInfo { ...Pagination }
+query PlayersPage {
+  players(first: 20) {
+    nodes { ...PlayerCard }
   }
 }

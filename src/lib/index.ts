@@ -9,3 +9,4 @@ export * from './domains';
 export * from './firebase';
 export * from './fetchGraphql';
 export * from './gtag';
+export * from './handleApolloError';

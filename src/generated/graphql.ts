@@ -2296,6 +2296,14 @@ export type MoveMediaFragment = { __typename?: 'Move', id: string, name: string,
 
 export type PlayerCardFragment = { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null, standingsCount: number, battlesCount: number };
 
+export type PlayerCardsQueryVariables = Exact<{
+  after?: InputMaybe<Scalars['String']>;
+  keyword?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type PlayerCardsQuery = { __typename?: 'Query', players: { __typename?: 'PlayerConnection', edges: Array<{ __typename?: 'PlayerEdge', cursor: string, node: { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null, standingsCount: number, battlesCount: number } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null } } };
+
 export type PlayerProfileFragment = { __typename?: 'Player', id: string, name: string, slug: string, avatarUrl?: string | null, twitterId?: string | null, streamingUrl?: string | null };
 
 export type PlayerStandingCardFragment = { __typename?: 'Standing', id: string, place: number, tournament: { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: string | null, startsAt: string } };
@@ -2993,13 +3001,10 @@ export type TopPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type TopPageQuery = { __typename?: 'Query', tournaments: { __typename?: 'TournamentConnection', nodes: Array<{ __typename?: 'Tournament', id: string, name: string, mainImageUrl?: string | null, startsAt: string, videosCount: number, standings: Array<{ __typename?: 'Standing', id: string, place: number, player: { __typename?: 'Player', id: string, name: string } }> }> }, players: { __typename?: 'PlayerConnection', nodes: Array<{ __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null, standingsCount: number, battlesCount: number }> }, characters: { __typename?: 'CharacterConnection', nodes: Array<{ __typename?: 'Character', slug: string, name: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number }> }, articles: { __typename?: 'ArticleConnection', nodes: Array<{ __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, author: { __typename?: 'User', name: string, avatarUrl: string } }> } };
 
-export type PlayersPageQueryVariables = Exact<{
-  after?: InputMaybe<Scalars['String']>;
-  keyword?: InputMaybe<Scalars['String']>;
-}>;
+export type PlayersPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type PlayersPageQuery = { __typename?: 'Query', players: { __typename?: 'PlayerConnection', edges: Array<{ __typename?: 'PlayerEdge', cursor: string, node: { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null, standingsCount: number, battlesCount: number } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null } } };
+export type PlayersPageQuery = { __typename?: 'Query', players: { __typename?: 'PlayerConnection', nodes: Array<{ __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null, standingsCount: number, battlesCount: number }> } };
 
 export type PlayerPageQueryVariables = Exact<{
   playerSlug: Scalars['String'];
@@ -4291,6 +4296,51 @@ export function useBattleListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions
 export type BattleListQueryHookResult = ReturnType<typeof useBattleListQuery>;
 export type BattleListLazyQueryHookResult = ReturnType<typeof useBattleListLazyQuery>;
 export type BattleListQueryResult = Apollo.QueryResult<BattleListQuery, BattleListQueryVariables>;
+export const PlayerCardsDocument = gql`
+    query PlayerCards($after: String, $keyword: String) {
+  players(first: 20, after: $after, keyword: $keyword) {
+    edges {
+      node {
+        ...PlayerCard
+      }
+      cursor
+    }
+    pageInfo {
+      ...Pagination
+    }
+  }
+}
+    ${PlayerCardFragmentDoc}
+${PaginationFragmentDoc}`;
+
+/**
+ * __usePlayerCardsQuery__
+ *
+ * To run a query within a React component, call `usePlayerCardsQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePlayerCardsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePlayerCardsQuery({
+ *   variables: {
+ *      after: // value for 'after'
+ *      keyword: // value for 'keyword'
+ *   },
+ * });
+ */
+export function usePlayerCardsQuery(baseOptions?: Apollo.QueryHookOptions<PlayerCardsQuery, PlayerCardsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PlayerCardsQuery, PlayerCardsQueryVariables>(PlayerCardsDocument, options);
+      }
+export function usePlayerCardsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PlayerCardsQuery, PlayerCardsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PlayerCardsQuery, PlayerCardsQueryVariables>(PlayerCardsDocument, options);
+        }
+export type PlayerCardsQueryHookResult = ReturnType<typeof usePlayerCardsQuery>;
+export type PlayerCardsLazyQueryHookResult = ReturnType<typeof usePlayerCardsLazyQuery>;
+export type PlayerCardsQueryResult = Apollo.QueryResult<PlayerCardsQuery, PlayerCardsQueryVariables>;
 export const TournamentCardsDocument = gql`
     query TournamentCards($after: String, $keyword: String) {
   tournaments(first: 12, after: $after, keyword: $keyword) {
@@ -7563,21 +7613,14 @@ export type TopPageQueryHookResult = ReturnType<typeof useTopPageQuery>;
 export type TopPageLazyQueryHookResult = ReturnType<typeof useTopPageLazyQuery>;
 export type TopPageQueryResult = Apollo.QueryResult<TopPageQuery, TopPageQueryVariables>;
 export const PlayersPageDocument = gql`
-    query PlayersPage($after: String, $keyword: String) {
-  players(first: 20, after: $after, keyword: $keyword) {
-    edges {
-      node {
-        ...PlayerCard
-      }
-      cursor
-    }
-    pageInfo {
-      ...Pagination
+    query PlayersPage {
+  players(first: 20) {
+    nodes {
+      ...PlayerCard
     }
   }
 }
-    ${PlayerCardFragmentDoc}
-${PaginationFragmentDoc}`;
+    ${PlayerCardFragmentDoc}`;
 
 /**
  * __usePlayersPageQuery__
@@ -7591,8 +7634,6 @@ ${PaginationFragmentDoc}`;
  * @example
  * const { data, loading, error } = usePlayersPageQuery({
  *   variables: {
- *      after: // value for 'after'
- *      keyword: // value for 'keyword'
  *   },
  * });
  */

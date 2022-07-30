@@ -2,7 +2,6 @@ import React from 'react';
 
 import { Box, Button, Grid } from '@mui/material';
 import { GetStaticProps } from 'next';
-import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
 import { Head, Content, Breadcrumbs, TournamentCard } from '@/components';
@@ -12,21 +11,14 @@ import {
   TournamentsPageQuery,
   useTournamentCardsQuery,
 } from '@/generated/graphql';
-import { loadingState, fetchGraphql } from '@/lib';
+import { loadingState, fetchGraphql, handleApolloError } from '@/lib';
 
 const Page: React.FC<TournamentsPageQuery> = ssrData => {
-  const { data, loading, fetchMore } = useTournamentCardsQuery({
-    onError: e => toast.error(e.message),
-  });
+  const { data, loading, fetchMore } = useTournamentCardsQuery({ onError: handleApolloError });
   const setLoading = useSetRecoilState(loadingState);
   setLoading(loading);
 
-  let tournaments: TournamentCardFragment[];
-  if (data) {
-    tournaments = data.tournaments.edges.map(edge => edge.node);
-  } else {
-    tournaments = ssrData.tournaments.nodes;
-  }
+  const tournaments = data ? data.tournaments.edges.map(e => e.node) : ssrData.tournaments.nodes;
   const pageInfo = data?.tournaments.pageInfo;
 
   return (
