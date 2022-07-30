@@ -4,3 +4,9 @@ fragment CurrentUser on CurrentUser {
   role
   avatarUrl
 }
+
+query CurrentUser {
+  currentUser {
+    ...CurrentUser
+  }
+}
