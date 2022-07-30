@@ -1,7 +1,0 @@
-fragment PlayerChip on Player {
-  id
-  slug
-  name
-  avatarUrl
-  battlesCount
-}

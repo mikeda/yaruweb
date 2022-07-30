@@ -21,6 +21,7 @@ Primary.args = {
     status: ArticleStatus.Published,
     mainImageUrl: 'https://d2ybk292wkc2jl.cloudfront.net/site/no_image.jpeg',
     author: {
+      id: '1',
       name: 'ミケダ',
       avatarUrl: 'https://d2ybk292wkc2jl.cloudfront.net/site/no_image.jpeg',
     },

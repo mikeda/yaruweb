@@ -50,3 +50,7 @@ overrides:
       - '*.yaml'
     options:
       parser: yaml
+  - files:
+      - '*.graphql'
+    options:
+      parser: graphql

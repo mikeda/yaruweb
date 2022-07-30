@@ -14,6 +14,7 @@ const Template: ComponentStory<typeof CharacterCard> = args => <CharacterCard {.
 export const Primary = Template.bind({});
 Primary.args = {
   character: {
+    id: '1',
     slug: 'josie',
     name: 'ジョシー',
     faceImageUrl: 'https://d2ybk292wkc2jl.cloudfront.net/uploads/character/face_image/36/Ip3I4Nsgac2Wpg.png',

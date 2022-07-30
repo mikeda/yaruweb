@@ -8,9 +8,10 @@
     "dev:path": "pathpida --output src/generated --ignorePath .gitignore --watch",
     "build": "pathpida --output src/generated --ignorePath .gitignore && next build",
     "test": "jest --watch",
-    "eslint": "npx eslint --ext ts,tsx --max-warnings 0 src",
+    "eslint": "npx eslint --ext ts,tsx,graphql --max-warnings 0 src",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "get-graphql-schema": "get-graphql-schema http://localhost:5000/graphql > schema.graphql"
   },
   "dependencies": {
     "@apollo/client": "^3.6.9",
@@ -59,6 +60,7 @@
     "@graphql-codegen/typescript-operations": "^2.5.2",
     "@graphql-codegen/typescript-react-apollo": "^3.3.2",
     "@graphql-codegen/typescript-resolvers": "^2.7.2",
+    "@graphql-eslint/eslint-plugin": "^3.10.7",
     "@storybook/addon-actions": "^6.5.9",
     "@storybook/addon-essentials": "^6.5.9",
     "@storybook/addon-interactions": "^6.5.9",
@@ -88,6 +90,7 @@
     "eslint-plugin-prettier": "^4.2.1",
     "eslint-plugin-react": "^7.30.1",
     "eslint-plugin-storybook": "^0.6.1",
+    "get-graphql-schema": "^2.1.2",
     "jest": "27.5.1",
     "next-router-mock": "^0.7.4",
     "npm-run-all": "^4.1.5",

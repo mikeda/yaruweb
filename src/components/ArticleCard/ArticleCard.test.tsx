@@ -16,7 +16,7 @@ describe(ArticleCard, () => {
           mainImageUrl: 'https://example.com/main.jpg',
           publishedAt: '2022-05-05T17:04:40+09:00',
           status: ArticleStatus.Published,
-          author: { __typename: 'User', name: '著者', avatarUrl: 'https://example.com/avatar.jpg' },
+          author: { __typename: 'User', id: '1', name: '著者', avatarUrl: 'https://example.com/avatar.jpg' },
         }}
       />,
     );

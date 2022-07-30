@@ -1,41 +1,17 @@
 fragment CharacterBreadcrumbs on Character {
+  id
   slug
   name
 }
 
-fragment ComboCategoryBreadcrumbs on ComboCategory {
-  id
-  name
-
-  character {
-    ...CharacterBreadcrumbs
-  }
-}
-
-fragment MoveCategoryBreadcrumbs on MoveCategory {
-  id
-  name
-
-  character {
-    ...CharacterBreadcrumbs
-  }
-}
-
-fragment MoveBreadcrumbs on Move {
-  id
-  name
-
-  moveCategory {
-    ...MoveCategoryBreadcrumbs
-  }
-}
-
 fragment OrganizerBreadcrumbs on Organizer {
+  id
   slug
   name
 }
 
 fragment PlayerBreadcrumbs on Player {
+  id
   slug
   name
 }

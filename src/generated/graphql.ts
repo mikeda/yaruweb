@@ -13,6 +13,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
+  /** An ISO 8601-encoded datetime */
   ISO8601DateTime: string;
 };
 
@@ -2175,80 +2176,14 @@ export type VideoUpload = {
   url: Scalars['String'];
 };
 
-export type CurrentUserFragment = { __typename?: 'CurrentUser', id: string, name: string, role: UserRole, avatarUrl: string };
-
-export type PaginationFragment = { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null };
-
-export type SsgArticlePathsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type SsgArticlePathsQuery = { __typename?: 'Query', articles: { __typename?: 'ArticleConnection', nodes: Array<{ __typename?: 'Article', id: string }> } };
-
-export type SsgCharacterPathsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type SsgCharacterPathsQuery = { __typename?: 'Query', characters: { __typename?: 'CharacterConnection', nodes: Array<{ __typename?: 'Character', slug: string }> } };
-
-export type SsgPlayerPathsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type SsgPlayerPathsQuery = { __typename?: 'Query', players: { __typename?: 'PlayerConnection', nodes: Array<{ __typename?: 'Player', slug: string }> } };
-
-export type SsgTournamentPathsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type SsgTournamentPathsQuery = { __typename?: 'Query', tournaments: { __typename?: 'TournamentConnection', nodes: Array<{ __typename?: 'Tournament', id: string }> } };
-
-export type SsgTournamentVideoPathsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type SsgTournamentVideoPathsQuery = { __typename?: 'Query', tournamentVideos: { __typename?: 'TournamentVideoConnection', nodes: Array<{ __typename?: 'TournamentVideo', id: string }> } };
-
-export type CharacterSelectOptionFragment = { __typename?: 'Character', id: string, slug: string, name: string };
-
-export type CharacterSelectOptionsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type CharacterSelectOptionsQuery = { __typename?: 'Query', characters: { __typename?: 'CharacterConnection', nodes: Array<{ __typename?: 'Character', id: string, slug: string, name: string }> } };
-
-export type ComboSelectOptionsQueryVariables = Exact<{
-  characterSlug: Scalars['String'];
-}>;
-
-
-export type ComboSelectOptionsQuery = { __typename?: 'Query', comboCategories: Array<{ __typename?: 'ComboCategory', id: string, name: string, combos: Array<{ __typename?: 'Combo', id: string, command: Array<string> }> }> };
-
-export type CountrySelectOptionFragment = { __typename?: 'Country', id: string, name: string, flagEmoji: string };
-
-export type CountrySelectOptionsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type CountrySelectOptionsQuery = { __typename?: 'Query', countries: Array<{ __typename?: 'Country', id: string, name: string, flagEmoji: string }> };
-
-export type CurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type CurrentUserQuery = { __typename?: 'Query', currentUser: { __typename?: 'CurrentUser', id: string, name: string, role: UserRole, avatarUrl: string } };
-
-export type MoveSelectOptionsQueryVariables = Exact<{
-  characterSlug: Scalars['String'];
-}>;
-
-
-export type MoveSelectOptionsQuery = { __typename?: 'Query', moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, moves: Array<{ __typename?: 'Move', id: string, name: string, command: Array<string> }> }> };
-
-export type OrganizerSelectOptionFragment = { __typename?: 'Organizer', id: string, slug: string, name: string };
-
-export type PlayerSelectOptionFragment = { __typename?: 'Player', id: string, slug: string, name: string, tonamelId?: string | null, smashggId?: string | null };
-
-export type ArticleCardFragment = { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, author: { __typename?: 'User', name: string, avatarUrl: string } };
+export type ArticleCardFragment = { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, author: { __typename?: 'User', id: string, name: string, avatarUrl: string } };
 
 export type ArticleCardsQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type ArticleCardsQuery = { __typename?: 'Query', articles: { __typename?: 'ArticleConnection', edges: Array<{ __typename?: 'ArticleEdge', cursor: string, node: { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, author: { __typename?: 'User', name: string, avatarUrl: string } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null } } };
+export type ArticleCardsQuery = { __typename?: 'Query', articles: { __typename?: 'ArticleConnection', edges: Array<{ __typename?: 'ArticleEdge', cursor: string, node: { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, author: { __typename?: 'User', id: string, name: string, avatarUrl: string } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null } } };
 
 export type BattleListQueryVariables = Exact<{
   tournamentId?: InputMaybe<Scalars['ID']>;
@@ -2258,11 +2193,11 @@ export type BattleListQueryVariables = Exact<{
 }>;
 
 
-export type BattleListQuery = { __typename?: 'Query', battles: { __typename?: 'BattleConnection', edges: Array<{ __typename?: 'BattleEdge', cursor: string, node: { __typename?: 'Battle', id: string, round: BattleRound, startSec: number, tournamentVideo: { __typename?: 'TournamentVideo', id: string, youtubeVideoId: string, tournament: { __typename?: 'Tournament', id: string, name: string, startsAt: string } }, sides: Array<{ __typename?: 'BattleSide', rounds: number, player: { __typename?: 'Player', name: string }, character: { __typename?: 'Character', faceImageUrl: string } }> } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null } } };
+export type BattleListQuery = { __typename?: 'Query', battles: { __typename?: 'BattleConnection', edges: Array<{ __typename?: 'BattleEdge', cursor: string, node: { __typename?: 'Battle', id: string, round: BattleRound, startSec: number, tournamentVideo: { __typename?: 'TournamentVideo', id: string, youtubeVideoId: string, tournament: { __typename?: 'Tournament', id: string, name: string, startsAt: string } }, sides: Array<{ __typename?: 'BattleSide', id: string, rounds: number, player: { __typename?: 'Player', id: string, name: string }, character: { __typename?: 'Character', id: string, faceImageUrl: string } }> } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null } } };
 
-export type BattleListItemFragment = { __typename?: 'Battle', id: string, round: BattleRound, startSec: number, tournamentVideo: { __typename?: 'TournamentVideo', id: string, youtubeVideoId: string, tournament: { __typename?: 'Tournament', id: string, name: string, startsAt: string } }, sides: Array<{ __typename?: 'BattleSide', rounds: number, player: { __typename?: 'Player', name: string }, character: { __typename?: 'Character', faceImageUrl: string } }> };
+export type BattleListItemFragment = { __typename?: 'Battle', id: string, round: BattleRound, startSec: number, tournamentVideo: { __typename?: 'TournamentVideo', id: string, youtubeVideoId: string, tournament: { __typename?: 'Tournament', id: string, name: string, startsAt: string } }, sides: Array<{ __typename?: 'BattleSide', id: string, rounds: number, player: { __typename?: 'Player', id: string, name: string }, character: { __typename?: 'Character', id: string, faceImageUrl: string } }> };
 
-export type CharacterCardFragment = { __typename?: 'Character', slug: string, name: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number };
+export type CharacterCardFragment = { __typename?: 'Character', id: string, slug: string, name: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number };
 
 export type CharacterProfileFragment = { __typename?: 'Character', slug: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string };
 
@@ -2320,13 +2255,7 @@ export type PlayerStandingCardsQuery = { __typename?: 'Query', standings: { __ty
 
 export type PlayerTabsFragment = { __typename?: 'Player', slug: string, battlesCount: number, standingsCount: number };
 
-export type CharacterBattleCountChipFragment = { __typename?: 'BattleCount', id: string, count: number, character: { __typename?: 'Character', id: string, slug: string, name: string, faceImageUrl: string } };
-
-export type CharacterChipFragment = { __typename?: 'Character', id: string, slug: string, name: string, faceImageUrl: string, battlesCount: number };
-
 export type PlayerBattleCountChipFragment = { __typename?: 'BattleCount', id: string, count: number, player: { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null } };
-
-export type PlayerChipFragment = { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null, battlesCount: number };
 
 export type TournamentCardFragment = { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: string | null, startsAt: string, videosCount: number, standings: Array<{ __typename?: 'Standing', id: string, place: number, player: { __typename?: 'Player', id: string, name: string } }> };
 
@@ -2399,7 +2328,7 @@ export type DeleteComboMutationVariables = Exact<{
 }>;
 
 
-export type DeleteComboMutation = { __typename?: 'Mutation', deleteCombo?: { __typename?: 'DeleteComboPayload', combo: { __typename?: 'Combo', comboCategory: { __typename?: 'ComboCategory', id: string, combos: Array<{ __typename?: 'Combo', id: string }> } } } | null };
+export type DeleteComboMutation = { __typename?: 'Mutation', deleteCombo?: { __typename?: 'DeleteComboPayload', combo: { __typename?: 'Combo', id: string, comboCategory: { __typename?: 'ComboCategory', id: string, combos: Array<{ __typename?: 'Combo', id: string }> } } } | null };
 
 export type CreateComboVideoMutationVariables = Exact<{
   comboId: Scalars['ID'];
@@ -2492,7 +2421,7 @@ export type DeleteMoveMutationVariables = Exact<{
 }>;
 
 
-export type DeleteMoveMutation = { __typename?: 'Mutation', deleteMove?: { __typename?: 'DeleteMovePayload', move: { __typename?: 'Move', moveCategory: { __typename?: 'MoveCategory', id: string, moves: Array<{ __typename?: 'Move', id: string }> } } } | null };
+export type DeleteMoveMutation = { __typename?: 'Mutation', deleteMove?: { __typename?: 'DeleteMovePayload', move: { __typename?: 'Move', id: string, moveCategory: { __typename?: 'MoveCategory', id: string, moves: Array<{ __typename?: 'Move', id: string }> } } } | null };
 
 export type CreateMoveVideoMutationVariables = Exact<{
   moveId: Scalars['ID'];
@@ -2544,7 +2473,7 @@ export type DeleteTournamentMutation = { __typename?: 'Mutation', deleteTourname
 
 export type ArticleFormArticleFragment = { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, category: ArticleCategory, content: string };
 
-export type CharacterFormFragment = { __typename?: 'Character', name: string, nameKana: string, longName: string, longNameKana: string, slug: string, country: string, fightingStyle: string, story: string, description: string, dlc: boolean };
+export type CharacterFormFragment = { __typename?: 'Character', id: string, name: string, nameKana: string, longName: string, longNameKana: string, slug: string, country: string, fightingStyle: string, story: string, description: string, dlc: boolean };
 
 export type ComboCategoryFormFragment = { __typename?: 'ComboCategory', id: string, name: string, position: number };
 
@@ -2596,7 +2525,7 @@ export type MoveFormQuery = { __typename?: 'Query', move: { __typename?: 'Move',
 
 export type MovePositionSelectFragment = { __typename?: 'Move', id: string, name: string, position: number };
 
-export type OrganizerFormFragment = { __typename?: 'Organizer', name: string, slug: string, tonamelId?: string | null, twitterId?: string | null, streamingUrl?: string | null, description?: string | null };
+export type OrganizerFormFragment = { __typename?: 'Organizer', id: string, name: string, slug: string, tonamelId?: string | null, twitterId?: string | null, streamingUrl?: string | null, description?: string | null };
 
 export type PlayerFormFragment = { __typename?: 'Player', name: string, slug: string, tonamelId?: string | null, smashggId?: string | null, twitterId?: string | null, streamingUrl?: string | null, description?: string | null, country?: { __typename?: 'Country', id: string } | null };
 
@@ -2612,17 +2541,11 @@ export type TournamentFormQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type TournamentFormQuery = { __typename?: 'Query', organizers: { __typename?: 'OrganizerConnection', nodes: Array<{ __typename?: 'Organizer', id: string, slug: string, name: string }> } };
 
-export type CharacterBreadcrumbsFragment = { __typename?: 'Character', slug: string, name: string };
+export type CharacterBreadcrumbsFragment = { __typename?: 'Character', id: string, slug: string, name: string };
 
-export type ComboCategoryBreadcrumbsFragment = { __typename?: 'ComboCategory', id: string, name: string, character: { __typename?: 'Character', slug: string, name: string } };
+export type OrganizerBreadcrumbsFragment = { __typename?: 'Organizer', id: string, slug: string, name: string };
 
-export type MoveCategoryBreadcrumbsFragment = { __typename?: 'MoveCategory', id: string, name: string, character: { __typename?: 'Character', slug: string, name: string } };
-
-export type MoveBreadcrumbsFragment = { __typename?: 'Move', id: string, name: string, moveCategory: { __typename?: 'MoveCategory', id: string, name: string, character: { __typename?: 'Character', slug: string, name: string } } };
-
-export type OrganizerBreadcrumbsFragment = { __typename?: 'Organizer', slug: string, name: string };
-
-export type PlayerBreadcrumbsFragment = { __typename?: 'Player', slug: string, name: string };
+export type PlayerBreadcrumbsFragment = { __typename?: 'Player', id: string, slug: string, name: string };
 
 export type TournamentBreadcrumbsFragment = { __typename?: 'Tournament', id: string, name: string };
 
@@ -2661,19 +2584,85 @@ export type ArticleElementMoveQueryVariables = Exact<{
 
 export type ArticleElementMoveQuery = { __typename?: 'Query', move: { __typename?: 'Move', id: string, name: string, kana?: string | null, command: Array<string>, statusAfter?: string | null, note?: string | null, moveable: { __typename: 'AttackMove', id: string, startUpFrame?: number | null, duration?: number | null, blockFrame?: number | null, blockResult: AttackMoveResultEnum, hitFrame?: number | null, hitResult: AttackMoveResultEnum, counterFrame?: number | null, counterResult: AttackMoveResultEnum, heights: Array<AttackTypeEnum>, damages: Array<number>, powerCrush: boolean, crouchingStatus: boolean, jumpStatus: boolean, homing: boolean, screw: boolean, wallBound: boolean } | { __typename: 'ReversalMove', id: string, kind: string, startUpFrame?: number | null, finishFrame?: number | null } | { __typename: 'ThrowMove', id: string, throwType: ThrowTypeEnum, throwResult: ThrowMoveResultEnum, throwEscape: ThrowEscapeEnum, startUpFrame?: number | null, damage?: number | null }, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null } };
 
+export type CurrentUserFragment = { __typename?: 'CurrentUser', id: string, name: string, role: UserRole, avatarUrl: string };
+
+export type PaginationFragment = { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null };
+
+export type SsgArticlePathsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SsgArticlePathsQuery = { __typename?: 'Query', articles: { __typename?: 'ArticleConnection', nodes: Array<{ __typename?: 'Article', id: string }> } };
+
+export type SsgCharacterPathsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SsgCharacterPathsQuery = { __typename?: 'Query', characters: { __typename?: 'CharacterConnection', nodes: Array<{ __typename?: 'Character', id: string, slug: string }> } };
+
+export type SsgPlayerPathsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SsgPlayerPathsQuery = { __typename?: 'Query', players: { __typename?: 'PlayerConnection', nodes: Array<{ __typename?: 'Player', id: string, slug: string }> } };
+
+export type SsgTournamentPathsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SsgTournamentPathsQuery = { __typename?: 'Query', tournaments: { __typename?: 'TournamentConnection', nodes: Array<{ __typename?: 'Tournament', id: string }> } };
+
+export type SsgTournamentVideoPathsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SsgTournamentVideoPathsQuery = { __typename?: 'Query', tournamentVideos: { __typename?: 'TournamentVideoConnection', nodes: Array<{ __typename?: 'TournamentVideo', id: string }> } };
+
+export type CharacterSelectOptionFragment = { __typename?: 'Character', id: string, slug: string, name: string };
+
+export type CharacterSelectOptionsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type CharacterSelectOptionsQuery = { __typename?: 'Query', characters: { __typename?: 'CharacterConnection', nodes: Array<{ __typename?: 'Character', id: string, slug: string, name: string }> } };
+
+export type ComboSelectOptionsQueryVariables = Exact<{
+  characterSlug: Scalars['String'];
+}>;
+
+
+export type ComboSelectOptionsQuery = { __typename?: 'Query', comboCategories: Array<{ __typename?: 'ComboCategory', id: string, name: string, combos: Array<{ __typename?: 'Combo', id: string, command: Array<string> }> }> };
+
+export type CountrySelectOptionFragment = { __typename?: 'Country', id: string, name: string, flagEmoji: string };
+
+export type CountrySelectOptionsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type CountrySelectOptionsQuery = { __typename?: 'Query', countries: Array<{ __typename?: 'Country', id: string, name: string, flagEmoji: string }> };
+
+export type CurrentUserQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type CurrentUserQuery = { __typename?: 'Query', currentUser: { __typename?: 'CurrentUser', id: string, name: string, role: UserRole, avatarUrl: string } };
+
+export type MoveSelectOptionsQueryVariables = Exact<{
+  characterSlug: Scalars['String'];
+}>;
+
+
+export type MoveSelectOptionsQuery = { __typename?: 'Query', moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, moves: Array<{ __typename?: 'Move', id: string, name: string, command: Array<string> }> }> };
+
+export type OrganizerSelectOptionFragment = { __typename?: 'Organizer', id: string, slug: string, name: string };
+
+export type PlayerSelectOptionFragment = { __typename?: 'Player', id: string, slug: string, name: string, tonamelId?: string | null, smashggId?: string | null };
+
 export type DashboardCharacterCombosPageQueryVariables = Exact<{
   characterSlug: Scalars['String'];
 }>;
 
 
-export type DashboardCharacterCombosPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string, id: string, comboCategories: Array<{ __typename?: 'ComboCategory', id: string, name: string, position: number, combos: Array<{ __typename?: 'Combo', id: string, command: Array<string>, position: number, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> }>, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, moves: Array<{ __typename?: 'Move', id: string, name: string }> }> } };
+export type DashboardCharacterCombosPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', id: string, slug: string, name: string, comboCategories: Array<{ __typename?: 'ComboCategory', id: string, name: string, position: number, combos: Array<{ __typename?: 'Combo', id: string, command: Array<string>, position: number, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> }>, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, moves: Array<{ __typename?: 'Move', id: string, name: string }> }> } };
 
 export type PageAdminCharacterEditQueryVariables = Exact<{
   characterSlug: Scalars['String'];
 }>;
 
 
-export type PageAdminCharacterEditQuery = { __typename?: 'Query', character: { __typename?: 'Character', name: string, nameKana: string, longName: string, longNameKana: string, slug: string, country: string, fightingStyle: string, story: string, description: string, dlc: boolean } };
+export type PageAdminCharacterEditQuery = { __typename?: 'Query', character: { __typename?: 'Character', id: string, name: string, nameKana: string, longName: string, longNameKana: string, slug: string, country: string, fightingStyle: string, story: string, description: string, dlc: boolean } };
 
 export type UpdateCharacterMutationVariables = Exact<{
   characterSlug: Scalars['String'];
@@ -2688,7 +2677,7 @@ export type DashboardCharacterMovesPageQueryVariables = Exact<{
 }>;
 
 
-export type DashboardCharacterMovesPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string, id: string, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, position: number, moves: Array<{ __typename?: 'Move', id: string, name: string, command: Array<string>, position: number, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> }> } };
+export type DashboardCharacterMovesPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', id: string, slug: string, name: string, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, position: number, moves: Array<{ __typename?: 'Move', id: string, name: string, command: Array<string>, position: number, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> }> } };
 
 export type CreateCharacterMutationVariables = Exact<{
   attributes: CharacterAttributes;
@@ -2702,7 +2691,7 @@ export type AdminOrganizerEditPageQueryVariables = Exact<{
 }>;
 
 
-export type AdminOrganizerEditPageQuery = { __typename?: 'Query', organizer: { __typename?: 'Organizer', name: string, slug: string, tonamelId?: string | null, twitterId?: string | null, streamingUrl?: string | null, description?: string | null } };
+export type AdminOrganizerEditPageQuery = { __typename?: 'Query', organizer: { __typename?: 'Organizer', id: string, name: string, slug: string, tonamelId?: string | null, twitterId?: string | null, streamingUrl?: string | null, description?: string | null } };
 
 export type AdminOrganizerEditPageUpdateOrganizerMutationVariables = Exact<{
   organizerSlug: Scalars['String'];
@@ -2710,7 +2699,7 @@ export type AdminOrganizerEditPageUpdateOrganizerMutationVariables = Exact<{
 }>;
 
 
-export type AdminOrganizerEditPageUpdateOrganizerMutation = { __typename?: 'Mutation', updateOrganizer?: { __typename?: 'UpdateOrganizerPayload', organizer: { __typename?: 'Organizer', name: string, slug: string, tonamelId?: string | null, twitterId?: string | null, streamingUrl?: string | null, description?: string | null } } | null };
+export type AdminOrganizerEditPageUpdateOrganizerMutation = { __typename?: 'Mutation', updateOrganizer?: { __typename?: 'UpdateOrganizerPayload', organizer: { __typename?: 'Organizer', id: string, name: string, slug: string, tonamelId?: string | null, twitterId?: string | null, streamingUrl?: string | null, description?: string | null } } | null };
 
 export type AdminOrganizersPageOrganizerFragment = { __typename?: 'Organizer', id: string, slug: string, name: string, avatarUrl?: string | null };
 
@@ -2741,7 +2730,7 @@ export type AdminPlayerEditPageQueryVariables = Exact<{
 }>;
 
 
-export type AdminPlayerEditPageQuery = { __typename?: 'Query', player: { __typename?: 'Player', name: string, slug: string, tonamelId?: string | null, smashggId?: string | null, twitterId?: string | null, streamingUrl?: string | null, description?: string | null, country?: { __typename?: 'Country', id: string } | null } };
+export type AdminPlayerEditPageQuery = { __typename?: 'Query', player: { __typename?: 'Player', name: string, slug: string, tonamelId?: string | null, smashggId?: string | null, twitterId?: string | null, streamingUrl?: string | null, description?: string | null, id: string, country?: { __typename?: 'Country', id: string } | null } };
 
 export type AdminPlayerEditPageUpdatePlayerMutationVariables = Exact<{
   playerSlug: Scalars['String'];
@@ -2749,7 +2738,7 @@ export type AdminPlayerEditPageUpdatePlayerMutationVariables = Exact<{
 }>;
 
 
-export type AdminPlayerEditPageUpdatePlayerMutation = { __typename?: 'Mutation', updatePlayer?: { __typename?: 'UpdatePlayerPayload', player: { __typename?: 'Player', name: string, slug: string, tonamelId?: string | null, smashggId?: string | null, twitterId?: string | null, streamingUrl?: string | null, description?: string | null, country?: { __typename?: 'Country', id: string } | null } } | null };
+export type AdminPlayerEditPageUpdatePlayerMutation = { __typename?: 'Mutation', updatePlayer?: { __typename?: 'UpdatePlayerPayload', player: { __typename?: 'Player', name: string, slug: string, tonamelId?: string | null, smashggId?: string | null, twitterId?: string | null, streamingUrl?: string | null, description?: string | null, id: string, country?: { __typename?: 'Country', id: string } | null } } | null };
 
 export type AdminPlayersNewPageCreatePlayerMutationVariables = Exact<{
   attributes: PlayerAttributes;
@@ -2757,8 +2746,6 @@ export type AdminPlayersNewPageCreatePlayerMutationVariables = Exact<{
 
 
 export type AdminPlayersNewPageCreatePlayerMutation = { __typename?: 'Mutation', createPlayer?: { __typename?: 'CreatePlayerPayload', player: { __typename?: 'Player', id: string } } | null };
-
-export type BattleFormFragment = { __typename?: 'Battle', id: string, startSec: number, round: BattleRound, tournamentVideo: { __typename?: 'TournamentVideo', id: string }, sides: Array<{ __typename?: 'BattleSide', rounds: number, player: { __typename?: 'Player', slug: string }, character: { __typename?: 'Character', slug: string } }> };
 
 export type CreateBattleMutationVariables = Exact<{
   attributes: BattleAttributes;
@@ -2773,7 +2760,7 @@ export type UpdateBattleMutationVariables = Exact<{
 }>;
 
 
-export type UpdateBattleMutation = { __typename?: 'Mutation', updateBattle?: { __typename?: 'UpdateBattlePayload', battle: { __typename?: 'Battle', id: string, round: BattleRound, startSec: number, sides: Array<{ __typename?: 'BattleSide', rounds: number, player: { __typename?: 'Player', id: string, name: string }, character: { __typename?: 'Character', id: string, faceImageUrl: string } }> } } | null };
+export type UpdateBattleMutation = { __typename?: 'Mutation', updateBattle?: { __typename?: 'UpdateBattlePayload', battle: { __typename?: 'Battle', id: string, round: BattleRound, startSec: number, sides: Array<{ __typename?: 'BattleSide', id: string, rounds: number, player: { __typename?: 'Player', id: string, name: string }, character: { __typename?: 'Character', id: string, faceImageUrl: string } }> } } | null };
 
 export type DeleteBattleMutationVariables = Exact<{
   battleId: Scalars['ID'];
@@ -2789,16 +2776,16 @@ export type AdminBattlesPageQueryVariables = Exact<{
 
 export type AdminBattlesPageQuery = { __typename?: 'Query', tournamentVideo: { __typename?: 'TournamentVideo', id: string, title: string, youtubeVideoId: string, tournament: { __typename?: 'Tournament', id: string, name: string } }, players: { __typename?: 'PlayerConnection', nodes: Array<{ __typename?: 'Player', id: string, slug: string, name: string, tonamelId?: string | null, smashggId?: string | null }> }, characters: { __typename?: 'CharacterConnection', nodes: Array<{ __typename?: 'Character', id: string, slug: string, name: string }> } };
 
-export type AdminBattlesPageSideFragment = { __typename?: 'BattleSide', rounds: number, player: { __typename?: 'Player', id: string, name: string }, character: { __typename?: 'Character', id: string, faceImageUrl: string } };
+export type AdminBattlesPageSideFragment = { __typename?: 'BattleSide', id: string, rounds: number, player: { __typename?: 'Player', id: string, name: string }, character: { __typename?: 'Character', id: string, faceImageUrl: string } };
 
-export type AdminBattlesPageBattleReslutFragment = { __typename?: 'Battle', id: string, round: BattleRound, startSec: number, sides: Array<{ __typename?: 'BattleSide', rounds: number, player: { __typename?: 'Player', id: string, name: string }, character: { __typename?: 'Character', id: string, faceImageUrl: string } }> };
+export type AdminBattlesPageBattleReslutFragment = { __typename?: 'Battle', id: string, round: BattleRound, startSec: number, sides: Array<{ __typename?: 'BattleSide', id: string, rounds: number, player: { __typename?: 'Player', id: string, name: string }, character: { __typename?: 'Character', id: string, faceImageUrl: string } }> };
 
 export type AdminBattlesPageBattlesQueryVariables = Exact<{
   tournamentVideoId: Scalars['ID'];
 }>;
 
 
-export type AdminBattlesPageBattlesQuery = { __typename?: 'Query', battles: { __typename?: 'BattleConnection', nodes: Array<{ __typename?: 'Battle', id: string, round: BattleRound, startSec: number, sides: Array<{ __typename?: 'BattleSide', rounds: number, player: { __typename?: 'Player', id: string, name: string }, character: { __typename?: 'Character', id: string, faceImageUrl: string } }> }> } };
+export type AdminBattlesPageBattlesQuery = { __typename?: 'Query', battles: { __typename?: 'BattleConnection', nodes: Array<{ __typename?: 'Battle', id: string, round: BattleRound, startSec: number, sides: Array<{ __typename?: 'BattleSide', id: string, rounds: number, player: { __typename?: 'Player', id: string, name: string }, character: { __typename?: 'Character', id: string, faceImageUrl: string } }> }> } };
 
 export type AdminTournamentVideoEditPageQueryVariables = Exact<{
   tournamentVideoId: Scalars['ID'];
@@ -2893,49 +2880,49 @@ export type CreateTournamentMutation = { __typename?: 'Mutation', createTourname
 export type ArticlesPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ArticlesPageQuery = { __typename?: 'Query', articles: { __typename?: 'ArticleConnection', nodes: Array<{ __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, author: { __typename?: 'User', name: string, avatarUrl: string } }> } };
+export type ArticlesPageQuery = { __typename?: 'Query', articles: { __typename?: 'ArticleConnection', nodes: Array<{ __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, author: { __typename?: 'User', id: string, name: string, avatarUrl: string } }> } };
 
-export type ArticlePageFragment = { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, category: ArticleCategory, content: string, author: { __typename?: 'User', name: string, avatarUrl: string }, relatedArticles: Array<{ __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, author: { __typename?: 'User', name: string, avatarUrl: string } }> };
+export type ArticlePageFragment = { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, category: ArticleCategory, content: string, author: { __typename?: 'User', id: string, name: string, avatarUrl: string }, relatedArticles: Array<{ __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, author: { __typename?: 'User', id: string, name: string, avatarUrl: string } }> };
 
 export type ArticlePageQueryVariables = Exact<{
   articleId: Scalars['ID'];
 }>;
 
 
-export type ArticlePageQuery = { __typename?: 'Query', article: { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, category: ArticleCategory, content: string, author: { __typename?: 'User', name: string, avatarUrl: string }, relatedArticles: Array<{ __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, author: { __typename?: 'User', name: string, avatarUrl: string } }> } };
+export type ArticlePageQuery = { __typename?: 'Query', article: { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, category: ArticleCategory, content: string, author: { __typename?: 'User', id: string, name: string, avatarUrl: string }, relatedArticles: Array<{ __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, author: { __typename?: 'User', id: string, name: string, avatarUrl: string } }> } };
 
 export type CharactersPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CharactersPageQuery = { __typename?: 'Query', characters: { __typename?: 'CharacterConnection', nodes: Array<{ __typename?: 'Character', slug: string, name: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number }> } };
+export type CharactersPageQuery = { __typename?: 'Query', characters: { __typename?: 'CharacterConnection', nodes: Array<{ __typename?: 'Character', id: string, slug: string, name: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number }> } };
 
 export type CharacterPageQueryVariables = Exact<{
   characterSlug: Scalars['String'];
 }>;
 
 
-export type CharacterPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', story: string, description: string, slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, combosCount: number, movesCount: number }, battleCounts: { __typename?: 'BattleCountConnection', nodes: Array<{ __typename?: 'BattleCount', id: string, count: number, player: { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null } }> } };
+export type CharacterPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', story: string, description: string, id: string, slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, combosCount: number, movesCount: number }, battleCounts: { __typename?: 'BattleCountConnection', nodes: Array<{ __typename?: 'BattleCount', id: string, count: number, player: { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null } }> } };
 
 export type CharacterBattlesPageQueryVariables = Exact<{
   characterSlug: Scalars['String'];
 }>;
 
 
-export type CharacterBattlesPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, combosCount: number, movesCount: number } };
+export type CharacterBattlesPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', id: string, slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, combosCount: number, movesCount: number } };
 
 export type CharacterCombosPageQueryVariables = Exact<{
   characterSlug: Scalars['String'];
 }>;
 
 
-export type CharacterCombosPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, combosCount: number, movesCount: number, comboCategories: Array<{ __typename?: 'ComboCategory', id: string, name: string, combos: Array<{ __typename?: 'Combo', id: string, damage?: number | null, command: Array<string>, note?: string | null, move?: { __typename?: 'Move', id: string } | null, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> }>, comboStarters: Array<{ __typename?: 'Move', id: string, name: string, combosCount: number }> } };
+export type CharacterCombosPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', id: string, slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, combosCount: number, movesCount: number, comboCategories: Array<{ __typename?: 'ComboCategory', id: string, name: string, combos: Array<{ __typename?: 'Combo', id: string, damage?: number | null, command: Array<string>, note?: string | null, move?: { __typename?: 'Move', id: string } | null, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> }>, comboStarters: Array<{ __typename?: 'Move', id: string, name: string, combosCount: number }> } };
 
 export type CharacterMovesPageQueryVariables = Exact<{
   characterSlug: Scalars['String'];
 }>;
 
 
-export type CharacterMovesPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, combosCount: number, movesCount: number, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, moves: Array<{ __typename?: 'Move', id: string, name: string, kana?: string | null, command: Array<string>, note?: string | null, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null, moveable: { __typename: 'AttackMove', id: string, startUpFrame?: number | null, duration?: number | null, blockFrame?: number | null, blockResult: AttackMoveResultEnum, hitFrame?: number | null, hitResult: AttackMoveResultEnum, counterFrame?: number | null, counterResult: AttackMoveResultEnum, heights: Array<AttackTypeEnum>, damages: Array<number>, powerCrush: boolean, crouchingStatus: boolean, jumpStatus: boolean, homing: boolean, screw: boolean, wallBound: boolean } | { __typename: 'ReversalMove', id: string, kind: string, startUpFrame?: number | null, finishFrame?: number | null } | { __typename: 'ThrowMove', id: string, throwType: ThrowTypeEnum, throwResult: ThrowMoveResultEnum, throwEscape: ThrowEscapeEnum, startUpFrame?: number | null, damage?: number | null } }> }> } };
+export type CharacterMovesPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', id: string, slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, combosCount: number, movesCount: number, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, moves: Array<{ __typename?: 'Move', id: string, name: string, kana?: string | null, command: Array<string>, note?: string | null, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null, moveable: { __typename: 'AttackMove', id: string, startUpFrame?: number | null, duration?: number | null, blockFrame?: number | null, blockResult: AttackMoveResultEnum, hitFrame?: number | null, hitResult: AttackMoveResultEnum, counterFrame?: number | null, counterResult: AttackMoveResultEnum, heights: Array<AttackTypeEnum>, damages: Array<number>, powerCrush: boolean, crouchingStatus: boolean, jumpStatus: boolean, homing: boolean, screw: boolean, wallBound: boolean } | { __typename: 'ReversalMove', id: string, kind: string, startUpFrame?: number | null, finishFrame?: number | null } | { __typename: 'ThrowMove', id: string, throwType: ThrowTypeEnum, throwResult: ThrowMoveResultEnum, throwEscape: ThrowEscapeEnum, startUpFrame?: number | null, damage?: number | null } }> }> } };
 
 export type DashboardArticlePageQueryVariables = Exact<{
   articleId: Scalars['ID'];
@@ -2949,7 +2936,7 @@ export type MyArticleQueryVariables = Exact<{
 }>;
 
 
-export type MyArticleQuery = { __typename?: 'Query', myArticle: { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, category: ArticleCategory, content: string, author: { __typename?: 'User', name: string, avatarUrl: string } } };
+export type MyArticleQuery = { __typename?: 'Query', myArticle: { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, category: ArticleCategory, content: string, author: { __typename?: 'User', id: string, name: string, avatarUrl: string } } };
 
 export type UpdateArticleMutationVariables = Exact<{
   articleId: Scalars['ID'];
@@ -3007,7 +2994,7 @@ export type UpdateCurrentUserMutation = { __typename?: 'Mutation', updateCurrent
 export type TopPageQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type TopPageQuery = { __typename?: 'Query', tournaments: { __typename?: 'TournamentConnection', nodes: Array<{ __typename?: 'Tournament', id: string, name: string, mainImageUrl?: string | null, startsAt: string, videosCount: number, standings: Array<{ __typename?: 'Standing', id: string, place: number, player: { __typename?: 'Player', id: string, name: string } }> }> }, players: { __typename?: 'PlayerConnection', nodes: Array<{ __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null, standingsCount: number, battlesCount: number }> }, characters: { __typename?: 'CharacterConnection', nodes: Array<{ __typename?: 'Character', slug: string, name: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number }> }, articles: { __typename?: 'ArticleConnection', nodes: Array<{ __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, author: { __typename?: 'User', name: string, avatarUrl: string } }> } };
+export type TopPageQuery = { __typename?: 'Query', tournaments: { __typename?: 'TournamentConnection', nodes: Array<{ __typename?: 'Tournament', id: string, name: string, mainImageUrl?: string | null, startsAt: string, videosCount: number, standings: Array<{ __typename?: 'Standing', id: string, place: number, player: { __typename?: 'Player', id: string, name: string } }> }> }, players: { __typename?: 'PlayerConnection', nodes: Array<{ __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null, standingsCount: number, battlesCount: number }> }, characters: { __typename?: 'CharacterConnection', nodes: Array<{ __typename?: 'Character', id: string, slug: string, name: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number }> }, articles: { __typename?: 'ArticleConnection', nodes: Array<{ __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, author: { __typename?: 'User', id: string, name: string, avatarUrl: string } }> } };
 
 export type PlayersPageQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -3019,21 +3006,21 @@ export type PlayerPageQueryVariables = Exact<{
 }>;
 
 
-export type PlayerPageQuery = { __typename?: 'Query', player: { __typename?: 'Player', description?: string | null, slug: string, name: string, id: string, avatarUrl?: string | null, twitterId?: string | null, streamingUrl?: string | null, battlesCount: number, standingsCount: number } };
+export type PlayerPageQuery = { __typename?: 'Query', player: { __typename?: 'Player', description?: string | null, id: string, slug: string, name: string, avatarUrl?: string | null, twitterId?: string | null, streamingUrl?: string | null, battlesCount: number, standingsCount: number } };
 
 export type PlayerBattlesPageQueryVariables = Exact<{
   playerSlug: Scalars['String'];
 }>;
 
 
-export type PlayerBattlesPageQuery = { __typename?: 'Query', player: { __typename?: 'Player', slug: string, name: string, id: string, avatarUrl?: string | null, twitterId?: string | null, streamingUrl?: string | null, battlesCount: number, standingsCount: number } };
+export type PlayerBattlesPageQuery = { __typename?: 'Query', player: { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null, twitterId?: string | null, streamingUrl?: string | null, battlesCount: number, standingsCount: number } };
 
 export type PlayerStandingsPageQueryVariables = Exact<{
   playerSlug: Scalars['String'];
 }>;
 
 
-export type PlayerStandingsPageQuery = { __typename?: 'Query', player: { __typename?: 'Player', slug: string, name: string, id: string, avatarUrl?: string | null, twitterId?: string | null, streamingUrl?: string | null, battlesCount: number, standingsCount: number }, standings: { __typename?: 'StandingConnection', nodes: Array<{ __typename?: 'Standing', id: string, place: number, tournament: { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: string | null, startsAt: string } }> } };
+export type PlayerStandingsPageQuery = { __typename?: 'Query', player: { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null, twitterId?: string | null, streamingUrl?: string | null, battlesCount: number, standingsCount: number }, standings: { __typename?: 'StandingConnection', nodes: Array<{ __typename?: 'Standing', id: string, place: number, tournament: { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: string | null, startsAt: string } }> } };
 
 export type TournamentsPageQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -3054,50 +3041,6 @@ export type TournamentBattlesPageQueryVariables = Exact<{
 
 export type TournamentBattlesPageQuery = { __typename?: 'Query', tournament: { __typename?: 'Tournament', id: string, name: string, battlesCount: number } };
 
-export const CurrentUserFragmentDoc = gql`
-    fragment CurrentUser on CurrentUser {
-  id
-  name
-  role
-  avatarUrl
-}
-    `;
-export const PaginationFragmentDoc = gql`
-    fragment Pagination on PageInfo {
-  hasNextPage
-  endCursor
-}
-    `;
-export const CharacterSelectOptionFragmentDoc = gql`
-    fragment CharacterSelectOption on Character {
-  id
-  slug
-  name
-}
-    `;
-export const CountrySelectOptionFragmentDoc = gql`
-    fragment CountrySelectOption on Country {
-  id
-  name
-  flagEmoji
-}
-    `;
-export const OrganizerSelectOptionFragmentDoc = gql`
-    fragment OrganizerSelectOption on Organizer {
-  id
-  slug
-  name
-}
-    `;
-export const PlayerSelectOptionFragmentDoc = gql`
-    fragment PlayerSelectOption on Player {
-  id
-  slug
-  name
-  tonamelId
-  smashggId
-}
-    `;
 export const BattleListItemFragmentDoc = gql`
     fragment BattleListItem on Battle {
   id
@@ -3113,18 +3056,22 @@ export const BattleListItemFragmentDoc = gql`
     }
   }
   sides {
+    id
+    rounds
     player {
+      id
       name
     }
     character {
+      id
       faceImageUrl
     }
-    rounds
   }
 }
     `;
 export const CharacterCardFragmentDoc = gql`
     fragment CharacterCard on Character {
+  id
   slug
   name
   faceImageUrl
@@ -3266,7 +3213,6 @@ export const MoveMediaAttackFragmentDoc = gql`
   hitResult
   counterFrame
   counterResult
-  blockResult
   heights
   damages
   powerCrush
@@ -3363,27 +3309,6 @@ export const PlayerTabsFragmentDoc = gql`
   standingsCount
 }
     `;
-export const CharacterBattleCountChipFragmentDoc = gql`
-    fragment CharacterBattleCountChip on BattleCount {
-  id
-  count
-  character {
-    id
-    slug
-    name
-    faceImageUrl
-  }
-}
-    `;
-export const CharacterChipFragmentDoc = gql`
-    fragment CharacterChip on Character {
-  id
-  slug
-  name
-  faceImageUrl
-  battlesCount
-}
-    `;
 export const PlayerBattleCountChipFragmentDoc = gql`
     fragment PlayerBattleCountChip on BattleCount {
   id
@@ -3394,15 +3319,6 @@ export const PlayerBattleCountChipFragmentDoc = gql`
     name
     avatarUrl
   }
-}
-    `;
-export const PlayerChipFragmentDoc = gql`
-    fragment PlayerChip on Player {
-  id
-  slug
-  name
-  avatarUrl
-  battlesCount
 }
     `;
 export const TournamentCardFragmentDoc = gql`
@@ -3445,6 +3361,13 @@ export const ComboCategoryFormFragmentDoc = gql`
   position
 }
     `;
+export const ComboCategoryPositionSelectFragmentDoc = gql`
+    fragment ComboCategoryPositionSelect on ComboCategory {
+  id
+  name
+  position
+}
+    `;
 export const ComboPositionSelectFragmentDoc = gql`
     fragment ComboPositionSelect on Combo {
   id
@@ -3469,11 +3392,13 @@ export const ComboDashboardCategoryFragmentDoc = gql`
   id
   name
   ...ComboCategoryForm
+  ...ComboCategoryPositionSelect
   combos {
     ...ComboTableRow
   }
 }
     ${ComboCategoryFormFragmentDoc}
+${ComboCategoryPositionSelectFragmentDoc}
 ${ComboTableRowFragmentDoc}`;
 export const MoveSelectOptionFragmentDoc = gql`
     fragment MoveSelectOption on MoveCategory {
@@ -3505,6 +3430,13 @@ export const MoveCategoryFormFragmentDoc = gql`
   position
 }
     `;
+export const MoveCategoryPositionSelectFragmentDoc = gql`
+    fragment MoveCategoryPositionSelect on MoveCategory {
+  id
+  name
+  position
+}
+    `;
 export const MovePositionSelectFragmentDoc = gql`
     fragment MovePositionSelect on Move {
   id
@@ -3530,11 +3462,13 @@ export const MoveDashboardCategoryFragmentDoc = gql`
   id
   name
   ...MoveCategoryForm
+  ...MoveCategoryPositionSelect
   moves {
     ...MoveTableRow
   }
 }
     ${MoveCategoryFormFragmentDoc}
+${MoveCategoryPositionSelectFragmentDoc}
 ${MoveTableRowFragmentDoc}`;
 export const MoveDashboardFragmentDoc = gql`
     fragment MoveDashboard on Character {
@@ -3575,6 +3509,7 @@ export const ArticleFormArticleFragmentDoc = gql`
     `;
 export const CharacterFormFragmentDoc = gql`
     fragment CharacterForm on Character {
+  id
   name
   nameKana
   longName
@@ -3587,13 +3522,6 @@ export const CharacterFormFragmentDoc = gql`
   dlc
 }
     `;
-export const ComboCategoryPositionSelectFragmentDoc = gql`
-    fragment ComboCategoryPositionSelect on ComboCategory {
-  id
-  name
-  position
-}
-    `;
 export const ComboFormFragmentDoc = gql`
     fragment ComboForm on Combo {
   id
@@ -3604,13 +3532,6 @@ export const ComboFormFragmentDoc = gql`
   move {
     id
   }
-}
-    `;
-export const MoveCategoryPositionSelectFragmentDoc = gql`
-    fragment MoveCategoryPositionSelect on MoveCategory {
-  id
-  name
-  position
 }
     `;
 export const MoveFormAttackFragmentDoc = gql`
@@ -3692,6 +3613,7 @@ ${MoveFormThrowFragmentDoc}
 ${MoveFormReversalFragmentDoc}`;
 export const OrganizerFormFragmentDoc = gql`
     fragment OrganizerForm on Organizer {
+  id
   name
   slug
   tonamelId
@@ -3727,45 +3649,21 @@ export const TournamentFormFragmentDoc = gql`
     `;
 export const CharacterBreadcrumbsFragmentDoc = gql`
     fragment CharacterBreadcrumbs on Character {
+  id
   slug
   name
 }
     `;
-export const ComboCategoryBreadcrumbsFragmentDoc = gql`
-    fragment ComboCategoryBreadcrumbs on ComboCategory {
-  id
-  name
-  character {
-    ...CharacterBreadcrumbs
-  }
-}
-    ${CharacterBreadcrumbsFragmentDoc}`;
-export const MoveCategoryBreadcrumbsFragmentDoc = gql`
-    fragment MoveCategoryBreadcrumbs on MoveCategory {
-  id
-  name
-  character {
-    ...CharacterBreadcrumbs
-  }
-}
-    ${CharacterBreadcrumbsFragmentDoc}`;
-export const MoveBreadcrumbsFragmentDoc = gql`
-    fragment MoveBreadcrumbs on Move {
-  id
-  name
-  moveCategory {
-    ...MoveCategoryBreadcrumbs
-  }
-}
-    ${MoveCategoryBreadcrumbsFragmentDoc}`;
 export const OrganizerBreadcrumbsFragmentDoc = gql`
     fragment OrganizerBreadcrumbs on Organizer {
+  id
   slug
   name
 }
     `;
 export const PlayerBreadcrumbsFragmentDoc = gql`
     fragment PlayerBreadcrumbs on Player {
+  id
   slug
   name
 }
@@ -3785,6 +3683,50 @@ export const TournamentVideoBreadcrumbsFragmentDoc = gql`
   }
 }
     ${TournamentBreadcrumbsFragmentDoc}`;
+export const CurrentUserFragmentDoc = gql`
+    fragment CurrentUser on CurrentUser {
+  id
+  name
+  role
+  avatarUrl
+}
+    `;
+export const PaginationFragmentDoc = gql`
+    fragment Pagination on PageInfo {
+  hasNextPage
+  endCursor
+}
+    `;
+export const CharacterSelectOptionFragmentDoc = gql`
+    fragment CharacterSelectOption on Character {
+  id
+  slug
+  name
+}
+    `;
+export const CountrySelectOptionFragmentDoc = gql`
+    fragment CountrySelectOption on Country {
+  id
+  name
+  flagEmoji
+}
+    `;
+export const OrganizerSelectOptionFragmentDoc = gql`
+    fragment OrganizerSelectOption on Organizer {
+  id
+  slug
+  name
+}
+    `;
+export const PlayerSelectOptionFragmentDoc = gql`
+    fragment PlayerSelectOption on Player {
+  id
+  slug
+  name
+  tonamelId
+  smashggId
+}
+    `;
 export const AdminOrganizersPageOrganizerFragmentDoc = gql`
     fragment AdminOrganizersPageOrganizer on Organizer {
   id
@@ -3793,27 +3735,10 @@ export const AdminOrganizersPageOrganizerFragmentDoc = gql`
   avatarUrl
 }
     `;
-export const BattleFormFragmentDoc = gql`
-    fragment BattleForm on Battle {
-  id
-  tournamentVideo {
-    id
-  }
-  startSec
-  round
-  sides {
-    player {
-      slug
-    }
-    character {
-      slug
-    }
-    rounds
-  }
-}
-    `;
 export const AdminBattlesPageSideFragmentDoc = gql`
     fragment AdminBattlesPageSide on BattleSide {
+  id
+  rounds
   player {
     id
     name
@@ -3822,7 +3747,6 @@ export const AdminBattlesPageSideFragmentDoc = gql`
     id
     faceImageUrl
   }
-  rounds
 }
     `;
 export const AdminBattlesPageBattleReslutFragmentDoc = gql`
@@ -3852,6 +3776,7 @@ export const ArticleCardFragmentDoc = gql`
   publishedAt
   status
   author {
+    id
     name
     avatarUrl
   }
@@ -3868,6 +3793,7 @@ export const ArticlePageFragmentDoc = gql`
   category
   content
   author {
+    id
     name
     avatarUrl
   }
@@ -3883,371 +3809,6 @@ export const DashboardArticlesPageArticleFragmentDoc = gql`
   status
 }
     `;
-export const SsgArticlePathsDocument = gql`
-    query SsgArticlePaths {
-  articles(first: 100) {
-    nodes {
-      id
-    }
-  }
-}
-    `;
-
-/**
- * __useSsgArticlePathsQuery__
- *
- * To run a query within a React component, call `useSsgArticlePathsQuery` and pass it any options that fit your needs.
- * When your component renders, `useSsgArticlePathsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useSsgArticlePathsQuery({
- *   variables: {
- *   },
- * });
- */
-export function useSsgArticlePathsQuery(baseOptions?: Apollo.QueryHookOptions<SsgArticlePathsQuery, SsgArticlePathsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<SsgArticlePathsQuery, SsgArticlePathsQueryVariables>(SsgArticlePathsDocument, options);
-      }
-export function useSsgArticlePathsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SsgArticlePathsQuery, SsgArticlePathsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<SsgArticlePathsQuery, SsgArticlePathsQueryVariables>(SsgArticlePathsDocument, options);
-        }
-export type SsgArticlePathsQueryHookResult = ReturnType<typeof useSsgArticlePathsQuery>;
-export type SsgArticlePathsLazyQueryHookResult = ReturnType<typeof useSsgArticlePathsLazyQuery>;
-export type SsgArticlePathsQueryResult = Apollo.QueryResult<SsgArticlePathsQuery, SsgArticlePathsQueryVariables>;
-export const SsgCharacterPathsDocument = gql`
-    query SsgCharacterPaths {
-  characters(first: 100) {
-    nodes {
-      slug
-    }
-  }
-}
-    `;
-
-/**
- * __useSsgCharacterPathsQuery__
- *
- * To run a query within a React component, call `useSsgCharacterPathsQuery` and pass it any options that fit your needs.
- * When your component renders, `useSsgCharacterPathsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useSsgCharacterPathsQuery({
- *   variables: {
- *   },
- * });
- */
-export function useSsgCharacterPathsQuery(baseOptions?: Apollo.QueryHookOptions<SsgCharacterPathsQuery, SsgCharacterPathsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<SsgCharacterPathsQuery, SsgCharacterPathsQueryVariables>(SsgCharacterPathsDocument, options);
-      }
-export function useSsgCharacterPathsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SsgCharacterPathsQuery, SsgCharacterPathsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<SsgCharacterPathsQuery, SsgCharacterPathsQueryVariables>(SsgCharacterPathsDocument, options);
-        }
-export type SsgCharacterPathsQueryHookResult = ReturnType<typeof useSsgCharacterPathsQuery>;
-export type SsgCharacterPathsLazyQueryHookResult = ReturnType<typeof useSsgCharacterPathsLazyQuery>;
-export type SsgCharacterPathsQueryResult = Apollo.QueryResult<SsgCharacterPathsQuery, SsgCharacterPathsQueryVariables>;
-export const SsgPlayerPathsDocument = gql`
-    query SsgPlayerPaths {
-  players(first: 100) {
-    nodes {
-      slug
-    }
-  }
-}
-    `;
-
-/**
- * __useSsgPlayerPathsQuery__
- *
- * To run a query within a React component, call `useSsgPlayerPathsQuery` and pass it any options that fit your needs.
- * When your component renders, `useSsgPlayerPathsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useSsgPlayerPathsQuery({
- *   variables: {
- *   },
- * });
- */
-export function useSsgPlayerPathsQuery(baseOptions?: Apollo.QueryHookOptions<SsgPlayerPathsQuery, SsgPlayerPathsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<SsgPlayerPathsQuery, SsgPlayerPathsQueryVariables>(SsgPlayerPathsDocument, options);
-      }
-export function useSsgPlayerPathsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SsgPlayerPathsQuery, SsgPlayerPathsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<SsgPlayerPathsQuery, SsgPlayerPathsQueryVariables>(SsgPlayerPathsDocument, options);
-        }
-export type SsgPlayerPathsQueryHookResult = ReturnType<typeof useSsgPlayerPathsQuery>;
-export type SsgPlayerPathsLazyQueryHookResult = ReturnType<typeof useSsgPlayerPathsLazyQuery>;
-export type SsgPlayerPathsQueryResult = Apollo.QueryResult<SsgPlayerPathsQuery, SsgPlayerPathsQueryVariables>;
-export const SsgTournamentPathsDocument = gql`
-    query SsgTournamentPaths {
-  tournaments(first: 50) {
-    nodes {
-      id
-    }
-  }
-}
-    `;
-
-/**
- * __useSsgTournamentPathsQuery__
- *
- * To run a query within a React component, call `useSsgTournamentPathsQuery` and pass it any options that fit your needs.
- * When your component renders, `useSsgTournamentPathsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useSsgTournamentPathsQuery({
- *   variables: {
- *   },
- * });
- */
-export function useSsgTournamentPathsQuery(baseOptions?: Apollo.QueryHookOptions<SsgTournamentPathsQuery, SsgTournamentPathsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<SsgTournamentPathsQuery, SsgTournamentPathsQueryVariables>(SsgTournamentPathsDocument, options);
-      }
-export function useSsgTournamentPathsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SsgTournamentPathsQuery, SsgTournamentPathsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<SsgTournamentPathsQuery, SsgTournamentPathsQueryVariables>(SsgTournamentPathsDocument, options);
-        }
-export type SsgTournamentPathsQueryHookResult = ReturnType<typeof useSsgTournamentPathsQuery>;
-export type SsgTournamentPathsLazyQueryHookResult = ReturnType<typeof useSsgTournamentPathsLazyQuery>;
-export type SsgTournamentPathsQueryResult = Apollo.QueryResult<SsgTournamentPathsQuery, SsgTournamentPathsQueryVariables>;
-export const SsgTournamentVideoPathsDocument = gql`
-    query SsgTournamentVideoPaths {
-  tournamentVideos(first: 100) {
-    nodes {
-      id
-    }
-  }
-}
-    `;
-
-/**
- * __useSsgTournamentVideoPathsQuery__
- *
- * To run a query within a React component, call `useSsgTournamentVideoPathsQuery` and pass it any options that fit your needs.
- * When your component renders, `useSsgTournamentVideoPathsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useSsgTournamentVideoPathsQuery({
- *   variables: {
- *   },
- * });
- */
-export function useSsgTournamentVideoPathsQuery(baseOptions?: Apollo.QueryHookOptions<SsgTournamentVideoPathsQuery, SsgTournamentVideoPathsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<SsgTournamentVideoPathsQuery, SsgTournamentVideoPathsQueryVariables>(SsgTournamentVideoPathsDocument, options);
-      }
-export function useSsgTournamentVideoPathsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SsgTournamentVideoPathsQuery, SsgTournamentVideoPathsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<SsgTournamentVideoPathsQuery, SsgTournamentVideoPathsQueryVariables>(SsgTournamentVideoPathsDocument, options);
-        }
-export type SsgTournamentVideoPathsQueryHookResult = ReturnType<typeof useSsgTournamentVideoPathsQuery>;
-export type SsgTournamentVideoPathsLazyQueryHookResult = ReturnType<typeof useSsgTournamentVideoPathsLazyQuery>;
-export type SsgTournamentVideoPathsQueryResult = Apollo.QueryResult<SsgTournamentVideoPathsQuery, SsgTournamentVideoPathsQueryVariables>;
-export const CharacterSelectOptionsDocument = gql`
-    query CharacterSelectOptions {
-  characters(first: 100) {
-    nodes {
-      ...CharacterSelectOption
-    }
-  }
-}
-    ${CharacterSelectOptionFragmentDoc}`;
-
-/**
- * __useCharacterSelectOptionsQuery__
- *
- * To run a query within a React component, call `useCharacterSelectOptionsQuery` and pass it any options that fit your needs.
- * When your component renders, `useCharacterSelectOptionsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useCharacterSelectOptionsQuery({
- *   variables: {
- *   },
- * });
- */
-export function useCharacterSelectOptionsQuery(baseOptions?: Apollo.QueryHookOptions<CharacterSelectOptionsQuery, CharacterSelectOptionsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<CharacterSelectOptionsQuery, CharacterSelectOptionsQueryVariables>(CharacterSelectOptionsDocument, options);
-      }
-export function useCharacterSelectOptionsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CharacterSelectOptionsQuery, CharacterSelectOptionsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<CharacterSelectOptionsQuery, CharacterSelectOptionsQueryVariables>(CharacterSelectOptionsDocument, options);
-        }
-export type CharacterSelectOptionsQueryHookResult = ReturnType<typeof useCharacterSelectOptionsQuery>;
-export type CharacterSelectOptionsLazyQueryHookResult = ReturnType<typeof useCharacterSelectOptionsLazyQuery>;
-export type CharacterSelectOptionsQueryResult = Apollo.QueryResult<CharacterSelectOptionsQuery, CharacterSelectOptionsQueryVariables>;
-export const ComboSelectOptionsDocument = gql`
-    query ComboSelectOptions($characterSlug: String!) {
-  comboCategories(characterSlug: $characterSlug) {
-    id
-    name
-    combos {
-      id
-      command
-    }
-  }
-}
-    `;
-
-/**
- * __useComboSelectOptionsQuery__
- *
- * To run a query within a React component, call `useComboSelectOptionsQuery` and pass it any options that fit your needs.
- * When your component renders, `useComboSelectOptionsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useComboSelectOptionsQuery({
- *   variables: {
- *      characterSlug: // value for 'characterSlug'
- *   },
- * });
- */
-export function useComboSelectOptionsQuery(baseOptions: Apollo.QueryHookOptions<ComboSelectOptionsQuery, ComboSelectOptionsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<ComboSelectOptionsQuery, ComboSelectOptionsQueryVariables>(ComboSelectOptionsDocument, options);
-      }
-export function useComboSelectOptionsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ComboSelectOptionsQuery, ComboSelectOptionsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<ComboSelectOptionsQuery, ComboSelectOptionsQueryVariables>(ComboSelectOptionsDocument, options);
-        }
-export type ComboSelectOptionsQueryHookResult = ReturnType<typeof useComboSelectOptionsQuery>;
-export type ComboSelectOptionsLazyQueryHookResult = ReturnType<typeof useComboSelectOptionsLazyQuery>;
-export type ComboSelectOptionsQueryResult = Apollo.QueryResult<ComboSelectOptionsQuery, ComboSelectOptionsQueryVariables>;
-export const CountrySelectOptionsDocument = gql`
-    query CountrySelectOptions {
-  countries {
-    ...CountrySelectOption
-  }
-}
-    ${CountrySelectOptionFragmentDoc}`;
-
-/**
- * __useCountrySelectOptionsQuery__
- *
- * To run a query within a React component, call `useCountrySelectOptionsQuery` and pass it any options that fit your needs.
- * When your component renders, `useCountrySelectOptionsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useCountrySelectOptionsQuery({
- *   variables: {
- *   },
- * });
- */
-export function useCountrySelectOptionsQuery(baseOptions?: Apollo.QueryHookOptions<CountrySelectOptionsQuery, CountrySelectOptionsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<CountrySelectOptionsQuery, CountrySelectOptionsQueryVariables>(CountrySelectOptionsDocument, options);
-      }
-export function useCountrySelectOptionsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CountrySelectOptionsQuery, CountrySelectOptionsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<CountrySelectOptionsQuery, CountrySelectOptionsQueryVariables>(CountrySelectOptionsDocument, options);
-        }
-export type CountrySelectOptionsQueryHookResult = ReturnType<typeof useCountrySelectOptionsQuery>;
-export type CountrySelectOptionsLazyQueryHookResult = ReturnType<typeof useCountrySelectOptionsLazyQuery>;
-export type CountrySelectOptionsQueryResult = Apollo.QueryResult<CountrySelectOptionsQuery, CountrySelectOptionsQueryVariables>;
-export const CurrentUserDocument = gql`
-    query CurrentUser {
-  currentUser {
-    ...CurrentUser
-  }
-}
-    ${CurrentUserFragmentDoc}`;
-
-/**
- * __useCurrentUserQuery__
- *
- * To run a query within a React component, call `useCurrentUserQuery` and pass it any options that fit your needs.
- * When your component renders, `useCurrentUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useCurrentUserQuery({
- *   variables: {
- *   },
- * });
- */
-export function useCurrentUserQuery(baseOptions?: Apollo.QueryHookOptions<CurrentUserQuery, CurrentUserQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<CurrentUserQuery, CurrentUserQueryVariables>(CurrentUserDocument, options);
-      }
-export function useCurrentUserLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CurrentUserQuery, CurrentUserQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<CurrentUserQuery, CurrentUserQueryVariables>(CurrentUserDocument, options);
-        }
-export type CurrentUserQueryHookResult = ReturnType<typeof useCurrentUserQuery>;
-export type CurrentUserLazyQueryHookResult = ReturnType<typeof useCurrentUserLazyQuery>;
-export type CurrentUserQueryResult = Apollo.QueryResult<CurrentUserQuery, CurrentUserQueryVariables>;
-export const MoveSelectOptionsDocument = gql`
-    query MoveSelectOptions($characterSlug: String!) {
-  moveCategories(characterSlug: $characterSlug) {
-    id
-    name
-    moves {
-      id
-      name
-      command
-    }
-  }
-}
-    `;
-
-/**
- * __useMoveSelectOptionsQuery__
- *
- * To run a query within a React component, call `useMoveSelectOptionsQuery` and pass it any options that fit your needs.
- * When your component renders, `useMoveSelectOptionsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useMoveSelectOptionsQuery({
- *   variables: {
- *      characterSlug: // value for 'characterSlug'
- *   },
- * });
- */
-export function useMoveSelectOptionsQuery(baseOptions: Apollo.QueryHookOptions<MoveSelectOptionsQuery, MoveSelectOptionsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<MoveSelectOptionsQuery, MoveSelectOptionsQueryVariables>(MoveSelectOptionsDocument, options);
-      }
-export function useMoveSelectOptionsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MoveSelectOptionsQuery, MoveSelectOptionsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<MoveSelectOptionsQuery, MoveSelectOptionsQueryVariables>(MoveSelectOptionsDocument, options);
-        }
-export type MoveSelectOptionsQueryHookResult = ReturnType<typeof useMoveSelectOptionsQuery>;
-export type MoveSelectOptionsLazyQueryHookResult = ReturnType<typeof useMoveSelectOptionsLazyQuery>;
-export type MoveSelectOptionsQueryResult = Apollo.QueryResult<MoveSelectOptionsQuery, MoveSelectOptionsQueryVariables>;
 export const ArticleCardsDocument = gql`
     query ArticleCards($after: String) {
   articles(first: 12, after: $after) {
@@ -4739,6 +4300,7 @@ export const DeleteComboDocument = gql`
     mutation DeleteCombo($comboId: ID!) {
   deleteCombo(input: {comboId: $comboId}) {
     combo {
+      id
       comboCategory {
         id
         combos {
@@ -5214,6 +4776,7 @@ export const DeleteMoveDocument = gql`
     mutation DeleteMove($moveId: ID!) {
   deleteMove(input: {moveId: $moveId}) {
     move {
+      id
       moveCategory {
         id
         moves {
@@ -5335,7 +4898,7 @@ export type PlayerTableRowsQueryHookResult = ReturnType<typeof usePlayerTableRow
 export type PlayerTableRowsLazyQueryHookResult = ReturnType<typeof usePlayerTableRowsLazyQuery>;
 export type PlayerTableRowsQueryResult = Apollo.QueryResult<PlayerTableRowsQuery, PlayerTableRowsQueryVariables>;
 export const DeletePlayerDocument = gql`
-    mutation deletePlayer($playerSlug: String!) {
+    mutation DeletePlayer($playerSlug: String!) {
   deletePlayer(input: {playerSlug: $playerSlug}) {
     player {
       id
@@ -5370,7 +4933,7 @@ export type DeletePlayerMutationHookResult = ReturnType<typeof useDeletePlayerMu
 export type DeletePlayerMutationResult = Apollo.MutationResult<DeletePlayerMutation>;
 export type DeletePlayerMutationOptions = Apollo.BaseMutationOptions<DeletePlayerMutation, DeletePlayerMutationVariables>;
 export const CreatePlayerFromSmashggDocument = gql`
-    mutation createPlayerFromSmashgg($smashggId: String!) {
+    mutation CreatePlayerFromSmashgg($smashggId: String!) {
   createPlayerFromSmashgg(input: {smashggId: $smashggId}) {
     player {
       id
@@ -5875,6 +5438,373 @@ export function useArticleElementMoveLazyQuery(baseOptions?: Apollo.LazyQueryHoo
 export type ArticleElementMoveQueryHookResult = ReturnType<typeof useArticleElementMoveQuery>;
 export type ArticleElementMoveLazyQueryHookResult = ReturnType<typeof useArticleElementMoveLazyQuery>;
 export type ArticleElementMoveQueryResult = Apollo.QueryResult<ArticleElementMoveQuery, ArticleElementMoveQueryVariables>;
+export const SsgArticlePathsDocument = gql`
+    query SsgArticlePaths {
+  articles(first: 50) {
+    nodes {
+      id
+    }
+  }
+}
+    `;
+
+/**
+ * __useSsgArticlePathsQuery__
+ *
+ * To run a query within a React component, call `useSsgArticlePathsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSsgArticlePathsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSsgArticlePathsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useSsgArticlePathsQuery(baseOptions?: Apollo.QueryHookOptions<SsgArticlePathsQuery, SsgArticlePathsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SsgArticlePathsQuery, SsgArticlePathsQueryVariables>(SsgArticlePathsDocument, options);
+      }
+export function useSsgArticlePathsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SsgArticlePathsQuery, SsgArticlePathsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SsgArticlePathsQuery, SsgArticlePathsQueryVariables>(SsgArticlePathsDocument, options);
+        }
+export type SsgArticlePathsQueryHookResult = ReturnType<typeof useSsgArticlePathsQuery>;
+export type SsgArticlePathsLazyQueryHookResult = ReturnType<typeof useSsgArticlePathsLazyQuery>;
+export type SsgArticlePathsQueryResult = Apollo.QueryResult<SsgArticlePathsQuery, SsgArticlePathsQueryVariables>;
+export const SsgCharacterPathsDocument = gql`
+    query SsgCharacterPaths {
+  characters(first: 100) {
+    nodes {
+      id
+      slug
+    }
+  }
+}
+    `;
+
+/**
+ * __useSsgCharacterPathsQuery__
+ *
+ * To run a query within a React component, call `useSsgCharacterPathsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSsgCharacterPathsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSsgCharacterPathsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useSsgCharacterPathsQuery(baseOptions?: Apollo.QueryHookOptions<SsgCharacterPathsQuery, SsgCharacterPathsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SsgCharacterPathsQuery, SsgCharacterPathsQueryVariables>(SsgCharacterPathsDocument, options);
+      }
+export function useSsgCharacterPathsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SsgCharacterPathsQuery, SsgCharacterPathsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SsgCharacterPathsQuery, SsgCharacterPathsQueryVariables>(SsgCharacterPathsDocument, options);
+        }
+export type SsgCharacterPathsQueryHookResult = ReturnType<typeof useSsgCharacterPathsQuery>;
+export type SsgCharacterPathsLazyQueryHookResult = ReturnType<typeof useSsgCharacterPathsLazyQuery>;
+export type SsgCharacterPathsQueryResult = Apollo.QueryResult<SsgCharacterPathsQuery, SsgCharacterPathsQueryVariables>;
+export const SsgPlayerPathsDocument = gql`
+    query SsgPlayerPaths {
+  players(first: 50) {
+    nodes {
+      id
+      slug
+    }
+  }
+}
+    `;
+
+/**
+ * __useSsgPlayerPathsQuery__
+ *
+ * To run a query within a React component, call `useSsgPlayerPathsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSsgPlayerPathsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSsgPlayerPathsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useSsgPlayerPathsQuery(baseOptions?: Apollo.QueryHookOptions<SsgPlayerPathsQuery, SsgPlayerPathsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SsgPlayerPathsQuery, SsgPlayerPathsQueryVariables>(SsgPlayerPathsDocument, options);
+      }
+export function useSsgPlayerPathsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SsgPlayerPathsQuery, SsgPlayerPathsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SsgPlayerPathsQuery, SsgPlayerPathsQueryVariables>(SsgPlayerPathsDocument, options);
+        }
+export type SsgPlayerPathsQueryHookResult = ReturnType<typeof useSsgPlayerPathsQuery>;
+export type SsgPlayerPathsLazyQueryHookResult = ReturnType<typeof useSsgPlayerPathsLazyQuery>;
+export type SsgPlayerPathsQueryResult = Apollo.QueryResult<SsgPlayerPathsQuery, SsgPlayerPathsQueryVariables>;
+export const SsgTournamentPathsDocument = gql`
+    query SsgTournamentPaths {
+  tournaments(first: 50) {
+    nodes {
+      id
+    }
+  }
+}
+    `;
+
+/**
+ * __useSsgTournamentPathsQuery__
+ *
+ * To run a query within a React component, call `useSsgTournamentPathsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSsgTournamentPathsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSsgTournamentPathsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useSsgTournamentPathsQuery(baseOptions?: Apollo.QueryHookOptions<SsgTournamentPathsQuery, SsgTournamentPathsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SsgTournamentPathsQuery, SsgTournamentPathsQueryVariables>(SsgTournamentPathsDocument, options);
+      }
+export function useSsgTournamentPathsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SsgTournamentPathsQuery, SsgTournamentPathsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SsgTournamentPathsQuery, SsgTournamentPathsQueryVariables>(SsgTournamentPathsDocument, options);
+        }
+export type SsgTournamentPathsQueryHookResult = ReturnType<typeof useSsgTournamentPathsQuery>;
+export type SsgTournamentPathsLazyQueryHookResult = ReturnType<typeof useSsgTournamentPathsLazyQuery>;
+export type SsgTournamentPathsQueryResult = Apollo.QueryResult<SsgTournamentPathsQuery, SsgTournamentPathsQueryVariables>;
+export const SsgTournamentVideoPathsDocument = gql`
+    query SsgTournamentVideoPaths {
+  tournamentVideos(first: 50) {
+    nodes {
+      id
+    }
+  }
+}
+    `;
+
+/**
+ * __useSsgTournamentVideoPathsQuery__
+ *
+ * To run a query within a React component, call `useSsgTournamentVideoPathsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSsgTournamentVideoPathsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSsgTournamentVideoPathsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useSsgTournamentVideoPathsQuery(baseOptions?: Apollo.QueryHookOptions<SsgTournamentVideoPathsQuery, SsgTournamentVideoPathsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SsgTournamentVideoPathsQuery, SsgTournamentVideoPathsQueryVariables>(SsgTournamentVideoPathsDocument, options);
+      }
+export function useSsgTournamentVideoPathsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SsgTournamentVideoPathsQuery, SsgTournamentVideoPathsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SsgTournamentVideoPathsQuery, SsgTournamentVideoPathsQueryVariables>(SsgTournamentVideoPathsDocument, options);
+        }
+export type SsgTournamentVideoPathsQueryHookResult = ReturnType<typeof useSsgTournamentVideoPathsQuery>;
+export type SsgTournamentVideoPathsLazyQueryHookResult = ReturnType<typeof useSsgTournamentVideoPathsLazyQuery>;
+export type SsgTournamentVideoPathsQueryResult = Apollo.QueryResult<SsgTournamentVideoPathsQuery, SsgTournamentVideoPathsQueryVariables>;
+export const CharacterSelectOptionsDocument = gql`
+    query CharacterSelectOptions {
+  characters(first: 100) {
+    nodes {
+      ...CharacterSelectOption
+    }
+  }
+}
+    ${CharacterSelectOptionFragmentDoc}`;
+
+/**
+ * __useCharacterSelectOptionsQuery__
+ *
+ * To run a query within a React component, call `useCharacterSelectOptionsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCharacterSelectOptionsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCharacterSelectOptionsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useCharacterSelectOptionsQuery(baseOptions?: Apollo.QueryHookOptions<CharacterSelectOptionsQuery, CharacterSelectOptionsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<CharacterSelectOptionsQuery, CharacterSelectOptionsQueryVariables>(CharacterSelectOptionsDocument, options);
+      }
+export function useCharacterSelectOptionsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CharacterSelectOptionsQuery, CharacterSelectOptionsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<CharacterSelectOptionsQuery, CharacterSelectOptionsQueryVariables>(CharacterSelectOptionsDocument, options);
+        }
+export type CharacterSelectOptionsQueryHookResult = ReturnType<typeof useCharacterSelectOptionsQuery>;
+export type CharacterSelectOptionsLazyQueryHookResult = ReturnType<typeof useCharacterSelectOptionsLazyQuery>;
+export type CharacterSelectOptionsQueryResult = Apollo.QueryResult<CharacterSelectOptionsQuery, CharacterSelectOptionsQueryVariables>;
+export const ComboSelectOptionsDocument = gql`
+    query ComboSelectOptions($characterSlug: String!) {
+  comboCategories(characterSlug: $characterSlug) {
+    id
+    name
+    combos {
+      id
+      command
+    }
+  }
+}
+    `;
+
+/**
+ * __useComboSelectOptionsQuery__
+ *
+ * To run a query within a React component, call `useComboSelectOptionsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useComboSelectOptionsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useComboSelectOptionsQuery({
+ *   variables: {
+ *      characterSlug: // value for 'characterSlug'
+ *   },
+ * });
+ */
+export function useComboSelectOptionsQuery(baseOptions: Apollo.QueryHookOptions<ComboSelectOptionsQuery, ComboSelectOptionsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ComboSelectOptionsQuery, ComboSelectOptionsQueryVariables>(ComboSelectOptionsDocument, options);
+      }
+export function useComboSelectOptionsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ComboSelectOptionsQuery, ComboSelectOptionsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ComboSelectOptionsQuery, ComboSelectOptionsQueryVariables>(ComboSelectOptionsDocument, options);
+        }
+export type ComboSelectOptionsQueryHookResult = ReturnType<typeof useComboSelectOptionsQuery>;
+export type ComboSelectOptionsLazyQueryHookResult = ReturnType<typeof useComboSelectOptionsLazyQuery>;
+export type ComboSelectOptionsQueryResult = Apollo.QueryResult<ComboSelectOptionsQuery, ComboSelectOptionsQueryVariables>;
+export const CountrySelectOptionsDocument = gql`
+    query CountrySelectOptions {
+  countries {
+    ...CountrySelectOption
+  }
+}
+    ${CountrySelectOptionFragmentDoc}`;
+
+/**
+ * __useCountrySelectOptionsQuery__
+ *
+ * To run a query within a React component, call `useCountrySelectOptionsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCountrySelectOptionsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCountrySelectOptionsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useCountrySelectOptionsQuery(baseOptions?: Apollo.QueryHookOptions<CountrySelectOptionsQuery, CountrySelectOptionsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<CountrySelectOptionsQuery, CountrySelectOptionsQueryVariables>(CountrySelectOptionsDocument, options);
+      }
+export function useCountrySelectOptionsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CountrySelectOptionsQuery, CountrySelectOptionsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<CountrySelectOptionsQuery, CountrySelectOptionsQueryVariables>(CountrySelectOptionsDocument, options);
+        }
+export type CountrySelectOptionsQueryHookResult = ReturnType<typeof useCountrySelectOptionsQuery>;
+export type CountrySelectOptionsLazyQueryHookResult = ReturnType<typeof useCountrySelectOptionsLazyQuery>;
+export type CountrySelectOptionsQueryResult = Apollo.QueryResult<CountrySelectOptionsQuery, CountrySelectOptionsQueryVariables>;
+export const CurrentUserDocument = gql`
+    query CurrentUser {
+  currentUser {
+    ...CurrentUser
+  }
+}
+    ${CurrentUserFragmentDoc}`;
+
+/**
+ * __useCurrentUserQuery__
+ *
+ * To run a query within a React component, call `useCurrentUserQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCurrentUserQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCurrentUserQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useCurrentUserQuery(baseOptions?: Apollo.QueryHookOptions<CurrentUserQuery, CurrentUserQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<CurrentUserQuery, CurrentUserQueryVariables>(CurrentUserDocument, options);
+      }
+export function useCurrentUserLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CurrentUserQuery, CurrentUserQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<CurrentUserQuery, CurrentUserQueryVariables>(CurrentUserDocument, options);
+        }
+export type CurrentUserQueryHookResult = ReturnType<typeof useCurrentUserQuery>;
+export type CurrentUserLazyQueryHookResult = ReturnType<typeof useCurrentUserLazyQuery>;
+export type CurrentUserQueryResult = Apollo.QueryResult<CurrentUserQuery, CurrentUserQueryVariables>;
+export const MoveSelectOptionsDocument = gql`
+    query MoveSelectOptions($characterSlug: String!) {
+  moveCategories(characterSlug: $characterSlug) {
+    id
+    name
+    moves {
+      id
+      name
+      command
+    }
+  }
+}
+    `;
+
+/**
+ * __useMoveSelectOptionsQuery__
+ *
+ * To run a query within a React component, call `useMoveSelectOptionsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useMoveSelectOptionsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useMoveSelectOptionsQuery({
+ *   variables: {
+ *      characterSlug: // value for 'characterSlug'
+ *   },
+ * });
+ */
+export function useMoveSelectOptionsQuery(baseOptions: Apollo.QueryHookOptions<MoveSelectOptionsQuery, MoveSelectOptionsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<MoveSelectOptionsQuery, MoveSelectOptionsQueryVariables>(MoveSelectOptionsDocument, options);
+      }
+export function useMoveSelectOptionsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MoveSelectOptionsQuery, MoveSelectOptionsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<MoveSelectOptionsQuery, MoveSelectOptionsQueryVariables>(MoveSelectOptionsDocument, options);
+        }
+export type MoveSelectOptionsQueryHookResult = ReturnType<typeof useMoveSelectOptionsQuery>;
+export type MoveSelectOptionsLazyQueryHookResult = ReturnType<typeof useMoveSelectOptionsLazyQuery>;
+export type MoveSelectOptionsQueryResult = Apollo.QueryResult<MoveSelectOptionsQuery, MoveSelectOptionsQueryVariables>;
 export const DashboardCharacterCombosPageDocument = gql`
     query DashboardCharacterCombosPage($characterSlug: String!) {
   character(characterSlug: $characterSlug) {
@@ -7354,6 +7284,7 @@ export const MyArticleDocument = gql`
     category
     content
     author {
+      id
       name
       avatarUrl
     }

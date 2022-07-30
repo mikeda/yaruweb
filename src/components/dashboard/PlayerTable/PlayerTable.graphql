@@ -16,7 +16,7 @@ query PlayerTableRows($after: String, $keyword: String) {
   }
 }
 
-mutation deletePlayer($playerSlug: String!) {
+mutation DeletePlayer($playerSlug: String!) {
   deletePlayer(input: { playerSlug: $playerSlug }) {
     player {
       id
@@ -24,7 +24,7 @@ mutation deletePlayer($playerSlug: String!) {
   }
 }
 
-mutation createPlayerFromSmashgg($smashggId: String!) {
+mutation CreatePlayerFromSmashgg($smashggId: String!) {
   createPlayerFromSmashgg(input: { smashggId: $smashggId }) {
     player {
       id

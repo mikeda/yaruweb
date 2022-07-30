@@ -19,6 +19,7 @@ mutation CreateAttackMove($moveCategoryId: ID!, $attributes: AttackMoveAttribute
 
       moveCategory {
         id
+
         moves {
           id
           position
@@ -35,6 +36,7 @@ mutation CreateThrowMove($moveCategoryId: ID!, $attributes: ThrowMoveAttributes!
 
       moveCategory {
         id
+
         moves {
           id
           position
@@ -51,6 +53,7 @@ mutation CreateReversalMove($moveCategoryId: ID!, $attributes: ReversalMoveAttri
 
       moveCategory {
         id
+
         moves {
           id
           position
@@ -67,6 +70,7 @@ mutation UpdateAttackMove($moveId: ID!, $attributes: AttackMoveAttributes!) {
 
       moveCategory {
         id
+
         moves {
           id
           position
@@ -83,6 +87,7 @@ mutation UpdateThrowMove($moveId: ID!, $attributes: ThrowMoveAttributes!) {
 
       moveCategory {
         id
+
         moves {
           id
           position
@@ -99,6 +104,7 @@ mutation UpdateReversalMove($moveId: ID!, $attributes: ReversalMoveAttributes!) 
 
       moveCategory {
         id
+
         moves {
           id
           position
@@ -111,6 +117,8 @@ mutation UpdateReversalMove($moveId: ID!, $attributes: ReversalMoveAttributes!) 
 mutation DeleteMove($moveId: ID!) {
   deleteMove(input: { moveId: $moveId }) {
     move {
+      id
+
       moveCategory {
         id
         moves { id }
