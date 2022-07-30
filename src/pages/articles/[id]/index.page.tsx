@@ -11,8 +11,8 @@ import {
   ArticlePageDocument,
   ArticlePageQuery,
   ArticlePageQueryVariables,
-  ArticlePathsDocument,
-  ArticlePathsQuery,
+  SsgArticlePathsDocument,
+  SsgArticlePathsQuery,
 } from '@/generated/graphql';
 import { dayjs, fetchGraphql, NO_IMAGE_URL } from '@/lib';
 
@@ -80,9 +80,9 @@ export const getStaticProps: GetStaticProps<ArticlePageQuery, Params> = async ({
 };
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
-  const data: ArticlePathsQuery = await fetchGraphql(ArticlePathsDocument);
+  const data: SsgArticlePathsQuery = await fetchGraphql(SsgArticlePathsDocument);
 
-  const paths = data.allArticles.map(({ id }) => ({ params: { id } }));
+  const paths = data.articles.nodes.map(({ id }) => ({ params: { id } }));
 
   return { paths, fallback: 'blocking' };
 };

@@ -10,8 +10,8 @@ import {
   CharacterMovesPageDocument,
   CharacterMovesPageQuery,
   CharacterMovesPageQueryVariables,
-  CharacterPathsDocument,
-  CharacterPathsQuery,
+  SsgCharacterPathsDocument,
+  SsgCharacterPathsQuery,
 } from '@/generated/graphql';
 import { fetchGraphql } from '@/lib';
 
@@ -62,7 +62,7 @@ export const getStaticProps: GetStaticProps<CharacterMovesPageQuery, Params> = a
 };
 
 export const getStaticPaths: GetStaticPaths<Params> = async () => {
-  const data: CharacterPathsQuery = await fetchGraphql(CharacterPathsDocument);
+  const data: SsgCharacterPathsQuery = await fetchGraphql(SsgCharacterPathsDocument);
 
   const paths = data.characters.nodes.map(({ slug }) => ({ params: { slug } }));
 

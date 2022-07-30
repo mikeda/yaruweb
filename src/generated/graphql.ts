@@ -1455,9 +1455,6 @@ export type PublishArticlePayload = {
 
 export type Query = {
   __typename?: 'Query';
-  allArticles: Array<Article>;
-  allTournamentVideos: Array<TournamentVideo>;
-  allTournaments: Array<Tournament>;
   article: Article;
   articles: ArticleConnection;
   battleCounts: BattleCountConnection;
@@ -2182,15 +2179,30 @@ export type CurrentUserFragment = { __typename?: 'CurrentUser', id: string, name
 
 export type PaginationFragment = { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null };
 
-export type ArticlePathsQueryVariables = Exact<{ [key: string]: never; }>;
+export type SsgArticlePathsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type ArticlePathsQuery = { __typename?: 'Query', allArticles: Array<{ __typename?: 'Article', id: string }> };
+export type SsgArticlePathsQuery = { __typename?: 'Query', articles: { __typename?: 'ArticleConnection', nodes: Array<{ __typename?: 'Article', id: string }> } };
 
-export type CharacterPathsQueryVariables = Exact<{ [key: string]: never; }>;
+export type SsgCharacterPathsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type CharacterPathsQuery = { __typename?: 'Query', characters: { __typename?: 'CharacterConnection', nodes: Array<{ __typename?: 'Character', slug: string }> } };
+export type SsgCharacterPathsQuery = { __typename?: 'Query', characters: { __typename?: 'CharacterConnection', nodes: Array<{ __typename?: 'Character', slug: string }> } };
+
+export type SsgPlayerPathsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SsgPlayerPathsQuery = { __typename?: 'Query', players: { __typename?: 'PlayerConnection', nodes: Array<{ __typename?: 'Player', slug: string }> } };
+
+export type SsgTournamentPathsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SsgTournamentPathsQuery = { __typename?: 'Query', tournaments: { __typename?: 'TournamentConnection', nodes: Array<{ __typename?: 'Tournament', id: string }> } };
+
+export type SsgTournamentVideoPathsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SsgTournamentVideoPathsQuery = { __typename?: 'Query', tournamentVideos: { __typename?: 'TournamentVideoConnection', nodes: Array<{ __typename?: 'TournamentVideo', id: string }> } };
 
 export type CharacterSelectOptionFragment = { __typename?: 'Character', id: string, slug: string, name: string };
 
@@ -2228,23 +2240,6 @@ export type MoveSelectOptionsQuery = { __typename?: 'Query', moveCategories: Arr
 export type OrganizerSelectOptionFragment = { __typename?: 'Organizer', id: string, slug: string, name: string };
 
 export type PlayerSelectOptionFragment = { __typename?: 'Player', id: string, slug: string, name: string, tonamelId?: string | null, smashggId?: string | null };
-
-export type PlayerSlugsQueryVariables = Exact<{
-  first?: InputMaybe<Scalars['Int']>;
-}>;
-
-
-export type PlayerSlugsQuery = { __typename?: 'Query', players: { __typename?: 'PlayerConnection', nodes: Array<{ __typename?: 'Player', slug: string }> } };
-
-export type TournamentPathsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type TournamentPathsQuery = { __typename?: 'Query', allTournaments: Array<{ __typename?: 'Tournament', id: string }> };
-
-export type TournamentVideoPathsQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type TournamentVideoPathsQuery = { __typename?: 'Query', allTournamentVideos: Array<{ __typename?: 'TournamentVideo', id: string }> };
 
 export type ArticleCardFragment = { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, author: { __typename?: 'User', name: string, avatarUrl: string } };
 
@@ -3888,42 +3883,44 @@ export const DashboardArticlesPageArticleFragmentDoc = gql`
   status
 }
     `;
-export const ArticlePathsDocument = gql`
-    query ArticlePaths {
-  allArticles {
-    id
+export const SsgArticlePathsDocument = gql`
+    query SsgArticlePaths {
+  articles(first: 100) {
+    nodes {
+      id
+    }
   }
 }
     `;
 
 /**
- * __useArticlePathsQuery__
+ * __useSsgArticlePathsQuery__
  *
- * To run a query within a React component, call `useArticlePathsQuery` and pass it any options that fit your needs.
- * When your component renders, `useArticlePathsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useSsgArticlePathsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSsgArticlePathsQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useArticlePathsQuery({
+ * const { data, loading, error } = useSsgArticlePathsQuery({
  *   variables: {
  *   },
  * });
  */
-export function useArticlePathsQuery(baseOptions?: Apollo.QueryHookOptions<ArticlePathsQuery, ArticlePathsQueryVariables>) {
+export function useSsgArticlePathsQuery(baseOptions?: Apollo.QueryHookOptions<SsgArticlePathsQuery, SsgArticlePathsQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<ArticlePathsQuery, ArticlePathsQueryVariables>(ArticlePathsDocument, options);
+        return Apollo.useQuery<SsgArticlePathsQuery, SsgArticlePathsQueryVariables>(SsgArticlePathsDocument, options);
       }
-export function useArticlePathsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ArticlePathsQuery, ArticlePathsQueryVariables>) {
+export function useSsgArticlePathsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SsgArticlePathsQuery, SsgArticlePathsQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<ArticlePathsQuery, ArticlePathsQueryVariables>(ArticlePathsDocument, options);
+          return Apollo.useLazyQuery<SsgArticlePathsQuery, SsgArticlePathsQueryVariables>(SsgArticlePathsDocument, options);
         }
-export type ArticlePathsQueryHookResult = ReturnType<typeof useArticlePathsQuery>;
-export type ArticlePathsLazyQueryHookResult = ReturnType<typeof useArticlePathsLazyQuery>;
-export type ArticlePathsQueryResult = Apollo.QueryResult<ArticlePathsQuery, ArticlePathsQueryVariables>;
-export const CharacterPathsDocument = gql`
-    query CharacterPaths {
+export type SsgArticlePathsQueryHookResult = ReturnType<typeof useSsgArticlePathsQuery>;
+export type SsgArticlePathsLazyQueryHookResult = ReturnType<typeof useSsgArticlePathsLazyQuery>;
+export type SsgArticlePathsQueryResult = Apollo.QueryResult<SsgArticlePathsQuery, SsgArticlePathsQueryVariables>;
+export const SsgCharacterPathsDocument = gql`
+    query SsgCharacterPaths {
   characters(first: 100) {
     nodes {
       slug
@@ -3933,31 +3930,139 @@ export const CharacterPathsDocument = gql`
     `;
 
 /**
- * __useCharacterPathsQuery__
+ * __useSsgCharacterPathsQuery__
  *
- * To run a query within a React component, call `useCharacterPathsQuery` and pass it any options that fit your needs.
- * When your component renders, `useCharacterPathsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useSsgCharacterPathsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSsgCharacterPathsQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useCharacterPathsQuery({
+ * const { data, loading, error } = useSsgCharacterPathsQuery({
  *   variables: {
  *   },
  * });
  */
-export function useCharacterPathsQuery(baseOptions?: Apollo.QueryHookOptions<CharacterPathsQuery, CharacterPathsQueryVariables>) {
+export function useSsgCharacterPathsQuery(baseOptions?: Apollo.QueryHookOptions<SsgCharacterPathsQuery, SsgCharacterPathsQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<CharacterPathsQuery, CharacterPathsQueryVariables>(CharacterPathsDocument, options);
+        return Apollo.useQuery<SsgCharacterPathsQuery, SsgCharacterPathsQueryVariables>(SsgCharacterPathsDocument, options);
       }
-export function useCharacterPathsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CharacterPathsQuery, CharacterPathsQueryVariables>) {
+export function useSsgCharacterPathsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SsgCharacterPathsQuery, SsgCharacterPathsQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<CharacterPathsQuery, CharacterPathsQueryVariables>(CharacterPathsDocument, options);
+          return Apollo.useLazyQuery<SsgCharacterPathsQuery, SsgCharacterPathsQueryVariables>(SsgCharacterPathsDocument, options);
         }
-export type CharacterPathsQueryHookResult = ReturnType<typeof useCharacterPathsQuery>;
-export type CharacterPathsLazyQueryHookResult = ReturnType<typeof useCharacterPathsLazyQuery>;
-export type CharacterPathsQueryResult = Apollo.QueryResult<CharacterPathsQuery, CharacterPathsQueryVariables>;
+export type SsgCharacterPathsQueryHookResult = ReturnType<typeof useSsgCharacterPathsQuery>;
+export type SsgCharacterPathsLazyQueryHookResult = ReturnType<typeof useSsgCharacterPathsLazyQuery>;
+export type SsgCharacterPathsQueryResult = Apollo.QueryResult<SsgCharacterPathsQuery, SsgCharacterPathsQueryVariables>;
+export const SsgPlayerPathsDocument = gql`
+    query SsgPlayerPaths {
+  players(first: 100) {
+    nodes {
+      slug
+    }
+  }
+}
+    `;
+
+/**
+ * __useSsgPlayerPathsQuery__
+ *
+ * To run a query within a React component, call `useSsgPlayerPathsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSsgPlayerPathsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSsgPlayerPathsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useSsgPlayerPathsQuery(baseOptions?: Apollo.QueryHookOptions<SsgPlayerPathsQuery, SsgPlayerPathsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SsgPlayerPathsQuery, SsgPlayerPathsQueryVariables>(SsgPlayerPathsDocument, options);
+      }
+export function useSsgPlayerPathsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SsgPlayerPathsQuery, SsgPlayerPathsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SsgPlayerPathsQuery, SsgPlayerPathsQueryVariables>(SsgPlayerPathsDocument, options);
+        }
+export type SsgPlayerPathsQueryHookResult = ReturnType<typeof useSsgPlayerPathsQuery>;
+export type SsgPlayerPathsLazyQueryHookResult = ReturnType<typeof useSsgPlayerPathsLazyQuery>;
+export type SsgPlayerPathsQueryResult = Apollo.QueryResult<SsgPlayerPathsQuery, SsgPlayerPathsQueryVariables>;
+export const SsgTournamentPathsDocument = gql`
+    query SsgTournamentPaths {
+  tournaments(first: 50) {
+    nodes {
+      id
+    }
+  }
+}
+    `;
+
+/**
+ * __useSsgTournamentPathsQuery__
+ *
+ * To run a query within a React component, call `useSsgTournamentPathsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSsgTournamentPathsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSsgTournamentPathsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useSsgTournamentPathsQuery(baseOptions?: Apollo.QueryHookOptions<SsgTournamentPathsQuery, SsgTournamentPathsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SsgTournamentPathsQuery, SsgTournamentPathsQueryVariables>(SsgTournamentPathsDocument, options);
+      }
+export function useSsgTournamentPathsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SsgTournamentPathsQuery, SsgTournamentPathsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SsgTournamentPathsQuery, SsgTournamentPathsQueryVariables>(SsgTournamentPathsDocument, options);
+        }
+export type SsgTournamentPathsQueryHookResult = ReturnType<typeof useSsgTournamentPathsQuery>;
+export type SsgTournamentPathsLazyQueryHookResult = ReturnType<typeof useSsgTournamentPathsLazyQuery>;
+export type SsgTournamentPathsQueryResult = Apollo.QueryResult<SsgTournamentPathsQuery, SsgTournamentPathsQueryVariables>;
+export const SsgTournamentVideoPathsDocument = gql`
+    query SsgTournamentVideoPaths {
+  tournamentVideos(first: 100) {
+    nodes {
+      id
+    }
+  }
+}
+    `;
+
+/**
+ * __useSsgTournamentVideoPathsQuery__
+ *
+ * To run a query within a React component, call `useSsgTournamentVideoPathsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSsgTournamentVideoPathsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSsgTournamentVideoPathsQuery({
+ *   variables: {
+ *   },
+ * });
+ */
+export function useSsgTournamentVideoPathsQuery(baseOptions?: Apollo.QueryHookOptions<SsgTournamentVideoPathsQuery, SsgTournamentVideoPathsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SsgTournamentVideoPathsQuery, SsgTournamentVideoPathsQueryVariables>(SsgTournamentVideoPathsDocument, options);
+      }
+export function useSsgTournamentVideoPathsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SsgTournamentVideoPathsQuery, SsgTournamentVideoPathsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SsgTournamentVideoPathsQuery, SsgTournamentVideoPathsQueryVariables>(SsgTournamentVideoPathsDocument, options);
+        }
+export type SsgTournamentVideoPathsQueryHookResult = ReturnType<typeof useSsgTournamentVideoPathsQuery>;
+export type SsgTournamentVideoPathsLazyQueryHookResult = ReturnType<typeof useSsgTournamentVideoPathsLazyQuery>;
+export type SsgTournamentVideoPathsQueryResult = Apollo.QueryResult<SsgTournamentVideoPathsQuery, SsgTournamentVideoPathsQueryVariables>;
 export const CharacterSelectOptionsDocument = gql`
     query CharacterSelectOptions {
   characters(first: 100) {
@@ -4143,111 +4248,6 @@ export function useMoveSelectOptionsLazyQuery(baseOptions?: Apollo.LazyQueryHook
 export type MoveSelectOptionsQueryHookResult = ReturnType<typeof useMoveSelectOptionsQuery>;
 export type MoveSelectOptionsLazyQueryHookResult = ReturnType<typeof useMoveSelectOptionsLazyQuery>;
 export type MoveSelectOptionsQueryResult = Apollo.QueryResult<MoveSelectOptionsQuery, MoveSelectOptionsQueryVariables>;
-export const PlayerSlugsDocument = gql`
-    query PlayerSlugs($first: Int) {
-  players(first: $first) {
-    nodes {
-      slug
-    }
-  }
-}
-    `;
-
-/**
- * __usePlayerSlugsQuery__
- *
- * To run a query within a React component, call `usePlayerSlugsQuery` and pass it any options that fit your needs.
- * When your component renders, `usePlayerSlugsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = usePlayerSlugsQuery({
- *   variables: {
- *      first: // value for 'first'
- *   },
- * });
- */
-export function usePlayerSlugsQuery(baseOptions?: Apollo.QueryHookOptions<PlayerSlugsQuery, PlayerSlugsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<PlayerSlugsQuery, PlayerSlugsQueryVariables>(PlayerSlugsDocument, options);
-      }
-export function usePlayerSlugsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PlayerSlugsQuery, PlayerSlugsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<PlayerSlugsQuery, PlayerSlugsQueryVariables>(PlayerSlugsDocument, options);
-        }
-export type PlayerSlugsQueryHookResult = ReturnType<typeof usePlayerSlugsQuery>;
-export type PlayerSlugsLazyQueryHookResult = ReturnType<typeof usePlayerSlugsLazyQuery>;
-export type PlayerSlugsQueryResult = Apollo.QueryResult<PlayerSlugsQuery, PlayerSlugsQueryVariables>;
-export const TournamentPathsDocument = gql`
-    query TournamentPaths {
-  allTournaments {
-    id
-  }
-}
-    `;
-
-/**
- * __useTournamentPathsQuery__
- *
- * To run a query within a React component, call `useTournamentPathsQuery` and pass it any options that fit your needs.
- * When your component renders, `useTournamentPathsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useTournamentPathsQuery({
- *   variables: {
- *   },
- * });
- */
-export function useTournamentPathsQuery(baseOptions?: Apollo.QueryHookOptions<TournamentPathsQuery, TournamentPathsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<TournamentPathsQuery, TournamentPathsQueryVariables>(TournamentPathsDocument, options);
-      }
-export function useTournamentPathsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TournamentPathsQuery, TournamentPathsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<TournamentPathsQuery, TournamentPathsQueryVariables>(TournamentPathsDocument, options);
-        }
-export type TournamentPathsQueryHookResult = ReturnType<typeof useTournamentPathsQuery>;
-export type TournamentPathsLazyQueryHookResult = ReturnType<typeof useTournamentPathsLazyQuery>;
-export type TournamentPathsQueryResult = Apollo.QueryResult<TournamentPathsQuery, TournamentPathsQueryVariables>;
-export const TournamentVideoPathsDocument = gql`
-    query TournamentVideoPaths {
-  allTournamentVideos {
-    id
-  }
-}
-    `;
-
-/**
- * __useTournamentVideoPathsQuery__
- *
- * To run a query within a React component, call `useTournamentVideoPathsQuery` and pass it any options that fit your needs.
- * When your component renders, `useTournamentVideoPathsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useTournamentVideoPathsQuery({
- *   variables: {
- *   },
- * });
- */
-export function useTournamentVideoPathsQuery(baseOptions?: Apollo.QueryHookOptions<TournamentVideoPathsQuery, TournamentVideoPathsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<TournamentVideoPathsQuery, TournamentVideoPathsQueryVariables>(TournamentVideoPathsDocument, options);
-      }
-export function useTournamentVideoPathsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TournamentVideoPathsQuery, TournamentVideoPathsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<TournamentVideoPathsQuery, TournamentVideoPathsQueryVariables>(TournamentVideoPathsDocument, options);
-        }
-export type TournamentVideoPathsQueryHookResult = ReturnType<typeof useTournamentVideoPathsQuery>;
-export type TournamentVideoPathsLazyQueryHookResult = ReturnType<typeof useTournamentVideoPathsLazyQuery>;
-export type TournamentVideoPathsQueryResult = Apollo.QueryResult<TournamentVideoPathsQuery, TournamentVideoPathsQueryVariables>;
 export const ArticleCardsDocument = gql`
     query ArticleCards($after: String) {
   articles(first: 12, after: $after) {
