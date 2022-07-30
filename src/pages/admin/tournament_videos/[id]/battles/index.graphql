@@ -22,9 +22,11 @@ query AdminBattlesPage($tournamentVideoId: ID!) {
 }
 
 fragment AdminBattlesPageSide on BattleSide {
+  id
+  rounds
+
   player { id name }
   character { id faceImageUrl }
-  rounds
 }
 
 fragment AdminBattlesPageBattleReslut on Battle {

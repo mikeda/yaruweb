@@ -18,6 +18,7 @@ mutation CreateCombo($comboCategoryId: ID!, $attributes: ComboAttributes!) {
 
       comboCategory {
         id
+
         combos {
           id
           position
@@ -34,6 +35,7 @@ mutation UpdateCombo($comboId: ID!, $attributes: ComboAttributes!) {
 
       comboCategory {
         id
+
         combos {
           id
           position
@@ -46,6 +48,8 @@ mutation UpdateCombo($comboId: ID!, $attributes: ComboAttributes!) {
 mutation DeleteCombo($comboId: ID!) {
   deleteCombo(input: { comboId: $comboId }) {
     combo {
+      id
+
       comboCategory {
         id
         combos { id }

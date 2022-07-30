@@ -1,0 +1,2042 @@
+type Article {
+  author: User!
+  category: ArticleCategory!
+  content: String!
+  description: String!
+  id: ID!
+  mainImageUrl: String
+  publishedAt: ISO8601DateTime
+  relatedArticles: [Article!]!
+  status: ArticleStatus!
+  title: String!
+}
+
+input ArticleAttributes {
+  category: ArticleCategory!
+  title: String!
+  mainImage: String
+  content: String!
+}
+
+enum ArticleCategory {
+  """入門"""
+  intro
+
+  """解説・戦略"""
+  theory
+
+  """イベント"""
+  event
+
+  """対戦"""
+  battle
+
+  """ニュース"""
+  news
+
+  """雑談"""
+  blog
+}
+
+"""The connection type for Article."""
+type ArticleConnection {
+  """A list of edges."""
+  edges: [ArticleEdge!]!
+
+  """A list of nodes."""
+  nodes: [Article!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+}
+
+"""An edge in a connection."""
+type ArticleEdge {
+  """A cursor for use in pagination."""
+  cursor: String!
+
+  """The item at the end of the edge."""
+  node: Article!
+}
+
+type ArticleLink {
+  description: String
+  imageUrl: String
+  title: String!
+  url: String!
+}
+
+enum ArticleStatus {
+  """下書き"""
+  draft
+
+  """公開中"""
+  published
+}
+
+type ArticleVideo {
+  id: ID!
+  m3u8Url: String!
+  thumbnailUrl: String!
+}
+
+input AttackAttributes {
+  startUpFrame: Int
+  duration: Int
+  heights: [AttackTypeEnum!]!
+  damages: [Int!]!
+  reach: Float
+  powerCrush: Boolean!
+  crouchingStatus: Boolean!
+  jumpStatus: Boolean!
+  homing: Boolean!
+  screw: Boolean!
+  wallBound: Boolean!
+  blockResult: AttackMoveResultEnum!
+  blockStatus: AttackMoveStateEnum
+  blockFrame: Int
+  hitResult: AttackMoveResultEnum!
+  hitStatus: AttackMoveStateEnum
+  hitFrame: Int
+  counterResult: AttackMoveResultEnum!
+  counterStatus: AttackMoveStateEnum
+  counterFrame: Int
+}
+
+type AttackMove {
+  blockFrame: Int
+  blockResult: AttackMoveResultEnum!
+  blockStatus: AttackMoveStateEnum
+  counterFrame: Int
+  counterResult: AttackMoveResultEnum!
+  counterStatus: AttackMoveStateEnum
+  crouchingStatus: Boolean!
+  crouchingStatusFrame: Int
+  damages: [Int!]!
+  duration: Int
+  heights: [AttackTypeEnum!]!
+  hitFrame: Int
+  hitResult: AttackMoveResultEnum!
+  hitStatus: AttackMoveStateEnum
+  homing: Boolean!
+  id: ID!
+  jumpStatus: Boolean!
+  jumpStatusFrame: Int
+  powerCrush: Boolean!
+  powerCrushFrame: Int
+  reach: Float
+  screw: Boolean!
+  startUpFrame: Int
+  wallBound: Boolean!
+}
+
+input AttackMoveAttributes {
+  move: MoveAttributes!
+  attack: AttackAttributes!
+}
+
+enum AttackMoveResultEnum {
+  """-"""
+  normal
+
+  """ダウン"""
+  down
+
+  """空中コンボ"""
+  combo
+}
+
+enum AttackMoveStateEnum {
+  """強制しゃがみ"""
+  crouching
+
+  """強制横向き"""
+  sideways
+
+  """強制後ろ向き"""
+  backward
+
+  """きりもみ"""
+  twist
+
+  """ガード可能な硬直"""
+  blockable
+}
+
+enum AttackTypeEnum {
+  """上段"""
+  h
+
+  """中段"""
+  m
+
+  """下段"""
+  l
+
+  """特殊中段"""
+  sm
+
+  """上段ガード不能"""
+  ubh
+
+  """中段ガード不能"""
+  ubm
+
+  """下段ガード不能"""
+  ubl
+
+  """空中ガード不能"""
+  uba
+
+  """打撃投げ"""
+  t
+
+  """上段投げ"""
+  th
+
+  """中段投げ"""
+  tm
+
+  """下段投げ"""
+  tl
+}
+
+type Battle {
+  id: ID!
+  round: BattleRound!
+  sides: [BattleSide!]!
+  startSec: Int!
+  tournamentVideo: TournamentVideo!
+}
+
+input BattleAttributes {
+  tournamentVideoId: ID!
+  startSec: Int!
+  round: BattleRound!
+  sides: [BattleSideAttributes!]!
+}
+
+"""The connection type for Battle."""
+type BattleConnection {
+  """A list of edges."""
+  edges: [BattleEdge!]!
+
+  """A list of nodes."""
+  nodes: [Battle!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+}
+
+type BattleCount {
+  character: Character!
+  count: Int!
+  id: ID!
+  player: Player!
+}
+
+"""The connection type for BattleCount."""
+type BattleCountConnection {
+  """A list of edges."""
+  edges: [BattleCountEdge!]!
+
+  """A list of nodes."""
+  nodes: [BattleCount!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+}
+
+"""An edge in a connection."""
+type BattleCountEdge {
+  """A cursor for use in pagination."""
+  cursor: String!
+
+  """The item at the end of the edge."""
+  node: BattleCount!
+}
+
+"""An edge in a connection."""
+type BattleEdge {
+  """A cursor for use in pagination."""
+  cursor: String!
+
+  """The item at the end of the edge."""
+  node: Battle!
+}
+
+enum BattleRound {
+  """Grand Final"""
+  grand_final
+
+  """Grand Final(リセット)"""
+  grand_final_reset
+
+  """Winners Final"""
+  winners_final
+
+  """Winners Semifinal"""
+  winners_semifinal
+
+  """Losers Final"""
+  losers_final
+
+  """Losers Semifinal"""
+  losers_semifinal
+
+  """Final"""
+  final
+
+  """Semifinal"""
+  semifinal
+
+  """3位決定戦"""
+  third_place
+
+  """指定なし"""
+  unspecified
+}
+
+type BattleSide {
+  character: Character!
+  id: ID!
+  player: Player!
+  rounds: Int!
+}
+
+input BattleSideAttributes {
+  playerId: ID!
+  characterId: ID!
+  rounds: Int!
+}
+
+type Channel {
+  channelId: String!
+  id: ID!
+  name: String!
+}
+
+type Character {
+  battlesCount: Int!
+  comboCategories: [ComboCategory!]!
+  comboStarters: [Move!]!
+  combosCount: Int!
+  country: String!
+  description: String!
+  dlc: Boolean!
+  faceImageUrl: String!
+  fightingStyle: String!
+  id: ID!
+  longName: String!
+  longNameKana: String!
+  mainImageUrl: String!
+  moveCategories: [MoveCategory!]!
+  movesCount: Int!
+  name: String!
+  nameKana: String!
+  slug: String!
+  story: String!
+}
+
+input CharacterAttributes {
+  name: String!
+  nameKana: String!
+  longName: String!
+  longNameKana: String!
+  slug: String!
+  mainImage: String
+  faceImage: String
+  country: String!
+  fightingStyle: String!
+  story: String!
+  description: String!
+  dlc: Boolean!
+}
+
+"""The connection type for Character."""
+type CharacterConnection {
+  """A list of edges."""
+  edges: [CharacterEdge!]!
+
+  """A list of nodes."""
+  nodes: [Character!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+}
+
+"""An edge in a connection."""
+type CharacterEdge {
+  """A cursor for use in pagination."""
+  cursor: String!
+
+  """The item at the end of the edge."""
+  node: Character!
+}
+
+enum CharacterOrder {
+  """名前"""
+  name
+
+  """新着"""
+  use_rate
+}
+
+type Combo {
+  comboCategory: ComboCategory!
+  comboVideo: ComboVideo
+  command: [String!]!
+  damage: Int
+  id: ID!
+  move: Move
+  note: String
+  position: Int!
+}
+
+input ComboAttributes {
+  moveId: ID
+  damage: Int
+  note: String
+  position: Int!
+  command: [String!]!
+}
+
+type ComboCategory {
+  character: Character!
+  combos: [Combo!]!
+  combosCount: Int!
+  id: ID!
+  name: String!
+  position: Int!
+}
+
+input ComboCategoryAttributes {
+  name: String!
+  position: Int!
+}
+
+type ComboVideo {
+  id: ID!
+  m3u8Url: String!
+  thumbnailUrl: String!
+}
+
+type Country {
+  code: String!
+  flagEmoji: String!
+  id: ID!
+  name: String!
+}
+
+"""Autogenerated input type of CreateArticleImage"""
+input CreateArticleImageInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  image: String!
+}
+
+"""Autogenerated return type of CreateArticleImage"""
+type CreateArticleImagePayload {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  url: String
+}
+
+"""Autogenerated input type of CreateArticle"""
+input CreateArticleInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  attributes: ArticleAttributes!
+}
+
+"""Autogenerated input type of CreateArticleLink"""
+input CreateArticleLinkInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  url: String!
+}
+
+"""Autogenerated return type of CreateArticleLink"""
+type CreateArticleLinkPayload {
+  articleLink: ArticleLink!
+
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+}
+
+"""Autogenerated return type of CreateArticle"""
+type CreateArticlePayload {
+  article: Article!
+
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+}
+
+"""Autogenerated input type of CreateArticleVideo"""
+input CreateArticleVideoInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+}
+
+"""Autogenerated return type of CreateArticleVideo"""
+type CreateArticleVideoPayload {
+  articleVideo: ArticleVideo!
+
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  videoUpload: VideoUpload!
+}
+
+"""Autogenerated input type of CreateAttackMove"""
+input CreateAttackMoveInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  moveCategoryId: ID!
+  attributes: AttackMoveAttributes!
+}
+
+"""Autogenerated return type of CreateAttackMove"""
+type CreateAttackMovePayload {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  move: Move!
+}
+
+"""Autogenerated input type of CreateBattle"""
+input CreateBattleInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  attributes: BattleAttributes!
+}
+
+"""Autogenerated return type of CreateBattle"""
+type CreateBattlePayload {
+  battle: Battle!
+
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+}
+
+"""Autogenerated input type of CreateCharacter"""
+input CreateCharacterInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  attributes: CharacterAttributes!
+}
+
+"""Autogenerated return type of CreateCharacter"""
+type CreateCharacterPayload {
+  character: Character!
+
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+}
+
+"""Autogenerated input type of CreateComboCategory"""
+input CreateComboCategoryInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  characterSlug: String!
+  attributes: ComboCategoryAttributes!
+}
+
+"""Autogenerated return type of CreateComboCategory"""
+type CreateComboCategoryPayload {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  comboCategory: ComboCategory!
+}
+
+"""Autogenerated input type of CreateCombo"""
+input CreateComboInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  comboCategoryId: ID!
+  attributes: ComboAttributes!
+}
+
+"""Autogenerated return type of CreateCombo"""
+type CreateComboPayload {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  combo: Combo!
+}
+
+"""Autogenerated input type of CreateComboVideo"""
+input CreateComboVideoInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  comboId: ID!
+}
+
+"""Autogenerated return type of CreateComboVideo"""
+type CreateComboVideoPayload {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  combo: Combo!
+  videoUpload: VideoUpload!
+}
+
+"""Autogenerated input type of CreateMoveCategory"""
+input CreateMoveCategoryInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  characterSlug: String!
+  attributes: MoveCategoryAttributes!
+}
+
+"""Autogenerated return type of CreateMoveCategory"""
+type CreateMoveCategoryPayload {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  moveCategory: MoveCategory!
+}
+
+"""Autogenerated input type of CreateMove"""
+input CreateMoveInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  moveCategoryId: ID!
+  attributes: MoveAttributes!
+}
+
+"""Autogenerated return type of CreateMove"""
+type CreateMovePayload {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  move: Move!
+}
+
+"""Autogenerated input type of CreateMoveVideo"""
+input CreateMoveVideoInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  moveId: ID!
+}
+
+"""Autogenerated return type of CreateMoveVideo"""
+type CreateMoveVideoPayload {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  move: Move!
+  videoUpload: VideoUpload!
+}
+
+"""Autogenerated input type of CreateOrganizer"""
+input CreateOrganizerInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  attributes: OrganizerAttributes!
+}
+
+"""Autogenerated return type of CreateOrganizer"""
+type CreateOrganizerPayload {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  organizer: Organizer!
+}
+
+"""Autogenerated input type of CreatePlayerFromSmashgg"""
+input CreatePlayerFromSmashggInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  smashggId: String!
+}
+
+"""Autogenerated return type of CreatePlayerFromSmashgg"""
+type CreatePlayerFromSmashggPayload {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  player: Player!
+}
+
+"""Autogenerated input type of CreatePlayer"""
+input CreatePlayerInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  attributes: PlayerAttributes!
+}
+
+"""Autogenerated return type of CreatePlayer"""
+type CreatePlayerPayload {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  player: Player!
+}
+
+"""Autogenerated input type of CreateReversalMove"""
+input CreateReversalMoveInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  moveCategoryId: ID!
+  attributes: ReversalMoveAttributes!
+}
+
+"""Autogenerated return type of CreateReversalMove"""
+type CreateReversalMovePayload {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  move: Move!
+}
+
+"""Autogenerated input type of CreateStanding"""
+input CreateStandingInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  tournamentId: ID!
+  attributes: StandingAttributes!
+}
+
+"""Autogenerated return type of CreateStanding"""
+type CreateStandingPayload {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  standing: Standing!
+}
+
+"""Autogenerated input type of CreateThrowMove"""
+input CreateThrowMoveInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  moveCategoryId: ID!
+  attributes: ThrowMoveAttributes!
+}
+
+"""Autogenerated return type of CreateThrowMove"""
+type CreateThrowMovePayload {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  move: Move!
+}
+
+"""Autogenerated input type of CreateTournament"""
+input CreateTournamentInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  attributes: TournamentAttributes!
+}
+
+"""Autogenerated return type of CreateTournament"""
+type CreateTournamentPayload {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  tournament: Tournament!
+}
+
+"""Autogenerated input type of CreateTournamentVideo"""
+input CreateTournamentVideoInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  tournamentId: ID!
+  url: String!
+}
+
+"""Autogenerated return type of CreateTournamentVideo"""
+type CreateTournamentVideoPayload {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  tournamentVideo: TournamentVideo!
+}
+
+"""Autogenerated input type of CreateUser"""
+input CreateUserInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+}
+
+"""Autogenerated return type of CreateUser"""
+type CreateUserPayload {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  currentUser: CurrentUser!
+}
+
+type CurrentUser {
+  avatarUrl: String!
+  createdAt: ISO8601DateTime!
+  description: String
+  id: ID!
+  name: String!
+  role: UserRole!
+}
+
+input CurrentUserAttributes {
+  name: String!
+  description: String
+  avatar: String
+}
+
+"""Autogenerated input type of DeleteArticle"""
+input DeleteArticleInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  articleId: ID!
+}
+
+"""Autogenerated return type of DeleteArticle"""
+type DeleteArticlePayload {
+  article: Article!
+
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+}
+
+"""Autogenerated input type of DeleteBattle"""
+input DeleteBattleInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  battleId: ID!
+}
+
+"""Autogenerated return type of DeleteBattle"""
+type DeleteBattlePayload {
+  battle: Battle!
+
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+}
+
+"""Autogenerated input type of DeleteComboCategory"""
+input DeleteComboCategoryInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  comboCategoryId: ID!
+}
+
+"""Autogenerated return type of DeleteComboCategory"""
+type DeleteComboCategoryPayload {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  comboCategory: ComboCategory!
+}
+
+"""Autogenerated input type of DeleteCombo"""
+input DeleteComboInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  comboId: ID!
+}
+
+"""Autogenerated return type of DeleteCombo"""
+type DeleteComboPayload {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  combo: Combo!
+}
+
+"""Autogenerated input type of DeleteMoveCategory"""
+input DeleteMoveCategoryInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  moveCategoryId: ID!
+}
+
+"""Autogenerated return type of DeleteMoveCategory"""
+type DeleteMoveCategoryPayload {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  moveCategory: MoveCategory!
+}
+
+"""Autogenerated input type of DeleteMove"""
+input DeleteMoveInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  moveId: ID!
+}
+
+"""Autogenerated return type of DeleteMove"""
+type DeleteMovePayload {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  move: Move!
+}
+
+"""Autogenerated input type of DeleteMoveVideo"""
+input DeleteMoveVideoInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  moveId: ID!
+}
+
+"""Autogenerated return type of DeleteMoveVideo"""
+type DeleteMoveVideoPayload {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  move: Move!
+}
+
+"""Autogenerated input type of DeleteOrganizer"""
+input DeleteOrganizerInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  organizerSlug: String!
+}
+
+"""Autogenerated return type of DeleteOrganizer"""
+type DeleteOrganizerPayload {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  organizer: Organizer!
+}
+
+"""Autogenerated input type of DeletePlayer"""
+input DeletePlayerInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  playerSlug: String!
+}
+
+"""Autogenerated return type of DeletePlayer"""
+type DeletePlayerPayload {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  player: Player!
+}
+
+"""Autogenerated input type of DeleteStanding"""
+input DeleteStandingInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  standingId: ID!
+}
+
+"""Autogenerated return type of DeleteStanding"""
+type DeleteStandingPayload {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  standing: Standing!
+}
+
+"""Autogenerated input type of DeleteTournament"""
+input DeleteTournamentInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  tournamentId: ID!
+}
+
+"""Autogenerated return type of DeleteTournament"""
+type DeleteTournamentPayload {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  tournament: Tournament!
+}
+
+"""Autogenerated input type of DeleteTournamentVideo"""
+input DeleteTournamentVideoInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  tournamentVideoId: ID!
+}
+
+"""Autogenerated return type of DeleteTournamentVideo"""
+type DeleteTournamentVideoPayload {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  tournamentVideo: TournamentVideo!
+}
+
+"""An ISO 8601-encoded datetime"""
+scalar ISO8601DateTime
+
+type Move {
+  combos: [Combo!]!
+  combosCount: Int!
+  command: [String!]!
+  id: ID!
+  kana: String
+  moveCategory: MoveCategory!
+  moveVideo: MoveVideo
+  moveable: Moveable!
+  name: String!
+  note: String
+  position: Int!
+  statusAfter: String
+}
+
+union Moveable = AttackMove | ReversalMove | ThrowMove
+
+input MoveAttributes {
+  name: String!
+  kana: String
+  command: [String!]!
+  statusAfter: String
+  position: Int!
+  note: String
+}
+
+type MoveCategory {
+  character: Character!
+  id: ID!
+  moves: [Move!]!
+  movesCount: Int!
+  name: String!
+  position: Int!
+}
+
+input MoveCategoryAttributes {
+  name: String!
+  position: Int!
+}
+
+type MoveVideo {
+  id: ID!
+  m3u8Url: String!
+  thumbnailUrl: String!
+}
+
+type Mutation {
+  createArticle(
+    """Parameters for CreateArticle"""
+    input: CreateArticleInput!
+  ): CreateArticlePayload
+  createArticleImage(
+    """Parameters for CreateArticleImage"""
+    input: CreateArticleImageInput!
+  ): CreateArticleImagePayload
+  createArticleLink(
+    """Parameters for CreateArticleLink"""
+    input: CreateArticleLinkInput!
+  ): CreateArticleLinkPayload
+  createArticleVideo(
+    """Parameters for CreateArticleVideo"""
+    input: CreateArticleVideoInput!
+  ): CreateArticleVideoPayload
+  createAttackMove(
+    """Parameters for CreateAttackMove"""
+    input: CreateAttackMoveInput!
+  ): CreateAttackMovePayload
+  createBattle(
+    """Parameters for CreateBattle"""
+    input: CreateBattleInput!
+  ): CreateBattlePayload
+  createCharacter(
+    """Parameters for CreateCharacter"""
+    input: CreateCharacterInput!
+  ): CreateCharacterPayload
+  createCombo(
+    """Parameters for CreateCombo"""
+    input: CreateComboInput!
+  ): CreateComboPayload
+  createComboCategory(
+    """Parameters for CreateComboCategory"""
+    input: CreateComboCategoryInput!
+  ): CreateComboCategoryPayload
+  createComboVideo(
+    """Parameters for CreateComboVideo"""
+    input: CreateComboVideoInput!
+  ): CreateComboVideoPayload
+  createMove(
+    """Parameters for CreateMove"""
+    input: CreateMoveInput!
+  ): CreateMovePayload
+  createMoveCategory(
+    """Parameters for CreateMoveCategory"""
+    input: CreateMoveCategoryInput!
+  ): CreateMoveCategoryPayload
+  createMoveVideo(
+    """Parameters for CreateMoveVideo"""
+    input: CreateMoveVideoInput!
+  ): CreateMoveVideoPayload
+  createOrganizer(
+    """Parameters for CreateOrganizer"""
+    input: CreateOrganizerInput!
+  ): CreateOrganizerPayload
+  createPlayer(
+    """Parameters for CreatePlayer"""
+    input: CreatePlayerInput!
+  ): CreatePlayerPayload
+  createPlayerFromSmashgg(
+    """Parameters for CreatePlayerFromSmashgg"""
+    input: CreatePlayerFromSmashggInput!
+  ): CreatePlayerFromSmashggPayload
+  createReversalMove(
+    """Parameters for CreateReversalMove"""
+    input: CreateReversalMoveInput!
+  ): CreateReversalMovePayload
+  createStanding(
+    """Parameters for CreateStanding"""
+    input: CreateStandingInput!
+  ): CreateStandingPayload
+  createThrowMove(
+    """Parameters for CreateThrowMove"""
+    input: CreateThrowMoveInput!
+  ): CreateThrowMovePayload
+  createTournament(
+    """Parameters for CreateTournament"""
+    input: CreateTournamentInput!
+  ): CreateTournamentPayload
+  createTournamentVideo(
+    """Parameters for CreateTournamentVideo"""
+    input: CreateTournamentVideoInput!
+  ): CreateTournamentVideoPayload
+  createUser(
+    """Parameters for CreateUser"""
+    input: CreateUserInput!
+  ): CreateUserPayload
+  deleteArticle(
+    """Parameters for DeleteArticle"""
+    input: DeleteArticleInput!
+  ): DeleteArticlePayload
+  deleteBattle(
+    """Parameters for DeleteBattle"""
+    input: DeleteBattleInput!
+  ): DeleteBattlePayload
+  deleteCombo(
+    """Parameters for DeleteCombo"""
+    input: DeleteComboInput!
+  ): DeleteComboPayload
+  deleteComboCategory(
+    """Parameters for DeleteComboCategory"""
+    input: DeleteComboCategoryInput!
+  ): DeleteComboCategoryPayload
+  deleteMove(
+    """Parameters for DeleteMove"""
+    input: DeleteMoveInput!
+  ): DeleteMovePayload
+  deleteMoveCategory(
+    """Parameters for DeleteMoveCategory"""
+    input: DeleteMoveCategoryInput!
+  ): DeleteMoveCategoryPayload
+  deleteMoveVideo(
+    """Parameters for DeleteMoveVideo"""
+    input: DeleteMoveVideoInput!
+  ): DeleteMoveVideoPayload
+  deleteOrganizer(
+    """Parameters for DeleteOrganizer"""
+    input: DeleteOrganizerInput!
+  ): DeleteOrganizerPayload
+  deletePlayer(
+    """Parameters for DeletePlayer"""
+    input: DeletePlayerInput!
+  ): DeletePlayerPayload
+  deleteStanding(
+    """Parameters for DeleteStanding"""
+    input: DeleteStandingInput!
+  ): DeleteStandingPayload
+  deleteTournament(
+    """Parameters for DeleteTournament"""
+    input: DeleteTournamentInput!
+  ): DeleteTournamentPayload
+  deleteTournamentVideo(
+    """Parameters for DeleteTournamentVideo"""
+    input: DeleteTournamentVideoInput!
+  ): DeleteTournamentVideoPayload
+  publishArticle(
+    """Parameters for PublishArticle"""
+    input: PublishArticleInput!
+  ): PublishArticlePayload
+  setUserAvatar(
+    """Parameters for SetUserAvatar"""
+    input: SetUserAvatarInput!
+  ): SetUserAvatarPayload
+  stopArticle(
+    """Parameters for StopArticle"""
+    input: StopArticleInput!
+  ): StopArticlePayload
+  updateArticle(
+    """Parameters for UpdateArticle"""
+    input: UpdateArticleInput!
+  ): UpdateArticlePayload
+  updateAttackMove(
+    """Parameters for UpdateAttackMove"""
+    input: UpdateAttackMoveInput!
+  ): UpdateAttackMovePayload
+  updateBattle(
+    """Parameters for UpdateBattle"""
+    input: UpdateBattleInput!
+  ): UpdateBattlePayload
+  updateCharacter(
+    """Parameters for UpdateCharacter"""
+    input: UpdateCharacterInput!
+  ): UpdateCharacterPayload
+  updateCombo(
+    """Parameters for UpdateCombo"""
+    input: UpdateComboInput!
+  ): UpdateComboPayload
+  updateComboCategory(
+    """Parameters for UpdateComboCategory"""
+    input: UpdateComboCategoryInput!
+  ): UpdateComboCategoryPayload
+  updateCurrentUser(
+    """Parameters for UpdateCurrentUser"""
+    input: UpdateCurrentUserInput!
+  ): UpdateCurrentUserPayload
+  updateMove(
+    """Parameters for UpdateMove"""
+    input: UpdateMoveInput!
+  ): UpdateMovePayload
+  updateMoveCategory(
+    """Parameters for UpdateMoveCategory"""
+    input: UpdateMoveCategoryInput!
+  ): UpdateMoveCategoryPayload
+  updateOrganizer(
+    """Parameters for UpdateOrganizer"""
+    input: UpdateOrganizerInput!
+  ): UpdateOrganizerPayload
+  updatePlayer(
+    """Parameters for UpdatePlayer"""
+    input: UpdatePlayerInput!
+  ): UpdatePlayerPayload
+  updateReversalMove(
+    """Parameters for UpdateReversalMove"""
+    input: UpdateReversalMoveInput!
+  ): UpdateReversalMovePayload
+  updateStanding(
+    """Parameters for UpdateStanding"""
+    input: UpdateStandingInput!
+  ): UpdateStandingPayload
+  updateThrowMove(
+    """Parameters for UpdateThrowMove"""
+    input: UpdateThrowMoveInput!
+  ): UpdateThrowMovePayload
+  updateTournament(
+    """Parameters for UpdateTournament"""
+    input: UpdateTournamentInput!
+  ): UpdateTournamentPayload
+  updateTournamentVideo(
+    """Parameters for UpdateTournamentVideo"""
+    input: UpdateTournamentVideoInput!
+  ): UpdateTournamentVideoPayload
+}
+
+enum Order {
+  """新着"""
+  new
+}
+
+type Organizer {
+  avatarUrl: String
+  description: String
+  id: ID!
+  name: String!
+  slug: String!
+  streamingUrl: String
+  tonamelId: String
+  tournaments: [Tournament!]!
+  twitterId: String
+}
+
+input OrganizerAttributes {
+  name: String!
+  slug: String!
+  tonamelId: String
+  twitterId: String
+  streamingUrl: String
+  description: String
+}
+
+"""The connection type for Organizer."""
+type OrganizerConnection {
+  """A list of edges."""
+  edges: [OrganizerEdge!]!
+
+  """A list of nodes."""
+  nodes: [Organizer!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+}
+
+"""An edge in a connection."""
+type OrganizerEdge {
+  """A cursor for use in pagination."""
+  cursor: String!
+
+  """The item at the end of the edge."""
+  node: Organizer!
+}
+
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+}
+
+type Player {
+  avatarUrl: String
+  battleCounts: [BattleCount!]!
+  battlesCount: Int!
+  country: Country
+  description: String
+  id: ID!
+  name: String!
+  slug: String!
+  smashggId: String
+  standingsCount: Int!
+  streamingUrl: String
+  tonamelId: String
+  twitterId: String
+}
+
+input PlayerAttributes {
+  countryId: ID
+  name: String!
+  slug: String!
+  tonamelId: String
+  smashggId: String
+  twitterId: String
+  avatar: String
+  streamingUrl: String
+  description: String
+}
+
+"""The connection type for Player."""
+type PlayerConnection {
+  """A list of edges."""
+  edges: [PlayerEdge!]!
+
+  """A list of nodes."""
+  nodes: [Player!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+}
+
+"""An edge in a connection."""
+type PlayerEdge {
+  """A cursor for use in pagination."""
+  cursor: String!
+
+  """The item at the end of the edge."""
+  node: Player!
+}
+
+"""Autogenerated input type of PublishArticle"""
+input PublishArticleInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  articleId: ID!
+}
+
+"""Autogenerated return type of PublishArticle"""
+type PublishArticlePayload {
+  article: Article!
+
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+}
+
+type Query {
+  article(articleId: ID!): Article!
+  articles(
+    category: ArticleCategory
+    order: Order = new
+
+    """Returns the elements in the list that come after the specified cursor."""
+    after: String
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the first _n_ elements from the list."""
+    first: Int
+
+    """Returns the last _n_ elements from the list."""
+    last: Int
+  ): ArticleConnection!
+  battleCounts(
+    playerSlug: String = null
+    characterSlug: String = null
+
+    """Returns the elements in the list that come after the specified cursor."""
+    after: String
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the first _n_ elements from the list."""
+    first: Int
+
+    """Returns the last _n_ elements from the list."""
+    last: Int
+  ): BattleCountConnection!
+  battles(
+    tournamentId: ID = null
+    tournamentVideoId: ID = null
+    playerSlug: String = null
+    characterSlug: String = null
+
+    """Returns the elements in the list that come after the specified cursor."""
+    after: String
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the first _n_ elements from the list."""
+    first: Int
+
+    """Returns the last _n_ elements from the list."""
+    last: Int
+  ): BattleConnection!
+  character(characterSlug: String!): Character!
+  characters(
+    order: CharacterOrder = name
+    keyword: String
+
+    """Returns the elements in the list that come after the specified cursor."""
+    after: String
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the first _n_ elements from the list."""
+    first: Int
+
+    """Returns the last _n_ elements from the list."""
+    last: Int
+  ): CharacterConnection!
+  combo(comboId: ID!): Combo!
+  comboCategories(characterSlug: String = null): [ComboCategory!]!
+  comboCategory(comboCategoryId: ID!): ComboCategory!
+  combos(comboCategoryId: ID!): [Combo!]!
+  countries: [Country!]!
+  currentUser: CurrentUser!
+  move(moveId: ID!): Move!
+  moveCategories(characterSlug: String = null): [MoveCategory!]!
+  moveCategory(moveCategoryId: ID!): MoveCategory!
+  moves(moveCategoryId: ID!): [Move!]!
+  myArticle(articleId: ID!): Article!
+  myArticles(
+    keyword: String
+
+    """Returns the elements in the list that come after the specified cursor."""
+    after: String
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the first _n_ elements from the list."""
+    first: Int
+
+    """Returns the last _n_ elements from the list."""
+    last: Int
+  ): ArticleConnection!
+  organizer(organizerSlug: String!): Organizer!
+  organizers(
+    keyword: String
+
+    """Returns the elements in the list that come after the specified cursor."""
+    after: String
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the first _n_ elements from the list."""
+    first: Int
+
+    """Returns the last _n_ elements from the list."""
+    last: Int
+  ): OrganizerConnection!
+  player(playerSlug: String!): Player!
+  players(
+    keyword: String
+
+    """Returns the elements in the list that come after the specified cursor."""
+    after: String
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the first _n_ elements from the list."""
+    first: Int
+
+    """Returns the last _n_ elements from the list."""
+    last: Int
+  ): PlayerConnection!
+  standings(
+    playerSlug: String = null
+    tournamentId: ID = null
+
+    """Returns the elements in the list that come after the specified cursor."""
+    after: String
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the first _n_ elements from the list."""
+    first: Int
+
+    """Returns the last _n_ elements from the list."""
+    last: Int
+  ): StandingConnection!
+  tournament(tournamentId: ID!): Tournament!
+  tournamentVideo(tournamentVideoId: ID!): TournamentVideo!
+  tournamentVideos(
+    tournamentId: ID = null
+
+    """Returns the elements in the list that come after the specified cursor."""
+    after: String
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the first _n_ elements from the list."""
+    first: Int
+
+    """Returns the last _n_ elements from the list."""
+    last: Int
+  ): TournamentVideoConnection!
+  tournaments(
+    organizerId: ID
+    keyword: String
+    thisWeek: Boolean = false
+
+    """Returns the elements in the list that come after the specified cursor."""
+    after: String
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the first _n_ elements from the list."""
+    first: Int
+
+    """Returns the last _n_ elements from the list."""
+    last: Int
+  ): TournamentConnection!
+}
+
+input ReversalAttributes {
+  kind: String!
+  startUpFrame: Int
+  finishFrame: Int
+}
+
+type ReversalMove {
+  finishFrame: Int
+  id: ID!
+  kind: String!
+  startUpFrame: Int
+}
+
+input ReversalMoveAttributes {
+  move: MoveAttributes!
+  reversal: ReversalAttributes!
+}
+
+"""Autogenerated input type of SetUserAvatar"""
+input SetUserAvatarInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  avatar: String!
+}
+
+"""Autogenerated return type of SetUserAvatar"""
+type SetUserAvatarPayload {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  user: User!
+}
+
+type Standing {
+  id: ID!
+  place: Int!
+  player: Player!
+  playerId: ID!
+  tournament: Tournament!
+}
+
+input StandingAttributes {
+  playerId: ID!
+  place: Int!
+}
+
+"""The connection type for Standing."""
+type StandingConnection {
+  """A list of edges."""
+  edges: [StandingEdge!]!
+
+  """A list of nodes."""
+  nodes: [Standing!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+}
+
+"""An edge in a connection."""
+type StandingEdge {
+  """A cursor for use in pagination."""
+  cursor: String!
+
+  """The item at the end of the edge."""
+  node: Standing!
+}
+
+"""Autogenerated input type of StopArticle"""
+input StopArticleInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  articleId: ID!
+}
+
+"""Autogenerated return type of StopArticle"""
+type StopArticlePayload {
+  article: Article!
+
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+}
+
+input ThrowAttributes {
+  startUpFrame: Int
+  throwType: ThrowTypeEnum!
+  damage: Int
+  throwEscape: ThrowEscapeEnum!
+  throwResult: ThrowMoveResultEnum!
+}
+
+enum ThrowEscapeEnum {
+  """LP OR RP"""
+  lp_or_rp
+
+  """WP"""
+  wp
+
+  """LP"""
+  lp
+
+  """RP"""
+  rp
+
+  """不可"""
+  inescapable
+}
+
+type ThrowMove {
+  damage: Int
+  id: ID!
+  startUpFrame: Int
+  throwEscape: ThrowEscapeEnum!
+  throwResult: ThrowMoveResultEnum!
+  throwType: ThrowTypeEnum!
+}
+
+input ThrowMoveAttributes {
+  move: MoveAttributes!
+  throw: ThrowAttributes!
+}
+
+enum ThrowMoveResultEnum {
+  """-"""
+  normal
+
+  """ダウン"""
+  down
+
+  """空中コンボ"""
+  combo
+}
+
+enum ThrowTypeEnum {
+  """上段投げ"""
+  high
+
+  """中段投げ"""
+  middle
+
+  """下段投げ"""
+  low
+
+  """ダウン投げ"""
+  down
+
+  """空中投げ"""
+  juggle
+
+  """壁投げ"""
+  wall
+
+  """投げコンボ"""
+  combo
+
+  """左側面投げ"""
+  left
+
+  """右側面投げ"""
+  right
+
+  """背面投げ"""
+  back
+}
+
+type Tournament {
+  battlesCount: Int!
+  description: String!
+  id: ID!
+  mainImageUrl: String
+  name: String!
+  organizerId: ID!
+  standings: [Standing!]!
+  standingsCount: Int!
+  startsAt: ISO8601DateTime!
+  streamingUrl: String
+  url: String!
+  videos: [TournamentVideo!]!
+  videosCount: Int!
+}
+
+input TournamentAttributes {
+  organizerId: ID
+  name: String!
+  mainImage: String
+  url: String!
+  streamingUrl: String
+  startsAt: String!
+  description: String!
+}
+
+"""The connection type for Tournament."""
+type TournamentConnection {
+  """A list of edges."""
+  edges: [TournamentEdge!]!
+
+  """A list of nodes."""
+  nodes: [Tournament!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+}
+
+"""An edge in a connection."""
+type TournamentEdge {
+  """A cursor for use in pagination."""
+  cursor: String!
+
+  """The item at the end of the edge."""
+  node: Tournament!
+}
+
+type TournamentVideo {
+  battles: [Battle!]!
+  battlesCount: Int!
+  channel: Channel!
+  id: ID!
+  label: String
+  publishedAt: ISO8601DateTime
+  thumbnailUrl: String!
+  title: String!
+  tournament: Tournament!
+  url: String!
+  youtubeVideoId: String!
+}
+
+input TournamentVideoAttributes {
+  title: String!
+  label: String
+  publishedAt: String!
+}
+
+"""The connection type for TournamentVideo."""
+type TournamentVideoConnection {
+  """A list of edges."""
+  edges: [TournamentVideoEdge!]!
+
+  """A list of nodes."""
+  nodes: [TournamentVideo!]!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+}
+
+"""An edge in a connection."""
+type TournamentVideoEdge {
+  """A cursor for use in pagination."""
+  cursor: String!
+
+  """The item at the end of the edge."""
+  node: TournamentVideo!
+}
+
+"""Autogenerated input type of UpdateArticle"""
+input UpdateArticleInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  articleId: ID!
+  attributes: ArticleAttributes!
+}
+
+"""Autogenerated return type of UpdateArticle"""
+type UpdateArticlePayload {
+  article: Article!
+
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+}
+
+"""Autogenerated input type of UpdateAttackMove"""
+input UpdateAttackMoveInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  moveId: ID!
+  attributes: AttackMoveAttributes!
+}
+
+"""Autogenerated return type of UpdateAttackMove"""
+type UpdateAttackMovePayload {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  move: Move!
+}
+
+"""Autogenerated input type of UpdateBattle"""
+input UpdateBattleInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  battleId: ID!
+  attributes: BattleAttributes!
+}
+
+"""Autogenerated return type of UpdateBattle"""
+type UpdateBattlePayload {
+  battle: Battle!
+
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+}
+
+"""Autogenerated input type of UpdateCharacter"""
+input UpdateCharacterInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  characterSlug: String!
+  attributes: CharacterAttributes!
+}
+
+"""Autogenerated return type of UpdateCharacter"""
+type UpdateCharacterPayload {
+  character: Character!
+
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+}
+
+"""Autogenerated input type of UpdateComboCategory"""
+input UpdateComboCategoryInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  comboCategoryId: ID!
+  attributes: ComboCategoryAttributes!
+}
+
+"""Autogenerated return type of UpdateComboCategory"""
+type UpdateComboCategoryPayload {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  comboCategory: ComboCategory!
+}
+
+"""Autogenerated input type of UpdateCombo"""
+input UpdateComboInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  comboId: ID!
+  attributes: ComboAttributes!
+}
+
+"""Autogenerated return type of UpdateCombo"""
+type UpdateComboPayload {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  combo: Combo!
+}
+
+"""Autogenerated input type of UpdateCurrentUser"""
+input UpdateCurrentUserInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  attributes: CurrentUserAttributes!
+}
+
+"""Autogenerated return type of UpdateCurrentUser"""
+type UpdateCurrentUserPayload {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  currentUser: CurrentUser!
+}
+
+"""Autogenerated input type of UpdateMoveCategory"""
+input UpdateMoveCategoryInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  moveCategoryId: ID!
+  attributes: MoveCategoryAttributes!
+}
+
+"""Autogenerated return type of UpdateMoveCategory"""
+type UpdateMoveCategoryPayload {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  moveCategory: MoveCategory!
+}
+
+"""Autogenerated input type of UpdateMove"""
+input UpdateMoveInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  moveId: ID!
+  attributes: MoveAttributes!
+}
+
+"""Autogenerated return type of UpdateMove"""
+type UpdateMovePayload {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  move: Move!
+}
+
+"""Autogenerated input type of UpdateOrganizer"""
+input UpdateOrganizerInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  organizerSlug: String!
+  attributes: OrganizerAttributes!
+}
+
+"""Autogenerated return type of UpdateOrganizer"""
+type UpdateOrganizerPayload {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  organizer: Organizer!
+}
+
+"""Autogenerated input type of UpdatePlayer"""
+input UpdatePlayerInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  playerSlug: String!
+  attributes: PlayerAttributes!
+}
+
+"""Autogenerated return type of UpdatePlayer"""
+type UpdatePlayerPayload {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  player: Player!
+}
+
+"""Autogenerated input type of UpdateReversalMove"""
+input UpdateReversalMoveInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  moveId: ID!
+  attributes: ReversalMoveAttributes!
+}
+
+"""Autogenerated return type of UpdateReversalMove"""
+type UpdateReversalMovePayload {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  move: Move!
+}
+
+"""Autogenerated input type of UpdateStanding"""
+input UpdateStandingInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  standingId: ID!
+  attributes: StandingAttributes!
+}
+
+"""Autogenerated return type of UpdateStanding"""
+type UpdateStandingPayload {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  standing: Standing!
+}
+
+"""Autogenerated input type of UpdateThrowMove"""
+input UpdateThrowMoveInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  moveId: ID!
+  attributes: ThrowMoveAttributes!
+}
+
+"""Autogenerated return type of UpdateThrowMove"""
+type UpdateThrowMovePayload {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  move: Move!
+}
+
+"""Autogenerated input type of UpdateTournament"""
+input UpdateTournamentInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  tournamentId: ID!
+  attributes: TournamentAttributes!
+}
+
+"""Autogenerated return type of UpdateTournament"""
+type UpdateTournamentPayload {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  tournament: Tournament!
+}
+
+"""Autogenerated input type of UpdateTournamentVideo"""
+input UpdateTournamentVideoInput {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  tournamentVideoId: ID!
+  attributes: TournamentVideoAttributes!
+}
+
+"""Autogenerated return type of UpdateTournamentVideo"""
+type UpdateTournamentVideoPayload {
+  """A unique identifier for the client performing the mutation."""
+  clientMutationId: String
+  tournamentVideo: TournamentVideo!
+}
+
+type User {
+  avatarUrl: String!
+  createdAt: ISO8601DateTime!
+  description: String
+  id: ID!
+  name: String!
+  twitterId: String
+}
+
+enum UserRole {
+  """ユーザー"""
+  user
+
+  """管理者"""
+  admin
+}
+
+type VideoUpload {
+  fields: String!
+  url: String!
+}
+

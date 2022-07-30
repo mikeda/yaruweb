@@ -1,4 +1,5 @@
 fragment CharacterCard on Character {
+  id
   slug
   name
   faceImageUrl

@@ -8,7 +8,6 @@ fragment MoveMediaAttack on AttackMove {
   hitResult
   counterFrame
   counterResult
-  blockResult
   heights
   damages
   powerCrush

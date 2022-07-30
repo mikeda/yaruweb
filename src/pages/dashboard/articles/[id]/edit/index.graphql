@@ -16,6 +16,7 @@ query MyArticle($articleId: ID!) {
     content
 
     author {
+      id
       name
       avatarUrl
     }

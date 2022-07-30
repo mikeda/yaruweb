@@ -24,18 +24,25 @@ http://localhost:3000/
 
 ### GraphQL
 
-#### サーバーを起動
+#### サーバー
 
-サーバーサイドは別レポジトリ
+サーバーサイドは別レポジトリなので起動方法はそちらを確認。
 
 https://github.com/mikeda/yarouyo
 
 - GraphiQL : http://localhost:5000/graphiql
 - GraphQL : http://localhost:5000/graphql
 
-#### graphql-codegen
+スキーマ変更があった場合はスキーマのダウンロード、型定義の更新を行う。
 
-GraphQL のクエリ追加、サーバーサイドでのスキーマ変更があった場合は型定義を更新する。
+```bash
+yarn get-graphql-schema
+yarn graphql-codegen
+```
+
+#### クライアント
+
+graphql ファイルの追加・変更を行った場合は型定義を更新する。
 
 ```bash
 yarn graphql-codegen

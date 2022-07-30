@@ -30,14 +30,16 @@ Primary.args = {
 
     sides: [
       {
-        player: { name: 'プレイヤー1' },
-        character: { faceImageUrl: 'https://d2ybk292wkc2jl.cloudfront.net/site/no_image.jpeg' },
+        id: '1',
         rounds: 3,
+        player: { id: '1', name: 'プレイヤー1' },
+        character: { id: '1', faceImageUrl: 'https://d2ybk292wkc2jl.cloudfront.net/site/no_image.jpeg' },
       },
       {
-        player: { name: 'プレイヤー2' },
-        character: { faceImageUrl: 'https://d2ybk292wkc2jl.cloudfront.net/site/no_image.jpeg' },
+        id: '2',
         rounds: 1,
+        player: { id: '2', name: 'プレイヤー2' },
+        character: { id: '2', faceImageUrl: 'https://d2ybk292wkc2jl.cloudfront.net/site/no_image.jpeg' },
       },
     ],
   },
