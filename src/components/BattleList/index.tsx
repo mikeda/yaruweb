@@ -62,7 +62,8 @@ export const BattleList: React.FC<Props> = ({ tournamentId, playerSlug, characte
 
   if (!data) return null;
 
-  const { records: battles, paging } = data.battles;
+  const battles = data.battles.edges.map(edge => edge.node);
+  const pageInfo = data.battles.pageInfo;
 
   const battle = battles[battleIndex];
   if (!battle) return null;
@@ -109,24 +110,12 @@ export const BattleList: React.FC<Props> = ({ tournamentId, playerSlug, characte
         </List>
       </Box>
 
-      {paging.hasNext && (
+      {pageInfo.hasNextPage && (
         <Box pt={2} pb={2} display="flex" justifyContent="center">
           <Button
             variant="outlined"
             onClick={() => {
-              fetchMore({
-                variables: { tournamentId, playerSlug, characterSlug, page: paging.currentPage + 1 },
-                updateQuery: (prev, { fetchMoreResult: data }) => {
-                  if (!data) return prev;
-
-                  return {
-                    battles: {
-                      records: [...prev.battles.records, ...data.battles.records],
-                      paging: data.battles.paging,
-                    },
-                  };
-                },
-              });
+              fetchMore({ variables: { after: pageInfo.endCursor } });
             }}
           >
             もっとみる

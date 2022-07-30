@@ -5,15 +5,14 @@ fragment PlayerTableRow on Player {
   avatarUrl
 }
 
-query PlayerTableRows($page: Int = 1, $keyword: String) {
-  players(page: $page, per: 10, keyword: $keyword) {
-    records {
-      ...PlayerTableRow
+query PlayerTableRows($after: String, $keyword: String) {
+  players(first: 10, after: $after, keyword: $keyword) {
+    edges {
+      node { ...PlayerTableRow }
+      cursor
     }
 
-    paging {
-      ...paging
-    }
+    pageInfo { ...Pagination }
   }
 }
 

@@ -6,3 +6,14 @@ fragment PlayerCard on Player {
   standingsCount
   battlesCount
 }
+
+query PlayerCards($after: String, $keyword: String) {
+  players(first: 20, after: $after, keyword: $keyword) {
+    edges {
+      node { ...PlayerCard }
+      cursor
+    }
+
+    pageInfo { ...Pagination }
+  }
+}

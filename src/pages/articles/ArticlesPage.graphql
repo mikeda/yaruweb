@@ -1,11 +1,7 @@
-query ArticlesPage($page: Int) {
-  articles(page: $page, per: 12) {
-    records {
+query ArticlesPage {
+  articles(first: 12) {
+    nodes {
       ...ArticleCard
-    }
-
-    paging {
-      ...paging
     }
   }
 }

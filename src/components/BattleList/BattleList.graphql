@@ -1,6 +1,16 @@
-query BattleList($tournamentId: ID, $playerSlug: String, $characterSlug: String, $page: Int) {
-  battles(tournamentId: $tournamentId, playerSlug: $playerSlug, characterSlug: $characterSlug, page: $page, per: 10) {
-    records { ...BattleListItem }
-    paging { ...paging }
+query BattleList($tournamentId: ID, $playerSlug: String, $characterSlug: String, $after: String) {
+  battles(
+    tournamentId: $tournamentId,
+    playerSlug: $playerSlug,
+    characterSlug: $characterSlug,
+    after: $after,
+    first: 10
+  ) {
+    edges {
+      node { ...BattleListItem }
+      cursor
+    }
+
+    pageInfo { ...Pagination }
   }
 }

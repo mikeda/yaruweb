@@ -27,7 +27,7 @@ const Page: React.FC = () => {
       updateQuery(prev => ({
         organizers: {
           ...prev.organizers,
-          records: prev.organizers.records.filter(t => t.id !== organizer.id),
+          edges: prev.organizers.edges.filter(edge => edge.node.id !== organizer.id),
         },
       }));
       toast.success('オーガナイザーを削除しました。');
@@ -37,7 +37,8 @@ const Page: React.FC = () => {
   setLoading(loading || deleteLoading);
 
   if (!data) return null;
-  const { records: organizers, paging } = data.organizers;
+  const organizers = data.organizers.edges.map(edge => edge.node);
+  const pageInfo = data.organizers.pageInfo;
 
   return (
     <AdminContent
@@ -68,22 +69,10 @@ const Page: React.FC = () => {
         ))}
       </DashboardTable>
 
-      {paging?.hasNext && (
+      {pageInfo.hasNextPage && (
         <DashboardTablePaging
           onClick={() => {
-            fetchMore({
-              variables: { page: paging.currentPage + 1 },
-              updateQuery: (prev, { fetchMoreResult: data }) => {
-                if (!data) return prev;
-
-                return {
-                  organizers: {
-                    records: [...prev.organizers.records, ...data.organizers.records],
-                    paging: data.organizers.paging,
-                  },
-                };
-              },
-            });
+            fetchMore({ variables: { after: pageInfo.endCursor } });
           }}
         />
       )}

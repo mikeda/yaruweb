@@ -1,11 +1,5 @@
-query PlayersPage($page: Int, $keyword: String) {
-  players(page: $page, per: 20, keyword: $keyword) {
-    records {
-      ...PlayerCard
-    }
-
-    paging {
-      ...paging
-    }
+query PlayersPage {
+  players(first: 20) {
+    nodes { ...PlayerCard }
   }
 }

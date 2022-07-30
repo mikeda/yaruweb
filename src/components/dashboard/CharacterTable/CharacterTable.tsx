@@ -22,7 +22,7 @@ export const CharacterTable: React.FC = () => {
   setLoading(loading);
 
   if (!data) return null;
-  const characters = data.characters.records;
+  const characters = data.characters.nodes;
 
   return (
     <>
