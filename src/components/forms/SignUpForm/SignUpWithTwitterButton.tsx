@@ -8,7 +8,7 @@ import { useSetRecoilState } from 'recoil';
 
 import { pagesPath } from '@/generated/$path';
 import { useCreateUserMutation } from '@/generated/graphql';
-import { signInFirebaseWithTwitter, currentUserState, colors } from '@/lib';
+import { signInFirebaseWithTwitter, currentUserState, colors, handleApolloError } from '@/lib';
 
 const useStyles = makeStyles({
   root: {
@@ -29,9 +29,7 @@ export const SignUpWithTwitterButton: React.FC = () => {
 
       router.push(pagesPath.$url());
     },
-    onError: error => {
-      toast.error(error.message);
-    },
+    onError: handleApolloError,
   });
   const classes = useStyles();
 

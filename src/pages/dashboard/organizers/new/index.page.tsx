@@ -6,7 +6,7 @@ import { useSetRecoilState } from 'recoil';
 
 import { AdminBreadcrumbs, DashboardContent, OrganizerForm } from '@/components';
 import { OrganizerAttributes, useAdminOrganizersNewPageCreateOrganizerMutation } from '@/generated/graphql';
-import { loadingState } from '@/lib';
+import { handleApolloError, loadingState } from '@/lib';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -16,9 +16,7 @@ const Page: React.FC = () => {
       toast.success('オーガナイザー情報を登録しました。');
       router.back();
     },
-    onError: e => {
-      toast.error(e.message);
-    },
+    onError: handleApolloError,
   });
 
   const onSubmit = (attributes: OrganizerAttributes) => {

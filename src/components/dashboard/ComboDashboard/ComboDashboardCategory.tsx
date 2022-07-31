@@ -14,7 +14,7 @@ import {
   useDeleteComboCategoryMutation,
   MoveSelectOptionFragment,
 } from '@/generated/graphql';
-import { loadingState } from '@/lib';
+import { handleApolloError, loadingState } from '@/lib';
 
 interface Props {
   comboCategory: ComboDashboardCategoryFragment;
@@ -28,7 +28,7 @@ export const ComboDashboardCategory: React.FC<Props> = ({ comboCategory, comboCa
   const [del, { loading }] = useDeleteComboCategoryMutation({
     variables: { comboCategoryId: comboCategory.id },
     onCompleted: () => toast.success('カテゴリを削除しました。'),
-    onError: e => toast.error(e.message),
+    onError: handleApolloError,
   });
 
   const onClickDelete = useCallback(() => {

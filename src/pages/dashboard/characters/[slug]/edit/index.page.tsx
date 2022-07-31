@@ -13,7 +13,7 @@ import {
   PageAdminCharacterEditQueryVariables,
   useUpdateCharacterMutation,
 } from '@/generated/graphql';
-import { fetchGraphql, loadingState } from '@/lib';
+import { fetchGraphql, handleApolloError, loadingState } from '@/lib';
 
 const Page: React.FC<PageAdminCharacterEditQuery> = ({ character }) => {
   const router = useRouter();
@@ -23,9 +23,7 @@ const Page: React.FC<PageAdminCharacterEditQuery> = ({ character }) => {
       toast.success('キャラクターを更新しました。');
       router.back();
     },
-    onError: e => {
-      toast.error(e.message);
-    },
+    onError: handleApolloError,
   });
 
   const onSubmit = (attributes: CharacterAttributes) => {

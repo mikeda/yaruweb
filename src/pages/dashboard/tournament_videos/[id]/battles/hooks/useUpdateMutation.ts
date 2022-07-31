@@ -2,7 +2,7 @@ import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
 import { useUpdateBattleMutation } from '@/generated/graphql';
-import { loadingState } from '@/lib';
+import { handleApolloError, loadingState } from '@/lib';
 
 export const useUpdateMutation = () => {
   const setLoading = useSetRecoilState(loadingState);
@@ -10,9 +10,7 @@ export const useUpdateMutation = () => {
     onCompleted: () => {
       toast.success('対戦動画を更新しました。');
     },
-    onError: e => {
-      toast.error(e.message);
-    },
+    onError: handleApolloError,
   });
   setLoading(loading);
 

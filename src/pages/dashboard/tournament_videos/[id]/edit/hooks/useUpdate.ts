@@ -2,7 +2,7 @@ import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
 import { useAdminTournamentVideoEditPageUpdateMutation } from '@/generated/graphql';
-import { loadingState } from '@/lib';
+import { handleApolloError, loadingState } from '@/lib';
 
 export const useUpdate = (onUpdate: () => void) => {
   const setLoading = useSetRecoilState(loadingState);
@@ -11,9 +11,7 @@ export const useUpdate = (onUpdate: () => void) => {
       toast.success('大会動画を更新しました。');
       onUpdate();
     },
-    onError: e => {
-      toast.error(e.message);
-    },
+    onError: handleApolloError,
   });
   setLoading(loading);
 

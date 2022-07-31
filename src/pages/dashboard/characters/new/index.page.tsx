@@ -6,7 +6,7 @@ import { useSetRecoilState } from 'recoil';
 
 import { CharacterForm, DashboardContent } from '@/components';
 import { CharacterAttributes, useCreateCharacterMutation } from '@/generated/graphql';
-import { loadingState } from '@/lib';
+import { handleApolloError, loadingState } from '@/lib';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -16,9 +16,7 @@ const Page: React.FC = () => {
       toast.success('キャラクターを登録しました。');
       router.back();
     },
-    onError: e => {
-      toast.error(e.message);
-    },
+    onError: handleApolloError,
   });
 
   const onSubmit = (attributes: CharacterAttributes) => {

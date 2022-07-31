@@ -1,6 +1,5 @@
 import React, { useCallback, useState } from 'react';
 
-import { ApolloError } from '@apollo/client';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { Dialog, IconButton } from '@mui/material';
 import { toast } from 'react-toastify';
@@ -15,7 +14,7 @@ import {
   useComboFormLazyQuery,
   MoveSelectOptionFragment,
 } from '@/generated/graphql';
-import { loadingState } from '@/lib';
+import { handleApolloError, loadingState } from '@/lib';
 
 interface Props {
   comboId: string;
@@ -32,19 +31,16 @@ export const CopyButton: React.FC<Props> = ({ comboId, comboCategoryId, combos, 
   const [fetch, { loading }] = useComboFormLazyQuery({
     variables: { comboId },
     onCompleted: data => setCombo(data.combo),
-    onError: e => toast.error(e.message),
+    onError: handleApolloError,
   });
 
-  const onCompleted = () => {
-    setOpen(false);
-    toast.success('コンボを登録しました。');
-  };
-
-  const onError = (e: ApolloError) => {
-    toast.error(e.message);
-  };
-
-  const [create, { loading: createLoading }] = useCreateComboMutation({ onCompleted, onError });
+  const [create, { loading: createLoading }] = useCreateComboMutation({
+    onCompleted: () => {
+      setOpen(false);
+      toast.success('コンボを登録しました。');
+    },
+    onError: handleApolloError,
+  });
   const onClickCreate = useCallback((attributes: ComboAttributes) => {
     create({ variables: { comboCategoryId, attributes } });
   }, []);

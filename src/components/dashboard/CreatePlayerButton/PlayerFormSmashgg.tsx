@@ -4,11 +4,11 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
 import { useRouter } from 'next/router';
 import { Controller, useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
 import * as yup from 'yup';
 
 import { pagesPath } from '@/generated/$path';
 import { useCreatePlayerFromSmashggMutation } from '@/generated/graphql';
+import { handleApolloError } from '@/lib';
 
 const schema = yup.object().shape({
   smashggId: yup.string().required(),
@@ -30,7 +30,7 @@ export const PlayerFormSmashgg: React.FC<Props> = ({ open, onClose }) => {
       router.push(pagesPath.dashboard.players.$url());
       onClose();
     },
-    onError: e => toast.error(e.message),
+    onError: handleApolloError,
   });
 
   const {

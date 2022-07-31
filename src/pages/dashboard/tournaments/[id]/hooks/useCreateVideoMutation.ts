@@ -2,7 +2,7 @@ import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
 import { useAdminTournamentPageCreateVideoMutation } from '@/generated/graphql';
-import { loadingState } from '@/lib';
+import { handleApolloError, loadingState } from '@/lib';
 
 interface Props {
   onCreate: () => void;
@@ -15,9 +15,7 @@ export const useCreateVideoMutation = ({ onCreate }: Props) => {
       toast.success('動画を登録しました。');
       onCreate();
     },
-    onError: e => {
-      toast.error(e.message);
-    },
+    onError: handleApolloError,
   });
   setLoading(loading);
 

@@ -12,15 +12,13 @@ import {
   useCurrentUserQuery,
   useUpdateCurrentUserMutation,
 } from '@/generated/graphql';
-import { currentUserState, loadingState } from '@/lib';
+import { currentUserState, handleApolloError, loadingState } from '@/lib';
 
 const Page: React.FC = () => {
   const setLoading = useSetRecoilState(loadingState);
   const { data, loading } = useCurrentUserQuery({
     fetchPolicy: 'network-only',
-    onError: e => {
-      toast.error(e.message);
-    },
+    onError: handleApolloError,
   });
 
   setLoading(loading);
@@ -55,9 +53,7 @@ const Form: React.FC<{ currentUser: CurrentUserFragment }> = ({ currentUser }) =
       setCurrentUser(updatedCurrentUser);
       toast.success('プロフィールを更新しました。');
     },
-    onError: e => {
-      toast.error(e.message);
-    },
+    onError: handleApolloError,
   });
 
   const onSubmit = (attributes: CurrentUserAttributes) => {

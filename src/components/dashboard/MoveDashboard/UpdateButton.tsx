@@ -13,7 +13,7 @@ import {
   useMoveCategoryFormLazyQuery,
   useUpdateMoveCategoryMutation,
 } from '@/generated/graphql';
-import { loadingState } from '@/lib';
+import { handleApolloError, loadingState } from '@/lib';
 
 interface Props {
   moveCategoryId: string;
@@ -30,12 +30,12 @@ export const UpdateButton: React.FC<Props> = ({ moveCategoryId, moveCategories }
     onCompleted: data => {
       setMoveCategory(data.moveCategory);
     },
-    onError: e => toast.error(e.message),
+    onError: handleApolloError,
   });
 
   const [update, { loading: updateLoading }] = useUpdateMoveCategoryMutation({
     onCompleted: () => toast.success('カテゴリを更新しました。'),
-    onError: e => toast.error(e.message),
+    onError: handleApolloError,
   });
 
   const onClickUpdate = useCallback((attributes: MoveCategoryAttributes) => {

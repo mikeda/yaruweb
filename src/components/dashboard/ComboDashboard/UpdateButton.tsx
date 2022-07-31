@@ -13,7 +13,7 @@ import {
   useComboCategoryFormLazyQuery,
   useUpdateComboCategoryMutation,
 } from '@/generated/graphql';
-import { loadingState } from '@/lib';
+import { handleApolloError, loadingState } from '@/lib';
 
 interface Props {
   comboCategoryId: string;
@@ -30,12 +30,12 @@ export const UpdateButton: React.FC<Props> = ({ comboCategoryId, comboCategories
     onCompleted: data => {
       setComboCategory(data.comboCategory);
     },
-    onError: e => toast.error(e.message),
+    onError: handleApolloError,
   });
 
   const [update, { loading: updateLoading }] = useUpdateComboCategoryMutation({
     onCompleted: () => toast.success('カテゴリを更新しました。'),
-    onError: e => toast.error(e.message),
+    onError: handleApolloError,
   });
 
   const onClickUpdate = useCallback((attributes: ComboCategoryAttributes) => {
