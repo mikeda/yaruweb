@@ -23,8 +23,10 @@ query AdminTournamentPage($tournamentId: ID!) {
 }
 
 query AdminTournamentPageStandings($tournamentId: ID!) {
-  standings(tournamentId: $tournamentId, first: 100) {
-    nodes {
+  tournament(tournamentId: $tournamentId) {
+    id
+
+    standings {
       id
       place
 
@@ -68,7 +70,6 @@ mutation AdminTournamentPageDeleteStanding($standingId: ID!) {
     }
   }
 }
-
 
 mutation AdminTournamentPageCreateVideo($tournamentId: ID!, $url: String!) {
   createTournamentVideo(input: { tournamentId: $tournamentId, url: $url }) {

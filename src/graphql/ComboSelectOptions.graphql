@@ -1,11 +1,15 @@
 query ComboSelectOptions($characterSlug: String!) {
-  comboCategories(characterSlug: $characterSlug) {
+  character(characterSlug: $characterSlug) {
     id
-    name
 
-    combos {
+    comboCategories {
       id
-      command
+      name
+
+      combos {
+        id
+        command
+      }
     }
   }
 }

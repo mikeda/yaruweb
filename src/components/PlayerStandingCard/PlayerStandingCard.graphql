@@ -11,12 +11,20 @@ fragment PlayerStandingCard on Standing {
 }
 
 query PlayerStandingCards($playerSlug: String!, $after: String) {
-  standings(playerSlug: $playerSlug, first: 10, after: $after) {
-    edges {
-      node { ...PlayerStandingCard }
-      cursor
-    }
+  player(playerSlug: $playerSlug) {
+    id
 
-    pageInfo { ...Pagination }
+    standings(first: 10, after: $after) {
+      edges {
+        node {
+          ...PlayerStandingCard
+        }
+        cursor
+      }
+
+      pageInfo {
+        ...Pagination
+      }
+    }
   }
 }
