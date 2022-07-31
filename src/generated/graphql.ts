@@ -2724,37 +2724,6 @@ export type UpdateArticleMutationVariables = Exact<{
 
 export type UpdateArticleMutation = { __typename?: 'Mutation', updateArticle?: { __typename?: 'UpdateArticlePayload', article: { __typename?: 'Article', id: string } } | null };
 
-export type DashboardArticlesPageArticleFragment = { __typename?: 'Article', id: string, title: string, status: ArticleStatus };
-
-export type DashboardArticlesPagePublishMutationVariables = Exact<{
-  articleId: Scalars['ID'];
-}>;
-
-
-export type DashboardArticlesPagePublishMutation = { __typename?: 'Mutation', publishArticle?: { __typename?: 'PublishArticlePayload', article: { __typename?: 'Article', id: string, title: string, status: ArticleStatus } } | null };
-
-export type DashboardArticlesPageStopMutationVariables = Exact<{
-  articleId: Scalars['ID'];
-}>;
-
-
-export type DashboardArticlesPageStopMutation = { __typename?: 'Mutation', stopArticle?: { __typename?: 'StopArticlePayload', article: { __typename?: 'Article', id: string, title: string, status: ArticleStatus } } | null };
-
-export type DashboardArticlesPageDeleteMutationVariables = Exact<{
-  articleId: Scalars['ID'];
-}>;
-
-
-export type DashboardArticlesPageDeleteMutation = { __typename?: 'Mutation', deleteArticle?: { __typename?: 'DeleteArticlePayload', article: { __typename?: 'Article', id: string } } | null };
-
-export type DashboardArticlesPageQueryVariables = Exact<{
-  after?: InputMaybe<Scalars['String']>;
-  keyword?: InputMaybe<Scalars['String']>;
-}>;
-
-
-export type DashboardArticlesPageQuery = { __typename?: 'Query', myArticles: { __typename?: 'ArticleConnection', edges: Array<{ __typename?: 'ArticleEdge', cursor: string, node: { __typename?: 'Article', id: string, title: string, status: ArticleStatus } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null } } };
-
 export type CreateArticleMutationVariables = Exact<{
   attributes: ArticleAttributes;
 }>;
@@ -3774,13 +3743,6 @@ export const ArticlePageFragmentDoc = gql`
   }
 }
     ${ArticleCardFragmentDoc}`;
-export const DashboardArticlesPageArticleFragmentDoc = gql`
-    fragment DashboardArticlesPageArticle on Article {
-  id
-  title
-  status
-}
-    `;
 export const AdminOrganizersPageOrganizerFragmentDoc = gql`
     fragment AdminOrganizersPageOrganizer on Organizer {
   id
@@ -6386,156 +6348,6 @@ export function useUpdateArticleMutation(baseOptions?: Apollo.MutationHookOption
 export type UpdateArticleMutationHookResult = ReturnType<typeof useUpdateArticleMutation>;
 export type UpdateArticleMutationResult = Apollo.MutationResult<UpdateArticleMutation>;
 export type UpdateArticleMutationOptions = Apollo.BaseMutationOptions<UpdateArticleMutation, UpdateArticleMutationVariables>;
-export const DashboardArticlesPagePublishDocument = gql`
-    mutation DashboardArticlesPagePublish($articleId: ID!) {
-  publishArticle(input: {articleId: $articleId}) {
-    article {
-      ...DashboardArticlesPageArticle
-    }
-  }
-}
-    ${DashboardArticlesPageArticleFragmentDoc}`;
-export type DashboardArticlesPagePublishMutationFn = Apollo.MutationFunction<DashboardArticlesPagePublishMutation, DashboardArticlesPagePublishMutationVariables>;
-
-/**
- * __useDashboardArticlesPagePublishMutation__
- *
- * To run a mutation, you first call `useDashboardArticlesPagePublishMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useDashboardArticlesPagePublishMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [dashboardArticlesPagePublishMutation, { data, loading, error }] = useDashboardArticlesPagePublishMutation({
- *   variables: {
- *      articleId: // value for 'articleId'
- *   },
- * });
- */
-export function useDashboardArticlesPagePublishMutation(baseOptions?: Apollo.MutationHookOptions<DashboardArticlesPagePublishMutation, DashboardArticlesPagePublishMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<DashboardArticlesPagePublishMutation, DashboardArticlesPagePublishMutationVariables>(DashboardArticlesPagePublishDocument, options);
-      }
-export type DashboardArticlesPagePublishMutationHookResult = ReturnType<typeof useDashboardArticlesPagePublishMutation>;
-export type DashboardArticlesPagePublishMutationResult = Apollo.MutationResult<DashboardArticlesPagePublishMutation>;
-export type DashboardArticlesPagePublishMutationOptions = Apollo.BaseMutationOptions<DashboardArticlesPagePublishMutation, DashboardArticlesPagePublishMutationVariables>;
-export const DashboardArticlesPageStopDocument = gql`
-    mutation DashboardArticlesPageStop($articleId: ID!) {
-  stopArticle(input: {articleId: $articleId}) {
-    article {
-      ...DashboardArticlesPageArticle
-    }
-  }
-}
-    ${DashboardArticlesPageArticleFragmentDoc}`;
-export type DashboardArticlesPageStopMutationFn = Apollo.MutationFunction<DashboardArticlesPageStopMutation, DashboardArticlesPageStopMutationVariables>;
-
-/**
- * __useDashboardArticlesPageStopMutation__
- *
- * To run a mutation, you first call `useDashboardArticlesPageStopMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useDashboardArticlesPageStopMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [dashboardArticlesPageStopMutation, { data, loading, error }] = useDashboardArticlesPageStopMutation({
- *   variables: {
- *      articleId: // value for 'articleId'
- *   },
- * });
- */
-export function useDashboardArticlesPageStopMutation(baseOptions?: Apollo.MutationHookOptions<DashboardArticlesPageStopMutation, DashboardArticlesPageStopMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<DashboardArticlesPageStopMutation, DashboardArticlesPageStopMutationVariables>(DashboardArticlesPageStopDocument, options);
-      }
-export type DashboardArticlesPageStopMutationHookResult = ReturnType<typeof useDashboardArticlesPageStopMutation>;
-export type DashboardArticlesPageStopMutationResult = Apollo.MutationResult<DashboardArticlesPageStopMutation>;
-export type DashboardArticlesPageStopMutationOptions = Apollo.BaseMutationOptions<DashboardArticlesPageStopMutation, DashboardArticlesPageStopMutationVariables>;
-export const DashboardArticlesPageDeleteDocument = gql`
-    mutation DashboardArticlesPageDelete($articleId: ID!) {
-  deleteArticle(input: {articleId: $articleId}) {
-    article {
-      id
-    }
-  }
-}
-    `;
-export type DashboardArticlesPageDeleteMutationFn = Apollo.MutationFunction<DashboardArticlesPageDeleteMutation, DashboardArticlesPageDeleteMutationVariables>;
-
-/**
- * __useDashboardArticlesPageDeleteMutation__
- *
- * To run a mutation, you first call `useDashboardArticlesPageDeleteMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useDashboardArticlesPageDeleteMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [dashboardArticlesPageDeleteMutation, { data, loading, error }] = useDashboardArticlesPageDeleteMutation({
- *   variables: {
- *      articleId: // value for 'articleId'
- *   },
- * });
- */
-export function useDashboardArticlesPageDeleteMutation(baseOptions?: Apollo.MutationHookOptions<DashboardArticlesPageDeleteMutation, DashboardArticlesPageDeleteMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<DashboardArticlesPageDeleteMutation, DashboardArticlesPageDeleteMutationVariables>(DashboardArticlesPageDeleteDocument, options);
-      }
-export type DashboardArticlesPageDeleteMutationHookResult = ReturnType<typeof useDashboardArticlesPageDeleteMutation>;
-export type DashboardArticlesPageDeleteMutationResult = Apollo.MutationResult<DashboardArticlesPageDeleteMutation>;
-export type DashboardArticlesPageDeleteMutationOptions = Apollo.BaseMutationOptions<DashboardArticlesPageDeleteMutation, DashboardArticlesPageDeleteMutationVariables>;
-export const DashboardArticlesPageDocument = gql`
-    query DashboardArticlesPage($after: String, $keyword: String) {
-  myArticles(first: 10, after: $after, keyword: $keyword) {
-    edges {
-      node {
-        ...DashboardArticlesPageArticle
-      }
-      cursor
-    }
-    pageInfo {
-      ...Pagination
-    }
-  }
-}
-    ${DashboardArticlesPageArticleFragmentDoc}
-${PaginationFragmentDoc}`;
-
-/**
- * __useDashboardArticlesPageQuery__
- *
- * To run a query within a React component, call `useDashboardArticlesPageQuery` and pass it any options that fit your needs.
- * When your component renders, `useDashboardArticlesPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useDashboardArticlesPageQuery({
- *   variables: {
- *      after: // value for 'after'
- *      keyword: // value for 'keyword'
- *   },
- * });
- */
-export function useDashboardArticlesPageQuery(baseOptions?: Apollo.QueryHookOptions<DashboardArticlesPageQuery, DashboardArticlesPageQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<DashboardArticlesPageQuery, DashboardArticlesPageQueryVariables>(DashboardArticlesPageDocument, options);
-      }
-export function useDashboardArticlesPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<DashboardArticlesPageQuery, DashboardArticlesPageQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<DashboardArticlesPageQuery, DashboardArticlesPageQueryVariables>(DashboardArticlesPageDocument, options);
-        }
-export type DashboardArticlesPageQueryHookResult = ReturnType<typeof useDashboardArticlesPageQuery>;
-export type DashboardArticlesPageLazyQueryHookResult = ReturnType<typeof useDashboardArticlesPageLazyQuery>;
-export type DashboardArticlesPageQueryResult = Apollo.QueryResult<DashboardArticlesPageQuery, DashboardArticlesPageQueryVariables>;
 export const CreateArticleDocument = gql`
     mutation CreateArticle($attributes: ArticleAttributes!) {
   createArticle(input: {attributes: $attributes}) {
