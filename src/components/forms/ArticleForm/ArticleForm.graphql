@@ -6,3 +6,19 @@ fragment ArticleFormArticle on Article {
   category
   content
 }
+
+mutation CreateArticle($attributes: ArticleAttributes!) {
+  createArticle(input: { attributes: $attributes }) {
+    article {
+      id
+    }
+  }
+}
+
+mutation UpdateArticle($articleId: ID!, $attributes: ArticleAttributes!) {
+  updateArticle(input: { articleId: $articleId, attributes: $attributes }) {
+    article {
+      id
+    }
+  }
+}

@@ -8,7 +8,7 @@ import { ArticleForm, DashboardBreadcrumbs, DashboardContent } from '@/component
 import {
   ArticleAttributes,
   ArticleFormArticleFragment,
-  useMyArticleQuery,
+  useDashboardArticlePageQuery,
   useUpdateArticleMutation,
 } from '@/generated/graphql';
 import { handleApolloError, loadingState } from '@/lib';
@@ -17,7 +17,7 @@ const Page: React.FC = () => {
   const router = useRouter();
   const setLoading = useSetRecoilState(loadingState);
   const { id } = router.query;
-  const { data, loading } = useMyArticleQuery({
+  const { data, loading } = useDashboardArticlePageQuery({
     variables: { articleId: id as string },
     skip: !id,
     fetchPolicy: 'network-only',
@@ -29,9 +29,9 @@ const Page: React.FC = () => {
   return (
     <DashboardContent
       title="記事編集"
-      breadcrumb={data && <DashboardBreadcrumbs to="articleEdit" article={data.myArticle} />}
+      breadcrumb={data && <DashboardBreadcrumbs to="articleEdit" article={data.article} />}
     >
-      {data && <Content article={data.myArticle} />}
+      {data && <Content article={data.article} />}
     </DashboardContent>
   );
 };
