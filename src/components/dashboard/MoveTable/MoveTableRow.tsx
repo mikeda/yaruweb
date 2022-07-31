@@ -11,7 +11,7 @@ import { VideoUploadButton } from './VideoUploadButton';
 
 import { Command } from '@/components';
 import { MovePositionSelectFragment, MoveTableRowFragment, useDeleteMoveMutation } from '@/generated/graphql';
-import { loadingState } from '@/lib';
+import { handleApolloError, loadingState } from '@/lib';
 
 interface Props {
   move: MoveTableRowFragment;
@@ -24,7 +24,7 @@ export const MoveTableRow: React.FC<Props> = ({ move, moveCategoryId, moves }) =
 
   const [del, { loading: deleteLoading }] = useDeleteMoveMutation({
     onCompleted: () => toast.success('コマンドを削除しました。'),
-    onError: e => toast.error(e.message),
+    onError: handleApolloError,
   });
 
   const onClickDelete = useCallback(() => {

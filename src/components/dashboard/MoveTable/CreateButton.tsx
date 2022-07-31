@@ -1,6 +1,5 @@
 import React, { useCallback, useState } from 'react';
 
-import { ApolloError } from '@apollo/client';
 import AddIcon from '@mui/icons-material/Add';
 import { Dialog, IconButton, Menu, MenuItem, Tooltip } from '@mui/material';
 import { toast } from 'react-toastify';
@@ -16,7 +15,7 @@ import {
   ThrowMoveAttributes,
   ReversalMoveAttributes,
 } from '@/generated/graphql';
-import { loadingState } from '@/lib';
+import { handleApolloError, loadingState } from '@/lib';
 
 interface Props {
   moveCategoryId: string;
@@ -33,21 +32,26 @@ export const CreateButton: React.FC<Props> = ({ moveCategoryId, moves }) => {
     toast.success('コマンドを登録しました。');
   };
 
-  const onError = (e: ApolloError) => {
-    toast.error(e.message);
-  };
-
-  const [createAttack, { loading: createAttackLoading }] = useCreateAttackMoveMutation({ onCompleted, onError });
+  const [createAttack, { loading: createAttackLoading }] = useCreateAttackMoveMutation({
+    onCompleted,
+    onError: handleApolloError,
+  });
   const onClickCreateAttack = useCallback((attributes: AttackMoveAttributes) => {
     createAttack({ variables: { moveCategoryId, attributes } });
   }, []);
 
-  const [createThrow, { loading: createThrowLoading }] = useCreateThrowMoveMutation({ onCompleted, onError });
+  const [createThrow, { loading: createThrowLoading }] = useCreateThrowMoveMutation({
+    onCompleted,
+    onError: handleApolloError,
+  });
   const onClickCreateThrow = useCallback((attributes: ThrowMoveAttributes) => {
     createThrow({ variables: { moveCategoryId, attributes } });
   }, []);
 
-  const [createReversal, { loading: createReversalLoading }] = useCreateReversalMoveMutation({ onCompleted, onError });
+  const [createReversal, { loading: createReversalLoading }] = useCreateReversalMoveMutation({
+    onCompleted,
+    onError: handleApolloError,
+  });
   const onClickCreateReversal = useCallback((attributes: ReversalMoveAttributes) => {
     createReversal({ variables: { moveCategoryId, attributes } });
   }, []);

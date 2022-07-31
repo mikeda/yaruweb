@@ -14,7 +14,7 @@ import {
   useComboFormLazyQuery,
   useUpdateComboMutation,
 } from '@/generated/graphql';
-import { loadingState } from '@/lib';
+import { handleApolloError, loadingState } from '@/lib';
 
 interface Props {
   comboId: string;
@@ -30,12 +30,12 @@ export const UpdateButton: React.FC<Props> = ({ comboId, combos, moveCategories 
   const [fetch, { loading }] = useComboFormLazyQuery({
     variables: { comboId },
     onCompleted: data => setCombo(data.combo),
-    onError: e => toast.error(e.message),
+    onError: handleApolloError,
   });
 
   const [update, { loading: attackLoading }] = useUpdateComboMutation({
     onCompleted: () => toast.success('コンボを更新しました。'),
-    onError: e => toast.error(e.message),
+    onError: handleApolloError,
   });
   const onClickUpdate = useCallback((attributes: ComboAttributes) => {
     update({ variables: { comboId, attributes } });

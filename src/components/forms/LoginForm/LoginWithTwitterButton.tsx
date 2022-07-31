@@ -8,7 +8,7 @@ import { useSetRecoilState } from 'recoil';
 
 import { pagesPath } from '@/generated/$path';
 import { useCurrentUserLazyQuery } from '@/generated/graphql';
-import { signInFirebaseWithTwitter, currentUserState, colors } from '@/lib';
+import { signInFirebaseWithTwitter, currentUserState, colors, handleApolloError } from '@/lib';
 
 const useStyles = makeStyles({
   root: {
@@ -28,9 +28,7 @@ export const LoginWithTwitterButton: React.FC = () => {
       toast.success('ログインしました。');
       router.push(pagesPath.$url());
     },
-    onError: e => {
-      toast.error(e.message);
-    },
+    onError: handleApolloError,
     fetchPolicy: 'network-only',
   });
   const classes = useStyles();

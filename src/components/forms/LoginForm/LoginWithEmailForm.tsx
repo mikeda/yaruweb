@@ -10,7 +10,7 @@ import * as yup from 'yup';
 
 import { pagesPath } from '@/generated/$path';
 import { useCurrentUserLazyQuery } from '@/generated/graphql';
-import { signInFirebaseWithEmail, currentUserState, UserValidator, loadingState } from '@/lib';
+import { signInFirebaseWithEmail, currentUserState, UserValidator, loadingState, handleApolloError } from '@/lib';
 
 interface SignUpInput {
   email: string;
@@ -42,9 +42,7 @@ export const LoginWithEmailForm: React.FC = () => {
       toast.success('ログインしました。');
       router.push(pagesPath.$url());
     },
-    onError: e => {
-      toast.error(e.message);
-    },
+    onError: handleApolloError,
     fetchPolicy: 'network-only',
   });
 

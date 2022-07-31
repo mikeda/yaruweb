@@ -11,7 +11,7 @@ import {
   ComboCategoryPositionSelectFragment,
   useCreateComboCategoryMutation,
 } from '@/generated/graphql';
-import { loadingState } from '@/lib';
+import { handleApolloError, loadingState } from '@/lib';
 
 interface Props {
   characterSlug: string;
@@ -24,7 +24,7 @@ export const CreateButton: React.FC<Props> = ({ characterSlug, comboCategories }
 
   const [create, { loading }] = useCreateComboCategoryMutation({
     onCompleted: () => toast.success('カテゴリを作成しました。'),
-    onError: e => toast.error(e.message),
+    onError: handleApolloError,
   });
 
   const onClickCreate = useCallback((attributes: ComboCategoryAttributes) => {

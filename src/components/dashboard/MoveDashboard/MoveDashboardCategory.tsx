@@ -13,7 +13,7 @@ import {
   MoveCategoryPositionSelectFragment,
   useDeleteMoveCategoryMutation,
 } from '@/generated/graphql';
-import { loadingState } from '@/lib';
+import { handleApolloError, loadingState } from '@/lib';
 
 interface Props {
   moveCategory: MoveDashboardCategoryFragment;
@@ -26,7 +26,7 @@ export const MoveDashboardCategory: React.FC<Props> = ({ moveCategory, moveCateg
   const [del, { loading }] = useDeleteMoveCategoryMutation({
     variables: { moveCategoryId: moveCategory.id },
     onCompleted: () => toast.success('カテゴリを削除しました。'),
-    onError: e => toast.error(e.message),
+    onError: handleApolloError,
   });
 
   const onClickDelete = useCallback(() => {

@@ -11,7 +11,7 @@ import {
   useMyArticleQuery,
   useUpdateArticleMutation,
 } from '@/generated/graphql';
-import { loadingState } from '@/lib';
+import { handleApolloError, loadingState } from '@/lib';
 
 const Page: React.FC = () => {
   const router = useRouter();
@@ -21,9 +21,7 @@ const Page: React.FC = () => {
     variables: { articleId: id as string },
     skip: !id,
     fetchPolicy: 'network-only',
-    onError: e => {
-      toast.error(e.message);
-    },
+    onError: handleApolloError,
   });
 
   setLoading(loading);
@@ -46,9 +44,7 @@ const Content: React.FC<{ article: ArticleFormArticleFragment }> = ({ article })
       toast.success('記事を更新しました。');
       router.back();
     },
-    onError: e => {
-      toast.error(e.message);
-    },
+    onError: handleApolloError,
   });
 
   const onSubmit = (attributes: ArticleAttributes) => {

@@ -12,7 +12,7 @@ import { SignUpWithTwitterButton } from './SignUpWithTwitterButton';
 
 import { pagesPath } from '@/generated/$path';
 import { useCreateUserMutation } from '@/generated/graphql';
-import { UserValidator, createFirebaseUserWithEmail, currentUserState, loadingState } from '@/lib';
+import { UserValidator, createFirebaseUserWithEmail, currentUserState, loadingState, handleApolloError } from '@/lib';
 
 interface SignUpInput {
   email: string;
@@ -45,9 +45,7 @@ export const SignUpForm: React.FC = () => {
 
       router.push(pagesPath.$url());
     },
-    onError: error => {
-      toast.error(error.message);
-    },
+    onError: handleApolloError,
   });
 
   const onSubmit = (attributes: SignUpInput) => {

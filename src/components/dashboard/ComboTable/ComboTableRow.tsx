@@ -16,7 +16,7 @@ import {
   MoveSelectOptionFragment,
   useDeleteComboMutation,
 } from '@/generated/graphql';
-import { loadingState } from '@/lib';
+import { handleApolloError, loadingState } from '@/lib';
 
 interface Props {
   combo: ComboTableRowFragment;
@@ -30,7 +30,7 @@ export const ComboTableRow: React.FC<Props> = ({ combo, comboCategoryId, combos,
 
   const [del, { loading: deleteLoading }] = useDeleteComboMutation({
     onCompleted: () => toast.success('コンボを削除しました。'),
-    onError: e => toast.error(e.message),
+    onError: handleApolloError,
   });
 
   const onClickDelete = useCallback(() => {

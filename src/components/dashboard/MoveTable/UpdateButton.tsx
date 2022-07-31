@@ -17,7 +17,7 @@ import {
   useUpdateReversalMoveMutation,
   useUpdateThrowMoveMutation,
 } from '@/generated/graphql';
-import { loadingState } from '@/lib';
+import { handleApolloError, loadingState } from '@/lib';
 
 interface Props {
   moveId: string;
@@ -32,12 +32,12 @@ export const UpdateButton: React.FC<Props> = ({ moveId, moves }) => {
   const [fetch, { loading }] = useMoveFormLazyQuery({
     variables: { moveId },
     onCompleted: data => setMove(data.move),
-    onError: e => toast.error(e.message),
+    onError: handleApolloError,
   });
 
   const [updateAttack, { loading: attackLoading }] = useUpdateAttackMoveMutation({
     onCompleted: () => toast.success('コマンドを更新しました。'),
-    onError: e => toast.error(e.message),
+    onError: handleApolloError,
   });
   const onClickUpdateAttack = useCallback((attributes: AttackMoveAttributes) => {
     updateAttack({ variables: { moveId, attributes } });
@@ -46,7 +46,7 @@ export const UpdateButton: React.FC<Props> = ({ moveId, moves }) => {
 
   const [updateThrow, { loading: throwLoading }] = useUpdateThrowMoveMutation({
     onCompleted: () => toast.success('コマンドを更新しました。'),
-    onError: e => toast.error(e.message),
+    onError: handleApolloError,
   });
   const onClickUpdateThrow = useCallback((attributes: ThrowMoveAttributes) => {
     updateThrow({ variables: { moveId, attributes } });
@@ -55,7 +55,7 @@ export const UpdateButton: React.FC<Props> = ({ moveId, moves }) => {
 
   const [updateReversal, { loading: reversalLoading }] = useUpdateReversalMoveMutation({
     onCompleted: () => toast.success('コマンドを更新しました。'),
-    onError: e => toast.error(e.message),
+    onError: handleApolloError,
   });
   const onClickUpdateReversal = useCallback((attributes: ReversalMoveAttributes) => {
     updateReversal({ variables: { moveId, attributes } });

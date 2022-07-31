@@ -12,7 +12,7 @@ import {
   ComboAttributes,
   MoveSelectOptionFragment,
 } from '@/generated/graphql';
-import { loadingState } from '@/lib';
+import { handleApolloError, loadingState } from '@/lib';
 
 interface Props {
   comboCategoryId: string;
@@ -29,7 +29,7 @@ export const CreateButton: React.FC<Props> = ({ comboCategoryId, combos, moveCat
       setOpen(false);
       toast.success('コンボを登録しました。');
     },
-    onError: e => toast.error(e.message),
+    onError: handleApolloError,
   });
   const onClickCreate = useCallback((attributes: ComboAttributes) => {
     create({ variables: { comboCategoryId, attributes } });
