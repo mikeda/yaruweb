@@ -26,8 +26,8 @@ const Page: React.FC<PlayerStandingsPageQuery> = ssrData => {
   setLoading(loading);
 
   const player = ssrData.player;
-  const standings = data ? data.standings.edges.map(e => e.node) : ssrData.standings.nodes;
-  const pageInfo = data?.standings.pageInfo;
+  const standings = data ? data.player.standings.edges.map(e => e.node) : ssrData.player.standings.nodes;
+  const pageInfo = data?.player.standings.pageInfo;
 
   return (
     <Content activeTab="players" breadcrumb={<Breadcrumbs to="playerStandings" player={player} />}>

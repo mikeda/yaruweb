@@ -1401,10 +1401,19 @@ export type Player = {
   name: Scalars['String'];
   slug: Scalars['String'];
   smashggId?: Maybe<Scalars['String']>;
+  standings: StandingConnection;
   standingsCount: Scalars['Int'];
   streamingUrl?: Maybe<Scalars['String']>;
   tonamelId?: Maybe<Scalars['String']>;
   twitterId?: Maybe<Scalars['String']>;
+};
+
+
+export type PlayerStandingsArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
 };
 
 export type PlayerAttributes = {
@@ -1463,22 +1472,17 @@ export type Query = {
   character: Character;
   characters: CharacterConnection;
   combo: Combo;
-  comboCategories: Array<ComboCategory>;
   comboCategory: ComboCategory;
-  combos: Array<Combo>;
   countries: Array<Country>;
   currentUser: CurrentUser;
   move: Move;
-  moveCategories: Array<MoveCategory>;
   moveCategory: MoveCategory;
-  moves: Array<Move>;
   myArticle: Article;
   myArticles: ArticleConnection;
   organizer: Organizer;
   organizers: OrganizerConnection;
   player: Player;
   players: PlayerConnection;
-  standings: StandingConnection;
   tournament: Tournament;
   tournamentVideo: TournamentVideo;
   tournamentVideos: TournamentVideoConnection;
@@ -1543,17 +1547,7 @@ export type QueryComboArgs = {
 };
 
 
-export type QueryComboCategoriesArgs = {
-  characterSlug?: InputMaybe<Scalars['String']>;
-};
-
-
 export type QueryComboCategoryArgs = {
-  comboCategoryId: Scalars['ID'];
-};
-
-
-export type QueryCombosArgs = {
   comboCategoryId: Scalars['ID'];
 };
 
@@ -1563,17 +1557,7 @@ export type QueryMoveArgs = {
 };
 
 
-export type QueryMoveCategoriesArgs = {
-  characterSlug?: InputMaybe<Scalars['String']>;
-};
-
-
 export type QueryMoveCategoryArgs = {
-  moveCategoryId: Scalars['ID'];
-};
-
-
-export type QueryMovesArgs = {
   moveCategoryId: Scalars['ID'];
 };
 
@@ -1617,16 +1601,6 @@ export type QueryPlayersArgs = {
   first?: InputMaybe<Scalars['Int']>;
   keyword?: InputMaybe<Scalars['String']>;
   last?: InputMaybe<Scalars['Int']>;
-};
-
-
-export type QueryStandingsArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  before?: InputMaybe<Scalars['String']>;
-  first?: InputMaybe<Scalars['Int']>;
-  last?: InputMaybe<Scalars['Int']>;
-  playerSlug?: InputMaybe<Scalars['String']>;
-  tournamentId?: InputMaybe<Scalars['ID']>;
 };
 
 
@@ -2251,7 +2225,7 @@ export type PlayerStandingCardsQueryVariables = Exact<{
 }>;
 
 
-export type PlayerStandingCardsQuery = { __typename?: 'Query', standings: { __typename?: 'StandingConnection', edges: Array<{ __typename?: 'StandingEdge', cursor: string, node: { __typename?: 'Standing', id: string, place: number, tournament: { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: string | null, startsAt: string } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null } } };
+export type PlayerStandingCardsQuery = { __typename?: 'Query', player: { __typename?: 'Player', id: string, standings: { __typename?: 'StandingConnection', edges: Array<{ __typename?: 'StandingEdge', cursor: string, node: { __typename?: 'Standing', id: string, place: number, tournament: { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: string | null, startsAt: string } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null } } } };
 
 export type PlayerTabsFragment = { __typename?: 'Player', slug: string, battlesCount: number, standingsCount: number };
 
@@ -2596,7 +2570,7 @@ export type ComboSelectOptionsQueryVariables = Exact<{
 }>;
 
 
-export type ComboSelectOptionsQuery = { __typename?: 'Query', comboCategories: Array<{ __typename?: 'ComboCategory', id: string, name: string, combos: Array<{ __typename?: 'Combo', id: string, command: Array<string> }> }> };
+export type ComboSelectOptionsQuery = { __typename?: 'Query', character: { __typename?: 'Character', id: string, comboCategories: Array<{ __typename?: 'ComboCategory', id: string, name: string, combos: Array<{ __typename?: 'Combo', id: string, command: Array<string> }> }> } };
 
 export type CountrySelectOptionFragment = { __typename?: 'Country', id: string, name: string, flagEmoji: string };
 
@@ -2617,7 +2591,7 @@ export type MoveSelectOptionsQueryVariables = Exact<{
 }>;
 
 
-export type MoveSelectOptionsQuery = { __typename?: 'Query', moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, moves: Array<{ __typename?: 'Move', id: string, name: string, command: Array<string> }> }> };
+export type MoveSelectOptionsQuery = { __typename?: 'Query', character: { __typename?: 'Character', id: string, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, moves: Array<{ __typename?: 'Move', id: string, name: string, command: Array<string> }> }> } };
 
 export type OrganizerSelectOptionFragment = { __typename?: 'Organizer', id: string, slug: string, name: string };
 
@@ -2649,233 +2623,6 @@ export type SsgTournamentVideoPathsQueryVariables = Exact<{ [key: string]: never
 
 
 export type SsgTournamentVideoPathsQuery = { __typename?: 'Query', tournamentVideos: { __typename?: 'TournamentVideoConnection', nodes: Array<{ __typename?: 'TournamentVideo', id: string }> } };
-
-export type DashboardCharacterCombosPageQueryVariables = Exact<{
-  characterSlug: Scalars['String'];
-}>;
-
-
-export type DashboardCharacterCombosPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', id: string, slug: string, name: string, comboCategories: Array<{ __typename?: 'ComboCategory', id: string, name: string, position: number, combos: Array<{ __typename?: 'Combo', id: string, command: Array<string>, position: number, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> }>, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, moves: Array<{ __typename?: 'Move', id: string, name: string }> }> } };
-
-export type PageAdminCharacterEditQueryVariables = Exact<{
-  characterSlug: Scalars['String'];
-}>;
-
-
-export type PageAdminCharacterEditQuery = { __typename?: 'Query', character: { __typename?: 'Character', id: string, name: string, nameKana: string, longName: string, longNameKana: string, slug: string, country: string, fightingStyle: string, story: string, description: string, dlc: boolean } };
-
-export type UpdateCharacterMutationVariables = Exact<{
-  characterSlug: Scalars['String'];
-  attributes: CharacterAttributes;
-}>;
-
-
-export type UpdateCharacterMutation = { __typename?: 'Mutation', updateCharacter?: { __typename?: 'UpdateCharacterPayload', character: { __typename?: 'Character', id: string } } | null };
-
-export type DashboardCharacterMovesPageQueryVariables = Exact<{
-  characterSlug: Scalars['String'];
-}>;
-
-
-export type DashboardCharacterMovesPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', id: string, slug: string, name: string, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, position: number, moves: Array<{ __typename?: 'Move', id: string, name: string, command: Array<string>, position: number, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> }> } };
-
-export type CreateCharacterMutationVariables = Exact<{
-  attributes: CharacterAttributes;
-}>;
-
-
-export type CreateCharacterMutation = { __typename?: 'Mutation', createCharacter?: { __typename?: 'CreateCharacterPayload', character: { __typename?: 'Character', id: string } } | null };
-
-export type AdminOrganizerEditPageQueryVariables = Exact<{
-  organizerSlug: Scalars['String'];
-}>;
-
-
-export type AdminOrganizerEditPageQuery = { __typename?: 'Query', organizer: { __typename?: 'Organizer', id: string, name: string, slug: string, tonamelId?: string | null, twitterId?: string | null, streamingUrl?: string | null, description?: string | null } };
-
-export type AdminOrganizerEditPageUpdateOrganizerMutationVariables = Exact<{
-  organizerSlug: Scalars['String'];
-  attributes: OrganizerAttributes;
-}>;
-
-
-export type AdminOrganizerEditPageUpdateOrganizerMutation = { __typename?: 'Mutation', updateOrganizer?: { __typename?: 'UpdateOrganizerPayload', organizer: { __typename?: 'Organizer', id: string, name: string, slug: string, tonamelId?: string | null, twitterId?: string | null, streamingUrl?: string | null, description?: string | null } } | null };
-
-export type AdminOrganizersPageOrganizerFragment = { __typename?: 'Organizer', id: string, slug: string, name: string, avatarUrl?: string | null };
-
-export type AdminOrganizersPageDeleteMutationVariables = Exact<{
-  organizerSlug: Scalars['String'];
-}>;
-
-
-export type AdminOrganizersPageDeleteMutation = { __typename?: 'Mutation', deleteOrganizer?: { __typename?: 'DeleteOrganizerPayload', organizer: { __typename?: 'Organizer', id: string } } | null };
-
-export type AdminOrganizersPageOrganizersQueryVariables = Exact<{
-  after?: InputMaybe<Scalars['String']>;
-  keyword?: InputMaybe<Scalars['String']>;
-}>;
-
-
-export type AdminOrganizersPageOrganizersQuery = { __typename?: 'Query', organizers: { __typename?: 'OrganizerConnection', edges: Array<{ __typename?: 'OrganizerEdge', cursor: string, node: { __typename?: 'Organizer', id: string, slug: string, name: string, avatarUrl?: string | null } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null } } };
-
-export type AdminOrganizersNewPageCreateOrganizerMutationVariables = Exact<{
-  attributes: OrganizerAttributes;
-}>;
-
-
-export type AdminOrganizersNewPageCreateOrganizerMutation = { __typename?: 'Mutation', createOrganizer?: { __typename?: 'CreateOrganizerPayload', organizer: { __typename?: 'Organizer', id: string } } | null };
-
-export type AdminPlayerEditPageQueryVariables = Exact<{
-  playerSlug: Scalars['String'];
-}>;
-
-
-export type AdminPlayerEditPageQuery = { __typename?: 'Query', player: { __typename?: 'Player', name: string, slug: string, tonamelId?: string | null, smashggId?: string | null, twitterId?: string | null, streamingUrl?: string | null, description?: string | null, id: string, country?: { __typename?: 'Country', id: string } | null } };
-
-export type AdminPlayerEditPageUpdatePlayerMutationVariables = Exact<{
-  playerSlug: Scalars['String'];
-  attributes: PlayerAttributes;
-}>;
-
-
-export type AdminPlayerEditPageUpdatePlayerMutation = { __typename?: 'Mutation', updatePlayer?: { __typename?: 'UpdatePlayerPayload', player: { __typename?: 'Player', name: string, slug: string, tonamelId?: string | null, smashggId?: string | null, twitterId?: string | null, streamingUrl?: string | null, description?: string | null, id: string, country?: { __typename?: 'Country', id: string } | null } } | null };
-
-export type AdminPlayersNewPageCreatePlayerMutationVariables = Exact<{
-  attributes: PlayerAttributes;
-}>;
-
-
-export type AdminPlayersNewPageCreatePlayerMutation = { __typename?: 'Mutation', createPlayer?: { __typename?: 'CreatePlayerPayload', player: { __typename?: 'Player', id: string } } | null };
-
-export type CreateBattleMutationVariables = Exact<{
-  attributes: BattleAttributes;
-}>;
-
-
-export type CreateBattleMutation = { __typename?: 'Mutation', createBattle?: { __typename?: 'CreateBattlePayload', battle: { __typename?: 'Battle', id: string } } | null };
-
-export type UpdateBattleMutationVariables = Exact<{
-  battleId: Scalars['ID'];
-  attributes: BattleAttributes;
-}>;
-
-
-export type UpdateBattleMutation = { __typename?: 'Mutation', updateBattle?: { __typename?: 'UpdateBattlePayload', battle: { __typename?: 'Battle', id: string, round: BattleRound, startSec: number, sides: Array<{ __typename?: 'BattleSide', id: string, rounds: number, player: { __typename?: 'Player', id: string, name: string }, character: { __typename?: 'Character', id: string, faceImageUrl: string } }> } } | null };
-
-export type DeleteBattleMutationVariables = Exact<{
-  battleId: Scalars['ID'];
-}>;
-
-
-export type DeleteBattleMutation = { __typename?: 'Mutation', deleteBattle?: { __typename?: 'DeleteBattlePayload', battle: { __typename?: 'Battle', id: string } } | null };
-
-export type AdminBattlesPageQueryVariables = Exact<{
-  tournamentVideoId: Scalars['ID'];
-}>;
-
-
-export type AdminBattlesPageQuery = { __typename?: 'Query', tournamentVideo: { __typename?: 'TournamentVideo', id: string, title: string, youtubeVideoId: string, tournament: { __typename?: 'Tournament', id: string, name: string } }, players: { __typename?: 'PlayerConnection', nodes: Array<{ __typename?: 'Player', id: string, slug: string, name: string, tonamelId?: string | null, smashggId?: string | null }> }, characters: { __typename?: 'CharacterConnection', nodes: Array<{ __typename?: 'Character', id: string, slug: string, name: string }> } };
-
-export type AdminBattlesPageSideFragment = { __typename?: 'BattleSide', id: string, rounds: number, player: { __typename?: 'Player', id: string, name: string }, character: { __typename?: 'Character', id: string, faceImageUrl: string } };
-
-export type AdminBattlesPageBattleReslutFragment = { __typename?: 'Battle', id: string, round: BattleRound, startSec: number, sides: Array<{ __typename?: 'BattleSide', id: string, rounds: number, player: { __typename?: 'Player', id: string, name: string }, character: { __typename?: 'Character', id: string, faceImageUrl: string } }> };
-
-export type AdminBattlesPageBattlesQueryVariables = Exact<{
-  tournamentVideoId: Scalars['ID'];
-}>;
-
-
-export type AdminBattlesPageBattlesQuery = { __typename?: 'Query', battles: { __typename?: 'BattleConnection', nodes: Array<{ __typename?: 'Battle', id: string, round: BattleRound, startSec: number, sides: Array<{ __typename?: 'BattleSide', id: string, rounds: number, player: { __typename?: 'Player', id: string, name: string }, character: { __typename?: 'Character', id: string, faceImageUrl: string } }> }> } };
-
-export type AdminTournamentVideoEditPageQueryVariables = Exact<{
-  tournamentVideoId: Scalars['ID'];
-}>;
-
-
-export type AdminTournamentVideoEditPageQuery = { __typename?: 'Query', tournamentVideo: { __typename?: 'TournamentVideo', id: string, title: string, label?: string | null, publishedAt?: string | null, tournament: { __typename?: 'Tournament', id: string, name: string } } };
-
-export type TournamentVideoFormFragment = { __typename?: 'TournamentVideo', id: string, title: string, label?: string | null, publishedAt?: string | null };
-
-export type AdminTournamentVideoEditPageUpdateMutationVariables = Exact<{
-  tournamentVideoId: Scalars['ID'];
-  attributes: TournamentVideoAttributes;
-}>;
-
-
-export type AdminTournamentVideoEditPageUpdateMutation = { __typename?: 'Mutation', updateTournamentVideo?: { __typename?: 'UpdateTournamentVideoPayload', tournamentVideo: { __typename?: 'TournamentVideo', id: string, title: string, label?: string | null, publishedAt?: string | null } } | null };
-
-export type AdminTournamentEditPageQueryVariables = Exact<{
-  tournamentId: Scalars['ID'];
-}>;
-
-
-export type AdminTournamentEditPageQuery = { __typename?: 'Query', tournament: { __typename?: 'Tournament', id: string, organizerId: string, name: string, url: string, streamingUrl?: string | null, startsAt: string, description: string } };
-
-export type AdminTournamentEditPageUpdateTournamentMutationVariables = Exact<{
-  tournamentId: Scalars['ID'];
-  attributes: TournamentAttributes;
-}>;
-
-
-export type AdminTournamentEditPageUpdateTournamentMutation = { __typename?: 'Mutation', updateTournament?: { __typename?: 'UpdateTournamentPayload', tournament: { __typename?: 'Tournament', id: string, organizerId: string, name: string, url: string, streamingUrl?: string | null, startsAt: string, description: string } } | null };
-
-export type AdminTournamentPageQueryVariables = Exact<{
-  tournamentId: Scalars['ID'];
-}>;
-
-
-export type AdminTournamentPageQuery = { __typename?: 'Query', tournament: { __typename?: 'Tournament', id: string, name: string, description: string, mainImageUrl?: string | null, startsAt: string, standingsCount: number, videosCount: number, videos: Array<{ __typename?: 'TournamentVideo', id: string, title: string, youtubeVideoId: string }> }, players: { __typename?: 'PlayerConnection', nodes: Array<{ __typename?: 'Player', id: string, slug: string, name: string, tonamelId?: string | null, smashggId?: string | null }> } };
-
-export type AdminTournamentPageStandingsQueryVariables = Exact<{
-  tournamentId: Scalars['ID'];
-}>;
-
-
-export type AdminTournamentPageStandingsQuery = { __typename?: 'Query', standings: { __typename?: 'StandingConnection', nodes: Array<{ __typename?: 'Standing', id: string, place: number, player: { __typename?: 'Player', id: string, name: string, avatarUrl?: string | null } }> } };
-
-export type AdminTournamentPageVideosQueryVariables = Exact<{
-  tournamentId: Scalars['ID'];
-}>;
-
-
-export type AdminTournamentPageVideosQuery = { __typename?: 'Query', tournamentVideos: { __typename?: 'TournamentVideoConnection', nodes: Array<{ __typename?: 'TournamentVideo', id: string, title: string, thumbnailUrl: string, battlesCount: number, channel: { __typename?: 'Channel', id: string, name: string } }> } };
-
-export type AdminTournamentPageCreateStandingMutationVariables = Exact<{
-  tournamentId: Scalars['ID'];
-  attributes: StandingAttributes;
-}>;
-
-
-export type AdminTournamentPageCreateStandingMutation = { __typename?: 'Mutation', createStanding?: { __typename?: 'CreateStandingPayload', standing: { __typename?: 'Standing', id: string } } | null };
-
-export type AdminTournamentPageDeleteStandingMutationVariables = Exact<{
-  standingId: Scalars['ID'];
-}>;
-
-
-export type AdminTournamentPageDeleteStandingMutation = { __typename?: 'Mutation', deleteStanding?: { __typename?: 'DeleteStandingPayload', standing: { __typename?: 'Standing', id: string } } | null };
-
-export type AdminTournamentPageCreateVideoMutationVariables = Exact<{
-  tournamentId: Scalars['ID'];
-  url: Scalars['String'];
-}>;
-
-
-export type AdminTournamentPageCreateVideoMutation = { __typename?: 'Mutation', createTournamentVideo?: { __typename?: 'CreateTournamentVideoPayload', tournamentVideo: { __typename?: 'TournamentVideo', id: string } } | null };
-
-export type AdminTournamentPageDeleteVideoMutationVariables = Exact<{
-  tournamentVideoId: Scalars['ID'];
-}>;
-
-
-export type AdminTournamentPageDeleteVideoMutation = { __typename?: 'Mutation', deleteTournamentVideo?: { __typename?: 'DeleteTournamentVideoPayload', tournamentVideo: { __typename?: 'TournamentVideo', id: string } } | null };
-
-export type CreateTournamentMutationVariables = Exact<{
-  attributes: TournamentAttributes;
-}>;
-
-
-export type CreateTournamentMutation = { __typename?: 'Mutation', createTournament?: { __typename?: 'CreateTournamentPayload', tournament: { __typename?: 'Tournament', id: string } } | null };
 
 export type ArticlesPageQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -2984,12 +2731,239 @@ export type CreateArticleMutationVariables = Exact<{
 
 export type CreateArticleMutation = { __typename?: 'Mutation', createArticle?: { __typename?: 'CreateArticlePayload', article: { __typename?: 'Article', id: string } } | null };
 
+export type DashboardCharacterCombosPageQueryVariables = Exact<{
+  characterSlug: Scalars['String'];
+}>;
+
+
+export type DashboardCharacterCombosPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', id: string, slug: string, name: string, comboCategories: Array<{ __typename?: 'ComboCategory', id: string, name: string, position: number, combos: Array<{ __typename?: 'Combo', id: string, command: Array<string>, position: number, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> }>, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, moves: Array<{ __typename?: 'Move', id: string, name: string }> }> } };
+
+export type PageAdminCharacterEditQueryVariables = Exact<{
+  characterSlug: Scalars['String'];
+}>;
+
+
+export type PageAdminCharacterEditQuery = { __typename?: 'Query', character: { __typename?: 'Character', id: string, name: string, nameKana: string, longName: string, longNameKana: string, slug: string, country: string, fightingStyle: string, story: string, description: string, dlc: boolean } };
+
+export type UpdateCharacterMutationVariables = Exact<{
+  characterSlug: Scalars['String'];
+  attributes: CharacterAttributes;
+}>;
+
+
+export type UpdateCharacterMutation = { __typename?: 'Mutation', updateCharacter?: { __typename?: 'UpdateCharacterPayload', character: { __typename?: 'Character', id: string } } | null };
+
+export type DashboardCharacterMovesPageQueryVariables = Exact<{
+  characterSlug: Scalars['String'];
+}>;
+
+
+export type DashboardCharacterMovesPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', id: string, slug: string, name: string, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, position: number, moves: Array<{ __typename?: 'Move', id: string, name: string, command: Array<string>, position: number, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> }> } };
+
+export type CreateCharacterMutationVariables = Exact<{
+  attributes: CharacterAttributes;
+}>;
+
+
+export type CreateCharacterMutation = { __typename?: 'Mutation', createCharacter?: { __typename?: 'CreateCharacterPayload', character: { __typename?: 'Character', id: string } } | null };
+
+export type AdminOrganizerEditPageQueryVariables = Exact<{
+  organizerSlug: Scalars['String'];
+}>;
+
+
+export type AdminOrganizerEditPageQuery = { __typename?: 'Query', organizer: { __typename?: 'Organizer', id: string, name: string, slug: string, tonamelId?: string | null, twitterId?: string | null, streamingUrl?: string | null, description?: string | null } };
+
+export type AdminOrganizerEditPageUpdateOrganizerMutationVariables = Exact<{
+  organizerSlug: Scalars['String'];
+  attributes: OrganizerAttributes;
+}>;
+
+
+export type AdminOrganizerEditPageUpdateOrganizerMutation = { __typename?: 'Mutation', updateOrganizer?: { __typename?: 'UpdateOrganizerPayload', organizer: { __typename?: 'Organizer', id: string, name: string, slug: string, tonamelId?: string | null, twitterId?: string | null, streamingUrl?: string | null, description?: string | null } } | null };
+
+export type AdminOrganizersPageOrganizerFragment = { __typename?: 'Organizer', id: string, slug: string, name: string, avatarUrl?: string | null };
+
+export type AdminOrganizersPageDeleteMutationVariables = Exact<{
+  organizerSlug: Scalars['String'];
+}>;
+
+
+export type AdminOrganizersPageDeleteMutation = { __typename?: 'Mutation', deleteOrganizer?: { __typename?: 'DeleteOrganizerPayload', organizer: { __typename?: 'Organizer', id: string } } | null };
+
+export type AdminOrganizersPageOrganizersQueryVariables = Exact<{
+  after?: InputMaybe<Scalars['String']>;
+  keyword?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type AdminOrganizersPageOrganizersQuery = { __typename?: 'Query', organizers: { __typename?: 'OrganizerConnection', edges: Array<{ __typename?: 'OrganizerEdge', cursor: string, node: { __typename?: 'Organizer', id: string, slug: string, name: string, avatarUrl?: string | null } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null } } };
+
+export type AdminOrganizersNewPageCreateOrganizerMutationVariables = Exact<{
+  attributes: OrganizerAttributes;
+}>;
+
+
+export type AdminOrganizersNewPageCreateOrganizerMutation = { __typename?: 'Mutation', createOrganizer?: { __typename?: 'CreateOrganizerPayload', organizer: { __typename?: 'Organizer', id: string } } | null };
+
+export type AdminPlayerEditPageQueryVariables = Exact<{
+  playerSlug: Scalars['String'];
+}>;
+
+
+export type AdminPlayerEditPageQuery = { __typename?: 'Query', player: { __typename?: 'Player', name: string, slug: string, tonamelId?: string | null, smashggId?: string | null, twitterId?: string | null, streamingUrl?: string | null, description?: string | null, id: string, country?: { __typename?: 'Country', id: string } | null } };
+
+export type AdminPlayerEditPageUpdatePlayerMutationVariables = Exact<{
+  playerSlug: Scalars['String'];
+  attributes: PlayerAttributes;
+}>;
+
+
+export type AdminPlayerEditPageUpdatePlayerMutation = { __typename?: 'Mutation', updatePlayer?: { __typename?: 'UpdatePlayerPayload', player: { __typename?: 'Player', name: string, slug: string, tonamelId?: string | null, smashggId?: string | null, twitterId?: string | null, streamingUrl?: string | null, description?: string | null, id: string, country?: { __typename?: 'Country', id: string } | null } } | null };
+
+export type AdminPlayersNewPageCreatePlayerMutationVariables = Exact<{
+  attributes: PlayerAttributes;
+}>;
+
+
+export type AdminPlayersNewPageCreatePlayerMutation = { __typename?: 'Mutation', createPlayer?: { __typename?: 'CreatePlayerPayload', player: { __typename?: 'Player', id: string } } | null };
+
 export type UpdateCurrentUserMutationVariables = Exact<{
   attributes: CurrentUserAttributes;
 }>;
 
 
 export type UpdateCurrentUserMutation = { __typename?: 'Mutation', updateCurrentUser?: { __typename?: 'UpdateCurrentUserPayload', currentUser: { __typename?: 'CurrentUser', id: string, name: string, role: UserRole, avatarUrl: string } } | null };
+
+export type CreateBattleMutationVariables = Exact<{
+  attributes: BattleAttributes;
+}>;
+
+
+export type CreateBattleMutation = { __typename?: 'Mutation', createBattle?: { __typename?: 'CreateBattlePayload', battle: { __typename?: 'Battle', id: string } } | null };
+
+export type UpdateBattleMutationVariables = Exact<{
+  battleId: Scalars['ID'];
+  attributes: BattleAttributes;
+}>;
+
+
+export type UpdateBattleMutation = { __typename?: 'Mutation', updateBattle?: { __typename?: 'UpdateBattlePayload', battle: { __typename?: 'Battle', id: string, round: BattleRound, startSec: number, sides: Array<{ __typename?: 'BattleSide', id: string, rounds: number, player: { __typename?: 'Player', id: string, name: string }, character: { __typename?: 'Character', id: string, faceImageUrl: string } }> } } | null };
+
+export type DeleteBattleMutationVariables = Exact<{
+  battleId: Scalars['ID'];
+}>;
+
+
+export type DeleteBattleMutation = { __typename?: 'Mutation', deleteBattle?: { __typename?: 'DeleteBattlePayload', battle: { __typename?: 'Battle', id: string } } | null };
+
+export type AdminBattlesPageQueryVariables = Exact<{
+  tournamentVideoId: Scalars['ID'];
+}>;
+
+
+export type AdminBattlesPageQuery = { __typename?: 'Query', tournamentVideo: { __typename?: 'TournamentVideo', id: string, title: string, youtubeVideoId: string, tournament: { __typename?: 'Tournament', id: string, name: string } }, players: { __typename?: 'PlayerConnection', nodes: Array<{ __typename?: 'Player', id: string, slug: string, name: string, tonamelId?: string | null, smashggId?: string | null }> }, characters: { __typename?: 'CharacterConnection', nodes: Array<{ __typename?: 'Character', id: string, slug: string, name: string }> } };
+
+export type AdminBattlesPageSideFragment = { __typename?: 'BattleSide', id: string, rounds: number, player: { __typename?: 'Player', id: string, name: string }, character: { __typename?: 'Character', id: string, faceImageUrl: string } };
+
+export type AdminBattlesPageBattleReslutFragment = { __typename?: 'Battle', id: string, round: BattleRound, startSec: number, sides: Array<{ __typename?: 'BattleSide', id: string, rounds: number, player: { __typename?: 'Player', id: string, name: string }, character: { __typename?: 'Character', id: string, faceImageUrl: string } }> };
+
+export type AdminBattlesPageBattlesQueryVariables = Exact<{
+  tournamentVideoId: Scalars['ID'];
+}>;
+
+
+export type AdminBattlesPageBattlesQuery = { __typename?: 'Query', battles: { __typename?: 'BattleConnection', nodes: Array<{ __typename?: 'Battle', id: string, round: BattleRound, startSec: number, sides: Array<{ __typename?: 'BattleSide', id: string, rounds: number, player: { __typename?: 'Player', id: string, name: string }, character: { __typename?: 'Character', id: string, faceImageUrl: string } }> }> } };
+
+export type AdminTournamentVideoEditPageQueryVariables = Exact<{
+  tournamentVideoId: Scalars['ID'];
+}>;
+
+
+export type AdminTournamentVideoEditPageQuery = { __typename?: 'Query', tournamentVideo: { __typename?: 'TournamentVideo', id: string, title: string, label?: string | null, publishedAt?: string | null, tournament: { __typename?: 'Tournament', id: string, name: string } } };
+
+export type TournamentVideoFormFragment = { __typename?: 'TournamentVideo', id: string, title: string, label?: string | null, publishedAt?: string | null };
+
+export type AdminTournamentVideoEditPageUpdateMutationVariables = Exact<{
+  tournamentVideoId: Scalars['ID'];
+  attributes: TournamentVideoAttributes;
+}>;
+
+
+export type AdminTournamentVideoEditPageUpdateMutation = { __typename?: 'Mutation', updateTournamentVideo?: { __typename?: 'UpdateTournamentVideoPayload', tournamentVideo: { __typename?: 'TournamentVideo', id: string, title: string, label?: string | null, publishedAt?: string | null } } | null };
+
+export type AdminTournamentEditPageQueryVariables = Exact<{
+  tournamentId: Scalars['ID'];
+}>;
+
+
+export type AdminTournamentEditPageQuery = { __typename?: 'Query', tournament: { __typename?: 'Tournament', id: string, organizerId: string, name: string, url: string, streamingUrl?: string | null, startsAt: string, description: string } };
+
+export type AdminTournamentEditPageUpdateTournamentMutationVariables = Exact<{
+  tournamentId: Scalars['ID'];
+  attributes: TournamentAttributes;
+}>;
+
+
+export type AdminTournamentEditPageUpdateTournamentMutation = { __typename?: 'Mutation', updateTournament?: { __typename?: 'UpdateTournamentPayload', tournament: { __typename?: 'Tournament', id: string, organizerId: string, name: string, url: string, streamingUrl?: string | null, startsAt: string, description: string } } | null };
+
+export type AdminTournamentPageQueryVariables = Exact<{
+  tournamentId: Scalars['ID'];
+}>;
+
+
+export type AdminTournamentPageQuery = { __typename?: 'Query', tournament: { __typename?: 'Tournament', id: string, name: string, description: string, mainImageUrl?: string | null, startsAt: string, standingsCount: number, videosCount: number, videos: Array<{ __typename?: 'TournamentVideo', id: string, title: string, youtubeVideoId: string }> }, players: { __typename?: 'PlayerConnection', nodes: Array<{ __typename?: 'Player', id: string, slug: string, name: string, tonamelId?: string | null, smashggId?: string | null }> } };
+
+export type AdminTournamentPageStandingsQueryVariables = Exact<{
+  tournamentId: Scalars['ID'];
+}>;
+
+
+export type AdminTournamentPageStandingsQuery = { __typename?: 'Query', tournament: { __typename?: 'Tournament', id: string, standings: Array<{ __typename?: 'Standing', id: string, place: number, player: { __typename?: 'Player', id: string, name: string, avatarUrl?: string | null } }> } };
+
+export type AdminTournamentPageVideosQueryVariables = Exact<{
+  tournamentId: Scalars['ID'];
+}>;
+
+
+export type AdminTournamentPageVideosQuery = { __typename?: 'Query', tournamentVideos: { __typename?: 'TournamentVideoConnection', nodes: Array<{ __typename?: 'TournamentVideo', id: string, title: string, thumbnailUrl: string, battlesCount: number, channel: { __typename?: 'Channel', id: string, name: string } }> } };
+
+export type AdminTournamentPageCreateStandingMutationVariables = Exact<{
+  tournamentId: Scalars['ID'];
+  attributes: StandingAttributes;
+}>;
+
+
+export type AdminTournamentPageCreateStandingMutation = { __typename?: 'Mutation', createStanding?: { __typename?: 'CreateStandingPayload', standing: { __typename?: 'Standing', id: string } } | null };
+
+export type AdminTournamentPageDeleteStandingMutationVariables = Exact<{
+  standingId: Scalars['ID'];
+}>;
+
+
+export type AdminTournamentPageDeleteStandingMutation = { __typename?: 'Mutation', deleteStanding?: { __typename?: 'DeleteStandingPayload', standing: { __typename?: 'Standing', id: string } } | null };
+
+export type AdminTournamentPageCreateVideoMutationVariables = Exact<{
+  tournamentId: Scalars['ID'];
+  url: Scalars['String'];
+}>;
+
+
+export type AdminTournamentPageCreateVideoMutation = { __typename?: 'Mutation', createTournamentVideo?: { __typename?: 'CreateTournamentVideoPayload', tournamentVideo: { __typename?: 'TournamentVideo', id: string } } | null };
+
+export type AdminTournamentPageDeleteVideoMutationVariables = Exact<{
+  tournamentVideoId: Scalars['ID'];
+}>;
+
+
+export type AdminTournamentPageDeleteVideoMutation = { __typename?: 'Mutation', deleteTournamentVideo?: { __typename?: 'DeleteTournamentVideoPayload', tournamentVideo: { __typename?: 'TournamentVideo', id: string } } | null };
+
+export type CreateTournamentMutationVariables = Exact<{
+  attributes: TournamentAttributes;
+}>;
+
+
+export type CreateTournamentMutation = { __typename?: 'Mutation', createTournament?: { __typename?: 'CreateTournamentPayload', tournament: { __typename?: 'Tournament', id: string } } | null };
 
 export type TopPageQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -3020,7 +2994,7 @@ export type PlayerStandingsPageQueryVariables = Exact<{
 }>;
 
 
-export type PlayerStandingsPageQuery = { __typename?: 'Query', player: { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null, twitterId?: string | null, streamingUrl?: string | null, battlesCount: number, standingsCount: number }, standings: { __typename?: 'StandingConnection', nodes: Array<{ __typename?: 'Standing', id: string, place: number, tournament: { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: string | null, startsAt: string } }> } };
+export type PlayerStandingsPageQuery = { __typename?: 'Query', player: { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null, twitterId?: string | null, streamingUrl?: string | null, battlesCount: number, standingsCount: number, standings: { __typename?: 'StandingConnection', nodes: Array<{ __typename?: 'Standing', id: string, place: number, tournament: { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: string | null, startsAt: string } }> } } };
 
 export type TournamentsPageQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -3727,46 +3701,6 @@ export const PlayerSelectOptionFragmentDoc = gql`
   smashggId
 }
     `;
-export const AdminOrganizersPageOrganizerFragmentDoc = gql`
-    fragment AdminOrganizersPageOrganizer on Organizer {
-  id
-  slug
-  name
-  avatarUrl
-}
-    `;
-export const AdminBattlesPageSideFragmentDoc = gql`
-    fragment AdminBattlesPageSide on BattleSide {
-  id
-  rounds
-  player {
-    id
-    name
-  }
-  character {
-    id
-    faceImageUrl
-  }
-}
-    `;
-export const AdminBattlesPageBattleReslutFragmentDoc = gql`
-    fragment AdminBattlesPageBattleReslut on Battle {
-  id
-  round
-  startSec
-  sides {
-    ...AdminBattlesPageSide
-  }
-}
-    ${AdminBattlesPageSideFragmentDoc}`;
-export const TournamentVideoFormFragmentDoc = gql`
-    fragment TournamentVideoForm on TournamentVideo {
-  id
-  title
-  label
-  publishedAt
-}
-    `;
 export const ArticleCardFragmentDoc = gql`
     fragment ArticleCard on Article {
   id
@@ -3807,6 +3741,46 @@ export const DashboardArticlesPageArticleFragmentDoc = gql`
   id
   title
   status
+}
+    `;
+export const AdminOrganizersPageOrganizerFragmentDoc = gql`
+    fragment AdminOrganizersPageOrganizer on Organizer {
+  id
+  slug
+  name
+  avatarUrl
+}
+    `;
+export const AdminBattlesPageSideFragmentDoc = gql`
+    fragment AdminBattlesPageSide on BattleSide {
+  id
+  rounds
+  player {
+    id
+    name
+  }
+  character {
+    id
+    faceImageUrl
+  }
+}
+    `;
+export const AdminBattlesPageBattleReslutFragmentDoc = gql`
+    fragment AdminBattlesPageBattleReslut on Battle {
+  id
+  round
+  startSec
+  sides {
+    ...AdminBattlesPageSide
+  }
+}
+    ${AdminBattlesPageSideFragmentDoc}`;
+export const TournamentVideoFormFragmentDoc = gql`
+    fragment TournamentVideoForm on TournamentVideo {
+  id
+  title
+  label
+  publishedAt
 }
     `;
 export const ArticleCardsDocument = gql`
@@ -3953,15 +3927,18 @@ export type PlayerCardsLazyQueryHookResult = ReturnType<typeof usePlayerCardsLaz
 export type PlayerCardsQueryResult = Apollo.QueryResult<PlayerCardsQuery, PlayerCardsQueryVariables>;
 export const PlayerStandingCardsDocument = gql`
     query PlayerStandingCards($playerSlug: String!, $after: String) {
-  standings(playerSlug: $playerSlug, first: 10, after: $after) {
-    edges {
-      node {
-        ...PlayerStandingCard
+  player(playerSlug: $playerSlug) {
+    id
+    standings(first: 10, after: $after) {
+      edges {
+        node {
+          ...PlayerStandingCard
+        }
+        cursor
       }
-      cursor
-    }
-    pageInfo {
-      ...Pagination
+      pageInfo {
+        ...Pagination
+      }
     }
   }
 }
@@ -5476,12 +5453,15 @@ export type CharacterSelectOptionsLazyQueryHookResult = ReturnType<typeof useCha
 export type CharacterSelectOptionsQueryResult = Apollo.QueryResult<CharacterSelectOptionsQuery, CharacterSelectOptionsQueryVariables>;
 export const ComboSelectOptionsDocument = gql`
     query ComboSelectOptions($characterSlug: String!) {
-  comboCategories(characterSlug: $characterSlug) {
+  character(characterSlug: $characterSlug) {
     id
-    name
-    combos {
+    comboCategories {
       id
-      command
+      name
+      combos {
+        id
+        command
+      }
     }
   }
 }
@@ -5584,13 +5564,16 @@ export type CurrentUserLazyQueryHookResult = ReturnType<typeof useCurrentUserLaz
 export type CurrentUserQueryResult = Apollo.QueryResult<CurrentUserQuery, CurrentUserQueryVariables>;
 export const MoveSelectOptionsDocument = gql`
     query MoveSelectOptions($characterSlug: String!) {
-  moveCategories(characterSlug: $characterSlug) {
+  character(characterSlug: $characterSlug) {
     id
-    name
-    moves {
+    moveCategories {
       id
       name
-      command
+      moves {
+        id
+        name
+        command
+      }
     }
   }
 }
@@ -5805,1146 +5788,6 @@ export function useSsgTournamentVideoPathsLazyQuery(baseOptions?: Apollo.LazyQue
 export type SsgTournamentVideoPathsQueryHookResult = ReturnType<typeof useSsgTournamentVideoPathsQuery>;
 export type SsgTournamentVideoPathsLazyQueryHookResult = ReturnType<typeof useSsgTournamentVideoPathsLazyQuery>;
 export type SsgTournamentVideoPathsQueryResult = Apollo.QueryResult<SsgTournamentVideoPathsQuery, SsgTournamentVideoPathsQueryVariables>;
-export const DashboardCharacterCombosPageDocument = gql`
-    query DashboardCharacterCombosPage($characterSlug: String!) {
-  character(characterSlug: $characterSlug) {
-    ...CharacterBreadcrumbs
-    ...ComboDashboard
-  }
-}
-    ${CharacterBreadcrumbsFragmentDoc}
-${ComboDashboardFragmentDoc}`;
-
-/**
- * __useDashboardCharacterCombosPageQuery__
- *
- * To run a query within a React component, call `useDashboardCharacterCombosPageQuery` and pass it any options that fit your needs.
- * When your component renders, `useDashboardCharacterCombosPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useDashboardCharacterCombosPageQuery({
- *   variables: {
- *      characterSlug: // value for 'characterSlug'
- *   },
- * });
- */
-export function useDashboardCharacterCombosPageQuery(baseOptions: Apollo.QueryHookOptions<DashboardCharacterCombosPageQuery, DashboardCharacterCombosPageQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<DashboardCharacterCombosPageQuery, DashboardCharacterCombosPageQueryVariables>(DashboardCharacterCombosPageDocument, options);
-      }
-export function useDashboardCharacterCombosPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<DashboardCharacterCombosPageQuery, DashboardCharacterCombosPageQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<DashboardCharacterCombosPageQuery, DashboardCharacterCombosPageQueryVariables>(DashboardCharacterCombosPageDocument, options);
-        }
-export type DashboardCharacterCombosPageQueryHookResult = ReturnType<typeof useDashboardCharacterCombosPageQuery>;
-export type DashboardCharacterCombosPageLazyQueryHookResult = ReturnType<typeof useDashboardCharacterCombosPageLazyQuery>;
-export type DashboardCharacterCombosPageQueryResult = Apollo.QueryResult<DashboardCharacterCombosPageQuery, DashboardCharacterCombosPageQueryVariables>;
-export const PageAdminCharacterEditDocument = gql`
-    query PageAdminCharacterEdit($characterSlug: String!) {
-  character(characterSlug: $characterSlug) {
-    ...CharacterForm
-  }
-}
-    ${CharacterFormFragmentDoc}`;
-
-/**
- * __usePageAdminCharacterEditQuery__
- *
- * To run a query within a React component, call `usePageAdminCharacterEditQuery` and pass it any options that fit your needs.
- * When your component renders, `usePageAdminCharacterEditQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = usePageAdminCharacterEditQuery({
- *   variables: {
- *      characterSlug: // value for 'characterSlug'
- *   },
- * });
- */
-export function usePageAdminCharacterEditQuery(baseOptions: Apollo.QueryHookOptions<PageAdminCharacterEditQuery, PageAdminCharacterEditQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<PageAdminCharacterEditQuery, PageAdminCharacterEditQueryVariables>(PageAdminCharacterEditDocument, options);
-      }
-export function usePageAdminCharacterEditLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PageAdminCharacterEditQuery, PageAdminCharacterEditQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<PageAdminCharacterEditQuery, PageAdminCharacterEditQueryVariables>(PageAdminCharacterEditDocument, options);
-        }
-export type PageAdminCharacterEditQueryHookResult = ReturnType<typeof usePageAdminCharacterEditQuery>;
-export type PageAdminCharacterEditLazyQueryHookResult = ReturnType<typeof usePageAdminCharacterEditLazyQuery>;
-export type PageAdminCharacterEditQueryResult = Apollo.QueryResult<PageAdminCharacterEditQuery, PageAdminCharacterEditQueryVariables>;
-export const UpdateCharacterDocument = gql`
-    mutation UpdateCharacter($characterSlug: String!, $attributes: CharacterAttributes!) {
-  updateCharacter(input: {characterSlug: $characterSlug, attributes: $attributes}) {
-    character {
-      id
-    }
-  }
-}
-    `;
-export type UpdateCharacterMutationFn = Apollo.MutationFunction<UpdateCharacterMutation, UpdateCharacterMutationVariables>;
-
-/**
- * __useUpdateCharacterMutation__
- *
- * To run a mutation, you first call `useUpdateCharacterMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useUpdateCharacterMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [updateCharacterMutation, { data, loading, error }] = useUpdateCharacterMutation({
- *   variables: {
- *      characterSlug: // value for 'characterSlug'
- *      attributes: // value for 'attributes'
- *   },
- * });
- */
-export function useUpdateCharacterMutation(baseOptions?: Apollo.MutationHookOptions<UpdateCharacterMutation, UpdateCharacterMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<UpdateCharacterMutation, UpdateCharacterMutationVariables>(UpdateCharacterDocument, options);
-      }
-export type UpdateCharacterMutationHookResult = ReturnType<typeof useUpdateCharacterMutation>;
-export type UpdateCharacterMutationResult = Apollo.MutationResult<UpdateCharacterMutation>;
-export type UpdateCharacterMutationOptions = Apollo.BaseMutationOptions<UpdateCharacterMutation, UpdateCharacterMutationVariables>;
-export const DashboardCharacterMovesPageDocument = gql`
-    query DashboardCharacterMovesPage($characterSlug: String!) {
-  character(characterSlug: $characterSlug) {
-    ...CharacterBreadcrumbs
-    ...MoveDashboard
-  }
-}
-    ${CharacterBreadcrumbsFragmentDoc}
-${MoveDashboardFragmentDoc}`;
-
-/**
- * __useDashboardCharacterMovesPageQuery__
- *
- * To run a query within a React component, call `useDashboardCharacterMovesPageQuery` and pass it any options that fit your needs.
- * When your component renders, `useDashboardCharacterMovesPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useDashboardCharacterMovesPageQuery({
- *   variables: {
- *      characterSlug: // value for 'characterSlug'
- *   },
- * });
- */
-export function useDashboardCharacterMovesPageQuery(baseOptions: Apollo.QueryHookOptions<DashboardCharacterMovesPageQuery, DashboardCharacterMovesPageQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<DashboardCharacterMovesPageQuery, DashboardCharacterMovesPageQueryVariables>(DashboardCharacterMovesPageDocument, options);
-      }
-export function useDashboardCharacterMovesPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<DashboardCharacterMovesPageQuery, DashboardCharacterMovesPageQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<DashboardCharacterMovesPageQuery, DashboardCharacterMovesPageQueryVariables>(DashboardCharacterMovesPageDocument, options);
-        }
-export type DashboardCharacterMovesPageQueryHookResult = ReturnType<typeof useDashboardCharacterMovesPageQuery>;
-export type DashboardCharacterMovesPageLazyQueryHookResult = ReturnType<typeof useDashboardCharacterMovesPageLazyQuery>;
-export type DashboardCharacterMovesPageQueryResult = Apollo.QueryResult<DashboardCharacterMovesPageQuery, DashboardCharacterMovesPageQueryVariables>;
-export const CreateCharacterDocument = gql`
-    mutation CreateCharacter($attributes: CharacterAttributes!) {
-  createCharacter(input: {attributes: $attributes}) {
-    character {
-      id
-    }
-  }
-}
-    `;
-export type CreateCharacterMutationFn = Apollo.MutationFunction<CreateCharacterMutation, CreateCharacterMutationVariables>;
-
-/**
- * __useCreateCharacterMutation__
- *
- * To run a mutation, you first call `useCreateCharacterMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useCreateCharacterMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [createCharacterMutation, { data, loading, error }] = useCreateCharacterMutation({
- *   variables: {
- *      attributes: // value for 'attributes'
- *   },
- * });
- */
-export function useCreateCharacterMutation(baseOptions?: Apollo.MutationHookOptions<CreateCharacterMutation, CreateCharacterMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<CreateCharacterMutation, CreateCharacterMutationVariables>(CreateCharacterDocument, options);
-      }
-export type CreateCharacterMutationHookResult = ReturnType<typeof useCreateCharacterMutation>;
-export type CreateCharacterMutationResult = Apollo.MutationResult<CreateCharacterMutation>;
-export type CreateCharacterMutationOptions = Apollo.BaseMutationOptions<CreateCharacterMutation, CreateCharacterMutationVariables>;
-export const AdminOrganizerEditPageDocument = gql`
-    query AdminOrganizerEditPage($organizerSlug: String!) {
-  organizer(organizerSlug: $organizerSlug) {
-    ...OrganizerForm
-    ...OrganizerBreadcrumbs
-  }
-}
-    ${OrganizerFormFragmentDoc}
-${OrganizerBreadcrumbsFragmentDoc}`;
-
-/**
- * __useAdminOrganizerEditPageQuery__
- *
- * To run a query within a React component, call `useAdminOrganizerEditPageQuery` and pass it any options that fit your needs.
- * When your component renders, `useAdminOrganizerEditPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useAdminOrganizerEditPageQuery({
- *   variables: {
- *      organizerSlug: // value for 'organizerSlug'
- *   },
- * });
- */
-export function useAdminOrganizerEditPageQuery(baseOptions: Apollo.QueryHookOptions<AdminOrganizerEditPageQuery, AdminOrganizerEditPageQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<AdminOrganizerEditPageQuery, AdminOrganizerEditPageQueryVariables>(AdminOrganizerEditPageDocument, options);
-      }
-export function useAdminOrganizerEditPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AdminOrganizerEditPageQuery, AdminOrganizerEditPageQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<AdminOrganizerEditPageQuery, AdminOrganizerEditPageQueryVariables>(AdminOrganizerEditPageDocument, options);
-        }
-export type AdminOrganizerEditPageQueryHookResult = ReturnType<typeof useAdminOrganizerEditPageQuery>;
-export type AdminOrganizerEditPageLazyQueryHookResult = ReturnType<typeof useAdminOrganizerEditPageLazyQuery>;
-export type AdminOrganizerEditPageQueryResult = Apollo.QueryResult<AdminOrganizerEditPageQuery, AdminOrganizerEditPageQueryVariables>;
-export const AdminOrganizerEditPageUpdateOrganizerDocument = gql`
-    mutation AdminOrganizerEditPageUpdateOrganizer($organizerSlug: String!, $attributes: OrganizerAttributes!) {
-  updateOrganizer(input: {organizerSlug: $organizerSlug, attributes: $attributes}) {
-    organizer {
-      ...OrganizerForm
-      ...OrganizerBreadcrumbs
-    }
-  }
-}
-    ${OrganizerFormFragmentDoc}
-${OrganizerBreadcrumbsFragmentDoc}`;
-export type AdminOrganizerEditPageUpdateOrganizerMutationFn = Apollo.MutationFunction<AdminOrganizerEditPageUpdateOrganizerMutation, AdminOrganizerEditPageUpdateOrganizerMutationVariables>;
-
-/**
- * __useAdminOrganizerEditPageUpdateOrganizerMutation__
- *
- * To run a mutation, you first call `useAdminOrganizerEditPageUpdateOrganizerMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useAdminOrganizerEditPageUpdateOrganizerMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [adminOrganizerEditPageUpdateOrganizerMutation, { data, loading, error }] = useAdminOrganizerEditPageUpdateOrganizerMutation({
- *   variables: {
- *      organizerSlug: // value for 'organizerSlug'
- *      attributes: // value for 'attributes'
- *   },
- * });
- */
-export function useAdminOrganizerEditPageUpdateOrganizerMutation(baseOptions?: Apollo.MutationHookOptions<AdminOrganizerEditPageUpdateOrganizerMutation, AdminOrganizerEditPageUpdateOrganizerMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<AdminOrganizerEditPageUpdateOrganizerMutation, AdminOrganizerEditPageUpdateOrganizerMutationVariables>(AdminOrganizerEditPageUpdateOrganizerDocument, options);
-      }
-export type AdminOrganizerEditPageUpdateOrganizerMutationHookResult = ReturnType<typeof useAdminOrganizerEditPageUpdateOrganizerMutation>;
-export type AdminOrganizerEditPageUpdateOrganizerMutationResult = Apollo.MutationResult<AdminOrganizerEditPageUpdateOrganizerMutation>;
-export type AdminOrganizerEditPageUpdateOrganizerMutationOptions = Apollo.BaseMutationOptions<AdminOrganizerEditPageUpdateOrganizerMutation, AdminOrganizerEditPageUpdateOrganizerMutationVariables>;
-export const AdminOrganizersPageDeleteDocument = gql`
-    mutation AdminOrganizersPageDelete($organizerSlug: String!) {
-  deleteOrganizer(input: {organizerSlug: $organizerSlug}) {
-    organizer {
-      id
-    }
-  }
-}
-    `;
-export type AdminOrganizersPageDeleteMutationFn = Apollo.MutationFunction<AdminOrganizersPageDeleteMutation, AdminOrganizersPageDeleteMutationVariables>;
-
-/**
- * __useAdminOrganizersPageDeleteMutation__
- *
- * To run a mutation, you first call `useAdminOrganizersPageDeleteMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useAdminOrganizersPageDeleteMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [adminOrganizersPageDeleteMutation, { data, loading, error }] = useAdminOrganizersPageDeleteMutation({
- *   variables: {
- *      organizerSlug: // value for 'organizerSlug'
- *   },
- * });
- */
-export function useAdminOrganizersPageDeleteMutation(baseOptions?: Apollo.MutationHookOptions<AdminOrganizersPageDeleteMutation, AdminOrganizersPageDeleteMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<AdminOrganizersPageDeleteMutation, AdminOrganizersPageDeleteMutationVariables>(AdminOrganizersPageDeleteDocument, options);
-      }
-export type AdminOrganizersPageDeleteMutationHookResult = ReturnType<typeof useAdminOrganizersPageDeleteMutation>;
-export type AdminOrganizersPageDeleteMutationResult = Apollo.MutationResult<AdminOrganizersPageDeleteMutation>;
-export type AdminOrganizersPageDeleteMutationOptions = Apollo.BaseMutationOptions<AdminOrganizersPageDeleteMutation, AdminOrganizersPageDeleteMutationVariables>;
-export const AdminOrganizersPageOrganizersDocument = gql`
-    query AdminOrganizersPageOrganizers($after: String, $keyword: String) {
-  organizers(first: 10, after: $after, keyword: $keyword) {
-    edges {
-      node {
-        ...AdminOrganizersPageOrganizer
-      }
-      cursor
-    }
-    pageInfo {
-      ...Pagination
-    }
-  }
-}
-    ${AdminOrganizersPageOrganizerFragmentDoc}
-${PaginationFragmentDoc}`;
-
-/**
- * __useAdminOrganizersPageOrganizersQuery__
- *
- * To run a query within a React component, call `useAdminOrganizersPageOrganizersQuery` and pass it any options that fit your needs.
- * When your component renders, `useAdminOrganizersPageOrganizersQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useAdminOrganizersPageOrganizersQuery({
- *   variables: {
- *      after: // value for 'after'
- *      keyword: // value for 'keyword'
- *   },
- * });
- */
-export function useAdminOrganizersPageOrganizersQuery(baseOptions?: Apollo.QueryHookOptions<AdminOrganizersPageOrganizersQuery, AdminOrganizersPageOrganizersQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<AdminOrganizersPageOrganizersQuery, AdminOrganizersPageOrganizersQueryVariables>(AdminOrganizersPageOrganizersDocument, options);
-      }
-export function useAdminOrganizersPageOrganizersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AdminOrganizersPageOrganizersQuery, AdminOrganizersPageOrganizersQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<AdminOrganizersPageOrganizersQuery, AdminOrganizersPageOrganizersQueryVariables>(AdminOrganizersPageOrganizersDocument, options);
-        }
-export type AdminOrganizersPageOrganizersQueryHookResult = ReturnType<typeof useAdminOrganizersPageOrganizersQuery>;
-export type AdminOrganizersPageOrganizersLazyQueryHookResult = ReturnType<typeof useAdminOrganizersPageOrganizersLazyQuery>;
-export type AdminOrganizersPageOrganizersQueryResult = Apollo.QueryResult<AdminOrganizersPageOrganizersQuery, AdminOrganizersPageOrganizersQueryVariables>;
-export const AdminOrganizersNewPageCreateOrganizerDocument = gql`
-    mutation AdminOrganizersNewPageCreateOrganizer($attributes: OrganizerAttributes!) {
-  createOrganizer(input: {attributes: $attributes}) {
-    organizer {
-      id
-    }
-  }
-}
-    `;
-export type AdminOrganizersNewPageCreateOrganizerMutationFn = Apollo.MutationFunction<AdminOrganizersNewPageCreateOrganizerMutation, AdminOrganizersNewPageCreateOrganizerMutationVariables>;
-
-/**
- * __useAdminOrganizersNewPageCreateOrganizerMutation__
- *
- * To run a mutation, you first call `useAdminOrganizersNewPageCreateOrganizerMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useAdminOrganizersNewPageCreateOrganizerMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [adminOrganizersNewPageCreateOrganizerMutation, { data, loading, error }] = useAdminOrganizersNewPageCreateOrganizerMutation({
- *   variables: {
- *      attributes: // value for 'attributes'
- *   },
- * });
- */
-export function useAdminOrganizersNewPageCreateOrganizerMutation(baseOptions?: Apollo.MutationHookOptions<AdminOrganizersNewPageCreateOrganizerMutation, AdminOrganizersNewPageCreateOrganizerMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<AdminOrganizersNewPageCreateOrganizerMutation, AdminOrganizersNewPageCreateOrganizerMutationVariables>(AdminOrganizersNewPageCreateOrganizerDocument, options);
-      }
-export type AdminOrganizersNewPageCreateOrganizerMutationHookResult = ReturnType<typeof useAdminOrganizersNewPageCreateOrganizerMutation>;
-export type AdminOrganizersNewPageCreateOrganizerMutationResult = Apollo.MutationResult<AdminOrganizersNewPageCreateOrganizerMutation>;
-export type AdminOrganizersNewPageCreateOrganizerMutationOptions = Apollo.BaseMutationOptions<AdminOrganizersNewPageCreateOrganizerMutation, AdminOrganizersNewPageCreateOrganizerMutationVariables>;
-export const AdminPlayerEditPageDocument = gql`
-    query AdminPlayerEditPage($playerSlug: String!) {
-  player(playerSlug: $playerSlug) {
-    ...PlayerForm
-    ...PlayerBreadcrumbs
-  }
-}
-    ${PlayerFormFragmentDoc}
-${PlayerBreadcrumbsFragmentDoc}`;
-
-/**
- * __useAdminPlayerEditPageQuery__
- *
- * To run a query within a React component, call `useAdminPlayerEditPageQuery` and pass it any options that fit your needs.
- * When your component renders, `useAdminPlayerEditPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useAdminPlayerEditPageQuery({
- *   variables: {
- *      playerSlug: // value for 'playerSlug'
- *   },
- * });
- */
-export function useAdminPlayerEditPageQuery(baseOptions: Apollo.QueryHookOptions<AdminPlayerEditPageQuery, AdminPlayerEditPageQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<AdminPlayerEditPageQuery, AdminPlayerEditPageQueryVariables>(AdminPlayerEditPageDocument, options);
-      }
-export function useAdminPlayerEditPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AdminPlayerEditPageQuery, AdminPlayerEditPageQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<AdminPlayerEditPageQuery, AdminPlayerEditPageQueryVariables>(AdminPlayerEditPageDocument, options);
-        }
-export type AdminPlayerEditPageQueryHookResult = ReturnType<typeof useAdminPlayerEditPageQuery>;
-export type AdminPlayerEditPageLazyQueryHookResult = ReturnType<typeof useAdminPlayerEditPageLazyQuery>;
-export type AdminPlayerEditPageQueryResult = Apollo.QueryResult<AdminPlayerEditPageQuery, AdminPlayerEditPageQueryVariables>;
-export const AdminPlayerEditPageUpdatePlayerDocument = gql`
-    mutation AdminPlayerEditPageUpdatePlayer($playerSlug: String!, $attributes: PlayerAttributes!) {
-  updatePlayer(input: {playerSlug: $playerSlug, attributes: $attributes}) {
-    player {
-      ...PlayerForm
-      ...PlayerBreadcrumbs
-    }
-  }
-}
-    ${PlayerFormFragmentDoc}
-${PlayerBreadcrumbsFragmentDoc}`;
-export type AdminPlayerEditPageUpdatePlayerMutationFn = Apollo.MutationFunction<AdminPlayerEditPageUpdatePlayerMutation, AdminPlayerEditPageUpdatePlayerMutationVariables>;
-
-/**
- * __useAdminPlayerEditPageUpdatePlayerMutation__
- *
- * To run a mutation, you first call `useAdminPlayerEditPageUpdatePlayerMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useAdminPlayerEditPageUpdatePlayerMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [adminPlayerEditPageUpdatePlayerMutation, { data, loading, error }] = useAdminPlayerEditPageUpdatePlayerMutation({
- *   variables: {
- *      playerSlug: // value for 'playerSlug'
- *      attributes: // value for 'attributes'
- *   },
- * });
- */
-export function useAdminPlayerEditPageUpdatePlayerMutation(baseOptions?: Apollo.MutationHookOptions<AdminPlayerEditPageUpdatePlayerMutation, AdminPlayerEditPageUpdatePlayerMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<AdminPlayerEditPageUpdatePlayerMutation, AdminPlayerEditPageUpdatePlayerMutationVariables>(AdminPlayerEditPageUpdatePlayerDocument, options);
-      }
-export type AdminPlayerEditPageUpdatePlayerMutationHookResult = ReturnType<typeof useAdminPlayerEditPageUpdatePlayerMutation>;
-export type AdminPlayerEditPageUpdatePlayerMutationResult = Apollo.MutationResult<AdminPlayerEditPageUpdatePlayerMutation>;
-export type AdminPlayerEditPageUpdatePlayerMutationOptions = Apollo.BaseMutationOptions<AdminPlayerEditPageUpdatePlayerMutation, AdminPlayerEditPageUpdatePlayerMutationVariables>;
-export const AdminPlayersNewPageCreatePlayerDocument = gql`
-    mutation AdminPlayersNewPageCreatePlayer($attributes: PlayerAttributes!) {
-  createPlayer(input: {attributes: $attributes}) {
-    player {
-      id
-    }
-  }
-}
-    `;
-export type AdminPlayersNewPageCreatePlayerMutationFn = Apollo.MutationFunction<AdminPlayersNewPageCreatePlayerMutation, AdminPlayersNewPageCreatePlayerMutationVariables>;
-
-/**
- * __useAdminPlayersNewPageCreatePlayerMutation__
- *
- * To run a mutation, you first call `useAdminPlayersNewPageCreatePlayerMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useAdminPlayersNewPageCreatePlayerMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [adminPlayersNewPageCreatePlayerMutation, { data, loading, error }] = useAdminPlayersNewPageCreatePlayerMutation({
- *   variables: {
- *      attributes: // value for 'attributes'
- *   },
- * });
- */
-export function useAdminPlayersNewPageCreatePlayerMutation(baseOptions?: Apollo.MutationHookOptions<AdminPlayersNewPageCreatePlayerMutation, AdminPlayersNewPageCreatePlayerMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<AdminPlayersNewPageCreatePlayerMutation, AdminPlayersNewPageCreatePlayerMutationVariables>(AdminPlayersNewPageCreatePlayerDocument, options);
-      }
-export type AdminPlayersNewPageCreatePlayerMutationHookResult = ReturnType<typeof useAdminPlayersNewPageCreatePlayerMutation>;
-export type AdminPlayersNewPageCreatePlayerMutationResult = Apollo.MutationResult<AdminPlayersNewPageCreatePlayerMutation>;
-export type AdminPlayersNewPageCreatePlayerMutationOptions = Apollo.BaseMutationOptions<AdminPlayersNewPageCreatePlayerMutation, AdminPlayersNewPageCreatePlayerMutationVariables>;
-export const CreateBattleDocument = gql`
-    mutation CreateBattle($attributes: BattleAttributes!) {
-  createBattle(input: {attributes: $attributes}) {
-    battle {
-      id
-    }
-  }
-}
-    `;
-export type CreateBattleMutationFn = Apollo.MutationFunction<CreateBattleMutation, CreateBattleMutationVariables>;
-
-/**
- * __useCreateBattleMutation__
- *
- * To run a mutation, you first call `useCreateBattleMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useCreateBattleMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [createBattleMutation, { data, loading, error }] = useCreateBattleMutation({
- *   variables: {
- *      attributes: // value for 'attributes'
- *   },
- * });
- */
-export function useCreateBattleMutation(baseOptions?: Apollo.MutationHookOptions<CreateBattleMutation, CreateBattleMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<CreateBattleMutation, CreateBattleMutationVariables>(CreateBattleDocument, options);
-      }
-export type CreateBattleMutationHookResult = ReturnType<typeof useCreateBattleMutation>;
-export type CreateBattleMutationResult = Apollo.MutationResult<CreateBattleMutation>;
-export type CreateBattleMutationOptions = Apollo.BaseMutationOptions<CreateBattleMutation, CreateBattleMutationVariables>;
-export const UpdateBattleDocument = gql`
-    mutation UpdateBattle($battleId: ID!, $attributes: BattleAttributes!) {
-  updateBattle(input: {battleId: $battleId, attributes: $attributes}) {
-    battle {
-      ...AdminBattlesPageBattleReslut
-    }
-  }
-}
-    ${AdminBattlesPageBattleReslutFragmentDoc}`;
-export type UpdateBattleMutationFn = Apollo.MutationFunction<UpdateBattleMutation, UpdateBattleMutationVariables>;
-
-/**
- * __useUpdateBattleMutation__
- *
- * To run a mutation, you first call `useUpdateBattleMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useUpdateBattleMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [updateBattleMutation, { data, loading, error }] = useUpdateBattleMutation({
- *   variables: {
- *      battleId: // value for 'battleId'
- *      attributes: // value for 'attributes'
- *   },
- * });
- */
-export function useUpdateBattleMutation(baseOptions?: Apollo.MutationHookOptions<UpdateBattleMutation, UpdateBattleMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<UpdateBattleMutation, UpdateBattleMutationVariables>(UpdateBattleDocument, options);
-      }
-export type UpdateBattleMutationHookResult = ReturnType<typeof useUpdateBattleMutation>;
-export type UpdateBattleMutationResult = Apollo.MutationResult<UpdateBattleMutation>;
-export type UpdateBattleMutationOptions = Apollo.BaseMutationOptions<UpdateBattleMutation, UpdateBattleMutationVariables>;
-export const DeleteBattleDocument = gql`
-    mutation DeleteBattle($battleId: ID!) {
-  deleteBattle(input: {battleId: $battleId}) {
-    battle {
-      id
-    }
-  }
-}
-    `;
-export type DeleteBattleMutationFn = Apollo.MutationFunction<DeleteBattleMutation, DeleteBattleMutationVariables>;
-
-/**
- * __useDeleteBattleMutation__
- *
- * To run a mutation, you first call `useDeleteBattleMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useDeleteBattleMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [deleteBattleMutation, { data, loading, error }] = useDeleteBattleMutation({
- *   variables: {
- *      battleId: // value for 'battleId'
- *   },
- * });
- */
-export function useDeleteBattleMutation(baseOptions?: Apollo.MutationHookOptions<DeleteBattleMutation, DeleteBattleMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<DeleteBattleMutation, DeleteBattleMutationVariables>(DeleteBattleDocument, options);
-      }
-export type DeleteBattleMutationHookResult = ReturnType<typeof useDeleteBattleMutation>;
-export type DeleteBattleMutationResult = Apollo.MutationResult<DeleteBattleMutation>;
-export type DeleteBattleMutationOptions = Apollo.BaseMutationOptions<DeleteBattleMutation, DeleteBattleMutationVariables>;
-export const AdminBattlesPageDocument = gql`
-    query AdminBattlesPage($tournamentVideoId: ID!) {
-  tournamentVideo(tournamentVideoId: $tournamentVideoId) {
-    id
-    title
-    youtubeVideoId
-    tournament {
-      id
-      name
-    }
-  }
-  players(first: 500) {
-    nodes {
-      ...PlayerSelectOption
-    }
-  }
-  characters(first: 100) {
-    nodes {
-      ...CharacterSelectOption
-    }
-  }
-}
-    ${PlayerSelectOptionFragmentDoc}
-${CharacterSelectOptionFragmentDoc}`;
-
-/**
- * __useAdminBattlesPageQuery__
- *
- * To run a query within a React component, call `useAdminBattlesPageQuery` and pass it any options that fit your needs.
- * When your component renders, `useAdminBattlesPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useAdminBattlesPageQuery({
- *   variables: {
- *      tournamentVideoId: // value for 'tournamentVideoId'
- *   },
- * });
- */
-export function useAdminBattlesPageQuery(baseOptions: Apollo.QueryHookOptions<AdminBattlesPageQuery, AdminBattlesPageQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<AdminBattlesPageQuery, AdminBattlesPageQueryVariables>(AdminBattlesPageDocument, options);
-      }
-export function useAdminBattlesPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AdminBattlesPageQuery, AdminBattlesPageQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<AdminBattlesPageQuery, AdminBattlesPageQueryVariables>(AdminBattlesPageDocument, options);
-        }
-export type AdminBattlesPageQueryHookResult = ReturnType<typeof useAdminBattlesPageQuery>;
-export type AdminBattlesPageLazyQueryHookResult = ReturnType<typeof useAdminBattlesPageLazyQuery>;
-export type AdminBattlesPageQueryResult = Apollo.QueryResult<AdminBattlesPageQuery, AdminBattlesPageQueryVariables>;
-export const AdminBattlesPageBattlesDocument = gql`
-    query AdminBattlesPageBattles($tournamentVideoId: ID!) {
-  battles(tournamentVideoId: $tournamentVideoId, first: 200) {
-    nodes {
-      ...AdminBattlesPageBattleReslut
-    }
-  }
-}
-    ${AdminBattlesPageBattleReslutFragmentDoc}`;
-
-/**
- * __useAdminBattlesPageBattlesQuery__
- *
- * To run a query within a React component, call `useAdminBattlesPageBattlesQuery` and pass it any options that fit your needs.
- * When your component renders, `useAdminBattlesPageBattlesQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useAdminBattlesPageBattlesQuery({
- *   variables: {
- *      tournamentVideoId: // value for 'tournamentVideoId'
- *   },
- * });
- */
-export function useAdminBattlesPageBattlesQuery(baseOptions: Apollo.QueryHookOptions<AdminBattlesPageBattlesQuery, AdminBattlesPageBattlesQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<AdminBattlesPageBattlesQuery, AdminBattlesPageBattlesQueryVariables>(AdminBattlesPageBattlesDocument, options);
-      }
-export function useAdminBattlesPageBattlesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AdminBattlesPageBattlesQuery, AdminBattlesPageBattlesQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<AdminBattlesPageBattlesQuery, AdminBattlesPageBattlesQueryVariables>(AdminBattlesPageBattlesDocument, options);
-        }
-export type AdminBattlesPageBattlesQueryHookResult = ReturnType<typeof useAdminBattlesPageBattlesQuery>;
-export type AdminBattlesPageBattlesLazyQueryHookResult = ReturnType<typeof useAdminBattlesPageBattlesLazyQuery>;
-export type AdminBattlesPageBattlesQueryResult = Apollo.QueryResult<AdminBattlesPageBattlesQuery, AdminBattlesPageBattlesQueryVariables>;
-export const AdminTournamentVideoEditPageDocument = gql`
-    query AdminTournamentVideoEditPage($tournamentVideoId: ID!) {
-  tournamentVideo(tournamentVideoId: $tournamentVideoId) {
-    ...TournamentVideoForm
-    ...TournamentVideoBreadcrumbs
-  }
-}
-    ${TournamentVideoFormFragmentDoc}
-${TournamentVideoBreadcrumbsFragmentDoc}`;
-
-/**
- * __useAdminTournamentVideoEditPageQuery__
- *
- * To run a query within a React component, call `useAdminTournamentVideoEditPageQuery` and pass it any options that fit your needs.
- * When your component renders, `useAdminTournamentVideoEditPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useAdminTournamentVideoEditPageQuery({
- *   variables: {
- *      tournamentVideoId: // value for 'tournamentVideoId'
- *   },
- * });
- */
-export function useAdminTournamentVideoEditPageQuery(baseOptions: Apollo.QueryHookOptions<AdminTournamentVideoEditPageQuery, AdminTournamentVideoEditPageQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<AdminTournamentVideoEditPageQuery, AdminTournamentVideoEditPageQueryVariables>(AdminTournamentVideoEditPageDocument, options);
-      }
-export function useAdminTournamentVideoEditPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AdminTournamentVideoEditPageQuery, AdminTournamentVideoEditPageQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<AdminTournamentVideoEditPageQuery, AdminTournamentVideoEditPageQueryVariables>(AdminTournamentVideoEditPageDocument, options);
-        }
-export type AdminTournamentVideoEditPageQueryHookResult = ReturnType<typeof useAdminTournamentVideoEditPageQuery>;
-export type AdminTournamentVideoEditPageLazyQueryHookResult = ReturnType<typeof useAdminTournamentVideoEditPageLazyQuery>;
-export type AdminTournamentVideoEditPageQueryResult = Apollo.QueryResult<AdminTournamentVideoEditPageQuery, AdminTournamentVideoEditPageQueryVariables>;
-export const AdminTournamentVideoEditPageUpdateDocument = gql`
-    mutation AdminTournamentVideoEditPageUpdate($tournamentVideoId: ID!, $attributes: TournamentVideoAttributes!) {
-  updateTournamentVideo(
-    input: {tournamentVideoId: $tournamentVideoId, attributes: $attributes}
-  ) {
-    tournamentVideo {
-      ...TournamentVideoForm
-    }
-  }
-}
-    ${TournamentVideoFormFragmentDoc}`;
-export type AdminTournamentVideoEditPageUpdateMutationFn = Apollo.MutationFunction<AdminTournamentVideoEditPageUpdateMutation, AdminTournamentVideoEditPageUpdateMutationVariables>;
-
-/**
- * __useAdminTournamentVideoEditPageUpdateMutation__
- *
- * To run a mutation, you first call `useAdminTournamentVideoEditPageUpdateMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useAdminTournamentVideoEditPageUpdateMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [adminTournamentVideoEditPageUpdateMutation, { data, loading, error }] = useAdminTournamentVideoEditPageUpdateMutation({
- *   variables: {
- *      tournamentVideoId: // value for 'tournamentVideoId'
- *      attributes: // value for 'attributes'
- *   },
- * });
- */
-export function useAdminTournamentVideoEditPageUpdateMutation(baseOptions?: Apollo.MutationHookOptions<AdminTournamentVideoEditPageUpdateMutation, AdminTournamentVideoEditPageUpdateMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<AdminTournamentVideoEditPageUpdateMutation, AdminTournamentVideoEditPageUpdateMutationVariables>(AdminTournamentVideoEditPageUpdateDocument, options);
-      }
-export type AdminTournamentVideoEditPageUpdateMutationHookResult = ReturnType<typeof useAdminTournamentVideoEditPageUpdateMutation>;
-export type AdminTournamentVideoEditPageUpdateMutationResult = Apollo.MutationResult<AdminTournamentVideoEditPageUpdateMutation>;
-export type AdminTournamentVideoEditPageUpdateMutationOptions = Apollo.BaseMutationOptions<AdminTournamentVideoEditPageUpdateMutation, AdminTournamentVideoEditPageUpdateMutationVariables>;
-export const AdminTournamentEditPageDocument = gql`
-    query AdminTournamentEditPage($tournamentId: ID!) {
-  tournament(tournamentId: $tournamentId) {
-    ...TournamentForm
-    ...TournamentBreadcrumbs
-  }
-}
-    ${TournamentFormFragmentDoc}
-${TournamentBreadcrumbsFragmentDoc}`;
-
-/**
- * __useAdminTournamentEditPageQuery__
- *
- * To run a query within a React component, call `useAdminTournamentEditPageQuery` and pass it any options that fit your needs.
- * When your component renders, `useAdminTournamentEditPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useAdminTournamentEditPageQuery({
- *   variables: {
- *      tournamentId: // value for 'tournamentId'
- *   },
- * });
- */
-export function useAdminTournamentEditPageQuery(baseOptions: Apollo.QueryHookOptions<AdminTournamentEditPageQuery, AdminTournamentEditPageQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<AdminTournamentEditPageQuery, AdminTournamentEditPageQueryVariables>(AdminTournamentEditPageDocument, options);
-      }
-export function useAdminTournamentEditPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AdminTournamentEditPageQuery, AdminTournamentEditPageQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<AdminTournamentEditPageQuery, AdminTournamentEditPageQueryVariables>(AdminTournamentEditPageDocument, options);
-        }
-export type AdminTournamentEditPageQueryHookResult = ReturnType<typeof useAdminTournamentEditPageQuery>;
-export type AdminTournamentEditPageLazyQueryHookResult = ReturnType<typeof useAdminTournamentEditPageLazyQuery>;
-export type AdminTournamentEditPageQueryResult = Apollo.QueryResult<AdminTournamentEditPageQuery, AdminTournamentEditPageQueryVariables>;
-export const AdminTournamentEditPageUpdateTournamentDocument = gql`
-    mutation AdminTournamentEditPageUpdateTournament($tournamentId: ID!, $attributes: TournamentAttributes!) {
-  updateTournament(input: {tournamentId: $tournamentId, attributes: $attributes}) {
-    tournament {
-      ...TournamentForm
-      ...TournamentBreadcrumbs
-    }
-  }
-}
-    ${TournamentFormFragmentDoc}
-${TournamentBreadcrumbsFragmentDoc}`;
-export type AdminTournamentEditPageUpdateTournamentMutationFn = Apollo.MutationFunction<AdminTournamentEditPageUpdateTournamentMutation, AdminTournamentEditPageUpdateTournamentMutationVariables>;
-
-/**
- * __useAdminTournamentEditPageUpdateTournamentMutation__
- *
- * To run a mutation, you first call `useAdminTournamentEditPageUpdateTournamentMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useAdminTournamentEditPageUpdateTournamentMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [adminTournamentEditPageUpdateTournamentMutation, { data, loading, error }] = useAdminTournamentEditPageUpdateTournamentMutation({
- *   variables: {
- *      tournamentId: // value for 'tournamentId'
- *      attributes: // value for 'attributes'
- *   },
- * });
- */
-export function useAdminTournamentEditPageUpdateTournamentMutation(baseOptions?: Apollo.MutationHookOptions<AdminTournamentEditPageUpdateTournamentMutation, AdminTournamentEditPageUpdateTournamentMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<AdminTournamentEditPageUpdateTournamentMutation, AdminTournamentEditPageUpdateTournamentMutationVariables>(AdminTournamentEditPageUpdateTournamentDocument, options);
-      }
-export type AdminTournamentEditPageUpdateTournamentMutationHookResult = ReturnType<typeof useAdminTournamentEditPageUpdateTournamentMutation>;
-export type AdminTournamentEditPageUpdateTournamentMutationResult = Apollo.MutationResult<AdminTournamentEditPageUpdateTournamentMutation>;
-export type AdminTournamentEditPageUpdateTournamentMutationOptions = Apollo.BaseMutationOptions<AdminTournamentEditPageUpdateTournamentMutation, AdminTournamentEditPageUpdateTournamentMutationVariables>;
-export const AdminTournamentPageDocument = gql`
-    query AdminTournamentPage($tournamentId: ID!) {
-  tournament(tournamentId: $tournamentId) {
-    id
-    name
-    description
-    mainImageUrl
-    startsAt
-    standingsCount
-    videosCount
-    videos {
-      id
-      title
-      youtubeVideoId
-    }
-  }
-  players(first: 500) {
-    nodes {
-      ...PlayerSelectOption
-    }
-  }
-}
-    ${PlayerSelectOptionFragmentDoc}`;
-
-/**
- * __useAdminTournamentPageQuery__
- *
- * To run a query within a React component, call `useAdminTournamentPageQuery` and pass it any options that fit your needs.
- * When your component renders, `useAdminTournamentPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useAdminTournamentPageQuery({
- *   variables: {
- *      tournamentId: // value for 'tournamentId'
- *   },
- * });
- */
-export function useAdminTournamentPageQuery(baseOptions: Apollo.QueryHookOptions<AdminTournamentPageQuery, AdminTournamentPageQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<AdminTournamentPageQuery, AdminTournamentPageQueryVariables>(AdminTournamentPageDocument, options);
-      }
-export function useAdminTournamentPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AdminTournamentPageQuery, AdminTournamentPageQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<AdminTournamentPageQuery, AdminTournamentPageQueryVariables>(AdminTournamentPageDocument, options);
-        }
-export type AdminTournamentPageQueryHookResult = ReturnType<typeof useAdminTournamentPageQuery>;
-export type AdminTournamentPageLazyQueryHookResult = ReturnType<typeof useAdminTournamentPageLazyQuery>;
-export type AdminTournamentPageQueryResult = Apollo.QueryResult<AdminTournamentPageQuery, AdminTournamentPageQueryVariables>;
-export const AdminTournamentPageStandingsDocument = gql`
-    query AdminTournamentPageStandings($tournamentId: ID!) {
-  standings(tournamentId: $tournamentId, first: 100) {
-    nodes {
-      id
-      place
-      player {
-        id
-        name
-        avatarUrl
-      }
-    }
-  }
-}
-    `;
-
-/**
- * __useAdminTournamentPageStandingsQuery__
- *
- * To run a query within a React component, call `useAdminTournamentPageStandingsQuery` and pass it any options that fit your needs.
- * When your component renders, `useAdminTournamentPageStandingsQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useAdminTournamentPageStandingsQuery({
- *   variables: {
- *      tournamentId: // value for 'tournamentId'
- *   },
- * });
- */
-export function useAdminTournamentPageStandingsQuery(baseOptions: Apollo.QueryHookOptions<AdminTournamentPageStandingsQuery, AdminTournamentPageStandingsQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<AdminTournamentPageStandingsQuery, AdminTournamentPageStandingsQueryVariables>(AdminTournamentPageStandingsDocument, options);
-      }
-export function useAdminTournamentPageStandingsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AdminTournamentPageStandingsQuery, AdminTournamentPageStandingsQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<AdminTournamentPageStandingsQuery, AdminTournamentPageStandingsQueryVariables>(AdminTournamentPageStandingsDocument, options);
-        }
-export type AdminTournamentPageStandingsQueryHookResult = ReturnType<typeof useAdminTournamentPageStandingsQuery>;
-export type AdminTournamentPageStandingsLazyQueryHookResult = ReturnType<typeof useAdminTournamentPageStandingsLazyQuery>;
-export type AdminTournamentPageStandingsQueryResult = Apollo.QueryResult<AdminTournamentPageStandingsQuery, AdminTournamentPageStandingsQueryVariables>;
-export const AdminTournamentPageVideosDocument = gql`
-    query AdminTournamentPageVideos($tournamentId: ID!) {
-  tournamentVideos(tournamentId: $tournamentId) {
-    nodes {
-      id
-      title
-      thumbnailUrl
-      battlesCount
-      channel {
-        id
-        name
-      }
-    }
-  }
-}
-    `;
-
-/**
- * __useAdminTournamentPageVideosQuery__
- *
- * To run a query within a React component, call `useAdminTournamentPageVideosQuery` and pass it any options that fit your needs.
- * When your component renders, `useAdminTournamentPageVideosQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useAdminTournamentPageVideosQuery({
- *   variables: {
- *      tournamentId: // value for 'tournamentId'
- *   },
- * });
- */
-export function useAdminTournamentPageVideosQuery(baseOptions: Apollo.QueryHookOptions<AdminTournamentPageVideosQuery, AdminTournamentPageVideosQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<AdminTournamentPageVideosQuery, AdminTournamentPageVideosQueryVariables>(AdminTournamentPageVideosDocument, options);
-      }
-export function useAdminTournamentPageVideosLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AdminTournamentPageVideosQuery, AdminTournamentPageVideosQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<AdminTournamentPageVideosQuery, AdminTournamentPageVideosQueryVariables>(AdminTournamentPageVideosDocument, options);
-        }
-export type AdminTournamentPageVideosQueryHookResult = ReturnType<typeof useAdminTournamentPageVideosQuery>;
-export type AdminTournamentPageVideosLazyQueryHookResult = ReturnType<typeof useAdminTournamentPageVideosLazyQuery>;
-export type AdminTournamentPageVideosQueryResult = Apollo.QueryResult<AdminTournamentPageVideosQuery, AdminTournamentPageVideosQueryVariables>;
-export const AdminTournamentPageCreateStandingDocument = gql`
-    mutation AdminTournamentPageCreateStanding($tournamentId: ID!, $attributes: StandingAttributes!) {
-  createStanding(input: {tournamentId: $tournamentId, attributes: $attributes}) {
-    standing {
-      id
-    }
-  }
-}
-    `;
-export type AdminTournamentPageCreateStandingMutationFn = Apollo.MutationFunction<AdminTournamentPageCreateStandingMutation, AdminTournamentPageCreateStandingMutationVariables>;
-
-/**
- * __useAdminTournamentPageCreateStandingMutation__
- *
- * To run a mutation, you first call `useAdminTournamentPageCreateStandingMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useAdminTournamentPageCreateStandingMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [adminTournamentPageCreateStandingMutation, { data, loading, error }] = useAdminTournamentPageCreateStandingMutation({
- *   variables: {
- *      tournamentId: // value for 'tournamentId'
- *      attributes: // value for 'attributes'
- *   },
- * });
- */
-export function useAdminTournamentPageCreateStandingMutation(baseOptions?: Apollo.MutationHookOptions<AdminTournamentPageCreateStandingMutation, AdminTournamentPageCreateStandingMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<AdminTournamentPageCreateStandingMutation, AdminTournamentPageCreateStandingMutationVariables>(AdminTournamentPageCreateStandingDocument, options);
-      }
-export type AdminTournamentPageCreateStandingMutationHookResult = ReturnType<typeof useAdminTournamentPageCreateStandingMutation>;
-export type AdminTournamentPageCreateStandingMutationResult = Apollo.MutationResult<AdminTournamentPageCreateStandingMutation>;
-export type AdminTournamentPageCreateStandingMutationOptions = Apollo.BaseMutationOptions<AdminTournamentPageCreateStandingMutation, AdminTournamentPageCreateStandingMutationVariables>;
-export const AdminTournamentPageDeleteStandingDocument = gql`
-    mutation AdminTournamentPageDeleteStanding($standingId: ID!) {
-  deleteStanding(input: {standingId: $standingId}) {
-    standing {
-      id
-    }
-  }
-}
-    `;
-export type AdminTournamentPageDeleteStandingMutationFn = Apollo.MutationFunction<AdminTournamentPageDeleteStandingMutation, AdminTournamentPageDeleteStandingMutationVariables>;
-
-/**
- * __useAdminTournamentPageDeleteStandingMutation__
- *
- * To run a mutation, you first call `useAdminTournamentPageDeleteStandingMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useAdminTournamentPageDeleteStandingMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [adminTournamentPageDeleteStandingMutation, { data, loading, error }] = useAdminTournamentPageDeleteStandingMutation({
- *   variables: {
- *      standingId: // value for 'standingId'
- *   },
- * });
- */
-export function useAdminTournamentPageDeleteStandingMutation(baseOptions?: Apollo.MutationHookOptions<AdminTournamentPageDeleteStandingMutation, AdminTournamentPageDeleteStandingMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<AdminTournamentPageDeleteStandingMutation, AdminTournamentPageDeleteStandingMutationVariables>(AdminTournamentPageDeleteStandingDocument, options);
-      }
-export type AdminTournamentPageDeleteStandingMutationHookResult = ReturnType<typeof useAdminTournamentPageDeleteStandingMutation>;
-export type AdminTournamentPageDeleteStandingMutationResult = Apollo.MutationResult<AdminTournamentPageDeleteStandingMutation>;
-export type AdminTournamentPageDeleteStandingMutationOptions = Apollo.BaseMutationOptions<AdminTournamentPageDeleteStandingMutation, AdminTournamentPageDeleteStandingMutationVariables>;
-export const AdminTournamentPageCreateVideoDocument = gql`
-    mutation AdminTournamentPageCreateVideo($tournamentId: ID!, $url: String!) {
-  createTournamentVideo(input: {tournamentId: $tournamentId, url: $url}) {
-    tournamentVideo {
-      id
-    }
-  }
-}
-    `;
-export type AdminTournamentPageCreateVideoMutationFn = Apollo.MutationFunction<AdminTournamentPageCreateVideoMutation, AdminTournamentPageCreateVideoMutationVariables>;
-
-/**
- * __useAdminTournamentPageCreateVideoMutation__
- *
- * To run a mutation, you first call `useAdminTournamentPageCreateVideoMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useAdminTournamentPageCreateVideoMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [adminTournamentPageCreateVideoMutation, { data, loading, error }] = useAdminTournamentPageCreateVideoMutation({
- *   variables: {
- *      tournamentId: // value for 'tournamentId'
- *      url: // value for 'url'
- *   },
- * });
- */
-export function useAdminTournamentPageCreateVideoMutation(baseOptions?: Apollo.MutationHookOptions<AdminTournamentPageCreateVideoMutation, AdminTournamentPageCreateVideoMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<AdminTournamentPageCreateVideoMutation, AdminTournamentPageCreateVideoMutationVariables>(AdminTournamentPageCreateVideoDocument, options);
-      }
-export type AdminTournamentPageCreateVideoMutationHookResult = ReturnType<typeof useAdminTournamentPageCreateVideoMutation>;
-export type AdminTournamentPageCreateVideoMutationResult = Apollo.MutationResult<AdminTournamentPageCreateVideoMutation>;
-export type AdminTournamentPageCreateVideoMutationOptions = Apollo.BaseMutationOptions<AdminTournamentPageCreateVideoMutation, AdminTournamentPageCreateVideoMutationVariables>;
-export const AdminTournamentPageDeleteVideoDocument = gql`
-    mutation AdminTournamentPageDeleteVideo($tournamentVideoId: ID!) {
-  deleteTournamentVideo(input: {tournamentVideoId: $tournamentVideoId}) {
-    tournamentVideo {
-      id
-    }
-  }
-}
-    `;
-export type AdminTournamentPageDeleteVideoMutationFn = Apollo.MutationFunction<AdminTournamentPageDeleteVideoMutation, AdminTournamentPageDeleteVideoMutationVariables>;
-
-/**
- * __useAdminTournamentPageDeleteVideoMutation__
- *
- * To run a mutation, you first call `useAdminTournamentPageDeleteVideoMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useAdminTournamentPageDeleteVideoMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [adminTournamentPageDeleteVideoMutation, { data, loading, error }] = useAdminTournamentPageDeleteVideoMutation({
- *   variables: {
- *      tournamentVideoId: // value for 'tournamentVideoId'
- *   },
- * });
- */
-export function useAdminTournamentPageDeleteVideoMutation(baseOptions?: Apollo.MutationHookOptions<AdminTournamentPageDeleteVideoMutation, AdminTournamentPageDeleteVideoMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<AdminTournamentPageDeleteVideoMutation, AdminTournamentPageDeleteVideoMutationVariables>(AdminTournamentPageDeleteVideoDocument, options);
-      }
-export type AdminTournamentPageDeleteVideoMutationHookResult = ReturnType<typeof useAdminTournamentPageDeleteVideoMutation>;
-export type AdminTournamentPageDeleteVideoMutationResult = Apollo.MutationResult<AdminTournamentPageDeleteVideoMutation>;
-export type AdminTournamentPageDeleteVideoMutationOptions = Apollo.BaseMutationOptions<AdminTournamentPageDeleteVideoMutation, AdminTournamentPageDeleteVideoMutationVariables>;
-export const CreateTournamentDocument = gql`
-    mutation CreateTournament($attributes: TournamentAttributes!) {
-  createTournament(input: {attributes: $attributes}) {
-    tournament {
-      id
-    }
-  }
-}
-    `;
-export type CreateTournamentMutationFn = Apollo.MutationFunction<CreateTournamentMutation, CreateTournamentMutationVariables>;
-
-/**
- * __useCreateTournamentMutation__
- *
- * To run a mutation, you first call `useCreateTournamentMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useCreateTournamentMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [createTournamentMutation, { data, loading, error }] = useCreateTournamentMutation({
- *   variables: {
- *      attributes: // value for 'attributes'
- *   },
- * });
- */
-export function useCreateTournamentMutation(baseOptions?: Apollo.MutationHookOptions<CreateTournamentMutation, CreateTournamentMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<CreateTournamentMutation, CreateTournamentMutationVariables>(CreateTournamentDocument, options);
-      }
-export type CreateTournamentMutationHookResult = ReturnType<typeof useCreateTournamentMutation>;
-export type CreateTournamentMutationResult = Apollo.MutationResult<CreateTournamentMutation>;
-export type CreateTournamentMutationOptions = Apollo.BaseMutationOptions<CreateTournamentMutation, CreateTournamentMutationVariables>;
 export const ArticlesPageDocument = gql`
     query ArticlesPage {
   articles(first: 12) {
@@ -7540,6 +6383,486 @@ export function useCreateArticleMutation(baseOptions?: Apollo.MutationHookOption
 export type CreateArticleMutationHookResult = ReturnType<typeof useCreateArticleMutation>;
 export type CreateArticleMutationResult = Apollo.MutationResult<CreateArticleMutation>;
 export type CreateArticleMutationOptions = Apollo.BaseMutationOptions<CreateArticleMutation, CreateArticleMutationVariables>;
+export const DashboardCharacterCombosPageDocument = gql`
+    query DashboardCharacterCombosPage($characterSlug: String!) {
+  character(characterSlug: $characterSlug) {
+    ...CharacterBreadcrumbs
+    ...ComboDashboard
+  }
+}
+    ${CharacterBreadcrumbsFragmentDoc}
+${ComboDashboardFragmentDoc}`;
+
+/**
+ * __useDashboardCharacterCombosPageQuery__
+ *
+ * To run a query within a React component, call `useDashboardCharacterCombosPageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useDashboardCharacterCombosPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useDashboardCharacterCombosPageQuery({
+ *   variables: {
+ *      characterSlug: // value for 'characterSlug'
+ *   },
+ * });
+ */
+export function useDashboardCharacterCombosPageQuery(baseOptions: Apollo.QueryHookOptions<DashboardCharacterCombosPageQuery, DashboardCharacterCombosPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<DashboardCharacterCombosPageQuery, DashboardCharacterCombosPageQueryVariables>(DashboardCharacterCombosPageDocument, options);
+      }
+export function useDashboardCharacterCombosPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<DashboardCharacterCombosPageQuery, DashboardCharacterCombosPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<DashboardCharacterCombosPageQuery, DashboardCharacterCombosPageQueryVariables>(DashboardCharacterCombosPageDocument, options);
+        }
+export type DashboardCharacterCombosPageQueryHookResult = ReturnType<typeof useDashboardCharacterCombosPageQuery>;
+export type DashboardCharacterCombosPageLazyQueryHookResult = ReturnType<typeof useDashboardCharacterCombosPageLazyQuery>;
+export type DashboardCharacterCombosPageQueryResult = Apollo.QueryResult<DashboardCharacterCombosPageQuery, DashboardCharacterCombosPageQueryVariables>;
+export const PageAdminCharacterEditDocument = gql`
+    query PageAdminCharacterEdit($characterSlug: String!) {
+  character(characterSlug: $characterSlug) {
+    ...CharacterForm
+  }
+}
+    ${CharacterFormFragmentDoc}`;
+
+/**
+ * __usePageAdminCharacterEditQuery__
+ *
+ * To run a query within a React component, call `usePageAdminCharacterEditQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePageAdminCharacterEditQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePageAdminCharacterEditQuery({
+ *   variables: {
+ *      characterSlug: // value for 'characterSlug'
+ *   },
+ * });
+ */
+export function usePageAdminCharacterEditQuery(baseOptions: Apollo.QueryHookOptions<PageAdminCharacterEditQuery, PageAdminCharacterEditQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PageAdminCharacterEditQuery, PageAdminCharacterEditQueryVariables>(PageAdminCharacterEditDocument, options);
+      }
+export function usePageAdminCharacterEditLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PageAdminCharacterEditQuery, PageAdminCharacterEditQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PageAdminCharacterEditQuery, PageAdminCharacterEditQueryVariables>(PageAdminCharacterEditDocument, options);
+        }
+export type PageAdminCharacterEditQueryHookResult = ReturnType<typeof usePageAdminCharacterEditQuery>;
+export type PageAdminCharacterEditLazyQueryHookResult = ReturnType<typeof usePageAdminCharacterEditLazyQuery>;
+export type PageAdminCharacterEditQueryResult = Apollo.QueryResult<PageAdminCharacterEditQuery, PageAdminCharacterEditQueryVariables>;
+export const UpdateCharacterDocument = gql`
+    mutation UpdateCharacter($characterSlug: String!, $attributes: CharacterAttributes!) {
+  updateCharacter(input: {characterSlug: $characterSlug, attributes: $attributes}) {
+    character {
+      id
+    }
+  }
+}
+    `;
+export type UpdateCharacterMutationFn = Apollo.MutationFunction<UpdateCharacterMutation, UpdateCharacterMutationVariables>;
+
+/**
+ * __useUpdateCharacterMutation__
+ *
+ * To run a mutation, you first call `useUpdateCharacterMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateCharacterMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateCharacterMutation, { data, loading, error }] = useUpdateCharacterMutation({
+ *   variables: {
+ *      characterSlug: // value for 'characterSlug'
+ *      attributes: // value for 'attributes'
+ *   },
+ * });
+ */
+export function useUpdateCharacterMutation(baseOptions?: Apollo.MutationHookOptions<UpdateCharacterMutation, UpdateCharacterMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateCharacterMutation, UpdateCharacterMutationVariables>(UpdateCharacterDocument, options);
+      }
+export type UpdateCharacterMutationHookResult = ReturnType<typeof useUpdateCharacterMutation>;
+export type UpdateCharacterMutationResult = Apollo.MutationResult<UpdateCharacterMutation>;
+export type UpdateCharacterMutationOptions = Apollo.BaseMutationOptions<UpdateCharacterMutation, UpdateCharacterMutationVariables>;
+export const DashboardCharacterMovesPageDocument = gql`
+    query DashboardCharacterMovesPage($characterSlug: String!) {
+  character(characterSlug: $characterSlug) {
+    ...CharacterBreadcrumbs
+    ...MoveDashboard
+  }
+}
+    ${CharacterBreadcrumbsFragmentDoc}
+${MoveDashboardFragmentDoc}`;
+
+/**
+ * __useDashboardCharacterMovesPageQuery__
+ *
+ * To run a query within a React component, call `useDashboardCharacterMovesPageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useDashboardCharacterMovesPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useDashboardCharacterMovesPageQuery({
+ *   variables: {
+ *      characterSlug: // value for 'characterSlug'
+ *   },
+ * });
+ */
+export function useDashboardCharacterMovesPageQuery(baseOptions: Apollo.QueryHookOptions<DashboardCharacterMovesPageQuery, DashboardCharacterMovesPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<DashboardCharacterMovesPageQuery, DashboardCharacterMovesPageQueryVariables>(DashboardCharacterMovesPageDocument, options);
+      }
+export function useDashboardCharacterMovesPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<DashboardCharacterMovesPageQuery, DashboardCharacterMovesPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<DashboardCharacterMovesPageQuery, DashboardCharacterMovesPageQueryVariables>(DashboardCharacterMovesPageDocument, options);
+        }
+export type DashboardCharacterMovesPageQueryHookResult = ReturnType<typeof useDashboardCharacterMovesPageQuery>;
+export type DashboardCharacterMovesPageLazyQueryHookResult = ReturnType<typeof useDashboardCharacterMovesPageLazyQuery>;
+export type DashboardCharacterMovesPageQueryResult = Apollo.QueryResult<DashboardCharacterMovesPageQuery, DashboardCharacterMovesPageQueryVariables>;
+export const CreateCharacterDocument = gql`
+    mutation CreateCharacter($attributes: CharacterAttributes!) {
+  createCharacter(input: {attributes: $attributes}) {
+    character {
+      id
+    }
+  }
+}
+    `;
+export type CreateCharacterMutationFn = Apollo.MutationFunction<CreateCharacterMutation, CreateCharacterMutationVariables>;
+
+/**
+ * __useCreateCharacterMutation__
+ *
+ * To run a mutation, you first call `useCreateCharacterMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateCharacterMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createCharacterMutation, { data, loading, error }] = useCreateCharacterMutation({
+ *   variables: {
+ *      attributes: // value for 'attributes'
+ *   },
+ * });
+ */
+export function useCreateCharacterMutation(baseOptions?: Apollo.MutationHookOptions<CreateCharacterMutation, CreateCharacterMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateCharacterMutation, CreateCharacterMutationVariables>(CreateCharacterDocument, options);
+      }
+export type CreateCharacterMutationHookResult = ReturnType<typeof useCreateCharacterMutation>;
+export type CreateCharacterMutationResult = Apollo.MutationResult<CreateCharacterMutation>;
+export type CreateCharacterMutationOptions = Apollo.BaseMutationOptions<CreateCharacterMutation, CreateCharacterMutationVariables>;
+export const AdminOrganizerEditPageDocument = gql`
+    query AdminOrganizerEditPage($organizerSlug: String!) {
+  organizer(organizerSlug: $organizerSlug) {
+    ...OrganizerForm
+    ...OrganizerBreadcrumbs
+  }
+}
+    ${OrganizerFormFragmentDoc}
+${OrganizerBreadcrumbsFragmentDoc}`;
+
+/**
+ * __useAdminOrganizerEditPageQuery__
+ *
+ * To run a query within a React component, call `useAdminOrganizerEditPageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAdminOrganizerEditPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAdminOrganizerEditPageQuery({
+ *   variables: {
+ *      organizerSlug: // value for 'organizerSlug'
+ *   },
+ * });
+ */
+export function useAdminOrganizerEditPageQuery(baseOptions: Apollo.QueryHookOptions<AdminOrganizerEditPageQuery, AdminOrganizerEditPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AdminOrganizerEditPageQuery, AdminOrganizerEditPageQueryVariables>(AdminOrganizerEditPageDocument, options);
+      }
+export function useAdminOrganizerEditPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AdminOrganizerEditPageQuery, AdminOrganizerEditPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AdminOrganizerEditPageQuery, AdminOrganizerEditPageQueryVariables>(AdminOrganizerEditPageDocument, options);
+        }
+export type AdminOrganizerEditPageQueryHookResult = ReturnType<typeof useAdminOrganizerEditPageQuery>;
+export type AdminOrganizerEditPageLazyQueryHookResult = ReturnType<typeof useAdminOrganizerEditPageLazyQuery>;
+export type AdminOrganizerEditPageQueryResult = Apollo.QueryResult<AdminOrganizerEditPageQuery, AdminOrganizerEditPageQueryVariables>;
+export const AdminOrganizerEditPageUpdateOrganizerDocument = gql`
+    mutation AdminOrganizerEditPageUpdateOrganizer($organizerSlug: String!, $attributes: OrganizerAttributes!) {
+  updateOrganizer(input: {organizerSlug: $organizerSlug, attributes: $attributes}) {
+    organizer {
+      ...OrganizerForm
+      ...OrganizerBreadcrumbs
+    }
+  }
+}
+    ${OrganizerFormFragmentDoc}
+${OrganizerBreadcrumbsFragmentDoc}`;
+export type AdminOrganizerEditPageUpdateOrganizerMutationFn = Apollo.MutationFunction<AdminOrganizerEditPageUpdateOrganizerMutation, AdminOrganizerEditPageUpdateOrganizerMutationVariables>;
+
+/**
+ * __useAdminOrganizerEditPageUpdateOrganizerMutation__
+ *
+ * To run a mutation, you first call `useAdminOrganizerEditPageUpdateOrganizerMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAdminOrganizerEditPageUpdateOrganizerMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [adminOrganizerEditPageUpdateOrganizerMutation, { data, loading, error }] = useAdminOrganizerEditPageUpdateOrganizerMutation({
+ *   variables: {
+ *      organizerSlug: // value for 'organizerSlug'
+ *      attributes: // value for 'attributes'
+ *   },
+ * });
+ */
+export function useAdminOrganizerEditPageUpdateOrganizerMutation(baseOptions?: Apollo.MutationHookOptions<AdminOrganizerEditPageUpdateOrganizerMutation, AdminOrganizerEditPageUpdateOrganizerMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<AdminOrganizerEditPageUpdateOrganizerMutation, AdminOrganizerEditPageUpdateOrganizerMutationVariables>(AdminOrganizerEditPageUpdateOrganizerDocument, options);
+      }
+export type AdminOrganizerEditPageUpdateOrganizerMutationHookResult = ReturnType<typeof useAdminOrganizerEditPageUpdateOrganizerMutation>;
+export type AdminOrganizerEditPageUpdateOrganizerMutationResult = Apollo.MutationResult<AdminOrganizerEditPageUpdateOrganizerMutation>;
+export type AdminOrganizerEditPageUpdateOrganizerMutationOptions = Apollo.BaseMutationOptions<AdminOrganizerEditPageUpdateOrganizerMutation, AdminOrganizerEditPageUpdateOrganizerMutationVariables>;
+export const AdminOrganizersPageDeleteDocument = gql`
+    mutation AdminOrganizersPageDelete($organizerSlug: String!) {
+  deleteOrganizer(input: {organizerSlug: $organizerSlug}) {
+    organizer {
+      id
+    }
+  }
+}
+    `;
+export type AdminOrganizersPageDeleteMutationFn = Apollo.MutationFunction<AdminOrganizersPageDeleteMutation, AdminOrganizersPageDeleteMutationVariables>;
+
+/**
+ * __useAdminOrganizersPageDeleteMutation__
+ *
+ * To run a mutation, you first call `useAdminOrganizersPageDeleteMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAdminOrganizersPageDeleteMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [adminOrganizersPageDeleteMutation, { data, loading, error }] = useAdminOrganizersPageDeleteMutation({
+ *   variables: {
+ *      organizerSlug: // value for 'organizerSlug'
+ *   },
+ * });
+ */
+export function useAdminOrganizersPageDeleteMutation(baseOptions?: Apollo.MutationHookOptions<AdminOrganizersPageDeleteMutation, AdminOrganizersPageDeleteMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<AdminOrganizersPageDeleteMutation, AdminOrganizersPageDeleteMutationVariables>(AdminOrganizersPageDeleteDocument, options);
+      }
+export type AdminOrganizersPageDeleteMutationHookResult = ReturnType<typeof useAdminOrganizersPageDeleteMutation>;
+export type AdminOrganizersPageDeleteMutationResult = Apollo.MutationResult<AdminOrganizersPageDeleteMutation>;
+export type AdminOrganizersPageDeleteMutationOptions = Apollo.BaseMutationOptions<AdminOrganizersPageDeleteMutation, AdminOrganizersPageDeleteMutationVariables>;
+export const AdminOrganizersPageOrganizersDocument = gql`
+    query AdminOrganizersPageOrganizers($after: String, $keyword: String) {
+  organizers(first: 10, after: $after, keyword: $keyword) {
+    edges {
+      node {
+        ...AdminOrganizersPageOrganizer
+      }
+      cursor
+    }
+    pageInfo {
+      ...Pagination
+    }
+  }
+}
+    ${AdminOrganizersPageOrganizerFragmentDoc}
+${PaginationFragmentDoc}`;
+
+/**
+ * __useAdminOrganizersPageOrganizersQuery__
+ *
+ * To run a query within a React component, call `useAdminOrganizersPageOrganizersQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAdminOrganizersPageOrganizersQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAdminOrganizersPageOrganizersQuery({
+ *   variables: {
+ *      after: // value for 'after'
+ *      keyword: // value for 'keyword'
+ *   },
+ * });
+ */
+export function useAdminOrganizersPageOrganizersQuery(baseOptions?: Apollo.QueryHookOptions<AdminOrganizersPageOrganizersQuery, AdminOrganizersPageOrganizersQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AdminOrganizersPageOrganizersQuery, AdminOrganizersPageOrganizersQueryVariables>(AdminOrganizersPageOrganizersDocument, options);
+      }
+export function useAdminOrganizersPageOrganizersLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AdminOrganizersPageOrganizersQuery, AdminOrganizersPageOrganizersQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AdminOrganizersPageOrganizersQuery, AdminOrganizersPageOrganizersQueryVariables>(AdminOrganizersPageOrganizersDocument, options);
+        }
+export type AdminOrganizersPageOrganizersQueryHookResult = ReturnType<typeof useAdminOrganizersPageOrganizersQuery>;
+export type AdminOrganizersPageOrganizersLazyQueryHookResult = ReturnType<typeof useAdminOrganizersPageOrganizersLazyQuery>;
+export type AdminOrganizersPageOrganizersQueryResult = Apollo.QueryResult<AdminOrganizersPageOrganizersQuery, AdminOrganizersPageOrganizersQueryVariables>;
+export const AdminOrganizersNewPageCreateOrganizerDocument = gql`
+    mutation AdminOrganizersNewPageCreateOrganizer($attributes: OrganizerAttributes!) {
+  createOrganizer(input: {attributes: $attributes}) {
+    organizer {
+      id
+    }
+  }
+}
+    `;
+export type AdminOrganizersNewPageCreateOrganizerMutationFn = Apollo.MutationFunction<AdminOrganizersNewPageCreateOrganizerMutation, AdminOrganizersNewPageCreateOrganizerMutationVariables>;
+
+/**
+ * __useAdminOrganizersNewPageCreateOrganizerMutation__
+ *
+ * To run a mutation, you first call `useAdminOrganizersNewPageCreateOrganizerMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAdminOrganizersNewPageCreateOrganizerMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [adminOrganizersNewPageCreateOrganizerMutation, { data, loading, error }] = useAdminOrganizersNewPageCreateOrganizerMutation({
+ *   variables: {
+ *      attributes: // value for 'attributes'
+ *   },
+ * });
+ */
+export function useAdminOrganizersNewPageCreateOrganizerMutation(baseOptions?: Apollo.MutationHookOptions<AdminOrganizersNewPageCreateOrganizerMutation, AdminOrganizersNewPageCreateOrganizerMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<AdminOrganizersNewPageCreateOrganizerMutation, AdminOrganizersNewPageCreateOrganizerMutationVariables>(AdminOrganizersNewPageCreateOrganizerDocument, options);
+      }
+export type AdminOrganizersNewPageCreateOrganizerMutationHookResult = ReturnType<typeof useAdminOrganizersNewPageCreateOrganizerMutation>;
+export type AdminOrganizersNewPageCreateOrganizerMutationResult = Apollo.MutationResult<AdminOrganizersNewPageCreateOrganizerMutation>;
+export type AdminOrganizersNewPageCreateOrganizerMutationOptions = Apollo.BaseMutationOptions<AdminOrganizersNewPageCreateOrganizerMutation, AdminOrganizersNewPageCreateOrganizerMutationVariables>;
+export const AdminPlayerEditPageDocument = gql`
+    query AdminPlayerEditPage($playerSlug: String!) {
+  player(playerSlug: $playerSlug) {
+    ...PlayerForm
+    ...PlayerBreadcrumbs
+  }
+}
+    ${PlayerFormFragmentDoc}
+${PlayerBreadcrumbsFragmentDoc}`;
+
+/**
+ * __useAdminPlayerEditPageQuery__
+ *
+ * To run a query within a React component, call `useAdminPlayerEditPageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAdminPlayerEditPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAdminPlayerEditPageQuery({
+ *   variables: {
+ *      playerSlug: // value for 'playerSlug'
+ *   },
+ * });
+ */
+export function useAdminPlayerEditPageQuery(baseOptions: Apollo.QueryHookOptions<AdminPlayerEditPageQuery, AdminPlayerEditPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AdminPlayerEditPageQuery, AdminPlayerEditPageQueryVariables>(AdminPlayerEditPageDocument, options);
+      }
+export function useAdminPlayerEditPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AdminPlayerEditPageQuery, AdminPlayerEditPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AdminPlayerEditPageQuery, AdminPlayerEditPageQueryVariables>(AdminPlayerEditPageDocument, options);
+        }
+export type AdminPlayerEditPageQueryHookResult = ReturnType<typeof useAdminPlayerEditPageQuery>;
+export type AdminPlayerEditPageLazyQueryHookResult = ReturnType<typeof useAdminPlayerEditPageLazyQuery>;
+export type AdminPlayerEditPageQueryResult = Apollo.QueryResult<AdminPlayerEditPageQuery, AdminPlayerEditPageQueryVariables>;
+export const AdminPlayerEditPageUpdatePlayerDocument = gql`
+    mutation AdminPlayerEditPageUpdatePlayer($playerSlug: String!, $attributes: PlayerAttributes!) {
+  updatePlayer(input: {playerSlug: $playerSlug, attributes: $attributes}) {
+    player {
+      ...PlayerForm
+      ...PlayerBreadcrumbs
+    }
+  }
+}
+    ${PlayerFormFragmentDoc}
+${PlayerBreadcrumbsFragmentDoc}`;
+export type AdminPlayerEditPageUpdatePlayerMutationFn = Apollo.MutationFunction<AdminPlayerEditPageUpdatePlayerMutation, AdminPlayerEditPageUpdatePlayerMutationVariables>;
+
+/**
+ * __useAdminPlayerEditPageUpdatePlayerMutation__
+ *
+ * To run a mutation, you first call `useAdminPlayerEditPageUpdatePlayerMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAdminPlayerEditPageUpdatePlayerMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [adminPlayerEditPageUpdatePlayerMutation, { data, loading, error }] = useAdminPlayerEditPageUpdatePlayerMutation({
+ *   variables: {
+ *      playerSlug: // value for 'playerSlug'
+ *      attributes: // value for 'attributes'
+ *   },
+ * });
+ */
+export function useAdminPlayerEditPageUpdatePlayerMutation(baseOptions?: Apollo.MutationHookOptions<AdminPlayerEditPageUpdatePlayerMutation, AdminPlayerEditPageUpdatePlayerMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<AdminPlayerEditPageUpdatePlayerMutation, AdminPlayerEditPageUpdatePlayerMutationVariables>(AdminPlayerEditPageUpdatePlayerDocument, options);
+      }
+export type AdminPlayerEditPageUpdatePlayerMutationHookResult = ReturnType<typeof useAdminPlayerEditPageUpdatePlayerMutation>;
+export type AdminPlayerEditPageUpdatePlayerMutationResult = Apollo.MutationResult<AdminPlayerEditPageUpdatePlayerMutation>;
+export type AdminPlayerEditPageUpdatePlayerMutationOptions = Apollo.BaseMutationOptions<AdminPlayerEditPageUpdatePlayerMutation, AdminPlayerEditPageUpdatePlayerMutationVariables>;
+export const AdminPlayersNewPageCreatePlayerDocument = gql`
+    mutation AdminPlayersNewPageCreatePlayer($attributes: PlayerAttributes!) {
+  createPlayer(input: {attributes: $attributes}) {
+    player {
+      id
+    }
+  }
+}
+    `;
+export type AdminPlayersNewPageCreatePlayerMutationFn = Apollo.MutationFunction<AdminPlayersNewPageCreatePlayerMutation, AdminPlayersNewPageCreatePlayerMutationVariables>;
+
+/**
+ * __useAdminPlayersNewPageCreatePlayerMutation__
+ *
+ * To run a mutation, you first call `useAdminPlayersNewPageCreatePlayerMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAdminPlayersNewPageCreatePlayerMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [adminPlayersNewPageCreatePlayerMutation, { data, loading, error }] = useAdminPlayersNewPageCreatePlayerMutation({
+ *   variables: {
+ *      attributes: // value for 'attributes'
+ *   },
+ * });
+ */
+export function useAdminPlayersNewPageCreatePlayerMutation(baseOptions?: Apollo.MutationHookOptions<AdminPlayersNewPageCreatePlayerMutation, AdminPlayersNewPageCreatePlayerMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<AdminPlayersNewPageCreatePlayerMutation, AdminPlayersNewPageCreatePlayerMutationVariables>(AdminPlayersNewPageCreatePlayerDocument, options);
+      }
+export type AdminPlayersNewPageCreatePlayerMutationHookResult = ReturnType<typeof useAdminPlayersNewPageCreatePlayerMutation>;
+export type AdminPlayersNewPageCreatePlayerMutationResult = Apollo.MutationResult<AdminPlayersNewPageCreatePlayerMutation>;
+export type AdminPlayersNewPageCreatePlayerMutationOptions = Apollo.BaseMutationOptions<AdminPlayersNewPageCreatePlayerMutation, AdminPlayersNewPageCreatePlayerMutationVariables>;
 export const UpdateCurrentUserDocument = gql`
     mutation UpdateCurrentUser($attributes: CurrentUserAttributes!) {
   updateCurrentUser(input: {attributes: $attributes}) {
@@ -7575,6 +6898,667 @@ export function useUpdateCurrentUserMutation(baseOptions?: Apollo.MutationHookOp
 export type UpdateCurrentUserMutationHookResult = ReturnType<typeof useUpdateCurrentUserMutation>;
 export type UpdateCurrentUserMutationResult = Apollo.MutationResult<UpdateCurrentUserMutation>;
 export type UpdateCurrentUserMutationOptions = Apollo.BaseMutationOptions<UpdateCurrentUserMutation, UpdateCurrentUserMutationVariables>;
+export const CreateBattleDocument = gql`
+    mutation CreateBattle($attributes: BattleAttributes!) {
+  createBattle(input: {attributes: $attributes}) {
+    battle {
+      id
+    }
+  }
+}
+    `;
+export type CreateBattleMutationFn = Apollo.MutationFunction<CreateBattleMutation, CreateBattleMutationVariables>;
+
+/**
+ * __useCreateBattleMutation__
+ *
+ * To run a mutation, you first call `useCreateBattleMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateBattleMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createBattleMutation, { data, loading, error }] = useCreateBattleMutation({
+ *   variables: {
+ *      attributes: // value for 'attributes'
+ *   },
+ * });
+ */
+export function useCreateBattleMutation(baseOptions?: Apollo.MutationHookOptions<CreateBattleMutation, CreateBattleMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateBattleMutation, CreateBattleMutationVariables>(CreateBattleDocument, options);
+      }
+export type CreateBattleMutationHookResult = ReturnType<typeof useCreateBattleMutation>;
+export type CreateBattleMutationResult = Apollo.MutationResult<CreateBattleMutation>;
+export type CreateBattleMutationOptions = Apollo.BaseMutationOptions<CreateBattleMutation, CreateBattleMutationVariables>;
+export const UpdateBattleDocument = gql`
+    mutation UpdateBattle($battleId: ID!, $attributes: BattleAttributes!) {
+  updateBattle(input: {battleId: $battleId, attributes: $attributes}) {
+    battle {
+      ...AdminBattlesPageBattleReslut
+    }
+  }
+}
+    ${AdminBattlesPageBattleReslutFragmentDoc}`;
+export type UpdateBattleMutationFn = Apollo.MutationFunction<UpdateBattleMutation, UpdateBattleMutationVariables>;
+
+/**
+ * __useUpdateBattleMutation__
+ *
+ * To run a mutation, you first call `useUpdateBattleMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateBattleMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateBattleMutation, { data, loading, error }] = useUpdateBattleMutation({
+ *   variables: {
+ *      battleId: // value for 'battleId'
+ *      attributes: // value for 'attributes'
+ *   },
+ * });
+ */
+export function useUpdateBattleMutation(baseOptions?: Apollo.MutationHookOptions<UpdateBattleMutation, UpdateBattleMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateBattleMutation, UpdateBattleMutationVariables>(UpdateBattleDocument, options);
+      }
+export type UpdateBattleMutationHookResult = ReturnType<typeof useUpdateBattleMutation>;
+export type UpdateBattleMutationResult = Apollo.MutationResult<UpdateBattleMutation>;
+export type UpdateBattleMutationOptions = Apollo.BaseMutationOptions<UpdateBattleMutation, UpdateBattleMutationVariables>;
+export const DeleteBattleDocument = gql`
+    mutation DeleteBattle($battleId: ID!) {
+  deleteBattle(input: {battleId: $battleId}) {
+    battle {
+      id
+    }
+  }
+}
+    `;
+export type DeleteBattleMutationFn = Apollo.MutationFunction<DeleteBattleMutation, DeleteBattleMutationVariables>;
+
+/**
+ * __useDeleteBattleMutation__
+ *
+ * To run a mutation, you first call `useDeleteBattleMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteBattleMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteBattleMutation, { data, loading, error }] = useDeleteBattleMutation({
+ *   variables: {
+ *      battleId: // value for 'battleId'
+ *   },
+ * });
+ */
+export function useDeleteBattleMutation(baseOptions?: Apollo.MutationHookOptions<DeleteBattleMutation, DeleteBattleMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteBattleMutation, DeleteBattleMutationVariables>(DeleteBattleDocument, options);
+      }
+export type DeleteBattleMutationHookResult = ReturnType<typeof useDeleteBattleMutation>;
+export type DeleteBattleMutationResult = Apollo.MutationResult<DeleteBattleMutation>;
+export type DeleteBattleMutationOptions = Apollo.BaseMutationOptions<DeleteBattleMutation, DeleteBattleMutationVariables>;
+export const AdminBattlesPageDocument = gql`
+    query AdminBattlesPage($tournamentVideoId: ID!) {
+  tournamentVideo(tournamentVideoId: $tournamentVideoId) {
+    id
+    title
+    youtubeVideoId
+    tournament {
+      id
+      name
+    }
+  }
+  players(first: 500) {
+    nodes {
+      ...PlayerSelectOption
+    }
+  }
+  characters(first: 100) {
+    nodes {
+      ...CharacterSelectOption
+    }
+  }
+}
+    ${PlayerSelectOptionFragmentDoc}
+${CharacterSelectOptionFragmentDoc}`;
+
+/**
+ * __useAdminBattlesPageQuery__
+ *
+ * To run a query within a React component, call `useAdminBattlesPageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAdminBattlesPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAdminBattlesPageQuery({
+ *   variables: {
+ *      tournamentVideoId: // value for 'tournamentVideoId'
+ *   },
+ * });
+ */
+export function useAdminBattlesPageQuery(baseOptions: Apollo.QueryHookOptions<AdminBattlesPageQuery, AdminBattlesPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AdminBattlesPageQuery, AdminBattlesPageQueryVariables>(AdminBattlesPageDocument, options);
+      }
+export function useAdminBattlesPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AdminBattlesPageQuery, AdminBattlesPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AdminBattlesPageQuery, AdminBattlesPageQueryVariables>(AdminBattlesPageDocument, options);
+        }
+export type AdminBattlesPageQueryHookResult = ReturnType<typeof useAdminBattlesPageQuery>;
+export type AdminBattlesPageLazyQueryHookResult = ReturnType<typeof useAdminBattlesPageLazyQuery>;
+export type AdminBattlesPageQueryResult = Apollo.QueryResult<AdminBattlesPageQuery, AdminBattlesPageQueryVariables>;
+export const AdminBattlesPageBattlesDocument = gql`
+    query AdminBattlesPageBattles($tournamentVideoId: ID!) {
+  battles(tournamentVideoId: $tournamentVideoId, first: 200) {
+    nodes {
+      ...AdminBattlesPageBattleReslut
+    }
+  }
+}
+    ${AdminBattlesPageBattleReslutFragmentDoc}`;
+
+/**
+ * __useAdminBattlesPageBattlesQuery__
+ *
+ * To run a query within a React component, call `useAdminBattlesPageBattlesQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAdminBattlesPageBattlesQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAdminBattlesPageBattlesQuery({
+ *   variables: {
+ *      tournamentVideoId: // value for 'tournamentVideoId'
+ *   },
+ * });
+ */
+export function useAdminBattlesPageBattlesQuery(baseOptions: Apollo.QueryHookOptions<AdminBattlesPageBattlesQuery, AdminBattlesPageBattlesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AdminBattlesPageBattlesQuery, AdminBattlesPageBattlesQueryVariables>(AdminBattlesPageBattlesDocument, options);
+      }
+export function useAdminBattlesPageBattlesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AdminBattlesPageBattlesQuery, AdminBattlesPageBattlesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AdminBattlesPageBattlesQuery, AdminBattlesPageBattlesQueryVariables>(AdminBattlesPageBattlesDocument, options);
+        }
+export type AdminBattlesPageBattlesQueryHookResult = ReturnType<typeof useAdminBattlesPageBattlesQuery>;
+export type AdminBattlesPageBattlesLazyQueryHookResult = ReturnType<typeof useAdminBattlesPageBattlesLazyQuery>;
+export type AdminBattlesPageBattlesQueryResult = Apollo.QueryResult<AdminBattlesPageBattlesQuery, AdminBattlesPageBattlesQueryVariables>;
+export const AdminTournamentVideoEditPageDocument = gql`
+    query AdminTournamentVideoEditPage($tournamentVideoId: ID!) {
+  tournamentVideo(tournamentVideoId: $tournamentVideoId) {
+    ...TournamentVideoForm
+    ...TournamentVideoBreadcrumbs
+  }
+}
+    ${TournamentVideoFormFragmentDoc}
+${TournamentVideoBreadcrumbsFragmentDoc}`;
+
+/**
+ * __useAdminTournamentVideoEditPageQuery__
+ *
+ * To run a query within a React component, call `useAdminTournamentVideoEditPageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAdminTournamentVideoEditPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAdminTournamentVideoEditPageQuery({
+ *   variables: {
+ *      tournamentVideoId: // value for 'tournamentVideoId'
+ *   },
+ * });
+ */
+export function useAdminTournamentVideoEditPageQuery(baseOptions: Apollo.QueryHookOptions<AdminTournamentVideoEditPageQuery, AdminTournamentVideoEditPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AdminTournamentVideoEditPageQuery, AdminTournamentVideoEditPageQueryVariables>(AdminTournamentVideoEditPageDocument, options);
+      }
+export function useAdminTournamentVideoEditPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AdminTournamentVideoEditPageQuery, AdminTournamentVideoEditPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AdminTournamentVideoEditPageQuery, AdminTournamentVideoEditPageQueryVariables>(AdminTournamentVideoEditPageDocument, options);
+        }
+export type AdminTournamentVideoEditPageQueryHookResult = ReturnType<typeof useAdminTournamentVideoEditPageQuery>;
+export type AdminTournamentVideoEditPageLazyQueryHookResult = ReturnType<typeof useAdminTournamentVideoEditPageLazyQuery>;
+export type AdminTournamentVideoEditPageQueryResult = Apollo.QueryResult<AdminTournamentVideoEditPageQuery, AdminTournamentVideoEditPageQueryVariables>;
+export const AdminTournamentVideoEditPageUpdateDocument = gql`
+    mutation AdminTournamentVideoEditPageUpdate($tournamentVideoId: ID!, $attributes: TournamentVideoAttributes!) {
+  updateTournamentVideo(
+    input: {tournamentVideoId: $tournamentVideoId, attributes: $attributes}
+  ) {
+    tournamentVideo {
+      ...TournamentVideoForm
+    }
+  }
+}
+    ${TournamentVideoFormFragmentDoc}`;
+export type AdminTournamentVideoEditPageUpdateMutationFn = Apollo.MutationFunction<AdminTournamentVideoEditPageUpdateMutation, AdminTournamentVideoEditPageUpdateMutationVariables>;
+
+/**
+ * __useAdminTournamentVideoEditPageUpdateMutation__
+ *
+ * To run a mutation, you first call `useAdminTournamentVideoEditPageUpdateMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAdminTournamentVideoEditPageUpdateMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [adminTournamentVideoEditPageUpdateMutation, { data, loading, error }] = useAdminTournamentVideoEditPageUpdateMutation({
+ *   variables: {
+ *      tournamentVideoId: // value for 'tournamentVideoId'
+ *      attributes: // value for 'attributes'
+ *   },
+ * });
+ */
+export function useAdminTournamentVideoEditPageUpdateMutation(baseOptions?: Apollo.MutationHookOptions<AdminTournamentVideoEditPageUpdateMutation, AdminTournamentVideoEditPageUpdateMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<AdminTournamentVideoEditPageUpdateMutation, AdminTournamentVideoEditPageUpdateMutationVariables>(AdminTournamentVideoEditPageUpdateDocument, options);
+      }
+export type AdminTournamentVideoEditPageUpdateMutationHookResult = ReturnType<typeof useAdminTournamentVideoEditPageUpdateMutation>;
+export type AdminTournamentVideoEditPageUpdateMutationResult = Apollo.MutationResult<AdminTournamentVideoEditPageUpdateMutation>;
+export type AdminTournamentVideoEditPageUpdateMutationOptions = Apollo.BaseMutationOptions<AdminTournamentVideoEditPageUpdateMutation, AdminTournamentVideoEditPageUpdateMutationVariables>;
+export const AdminTournamentEditPageDocument = gql`
+    query AdminTournamentEditPage($tournamentId: ID!) {
+  tournament(tournamentId: $tournamentId) {
+    ...TournamentForm
+    ...TournamentBreadcrumbs
+  }
+}
+    ${TournamentFormFragmentDoc}
+${TournamentBreadcrumbsFragmentDoc}`;
+
+/**
+ * __useAdminTournamentEditPageQuery__
+ *
+ * To run a query within a React component, call `useAdminTournamentEditPageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAdminTournamentEditPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAdminTournamentEditPageQuery({
+ *   variables: {
+ *      tournamentId: // value for 'tournamentId'
+ *   },
+ * });
+ */
+export function useAdminTournamentEditPageQuery(baseOptions: Apollo.QueryHookOptions<AdminTournamentEditPageQuery, AdminTournamentEditPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AdminTournamentEditPageQuery, AdminTournamentEditPageQueryVariables>(AdminTournamentEditPageDocument, options);
+      }
+export function useAdminTournamentEditPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AdminTournamentEditPageQuery, AdminTournamentEditPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AdminTournamentEditPageQuery, AdminTournamentEditPageQueryVariables>(AdminTournamentEditPageDocument, options);
+        }
+export type AdminTournamentEditPageQueryHookResult = ReturnType<typeof useAdminTournamentEditPageQuery>;
+export type AdminTournamentEditPageLazyQueryHookResult = ReturnType<typeof useAdminTournamentEditPageLazyQuery>;
+export type AdminTournamentEditPageQueryResult = Apollo.QueryResult<AdminTournamentEditPageQuery, AdminTournamentEditPageQueryVariables>;
+export const AdminTournamentEditPageUpdateTournamentDocument = gql`
+    mutation AdminTournamentEditPageUpdateTournament($tournamentId: ID!, $attributes: TournamentAttributes!) {
+  updateTournament(input: {tournamentId: $tournamentId, attributes: $attributes}) {
+    tournament {
+      ...TournamentForm
+      ...TournamentBreadcrumbs
+    }
+  }
+}
+    ${TournamentFormFragmentDoc}
+${TournamentBreadcrumbsFragmentDoc}`;
+export type AdminTournamentEditPageUpdateTournamentMutationFn = Apollo.MutationFunction<AdminTournamentEditPageUpdateTournamentMutation, AdminTournamentEditPageUpdateTournamentMutationVariables>;
+
+/**
+ * __useAdminTournamentEditPageUpdateTournamentMutation__
+ *
+ * To run a mutation, you first call `useAdminTournamentEditPageUpdateTournamentMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAdminTournamentEditPageUpdateTournamentMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [adminTournamentEditPageUpdateTournamentMutation, { data, loading, error }] = useAdminTournamentEditPageUpdateTournamentMutation({
+ *   variables: {
+ *      tournamentId: // value for 'tournamentId'
+ *      attributes: // value for 'attributes'
+ *   },
+ * });
+ */
+export function useAdminTournamentEditPageUpdateTournamentMutation(baseOptions?: Apollo.MutationHookOptions<AdminTournamentEditPageUpdateTournamentMutation, AdminTournamentEditPageUpdateTournamentMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<AdminTournamentEditPageUpdateTournamentMutation, AdminTournamentEditPageUpdateTournamentMutationVariables>(AdminTournamentEditPageUpdateTournamentDocument, options);
+      }
+export type AdminTournamentEditPageUpdateTournamentMutationHookResult = ReturnType<typeof useAdminTournamentEditPageUpdateTournamentMutation>;
+export type AdminTournamentEditPageUpdateTournamentMutationResult = Apollo.MutationResult<AdminTournamentEditPageUpdateTournamentMutation>;
+export type AdminTournamentEditPageUpdateTournamentMutationOptions = Apollo.BaseMutationOptions<AdminTournamentEditPageUpdateTournamentMutation, AdminTournamentEditPageUpdateTournamentMutationVariables>;
+export const AdminTournamentPageDocument = gql`
+    query AdminTournamentPage($tournamentId: ID!) {
+  tournament(tournamentId: $tournamentId) {
+    id
+    name
+    description
+    mainImageUrl
+    startsAt
+    standingsCount
+    videosCount
+    videos {
+      id
+      title
+      youtubeVideoId
+    }
+  }
+  players(first: 500) {
+    nodes {
+      ...PlayerSelectOption
+    }
+  }
+}
+    ${PlayerSelectOptionFragmentDoc}`;
+
+/**
+ * __useAdminTournamentPageQuery__
+ *
+ * To run a query within a React component, call `useAdminTournamentPageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAdminTournamentPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAdminTournamentPageQuery({
+ *   variables: {
+ *      tournamentId: // value for 'tournamentId'
+ *   },
+ * });
+ */
+export function useAdminTournamentPageQuery(baseOptions: Apollo.QueryHookOptions<AdminTournamentPageQuery, AdminTournamentPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AdminTournamentPageQuery, AdminTournamentPageQueryVariables>(AdminTournamentPageDocument, options);
+      }
+export function useAdminTournamentPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AdminTournamentPageQuery, AdminTournamentPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AdminTournamentPageQuery, AdminTournamentPageQueryVariables>(AdminTournamentPageDocument, options);
+        }
+export type AdminTournamentPageQueryHookResult = ReturnType<typeof useAdminTournamentPageQuery>;
+export type AdminTournamentPageLazyQueryHookResult = ReturnType<typeof useAdminTournamentPageLazyQuery>;
+export type AdminTournamentPageQueryResult = Apollo.QueryResult<AdminTournamentPageQuery, AdminTournamentPageQueryVariables>;
+export const AdminTournamentPageStandingsDocument = gql`
+    query AdminTournamentPageStandings($tournamentId: ID!) {
+  tournament(tournamentId: $tournamentId) {
+    id
+    standings {
+      id
+      place
+      player {
+        id
+        name
+        avatarUrl
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useAdminTournamentPageStandingsQuery__
+ *
+ * To run a query within a React component, call `useAdminTournamentPageStandingsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAdminTournamentPageStandingsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAdminTournamentPageStandingsQuery({
+ *   variables: {
+ *      tournamentId: // value for 'tournamentId'
+ *   },
+ * });
+ */
+export function useAdminTournamentPageStandingsQuery(baseOptions: Apollo.QueryHookOptions<AdminTournamentPageStandingsQuery, AdminTournamentPageStandingsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AdminTournamentPageStandingsQuery, AdminTournamentPageStandingsQueryVariables>(AdminTournamentPageStandingsDocument, options);
+      }
+export function useAdminTournamentPageStandingsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AdminTournamentPageStandingsQuery, AdminTournamentPageStandingsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AdminTournamentPageStandingsQuery, AdminTournamentPageStandingsQueryVariables>(AdminTournamentPageStandingsDocument, options);
+        }
+export type AdminTournamentPageStandingsQueryHookResult = ReturnType<typeof useAdminTournamentPageStandingsQuery>;
+export type AdminTournamentPageStandingsLazyQueryHookResult = ReturnType<typeof useAdminTournamentPageStandingsLazyQuery>;
+export type AdminTournamentPageStandingsQueryResult = Apollo.QueryResult<AdminTournamentPageStandingsQuery, AdminTournamentPageStandingsQueryVariables>;
+export const AdminTournamentPageVideosDocument = gql`
+    query AdminTournamentPageVideos($tournamentId: ID!) {
+  tournamentVideos(tournamentId: $tournamentId) {
+    nodes {
+      id
+      title
+      thumbnailUrl
+      battlesCount
+      channel {
+        id
+        name
+      }
+    }
+  }
+}
+    `;
+
+/**
+ * __useAdminTournamentPageVideosQuery__
+ *
+ * To run a query within a React component, call `useAdminTournamentPageVideosQuery` and pass it any options that fit your needs.
+ * When your component renders, `useAdminTournamentPageVideosQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useAdminTournamentPageVideosQuery({
+ *   variables: {
+ *      tournamentId: // value for 'tournamentId'
+ *   },
+ * });
+ */
+export function useAdminTournamentPageVideosQuery(baseOptions: Apollo.QueryHookOptions<AdminTournamentPageVideosQuery, AdminTournamentPageVideosQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AdminTournamentPageVideosQuery, AdminTournamentPageVideosQueryVariables>(AdminTournamentPageVideosDocument, options);
+      }
+export function useAdminTournamentPageVideosLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AdminTournamentPageVideosQuery, AdminTournamentPageVideosQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AdminTournamentPageVideosQuery, AdminTournamentPageVideosQueryVariables>(AdminTournamentPageVideosDocument, options);
+        }
+export type AdminTournamentPageVideosQueryHookResult = ReturnType<typeof useAdminTournamentPageVideosQuery>;
+export type AdminTournamentPageVideosLazyQueryHookResult = ReturnType<typeof useAdminTournamentPageVideosLazyQuery>;
+export type AdminTournamentPageVideosQueryResult = Apollo.QueryResult<AdminTournamentPageVideosQuery, AdminTournamentPageVideosQueryVariables>;
+export const AdminTournamentPageCreateStandingDocument = gql`
+    mutation AdminTournamentPageCreateStanding($tournamentId: ID!, $attributes: StandingAttributes!) {
+  createStanding(input: {tournamentId: $tournamentId, attributes: $attributes}) {
+    standing {
+      id
+    }
+  }
+}
+    `;
+export type AdminTournamentPageCreateStandingMutationFn = Apollo.MutationFunction<AdminTournamentPageCreateStandingMutation, AdminTournamentPageCreateStandingMutationVariables>;
+
+/**
+ * __useAdminTournamentPageCreateStandingMutation__
+ *
+ * To run a mutation, you first call `useAdminTournamentPageCreateStandingMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAdminTournamentPageCreateStandingMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [adminTournamentPageCreateStandingMutation, { data, loading, error }] = useAdminTournamentPageCreateStandingMutation({
+ *   variables: {
+ *      tournamentId: // value for 'tournamentId'
+ *      attributes: // value for 'attributes'
+ *   },
+ * });
+ */
+export function useAdminTournamentPageCreateStandingMutation(baseOptions?: Apollo.MutationHookOptions<AdminTournamentPageCreateStandingMutation, AdminTournamentPageCreateStandingMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<AdminTournamentPageCreateStandingMutation, AdminTournamentPageCreateStandingMutationVariables>(AdminTournamentPageCreateStandingDocument, options);
+      }
+export type AdminTournamentPageCreateStandingMutationHookResult = ReturnType<typeof useAdminTournamentPageCreateStandingMutation>;
+export type AdminTournamentPageCreateStandingMutationResult = Apollo.MutationResult<AdminTournamentPageCreateStandingMutation>;
+export type AdminTournamentPageCreateStandingMutationOptions = Apollo.BaseMutationOptions<AdminTournamentPageCreateStandingMutation, AdminTournamentPageCreateStandingMutationVariables>;
+export const AdminTournamentPageDeleteStandingDocument = gql`
+    mutation AdminTournamentPageDeleteStanding($standingId: ID!) {
+  deleteStanding(input: {standingId: $standingId}) {
+    standing {
+      id
+    }
+  }
+}
+    `;
+export type AdminTournamentPageDeleteStandingMutationFn = Apollo.MutationFunction<AdminTournamentPageDeleteStandingMutation, AdminTournamentPageDeleteStandingMutationVariables>;
+
+/**
+ * __useAdminTournamentPageDeleteStandingMutation__
+ *
+ * To run a mutation, you first call `useAdminTournamentPageDeleteStandingMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAdminTournamentPageDeleteStandingMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [adminTournamentPageDeleteStandingMutation, { data, loading, error }] = useAdminTournamentPageDeleteStandingMutation({
+ *   variables: {
+ *      standingId: // value for 'standingId'
+ *   },
+ * });
+ */
+export function useAdminTournamentPageDeleteStandingMutation(baseOptions?: Apollo.MutationHookOptions<AdminTournamentPageDeleteStandingMutation, AdminTournamentPageDeleteStandingMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<AdminTournamentPageDeleteStandingMutation, AdminTournamentPageDeleteStandingMutationVariables>(AdminTournamentPageDeleteStandingDocument, options);
+      }
+export type AdminTournamentPageDeleteStandingMutationHookResult = ReturnType<typeof useAdminTournamentPageDeleteStandingMutation>;
+export type AdminTournamentPageDeleteStandingMutationResult = Apollo.MutationResult<AdminTournamentPageDeleteStandingMutation>;
+export type AdminTournamentPageDeleteStandingMutationOptions = Apollo.BaseMutationOptions<AdminTournamentPageDeleteStandingMutation, AdminTournamentPageDeleteStandingMutationVariables>;
+export const AdminTournamentPageCreateVideoDocument = gql`
+    mutation AdminTournamentPageCreateVideo($tournamentId: ID!, $url: String!) {
+  createTournamentVideo(input: {tournamentId: $tournamentId, url: $url}) {
+    tournamentVideo {
+      id
+    }
+  }
+}
+    `;
+export type AdminTournamentPageCreateVideoMutationFn = Apollo.MutationFunction<AdminTournamentPageCreateVideoMutation, AdminTournamentPageCreateVideoMutationVariables>;
+
+/**
+ * __useAdminTournamentPageCreateVideoMutation__
+ *
+ * To run a mutation, you first call `useAdminTournamentPageCreateVideoMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAdminTournamentPageCreateVideoMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [adminTournamentPageCreateVideoMutation, { data, loading, error }] = useAdminTournamentPageCreateVideoMutation({
+ *   variables: {
+ *      tournamentId: // value for 'tournamentId'
+ *      url: // value for 'url'
+ *   },
+ * });
+ */
+export function useAdminTournamentPageCreateVideoMutation(baseOptions?: Apollo.MutationHookOptions<AdminTournamentPageCreateVideoMutation, AdminTournamentPageCreateVideoMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<AdminTournamentPageCreateVideoMutation, AdminTournamentPageCreateVideoMutationVariables>(AdminTournamentPageCreateVideoDocument, options);
+      }
+export type AdminTournamentPageCreateVideoMutationHookResult = ReturnType<typeof useAdminTournamentPageCreateVideoMutation>;
+export type AdminTournamentPageCreateVideoMutationResult = Apollo.MutationResult<AdminTournamentPageCreateVideoMutation>;
+export type AdminTournamentPageCreateVideoMutationOptions = Apollo.BaseMutationOptions<AdminTournamentPageCreateVideoMutation, AdminTournamentPageCreateVideoMutationVariables>;
+export const AdminTournamentPageDeleteVideoDocument = gql`
+    mutation AdminTournamentPageDeleteVideo($tournamentVideoId: ID!) {
+  deleteTournamentVideo(input: {tournamentVideoId: $tournamentVideoId}) {
+    tournamentVideo {
+      id
+    }
+  }
+}
+    `;
+export type AdminTournamentPageDeleteVideoMutationFn = Apollo.MutationFunction<AdminTournamentPageDeleteVideoMutation, AdminTournamentPageDeleteVideoMutationVariables>;
+
+/**
+ * __useAdminTournamentPageDeleteVideoMutation__
+ *
+ * To run a mutation, you first call `useAdminTournamentPageDeleteVideoMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useAdminTournamentPageDeleteVideoMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [adminTournamentPageDeleteVideoMutation, { data, loading, error }] = useAdminTournamentPageDeleteVideoMutation({
+ *   variables: {
+ *      tournamentVideoId: // value for 'tournamentVideoId'
+ *   },
+ * });
+ */
+export function useAdminTournamentPageDeleteVideoMutation(baseOptions?: Apollo.MutationHookOptions<AdminTournamentPageDeleteVideoMutation, AdminTournamentPageDeleteVideoMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<AdminTournamentPageDeleteVideoMutation, AdminTournamentPageDeleteVideoMutationVariables>(AdminTournamentPageDeleteVideoDocument, options);
+      }
+export type AdminTournamentPageDeleteVideoMutationHookResult = ReturnType<typeof useAdminTournamentPageDeleteVideoMutation>;
+export type AdminTournamentPageDeleteVideoMutationResult = Apollo.MutationResult<AdminTournamentPageDeleteVideoMutation>;
+export type AdminTournamentPageDeleteVideoMutationOptions = Apollo.BaseMutationOptions<AdminTournamentPageDeleteVideoMutation, AdminTournamentPageDeleteVideoMutationVariables>;
+export const CreateTournamentDocument = gql`
+    mutation CreateTournament($attributes: TournamentAttributes!) {
+  createTournament(input: {attributes: $attributes}) {
+    tournament {
+      id
+    }
+  }
+}
+    `;
+export type CreateTournamentMutationFn = Apollo.MutationFunction<CreateTournamentMutation, CreateTournamentMutationVariables>;
+
+/**
+ * __useCreateTournamentMutation__
+ *
+ * To run a mutation, you first call `useCreateTournamentMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateTournamentMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createTournamentMutation, { data, loading, error }] = useCreateTournamentMutation({
+ *   variables: {
+ *      attributes: // value for 'attributes'
+ *   },
+ * });
+ */
+export function useCreateTournamentMutation(baseOptions?: Apollo.MutationHookOptions<CreateTournamentMutation, CreateTournamentMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateTournamentMutation, CreateTournamentMutationVariables>(CreateTournamentDocument, options);
+      }
+export type CreateTournamentMutationHookResult = ReturnType<typeof useCreateTournamentMutation>;
+export type CreateTournamentMutationResult = Apollo.MutationResult<CreateTournamentMutation>;
+export type CreateTournamentMutationOptions = Apollo.BaseMutationOptions<CreateTournamentMutation, CreateTournamentMutationVariables>;
 export const TopPageDocument = gql`
     query TopPage {
   tournaments(first: 3, thisWeek: true) {
@@ -7750,10 +7734,10 @@ export const PlayerStandingsPageDocument = gql`
     ...PlayerBreadcrumbs
     ...PlayerProfile
     ...PlayerTabs
-  }
-  standings(playerSlug: $playerSlug, first: 10) {
-    nodes {
-      ...PlayerStandingCard
+    standings(first: 10) {
+      nodes {
+        ...PlayerStandingCard
+      }
     }
   }
 }

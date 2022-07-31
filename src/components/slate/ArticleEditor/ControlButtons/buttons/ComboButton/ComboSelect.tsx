@@ -15,7 +15,9 @@ export const ComboSelect: React.FC<Props> = ({ characterSlug, onChange }) => {
   if (loading) return <p>Loading...</p>;
   if (error) return <p>読み込みに失敗しました。</p>;
   if (!data) return <p>読み込みに失敗しました。</p>;
-  if (data.comboCategories.length === 0) return <p>コマンドが登録されていません。</p>;
+
+  const comboCategories = data.character.comboCategories;
+  if (comboCategories.length === 0) return <p>コマンドが登録されていません。</p>;
 
   return (
     <Select
@@ -29,7 +31,7 @@ export const ComboSelect: React.FC<Props> = ({ characterSlug, onChange }) => {
     >
       <option value=""></option>
 
-      {data.comboCategories.map(comboCategory => (
+      {comboCategories.map(comboCategory => (
         <>
           <optgroup label={comboCategory.name} />
           {comboCategory.combos.map(combo => (

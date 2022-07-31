@@ -3,9 +3,11 @@ query PlayerStandingsPage($playerSlug: String!) {
     ...PlayerBreadcrumbs
     ...PlayerProfile
     ...PlayerTabs
-  }
 
-  standings(playerSlug: $playerSlug, first: 10) {
-    nodes { ...PlayerStandingCard }
+    standings(first: 10) {
+      nodes {
+        ...PlayerStandingCard
+      }
+    }
   }
 }
