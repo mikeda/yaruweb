@@ -1,0 +1,44 @@
+fragment ArticleTableRow on Article {
+  id
+  title
+  status
+}
+
+query ArticleTableRows($after: String, $keyword: String) {
+  myArticles(first: 10, after: $after, keyword: $keyword) {
+    edges {
+      node {
+        ...ArticleTableRow
+      }
+      cursor
+    }
+
+    pageInfo {
+      ...Pagination
+    }
+  }
+}
+
+mutation PublishArticle($articleId: ID!) {
+  publishArticle(input: { articleId: $articleId }) {
+    article {
+      ...ArticleTableRow
+    }
+  }
+}
+
+mutation StopArticle($articleId: ID!) {
+  stopArticle(input: { articleId: $articleId }) {
+    article {
+      ...ArticleTableRow
+    }
+  }
+}
+
+mutation DeleteArticle($articleId: ID!) {
+  deleteArticle(input: { articleId: $articleId }) {
+    article {
+      id
+    }
+  }
+}

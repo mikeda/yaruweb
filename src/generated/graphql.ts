@@ -2243,6 +2243,37 @@ export type TournamentCardsQuery = { __typename?: 'Query', tournaments: { __type
 
 export type TournamentTabsFragment = { __typename?: 'Tournament', id: string, battlesCount: number };
 
+export type ArticleTableRowFragment = { __typename?: 'Article', id: string, title: string, status: ArticleStatus };
+
+export type ArticleTableRowsQueryVariables = Exact<{
+  after?: InputMaybe<Scalars['String']>;
+  keyword?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type ArticleTableRowsQuery = { __typename?: 'Query', myArticles: { __typename?: 'ArticleConnection', edges: Array<{ __typename?: 'ArticleEdge', cursor: string, node: { __typename?: 'Article', id: string, title: string, status: ArticleStatus } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null } } };
+
+export type PublishArticleMutationVariables = Exact<{
+  articleId: Scalars['ID'];
+}>;
+
+
+export type PublishArticleMutation = { __typename?: 'Mutation', publishArticle?: { __typename?: 'PublishArticlePayload', article: { __typename?: 'Article', id: string, title: string, status: ArticleStatus } } | null };
+
+export type StopArticleMutationVariables = Exact<{
+  articleId: Scalars['ID'];
+}>;
+
+
+export type StopArticleMutation = { __typename?: 'Mutation', stopArticle?: { __typename?: 'StopArticlePayload', article: { __typename?: 'Article', id: string, title: string, status: ArticleStatus } } | null };
+
+export type DeleteArticleMutationVariables = Exact<{
+  articleId: Scalars['ID'];
+}>;
+
+
+export type DeleteArticleMutation = { __typename?: 'Mutation', deleteArticle?: { __typename?: 'DeleteArticlePayload', article: { __typename?: 'Article', id: string } } | null };
+
 export type CharacterTableRowFragment = { __typename?: 'Character', id: string, slug: string, name: string, faceImageUrl: string, movesCount: number, combosCount: number };
 
 export type CharacterTableRowsQueryVariables = Exact<{
@@ -3318,6 +3349,13 @@ export const TournamentTabsFragmentDoc = gql`
   battlesCount
 }
     `;
+export const ArticleTableRowFragmentDoc = gql`
+    fragment ArticleTableRow on Article {
+  id
+  title
+  status
+}
+    `;
 export const CharacterTableRowFragmentDoc = gql`
     fragment CharacterTableRow on Character {
   id
@@ -4018,6 +4056,156 @@ export function useTournamentCardsLazyQuery(baseOptions?: Apollo.LazyQueryHookOp
 export type TournamentCardsQueryHookResult = ReturnType<typeof useTournamentCardsQuery>;
 export type TournamentCardsLazyQueryHookResult = ReturnType<typeof useTournamentCardsLazyQuery>;
 export type TournamentCardsQueryResult = Apollo.QueryResult<TournamentCardsQuery, TournamentCardsQueryVariables>;
+export const ArticleTableRowsDocument = gql`
+    query ArticleTableRows($after: String, $keyword: String) {
+  myArticles(first: 10, after: $after, keyword: $keyword) {
+    edges {
+      node {
+        ...ArticleTableRow
+      }
+      cursor
+    }
+    pageInfo {
+      ...Pagination
+    }
+  }
+}
+    ${ArticleTableRowFragmentDoc}
+${PaginationFragmentDoc}`;
+
+/**
+ * __useArticleTableRowsQuery__
+ *
+ * To run a query within a React component, call `useArticleTableRowsQuery` and pass it any options that fit your needs.
+ * When your component renders, `useArticleTableRowsQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useArticleTableRowsQuery({
+ *   variables: {
+ *      after: // value for 'after'
+ *      keyword: // value for 'keyword'
+ *   },
+ * });
+ */
+export function useArticleTableRowsQuery(baseOptions?: Apollo.QueryHookOptions<ArticleTableRowsQuery, ArticleTableRowsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ArticleTableRowsQuery, ArticleTableRowsQueryVariables>(ArticleTableRowsDocument, options);
+      }
+export function useArticleTableRowsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ArticleTableRowsQuery, ArticleTableRowsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ArticleTableRowsQuery, ArticleTableRowsQueryVariables>(ArticleTableRowsDocument, options);
+        }
+export type ArticleTableRowsQueryHookResult = ReturnType<typeof useArticleTableRowsQuery>;
+export type ArticleTableRowsLazyQueryHookResult = ReturnType<typeof useArticleTableRowsLazyQuery>;
+export type ArticleTableRowsQueryResult = Apollo.QueryResult<ArticleTableRowsQuery, ArticleTableRowsQueryVariables>;
+export const PublishArticleDocument = gql`
+    mutation PublishArticle($articleId: ID!) {
+  publishArticle(input: {articleId: $articleId}) {
+    article {
+      ...ArticleTableRow
+    }
+  }
+}
+    ${ArticleTableRowFragmentDoc}`;
+export type PublishArticleMutationFn = Apollo.MutationFunction<PublishArticleMutation, PublishArticleMutationVariables>;
+
+/**
+ * __usePublishArticleMutation__
+ *
+ * To run a mutation, you first call `usePublishArticleMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `usePublishArticleMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [publishArticleMutation, { data, loading, error }] = usePublishArticleMutation({
+ *   variables: {
+ *      articleId: // value for 'articleId'
+ *   },
+ * });
+ */
+export function usePublishArticleMutation(baseOptions?: Apollo.MutationHookOptions<PublishArticleMutation, PublishArticleMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<PublishArticleMutation, PublishArticleMutationVariables>(PublishArticleDocument, options);
+      }
+export type PublishArticleMutationHookResult = ReturnType<typeof usePublishArticleMutation>;
+export type PublishArticleMutationResult = Apollo.MutationResult<PublishArticleMutation>;
+export type PublishArticleMutationOptions = Apollo.BaseMutationOptions<PublishArticleMutation, PublishArticleMutationVariables>;
+export const StopArticleDocument = gql`
+    mutation StopArticle($articleId: ID!) {
+  stopArticle(input: {articleId: $articleId}) {
+    article {
+      ...ArticleTableRow
+    }
+  }
+}
+    ${ArticleTableRowFragmentDoc}`;
+export type StopArticleMutationFn = Apollo.MutationFunction<StopArticleMutation, StopArticleMutationVariables>;
+
+/**
+ * __useStopArticleMutation__
+ *
+ * To run a mutation, you first call `useStopArticleMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useStopArticleMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [stopArticleMutation, { data, loading, error }] = useStopArticleMutation({
+ *   variables: {
+ *      articleId: // value for 'articleId'
+ *   },
+ * });
+ */
+export function useStopArticleMutation(baseOptions?: Apollo.MutationHookOptions<StopArticleMutation, StopArticleMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<StopArticleMutation, StopArticleMutationVariables>(StopArticleDocument, options);
+      }
+export type StopArticleMutationHookResult = ReturnType<typeof useStopArticleMutation>;
+export type StopArticleMutationResult = Apollo.MutationResult<StopArticleMutation>;
+export type StopArticleMutationOptions = Apollo.BaseMutationOptions<StopArticleMutation, StopArticleMutationVariables>;
+export const DeleteArticleDocument = gql`
+    mutation DeleteArticle($articleId: ID!) {
+  deleteArticle(input: {articleId: $articleId}) {
+    article {
+      id
+    }
+  }
+}
+    `;
+export type DeleteArticleMutationFn = Apollo.MutationFunction<DeleteArticleMutation, DeleteArticleMutationVariables>;
+
+/**
+ * __useDeleteArticleMutation__
+ *
+ * To run a mutation, you first call `useDeleteArticleMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteArticleMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteArticleMutation, { data, loading, error }] = useDeleteArticleMutation({
+ *   variables: {
+ *      articleId: // value for 'articleId'
+ *   },
+ * });
+ */
+export function useDeleteArticleMutation(baseOptions?: Apollo.MutationHookOptions<DeleteArticleMutation, DeleteArticleMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteArticleMutation, DeleteArticleMutationVariables>(DeleteArticleDocument, options);
+      }
+export type DeleteArticleMutationHookResult = ReturnType<typeof useDeleteArticleMutation>;
+export type DeleteArticleMutationResult = Apollo.MutationResult<DeleteArticleMutation>;
+export type DeleteArticleMutationOptions = Apollo.BaseMutationOptions<DeleteArticleMutation, DeleteArticleMutationVariables>;
 export const CharacterTableRowsDocument = gql`
     query CharacterTableRows($keyword: String) {
   characters(first: 100, keyword: $keyword) {
