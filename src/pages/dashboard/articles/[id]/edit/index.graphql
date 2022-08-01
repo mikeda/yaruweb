@@ -1,5 +1,5 @@
 query DashboardArticlePage($articleId: ID!) {
-  article(articleId: $articleId) {
+  article(articleId: $articleId, myOwn: true) {
     ...ArticleFormArticle
   }
 }

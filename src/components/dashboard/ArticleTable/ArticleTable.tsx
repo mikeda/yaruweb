@@ -19,7 +19,7 @@ export const ArticleTable: React.FC = () => {
   }, []);
 
   if (!data) return null;
-  const { edges, pageInfo } = data.myArticles;
+  const { edges, pageInfo } = data.articles;
   const articles = edges.map(edge => edge.node);
 
   const onClickMore = () => {

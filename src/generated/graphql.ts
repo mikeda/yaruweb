@@ -1477,8 +1477,6 @@ export type Query = {
   currentUser: CurrentUser;
   move: Move;
   moveCategory: MoveCategory;
-  myArticle: Article;
-  myArticles: ArticleConnection;
   organizer: Organizer;
   organizers: OrganizerConnection;
   player: Player;
@@ -1492,6 +1490,7 @@ export type Query = {
 
 export type QueryArticleArgs = {
   articleId: Scalars['ID'];
+  myOwn?: InputMaybe<Scalars['Boolean']>;
 };
 
 
@@ -1500,7 +1499,9 @@ export type QueryArticlesArgs = {
   before?: InputMaybe<Scalars['String']>;
   category?: InputMaybe<ArticleCategory>;
   first?: InputMaybe<Scalars['Int']>;
+  keyword?: InputMaybe<Scalars['String']>;
   last?: InputMaybe<Scalars['Int']>;
+  myOwn?: InputMaybe<Scalars['Boolean']>;
   order?: InputMaybe<Order>;
 };
 
@@ -1559,20 +1560,6 @@ export type QueryMoveArgs = {
 
 export type QueryMoveCategoryArgs = {
   moveCategoryId: Scalars['ID'];
-};
-
-
-export type QueryMyArticleArgs = {
-  articleId: Scalars['ID'];
-};
-
-
-export type QueryMyArticlesArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  before?: InputMaybe<Scalars['String']>;
-  first?: InputMaybe<Scalars['Int']>;
-  keyword?: InputMaybe<Scalars['String']>;
-  last?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -2251,7 +2238,7 @@ export type ArticleTableRowsQueryVariables = Exact<{
 }>;
 
 
-export type ArticleTableRowsQuery = { __typename?: 'Query', myArticles: { __typename?: 'ArticleConnection', edges: Array<{ __typename?: 'ArticleEdge', cursor: string, node: { __typename?: 'Article', id: string, title: string, status: ArticleStatus } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null } } };
+export type ArticleTableRowsQuery = { __typename?: 'Query', articles: { __typename?: 'ArticleConnection', edges: Array<{ __typename?: 'ArticleEdge', cursor: string, node: { __typename?: 'Article', id: string, title: string, status: ArticleStatus } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null } } };
 
 export type PublishArticleMutationVariables = Exact<{
   articleId: Scalars['ID'];
@@ -4013,7 +4000,7 @@ export type TournamentCardsLazyQueryHookResult = ReturnType<typeof useTournament
 export type TournamentCardsQueryResult = Apollo.QueryResult<TournamentCardsQuery, TournamentCardsQueryVariables>;
 export const ArticleTableRowsDocument = gql`
     query ArticleTableRows($after: String, $keyword: String) {
-  myArticles(first: 10, after: $after, keyword: $keyword) {
+  articles(first: 10, after: $after, keyword: $keyword, myOwn: true) {
     edges {
       node {
         ...ArticleTableRow
