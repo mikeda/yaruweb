@@ -37,7 +37,6 @@ export const apolloClient = new ApolloClient({
         fields: {
           articles: relayStylePagination(),
           battles: relayStylePagination(),
-          myArticles: relayStylePagination(),
           organizers: relayStylePagination(),
           players: relayStylePagination(),
           standings: relayStylePagination(),
