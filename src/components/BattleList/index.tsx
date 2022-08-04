@@ -9,22 +9,36 @@ import { YouTubePlayer } from 'youtube-player/dist/types';
 
 import { BattleListItem } from '../BattleListItem';
 
-import { YouTubeWrapper } from '@/components';
-import { useBattleListQuery } from '@/generated/graphql';
+import { CharacterBattleCountChip, PlayerBattleCountChip, SelectChipContainer, YouTubeWrapper } from '@/components';
+import {
+  CharacterBattleCountChipFragment,
+  PlayerBattleCountChipFragment,
+  useBattleListQuery,
+} from '@/generated/graphql';
 import { loadingState } from '@/lib';
 
 interface Props {
   tournamentId?: string;
   playerSlug?: string;
   characterSlug?: string;
+  playerBattleCounts?: PlayerBattleCountChipFragment[];
+  characterBattleCounts?: CharacterBattleCountChipFragment[];
 }
 
-export const BattleList: React.FC<Props> = ({ tournamentId, playerSlug, characterSlug }) => {
+export const BattleList: React.FC<Props> = ({
+  tournamentId,
+  playerSlug,
+  characterSlug,
+  playerBattleCounts,
+  characterBattleCounts,
+}) => {
   const [youTubePlayer, setYouTubePlayer] = useState<YouTubePlayer>();
   const [battleIndex, setBattleIndex] = useState<number>(0);
   const setLoading = useSetRecoilState(loadingState);
+  //const [selectedPlayerSlug, setSelectedPlayerSlug] = useState<string>();
+  //const [selectedCharacterSlug, setSelectedCharacterSlug] = useState<string>();
 
-  const { data, fetchMore } = useBattleListQuery({
+  const { data, fetchMore, refetch } = useBattleListQuery({
     variables: { tournamentId, playerSlug, characterSlug },
     onCompleted: () => {
       setLoading(false);
@@ -85,6 +99,36 @@ export const BattleList: React.FC<Props> = ({ tournamentId, playerSlug, characte
       </YouTubeWrapper>
 
       <Box component={Paper}>
+        {playerBattleCounts && (
+          <SelectChipContainer>
+            {playerBattleCounts.map(bc => (
+              <PlayerBattleCountChip
+                key={bc.player.id}
+                battleCount={bc}
+                active={playerSlug === bc.player.slug}
+                onClick={() => {
+                  refetch({ playerSlug: playerSlug === bc.player.slug ? undefined : bc.player.slug });
+                }}
+              />
+            ))}
+          </SelectChipContainer>
+        )}
+
+        {characterBattleCounts && (
+          <SelectChipContainer>
+            {characterBattleCounts.map(bc => (
+              <CharacterBattleCountChip
+                key={bc.character.id}
+                battleCount={bc}
+                active={playerSlug === bc.character.slug}
+                onClick={() => {
+                  refetch({ characterSlug: characterSlug === bc.character.slug ? undefined : bc.character.slug });
+                }}
+              />
+            ))}
+          </SelectChipContainer>
+        )}
+
         <BattleListItem battle={battle} onClick={() => updateBattle(battleIndex)} />
 
         <Box display="flex">

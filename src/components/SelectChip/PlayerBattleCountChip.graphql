@@ -1,5 +1,4 @@
-fragment PlayerBattleCountChip on BattleCount {
-  id
+fragment PlayerBattleCountChip on PlayerBattleCount {
   count
 
   player {

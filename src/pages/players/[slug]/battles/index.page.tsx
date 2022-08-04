@@ -23,7 +23,7 @@ const Page: React.FC<PlayerBattlesPageQuery> = ({ player }) => {
 
       <PlayerTabs activeTab="battles" player={player} />
 
-      <BattleList playerSlug={player.slug} />
+      <BattleList playerSlug={player.slug} characterBattleCounts={player.characterBattleCounts} />
     </Content>
   );
 };

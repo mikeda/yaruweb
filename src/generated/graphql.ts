@@ -327,8 +327,14 @@ export type Character = {
   movesCount: Scalars['Int'];
   name: Scalars['String'];
   nameKana: Scalars['String'];
+  playerBattleCounts: Array<PlayerBattleCount>;
   slug: Scalars['String'];
   story: Scalars['String'];
+};
+
+
+export type CharacterPlayerBattleCountsArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
 };
 
 export type CharacterAttributes = {
@@ -344,6 +350,12 @@ export type CharacterAttributes = {
   nameKana: Scalars['String'];
   slug: Scalars['String'];
   story: Scalars['String'];
+};
+
+export type CharacterBattleCount = {
+  __typename?: 'CharacterBattleCount';
+  character: Character;
+  count: Scalars['Int'];
 };
 
 /** The connection type for Character. */
@@ -1395,6 +1407,7 @@ export type Player = {
   avatarUrl?: Maybe<Scalars['String']>;
   battleCounts: Array<BattleCount>;
   battlesCount: Scalars['Int'];
+  characterBattleCounts: Array<CharacterBattleCount>;
   country?: Maybe<Country>;
   description?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
@@ -1406,6 +1419,11 @@ export type Player = {
   streamingUrl?: Maybe<Scalars['String']>;
   tonamelId?: Maybe<Scalars['String']>;
   twitterId?: Maybe<Scalars['String']>;
+};
+
+
+export type PlayerCharacterBattleCountsArgs = {
+  limit?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -1426,6 +1444,12 @@ export type PlayerAttributes = {
   streamingUrl?: InputMaybe<Scalars['String']>;
   tonamelId?: InputMaybe<Scalars['String']>;
   twitterId?: InputMaybe<Scalars['String']>;
+};
+
+export type PlayerBattleCount = {
+  __typename?: 'PlayerBattleCount';
+  count: Scalars['Int'];
+  player: Player;
 };
 
 /** The connection type for Player. */
@@ -2216,7 +2240,9 @@ export type PlayerStandingCardsQuery = { __typename?: 'Query', player: { __typen
 
 export type PlayerTabsFragment = { __typename?: 'Player', slug: string, battlesCount: number, standingsCount: number };
 
-export type PlayerBattleCountChipFragment = { __typename?: 'BattleCount', id: string, count: number, player: { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null } };
+export type CharacterBattleCountChipFragment = { __typename?: 'CharacterBattleCount', count: number, character: { __typename?: 'Character', id: string, slug: string, name: string, faceImageUrl: string } };
+
+export type PlayerBattleCountChipFragment = { __typename?: 'PlayerBattleCount', count: number, player: { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null } };
 
 export type TournamentCardFragment = { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: string | null, startsAt: string, videosCount: number, standings: Array<{ __typename?: 'Standing', id: string, place: number, player: { __typename?: 'Player', id: string, name: string } }> };
 
@@ -2676,7 +2702,7 @@ export type CharacterBattlesPageQueryVariables = Exact<{
 }>;
 
 
-export type CharacterBattlesPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', id: string, slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, combosCount: number, movesCount: number } };
+export type CharacterBattlesPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', id: string, slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, combosCount: number, movesCount: number, playerBattleCounts: Array<{ __typename?: 'PlayerBattleCount', count: number, player: { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null } }> } };
 
 export type CharacterCombosPageQueryVariables = Exact<{
   characterSlug: Scalars['String'];
@@ -2690,7 +2716,7 @@ export type CharacterPageQueryVariables = Exact<{
 }>;
 
 
-export type CharacterPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', story: string, description: string, id: string, slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, combosCount: number, movesCount: number }, battleCounts: { __typename?: 'BattleCountConnection', nodes: Array<{ __typename?: 'BattleCount', id: string, count: number, player: { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null } }> } };
+export type CharacterPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', story: string, description: string, id: string, slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, combosCount: number, movesCount: number } };
 
 export type CharacterMovesPageQueryVariables = Exact<{
   characterSlug: Scalars['String'];
@@ -2955,7 +2981,7 @@ export type PlayerBattlesPageQueryVariables = Exact<{
 }>;
 
 
-export type PlayerBattlesPageQuery = { __typename?: 'Query', player: { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null, twitterId?: string | null, streamingUrl?: string | null, battlesCount: number, standingsCount: number } };
+export type PlayerBattlesPageQuery = { __typename?: 'Query', player: { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null, twitterId?: string | null, streamingUrl?: string | null, battlesCount: number, standingsCount: number, characterBattleCounts: Array<{ __typename?: 'CharacterBattleCount', count: number, character: { __typename?: 'Character', id: string, slug: string, name: string, faceImageUrl: string } }> } };
 
 export type PlayerPageQueryVariables = Exact<{
   playerSlug: Scalars['String'];
@@ -3263,9 +3289,19 @@ export const PlayerTabsFragmentDoc = gql`
   standingsCount
 }
     `;
+export const CharacterBattleCountChipFragmentDoc = gql`
+    fragment CharacterBattleCountChip on CharacterBattleCount {
+  count
+  character {
+    id
+    slug
+    name
+    faceImageUrl
+  }
+}
+    `;
 export const PlayerBattleCountChipFragmentDoc = gql`
-    fragment PlayerBattleCountChip on BattleCount {
-  id
+    fragment PlayerBattleCountChip on PlayerBattleCount {
   count
   player {
     id
@@ -6066,11 +6102,15 @@ export const CharacterBattlesPageDocument = gql`
     ...CharacterBreadcrumbs
     ...CharacterProfile
     ...CharacterTabs
+    playerBattleCounts {
+      ...PlayerBattleCountChip
+    }
   }
 }
     ${CharacterBreadcrumbsFragmentDoc}
 ${CharacterProfileFragmentDoc}
-${CharacterTabsFragmentDoc}`;
+${CharacterTabsFragmentDoc}
+${PlayerBattleCountChipFragmentDoc}`;
 
 /**
  * __useCharacterBattlesPageQuery__
@@ -6160,16 +6200,10 @@ export const CharacterPageDocument = gql`
     story
     description
   }
-  battleCounts(characterSlug: $characterSlug, first: 10) {
-    nodes {
-      ...PlayerBattleCountChip
-    }
-  }
 }
     ${CharacterBreadcrumbsFragmentDoc}
 ${CharacterProfileFragmentDoc}
-${CharacterTabsFragmentDoc}
-${PlayerBattleCountChipFragmentDoc}`;
+${CharacterTabsFragmentDoc}`;
 
 /**
  * __useCharacterPageQuery__
@@ -6283,7 +6317,7 @@ export type CharactersPageLazyQueryHookResult = ReturnType<typeof useCharactersP
 export type CharactersPageQueryResult = Apollo.QueryResult<CharactersPageQuery, CharactersPageQueryVariables>;
 export const DashboardArticlePageDocument = gql`
     query DashboardArticlePage($articleId: ID!) {
-  article(articleId: $articleId) {
+  article(articleId: $articleId, myOwn: true) {
     ...ArticleFormArticle
   }
 }
@@ -7552,11 +7586,15 @@ export const PlayerBattlesPageDocument = gql`
     ...PlayerBreadcrumbs
     ...PlayerProfile
     ...PlayerTabs
+    characterBattleCounts {
+      ...CharacterBattleCountChip
+    }
   }
 }
     ${PlayerBreadcrumbsFragmentDoc}
 ${PlayerProfileFragmentDoc}
-${PlayerTabsFragmentDoc}`;
+${PlayerTabsFragmentDoc}
+${CharacterBattleCountChipFragmentDoc}`;
 
 /**
  * __usePlayerBattlesPageQuery__
