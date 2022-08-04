@@ -334,6 +334,7 @@ type Character {
   movesCount: Int!
   name: String!
   nameKana: String!
+  playerBattleCounts(limit: Int = 10): [PlayerBattleCount!]!
   slug: String!
   story: String!
 }
@@ -351,6 +352,11 @@ input CharacterAttributes {
   story: String!
   description: String!
   dlc: Boolean!
+}
+
+type CharacterBattleCount {
+  character: Character!
+  count: Int!
 }
 
 """The connection type for Character."""
@@ -1266,6 +1272,7 @@ type Player {
   avatarUrl: String
   battleCounts: [BattleCount!]!
   battlesCount: Int!
+  characterBattleCounts(limit: Int = 10): [CharacterBattleCount!]!
   country: Country
   description: String
   id: ID!
@@ -1303,6 +1310,11 @@ input PlayerAttributes {
   avatar: String
   streamingUrl: String
   description: String
+}
+
+type PlayerBattleCount {
+  count: Int!
+  player: Player!
 }
 
 """The connection type for Player."""

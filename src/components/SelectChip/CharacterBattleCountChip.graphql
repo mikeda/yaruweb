@@ -1,0 +1,10 @@
+fragment CharacterBattleCountChip on CharacterBattleCount {
+  count
+
+  character {
+    id
+    slug
+    name
+    faceImageUrl
+  }
+}

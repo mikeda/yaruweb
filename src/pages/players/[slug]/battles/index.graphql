@@ -3,5 +3,9 @@ query PlayerBattlesPage($playerSlug: String!) {
     ...PlayerBreadcrumbs
     ...PlayerProfile
     ...PlayerTabs
+
+    characterBattleCounts {
+      ...CharacterBattleCountChip
+    }
   }
 }
