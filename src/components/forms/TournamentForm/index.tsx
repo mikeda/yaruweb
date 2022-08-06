@@ -2,11 +2,10 @@ import React from 'react';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Box, Button, Card, CardContent, Divider, Grid, TextField } from '@mui/material';
-import { Autocomplete } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
-import { TournamentAttributes, TournamentFormFragment, useTournamentFormQuery } from '@/generated/graphql';
+import { TournamentAttributes, TournamentFormFragment } from '@/generated/graphql';
 import { dayjs } from '@/lib';
 
 const schema = yup.object().shape({
@@ -23,11 +22,9 @@ interface Props {
 }
 
 export const TournamentForm: React.FC<Props> = ({ tournament, onSubmit }) => {
-  const { data } = useTournamentFormQuery();
   const {
     handleSubmit,
     control,
-    getValues,
     setValue,
     formState: { errors },
   } = useForm<TournamentAttributes>({
@@ -45,8 +42,6 @@ export const TournamentForm: React.FC<Props> = ({ tournament, onSubmit }) => {
           startsAt: dayjs().add(1, 'day').hour(18).minute(0).second(0).format('YYYY-MM-DDTHH:mm'),
         },
   });
-
-  if (!data) return null;
 
   return (
     <Card>
