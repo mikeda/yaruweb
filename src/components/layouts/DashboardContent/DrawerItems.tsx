@@ -19,7 +19,7 @@ const useStyles = makeStyles(() =>
   }),
 );
 
-type MenuKey = 'article' | 'tournament' | 'player' | 'organizer' | 'character' | 'profile';
+type MenuKey = 'article' | 'tournament' | 'player' | 'character' | 'profile';
 
 interface ItemProps {
   key: MenuKey;
@@ -49,12 +49,6 @@ const adminItems: ItemProps[] = [
     key: 'player',
     label: 'プレイヤー',
     link: pagesPath.dashboard.players.$url(),
-    icon: <People />,
-  },
-  {
-    key: 'organizer',
-    label: 'オーガナイザー',
-    link: pagesPath.dashboard.organizers.$url(),
     icon: <People />,
   },
   {

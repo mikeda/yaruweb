@@ -1,4 +1,4 @@
-import { CharactersParam, OrganizerParam, PlayerParam, TournamentParam, TournamentVideoParam } from './params';
+import { CharactersParam, PlayerParam, TournamentParam, TournamentVideoParam } from './params';
 
 import { BreadcrumbChainItem } from '.';
 
@@ -11,10 +11,6 @@ export type AdminBreadcrumbParams =
   | { to: 'characterEdit'; character: CharactersParam }
   | { to: 'combos'; character: CharactersParam }
   | { to: 'moves'; character: CharactersParam }
-  | { to: 'organizers' }
-  | { to: 'organizer'; organizer: OrganizerParam }
-  | { to: 'organizersNew' }
-  | { to: 'organizerEdit'; organizer: OrganizerParam }
   | { to: 'players' }
   | { to: 'player'; player: PlayerParam }
   | { to: 'playersNew' }
@@ -49,14 +45,6 @@ export const breadcrumbChain = (props: AdminBreadcrumbParams): BreadcrumbChainIt
         url: pagesPath.dashboard.characters._slug(props.character.slug).moves.$url(),
         parent: breadcrumbChain({ to: 'character', character: props.character }),
       };
-    case 'organizers':
-      return { name: 'オーガナイザー', url: pagesPath.dashboard.organizers.$url() };
-    case 'organizer':
-      return { name: props.organizer.name, parent: breadcrumbChain({ to: 'organizers' }) };
-    case 'organizersNew':
-      return { name: 'オーガナイザーを登録', parent: breadcrumbChain({ to: 'organizers' }) };
-    case 'organizerEdit':
-      return { name: 'オーガナイザーを編集', parent: breadcrumbChain({ to: 'organizer', organizer: props.organizer }) };
     case 'players':
       return { name: 'プレイヤー', url: pagesPath.dashboard.players.$url() };
     case 'player':

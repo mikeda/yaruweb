@@ -4,12 +4,6 @@ fragment CharacterBreadcrumbs on Character {
   name
 }
 
-fragment OrganizerBreadcrumbs on Organizer {
-  id
-  slug
-  name
-}
-
 fragment PlayerBreadcrumbs on Player {
   id
   slug

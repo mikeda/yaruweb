@@ -1,5 +1,0 @@
-fragment OrganizerSelectOption on Organizer {
-  id
-  slug
-  name
-}

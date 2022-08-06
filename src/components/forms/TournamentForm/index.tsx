@@ -6,16 +6,10 @@ import { Autocomplete } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
-import {
-  OrganizerSelectOptionFragment,
-  TournamentAttributes,
-  TournamentFormFragment,
-  useTournamentFormQuery,
-} from '@/generated/graphql';
+import { TournamentAttributes, TournamentFormFragment, useTournamentFormQuery } from '@/generated/graphql';
 import { dayjs } from '@/lib';
 
 const schema = yup.object().shape({
-  organizerId: yup.string().required(),
   name: yup.string().required(),
   url: yup.string().url().nullable(),
   streamingUrl: yup.string().url().nullable(),
@@ -41,7 +35,6 @@ export const TournamentForm: React.FC<Props> = ({ tournament, onSubmit }) => {
     mode: 'onBlur',
     defaultValues: tournament
       ? {
-          organizerId: tournament.organizerId,
           name: tournament.name,
           url: tournament.url,
           streamingUrl: tournament.streamingUrl,
@@ -52,33 +45,14 @@ export const TournamentForm: React.FC<Props> = ({ tournament, onSubmit }) => {
           startsAt: dayjs().add(1, 'day').hour(18).minute(0).second(0).format('YYYY-MM-DDTHH:mm'),
         },
   });
-  const organizerId = getValues('organizerId');
 
   if (!data) return null;
-  const organizers = data.organizers.nodes;
 
   return (
     <Card>
       <form onSubmit={handleSubmit(onSubmit)}>
         <CardContent>
           <Grid container spacing={2}>
-            <Grid item xs={12} sm={6}>
-              <Autocomplete<OrganizerSelectOptionFragment>
-                options={organizers}
-                getOptionLabel={organizer => `${organizer.name}(${organizer.slug})`}
-                onChange={(e, organizer) => {
-                  if (organizer) setValue('organizerId', organizer.id);
-                }}
-                defaultValue={organizers.filter(o => o.id === organizerId)[0]}
-                style={{ width: 300 }}
-                renderInput={params => {
-                  return (
-                    <TextField {...params} label="オーガナイザー" variant="outlined" defaultValue={'まんば杯(manba)'} />
-                  );
-                }}
-              />
-            </Grid>
-
             <Grid item xs={12}>
               <Controller
                 name="name"

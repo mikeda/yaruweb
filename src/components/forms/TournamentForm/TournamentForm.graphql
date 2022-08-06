@@ -1,15 +1,8 @@
 fragment TournamentForm on Tournament {
   id
-  organizerId
   name
   url
   streamingUrl
   startsAt
   description
-}
-
-query TournamentForm {
-  organizers(first: 100) {
-    nodes { ...OrganizerSelectOption }
-  }
 }
