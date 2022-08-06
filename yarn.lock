@@ -3287,7 +3287,7 @@
     "@sentry/utils" "7.9.0"
     tslib "^1.9.3"
 
-"@sentry/react@^7.9.0":
+"@sentry/react@7.9.0":
   version "7.9.0"
   resolved "https://registry.yarnpkg.com/@sentry/react/-/react-7.9.0.tgz#555a4a6093621ee0c3ce90804d3be28ca342670e"
   integrity sha512-T3jHDH0AYmbyyufvKEOCFnIeLTU/bHUZM+e3eTevcq/eXFHS7JTK/8qsRnK0sYUT7/JolbpG/iq7QDkeGvSxpQ==
@@ -3298,7 +3298,7 @@
     hoist-non-react-statics "^3.3.2"
     tslib "^1.9.3"
 
-"@sentry/tracing@^7.9.0":
+"@sentry/tracing@7.9.0":
   version "7.9.0"
   resolved "https://registry.yarnpkg.com/@sentry/tracing/-/tracing-7.9.0.tgz#0cbbf5b61ee76b934d2e4160a0ad3daf0001237b"
   integrity sha512-X4HQ7jjP7qyc4saCtq31kLqQzcBpRNifE9KccgEbNXAkKoMrg5F22oUlfN2EcEWy0vm1C23juseDsOSSMXAM+A==
