@@ -227,34 +227,6 @@ export type BattleConnection = {
   pageInfo: PageInfo;
 };
 
-export type BattleCount = {
-  __typename?: 'BattleCount';
-  character: Character;
-  count: Scalars['Int'];
-  id: Scalars['ID'];
-  player: Player;
-};
-
-/** The connection type for BattleCount. */
-export type BattleCountConnection = {
-  __typename?: 'BattleCountConnection';
-  /** A list of edges. */
-  edges: Array<BattleCountEdge>;
-  /** A list of nodes. */
-  nodes: Array<BattleCount>;
-  /** Information to aid in pagination. */
-  pageInfo: PageInfo;
-};
-
-/** An edge in a connection. */
-export type BattleCountEdge = {
-  __typename?: 'BattleCountEdge';
-  /** A cursor for use in pagination. */
-  cursor: Scalars['String'];
-  /** The item at the end of the edge. */
-  node: BattleCount;
-};
-
 /** An edge in a connection. */
 export type BattleEdge = {
   __typename?: 'BattleEdge';
@@ -1415,7 +1387,6 @@ export type PageInfo = {
 export type Player = {
   __typename?: 'Player';
   avatarUrl?: Maybe<Scalars['String']>;
-  battleCounts: Array<BattleCount>;
   battles: BattleConnection;
   battlesCount: Scalars['Int'];
   characterBattleCounts: Array<CharacterBattleCount>;
@@ -1511,8 +1482,6 @@ export type Query = {
   __typename?: 'Query';
   article: Article;
   articles: ArticleConnection;
-  battleCounts: BattleCountConnection;
-  battles: BattleConnection;
   character: Character;
   characters: CharacterConnection;
   combo: Combo;
@@ -1547,28 +1516,6 @@ export type QueryArticlesArgs = {
   last?: InputMaybe<Scalars['Int']>;
   myOwn?: InputMaybe<Scalars['Boolean']>;
   order?: InputMaybe<Order>;
-};
-
-
-export type QueryBattleCountsArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  before?: InputMaybe<Scalars['String']>;
-  characterSlug?: InputMaybe<Scalars['String']>;
-  first?: InputMaybe<Scalars['Int']>;
-  last?: InputMaybe<Scalars['Int']>;
-  playerSlug?: InputMaybe<Scalars['String']>;
-};
-
-
-export type QueryBattlesArgs = {
-  after?: InputMaybe<Scalars['String']>;
-  before?: InputMaybe<Scalars['String']>;
-  characterSlug?: InputMaybe<Scalars['String']>;
-  first?: InputMaybe<Scalars['Int']>;
-  last?: InputMaybe<Scalars['Int']>;
-  playerSlug?: InputMaybe<Scalars['String']>;
-  tournamentId?: InputMaybe<Scalars['ID']>;
-  tournamentVideoId?: InputMaybe<Scalars['ID']>;
 };
 
 
@@ -2924,7 +2871,7 @@ export type AdminBattlesPageBattlesQueryVariables = Exact<{
 }>;
 
 
-export type AdminBattlesPageBattlesQuery = { __typename?: 'Query', battles: { __typename?: 'BattleConnection', nodes: Array<{ __typename?: 'Battle', id: string, round: BattleRound, startSec: number, sides: Array<{ __typename?: 'BattleSide', id: string, rounds: number, player: { __typename?: 'Player', id: string, name: string }, character: { __typename?: 'Character', id: string, faceImageUrl: string } }> }> } };
+export type AdminBattlesPageBattlesQuery = { __typename?: 'Query', tournamentVideo: { __typename?: 'TournamentVideo', id: string, battles: Array<{ __typename?: 'Battle', id: string, round: BattleRound, startSec: number, sides: Array<{ __typename?: 'BattleSide', id: string, rounds: number, player: { __typename?: 'Player', id: string, name: string }, character: { __typename?: 'Character', id: string, faceImageUrl: string } }> }> } };
 
 export type AdminTournamentVideoEditPageQueryVariables = Exact<{
   tournamentVideoId: Scalars['ID'];
@@ -3026,7 +2973,7 @@ export type PlayerBattlesPageQueryVariables = Exact<{
 }>;
 
 
-export type PlayerBattlesPageQuery = { __typename?: 'Query', player: { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null, twitterId?: string | null, streamingUrl?: string | null, battlesCount: number, standingsCount: number, characterBattleCounts: Array<{ __typename?: 'CharacterBattleCount', count: number, character: { __typename?: 'Character', id: string, slug: string, name: string, faceImageUrl: string } }> } };
+export type PlayerBattlesPageQuery = { __typename?: 'Query', player: { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null, twitterId?: string | null, streamingUrl?: string | null, battlesCount: number, standingsCount: number } };
 
 export type PlayerPageQueryVariables = Exact<{
   playerSlug: Scalars['String'];
@@ -7167,8 +7114,9 @@ export type AdminBattlesPageLazyQueryHookResult = ReturnType<typeof useAdminBatt
 export type AdminBattlesPageQueryResult = Apollo.QueryResult<AdminBattlesPageQuery, AdminBattlesPageQueryVariables>;
 export const AdminBattlesPageBattlesDocument = gql`
     query AdminBattlesPageBattles($tournamentVideoId: ID!) {
-  battles(tournamentVideoId: $tournamentVideoId, first: 200) {
-    nodes {
+  tournamentVideo(tournamentVideoId: $tournamentVideoId) {
+    id
+    battles {
       ...AdminBattlesPageBattleReslut
     }
   }
@@ -7728,15 +7676,11 @@ export const PlayerBattlesPageDocument = gql`
     ...PlayerBreadcrumbs
     ...PlayerProfile
     ...PlayerTabs
-    characterBattleCounts {
-      ...CharacterBattleCountChip
-    }
   }
 }
     ${PlayerBreadcrumbsFragmentDoc}
 ${PlayerProfileFragmentDoc}
-${PlayerTabsFragmentDoc}
-${CharacterBattleCountChipFragmentDoc}`;
+${PlayerTabsFragmentDoc}`;
 
 /**
  * __usePlayerBattlesPageQuery__
