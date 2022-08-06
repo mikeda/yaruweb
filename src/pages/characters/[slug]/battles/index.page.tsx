@@ -4,7 +4,7 @@ import { ParsedUrlQuery } from 'querystring';
 
 import { GetStaticPaths, GetStaticProps } from 'next';
 
-import { Breadcrumbs, Content, Head, CharacterProfile, CharacterTabs, BattleList } from '@/components';
+import { Breadcrumbs, Content, Head, CharacterProfile, CharacterTabs, CharacterBattleList } from '@/components';
 import {
   CharacterBattlesPageDocument,
   CharacterBattlesPageQuery,
@@ -23,7 +23,7 @@ const Page: React.FC<CharacterBattlesPageQuery> = ({ character }) => {
 
       <CharacterTabs character={character} activeTab="battles" />
 
-      <BattleList characterSlug={character.slug} playerBattleCounts={character.playerBattleCounts} />
+      <CharacterBattleList characterSlug={character.slug} />
     </Content>
   );
 };
