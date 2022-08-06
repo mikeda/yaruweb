@@ -49,17 +49,6 @@ export const pagesPath = {
       },
       $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/characters' as const, hash: url?.hash })
     },
-    "organizers": {
-      _slug: (slug: string | number) => ({
-        "edit": {
-          $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/organizers/[slug]/edit' as const, query: { slug }, hash: url?.hash })
-        }
-      }),
-      "new": {
-        $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/organizers/new' as const, hash: url?.hash })
-      },
-      $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/organizers' as const, hash: url?.hash })
-    },
     "players": {
       _slug: (slug: string | number) => ({
         "edit": {

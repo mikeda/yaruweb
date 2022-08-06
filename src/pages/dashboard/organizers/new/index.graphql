@@ -1,7 +1,0 @@
-mutation AdminOrganizersNewPageCreateOrganizer($attributes: OrganizerAttributes!) {
-  createOrganizer(input: { attributes: $attributes }) {
-    organizer {
-      id
-    }
-  }
-}

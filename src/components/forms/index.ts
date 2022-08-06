@@ -5,7 +5,6 @@ export * from './ComboForm';
 export * from './LoginForm';
 export * from './MoveCategoryForm';
 export * from './MoveForm';
-export * from './OrganizerForm';
 export * from './PlayerForm';
 export * from './SignUpForm';
 export * from './TournamentForm';

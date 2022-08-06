@@ -1,9 +1,0 @@
-fragment OrganizerForm on Organizer {
-  id
-  name
-  slug
-  tonamelId
-  twitterId
-  streamingUrl
-  description
-}
