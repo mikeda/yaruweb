@@ -33,6 +33,6 @@
     {
       "groupName": "sentry",
       "matchPackagePatterns": [ "^@sentry" ]
-    },
+    }
   ]
 }
