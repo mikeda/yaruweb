@@ -1,6 +1,38 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "labels": ["renovate"],
   "extends": [
-    "config:base"
+    "config:base",
+    ":timezone(Asia/Tokyo)",
+    ":prHourlyLimitNone",
+    ":automergePatch"
+  ],
+  "ignorePaths": [
+    ".github/workflows/ci.yml"
+  ],
+  "schedule": ["after 3am on sunday", "before 8am on sunday"],
+  "dependencyDashboard": true,
+  "branchConcurrentLimit": 0,
+  "packageRules": [
+    {
+      "groupName": "eslint",
+      "matchPackagePatterns": [ "eslint" ]
+    },
+    {
+      "groupName": "storybook-addon",
+      "matchPackagePatterns": [ "storybook-addon" ]
+    },
+    {
+      "groupName": "types",
+      "matchPackagePatterns": [ "^@types" ]
+    },
+    {
+      "groupName": "fortawesome",
+      "matchPackagePatterns": [ "fortawesome" ]
+    },
+    {
+      "groupName": "sentry",
+      "matchPackagePatterns": [ "^@sentry" ]
+    },
   ]
 }
