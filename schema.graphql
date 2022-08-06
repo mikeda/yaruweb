@@ -228,34 +228,6 @@ type BattleConnection {
   pageInfo: PageInfo!
 }
 
-type BattleCount {
-  character: Character!
-  count: Int!
-  id: ID!
-  player: Player!
-}
-
-"""The connection type for BattleCount."""
-type BattleCountConnection {
-  """A list of edges."""
-  edges: [BattleCountEdge!]!
-
-  """A list of nodes."""
-  nodes: [BattleCount!]!
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-}
-
-"""An edge in a connection."""
-type BattleCountEdge {
-  """A cursor for use in pagination."""
-  cursor: String!
-
-  """The item at the end of the edge."""
-  node: BattleCount!
-}
-
 """An edge in a connection."""
 type BattleEdge {
   """A cursor for use in pagination."""
@@ -1286,7 +1258,6 @@ type PageInfo {
 
 type Player {
   avatarUrl: String
-  battleCounts: [BattleCount!]!
   battles(
     """Returns the elements in the list that come after the specified cursor."""
     after: String
@@ -1407,44 +1378,6 @@ type Query {
     """Returns the last _n_ elements from the list."""
     last: Int
   ): ArticleConnection!
-  battleCounts(
-    playerSlug: String = null
-    characterSlug: String = null
-
-    """Returns the elements in the list that come after the specified cursor."""
-    after: String
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the first _n_ elements from the list."""
-    first: Int
-
-    """Returns the last _n_ elements from the list."""
-    last: Int
-  ): BattleCountConnection!
-  battles(
-    tournamentId: ID = null
-    tournamentVideoId: ID = null
-    playerSlug: String = null
-    characterSlug: String = null
-
-    """Returns the elements in the list that come after the specified cursor."""
-    after: String
-
-    """
-    Returns the elements in the list that come before the specified cursor.
-    """
-    before: String
-
-    """Returns the first _n_ elements from the list."""
-    first: Int
-
-    """Returns the last _n_ elements from the list."""
-    last: Int
-  ): BattleConnection!
   character(characterSlug: String!): Character!
   characters(
     order: CharacterOrder = name
