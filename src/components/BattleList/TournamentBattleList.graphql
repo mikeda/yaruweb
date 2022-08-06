@@ -1,0 +1,18 @@
+query TournamentBattleList($tournamentId: ID!, $after: String) {
+  tournament(tournamentId: $tournamentId) {
+    id
+
+    battles(after: $after) {
+      edges {
+        node {
+          ...BattleListItem
+        }
+        cursor
+      }
+
+      pageInfo {
+        ...Pagination
+      }
+    }
+  }
+}

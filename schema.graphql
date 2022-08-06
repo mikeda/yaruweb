@@ -317,6 +317,22 @@ type Channel {
 }
 
 type Character {
+  battles(
+    """Returns the elements in the list that come after the specified cursor."""
+    after: String
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the first _n_ elements from the list."""
+    first: Int
+
+    """Returns the last _n_ elements from the list."""
+    last: Int
+    playerSlug: String
+  ): BattleConnection!
   battlesCount: Int!
   comboCategories: [ComboCategory!]!
   comboStarters: [Move!]!
@@ -1271,6 +1287,22 @@ type PageInfo {
 type Player {
   avatarUrl: String
   battleCounts: [BattleCount!]!
+  battles(
+    """Returns the elements in the list that come after the specified cursor."""
+    after: String
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the first _n_ elements from the list."""
+    first: Int
+
+    """Returns the last _n_ elements from the list."""
+    last: Int
+    characterSlug: String
+  ): BattleConnection!
   battlesCount: Int!
   characterBattleCounts(limit: Int = 10): [CharacterBattleCount!]!
   country: Country
@@ -1678,6 +1710,21 @@ enum ThrowTypeEnum {
 }
 
 type Tournament {
+  battles(
+    """Returns the elements in the list that come after the specified cursor."""
+    after: String
+
+    """
+    Returns the elements in the list that come before the specified cursor.
+    """
+    before: String
+
+    """Returns the first _n_ elements from the list."""
+    first: Int
+
+    """Returns the last _n_ elements from the list."""
+    last: Int
+  ): BattleConnection!
   battlesCount: Int!
   description: String!
   id: ID!

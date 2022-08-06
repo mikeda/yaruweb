@@ -1,0 +1,22 @@
+query CharacterBattleList($characterSlug: String!, $playerSlug: String, $after: String) {
+  character(characterSlug: $characterSlug) {
+    id
+
+    battles(playerSlug: $playerSlug, after: $after) {
+      edges {
+        node {
+          ...BattleListItem
+        }
+        cursor
+      }
+
+      pageInfo {
+        ...Pagination
+      }
+    }
+
+    playerBattleCounts {
+      ...PlayerBattleCountChip
+    }
+  }
+}

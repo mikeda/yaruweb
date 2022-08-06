@@ -41,7 +41,7 @@ export const PlayerTabs: React.FC<Props> = ({ player, activeTab }) => {
         />
         <Tab
           value="standings"
-          label={`大会戦績 (${player.standingsCount})`}
+          label={`大会入賞 (${player.standingsCount})`}
           onClick={() => {
             router.push(pagesPath.players._slug(player.slug).standings.$url());
           }}

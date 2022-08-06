@@ -4,47 +4,23 @@ import SkipNextIcon from '@mui/icons-material/SkipNext';
 import SkipPreviousIcon from '@mui/icons-material/SkipPrevious';
 import { Box, Button, IconButton, List, Paper, Tooltip } from '@mui/material';
 import YouTube from 'react-youtube';
-import { useSetRecoilState } from 'recoil';
 import { YouTubePlayer } from 'youtube-player/dist/types';
 
 import { BattleListItem } from '../BattleListItem';
 
-import { CharacterBattleCountChip, PlayerBattleCountChip, SelectChipContainer, YouTubeWrapper } from '@/components';
-import {
-  CharacterBattleCountChipFragment,
-  PlayerBattleCountChipFragment,
-  useBattleListQuery,
-} from '@/generated/graphql';
-import { loadingState } from '@/lib';
+import { YouTubeWrapper } from '@/components';
+import { BattleListItemFragment } from '@/generated/graphql';
 
 interface Props {
-  tournamentId?: string;
-  playerSlug?: string;
-  characterSlug?: string;
-  playerBattleCounts?: PlayerBattleCountChipFragment[];
-  characterBattleCounts?: CharacterBattleCountChipFragment[];
+  battles: BattleListItemFragment[];
+  selector?: React.ReactNode;
+  hasNextPage: boolean;
+  onClickMore: () => void;
 }
 
-export const BattleList: React.FC<Props> = ({
-  tournamentId,
-  playerSlug,
-  characterSlug,
-  playerBattleCounts,
-  characterBattleCounts,
-}) => {
+export const BattleList: React.FC<Props> = ({ battles, selector, hasNextPage, onClickMore }) => {
   const [youTubePlayer, setYouTubePlayer] = useState<YouTubePlayer>();
   const [battleIndex, setBattleIndex] = useState<number>(0);
-  const setLoading = useSetRecoilState(loadingState);
-  //const [selectedPlayerSlug, setSelectedPlayerSlug] = useState<string>();
-  //const [selectedCharacterSlug, setSelectedCharacterSlug] = useState<string>();
-
-  const { data, fetchMore, refetch } = useBattleListQuery({
-    variables: { tournamentId, playerSlug, characterSlug },
-    onCompleted: () => {
-      setLoading(false);
-    },
-    notifyOnNetworkStatusChange: true,
-  });
 
   const updateBattle = (index: number) => {
     const battle = battles[index];
@@ -74,11 +50,6 @@ export const BattleList: React.FC<Props> = ({
     updateBattle(newIndex);
   };
 
-  if (!data) return null;
-
-  const battles = data.battles.edges.map(edge => edge.node);
-  const pageInfo = data.battles.pageInfo;
-
   const battle = battles[battleIndex];
   if (!battle) return null;
 
@@ -98,37 +69,9 @@ export const BattleList: React.FC<Props> = ({
         />
       </YouTubeWrapper>
 
+      {selector}
+
       <Box component={Paper}>
-        {playerBattleCounts && (
-          <SelectChipContainer>
-            {playerBattleCounts.map(bc => (
-              <PlayerBattleCountChip
-                key={bc.player.id}
-                battleCount={bc}
-                active={playerSlug === bc.player.slug}
-                onClick={() => {
-                  refetch({ playerSlug: playerSlug === bc.player.slug ? undefined : bc.player.slug });
-                }}
-              />
-            ))}
-          </SelectChipContainer>
-        )}
-
-        {characterBattleCounts && (
-          <SelectChipContainer>
-            {characterBattleCounts.map(bc => (
-              <CharacterBattleCountChip
-                key={bc.character.id}
-                battleCount={bc}
-                active={playerSlug === bc.character.slug}
-                onClick={() => {
-                  refetch({ characterSlug: characterSlug === bc.character.slug ? undefined : bc.character.slug });
-                }}
-              />
-            ))}
-          </SelectChipContainer>
-        )}
-
         <BattleListItem battle={battle} onClick={() => updateBattle(battleIndex)} />
 
         <Box display="flex">
@@ -154,14 +97,9 @@ export const BattleList: React.FC<Props> = ({
         </List>
       </Box>
 
-      {pageInfo.hasNextPage && (
+      {hasNextPage && (
         <Box pt={2} pb={2} display="flex" justifyContent="center">
-          <Button
-            variant="outlined"
-            onClick={() => {
-              fetchMore({ variables: { after: pageInfo.endCursor } });
-            }}
-          >
+          <Button variant="outlined" onClick={onClickMore}>
             もっとみる
           </Button>
         </Box>

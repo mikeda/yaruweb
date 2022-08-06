@@ -5,7 +5,7 @@ import { ParsedUrlQuery } from 'querystring';
 import { Box } from '@mui/material';
 import { GetStaticPaths, GetStaticProps } from 'next';
 
-import { Breadcrumbs, Content, Head, TournamentTabs, BattleList } from '@/components';
+import { Breadcrumbs, Content, Head, TournamentTabs, TournamentBattleList } from '@/components';
 import {
   SsgTournamentPathsDocument,
   SsgTournamentPathsQuery,
@@ -24,7 +24,7 @@ const Page: React.FC<TournamentBattlesPageQuery> = ({ tournament }) => {
         <TournamentTabs tournament={tournament} activeTab="battles" />
       </Box>
 
-      <BattleList tournamentId={tournament.id} />
+      <TournamentBattleList tournamentId={tournament.id} />
     </Content>
   );
 };

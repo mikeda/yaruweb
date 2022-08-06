@@ -43,6 +43,21 @@ export const apolloClient = new ApolloClient({
           tournaments: relayStylePagination(),
         },
       },
+      Character: {
+        fields: {
+          battles: relayStylePagination(),
+        },
+      },
+      Player: {
+        fields: {
+          battles: relayStylePagination(),
+        },
+      },
+      Tournament: {
+        fields: {
+          battles: relayStylePagination(),
+        },
+      },
     },
   }),
   connectToDevTools: process.env.NODE_ENV === 'development',

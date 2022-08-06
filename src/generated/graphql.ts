@@ -310,6 +310,7 @@ export type Channel = {
 
 export type Character = {
   __typename?: 'Character';
+  battles: BattleConnection;
   battlesCount: Scalars['Int'];
   comboCategories: Array<ComboCategory>;
   comboStarters: Array<Move>;
@@ -330,6 +331,15 @@ export type Character = {
   playerBattleCounts: Array<PlayerBattleCount>;
   slug: Scalars['String'];
   story: Scalars['String'];
+};
+
+
+export type CharacterBattlesArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+  playerSlug?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -1406,6 +1416,7 @@ export type Player = {
   __typename?: 'Player';
   avatarUrl?: Maybe<Scalars['String']>;
   battleCounts: Array<BattleCount>;
+  battles: BattleConnection;
   battlesCount: Scalars['Int'];
   characterBattleCounts: Array<CharacterBattleCount>;
   country?: Maybe<Country>;
@@ -1419,6 +1430,15 @@ export type Player = {
   streamingUrl?: Maybe<Scalars['String']>;
   tonamelId?: Maybe<Scalars['String']>;
   twitterId?: Maybe<Scalars['String']>;
+};
+
+
+export type PlayerBattlesArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  characterSlug?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -1797,6 +1817,7 @@ export enum ThrowTypeEnum {
 
 export type Tournament = {
   __typename?: 'Tournament';
+  battles: BattleConnection;
   battlesCount: Scalars['Int'];
   description: Scalars['String'];
   id: Scalars['ID'];
@@ -1810,6 +1831,14 @@ export type Tournament = {
   url: Scalars['String'];
   videos: Array<TournamentVideo>;
   videosCount: Scalars['Int'];
+};
+
+
+export type TournamentBattlesArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
 };
 
 export type TournamentAttributes = {
@@ -2170,15 +2199,31 @@ export type ArticleCardsQueryVariables = Exact<{
 
 export type ArticleCardsQuery = { __typename?: 'Query', articles: { __typename?: 'ArticleConnection', edges: Array<{ __typename?: 'ArticleEdge', cursor: string, node: { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, author: { __typename?: 'User', id: string, name: string, avatarUrl: string } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null } } };
 
-export type BattleListQueryVariables = Exact<{
-  tournamentId?: InputMaybe<Scalars['ID']>;
+export type CharacterBattleListQueryVariables = Exact<{
+  characterSlug: Scalars['String'];
   playerSlug?: InputMaybe<Scalars['String']>;
+  after?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type CharacterBattleListQuery = { __typename?: 'Query', character: { __typename?: 'Character', id: string, battles: { __typename?: 'BattleConnection', edges: Array<{ __typename?: 'BattleEdge', cursor: string, node: { __typename?: 'Battle', id: string, round: BattleRound, startSec: number, tournamentVideo: { __typename?: 'TournamentVideo', id: string, youtubeVideoId: string, tournament: { __typename?: 'Tournament', id: string, name: string, startsAt: string } }, sides: Array<{ __typename?: 'BattleSide', id: string, rounds: number, player: { __typename?: 'Player', id: string, name: string }, character: { __typename?: 'Character', id: string, faceImageUrl: string } }> } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null } }, playerBattleCounts: Array<{ __typename?: 'PlayerBattleCount', count: number, player: { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null } }> } };
+
+export type PlayerBattleListQueryVariables = Exact<{
+  playerSlug: Scalars['String'];
   characterSlug?: InputMaybe<Scalars['String']>;
   after?: InputMaybe<Scalars['String']>;
 }>;
 
 
-export type BattleListQuery = { __typename?: 'Query', battles: { __typename?: 'BattleConnection', edges: Array<{ __typename?: 'BattleEdge', cursor: string, node: { __typename?: 'Battle', id: string, round: BattleRound, startSec: number, tournamentVideo: { __typename?: 'TournamentVideo', id: string, youtubeVideoId: string, tournament: { __typename?: 'Tournament', id: string, name: string, startsAt: string } }, sides: Array<{ __typename?: 'BattleSide', id: string, rounds: number, player: { __typename?: 'Player', id: string, name: string }, character: { __typename?: 'Character', id: string, faceImageUrl: string } }> } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null } } };
+export type PlayerBattleListQuery = { __typename?: 'Query', player: { __typename?: 'Player', id: string, battles: { __typename?: 'BattleConnection', edges: Array<{ __typename?: 'BattleEdge', cursor: string, node: { __typename?: 'Battle', id: string, round: BattleRound, startSec: number, tournamentVideo: { __typename?: 'TournamentVideo', id: string, youtubeVideoId: string, tournament: { __typename?: 'Tournament', id: string, name: string, startsAt: string } }, sides: Array<{ __typename?: 'BattleSide', id: string, rounds: number, player: { __typename?: 'Player', id: string, name: string }, character: { __typename?: 'Character', id: string, faceImageUrl: string } }> } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null } }, characterBattleCounts: Array<{ __typename?: 'CharacterBattleCount', count: number, character: { __typename?: 'Character', id: string, slug: string, name: string, faceImageUrl: string } }> } };
+
+export type TournamentBattleListQueryVariables = Exact<{
+  tournamentId: Scalars['ID'];
+  after?: InputMaybe<Scalars['String']>;
+}>;
+
+
+export type TournamentBattleListQuery = { __typename?: 'Query', tournament: { __typename?: 'Tournament', id: string, battles: { __typename?: 'BattleConnection', edges: Array<{ __typename?: 'BattleEdge', cursor: string, node: { __typename?: 'Battle', id: string, round: BattleRound, startSec: number, tournamentVideo: { __typename?: 'TournamentVideo', id: string, youtubeVideoId: string, tournament: { __typename?: 'Tournament', id: string, name: string, startsAt: string } }, sides: Array<{ __typename?: 'BattleSide', id: string, rounds: number, player: { __typename?: 'Player', id: string, name: string }, character: { __typename?: 'Character', id: string, faceImageUrl: string } }> } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null } } } };
 
 export type BattleListItemFragment = { __typename?: 'Battle', id: string, round: BattleRound, startSec: number, tournamentVideo: { __typename?: 'TournamentVideo', id: string, youtubeVideoId: string, tournament: { __typename?: 'Tournament', id: string, name: string, startsAt: string } }, sides: Array<{ __typename?: 'BattleSide', id: string, rounds: number, player: { __typename?: 'Player', id: string, name: string }, character: { __typename?: 'Character', id: string, faceImageUrl: string } }> };
 
@@ -2702,7 +2747,7 @@ export type CharacterBattlesPageQueryVariables = Exact<{
 }>;
 
 
-export type CharacterBattlesPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', id: string, slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, combosCount: number, movesCount: number, playerBattleCounts: Array<{ __typename?: 'PlayerBattleCount', count: number, player: { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null } }> } };
+export type CharacterBattlesPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', id: string, slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, combosCount: number, movesCount: number } };
 
 export type CharacterCombosPageQueryVariables = Exact<{
   characterSlug: Scalars['String'];
@@ -3843,23 +3888,126 @@ export function useArticleCardsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptio
 export type ArticleCardsQueryHookResult = ReturnType<typeof useArticleCardsQuery>;
 export type ArticleCardsLazyQueryHookResult = ReturnType<typeof useArticleCardsLazyQuery>;
 export type ArticleCardsQueryResult = Apollo.QueryResult<ArticleCardsQuery, ArticleCardsQueryVariables>;
-export const BattleListDocument = gql`
-    query BattleList($tournamentId: ID, $playerSlug: String, $characterSlug: String, $after: String) {
-  battles(
-    tournamentId: $tournamentId
-    playerSlug: $playerSlug
-    characterSlug: $characterSlug
-    after: $after
-    first: 10
-  ) {
-    edges {
-      node {
-        ...BattleListItem
+export const CharacterBattleListDocument = gql`
+    query CharacterBattleList($characterSlug: String!, $playerSlug: String, $after: String) {
+  character(characterSlug: $characterSlug) {
+    id
+    battles(playerSlug: $playerSlug, after: $after) {
+      edges {
+        node {
+          ...BattleListItem
+        }
+        cursor
       }
-      cursor
+      pageInfo {
+        ...Pagination
+      }
     }
-    pageInfo {
-      ...Pagination
+    playerBattleCounts {
+      ...PlayerBattleCountChip
+    }
+  }
+}
+    ${BattleListItemFragmentDoc}
+${PaginationFragmentDoc}
+${PlayerBattleCountChipFragmentDoc}`;
+
+/**
+ * __useCharacterBattleListQuery__
+ *
+ * To run a query within a React component, call `useCharacterBattleListQuery` and pass it any options that fit your needs.
+ * When your component renders, `useCharacterBattleListQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useCharacterBattleListQuery({
+ *   variables: {
+ *      characterSlug: // value for 'characterSlug'
+ *      playerSlug: // value for 'playerSlug'
+ *      after: // value for 'after'
+ *   },
+ * });
+ */
+export function useCharacterBattleListQuery(baseOptions: Apollo.QueryHookOptions<CharacterBattleListQuery, CharacterBattleListQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<CharacterBattleListQuery, CharacterBattleListQueryVariables>(CharacterBattleListDocument, options);
+      }
+export function useCharacterBattleListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CharacterBattleListQuery, CharacterBattleListQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<CharacterBattleListQuery, CharacterBattleListQueryVariables>(CharacterBattleListDocument, options);
+        }
+export type CharacterBattleListQueryHookResult = ReturnType<typeof useCharacterBattleListQuery>;
+export type CharacterBattleListLazyQueryHookResult = ReturnType<typeof useCharacterBattleListLazyQuery>;
+export type CharacterBattleListQueryResult = Apollo.QueryResult<CharacterBattleListQuery, CharacterBattleListQueryVariables>;
+export const PlayerBattleListDocument = gql`
+    query PlayerBattleList($playerSlug: String!, $characterSlug: String, $after: String) {
+  player(playerSlug: $playerSlug) {
+    id
+    battles(characterSlug: $characterSlug, after: $after) {
+      edges {
+        node {
+          ...BattleListItem
+        }
+        cursor
+      }
+      pageInfo {
+        ...Pagination
+      }
+    }
+    characterBattleCounts {
+      ...CharacterBattleCountChip
+    }
+  }
+}
+    ${BattleListItemFragmentDoc}
+${PaginationFragmentDoc}
+${CharacterBattleCountChipFragmentDoc}`;
+
+/**
+ * __usePlayerBattleListQuery__
+ *
+ * To run a query within a React component, call `usePlayerBattleListQuery` and pass it any options that fit your needs.
+ * When your component renders, `usePlayerBattleListQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = usePlayerBattleListQuery({
+ *   variables: {
+ *      playerSlug: // value for 'playerSlug'
+ *      characterSlug: // value for 'characterSlug'
+ *      after: // value for 'after'
+ *   },
+ * });
+ */
+export function usePlayerBattleListQuery(baseOptions: Apollo.QueryHookOptions<PlayerBattleListQuery, PlayerBattleListQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PlayerBattleListQuery, PlayerBattleListQueryVariables>(PlayerBattleListDocument, options);
+      }
+export function usePlayerBattleListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PlayerBattleListQuery, PlayerBattleListQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PlayerBattleListQuery, PlayerBattleListQueryVariables>(PlayerBattleListDocument, options);
+        }
+export type PlayerBattleListQueryHookResult = ReturnType<typeof usePlayerBattleListQuery>;
+export type PlayerBattleListLazyQueryHookResult = ReturnType<typeof usePlayerBattleListLazyQuery>;
+export type PlayerBattleListQueryResult = Apollo.QueryResult<PlayerBattleListQuery, PlayerBattleListQueryVariables>;
+export const TournamentBattleListDocument = gql`
+    query TournamentBattleList($tournamentId: ID!, $after: String) {
+  tournament(tournamentId: $tournamentId) {
+    id
+    battles(after: $after) {
+      edges {
+        node {
+          ...BattleListItem
+        }
+        cursor
+      }
+      pageInfo {
+        ...Pagination
+      }
     }
   }
 }
@@ -3867,35 +4015,33 @@ export const BattleListDocument = gql`
 ${PaginationFragmentDoc}`;
 
 /**
- * __useBattleListQuery__
+ * __useTournamentBattleListQuery__
  *
- * To run a query within a React component, call `useBattleListQuery` and pass it any options that fit your needs.
- * When your component renders, `useBattleListQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * To run a query within a React component, call `useTournamentBattleListQuery` and pass it any options that fit your needs.
+ * When your component renders, `useTournamentBattleListQuery` returns an object from Apollo Client that contains loading, error, and data properties
  * you can use to render your UI.
  *
  * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
  *
  * @example
- * const { data, loading, error } = useBattleListQuery({
+ * const { data, loading, error } = useTournamentBattleListQuery({
  *   variables: {
  *      tournamentId: // value for 'tournamentId'
- *      playerSlug: // value for 'playerSlug'
- *      characterSlug: // value for 'characterSlug'
  *      after: // value for 'after'
  *   },
  * });
  */
-export function useBattleListQuery(baseOptions?: Apollo.QueryHookOptions<BattleListQuery, BattleListQueryVariables>) {
+export function useTournamentBattleListQuery(baseOptions: Apollo.QueryHookOptions<TournamentBattleListQuery, TournamentBattleListQueryVariables>) {
         const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<BattleListQuery, BattleListQueryVariables>(BattleListDocument, options);
+        return Apollo.useQuery<TournamentBattleListQuery, TournamentBattleListQueryVariables>(TournamentBattleListDocument, options);
       }
-export function useBattleListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<BattleListQuery, BattleListQueryVariables>) {
+export function useTournamentBattleListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TournamentBattleListQuery, TournamentBattleListQueryVariables>) {
           const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<BattleListQuery, BattleListQueryVariables>(BattleListDocument, options);
+          return Apollo.useLazyQuery<TournamentBattleListQuery, TournamentBattleListQueryVariables>(TournamentBattleListDocument, options);
         }
-export type BattleListQueryHookResult = ReturnType<typeof useBattleListQuery>;
-export type BattleListLazyQueryHookResult = ReturnType<typeof useBattleListLazyQuery>;
-export type BattleListQueryResult = Apollo.QueryResult<BattleListQuery, BattleListQueryVariables>;
+export type TournamentBattleListQueryHookResult = ReturnType<typeof useTournamentBattleListQuery>;
+export type TournamentBattleListLazyQueryHookResult = ReturnType<typeof useTournamentBattleListLazyQuery>;
+export type TournamentBattleListQueryResult = Apollo.QueryResult<TournamentBattleListQuery, TournamentBattleListQueryVariables>;
 export const PlayerCardsDocument = gql`
     query PlayerCards($after: String, $keyword: String) {
   players(first: 20, after: $after, keyword: $keyword) {
@@ -6102,15 +6248,11 @@ export const CharacterBattlesPageDocument = gql`
     ...CharacterBreadcrumbs
     ...CharacterProfile
     ...CharacterTabs
-    playerBattleCounts {
-      ...PlayerBattleCountChip
-    }
   }
 }
     ${CharacterBreadcrumbsFragmentDoc}
 ${CharacterProfileFragmentDoc}
-${CharacterTabsFragmentDoc}
-${PlayerBattleCountChipFragmentDoc}`;
+${CharacterTabsFragmentDoc}`;
 
 /**
  * __useCharacterBattlesPageQuery__
