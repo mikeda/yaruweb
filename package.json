@@ -61,7 +61,7 @@
     "@graphql-codegen/typescript-react-apollo": "^3.3.2",
     "@graphql-codegen/typescript-resolvers": "^2.7.2",
     "@graphql-eslint/eslint-plugin": "^3.10.7",
-    "@storybook/addon-actions": "^6.5.9",
+    "@storybook/addon-actions": "^6.5.10",
     "@storybook/addon-essentials": "^6.5.9",
     "@storybook/addon-interactions": "^6.5.9",
     "@storybook/addon-links": "^6.5.10",
