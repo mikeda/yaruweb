@@ -1,10 +1,10 @@
 import { atom } from 'recoil';
 
-import { CurrentUserFragment } from '@/generated/graphql';
+import { ViewerFragment } from '@/generated/graphql';
 
 // undefined : まだログイン確認が完了していない状態とする
 // null      : ログイン確認をした結果、ログインしていなかった状態とする
-export const currentUserState = atom<undefined | null | CurrentUserFragment>({
+export const viewerState = atom<undefined | null | ViewerFragment>({
   key: 'CurrentUser',
   default: undefined,
 });

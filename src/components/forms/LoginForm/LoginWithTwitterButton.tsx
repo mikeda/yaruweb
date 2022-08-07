@@ -7,8 +7,8 @@ import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
 import { pagesPath } from '@/generated/$path';
-import { useCurrentUserLazyQuery } from '@/generated/graphql';
-import { signInFirebaseWithTwitter, currentUserState, colors, handleApolloError } from '@/lib';
+import { useViewerLazyQuery } from '@/generated/graphql';
+import { signInFirebaseWithTwitter, viewerState, colors, handleApolloError } from '@/lib';
 
 const useStyles = makeStyles({
   root: {
@@ -19,12 +19,12 @@ const useStyles = makeStyles({
 
 export const LoginWithTwitterButton: React.FC = () => {
   const router = useRouter();
-  const setCurrentUser = useSetRecoilState(currentUserState);
-  const [getCurrentUser] = useCurrentUserLazyQuery({
+  const setViewer = useSetRecoilState(viewerState);
+  const [getViewer] = useViewerLazyQuery({
     onCompleted: data => {
-      if (!data.currentUser) return;
+      if (!data.viewer) return;
 
-      setCurrentUser(data.currentUser);
+      setViewer(data.viewer);
       toast.success('ログインしました。');
       router.push(pagesPath.$url());
     },
@@ -36,7 +36,7 @@ export const LoginWithTwitterButton: React.FC = () => {
   const onLogin = () => {
     signInFirebaseWithTwitter()
       .then(() => {
-        getCurrentUser();
+        getViewer();
       })
       .catch(e => {
         toast.error(e.message);

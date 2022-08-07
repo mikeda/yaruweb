@@ -17,8 +17,8 @@ import '@fortawesome/fontawesome-svg-core/styles.css';
 config.autoAddCss = false;
 
 import { Loading } from '@/components';
-import { useCurrentUserQuery } from '@/generated/graphql';
-import { apolloClient, theme, currentUserState, loadingState } from '@/lib';
+import { useViewerQuery } from '@/generated/graphql';
+import { apolloClient, theme, viewerState, loadingState } from '@/lib';
 import * as gtag from '@/lib/gtag';
 
 declare module '@mui/styles/defaultTheme' {
@@ -27,10 +27,10 @@ declare module '@mui/styles/defaultTheme' {
 }
 
 const AppInit = () => {
-  const setCurrentUser = useSetRecoilState(currentUserState);
-  useCurrentUserQuery({
+  const setViewer = useSetRecoilState(viewerState);
+  useViewerQuery({
     onCompleted: res => {
-      setCurrentUser(res.currentUser);
+      setViewer(res.viewer);
     },
   });
 

@@ -6,58 +6,51 @@ import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 
 import { DashboardContent } from '@/components';
-import {
-  CurrentUserAttributes,
-  CurrentUserFragment,
-  useCurrentUserQuery,
-  useUpdateCurrentUserMutation,
-} from '@/generated/graphql';
-import { currentUserState, handleApolloError, loadingState } from '@/lib';
+import { ViewerAttributes, ViewerFragment, useViewerQuery, useUpdateViewerMutation } from '@/generated/graphql';
+import { viewerState, handleApolloError, loadingState } from '@/lib';
 
 const Page: React.FC = () => {
   const setLoading = useSetRecoilState(loadingState);
-  const { data, loading } = useCurrentUserQuery({
+  const { data, loading } = useViewerQuery({
     fetchPolicy: 'network-only',
     onError: handleApolloError,
   });
 
   setLoading(loading);
 
-  return (
-    <DashboardContent title="プロフィール編集">{data && <Form currentUser={data.currentUser} />}</DashboardContent>
-  );
+  return <DashboardContent title="プロフィール編集">{data && <Form viewer={data.viewer} />}</DashboardContent>;
 };
 
-const Form: React.FC<{ currentUser: CurrentUserFragment }> = ({ currentUser }) => {
-  const setCurrentUser = useSetRecoilState(currentUserState);
+const Form: React.FC<{ viewer: ViewerFragment }> = ({ viewer }) => {
+  const setViewer = useSetRecoilState(viewerState);
   const setLoading = useSetRecoilState(loadingState);
   const {
     handleSubmit,
     setValue,
     control,
     formState: { errors },
-  } = useForm<CurrentUserAttributes>({
+  } = useForm<ViewerAttributes>({
     defaultValues: {
-      name: currentUser.name,
+      name: viewer.name,
     },
   });
 
-  const [updateCurrentUser, { loading }] = useUpdateCurrentUserMutation({
+  const [updateViewer, { loading }] = useUpdateViewerMutation({
     onCompleted: data => {
-      const updatedCurrentUser = data.updateCurrentUser?.currentUser;
-      if (!updatedCurrentUser) {
+      const updatedViewer = data.updateViewer?.viewer;
+      if (!updatedViewer) {
         toast.error('プロフィールの更新に失敗しました。');
         return;
       }
 
-      setCurrentUser(updatedCurrentUser);
+      setViewer(updatedViewer);
       toast.success('プロフィールを更新しました。');
     },
     onError: handleApolloError,
   });
 
-  const onSubmit = (attributes: CurrentUserAttributes) => {
-    updateCurrentUser({ variables: { attributes } });
+  const onSubmit = (attributes: ViewerAttributes) => {
+    updateViewer({ variables: { attributes } });
   };
 
   setLoading(loading);

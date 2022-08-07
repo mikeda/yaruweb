@@ -1,7 +1,7 @@
-mutation UpdateCurrentUser($attributes: CurrentUserAttributes!) {
-  updateCurrentUser(input: { attributes: $attributes }) {
-    currentUser {
-      ...CurrentUser
+mutation UpdateViewer($attributes: ViewerAttributes!) {
+  updateViewer(input: { attributes: $attributes }) {
+    viewer {
+      ...Viewer
     }
   }
 }
