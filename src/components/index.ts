@@ -5,7 +5,6 @@ export * from './slate';
 
 export * from './ArticleCard';
 export * from './BattleList';
-export * from './BattleListItem';
 export * from './CharacterCard';
 export * from './CharacterProfile';
 export * from './CharacterTabs';

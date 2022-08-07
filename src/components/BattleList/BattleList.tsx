@@ -6,7 +6,7 @@ import { Box, Button, IconButton, List, Paper, Tooltip } from '@mui/material';
 import YouTube from 'react-youtube';
 import { YouTubePlayer } from 'youtube-player/dist/types';
 
-import { BattleListItem } from '../BattleListItem';
+import { BattleListItem } from './BattleListItem';
 
 import { YouTubeWrapper } from '@/components';
 import { BattleListItemFragment } from '@/generated/graphql';

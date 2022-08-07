@@ -2,7 +2,8 @@ import React from 'react';
 
 import { render } from '@testing-library/react';
 
-import { BattleListItem } from '@/components';
+import { BattleListItem } from './BattleListItem';
+
 import { BattleRound } from '@/generated/graphql';
 
 jest.mock('next/router', () => require('next-router-mock'));

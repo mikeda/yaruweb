@@ -2,7 +2,8 @@ import React from 'react';
 
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { BattleListItem } from '@/components';
+import { BattleListItem } from './BattleListItem';
+
 import { BattleRound } from '@/generated/graphql';
 
 export default {
