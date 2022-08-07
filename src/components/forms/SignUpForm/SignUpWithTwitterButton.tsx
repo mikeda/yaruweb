@@ -8,7 +8,7 @@ import { useSetRecoilState } from 'recoil';
 
 import { pagesPath } from '@/generated/$path';
 import { useCreateUserMutation } from '@/generated/graphql';
-import { signInFirebaseWithTwitter, currentUserState, colors, handleApolloError } from '@/lib';
+import { signInFirebaseWithTwitter, viewerState, colors, handleApolloError } from '@/lib';
 
 const useStyles = makeStyles({
   root: {
@@ -19,12 +19,12 @@ const useStyles = makeStyles({
 
 export const SignUpWithTwitterButton: React.FC = () => {
   const router = useRouter();
-  const setCurrentUser = useSetRecoilState(currentUserState);
+  const setViewer = useSetRecoilState(viewerState);
   const [createUserWithTwitter] = useCreateUserMutation({
     onCompleted: data => {
-      const currentUser = data.createUser?.currentUser;
-      if (!currentUser) return;
-      setCurrentUser(currentUser);
+      const viewer = data.createUser?.viewer;
+      if (!viewer) return;
+      setViewer(viewer);
       toast.success('ユーザー登録が完了しました。');
 
       router.push(pagesPath.$url());

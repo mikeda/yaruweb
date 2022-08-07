@@ -12,7 +12,7 @@ import { SignUpWithTwitterButton } from './SignUpWithTwitterButton';
 
 import { pagesPath } from '@/generated/$path';
 import { useCreateUserMutation } from '@/generated/graphql';
-import { UserValidator, createFirebaseUserWithEmail, currentUserState, loadingState, handleApolloError } from '@/lib';
+import { UserValidator, createFirebaseUserWithEmail, viewerState, loadingState, handleApolloError } from '@/lib';
 
 interface SignUpInput {
   email: string;
@@ -35,12 +35,12 @@ export const SignUpForm: React.FC = () => {
   });
   const router = useRouter();
   const setLoading = useSetRecoilState(loadingState);
-  const setCurrentUser = useSetRecoilState(currentUserState);
+  const setViewer = useSetRecoilState(viewerState);
   const [createUser, { loading }] = useCreateUserMutation({
     onCompleted: data => {
-      const currentUser = data.createUser?.currentUser;
-      if (!currentUser) return;
-      setCurrentUser(currentUser);
+      const viewer = data.createUser?.viewer;
+      if (!viewer) return;
+      setViewer(viewer);
       toast.success('ユーザー登録が完了しました。');
 
       router.push(pagesPath.$url());

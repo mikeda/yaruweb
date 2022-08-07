@@ -1,2 +1,2 @@
-export * from './currentUserState';
+export * from './viewerState';
 export * from './loadingState';

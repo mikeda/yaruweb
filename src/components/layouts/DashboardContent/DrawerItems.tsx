@@ -10,7 +10,7 @@ import makeStyles from '@mui/styles/makeStyles';
 import { Link } from '@/components';
 import { pagesPath } from '@/generated/$path';
 import { UserRole } from '@/generated/graphql';
-import { theme, useCurrentUser } from '@/lib';
+import { theme, useViewer } from '@/lib';
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -61,7 +61,7 @@ const adminItems: ItemProps[] = [
 
 export const DrawerItems: React.FC = () => {
   const classes = useStyles();
-  const { currentUser } = useCurrentUser();
+  const { viewer } = useViewer();
 
   return (
     <div>
@@ -75,7 +75,7 @@ export const DrawerItems: React.FC = () => {
         ))}
       </List>
 
-      {currentUser?.role === UserRole.Admin && (
+      {viewer?.role === UserRole.Admin && (
         <>
           <Divider />
 

@@ -9,8 +9,8 @@ import { useSetRecoilState } from 'recoil';
 import * as yup from 'yup';
 
 import { pagesPath } from '@/generated/$path';
-import { useCurrentUserLazyQuery } from '@/generated/graphql';
-import { signInFirebaseWithEmail, currentUserState, UserValidator, loadingState, handleApolloError } from '@/lib';
+import { useViewerLazyQuery } from '@/generated/graphql';
+import { signInFirebaseWithEmail, viewerState, UserValidator, loadingState, handleApolloError } from '@/lib';
 
 interface SignUpInput {
   email: string;
@@ -32,13 +32,13 @@ export const LoginWithEmailForm: React.FC = () => {
   });
   const router = useRouter();
   const setLoading = useSetRecoilState(loadingState);
-  const setCurrentUser = useSetRecoilState(currentUserState);
+  const setViewer = useSetRecoilState(viewerState);
 
-  const [getCurrentUser, { loading }] = useCurrentUserLazyQuery({
+  const [getViewer, { loading }] = useViewerLazyQuery({
     onCompleted: data => {
-      if (!data.currentUser) return;
+      if (!data.viewer) return;
 
-      setCurrentUser(data.currentUser);
+      setViewer(data.viewer);
       toast.success('ログインしました。');
       router.push(pagesPath.$url());
     },
@@ -49,7 +49,7 @@ export const LoginWithEmailForm: React.FC = () => {
   const onSubmit = (attributes: SignUpInput) => {
     signInFirebaseWithEmail(attributes.email, attributes.password)
       .then(() => {
-        getCurrentUser();
+        getViewer();
       })
       .catch(e => {
         toast.error(e.message);
