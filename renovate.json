@@ -10,7 +10,7 @@
   "ignorePaths": [
     ".github/workflows/ci.yml"
   ],
-  "schedule": ["after 3am on sunday", "before 8am on sunday"],
+  "schedule": ["after 3am on saturday", "before 8am on saturday"],
   "dependencyDashboard": true,
   "branchConcurrentLimit": 0,
   "packageRules": [
