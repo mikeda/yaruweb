@@ -50,6 +50,7 @@ export const apolloClient = new ApolloClient({
       Player: {
         fields: {
           battles: relayStylePagination(),
+          standings: relayStylePagination(),
         },
       },
       Tournament: {
