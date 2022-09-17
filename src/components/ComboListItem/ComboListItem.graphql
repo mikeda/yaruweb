@@ -4,7 +4,9 @@ fragment ComboListItem on Combo {
   command
   note
 
-  move { id }
+  move {
+    id
+  }
 
   comboVideo {
     id

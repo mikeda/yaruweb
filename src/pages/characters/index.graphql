@@ -1,5 +1,7 @@
 query CharactersPage {
   characters(first: 100) {
-    nodes { ...CharacterCard }
+    nodes {
+      ...CharacterCard
+    }
   }
 }

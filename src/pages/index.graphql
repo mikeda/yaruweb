@@ -1,17 +1,25 @@
 query TopPage {
-  tournaments(first: 3, thisWeek: true) {
-    nodes { ...TournamentCard }
+  tournaments(first: 3) {
+    nodes {
+      ...TournamentCard
+    }
   }
 
   players(first: 4) {
-    nodes { ...PlayerCard }
+    nodes {
+      ...PlayerCard
+    }
   }
 
   characters(first: 4, order: use_rate) {
-    nodes { ...CharacterCard }
+    nodes {
+      ...CharacterCard
+    }
   }
 
   articles(first: 3) {
-    nodes { ...ArticleCard }
+    nodes {
+      ...ArticleCard
+    }
   }
 }

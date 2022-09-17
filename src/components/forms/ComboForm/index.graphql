@@ -4,7 +4,9 @@ fragment ComboForm on Combo {
   damage
   note
   position
-  move { id }
+  move {
+    id
+  }
 }
 
 fragment ComboPositionSelect on Combo {

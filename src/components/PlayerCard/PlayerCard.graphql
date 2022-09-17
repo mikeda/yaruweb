@@ -10,10 +10,14 @@ fragment PlayerCard on Player {
 query PlayerCards($after: String, $keyword: String) {
   players(first: 20, after: $after, keyword: $keyword) {
     edges {
-      node { ...PlayerCard }
+      node {
+        ...PlayerCard
+      }
       cursor
     }
 
-    pageInfo { ...Pagination }
+    pageInfo {
+      ...Pagination
+    }
   }
 }
