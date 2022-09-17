@@ -1,5 +1,7 @@
 query PlayersPage {
   players(first: 20) {
-    nodes { ...PlayerCard }
+    nodes {
+      ...PlayerCard
+    }
   }
 }

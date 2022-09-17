@@ -16,10 +16,14 @@ fragment ArticleCard on Article {
 query ArticleCards($after: String) {
   articles(first: 12, after: $after) {
     edges {
-      node { ...ArticleCard }
+      node {
+        ...ArticleCard
+      }
       cursor
     }
 
-    pageInfo { ...Pagination }
+    pageInfo {
+      ...Pagination
+    }
   }
 }

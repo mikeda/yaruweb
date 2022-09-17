@@ -1485,7 +1485,6 @@ export type QueryTournamentsArgs = {
   first?: InputMaybe<Scalars['Int']>;
   keyword?: InputMaybe<Scalars['String']>;
   last?: InputMaybe<Scalars['Int']>;
-  thisWeek?: InputMaybe<Scalars['Boolean']>;
 };
 
 export type ReversalAttributes = {
@@ -7174,7 +7173,7 @@ export type CreateTournamentMutationResult = Apollo.MutationResult<CreateTournam
 export type CreateTournamentMutationOptions = Apollo.BaseMutationOptions<CreateTournamentMutation, CreateTournamentMutationVariables>;
 export const TopPageDocument = gql`
     query TopPage {
-  tournaments(first: 3, thisWeek: true) {
+  tournaments(first: 3) {
     nodes {
       ...TournamentCard
     }

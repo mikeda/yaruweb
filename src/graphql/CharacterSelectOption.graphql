@@ -6,6 +6,8 @@ fragment CharacterSelectOption on Character {
 
 query CharacterSelectOptions {
   characters(first: 100) {
-    nodes { ...CharacterSelectOption }
+    nodes {
+      ...CharacterSelectOption
+    }
   }
 }

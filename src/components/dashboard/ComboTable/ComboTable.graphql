@@ -52,7 +52,9 @@ mutation DeleteCombo($comboId: ID!) {
 
       comboCategory {
         id
-        combos { id }
+        combos {
+          id
+        }
       }
     }
   }

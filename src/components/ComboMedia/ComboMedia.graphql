@@ -4,7 +4,6 @@ fragment ComboMedia on Combo {
   command
   note
 
-
   comboCategory {
     id
     name

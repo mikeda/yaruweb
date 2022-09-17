@@ -55,9 +55,15 @@ fragment MoveForm on Move {
   moveable {
     __typename
 
-    ... on AttackMove { ...MoveFormAttack }
-    ... on ThrowMove { ...MoveFormThrow }
-    ... on ReversalMove { ...MoveFormReversal }
+    ... on AttackMove {
+      ...MoveFormAttack
+    }
+    ... on ThrowMove {
+      ...MoveFormThrow
+    }
+    ... on ReversalMove {
+      ...MoveFormReversal
+    }
   }
 
   moveVideo {

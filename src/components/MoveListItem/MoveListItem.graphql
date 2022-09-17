@@ -37,9 +37,15 @@ fragment ReversalListItem on ReversalMove {
 fragment MoveListItemMoveable on Moveable {
   __typename
 
-  ... on AttackMove { ...AttackListItem }
-  ... on ThrowMove { ...ThrowListItem }
-  ... on ReversalMove { ...ReversalListItem }
+  ... on AttackMove {
+    ...AttackListItem
+  }
+  ... on ThrowMove {
+    ...ThrowListItem
+  }
+  ... on ReversalMove {
+    ...ReversalListItem
+  }
 }
 
 fragment MoveListItem on Move {
