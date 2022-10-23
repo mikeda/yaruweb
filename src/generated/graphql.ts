@@ -2705,20 +2705,27 @@ export type AdminTournamentVideoEditPageUpdateMutationVariables = Exact<{
 
 export type AdminTournamentVideoEditPageUpdateMutation = { __typename?: 'Mutation', updateTournamentVideo?: { __typename?: 'UpdateTournamentVideoPayload', tournamentVideo: { __typename?: 'TournamentVideo', id: string, title: string, label?: string | null, publishedAt?: string | null } } | null };
 
+export type CreateTournamentMutationVariables = Exact<{
+  attributes: TournamentAttributes;
+}>;
+
+
+export type CreateTournamentMutation = { __typename?: 'Mutation', createTournament?: { __typename?: 'CreateTournamentPayload', tournament: { __typename?: 'Tournament', id: string } } | null };
+
+export type UpdateTournamentMutationVariables = Exact<{
+  tournamentId: Scalars['ID'];
+  attributes: TournamentAttributes;
+}>;
+
+
+export type UpdateTournamentMutation = { __typename?: 'Mutation', updateTournament?: { __typename?: 'UpdateTournamentPayload', tournament: { __typename?: 'Tournament', id: string, name: string, startsAt: string, videosCount: number, standingsCount: number, mainImageUrl?: string | null } } | null };
+
 export type AdminTournamentEditPageQueryVariables = Exact<{
   tournamentId: Scalars['ID'];
 }>;
 
 
 export type AdminTournamentEditPageQuery = { __typename?: 'Query', tournament: { __typename?: 'Tournament', id: string, name: string, url: string, streamingUrl?: string | null, startsAt: string, description: string } };
-
-export type AdminTournamentEditPageUpdateTournamentMutationVariables = Exact<{
-  tournamentId: Scalars['ID'];
-  attributes: TournamentAttributes;
-}>;
-
-
-export type AdminTournamentEditPageUpdateTournamentMutation = { __typename?: 'Mutation', updateTournament?: { __typename?: 'UpdateTournamentPayload', tournament: { __typename?: 'Tournament', id: string, name: string, url: string, streamingUrl?: string | null, startsAt: string, description: string } } | null };
 
 export type AdminTournamentPageQueryVariables = Exact<{
   tournamentId: Scalars['ID'];
@@ -2770,13 +2777,6 @@ export type AdminTournamentPageDeleteVideoMutationVariables = Exact<{
 
 
 export type AdminTournamentPageDeleteVideoMutation = { __typename?: 'Mutation', deleteTournamentVideo?: { __typename?: 'DeleteTournamentVideoPayload', tournamentVideo: { __typename?: 'TournamentVideo', id: string } } | null };
-
-export type CreateTournamentMutationVariables = Exact<{
-  attributes: TournamentAttributes;
-}>;
-
-
-export type CreateTournamentMutation = { __typename?: 'Mutation', createTournament?: { __typename?: 'CreateTournamentPayload', tournament: { __typename?: 'Tournament', id: string } } | null };
 
 export type TopPageQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -6780,6 +6780,77 @@ export function useAdminTournamentVideoEditPageUpdateMutation(baseOptions?: Apol
 export type AdminTournamentVideoEditPageUpdateMutationHookResult = ReturnType<typeof useAdminTournamentVideoEditPageUpdateMutation>;
 export type AdminTournamentVideoEditPageUpdateMutationResult = Apollo.MutationResult<AdminTournamentVideoEditPageUpdateMutation>;
 export type AdminTournamentVideoEditPageUpdateMutationOptions = Apollo.BaseMutationOptions<AdminTournamentVideoEditPageUpdateMutation, AdminTournamentVideoEditPageUpdateMutationVariables>;
+export const CreateTournamentDocument = gql`
+    mutation CreateTournament($attributes: TournamentAttributes!) {
+  createTournament(input: {attributes: $attributes}) {
+    tournament {
+      id
+    }
+  }
+}
+    `;
+export type CreateTournamentMutationFn = Apollo.MutationFunction<CreateTournamentMutation, CreateTournamentMutationVariables>;
+
+/**
+ * __useCreateTournamentMutation__
+ *
+ * To run a mutation, you first call `useCreateTournamentMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateTournamentMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createTournamentMutation, { data, loading, error }] = useCreateTournamentMutation({
+ *   variables: {
+ *      attributes: // value for 'attributes'
+ *   },
+ * });
+ */
+export function useCreateTournamentMutation(baseOptions?: Apollo.MutationHookOptions<CreateTournamentMutation, CreateTournamentMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateTournamentMutation, CreateTournamentMutationVariables>(CreateTournamentDocument, options);
+      }
+export type CreateTournamentMutationHookResult = ReturnType<typeof useCreateTournamentMutation>;
+export type CreateTournamentMutationResult = Apollo.MutationResult<CreateTournamentMutation>;
+export type CreateTournamentMutationOptions = Apollo.BaseMutationOptions<CreateTournamentMutation, CreateTournamentMutationVariables>;
+export const UpdateTournamentDocument = gql`
+    mutation UpdateTournament($tournamentId: ID!, $attributes: TournamentAttributes!) {
+  updateTournament(input: {tournamentId: $tournamentId, attributes: $attributes}) {
+    tournament {
+      ...TournamentTableRow
+    }
+  }
+}
+    ${TournamentTableRowFragmentDoc}`;
+export type UpdateTournamentMutationFn = Apollo.MutationFunction<UpdateTournamentMutation, UpdateTournamentMutationVariables>;
+
+/**
+ * __useUpdateTournamentMutation__
+ *
+ * To run a mutation, you first call `useUpdateTournamentMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useUpdateTournamentMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [updateTournamentMutation, { data, loading, error }] = useUpdateTournamentMutation({
+ *   variables: {
+ *      tournamentId: // value for 'tournamentId'
+ *      attributes: // value for 'attributes'
+ *   },
+ * });
+ */
+export function useUpdateTournamentMutation(baseOptions?: Apollo.MutationHookOptions<UpdateTournamentMutation, UpdateTournamentMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateTournamentMutation, UpdateTournamentMutationVariables>(UpdateTournamentDocument, options);
+      }
+export type UpdateTournamentMutationHookResult = ReturnType<typeof useUpdateTournamentMutation>;
+export type UpdateTournamentMutationResult = Apollo.MutationResult<UpdateTournamentMutation>;
+export type UpdateTournamentMutationOptions = Apollo.BaseMutationOptions<UpdateTournamentMutation, UpdateTournamentMutationVariables>;
 export const AdminTournamentEditPageDocument = gql`
     query AdminTournamentEditPage($tournamentId: ID!) {
   tournament(tournamentId: $tournamentId) {
@@ -6817,44 +6888,6 @@ export function useAdminTournamentEditPageLazyQuery(baseOptions?: Apollo.LazyQue
 export type AdminTournamentEditPageQueryHookResult = ReturnType<typeof useAdminTournamentEditPageQuery>;
 export type AdminTournamentEditPageLazyQueryHookResult = ReturnType<typeof useAdminTournamentEditPageLazyQuery>;
 export type AdminTournamentEditPageQueryResult = Apollo.QueryResult<AdminTournamentEditPageQuery, AdminTournamentEditPageQueryVariables>;
-export const AdminTournamentEditPageUpdateTournamentDocument = gql`
-    mutation AdminTournamentEditPageUpdateTournament($tournamentId: ID!, $attributes: TournamentAttributes!) {
-  updateTournament(input: {tournamentId: $tournamentId, attributes: $attributes}) {
-    tournament {
-      ...TournamentForm
-      ...TournamentBreadcrumbs
-    }
-  }
-}
-    ${TournamentFormFragmentDoc}
-${TournamentBreadcrumbsFragmentDoc}`;
-export type AdminTournamentEditPageUpdateTournamentMutationFn = Apollo.MutationFunction<AdminTournamentEditPageUpdateTournamentMutation, AdminTournamentEditPageUpdateTournamentMutationVariables>;
-
-/**
- * __useAdminTournamentEditPageUpdateTournamentMutation__
- *
- * To run a mutation, you first call `useAdminTournamentEditPageUpdateTournamentMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useAdminTournamentEditPageUpdateTournamentMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [adminTournamentEditPageUpdateTournamentMutation, { data, loading, error }] = useAdminTournamentEditPageUpdateTournamentMutation({
- *   variables: {
- *      tournamentId: // value for 'tournamentId'
- *      attributes: // value for 'attributes'
- *   },
- * });
- */
-export function useAdminTournamentEditPageUpdateTournamentMutation(baseOptions?: Apollo.MutationHookOptions<AdminTournamentEditPageUpdateTournamentMutation, AdminTournamentEditPageUpdateTournamentMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<AdminTournamentEditPageUpdateTournamentMutation, AdminTournamentEditPageUpdateTournamentMutationVariables>(AdminTournamentEditPageUpdateTournamentDocument, options);
-      }
-export type AdminTournamentEditPageUpdateTournamentMutationHookResult = ReturnType<typeof useAdminTournamentEditPageUpdateTournamentMutation>;
-export type AdminTournamentEditPageUpdateTournamentMutationResult = Apollo.MutationResult<AdminTournamentEditPageUpdateTournamentMutation>;
-export type AdminTournamentEditPageUpdateTournamentMutationOptions = Apollo.BaseMutationOptions<AdminTournamentEditPageUpdateTournamentMutation, AdminTournamentEditPageUpdateTournamentMutationVariables>;
 export const AdminTournamentPageDocument = gql`
     query AdminTournamentPage($tournamentId: ID!) {
   tournament(tournamentId: $tournamentId) {
@@ -7136,41 +7169,6 @@ export function useAdminTournamentPageDeleteVideoMutation(baseOptions?: Apollo.M
 export type AdminTournamentPageDeleteVideoMutationHookResult = ReturnType<typeof useAdminTournamentPageDeleteVideoMutation>;
 export type AdminTournamentPageDeleteVideoMutationResult = Apollo.MutationResult<AdminTournamentPageDeleteVideoMutation>;
 export type AdminTournamentPageDeleteVideoMutationOptions = Apollo.BaseMutationOptions<AdminTournamentPageDeleteVideoMutation, AdminTournamentPageDeleteVideoMutationVariables>;
-export const CreateTournamentDocument = gql`
-    mutation CreateTournament($attributes: TournamentAttributes!) {
-  createTournament(input: {attributes: $attributes}) {
-    tournament {
-      id
-    }
-  }
-}
-    `;
-export type CreateTournamentMutationFn = Apollo.MutationFunction<CreateTournamentMutation, CreateTournamentMutationVariables>;
-
-/**
- * __useCreateTournamentMutation__
- *
- * To run a mutation, you first call `useCreateTournamentMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useCreateTournamentMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [createTournamentMutation, { data, loading, error }] = useCreateTournamentMutation({
- *   variables: {
- *      attributes: // value for 'attributes'
- *   },
- * });
- */
-export function useCreateTournamentMutation(baseOptions?: Apollo.MutationHookOptions<CreateTournamentMutation, CreateTournamentMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<CreateTournamentMutation, CreateTournamentMutationVariables>(CreateTournamentDocument, options);
-      }
-export type CreateTournamentMutationHookResult = ReturnType<typeof useCreateTournamentMutation>;
-export type CreateTournamentMutationResult = Apollo.MutationResult<CreateTournamentMutation>;
-export type CreateTournamentMutationOptions = Apollo.BaseMutationOptions<CreateTournamentMutation, CreateTournamentMutationVariables>;
 export const TopPageDocument = gql`
     query TopPage {
   tournaments(first: 3) {
