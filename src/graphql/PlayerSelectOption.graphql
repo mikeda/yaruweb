@@ -5,3 +5,11 @@ fragment PlayerSelectOption on Player {
   tonamelId
   smashggId
 }
+
+query PlayerSelectOptions {
+  players(first: 1000) {
+    nodes {
+      ...PlayerSelectOption
+    }
+  }
+}

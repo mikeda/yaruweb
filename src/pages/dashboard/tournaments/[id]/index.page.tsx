@@ -5,7 +5,7 @@ import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
 import { useRouter } from 'next/router';
 
-import { StandingList, VideoList } from './components';
+import { VideoList } from './components';
 
 import { AdminBreadcrumbs, DashboardContent } from '@/components';
 import { useAdminTournamentPageQuery } from '@/generated/graphql';
@@ -39,7 +39,7 @@ const Page: React.FC = () => {
   const classes = useStyles();
 
   if (!data) return null;
-  const { tournament, players } = data;
+  const { tournament } = data;
 
   return (
     <DashboardContent title={tournament.name} breadcrumb={<AdminBreadcrumbs to="tournament" tournament={tournament} />}>
@@ -56,16 +56,6 @@ const Page: React.FC = () => {
       </Box>
 
       <Grid container spacing={2}>
-        <Grid item sm={12} md={6}>
-          <Paper>
-            <Box p={2}>
-              <Typography variant="h3">結果</Typography>
-            </Box>
-
-            <StandingList tournamentId={tournament.id} players={players.nodes} />
-          </Paper>
-        </Grid>
-
         <Grid item sm={12} md={6}>
           <Paper>
             <Box p={2}>

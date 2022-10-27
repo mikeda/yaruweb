@@ -1,0 +1,7 @@
+mutation DeleteStanding($standingId: ID!) {
+  deleteStanding(input: { standingId: $standingId }) {
+    standing {
+      id
+    }
+  }
+}

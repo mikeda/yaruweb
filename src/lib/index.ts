@@ -3,6 +3,7 @@ export * from './states';
 export * from './view_helpers';
 export * from './yup';
 
+export * from './apolloCache';
 export * from './apolloClient';
 export * from './dayjs';
 export * from './domains';
