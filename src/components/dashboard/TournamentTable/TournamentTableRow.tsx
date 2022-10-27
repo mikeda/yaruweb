@@ -1,9 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import { Button, TableCell, TableRow, Typography } from '@mui/material';
+import { Button, Dialog, TableCell, TableRow, Typography } from '@mui/material';
 import { useRouter } from 'next/router';
 
-import { DashboardTableMenu } from '@/components';
+import { DashboardTableMenu, StandingList } from '@/components';
 import { pagesPath } from '@/generated/$path';
 import { TournamentTableRowFragment } from '@/generated/graphql';
 import { NO_IMAGE_URL, dayjs, resolveUrlObject } from '@/lib';
@@ -15,6 +15,7 @@ interface Props {
 
 export const TournamentTableRow = ({ tournament, onClickDelete }: Props) => {
   const router = useRouter();
+  const [standingDialogOpen, setStandingDialogOpen] = useState(false);
 
   return (
     <TableRow>
@@ -38,6 +39,19 @@ export const TournamentTableRow = ({ tournament, onClickDelete }: Props) => {
         >
           編集
         </Button>
+
+        <Button
+          variant="outlined"
+          onClick={() => {
+            setStandingDialogOpen(true);
+          }}
+        >
+          順位
+        </Button>
+
+        <Dialog open={standingDialogOpen} onClose={() => setStandingDialogOpen(false)}>
+          <StandingList tournamentId={tournament.id} />
+        </Dialog>
 
         <DashboardTableMenu
           items={[

@@ -14,29 +14,6 @@ query AdminTournamentPage($tournamentId: ID!) {
       youtubeVideoId
     }
   }
-
-  players(first: 500) {
-    nodes {
-      ...PlayerSelectOption
-    }
-  }
-}
-
-query AdminTournamentPageStandings($tournamentId: ID!) {
-  tournament(tournamentId: $tournamentId) {
-    id
-
-    standings {
-      id
-      place
-
-      player {
-        id
-        name
-        avatarUrl
-      }
-    }
-  }
 }
 
 query AdminTournamentPageVideos($tournamentId: ID!) {
@@ -51,22 +28,6 @@ query AdminTournamentPageVideos($tournamentId: ID!) {
         id
         name
       }
-    }
-  }
-}
-
-mutation AdminTournamentPageCreateStanding($tournamentId: ID!, $attributes: StandingAttributes!) {
-  createStanding(input: { tournamentId: $tournamentId, attributes: $attributes }) {
-    standing {
-      id
-    }
-  }
-}
-
-mutation AdminTournamentPageDeleteStanding($standingId: ID!) {
-  deleteStanding(input: { standingId: $standingId }) {
-    standing {
-      id
     }
   }
 }

@@ -1,0 +1,20 @@
+fragment StandingListItem on Standing {
+  id
+  place
+
+  player {
+    id
+    name
+    avatarUrl
+  }
+}
+
+query StandingList($tournamentId: ID!) {
+  tournament(tournamentId: $tournamentId) {
+    id
+
+    standings {
+      ...StandingListItem
+    }
+  }
+}

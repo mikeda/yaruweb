@@ -1,0 +1,7 @@
+mutation CreateStanding($tournamentId: ID!, $attributes: StandingAttributes!) {
+  createStanding(input: { tournamentId: $tournamentId, attributes: $attributes }) {
+    standing {
+      id
+    }
+  }
+}

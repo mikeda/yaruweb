@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import { Delete } from '@mui/icons-material';
 import {
   Avatar,
-  Box,
-  Button,
   IconButton,
   List,
   ListItem,
@@ -13,14 +11,13 @@ import {
   ListItemText,
 } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
-
-import { useCreateStandingMutation, useDeleteStandingMutation } from '../hooks';
+import { useSetRecoilState } from 'recoil';
 
 import { StandingForm } from './StandingForm';
 import { StandingPlaceAvatar } from './StandingPlaceAvatar';
 
-import { PlayerSelectOptionFragment, useAdminTournamentPageStandingsQuery } from '@/generated/graphql';
-import { DEFAULT_AVATAR_URL } from '@/lib';
+import { useCreateStandingMutation, useDeleteStandingMutation, useStandingListQuery } from '@/generated/graphql';
+import { DEFAULT_AVATAR_URL, deleteCache, handleApolloError, loadingState } from '@/lib';
 
 const useStyles = makeStyles({
   list: {
@@ -31,15 +28,30 @@ const useStyles = makeStyles({
 
 interface Props {
   tournamentId: string;
-  players: PlayerSelectOptionFragment[];
 }
 
-export const StandingList: React.FC<Props> = ({ tournamentId, players }) => {
-  const { data, refetch } = useAdminTournamentPageStandingsQuery({ variables: { tournamentId } });
-  const [dialogOpen, setDialogOpen] = useState(false);
-  const { create } = useCreateStandingMutation({ onCreate: refetch });
-  const { destroy } = useDeleteStandingMutation({ onDelete: refetch });
+export const StandingList: React.FC<Props> = ({ tournamentId }) => {
+  const { data, loading, refetch } = useStandingListQuery({ variables: { tournamentId } });
+  const setLoading = useSetRecoilState(loadingState);
   const classes = useStyles();
+
+  const [create, { loading: createLoading }] = useCreateStandingMutation({
+    onError: handleApolloError,
+    onCompleted: () => refetch(),
+  });
+
+  const [del, { loading: deleteLoading }] = useDeleteStandingMutation({
+    onError: handleApolloError,
+    //onCompleted: handleClose,
+    update(cache, { data }) {
+      const id = data?.deleteStanding?.standing.id;
+      if (id) {
+        deleteCache({ cache, id, __typename: 'Standing' });
+      }
+    },
+  });
+
+  setLoading(loading || createLoading || deleteLoading);
 
   if (!data) return null;
 
@@ -63,7 +75,7 @@ export const StandingList: React.FC<Props> = ({ tournamentId, players }) => {
                 edge="end"
                 onClick={() => {
                   if (window.confirm('削除します。')) {
-                    destroy({ variables: { standingId: standing.id } });
+                    del({ variables: { standingId: standing.id } });
                   }
                 }}
                 size="large"
@@ -75,17 +87,9 @@ export const StandingList: React.FC<Props> = ({ tournamentId, players }) => {
         ))}
       </List>
 
-      <Box pb={2} display="flex" justifyContent="center" onClick={() => setDialogOpen(true)}>
-        <Button color="primary">追加する</Button>
-      </Box>
-
       <StandingForm
-        open={dialogOpen}
-        players={players}
-        onClose={() => setDialogOpen(false)}
         onSubmit={attributes => {
           create({ variables: { tournamentId, attributes } });
-          setDialogOpen(false);
         }}
       />
     </>

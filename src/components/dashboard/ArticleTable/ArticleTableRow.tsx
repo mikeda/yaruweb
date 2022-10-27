@@ -13,7 +13,7 @@ import {
   usePublishArticleMutation,
   useStopArticleMutation,
 } from '@/generated/graphql';
-import { resolveUrlObject, ArticleStatusText, handleApolloError, loadingState } from '@/lib';
+import { resolveUrlObject, ArticleStatusText, handleApolloError, loadingState, deleteCache } from '@/lib';
 
 interface Props {
   article: ArticleTableRowFragment;
@@ -64,9 +64,7 @@ const ArticleMenu: React.FC<Props> = ({ article }) => {
     onError: handleApolloError,
     onCompleted: handleClose,
     update(cache) {
-      const normalizedId = cache.identify({ id: article.id, __typename: 'Article' });
-      cache.evict({ id: normalizedId });
-      cache.gc();
+      deleteCache({cache, id: article.id, __typename: 'Article'});
     },
   });
 
