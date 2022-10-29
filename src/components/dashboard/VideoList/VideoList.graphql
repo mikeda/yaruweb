@@ -1,0 +1,18 @@
+fragment VideoListItem on TournamentVideo {
+  id
+  title
+  thumbnailUrl
+  battlesCount
+}
+
+query VideoList($tournamentId: ID!) {
+  tournament(tournamentId: $tournamentId) {
+    id
+
+    videos {
+      id
+
+      ...VideoListItem
+    }
+  }
+}

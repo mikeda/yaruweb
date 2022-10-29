@@ -58,7 +58,6 @@ export const breadcrumbChain = (props: AdminBreadcrumbParams): BreadcrumbChainIt
     case 'tournament':
       return {
         name: props.tournament.name,
-        url: pagesPath.dashboard.tournaments._id(props.tournament.id).$url(),
         parent: breadcrumbChain({ to: 'tournaments' }),
       };
     case 'tournamentsNew':

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Button, Dialog, TableCell, TableRow, Typography } from '@mui/material';
 import { useRouter } from 'next/router';
 
-import { DashboardTableMenu, StandingList } from '@/components';
+import { DashboardTableMenu, StandingList, VideoList } from '@/components';
 import { pagesPath } from '@/generated/$path';
 import { TournamentTableRowFragment } from '@/generated/graphql';
 import { NO_IMAGE_URL, dayjs, resolveUrlObject } from '@/lib';
@@ -16,6 +16,7 @@ interface Props {
 export const TournamentTableRow = ({ tournament, onClickDelete }: Props) => {
   const router = useRouter();
   const [standingDialogOpen, setStandingDialogOpen] = useState(false);
+  const [videoDialogOpen, setVideoDialogOpen] = useState(false);
 
   return (
     <TableRow>
@@ -53,14 +54,21 @@ export const TournamentTableRow = ({ tournament, onClickDelete }: Props) => {
           <StandingList tournamentId={tournament.id} />
         </Dialog>
 
+        <Button
+          variant="outlined"
+          onClick={() => {
+            setVideoDialogOpen(true);
+          }}
+        >
+          動画
+        </Button>
+
+        <Dialog open={videoDialogOpen} onClose={() => setVideoDialogOpen(false)}>
+          <VideoList tournamentId={tournament.id} />
+        </Dialog>
+
         <DashboardTableMenu
           items={[
-            {
-              label: '結果・動画を登録',
-              onClick: () => {
-                router.push(pagesPath.dashboard.tournaments._id(tournament.id).$url());
-              },
-            },
             {
               label: '削除する',
               onClick: onClickDelete,
