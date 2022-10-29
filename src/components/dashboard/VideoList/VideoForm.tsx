@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
+import { Button, DialogActions, DialogContent, TextField } from '@mui/material';
 import { Controller, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
@@ -14,12 +14,10 @@ interface Attributes {
 }
 
 interface Props {
-  open: boolean;
-  onClose: () => void;
   onSubmit: (attributes: Attributes) => void;
 }
 
-export const VideoForm: React.FC<Props> = ({ open, onClose, onSubmit }) => {
+export const VideoForm: React.FC<Props> = ({ onSubmit }) => {
   const {
     handleSubmit,
     control,
@@ -30,36 +28,29 @@ export const VideoForm: React.FC<Props> = ({ open, onClose, onSubmit }) => {
   });
 
   return (
-    <Dialog open={open} onClose={onClose}>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <DialogTitle>動画を登録</DialogTitle>
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <DialogContent>
+        <Controller
+          name="url"
+          control={control}
+          render={({ field }) => (
+            <TextField
+              {...field}
+              label="YouTubeのURL"
+              placeholder="https://www.youtube.com/watch?v=xxxxx"
+              error={Boolean(errors.url)}
+              helperText={errors.url?.message}
+              fullWidth
+            />
+          )}
+        />
+      </DialogContent>
 
-        <DialogContent>
-          <Controller
-            name="url"
-            control={control}
-            render={({ field }) => (
-              <TextField
-                {...field}
-                label="YouTubeのURL"
-                placeholder="https://www.youtube.com/watch?v=xxxxx"
-                error={Boolean(errors.url)}
-                helperText={errors.url?.message}
-                fullWidth
-              />
-            )}
-          />
-        </DialogContent>
-
-        <DialogActions>
-          <Button onClick={onClose} color="primary">
-            Cancel
-          </Button>
-          <Button type="submit" color="primary">
-            登録する
-          </Button>
-        </DialogActions>
-      </form>
-    </Dialog>
+      <DialogActions>
+        <Button type="submit" color="primary">
+          登録する
+        </Button>
+      </DialogActions>
+    </form>
   );
 };

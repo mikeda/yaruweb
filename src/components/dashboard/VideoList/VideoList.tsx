@@ -1,17 +1,7 @@
 import React, { useState } from 'react';
 
 import { MoreVert } from '@mui/icons-material';
-import {
-  Box,
-  Button,
-  IconButton,
-  List,
-  ListItem,
-  ListItemSecondaryAction,
-  ListItemText,
-  Menu,
-  MenuItem,
-} from '@mui/material';
+import { IconButton, List, ListItem, ListItemSecondaryAction, ListItemText, Menu, MenuItem } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import { useRouter } from 'next/router';
 import { useSetRecoilState } from 'recoil';
@@ -40,7 +30,6 @@ interface Props {
 export const VideoList: React.FC<Props> = ({ tournamentId }) => {
   const { data, loading, refetch } = useVideoListQuery({ variables: { tournamentId } });
   const setLoading = useSetRecoilState(loadingState);
-  const [dialogOpen, setDialogOpen] = useState(false);
   const [create, { loading: createLoading }] = useCreateTournamentVideoMutation({
     onError: handleApolloError,
     onCompleted: () => refetch(),
@@ -83,16 +72,9 @@ export const VideoList: React.FC<Props> = ({ tournamentId }) => {
         ))}
       </List>
 
-      <Box pb={2} display="flex" justifyContent="center" onClick={() => setDialogOpen(true)}>
-        <Button color="primary">追加する</Button>
-      </Box>
-
       <VideoForm
-        open={dialogOpen}
-        onClose={() => setDialogOpen(false)}
         onSubmit={({ url }) => {
           create({ variables: { tournamentId, url } });
-          setDialogOpen(false);
         }}
       />
     </>
