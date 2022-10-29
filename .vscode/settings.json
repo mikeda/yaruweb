@@ -16,11 +16,6 @@
     "tsconfig.tsbuildinfo": true,
     "yarn-error.log": true
   },
-  "eslint.validate": [
-    "javascript",
-    "javascriptreact",
-    "typescript",
-    "typescriptreact",
-    "graphql"
-  ]
+  "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact", "graphql"],
+  "task.allowAutomaticTasks": "on"
 }
