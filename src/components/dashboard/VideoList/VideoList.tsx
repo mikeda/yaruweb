@@ -1,26 +1,20 @@
 import React, { useState } from 'react';
 
 import { MoreVert } from '@mui/icons-material';
-import {
-  Box,
-  Button,
-  IconButton,
-  List,
-  ListItem,
-  ListItemSecondaryAction,
-  ListItemText,
-  Menu,
-  MenuItem,
-} from '@mui/material';
+import { IconButton, List, ListItem, ListItemSecondaryAction, ListItemText, Menu, MenuItem } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import { useRouter } from 'next/router';
-
-import { useCreateVideoMutation, useDeleteVideoMutation } from '../hooks';
+import { useSetRecoilState } from 'recoil';
 
 import { VideoForm } from './VideoForm';
 
 import { pagesPath } from '@/generated/$path';
-import { useAdminTournamentPageVideosQuery } from '@/generated/graphql';
+import {
+  useCreateTournamentVideoMutation,
+  useDeleteTournamentVideoMutation,
+  useVideoListQuery,
+} from '@/generated/graphql';
+import { deleteCache, handleApolloError, loadingState } from '@/lib';
 
 const useStyles = makeStyles({
   list: {
@@ -34,18 +28,33 @@ interface Props {
 }
 
 export const VideoList: React.FC<Props> = ({ tournamentId }) => {
-  const { data, refetch } = useAdminTournamentPageVideosQuery({ variables: { tournamentId } });
-  const [dialogOpen, setDialogOpen] = useState(false);
-  const { create } = useCreateVideoMutation({ onCreate: refetch });
-  const { destroy } = useDeleteVideoMutation({ onDelete: refetch });
+  const { data, loading, refetch } = useVideoListQuery({ variables: { tournamentId } });
+  const setLoading = useSetRecoilState(loadingState);
+  const [create, { loading: createLoading }] = useCreateTournamentVideoMutation({
+    onError: handleApolloError,
+    onCompleted: () => refetch(),
+  });
+
+  const [del, { loading: deleteLoading }] = useDeleteTournamentVideoMutation({
+    onError: handleApolloError,
+    //onCompleted: handleClose,
+    update(cache, { data }) {
+      const id = data?.deleteTournamentVideo?.tournamentVideo.id;
+      if (id) {
+        deleteCache({ cache, id, __typename: 'TournamentVideo' });
+      }
+    },
+  });
   const classes = useStyles();
+
+  setLoading(loading || createLoading || deleteLoading);
 
   if (!data) return null;
 
   return (
     <>
       <List className={classes.list}>
-        {data.tournamentVideos.nodes.map(video => (
+        {data.tournament.videos.map(video => (
           <ListItem key={video.id}>
             <ListItemText primary={video.title} secondary={`対戦動画 ${video.battlesCount}`} />
 
@@ -54,7 +63,7 @@ export const VideoList: React.FC<Props> = ({ tournamentId }) => {
                 tournamentVideoId={video.id}
                 onDestroy={() => {
                   if (window.confirm('削除します。')) {
-                    destroy({ variables: { tournamentVideoId: video.id } });
+                    del({ variables: { tournamentVideoId: video.id } });
                   }
                 }}
               />
@@ -63,16 +72,9 @@ export const VideoList: React.FC<Props> = ({ tournamentId }) => {
         ))}
       </List>
 
-      <Box pb={2} display="flex" justifyContent="center" onClick={() => setDialogOpen(true)}>
-        <Button color="primary">追加する</Button>
-      </Box>
-
       <VideoForm
-        open={dialogOpen}
-        onClose={() => setDialogOpen(false)}
         onSubmit={({ url }) => {
           create({ variables: { tournamentId, url } });
-          setDialogOpen(false);
         }}
       />
     </>

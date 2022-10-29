@@ -8,3 +8,4 @@ export * from './MoveDashboard';
 export * from './MoveTable';
 export * from './PlayerTable';
 export * from './StandingList';
+export * from './VideoList';

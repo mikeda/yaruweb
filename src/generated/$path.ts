@@ -79,8 +79,7 @@ export const pagesPath = {
       _id: (id: string | number) => ({
         "edit": {
           $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/tournaments/[id]/edit' as const, query: { id }, hash: url?.hash })
-        },
-        $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/tournaments/[id]' as const, query: { id }, hash: url?.hash })
+        }
       }),
       "new": {
         $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/tournaments/new' as const, hash: url?.hash })

@@ -2370,6 +2370,30 @@ export type DeleteTournamentMutationVariables = Exact<{
 
 export type DeleteTournamentMutation = { __typename?: 'Mutation', deleteTournament?: { __typename?: 'DeleteTournamentPayload', tournament: { __typename?: 'Tournament', id: string } } | null };
 
+export type CreateTournamentVideoMutationVariables = Exact<{
+  tournamentId: Scalars['ID'];
+  url: Scalars['String'];
+}>;
+
+
+export type CreateTournamentVideoMutation = { __typename?: 'Mutation', createTournamentVideo?: { __typename?: 'CreateTournamentVideoPayload', tournamentVideo: { __typename?: 'TournamentVideo', id: string } } | null };
+
+export type DeleteTournamentVideoMutationVariables = Exact<{
+  tournamentVideoId: Scalars['ID'];
+}>;
+
+
+export type DeleteTournamentVideoMutation = { __typename?: 'Mutation', deleteTournamentVideo?: { __typename?: 'DeleteTournamentVideoPayload', tournamentVideo: { __typename?: 'TournamentVideo', id: string } } | null };
+
+export type VideoListItemFragment = { __typename?: 'TournamentVideo', id: string, title: string, thumbnailUrl: string, battlesCount: number };
+
+export type VideoListQueryVariables = Exact<{
+  tournamentId: Scalars['ID'];
+}>;
+
+
+export type VideoListQuery = { __typename?: 'Query', tournament: { __typename?: 'Tournament', id: string, videos: Array<{ __typename?: 'TournamentVideo', id: string, title: string, thumbnailUrl: string, battlesCount: number }> } };
+
 export type ArticleFormArticleFragment = { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, category: ArticleCategory, content: string };
 
 export type CreateArticleMutationVariables = Exact<{
@@ -2755,35 +2779,6 @@ export type AdminTournamentEditPageQueryVariables = Exact<{
 
 
 export type AdminTournamentEditPageQuery = { __typename?: 'Query', tournament: { __typename?: 'Tournament', id: string, name: string, url: string, streamingUrl?: string | null, startsAt: string, description: string } };
-
-export type AdminTournamentPageQueryVariables = Exact<{
-  tournamentId: Scalars['ID'];
-}>;
-
-
-export type AdminTournamentPageQuery = { __typename?: 'Query', tournament: { __typename?: 'Tournament', id: string, name: string, description: string, mainImageUrl?: string | null, startsAt: string, standingsCount: number, videosCount: number, videos: Array<{ __typename?: 'TournamentVideo', id: string, title: string, youtubeVideoId: string }> } };
-
-export type AdminTournamentPageVideosQueryVariables = Exact<{
-  tournamentId: Scalars['ID'];
-}>;
-
-
-export type AdminTournamentPageVideosQuery = { __typename?: 'Query', tournamentVideos: { __typename?: 'TournamentVideoConnection', nodes: Array<{ __typename?: 'TournamentVideo', id: string, title: string, thumbnailUrl: string, battlesCount: number, channel: { __typename?: 'Channel', id: string, name: string } }> } };
-
-export type AdminTournamentPageCreateVideoMutationVariables = Exact<{
-  tournamentId: Scalars['ID'];
-  url: Scalars['String'];
-}>;
-
-
-export type AdminTournamentPageCreateVideoMutation = { __typename?: 'Mutation', createTournamentVideo?: { __typename?: 'CreateTournamentVideoPayload', tournamentVideo: { __typename?: 'TournamentVideo', id: string } } | null };
-
-export type AdminTournamentPageDeleteVideoMutationVariables = Exact<{
-  tournamentVideoId: Scalars['ID'];
-}>;
-
-
-export type AdminTournamentPageDeleteVideoMutation = { __typename?: 'Mutation', deleteTournamentVideo?: { __typename?: 'DeleteTournamentVideoPayload', tournamentVideo: { __typename?: 'TournamentVideo', id: string } } | null };
 
 export type TopPageQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -3317,6 +3312,14 @@ export const TournamentTableRowFragmentDoc = gql`
   videosCount
   standingsCount
   mainImageUrl
+}
+    `;
+export const VideoListItemFragmentDoc = gql`
+    fragment VideoListItem on TournamentVideo {
+  id
+  title
+  thumbnailUrl
+  battlesCount
 }
     `;
 export const ArticleFormArticleFragmentDoc = gql`
@@ -5191,6 +5194,116 @@ export function useDeleteTournamentMutation(baseOptions?: Apollo.MutationHookOpt
 export type DeleteTournamentMutationHookResult = ReturnType<typeof useDeleteTournamentMutation>;
 export type DeleteTournamentMutationResult = Apollo.MutationResult<DeleteTournamentMutation>;
 export type DeleteTournamentMutationOptions = Apollo.BaseMutationOptions<DeleteTournamentMutation, DeleteTournamentMutationVariables>;
+export const CreateTournamentVideoDocument = gql`
+    mutation CreateTournamentVideo($tournamentId: ID!, $url: String!) {
+  createTournamentVideo(input: {tournamentId: $tournamentId, url: $url}) {
+    tournamentVideo {
+      id
+    }
+  }
+}
+    `;
+export type CreateTournamentVideoMutationFn = Apollo.MutationFunction<CreateTournamentVideoMutation, CreateTournamentVideoMutationVariables>;
+
+/**
+ * __useCreateTournamentVideoMutation__
+ *
+ * To run a mutation, you first call `useCreateTournamentVideoMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useCreateTournamentVideoMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [createTournamentVideoMutation, { data, loading, error }] = useCreateTournamentVideoMutation({
+ *   variables: {
+ *      tournamentId: // value for 'tournamentId'
+ *      url: // value for 'url'
+ *   },
+ * });
+ */
+export function useCreateTournamentVideoMutation(baseOptions?: Apollo.MutationHookOptions<CreateTournamentVideoMutation, CreateTournamentVideoMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateTournamentVideoMutation, CreateTournamentVideoMutationVariables>(CreateTournamentVideoDocument, options);
+      }
+export type CreateTournamentVideoMutationHookResult = ReturnType<typeof useCreateTournamentVideoMutation>;
+export type CreateTournamentVideoMutationResult = Apollo.MutationResult<CreateTournamentVideoMutation>;
+export type CreateTournamentVideoMutationOptions = Apollo.BaseMutationOptions<CreateTournamentVideoMutation, CreateTournamentVideoMutationVariables>;
+export const DeleteTournamentVideoDocument = gql`
+    mutation DeleteTournamentVideo($tournamentVideoId: ID!) {
+  deleteTournamentVideo(input: {tournamentVideoId: $tournamentVideoId}) {
+    tournamentVideo {
+      id
+    }
+  }
+}
+    `;
+export type DeleteTournamentVideoMutationFn = Apollo.MutationFunction<DeleteTournamentVideoMutation, DeleteTournamentVideoMutationVariables>;
+
+/**
+ * __useDeleteTournamentVideoMutation__
+ *
+ * To run a mutation, you first call `useDeleteTournamentVideoMutation` within a React component and pass it any options that fit your needs.
+ * When your component renders, `useDeleteTournamentVideoMutation` returns a tuple that includes:
+ * - A mutate function that you can call at any time to execute the mutation
+ * - An object with fields that represent the current status of the mutation's execution
+ *
+ * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
+ *
+ * @example
+ * const [deleteTournamentVideoMutation, { data, loading, error }] = useDeleteTournamentVideoMutation({
+ *   variables: {
+ *      tournamentVideoId: // value for 'tournamentVideoId'
+ *   },
+ * });
+ */
+export function useDeleteTournamentVideoMutation(baseOptions?: Apollo.MutationHookOptions<DeleteTournamentVideoMutation, DeleteTournamentVideoMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteTournamentVideoMutation, DeleteTournamentVideoMutationVariables>(DeleteTournamentVideoDocument, options);
+      }
+export type DeleteTournamentVideoMutationHookResult = ReturnType<typeof useDeleteTournamentVideoMutation>;
+export type DeleteTournamentVideoMutationResult = Apollo.MutationResult<DeleteTournamentVideoMutation>;
+export type DeleteTournamentVideoMutationOptions = Apollo.BaseMutationOptions<DeleteTournamentVideoMutation, DeleteTournamentVideoMutationVariables>;
+export const VideoListDocument = gql`
+    query VideoList($tournamentId: ID!) {
+  tournament(tournamentId: $tournamentId) {
+    id
+    videos {
+      id
+      ...VideoListItem
+    }
+  }
+}
+    ${VideoListItemFragmentDoc}`;
+
+/**
+ * __useVideoListQuery__
+ *
+ * To run a query within a React component, call `useVideoListQuery` and pass it any options that fit your needs.
+ * When your component renders, `useVideoListQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useVideoListQuery({
+ *   variables: {
+ *      tournamentId: // value for 'tournamentId'
+ *   },
+ * });
+ */
+export function useVideoListQuery(baseOptions: Apollo.QueryHookOptions<VideoListQuery, VideoListQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<VideoListQuery, VideoListQueryVariables>(VideoListDocument, options);
+      }
+export function useVideoListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<VideoListQuery, VideoListQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<VideoListQuery, VideoListQueryVariables>(VideoListDocument, options);
+        }
+export type VideoListQueryHookResult = ReturnType<typeof useVideoListQuery>;
+export type VideoListLazyQueryHookResult = ReturnType<typeof useVideoListLazyQuery>;
+export type VideoListQueryResult = Apollo.QueryResult<VideoListQuery, VideoListQueryVariables>;
 export const CreateArticleDocument = gql`
     mutation CreateArticle($attributes: ArticleAttributes!) {
   createArticle(input: {attributes: $attributes}) {
@@ -7051,167 +7164,6 @@ export function useAdminTournamentEditPageLazyQuery(baseOptions?: Apollo.LazyQue
 export type AdminTournamentEditPageQueryHookResult = ReturnType<typeof useAdminTournamentEditPageQuery>;
 export type AdminTournamentEditPageLazyQueryHookResult = ReturnType<typeof useAdminTournamentEditPageLazyQuery>;
 export type AdminTournamentEditPageQueryResult = Apollo.QueryResult<AdminTournamentEditPageQuery, AdminTournamentEditPageQueryVariables>;
-export const AdminTournamentPageDocument = gql`
-    query AdminTournamentPage($tournamentId: ID!) {
-  tournament(tournamentId: $tournamentId) {
-    id
-    name
-    description
-    mainImageUrl
-    startsAt
-    standingsCount
-    videosCount
-    videos {
-      id
-      title
-      youtubeVideoId
-    }
-  }
-}
-    `;
-
-/**
- * __useAdminTournamentPageQuery__
- *
- * To run a query within a React component, call `useAdminTournamentPageQuery` and pass it any options that fit your needs.
- * When your component renders, `useAdminTournamentPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useAdminTournamentPageQuery({
- *   variables: {
- *      tournamentId: // value for 'tournamentId'
- *   },
- * });
- */
-export function useAdminTournamentPageQuery(baseOptions: Apollo.QueryHookOptions<AdminTournamentPageQuery, AdminTournamentPageQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<AdminTournamentPageQuery, AdminTournamentPageQueryVariables>(AdminTournamentPageDocument, options);
-      }
-export function useAdminTournamentPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AdminTournamentPageQuery, AdminTournamentPageQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<AdminTournamentPageQuery, AdminTournamentPageQueryVariables>(AdminTournamentPageDocument, options);
-        }
-export type AdminTournamentPageQueryHookResult = ReturnType<typeof useAdminTournamentPageQuery>;
-export type AdminTournamentPageLazyQueryHookResult = ReturnType<typeof useAdminTournamentPageLazyQuery>;
-export type AdminTournamentPageQueryResult = Apollo.QueryResult<AdminTournamentPageQuery, AdminTournamentPageQueryVariables>;
-export const AdminTournamentPageVideosDocument = gql`
-    query AdminTournamentPageVideos($tournamentId: ID!) {
-  tournamentVideos(tournamentId: $tournamentId) {
-    nodes {
-      id
-      title
-      thumbnailUrl
-      battlesCount
-      channel {
-        id
-        name
-      }
-    }
-  }
-}
-    `;
-
-/**
- * __useAdminTournamentPageVideosQuery__
- *
- * To run a query within a React component, call `useAdminTournamentPageVideosQuery` and pass it any options that fit your needs.
- * When your component renders, `useAdminTournamentPageVideosQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useAdminTournamentPageVideosQuery({
- *   variables: {
- *      tournamentId: // value for 'tournamentId'
- *   },
- * });
- */
-export function useAdminTournamentPageVideosQuery(baseOptions: Apollo.QueryHookOptions<AdminTournamentPageVideosQuery, AdminTournamentPageVideosQueryVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useQuery<AdminTournamentPageVideosQuery, AdminTournamentPageVideosQueryVariables>(AdminTournamentPageVideosDocument, options);
-      }
-export function useAdminTournamentPageVideosLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AdminTournamentPageVideosQuery, AdminTournamentPageVideosQueryVariables>) {
-          const options = {...defaultOptions, ...baseOptions}
-          return Apollo.useLazyQuery<AdminTournamentPageVideosQuery, AdminTournamentPageVideosQueryVariables>(AdminTournamentPageVideosDocument, options);
-        }
-export type AdminTournamentPageVideosQueryHookResult = ReturnType<typeof useAdminTournamentPageVideosQuery>;
-export type AdminTournamentPageVideosLazyQueryHookResult = ReturnType<typeof useAdminTournamentPageVideosLazyQuery>;
-export type AdminTournamentPageVideosQueryResult = Apollo.QueryResult<AdminTournamentPageVideosQuery, AdminTournamentPageVideosQueryVariables>;
-export const AdminTournamentPageCreateVideoDocument = gql`
-    mutation AdminTournamentPageCreateVideo($tournamentId: ID!, $url: String!) {
-  createTournamentVideo(input: {tournamentId: $tournamentId, url: $url}) {
-    tournamentVideo {
-      id
-    }
-  }
-}
-    `;
-export type AdminTournamentPageCreateVideoMutationFn = Apollo.MutationFunction<AdminTournamentPageCreateVideoMutation, AdminTournamentPageCreateVideoMutationVariables>;
-
-/**
- * __useAdminTournamentPageCreateVideoMutation__
- *
- * To run a mutation, you first call `useAdminTournamentPageCreateVideoMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useAdminTournamentPageCreateVideoMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [adminTournamentPageCreateVideoMutation, { data, loading, error }] = useAdminTournamentPageCreateVideoMutation({
- *   variables: {
- *      tournamentId: // value for 'tournamentId'
- *      url: // value for 'url'
- *   },
- * });
- */
-export function useAdminTournamentPageCreateVideoMutation(baseOptions?: Apollo.MutationHookOptions<AdminTournamentPageCreateVideoMutation, AdminTournamentPageCreateVideoMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<AdminTournamentPageCreateVideoMutation, AdminTournamentPageCreateVideoMutationVariables>(AdminTournamentPageCreateVideoDocument, options);
-      }
-export type AdminTournamentPageCreateVideoMutationHookResult = ReturnType<typeof useAdminTournamentPageCreateVideoMutation>;
-export type AdminTournamentPageCreateVideoMutationResult = Apollo.MutationResult<AdminTournamentPageCreateVideoMutation>;
-export type AdminTournamentPageCreateVideoMutationOptions = Apollo.BaseMutationOptions<AdminTournamentPageCreateVideoMutation, AdminTournamentPageCreateVideoMutationVariables>;
-export const AdminTournamentPageDeleteVideoDocument = gql`
-    mutation AdminTournamentPageDeleteVideo($tournamentVideoId: ID!) {
-  deleteTournamentVideo(input: {tournamentVideoId: $tournamentVideoId}) {
-    tournamentVideo {
-      id
-    }
-  }
-}
-    `;
-export type AdminTournamentPageDeleteVideoMutationFn = Apollo.MutationFunction<AdminTournamentPageDeleteVideoMutation, AdminTournamentPageDeleteVideoMutationVariables>;
-
-/**
- * __useAdminTournamentPageDeleteVideoMutation__
- *
- * To run a mutation, you first call `useAdminTournamentPageDeleteVideoMutation` within a React component and pass it any options that fit your needs.
- * When your component renders, `useAdminTournamentPageDeleteVideoMutation` returns a tuple that includes:
- * - A mutate function that you can call at any time to execute the mutation
- * - An object with fields that represent the current status of the mutation's execution
- *
- * @param baseOptions options that will be passed into the mutation, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options-2;
- *
- * @example
- * const [adminTournamentPageDeleteVideoMutation, { data, loading, error }] = useAdminTournamentPageDeleteVideoMutation({
- *   variables: {
- *      tournamentVideoId: // value for 'tournamentVideoId'
- *   },
- * });
- */
-export function useAdminTournamentPageDeleteVideoMutation(baseOptions?: Apollo.MutationHookOptions<AdminTournamentPageDeleteVideoMutation, AdminTournamentPageDeleteVideoMutationVariables>) {
-        const options = {...defaultOptions, ...baseOptions}
-        return Apollo.useMutation<AdminTournamentPageDeleteVideoMutation, AdminTournamentPageDeleteVideoMutationVariables>(AdminTournamentPageDeleteVideoDocument, options);
-      }
-export type AdminTournamentPageDeleteVideoMutationHookResult = ReturnType<typeof useAdminTournamentPageDeleteVideoMutation>;
-export type AdminTournamentPageDeleteVideoMutationResult = Apollo.MutationResult<AdminTournamentPageDeleteVideoMutation>;
-export type AdminTournamentPageDeleteVideoMutationOptions = Apollo.BaseMutationOptions<AdminTournamentPageDeleteVideoMutation, AdminTournamentPageDeleteVideoMutationVariables>;
 export const TopPageDocument = gql`
     query TopPage {
   tournaments(first: 3) {
