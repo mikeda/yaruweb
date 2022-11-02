@@ -18,6 +18,7 @@ export const Image: React.FC<Props> = ({ url, attributes, children }) => {
           src={url}
           style={{
             display: 'block',
+            width: '100%',
             maxWidth: '550px',
             maxHeight: '20em',
             boxShadow: `${selected && focused ? '0 0 0 3px #B4D5FF' : 'none'}`,
