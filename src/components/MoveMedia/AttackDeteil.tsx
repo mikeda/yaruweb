@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { ArrowRight } from '@mui/icons-material';
-import { Chip, Divider, Stack, Typography } from '@mui/material';
+import { Chip, Divider, Stack } from '@mui/material';
 
 import { DetailFooter } from './DetailFooter';
 import { DetailItem } from './DetailItem';
@@ -21,9 +21,7 @@ export const AttackDeteil: React.FC<Props> = ({ move, attack }) => {
         <DetailItem label="判定">
           <Stack direction="row" divider={<ArrowRight />} spacing={1}>
             {attack.heights.map((h, i) => (
-              <Typography key={i} variant="body2">
-                {AttackTypeEnumText[h]}
-              </Typography>
+              <span key={i}>{AttackTypeEnumText[h]}</span>
             ))}
           </Stack>
         </DetailItem>
