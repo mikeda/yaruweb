@@ -35,9 +35,14 @@ export const BattleListItem: React.FC<Props> = ({ battle, onClick }) => {
         }
         secondary={
           <>
-            <Typography variant="body2">{subTitle}</Typography>
+            <Typography variant="body2" component="span">
+              {subTitle}
+            </Typography>
+            <br />
             {battle.round !== BattleRound.Unspecified && (
-              <Typography variant="body2">{BattleRoundText[battle.round]}</Typography>
+              <Typography variant="body2" component="span">
+                {BattleRoundText[battle.round]}
+              </Typography>
             )}
           </>
         }

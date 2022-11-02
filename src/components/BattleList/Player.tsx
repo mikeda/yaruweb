@@ -43,7 +43,7 @@ export const Player: React.FC<Props> = ({ name, rounds, faceImageUrl }) => {
     <Box display="flex" alignItems="center" className={classes.root}>
       <Avatar className={clsx(classes.avatar, rounds === 3 && classes.win)}>{rounds}</Avatar>
       <Avatar className={classes.avatar} src={faceImageUrl} />
-      <Typography>{name}</Typography>
+      <Typography component="div">{name}</Typography>
     </Box>
   );
 };

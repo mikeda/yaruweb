@@ -6,7 +6,6 @@ import { useRecoilValue } from 'recoil';
 
 import { loadingState } from '@/lib';
 
-
 export const Loading: React.FC = () => {
   const loading = useRecoilValue(loadingState);
   if (!loading) return null;
@@ -59,15 +58,15 @@ const Inner = styled('div')`
     animation-fill-mode: both;
   }
 
-  & > div:nth-child(1) {
+  & > div:nth-of-type(1) {
     animation: ${scale} 0.75s -0.24s infinite cubic-bezier(0.2, 0.68, 0.18, 1.08);
   }
 
-  & > div:nth-child(2) {
+  & > div:nth-of-type(2) {
     animation: ${scale} 0.75s -0.12s infinite cubic-bezier(0.2, 0.68, 0.18, 1.08);
   }
 
-  & > div:nth-child(3) {
+  & > div:nth-of-type(3) {
     animation: ${scale} 0.75s 0s infinite cubic-bezier(0.2, 0.68, 0.18, 1.08);
   }
 `;

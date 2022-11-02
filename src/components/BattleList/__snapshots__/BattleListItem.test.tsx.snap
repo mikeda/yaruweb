@@ -35,11 +35,11 @@ exports[`BattleListItem Snapshot 1`] = `
                   src="https://example.com/face.jpg"
                 />
               </div>
-              <p
+              <div
                 class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
               >
                 対戦者名1
-              </p>
+              </div>
             </div>
           </div>
           <div
@@ -61,29 +61,30 @@ exports[`BattleListItem Snapshot 1`] = `
                   src="https://example.com/face.jpg"
                 />
               </div>
-              <p
+              <div
                 class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
               >
                 対戦者名2
-              </p>
+              </div>
             </div>
           </div>
         </div>
       </span>
       <p
         class="MuiTypography-root MuiTypography-body2 MuiListItemText-secondary css-83ijpv-MuiTypography-root"
-      />
-      <p
-        class="MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root"
       >
-        動画名 | 2022/5/5
+        <span
+          class="MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root"
+        >
+          動画名 | 2022/5/5
+        </span>
+        <br />
+        <span
+          class="MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root"
+        >
+          Grand Final(リセット)
+        </span>
       </p>
-      <p
-        class="MuiTypography-root MuiTypography-body2 css-e784if-MuiTypography-root"
-      >
-        Grand Final(リセット)
-      </p>
-      <p />
     </div>
     <span
       class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
