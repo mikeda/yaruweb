@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useRef } from 'react';
 
 import isUrl from 'is-url';
 import { createEditor, Transforms, Node } from 'slate';
@@ -23,10 +23,11 @@ export const createArticleEditor = () => {
 
 export const ArticleEditor: React.FC = () => {
   const editor = useSlate();
+  const compositionRef = useRef(false);
   const renderElement = useCallback((props: RenderElementProps) => <ArticleElement {...props} />, []);
   const renderLeaf = useCallback((props: RenderLeafProps) => <ArticleLeaf {...props} />, []);
   const onKeyDown = useCallback((event: React.KeyboardEvent<HTMLDivElement>) => {
-    if (event.key === 'Enter') {
+    if (event.key === 'Enter' && !compositionRef.current) {
       if (event.shiftKey) {
         event.preventDefault();
         editor.insertText('\n');
@@ -127,6 +128,12 @@ export const ArticleEditor: React.FC = () => {
 
       <Editable
         placeholder="本文"
+        onCompositionStart={() => {
+          compositionRef.current = true;
+        }}
+        onCompositionEnd={() => {
+          compositionRef.current = false;
+        }}
         renderElement={renderElement}
         renderLeaf={renderLeaf}
         onKeyDown={onKeyDown}

@@ -53,10 +53,14 @@ export const ArticleForm: React.FC<Props> = ({ article, onSubmit }) => {
     formState: { errors },
   } = useForm<ArticleAttributes>({
     resolver: yupResolver(schema),
-    defaultValues: article && {
-      title: article.title,
-      category: article.category,
-    },
+    defaultValues: article
+      ? {
+          title: article.title,
+          category: article.category,
+        }
+      : {
+          category: ArticleCategory.Blog,
+        },
   });
 
   const onFormSubmit = (attributes: ArticleAttributes) => {
