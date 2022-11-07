@@ -1,0 +1,11 @@
+fragment MoveCategoryForm on MoveCategory {
+  id
+  name
+  position
+}
+
+fragment MoveCategoryPositionSelect on MoveCategory {
+  id
+  name
+  position
+}

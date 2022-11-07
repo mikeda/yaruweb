@@ -1,15 +1,3 @@
-fragment MoveCategoryForm on MoveCategory {
-  id
-  name
-  position
-}
-
-fragment MoveCategoryPositionSelect on MoveCategory {
-  id
-  name
-  position
-}
-
 query MoveCategoryForm($moveCategoryId: ID!) {
   moveCategory(moveCategoryId: $moveCategoryId) {
     ...MoveCategoryForm

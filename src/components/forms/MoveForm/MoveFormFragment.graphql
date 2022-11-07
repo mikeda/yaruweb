@@ -1,0 +1,74 @@
+fragment MoveFormAttack on AttackMove {
+  id
+  startUpFrame
+  duration
+  reach
+  blockFrame
+  blockResult
+  blockStatus
+  hitFrame
+  hitResult
+  hitStatus
+  counterFrame
+  counterResult
+  counterStatus
+  heights
+  damages
+  powerCrush
+  crouchingStatus
+  jumpStatus
+  homing
+  screw
+  wallBound
+}
+
+fragment MoveFormThrow on ThrowMove {
+  id
+  throwType
+  throwResult
+  throwEscape
+  startUpFrame
+  damage
+}
+
+fragment MoveFormReversal on ReversalMove {
+  id
+  kind
+  startUpFrame
+  finishFrame
+}
+
+fragment MoveForm on Move {
+  id
+  name
+  kana
+  command
+  statusAfter
+  note
+  position
+
+  moveCategory {
+    id
+    name
+  }
+
+  moveable {
+    __typename
+
+    ... on AttackMove {
+      ...MoveFormAttack
+    }
+    ... on ThrowMove {
+      ...MoveFormThrow
+    }
+    ... on ReversalMove {
+      ...MoveFormReversal
+    }
+  }
+
+  moveVideo {
+    id
+    m3u8Url
+    thumbnailUrl
+  }
+}

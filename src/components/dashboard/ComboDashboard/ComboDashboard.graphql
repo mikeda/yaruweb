@@ -1,27 +1,3 @@
-fragment ComboDashboardCategory on ComboCategory {
-  id
-  name
-  ...ComboCategoryForm
-  ...ComboCategoryPositionSelect
-
-  combos {
-    ...ComboTableRow
-  }
-}
-
-fragment ComboDashboard on Character {
-  id
-  slug
-
-  comboCategories {
-    ...ComboDashboardCategory
-  }
-
-  moveCategories {
-    ...MoveSelectOption
-  }
-}
-
 mutation CreateComboCategory($characterSlug: String!, $attributes: ComboCategoryAttributes!) {
   createComboCategory(input: { characterSlug: $characterSlug, attributes: $attributes }) {
     comboCategory {

@@ -1,0 +1,23 @@
+fragment ComboDashboardCategory on ComboCategory {
+  id
+  name
+  ...ComboCategoryForm
+  ...ComboCategoryPositionSelect
+
+  combos {
+    ...ComboTableRow
+  }
+}
+
+fragment ComboDashboard on Character {
+  id
+  slug
+
+  comboCategories {
+    ...ComboDashboardCategory
+  }
+
+  moveCategories {
+    ...MoveSelectOption
+  }
+}

@@ -1,0 +1,6 @@
+fragment Viewer on User {
+  id
+  name
+  role
+  avatarUrl
+}

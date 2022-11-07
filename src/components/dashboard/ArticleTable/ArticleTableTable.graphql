@@ -5,7 +5,7 @@ fragment ArticleTableRow on Article {
 }
 
 query ArticleTableRows($after: String, $keyword: String) {
-  articles(first: 10, after: $after, keyword: $keyword, myOwn: true) {
+  myArticles(first: 10, after: $after, keyword: $keyword) {
     edges {
       node {
         ...ArticleTableRow

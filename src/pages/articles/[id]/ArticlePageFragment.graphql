@@ -18,9 +18,3 @@ fragment ArticlePage on Article {
     ...ArticleCard
   }
 }
-
-query ArticlePage($articleId: ID!) {
-  article(articleId: $articleId) {
-    ...ArticlePage
-  }
-}
