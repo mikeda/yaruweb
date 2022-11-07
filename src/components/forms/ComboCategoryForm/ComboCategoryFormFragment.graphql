@@ -1,0 +1,11 @@
+fragment ComboCategoryForm on ComboCategory {
+  id
+  name
+  position
+}
+
+fragment ComboCategoryPositionSelect on ComboCategory {
+  id
+  name
+  position
+}

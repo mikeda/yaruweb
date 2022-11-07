@@ -1260,11 +1260,6 @@ export type MutationUpdateViewerArgs = {
   input: UpdateViewerInput;
 };
 
-export enum Order {
-  /** 新着 */
-  New = 'new'
-}
-
 /** Information about pagination in a connection. */
 export type PageInfo = {
   __typename?: 'PageInfo';
@@ -1383,6 +1378,7 @@ export type Query = {
   countries: Array<Country>;
   move: Move;
   moveCategory: MoveCategory;
+  myArticles: ArticleConnection;
   player: Player;
   players: PlayerConnection;
   tournament: Tournament;
@@ -1406,8 +1402,6 @@ export type QueryArticlesArgs = {
   first?: InputMaybe<Scalars['Int']>;
   keyword?: InputMaybe<Scalars['String']>;
   last?: InputMaybe<Scalars['Int']>;
-  myOwn?: InputMaybe<Scalars['Boolean']>;
-  order?: InputMaybe<Order>;
 };
 
 
@@ -1443,6 +1437,15 @@ export type QueryMoveArgs = {
 
 export type QueryMoveCategoryArgs = {
   moveCategoryId: Scalars['ID'];
+};
+
+
+export type QueryMyArticlesArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  keyword?: InputMaybe<Scalars['String']>;
+  last?: InputMaybe<Scalars['Int']>;
 };
 
 
@@ -2121,7 +2124,7 @@ export type ArticleTableRowsQueryVariables = Exact<{
 }>;
 
 
-export type ArticleTableRowsQuery = { __typename?: 'Query', articles: { __typename?: 'ArticleConnection', edges: Array<{ __typename?: 'ArticleEdge', cursor: string, node: { __typename?: 'Article', id: string, title: string, status: ArticleStatus } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null } } };
+export type ArticleTableRowsQuery = { __typename?: 'Query', myArticles: { __typename?: 'ArticleConnection', edges: Array<{ __typename?: 'ArticleEdge', cursor: string, node: { __typename?: 'Article', id: string, title: string, status: ArticleStatus } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null } } };
 
 export type PublishArticleMutationVariables = Exact<{
   articleId: Scalars['ID'];
@@ -2153,10 +2156,6 @@ export type CharacterTableRowsQueryVariables = Exact<{
 
 export type CharacterTableRowsQuery = { __typename?: 'Query', characters: { __typename?: 'CharacterConnection', nodes: Array<{ __typename?: 'Character', id: string, slug: string, name: string, faceImageUrl: string, movesCount: number, combosCount: number }> } };
 
-export type ComboDashboardCategoryFragment = { __typename?: 'ComboCategory', id: string, name: string, position: number, combos: Array<{ __typename?: 'Combo', id: string, command: Array<string>, position: number, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> };
-
-export type ComboDashboardFragment = { __typename?: 'Character', id: string, slug: string, comboCategories: Array<{ __typename?: 'ComboCategory', id: string, name: string, position: number, combos: Array<{ __typename?: 'Combo', id: string, command: Array<string>, position: number, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> }>, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, moves: Array<{ __typename?: 'Move', id: string, name: string }> }> };
-
 export type CreateComboCategoryMutationVariables = Exact<{
   characterSlug: Scalars['String'];
   attributes: ComboCategoryAttributes;
@@ -2179,6 +2178,12 @@ export type DeleteComboCategoryMutationVariables = Exact<{
 
 
 export type DeleteComboCategoryMutation = { __typename?: 'Mutation', deleteComboCategory?: { __typename?: 'DeleteComboCategoryPayload', comboCategory: { __typename?: 'ComboCategory', id: string, name: string, position: number, character: { __typename?: 'Character', id: string, comboCategories: Array<{ __typename?: 'ComboCategory', id: string, position: number }> }, combos: Array<{ __typename?: 'Combo', id: string, command: Array<string>, position: number, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> } } | null };
+
+export type ComboDashboardCategoryFragment = { __typename?: 'ComboCategory', id: string, name: string, position: number, combos: Array<{ __typename?: 'Combo', id: string, command: Array<string>, position: number, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> };
+
+export type ComboDashboardFragment = { __typename?: 'Character', id: string, slug: string, comboCategories: Array<{ __typename?: 'ComboCategory', id: string, name: string, position: number, combos: Array<{ __typename?: 'Combo', id: string, command: Array<string>, position: number, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> }>, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, moves: Array<{ __typename?: 'Move', id: string, name: string }> }> };
+
+export type ComboPositionSelectFragment = { __typename?: 'Combo', id: string, command: Array<string>, position: number };
 
 export type ComboTableRowFragment = { __typename?: 'Combo', id: string, command: Array<string>, position: number, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null };
 
@@ -2413,10 +2418,6 @@ export type UpdateArticleMutation = { __typename?: 'Mutation', updateArticle?: {
 
 export type CharacterFormFragment = { __typename?: 'Character', id: string, name: string, nameKana: string, longName: string, longNameKana: string, slug: string, country: string, fightingStyle: string, story: string, description: string, dlc: boolean };
 
-export type ComboCategoryFormFragment = { __typename?: 'ComboCategory', id: string, name: string, position: number };
-
-export type ComboCategoryPositionSelectFragment = { __typename?: 'ComboCategory', id: string, name: string, position: number };
-
 export type ComboCategoryFormQueryVariables = Exact<{
   comboCategoryId: Scalars['ID'];
 }>;
@@ -2424,9 +2425,9 @@ export type ComboCategoryFormQueryVariables = Exact<{
 
 export type ComboCategoryFormQuery = { __typename?: 'Query', comboCategory: { __typename?: 'ComboCategory', id: string, name: string, position: number } };
 
-export type ComboFormFragment = { __typename?: 'Combo', id: string, command: Array<string>, damage?: number | null, note?: string | null, position: number, move?: { __typename?: 'Move', id: string } | null };
+export type ComboCategoryFormFragment = { __typename?: 'ComboCategory', id: string, name: string, position: number };
 
-export type ComboPositionSelectFragment = { __typename?: 'Combo', id: string, command: Array<string>, position: number };
+export type ComboCategoryPositionSelectFragment = { __typename?: 'ComboCategory', id: string, name: string, position: number };
 
 export type ComboFormQueryVariables = Exact<{
   comboId: Scalars['ID'];
@@ -2435,9 +2436,7 @@ export type ComboFormQueryVariables = Exact<{
 
 export type ComboFormQuery = { __typename?: 'Query', combo: { __typename?: 'Combo', id: string, command: Array<string>, damage?: number | null, note?: string | null, position: number, move?: { __typename?: 'Move', id: string } | null } };
 
-export type MoveCategoryFormFragment = { __typename?: 'MoveCategory', id: string, name: string, position: number };
-
-export type MoveCategoryPositionSelectFragment = { __typename?: 'MoveCategory', id: string, name: string, position: number };
+export type ComboFormFragment = { __typename?: 'Combo', id: string, command: Array<string>, damage?: number | null, note?: string | null, position: number, move?: { __typename?: 'Move', id: string } | null };
 
 export type MoveCategoryFormQueryVariables = Exact<{
   moveCategoryId: Scalars['ID'];
@@ -2446,13 +2445,9 @@ export type MoveCategoryFormQueryVariables = Exact<{
 
 export type MoveCategoryFormQuery = { __typename?: 'Query', moveCategory: { __typename?: 'MoveCategory', id: string, name: string, position: number } };
 
-export type MoveFormAttackFragment = { __typename?: 'AttackMove', id: string, startUpFrame?: number | null, duration?: number | null, reach?: number | null, blockFrame?: number | null, blockResult: AttackMoveResultEnum, blockStatus?: AttackMoveStateEnum | null, hitFrame?: number | null, hitResult: AttackMoveResultEnum, hitStatus?: AttackMoveStateEnum | null, counterFrame?: number | null, counterResult: AttackMoveResultEnum, counterStatus?: AttackMoveStateEnum | null, heights: Array<AttackTypeEnum>, damages: Array<number>, powerCrush: boolean, crouchingStatus: boolean, jumpStatus: boolean, homing: boolean, screw: boolean, wallBound: boolean };
+export type MoveCategoryFormFragment = { __typename?: 'MoveCategory', id: string, name: string, position: number };
 
-export type MoveFormThrowFragment = { __typename?: 'ThrowMove', id: string, throwType: ThrowTypeEnum, throwResult: ThrowMoveResultEnum, throwEscape: ThrowEscapeEnum, startUpFrame?: number | null, damage?: number | null };
-
-export type MoveFormReversalFragment = { __typename?: 'ReversalMove', id: string, kind: string, startUpFrame?: number | null, finishFrame?: number | null };
-
-export type MoveFormFragment = { __typename?: 'Move', id: string, name: string, kana?: string | null, command: Array<string>, statusAfter?: string | null, note?: string | null, position: number, moveCategory: { __typename?: 'MoveCategory', id: string, name: string }, moveable: { __typename: 'AttackMove', id: string, startUpFrame?: number | null, duration?: number | null, reach?: number | null, blockFrame?: number | null, blockResult: AttackMoveResultEnum, blockStatus?: AttackMoveStateEnum | null, hitFrame?: number | null, hitResult: AttackMoveResultEnum, hitStatus?: AttackMoveStateEnum | null, counterFrame?: number | null, counterResult: AttackMoveResultEnum, counterStatus?: AttackMoveStateEnum | null, heights: Array<AttackTypeEnum>, damages: Array<number>, powerCrush: boolean, crouchingStatus: boolean, jumpStatus: boolean, homing: boolean, screw: boolean, wallBound: boolean } | { __typename: 'ReversalMove', id: string, kind: string, startUpFrame?: number | null, finishFrame?: number | null } | { __typename: 'ThrowMove', id: string, throwType: ThrowTypeEnum, throwResult: ThrowMoveResultEnum, throwEscape: ThrowEscapeEnum, startUpFrame?: number | null, damage?: number | null }, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null };
+export type MoveCategoryPositionSelectFragment = { __typename?: 'MoveCategory', id: string, name: string, position: number };
 
 export type MoveFormQueryVariables = Exact<{
   moveId: Scalars['ID'];
@@ -2462,6 +2457,14 @@ export type MoveFormQueryVariables = Exact<{
 export type MoveFormQuery = { __typename?: 'Query', move: { __typename?: 'Move', id: string, name: string, kana?: string | null, command: Array<string>, statusAfter?: string | null, note?: string | null, position: number, moveCategory: { __typename?: 'MoveCategory', id: string, name: string }, moveable: { __typename: 'AttackMove', id: string, startUpFrame?: number | null, duration?: number | null, reach?: number | null, blockFrame?: number | null, blockResult: AttackMoveResultEnum, blockStatus?: AttackMoveStateEnum | null, hitFrame?: number | null, hitResult: AttackMoveResultEnum, hitStatus?: AttackMoveStateEnum | null, counterFrame?: number | null, counterResult: AttackMoveResultEnum, counterStatus?: AttackMoveStateEnum | null, heights: Array<AttackTypeEnum>, damages: Array<number>, powerCrush: boolean, crouchingStatus: boolean, jumpStatus: boolean, homing: boolean, screw: boolean, wallBound: boolean } | { __typename: 'ReversalMove', id: string, kind: string, startUpFrame?: number | null, finishFrame?: number | null } | { __typename: 'ThrowMove', id: string, throwType: ThrowTypeEnum, throwResult: ThrowMoveResultEnum, throwEscape: ThrowEscapeEnum, startUpFrame?: number | null, damage?: number | null }, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null } };
 
 export type MovePositionSelectFragment = { __typename?: 'Move', id: string, name: string, position: number };
+
+export type MoveFormAttackFragment = { __typename?: 'AttackMove', id: string, startUpFrame?: number | null, duration?: number | null, reach?: number | null, blockFrame?: number | null, blockResult: AttackMoveResultEnum, blockStatus?: AttackMoveStateEnum | null, hitFrame?: number | null, hitResult: AttackMoveResultEnum, hitStatus?: AttackMoveStateEnum | null, counterFrame?: number | null, counterResult: AttackMoveResultEnum, counterStatus?: AttackMoveStateEnum | null, heights: Array<AttackTypeEnum>, damages: Array<number>, powerCrush: boolean, crouchingStatus: boolean, jumpStatus: boolean, homing: boolean, screw: boolean, wallBound: boolean };
+
+export type MoveFormThrowFragment = { __typename?: 'ThrowMove', id: string, throwType: ThrowTypeEnum, throwResult: ThrowMoveResultEnum, throwEscape: ThrowEscapeEnum, startUpFrame?: number | null, damage?: number | null };
+
+export type MoveFormReversalFragment = { __typename?: 'ReversalMove', id: string, kind: string, startUpFrame?: number | null, finishFrame?: number | null };
+
+export type MoveFormFragment = { __typename?: 'Move', id: string, name: string, kana?: string | null, command: Array<string>, statusAfter?: string | null, note?: string | null, position: number, moveCategory: { __typename?: 'MoveCategory', id: string, name: string }, moveable: { __typename: 'AttackMove', id: string, startUpFrame?: number | null, duration?: number | null, reach?: number | null, blockFrame?: number | null, blockResult: AttackMoveResultEnum, blockStatus?: AttackMoveStateEnum | null, hitFrame?: number | null, hitResult: AttackMoveResultEnum, hitStatus?: AttackMoveStateEnum | null, counterFrame?: number | null, counterResult: AttackMoveResultEnum, counterStatus?: AttackMoveStateEnum | null, heights: Array<AttackTypeEnum>, damages: Array<number>, powerCrush: boolean, crouchingStatus: boolean, jumpStatus: boolean, homing: boolean, screw: boolean, wallBound: boolean } | { __typename: 'ReversalMove', id: string, kind: string, startUpFrame?: number | null, finishFrame?: number | null } | { __typename: 'ThrowMove', id: string, throwType: ThrowTypeEnum, throwResult: ThrowMoveResultEnum, throwEscape: ThrowEscapeEnum, startUpFrame?: number | null, damage?: number | null }, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null };
 
 export type PlayerFormFragment = { __typename?: 'Player', name: string, slug: string, tonamelId?: string | null, smashggId?: string | null, twitterId?: string | null, streamingUrl?: string | null, description?: string | null, country?: { __typename?: 'Country', id: string } | null };
 
@@ -2575,14 +2578,12 @@ export type SsgTournamentVideoPathsQueryVariables = Exact<{ [key: string]: never
 
 export type SsgTournamentVideoPathsQuery = { __typename?: 'Query', tournamentVideos: { __typename?: 'TournamentVideoConnection', nodes: Array<{ __typename?: 'TournamentVideo', id: string }> } };
 
-export type ViewerFragment = { __typename?: 'User', id: string, name: string, role: UserRole, avatarUrl: string };
-
 export type ViewerQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type ViewerQuery = { __typename?: 'Query', viewer: { __typename?: 'User', id: string, name: string, role: UserRole, avatarUrl: string } };
 
-export type ArticlePageFragment = { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, category: ArticleCategory, content: string, author: { __typename?: 'User', id: string, name: string, avatarUrl: string }, relatedArticles: Array<{ __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, author: { __typename?: 'User', id: string, name: string, avatarUrl: string } }> };
+export type ViewerFragment = { __typename?: 'User', id: string, name: string, role: UserRole, avatarUrl: string };
 
 export type ArticlePageQueryVariables = Exact<{
   articleId: Scalars['ID'];
@@ -2590,6 +2591,8 @@ export type ArticlePageQueryVariables = Exact<{
 
 
 export type ArticlePageQuery = { __typename?: 'Query', article: { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, category: ArticleCategory, content: string, author: { __typename?: 'User', id: string, name: string, avatarUrl: string }, relatedArticles: Array<{ __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, author: { __typename?: 'User', id: string, name: string, avatarUrl: string } }> } };
+
+export type ArticlePageFragment = { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, category: ArticleCategory, content: string, author: { __typename?: 'User', id: string, name: string, avatarUrl: string }, relatedArticles: Array<{ __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, author: { __typename?: 'User', id: string, name: string, avatarUrl: string } }> };
 
 export type ArticlesPageQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -3931,7 +3934,7 @@ export type TournamentCardsLazyQueryHookResult = ReturnType<typeof useTournament
 export type TournamentCardsQueryResult = Apollo.QueryResult<TournamentCardsQuery, TournamentCardsQueryVariables>;
 export const ArticleTableRowsDocument = gql`
     query ArticleTableRows($after: String, $keyword: String) {
-  articles(first: 10, after: $after, keyword: $keyword, myOwn: true) {
+  myArticles(first: 10, after: $after, keyword: $keyword) {
     edges {
       node {
         ...ArticleTableRow

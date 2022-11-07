@@ -1,0 +1,5 @@
+query ComboForm($comboId: ID!) {
+  combo(comboId: $comboId) {
+    ...ComboForm
+  }
+}

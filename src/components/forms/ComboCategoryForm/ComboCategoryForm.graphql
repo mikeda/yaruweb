@@ -1,15 +1,3 @@
-fragment ComboCategoryForm on ComboCategory {
-  id
-  name
-  position
-}
-
-fragment ComboCategoryPositionSelect on ComboCategory {
-  id
-  name
-  position
-}
-
 query ComboCategoryForm($comboCategoryId: ID!) {
   comboCategory(comboCategoryId: $comboCategoryId) {
     ...ComboCategoryForm

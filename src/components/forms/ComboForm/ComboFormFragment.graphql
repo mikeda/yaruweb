@@ -1,0 +1,10 @@
+fragment ComboForm on Combo {
+  id
+  command
+  damage
+  note
+  position
+  move {
+    id
+  }
+}
