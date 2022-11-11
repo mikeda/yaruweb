@@ -2460,15 +2460,15 @@
     parse-filepath "^1.0.2"
     tslib "~2.4.0"
 
-"@graphql-eslint/eslint-plugin@3.13.0":
-  version "3.13.0"
-  resolved "https://registry.yarnpkg.com/@graphql-eslint/eslint-plugin/-/eslint-plugin-3.13.0.tgz#3490b961cb87b8b0f2fa876102fe1c0097d1df3f"
-  integrity sha512-ZFWqGrSU7GnKuNRQ0omlmLikHarQ3kUf4bd3OgFte/JnyHTDeHm5M1o5L32bnHQzuuMpSXEItLy8wqqKAlrGGg==
+"@graphql-eslint/eslint-plugin@3.13.1":
+  version "3.13.1"
+  resolved "https://registry.yarnpkg.com/@graphql-eslint/eslint-plugin/-/eslint-plugin-3.13.1.tgz#2805481f3a39b260035c035d260851c43ee957a5"
+  integrity sha512-Q9holJ9CnV5zgG3uqYAMdJ4GBVsNjF/BOaGWeBx6K33P3BvCXGivCZvJJhpXCRfbp0sP2CiLKf02eG9ScZS3lg==
   dependencies:
     "@babel/code-frame" "^7.18.6"
     "@graphql-tools/code-file-loader" "^7.3.6"
     "@graphql-tools/graphql-tag-pluck" "^7.3.6"
-    "@graphql-tools/utils" "^8.12.0"
+    "@graphql-tools/utils" "^9.0.0"
     chalk "^4.1.2"
     debug "^4.3.4"
     fast-glob "^3.2.12"
@@ -2756,7 +2756,7 @@
   dependencies:
     tslib "^2.4.0"
 
-"@graphql-tools/utils@8.12.0", "@graphql-tools/utils@^8.12.0":
+"@graphql-tools/utils@8.12.0":
   version "8.12.0"
   resolved "https://registry.yarnpkg.com/@graphql-tools/utils/-/utils-8.12.0.tgz#243bc4f5fc2edbc9e8fd1038189e57d837cbe31f"
   integrity sha512-TeO+MJWGXjUTS52qfK4R8HiPoF/R7X+qmgtOYd8DTH0l6b+5Y/tlg5aGeUJefqImRq7nvi93Ms40k/Uz4D5CWw==
@@ -2781,6 +2781,13 @@
   version "9.0.0"
   resolved "https://registry.yarnpkg.com/@graphql-tools/utils/-/utils-9.0.0.tgz#4e75680d29e866b3de293b4bc9fa4a40aeae0085"
   integrity sha512-kaCwyWnURxMsYbxzkfylLqFFelu83jKk3BJOOy0GIuxEtgXVS9v7Y/tojljo69Q+jaZ2YxAi3+d8IpM+hx768A==
+  dependencies:
+    tslib "^2.4.0"
+
+"@graphql-tools/utils@^9.0.0":
+  version "9.1.0"
+  resolved "https://registry.yarnpkg.com/@graphql-tools/utils/-/utils-9.1.0.tgz#c33893e0aa9cbd3760d94f1771477e722adb4e54"
+  integrity sha512-4Ketxo98IwKA/56LP6cI6PgQBwUCujszQcTNkzjq7liJPa2mLjKnmVOJ0bauMwKcEazeYuZagceljb0POmEGvQ==
   dependencies:
     tslib "^2.4.0"
 
@@ -3325,10 +3332,10 @@
   resolved "https://registry.yarnpkg.com/@next/env/-/env-12.3.3.tgz#26c8e8f0f65da382d1a537cb8df30d63fc5d828a"
   integrity sha512-H2pKuOasV9RgvVaWosB2rGSNeQShQpiDaF4EEjLyagIc3HwqdOw2/VAG/8Lq+adOwPv2P73O1hulTNad3k5MDw==
 
-"@next/eslint-plugin-next@12.3.2":
-  version "12.3.2"
-  resolved "https://registry.yarnpkg.com/@next/eslint-plugin-next/-/eslint-plugin-next-12.3.2.tgz#c965bb41fd5c36b6fc5fe066aeebf9385b69a62d"
-  integrity sha512-Jx0BIS9STamGSbA+vgTxPAi1mRcq4DoH/5kPMs0PFLFi542mmIKUUtYWB61bI+G6KPMTqejYmO3zi+SF6tzGYg==
+"@next/eslint-plugin-next@12.3.3":
+  version "12.3.3"
+  resolved "https://registry.yarnpkg.com/@next/eslint-plugin-next/-/eslint-plugin-next-12.3.3.tgz#4c2eb595101a1778d5ff7c78574f7e810f72b5e5"
+  integrity sha512-s1mPMhhmwc+B97lQ2xzLLEdn3TR6ietc8Z1zLhAEd5Vujqx+Ks7E8Qr8V93I/qTs21WY66zvs1SXKYLvOHbQVw==
   dependencies:
     glob "7.1.7"
 
@@ -8450,12 +8457,12 @@ escodegen@^2.0.0:
   optionalDependencies:
     source-map "~0.6.1"
 
-eslint-config-next@12.3.2:
-  version "12.3.2"
-  resolved "https://registry.yarnpkg.com/eslint-config-next/-/eslint-config-next-12.3.2.tgz#3dd50a9ae5acf77f0ca5c94d77b604e40c67bf5c"
-  integrity sha512-ir8t3wRNexUMSKsMNh7J1EWwiBAr2dd015UAiCFvQ/01MRBPmFof1C6PFh/RqlupwamSZlv6j8gfaV1RxHuRoQ==
+eslint-config-next@12.3.3:
+  version "12.3.3"
+  resolved "https://registry.yarnpkg.com/eslint-config-next/-/eslint-config-next-12.3.3.tgz#b04f6b55b43a72983e68e51329a993d2a8ea648c"
+  integrity sha512-ZqovaLqMlWQh9yVbqJ2gvOLk6acAZX4vRkORFsiI5lv9oJDDBbDDeTPG2KmpZ3K+l/wJ+xo6bm4FN90j94snhw==
   dependencies:
-    "@next/eslint-plugin-next" "12.3.2"
+    "@next/eslint-plugin-next" "12.3.3"
     "@rushstack/eslint-patch" "^1.1.3"
     "@typescript-eslint/parser" "^5.21.0"
     eslint-import-resolver-node "^0.3.6"
@@ -8516,10 +8523,10 @@ eslint-plugin-import@2.26.0, eslint-plugin-import@^2.26.0:
     resolve "^1.22.0"
     tsconfig-paths "^3.14.1"
 
-eslint-plugin-jest@27.1.4:
-  version "27.1.4"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-27.1.4.tgz#bdfaf51ee9ed0b86dac1e83753e22da072acaa92"
-  integrity sha512-evJ9E9id/z2Fu6LR+ncNySJ6UMs5RiJiv4JsmdA3gPWoq0AR+uZyva738+Y9Uln+3WaYX+3OYP9HJoau94Iurg==
+eslint-plugin-jest@27.1.5:
+  version "27.1.5"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-jest/-/eslint-plugin-jest-27.1.5.tgz#16fad619cfee6cdf73d56098fbed0761e1f653ce"
+  integrity sha512-CK2dekZ5VBdzsOSOH5Fc1rwC+cWXjkcyrmf1RV714nDUDKu+o73TTJiDxpbILG8PtPPpAAl3ywzh5QA7Ft0mjA==
   dependencies:
     "@typescript-eslint/utils" "^5.10.0"
 
