@@ -9898,10 +9898,10 @@ header-case@^2.0.4:
     capital-case "^1.0.4"
     tslib "^2.0.3"
 
-hls.js@1.2.6:
-  version "1.2.6"
-  resolved "https://registry.yarnpkg.com/hls.js/-/hls.js-1.2.6.tgz#9371041420fb93c09bc25580a0d1b81d81977876"
-  integrity sha512-jbhEDXM3mzXVbwnauOAfMiqGp/+kIVWJM6yT5K5sKD/YC3mMT33H+tvDU3tOb+X9s0VR55452To/u42h6ETO+w==
+hls.js@1.2.7:
+  version "1.2.7"
+  resolved "https://registry.yarnpkg.com/hls.js/-/hls.js-1.2.7.tgz#f421e258b10aa797cffb5ab2c3786675ead617f5"
+  integrity sha512-mD4Po7Q5TPNIYX6G8sDD+RS/xfrWjMjrtp+xPw3Thw8Tq557Vn0wdXIX/Zii28F9ncUMMQPZsGkoCWFna9CZCw==
 
 hmac-drbg@^1.0.1:
   version "1.0.1"
