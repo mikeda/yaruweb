@@ -16,10 +16,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import '@fortawesome/fontawesome-svg-core/styles.css';
 config.autoAddCss = false;
 
-import { Loading } from '@/components';
+import { GoogleTagManager, GoogleTagManagerId, Loading } from '@/components';
 import { useViewerQuery } from '@/generated/graphql';
-import { apolloClient, theme, viewerState, loadingState } from '@/lib';
-import * as gtag from '@/lib/gtag';
+import { apolloClient, theme, viewerState, loadingState, googleTagManagerId } from '@/lib';
 
 declare module '@mui/styles/defaultTheme' {
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -62,26 +61,16 @@ const AppInit = () => {
 };
 
 export default function App({ Component, pageProps }: AppProps) {
-  const router = useRouter();
-
   useEffect(() => {
     // Remove the server-side injected CSS.
     const jssStyles = document.querySelector('#jss-server-side');
     jssStyles?.parentElement?.removeChild(jssStyles);
   }, []);
 
-  useEffect(() => {
-    const handleRouteChange = (url: string) => {
-      gtag.pageview(url);
-    };
-    router.events.on('routeChangeComplete', handleRouteChange);
-    return () => {
-      router.events.off('routeChangeComplete', handleRouteChange);
-    };
-  }, [router.events]);
-
   return (
     <RecoilRoot>
+      <GoogleTagManager googleTagManagerId={googleTagManagerId as GoogleTagManagerId} />
+
       <ApolloProvider client={apolloClient}>
         <StyledEngineProvider injectFirst>
           <ThemeProvider theme={theme}>
