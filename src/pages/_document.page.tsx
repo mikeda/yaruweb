@@ -3,7 +3,7 @@ import React from 'react';
 import ServerStyleSheets from '@mui/styles/ServerStyleSheets';
 import NextDocument, { Html, Head, Main, NextScript, DocumentInitialProps, DocumentContext } from 'next/document';
 
-import { GA_TRACKING_ID, theme } from '@/lib';
+import { theme } from '@/lib';
 
 class Document extends NextDocument {
   render() {
@@ -13,22 +13,6 @@ class Document extends NextDocument {
           <link rel="stylesheet" href="/fonts/fonts.css" />
           <meta name="theme-color" content={theme.palette.primary.main} />
           <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
-          {GA_TRACKING_ID && (
-            <>
-              <script async={true} src={`https://www.googletagmanager.com/gtag/js?id=${GA_TRACKING_ID}`} />
-              <script
-                dangerouslySetInnerHTML={{
-                  __html: `
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', '${GA_TRACKING_ID}', {
-                  page_path: window.location.pathname,
-                });`,
-                }}
-              />
-            </>
-          )}
         </Head>
         <body>
           <Main />

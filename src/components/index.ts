@@ -12,6 +12,7 @@ export * from './ComboMedia';
 export * from './ComboListItem';
 export * from './Command';
 export * from './CustomText';
+export * from './GoogleTagManager';
 export * from './IntroSlides';
 export * from './Link';
 export * from './Loading';
