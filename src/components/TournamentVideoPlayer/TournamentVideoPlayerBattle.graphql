@@ -1,0 +1,20 @@
+fragment TournamentVideoPlayerBattle on Battle {
+  id
+  round
+  startSec
+
+  sides {
+    id
+    rounds
+
+    player {
+      id
+      name
+    }
+
+    character {
+      id
+      faceImageUrl
+    }
+  }
+}

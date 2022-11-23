@@ -1601,7 +1601,7 @@ type TournamentVideo {
   channel: Channel!
   id: ID!
   label: String
-  publishedAt: ISO8601DateTime
+  publishedAt: ISO8601DateTime!
   thumbnailUrl: String!
   title: String!
   tournament: Tournament!
