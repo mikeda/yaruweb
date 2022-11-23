@@ -28,6 +28,6 @@ export * from './SearchWord';
 export * from './SelectChip';
 export * from './StaffRequirement';
 export * from './TournamentCard';
-export * from './TournamentTabs';
+export * from './TournamentVideoPlayer';
 export * from './YouTubeWrapper';
 export * from './VideoPlayer';

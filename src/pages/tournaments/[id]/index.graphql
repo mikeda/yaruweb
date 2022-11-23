@@ -1,7 +1,5 @@
 query TournamentPage($tournamentId: ID!) {
   tournament(tournamentId: $tournamentId) {
-    ...TournamentTabs
-
     id
     name
     mainImageUrl
@@ -26,6 +24,9 @@ query TournamentPage($tournamentId: ID!) {
       id
       label
       battlesCount
+      publishedAt
+
+      ...TournamentVideoPlayer
     }
   }
 }

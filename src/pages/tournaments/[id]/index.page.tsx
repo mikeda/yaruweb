@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { ParsedUrlQuery } from 'querystring';
 
@@ -14,13 +14,15 @@ import {
   ListItemAvatar,
   ListItemText,
   Paper,
+  Tab,
+  Tabs,
   Typography,
 } from '@mui/material';
 import makeStyles from '@mui/styles/makeStyles';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Link from 'next/link';
 
-import { NotFound, Content, Head, Breadcrumbs, TournamentTabs } from '@/components';
+import { NotFound, Content, Head, Breadcrumbs, TournamentVideoPlayer } from '@/components';
 import { pagesPath } from '@/generated/$path';
 import {
   SsgTournamentPathsDocument,
@@ -28,6 +30,7 @@ import {
   TournamentPageDocument,
   TournamentPageQuery,
   TournamentPageQueryVariables,
+  TournamentVideoPlayerFragment,
 } from '@/generated/graphql';
 import { dayjs, fetchGraphql, DEFAULT_AVATAR_URL, NO_IMAGE_URL, placeIconUrl } from '@/lib';
 
@@ -43,6 +46,7 @@ const useStyles = makeStyles({
 
 const PageContent: React.FC<TournamentPageQuery> = ({ tournament }) => {
   const classes = useStyles();
+  const [videoIndex, setVideoIndex] = useState(0);
 
   return (
     <>
@@ -80,7 +84,7 @@ const PageContent: React.FC<TournamentPageQuery> = ({ tournament }) => {
         </Typography>
 
         {tournament.standings.length === 0 ? (
-          <NotFound>対戦動画が登録されていません。</NotFound>
+          <NotFound>対戦結果が登録されていません。</NotFound>
         ) : (
           <Paper>
             <List component="div">
@@ -105,6 +109,37 @@ const PageContent: React.FC<TournamentPageQuery> = ({ tournament }) => {
           </Paper>
         )}
       </Box>
+
+      <Box mt={4}>
+        <Typography variant="h2" gutterBottom>
+          対戦動画
+        </Typography>
+
+        {tournament.videos.length === 0 ? (
+          <NotFound>対戦動画が登録されていません。</NotFound>
+        ) : (
+          <Paper square>
+            {tournament.videos.length > 1 && (
+              <Tabs value={videoIndex} indicatorColor="primary" textColor="primary" variant="fullWidth">
+                {tournament.videos
+                  .sort((a, b) => dayjs(a.publishedAt).unix() - dayjs(b.publishedAt).unix())
+                  .map((video, i) => (
+                    <Tab
+                      key={video.id}
+                      value={i}
+                      label={`動画 ${i + 1}`}
+                      onClick={() => {
+                        setVideoIndex(i);
+                      }}
+                    />
+                  ))}
+              </Tabs>
+            )}
+
+            <TournamentVideoPlayer tournamentVideo={tournament.videos[videoIndex] as TournamentVideoPlayerFragment} />
+          </Paper>
+        )}
+      </Box>
     </>
   );
 };
@@ -117,8 +152,6 @@ const Page: React.FC<TournamentPageQuery> = ({ tournament }) => {
       breadcrumb={<Breadcrumbs to="tournament" tournament={tournament} />}
     >
       <Head title={tournament.name} image={tournament.mainImageUrl} />
-
-      <TournamentTabs activeTab="top" tournament={tournament} />
 
       <PageContent tournament={tournament} />
     </Content>

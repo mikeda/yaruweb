@@ -1,0 +1,8 @@
+fragment TournamentVideoPlayer on TournamentVideo {
+  id
+  youtubeVideoId
+
+  battles {
+    ...TournamentVideoPlayerBattle
+  }
+}
