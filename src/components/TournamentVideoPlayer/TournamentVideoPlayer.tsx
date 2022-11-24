@@ -62,7 +62,6 @@ export const TournamentVideoPlayer: React.FC<Props> = ({ tournamentVideo }) => {
 
             setYouTubePlayer(event.target);
             player.seekTo(battle.startSec, true);
-            player.playVideo();
           }}
         />
       </YouTubeWrapper>
