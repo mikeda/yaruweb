@@ -98,7 +98,7 @@
     "prettier": "2.8.1",
     "storybook-addon-apollo-client": "4.0.13",
     "storybook-addon-next-router": "4.0.2",
-    "ts-unused-exports": "8.0.5",
+    "ts-unused-exports": "9.0.0",
     "typescript": "4.9.4"
   }
 }
