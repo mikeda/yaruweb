@@ -7,9 +7,11 @@ import { useSetRecoilState } from 'recoil';
 
 import { CopyButton } from './CopyButton';
 import { UpdateButton } from './UpdateButton';
-import { VideoUploadButton } from './VideoUploadButton';
 
 import { Command } from '@/components';
+
+import { VideoUploadButton } from './VideoUploadButton';
+
 import {
   ComboPositionSelectFragment,
   ComboTableRowFragment,
