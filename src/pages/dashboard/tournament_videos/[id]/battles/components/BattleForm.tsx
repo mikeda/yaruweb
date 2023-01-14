@@ -25,9 +25,11 @@ import { createFilterOptions } from '@mui/material/useAutocomplete';
 import { Control, Controller, useForm, UseFormGetValues, UseFormSetValue } from 'react-hook-form';
 import YouTube from 'react-youtube';
 import { YouTubePlayer } from 'youtube-player/dist/types';
-import * as yup from 'yup';
 
 import { YouTubeWrapper } from '@/components';
+
+import * as yup from 'yup';
+
 import {
   CharacterSelectOptionFragment,
   PlayerSelectOptionFragment,

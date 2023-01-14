@@ -9,14 +9,15 @@ import clsx from 'clsx';
 
 import { useUpdateMutation } from '../hooks/useUpdateMutation';
 
-import { BattleForm } from './BattleForm';
-
 import {
   BattleRound,
   CharacterSelectOptionFragment,
   AdminBattlesPageBattleReslutFragment,
   PlayerSelectOptionFragment,
 } from '@/generated/graphql';
+
+import { BattleForm } from './BattleForm';
+
 import { BattleRoundText } from '@/lib';
 import { theme, formatSec } from '@/lib';
 
