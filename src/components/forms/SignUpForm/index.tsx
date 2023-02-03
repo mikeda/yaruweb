@@ -9,11 +9,10 @@ import { useSetRecoilState } from 'recoil';
 import * as yup from 'yup';
 
 
-import { pagesPath } from '@/generated/$path';
-import { useCreateUserMutation } from '@/generated/graphql';
-
 import { SignUpWithTwitterButton } from './SignUpWithTwitterButton';
 
+import { pagesPath } from '@/generated/$path';
+import { useCreateUserMutation } from '@/generated/graphql';
 import { UserValidator, createFirebaseUserWithEmail, viewerState, loadingState, handleApolloError } from '@/lib';
 
 interface SignUpInput {

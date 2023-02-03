@@ -7,11 +7,9 @@ import { useSetRecoilState } from 'recoil';
 
 import { CopyButton } from './CopyButton';
 import { UpdateButton } from './UpdateButton';
-
-import { Command } from '@/components';
-
 import { VideoUploadButton } from './VideoUploadButton';
 
+import { Command } from '@/components';
 import { MovePositionSelectFragment, MoveTableRowFragment, useDeleteMoveMutation } from '@/generated/graphql';
 import { handleApolloError, loadingState } from '@/lib';
 
