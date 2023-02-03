@@ -45,9 +45,9 @@
     "react-twitter-widgets": "1.11.0",
     "react-youtube": "10.0.0",
     "recoil": "0.7.6",
-    "slate": "0.88.1",
+    "slate": "0.90.0",
     "slate-history": "0.86.0",
-    "slate-react": "0.88.2",
+    "slate-react": "0.90.0",
     "slick-carousel": "1.8.1",
     "youtube-player": "5.5.2",
     "yup": "0.32.11"
