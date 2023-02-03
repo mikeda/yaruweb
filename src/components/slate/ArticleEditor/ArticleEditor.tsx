@@ -9,16 +9,13 @@ import { ArticleElement } from '../ArticleElement';
 import { ArticleLeaf } from '../ArticleLeaf';
 
 import { ControlButtons } from './ControlButtons';
-
-import { EmbedLinkElement } from '@/custom-types';
-
 import { withIcon } from './helpers/IconHelper';
-
-import { useCreateArticleLinkMutation } from '@/generated/graphql';
-
 import { withLink } from './helpers/LinkHelper';
 import { getTweetNode } from './helpers/TweetHelper';
 import { getYoutubeNode, isYoutubeUrl } from './helpers/YoutubeHelper';
+
+import { EmbedLinkElement } from '@/custom-types';
+import { useCreateArticleLinkMutation } from '@/generated/graphql';
 
 
 export const createArticleEditor = () => {

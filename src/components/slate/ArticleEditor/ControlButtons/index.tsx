@@ -8,14 +8,12 @@ import { ImageButton } from './buttons/ImageButton';
 import { LinkButton } from './buttons/LinkButton';
 import { MarkButton } from './buttons/MarkButton';
 import { MoveButton } from './buttons/MoveButton';
+import { OperationButton } from './buttons/OperationButton';
+import { VideoButton } from './buttons/VideoButton';
 
 import { useCharacterSelectOptionsQuery } from '@/generated/graphql';
-
-import { OperationButton } from './buttons/OperationButton';
-
 import { YAROUYO_FONT_CODE } from '@/lib';
 
-import { VideoButton } from './buttons/VideoButton';
 
 
 export const ControlButtons: React.FC = () => {
