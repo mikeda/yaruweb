@@ -14,7 +14,7 @@
     "get-graphql-schema": "get-graphql-schema http://localhost:5000/graphql > schema.graphql"
   },
   "dependencies": {
-    "@apollo/client": "3.7.6",
+    "@apollo/client": "3.7.7",
     "@emotion/react": "11.10.5",
     "@emotion/styled": "11.10.5",
     "@fortawesome/fontawesome-svg-core": "latest",
