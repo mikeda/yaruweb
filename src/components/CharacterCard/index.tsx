@@ -53,31 +53,31 @@ export const CharacterCard: React.FC<Props> = ({ character }) => {
         className={classes.root}
         href={pagesPath.characters._slug(character.slug).$url()}
         component={Link}
-        color="inherit"
+        color='inherit'
       >
         <CardMedia image={character.faceImageUrl} className={classes.media} />
 
         <CardContent className={classes.content}>
-          <Typography variant="h4">{character.name}</Typography>
+          <Typography variant='h4'>{character.name}</Typography>
 
           <List disablePadding dense>
             <ListItem disableGutters>
               <ListItemIcon className={classes.listItemIcon}>
-                <PublicIcon fontSize="small" />
+                <PublicIcon fontSize='small' />
               </ListItemIcon>
               <ListItemText primary={character.country} className={classes.listItemText} />
             </ListItem>
 
             <ListItem disableGutters>
               <ListItemIcon className={classes.listItemIcon}>
-                <SportsKabaddiIcon fontSize="small" />
+                <SportsKabaddiIcon fontSize='small' />
               </ListItemIcon>
               <ListItemText primary={character.fightingStyle} className={classes.listItemText} />
             </ListItem>
 
             <ListItem disableGutters>
               <ListItemIcon className={classes.listItemIcon}>
-                <YouTubeIcon fontSize="small" style={{ fill: colors.youtube }} />
+                <YouTubeIcon fontSize='small' style={{ fill: colors.youtube }} />
               </ListItemIcon>
               <ListItemText primary={`対戦動画 ${character.battlesCount}`} className={classes.listItemText} />
             </ListItem>

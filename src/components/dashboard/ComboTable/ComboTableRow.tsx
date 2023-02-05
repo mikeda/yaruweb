@@ -43,11 +43,11 @@ export const ComboTableRow: React.FC<Props> = ({ combo, comboCategoryId, combos,
 
   return (
     <TableRow>
-      <TableCell scope="row">
+      <TableCell scope='row'>
         <Command command={combo.command} />
       </TableCell>
 
-      <TableCell align="right" scope="row">
+      <TableCell align='right' scope='row'>
         <VideoUploadButton combo={combo} />
 
         <UpdateButton comboId={combo.id} combos={combos} moveCategories={moveCategories} />
@@ -59,7 +59,7 @@ export const ComboTableRow: React.FC<Props> = ({ combo, comboCategoryId, combos,
           moveCategories={moveCategories}
         />
 
-        <IconButton onClick={onClickDelete} size="large">
+        <IconButton onClick={onClickDelete} size='large'>
           <DeleteIcon />
         </IconButton>
       </TableCell>

@@ -64,12 +64,12 @@ export const AdminBreadcrumbs: React.FC<AdminBreadcrumbParams> = props => {
 const BreadcrumbList: React.FC<{ items: BreadcrumbsItem[] }> = ({ items }) => {
   return (
     <MuiBreadcrumbs>
-      <Link href="/" color="inherit">
+      <Link href='/' color='inherit'>
         TOP
       </Link>
       {items.map(({ name, url }, i) =>
         url ? (
-          <Link href={url} color="inherit" key={i}>
+          <Link href={url} color='inherit' key={i}>
             {name}
           </Link>
         ) : (

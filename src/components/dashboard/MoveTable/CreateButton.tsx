@@ -68,8 +68,8 @@ export const CreateButton: React.FC<Props> = ({ moveCategoryId, moves }) => {
 
   return (
     <>
-      <Tooltip title="コマンドを作成">
-        <IconButton onClick={openMenu} size="large">
+      <Tooltip title='コマンドを作成'>
+        <IconButton onClick={openMenu} size='large'>
           <AddIcon />
         </IconButton>
       </Tooltip>
@@ -103,7 +103,7 @@ export const CreateButton: React.FC<Props> = ({ moveCategoryId, moves }) => {
         </MenuItem>
       </Menu>
 
-      <Dialog open={Boolean(moveType)} onClose={() => setMoveType(null)} scroll="paper">
+      <Dialog open={Boolean(moveType)} onClose={() => setMoveType(null)} scroll='paper'>
         {moveType === 'attack' && <AttackMoveForm moves={moves} onSubmit={onClickCreateAttack} />}
         {moveType === 'throw' && <ThrowMoveForm moves={moves} onSubmit={onClickCreateThrow} />}
         {moveType === 'reversal' && <ReversalMoveForm moves={moves} onSubmit={onClickCreateReversal} />}

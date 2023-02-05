@@ -53,13 +53,13 @@ export const PlayerFormSmashgg: React.FC<Props> = ({ open, onClose }) => {
 
         <DialogContent>
           <Controller
-            name="smashggId"
+            name='smashggId'
             control={control}
             render={({ field }) => (
               <TextField
                 {...field}
-                label="SmashGGのID"
-                placeholder="https://smash.gg/user/<id> or <id>"
+                label='SmashGGのID'
+                placeholder='https://smash.gg/user/<id> or <id>'
                 error={Boolean(errors.smashggId)}
                 helperText={errors.smashggId?.message}
                 fullWidth
@@ -69,10 +69,10 @@ export const PlayerFormSmashgg: React.FC<Props> = ({ open, onClose }) => {
         </DialogContent>
 
         <DialogActions>
-          <Button onClick={onClose} color="primary">
+          <Button onClick={onClose} color='primary'>
             Cancel
           </Button>
-          <Button type="submit" color="primary">
+          <Button type='submit' color='primary'>
             登録する
           </Button>
         </DialogActions>

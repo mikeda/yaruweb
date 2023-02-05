@@ -16,12 +16,12 @@ import { fetchGraphql } from '@/lib';
 
 const Page: React.FC<PlayerBattlesPageQuery> = ({ player }) => {
   return (
-    <Content activeTab="players" breadcrumb={<Breadcrumbs to="playerBattles" player={player} />}>
+    <Content activeTab='players' breadcrumb={<Breadcrumbs to='playerBattles' player={player} />}>
       <Head title={`${player.name}の対戦動画`} />
 
       <PlayerProfile player={player} />
 
-      <PlayerTabs activeTab="battles" player={player} />
+      <PlayerTabs activeTab='battles' player={player} />
 
       <PlayerBattleList playerSlug={player.slug} />
     </Content>

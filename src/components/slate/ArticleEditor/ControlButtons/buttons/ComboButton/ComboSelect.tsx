@@ -26,10 +26,10 @@ export const ComboSelect: React.FC<Props> = ({ characterSlug, onChange }) => {
 
         onChange(option.target.value as string);
       }}
-      defaultValue=""
+      defaultValue=''
       native
     >
-      <option value=""></option>
+      <option value=''></option>
 
       {comboCategories.map(comboCategory => (
         <>

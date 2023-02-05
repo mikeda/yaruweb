@@ -40,7 +40,7 @@ export const SignUpWithTwitterButton: React.FC = () => {
   };
 
   return (
-    <Button variant="contained" onClick={onSignUp} className={classes.root}>
+    <Button variant='contained' onClick={onSignUp} className={classes.root}>
       Twitterで登録
     </Button>
   );

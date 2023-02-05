@@ -70,15 +70,15 @@ export const CharacterForm: React.FC<Props> = ({ character, onSubmit }) => {
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <Controller
-                name="name"
+                name='name'
                 control={control}
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    label="名前"
+                    label='名前'
                     error={Boolean(errors.name)}
                     helperText={errors.name?.message}
-                    size="small"
+                    size='small'
                     fullWidth
                   />
                 )}
@@ -87,15 +87,15 @@ export const CharacterForm: React.FC<Props> = ({ character, onSubmit }) => {
 
             <Grid item xs={12} sm={6}>
               <Controller
-                name="nameKana"
+                name='nameKana'
                 control={control}
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    label="カナ"
+                    label='カナ'
                     error={Boolean(errors.nameKana)}
                     helperText={errors.nameKana?.message}
-                    size="small"
+                    size='small'
                     fullWidth
                   />
                 )}
@@ -104,15 +104,15 @@ export const CharacterForm: React.FC<Props> = ({ character, onSubmit }) => {
 
             <Grid item xs={12} sm={6}>
               <Controller
-                name="longName"
+                name='longName'
                 control={control}
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    label="正式名称"
+                    label='正式名称'
                     error={Boolean(errors.longName)}
                     helperText={errors.longName?.message}
-                    size="small"
+                    size='small'
                     fullWidth
                   />
                 )}
@@ -121,15 +121,15 @@ export const CharacterForm: React.FC<Props> = ({ character, onSubmit }) => {
 
             <Grid item xs={12} sm={6}>
               <Controller
-                name="longNameKana"
+                name='longNameKana'
                 control={control}
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    label="正式名称(カナ)"
+                    label='正式名称(カナ)'
                     error={Boolean(errors.longNameKana)}
                     helperText={errors.longNameKana?.message}
-                    size="small"
+                    size='small'
                     fullWidth
                   />
                 )}
@@ -138,15 +138,15 @@ export const CharacterForm: React.FC<Props> = ({ character, onSubmit }) => {
 
             <Grid item xs={12} sm={6}>
               <Controller
-                name="slug"
+                name='slug'
                 control={control}
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    label="ID(URLで使う名前)"
+                    label='ID(URLで使う名前)'
                     error={Boolean(errors.slug)}
                     helperText={errors.slug?.message}
-                    size="small"
+                    size='small'
                     fullWidth
                   />
                 )}
@@ -155,15 +155,15 @@ export const CharacterForm: React.FC<Props> = ({ character, onSubmit }) => {
 
             <Grid item xs={12} sm={6}>
               <Controller
-                name="country"
+                name='country'
                 control={control}
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    label="国籍"
+                    label='国籍'
                     error={Boolean(errors.country)}
                     helperText={errors.country?.message}
-                    size="small"
+                    size='small'
                     fullWidth
                   />
                 )}
@@ -172,15 +172,15 @@ export const CharacterForm: React.FC<Props> = ({ character, onSubmit }) => {
 
             <Grid item xs={12} sm={6}>
               <Controller
-                name="fightingStyle"
+                name='fightingStyle'
                 control={control}
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    label="格闘スタイル"
+                    label='格闘スタイル'
                     error={Boolean(errors.fightingStyle)}
                     helperText={errors.fightingStyle?.message}
-                    size="small"
+                    size='small'
                     fullWidth
                   />
                 )}
@@ -190,15 +190,15 @@ export const CharacterForm: React.FC<Props> = ({ character, onSubmit }) => {
 
           <Box mt={4}>
             <Controller
-              name="story"
+              name='story'
               control={control}
               render={({ field }) => (
                 <TextField
                   {...field}
-                  label="公式ストーリー"
+                  label='公式ストーリー'
                   error={Boolean(errors.story)}
                   helperText={errors.story?.message}
-                  size="small"
+                  size='small'
                   multiline
                   fullWidth
                 />
@@ -208,15 +208,15 @@ export const CharacterForm: React.FC<Props> = ({ character, onSubmit }) => {
 
           <Box mt={4}>
             <Controller
-              name="description"
+              name='description'
               control={control}
               render={({ field }) => (
                 <TextField
                   {...field}
-                  label="キャラ解説"
+                  label='キャラ解説'
                   error={Boolean(errors.description)}
                   helperText={errors.description?.message}
-                  size="small"
+                  size='small'
                   multiline
                   fullWidth
                 />
@@ -224,12 +224,12 @@ export const CharacterForm: React.FC<Props> = ({ character, onSubmit }) => {
             />
           </Box>
 
-          <Stack direction="row" spacing={2} mt={4}>
-            <Button component="label" color="primary" variant="outlined">
+          <Stack direction='row' spacing={2} mt={4}>
+            <Button component='label' color='primary' variant='outlined'>
               顔画像を選択
               <input
-                type="file"
-                accept="image/*"
+                type='file'
+                accept='image/*'
                 hidden
                 onChange={e => {
                   if (!e.target.files) return;
@@ -247,11 +247,11 @@ export const CharacterForm: React.FC<Props> = ({ character, onSubmit }) => {
               />
             </Button>
 
-            <Button component="label" color="primary" variant="outlined">
+            <Button component='label' color='primary' variant='outlined'>
               全体画像を選択
               <input
-                type="file"
-                accept="image/*"
+                type='file'
+                accept='image/*'
                 hidden
                 onChange={e => {
                   if (!e.target.files) return;
@@ -274,20 +274,20 @@ export const CharacterForm: React.FC<Props> = ({ character, onSubmit }) => {
             <FormControlLabel
               control={
                 <Controller
-                  name="dlc"
+                  name='dlc'
                   render={({ field }) => <Checkbox {...field} checked={field.value} />}
                   control={control}
                 />
               }
-              label="DLC"
+              label='DLC'
             />
           </Box>
         </CardContent>
 
         <Divider />
 
-        <Box m={2} display="flex" justifyContent="center">
-          <Button type="submit" variant="contained">
+        <Box m={2} display='flex' justifyContent='center'>
+          <Button type='submit' variant='contained'>
             登録する
           </Button>
         </Box>

@@ -39,15 +39,15 @@ const Page: React.FC<TopPageQuery> = ({ tournaments, players, characters, articl
   const router = useRouter();
 
   return (
-    <Content activeTab="top">
-      <Head title="鉄拳やろうよ.com" description="鉄拳やろうよ.comは格闘ゲーム「鉄拳7」を楽しむためのサイトです。" />
+    <Content activeTab='top'>
+      <Head title='鉄拳やろうよ.com' description='鉄拳やろうよ.comは格闘ゲーム「鉄拳7」を楽しむためのサイトです。' />
 
       <Box>
         <IntroSlides />
       </Box>
 
       <Box mt={4}>
-        <Typography variant="h2" gutterBottom>
+        <Typography variant='h2' gutterBottom>
           大会
         </Typography>
 
@@ -67,7 +67,7 @@ const Page: React.FC<TopPageQuery> = ({ tournaments, players, characters, articl
       </Box>
 
       <Box mt={4}>
-        <Typography variant="h2" gutterBottom>
+        <Typography variant='h2' gutterBottom>
           プレイヤー
         </Typography>
 
@@ -87,7 +87,7 @@ const Page: React.FC<TopPageQuery> = ({ tournaments, players, characters, articl
       </Box>
 
       <Box mt={4}>
-        <Typography variant="h2" gutterBottom>
+        <Typography variant='h2' gutterBottom>
           キャラクター
         </Typography>
 
@@ -107,7 +107,7 @@ const Page: React.FC<TopPageQuery> = ({ tournaments, players, characters, articl
       </Box>
 
       <Box mt={4}>
-        <Typography variant="h2" gutterBottom>
+        <Typography variant='h2' gutterBottom>
           新着記事
         </Typography>
 

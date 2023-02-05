@@ -72,12 +72,12 @@ export const ArticleForm: React.FC<Props> = ({ article, onSubmit }) => {
       <form onSubmit={handleSubmit(onFormSubmit)}>
         <CardContent>
           <Controller
-            name="title"
+            name='title'
             control={control}
             render={({ field }) => (
               <TextField
                 {...field}
-                label="タイトル"
+                label='タイトル'
                 error={Boolean(errors.title)}
                 helperText={errors.title?.message}
                 fullWidth
@@ -86,7 +86,7 @@ export const ArticleForm: React.FC<Props> = ({ article, onSubmit }) => {
           />
 
           <Box mt={4}>
-            <FormControl variant="outlined">
+            <FormControl variant='outlined'>
               <InputLabel>カテゴリー</InputLabel>
               <Controller
                 render={({ field }) => (
@@ -105,17 +105,17 @@ export const ArticleForm: React.FC<Props> = ({ article, onSubmit }) => {
                   </Select>
                 )}
                 control={control}
-                name="category"
+                name='category'
               />
             </FormControl>
           </Box>
 
           <Box mt={4}>
-            <Button component="label" color="primary" variant="outlined">
+            <Button component='label' color='primary' variant='outlined'>
               メイン画像を選択
               <input
-                type="file"
-                accept="image/*"
+                type='file'
+                accept='image/*'
                 hidden
                 onChange={e => {
                   if (!e.target.files) return;
@@ -143,8 +143,8 @@ export const ArticleForm: React.FC<Props> = ({ article, onSubmit }) => {
 
         <Divider />
 
-        <Box m={2} display="flex" justifyContent="center">
-          <Button type="submit" variant="contained">
+        <Box m={2} display='flex' justifyContent='center'>
+          <Button type='submit' variant='contained'>
             登録する
           </Button>
         </Box>

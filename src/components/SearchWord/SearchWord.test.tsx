@@ -6,7 +6,7 @@ import { SearchWord } from '@/components';
 
 describe(SearchWord, () => {
   test('Snapshot', () => {
-    const { asFragment } = render(<SearchWord initWord="word" onSearch={() => {}} />);
+    const { asFragment } = render(<SearchWord initWord='word' onSearch={() => {}} />);
 
     expect(asFragment()).toMatchSnapshot();
   });

@@ -36,7 +36,7 @@ export const CreateButton: React.FC<Props> = ({ characterSlug, comboCategories }
 
   return (
     <>
-      <Button variant="contained" color="primary" startIcon={<AddIcon />} onClick={() => setOpen(true)}>
+      <Button variant='contained' color='primary' startIcon={<AddIcon />} onClick={() => setOpen(true)}>
         カテゴリを追加
       </Button>
       <Dialog open={open} onClose={() => setOpen(false)}>

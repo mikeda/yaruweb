@@ -35,7 +35,7 @@ export const TournamentVideoPlayerBattle: React.FC<Props> = ({ battle, onClick }
           </Grid>
         }
         secondary={
-          <Typography variant="body2" component="span">
+          <Typography variant='body2' component='span'>
             {subText}
           </Typography>
         }

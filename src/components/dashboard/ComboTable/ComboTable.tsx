@@ -28,8 +28,8 @@ export const ComboTable: React.FC<Props> = ({ comboCategoryId, combos, moveCateg
           />
         ))}
         <TableRow>
-          <TableCell scope="row" colSpan={10}>
-            <Box display="flex" justifyContent="center">
+          <TableCell scope='row' colSpan={10}>
+            <Box display='flex' justifyContent='center'>
               <CreateButton comboCategoryId={comboCategoryId} combos={combos} moveCategories={moveCategories} />
             </Box>
           </TableCell>

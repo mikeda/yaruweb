@@ -37,19 +37,19 @@ export const CharacterProfile: React.FC<Props> = ({ character }) => {
       <CardMedia image={character.faceImageUrl} className={classes.media} />
 
       <CardContent className={classes.content}>
-        <Typography variant="h2">{character.longName}</Typography>
+        <Typography variant='h2'>{character.longName}</Typography>
 
         <List disablePadding dense>
           <ListItem disableGutters>
             <ListItemIcon className={classes.listItemIcon}>
-              <Public fontSize="small" />
+              <Public fontSize='small' />
             </ListItemIcon>
             <ListItemText primary={character.country} className={classes.listItemText} />
           </ListItem>
 
           <ListItem disableGutters>
             <ListItemIcon className={classes.listItemIcon}>
-              <SportsKabaddi fontSize="small" />
+              <SportsKabaddi fontSize='small' />
             </ListItemIcon>
             <ListItemText primary={character.fightingStyle} className={classes.listItemText} />
           </ListItem>

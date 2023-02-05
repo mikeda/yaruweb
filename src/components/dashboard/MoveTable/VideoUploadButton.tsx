@@ -53,7 +53,7 @@ export const VideoUploadButton: React.FC<{ move: MoveTableRowFragment }> = ({ mo
 
   return (
     <>
-      <IconButton onClick={() => setDialogOpen(true)} size="large">
+      <IconButton onClick={() => setDialogOpen(true)} size='large'>
         <YouTubeIcon style={move.moveVideo ? { fill: colors.youtube } : {}} />
       </IconButton>
 
@@ -66,9 +66,9 @@ export const VideoUploadButton: React.FC<{ move: MoveTableRowFragment }> = ({ mo
 
         <DialogActions>
           <input
-            type="file"
-            id="video"
-            accept="video/mp4"
+            type='file'
+            id='video'
+            accept='video/mp4'
             onChange={event => {
               const target = event.target;
               if (!target.files) return;

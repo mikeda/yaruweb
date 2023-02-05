@@ -14,12 +14,12 @@ const Page: React.FC = () => {
 
   return (
     <DashboardContent
-      title="大会"
-      breadcrumb={<AdminBreadcrumbs to="tournaments" />}
+      title='大会'
+      breadcrumb={<AdminBreadcrumbs to='tournaments' />}
       actions={
         <Button
-          variant="contained"
-          color="primary"
+          variant='contained'
+          color='primary'
           startIcon={<AddIcon />}
           href={resolveUrlObject(router, pagesPath.dashboard.tournaments.new.$url())}
         >

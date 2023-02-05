@@ -15,11 +15,11 @@ export const CommandForm: React.FC<Props> = ({ command, onChange }) => {
 
   return (
     <Paper>
-      <Box px={2} mb={2} display="flex" alignItems="center" justifyContent="space-between">
+      <Box px={2} mb={2} display='flex' alignItems='center' justifyContent='space-between'>
         <Command command={command} />
 
         <div>
-          <IconButton edge="end" onClick={() => setDialogOpen(true)} size="large">
+          <IconButton edge='end' onClick={() => setDialogOpen(true)} size='large'>
             <EditIcon />
           </IconButton>
         </div>

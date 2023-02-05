@@ -66,7 +66,7 @@ export const BattleListItem: React.FC<Props> = ({
   }
   return (
     <ListItem>
-      <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)} maxWidth="md">
+      <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)} maxWidth='md'>
         <BattleForm
           youtubeVideoId={youtubeVideoId}
           players={players}
@@ -81,7 +81,7 @@ export const BattleListItem: React.FC<Props> = ({
 
       <ListItemText
         primary={
-          <Box display="flex" alignItems="center">
+          <Box display='flex' alignItems='center'>
             <Avatar className={clsx(classes.avatar, left.rounds === 3 && classes.win)}>{left.rounds}</Avatar>
             <Avatar className={classes.avatar} src={left.character.faceImageUrl} />
             <span>{left.player.name}</span>
@@ -95,10 +95,10 @@ export const BattleListItem: React.FC<Props> = ({
       />
 
       <ListItemSecondaryAction>
-        <IconButton onClick={() => setDialogOpen(true)} size="large">
+        <IconButton onClick={() => setDialogOpen(true)} size='large'>
           <EditIcon />
         </IconButton>
-        <IconButton edge="end" onClick={onDestroy} size="large">
+        <IconButton edge='end' onClick={onDestroy} size='large'>
           <DeleteIcon />
         </IconButton>
       </ListItemSecondaryAction>

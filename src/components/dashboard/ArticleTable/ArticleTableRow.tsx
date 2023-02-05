@@ -24,13 +24,13 @@ export const ArticleTableRow: React.FC<Props> = ({ article }) => {
 
   return (
     <TableRow>
-      <TableCell component="th" scope="row">
+      <TableCell component='th' scope='row'>
         <Typography>{article.title}</Typography>
-        <Typography variant="caption">{ArticleStatusText[article.status]}</Typography>
+        <Typography variant='caption'>{ArticleStatusText[article.status]}</Typography>
       </TableCell>
-      <TableCell align="right" scope="row">
+      <TableCell align='right' scope='row'>
         <Button
-          variant="outlined"
+          variant='outlined'
           href={resolveUrlObject(router, pagesPath.dashboard.articles._id(article.id).edit.$url())}
         >
           編集
@@ -64,7 +64,7 @@ const ArticleMenu: React.FC<Props> = ({ article }) => {
     onError: handleApolloError,
     onCompleted: handleClose,
     update(cache) {
-      deleteCache({cache, id: article.id, __typename: 'Article'});
+      deleteCache({ cache, id: article.id, __typename: 'Article' });
     },
   });
 
@@ -76,7 +76,7 @@ const ArticleMenu: React.FC<Props> = ({ article }) => {
 
   return (
     <>
-      <IconButton edge="end" onClick={handleClick} size="large">
+      <IconButton edge='end' onClick={handleClick} size='large'>
         <MoreVert />
       </IconButton>
 

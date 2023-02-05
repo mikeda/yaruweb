@@ -18,10 +18,10 @@ export const CharacterTabs: React.FC<Props> = ({ character, activeTab }) => {
 
   return (
     <Paper square>
-      <MuiTabs value={activeTab} indicatorColor="primary" textColor="primary" variant="fullWidth">
+      <MuiTabs value={activeTab} indicatorColor='primary' textColor='primary' variant='fullWidth'>
         <Tab
-          value="profile"
-          label="キャラ紹介"
+          value='profile'
+          label='キャラ紹介'
           onClick={() => {
             router.push(pagesPath.characters._slug(character.slug).$url());
           }}
@@ -29,7 +29,7 @@ export const CharacterTabs: React.FC<Props> = ({ character, activeTab }) => {
 
         {character.movesCount > 0 && (
           <Tab
-            value="moves"
+            value='moves'
             label={`コマンド (${character.movesCount})`}
             onClick={() => {
               router.push(pagesPath.characters._slug(character.slug).moves.$url());
@@ -39,7 +39,7 @@ export const CharacterTabs: React.FC<Props> = ({ character, activeTab }) => {
 
         {character.combosCount > 0 && (
           <Tab
-            value="combos"
+            value='combos'
             label={`コンボ (${character.combosCount})`}
             onClick={() => {
               router.push(pagesPath.characters._slug(character.slug).combos.$url());
@@ -48,7 +48,7 @@ export const CharacterTabs: React.FC<Props> = ({ character, activeTab }) => {
         )}
 
         <Tab
-          value="battles"
+          value='battles'
           label={`対戦動画 (${character.battlesCount})`}
           onClick={() => {
             router.push(pagesPath.characters._slug(character.slug).battles.$url());

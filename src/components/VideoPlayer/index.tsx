@@ -41,7 +41,7 @@ export const VideoPlayer: React.FC<Props> = ({ src, thumnailUrl, width = '100%',
       controls
       ref={videoRef}
       poster={thumnailUrl}
-      preload="none"
+      preload='none'
       autoPlay={autoPlay}
       muted
       playsInline

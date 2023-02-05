@@ -6,8 +6,8 @@ import { PlayerTable } from '@/components/dashboard/PlayerTable';
 const Page: React.FC = () => {
   return (
     <DashboardContent
-      title="プレイヤー"
-      breadcrumb={<AdminBreadcrumbs to="players" />}
+      title='プレイヤー'
+      breadcrumb={<AdminBreadcrumbs to='players' />}
       actions={<CreatePlayerButton />}
     >
       <PlayerTable />

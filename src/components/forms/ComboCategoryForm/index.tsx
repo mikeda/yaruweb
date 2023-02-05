@@ -53,18 +53,18 @@ export const ComboCategoryForm: React.FC<Props> = ({ comboCategory, comboCategor
       <form onSubmit={handleSubmit(onSubmit)}>
         <CardContent>
           <Controller
-            name="name"
+            name='name'
             control={control}
             render={({ field }) => (
-              <TextField {...field} label="名前" error={Boolean(errors.name)} helperText={errors.name?.message} />
+              <TextField {...field} label='名前' error={Boolean(errors.name)} helperText={errors.name?.message} />
             )}
           />
 
           <Box mt={4}>
-            <FormControl fullWidth variant="outlined" size="small">
+            <FormControl fullWidth variant='outlined' size='small'>
               <InputLabel>表示順</InputLabel>
               <Controller
-                name="position"
+                name='position'
                 control={control}
                 render={({ field }) => (
                   <Select
@@ -88,8 +88,8 @@ export const ComboCategoryForm: React.FC<Props> = ({ comboCategory, comboCategor
           </Box>
         </CardContent>
         <Divider />
-        <Box m={2} justifyContent="flex-end">
-          <Button type="submit" variant="contained">
+        <Box m={2} justifyContent='flex-end'>
+          <Button type='submit' variant='contained'>
             登録する
           </Button>
         </Box>

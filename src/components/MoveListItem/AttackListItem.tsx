@@ -31,16 +31,16 @@ export const AttackListItem: React.FC<AttackMove> = ({ move, attack }) => {
     <Stack spacing={1}>
       <AttackLabels attack={attack} />
 
-      <Typography variant="body2">
+      <Typography variant='body2'>
         {attack.heights.map(h => AttackTypeEnumText[h]).join(',')}
         {attack.damages.length > 0 && ` / ダメージ ${attack.damages.join(',')}`}
       </Typography>
 
-      <Typography variant="body2">
+      <Typography variant='body2'>
         発生 {attack.startUpFrame ? frameDiffText(attack.startUpFrame) : '-'}
         {attack.duration && `（持続 ${attack.duration}F）`}
       </Typography>
-      <Typography variant="body2">{frames.map(frame => `${frame.label} ${frame.frame}`).join(' / ')}</Typography>
+      <Typography variant='body2'>{frames.map(frame => `${frame.label} ${frame.frame}`).join(' / ')}</Typography>
 
       <ListItemFooter move={move} />
     </Stack>
@@ -59,9 +59,9 @@ const AttackLabels: React.FC<{ attack: AttackListItemFragment }> = ({ attack }) 
   if (labels.length === 0) return null;
 
   return (
-    <Stack direction="row" spacing={1}>
+    <Stack direction='row' spacing={1}>
       {labels.map(label => (
-        <Chip key={label} size="small" label={label} />
+        <Chip key={label} size='small' label={label} />
       ))}
     </Stack>
   );

@@ -26,7 +26,7 @@ const Page: React.FC = () => {
   setLoading(loading);
 
   return (
-    <DashboardContent title="キャラクター登録">
+    <DashboardContent title='キャラクター登録'>
       <CharacterForm onSubmit={onSubmit} />
     </DashboardContent>
   );

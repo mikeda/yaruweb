@@ -18,17 +18,17 @@ export const PlayerTableRow: React.FC<Props> = ({ player, onClickDelete }) => {
 
   return (
     <TableRow>
-      <TableCell scope="row" width={64}>
+      <TableCell scope='row' width={64}>
         <img src={player.avatarUrl || DEFAULT_AVATAR_URL} width={64} />
       </TableCell>
 
-      <TableCell scope="row">
+      <TableCell scope='row'>
         <Typography>{player.name}</Typography>
       </TableCell>
 
-      <TableCell align="right" scope="row">
+      <TableCell align='right' scope='row'>
         <Button
-          variant="outlined"
+          variant='outlined'
           href={resolveUrlObject(router, pagesPath.dashboard.players._slug(player.slug).edit.$url())}
         >
           編集

@@ -9,7 +9,7 @@ export const DetailFooter: React.FC<{ move: MoveMediaFragment }> = ({ move }) =>
   if (!move.note) return null;
 
   return (
-    <Typography variant="body2" sx={{ whiteSpace: 'pre-line' }}>
+    <Typography variant='body2' sx={{ whiteSpace: 'pre-line' }}>
       <CustomText text={move.note} />
     </Typography>
   );

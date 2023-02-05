@@ -83,7 +83,7 @@ export const ComboForm: React.FC<Props> = ({ combo, combos, moveCategories, onSu
       <form onSubmit={handleSubmit(onSubmit)}>
         <CardContent>
           <Box mt={4}>
-            <Typography variant="h4" gutterBottom>
+            <Typography variant='h4' gutterBottom>
               コマンド
             </Typography>
 
@@ -97,17 +97,17 @@ export const ComboForm: React.FC<Props> = ({ combo, combos, moveCategories, onSu
 
           <Box mt={4}>
             <Controller
-              name="damage"
+              name='damage'
               control={control}
-              render={({ field }) => <TextField {...field} type="number" label="ダメージ" size="small" />}
+              render={({ field }) => <TextField {...field} type='number' label='ダメージ' size='small' />}
             />
           </Box>
 
           <Box mt={4}>
             <Controller
-              name="note"
+              name='note'
               control={control}
-              render={({ field }) => <TextField {...field} label="備考" size="small" multiline fullWidth />}
+              render={({ field }) => <TextField {...field} label='備考' size='small' multiline fullWidth />}
             />
           </Box>
 
@@ -121,17 +121,17 @@ export const ComboForm: React.FC<Props> = ({ combo, combos, moveCategories, onSu
                 setValue('moveId', option.id);
               }}
               renderInput={params => (
-                <TextField {...params} label="コンボ始動技" variant="outlined" fullWidth size="small" />
+                <TextField {...params} label='コンボ始動技' variant='outlined' fullWidth size='small' />
               )}
               disableClearable
             />
           </Box>
 
           <Box mt={4}>
-            <FormControl fullWidth variant="outlined" size="small">
+            <FormControl fullWidth variant='outlined' size='small'>
               <InputLabel>表示順</InputLabel>
               <Controller
-                name="position"
+                name='position'
                 control={control}
                 render={({ field }) => (
                   <Select
@@ -157,8 +157,8 @@ export const ComboForm: React.FC<Props> = ({ combo, combos, moveCategories, onSu
 
         <Divider />
 
-        <Box m={2} display="flex" justifyContent="center">
-          <Button type="submit" variant="contained">
+        <Box m={2} display='flex' justifyContent='center'>
+          <Button type='submit' variant='contained'>
             登録する
           </Button>
         </Box>

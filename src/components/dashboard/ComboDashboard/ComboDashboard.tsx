@@ -27,7 +27,7 @@ export const ComboDashboard: React.FC<Props> = ({ character: { slug, comboCatego
 
       <Divider sx={{ mt: 2, mb: 2 }} />
 
-      <Box display="flex" justifyContent="center">
+      <Box display='flex' justifyContent='center'>
         <CreateButton characterSlug={slug} comboCategories={comboCategories} />
       </Box>
     </>

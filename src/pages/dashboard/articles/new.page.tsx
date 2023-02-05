@@ -26,7 +26,7 @@ const Page: React.FC = () => {
   setLoading(loading);
 
   return (
-    <DashboardContent title="記事登録" breadcrumb={<DashboardBreadcrumbs to="articlesNew" />}>
+    <DashboardContent title='記事登録' breadcrumb={<DashboardBreadcrumbs to='articlesNew' />}>
       <ArticleForm onSubmit={onSubmit} />
     </DashboardContent>
   );

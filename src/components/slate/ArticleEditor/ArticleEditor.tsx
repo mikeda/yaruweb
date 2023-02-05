@@ -17,7 +17,6 @@ import { getYoutubeNode, isYoutubeUrl } from './helpers/YoutubeHelper';
 import { EmbedLinkElement } from '@/custom-types';
 import { useCreateArticleLinkMutation } from '@/generated/graphql';
 
-
 export const createArticleEditor = () => {
   return withIcon(withLink(withHistory(withReact(createEditor()))));
 };
@@ -128,7 +127,7 @@ export const ArticleEditor: React.FC = () => {
       <ControlButtons />
 
       <Editable
-        placeholder="本文"
+        placeholder='本文'
         onCompositionStart={() => {
           compositionRef.current = true;
         }}

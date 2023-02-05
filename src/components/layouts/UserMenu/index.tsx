@@ -28,10 +28,10 @@ export const UserMenu: React.FC = () => {
 
   return (
     <>
-      <IconButton aria-controls="user-menu" aria-haspopup="true" onClick={handleClick} size="large">
+      <IconButton aria-controls='user-menu' aria-haspopup='true' onClick={handleClick} size='large'>
         <Avatar alt={viewer.name} src={viewer.avatarUrl} />
       </IconButton>
-      <Menu id="user-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
+      <Menu id='user-menu' anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
         <MenuItem
           onClick={() => {
             router.push(pagesPath.dashboard.articles.$url());

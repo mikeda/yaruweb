@@ -26,7 +26,7 @@ const Page: React.FC = () => {
   setLoading(loading);
 
   return (
-    <DashboardContent title="プレイヤー登録" breadcrumb={<AdminBreadcrumbs to="playersNew" />}>
+    <DashboardContent title='プレイヤー登録' breadcrumb={<AdminBreadcrumbs to='playersNew' />}>
       <PlayerForm onSubmit={onSubmit} />
     </DashboardContent>
   );

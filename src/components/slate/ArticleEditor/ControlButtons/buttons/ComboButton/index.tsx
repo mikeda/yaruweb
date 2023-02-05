@@ -32,7 +32,7 @@ export const ComboButton: React.FC<Props> = ({ characters }) => {
           savedSelection.current = editor.selection;
           setExpanded(!expanded);
         }}
-        text="コンボ"
+        text='コンボ'
       />
 
       <Dialog open={expanded} onClose={() => setExpanded(false)}>
@@ -41,7 +41,7 @@ export const ComboButton: React.FC<Props> = ({ characters }) => {
             <InputLabel>キャラクター</InputLabel>
 
             <Select
-              placeholder="キャラクター"
+              placeholder='キャラクター'
               onChange={item => {
                 if (item) setCharacterSlug(item.target.value as string);
               }}

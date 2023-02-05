@@ -13,12 +13,12 @@ const Page: React.FC = () => {
 
   return (
     <DashboardContent
-      title="記事一覧"
-      breadcrumb={<DashboardBreadcrumbs to="articles" />}
+      title='記事一覧'
+      breadcrumb={<DashboardBreadcrumbs to='articles' />}
       actions={
         <Button
-          variant="contained"
-          color="primary"
+          variant='contained'
+          color='primary'
           startIcon={<Add />}
           href={resolveUrlObject(router, pagesPath.dashboard.articles.new.$url())}
         >

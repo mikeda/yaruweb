@@ -39,12 +39,12 @@ export const MoveDashboardCategory: React.FC<Props> = ({ moveCategory, moveCateg
 
   return (
     <Stack spacing={1}>
-      <Stack direction="row" alignItems="center" spacing={2}>
-        <Typography variant="h2">{moveCategory.name}</Typography>
+      <Stack direction='row' alignItems='center' spacing={2}>
+        <Typography variant='h2'>{moveCategory.name}</Typography>
 
         <UpdateButton moveCategoryId={moveCategory.id} moveCategories={moveCategories} />
 
-        <IconButton onClick={onClickDelete} size="large">
+        <IconButton onClick={onClickDelete} size='large'>
           <DeleteIcon />
         </IconButton>
       </Stack>

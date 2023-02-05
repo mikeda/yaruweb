@@ -46,7 +46,7 @@ export const OperationListSelector: React.FC<Props> = ({ command: initialCommand
 
             <Box>
               <IconButton
-                edge="end"
+                edge='end'
                 onClick={e => {
                   e.preventDefault();
                   setCommand(prev => prev.slice(0, -1));
@@ -73,9 +73,9 @@ export const OperationListSelector: React.FC<Props> = ({ command: initialCommand
 
             <Box>
               <TextField
-                label="テキスト"
-                placeholder="立ち途中"
-                size="small"
+                label='テキスト'
+                placeholder='立ち途中'
+                size='small'
                 value={text}
                 onChange={e => setText(e.target.value)}
               />
@@ -91,7 +91,7 @@ export const OperationListSelector: React.FC<Props> = ({ command: initialCommand
         </DialogContent>
 
         <DialogActions>
-          <Button onClick={onClose} color="primary">
+          <Button onClick={onClose} color='primary'>
             Cancel
           </Button>
           <Button
@@ -99,8 +99,8 @@ export const OperationListSelector: React.FC<Props> = ({ command: initialCommand
               onChange(command);
               onClose();
             }}
-            type="submit"
-            color="primary"
+            type='submit'
+            color='primary'
           >
             登録する
           </Button>

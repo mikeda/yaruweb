@@ -33,7 +33,7 @@ const Page: React.FC = () => {
   const { tournamentVideo, characters, players } = data;
 
   return (
-    <DashboardContent title="対戦" breadcrumb={<AdminBreadcrumbs to="battles" tournamentVideo={tournamentVideo} />}>
+    <DashboardContent title='対戦' breadcrumb={<AdminBreadcrumbs to='battles' tournamentVideo={tournamentVideo} />}>
       <BattleForm
         youtubeVideoId={tournamentVideo.youtubeVideoId}
         players={players.nodes}

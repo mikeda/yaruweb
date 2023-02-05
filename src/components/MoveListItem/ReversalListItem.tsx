@@ -14,10 +14,10 @@ interface ReversalMove {
 export const ReversalListItem: React.FC<ReversalMove> = ({ move, reversal }) => {
   return (
     <Stack spacing={2} sx={{ paddingBottom: 1 }}>
-      <Typography variant="body2">{reversal.kind}</Typography>
+      <Typography variant='body2'>{reversal.kind}</Typography>
 
       {(reversal.startUpFrame || reversal.finishFrame) && (
-        <Typography variant="body2">{`受付フレーム ${reversal.startUpFrame}F〜${reversal.finishFrame}F`}</Typography>
+        <Typography variant='body2'>{`受付フレーム ${reversal.startUpFrame}F〜${reversal.finishFrame}F`}</Typography>
       )}
 
       <ListItemFooter move={move} />

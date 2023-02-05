@@ -37,20 +37,20 @@ export const MoveTableRow: React.FC<Props> = ({ move, moveCategoryId, moves }) =
 
   return (
     <TableRow>
-      <TableCell scope="row">
+      <TableCell scope='row'>
         <Typography>{move.name}</Typography>
 
         <Command command={move.command} />
       </TableCell>
 
-      <TableCell align="right" scope="row">
+      <TableCell align='right' scope='row'>
         <VideoUploadButton move={move} />
 
         <UpdateButton moveId={move.id} moves={moves} />
 
         <CopyButton moveId={move.id} moveCategoryId={moveCategoryId} moves={moves} />
 
-        <IconButton onClick={onClickDelete} size="large">
+        <IconButton onClick={onClickDelete} size='large'>
           <DeleteIcon />
         </IconButton>
       </TableCell>

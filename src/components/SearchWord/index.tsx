@@ -53,7 +53,7 @@ export const SearchWord: React.FC<Props> = ({ initWord, onSearch }) => {
           e.preventDefault();
           onSearch(word);
         }}
-        size="large"
+        size='large'
       >
         <SearchIcon />
       </IconButton>

@@ -42,7 +42,7 @@ export const Content: React.FC<Props> = ({ title, breadcrumb, activeTab, childre
         <div className={classes.header}>
           {breadcrumb}
           {title && (
-            <Typography className={classes.title} variant="h1">
+            <Typography className={classes.title} variant='h1'>
               {title}
             </Typography>
           )}

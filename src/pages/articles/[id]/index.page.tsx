@@ -28,19 +28,19 @@ const Page: React.FC<ArticlePageQuery> = ({ article }) => {
   const classes = useStyles();
 
   return (
-    <Content activeTab="articles" title={article.title} breadcrumb={<Breadcrumbs to="article" article={article} />}>
+    <Content activeTab='articles' title={article.title} breadcrumb={<Breadcrumbs to='article' article={article} />}>
       <Head title={article.title} description={article.description} image={article.mainImageUrl} />
 
       <Box mb={2}>
         <img className={classes.mainImage} src={article.mainImageUrl || NO_IMAGE_URL} />
       </Box>
 
-      <Box mb={2} display="flex" flexDirection="row">
+      <Box mb={2} display='flex' flexDirection='row'>
         <Avatar alt={article.author.name} src={article.author.avatarUrl} />
         <Box ml={2} flexGrow={1}>
-          <Typography variant="h6">{article.author.name}</Typography>
+          <Typography variant='h6'>{article.author.name}</Typography>
           {article.publishedAt && (
-            <Typography variant="caption">{dayjs(article.publishedAt).format('YYYY/M/D H:mm')}</Typography>
+            <Typography variant='caption'>{dayjs(article.publishedAt).format('YYYY/M/D H:mm')}</Typography>
           )}
         </Box>
       </Box>
@@ -48,7 +48,7 @@ const Page: React.FC<ArticlePageQuery> = ({ article }) => {
       <ArticleBody content={article.content} />
 
       <Box mt={4}>
-        <Typography variant="h2" gutterBottom>
+        <Typography variant='h2' gutterBottom>
           関連記事
         </Typography>
 

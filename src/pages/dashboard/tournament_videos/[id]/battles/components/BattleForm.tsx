@@ -128,8 +128,8 @@ export const BattleForm: React.FC<Props> = ({ youtubeVideoId, players, character
 
   return (
     <>
-      <Box display="flex" justifyContent="center" mb={2}>
-        <Box width="100%" maxWidth={640}>
+      <Box display='flex' justifyContent='center' mb={2}>
+        <Box width='100%' maxWidth={640}>
           <YouTubeWrapper>
             <YouTube
               videoId={youtubeVideoId}
@@ -151,14 +151,14 @@ export const BattleForm: React.FC<Props> = ({ youtubeVideoId, players, character
           <Grid container spacing={2}>
             <Grid item xs={8}>
               <Controller
-                name="startSec"
+                name='startSec'
                 control={control}
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    size="small"
-                    type="number"
-                    label="開始時間"
+                    size='small'
+                    type='number'
+                    label='開始時間'
                     error={Boolean(errors.startSec)}
                     helperText={errors.startSec?.message}
                     defaultValue={0}
@@ -166,51 +166,51 @@ export const BattleForm: React.FC<Props> = ({ youtubeVideoId, players, character
                 )}
               />
 
-              <Tooltip title="プレイヤーの時間を取得">
-                <IconButton size="small" onClick={onClickGetPlayerTime}>
+              <Tooltip title='プレイヤーの時間を取得'>
+                <IconButton size='small' onClick={onClickGetPlayerTime}>
                   <GetApp />
                 </IconButton>
               </Tooltip>
 
-              <Tooltip title="プレイヤーの時間を移動">
-                <IconButton size="small" onClick={onClickSetPlayerTime}>
+              <Tooltip title='プレイヤーの時間を移動'>
+                <IconButton size='small' onClick={onClickSetPlayerTime}>
                   <PlayArrow />
                 </IconButton>
               </Tooltip>
 
-              <Tooltip title="15秒戻る">
-                <IconButton size="small" onClick={onClick15SecAgo}>
+              <Tooltip title='15秒戻る'>
+                <IconButton size='small' onClick={onClick15SecAgo}>
                   <KeyboardDoubleArrowLeftIcon />
                 </IconButton>
               </Tooltip>
 
-              <Tooltip title="5秒戻る">
-                <IconButton size="small" onClick={onClick5SecAgo}>
+              <Tooltip title='5秒戻る'>
+                <IconButton size='small' onClick={onClick5SecAgo}>
                   <KeyboardArrowLeftIcon />
                 </IconButton>
               </Tooltip>
 
-              <Tooltip title="5秒進む">
-                <IconButton size="small" onClick={onClick5SecLater}>
+              <Tooltip title='5秒進む'>
+                <IconButton size='small' onClick={onClick5SecLater}>
                   <KeyboardArrowRightIcon />
                 </IconButton>
               </Tooltip>
 
-              <Tooltip title="15秒進む">
-                <IconButton size="small" onClick={onClick15SecLater}>
+              <Tooltip title='15秒進む'>
+                <IconButton size='small' onClick={onClick15SecLater}>
                   <KeyboardDoubleArrowRightIcon />
                 </IconButton>
               </Tooltip>
 
-              <Tooltip title="サイド入れ替え">
-                <IconButton size="small" onClick={onClickSwapSides}>
+              <Tooltip title='サイド入れ替え'>
+                <IconButton size='small' onClick={onClickSwapSides}>
                   <SwapVertIcon />
                 </IconButton>
               </Tooltip>
             </Grid>
 
             <Grid item xs={4}>
-              <FormControl fullWidth variant="outlined" size="small">
+              <FormControl fullWidth variant='outlined' size='small'>
                 <InputLabel>試合</InputLabel>
                 <Controller
                   render={({ field }) => (
@@ -229,7 +229,7 @@ export const BattleForm: React.FC<Props> = ({ youtubeVideoId, players, character
                     </Select>
                   )}
                   control={control}
-                  name="round"
+                  name='round'
                 />
               </FormControl>
             </Grid>
@@ -258,8 +258,8 @@ export const BattleForm: React.FC<Props> = ({ youtubeVideoId, players, character
             />
           </Grid>
 
-          <Box mt={2} display="flex" justifyContent="center">
-            <Button type="submit" variant="contained">
+          <Box mt={2} display='flex' justifyContent='center'>
+            <Button type='submit' variant='contained'>
               登録する
             </Button>
           </Box>
@@ -312,7 +312,7 @@ const SideForm: React.FC<SideFormProps> = ({ index, players, characters, control
                 }}
                 style={{ width: 300 }}
                 renderInput={params => (
-                  <TextField {...params} label="プレイヤー" variant="outlined" fullWidth size="small" />
+                  <TextField {...params} label='プレイヤー' variant='outlined' fullWidth size='small' />
                 )}
                 disableClearable
               />
@@ -341,7 +341,7 @@ const SideForm: React.FC<SideFormProps> = ({ index, players, characters, control
                 }}
                 style={{ width: 300 }}
                 renderInput={params => (
-                  <TextField {...params} label="キャラクター" variant="outlined" fullWidth size="small" />
+                  <TextField {...params} label='キャラクター' variant='outlined' fullWidth size='small' />
                 )}
                 disableClearable
               />
@@ -351,7 +351,7 @@ const SideForm: React.FC<SideFormProps> = ({ index, players, characters, control
       </Grid>
 
       <Grid item xs={2}>
-        <FormControl fullWidth variant="outlined" size="small">
+        <FormControl fullWidth variant='outlined' size='small'>
           <InputLabel>取得ラウンド</InputLabel>
           <Controller
             control={control}

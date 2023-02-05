@@ -102,15 +102,15 @@ export const ThrowMoveForm: React.FC<Props> = ({ move, moves, onSubmit, copy = f
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <Controller
-                name="move.name"
+                name='move.name'
                 control={control}
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    label="名前"
+                    label='名前'
                     error={Boolean(errors.move?.name)}
                     helperText={errors.move?.name?.message}
-                    size="small"
+                    size='small'
                     fullWidth
                   />
                 )}
@@ -119,15 +119,15 @@ export const ThrowMoveForm: React.FC<Props> = ({ move, moves, onSubmit, copy = f
 
             <Grid item xs={12} sm={6}>
               <Controller
-                name="move.kana"
+                name='move.kana'
                 control={control}
-                render={({ field }) => <TextField {...field} label="カナ" size="small" fullWidth />}
+                render={({ field }) => <TextField {...field} label='カナ' size='small' fullWidth />}
               />
             </Grid>
           </Grid>
 
           <Box mt={4}>
-            <Typography variant="h4" gutterBottom>
+            <Typography variant='h4' gutterBottom>
               コマンド
             </Typography>
 
@@ -141,20 +141,20 @@ export const ThrowMoveForm: React.FC<Props> = ({ move, moves, onSubmit, copy = f
 
           <Box mt={4}>
             <Controller
-              name="move.statusAfter"
+              name='move.statusAfter'
               control={control}
-              render={({ field }) => <TextField {...field} type="text" label="技後の状態" size="small" fullWidth />}
+              render={({ field }) => <TextField {...field} type='text' label='技後の状態' size='small' fullWidth />}
             />
           </Box>
 
           <Box mt={4}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
-                <FormControl fullWidth variant="outlined" size="small">
+                <FormControl fullWidth variant='outlined' size='small'>
                   <InputLabel>種別</InputLabel>
                   <Controller
                     control={control}
-                    name="throw.throwType"
+                    name='throw.throwType'
                     render={({ field }) => (
                       <Select
                         {...field}
@@ -176,26 +176,26 @@ export const ThrowMoveForm: React.FC<Props> = ({ move, moves, onSubmit, copy = f
 
               <Grid item xs={12} sm={6}>
                 <Controller
-                  name="throw.startUpFrame"
+                  name='throw.startUpFrame'
                   control={control}
                   render={({ field }) => (
-                    <TextField {...field} type="number" label="発生フレーム" size="small" fullWidth />
+                    <TextField {...field} type='number' label='発生フレーム' size='small' fullWidth />
                   )}
                 />
               </Grid>
 
               <Grid item xs={12} sm={6}>
                 <Controller
-                  name="throw.damage"
+                  name='throw.damage'
                   control={control}
                   render={({ field }) => (
                     <TextField
                       {...field}
-                      type="number"
-                      label="ダメージ"
+                      type='number'
+                      label='ダメージ'
                       error={Boolean(errors.throw?.damage)}
                       helperText={errors.throw?.damage?.message}
-                      size="small"
+                      size='small'
                       fullWidth
                     />
                   )}
@@ -203,11 +203,11 @@ export const ThrowMoveForm: React.FC<Props> = ({ move, moves, onSubmit, copy = f
               </Grid>
 
               <Grid item xs={12} sm={6}>
-                <FormControl fullWidth variant="outlined" size="small">
+                <FormControl fullWidth variant='outlined' size='small'>
                   <InputLabel>投げ後の相手</InputLabel>
                   <Controller
                     control={control}
-                    name="throw.throwResult"
+                    name='throw.throwResult'
                     render={({ field }) => (
                       <Select
                         {...field}
@@ -228,11 +228,11 @@ export const ThrowMoveForm: React.FC<Props> = ({ move, moves, onSubmit, copy = f
               </Grid>
 
               <Grid item xs={12} sm={6}>
-                <FormControl fullWidth variant="outlined" size="small">
+                <FormControl fullWidth variant='outlined' size='small'>
                   <InputLabel>投げ抜け</InputLabel>
                   <Controller
                     control={control}
-                    name="throw.throwEscape"
+                    name='throw.throwEscape'
                     render={({ field }) => (
                       <Select
                         {...field}
@@ -258,19 +258,19 @@ export const ThrowMoveForm: React.FC<Props> = ({ move, moves, onSubmit, copy = f
             <Grid container spacing={2}>
               <Grid item xs={12}>
                 <Controller
-                  name="move.note"
+                  name='move.note'
                   control={control}
-                  render={({ field }) => <TextField {...field} label="備考" fullWidth multiline />}
+                  render={({ field }) => <TextField {...field} label='備考' fullWidth multiline />}
                 />
               </Grid>
             </Grid>
           </Box>
 
           <Box mt={4}>
-            <FormControl fullWidth variant="outlined" size="small">
+            <FormControl fullWidth variant='outlined' size='small'>
               <InputLabel>表示順</InputLabel>
               <Controller
-                name="move.position"
+                name='move.position'
                 control={control}
                 render={({ field }) => (
                   <Select
@@ -296,8 +296,8 @@ export const ThrowMoveForm: React.FC<Props> = ({ move, moves, onSubmit, copy = f
 
         <Divider />
 
-        <Box m={2} display="flex" justifyContent="center">
-          <Button type="submit" variant="contained">
+        <Box m={2} display='flex' justifyContent='center'>
+          <Button type='submit' variant='contained'>
             登録する
           </Button>
         </Box>

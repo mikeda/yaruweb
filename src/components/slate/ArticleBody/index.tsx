@@ -44,11 +44,11 @@ const setTocLinks = (slateContent: Descendant[]): TocRow[] => {
 const Toc: React.FC<{ tocRows: TocRow[] }> = ({ tocRows }) => {
   return (
     <Paper sx={{ p: 2, bgcolor: theme.palette.grey[100] }}>
-      <Typography variant="h5">目次</Typography>
+      <Typography variant='h5'>目次</Typography>
 
-      <List component="nav" dense>
+      <List component='nav' dense>
         {tocRows.map((tocRow, i) => (
-          <ListItemButton key={i} component="a" href={`#${tocRow.id}`} sx={{ pl: tocRow.lebel === 2 ? 4 : 0 }}>
+          <ListItemButton key={i} component='a' href={`#${tocRow.id}`} sx={{ pl: tocRow.lebel === 2 ? 4 : 0 }}>
             {tocRow.title}
           </ListItemButton>
         ))}
