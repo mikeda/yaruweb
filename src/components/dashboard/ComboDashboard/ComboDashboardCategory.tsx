@@ -41,12 +41,12 @@ export const ComboDashboardCategory: React.FC<Props> = ({ comboCategory, comboCa
 
   return (
     <Stack spacing={1}>
-      <Stack direction="row" alignItems="center" spacing={2}>
-        <Typography variant="h2">{comboCategory.name}</Typography>
+      <Stack direction='row' alignItems='center' spacing={2}>
+        <Typography variant='h2'>{comboCategory.name}</Typography>
 
         <UpdateButton comboCategoryId={comboCategory.id} comboCategories={comboCategories} />
 
-        <IconButton onClick={onClickDelete} size="large">
+        <IconButton onClick={onClickDelete} size='large'>
           <DeleteIcon />
         </IconButton>
       </Stack>

@@ -34,7 +34,7 @@ export const ComboListItem: React.FC<Props> = ({ combo, first }) => {
           <>
             {combo.comboVideo && (
               <>
-                <IconButton onClick={() => setDialogOpen(true)} size="large">
+                <IconButton onClick={() => setDialogOpen(true)} size='large'>
                   <YouTubeIcon style={{ fill: colors.youtube }} />
                 </IconButton>
 
@@ -66,7 +66,7 @@ export const ComboListItem: React.FC<Props> = ({ combo, first }) => {
 
       {combo.note && (
         <ListItem>
-          <Typography component={Paper} p={0.5} variant="caption" sx={{ whiteSpace: 'pre-line' }}>
+          <Typography component={Paper} p={0.5} variant='caption' sx={{ whiteSpace: 'pre-line' }}>
             {combo.note}
           </Typography>
         </ListItem>

@@ -21,7 +21,7 @@ export const HeaderNav: React.FC<{ activeTab: TabValue }> = ({ activeTab }) => {
   const router = useRouter();
 
   return (
-    <Tabs value={activeTab} indicatorColor="primary" textColor="primary" variant="scrollable">
+    <Tabs value={activeTab} indicatorColor='primary' textColor='primary' variant='scrollable'>
       {Object.entries(tabItems).map(([value, { name, url }]) => (
         <Tab key={value} value={value} label={name} onClick={() => router.push(url)} sx={{ minWidth: 0 }} />
       ))}

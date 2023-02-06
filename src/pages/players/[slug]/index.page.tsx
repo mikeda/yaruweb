@@ -27,16 +27,16 @@ const Page: React.FC<PlayerPageQuery> = ({ player }) => {
   const classes = useStyles();
 
   return (
-    <Content activeTab="players" breadcrumb={<Breadcrumbs to="player" player={player} />}>
+    <Content activeTab='players' breadcrumb={<Breadcrumbs to='player' player={player} />}>
       <Head title={player.name} />
 
       <PlayerProfile player={player} />
 
-      <PlayerTabs activeTab="profile" player={player} />
+      <PlayerTabs activeTab='profile' player={player} />
 
       <Paper>
         <Box p={2}>
-          <Typography variant="h2" gutterBottom>
+          <Typography variant='h2' gutterBottom>
             プロフィール
           </Typography>
 

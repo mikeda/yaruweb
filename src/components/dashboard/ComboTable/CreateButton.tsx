@@ -39,13 +39,13 @@ export const CreateButton: React.FC<Props> = ({ comboCategoryId, combos, moveCat
 
   return (
     <>
-      <Tooltip title="コンボを作成">
-        <IconButton onClick={() => setOpen(true)} size="large">
+      <Tooltip title='コンボを作成'>
+        <IconButton onClick={() => setOpen(true)} size='large'>
           <AddIcon />
         </IconButton>
       </Tooltip>
 
-      <Dialog open={open} onClose={() => setOpen(false)} scroll="paper">
+      <Dialog open={open} onClose={() => setOpen(false)} scroll='paper'>
         <ComboForm combos={combos} moveCategories={moveCategories} onSubmit={onClickCreate} />
       </Dialog>
     </>

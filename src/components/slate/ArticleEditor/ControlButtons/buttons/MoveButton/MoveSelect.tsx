@@ -45,7 +45,7 @@ export const MoveSelect: React.FC<Props> = ({ characterSlug, onChange }) => {
       onChange={(e, option) => {
         onChange(option.id);
       }}
-      renderInput={params => <TextField {...params} label="コマンド" variant="outlined" fullWidth size="small" />}
+      renderInput={params => <TextField {...params} label='コマンド' variant='outlined' fullWidth size='small' />}
       disableClearable
     />
   );

@@ -74,15 +74,15 @@ export const BattleList: React.FC<Props> = ({ battles, selector, hasNextPage, on
       <Box component={Paper}>
         <BattleListItem battle={battle} onClick={() => updateBattle(battleIndex)} />
 
-        <Box display="flex">
-          <Tooltip title="1つ前の対戦に移動" sx={{ flexGrow: 1 }}>
-            <IconButton size="small" onClick={onClickSkipPrevious}>
+        <Box display='flex'>
+          <Tooltip title='1つ前の対戦に移動' sx={{ flexGrow: 1 }}>
+            <IconButton size='small' onClick={onClickSkipPrevious}>
               <SkipPreviousIcon />
             </IconButton>
           </Tooltip>
 
-          <Tooltip title="次の対戦に移動" sx={{ flexGrow: 1 }}>
-            <IconButton size="small" onClick={onClickSkipNext}>
+          <Tooltip title='次の対戦に移動' sx={{ flexGrow: 1 }}>
+            <IconButton size='small' onClick={onClickSkipNext}>
               <SkipNextIcon />
             </IconButton>
           </Tooltip>
@@ -98,8 +98,8 @@ export const BattleList: React.FC<Props> = ({ battles, selector, hasNextPage, on
       </Box>
 
       {hasNextPage && (
-        <Box pt={2} pb={2} display="flex" justifyContent="center">
-          <Button variant="outlined" onClick={onClickMore}>
+        <Box pt={2} pb={2} display='flex' justifyContent='center'>
+          <Button variant='outlined' onClick={onClickMore}>
             もっとみる
           </Button>
         </Box>

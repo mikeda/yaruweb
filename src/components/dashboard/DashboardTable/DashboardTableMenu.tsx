@@ -25,7 +25,7 @@ export const DashboardTableMenu: React.FC<Props> = ({ items }) => {
 
   return (
     <>
-      <IconButton edge="end" onClick={handleClick} size="large">
+      <IconButton edge='end' onClick={handleClick} size='large'>
         <MoreVert />
       </IconButton>
 

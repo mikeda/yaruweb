@@ -63,12 +63,12 @@ export const LoginWithEmailForm: React.FC = () => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <CardContent>
           <Controller
-            name="email"
+            name='email'
             control={control}
             render={({ field }) => (
               <TextField
                 {...field}
-                label="メールアドレス"
+                label='メールアドレス'
                 error={Boolean(errors.email)}
                 helperText={errors.email?.message}
               />
@@ -78,14 +78,14 @@ export const LoginWithEmailForm: React.FC = () => {
 
         <CardContent>
           <Controller
-            name="password"
+            name='password'
             control={control}
             render={({ field }) => (
               <TextField
                 {...field}
-                type="password["
-                label="パスワード"
-                placeholder="8文字以上"
+                type='password['
+                label='パスワード'
+                placeholder='8文字以上'
                 error={Boolean(errors.password)}
                 helperText={errors.password?.message}
               />
@@ -95,8 +95,8 @@ export const LoginWithEmailForm: React.FC = () => {
 
         <Divider />
 
-        <Box m={2} justifyContent="flex-end">
-          <Button type="submit" variant="contained">
+        <Box m={2} justifyContent='flex-end'>
+          <Button type='submit' variant='contained'>
             ログインする
           </Button>
         </Box>

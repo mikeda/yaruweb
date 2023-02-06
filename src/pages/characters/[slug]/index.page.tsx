@@ -33,24 +33,24 @@ const Page: React.FC<CharacterPageQuery> = ({ character }) => {
   const classes = useStyles();
 
   return (
-    <Content activeTab="characters" breadcrumb={<Breadcrumbs to="character" character={character} />}>
+    <Content activeTab='characters' breadcrumb={<Breadcrumbs to='character' character={character} />}>
       <Head title={character.longName} />
 
       <CharacterProfile character={character} />
 
       <Box mt={2}>
-        <CharacterTabs character={character} activeTab="profile" />
+        <CharacterTabs character={character} activeTab='profile' />
       </Box>
 
       <Paper className={classes.paper}>
-        <Typography className={classes.title} variant="h5">
+        <Typography className={classes.title} variant='h5'>
           ストーリー
         </Typography>
         <Typography className={classes.body}>{character.story}</Typography>
       </Paper>
 
       <Paper className={classes.paper}>
-        <Typography className={classes.title} variant="h5">
+        <Typography className={classes.title} variant='h5'>
           キャラ解説
         </Typography>
         <Typography className={classes.body}>{character.description}</Typography>

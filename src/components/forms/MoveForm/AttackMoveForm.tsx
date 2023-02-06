@@ -210,15 +210,15 @@ export const AttackMoveForm: React.FC<Props> = ({ move, moves, onSubmit, copy = 
         <Grid container spacing={2}>
           <Grid item xs={12} sm={6}>
             <Controller
-              name="move.name"
+              name='move.name'
               control={control}
               render={({ field }) => (
                 <TextField
                   {...field}
-                  label="名前"
+                  label='名前'
                   error={Boolean(errors.move?.name)}
                   helperText={errors.move?.name?.message}
-                  size="small"
+                  size='small'
                   fullWidth
                 />
               )}
@@ -227,15 +227,15 @@ export const AttackMoveForm: React.FC<Props> = ({ move, moves, onSubmit, copy = 
 
           <Grid item xs={12} sm={6}>
             <Controller
-              name="move.kana"
+              name='move.kana'
               control={control}
-              render={({ field }) => <TextField {...field} label="カナ" size="small" fullWidth />}
+              render={({ field }) => <TextField {...field} label='カナ' size='small' fullWidth />}
             />
           </Grid>
         </Grid>
 
         <Box mt={4}>
-          <Typography variant="h4" gutterBottom>
+          <Typography variant='h4' gutterBottom>
             コマンド
           </Typography>
 
@@ -249,26 +249,26 @@ export const AttackMoveForm: React.FC<Props> = ({ move, moves, onSubmit, copy = 
 
         <Box mt={4}>
           <Controller
-            name="move.statusAfter"
+            name='move.statusAfter'
             control={control}
-            render={({ field }) => <TextField {...field} type="text" label="技後の状態" size="small" fullWidth />}
+            render={({ field }) => <TextField {...field} type='text' label='技後の状態' size='small' fullWidth />}
           />
         </Box>
 
         <Box mt={4}>
-          <Typography variant="h4" gutterBottom>
+          <Typography variant='h4' gutterBottom>
             判定
           </Typography>
 
           <div className={classes.chips}>
             {heights.map((h, i) => (
-              <Chip variant="outlined" key={i} label={AttackTypeEnumText[h]} />
+              <Chip variant='outlined' key={i} label={AttackTypeEnumText[h]} />
             ))}
           </div>
 
           <div className={classes.chips}>
-            <FormControl variant="outlined" size="small">
-              <Select defaultValue="h" inputRef={heightRef}>
+            <FormControl variant='outlined' size='small'>
+              <Select defaultValue='h' inputRef={heightRef}>
                 {Object.entries(AttackTypeEnumText).map(([key, value]) => (
                   <MenuItem key={key} value={key}>
                     {value}
@@ -301,19 +301,19 @@ export const AttackMoveForm: React.FC<Props> = ({ move, moves, onSubmit, copy = 
         </Box>
 
         <Box mt={4}>
-          <Typography variant="h4" gutterBottom>
+          <Typography variant='h4' gutterBottom>
             ダメージ
           </Typography>
 
           <div className={classes.chips}>
             {damages.map((d, i) => (
-              <Chip variant="outlined" key={i} label={d} />
+              <Chip variant='outlined' key={i} label={d} />
             ))}
             <Chip label={`合計 ${damages.reduce((a, b) => a + b, 0)}`} />
           </div>
 
           <div className={classes.chips}>
-            <TextField inputRef={damageRef} type="number" size="small" defaultValue={10} />
+            <TextField inputRef={damageRef} type='number' size='small' defaultValue={10} />
             <Button
               onClick={() => {
                 if (!damageRef.current?.value) return;
@@ -339,19 +339,19 @@ export const AttackMoveForm: React.FC<Props> = ({ move, moves, onSubmit, copy = 
         <Box mt={4}>
           <Grid container spacing={2}>
             <Grid item xs={12} sm={4}>
-              <Typography variant="h4" gutterBottom>
+              <Typography variant='h4' gutterBottom>
                 発生
               </Typography>
 
               <Controller
-                name="attack.startUpFrame"
+                name='attack.startUpFrame'
                 control={control}
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    type="number"
-                    label="フレーム"
-                    size="small"
+                    type='number'
+                    label='フレーム'
+                    size='small'
                     fullWidth
                     error={Boolean(errors.attack?.startUpFrame)}
                     helperText={errors.attack?.startUpFrame?.message}
@@ -361,19 +361,19 @@ export const AttackMoveForm: React.FC<Props> = ({ move, moves, onSubmit, copy = 
             </Grid>
 
             <Grid item xs={12} sm={4}>
-              <Typography variant="h4" gutterBottom>
+              <Typography variant='h4' gutterBottom>
                 持続
               </Typography>
 
               <Controller
-                name="attack.duration"
+                name='attack.duration'
                 control={control}
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    type="number"
-                    label="フレーム"
-                    size="small"
+                    type='number'
+                    label='フレーム'
+                    size='small'
                     fullWidth
                     error={Boolean(errors.attack?.duration)}
                     helperText={errors.attack?.duration?.message}
@@ -383,18 +383,18 @@ export const AttackMoveForm: React.FC<Props> = ({ move, moves, onSubmit, copy = 
             </Grid>
 
             <Grid item xs={12} sm={4}>
-              <Typography variant="h4" gutterBottom>
+              <Typography variant='h4' gutterBottom>
                 リーチ
               </Typography>
 
               <Controller
-                name="attack.reach"
+                name='attack.reach'
                 control={control}
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    type="number"
-                    size="small"
+                    type='number'
+                    size='small'
                     fullWidth
                     error={Boolean(errors.attack?.reach)}
                     helperText={errors.attack?.reach?.message}
@@ -407,13 +407,13 @@ export const AttackMoveForm: React.FC<Props> = ({ move, moves, onSubmit, copy = 
 
         {frameCols.map(({ label, result: resultKey, frame: frameKey, state: stateKey }) => (
           <Box key={label} mt={4}>
-            <Typography variant="h4" gutterBottom>
+            <Typography variant='h4' gutterBottom>
               {label}
             </Typography>
 
             <Grid container spacing={2}>
               <Grid item xs={12} sm={4}>
-                <FormControl fullWidth variant="outlined" size="small">
+                <FormControl fullWidth variant='outlined' size='small'>
                   <Controller
                     control={control}
                     name={resultKey}
@@ -443,9 +443,9 @@ export const AttackMoveForm: React.FC<Props> = ({ move, moves, onSubmit, copy = 
                   render={({ field }) => (
                     <TextField
                       {...field}
-                      type="number"
-                      label="フレーム"
-                      size="small"
+                      type='number'
+                      label='フレーム'
+                      size='small'
                       fullWidth
                       error={Boolean(errors.attack && errors.attack[frameKey])}
                       helperText={errors.attack && errors.attack[frameKey]?.message}
@@ -455,7 +455,7 @@ export const AttackMoveForm: React.FC<Props> = ({ move, moves, onSubmit, copy = 
               </Grid>
 
               <Grid item xs={12} sm={4}>
-                <FormControl fullWidth variant="outlined" size="small">
+                <FormControl fullWidth variant='outlined' size='small'>
                   <InputLabel>相手の状態</InputLabel>
                   <Controller
                     control={control}
@@ -483,7 +483,7 @@ export const AttackMoveForm: React.FC<Props> = ({ move, moves, onSubmit, copy = 
         ))}
 
         <Box mt={4}>
-          <Typography variant="h4" gutterBottom>
+          <Typography variant='h4' gutterBottom>
             ステータス
           </Typography>
           <Grid container spacing={2}>
@@ -508,19 +508,19 @@ export const AttackMoveForm: React.FC<Props> = ({ move, moves, onSubmit, copy = 
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <Controller
-                name="move.note"
+                name='move.note'
                 control={control}
-                render={({ field }) => <TextField {...field} label="備考" fullWidth multiline />}
+                render={({ field }) => <TextField {...field} label='備考' fullWidth multiline />}
               />
             </Grid>
           </Grid>
         </Box>
 
         <Box mt={4}>
-          <FormControl fullWidth variant="outlined" size="small">
+          <FormControl fullWidth variant='outlined' size='small'>
             <InputLabel>表示順</InputLabel>
             <Controller
-              name="move.position"
+              name='move.position'
               control={control}
               render={({ field }) => (
                 <Select
@@ -545,7 +545,7 @@ export const AttackMoveForm: React.FC<Props> = ({ move, moves, onSubmit, copy = 
       </DialogContent>
 
       <DialogActions>
-        <Button type="submit" variant="contained">
+        <Button type='submit' variant='contained'>
           登録する
         </Button>
       </DialogActions>

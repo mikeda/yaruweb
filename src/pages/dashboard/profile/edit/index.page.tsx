@@ -18,7 +18,7 @@ const Page: React.FC = () => {
 
   setLoading(loading);
 
-  return <DashboardContent title="プロフィール編集">{data && <Form viewer={data.viewer} />}</DashboardContent>;
+  return <DashboardContent title='プロフィール編集'>{data && <Form viewer={data.viewer} />}</DashboardContent>;
 };
 
 const Form: React.FC<{ viewer: ViewerFragment }> = ({ viewer }) => {
@@ -60,19 +60,19 @@ const Form: React.FC<{ viewer: ViewerFragment }> = ({ viewer }) => {
       <form onSubmit={handleSubmit(onSubmit)}>
         <CardContent>
           <Controller
-            name="name"
+            name='name'
             control={control}
             render={({ field }) => (
-              <TextField {...field} label="名前" error={Boolean(errors.name)} helperText={errors.name?.message} />
+              <TextField {...field} label='名前' error={Boolean(errors.name)} helperText={errors.name?.message} />
             )}
           />
 
           <Box mt={4}>
-            <Button component="label" color="primary" variant="outlined">
+            <Button component='label' color='primary' variant='outlined'>
               全体画像を選択
               <input
-                type="file"
-                accept="image/*"
+                type='file'
+                accept='image/*'
                 hidden
                 onChange={e => {
                   if (!e.target.files) return;
@@ -94,8 +94,8 @@ const Form: React.FC<{ viewer: ViewerFragment }> = ({ viewer }) => {
 
         <Divider />
 
-        <Box m={2} display="flex" justifyContent="center">
-          <Button type="submit" variant="contained">
+        <Box m={2} display='flex' justifyContent='center'>
+          <Button type='submit' variant='contained'>
             登録する
           </Button>
         </Box>

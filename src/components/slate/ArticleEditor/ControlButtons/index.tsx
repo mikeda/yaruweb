@@ -14,17 +14,15 @@ import { VideoButton } from './buttons/VideoButton';
 import { useCharacterSelectOptionsQuery } from '@/generated/graphql';
 import { YAROUYO_FONT_CODE } from '@/lib';
 
-
-
 export const ControlButtons: React.FC = () => {
   const { data } = useCharacterSelectOptionsQuery();
 
   return (
     <Container>
-      <MarkButton format="bold" icon={YAROUYO_FONT_CODE.bold} />
-      <BlockButton format="heading-one" icon={YAROUYO_FONT_CODE.h1} />
-      <BlockButton format="heading-two" icon={YAROUYO_FONT_CODE.h2} />
-      <BlockButton format="bulleted-list" icon={YAROUYO_FONT_CODE.list} />
+      <MarkButton format='bold' icon={YAROUYO_FONT_CODE.bold} />
+      <BlockButton format='heading-one' icon={YAROUYO_FONT_CODE.h1} />
+      <BlockButton format='heading-two' icon={YAROUYO_FONT_CODE.h2} />
+      <BlockButton format='bulleted-list' icon={YAROUYO_FONT_CODE.list} />
 
       <OperationButton icon={YAROUYO_FONT_CODE.lp} />
       <ImageButton />

@@ -23,7 +23,7 @@ export const MoveListItem: React.FC<{ move: MoveListItemFragment; first: boolean
           <>
             {move.moveVideo && (
               <>
-                <IconButton onClick={() => setDialogOpen(true)} size="large">
+                <IconButton onClick={() => setDialogOpen(true)} size='large'>
                   <YouTubeIcon style={{ fill: colors.youtube }} />
                 </IconButton>
 

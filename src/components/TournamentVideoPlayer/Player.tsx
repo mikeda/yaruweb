@@ -40,10 +40,10 @@ export const Player: React.FC<Props> = ({ name, rounds, faceImageUrl }) => {
   const classes = useStyles();
 
   return (
-    <Box display="flex" alignItems="center" className={classes.root}>
+    <Box display='flex' alignItems='center' className={classes.root}>
       <Avatar className={clsx(classes.avatar, rounds === 3 && classes.win)}>{rounds}</Avatar>
       <Avatar className={classes.avatar} src={faceImageUrl} />
-      <Typography component="div">{name}</Typography>
+      <Typography component='div'>{name}</Typography>
     </Box>
   );
 };

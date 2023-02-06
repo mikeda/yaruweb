@@ -17,19 +17,19 @@ import { fetchGraphql } from '@/lib';
 
 const Page: React.FC<CharacterMovesPageQuery> = ({ character }) => {
   return (
-    <Content activeTab="characters" breadcrumb={<Breadcrumbs to="characterMoves" character={character} />}>
+    <Content activeTab='characters' breadcrumb={<Breadcrumbs to='characterMoves' character={character} />}>
       <Head title={`${character.longName}のコマンドリスト`} />
 
       <CharacterProfile character={character} />
 
       <Box mt={2}>
-        <CharacterTabs character={character} activeTab="moves" />
+        <CharacterTabs character={character} activeTab='moves' />
       </Box>
 
       {character.moveCategories.map(moveCategory => {
         return (
           <Box key={moveCategory.id} mt={4}>
-            <Typography variant="h3" gutterBottom>
+            <Typography variant='h3' gutterBottom>
               {moveCategory.name}
             </Typography>
 

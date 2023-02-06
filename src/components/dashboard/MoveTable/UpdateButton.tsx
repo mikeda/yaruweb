@@ -67,7 +67,7 @@ export const UpdateButton: React.FC<Props> = ({ moveId, moves }) => {
   return (
     <>
       <IconButton
-        size="large"
+        size='large'
         onClick={() => {
           fetch().then(() => setOpen(true));
         }}

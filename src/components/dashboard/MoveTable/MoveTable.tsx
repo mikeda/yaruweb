@@ -21,8 +21,8 @@ export const MoveTable: React.FC<Props> = ({ moveCategoryId, moves }) => {
           <MoveTableRow key={move.id} move={move} moveCategoryId={moveCategoryId} moves={moves} />
         ))}
         <TableRow>
-          <TableCell scope="row" colSpan={10}>
-            <Box display="flex" justifyContent="center">
+          <TableCell scope='row' colSpan={10}>
+            <Box display='flex' justifyContent='center'>
               <CreateButton moveCategoryId={moveCategoryId} moves={moves} />
             </Box>
           </TableCell>

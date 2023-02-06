@@ -13,7 +13,7 @@ export const StaffRequirement: React.FC = () => {
             <PeopleIcon />
           </Avatar>
         }
-        title="運営テケナー募集中"
+        title='運営テケナー募集中'
       />
       <CardContent>
         <Typography>
@@ -23,7 +23,7 @@ export const StaffRequirement: React.FC = () => {
         </Typography>
       </CardContent>
       <CardActions>
-        <Button href="https://twitter.com/mikeda" target="_blank" startIcon={<TwitterIcon />}>
+        <Button href='https://twitter.com/mikeda' target='_blank' startIcon={<TwitterIcon />}>
           Twitter
         </Button>
       </CardActions>

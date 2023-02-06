@@ -13,13 +13,13 @@ export const LoginForm: React.FC = () => {
     <>
       <LoginWithEmailForm />
 
-      <Box p={2} display="flex" justifyContent="center" alignItems="center">
+      <Box p={2} display='flex' justifyContent='center' alignItems='center'>
         <Box>
           <LoginWithTwitterButton />
         </Box>
 
         <Box ml={2}>
-          <Link href={pagesPath.signup.$url()} color="inherit">
+          <Link href={pagesPath.signup.$url()} color='inherit'>
             新規登録はこちら
           </Link>
         </Box>

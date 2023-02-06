@@ -9,8 +9,8 @@ import { fetchGraphql } from '@/lib';
 
 const Page: React.FC<CharactersPageQuery> = ({ characters }) => {
   return (
-    <Content activeTab="characters" title="キャラクター" breadcrumb={<Breadcrumbs to="characters" />}>
-      <Head title="キャラクター一覧" description="鉄拳7のキャラクター一覧です。" />
+    <Content activeTab='characters' title='キャラクター' breadcrumb={<Breadcrumbs to='characters' />}>
+      <Head title='キャラクター一覧' description='鉄拳7のキャラクター一覧です。' />
 
       <Grid container spacing={2}>
         {characters.nodes.map(character => (

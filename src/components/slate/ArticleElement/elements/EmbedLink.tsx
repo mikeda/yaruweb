@@ -44,13 +44,13 @@ export const EmbedLink: React.FC<Props> = ({ url, title, description, imageUrl, 
         <Card>
           <CardActionArea href={url} css={rootStyle}>
             <CardContent css={contentStyle}>
-              <Typography gutterBottom variant="h6" css={textStyle}>
+              <Typography gutterBottom variant='h6' css={textStyle}>
                 {title}
               </Typography>
-              <Typography variant="caption" css={textStyle}>
+              <Typography variant='caption' css={textStyle}>
                 {description}
               </Typography>
-              <Typography variant="caption">{hostname}</Typography>
+              <Typography variant='caption'>{hostname}</Typography>
             </CardContent>
 
             {imageUrl && <CardMedia image={imageUrl} css={mediaStyle} />}

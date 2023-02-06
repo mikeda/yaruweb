@@ -9,7 +9,7 @@ export const ListItemFooter: React.FC<{ move: MoveListItemFragment }> = ({ move 
   if (!move.note) return null;
 
   return (
-    <Typography component={Paper} p={0.5} variant="caption" sx={{ whiteSpace: 'pre-line' }}>
+    <Typography component={Paper} p={0.5} variant='caption' sx={{ whiteSpace: 'pre-line' }}>
       <CustomText text={move.note} />
     </Typography>
   );

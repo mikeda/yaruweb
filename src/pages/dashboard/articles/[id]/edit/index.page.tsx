@@ -28,8 +28,8 @@ const Page: React.FC = () => {
 
   return (
     <DashboardContent
-      title="記事編集"
-      breadcrumb={data && <DashboardBreadcrumbs to="articleEdit" article={data.article} />}
+      title='記事編集'
+      breadcrumb={data && <DashboardBreadcrumbs to='articleEdit' article={data.article} />}
     >
       {data && <Content article={data.article} />}
     </DashboardContent>

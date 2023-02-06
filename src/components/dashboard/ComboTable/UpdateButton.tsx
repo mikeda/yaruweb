@@ -47,7 +47,7 @@ export const UpdateButton: React.FC<Props> = ({ comboId, combos, moveCategories 
   return (
     <>
       <IconButton
-        size="large"
+        size='large'
         onClick={() => {
           fetch().then(() => setOpen(true));
         }}

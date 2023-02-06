@@ -53,24 +53,24 @@ const PageContent: React.FC<TournamentPageQuery> = ({ tournament }) => {
       <Card>
         <CardMedia image={tournament.mainImageUrl || NO_IMAGE_URL} title={tournament.name} className={classes.media} />
         <CardContent>
-          <Typography variant="h3">開催日時</Typography>
-          <Typography variant="body1" color="textSecondary" component="p">
+          <Typography variant='h3'>開催日時</Typography>
+          <Typography variant='body1' color='textSecondary' component='p'>
             {dayjs(tournament.startsAt).format('YYYY/M/D H:mm')}
           </Typography>
 
           <Box mt={2}>
-            <Typography variant="h3">大会概要</Typography>
-            <Typography variant="body2" color="textSecondary" component="p" sx={{ whiteSpace: 'pre-line' }}>
+            <Typography variant='h3'>大会概要</Typography>
+            <Typography variant='body2' color='textSecondary' component='p' sx={{ whiteSpace: 'pre-line' }}>
               {tournament.description}
             </Typography>
           </Box>
 
           <Box mt={2}>
-            <Button href={tournament.url} target="_blank" color="primary">
+            <Button href={tournament.url} target='_blank' color='primary'>
               大会URL
             </Button>
             {tournament.streamingUrl && (
-              <Button href={tournament.streamingUrl} target="_blank" color="primary">
+              <Button href={tournament.streamingUrl} target='_blank' color='primary'>
                 配信URL
               </Button>
             )}
@@ -79,7 +79,7 @@ const PageContent: React.FC<TournamentPageQuery> = ({ tournament }) => {
       </Card>
 
       <Box mt={4}>
-        <Typography variant="h2" gutterBottom>
+        <Typography variant='h2' gutterBottom>
           結果
         </Typography>
 
@@ -87,12 +87,12 @@ const PageContent: React.FC<TournamentPageQuery> = ({ tournament }) => {
           <NotFound>対戦結果が登録されていません。</NotFound>
         ) : (
           <Paper>
-            <List component="div">
+            <List component='div'>
               {tournament.standings
                 .sort((a, b) => a.place - b.place)
                 .map(standing => (
                   <Link key={standing.id} href={pagesPath.players._slug(standing.player.slug).$url()} passHref>
-                    <ListItem button component="a">
+                    <ListItem button component='a'>
                       <ListItemAvatar>
                         <img src={placeIconUrl(standing.place)} width={38} height={44} />
                       </ListItemAvatar>
@@ -111,7 +111,7 @@ const PageContent: React.FC<TournamentPageQuery> = ({ tournament }) => {
       </Box>
 
       <Box mt={4}>
-        <Typography variant="h2" gutterBottom>
+        <Typography variant='h2' gutterBottom>
           対戦動画
         </Typography>
 
@@ -120,7 +120,7 @@ const PageContent: React.FC<TournamentPageQuery> = ({ tournament }) => {
         ) : (
           <Paper square>
             {tournament.videos.length > 1 && (
-              <Tabs value={videoIndex} indicatorColor="primary" textColor="primary" variant="fullWidth">
+              <Tabs value={videoIndex} indicatorColor='primary' textColor='primary' variant='fullWidth'>
                 {tournament.videos
                   .sort((a, b) => dayjs(a.publishedAt).unix() - dayjs(b.publishedAt).unix())
                   .map((video, i) => (
@@ -147,9 +147,9 @@ const PageContent: React.FC<TournamentPageQuery> = ({ tournament }) => {
 const Page: React.FC<TournamentPageQuery> = ({ tournament }) => {
   return (
     <Content
-      activeTab="tournaments"
+      activeTab='tournaments'
       title={tournament.name}
-      breadcrumb={<Breadcrumbs to="tournament" tournament={tournament} />}
+      breadcrumb={<Breadcrumbs to='tournament' tournament={tournament} />}
     >
       <Head title={tournament.name} image={tournament.mainImageUrl} />
 

@@ -91,7 +91,7 @@ export const DrawerItems: React.FC = () => {
 };
 
 const Item: React.FC<{ item: ItemProps }> = ({ item: { icon, label, link } }) => (
-  <Link href={link} color="inherit">
+  <Link href={link} color='inherit'>
     <ListItem button>
       <ListItemIcon>{icon}</ListItemIcon>
       <ListItemText primary={label} />

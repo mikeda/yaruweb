@@ -8,8 +8,8 @@ describe(VideoPlayer, () => {
   test('Snapshot', () => {
     const { asFragment } = render(
       <VideoPlayer
-        src="https://example.com/main.jpg"
-        thumnailUrl="https://example.com/main.jpg"
+        src='https://example.com/main.jpg'
+        thumnailUrl='https://example.com/main.jpg'
         width={400}
         autoPlay
       />,

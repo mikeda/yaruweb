@@ -72,13 +72,13 @@ export const StandingList: React.FC<Props> = ({ tournamentId }) => {
 
             <ListItemSecondaryAction>
               <IconButton
-                edge="end"
+                edge='end'
                 onClick={() => {
                   if (window.confirm('削除します。')) {
                     del({ variables: { standingId: standing.id } });
                   }
                 }}
-                size="large"
+                size='large'
               >
                 <Delete />
               </IconButton>

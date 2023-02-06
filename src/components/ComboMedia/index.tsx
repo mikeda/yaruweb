@@ -17,7 +17,7 @@ export const ComboMedia: React.FC<Props> = ({ combo }) => {
       <CardContent>
         <Command command={combo.command} />
         {combo.note && (
-          <Typography variant="caption" component="p">
+          <Typography variant='caption' component='p'>
             {combo.note}
           </Typography>
         )}

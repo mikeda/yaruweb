@@ -69,15 +69,15 @@ export const TournamentVideoPlayer: React.FC<Props> = ({ tournamentVideo }) => {
       <Box component={Paper}>
         <TournamentVideoPlayerBattle battle={battle} onClick={() => updateBattle(battleIndex)} />
 
-        <Box display="flex">
-          <Tooltip title="1つ前の対戦に移動" sx={{ flexGrow: 1 }}>
-            <IconButton size="small" onClick={onClickSkipPrevious}>
+        <Box display='flex'>
+          <Tooltip title='1つ前の対戦に移動' sx={{ flexGrow: 1 }}>
+            <IconButton size='small' onClick={onClickSkipPrevious}>
               <SkipPreviousIcon />
             </IconButton>
           </Tooltip>
 
-          <Tooltip title="次の対戦に移動" sx={{ flexGrow: 1 }}>
-            <IconButton size="small" onClick={onClickSkipNext}>
+          <Tooltip title='次の対戦に移動' sx={{ flexGrow: 1 }}>
+            <IconButton size='small' onClick={onClickSkipNext}>
               <SkipNextIcon />
             </IconButton>
           </Tooltip>

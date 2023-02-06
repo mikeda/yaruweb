@@ -34,8 +34,8 @@ const Page: React.FC<PageAdminCharacterEditQuery> = ({ character }) => {
 
   return (
     <DashboardContent
-      title="キャラクター編集"
-      breadcrumb={<AdminBreadcrumbs to="characterEdit" character={character} />}
+      title='キャラクター編集'
+      breadcrumb={<AdminBreadcrumbs to='characterEdit' character={character} />}
     >
       <CharacterForm character={character} onSubmit={onSubmit} />
     </DashboardContent>

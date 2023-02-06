@@ -16,7 +16,7 @@ export const SelectChip: React.FC<Props> = ({ label, count, avatarUrl, active = 
       label={count ? `${label} (${count})` : label}
       avatar={avatarUrl ? <Avatar src={avatarUrl} /> : undefined}
       color={active ? 'primary' : undefined}
-      variant="outlined"
+      variant='outlined'
       onClick={onClick}
     />
   );

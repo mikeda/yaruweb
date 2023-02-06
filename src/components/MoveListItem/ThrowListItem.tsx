@@ -15,11 +15,11 @@ interface ThrowMove {
 export const ThrowListItem: React.FC<ThrowMove> = ({ move, throw: thrw }) => {
   return (
     <Stack spacing={2} sx={{ paddingBottom: 1 }}>
-      <Typography variant="body2">{`${ThrowTypeEnumText[thrw.throwType]} / ダメージ ${thrw.damage || '-'} / 投げ抜け ${
+      <Typography variant='body2'>{`${ThrowTypeEnumText[thrw.throwType]} / ダメージ ${thrw.damage || '-'} / 投げ抜け ${
         ThrowEscapeEnumText[thrw.throwEscape]
       }`}</Typography>
 
-      <Typography variant="body2">{`発生 ${thrw.startUpFrame ? frameDiffText(thrw.startUpFrame) : '-'} / H ${
+      <Typography variant='body2'>{`発生 ${thrw.startUpFrame ? frameDiffText(thrw.startUpFrame) : '-'} / H ${
         ThrowMoveResultText[thrw.throwResult]
       }`}</Typography>
 

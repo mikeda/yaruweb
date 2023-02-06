@@ -50,12 +50,12 @@ export const TournamentForm: React.FC<Props> = ({ tournament, onSubmit }) => {
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <Controller
-                name="name"
+                name='name'
                 control={control}
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    label="名前"
+                    label='名前'
                     error={Boolean(errors.name)}
                     helperText={errors.name?.message}
                     fullWidth
@@ -66,12 +66,12 @@ export const TournamentForm: React.FC<Props> = ({ tournament, onSubmit }) => {
 
             <Grid item xs={12}>
               <Controller
-                name="url"
+                name='url'
                 control={control}
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    label="URL"
+                    label='URL'
                     error={Boolean(errors.url)}
                     helperText={errors.url?.message}
                     fullWidth
@@ -82,12 +82,12 @@ export const TournamentForm: React.FC<Props> = ({ tournament, onSubmit }) => {
 
             <Grid item xs={12}>
               <Controller
-                name="streamingUrl"
+                name='streamingUrl'
                 control={control}
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    label="配信URL"
+                    label='配信URL'
                     error={Boolean(errors.streamingUrl)}
                     helperText={errors.streamingUrl?.message}
                     fullWidth
@@ -98,16 +98,16 @@ export const TournamentForm: React.FC<Props> = ({ tournament, onSubmit }) => {
 
             <Grid item xs={12}>
               <Controller
-                name="description"
+                name='description'
                 control={control}
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    label="イベント概要"
+                    label='イベント概要'
                     multiline
                     fullWidth
                     rows={4}
-                    variant="outlined"
+                    variant='outlined'
                     error={Boolean(errors.description)}
                     helperText={errors.description?.message}
                     style={{ backgroundColor: 'white' }}
@@ -118,9 +118,9 @@ export const TournamentForm: React.FC<Props> = ({ tournament, onSubmit }) => {
 
             <Grid item xs={12}>
               <input
-                type="file"
-                accept="image/*"
-                name="mainImageDummy"
+                type='file'
+                accept='image/*'
+                name='mainImageDummy'
                 onChange={e => {
                   if (!e.target.files) return;
                   const file = e.target.files[0];
@@ -135,19 +135,19 @@ export const TournamentForm: React.FC<Props> = ({ tournament, onSubmit }) => {
                   reader.readAsDataURL(file);
                 }}
               />
-              <input type="hidden" name="mainImage" />
+              <input type='hidden' name='mainImage' />
             </Grid>
 
             <Grid item xs={12}>
               <Controller
-                name="startsAt"
+                name='startsAt'
                 control={control}
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    label="開始時間"
-                    type="datetime-local"
-                    variant="outlined"
+                    label='開始時間'
+                    type='datetime-local'
+                    variant='outlined'
                     InputLabelProps={{
                       shrink: true,
                     }}
@@ -162,8 +162,8 @@ export const TournamentForm: React.FC<Props> = ({ tournament, onSubmit }) => {
 
         <Divider />
 
-        <Box m={2} display="flex" justifyContent="center">
-          <Button type="submit" variant="contained">
+        <Box m={2} display='flex' justifyContent='center'>
+          <Button type='submit' variant='contained'>
             登録する
           </Button>
         </Box>

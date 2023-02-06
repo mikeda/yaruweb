@@ -55,17 +55,17 @@ export const PlayerProfile: React.FC<Props> = ({ player }) => {
       </div>
 
       <div className={classes.content}>
-        <Typography variant="h1">{player.name}</Typography>
+        <Typography variant='h1'>{player.name}</Typography>
 
         <div className={classes.status}>
           {player.twitterId && (
-            <a href={`https://twitter.com/${player.twitterId}`} target="_blank" rel="noreferrer">
-              <Twitter fontSize="small" style={{ fill: colors.twitter }} />
+            <a href={`https://twitter.com/${player.twitterId}`} target='_blank' rel='noreferrer'>
+              <Twitter fontSize='small' style={{ fill: colors.twitter }} />
             </a>
           )}
           {player.streamingUrl && (
-            <a href={player.streamingUrl} target="_blank" rel="noreferrer">
-              <LiveTv fontSize="small" style={{ fill: theme.palette.grey[600] }} />
+            <a href={player.streamingUrl} target='_blank' rel='noreferrer'>
+              <LiveTv fontSize='small' style={{ fill: theme.palette.grey[600] }} />
             </a>
           )}
         </div>

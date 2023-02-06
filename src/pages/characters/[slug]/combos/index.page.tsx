@@ -38,13 +38,13 @@ const Page: NextPage<CharacterCombosPageQuery> = ({ character }) => {
   }
 
   return (
-    <Content activeTab="characters" breadcrumb={<Breadcrumbs to="characterCombos" character={character} />}>
+    <Content activeTab='characters' breadcrumb={<Breadcrumbs to='characterCombos' character={character} />}>
       <Head title={`${character.longName}のコンボ`} />
 
       <CharacterProfile character={character} />
 
       <Box mt={2}>
-        <CharacterTabs character={character} activeTab="combos" />
+        <CharacterTabs character={character} activeTab='combos' />
       </Box>
 
       {character.comboStarters.length > 0 && (
@@ -68,7 +68,7 @@ const Page: NextPage<CharacterCombosPageQuery> = ({ character }) => {
       {comboCategories.map(comboCategory => {
         return (
           <Box key={comboCategory.id} mt={4}>
-            <Typography variant="h3" gutterBottom>
+            <Typography variant='h3' gutterBottom>
               {comboCategory.name}
             </Typography>
 

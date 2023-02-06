@@ -23,7 +23,7 @@ export const CreatePlayerButton: React.FC = () => {
 
   return (
     <>
-      <Button variant="contained" color="primary" startIcon={<AddIcon />} onClick={handleClick}>
+      <Button variant='contained' color='primary' startIcon={<AddIcon />} onClick={handleClick}>
         作成する
       </Button>
 

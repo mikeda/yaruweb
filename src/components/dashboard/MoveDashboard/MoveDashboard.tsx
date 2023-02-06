@@ -22,7 +22,7 @@ export const MoveDashboard: React.FC<Props> = ({ character: { slug, moveCategori
 
       <Divider sx={{ mt: 2, mb: 2 }} />
 
-      <Box display="flex" justifyContent="center">
+      <Box display='flex' justifyContent='center'>
         <CreateButton characterSlug={slug} moveCategories={moveCategories} />
       </Box>
     </>

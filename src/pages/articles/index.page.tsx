@@ -17,8 +17,8 @@ const Page: React.FC<ArticlesPageQuery> = ssrData => {
   const pageInfo = data?.articles.pageInfo;
 
   return (
-    <Content activeTab="articles" title="記事一覧" breadcrumb={<Breadcrumbs to="articles" />}>
-      <Head title="鉄拳7の記事一覧" />
+    <Content activeTab='articles' title='記事一覧' breadcrumb={<Breadcrumbs to='articles' />}>
+      <Head title='鉄拳7の記事一覧' />
 
       <Grid container spacing={2}>
         {articles.map(article => (
@@ -29,9 +29,9 @@ const Page: React.FC<ArticlesPageQuery> = ssrData => {
       </Grid>
 
       {pageInfo?.hasNextPage && (
-        <Box pt={2} pb={2} display="flex" justifyContent="center">
+        <Box pt={2} pb={2} display='flex' justifyContent='center'>
           <Button
-            variant="outlined"
+            variant='outlined'
             onClick={() => {
               fetchMore({ variables: { after: pageInfo.endCursor } });
             }}

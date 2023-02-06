@@ -53,7 +53,7 @@ export const VideoUploadButton: React.FC<{ combo: ComboTableRowFragment }> = ({ 
 
   return (
     <>
-      <IconButton onClick={() => setDialogOpen(true)} size="large">
+      <IconButton onClick={() => setDialogOpen(true)} size='large'>
         <YouTubeIcon style={combo.comboVideo ? { fill: colors.youtube } : {}} />
       </IconButton>
 
@@ -66,9 +66,9 @@ export const VideoUploadButton: React.FC<{ combo: ComboTableRowFragment }> = ({ 
 
         <DialogActions>
           <input
-            type="file"
-            id="video"
-            accept="video/mp4"
+            type='file'
+            id='video'
+            accept='video/mp4'
             onChange={event => {
               const target = event.target;
               if (!target.files) return;

@@ -65,12 +65,12 @@ export const PlayerForm: React.FC<Props> = ({ player, onSubmit }) => {
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6}>
               <Controller
-                name="name"
+                name='name'
                 control={control}
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    label="名前"
+                    label='名前'
                     error={Boolean(errors.name)}
                     helperText={errors.name?.message}
                     fullWidth
@@ -81,12 +81,12 @@ export const PlayerForm: React.FC<Props> = ({ player, onSubmit }) => {
 
             <Grid item xs={12} sm={6}>
               <Controller
-                name="slug"
+                name='slug'
                 control={control}
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    label="プレイヤーID(URLに使用)"
+                    label='プレイヤーID(URLに使用)'
                     error={Boolean(errors.slug)}
                     helperText={errors.slug?.message}
                     fullWidth
@@ -96,7 +96,7 @@ export const PlayerForm: React.FC<Props> = ({ player, onSubmit }) => {
             </Grid>
 
             <Grid item xs={12} sm={6}>
-              <FormControl fullWidth variant="outlined">
+              <FormControl fullWidth variant='outlined'>
                 <InputLabel>国籍</InputLabel>
                 <Controller
                   render={({ field }) => (
@@ -117,19 +117,19 @@ export const PlayerForm: React.FC<Props> = ({ player, onSubmit }) => {
                     </Select>
                   )}
                   control={control}
-                  name="countryId"
+                  name='countryId'
                 />
               </FormControl>
             </Grid>
 
             <Grid item xs={12} sm={6}>
               <Controller
-                name="tonamelId"
+                name='tonamelId'
                 control={control}
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    label="Tonamel ID"
+                    label='Tonamel ID'
                     error={Boolean(errors.tonamelId)}
                     helperText={errors.tonamelId?.message}
                     fullWidth
@@ -140,12 +140,12 @@ export const PlayerForm: React.FC<Props> = ({ player, onSubmit }) => {
 
             <Grid item xs={12} sm={6}>
               <Controller
-                name="smashggId"
+                name='smashggId'
                 control={control}
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    label="smash.gg ID"
+                    label='smash.gg ID'
                     error={Boolean(errors.smashggId)}
                     helperText={errors.smashggId?.message}
                     fullWidth
@@ -156,12 +156,12 @@ export const PlayerForm: React.FC<Props> = ({ player, onSubmit }) => {
 
             <Grid item xs={12} sm={6}>
               <Controller
-                name="twitterId"
+                name='twitterId'
                 control={control}
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    label="Twitter ID"
+                    label='Twitter ID'
                     error={Boolean(errors.twitterId)}
                     helperText={errors.twitterId?.message}
                     fullWidth
@@ -172,12 +172,12 @@ export const PlayerForm: React.FC<Props> = ({ player, onSubmit }) => {
 
             <Grid item xs={12}>
               <Controller
-                name="streamingUrl"
+                name='streamingUrl'
                 control={control}
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    label="ストリーミングURL"
+                    label='ストリーミングURL'
                     error={Boolean(errors.streamingUrl)}
                     helperText={errors.streamingUrl?.message}
                     fullWidth
@@ -188,16 +188,16 @@ export const PlayerForm: React.FC<Props> = ({ player, onSubmit }) => {
 
             <Grid item xs={12}>
               <Controller
-                name="description"
+                name='description'
                 control={control}
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    label="概要"
+                    label='概要'
                     multiline
                     fullWidth
                     rows={5}
-                    variant="outlined"
+                    variant='outlined'
                     error={Boolean(errors.description)}
                     helperText={errors.description?.message}
                     style={{ backgroundColor: 'white' }}
@@ -208,9 +208,9 @@ export const PlayerForm: React.FC<Props> = ({ player, onSubmit }) => {
 
             <Grid item xs={12}>
               <input
-                type="file"
-                accept="image/*"
-                name="avatarDummy"
+                type='file'
+                accept='image/*'
+                name='avatarDummy'
                 onChange={e => {
                   if (!e.target.files) return;
                   const file = e.target.files[0];
@@ -225,15 +225,15 @@ export const PlayerForm: React.FC<Props> = ({ player, onSubmit }) => {
                   reader.readAsDataURL(file);
                 }}
               />
-              <input type="hidden" name="avatar" />
+              <input type='hidden' name='avatar' />
             </Grid>
           </Grid>
         </CardContent>
 
         <Divider />
 
-        <Box m={2} display="flex" justifyContent="flex-end">
-          <Button type="submit" variant="contained">
+        <Box m={2} display='flex' justifyContent='flex-end'>
+          <Button type='submit' variant='contained'>
             登録する
           </Button>
         </Box>

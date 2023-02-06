@@ -43,16 +43,16 @@ export const TournamentCard: React.FC<Props> = ({ tournament }) => {
 
   return (
     <Card>
-      <CardActionArea href={href} component={Link} color="inherit">
+      <CardActionArea href={href} component={Link} color='inherit'>
         <CardMedia image={tournament.mainImageUrl || NO_IMAGE_URL} className={classes.media} />
 
         <CardContent>
-          <Typography variant="h4">{tournament.name}</Typography>
+          <Typography variant='h4'>{tournament.name}</Typography>
 
           <List disablePadding dense>
             <ListItem disableGutters>
               <ListItemIcon className={classes.listItemIcon}>
-                <ScheduleIcon fontSize="small" />
+                <ScheduleIcon fontSize='small' />
               </ListItemIcon>
               <ListItemText
                 primary={dayjs(tournament.startsAt).format('YYYY/M/D H:mm')}
@@ -63,7 +63,7 @@ export const TournamentCard: React.FC<Props> = ({ tournament }) => {
             {tournament.standings.length > 0 && (
               <ListItem disableGutters>
                 <ListItemIcon className={classes.listItemIcon}>
-                  <EmojiEventsIcon fontSize="small" style={{ fill: colors.trophy }} />
+                  <EmojiEventsIcon fontSize='small' style={{ fill: colors.trophy }} />
                 </ListItemIcon>
                 <ListItemText
                   primary={tournament.standings

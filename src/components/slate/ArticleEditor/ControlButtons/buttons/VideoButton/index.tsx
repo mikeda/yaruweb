@@ -57,7 +57,7 @@ export const VideoButton: React.FC = () => {
 
   return (
     <>
-      <label htmlFor="video">
+      <label htmlFor='video'>
         <Button
           active={false}
           onMouseDown={event => {
@@ -69,9 +69,9 @@ export const VideoButton: React.FC = () => {
       </label>
 
       <HiddenInput
-        type="file"
-        id="video"
-        accept="video/mp4"
+        type='file'
+        id='video'
+        accept='video/mp4'
         onChange={event => {
           const target = event.target;
           if (!target.files) return;

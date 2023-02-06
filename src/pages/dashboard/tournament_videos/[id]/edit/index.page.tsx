@@ -26,8 +26,8 @@ const Page: React.FC = () => {
 
   return (
     <DashboardContent
-      title="大会を編集"
-      breadcrumb={<AdminBreadcrumbs to="tournamentVideoEdit" tournamentVideo={tournamentVideo} />}
+      title='大会を編集'
+      breadcrumb={<AdminBreadcrumbs to='tournamentVideoEdit' tournamentVideo={tournamentVideo} />}
     >
       <TournamentVideoEditForm tournamentVideo={tournamentVideo} onSubmit={onSubmit} />
     </DashboardContent>

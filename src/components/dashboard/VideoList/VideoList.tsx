@@ -98,10 +98,10 @@ const MenuButton: React.FC<{ tournamentVideoId: string; onDestroy: () => void }>
 
   return (
     <>
-      <IconButton edge="end" aria-controls="video-menu" aria-haspopup="true" onClick={handleClick} size="large">
+      <IconButton edge='end' aria-controls='video-menu' aria-haspopup='true' onClick={handleClick} size='large'>
         <MoreVert />
       </IconButton>
-      <Menu id="video-menu" anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
+      <Menu id='video-menu' anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
         <MenuItem
           onClick={() => {
             router.push(pagesPath.dashboard.tournament_videos._id(tournamentVideoId).edit.$url());

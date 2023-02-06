@@ -8,7 +8,6 @@ import { toast } from 'react-toastify';
 import { useSetRecoilState } from 'recoil';
 import * as yup from 'yup';
 
-
 import { SignUpWithTwitterButton } from './SignUpWithTwitterButton';
 
 import { pagesPath } from '@/generated/$path';
@@ -67,12 +66,12 @@ export const SignUpForm: React.FC = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <CardContent>
             <Controller
-              name="email"
+              name='email'
               control={control}
               render={({ field }) => (
                 <TextField
                   {...field}
-                  label="メールアドレス"
+                  label='メールアドレス'
                   error={Boolean(errors.email)}
                   helperText={errors.email?.message}
                 />
@@ -82,14 +81,14 @@ export const SignUpForm: React.FC = () => {
 
           <CardContent>
             <Controller
-              name="password"
+              name='password'
               control={control}
               render={({ field }) => (
                 <TextField
                   {...field}
-                  type="password["
-                  label="パスワード"
-                  placeholder="8文字以上"
+                  type='password['
+                  label='パスワード'
+                  placeholder='8文字以上'
                   error={Boolean(errors.password)}
                   helperText={errors.password?.message}
                 />
@@ -99,8 +98,8 @@ export const SignUpForm: React.FC = () => {
 
           <Divider />
 
-          <Box m={2} justifyContent="flex-end">
-            <Button type="submit" variant="contained">
+          <Box m={2} justifyContent='flex-end'>
+            <Button type='submit' variant='contained'>
               登録する
             </Button>
           </Box>

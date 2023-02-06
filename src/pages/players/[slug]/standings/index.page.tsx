@@ -30,15 +30,15 @@ const Page: React.FC<PlayerStandingsPageQuery> = ssrData => {
   const pageInfo = data?.player.standings.pageInfo;
 
   return (
-    <Content activeTab="players" breadcrumb={<Breadcrumbs to="playerStandings" player={player} />}>
+    <Content activeTab='players' breadcrumb={<Breadcrumbs to='playerStandings' player={player} />}>
       <Head title={`${player.name}の大会戦績`} />
 
       <PlayerProfile player={player} />
 
-      <PlayerTabs activeTab="standings" player={player} />
+      <PlayerTabs activeTab='standings' player={player} />
 
       <Box mt={4}>
-        <Typography variant="h2" gutterBottom>
+        <Typography variant='h2' gutterBottom>
           大会戦績
         </Typography>
 
@@ -51,9 +51,9 @@ const Page: React.FC<PlayerStandingsPageQuery> = ssrData => {
         </Grid>
 
         {pageInfo?.hasNextPage && (
-          <Box pt={2} pb={2} display="flex" justifyContent="center">
+          <Box pt={2} pb={2} display='flex' justifyContent='center'>
             <Button
-              variant="outlined"
+              variant='outlined'
               onClick={() => {
                 fetchMore({ variables: { after: pageInfo.endCursor } });
               }}

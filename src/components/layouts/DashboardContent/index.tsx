@@ -70,27 +70,27 @@ export const DashboardContent: React.FC<Props> = ({ children, title, breadcrumb,
   return (
     <div className={classes.root}>
       <Head title={title} />
-      <AppBar position="fixed" className={classes.appBar}>
+      <AppBar position='fixed' className={classes.appBar}>
         <Toolbar>
           <IconButton
-            color="inherit"
-            edge="start"
+            color='inherit'
+            edge='start'
             onClick={handleDrawerToggle}
             className={classes.menuButton}
-            size="large"
+            size='large'
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" noWrap>
+          <Typography variant='h6' noWrap>
             鉄拳やろうよ.com
           </Typography>
         </Toolbar>
       </AppBar>
-      <nav className={classes.drawer} aria-label="mailbox folders">
+      <nav className={classes.drawer} aria-label='mailbox folders'>
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-        <Hidden smUp implementation="css">
+        <Hidden smUp implementation='css'>
           <Drawer
-            variant="temporary"
+            variant='temporary'
             anchor={theme.direction === 'rtl' ? 'right' : 'left'}
             open={mobileOpen}
             onClose={handleDrawerToggle}
@@ -104,12 +104,12 @@ export const DashboardContent: React.FC<Props> = ({ children, title, breadcrumb,
             <DrawerItems />
           </Drawer>
         </Hidden>
-        <Hidden smDown implementation="css">
+        <Hidden smDown implementation='css'>
           <Drawer
             classes={{
               paper: classes.drawerPaper,
             }}
-            variant="permanent"
+            variant='permanent'
             open
           >
             <DrawerItems />
@@ -119,9 +119,9 @@ export const DashboardContent: React.FC<Props> = ({ children, title, breadcrumb,
 
       <main className={classes.content}>
         <div className={classes.toolbar} />
-        <Grid container spacing={3} justifyContent="space-between">
+        <Grid container spacing={3} justifyContent='space-between'>
           <Grid item>
-            <Typography variant="h1">{title}</Typography>
+            <Typography variant='h1'>{title}</Typography>
             {breadcrumb && <Grid item>{breadcrumb}</Grid>}
           </Grid>
           {actions && <Grid item>{actions}</Grid>}

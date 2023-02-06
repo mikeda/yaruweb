@@ -17,18 +17,18 @@ export const CharacterTableRow = ({ character }: Props) => {
 
   return (
     <TableRow>
-      <TableCell scope="row" width={80}>
+      <TableCell scope='row' width={80}>
         <img src={character.faceImageUrl} width={80} />
       </TableCell>
 
-      <TableCell scope="row">
+      <TableCell scope='row'>
         <Typography>{character.name}</Typography>
         <Typography variant={'caption'}>{`コマンド${character.movesCount} コンボ${character.combosCount}`}</Typography>
       </TableCell>
 
-      <TableCell align="right" scope="row">
+      <TableCell align='right' scope='row'>
         <Button
-          variant="outlined"
+          variant='outlined'
           href={resolveUrlObject(router, pagesPath.dashboard.characters._slug(character.slug).edit.$url())}
         >
           編集

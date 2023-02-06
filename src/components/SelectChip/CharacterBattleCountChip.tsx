@@ -14,7 +14,7 @@ interface Props {
 export const CharacterBattleCountChip: React.FC<Props> = ({ battleCount: bc, active, onClick }) => {
   return (
     <Chip
-      variant="outlined"
+      variant='outlined'
       avatar={<Avatar src={bc.character.faceImageUrl || DEFAULT_AVATAR_URL} />}
       label={`${bc.character.name} (${bc.count})`}
       color={active ? 'primary' : undefined}

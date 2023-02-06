@@ -32,7 +32,7 @@ export const MoveButton: React.FC<Props> = ({ characters }) => {
           savedSelection.current = editor.selection;
           setExpanded(!expanded);
         }}
-        text="コマンドリスト"
+        text='コマンドリスト'
       />
 
       <Dialog open={expanded} onClose={() => setExpanded(false)}>
@@ -46,7 +46,7 @@ export const MoveButton: React.FC<Props> = ({ characters }) => {
                 setCharacter(option);
               }}
               renderInput={params => (
-                <TextField {...params} label="キャラクター" variant="outlined" fullWidth size="small" />
+                <TextField {...params} label='キャラクター' variant='outlined' fullWidth size='small' />
               )}
               disableClearable
             />

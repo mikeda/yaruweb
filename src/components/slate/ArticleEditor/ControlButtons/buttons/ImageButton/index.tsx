@@ -29,7 +29,7 @@ export const ImageButton: React.FC = () => {
 
   return (
     <>
-      <label htmlFor="image">
+      <label htmlFor='image'>
         <Button
           active={false}
           onMouseDown={event => {
@@ -40,9 +40,9 @@ export const ImageButton: React.FC = () => {
       </label>
 
       <HiddenInput
-        type="file"
-        id="image"
-        accept="image/*"
+        type='file'
+        id='image'
+        accept='image/*'
         onChange={event => {
           const target = event.target;
           if (!target.files) return;

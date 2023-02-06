@@ -29,14 +29,14 @@ export const PlayerStandingCard: React.FC<Props> = ({ standing }) => {
 
   return (
     <Card>
-      <CardActionArea href={pagesPath.tournaments._id(standing.tournament.id).$url()} component={Link} color="inherit">
+      <CardActionArea href={pagesPath.tournaments._id(standing.tournament.id).$url()} component={Link} color='inherit'>
         <CardMedia image={standing.tournament.mainImageUrl || NO_IMAGE_URL} className={classes.media} />
 
         <CardContent className={classes.content}>
           <img src={placeIconUrl(standing.place)} width={38} height={44} />
           <div className={classes.title}>
-            <Typography variant="h6">{standing.tournament.name}</Typography>
-            <Typography variant="caption" component="p">
+            <Typography variant='h6'>{standing.tournament.name}</Typography>
+            <Typography variant='caption' component='p'>
               {dayjs(standing.tournament.startsAt).format('YYYY/M/D')}
             </Typography>
           </div>

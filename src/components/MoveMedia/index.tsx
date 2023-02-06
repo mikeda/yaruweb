@@ -18,7 +18,7 @@ export const MoveMedia: React.FC<Props> = ({ move }) => {
     <Card>
       <CardContent>
         <Box mb={2}>
-          <Typography variant="h4" gutterBottom>
+          <Typography variant='h4' gutterBottom>
             {move.name}
           </Typography>
 

@@ -40,12 +40,12 @@ export const TournamentVideoEditForm: React.FC<Props> = ({ tournamentVideo, onSu
           <Grid container spacing={2}>
             <Grid item xs={12}>
               <Controller
-                name="title"
+                name='title'
                 control={control}
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    label="タイトル"
+                    label='タイトル'
                     error={Boolean(errors.title)}
                     helperText={errors.title?.message}
                     fullWidth
@@ -56,24 +56,24 @@ export const TournamentVideoEditForm: React.FC<Props> = ({ tournamentVideo, onSu
 
             <Grid item xs={12}>
               <Controller
-                name="label"
+                name='label'
                 control={control}
                 render={({ field }) => (
-                  <TextField {...field} label="ラベル" placeholder="予選Aブロック(複数ある場合の区別用)" fullWidth />
+                  <TextField {...field} label='ラベル' placeholder='予選Aブロック(複数ある場合の区別用)' fullWidth />
                 )}
               />
             </Grid>
 
             <Grid item xs={12}>
               <Controller
-                name="publishedAt"
+                name='publishedAt'
                 control={control}
                 render={({ field }) => (
                   <TextField
                     {...field}
-                    label="開始時間"
-                    type="datetime-local"
-                    variant="outlined"
+                    label='開始時間'
+                    type='datetime-local'
+                    variant='outlined'
                     InputLabelProps={{
                       shrink: true,
                     }}
@@ -88,8 +88,8 @@ export const TournamentVideoEditForm: React.FC<Props> = ({ tournamentVideo, onSu
 
         <Divider />
 
-        <Box m={2} display="flex" justifyContent="center">
-          <Button type="submit" variant="contained">
+        <Box m={2} display='flex' justifyContent='center'>
+          <Button type='submit' variant='contained'>
             登録する
           </Button>
         </Box>

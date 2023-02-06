@@ -56,21 +56,21 @@ export const PlayerCard: React.FC<Props> = ({ player }) => {
         <CardMedia image={player.avatarUrl || NO_IMAGE_URL} className={classes.media} />
 
         <CardContent className={classes.content}>
-          <Typography variant="h4" gutterBottom>
+          <Typography variant='h4' gutterBottom>
             {player.name}
           </Typography>
 
           <List disablePadding dense>
             <ListItem disableGutters>
               <ListItemIcon className={classes.listItemIcon}>
-                <EmojiEventsIcon fontSize="small" style={{ fill: colors.trophy }} />
+                <EmojiEventsIcon fontSize='small' style={{ fill: colors.trophy }} />
               </ListItemIcon>
               <ListItemText primary={`大会戦績 ${player.standingsCount}`} className={classes.listItemText} />
             </ListItem>
 
             <ListItem disableGutters>
               <ListItemIcon className={classes.listItemIcon}>
-                <YouTubeIcon fontSize="small" style={{ fill: colors.youtube }} />
+                <YouTubeIcon fontSize='small' style={{ fill: colors.youtube }} />
               </ListItemIcon>
               <ListItemText primary={`対戦動画 ${player.battlesCount}`} className={classes.listItemText} />
             </ListItem>

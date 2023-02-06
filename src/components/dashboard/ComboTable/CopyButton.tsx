@@ -50,7 +50,7 @@ export const CopyButton: React.FC<Props> = ({ comboId, comboCategoryId, combos, 
   return (
     <>
       <IconButton
-        size="large"
+        size='large'
         onClick={() => {
           fetch().then(() => setOpen(true));
         }}

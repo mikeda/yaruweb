@@ -31,13 +31,13 @@ export const VideoForm: React.FC<Props> = ({ onSubmit }) => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <DialogContent>
         <Controller
-          name="url"
+          name='url'
           control={control}
           render={({ field }) => (
             <TextField
               {...field}
-              label="YouTubeのURL"
-              placeholder="https://www.youtube.com/watch?v=xxxxx"
+              label='YouTubeのURL'
+              placeholder='https://www.youtube.com/watch?v=xxxxx'
               error={Boolean(errors.url)}
               helperText={errors.url?.message}
               fullWidth
@@ -47,7 +47,7 @@ export const VideoForm: React.FC<Props> = ({ onSubmit }) => {
       </DialogContent>
 
       <DialogActions>
-        <Button type="submit" color="primary">
+        <Button type='submit' color='primary'>
           登録する
         </Button>
       </DialogActions>

@@ -9,6 +9,7 @@
     "build": "pathpida --output src/generated --ignorePath .gitignore && next build",
     "test": "jest --watch",
     "eslint": "npx eslint --ext ts,tsx,graphql --max-warnings 0 src",
+    "fmt": "prettier --write './src/**/*.{ts,tsx,json}'",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook",
     "get-graphql-schema": "get-graphql-schema http://localhost:5000/graphql > schema.graphql"

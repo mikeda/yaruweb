@@ -49,7 +49,7 @@ export const StandingForm: React.FC<Props> = ({ onSubmit }) => {
             if (player) setValue('playerId', player.id);
           }}
           style={{ width: 300 }}
-          renderInput={params => <TextField {...params} label="プレイヤー" />}
+          renderInput={params => <TextField {...params} label='プレイヤー' />}
         />
 
         <Box mt={2}>
@@ -64,7 +64,7 @@ export const StandingForm: React.FC<Props> = ({ onSubmit }) => {
                 </Select>
               )}
               control={control}
-              name="place"
+              name='place'
               defaultValue={1}
             />
           </FormControl>
@@ -72,7 +72,7 @@ export const StandingForm: React.FC<Props> = ({ onSubmit }) => {
       </DialogContent>
 
       <DialogActions>
-        <Button type="submit" color="primary">
+        <Button type='submit' color='primary'>
           登録する
         </Button>
       </DialogActions>
