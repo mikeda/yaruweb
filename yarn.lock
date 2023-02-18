@@ -15923,10 +15923,10 @@ ts-pnp@^1.1.6:
   resolved "https://registry.yarnpkg.com/ts-pnp/-/ts-pnp-1.2.0.tgz#a500ad084b0798f1c3071af391e65912c86bca92"
   integrity sha512-csd+vJOb/gkzvcCHgTGSChYpy5f1/XKNsmvBGO4JXS+z1v2HobugDz4s1IeFXM3wZB44uczs+eazB5Q/ccdhQw==
 
-ts-unused-exports@9.0.3:
-  version "9.0.3"
-  resolved "https://registry.yarnpkg.com/ts-unused-exports/-/ts-unused-exports-9.0.3.tgz#99a4e58708811fb29642352888759bcfb4c6cb4d"
-  integrity sha512-LCGLYL0EVdXNj1O/cGfpP2Fx+zfqoV936iMyIhvSVnXk4RUjwmSjMzzCNXI9b1j9PCs946a2TbRMhJh7/XUyUA==
+ts-unused-exports@9.0.4:
+  version "9.0.4"
+  resolved "https://registry.yarnpkg.com/ts-unused-exports/-/ts-unused-exports-9.0.4.tgz#599504dffdefaf1b46ea6015c3f71e0e9092c45e"
+  integrity sha512-/PPy0B1zhOJkDTUd1XVyaCqE/yA3IL2FrQ8W5/6cQ2g0kKC/06q8LEoPeXI6ELfI6Bivmv3MMvsUup5u3WH+BQ==
   dependencies:
     chalk "^4.0.0"
     tsconfig-paths "^3.9.0"
