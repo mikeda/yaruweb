@@ -16973,6 +16973,15 @@ youtube-player@5.5.2:
     load-script "^1.0.0"
     sister "^3.0.0"
 
+youtube-player@5.6.0:
+  version "5.6.0"
+  resolved "https://registry.yarnpkg.com/youtube-player/-/youtube-player-5.6.0.tgz#71699ca093d8ae65e87091898cf812b354e261ea"
+  integrity sha512-x95fBbxV7eZ1ZsFtMLMcSGX0Jb/GPPj69RsooyEDVa9bzvvNZ4d5VjnBVBYoY85008VefkLvtaV+b+l38R/LMQ==
+  dependencies:
+    debug "^4.3.4"
+    load-script "^1.0.0"
+    sister "^3.0.0"
+
 yup@0.32.11:
   version "0.32.11"
   resolved "https://registry.yarnpkg.com/yup/-/yup-0.32.11.tgz#d67fb83eefa4698607982e63f7ca4c5ed3cf18c5"
