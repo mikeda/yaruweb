@@ -10394,10 +10394,10 @@ header-case@^2.0.4:
     capital-case "^1.0.4"
     tslib "^2.0.3"
 
-hls.js@1.4.3:
-  version "1.4.3"
-  resolved "https://registry.yarnpkg.com/hls.js/-/hls.js-1.4.3.tgz#9326a680f5905631f86344d0ae155b5ef9d1bad7"
-  integrity sha512-EE1MjIYDNO+ynbmCpAWfhUwQpyG8gUcKKuGDGgYgfRmW/g+inQUQ8sVVVY5WZaCxEGxDMGLbXhXGepkmDIMvdw==
+hls.js@1.4.4:
+  version "1.4.4"
+  resolved "https://registry.yarnpkg.com/hls.js/-/hls.js-1.4.4.tgz#6605a70fdc37e20cc67545ce2602da2dc2427a88"
+  integrity sha512-Yix3i1klHtTWIj8Fa/yoN5mFreY3eLKGrmVldpkQ+2Bb1PmEok9Ah/VfAzlJnwtInCo4rs5l6/W2tUh76DaSNA==
 
 hmac-drbg@^1.0.1:
   version "1.0.1"
