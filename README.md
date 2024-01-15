@@ -9,7 +9,6 @@
 - MUI
 - GraphQL (Apollo Client)
 - Firebase Authentication
-- [Slate](https://github.com/ianstormtaylor/slate)
 
 ## 開発環境構築(Mac)
 

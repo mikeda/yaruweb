@@ -1,12 +1,10 @@
-import { ArticleParam, CharactersParam, PlayerParam, TournamentParam, TournamentVideoParam } from './params';
+import { CharactersParam, PlayerParam, TournamentParam, TournamentVideoParam } from './params';
 
 import { BreadcrumbChainItem } from '.';
 
 import { pagesPath } from '@/generated/$path';
 
 export type ChainParam =
-  | { to: 'articles' }
-  | { to: 'article'; article: ArticleParam }
   | { to: 'characters' }
   | { to: 'character'; character: CharactersParam }
   | { to: 'characterBattles'; character: CharactersParam }
@@ -27,10 +25,6 @@ export type ChainParam =
 
 export const breadcrumbChain = (props: ChainParam): BreadcrumbChainItem => {
   switch (props.to) {
-    case 'articles':
-      return { name: '記事', url: pagesPath.articles.$url() };
-    case 'article':
-      return { name: props.article.title, parent: breadcrumbChain({ to: 'articles' }) };
     case 'characters':
       return { name: 'キャラクター', url: pagesPath.characters.$url() };
     case 'character':

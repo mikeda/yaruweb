@@ -1,6 +1,4 @@
 import {
-  ArticleCategory,
-  ArticleStatus,
   AttackMoveResultEnum,
   AttackMoveStateEnum,
   AttackTypeEnum,
@@ -9,20 +7,6 @@ import {
   ThrowMoveResultEnum,
   ThrowTypeEnum,
 } from '@/generated/graphql';
-
-export const ArticleCategoryText: { [key in ArticleCategory]: string } = {
-  intro: '入門',
-  theory: '解説・戦略',
-  event: 'イベント',
-  battle: '対戦',
-  news: 'ニュース',
-  blog: '雑談',
-};
-
-export const ArticleStatusText: { [key in ArticleStatus]: string } = {
-  draft: '下書き',
-  published: '公開中',
-};
 
 export const AttackMoveResultText: { [key in AttackMoveResultEnum]: string } = {
   normal: '-',

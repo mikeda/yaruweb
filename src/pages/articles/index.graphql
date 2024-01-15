@@ -1,7 +1,0 @@
-query ArticlesPage {
-  articles(first: 12) {
-    nodes {
-      ...ArticleCard
-    }
-  }
-}

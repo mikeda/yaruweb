@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react';
 
 import { UrlObject } from 'url';
 
-import { Person, LibraryBooks, EmojiEvents, TagFaces, People } from '@mui/icons-material';
+import { Person, EmojiEvents, TagFaces, People } from '@mui/icons-material';
 import { Divider, List, ListItem, ListItemIcon, ListItemText } from '@mui/material';
 import createStyles from '@mui/styles/createStyles';
 import makeStyles from '@mui/styles/makeStyles';
@@ -19,7 +19,7 @@ const useStyles = makeStyles(() =>
   }),
 );
 
-type MenuKey = 'article' | 'tournament' | 'player' | 'character' | 'profile';
+type MenuKey = 'tournament' | 'player' | 'character' | 'profile';
 
 interface ItemProps {
   key: MenuKey;
@@ -35,7 +35,6 @@ const items: ItemProps[] = [
     link: pagesPath.dashboard.profile.edit.$url(),
     icon: <Person />,
   },
-  { key: 'article', label: '記事', link: pagesPath.dashboard.articles.$url(), icon: <LibraryBooks /> },
 ];
 
 const adminItems: ItemProps[] = [

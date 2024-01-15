@@ -1,4 +1,3 @@
-export * from './ArticleForm';
 export * from './CharacterForm';
 export * from './ComboCategoryForm';
 export * from './ComboForm';

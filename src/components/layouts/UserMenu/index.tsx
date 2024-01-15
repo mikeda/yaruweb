@@ -34,7 +34,7 @@ export const UserMenu: React.FC = () => {
       <Menu id='user-menu' anchorEl={anchorEl} keepMounted open={Boolean(anchorEl)} onClose={handleClose}>
         <MenuItem
           onClick={() => {
-            router.push(pagesPath.dashboard.articles.$url());
+            router.push(pagesPath.dashboard.profile.edit.$url());
             handleClose();
           }}
         >

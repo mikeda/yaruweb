@@ -1,5 +1,0 @@
-query ArticlePage($articleId: ID!) {
-  article(articleId: $articleId) {
-    ...ArticlePage
-  }
-}

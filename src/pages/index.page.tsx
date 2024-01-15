@@ -7,7 +7,6 @@ import { GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 
 import {
-  ArticleCard,
   CharacterCard,
   Content,
   Head,
@@ -34,7 +33,7 @@ const useStyles = makeStyles(() =>
   }),
 );
 
-const Page: React.FC<TopPageQuery> = ({ tournaments, players, characters, articles }) => {
+const Page: React.FC<TopPageQuery> = ({ tournaments, players, characters }) => {
   const classes = useStyles();
   const router = useRouter();
 
@@ -101,26 +100,6 @@ const Page: React.FC<TopPageQuery> = ({ tournaments, players, characters, articl
 
         <div className={classes.sectionFooter}>
           <Button href={resolveUrlObject(router, pagesPath.characters.$url())} component={LinkComponent}>
-            もっとみる
-          </Button>
-        </div>
-      </Box>
-
-      <Box mt={4}>
-        <Typography variant='h2' gutterBottom>
-          新着記事
-        </Typography>
-
-        <Grid container spacing={2}>
-          {articles.nodes.map(article => (
-            <Grid item key={article.id} xs={12} sm={6} md={4}>
-              <ArticleCard article={article} />
-            </Grid>
-          ))}
-        </Grid>
-
-        <div className={classes.sectionFooter}>
-          <Button href={resolveUrlObject(router, pagesPath.articles.$url())} component={LinkComponent}>
             もっとみる
           </Button>
         </div>

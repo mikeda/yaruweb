@@ -16,10 +16,4 @@ query TopPage {
       ...CharacterCard
     }
   }
-
-  articles(first: 3) {
-    nodes {
-      ...ArticleCard
-    }
-  }
 }

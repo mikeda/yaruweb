@@ -1,4 +1,3 @@
-export * from './ArticleTable';
 export * from './CharacterTable';
 export * from './ComboDashboard';
 export * from './ComboTable';

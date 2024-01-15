@@ -1,10 +1,4 @@
 export const pagesPath = {
-  "articles": {
-    _id: (id: string | number) => ({
-      $url: (url?: { hash?: string }) => ({ pathname: '/articles/[id]' as const, query: { id }, hash: url?.hash })
-    }),
-    $url: (url?: { hash?: string }) => ({ pathname: '/articles' as const, hash: url?.hash })
-  },
   "characters": {
     _slug: (slug: string | number) => ({
       "battles": {
@@ -21,17 +15,6 @@ export const pagesPath = {
     $url: (url?: { hash?: string }) => ({ pathname: '/characters' as const, hash: url?.hash })
   },
   "dashboard": {
-    "articles": {
-      _id: (id: string | number) => ({
-        "edit": {
-          $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/articles/[id]/edit' as const, query: { id }, hash: url?.hash })
-        }
-      }),
-      "new": {
-        $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/articles/new' as const, hash: url?.hash })
-      },
-      $url: (url?: { hash?: string }) => ({ pathname: '/dashboard/articles' as const, hash: url?.hash })
-    },
     "characters": {
       _slug: (slug: string | number) => ({
         "combos": {

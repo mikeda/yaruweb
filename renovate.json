@@ -16,10 +16,6 @@
       "matchPackagePatterns": ["storybook-addon"]
     },
     {
-      "groupName": "slate",
-      "matchPackagePatterns": ["^slate"]
-    },
-    {
       "groupName": "types",
       "matchPackagePatterns": ["^@types/"]
     },

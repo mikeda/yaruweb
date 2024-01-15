@@ -1,5 +1,4 @@
 import {
-  Article,
   Character,
   ComboCategory,
   Move,
@@ -9,7 +8,6 @@ import {
   TournamentVideo,
 } from '@/generated/graphql';
 
-export type ArticleParam = Pick<Article, 'id' | 'title'>;
 export type TournamentParam = Pick<Tournament, 'id' | 'name'>;
 export type TournamentVideoParam = Pick<TournamentVideo, 'id' | 'label'> & { tournament: TournamentParam };
 export type CharactersParam = Pick<Character, 'slug' | 'name'>;

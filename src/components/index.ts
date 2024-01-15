@@ -1,14 +1,11 @@
 export * from './dashboard';
 export * from './forms';
 export * from './layouts';
-export * from './slate';
 
-export * from './ArticleCard';
 export * from './BattleList';
 export * from './CharacterCard';
 export * from './CharacterProfile';
 export * from './CharacterTabs';
-export * from './ComboMedia';
 export * from './ComboListItem';
 export * from './Command';
 export * from './CustomText';
@@ -17,7 +14,6 @@ export * from './IntroSlides';
 export * from './Link';
 export * from './Loading';
 export * from './MoveListItem';
-export * from './MoveMedia';
 export * from './NotFound';
 export * from './OperationListSelector';
 export * from './PlayerCard';

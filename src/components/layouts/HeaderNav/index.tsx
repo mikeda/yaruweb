@@ -7,14 +7,13 @@ import { useRouter } from 'next/router';
 
 import { pagesPath } from '@/generated/$path';
 
-export type TabValue = 'top' | 'characters' | 'articles' | 'tournaments' | 'players';
+export type TabValue = 'top' | 'characters' | 'tournaments' | 'players';
 
 const tabItems: { [key in TabValue]: { name: string; url: UrlObject } } = {
   top: { name: 'TOP', url: pagesPath.$url() },
   tournaments: { name: '大会', url: pagesPath.tournaments.$url() },
   players: { name: 'プレイヤー', url: pagesPath.players.$url() },
   characters: { name: 'キャラクター', url: pagesPath.characters.$url() },
-  articles: { name: '記事', url: pagesPath.articles.$url() },
 };
 
 export const HeaderNav: React.FC<{ activeTab: TabValue }> = ({ activeTab }) => {
