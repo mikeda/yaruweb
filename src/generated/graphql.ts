@@ -50,7 +50,7 @@ export enum ArticleCategory {
   /** ニュース */
   News = 'news',
   /** 解説・戦略 */
-  Theory = 'theory',
+  Theory = 'theory'
 }
 
 /** The connection type for Article. */
@@ -85,7 +85,7 @@ export enum ArticleStatus {
   /** 下書き */
   Draft = 'draft',
   /** 公開中 */
-  Published = 'published',
+  Published = 'published'
 }
 
 export type ArticleVideo = {
@@ -157,7 +157,7 @@ export enum AttackMoveResultEnum {
   /** ダウン */
   Down = 'down',
   /** - */
-  Normal = 'normal',
+  Normal = 'normal'
 }
 
 export enum AttackMoveStateEnum {
@@ -170,7 +170,7 @@ export enum AttackMoveStateEnum {
   /** 強制横向き */
   Sideways = 'sideways',
   /** きりもみ */
-  Twist = 'twist',
+  Twist = 'twist'
 }
 
 export enum AttackTypeEnum {
@@ -197,7 +197,7 @@ export enum AttackTypeEnum {
   /** 下段ガード不能 */
   Ubl = 'ubl',
   /** 中段ガード不能 */
-  Ubm = 'ubm',
+  Ubm = 'ubm'
 }
 
 export type Battle = {
@@ -256,7 +256,7 @@ export enum BattleRound {
   /** Winners Final */
   WinnersFinal = 'winners_final',
   /** Winners Semifinal */
-  WinnersSemifinal = 'winners_semifinal',
+  WinnersSemifinal = 'winners_semifinal'
 }
 
 export type BattleSide = {
@@ -305,6 +305,7 @@ export type Character = {
   story: Scalars['String'];
 };
 
+
 export type CharacterBattlesArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
@@ -312,6 +313,7 @@ export type CharacterBattlesArgs = {
   last?: InputMaybe<Scalars['Int']>;
   playerSlug?: InputMaybe<Scalars['String']>;
 };
+
 
 export type CharacterPlayerBattleCountsArgs = {
   limit?: InputMaybe<Scalars['Int']>;
@@ -362,7 +364,7 @@ export enum CharacterOrder {
   /** 名前 */
   Name = 'name',
   /** 新着 */
-  UseRate = 'use_rate',
+  UseRate = 'use_rate'
 }
 
 export type Combo = {
@@ -1008,201 +1010,251 @@ export type Mutation = {
   updateViewer?: Maybe<UpdateViewerPayload>;
 };
 
+
 export type MutationCreateArticleArgs = {
   input: CreateArticleInput;
 };
+
 
 export type MutationCreateArticleImageArgs = {
   input: CreateArticleImageInput;
 };
 
+
 export type MutationCreateArticleLinkArgs = {
   input: CreateArticleLinkInput;
 };
+
 
 export type MutationCreateArticleVideoArgs = {
   input: CreateArticleVideoInput;
 };
 
+
 export type MutationCreateAttackMoveArgs = {
   input: CreateAttackMoveInput;
 };
+
 
 export type MutationCreateBattleArgs = {
   input: CreateBattleInput;
 };
 
+
 export type MutationCreateCharacterArgs = {
   input: CreateCharacterInput;
 };
+
 
 export type MutationCreateComboArgs = {
   input: CreateComboInput;
 };
 
+
 export type MutationCreateComboCategoryArgs = {
   input: CreateComboCategoryInput;
 };
+
 
 export type MutationCreateComboVideoArgs = {
   input: CreateComboVideoInput;
 };
 
+
 export type MutationCreateMoveArgs = {
   input: CreateMoveInput;
 };
+
 
 export type MutationCreateMoveCategoryArgs = {
   input: CreateMoveCategoryInput;
 };
 
+
 export type MutationCreateMoveVideoArgs = {
   input: CreateMoveVideoInput;
 };
+
 
 export type MutationCreatePlayerArgs = {
   input: CreatePlayerInput;
 };
 
+
 export type MutationCreatePlayerFromSmashggArgs = {
   input: CreatePlayerFromSmashggInput;
 };
+
 
 export type MutationCreateReversalMoveArgs = {
   input: CreateReversalMoveInput;
 };
 
+
 export type MutationCreateStandingArgs = {
   input: CreateStandingInput;
 };
+
 
 export type MutationCreateThrowMoveArgs = {
   input: CreateThrowMoveInput;
 };
 
+
 export type MutationCreateTournamentArgs = {
   input: CreateTournamentInput;
 };
+
 
 export type MutationCreateTournamentVideoArgs = {
   input: CreateTournamentVideoInput;
 };
 
+
 export type MutationCreateUserArgs = {
   input: CreateUserInput;
 };
+
 
 export type MutationDeleteArticleArgs = {
   input: DeleteArticleInput;
 };
 
+
 export type MutationDeleteBattleArgs = {
   input: DeleteBattleInput;
 };
+
 
 export type MutationDeleteComboArgs = {
   input: DeleteComboInput;
 };
 
+
 export type MutationDeleteComboCategoryArgs = {
   input: DeleteComboCategoryInput;
 };
+
 
 export type MutationDeleteMoveArgs = {
   input: DeleteMoveInput;
 };
 
+
 export type MutationDeleteMoveCategoryArgs = {
   input: DeleteMoveCategoryInput;
 };
+
 
 export type MutationDeleteMoveVideoArgs = {
   input: DeleteMoveVideoInput;
 };
 
+
 export type MutationDeletePlayerArgs = {
   input: DeletePlayerInput;
 };
+
 
 export type MutationDeleteStandingArgs = {
   input: DeleteStandingInput;
 };
 
+
 export type MutationDeleteTournamentArgs = {
   input: DeleteTournamentInput;
 };
+
 
 export type MutationDeleteTournamentVideoArgs = {
   input: DeleteTournamentVideoInput;
 };
 
+
 export type MutationPublishArticleArgs = {
   input: PublishArticleInput;
 };
+
 
 export type MutationSetUserAvatarArgs = {
   input: SetUserAvatarInput;
 };
 
+
 export type MutationStopArticleArgs = {
   input: StopArticleInput;
 };
+
 
 export type MutationUpdateArticleArgs = {
   input: UpdateArticleInput;
 };
 
+
 export type MutationUpdateAttackMoveArgs = {
   input: UpdateAttackMoveInput;
 };
+
 
 export type MutationUpdateBattleArgs = {
   input: UpdateBattleInput;
 };
 
+
 export type MutationUpdateCharacterArgs = {
   input: UpdateCharacterInput;
 };
+
 
 export type MutationUpdateComboArgs = {
   input: UpdateComboInput;
 };
 
+
 export type MutationUpdateComboCategoryArgs = {
   input: UpdateComboCategoryInput;
 };
+
 
 export type MutationUpdateMoveArgs = {
   input: UpdateMoveInput;
 };
 
+
 export type MutationUpdateMoveCategoryArgs = {
   input: UpdateMoveCategoryInput;
 };
+
 
 export type MutationUpdatePlayerArgs = {
   input: UpdatePlayerInput;
 };
 
+
 export type MutationUpdateReversalMoveArgs = {
   input: UpdateReversalMoveInput;
 };
+
 
 export type MutationUpdateStandingArgs = {
   input: UpdateStandingInput;
 };
 
+
 export type MutationUpdateThrowMoveArgs = {
   input: UpdateThrowMoveInput;
 };
+
 
 export type MutationUpdateTournamentArgs = {
   input: UpdateTournamentInput;
 };
 
+
 export type MutationUpdateTournamentVideoArgs = {
   input: UpdateTournamentVideoInput;
 };
+
 
 export type MutationUpdateViewerArgs = {
   input: UpdateViewerInput;
@@ -1240,6 +1292,7 @@ export type Player = {
   twitterId?: Maybe<Scalars['String']>;
 };
 
+
 export type PlayerBattlesArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
@@ -1248,9 +1301,11 @@ export type PlayerBattlesArgs = {
   last?: InputMaybe<Scalars['Int']>;
 };
 
+
 export type PlayerCharacterBattleCountsArgs = {
   limit?: InputMaybe<Scalars['Int']>;
 };
+
 
 export type PlayerStandingsArgs = {
   after?: InputMaybe<Scalars['String']>;
@@ -1333,10 +1388,12 @@ export type Query = {
   viewer: User;
 };
 
+
 export type QueryArticleArgs = {
   articleId: Scalars['ID'];
   myOwn?: InputMaybe<Scalars['Boolean']>;
 };
+
 
 export type QueryArticlesArgs = {
   after?: InputMaybe<Scalars['String']>;
@@ -1347,9 +1404,11 @@ export type QueryArticlesArgs = {
   last?: InputMaybe<Scalars['Int']>;
 };
 
+
 export type QueryCharacterArgs = {
   characterSlug: Scalars['String'];
 };
+
 
 export type QueryCharactersArgs = {
   after?: InputMaybe<Scalars['String']>;
@@ -1360,21 +1419,26 @@ export type QueryCharactersArgs = {
   order?: InputMaybe<CharacterOrder>;
 };
 
+
 export type QueryComboArgs = {
   comboId: Scalars['ID'];
 };
+
 
 export type QueryComboCategoryArgs = {
   comboCategoryId: Scalars['ID'];
 };
 
+
 export type QueryMoveArgs = {
   moveId: Scalars['ID'];
 };
 
+
 export type QueryMoveCategoryArgs = {
   moveCategoryId: Scalars['ID'];
 };
+
 
 export type QueryMyArticlesArgs = {
   after?: InputMaybe<Scalars['String']>;
@@ -1384,9 +1448,11 @@ export type QueryMyArticlesArgs = {
   last?: InputMaybe<Scalars['Int']>;
 };
 
+
 export type QueryPlayerArgs = {
   playerSlug: Scalars['String'];
 };
+
 
 export type QueryPlayersArgs = {
   after?: InputMaybe<Scalars['String']>;
@@ -1396,13 +1462,16 @@ export type QueryPlayersArgs = {
   last?: InputMaybe<Scalars['Int']>;
 };
 
+
 export type QueryTournamentArgs = {
   tournamentId: Scalars['ID'];
 };
 
+
 export type QueryTournamentVideoArgs = {
   tournamentVideoId: Scalars['ID'];
 };
+
 
 export type QueryTournamentVideosArgs = {
   after?: InputMaybe<Scalars['String']>;
@@ -1411,6 +1480,7 @@ export type QueryTournamentVideosArgs = {
   last?: InputMaybe<Scalars['Int']>;
   tournamentId?: InputMaybe<Scalars['ID']>;
 };
+
 
 export type QueryTournamentsArgs = {
   after?: InputMaybe<Scalars['String']>;
@@ -1521,7 +1591,7 @@ export enum ThrowEscapeEnum {
   /** RP */
   Rp = 'rp',
   /** WP */
-  Wp = 'wp',
+  Wp = 'wp'
 }
 
 export type ThrowMove = {
@@ -1545,7 +1615,7 @@ export enum ThrowMoveResultEnum {
   /** ダウン */
   Down = 'down',
   /** - */
-  Normal = 'normal',
+  Normal = 'normal'
 }
 
 export enum ThrowTypeEnum {
@@ -1568,7 +1638,7 @@ export enum ThrowTypeEnum {
   /** 右側面投げ */
   Right = 'right',
   /** 壁投げ */
-  Wall = 'wall',
+  Wall = 'wall'
 }
 
 export type Tournament = {
@@ -1587,6 +1657,7 @@ export type Tournament = {
   videos: Array<TournamentVideo>;
   videosCount: Scalars['Int'];
 };
+
 
 export type TournamentBattlesArgs = {
   after?: InputMaybe<Scalars['String']>;
@@ -1919,7 +1990,7 @@ export enum UserRole {
   /** 管理者 */
   Admin = 'admin',
   /** ユーザー */
-  User = 'user',
+  User = 'user'
 }
 
 export type VideoUpload = {
@@ -1934,62 +2005,16 @@ export type ViewerAttributes = {
   name: Scalars['String'];
 };
 
-export type ArticleCardFragment = {
-  __typename?: 'Article';
-  id: string;
-  title: string;
-  description: string;
-  mainImageUrl?: string | null;
-  publishedAt?: string | null;
-  status: ArticleStatus;
-  author: { __typename?: 'User'; id: string; name: string; avatarUrl: string };
-};
+export type ArticleCardFragment = { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, author: { __typename?: 'User', id: string, name: string, avatarUrl: string } };
 
 export type ArticleCardsQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
 }>;
 
-export type ArticleCardsQuery = {
-  __typename?: 'Query';
-  articles: {
-    __typename?: 'ArticleConnection';
-    edges: Array<{
-      __typename?: 'ArticleEdge';
-      cursor: string;
-      node: {
-        __typename?: 'Article';
-        id: string;
-        title: string;
-        description: string;
-        mainImageUrl?: string | null;
-        publishedAt?: string | null;
-        status: ArticleStatus;
-        author: { __typename?: 'User'; id: string; name: string; avatarUrl: string };
-      };
-    }>;
-    pageInfo: { __typename?: 'PageInfo'; hasNextPage: boolean; endCursor?: string | null };
-  };
-};
 
-export type BattleListItemFragment = {
-  __typename?: 'Battle';
-  id: string;
-  round: BattleRound;
-  startSec: number;
-  tournamentVideo: {
-    __typename?: 'TournamentVideo';
-    id: string;
-    youtubeVideoId: string;
-    tournament: { __typename?: 'Tournament'; id: string; name: string; startsAt: string };
-  };
-  sides: Array<{
-    __typename?: 'BattleSide';
-    id: string;
-    rounds: number;
-    player: { __typename?: 'Player'; id: string; name: string };
-    character: { __typename?: 'Character'; id: string; faceImageUrl: string };
-  }>;
-};
+export type ArticleCardsQuery = { __typename?: 'Query', articles: { __typename?: 'ArticleConnection', edges: Array<{ __typename?: 'ArticleEdge', cursor: string, node: { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, author: { __typename?: 'User', id: string, name: string, avatarUrl: string } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null } } };
+
+export type BattleListItemFragment = { __typename?: 'Battle', id: string, round: BattleRound, startSec: number, tournamentVideo: { __typename?: 'TournamentVideo', id: string, youtubeVideoId: string, tournament: { __typename?: 'Tournament', id: string, name: string, startsAt: string } }, sides: Array<{ __typename?: 'BattleSide', id: string, rounds: number, player: { __typename?: 'Player', id: string, name: string }, character: { __typename?: 'Character', id: string, faceImageUrl: string } }> };
 
 export type CharacterBattleListQueryVariables = Exact<{
   characterSlug: Scalars['String'];
@@ -1997,45 +2022,8 @@ export type CharacterBattleListQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
 }>;
 
-export type CharacterBattleListQuery = {
-  __typename?: 'Query';
-  character: {
-    __typename?: 'Character';
-    id: string;
-    battles: {
-      __typename?: 'BattleConnection';
-      edges: Array<{
-        __typename?: 'BattleEdge';
-        cursor: string;
-        node: {
-          __typename?: 'Battle';
-          id: string;
-          round: BattleRound;
-          startSec: number;
-          tournamentVideo: {
-            __typename?: 'TournamentVideo';
-            id: string;
-            youtubeVideoId: string;
-            tournament: { __typename?: 'Tournament'; id: string; name: string; startsAt: string };
-          };
-          sides: Array<{
-            __typename?: 'BattleSide';
-            id: string;
-            rounds: number;
-            player: { __typename?: 'Player'; id: string; name: string };
-            character: { __typename?: 'Character'; id: string; faceImageUrl: string };
-          }>;
-        };
-      }>;
-      pageInfo: { __typename?: 'PageInfo'; hasNextPage: boolean; endCursor?: string | null };
-    };
-    playerBattleCounts: Array<{
-      __typename?: 'PlayerBattleCount';
-      count: number;
-      player: { __typename?: 'Player'; id: string; slug: string; name: string; avatarUrl?: string | null };
-    }>;
-  };
-};
+
+export type CharacterBattleListQuery = { __typename?: 'Query', character: { __typename?: 'Character', id: string, battles: { __typename?: 'BattleConnection', edges: Array<{ __typename?: 'BattleEdge', cursor: string, node: { __typename?: 'Battle', id: string, round: BattleRound, startSec: number, tournamentVideo: { __typename?: 'TournamentVideo', id: string, youtubeVideoId: string, tournament: { __typename?: 'Tournament', id: string, name: string, startsAt: string } }, sides: Array<{ __typename?: 'BattleSide', id: string, rounds: number, player: { __typename?: 'Player', id: string, name: string }, character: { __typename?: 'Character', id: string, faceImageUrl: string } }> } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null } }, playerBattleCounts: Array<{ __typename?: 'PlayerBattleCount', count: number, player: { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null } }> } };
 
 export type PlayerBattleListQueryVariables = Exact<{
   playerSlug: Scalars['String'];
@@ -2043,3546 +2031,818 @@ export type PlayerBattleListQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
 }>;
 
-export type PlayerBattleListQuery = {
-  __typename?: 'Query';
-  player: {
-    __typename?: 'Player';
-    id: string;
-    battles: {
-      __typename?: 'BattleConnection';
-      edges: Array<{
-        __typename?: 'BattleEdge';
-        cursor: string;
-        node: {
-          __typename?: 'Battle';
-          id: string;
-          round: BattleRound;
-          startSec: number;
-          tournamentVideo: {
-            __typename?: 'TournamentVideo';
-            id: string;
-            youtubeVideoId: string;
-            tournament: { __typename?: 'Tournament'; id: string; name: string; startsAt: string };
-          };
-          sides: Array<{
-            __typename?: 'BattleSide';
-            id: string;
-            rounds: number;
-            player: { __typename?: 'Player'; id: string; name: string };
-            character: { __typename?: 'Character'; id: string; faceImageUrl: string };
-          }>;
-        };
-      }>;
-      pageInfo: { __typename?: 'PageInfo'; hasNextPage: boolean; endCursor?: string | null };
-    };
-    characterBattleCounts: Array<{
-      __typename?: 'CharacterBattleCount';
-      count: number;
-      character: { __typename?: 'Character'; id: string; slug: string; name: string; faceImageUrl: string };
-    }>;
-  };
-};
+
+export type PlayerBattleListQuery = { __typename?: 'Query', player: { __typename?: 'Player', id: string, battles: { __typename?: 'BattleConnection', edges: Array<{ __typename?: 'BattleEdge', cursor: string, node: { __typename?: 'Battle', id: string, round: BattleRound, startSec: number, tournamentVideo: { __typename?: 'TournamentVideo', id: string, youtubeVideoId: string, tournament: { __typename?: 'Tournament', id: string, name: string, startsAt: string } }, sides: Array<{ __typename?: 'BattleSide', id: string, rounds: number, player: { __typename?: 'Player', id: string, name: string }, character: { __typename?: 'Character', id: string, faceImageUrl: string } }> } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null } }, characterBattleCounts: Array<{ __typename?: 'CharacterBattleCount', count: number, character: { __typename?: 'Character', id: string, slug: string, name: string, faceImageUrl: string } }> } };
 
 export type TournamentBattleListQueryVariables = Exact<{
   tournamentId: Scalars['ID'];
   after?: InputMaybe<Scalars['String']>;
 }>;
 
-export type TournamentBattleListQuery = {
-  __typename?: 'Query';
-  tournament: {
-    __typename?: 'Tournament';
-    id: string;
-    battles: {
-      __typename?: 'BattleConnection';
-      edges: Array<{
-        __typename?: 'BattleEdge';
-        cursor: string;
-        node: {
-          __typename?: 'Battle';
-          id: string;
-          round: BattleRound;
-          startSec: number;
-          tournamentVideo: {
-            __typename?: 'TournamentVideo';
-            id: string;
-            youtubeVideoId: string;
-            tournament: { __typename?: 'Tournament'; id: string; name: string; startsAt: string };
-          };
-          sides: Array<{
-            __typename?: 'BattleSide';
-            id: string;
-            rounds: number;
-            player: { __typename?: 'Player'; id: string; name: string };
-            character: { __typename?: 'Character'; id: string; faceImageUrl: string };
-          }>;
-        };
-      }>;
-      pageInfo: { __typename?: 'PageInfo'; hasNextPage: boolean; endCursor?: string | null };
-    };
-  };
-};
 
-export type CharacterCardFragment = {
-  __typename?: 'Character';
-  id: string;
-  slug: string;
-  name: string;
-  faceImageUrl: string;
-  country: string;
-  fightingStyle: string;
-  battlesCount: number;
-};
+export type TournamentBattleListQuery = { __typename?: 'Query', tournament: { __typename?: 'Tournament', id: string, battles: { __typename?: 'BattleConnection', edges: Array<{ __typename?: 'BattleEdge', cursor: string, node: { __typename?: 'Battle', id: string, round: BattleRound, startSec: number, tournamentVideo: { __typename?: 'TournamentVideo', id: string, youtubeVideoId: string, tournament: { __typename?: 'Tournament', id: string, name: string, startsAt: string } }, sides: Array<{ __typename?: 'BattleSide', id: string, rounds: number, player: { __typename?: 'Player', id: string, name: string }, character: { __typename?: 'Character', id: string, faceImageUrl: string } }> } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null } } } };
 
-export type CharacterProfileFragment = {
-  __typename?: 'Character';
-  slug: string;
-  longName: string;
-  faceImageUrl: string;
-  country: string;
-  fightingStyle: string;
-};
+export type CharacterCardFragment = { __typename?: 'Character', id: string, slug: string, name: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number };
 
-export type CharacterTabsFragment = {
-  __typename?: 'Character';
-  slug: string;
-  battlesCount: number;
-  combosCount: number;
-  movesCount: number;
-};
+export type CharacterProfileFragment = { __typename?: 'Character', slug: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string };
 
-export type ComboListItemFragment = {
-  __typename?: 'Combo';
-  id: string;
-  damage?: number | null;
-  command: Array<string>;
-  note?: string | null;
-  move?: { __typename?: 'Move'; id: string } | null;
-  comboVideo?: { __typename?: 'ComboVideo'; id: string; m3u8Url: string; thumbnailUrl: string } | null;
-};
+export type CharacterTabsFragment = { __typename?: 'Character', slug: string, battlesCount: number, combosCount: number, movesCount: number };
 
-export type ComboMediaFragment = {
-  __typename?: 'Combo';
-  id: string;
-  damage?: number | null;
-  command: Array<string>;
-  note?: string | null;
-  comboCategory: { __typename?: 'ComboCategory'; id: string; name: string };
-  comboVideo?: { __typename?: 'ComboVideo'; id: string; m3u8Url: string; thumbnailUrl: string } | null;
-};
+export type ComboListItemFragment = { __typename?: 'Combo', id: string, damage?: number | null, command: Array<string>, note?: string | null, move?: { __typename?: 'Move', id: string } | null, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null };
 
-export type AttackListItemFragment = {
-  __typename?: 'AttackMove';
-  id: string;
-  startUpFrame?: number | null;
-  duration?: number | null;
-  blockFrame?: number | null;
-  blockResult: AttackMoveResultEnum;
-  hitFrame?: number | null;
-  hitResult: AttackMoveResultEnum;
-  counterFrame?: number | null;
-  counterResult: AttackMoveResultEnum;
-  heights: Array<AttackTypeEnum>;
-  damages: Array<number>;
-  powerCrush: boolean;
-  crouchingStatus: boolean;
-  jumpStatus: boolean;
-  homing: boolean;
-  screw: boolean;
-  wallBound: boolean;
-};
+export type ComboMediaFragment = { __typename?: 'Combo', id: string, damage?: number | null, command: Array<string>, note?: string | null, comboCategory: { __typename?: 'ComboCategory', id: string, name: string }, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null };
 
-export type ThrowListItemFragment = {
-  __typename?: 'ThrowMove';
-  id: string;
-  throwType: ThrowTypeEnum;
-  throwResult: ThrowMoveResultEnum;
-  throwEscape: ThrowEscapeEnum;
-  startUpFrame?: number | null;
-  damage?: number | null;
-};
+export type AttackListItemFragment = { __typename?: 'AttackMove', id: string, startUpFrame?: number | null, duration?: number | null, blockFrame?: number | null, blockResult: AttackMoveResultEnum, hitFrame?: number | null, hitResult: AttackMoveResultEnum, counterFrame?: number | null, counterResult: AttackMoveResultEnum, heights: Array<AttackTypeEnum>, damages: Array<number>, powerCrush: boolean, crouchingStatus: boolean, jumpStatus: boolean, homing: boolean, screw: boolean, wallBound: boolean };
 
-export type ReversalListItemFragment = {
-  __typename?: 'ReversalMove';
-  id: string;
-  kind: string;
-  startUpFrame?: number | null;
-  finishFrame?: number | null;
-};
+export type ThrowListItemFragment = { __typename?: 'ThrowMove', id: string, throwType: ThrowTypeEnum, throwResult: ThrowMoveResultEnum, throwEscape: ThrowEscapeEnum, startUpFrame?: number | null, damage?: number | null };
 
-type MoveListItemMoveable_AttackMove_Fragment = {
-  __typename: 'AttackMove';
-  id: string;
-  startUpFrame?: number | null;
-  duration?: number | null;
-  blockFrame?: number | null;
-  blockResult: AttackMoveResultEnum;
-  hitFrame?: number | null;
-  hitResult: AttackMoveResultEnum;
-  counterFrame?: number | null;
-  counterResult: AttackMoveResultEnum;
-  heights: Array<AttackTypeEnum>;
-  damages: Array<number>;
-  powerCrush: boolean;
-  crouchingStatus: boolean;
-  jumpStatus: boolean;
-  homing: boolean;
-  screw: boolean;
-  wallBound: boolean;
-};
+export type ReversalListItemFragment = { __typename?: 'ReversalMove', id: string, kind: string, startUpFrame?: number | null, finishFrame?: number | null };
 
-type MoveListItemMoveable_ReversalMove_Fragment = {
-  __typename: 'ReversalMove';
-  id: string;
-  kind: string;
-  startUpFrame?: number | null;
-  finishFrame?: number | null;
-};
+type MoveListItemMoveable_AttackMove_Fragment = { __typename: 'AttackMove', id: string, startUpFrame?: number | null, duration?: number | null, blockFrame?: number | null, blockResult: AttackMoveResultEnum, hitFrame?: number | null, hitResult: AttackMoveResultEnum, counterFrame?: number | null, counterResult: AttackMoveResultEnum, heights: Array<AttackTypeEnum>, damages: Array<number>, powerCrush: boolean, crouchingStatus: boolean, jumpStatus: boolean, homing: boolean, screw: boolean, wallBound: boolean };
 
-type MoveListItemMoveable_ThrowMove_Fragment = {
-  __typename: 'ThrowMove';
-  id: string;
-  throwType: ThrowTypeEnum;
-  throwResult: ThrowMoveResultEnum;
-  throwEscape: ThrowEscapeEnum;
-  startUpFrame?: number | null;
-  damage?: number | null;
-};
+type MoveListItemMoveable_ReversalMove_Fragment = { __typename: 'ReversalMove', id: string, kind: string, startUpFrame?: number | null, finishFrame?: number | null };
 
-export type MoveListItemMoveableFragment =
-  | MoveListItemMoveable_AttackMove_Fragment
-  | MoveListItemMoveable_ReversalMove_Fragment
-  | MoveListItemMoveable_ThrowMove_Fragment;
+type MoveListItemMoveable_ThrowMove_Fragment = { __typename: 'ThrowMove', id: string, throwType: ThrowTypeEnum, throwResult: ThrowMoveResultEnum, throwEscape: ThrowEscapeEnum, startUpFrame?: number | null, damage?: number | null };
 
-export type MoveListItemFragment = {
-  __typename?: 'Move';
-  id: string;
-  name: string;
-  kana?: string | null;
-  command: Array<string>;
-  note?: string | null;
-  moveVideo?: { __typename?: 'MoveVideo'; id: string; m3u8Url: string; thumbnailUrl: string } | null;
-  moveable:
-    | {
-        __typename: 'AttackMove';
-        id: string;
-        startUpFrame?: number | null;
-        duration?: number | null;
-        blockFrame?: number | null;
-        blockResult: AttackMoveResultEnum;
-        hitFrame?: number | null;
-        hitResult: AttackMoveResultEnum;
-        counterFrame?: number | null;
-        counterResult: AttackMoveResultEnum;
-        heights: Array<AttackTypeEnum>;
-        damages: Array<number>;
-        powerCrush: boolean;
-        crouchingStatus: boolean;
-        jumpStatus: boolean;
-        homing: boolean;
-        screw: boolean;
-        wallBound: boolean;
-      }
-    | {
-        __typename: 'ReversalMove';
-        id: string;
-        kind: string;
-        startUpFrame?: number | null;
-        finishFrame?: number | null;
-      }
-    | {
-        __typename: 'ThrowMove';
-        id: string;
-        throwType: ThrowTypeEnum;
-        throwResult: ThrowMoveResultEnum;
-        throwEscape: ThrowEscapeEnum;
-        startUpFrame?: number | null;
-        damage?: number | null;
-      };
-};
+export type MoveListItemMoveableFragment = MoveListItemMoveable_AttackMove_Fragment | MoveListItemMoveable_ReversalMove_Fragment | MoveListItemMoveable_ThrowMove_Fragment;
 
-export type MoveMediaAttackFragment = {
-  __typename?: 'AttackMove';
-  id: string;
-  startUpFrame?: number | null;
-  duration?: number | null;
-  blockFrame?: number | null;
-  blockResult: AttackMoveResultEnum;
-  hitFrame?: number | null;
-  hitResult: AttackMoveResultEnum;
-  counterFrame?: number | null;
-  counterResult: AttackMoveResultEnum;
-  heights: Array<AttackTypeEnum>;
-  damages: Array<number>;
-  powerCrush: boolean;
-  crouchingStatus: boolean;
-  jumpStatus: boolean;
-  homing: boolean;
-  screw: boolean;
-  wallBound: boolean;
-};
+export type MoveListItemFragment = { __typename?: 'Move', id: string, name: string, kana?: string | null, command: Array<string>, note?: string | null, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null, moveable: { __typename: 'AttackMove', id: string, startUpFrame?: number | null, duration?: number | null, blockFrame?: number | null, blockResult: AttackMoveResultEnum, hitFrame?: number | null, hitResult: AttackMoveResultEnum, counterFrame?: number | null, counterResult: AttackMoveResultEnum, heights: Array<AttackTypeEnum>, damages: Array<number>, powerCrush: boolean, crouchingStatus: boolean, jumpStatus: boolean, homing: boolean, screw: boolean, wallBound: boolean } | { __typename: 'ReversalMove', id: string, kind: string, startUpFrame?: number | null, finishFrame?: number | null } | { __typename: 'ThrowMove', id: string, throwType: ThrowTypeEnum, throwResult: ThrowMoveResultEnum, throwEscape: ThrowEscapeEnum, startUpFrame?: number | null, damage?: number | null } };
 
-export type MoveMediaThrowFragment = {
-  __typename?: 'ThrowMove';
-  id: string;
-  throwType: ThrowTypeEnum;
-  throwResult: ThrowMoveResultEnum;
-  throwEscape: ThrowEscapeEnum;
-  startUpFrame?: number | null;
-  damage?: number | null;
-};
+export type MoveMediaAttackFragment = { __typename?: 'AttackMove', id: string, startUpFrame?: number | null, duration?: number | null, blockFrame?: number | null, blockResult: AttackMoveResultEnum, hitFrame?: number | null, hitResult: AttackMoveResultEnum, counterFrame?: number | null, counterResult: AttackMoveResultEnum, heights: Array<AttackTypeEnum>, damages: Array<number>, powerCrush: boolean, crouchingStatus: boolean, jumpStatus: boolean, homing: boolean, screw: boolean, wallBound: boolean };
 
-export type MoveMediaReversalFragment = {
-  __typename?: 'ReversalMove';
-  id: string;
-  kind: string;
-  startUpFrame?: number | null;
-  finishFrame?: number | null;
-};
+export type MoveMediaThrowFragment = { __typename?: 'ThrowMove', id: string, throwType: ThrowTypeEnum, throwResult: ThrowMoveResultEnum, throwEscape: ThrowEscapeEnum, startUpFrame?: number | null, damage?: number | null };
 
-export type MoveMediaFragment = {
-  __typename?: 'Move';
-  id: string;
-  name: string;
-  kana?: string | null;
-  command: Array<string>;
-  statusAfter?: string | null;
-  note?: string | null;
-  moveable:
-    | {
-        __typename: 'AttackMove';
-        id: string;
-        startUpFrame?: number | null;
-        duration?: number | null;
-        blockFrame?: number | null;
-        blockResult: AttackMoveResultEnum;
-        hitFrame?: number | null;
-        hitResult: AttackMoveResultEnum;
-        counterFrame?: number | null;
-        counterResult: AttackMoveResultEnum;
-        heights: Array<AttackTypeEnum>;
-        damages: Array<number>;
-        powerCrush: boolean;
-        crouchingStatus: boolean;
-        jumpStatus: boolean;
-        homing: boolean;
-        screw: boolean;
-        wallBound: boolean;
-      }
-    | {
-        __typename: 'ReversalMove';
-        id: string;
-        kind: string;
-        startUpFrame?: number | null;
-        finishFrame?: number | null;
-      }
-    | {
-        __typename: 'ThrowMove';
-        id: string;
-        throwType: ThrowTypeEnum;
-        throwResult: ThrowMoveResultEnum;
-        throwEscape: ThrowEscapeEnum;
-        startUpFrame?: number | null;
-        damage?: number | null;
-      };
-  moveVideo?: { __typename?: 'MoveVideo'; id: string; m3u8Url: string; thumbnailUrl: string } | null;
-};
+export type MoveMediaReversalFragment = { __typename?: 'ReversalMove', id: string, kind: string, startUpFrame?: number | null, finishFrame?: number | null };
 
-export type PlayerCardFragment = {
-  __typename?: 'Player';
-  id: string;
-  slug: string;
-  name: string;
-  avatarUrl?: string | null;
-  standingsCount: number;
-  battlesCount: number;
-};
+export type MoveMediaFragment = { __typename?: 'Move', id: string, name: string, kana?: string | null, command: Array<string>, statusAfter?: string | null, note?: string | null, moveable: { __typename: 'AttackMove', id: string, startUpFrame?: number | null, duration?: number | null, blockFrame?: number | null, blockResult: AttackMoveResultEnum, hitFrame?: number | null, hitResult: AttackMoveResultEnum, counterFrame?: number | null, counterResult: AttackMoveResultEnum, heights: Array<AttackTypeEnum>, damages: Array<number>, powerCrush: boolean, crouchingStatus: boolean, jumpStatus: boolean, homing: boolean, screw: boolean, wallBound: boolean } | { __typename: 'ReversalMove', id: string, kind: string, startUpFrame?: number | null, finishFrame?: number | null } | { __typename: 'ThrowMove', id: string, throwType: ThrowTypeEnum, throwResult: ThrowMoveResultEnum, throwEscape: ThrowEscapeEnum, startUpFrame?: number | null, damage?: number | null }, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null };
+
+export type PlayerCardFragment = { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null, standingsCount: number, battlesCount: number };
 
 export type PlayerCardsQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
   keyword?: InputMaybe<Scalars['String']>;
 }>;
 
-export type PlayerCardsQuery = {
-  __typename?: 'Query';
-  players: {
-    __typename?: 'PlayerConnection';
-    edges: Array<{
-      __typename?: 'PlayerEdge';
-      cursor: string;
-      node: {
-        __typename?: 'Player';
-        id: string;
-        slug: string;
-        name: string;
-        avatarUrl?: string | null;
-        standingsCount: number;
-        battlesCount: number;
-      };
-    }>;
-    pageInfo: { __typename?: 'PageInfo'; hasNextPage: boolean; endCursor?: string | null };
-  };
-};
 
-export type PlayerProfileFragment = {
-  __typename?: 'Player';
-  id: string;
-  name: string;
-  slug: string;
-  avatarUrl?: string | null;
-  twitterId?: string | null;
-  streamingUrl?: string | null;
-};
+export type PlayerCardsQuery = { __typename?: 'Query', players: { __typename?: 'PlayerConnection', edges: Array<{ __typename?: 'PlayerEdge', cursor: string, node: { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null, standingsCount: number, battlesCount: number } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null } } };
 
-export type PlayerStandingCardFragment = {
-  __typename?: 'Standing';
-  id: string;
-  place: number;
-  tournament: { __typename?: 'Tournament'; id: string; name: string; mainImageUrl?: string | null; startsAt: string };
-};
+export type PlayerProfileFragment = { __typename?: 'Player', id: string, name: string, slug: string, avatarUrl?: string | null, twitterId?: string | null, streamingUrl?: string | null };
+
+export type PlayerStandingCardFragment = { __typename?: 'Standing', id: string, place: number, tournament: { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: string | null, startsAt: string } };
 
 export type PlayerStandingCardsQueryVariables = Exact<{
   playerSlug: Scalars['String'];
   after?: InputMaybe<Scalars['String']>;
 }>;
 
-export type PlayerStandingCardsQuery = {
-  __typename?: 'Query';
-  player: {
-    __typename?: 'Player';
-    id: string;
-    standings: {
-      __typename?: 'StandingConnection';
-      edges: Array<{
-        __typename?: 'StandingEdge';
-        cursor: string;
-        node: {
-          __typename?: 'Standing';
-          id: string;
-          place: number;
-          tournament: {
-            __typename?: 'Tournament';
-            id: string;
-            name: string;
-            mainImageUrl?: string | null;
-            startsAt: string;
-          };
-        };
-      }>;
-      pageInfo: { __typename?: 'PageInfo'; hasNextPage: boolean; endCursor?: string | null };
-    };
-  };
-};
 
-export type PlayerTabsFragment = { __typename?: 'Player'; slug: string; battlesCount: number; standingsCount: number };
+export type PlayerStandingCardsQuery = { __typename?: 'Query', player: { __typename?: 'Player', id: string, standings: { __typename?: 'StandingConnection', edges: Array<{ __typename?: 'StandingEdge', cursor: string, node: { __typename?: 'Standing', id: string, place: number, tournament: { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: string | null, startsAt: string } } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null } } } };
 
-export type CharacterBattleCountChipFragment = {
-  __typename?: 'CharacterBattleCount';
-  count: number;
-  character: { __typename?: 'Character'; id: string; slug: string; name: string; faceImageUrl: string };
-};
+export type PlayerTabsFragment = { __typename?: 'Player', slug: string, battlesCount: number, standingsCount: number };
 
-export type PlayerBattleCountChipFragment = {
-  __typename?: 'PlayerBattleCount';
-  count: number;
-  player: { __typename?: 'Player'; id: string; slug: string; name: string; avatarUrl?: string | null };
-};
+export type CharacterBattleCountChipFragment = { __typename?: 'CharacterBattleCount', count: number, character: { __typename?: 'Character', id: string, slug: string, name: string, faceImageUrl: string } };
 
-export type TournamentCardFragment = {
-  __typename?: 'Tournament';
-  id: string;
-  name: string;
-  mainImageUrl?: string | null;
-  startsAt: string;
-  videosCount: number;
-  standings: Array<{
-    __typename?: 'Standing';
-    id: string;
-    place: number;
-    player: { __typename?: 'Player'; id: string; name: string };
-  }>;
-};
+export type PlayerBattleCountChipFragment = { __typename?: 'PlayerBattleCount', count: number, player: { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null } };
+
+export type TournamentCardFragment = { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: string | null, startsAt: string, videosCount: number, standings: Array<{ __typename?: 'Standing', id: string, place: number, player: { __typename?: 'Player', id: string, name: string } }> };
 
 export type TournamentCardsQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
   keyword?: InputMaybe<Scalars['String']>;
 }>;
 
-export type TournamentCardsQuery = {
-  __typename?: 'Query';
-  tournaments: {
-    __typename?: 'TournamentConnection';
-    edges: Array<{
-      __typename?: 'TournamentEdge';
-      cursor: string;
-      node: {
-        __typename?: 'Tournament';
-        id: string;
-        name: string;
-        mainImageUrl?: string | null;
-        startsAt: string;
-        videosCount: number;
-        standings: Array<{
-          __typename?: 'Standing';
-          id: string;
-          place: number;
-          player: { __typename?: 'Player'; id: string; name: string };
-        }>;
-      };
-    }>;
-    pageInfo: { __typename?: 'PageInfo'; hasNextPage: boolean; endCursor?: string | null };
-  };
-};
 
-export type TournamentVideoPlayerFragment = {
-  __typename?: 'TournamentVideo';
-  id: string;
-  youtubeVideoId: string;
-  battles: Array<{
-    __typename?: 'Battle';
-    id: string;
-    round: BattleRound;
-    startSec: number;
-    sides: Array<{
-      __typename?: 'BattleSide';
-      id: string;
-      rounds: number;
-      player: { __typename?: 'Player'; id: string; name: string };
-      character: { __typename?: 'Character'; id: string; faceImageUrl: string };
-    }>;
-  }>;
-};
+export type TournamentCardsQuery = { __typename?: 'Query', tournaments: { __typename?: 'TournamentConnection', edges: Array<{ __typename?: 'TournamentEdge', cursor: string, node: { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: string | null, startsAt: string, videosCount: number, standings: Array<{ __typename?: 'Standing', id: string, place: number, player: { __typename?: 'Player', id: string, name: string } }> } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null } } };
 
-export type TournamentVideoPlayerBattleFragment = {
-  __typename?: 'Battle';
-  id: string;
-  round: BattleRound;
-  startSec: number;
-  sides: Array<{
-    __typename?: 'BattleSide';
-    id: string;
-    rounds: number;
-    player: { __typename?: 'Player'; id: string; name: string };
-    character: { __typename?: 'Character'; id: string; faceImageUrl: string };
-  }>;
-};
+export type TournamentVideoPlayerFragment = { __typename?: 'TournamentVideo', id: string, youtubeVideoId: string, battles: Array<{ __typename?: 'Battle', id: string, round: BattleRound, startSec: number, sides: Array<{ __typename?: 'BattleSide', id: string, rounds: number, player: { __typename?: 'Player', id: string, name: string }, character: { __typename?: 'Character', id: string, faceImageUrl: string } }> }> };
 
-export type ArticleTableRowFragment = { __typename?: 'Article'; id: string; title: string; status: ArticleStatus };
+export type TournamentVideoPlayerBattleFragment = { __typename?: 'Battle', id: string, round: BattleRound, startSec: number, sides: Array<{ __typename?: 'BattleSide', id: string, rounds: number, player: { __typename?: 'Player', id: string, name: string }, character: { __typename?: 'Character', id: string, faceImageUrl: string } }> };
+
+export type ArticleTableRowFragment = { __typename?: 'Article', id: string, title: string, status: ArticleStatus };
 
 export type ArticleTableRowsQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
   keyword?: InputMaybe<Scalars['String']>;
 }>;
 
-export type ArticleTableRowsQuery = {
-  __typename?: 'Query';
-  myArticles: {
-    __typename?: 'ArticleConnection';
-    edges: Array<{
-      __typename?: 'ArticleEdge';
-      cursor: string;
-      node: { __typename?: 'Article'; id: string; title: string; status: ArticleStatus };
-    }>;
-    pageInfo: { __typename?: 'PageInfo'; hasNextPage: boolean; endCursor?: string | null };
-  };
-};
+
+export type ArticleTableRowsQuery = { __typename?: 'Query', myArticles: { __typename?: 'ArticleConnection', edges: Array<{ __typename?: 'ArticleEdge', cursor: string, node: { __typename?: 'Article', id: string, title: string, status: ArticleStatus } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null } } };
 
 export type PublishArticleMutationVariables = Exact<{
   articleId: Scalars['ID'];
 }>;
 
-export type PublishArticleMutation = {
-  __typename?: 'Mutation';
-  publishArticle?: {
-    __typename?: 'PublishArticlePayload';
-    article: { __typename?: 'Article'; id: string; title: string; status: ArticleStatus };
-  } | null;
-};
+
+export type PublishArticleMutation = { __typename?: 'Mutation', publishArticle?: { __typename?: 'PublishArticlePayload', article: { __typename?: 'Article', id: string, title: string, status: ArticleStatus } } | null };
 
 export type StopArticleMutationVariables = Exact<{
   articleId: Scalars['ID'];
 }>;
 
-export type StopArticleMutation = {
-  __typename?: 'Mutation';
-  stopArticle?: {
-    __typename?: 'StopArticlePayload';
-    article: { __typename?: 'Article'; id: string; title: string; status: ArticleStatus };
-  } | null;
-};
+
+export type StopArticleMutation = { __typename?: 'Mutation', stopArticle?: { __typename?: 'StopArticlePayload', article: { __typename?: 'Article', id: string, title: string, status: ArticleStatus } } | null };
 
 export type DeleteArticleMutationVariables = Exact<{
   articleId: Scalars['ID'];
 }>;
 
-export type DeleteArticleMutation = {
-  __typename?: 'Mutation';
-  deleteArticle?: { __typename?: 'DeleteArticlePayload'; article: { __typename?: 'Article'; id: string } } | null;
-};
 
-export type CharacterTableRowFragment = {
-  __typename?: 'Character';
-  id: string;
-  slug: string;
-  name: string;
-  faceImageUrl: string;
-  movesCount: number;
-  combosCount: number;
-};
+export type DeleteArticleMutation = { __typename?: 'Mutation', deleteArticle?: { __typename?: 'DeleteArticlePayload', article: { __typename?: 'Article', id: string } } | null };
+
+export type CharacterTableRowFragment = { __typename?: 'Character', id: string, slug: string, name: string, faceImageUrl: string, movesCount: number, combosCount: number };
 
 export type CharacterTableRowsQueryVariables = Exact<{
   keyword?: InputMaybe<Scalars['String']>;
 }>;
 
-export type CharacterTableRowsQuery = {
-  __typename?: 'Query';
-  characters: {
-    __typename?: 'CharacterConnection';
-    nodes: Array<{
-      __typename?: 'Character';
-      id: string;
-      slug: string;
-      name: string;
-      faceImageUrl: string;
-      movesCount: number;
-      combosCount: number;
-    }>;
-  };
-};
+
+export type CharacterTableRowsQuery = { __typename?: 'Query', characters: { __typename?: 'CharacterConnection', nodes: Array<{ __typename?: 'Character', id: string, slug: string, name: string, faceImageUrl: string, movesCount: number, combosCount: number }> } };
 
 export type CreateComboCategoryMutationVariables = Exact<{
   characterSlug: Scalars['String'];
   attributes: ComboCategoryAttributes;
 }>;
 
-export type CreateComboCategoryMutation = {
-  __typename?: 'Mutation';
-  createComboCategory?: {
-    __typename?: 'CreateComboCategoryPayload';
-    comboCategory: {
-      __typename?: 'ComboCategory';
-      id: string;
-      name: string;
-      position: number;
-      character: {
-        __typename?: 'Character';
-        id: string;
-        comboCategories: Array<{ __typename?: 'ComboCategory'; id: string; position: number }>;
-      };
-      combos: Array<{
-        __typename?: 'Combo';
-        id: string;
-        command: Array<string>;
-        position: number;
-        comboVideo?: { __typename?: 'ComboVideo'; id: string; m3u8Url: string; thumbnailUrl: string } | null;
-      }>;
-    };
-  } | null;
-};
+
+export type CreateComboCategoryMutation = { __typename?: 'Mutation', createComboCategory?: { __typename?: 'CreateComboCategoryPayload', comboCategory: { __typename?: 'ComboCategory', id: string, name: string, position: number, character: { __typename?: 'Character', id: string, comboCategories: Array<{ __typename?: 'ComboCategory', id: string, position: number }> }, combos: Array<{ __typename?: 'Combo', id: string, command: Array<string>, position: number, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> } } | null };
 
 export type UpdateComboCategoryMutationVariables = Exact<{
   comboCategoryId: Scalars['ID'];
   attributes: ComboCategoryAttributes;
 }>;
 
-export type UpdateComboCategoryMutation = {
-  __typename?: 'Mutation';
-  updateComboCategory?: {
-    __typename?: 'UpdateComboCategoryPayload';
-    comboCategory: {
-      __typename?: 'ComboCategory';
-      id: string;
-      name: string;
-      position: number;
-      character: {
-        __typename?: 'Character';
-        id: string;
-        comboCategories: Array<{ __typename?: 'ComboCategory'; id: string; position: number }>;
-      };
-      combos: Array<{
-        __typename?: 'Combo';
-        id: string;
-        command: Array<string>;
-        position: number;
-        comboVideo?: { __typename?: 'ComboVideo'; id: string; m3u8Url: string; thumbnailUrl: string } | null;
-      }>;
-    };
-  } | null;
-};
+
+export type UpdateComboCategoryMutation = { __typename?: 'Mutation', updateComboCategory?: { __typename?: 'UpdateComboCategoryPayload', comboCategory: { __typename?: 'ComboCategory', id: string, name: string, position: number, character: { __typename?: 'Character', id: string, comboCategories: Array<{ __typename?: 'ComboCategory', id: string, position: number }> }, combos: Array<{ __typename?: 'Combo', id: string, command: Array<string>, position: number, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> } } | null };
 
 export type DeleteComboCategoryMutationVariables = Exact<{
   comboCategoryId: Scalars['ID'];
 }>;
 
-export type DeleteComboCategoryMutation = {
-  __typename?: 'Mutation';
-  deleteComboCategory?: {
-    __typename?: 'DeleteComboCategoryPayload';
-    comboCategory: {
-      __typename?: 'ComboCategory';
-      id: string;
-      name: string;
-      position: number;
-      character: {
-        __typename?: 'Character';
-        id: string;
-        comboCategories: Array<{ __typename?: 'ComboCategory'; id: string; position: number }>;
-      };
-      combos: Array<{
-        __typename?: 'Combo';
-        id: string;
-        command: Array<string>;
-        position: number;
-        comboVideo?: { __typename?: 'ComboVideo'; id: string; m3u8Url: string; thumbnailUrl: string } | null;
-      }>;
-    };
-  } | null;
-};
 
-export type ComboDashboardCategoryFragment = {
-  __typename?: 'ComboCategory';
-  id: string;
-  name: string;
-  position: number;
-  combos: Array<{
-    __typename?: 'Combo';
-    id: string;
-    command: Array<string>;
-    position: number;
-    comboVideo?: { __typename?: 'ComboVideo'; id: string; m3u8Url: string; thumbnailUrl: string } | null;
-  }>;
-};
+export type DeleteComboCategoryMutation = { __typename?: 'Mutation', deleteComboCategory?: { __typename?: 'DeleteComboCategoryPayload', comboCategory: { __typename?: 'ComboCategory', id: string, name: string, position: number, character: { __typename?: 'Character', id: string, comboCategories: Array<{ __typename?: 'ComboCategory', id: string, position: number }> }, combos: Array<{ __typename?: 'Combo', id: string, command: Array<string>, position: number, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> } } | null };
 
-export type ComboDashboardFragment = {
-  __typename?: 'Character';
-  id: string;
-  slug: string;
-  comboCategories: Array<{
-    __typename?: 'ComboCategory';
-    id: string;
-    name: string;
-    position: number;
-    combos: Array<{
-      __typename?: 'Combo';
-      id: string;
-      command: Array<string>;
-      position: number;
-      comboVideo?: { __typename?: 'ComboVideo'; id: string; m3u8Url: string; thumbnailUrl: string } | null;
-    }>;
-  }>;
-  moveCategories: Array<{
-    __typename?: 'MoveCategory';
-    id: string;
-    name: string;
-    moves: Array<{ __typename?: 'Move'; id: string; name: string }>;
-  }>;
-};
+export type ComboDashboardCategoryFragment = { __typename?: 'ComboCategory', id: string, name: string, position: number, combos: Array<{ __typename?: 'Combo', id: string, command: Array<string>, position: number, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> };
 
-export type ComboPositionSelectFragment = {
-  __typename?: 'Combo';
-  id: string;
-  command: Array<string>;
-  position: number;
-};
+export type ComboDashboardFragment = { __typename?: 'Character', id: string, slug: string, comboCategories: Array<{ __typename?: 'ComboCategory', id: string, name: string, position: number, combos: Array<{ __typename?: 'Combo', id: string, command: Array<string>, position: number, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> }>, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, moves: Array<{ __typename?: 'Move', id: string, name: string }> }> };
 
-export type ComboTableRowFragment = {
-  __typename?: 'Combo';
-  id: string;
-  command: Array<string>;
-  position: number;
-  comboVideo?: { __typename?: 'ComboVideo'; id: string; m3u8Url: string; thumbnailUrl: string } | null;
-};
+export type ComboPositionSelectFragment = { __typename?: 'Combo', id: string, command: Array<string>, position: number };
+
+export type ComboTableRowFragment = { __typename?: 'Combo', id: string, command: Array<string>, position: number, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null };
 
 export type CreateComboMutationVariables = Exact<{
   comboCategoryId: Scalars['ID'];
   attributes: ComboAttributes;
 }>;
 
-export type CreateComboMutation = {
-  __typename?: 'Mutation';
-  createCombo?: {
-    __typename?: 'CreateComboPayload';
-    combo: {
-      __typename?: 'Combo';
-      id: string;
-      command: Array<string>;
-      position: number;
-      comboCategory: {
-        __typename?: 'ComboCategory';
-        id: string;
-        combos: Array<{ __typename?: 'Combo'; id: string; position: number }>;
-      };
-      comboVideo?: { __typename?: 'ComboVideo'; id: string; m3u8Url: string; thumbnailUrl: string } | null;
-    };
-  } | null;
-};
+
+export type CreateComboMutation = { __typename?: 'Mutation', createCombo?: { __typename?: 'CreateComboPayload', combo: { __typename?: 'Combo', id: string, command: Array<string>, position: number, comboCategory: { __typename?: 'ComboCategory', id: string, combos: Array<{ __typename?: 'Combo', id: string, position: number }> }, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null } } | null };
 
 export type UpdateComboMutationVariables = Exact<{
   comboId: Scalars['ID'];
   attributes: ComboAttributes;
 }>;
 
-export type UpdateComboMutation = {
-  __typename?: 'Mutation';
-  updateCombo?: {
-    __typename?: 'UpdateComboPayload';
-    combo: {
-      __typename?: 'Combo';
-      id: string;
-      command: Array<string>;
-      position: number;
-      comboCategory: {
-        __typename?: 'ComboCategory';
-        id: string;
-        combos: Array<{ __typename?: 'Combo'; id: string; position: number }>;
-      };
-      comboVideo?: { __typename?: 'ComboVideo'; id: string; m3u8Url: string; thumbnailUrl: string } | null;
-    };
-  } | null;
-};
+
+export type UpdateComboMutation = { __typename?: 'Mutation', updateCombo?: { __typename?: 'UpdateComboPayload', combo: { __typename?: 'Combo', id: string, command: Array<string>, position: number, comboCategory: { __typename?: 'ComboCategory', id: string, combos: Array<{ __typename?: 'Combo', id: string, position: number }> }, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null } } | null };
 
 export type DeleteComboMutationVariables = Exact<{
   comboId: Scalars['ID'];
 }>;
 
-export type DeleteComboMutation = {
-  __typename?: 'Mutation';
-  deleteCombo?: {
-    __typename?: 'DeleteComboPayload';
-    combo: {
-      __typename?: 'Combo';
-      id: string;
-      comboCategory: { __typename?: 'ComboCategory'; id: string; combos: Array<{ __typename?: 'Combo'; id: string }> };
-    };
-  } | null;
-};
+
+export type DeleteComboMutation = { __typename?: 'Mutation', deleteCombo?: { __typename?: 'DeleteComboPayload', combo: { __typename?: 'Combo', id: string, comboCategory: { __typename?: 'ComboCategory', id: string, combos: Array<{ __typename?: 'Combo', id: string }> } } } | null };
 
 export type CreateComboVideoMutationVariables = Exact<{
   comboId: Scalars['ID'];
 }>;
 
-export type CreateComboVideoMutation = {
-  __typename?: 'Mutation';
-  createComboVideo?: {
-    __typename?: 'CreateComboVideoPayload';
-    combo: {
-      __typename?: 'Combo';
-      id: string;
-      command: Array<string>;
-      position: number;
-      comboVideo?: { __typename?: 'ComboVideo'; id: string; m3u8Url: string; thumbnailUrl: string } | null;
-    };
-    videoUpload: { __typename?: 'VideoUpload'; url: string; fields: string };
-  } | null;
-};
 
-export type MoveSelectOptionFragment = {
-  __typename?: 'MoveCategory';
-  id: string;
-  name: string;
-  moves: Array<{ __typename?: 'Move'; id: string; name: string }>;
-};
+export type CreateComboVideoMutation = { __typename?: 'Mutation', createComboVideo?: { __typename?: 'CreateComboVideoPayload', combo: { __typename?: 'Combo', id: string, command: Array<string>, position: number, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }, videoUpload: { __typename?: 'VideoUpload', url: string, fields: string } } | null };
 
-export type MoveDashboardCategoryFragment = {
-  __typename?: 'MoveCategory';
-  id: string;
-  name: string;
-  position: number;
-  moves: Array<{
-    __typename?: 'Move';
-    id: string;
-    name: string;
-    command: Array<string>;
-    position: number;
-    moveVideo?: { __typename?: 'MoveVideo'; id: string; m3u8Url: string; thumbnailUrl: string } | null;
-  }>;
-};
+export type MoveSelectOptionFragment = { __typename?: 'MoveCategory', id: string, name: string, moves: Array<{ __typename?: 'Move', id: string, name: string }> };
 
-export type MoveDashboardFragment = {
-  __typename?: 'Character';
-  id: string;
-  slug: string;
-  moveCategories: Array<{
-    __typename?: 'MoveCategory';
-    id: string;
-    name: string;
-    position: number;
-    moves: Array<{
-      __typename?: 'Move';
-      id: string;
-      name: string;
-      command: Array<string>;
-      position: number;
-      moveVideo?: { __typename?: 'MoveVideo'; id: string; m3u8Url: string; thumbnailUrl: string } | null;
-    }>;
-  }>;
-};
+export type MoveDashboardCategoryFragment = { __typename?: 'MoveCategory', id: string, name: string, position: number, moves: Array<{ __typename?: 'Move', id: string, name: string, command: Array<string>, position: number, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> };
+
+export type MoveDashboardFragment = { __typename?: 'Character', id: string, slug: string, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, position: number, moves: Array<{ __typename?: 'Move', id: string, name: string, command: Array<string>, position: number, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> }> };
 
 export type CreateMoveCategoryMutationVariables = Exact<{
   characterSlug: Scalars['String'];
   attributes: MoveCategoryAttributes;
 }>;
 
-export type CreateMoveCategoryMutation = {
-  __typename?: 'Mutation';
-  createMoveCategory?: {
-    __typename?: 'CreateMoveCategoryPayload';
-    moveCategory: {
-      __typename?: 'MoveCategory';
-      id: string;
-      name: string;
-      position: number;
-      character: {
-        __typename?: 'Character';
-        id: string;
-        moveCategories: Array<{ __typename?: 'MoveCategory'; id: string; position: number }>;
-      };
-      moves: Array<{
-        __typename?: 'Move';
-        id: string;
-        name: string;
-        command: Array<string>;
-        position: number;
-        moveVideo?: { __typename?: 'MoveVideo'; id: string; m3u8Url: string; thumbnailUrl: string } | null;
-      }>;
-    };
-  } | null;
-};
+
+export type CreateMoveCategoryMutation = { __typename?: 'Mutation', createMoveCategory?: { __typename?: 'CreateMoveCategoryPayload', moveCategory: { __typename?: 'MoveCategory', id: string, name: string, position: number, character: { __typename?: 'Character', id: string, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, position: number }> }, moves: Array<{ __typename?: 'Move', id: string, name: string, command: Array<string>, position: number, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> } } | null };
 
 export type UpdateMoveCategoryMutationVariables = Exact<{
   moveCategoryId: Scalars['ID'];
   attributes: MoveCategoryAttributes;
 }>;
 
-export type UpdateMoveCategoryMutation = {
-  __typename?: 'Mutation';
-  updateMoveCategory?: {
-    __typename?: 'UpdateMoveCategoryPayload';
-    moveCategory: {
-      __typename?: 'MoveCategory';
-      id: string;
-      name: string;
-      position: number;
-      character: {
-        __typename?: 'Character';
-        id: string;
-        moveCategories: Array<{ __typename?: 'MoveCategory'; id: string; position: number }>;
-      };
-      moves: Array<{
-        __typename?: 'Move';
-        id: string;
-        name: string;
-        command: Array<string>;
-        position: number;
-        moveVideo?: { __typename?: 'MoveVideo'; id: string; m3u8Url: string; thumbnailUrl: string } | null;
-      }>;
-    };
-  } | null;
-};
+
+export type UpdateMoveCategoryMutation = { __typename?: 'Mutation', updateMoveCategory?: { __typename?: 'UpdateMoveCategoryPayload', moveCategory: { __typename?: 'MoveCategory', id: string, name: string, position: number, character: { __typename?: 'Character', id: string, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, position: number }> }, moves: Array<{ __typename?: 'Move', id: string, name: string, command: Array<string>, position: number, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> } } | null };
 
 export type DeleteMoveCategoryMutationVariables = Exact<{
   moveCategoryId: Scalars['ID'];
 }>;
 
-export type DeleteMoveCategoryMutation = {
-  __typename?: 'Mutation';
-  deleteMoveCategory?: {
-    __typename?: 'DeleteMoveCategoryPayload';
-    moveCategory: {
-      __typename?: 'MoveCategory';
-      id: string;
-      name: string;
-      position: number;
-      character: {
-        __typename?: 'Character';
-        id: string;
-        moveCategories: Array<{ __typename?: 'MoveCategory'; id: string; position: number }>;
-      };
-      moves: Array<{
-        __typename?: 'Move';
-        id: string;
-        name: string;
-        command: Array<string>;
-        position: number;
-        moveVideo?: { __typename?: 'MoveVideo'; id: string; m3u8Url: string; thumbnailUrl: string } | null;
-      }>;
-    };
-  } | null;
-};
 
-export type MoveTableRowFragment = {
-  __typename?: 'Move';
-  id: string;
-  name: string;
-  command: Array<string>;
-  position: number;
-  moveVideo?: { __typename?: 'MoveVideo'; id: string; m3u8Url: string; thumbnailUrl: string } | null;
-};
+export type DeleteMoveCategoryMutation = { __typename?: 'Mutation', deleteMoveCategory?: { __typename?: 'DeleteMoveCategoryPayload', moveCategory: { __typename?: 'MoveCategory', id: string, name: string, position: number, character: { __typename?: 'Character', id: string, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, position: number }> }, moves: Array<{ __typename?: 'Move', id: string, name: string, command: Array<string>, position: number, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> } } | null };
+
+export type MoveTableRowFragment = { __typename?: 'Move', id: string, name: string, command: Array<string>, position: number, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null };
 
 export type CreateAttackMoveMutationVariables = Exact<{
   moveCategoryId: Scalars['ID'];
   attributes: AttackMoveAttributes;
 }>;
 
-export type CreateAttackMoveMutation = {
-  __typename?: 'Mutation';
-  createAttackMove?: {
-    __typename?: 'CreateAttackMovePayload';
-    move: {
-      __typename?: 'Move';
-      id: string;
-      name: string;
-      command: Array<string>;
-      position: number;
-      moveCategory: {
-        __typename?: 'MoveCategory';
-        id: string;
-        moves: Array<{ __typename?: 'Move'; id: string; position: number }>;
-      };
-      moveVideo?: { __typename?: 'MoveVideo'; id: string; m3u8Url: string; thumbnailUrl: string } | null;
-    };
-  } | null;
-};
+
+export type CreateAttackMoveMutation = { __typename?: 'Mutation', createAttackMove?: { __typename?: 'CreateAttackMovePayload', move: { __typename?: 'Move', id: string, name: string, command: Array<string>, position: number, moveCategory: { __typename?: 'MoveCategory', id: string, moves: Array<{ __typename?: 'Move', id: string, position: number }> }, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null } } | null };
 
 export type CreateThrowMoveMutationVariables = Exact<{
   moveCategoryId: Scalars['ID'];
   attributes: ThrowMoveAttributes;
 }>;
 
-export type CreateThrowMoveMutation = {
-  __typename?: 'Mutation';
-  createThrowMove?: {
-    __typename?: 'CreateThrowMovePayload';
-    move: {
-      __typename?: 'Move';
-      id: string;
-      name: string;
-      command: Array<string>;
-      position: number;
-      moveCategory: {
-        __typename?: 'MoveCategory';
-        id: string;
-        moves: Array<{ __typename?: 'Move'; id: string; position: number }>;
-      };
-      moveVideo?: { __typename?: 'MoveVideo'; id: string; m3u8Url: string; thumbnailUrl: string } | null;
-    };
-  } | null;
-};
+
+export type CreateThrowMoveMutation = { __typename?: 'Mutation', createThrowMove?: { __typename?: 'CreateThrowMovePayload', move: { __typename?: 'Move', id: string, name: string, command: Array<string>, position: number, moveCategory: { __typename?: 'MoveCategory', id: string, moves: Array<{ __typename?: 'Move', id: string, position: number }> }, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null } } | null };
 
 export type CreateReversalMoveMutationVariables = Exact<{
   moveCategoryId: Scalars['ID'];
   attributes: ReversalMoveAttributes;
 }>;
 
-export type CreateReversalMoveMutation = {
-  __typename?: 'Mutation';
-  createReversalMove?: {
-    __typename?: 'CreateReversalMovePayload';
-    move: {
-      __typename?: 'Move';
-      id: string;
-      name: string;
-      command: Array<string>;
-      position: number;
-      moveCategory: {
-        __typename?: 'MoveCategory';
-        id: string;
-        moves: Array<{ __typename?: 'Move'; id: string; position: number }>;
-      };
-      moveVideo?: { __typename?: 'MoveVideo'; id: string; m3u8Url: string; thumbnailUrl: string } | null;
-    };
-  } | null;
-};
+
+export type CreateReversalMoveMutation = { __typename?: 'Mutation', createReversalMove?: { __typename?: 'CreateReversalMovePayload', move: { __typename?: 'Move', id: string, name: string, command: Array<string>, position: number, moveCategory: { __typename?: 'MoveCategory', id: string, moves: Array<{ __typename?: 'Move', id: string, position: number }> }, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null } } | null };
 
 export type UpdateAttackMoveMutationVariables = Exact<{
   moveId: Scalars['ID'];
   attributes: AttackMoveAttributes;
 }>;
 
-export type UpdateAttackMoveMutation = {
-  __typename?: 'Mutation';
-  updateAttackMove?: {
-    __typename?: 'UpdateAttackMovePayload';
-    move: {
-      __typename?: 'Move';
-      id: string;
-      name: string;
-      command: Array<string>;
-      position: number;
-      moveCategory: {
-        __typename?: 'MoveCategory';
-        id: string;
-        moves: Array<{ __typename?: 'Move'; id: string; position: number }>;
-      };
-      moveVideo?: { __typename?: 'MoveVideo'; id: string; m3u8Url: string; thumbnailUrl: string } | null;
-    };
-  } | null;
-};
+
+export type UpdateAttackMoveMutation = { __typename?: 'Mutation', updateAttackMove?: { __typename?: 'UpdateAttackMovePayload', move: { __typename?: 'Move', id: string, name: string, command: Array<string>, position: number, moveCategory: { __typename?: 'MoveCategory', id: string, moves: Array<{ __typename?: 'Move', id: string, position: number }> }, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null } } | null };
 
 export type UpdateThrowMoveMutationVariables = Exact<{
   moveId: Scalars['ID'];
   attributes: ThrowMoveAttributes;
 }>;
 
-export type UpdateThrowMoveMutation = {
-  __typename?: 'Mutation';
-  updateThrowMove?: {
-    __typename?: 'UpdateThrowMovePayload';
-    move: {
-      __typename?: 'Move';
-      id: string;
-      name: string;
-      command: Array<string>;
-      position: number;
-      moveCategory: {
-        __typename?: 'MoveCategory';
-        id: string;
-        moves: Array<{ __typename?: 'Move'; id: string; position: number }>;
-      };
-      moveVideo?: { __typename?: 'MoveVideo'; id: string; m3u8Url: string; thumbnailUrl: string } | null;
-    };
-  } | null;
-};
+
+export type UpdateThrowMoveMutation = { __typename?: 'Mutation', updateThrowMove?: { __typename?: 'UpdateThrowMovePayload', move: { __typename?: 'Move', id: string, name: string, command: Array<string>, position: number, moveCategory: { __typename?: 'MoveCategory', id: string, moves: Array<{ __typename?: 'Move', id: string, position: number }> }, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null } } | null };
 
 export type UpdateReversalMoveMutationVariables = Exact<{
   moveId: Scalars['ID'];
   attributes: ReversalMoveAttributes;
 }>;
 
-export type UpdateReversalMoveMutation = {
-  __typename?: 'Mutation';
-  updateReversalMove?: {
-    __typename?: 'UpdateReversalMovePayload';
-    move: {
-      __typename?: 'Move';
-      id: string;
-      moveCategory: {
-        __typename?: 'MoveCategory';
-        id: string;
-        moves: Array<{ __typename?: 'Move'; id: string; position: number }>;
-      };
-    };
-  } | null;
-};
+
+export type UpdateReversalMoveMutation = { __typename?: 'Mutation', updateReversalMove?: { __typename?: 'UpdateReversalMovePayload', move: { __typename?: 'Move', id: string, moveCategory: { __typename?: 'MoveCategory', id: string, moves: Array<{ __typename?: 'Move', id: string, position: number }> } } } | null };
 
 export type DeleteMoveMutationVariables = Exact<{
   moveId: Scalars['ID'];
 }>;
 
-export type DeleteMoveMutation = {
-  __typename?: 'Mutation';
-  deleteMove?: {
-    __typename?: 'DeleteMovePayload';
-    move: {
-      __typename?: 'Move';
-      id: string;
-      moveCategory: { __typename?: 'MoveCategory'; id: string; moves: Array<{ __typename?: 'Move'; id: string }> };
-    };
-  } | null;
-};
+
+export type DeleteMoveMutation = { __typename?: 'Mutation', deleteMove?: { __typename?: 'DeleteMovePayload', move: { __typename?: 'Move', id: string, moveCategory: { __typename?: 'MoveCategory', id: string, moves: Array<{ __typename?: 'Move', id: string }> } } } | null };
 
 export type CreateMoveVideoMutationVariables = Exact<{
   moveId: Scalars['ID'];
 }>;
 
-export type CreateMoveVideoMutation = {
-  __typename?: 'Mutation';
-  createMoveVideo?: {
-    __typename?: 'CreateMoveVideoPayload';
-    move: {
-      __typename?: 'Move';
-      id: string;
-      name: string;
-      command: Array<string>;
-      position: number;
-      moveVideo?: { __typename?: 'MoveVideo'; id: string; m3u8Url: string; thumbnailUrl: string } | null;
-    };
-    videoUpload: { __typename?: 'VideoUpload'; url: string; fields: string };
-  } | null;
-};
 
-export type PlayerTableRowFragment = {
-  __typename?: 'Player';
-  id: string;
-  slug: string;
-  name: string;
-  avatarUrl?: string | null;
-};
+export type CreateMoveVideoMutation = { __typename?: 'Mutation', createMoveVideo?: { __typename?: 'CreateMoveVideoPayload', move: { __typename?: 'Move', id: string, name: string, command: Array<string>, position: number, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }, videoUpload: { __typename?: 'VideoUpload', url: string, fields: string } } | null };
+
+export type PlayerTableRowFragment = { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null };
 
 export type PlayerTableRowsQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
   keyword?: InputMaybe<Scalars['String']>;
 }>;
 
-export type PlayerTableRowsQuery = {
-  __typename?: 'Query';
-  players: {
-    __typename?: 'PlayerConnection';
-    edges: Array<{
-      __typename?: 'PlayerEdge';
-      cursor: string;
-      node: { __typename?: 'Player'; id: string; slug: string; name: string; avatarUrl?: string | null };
-    }>;
-    pageInfo: { __typename?: 'PageInfo'; hasNextPage: boolean; endCursor?: string | null };
-  };
-};
+
+export type PlayerTableRowsQuery = { __typename?: 'Query', players: { __typename?: 'PlayerConnection', edges: Array<{ __typename?: 'PlayerEdge', cursor: string, node: { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null } } };
 
 export type DeletePlayerMutationVariables = Exact<{
   playerSlug: Scalars['String'];
 }>;
 
-export type DeletePlayerMutation = {
-  __typename?: 'Mutation';
-  deletePlayer?: { __typename?: 'DeletePlayerPayload'; player: { __typename?: 'Player'; id: string } } | null;
-};
+
+export type DeletePlayerMutation = { __typename?: 'Mutation', deletePlayer?: { __typename?: 'DeletePlayerPayload', player: { __typename?: 'Player', id: string } } | null };
 
 export type CreatePlayerFromSmashggMutationVariables = Exact<{
   smashggId: Scalars['String'];
 }>;
 
-export type CreatePlayerFromSmashggMutation = {
-  __typename?: 'Mutation';
-  createPlayerFromSmashgg?: {
-    __typename?: 'CreatePlayerFromSmashggPayload';
-    player: { __typename?: 'Player'; id: string };
-  } | null;
-};
+
+export type CreatePlayerFromSmashggMutation = { __typename?: 'Mutation', createPlayerFromSmashgg?: { __typename?: 'CreatePlayerFromSmashggPayload', player: { __typename?: 'Player', id: string } } | null };
 
 export type CreateStandingMutationVariables = Exact<{
   tournamentId: Scalars['ID'];
   attributes: StandingAttributes;
 }>;
 
-export type CreateStandingMutation = {
-  __typename?: 'Mutation';
-  createStanding?: { __typename?: 'CreateStandingPayload'; standing: { __typename?: 'Standing'; id: string } } | null;
-};
+
+export type CreateStandingMutation = { __typename?: 'Mutation', createStanding?: { __typename?: 'CreateStandingPayload', standing: { __typename?: 'Standing', id: string } } | null };
 
 export type DeleteStandingMutationVariables = Exact<{
   standingId: Scalars['ID'];
 }>;
 
-export type DeleteStandingMutation = {
-  __typename?: 'Mutation';
-  deleteStanding?: { __typename?: 'DeleteStandingPayload'; standing: { __typename?: 'Standing'; id: string } } | null;
-};
 
-export type StandingListItemFragment = {
-  __typename?: 'Standing';
-  id: string;
-  place: number;
-  player: { __typename?: 'Player'; id: string; name: string; avatarUrl?: string | null };
-};
+export type DeleteStandingMutation = { __typename?: 'Mutation', deleteStanding?: { __typename?: 'DeleteStandingPayload', standing: { __typename?: 'Standing', id: string } } | null };
+
+export type StandingListItemFragment = { __typename?: 'Standing', id: string, place: number, player: { __typename?: 'Player', id: string, name: string, avatarUrl?: string | null } };
 
 export type StandingListQueryVariables = Exact<{
   tournamentId: Scalars['ID'];
 }>;
 
-export type StandingListQuery = {
-  __typename?: 'Query';
-  tournament: {
-    __typename?: 'Tournament';
-    id: string;
-    standings: Array<{
-      __typename?: 'Standing';
-      id: string;
-      place: number;
-      player: { __typename?: 'Player'; id: string; name: string; avatarUrl?: string | null };
-    }>;
-  };
-};
 
-export type TournamentTableRowFragment = {
-  __typename?: 'Tournament';
-  id: string;
-  name: string;
-  startsAt: string;
-  videosCount: number;
-  standingsCount: number;
-  mainImageUrl?: string | null;
-};
+export type StandingListQuery = { __typename?: 'Query', tournament: { __typename?: 'Tournament', id: string, standings: Array<{ __typename?: 'Standing', id: string, place: number, player: { __typename?: 'Player', id: string, name: string, avatarUrl?: string | null } }> } };
+
+export type TournamentTableRowFragment = { __typename?: 'Tournament', id: string, name: string, startsAt: string, videosCount: number, standingsCount: number, mainImageUrl?: string | null };
 
 export type TournamentTableRowsQueryVariables = Exact<{
   after?: InputMaybe<Scalars['String']>;
   keyword?: InputMaybe<Scalars['String']>;
 }>;
 
-export type TournamentTableRowsQuery = {
-  __typename?: 'Query';
-  tournaments: {
-    __typename?: 'TournamentConnection';
-    edges: Array<{
-      __typename?: 'TournamentEdge';
-      cursor: string;
-      node: {
-        __typename?: 'Tournament';
-        id: string;
-        name: string;
-        startsAt: string;
-        videosCount: number;
-        standingsCount: number;
-        mainImageUrl?: string | null;
-      };
-    }>;
-    pageInfo: { __typename?: 'PageInfo'; hasNextPage: boolean; endCursor?: string | null };
-  };
-};
+
+export type TournamentTableRowsQuery = { __typename?: 'Query', tournaments: { __typename?: 'TournamentConnection', edges: Array<{ __typename?: 'TournamentEdge', cursor: string, node: { __typename?: 'Tournament', id: string, name: string, startsAt: string, videosCount: number, standingsCount: number, mainImageUrl?: string | null } }>, pageInfo: { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null } } };
 
 export type DeleteTournamentMutationVariables = Exact<{
   tournamentId: Scalars['ID'];
 }>;
 
-export type DeleteTournamentMutation = {
-  __typename?: 'Mutation';
-  deleteTournament?: {
-    __typename?: 'DeleteTournamentPayload';
-    tournament: { __typename?: 'Tournament'; id: string };
-  } | null;
-};
+
+export type DeleteTournamentMutation = { __typename?: 'Mutation', deleteTournament?: { __typename?: 'DeleteTournamentPayload', tournament: { __typename?: 'Tournament', id: string } } | null };
 
 export type CreateTournamentVideoMutationVariables = Exact<{
   tournamentId: Scalars['ID'];
   url: Scalars['String'];
 }>;
 
-export type CreateTournamentVideoMutation = {
-  __typename?: 'Mutation';
-  createTournamentVideo?: {
-    __typename?: 'CreateTournamentVideoPayload';
-    tournamentVideo: { __typename?: 'TournamentVideo'; id: string };
-  } | null;
-};
+
+export type CreateTournamentVideoMutation = { __typename?: 'Mutation', createTournamentVideo?: { __typename?: 'CreateTournamentVideoPayload', tournamentVideo: { __typename?: 'TournamentVideo', id: string } } | null };
 
 export type DeleteTournamentVideoMutationVariables = Exact<{
   tournamentVideoId: Scalars['ID'];
 }>;
 
-export type DeleteTournamentVideoMutation = {
-  __typename?: 'Mutation';
-  deleteTournamentVideo?: {
-    __typename?: 'DeleteTournamentVideoPayload';
-    tournamentVideo: { __typename?: 'TournamentVideo'; id: string };
-  } | null;
-};
 
-export type VideoListItemFragment = {
-  __typename?: 'TournamentVideo';
-  id: string;
-  title: string;
-  thumbnailUrl: string;
-  battlesCount: number;
-};
+export type DeleteTournamentVideoMutation = { __typename?: 'Mutation', deleteTournamentVideo?: { __typename?: 'DeleteTournamentVideoPayload', tournamentVideo: { __typename?: 'TournamentVideo', id: string } } | null };
+
+export type VideoListItemFragment = { __typename?: 'TournamentVideo', id: string, title: string, thumbnailUrl: string, battlesCount: number };
 
 export type VideoListQueryVariables = Exact<{
   tournamentId: Scalars['ID'];
 }>;
 
-export type VideoListQuery = {
-  __typename?: 'Query';
-  tournament: {
-    __typename?: 'Tournament';
-    id: string;
-    videos: Array<{
-      __typename?: 'TournamentVideo';
-      id: string;
-      title: string;
-      thumbnailUrl: string;
-      battlesCount: number;
-    }>;
-  };
-};
 
-export type ArticleFormArticleFragment = {
-  __typename?: 'Article';
-  id: string;
-  title: string;
-  description: string;
-  mainImageUrl?: string | null;
-  category: ArticleCategory;
-  content: string;
-};
+export type VideoListQuery = { __typename?: 'Query', tournament: { __typename?: 'Tournament', id: string, videos: Array<{ __typename?: 'TournamentVideo', id: string, title: string, thumbnailUrl: string, battlesCount: number }> } };
+
+export type ArticleFormArticleFragment = { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, category: ArticleCategory, content: string };
 
 export type CreateArticleMutationVariables = Exact<{
   attributes: ArticleAttributes;
 }>;
 
-export type CreateArticleMutation = {
-  __typename?: 'Mutation';
-  createArticle?: { __typename?: 'CreateArticlePayload'; article: { __typename?: 'Article'; id: string } } | null;
-};
+
+export type CreateArticleMutation = { __typename?: 'Mutation', createArticle?: { __typename?: 'CreateArticlePayload', article: { __typename?: 'Article', id: string } } | null };
 
 export type UpdateArticleMutationVariables = Exact<{
   articleId: Scalars['ID'];
   attributes: ArticleAttributes;
 }>;
 
-export type UpdateArticleMutation = {
-  __typename?: 'Mutation';
-  updateArticle?: { __typename?: 'UpdateArticlePayload'; article: { __typename?: 'Article'; id: string } } | null;
-};
 
-export type CharacterFormFragment = {
-  __typename?: 'Character';
-  id: string;
-  name: string;
-  nameKana: string;
-  longName: string;
-  longNameKana: string;
-  slug: string;
-  country: string;
-  fightingStyle: string;
-  story: string;
-  description: string;
-  dlc: boolean;
-};
+export type UpdateArticleMutation = { __typename?: 'Mutation', updateArticle?: { __typename?: 'UpdateArticlePayload', article: { __typename?: 'Article', id: string } } | null };
+
+export type CharacterFormFragment = { __typename?: 'Character', id: string, name: string, nameKana: string, longName: string, longNameKana: string, slug: string, country: string, fightingStyle: string, story: string, description: string, dlc: boolean };
 
 export type ComboCategoryFormQueryVariables = Exact<{
   comboCategoryId: Scalars['ID'];
 }>;
 
-export type ComboCategoryFormQuery = {
-  __typename?: 'Query';
-  comboCategory: { __typename?: 'ComboCategory'; id: string; name: string; position: number };
-};
 
-export type ComboCategoryFormFragment = { __typename?: 'ComboCategory'; id: string; name: string; position: number };
+export type ComboCategoryFormQuery = { __typename?: 'Query', comboCategory: { __typename?: 'ComboCategory', id: string, name: string, position: number } };
 
-export type ComboCategoryPositionSelectFragment = {
-  __typename?: 'ComboCategory';
-  id: string;
-  name: string;
-  position: number;
-};
+export type ComboCategoryFormFragment = { __typename?: 'ComboCategory', id: string, name: string, position: number };
+
+export type ComboCategoryPositionSelectFragment = { __typename?: 'ComboCategory', id: string, name: string, position: number };
 
 export type ComboFormQueryVariables = Exact<{
   comboId: Scalars['ID'];
 }>;
 
-export type ComboFormQuery = {
-  __typename?: 'Query';
-  combo: {
-    __typename?: 'Combo';
-    id: string;
-    command: Array<string>;
-    damage?: number | null;
-    note?: string | null;
-    position: number;
-    move?: { __typename?: 'Move'; id: string } | null;
-  };
-};
 
-export type ComboFormFragment = {
-  __typename?: 'Combo';
-  id: string;
-  command: Array<string>;
-  damage?: number | null;
-  note?: string | null;
-  position: number;
-  move?: { __typename?: 'Move'; id: string } | null;
-};
+export type ComboFormQuery = { __typename?: 'Query', combo: { __typename?: 'Combo', id: string, command: Array<string>, damage?: number | null, note?: string | null, position: number, move?: { __typename?: 'Move', id: string } | null } };
+
+export type ComboFormFragment = { __typename?: 'Combo', id: string, command: Array<string>, damage?: number | null, note?: string | null, position: number, move?: { __typename?: 'Move', id: string } | null };
 
 export type MoveCategoryFormQueryVariables = Exact<{
   moveCategoryId: Scalars['ID'];
 }>;
 
-export type MoveCategoryFormQuery = {
-  __typename?: 'Query';
-  moveCategory: { __typename?: 'MoveCategory'; id: string; name: string; position: number };
-};
 
-export type MoveCategoryFormFragment = { __typename?: 'MoveCategory'; id: string; name: string; position: number };
+export type MoveCategoryFormQuery = { __typename?: 'Query', moveCategory: { __typename?: 'MoveCategory', id: string, name: string, position: number } };
 
-export type MoveCategoryPositionSelectFragment = {
-  __typename?: 'MoveCategory';
-  id: string;
-  name: string;
-  position: number;
-};
+export type MoveCategoryFormFragment = { __typename?: 'MoveCategory', id: string, name: string, position: number };
+
+export type MoveCategoryPositionSelectFragment = { __typename?: 'MoveCategory', id: string, name: string, position: number };
 
 export type MoveFormQueryVariables = Exact<{
   moveId: Scalars['ID'];
 }>;
 
-export type MoveFormQuery = {
-  __typename?: 'Query';
-  move: {
-    __typename?: 'Move';
-    id: string;
-    name: string;
-    kana?: string | null;
-    command: Array<string>;
-    statusAfter?: string | null;
-    note?: string | null;
-    position: number;
-    moveCategory: { __typename?: 'MoveCategory'; id: string; name: string };
-    moveable:
-      | {
-          __typename: 'AttackMove';
-          id: string;
-          startUpFrame?: number | null;
-          duration?: number | null;
-          reach?: number | null;
-          blockFrame?: number | null;
-          blockResult: AttackMoveResultEnum;
-          blockStatus?: AttackMoveStateEnum | null;
-          hitFrame?: number | null;
-          hitResult: AttackMoveResultEnum;
-          hitStatus?: AttackMoveStateEnum | null;
-          counterFrame?: number | null;
-          counterResult: AttackMoveResultEnum;
-          counterStatus?: AttackMoveStateEnum | null;
-          heights: Array<AttackTypeEnum>;
-          damages: Array<number>;
-          powerCrush: boolean;
-          crouchingStatus: boolean;
-          jumpStatus: boolean;
-          homing: boolean;
-          screw: boolean;
-          wallBound: boolean;
-        }
-      | {
-          __typename: 'ReversalMove';
-          id: string;
-          kind: string;
-          startUpFrame?: number | null;
-          finishFrame?: number | null;
-        }
-      | {
-          __typename: 'ThrowMove';
-          id: string;
-          throwType: ThrowTypeEnum;
-          throwResult: ThrowMoveResultEnum;
-          throwEscape: ThrowEscapeEnum;
-          startUpFrame?: number | null;
-          damage?: number | null;
-        };
-    moveVideo?: { __typename?: 'MoveVideo'; id: string; m3u8Url: string; thumbnailUrl: string } | null;
-  };
-};
 
-export type MovePositionSelectFragment = { __typename?: 'Move'; id: string; name: string; position: number };
+export type MoveFormQuery = { __typename?: 'Query', move: { __typename?: 'Move', id: string, name: string, kana?: string | null, command: Array<string>, statusAfter?: string | null, note?: string | null, position: number, moveCategory: { __typename?: 'MoveCategory', id: string, name: string }, moveable: { __typename: 'AttackMove', id: string, startUpFrame?: number | null, duration?: number | null, reach?: number | null, blockFrame?: number | null, blockResult: AttackMoveResultEnum, blockStatus?: AttackMoveStateEnum | null, hitFrame?: number | null, hitResult: AttackMoveResultEnum, hitStatus?: AttackMoveStateEnum | null, counterFrame?: number | null, counterResult: AttackMoveResultEnum, counterStatus?: AttackMoveStateEnum | null, heights: Array<AttackTypeEnum>, damages: Array<number>, powerCrush: boolean, crouchingStatus: boolean, jumpStatus: boolean, homing: boolean, screw: boolean, wallBound: boolean } | { __typename: 'ReversalMove', id: string, kind: string, startUpFrame?: number | null, finishFrame?: number | null } | { __typename: 'ThrowMove', id: string, throwType: ThrowTypeEnum, throwResult: ThrowMoveResultEnum, throwEscape: ThrowEscapeEnum, startUpFrame?: number | null, damage?: number | null }, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null } };
 
-export type MoveFormAttackFragment = {
-  __typename?: 'AttackMove';
-  id: string;
-  startUpFrame?: number | null;
-  duration?: number | null;
-  reach?: number | null;
-  blockFrame?: number | null;
-  blockResult: AttackMoveResultEnum;
-  blockStatus?: AttackMoveStateEnum | null;
-  hitFrame?: number | null;
-  hitResult: AttackMoveResultEnum;
-  hitStatus?: AttackMoveStateEnum | null;
-  counterFrame?: number | null;
-  counterResult: AttackMoveResultEnum;
-  counterStatus?: AttackMoveStateEnum | null;
-  heights: Array<AttackTypeEnum>;
-  damages: Array<number>;
-  powerCrush: boolean;
-  crouchingStatus: boolean;
-  jumpStatus: boolean;
-  homing: boolean;
-  screw: boolean;
-  wallBound: boolean;
-};
+export type MovePositionSelectFragment = { __typename?: 'Move', id: string, name: string, position: number };
 
-export type MoveFormThrowFragment = {
-  __typename?: 'ThrowMove';
-  id: string;
-  throwType: ThrowTypeEnum;
-  throwResult: ThrowMoveResultEnum;
-  throwEscape: ThrowEscapeEnum;
-  startUpFrame?: number | null;
-  damage?: number | null;
-};
+export type MoveFormAttackFragment = { __typename?: 'AttackMove', id: string, startUpFrame?: number | null, duration?: number | null, reach?: number | null, blockFrame?: number | null, blockResult: AttackMoveResultEnum, blockStatus?: AttackMoveStateEnum | null, hitFrame?: number | null, hitResult: AttackMoveResultEnum, hitStatus?: AttackMoveStateEnum | null, counterFrame?: number | null, counterResult: AttackMoveResultEnum, counterStatus?: AttackMoveStateEnum | null, heights: Array<AttackTypeEnum>, damages: Array<number>, powerCrush: boolean, crouchingStatus: boolean, jumpStatus: boolean, homing: boolean, screw: boolean, wallBound: boolean };
 
-export type MoveFormReversalFragment = {
-  __typename?: 'ReversalMove';
-  id: string;
-  kind: string;
-  startUpFrame?: number | null;
-  finishFrame?: number | null;
-};
+export type MoveFormThrowFragment = { __typename?: 'ThrowMove', id: string, throwType: ThrowTypeEnum, throwResult: ThrowMoveResultEnum, throwEscape: ThrowEscapeEnum, startUpFrame?: number | null, damage?: number | null };
 
-export type MoveFormFragment = {
-  __typename?: 'Move';
-  id: string;
-  name: string;
-  kana?: string | null;
-  command: Array<string>;
-  statusAfter?: string | null;
-  note?: string | null;
-  position: number;
-  moveCategory: { __typename?: 'MoveCategory'; id: string; name: string };
-  moveable:
-    | {
-        __typename: 'AttackMove';
-        id: string;
-        startUpFrame?: number | null;
-        duration?: number | null;
-        reach?: number | null;
-        blockFrame?: number | null;
-        blockResult: AttackMoveResultEnum;
-        blockStatus?: AttackMoveStateEnum | null;
-        hitFrame?: number | null;
-        hitResult: AttackMoveResultEnum;
-        hitStatus?: AttackMoveStateEnum | null;
-        counterFrame?: number | null;
-        counterResult: AttackMoveResultEnum;
-        counterStatus?: AttackMoveStateEnum | null;
-        heights: Array<AttackTypeEnum>;
-        damages: Array<number>;
-        powerCrush: boolean;
-        crouchingStatus: boolean;
-        jumpStatus: boolean;
-        homing: boolean;
-        screw: boolean;
-        wallBound: boolean;
-      }
-    | {
-        __typename: 'ReversalMove';
-        id: string;
-        kind: string;
-        startUpFrame?: number | null;
-        finishFrame?: number | null;
-      }
-    | {
-        __typename: 'ThrowMove';
-        id: string;
-        throwType: ThrowTypeEnum;
-        throwResult: ThrowMoveResultEnum;
-        throwEscape: ThrowEscapeEnum;
-        startUpFrame?: number | null;
-        damage?: number | null;
-      };
-  moveVideo?: { __typename?: 'MoveVideo'; id: string; m3u8Url: string; thumbnailUrl: string } | null;
-};
+export type MoveFormReversalFragment = { __typename?: 'ReversalMove', id: string, kind: string, startUpFrame?: number | null, finishFrame?: number | null };
 
-export type PlayerFormFragment = {
-  __typename?: 'Player';
-  name: string;
-  slug: string;
-  tonamelId?: string | null;
-  smashggId?: string | null;
-  twitterId?: string | null;
-  streamingUrl?: string | null;
-  description?: string | null;
-  country?: { __typename?: 'Country'; id: string } | null;
-};
+export type MoveFormFragment = { __typename?: 'Move', id: string, name: string, kana?: string | null, command: Array<string>, statusAfter?: string | null, note?: string | null, position: number, moveCategory: { __typename?: 'MoveCategory', id: string, name: string }, moveable: { __typename: 'AttackMove', id: string, startUpFrame?: number | null, duration?: number | null, reach?: number | null, blockFrame?: number | null, blockResult: AttackMoveResultEnum, blockStatus?: AttackMoveStateEnum | null, hitFrame?: number | null, hitResult: AttackMoveResultEnum, hitStatus?: AttackMoveStateEnum | null, counterFrame?: number | null, counterResult: AttackMoveResultEnum, counterStatus?: AttackMoveStateEnum | null, heights: Array<AttackTypeEnum>, damages: Array<number>, powerCrush: boolean, crouchingStatus: boolean, jumpStatus: boolean, homing: boolean, screw: boolean, wallBound: boolean } | { __typename: 'ReversalMove', id: string, kind: string, startUpFrame?: number | null, finishFrame?: number | null } | { __typename: 'ThrowMove', id: string, throwType: ThrowTypeEnum, throwResult: ThrowMoveResultEnum, throwEscape: ThrowEscapeEnum, startUpFrame?: number | null, damage?: number | null }, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null };
 
-export type CreateUserMutationVariables = Exact<{ [key: string]: never }>;
+export type PlayerFormFragment = { __typename?: 'Player', name: string, slug: string, tonamelId?: string | null, smashggId?: string | null, twitterId?: string | null, streamingUrl?: string | null, description?: string | null, country?: { __typename?: 'Country', id: string } | null };
 
-export type CreateUserMutation = {
-  __typename?: 'Mutation';
-  createUser?: {
-    __typename?: 'CreateUserPayload';
-    viewer: { __typename?: 'User'; id: string; name: string; role: UserRole; avatarUrl: string };
-  } | null;
-};
+export type CreateUserMutationVariables = Exact<{ [key: string]: never; }>;
 
-export type TournamentFormFragment = {
-  __typename?: 'Tournament';
-  id: string;
-  name: string;
-  url: string;
-  streamingUrl?: string | null;
-  startsAt: string;
-  description: string;
-};
 
-export type CharacterBreadcrumbsFragment = { __typename?: 'Character'; id: string; slug: string; name: string };
+export type CreateUserMutation = { __typename?: 'Mutation', createUser?: { __typename?: 'CreateUserPayload', viewer: { __typename?: 'User', id: string, name: string, role: UserRole, avatarUrl: string } } | null };
 
-export type PlayerBreadcrumbsFragment = { __typename?: 'Player'; id: string; slug: string; name: string };
+export type TournamentFormFragment = { __typename?: 'Tournament', id: string, name: string, url: string, streamingUrl?: string | null, startsAt: string, description: string };
 
-export type TournamentBreadcrumbsFragment = { __typename?: 'Tournament'; id: string; name: string };
+export type CharacterBreadcrumbsFragment = { __typename?: 'Character', id: string, slug: string, name: string };
 
-export type TournamentVideoBreadcrumbsFragment = {
-  __typename?: 'TournamentVideo';
-  id: string;
-  label?: string | null;
-  tournament: { __typename?: 'Tournament'; id: string; name: string };
-};
+export type PlayerBreadcrumbsFragment = { __typename?: 'Player', id: string, slug: string, name: string };
+
+export type TournamentBreadcrumbsFragment = { __typename?: 'Tournament', id: string, name: string };
+
+export type TournamentVideoBreadcrumbsFragment = { __typename?: 'TournamentVideo', id: string, label?: string | null, tournament: { __typename?: 'Tournament', id: string, name: string } };
 
 export type CreateArticleLinkMutationVariables = Exact<{
   url: Scalars['String'];
 }>;
 
-export type CreateArticleLinkMutation = {
-  __typename?: 'Mutation';
-  createArticleLink?: {
-    __typename?: 'CreateArticleLinkPayload';
-    articleLink: {
-      __typename?: 'ArticleLink';
-      url: string;
-      title: string;
-      description?: string | null;
-      imageUrl?: string | null;
-    };
-  } | null;
-};
+
+export type CreateArticleLinkMutation = { __typename?: 'Mutation', createArticleLink?: { __typename?: 'CreateArticleLinkPayload', articleLink: { __typename?: 'ArticleLink', url: string, title: string, description?: string | null, imageUrl?: string | null } } | null };
 
 export type CreateArticleImageMutationVariables = Exact<{
   image: Scalars['String'];
 }>;
 
-export type CreateArticleImageMutation = {
-  __typename?: 'Mutation';
-  createArticleImage?: { __typename?: 'CreateArticleImagePayload'; url?: string | null } | null;
-};
 
-export type CreateArticleVideoMutationVariables = Exact<{ [key: string]: never }>;
+export type CreateArticleImageMutation = { __typename?: 'Mutation', createArticleImage?: { __typename?: 'CreateArticleImagePayload', url?: string | null } | null };
 
-export type CreateArticleVideoMutation = {
-  __typename?: 'Mutation';
-  createArticleVideo?: {
-    __typename?: 'CreateArticleVideoPayload';
-    articleVideo: { __typename?: 'ArticleVideo'; id: string; m3u8Url: string; thumbnailUrl: string };
-    videoUpload: { __typename?: 'VideoUpload'; url: string; fields: string };
-  } | null;
-};
+export type CreateArticleVideoMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type CreateArticleVideoMutation = { __typename?: 'Mutation', createArticleVideo?: { __typename?: 'CreateArticleVideoPayload', articleVideo: { __typename?: 'ArticleVideo', id: string, m3u8Url: string, thumbnailUrl: string }, videoUpload: { __typename?: 'VideoUpload', url: string, fields: string } } | null };
 
 export type ArticleElementComboQueryVariables = Exact<{
   comboId: Scalars['ID'];
 }>;
 
-export type ArticleElementComboQuery = {
-  __typename?: 'Query';
-  combo: {
-    __typename?: 'Combo';
-    id: string;
-    damage?: number | null;
-    command: Array<string>;
-    note?: string | null;
-    comboCategory: { __typename?: 'ComboCategory'; id: string; name: string };
-    comboVideo?: { __typename?: 'ComboVideo'; id: string; m3u8Url: string; thumbnailUrl: string } | null;
-  };
-};
+
+export type ArticleElementComboQuery = { __typename?: 'Query', combo: { __typename?: 'Combo', id: string, damage?: number | null, command: Array<string>, note?: string | null, comboCategory: { __typename?: 'ComboCategory', id: string, name: string }, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null } };
 
 export type ArticleElementMoveQueryVariables = Exact<{
   moveId: Scalars['ID'];
 }>;
 
-export type ArticleElementMoveQuery = {
-  __typename?: 'Query';
-  move: {
-    __typename?: 'Move';
-    id: string;
-    name: string;
-    kana?: string | null;
-    command: Array<string>;
-    statusAfter?: string | null;
-    note?: string | null;
-    moveable:
-      | {
-          __typename: 'AttackMove';
-          id: string;
-          startUpFrame?: number | null;
-          duration?: number | null;
-          blockFrame?: number | null;
-          blockResult: AttackMoveResultEnum;
-          hitFrame?: number | null;
-          hitResult: AttackMoveResultEnum;
-          counterFrame?: number | null;
-          counterResult: AttackMoveResultEnum;
-          heights: Array<AttackTypeEnum>;
-          damages: Array<number>;
-          powerCrush: boolean;
-          crouchingStatus: boolean;
-          jumpStatus: boolean;
-          homing: boolean;
-          screw: boolean;
-          wallBound: boolean;
-        }
-      | {
-          __typename: 'ReversalMove';
-          id: string;
-          kind: string;
-          startUpFrame?: number | null;
-          finishFrame?: number | null;
-        }
-      | {
-          __typename: 'ThrowMove';
-          id: string;
-          throwType: ThrowTypeEnum;
-          throwResult: ThrowMoveResultEnum;
-          throwEscape: ThrowEscapeEnum;
-          startUpFrame?: number | null;
-          damage?: number | null;
-        };
-    moveVideo?: { __typename?: 'MoveVideo'; id: string; m3u8Url: string; thumbnailUrl: string } | null;
-  };
-};
 
-export type CharacterSelectOptionFragment = { __typename?: 'Character'; id: string; slug: string; name: string };
+export type ArticleElementMoveQuery = { __typename?: 'Query', move: { __typename?: 'Move', id: string, name: string, kana?: string | null, command: Array<string>, statusAfter?: string | null, note?: string | null, moveable: { __typename: 'AttackMove', id: string, startUpFrame?: number | null, duration?: number | null, blockFrame?: number | null, blockResult: AttackMoveResultEnum, hitFrame?: number | null, hitResult: AttackMoveResultEnum, counterFrame?: number | null, counterResult: AttackMoveResultEnum, heights: Array<AttackTypeEnum>, damages: Array<number>, powerCrush: boolean, crouchingStatus: boolean, jumpStatus: boolean, homing: boolean, screw: boolean, wallBound: boolean } | { __typename: 'ReversalMove', id: string, kind: string, startUpFrame?: number | null, finishFrame?: number | null } | { __typename: 'ThrowMove', id: string, throwType: ThrowTypeEnum, throwResult: ThrowMoveResultEnum, throwEscape: ThrowEscapeEnum, startUpFrame?: number | null, damage?: number | null }, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null } };
 
-export type CharacterSelectOptionsQueryVariables = Exact<{ [key: string]: never }>;
+export type CharacterSelectOptionFragment = { __typename?: 'Character', id: string, slug: string, name: string };
 
-export type CharacterSelectOptionsQuery = {
-  __typename?: 'Query';
-  characters: {
-    __typename?: 'CharacterConnection';
-    nodes: Array<{ __typename?: 'Character'; id: string; slug: string; name: string }>;
-  };
-};
+export type CharacterSelectOptionsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type CharacterSelectOptionsQuery = { __typename?: 'Query', characters: { __typename?: 'CharacterConnection', nodes: Array<{ __typename?: 'Character', id: string, slug: string, name: string }> } };
 
 export type ComboSelectOptionsQueryVariables = Exact<{
   characterSlug: Scalars['String'];
 }>;
 
-export type ComboSelectOptionsQuery = {
-  __typename?: 'Query';
-  character: {
-    __typename?: 'Character';
-    id: string;
-    comboCategories: Array<{
-      __typename?: 'ComboCategory';
-      id: string;
-      name: string;
-      combos: Array<{ __typename?: 'Combo'; id: string; command: Array<string> }>;
-    }>;
-  };
-};
 
-export type CountrySelectOptionFragment = { __typename?: 'Country'; id: string; name: string; flagEmoji: string };
+export type ComboSelectOptionsQuery = { __typename?: 'Query', character: { __typename?: 'Character', id: string, comboCategories: Array<{ __typename?: 'ComboCategory', id: string, name: string, combos: Array<{ __typename?: 'Combo', id: string, command: Array<string> }> }> } };
 
-export type CountrySelectOptionsQueryVariables = Exact<{ [key: string]: never }>;
+export type CountrySelectOptionFragment = { __typename?: 'Country', id: string, name: string, flagEmoji: string };
 
-export type CountrySelectOptionsQuery = {
-  __typename?: 'Query';
-  countries: Array<{ __typename?: 'Country'; id: string; name: string; flagEmoji: string }>;
-};
+export type CountrySelectOptionsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type CountrySelectOptionsQuery = { __typename?: 'Query', countries: Array<{ __typename?: 'Country', id: string, name: string, flagEmoji: string }> };
 
 export type MoveSelectOptionsQueryVariables = Exact<{
   characterSlug: Scalars['String'];
 }>;
 
-export type MoveSelectOptionsQuery = {
-  __typename?: 'Query';
-  character: {
-    __typename?: 'Character';
-    id: string;
-    moveCategories: Array<{
-      __typename?: 'MoveCategory';
-      id: string;
-      name: string;
-      moves: Array<{ __typename?: 'Move'; id: string; name: string; command: Array<string> }>;
-    }>;
-  };
-};
 
-export type PaginationFragment = { __typename?: 'PageInfo'; hasNextPage: boolean; endCursor?: string | null };
+export type MoveSelectOptionsQuery = { __typename?: 'Query', character: { __typename?: 'Character', id: string, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, moves: Array<{ __typename?: 'Move', id: string, name: string, command: Array<string> }> }> } };
 
-export type PlayerSelectOptionFragment = {
-  __typename?: 'Player';
-  id: string;
-  slug: string;
-  name: string;
-  tonamelId?: string | null;
-  smashggId?: string | null;
-};
+export type PaginationFragment = { __typename?: 'PageInfo', hasNextPage: boolean, endCursor?: string | null };
 
-export type PlayerSelectOptionsQueryVariables = Exact<{ [key: string]: never }>;
+export type PlayerSelectOptionFragment = { __typename?: 'Player', id: string, slug: string, name: string, tonamelId?: string | null, smashggId?: string | null };
 
-export type PlayerSelectOptionsQuery = {
-  __typename?: 'Query';
-  players: {
-    __typename?: 'PlayerConnection';
-    nodes: Array<{
-      __typename?: 'Player';
-      id: string;
-      slug: string;
-      name: string;
-      tonamelId?: string | null;
-      smashggId?: string | null;
-    }>;
-  };
-};
+export type PlayerSelectOptionsQueryVariables = Exact<{ [key: string]: never; }>;
 
-export type SsgArticlePathsQueryVariables = Exact<{ [key: string]: never }>;
 
-export type SsgArticlePathsQuery = {
-  __typename?: 'Query';
-  articles: { __typename?: 'ArticleConnection'; nodes: Array<{ __typename?: 'Article'; id: string }> };
-};
+export type PlayerSelectOptionsQuery = { __typename?: 'Query', players: { __typename?: 'PlayerConnection', nodes: Array<{ __typename?: 'Player', id: string, slug: string, name: string, tonamelId?: string | null, smashggId?: string | null }> } };
 
-export type SsgCharacterPathsQueryVariables = Exact<{ [key: string]: never }>;
+export type SsgArticlePathsQueryVariables = Exact<{ [key: string]: never; }>;
 
-export type SsgCharacterPathsQuery = {
-  __typename?: 'Query';
-  characters: {
-    __typename?: 'CharacterConnection';
-    nodes: Array<{ __typename?: 'Character'; id: string; slug: string }>;
-  };
-};
 
-export type SsgPlayerPathsQueryVariables = Exact<{ [key: string]: never }>;
+export type SsgArticlePathsQuery = { __typename?: 'Query', articles: { __typename?: 'ArticleConnection', nodes: Array<{ __typename?: 'Article', id: string }> } };
 
-export type SsgPlayerPathsQuery = {
-  __typename?: 'Query';
-  players: { __typename?: 'PlayerConnection'; nodes: Array<{ __typename?: 'Player'; id: string; slug: string }> };
-};
+export type SsgCharacterPathsQueryVariables = Exact<{ [key: string]: never; }>;
 
-export type SsgTournamentPathsQueryVariables = Exact<{ [key: string]: never }>;
 
-export type SsgTournamentPathsQuery = {
-  __typename?: 'Query';
-  tournaments: { __typename?: 'TournamentConnection'; nodes: Array<{ __typename?: 'Tournament'; id: string }> };
-};
+export type SsgCharacterPathsQuery = { __typename?: 'Query', characters: { __typename?: 'CharacterConnection', nodes: Array<{ __typename?: 'Character', id: string, slug: string }> } };
 
-export type SsgTournamentVideoPathsQueryVariables = Exact<{ [key: string]: never }>;
+export type SsgPlayerPathsQueryVariables = Exact<{ [key: string]: never; }>;
 
-export type SsgTournamentVideoPathsQuery = {
-  __typename?: 'Query';
-  tournamentVideos: {
-    __typename?: 'TournamentVideoConnection';
-    nodes: Array<{ __typename?: 'TournamentVideo'; id: string }>;
-  };
-};
 
-export type ViewerQueryVariables = Exact<{ [key: string]: never }>;
+export type SsgPlayerPathsQuery = { __typename?: 'Query', players: { __typename?: 'PlayerConnection', nodes: Array<{ __typename?: 'Player', id: string, slug: string }> } };
 
-export type ViewerQuery = {
-  __typename?: 'Query';
-  viewer: { __typename?: 'User'; id: string; name: string; role: UserRole; avatarUrl: string };
-};
+export type SsgTournamentPathsQueryVariables = Exact<{ [key: string]: never; }>;
 
-export type ViewerFragment = { __typename?: 'User'; id: string; name: string; role: UserRole; avatarUrl: string };
+
+export type SsgTournamentPathsQuery = { __typename?: 'Query', tournaments: { __typename?: 'TournamentConnection', nodes: Array<{ __typename?: 'Tournament', id: string }> } };
+
+export type SsgTournamentVideoPathsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type SsgTournamentVideoPathsQuery = { __typename?: 'Query', tournamentVideos: { __typename?: 'TournamentVideoConnection', nodes: Array<{ __typename?: 'TournamentVideo', id: string }> } };
+
+export type ViewerQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ViewerQuery = { __typename?: 'Query', viewer: { __typename?: 'User', id: string, name: string, role: UserRole, avatarUrl: string } };
+
+export type ViewerFragment = { __typename?: 'User', id: string, name: string, role: UserRole, avatarUrl: string };
 
 export type ArticlePageQueryVariables = Exact<{
   articleId: Scalars['ID'];
 }>;
 
-export type ArticlePageQuery = {
-  __typename?: 'Query';
-  article: {
-    __typename?: 'Article';
-    id: string;
-    title: string;
-    description: string;
-    mainImageUrl?: string | null;
-    publishedAt?: string | null;
-    status: ArticleStatus;
-    category: ArticleCategory;
-    content: string;
-    author: { __typename?: 'User'; id: string; name: string; avatarUrl: string };
-    relatedArticles: Array<{
-      __typename?: 'Article';
-      id: string;
-      title: string;
-      description: string;
-      mainImageUrl?: string | null;
-      publishedAt?: string | null;
-      status: ArticleStatus;
-      author: { __typename?: 'User'; id: string; name: string; avatarUrl: string };
-    }>;
-  };
-};
 
-export type ArticlePageFragment = {
-  __typename?: 'Article';
-  id: string;
-  title: string;
-  description: string;
-  mainImageUrl?: string | null;
-  publishedAt?: string | null;
-  status: ArticleStatus;
-  category: ArticleCategory;
-  content: string;
-  author: { __typename?: 'User'; id: string; name: string; avatarUrl: string };
-  relatedArticles: Array<{
-    __typename?: 'Article';
-    id: string;
-    title: string;
-    description: string;
-    mainImageUrl?: string | null;
-    publishedAt?: string | null;
-    status: ArticleStatus;
-    author: { __typename?: 'User'; id: string; name: string; avatarUrl: string };
-  }>;
-};
+export type ArticlePageQuery = { __typename?: 'Query', article: { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, category: ArticleCategory, content: string, author: { __typename?: 'User', id: string, name: string, avatarUrl: string }, relatedArticles: Array<{ __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, author: { __typename?: 'User', id: string, name: string, avatarUrl: string } }> } };
 
-export type ArticlesPageQueryVariables = Exact<{ [key: string]: never }>;
+export type ArticlePageFragment = { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, category: ArticleCategory, content: string, author: { __typename?: 'User', id: string, name: string, avatarUrl: string }, relatedArticles: Array<{ __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, author: { __typename?: 'User', id: string, name: string, avatarUrl: string } }> };
 
-export type ArticlesPageQuery = {
-  __typename?: 'Query';
-  articles: {
-    __typename?: 'ArticleConnection';
-    nodes: Array<{
-      __typename?: 'Article';
-      id: string;
-      title: string;
-      description: string;
-      mainImageUrl?: string | null;
-      publishedAt?: string | null;
-      status: ArticleStatus;
-      author: { __typename?: 'User'; id: string; name: string; avatarUrl: string };
-    }>;
-  };
-};
+export type ArticlesPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type ArticlesPageQuery = { __typename?: 'Query', articles: { __typename?: 'ArticleConnection', nodes: Array<{ __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, author: { __typename?: 'User', id: string, name: string, avatarUrl: string } }> } };
 
 export type CharacterBattlesPageQueryVariables = Exact<{
   characterSlug: Scalars['String'];
 }>;
 
-export type CharacterBattlesPageQuery = {
-  __typename?: 'Query';
-  character: {
-    __typename?: 'Character';
-    id: string;
-    slug: string;
-    name: string;
-    longName: string;
-    faceImageUrl: string;
-    country: string;
-    fightingStyle: string;
-    battlesCount: number;
-    combosCount: number;
-    movesCount: number;
-  };
-};
+
+export type CharacterBattlesPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', id: string, slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, combosCount: number, movesCount: number } };
 
 export type CharacterCombosPageQueryVariables = Exact<{
   characterSlug: Scalars['String'];
 }>;
 
-export type CharacterCombosPageQuery = {
-  __typename?: 'Query';
-  character: {
-    __typename?: 'Character';
-    id: string;
-    slug: string;
-    name: string;
-    longName: string;
-    faceImageUrl: string;
-    country: string;
-    fightingStyle: string;
-    battlesCount: number;
-    combosCount: number;
-    movesCount: number;
-    comboCategories: Array<{
-      __typename?: 'ComboCategory';
-      id: string;
-      name: string;
-      combos: Array<{
-        __typename?: 'Combo';
-        id: string;
-        damage?: number | null;
-        command: Array<string>;
-        note?: string | null;
-        move?: { __typename?: 'Move'; id: string } | null;
-        comboVideo?: { __typename?: 'ComboVideo'; id: string; m3u8Url: string; thumbnailUrl: string } | null;
-      }>;
-    }>;
-    comboStarters: Array<{ __typename?: 'Move'; id: string; name: string; combosCount: number }>;
-  };
-};
+
+export type CharacterCombosPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', id: string, slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, combosCount: number, movesCount: number, comboCategories: Array<{ __typename?: 'ComboCategory', id: string, name: string, combos: Array<{ __typename?: 'Combo', id: string, damage?: number | null, command: Array<string>, note?: string | null, move?: { __typename?: 'Move', id: string } | null, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> }>, comboStarters: Array<{ __typename?: 'Move', id: string, name: string, combosCount: number }> } };
 
 export type CharacterPageQueryVariables = Exact<{
   characterSlug: Scalars['String'];
 }>;
 
-export type CharacterPageQuery = {
-  __typename?: 'Query';
-  character: {
-    __typename?: 'Character';
-    story: string;
-    description: string;
-    id: string;
-    slug: string;
-    name: string;
-    longName: string;
-    faceImageUrl: string;
-    country: string;
-    fightingStyle: string;
-    battlesCount: number;
-    combosCount: number;
-    movesCount: number;
-  };
-};
+
+export type CharacterPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', story: string, description: string, id: string, slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, combosCount: number, movesCount: number } };
 
 export type CharacterMovesPageQueryVariables = Exact<{
   characterSlug: Scalars['String'];
 }>;
 
-export type CharacterMovesPageQuery = {
-  __typename?: 'Query';
-  character: {
-    __typename?: 'Character';
-    id: string;
-    slug: string;
-    name: string;
-    longName: string;
-    faceImageUrl: string;
-    country: string;
-    fightingStyle: string;
-    battlesCount: number;
-    combosCount: number;
-    movesCount: number;
-    moveCategories: Array<{
-      __typename?: 'MoveCategory';
-      id: string;
-      name: string;
-      moves: Array<{
-        __typename?: 'Move';
-        id: string;
-        name: string;
-        kana?: string | null;
-        command: Array<string>;
-        note?: string | null;
-        moveVideo?: { __typename?: 'MoveVideo'; id: string; m3u8Url: string; thumbnailUrl: string } | null;
-        moveable:
-          | {
-              __typename: 'AttackMove';
-              id: string;
-              startUpFrame?: number | null;
-              duration?: number | null;
-              blockFrame?: number | null;
-              blockResult: AttackMoveResultEnum;
-              hitFrame?: number | null;
-              hitResult: AttackMoveResultEnum;
-              counterFrame?: number | null;
-              counterResult: AttackMoveResultEnum;
-              heights: Array<AttackTypeEnum>;
-              damages: Array<number>;
-              powerCrush: boolean;
-              crouchingStatus: boolean;
-              jumpStatus: boolean;
-              homing: boolean;
-              screw: boolean;
-              wallBound: boolean;
-            }
-          | {
-              __typename: 'ReversalMove';
-              id: string;
-              kind: string;
-              startUpFrame?: number | null;
-              finishFrame?: number | null;
-            }
-          | {
-              __typename: 'ThrowMove';
-              id: string;
-              throwType: ThrowTypeEnum;
-              throwResult: ThrowMoveResultEnum;
-              throwEscape: ThrowEscapeEnum;
-              startUpFrame?: number | null;
-              damage?: number | null;
-            };
-      }>;
-    }>;
-  };
-};
 
-export type CharactersPageQueryVariables = Exact<{ [key: string]: never }>;
+export type CharacterMovesPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', id: string, slug: string, name: string, longName: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number, combosCount: number, movesCount: number, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, moves: Array<{ __typename?: 'Move', id: string, name: string, kana?: string | null, command: Array<string>, note?: string | null, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null, moveable: { __typename: 'AttackMove', id: string, startUpFrame?: number | null, duration?: number | null, blockFrame?: number | null, blockResult: AttackMoveResultEnum, hitFrame?: number | null, hitResult: AttackMoveResultEnum, counterFrame?: number | null, counterResult: AttackMoveResultEnum, heights: Array<AttackTypeEnum>, damages: Array<number>, powerCrush: boolean, crouchingStatus: boolean, jumpStatus: boolean, homing: boolean, screw: boolean, wallBound: boolean } | { __typename: 'ReversalMove', id: string, kind: string, startUpFrame?: number | null, finishFrame?: number | null } | { __typename: 'ThrowMove', id: string, throwType: ThrowTypeEnum, throwResult: ThrowMoveResultEnum, throwEscape: ThrowEscapeEnum, startUpFrame?: number | null, damage?: number | null } }> }> } };
 
-export type CharactersPageQuery = {
-  __typename?: 'Query';
-  characters: {
-    __typename?: 'CharacterConnection';
-    nodes: Array<{
-      __typename?: 'Character';
-      id: string;
-      slug: string;
-      name: string;
-      faceImageUrl: string;
-      country: string;
-      fightingStyle: string;
-      battlesCount: number;
-    }>;
-  };
-};
+export type CharactersPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type CharactersPageQuery = { __typename?: 'Query', characters: { __typename?: 'CharacterConnection', nodes: Array<{ __typename?: 'Character', id: string, slug: string, name: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number }> } };
 
 export type DashboardArticlePageQueryVariables = Exact<{
   articleId: Scalars['ID'];
 }>;
 
-export type DashboardArticlePageQuery = {
-  __typename?: 'Query';
-  article: {
-    __typename?: 'Article';
-    id: string;
-    title: string;
-    description: string;
-    mainImageUrl?: string | null;
-    category: ArticleCategory;
-    content: string;
-  };
-};
+
+export type DashboardArticlePageQuery = { __typename?: 'Query', article: { __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, category: ArticleCategory, content: string } };
 
 export type DashboardCharacterCombosPageQueryVariables = Exact<{
   characterSlug: Scalars['String'];
 }>;
 
-export type DashboardCharacterCombosPageQuery = {
-  __typename?: 'Query';
-  character: {
-    __typename?: 'Character';
-    id: string;
-    slug: string;
-    name: string;
-    comboCategories: Array<{
-      __typename?: 'ComboCategory';
-      id: string;
-      name: string;
-      position: number;
-      combos: Array<{
-        __typename?: 'Combo';
-        id: string;
-        command: Array<string>;
-        position: number;
-        comboVideo?: { __typename?: 'ComboVideo'; id: string; m3u8Url: string; thumbnailUrl: string } | null;
-      }>;
-    }>;
-    moveCategories: Array<{
-      __typename?: 'MoveCategory';
-      id: string;
-      name: string;
-      moves: Array<{ __typename?: 'Move'; id: string; name: string }>;
-    }>;
-  };
-};
+
+export type DashboardCharacterCombosPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', id: string, slug: string, name: string, comboCategories: Array<{ __typename?: 'ComboCategory', id: string, name: string, position: number, combos: Array<{ __typename?: 'Combo', id: string, command: Array<string>, position: number, comboVideo?: { __typename?: 'ComboVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> }>, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, moves: Array<{ __typename?: 'Move', id: string, name: string }> }> } };
 
 export type PageAdminCharacterEditQueryVariables = Exact<{
   characterSlug: Scalars['String'];
 }>;
 
-export type PageAdminCharacterEditQuery = {
-  __typename?: 'Query';
-  character: {
-    __typename?: 'Character';
-    id: string;
-    name: string;
-    nameKana: string;
-    longName: string;
-    longNameKana: string;
-    slug: string;
-    country: string;
-    fightingStyle: string;
-    story: string;
-    description: string;
-    dlc: boolean;
-  };
-};
+
+export type PageAdminCharacterEditQuery = { __typename?: 'Query', character: { __typename?: 'Character', id: string, name: string, nameKana: string, longName: string, longNameKana: string, slug: string, country: string, fightingStyle: string, story: string, description: string, dlc: boolean } };
 
 export type UpdateCharacterMutationVariables = Exact<{
   characterSlug: Scalars['String'];
   attributes: CharacterAttributes;
 }>;
 
-export type UpdateCharacterMutation = {
-  __typename?: 'Mutation';
-  updateCharacter?: {
-    __typename?: 'UpdateCharacterPayload';
-    character: { __typename?: 'Character'; id: string };
-  } | null;
-};
+
+export type UpdateCharacterMutation = { __typename?: 'Mutation', updateCharacter?: { __typename?: 'UpdateCharacterPayload', character: { __typename?: 'Character', id: string } } | null };
 
 export type DashboardCharacterMovesPageQueryVariables = Exact<{
   characterSlug: Scalars['String'];
 }>;
 
-export type DashboardCharacterMovesPageQuery = {
-  __typename?: 'Query';
-  character: {
-    __typename?: 'Character';
-    id: string;
-    slug: string;
-    name: string;
-    moveCategories: Array<{
-      __typename?: 'MoveCategory';
-      id: string;
-      name: string;
-      position: number;
-      moves: Array<{
-        __typename?: 'Move';
-        id: string;
-        name: string;
-        command: Array<string>;
-        position: number;
-        moveVideo?: { __typename?: 'MoveVideo'; id: string; m3u8Url: string; thumbnailUrl: string } | null;
-      }>;
-    }>;
-  };
-};
+
+export type DashboardCharacterMovesPageQuery = { __typename?: 'Query', character: { __typename?: 'Character', id: string, slug: string, name: string, moveCategories: Array<{ __typename?: 'MoveCategory', id: string, name: string, position: number, moves: Array<{ __typename?: 'Move', id: string, name: string, command: Array<string>, position: number, moveVideo?: { __typename?: 'MoveVideo', id: string, m3u8Url: string, thumbnailUrl: string } | null }> }> } };
 
 export type CreateCharacterMutationVariables = Exact<{
   attributes: CharacterAttributes;
 }>;
 
-export type CreateCharacterMutation = {
-  __typename?: 'Mutation';
-  createCharacter?: {
-    __typename?: 'CreateCharacterPayload';
-    character: { __typename?: 'Character'; id: string };
-  } | null;
-};
+
+export type CreateCharacterMutation = { __typename?: 'Mutation', createCharacter?: { __typename?: 'CreateCharacterPayload', character: { __typename?: 'Character', id: string } } | null };
 
 export type AdminPlayerEditPageQueryVariables = Exact<{
   playerSlug: Scalars['String'];
 }>;
 
-export type AdminPlayerEditPageQuery = {
-  __typename?: 'Query';
-  player: {
-    __typename?: 'Player';
-    name: string;
-    slug: string;
-    tonamelId?: string | null;
-    smashggId?: string | null;
-    twitterId?: string | null;
-    streamingUrl?: string | null;
-    description?: string | null;
-    id: string;
-    country?: { __typename?: 'Country'; id: string } | null;
-  };
-};
+
+export type AdminPlayerEditPageQuery = { __typename?: 'Query', player: { __typename?: 'Player', name: string, slug: string, tonamelId?: string | null, smashggId?: string | null, twitterId?: string | null, streamingUrl?: string | null, description?: string | null, id: string, country?: { __typename?: 'Country', id: string } | null } };
 
 export type AdminPlayerEditPageUpdatePlayerMutationVariables = Exact<{
   playerSlug: Scalars['String'];
   attributes: PlayerAttributes;
 }>;
 
-export type AdminPlayerEditPageUpdatePlayerMutation = {
-  __typename?: 'Mutation';
-  updatePlayer?: {
-    __typename?: 'UpdatePlayerPayload';
-    player: {
-      __typename?: 'Player';
-      name: string;
-      slug: string;
-      tonamelId?: string | null;
-      smashggId?: string | null;
-      twitterId?: string | null;
-      streamingUrl?: string | null;
-      description?: string | null;
-      id: string;
-      country?: { __typename?: 'Country'; id: string } | null;
-    };
-  } | null;
-};
+
+export type AdminPlayerEditPageUpdatePlayerMutation = { __typename?: 'Mutation', updatePlayer?: { __typename?: 'UpdatePlayerPayload', player: { __typename?: 'Player', name: string, slug: string, tonamelId?: string | null, smashggId?: string | null, twitterId?: string | null, streamingUrl?: string | null, description?: string | null, id: string, country?: { __typename?: 'Country', id: string } | null } } | null };
 
 export type AdminPlayersNewPageCreatePlayerMutationVariables = Exact<{
   attributes: PlayerAttributes;
 }>;
 
-export type AdminPlayersNewPageCreatePlayerMutation = {
-  __typename?: 'Mutation';
-  createPlayer?: { __typename?: 'CreatePlayerPayload'; player: { __typename?: 'Player'; id: string } } | null;
-};
+
+export type AdminPlayersNewPageCreatePlayerMutation = { __typename?: 'Mutation', createPlayer?: { __typename?: 'CreatePlayerPayload', player: { __typename?: 'Player', id: string } } | null };
 
 export type UpdateViewerMutationVariables = Exact<{
   attributes: ViewerAttributes;
 }>;
 
-export type UpdateViewerMutation = {
-  __typename?: 'Mutation';
-  updateViewer?: {
-    __typename?: 'UpdateViewerPayload';
-    viewer: { __typename?: 'User'; id: string; name: string; role: UserRole; avatarUrl: string };
-  } | null;
-};
+
+export type UpdateViewerMutation = { __typename?: 'Mutation', updateViewer?: { __typename?: 'UpdateViewerPayload', viewer: { __typename?: 'User', id: string, name: string, role: UserRole, avatarUrl: string } } | null };
 
 export type CreateBattleMutationVariables = Exact<{
   attributes: BattleAttributes;
 }>;
 
-export type CreateBattleMutation = {
-  __typename?: 'Mutation';
-  createBattle?: { __typename?: 'CreateBattlePayload'; battle: { __typename?: 'Battle'; id: string } } | null;
-};
+
+export type CreateBattleMutation = { __typename?: 'Mutation', createBattle?: { __typename?: 'CreateBattlePayload', battle: { __typename?: 'Battle', id: string } } | null };
 
 export type UpdateBattleMutationVariables = Exact<{
   battleId: Scalars['ID'];
   attributes: BattleAttributes;
 }>;
 
-export type UpdateBattleMutation = {
-  __typename?: 'Mutation';
-  updateBattle?: {
-    __typename?: 'UpdateBattlePayload';
-    battle: {
-      __typename?: 'Battle';
-      id: string;
-      round: BattleRound;
-      startSec: number;
-      sides: Array<{
-        __typename?: 'BattleSide';
-        id: string;
-        rounds: number;
-        player: { __typename?: 'Player'; id: string; name: string };
-        character: { __typename?: 'Character'; id: string; faceImageUrl: string };
-      }>;
-    };
-  } | null;
-};
+
+export type UpdateBattleMutation = { __typename?: 'Mutation', updateBattle?: { __typename?: 'UpdateBattlePayload', battle: { __typename?: 'Battle', id: string, round: BattleRound, startSec: number, sides: Array<{ __typename?: 'BattleSide', id: string, rounds: number, player: { __typename?: 'Player', id: string, name: string }, character: { __typename?: 'Character', id: string, faceImageUrl: string } }> } } | null };
 
 export type DeleteBattleMutationVariables = Exact<{
   battleId: Scalars['ID'];
 }>;
 
-export type DeleteBattleMutation = {
-  __typename?: 'Mutation';
-  deleteBattle?: { __typename?: 'DeleteBattlePayload'; battle: { __typename?: 'Battle'; id: string } } | null;
-};
+
+export type DeleteBattleMutation = { __typename?: 'Mutation', deleteBattle?: { __typename?: 'DeleteBattlePayload', battle: { __typename?: 'Battle', id: string } } | null };
 
 export type AdminBattlesPageQueryVariables = Exact<{
   tournamentVideoId: Scalars['ID'];
 }>;
 
-export type AdminBattlesPageQuery = {
-  __typename?: 'Query';
-  tournamentVideo: {
-    __typename?: 'TournamentVideo';
-    id: string;
-    title: string;
-    youtubeVideoId: string;
-    tournament: { __typename?: 'Tournament'; id: string; name: string };
-  };
-  players: {
-    __typename?: 'PlayerConnection';
-    nodes: Array<{
-      __typename?: 'Player';
-      id: string;
-      slug: string;
-      name: string;
-      tonamelId?: string | null;
-      smashggId?: string | null;
-    }>;
-  };
-  characters: {
-    __typename?: 'CharacterConnection';
-    nodes: Array<{ __typename?: 'Character'; id: string; slug: string; name: string }>;
-  };
-};
 
-export type AdminBattlesPageSideFragment = {
-  __typename?: 'BattleSide';
-  id: string;
-  rounds: number;
-  player: { __typename?: 'Player'; id: string; name: string };
-  character: { __typename?: 'Character'; id: string; faceImageUrl: string };
-};
+export type AdminBattlesPageQuery = { __typename?: 'Query', tournamentVideo: { __typename?: 'TournamentVideo', id: string, title: string, youtubeVideoId: string, tournament: { __typename?: 'Tournament', id: string, name: string } }, players: { __typename?: 'PlayerConnection', nodes: Array<{ __typename?: 'Player', id: string, slug: string, name: string, tonamelId?: string | null, smashggId?: string | null }> }, characters: { __typename?: 'CharacterConnection', nodes: Array<{ __typename?: 'Character', id: string, slug: string, name: string }> } };
 
-export type AdminBattlesPageBattleReslutFragment = {
-  __typename?: 'Battle';
-  id: string;
-  round: BattleRound;
-  startSec: number;
-  sides: Array<{
-    __typename?: 'BattleSide';
-    id: string;
-    rounds: number;
-    player: { __typename?: 'Player'; id: string; name: string };
-    character: { __typename?: 'Character'; id: string; faceImageUrl: string };
-  }>;
-};
+export type AdminBattlesPageSideFragment = { __typename?: 'BattleSide', id: string, rounds: number, player: { __typename?: 'Player', id: string, name: string }, character: { __typename?: 'Character', id: string, faceImageUrl: string } };
+
+export type AdminBattlesPageBattleReslutFragment = { __typename?: 'Battle', id: string, round: BattleRound, startSec: number, sides: Array<{ __typename?: 'BattleSide', id: string, rounds: number, player: { __typename?: 'Player', id: string, name: string }, character: { __typename?: 'Character', id: string, faceImageUrl: string } }> };
 
 export type AdminBattlesPageBattlesQueryVariables = Exact<{
   tournamentVideoId: Scalars['ID'];
 }>;
 
-export type AdminBattlesPageBattlesQuery = {
-  __typename?: 'Query';
-  tournamentVideo: {
-    __typename?: 'TournamentVideo';
-    id: string;
-    battles: Array<{
-      __typename?: 'Battle';
-      id: string;
-      round: BattleRound;
-      startSec: number;
-      sides: Array<{
-        __typename?: 'BattleSide';
-        id: string;
-        rounds: number;
-        player: { __typename?: 'Player'; id: string; name: string };
-        character: { __typename?: 'Character'; id: string; faceImageUrl: string };
-      }>;
-    }>;
-  };
-};
+
+export type AdminBattlesPageBattlesQuery = { __typename?: 'Query', tournamentVideo: { __typename?: 'TournamentVideo', id: string, battles: Array<{ __typename?: 'Battle', id: string, round: BattleRound, startSec: number, sides: Array<{ __typename?: 'BattleSide', id: string, rounds: number, player: { __typename?: 'Player', id: string, name: string }, character: { __typename?: 'Character', id: string, faceImageUrl: string } }> }> } };
 
 export type AdminTournamentVideoEditPageQueryVariables = Exact<{
   tournamentVideoId: Scalars['ID'];
 }>;
 
-export type AdminTournamentVideoEditPageQuery = {
-  __typename?: 'Query';
-  tournamentVideo: {
-    __typename?: 'TournamentVideo';
-    id: string;
-    title: string;
-    label?: string | null;
-    publishedAt: string;
-    tournament: { __typename?: 'Tournament'; id: string; name: string };
-  };
-};
 
-export type TournamentVideoFormFragment = {
-  __typename?: 'TournamentVideo';
-  id: string;
-  title: string;
-  label?: string | null;
-  publishedAt: string;
-};
+export type AdminTournamentVideoEditPageQuery = { __typename?: 'Query', tournamentVideo: { __typename?: 'TournamentVideo', id: string, title: string, label?: string | null, publishedAt: string, tournament: { __typename?: 'Tournament', id: string, name: string } } };
+
+export type TournamentVideoFormFragment = { __typename?: 'TournamentVideo', id: string, title: string, label?: string | null, publishedAt: string };
 
 export type AdminTournamentVideoEditPageUpdateMutationVariables = Exact<{
   tournamentVideoId: Scalars['ID'];
   attributes: TournamentVideoAttributes;
 }>;
 
-export type AdminTournamentVideoEditPageUpdateMutation = {
-  __typename?: 'Mutation';
-  updateTournamentVideo?: {
-    __typename?: 'UpdateTournamentVideoPayload';
-    tournamentVideo: {
-      __typename?: 'TournamentVideo';
-      id: string;
-      title: string;
-      label?: string | null;
-      publishedAt: string;
-    };
-  } | null;
-};
+
+export type AdminTournamentVideoEditPageUpdateMutation = { __typename?: 'Mutation', updateTournamentVideo?: { __typename?: 'UpdateTournamentVideoPayload', tournamentVideo: { __typename?: 'TournamentVideo', id: string, title: string, label?: string | null, publishedAt: string } } | null };
 
 export type CreateTournamentMutationVariables = Exact<{
   attributes: TournamentAttributes;
 }>;
 
-export type CreateTournamentMutation = {
-  __typename?: 'Mutation';
-  createTournament?: {
-    __typename?: 'CreateTournamentPayload';
-    tournament: { __typename?: 'Tournament'; id: string };
-  } | null;
-};
+
+export type CreateTournamentMutation = { __typename?: 'Mutation', createTournament?: { __typename?: 'CreateTournamentPayload', tournament: { __typename?: 'Tournament', id: string } } | null };
 
 export type UpdateTournamentMutationVariables = Exact<{
   tournamentId: Scalars['ID'];
   attributes: TournamentAttributes;
 }>;
 
-export type UpdateTournamentMutation = {
-  __typename?: 'Mutation';
-  updateTournament?: {
-    __typename?: 'UpdateTournamentPayload';
-    tournament: {
-      __typename?: 'Tournament';
-      id: string;
-      name: string;
-      startsAt: string;
-      videosCount: number;
-      standingsCount: number;
-      mainImageUrl?: string | null;
-    };
-  } | null;
-};
+
+export type UpdateTournamentMutation = { __typename?: 'Mutation', updateTournament?: { __typename?: 'UpdateTournamentPayload', tournament: { __typename?: 'Tournament', id: string, name: string, startsAt: string, videosCount: number, standingsCount: number, mainImageUrl?: string | null } } | null };
 
 export type AdminTournamentEditPageQueryVariables = Exact<{
   tournamentId: Scalars['ID'];
 }>;
 
-export type AdminTournamentEditPageQuery = {
-  __typename?: 'Query';
-  tournament: {
-    __typename?: 'Tournament';
-    id: string;
-    name: string;
-    url: string;
-    streamingUrl?: string | null;
-    startsAt: string;
-    description: string;
-  };
-};
 
-export type TopPageQueryVariables = Exact<{ [key: string]: never }>;
+export type AdminTournamentEditPageQuery = { __typename?: 'Query', tournament: { __typename?: 'Tournament', id: string, name: string, url: string, streamingUrl?: string | null, startsAt: string, description: string } };
 
-export type TopPageQuery = {
-  __typename?: 'Query';
-  tournaments: {
-    __typename?: 'TournamentConnection';
-    nodes: Array<{
-      __typename?: 'Tournament';
-      id: string;
-      name: string;
-      mainImageUrl?: string | null;
-      startsAt: string;
-      videosCount: number;
-      standings: Array<{
-        __typename?: 'Standing';
-        id: string;
-        place: number;
-        player: { __typename?: 'Player'; id: string; name: string };
-      }>;
-    }>;
-  };
-  players: {
-    __typename?: 'PlayerConnection';
-    nodes: Array<{
-      __typename?: 'Player';
-      id: string;
-      slug: string;
-      name: string;
-      avatarUrl?: string | null;
-      standingsCount: number;
-      battlesCount: number;
-    }>;
-  };
-  characters: {
-    __typename?: 'CharacterConnection';
-    nodes: Array<{
-      __typename?: 'Character';
-      id: string;
-      slug: string;
-      name: string;
-      faceImageUrl: string;
-      country: string;
-      fightingStyle: string;
-      battlesCount: number;
-    }>;
-  };
-  articles: {
-    __typename?: 'ArticleConnection';
-    nodes: Array<{
-      __typename?: 'Article';
-      id: string;
-      title: string;
-      description: string;
-      mainImageUrl?: string | null;
-      publishedAt?: string | null;
-      status: ArticleStatus;
-      author: { __typename?: 'User'; id: string; name: string; avatarUrl: string };
-    }>;
-  };
-};
+export type TopPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type TopPageQuery = { __typename?: 'Query', tournaments: { __typename?: 'TournamentConnection', nodes: Array<{ __typename?: 'Tournament', id: string, name: string, mainImageUrl?: string | null, startsAt: string, videosCount: number, standings: Array<{ __typename?: 'Standing', id: string, place: number, player: { __typename?: 'Player', id: string, name: string } }> }> }, players: { __typename?: 'PlayerConnection', nodes: Array<{ __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null, standingsCount: number, battlesCount: number }> }, characters: { __typename?: 'CharacterConnection', nodes: Array<{ __typename?: 'Character', id: string, slug: string, name: string, faceImageUrl: string, country: string, fightingStyle: string, battlesCount: number }> }, articles: { __typename?: 'ArticleConnection', nodes: Array<{ __typename?: 'Article', id: string, title: string, description: string, mainImageUrl?: string | null, publishedAt?: string | null, status: ArticleStatus, author: { __typename?: 'User', id: string, name: string, avatarUrl: string } }> } };
 
 export type PlayerBattlesPageQueryVariables = Exact<{
   playerSlug: Scalars['String'];
 }>;
 
-export type PlayerBattlesPageQuery = {
-  __typename?: 'Query';
-  player: {
-    __typename?: 'Player';
-    id: string;
-    slug: string;
-    name: string;
-    avatarUrl?: string | null;
-    twitterId?: string | null;
-    streamingUrl?: string | null;
-    battlesCount: number;
-    standingsCount: number;
-  };
-};
+
+export type PlayerBattlesPageQuery = { __typename?: 'Query', player: { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null, twitterId?: string | null, streamingUrl?: string | null, battlesCount: number, standingsCount: number } };
 
 export type PlayerPageQueryVariables = Exact<{
   playerSlug: Scalars['String'];
 }>;
 
-export type PlayerPageQuery = {
-  __typename?: 'Query';
-  player: {
-    __typename?: 'Player';
-    description?: string | null;
-    id: string;
-    slug: string;
-    name: string;
-    avatarUrl?: string | null;
-    twitterId?: string | null;
-    streamingUrl?: string | null;
-    battlesCount: number;
-    standingsCount: number;
-  };
-};
+
+export type PlayerPageQuery = { __typename?: 'Query', player: { __typename?: 'Player', description?: string | null, id: string, slug: string, name: string, avatarUrl?: string | null, twitterId?: string | null, streamingUrl?: string | null, battlesCount: number, standingsCount: number } };
 
 export type PlayerStandingsPageQueryVariables = Exact<{
   playerSlug: Scalars['String'];
 }>;
 
-export type PlayerStandingsPageQuery = {
-  __typename?: 'Query';
-  player: {
-    __typename?: 'Player';
-    id: string;
-    slug: string;
-    name: string;
-    avatarUrl?: string | null;
-    twitterId?: string | null;
-    streamingUrl?: string | null;
-    battlesCount: number;
-    standingsCount: number;
-    standings: {
-      __typename?: 'StandingConnection';
-      nodes: Array<{
-        __typename?: 'Standing';
-        id: string;
-        place: number;
-        tournament: {
-          __typename?: 'Tournament';
-          id: string;
-          name: string;
-          mainImageUrl?: string | null;
-          startsAt: string;
-        };
-      }>;
-    };
-  };
-};
 
-export type PlayersPageQueryVariables = Exact<{ [key: string]: never }>;
+export type PlayerStandingsPageQuery = { __typename?: 'Query', player: { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null, twitterId?: string | null, streamingUrl?: string | null, battlesCount: number, standingsCount: number, standings: { __typename?: 'StandingConnection', nodes: Array<{ __typename?: 'Standing', id: string, place: number, tournament: { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: string | null, startsAt: string } }> } } };
 
-export type PlayersPageQuery = {
-  __typename?: 'Query';
-  players: {
-    __typename?: 'PlayerConnection';
-    nodes: Array<{
-      __typename?: 'Player';
-      id: string;
-      slug: string;
-      name: string;
-      avatarUrl?: string | null;
-      standingsCount: number;
-      battlesCount: number;
-    }>;
-  };
-};
+export type PlayersPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type PlayersPageQuery = { __typename?: 'Query', players: { __typename?: 'PlayerConnection', nodes: Array<{ __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null, standingsCount: number, battlesCount: number }> } };
 
 export type TournamentPageQueryVariables = Exact<{
   tournamentId: Scalars['ID'];
 }>;
 
-export type TournamentPageQuery = {
-  __typename?: 'Query';
-  tournament: {
-    __typename?: 'Tournament';
-    id: string;
-    name: string;
-    mainImageUrl?: string | null;
-    url: string;
-    streamingUrl?: string | null;
-    description: string;
-    startsAt: string;
-    standings: Array<{
-      __typename?: 'Standing';
-      id: string;
-      place: number;
-      player: { __typename?: 'Player'; id: string; slug: string; name: string; avatarUrl?: string | null };
-    }>;
-    videos: Array<{
-      __typename?: 'TournamentVideo';
-      id: string;
-      label?: string | null;
-      battlesCount: number;
-      publishedAt: string;
-      youtubeVideoId: string;
-      battles: Array<{
-        __typename?: 'Battle';
-        id: string;
-        round: BattleRound;
-        startSec: number;
-        sides: Array<{
-          __typename?: 'BattleSide';
-          id: string;
-          rounds: number;
-          player: { __typename?: 'Player'; id: string; name: string };
-          character: { __typename?: 'Character'; id: string; faceImageUrl: string };
-        }>;
-      }>;
-    }>;
-  };
-};
 
-export type TournamentsPageQueryVariables = Exact<{ [key: string]: never }>;
+export type TournamentPageQuery = { __typename?: 'Query', tournament: { __typename?: 'Tournament', id: string, name: string, mainImageUrl?: string | null, url: string, streamingUrl?: string | null, description: string, startsAt: string, standings: Array<{ __typename?: 'Standing', id: string, place: number, player: { __typename?: 'Player', id: string, slug: string, name: string, avatarUrl?: string | null } }>, videos: Array<{ __typename?: 'TournamentVideo', id: string, label?: string | null, battlesCount: number, publishedAt: string, youtubeVideoId: string, battles: Array<{ __typename?: 'Battle', id: string, round: BattleRound, startSec: number, sides: Array<{ __typename?: 'BattleSide', id: string, rounds: number, player: { __typename?: 'Player', id: string, name: string }, character: { __typename?: 'Character', id: string, faceImageUrl: string } }> }> }> } };
 
-export type TournamentsPageQuery = {
-  __typename?: 'Query';
-  tournaments: {
-    __typename?: 'TournamentConnection';
-    nodes: Array<{
-      __typename?: 'Tournament';
-      id: string;
-      name: string;
-      mainImageUrl?: string | null;
-      startsAt: string;
-      videosCount: number;
-      standings: Array<{
-        __typename?: 'Standing';
-        id: string;
-        place: number;
-        player: { __typename?: 'Player'; id: string; name: string };
-      }>;
-    }>;
-  };
-};
+export type TournamentsPageQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type TournamentsPageQuery = { __typename?: 'Query', tournaments: { __typename?: 'TournamentConnection', nodes: Array<{ __typename?: 'Tournament', id: string, name: string, mainImageUrl?: string | null, startsAt: string, videosCount: number, standings: Array<{ __typename?: 'Standing', id: string, place: number, player: { __typename?: 'Player', id: string, name: string } }> }> } };
 
 export const BattleListItemFragmentDoc = gql`
-  fragment BattleListItem on Battle {
+    fragment BattleListItem on Battle {
+  id
+  round
+  startSec
+  tournamentVideo {
     id
-    round
-    startSec
-    tournamentVideo {
-      id
-      youtubeVideoId
-      tournament {
-        id
-        name
-        startsAt
-      }
-    }
-    sides {
-      id
-      rounds
-      player {
-        id
-        name
-      }
-      character {
-        id
-        faceImageUrl
-      }
-    }
-  }
-`;
-export const CharacterCardFragmentDoc = gql`
-  fragment CharacterCard on Character {
-    id
-    slug
-    name
-    faceImageUrl
-    country
-    fightingStyle
-    battlesCount
-  }
-`;
-export const CharacterProfileFragmentDoc = gql`
-  fragment CharacterProfile on Character {
-    slug
-    longName
-    faceImageUrl
-    country
-    fightingStyle
-  }
-`;
-export const CharacterTabsFragmentDoc = gql`
-  fragment CharacterTabs on Character {
-    slug
-    battlesCount
-    combosCount
-    movesCount
-  }
-`;
-export const ComboListItemFragmentDoc = gql`
-  fragment ComboListItem on Combo {
-    id
-    damage
-    command
-    note
-    move {
-      id
-    }
-    comboVideo {
-      id
-      m3u8Url
-      thumbnailUrl
-    }
-  }
-`;
-export const ComboMediaFragmentDoc = gql`
-  fragment ComboMedia on Combo {
-    id
-    damage
-    command
-    note
-    comboCategory {
-      id
-      name
-    }
-    comboVideo {
-      id
-      m3u8Url
-      thumbnailUrl
-    }
-  }
-`;
-export const AttackListItemFragmentDoc = gql`
-  fragment AttackListItem on AttackMove {
-    id
-    startUpFrame
-    duration
-    blockFrame
-    blockResult
-    hitFrame
-    hitResult
-    counterFrame
-    counterResult
-    heights
-    damages
-    powerCrush
-    crouchingStatus
-    jumpStatus
-    homing
-    screw
-    wallBound
-  }
-`;
-export const ThrowListItemFragmentDoc = gql`
-  fragment ThrowListItem on ThrowMove {
-    id
-    throwType
-    throwResult
-    throwEscape
-    startUpFrame
-    damage
-  }
-`;
-export const ReversalListItemFragmentDoc = gql`
-  fragment ReversalListItem on ReversalMove {
-    id
-    kind
-    startUpFrame
-    finishFrame
-  }
-`;
-export const MoveListItemMoveableFragmentDoc = gql`
-  fragment MoveListItemMoveable on Moveable {
-    __typename
-    ... on AttackMove {
-      ...AttackListItem
-    }
-    ... on ThrowMove {
-      ...ThrowListItem
-    }
-    ... on ReversalMove {
-      ...ReversalListItem
-    }
-  }
-  ${AttackListItemFragmentDoc}
-  ${ThrowListItemFragmentDoc}
-  ${ReversalListItemFragmentDoc}
-`;
-export const MoveListItemFragmentDoc = gql`
-  fragment MoveListItem on Move {
-    id
-    name
-    kana
-    command
-    note
-    moveVideo {
-      id
-      m3u8Url
-      thumbnailUrl
-    }
-    moveable {
-      ...MoveListItemMoveable
-    }
-  }
-  ${MoveListItemMoveableFragmentDoc}
-`;
-export const MoveMediaAttackFragmentDoc = gql`
-  fragment MoveMediaAttack on AttackMove {
-    id
-    startUpFrame
-    duration
-    blockFrame
-    blockResult
-    hitFrame
-    hitResult
-    counterFrame
-    counterResult
-    heights
-    damages
-    powerCrush
-    crouchingStatus
-    jumpStatus
-    homing
-    screw
-    wallBound
-  }
-`;
-export const MoveMediaThrowFragmentDoc = gql`
-  fragment MoveMediaThrow on ThrowMove {
-    id
-    throwType
-    throwResult
-    throwEscape
-    startUpFrame
-    damage
-  }
-`;
-export const MoveMediaReversalFragmentDoc = gql`
-  fragment MoveMediaReversal on ReversalMove {
-    id
-    kind
-    startUpFrame
-    finishFrame
-  }
-`;
-export const MoveMediaFragmentDoc = gql`
-  fragment MoveMedia on Move {
-    id
-    name
-    kana
-    command
-    statusAfter
-    note
-    moveable {
-      __typename
-      ... on AttackMove {
-        ...MoveMediaAttack
-      }
-      ... on ThrowMove {
-        ...MoveMediaThrow
-      }
-      ... on ReversalMove {
-        ...MoveMediaReversal
-      }
-    }
-    moveVideo {
-      id
-      m3u8Url
-      thumbnailUrl
-    }
-  }
-  ${MoveMediaAttackFragmentDoc}
-  ${MoveMediaThrowFragmentDoc}
-  ${MoveMediaReversalFragmentDoc}
-`;
-export const PlayerCardFragmentDoc = gql`
-  fragment PlayerCard on Player {
-    id
-    slug
-    name
-    avatarUrl
-    standingsCount
-    battlesCount
-  }
-`;
-export const PlayerProfileFragmentDoc = gql`
-  fragment PlayerProfile on Player {
-    id
-    name
-    slug
-    avatarUrl
-    twitterId
-    streamingUrl
-  }
-`;
-export const PlayerStandingCardFragmentDoc = gql`
-  fragment PlayerStandingCard on Standing {
-    id
-    place
+    youtubeVideoId
     tournament {
       id
       name
-      mainImageUrl
       startsAt
     }
   }
-`;
-export const PlayerTabsFragmentDoc = gql`
-  fragment PlayerTabs on Player {
-    slug
-    battlesCount
-    standingsCount
-  }
-`;
-export const CharacterBattleCountChipFragmentDoc = gql`
-  fragment CharacterBattleCountChip on CharacterBattleCount {
-    count
-    character {
-      id
-      slug
-      name
-      faceImageUrl
-    }
-  }
-`;
-export const PlayerBattleCountChipFragmentDoc = gql`
-  fragment PlayerBattleCountChip on PlayerBattleCount {
-    count
-    player {
-      id
-      slug
-      name
-      avatarUrl
-    }
-  }
-`;
-export const TournamentCardFragmentDoc = gql`
-  fragment TournamentCard on Tournament {
-    id
-    name
-    mainImageUrl
-    startsAt
-    videosCount
-    standings {
-      id
-      place
-      player {
-        id
-        name
-      }
-    }
-  }
-`;
-export const TournamentVideoPlayerBattleFragmentDoc = gql`
-  fragment TournamentVideoPlayerBattle on Battle {
-    id
-    round
-    startSec
-    sides {
-      id
-      rounds
-      player {
-        id
-        name
-      }
-      character {
-        id
-        faceImageUrl
-      }
-    }
-  }
-`;
-export const TournamentVideoPlayerFragmentDoc = gql`
-  fragment TournamentVideoPlayer on TournamentVideo {
-    id
-    youtubeVideoId
-    battles {
-      ...TournamentVideoPlayerBattle
-    }
-  }
-  ${TournamentVideoPlayerBattleFragmentDoc}
-`;
-export const ArticleTableRowFragmentDoc = gql`
-  fragment ArticleTableRow on Article {
-    id
-    title
-    status
-  }
-`;
-export const CharacterTableRowFragmentDoc = gql`
-  fragment CharacterTableRow on Character {
-    id
-    slug
-    name
-    faceImageUrl
-    movesCount
-    combosCount
-  }
-`;
-export const ComboCategoryFormFragmentDoc = gql`
-  fragment ComboCategoryForm on ComboCategory {
-    id
-    name
-    position
-  }
-`;
-export const ComboCategoryPositionSelectFragmentDoc = gql`
-  fragment ComboCategoryPositionSelect on ComboCategory {
-    id
-    name
-    position
-  }
-`;
-export const ComboPositionSelectFragmentDoc = gql`
-  fragment ComboPositionSelect on Combo {
-    id
-    command
-    position
-  }
-`;
-export const ComboTableRowFragmentDoc = gql`
-  fragment ComboTableRow on Combo {
-    id
-    command
-    comboVideo {
-      id
-      m3u8Url
-      thumbnailUrl
-    }
-    ...ComboPositionSelect
-  }
-  ${ComboPositionSelectFragmentDoc}
-`;
-export const ComboDashboardCategoryFragmentDoc = gql`
-  fragment ComboDashboardCategory on ComboCategory {
-    id
-    name
-    ...ComboCategoryForm
-    ...ComboCategoryPositionSelect
-    combos {
-      ...ComboTableRow
-    }
-  }
-  ${ComboCategoryFormFragmentDoc}
-  ${ComboCategoryPositionSelectFragmentDoc}
-  ${ComboTableRowFragmentDoc}
-`;
-export const MoveSelectOptionFragmentDoc = gql`
-  fragment MoveSelectOption on MoveCategory {
-    id
-    name
-    moves {
-      id
-      name
-    }
-  }
-`;
-export const ComboDashboardFragmentDoc = gql`
-  fragment ComboDashboard on Character {
-    id
-    slug
-    comboCategories {
-      ...ComboDashboardCategory
-    }
-    moveCategories {
-      ...MoveSelectOption
-    }
-  }
-  ${ComboDashboardCategoryFragmentDoc}
-  ${MoveSelectOptionFragmentDoc}
-`;
-export const MoveCategoryFormFragmentDoc = gql`
-  fragment MoveCategoryForm on MoveCategory {
-    id
-    name
-    position
-  }
-`;
-export const MoveCategoryPositionSelectFragmentDoc = gql`
-  fragment MoveCategoryPositionSelect on MoveCategory {
-    id
-    name
-    position
-  }
-`;
-export const MovePositionSelectFragmentDoc = gql`
-  fragment MovePositionSelect on Move {
-    id
-    name
-    position
-  }
-`;
-export const MoveTableRowFragmentDoc = gql`
-  fragment MoveTableRow on Move {
-    id
-    name
-    command
-    ...MovePositionSelect
-    moveVideo {
-      id
-      m3u8Url
-      thumbnailUrl
-    }
-  }
-  ${MovePositionSelectFragmentDoc}
-`;
-export const MoveDashboardCategoryFragmentDoc = gql`
-  fragment MoveDashboardCategory on MoveCategory {
-    id
-    name
-    ...MoveCategoryForm
-    ...MoveCategoryPositionSelect
-    moves {
-      ...MoveTableRow
-    }
-  }
-  ${MoveCategoryFormFragmentDoc}
-  ${MoveCategoryPositionSelectFragmentDoc}
-  ${MoveTableRowFragmentDoc}
-`;
-export const MoveDashboardFragmentDoc = gql`
-  fragment MoveDashboard on Character {
-    id
-    slug
-    moveCategories {
-      ...MoveDashboardCategory
-    }
-  }
-  ${MoveDashboardCategoryFragmentDoc}
-`;
-export const PlayerTableRowFragmentDoc = gql`
-  fragment PlayerTableRow on Player {
-    id
-    slug
-    name
-    avatarUrl
-  }
-`;
-export const StandingListItemFragmentDoc = gql`
-  fragment StandingListItem on Standing {
-    id
-    place
-    player {
-      id
-      name
-      avatarUrl
-    }
-  }
-`;
-export const TournamentTableRowFragmentDoc = gql`
-  fragment TournamentTableRow on Tournament {
-    id
-    name
-    startsAt
-    videosCount
-    standingsCount
-    mainImageUrl
-  }
-`;
-export const VideoListItemFragmentDoc = gql`
-  fragment VideoListItem on TournamentVideo {
-    id
-    title
-    thumbnailUrl
-    battlesCount
-  }
-`;
-export const ArticleFormArticleFragmentDoc = gql`
-  fragment ArticleFormArticle on Article {
-    id
-    title
-    description
-    mainImageUrl
-    category
-    content
-  }
-`;
-export const CharacterFormFragmentDoc = gql`
-  fragment CharacterForm on Character {
-    id
-    name
-    nameKana
-    longName
-    longNameKana
-    slug
-    country
-    fightingStyle
-    story
-    description
-    dlc
-  }
-`;
-export const ComboFormFragmentDoc = gql`
-  fragment ComboForm on Combo {
-    id
-    command
-    damage
-    note
-    position
-    move {
-      id
-    }
-  }
-`;
-export const MoveFormAttackFragmentDoc = gql`
-  fragment MoveFormAttack on AttackMove {
-    id
-    startUpFrame
-    duration
-    reach
-    blockFrame
-    blockResult
-    blockStatus
-    hitFrame
-    hitResult
-    hitStatus
-    counterFrame
-    counterResult
-    counterStatus
-    heights
-    damages
-    powerCrush
-    crouchingStatus
-    jumpStatus
-    homing
-    screw
-    wallBound
-  }
-`;
-export const MoveFormThrowFragmentDoc = gql`
-  fragment MoveFormThrow on ThrowMove {
-    id
-    throwType
-    throwResult
-    throwEscape
-    startUpFrame
-    damage
-  }
-`;
-export const MoveFormReversalFragmentDoc = gql`
-  fragment MoveFormReversal on ReversalMove {
-    id
-    kind
-    startUpFrame
-    finishFrame
-  }
-`;
-export const MoveFormFragmentDoc = gql`
-  fragment MoveForm on Move {
-    id
-    name
-    kana
-    command
-    statusAfter
-    note
-    position
-    moveCategory {
-      id
-      name
-    }
-    moveable {
-      __typename
-      ... on AttackMove {
-        ...MoveFormAttack
-      }
-      ... on ThrowMove {
-        ...MoveFormThrow
-      }
-      ... on ReversalMove {
-        ...MoveFormReversal
-      }
-    }
-    moveVideo {
-      id
-      m3u8Url
-      thumbnailUrl
-    }
-  }
-  ${MoveFormAttackFragmentDoc}
-  ${MoveFormThrowFragmentDoc}
-  ${MoveFormReversalFragmentDoc}
-`;
-export const PlayerFormFragmentDoc = gql`
-  fragment PlayerForm on Player {
-    name
-    slug
-    tonamelId
-    smashggId
-    twitterId
-    streamingUrl
-    description
-    country {
-      id
-    }
-  }
-`;
-export const TournamentFormFragmentDoc = gql`
-  fragment TournamentForm on Tournament {
-    id
-    name
-    url
-    streamingUrl
-    startsAt
-    description
-  }
-`;
-export const CharacterBreadcrumbsFragmentDoc = gql`
-  fragment CharacterBreadcrumbs on Character {
-    id
-    slug
-    name
-  }
-`;
-export const PlayerBreadcrumbsFragmentDoc = gql`
-  fragment PlayerBreadcrumbs on Player {
-    id
-    slug
-    name
-  }
-`;
-export const TournamentBreadcrumbsFragmentDoc = gql`
-  fragment TournamentBreadcrumbs on Tournament {
-    id
-    name
-  }
-`;
-export const TournamentVideoBreadcrumbsFragmentDoc = gql`
-  fragment TournamentVideoBreadcrumbs on TournamentVideo {
-    id
-    label
-    tournament {
-      ...TournamentBreadcrumbs
-    }
-  }
-  ${TournamentBreadcrumbsFragmentDoc}
-`;
-export const CharacterSelectOptionFragmentDoc = gql`
-  fragment CharacterSelectOption on Character {
-    id
-    slug
-    name
-  }
-`;
-export const CountrySelectOptionFragmentDoc = gql`
-  fragment CountrySelectOption on Country {
-    id
-    name
-    flagEmoji
-  }
-`;
-export const PaginationFragmentDoc = gql`
-  fragment Pagination on PageInfo {
-    hasNextPage
-    endCursor
-  }
-`;
-export const PlayerSelectOptionFragmentDoc = gql`
-  fragment PlayerSelectOption on Player {
-    id
-    slug
-    name
-    tonamelId
-    smashggId
-  }
-`;
-export const ViewerFragmentDoc = gql`
-  fragment Viewer on User {
-    id
-    name
-    role
-    avatarUrl
-  }
-`;
-export const ArticleCardFragmentDoc = gql`
-  fragment ArticleCard on Article {
-    id
-    title
-    description
-    mainImageUrl
-    publishedAt
-    status
-    author {
-      id
-      name
-      avatarUrl
-    }
-  }
-`;
-export const ArticlePageFragmentDoc = gql`
-  fragment ArticlePage on Article {
-    id
-    title
-    description
-    mainImageUrl
-    publishedAt
-    status
-    category
-    content
-    author {
-      id
-      name
-      avatarUrl
-    }
-    relatedArticles {
-      ...ArticleCard
-    }
-  }
-  ${ArticleCardFragmentDoc}
-`;
-export const AdminBattlesPageSideFragmentDoc = gql`
-  fragment AdminBattlesPageSide on BattleSide {
+  sides {
     id
     rounds
     player {
@@ -5594,43 +2854,781 @@ export const AdminBattlesPageSideFragmentDoc = gql`
       faceImageUrl
     }
   }
-`;
+}
+    `;
+export const CharacterCardFragmentDoc = gql`
+    fragment CharacterCard on Character {
+  id
+  slug
+  name
+  faceImageUrl
+  country
+  fightingStyle
+  battlesCount
+}
+    `;
+export const CharacterProfileFragmentDoc = gql`
+    fragment CharacterProfile on Character {
+  slug
+  longName
+  faceImageUrl
+  country
+  fightingStyle
+}
+    `;
+export const CharacterTabsFragmentDoc = gql`
+    fragment CharacterTabs on Character {
+  slug
+  battlesCount
+  combosCount
+  movesCount
+}
+    `;
+export const ComboListItemFragmentDoc = gql`
+    fragment ComboListItem on Combo {
+  id
+  damage
+  command
+  note
+  move {
+    id
+  }
+  comboVideo {
+    id
+    m3u8Url
+    thumbnailUrl
+  }
+}
+    `;
+export const ComboMediaFragmentDoc = gql`
+    fragment ComboMedia on Combo {
+  id
+  damage
+  command
+  note
+  comboCategory {
+    id
+    name
+  }
+  comboVideo {
+    id
+    m3u8Url
+    thumbnailUrl
+  }
+}
+    `;
+export const AttackListItemFragmentDoc = gql`
+    fragment AttackListItem on AttackMove {
+  id
+  startUpFrame
+  duration
+  blockFrame
+  blockResult
+  hitFrame
+  hitResult
+  counterFrame
+  counterResult
+  heights
+  damages
+  powerCrush
+  crouchingStatus
+  jumpStatus
+  homing
+  screw
+  wallBound
+}
+    `;
+export const ThrowListItemFragmentDoc = gql`
+    fragment ThrowListItem on ThrowMove {
+  id
+  throwType
+  throwResult
+  throwEscape
+  startUpFrame
+  damage
+}
+    `;
+export const ReversalListItemFragmentDoc = gql`
+    fragment ReversalListItem on ReversalMove {
+  id
+  kind
+  startUpFrame
+  finishFrame
+}
+    `;
+export const MoveListItemMoveableFragmentDoc = gql`
+    fragment MoveListItemMoveable on Moveable {
+  __typename
+  ... on AttackMove {
+    ...AttackListItem
+  }
+  ... on ThrowMove {
+    ...ThrowListItem
+  }
+  ... on ReversalMove {
+    ...ReversalListItem
+  }
+}
+    ${AttackListItemFragmentDoc}
+${ThrowListItemFragmentDoc}
+${ReversalListItemFragmentDoc}`;
+export const MoveListItemFragmentDoc = gql`
+    fragment MoveListItem on Move {
+  id
+  name
+  kana
+  command
+  note
+  moveVideo {
+    id
+    m3u8Url
+    thumbnailUrl
+  }
+  moveable {
+    ...MoveListItemMoveable
+  }
+}
+    ${MoveListItemMoveableFragmentDoc}`;
+export const MoveMediaAttackFragmentDoc = gql`
+    fragment MoveMediaAttack on AttackMove {
+  id
+  startUpFrame
+  duration
+  blockFrame
+  blockResult
+  hitFrame
+  hitResult
+  counterFrame
+  counterResult
+  heights
+  damages
+  powerCrush
+  crouchingStatus
+  jumpStatus
+  homing
+  screw
+  wallBound
+}
+    `;
+export const MoveMediaThrowFragmentDoc = gql`
+    fragment MoveMediaThrow on ThrowMove {
+  id
+  throwType
+  throwResult
+  throwEscape
+  startUpFrame
+  damage
+}
+    `;
+export const MoveMediaReversalFragmentDoc = gql`
+    fragment MoveMediaReversal on ReversalMove {
+  id
+  kind
+  startUpFrame
+  finishFrame
+}
+    `;
+export const MoveMediaFragmentDoc = gql`
+    fragment MoveMedia on Move {
+  id
+  name
+  kana
+  command
+  statusAfter
+  note
+  moveable {
+    __typename
+    ... on AttackMove {
+      ...MoveMediaAttack
+    }
+    ... on ThrowMove {
+      ...MoveMediaThrow
+    }
+    ... on ReversalMove {
+      ...MoveMediaReversal
+    }
+  }
+  moveVideo {
+    id
+    m3u8Url
+    thumbnailUrl
+  }
+}
+    ${MoveMediaAttackFragmentDoc}
+${MoveMediaThrowFragmentDoc}
+${MoveMediaReversalFragmentDoc}`;
+export const PlayerCardFragmentDoc = gql`
+    fragment PlayerCard on Player {
+  id
+  slug
+  name
+  avatarUrl
+  standingsCount
+  battlesCount
+}
+    `;
+export const PlayerProfileFragmentDoc = gql`
+    fragment PlayerProfile on Player {
+  id
+  name
+  slug
+  avatarUrl
+  twitterId
+  streamingUrl
+}
+    `;
+export const PlayerStandingCardFragmentDoc = gql`
+    fragment PlayerStandingCard on Standing {
+  id
+  place
+  tournament {
+    id
+    name
+    mainImageUrl
+    startsAt
+  }
+}
+    `;
+export const PlayerTabsFragmentDoc = gql`
+    fragment PlayerTabs on Player {
+  slug
+  battlesCount
+  standingsCount
+}
+    `;
+export const CharacterBattleCountChipFragmentDoc = gql`
+    fragment CharacterBattleCountChip on CharacterBattleCount {
+  count
+  character {
+    id
+    slug
+    name
+    faceImageUrl
+  }
+}
+    `;
+export const PlayerBattleCountChipFragmentDoc = gql`
+    fragment PlayerBattleCountChip on PlayerBattleCount {
+  count
+  player {
+    id
+    slug
+    name
+    avatarUrl
+  }
+}
+    `;
+export const TournamentCardFragmentDoc = gql`
+    fragment TournamentCard on Tournament {
+  id
+  name
+  mainImageUrl
+  startsAt
+  videosCount
+  standings {
+    id
+    place
+    player {
+      id
+      name
+    }
+  }
+}
+    `;
+export const TournamentVideoPlayerBattleFragmentDoc = gql`
+    fragment TournamentVideoPlayerBattle on Battle {
+  id
+  round
+  startSec
+  sides {
+    id
+    rounds
+    player {
+      id
+      name
+    }
+    character {
+      id
+      faceImageUrl
+    }
+  }
+}
+    `;
+export const TournamentVideoPlayerFragmentDoc = gql`
+    fragment TournamentVideoPlayer on TournamentVideo {
+  id
+  youtubeVideoId
+  battles {
+    ...TournamentVideoPlayerBattle
+  }
+}
+    ${TournamentVideoPlayerBattleFragmentDoc}`;
+export const ArticleTableRowFragmentDoc = gql`
+    fragment ArticleTableRow on Article {
+  id
+  title
+  status
+}
+    `;
+export const CharacterTableRowFragmentDoc = gql`
+    fragment CharacterTableRow on Character {
+  id
+  slug
+  name
+  faceImageUrl
+  movesCount
+  combosCount
+}
+    `;
+export const ComboCategoryFormFragmentDoc = gql`
+    fragment ComboCategoryForm on ComboCategory {
+  id
+  name
+  position
+}
+    `;
+export const ComboCategoryPositionSelectFragmentDoc = gql`
+    fragment ComboCategoryPositionSelect on ComboCategory {
+  id
+  name
+  position
+}
+    `;
+export const ComboPositionSelectFragmentDoc = gql`
+    fragment ComboPositionSelect on Combo {
+  id
+  command
+  position
+}
+    `;
+export const ComboTableRowFragmentDoc = gql`
+    fragment ComboTableRow on Combo {
+  id
+  command
+  comboVideo {
+    id
+    m3u8Url
+    thumbnailUrl
+  }
+  ...ComboPositionSelect
+}
+    ${ComboPositionSelectFragmentDoc}`;
+export const ComboDashboardCategoryFragmentDoc = gql`
+    fragment ComboDashboardCategory on ComboCategory {
+  id
+  name
+  ...ComboCategoryForm
+  ...ComboCategoryPositionSelect
+  combos {
+    ...ComboTableRow
+  }
+}
+    ${ComboCategoryFormFragmentDoc}
+${ComboCategoryPositionSelectFragmentDoc}
+${ComboTableRowFragmentDoc}`;
+export const MoveSelectOptionFragmentDoc = gql`
+    fragment MoveSelectOption on MoveCategory {
+  id
+  name
+  moves {
+    id
+    name
+  }
+}
+    `;
+export const ComboDashboardFragmentDoc = gql`
+    fragment ComboDashboard on Character {
+  id
+  slug
+  comboCategories {
+    ...ComboDashboardCategory
+  }
+  moveCategories {
+    ...MoveSelectOption
+  }
+}
+    ${ComboDashboardCategoryFragmentDoc}
+${MoveSelectOptionFragmentDoc}`;
+export const MoveCategoryFormFragmentDoc = gql`
+    fragment MoveCategoryForm on MoveCategory {
+  id
+  name
+  position
+}
+    `;
+export const MoveCategoryPositionSelectFragmentDoc = gql`
+    fragment MoveCategoryPositionSelect on MoveCategory {
+  id
+  name
+  position
+}
+    `;
+export const MovePositionSelectFragmentDoc = gql`
+    fragment MovePositionSelect on Move {
+  id
+  name
+  position
+}
+    `;
+export const MoveTableRowFragmentDoc = gql`
+    fragment MoveTableRow on Move {
+  id
+  name
+  command
+  ...MovePositionSelect
+  moveVideo {
+    id
+    m3u8Url
+    thumbnailUrl
+  }
+}
+    ${MovePositionSelectFragmentDoc}`;
+export const MoveDashboardCategoryFragmentDoc = gql`
+    fragment MoveDashboardCategory on MoveCategory {
+  id
+  name
+  ...MoveCategoryForm
+  ...MoveCategoryPositionSelect
+  moves {
+    ...MoveTableRow
+  }
+}
+    ${MoveCategoryFormFragmentDoc}
+${MoveCategoryPositionSelectFragmentDoc}
+${MoveTableRowFragmentDoc}`;
+export const MoveDashboardFragmentDoc = gql`
+    fragment MoveDashboard on Character {
+  id
+  slug
+  moveCategories {
+    ...MoveDashboardCategory
+  }
+}
+    ${MoveDashboardCategoryFragmentDoc}`;
+export const PlayerTableRowFragmentDoc = gql`
+    fragment PlayerTableRow on Player {
+  id
+  slug
+  name
+  avatarUrl
+}
+    `;
+export const StandingListItemFragmentDoc = gql`
+    fragment StandingListItem on Standing {
+  id
+  place
+  player {
+    id
+    name
+    avatarUrl
+  }
+}
+    `;
+export const TournamentTableRowFragmentDoc = gql`
+    fragment TournamentTableRow on Tournament {
+  id
+  name
+  startsAt
+  videosCount
+  standingsCount
+  mainImageUrl
+}
+    `;
+export const VideoListItemFragmentDoc = gql`
+    fragment VideoListItem on TournamentVideo {
+  id
+  title
+  thumbnailUrl
+  battlesCount
+}
+    `;
+export const ArticleFormArticleFragmentDoc = gql`
+    fragment ArticleFormArticle on Article {
+  id
+  title
+  description
+  mainImageUrl
+  category
+  content
+}
+    `;
+export const CharacterFormFragmentDoc = gql`
+    fragment CharacterForm on Character {
+  id
+  name
+  nameKana
+  longName
+  longNameKana
+  slug
+  country
+  fightingStyle
+  story
+  description
+  dlc
+}
+    `;
+export const ComboFormFragmentDoc = gql`
+    fragment ComboForm on Combo {
+  id
+  command
+  damage
+  note
+  position
+  move {
+    id
+  }
+}
+    `;
+export const MoveFormAttackFragmentDoc = gql`
+    fragment MoveFormAttack on AttackMove {
+  id
+  startUpFrame
+  duration
+  reach
+  blockFrame
+  blockResult
+  blockStatus
+  hitFrame
+  hitResult
+  hitStatus
+  counterFrame
+  counterResult
+  counterStatus
+  heights
+  damages
+  powerCrush
+  crouchingStatus
+  jumpStatus
+  homing
+  screw
+  wallBound
+}
+    `;
+export const MoveFormThrowFragmentDoc = gql`
+    fragment MoveFormThrow on ThrowMove {
+  id
+  throwType
+  throwResult
+  throwEscape
+  startUpFrame
+  damage
+}
+    `;
+export const MoveFormReversalFragmentDoc = gql`
+    fragment MoveFormReversal on ReversalMove {
+  id
+  kind
+  startUpFrame
+  finishFrame
+}
+    `;
+export const MoveFormFragmentDoc = gql`
+    fragment MoveForm on Move {
+  id
+  name
+  kana
+  command
+  statusAfter
+  note
+  position
+  moveCategory {
+    id
+    name
+  }
+  moveable {
+    __typename
+    ... on AttackMove {
+      ...MoveFormAttack
+    }
+    ... on ThrowMove {
+      ...MoveFormThrow
+    }
+    ... on ReversalMove {
+      ...MoveFormReversal
+    }
+  }
+  moveVideo {
+    id
+    m3u8Url
+    thumbnailUrl
+  }
+}
+    ${MoveFormAttackFragmentDoc}
+${MoveFormThrowFragmentDoc}
+${MoveFormReversalFragmentDoc}`;
+export const PlayerFormFragmentDoc = gql`
+    fragment PlayerForm on Player {
+  name
+  slug
+  tonamelId
+  smashggId
+  twitterId
+  streamingUrl
+  description
+  country {
+    id
+  }
+}
+    `;
+export const TournamentFormFragmentDoc = gql`
+    fragment TournamentForm on Tournament {
+  id
+  name
+  url
+  streamingUrl
+  startsAt
+  description
+}
+    `;
+export const CharacterBreadcrumbsFragmentDoc = gql`
+    fragment CharacterBreadcrumbs on Character {
+  id
+  slug
+  name
+}
+    `;
+export const PlayerBreadcrumbsFragmentDoc = gql`
+    fragment PlayerBreadcrumbs on Player {
+  id
+  slug
+  name
+}
+    `;
+export const TournamentBreadcrumbsFragmentDoc = gql`
+    fragment TournamentBreadcrumbs on Tournament {
+  id
+  name
+}
+    `;
+export const TournamentVideoBreadcrumbsFragmentDoc = gql`
+    fragment TournamentVideoBreadcrumbs on TournamentVideo {
+  id
+  label
+  tournament {
+    ...TournamentBreadcrumbs
+  }
+}
+    ${TournamentBreadcrumbsFragmentDoc}`;
+export const CharacterSelectOptionFragmentDoc = gql`
+    fragment CharacterSelectOption on Character {
+  id
+  slug
+  name
+}
+    `;
+export const CountrySelectOptionFragmentDoc = gql`
+    fragment CountrySelectOption on Country {
+  id
+  name
+  flagEmoji
+}
+    `;
+export const PaginationFragmentDoc = gql`
+    fragment Pagination on PageInfo {
+  hasNextPage
+  endCursor
+}
+    `;
+export const PlayerSelectOptionFragmentDoc = gql`
+    fragment PlayerSelectOption on Player {
+  id
+  slug
+  name
+  tonamelId
+  smashggId
+}
+    `;
+export const ViewerFragmentDoc = gql`
+    fragment Viewer on User {
+  id
+  name
+  role
+  avatarUrl
+}
+    `;
+export const ArticleCardFragmentDoc = gql`
+    fragment ArticleCard on Article {
+  id
+  title
+  description
+  mainImageUrl
+  publishedAt
+  status
+  author {
+    id
+    name
+    avatarUrl
+  }
+}
+    `;
+export const ArticlePageFragmentDoc = gql`
+    fragment ArticlePage on Article {
+  id
+  title
+  description
+  mainImageUrl
+  publishedAt
+  status
+  category
+  content
+  author {
+    id
+    name
+    avatarUrl
+  }
+  relatedArticles {
+    ...ArticleCard
+  }
+}
+    ${ArticleCardFragmentDoc}`;
+export const AdminBattlesPageSideFragmentDoc = gql`
+    fragment AdminBattlesPageSide on BattleSide {
+  id
+  rounds
+  player {
+    id
+    name
+  }
+  character {
+    id
+    faceImageUrl
+  }
+}
+    `;
 export const AdminBattlesPageBattleReslutFragmentDoc = gql`
-  fragment AdminBattlesPageBattleReslut on Battle {
-    id
-    round
-    startSec
-    sides {
-      ...AdminBattlesPageSide
-    }
+    fragment AdminBattlesPageBattleReslut on Battle {
+  id
+  round
+  startSec
+  sides {
+    ...AdminBattlesPageSide
   }
-  ${AdminBattlesPageSideFragmentDoc}
-`;
+}
+    ${AdminBattlesPageSideFragmentDoc}`;
 export const TournamentVideoFormFragmentDoc = gql`
-  fragment TournamentVideoForm on TournamentVideo {
-    id
-    title
-    label
-    publishedAt
-  }
-`;
+    fragment TournamentVideoForm on TournamentVideo {
+  id
+  title
+  label
+  publishedAt
+}
+    `;
 export const ArticleCardsDocument = gql`
-  query ArticleCards($after: String) {
-    articles(first: 12, after: $after) {
-      edges {
-        node {
-          ...ArticleCard
-        }
-        cursor
+    query ArticleCards($after: String) {
+  articles(first: 12, after: $after) {
+    edges {
+      node {
+        ...ArticleCard
       }
-      pageInfo {
-        ...Pagination
-      }
+      cursor
+    }
+    pageInfo {
+      ...Pagination
     }
   }
-  ${ArticleCardFragmentDoc}
-  ${PaginationFragmentDoc}
-`;
+}
+    ${ArticleCardFragmentDoc}
+${PaginationFragmentDoc}`;
 
 /**
  * __useArticleCardsQuery__
@@ -5648,45 +3646,40 @@ export const ArticleCardsDocument = gql`
  *   },
  * });
  */
-export function useArticleCardsQuery(
-  baseOptions?: Apollo.QueryHookOptions<ArticleCardsQuery, ArticleCardsQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<ArticleCardsQuery, ArticleCardsQueryVariables>(ArticleCardsDocument, options);
-}
-export function useArticleCardsLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<ArticleCardsQuery, ArticleCardsQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<ArticleCardsQuery, ArticleCardsQueryVariables>(ArticleCardsDocument, options);
-}
+export function useArticleCardsQuery(baseOptions?: Apollo.QueryHookOptions<ArticleCardsQuery, ArticleCardsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ArticleCardsQuery, ArticleCardsQueryVariables>(ArticleCardsDocument, options);
+      }
+export function useArticleCardsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ArticleCardsQuery, ArticleCardsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ArticleCardsQuery, ArticleCardsQueryVariables>(ArticleCardsDocument, options);
+        }
 export type ArticleCardsQueryHookResult = ReturnType<typeof useArticleCardsQuery>;
 export type ArticleCardsLazyQueryHookResult = ReturnType<typeof useArticleCardsLazyQuery>;
 export type ArticleCardsQueryResult = Apollo.QueryResult<ArticleCardsQuery, ArticleCardsQueryVariables>;
 export const CharacterBattleListDocument = gql`
-  query CharacterBattleList($characterSlug: String!, $playerSlug: String, $after: String) {
-    character(characterSlug: $characterSlug) {
-      id
-      battles(playerSlug: $playerSlug, after: $after) {
-        edges {
-          node {
-            ...BattleListItem
-          }
-          cursor
+    query CharacterBattleList($characterSlug: String!, $playerSlug: String, $after: String) {
+  character(characterSlug: $characterSlug) {
+    id
+    battles(playerSlug: $playerSlug, after: $after) {
+      edges {
+        node {
+          ...BattleListItem
         }
-        pageInfo {
-          ...Pagination
-        }
+        cursor
       }
-      playerBattleCounts {
-        ...PlayerBattleCountChip
+      pageInfo {
+        ...Pagination
       }
     }
+    playerBattleCounts {
+      ...PlayerBattleCountChip
+    }
   }
-  ${BattleListItemFragmentDoc}
-  ${PaginationFragmentDoc}
-  ${PlayerBattleCountChipFragmentDoc}
-`;
+}
+    ${BattleListItemFragmentDoc}
+${PaginationFragmentDoc}
+${PlayerBattleCountChipFragmentDoc}`;
 
 /**
  * __useCharacterBattleListQuery__
@@ -5706,54 +3699,40 @@ export const CharacterBattleListDocument = gql`
  *   },
  * });
  */
-export function useCharacterBattleListQuery(
-  baseOptions: Apollo.QueryHookOptions<CharacterBattleListQuery, CharacterBattleListQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<CharacterBattleListQuery, CharacterBattleListQueryVariables>(
-    CharacterBattleListDocument,
-    options,
-  );
-}
-export function useCharacterBattleListLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<CharacterBattleListQuery, CharacterBattleListQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<CharacterBattleListQuery, CharacterBattleListQueryVariables>(
-    CharacterBattleListDocument,
-    options,
-  );
-}
+export function useCharacterBattleListQuery(baseOptions: Apollo.QueryHookOptions<CharacterBattleListQuery, CharacterBattleListQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<CharacterBattleListQuery, CharacterBattleListQueryVariables>(CharacterBattleListDocument, options);
+      }
+export function useCharacterBattleListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CharacterBattleListQuery, CharacterBattleListQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<CharacterBattleListQuery, CharacterBattleListQueryVariables>(CharacterBattleListDocument, options);
+        }
 export type CharacterBattleListQueryHookResult = ReturnType<typeof useCharacterBattleListQuery>;
 export type CharacterBattleListLazyQueryHookResult = ReturnType<typeof useCharacterBattleListLazyQuery>;
-export type CharacterBattleListQueryResult = Apollo.QueryResult<
-  CharacterBattleListQuery,
-  CharacterBattleListQueryVariables
->;
+export type CharacterBattleListQueryResult = Apollo.QueryResult<CharacterBattleListQuery, CharacterBattleListQueryVariables>;
 export const PlayerBattleListDocument = gql`
-  query PlayerBattleList($playerSlug: String!, $characterSlug: String, $after: String) {
-    player(playerSlug: $playerSlug) {
-      id
-      battles(characterSlug: $characterSlug, after: $after) {
-        edges {
-          node {
-            ...BattleListItem
-          }
-          cursor
+    query PlayerBattleList($playerSlug: String!, $characterSlug: String, $after: String) {
+  player(playerSlug: $playerSlug) {
+    id
+    battles(characterSlug: $characterSlug, after: $after) {
+      edges {
+        node {
+          ...BattleListItem
         }
-        pageInfo {
-          ...Pagination
-        }
+        cursor
       }
-      characterBattleCounts {
-        ...CharacterBattleCountChip
+      pageInfo {
+        ...Pagination
       }
     }
+    characterBattleCounts {
+      ...CharacterBattleCountChip
+    }
   }
-  ${BattleListItemFragmentDoc}
-  ${PaginationFragmentDoc}
-  ${CharacterBattleCountChipFragmentDoc}
-`;
+}
+    ${BattleListItemFragmentDoc}
+${PaginationFragmentDoc}
+${CharacterBattleCountChipFragmentDoc}`;
 
 /**
  * __usePlayerBattleListQuery__
@@ -5773,41 +3752,36 @@ export const PlayerBattleListDocument = gql`
  *   },
  * });
  */
-export function usePlayerBattleListQuery(
-  baseOptions: Apollo.QueryHookOptions<PlayerBattleListQuery, PlayerBattleListQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<PlayerBattleListQuery, PlayerBattleListQueryVariables>(PlayerBattleListDocument, options);
-}
-export function usePlayerBattleListLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<PlayerBattleListQuery, PlayerBattleListQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<PlayerBattleListQuery, PlayerBattleListQueryVariables>(PlayerBattleListDocument, options);
-}
+export function usePlayerBattleListQuery(baseOptions: Apollo.QueryHookOptions<PlayerBattleListQuery, PlayerBattleListQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PlayerBattleListQuery, PlayerBattleListQueryVariables>(PlayerBattleListDocument, options);
+      }
+export function usePlayerBattleListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PlayerBattleListQuery, PlayerBattleListQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PlayerBattleListQuery, PlayerBattleListQueryVariables>(PlayerBattleListDocument, options);
+        }
 export type PlayerBattleListQueryHookResult = ReturnType<typeof usePlayerBattleListQuery>;
 export type PlayerBattleListLazyQueryHookResult = ReturnType<typeof usePlayerBattleListLazyQuery>;
 export type PlayerBattleListQueryResult = Apollo.QueryResult<PlayerBattleListQuery, PlayerBattleListQueryVariables>;
 export const TournamentBattleListDocument = gql`
-  query TournamentBattleList($tournamentId: ID!, $after: String) {
-    tournament(tournamentId: $tournamentId) {
-      id
-      battles(after: $after) {
-        edges {
-          node {
-            ...BattleListItem
-          }
-          cursor
+    query TournamentBattleList($tournamentId: ID!, $after: String) {
+  tournament(tournamentId: $tournamentId) {
+    id
+    battles(after: $after) {
+      edges {
+        node {
+          ...BattleListItem
         }
-        pageInfo {
-          ...Pagination
-        }
+        cursor
+      }
+      pageInfo {
+        ...Pagination
       }
     }
   }
-  ${BattleListItemFragmentDoc}
-  ${PaginationFragmentDoc}
-`;
+}
+    ${BattleListItemFragmentDoc}
+${PaginationFragmentDoc}`;
 
 /**
  * __useTournamentBattleListQuery__
@@ -5826,47 +3800,33 @@ export const TournamentBattleListDocument = gql`
  *   },
  * });
  */
-export function useTournamentBattleListQuery(
-  baseOptions: Apollo.QueryHookOptions<TournamentBattleListQuery, TournamentBattleListQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<TournamentBattleListQuery, TournamentBattleListQueryVariables>(
-    TournamentBattleListDocument,
-    options,
-  );
-}
-export function useTournamentBattleListLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<TournamentBattleListQuery, TournamentBattleListQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<TournamentBattleListQuery, TournamentBattleListQueryVariables>(
-    TournamentBattleListDocument,
-    options,
-  );
-}
+export function useTournamentBattleListQuery(baseOptions: Apollo.QueryHookOptions<TournamentBattleListQuery, TournamentBattleListQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TournamentBattleListQuery, TournamentBattleListQueryVariables>(TournamentBattleListDocument, options);
+      }
+export function useTournamentBattleListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TournamentBattleListQuery, TournamentBattleListQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TournamentBattleListQuery, TournamentBattleListQueryVariables>(TournamentBattleListDocument, options);
+        }
 export type TournamentBattleListQueryHookResult = ReturnType<typeof useTournamentBattleListQuery>;
 export type TournamentBattleListLazyQueryHookResult = ReturnType<typeof useTournamentBattleListLazyQuery>;
-export type TournamentBattleListQueryResult = Apollo.QueryResult<
-  TournamentBattleListQuery,
-  TournamentBattleListQueryVariables
->;
+export type TournamentBattleListQueryResult = Apollo.QueryResult<TournamentBattleListQuery, TournamentBattleListQueryVariables>;
 export const PlayerCardsDocument = gql`
-  query PlayerCards($after: String, $keyword: String) {
-    players(first: 20, after: $after, keyword: $keyword) {
-      edges {
-        node {
-          ...PlayerCard
-        }
-        cursor
+    query PlayerCards($after: String, $keyword: String) {
+  players(first: 20, after: $after, keyword: $keyword) {
+    edges {
+      node {
+        ...PlayerCard
       }
-      pageInfo {
-        ...Pagination
-      }
+      cursor
+    }
+    pageInfo {
+      ...Pagination
     }
   }
-  ${PlayerCardFragmentDoc}
-  ${PaginationFragmentDoc}
-`;
+}
+    ${PlayerCardFragmentDoc}
+${PaginationFragmentDoc}`;
 
 /**
  * __usePlayerCardsQuery__
@@ -5885,41 +3845,36 @@ export const PlayerCardsDocument = gql`
  *   },
  * });
  */
-export function usePlayerCardsQuery(
-  baseOptions?: Apollo.QueryHookOptions<PlayerCardsQuery, PlayerCardsQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<PlayerCardsQuery, PlayerCardsQueryVariables>(PlayerCardsDocument, options);
-}
-export function usePlayerCardsLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<PlayerCardsQuery, PlayerCardsQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<PlayerCardsQuery, PlayerCardsQueryVariables>(PlayerCardsDocument, options);
-}
+export function usePlayerCardsQuery(baseOptions?: Apollo.QueryHookOptions<PlayerCardsQuery, PlayerCardsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PlayerCardsQuery, PlayerCardsQueryVariables>(PlayerCardsDocument, options);
+      }
+export function usePlayerCardsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PlayerCardsQuery, PlayerCardsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PlayerCardsQuery, PlayerCardsQueryVariables>(PlayerCardsDocument, options);
+        }
 export type PlayerCardsQueryHookResult = ReturnType<typeof usePlayerCardsQuery>;
 export type PlayerCardsLazyQueryHookResult = ReturnType<typeof usePlayerCardsLazyQuery>;
 export type PlayerCardsQueryResult = Apollo.QueryResult<PlayerCardsQuery, PlayerCardsQueryVariables>;
 export const PlayerStandingCardsDocument = gql`
-  query PlayerStandingCards($playerSlug: String!, $after: String) {
-    player(playerSlug: $playerSlug) {
-      id
-      standings(first: 10, after: $after) {
-        edges {
-          node {
-            ...PlayerStandingCard
-          }
-          cursor
+    query PlayerStandingCards($playerSlug: String!, $after: String) {
+  player(playerSlug: $playerSlug) {
+    id
+    standings(first: 10, after: $after) {
+      edges {
+        node {
+          ...PlayerStandingCard
         }
-        pageInfo {
-          ...Pagination
-        }
+        cursor
+      }
+      pageInfo {
+        ...Pagination
       }
     }
   }
-  ${PlayerStandingCardFragmentDoc}
-  ${PaginationFragmentDoc}
-`;
+}
+    ${PlayerStandingCardFragmentDoc}
+${PaginationFragmentDoc}`;
 
 /**
  * __usePlayerStandingCardsQuery__
@@ -5938,47 +3893,33 @@ export const PlayerStandingCardsDocument = gql`
  *   },
  * });
  */
-export function usePlayerStandingCardsQuery(
-  baseOptions: Apollo.QueryHookOptions<PlayerStandingCardsQuery, PlayerStandingCardsQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<PlayerStandingCardsQuery, PlayerStandingCardsQueryVariables>(
-    PlayerStandingCardsDocument,
-    options,
-  );
-}
-export function usePlayerStandingCardsLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<PlayerStandingCardsQuery, PlayerStandingCardsQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<PlayerStandingCardsQuery, PlayerStandingCardsQueryVariables>(
-    PlayerStandingCardsDocument,
-    options,
-  );
-}
+export function usePlayerStandingCardsQuery(baseOptions: Apollo.QueryHookOptions<PlayerStandingCardsQuery, PlayerStandingCardsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PlayerStandingCardsQuery, PlayerStandingCardsQueryVariables>(PlayerStandingCardsDocument, options);
+      }
+export function usePlayerStandingCardsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PlayerStandingCardsQuery, PlayerStandingCardsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PlayerStandingCardsQuery, PlayerStandingCardsQueryVariables>(PlayerStandingCardsDocument, options);
+        }
 export type PlayerStandingCardsQueryHookResult = ReturnType<typeof usePlayerStandingCardsQuery>;
 export type PlayerStandingCardsLazyQueryHookResult = ReturnType<typeof usePlayerStandingCardsLazyQuery>;
-export type PlayerStandingCardsQueryResult = Apollo.QueryResult<
-  PlayerStandingCardsQuery,
-  PlayerStandingCardsQueryVariables
->;
+export type PlayerStandingCardsQueryResult = Apollo.QueryResult<PlayerStandingCardsQuery, PlayerStandingCardsQueryVariables>;
 export const TournamentCardsDocument = gql`
-  query TournamentCards($after: String, $keyword: String) {
-    tournaments(first: 12, after: $after, keyword: $keyword) {
-      edges {
-        node {
-          ...TournamentCard
-        }
-        cursor
+    query TournamentCards($after: String, $keyword: String) {
+  tournaments(first: 12, after: $after, keyword: $keyword) {
+    edges {
+      node {
+        ...TournamentCard
       }
-      pageInfo {
-        ...Pagination
-      }
+      cursor
+    }
+    pageInfo {
+      ...Pagination
     }
   }
-  ${TournamentCardFragmentDoc}
-  ${PaginationFragmentDoc}
-`;
+}
+    ${TournamentCardFragmentDoc}
+${PaginationFragmentDoc}`;
 
 /**
  * __useTournamentCardsQuery__
@@ -5997,38 +3938,33 @@ export const TournamentCardsDocument = gql`
  *   },
  * });
  */
-export function useTournamentCardsQuery(
-  baseOptions?: Apollo.QueryHookOptions<TournamentCardsQuery, TournamentCardsQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<TournamentCardsQuery, TournamentCardsQueryVariables>(TournamentCardsDocument, options);
-}
-export function useTournamentCardsLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<TournamentCardsQuery, TournamentCardsQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<TournamentCardsQuery, TournamentCardsQueryVariables>(TournamentCardsDocument, options);
-}
+export function useTournamentCardsQuery(baseOptions?: Apollo.QueryHookOptions<TournamentCardsQuery, TournamentCardsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TournamentCardsQuery, TournamentCardsQueryVariables>(TournamentCardsDocument, options);
+      }
+export function useTournamentCardsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TournamentCardsQuery, TournamentCardsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TournamentCardsQuery, TournamentCardsQueryVariables>(TournamentCardsDocument, options);
+        }
 export type TournamentCardsQueryHookResult = ReturnType<typeof useTournamentCardsQuery>;
 export type TournamentCardsLazyQueryHookResult = ReturnType<typeof useTournamentCardsLazyQuery>;
 export type TournamentCardsQueryResult = Apollo.QueryResult<TournamentCardsQuery, TournamentCardsQueryVariables>;
 export const ArticleTableRowsDocument = gql`
-  query ArticleTableRows($after: String, $keyword: String) {
-    myArticles(first: 10, after: $after, keyword: $keyword) {
-      edges {
-        node {
-          ...ArticleTableRow
-        }
-        cursor
+    query ArticleTableRows($after: String, $keyword: String) {
+  myArticles(first: 10, after: $after, keyword: $keyword) {
+    edges {
+      node {
+        ...ArticleTableRow
       }
-      pageInfo {
-        ...Pagination
-      }
+      cursor
+    }
+    pageInfo {
+      ...Pagination
     }
   }
-  ${ArticleTableRowFragmentDoc}
-  ${PaginationFragmentDoc}
-`;
+}
+    ${ArticleTableRowFragmentDoc}
+${PaginationFragmentDoc}`;
 
 /**
  * __useArticleTableRowsQuery__
@@ -6047,31 +3983,26 @@ export const ArticleTableRowsDocument = gql`
  *   },
  * });
  */
-export function useArticleTableRowsQuery(
-  baseOptions?: Apollo.QueryHookOptions<ArticleTableRowsQuery, ArticleTableRowsQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<ArticleTableRowsQuery, ArticleTableRowsQueryVariables>(ArticleTableRowsDocument, options);
-}
-export function useArticleTableRowsLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<ArticleTableRowsQuery, ArticleTableRowsQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<ArticleTableRowsQuery, ArticleTableRowsQueryVariables>(ArticleTableRowsDocument, options);
-}
+export function useArticleTableRowsQuery(baseOptions?: Apollo.QueryHookOptions<ArticleTableRowsQuery, ArticleTableRowsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ArticleTableRowsQuery, ArticleTableRowsQueryVariables>(ArticleTableRowsDocument, options);
+      }
+export function useArticleTableRowsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ArticleTableRowsQuery, ArticleTableRowsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ArticleTableRowsQuery, ArticleTableRowsQueryVariables>(ArticleTableRowsDocument, options);
+        }
 export type ArticleTableRowsQueryHookResult = ReturnType<typeof useArticleTableRowsQuery>;
 export type ArticleTableRowsLazyQueryHookResult = ReturnType<typeof useArticleTableRowsLazyQuery>;
 export type ArticleTableRowsQueryResult = Apollo.QueryResult<ArticleTableRowsQuery, ArticleTableRowsQueryVariables>;
 export const PublishArticleDocument = gql`
-  mutation PublishArticle($articleId: ID!) {
-    publishArticle(input: { articleId: $articleId }) {
-      article {
-        ...ArticleTableRow
-      }
+    mutation PublishArticle($articleId: ID!) {
+  publishArticle(input: {articleId: $articleId}) {
+    article {
+      ...ArticleTableRow
     }
   }
-  ${ArticleTableRowFragmentDoc}
-`;
+}
+    ${ArticleTableRowFragmentDoc}`;
 export type PublishArticleMutationFn = Apollo.MutationFunction<PublishArticleMutation, PublishArticleMutationVariables>;
 
 /**
@@ -6091,28 +4022,22 @@ export type PublishArticleMutationFn = Apollo.MutationFunction<PublishArticleMut
  *   },
  * });
  */
-export function usePublishArticleMutation(
-  baseOptions?: Apollo.MutationHookOptions<PublishArticleMutation, PublishArticleMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<PublishArticleMutation, PublishArticleMutationVariables>(PublishArticleDocument, options);
-}
+export function usePublishArticleMutation(baseOptions?: Apollo.MutationHookOptions<PublishArticleMutation, PublishArticleMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<PublishArticleMutation, PublishArticleMutationVariables>(PublishArticleDocument, options);
+      }
 export type PublishArticleMutationHookResult = ReturnType<typeof usePublishArticleMutation>;
 export type PublishArticleMutationResult = Apollo.MutationResult<PublishArticleMutation>;
-export type PublishArticleMutationOptions = Apollo.BaseMutationOptions<
-  PublishArticleMutation,
-  PublishArticleMutationVariables
->;
+export type PublishArticleMutationOptions = Apollo.BaseMutationOptions<PublishArticleMutation, PublishArticleMutationVariables>;
 export const StopArticleDocument = gql`
-  mutation StopArticle($articleId: ID!) {
-    stopArticle(input: { articleId: $articleId }) {
-      article {
-        ...ArticleTableRow
-      }
+    mutation StopArticle($articleId: ID!) {
+  stopArticle(input: {articleId: $articleId}) {
+    article {
+      ...ArticleTableRow
     }
   }
-  ${ArticleTableRowFragmentDoc}
-`;
+}
+    ${ArticleTableRowFragmentDoc}`;
 export type StopArticleMutationFn = Apollo.MutationFunction<StopArticleMutation, StopArticleMutationVariables>;
 
 /**
@@ -6132,24 +4057,22 @@ export type StopArticleMutationFn = Apollo.MutationFunction<StopArticleMutation,
  *   },
  * });
  */
-export function useStopArticleMutation(
-  baseOptions?: Apollo.MutationHookOptions<StopArticleMutation, StopArticleMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<StopArticleMutation, StopArticleMutationVariables>(StopArticleDocument, options);
-}
+export function useStopArticleMutation(baseOptions?: Apollo.MutationHookOptions<StopArticleMutation, StopArticleMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<StopArticleMutation, StopArticleMutationVariables>(StopArticleDocument, options);
+      }
 export type StopArticleMutationHookResult = ReturnType<typeof useStopArticleMutation>;
 export type StopArticleMutationResult = Apollo.MutationResult<StopArticleMutation>;
 export type StopArticleMutationOptions = Apollo.BaseMutationOptions<StopArticleMutation, StopArticleMutationVariables>;
 export const DeleteArticleDocument = gql`
-  mutation DeleteArticle($articleId: ID!) {
-    deleteArticle(input: { articleId: $articleId }) {
-      article {
-        id
-      }
+    mutation DeleteArticle($articleId: ID!) {
+  deleteArticle(input: {articleId: $articleId}) {
+    article {
+      id
     }
   }
-`;
+}
+    `;
 export type DeleteArticleMutationFn = Apollo.MutationFunction<DeleteArticleMutation, DeleteArticleMutationVariables>;
 
 /**
@@ -6169,28 +4092,22 @@ export type DeleteArticleMutationFn = Apollo.MutationFunction<DeleteArticleMutat
  *   },
  * });
  */
-export function useDeleteArticleMutation(
-  baseOptions?: Apollo.MutationHookOptions<DeleteArticleMutation, DeleteArticleMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<DeleteArticleMutation, DeleteArticleMutationVariables>(DeleteArticleDocument, options);
-}
+export function useDeleteArticleMutation(baseOptions?: Apollo.MutationHookOptions<DeleteArticleMutation, DeleteArticleMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteArticleMutation, DeleteArticleMutationVariables>(DeleteArticleDocument, options);
+      }
 export type DeleteArticleMutationHookResult = ReturnType<typeof useDeleteArticleMutation>;
 export type DeleteArticleMutationResult = Apollo.MutationResult<DeleteArticleMutation>;
-export type DeleteArticleMutationOptions = Apollo.BaseMutationOptions<
-  DeleteArticleMutation,
-  DeleteArticleMutationVariables
->;
+export type DeleteArticleMutationOptions = Apollo.BaseMutationOptions<DeleteArticleMutation, DeleteArticleMutationVariables>;
 export const CharacterTableRowsDocument = gql`
-  query CharacterTableRows($keyword: String) {
-    characters(first: 100, keyword: $keyword) {
-      nodes {
-        ...CharacterTableRow
-      }
+    query CharacterTableRows($keyword: String) {
+  characters(first: 100, keyword: $keyword) {
+    nodes {
+      ...CharacterTableRow
     }
   }
-  ${CharacterTableRowFragmentDoc}
-`;
+}
+    ${CharacterTableRowFragmentDoc}`;
 
 /**
  * __useCharacterTableRowsQuery__
@@ -6208,51 +4125,36 @@ export const CharacterTableRowsDocument = gql`
  *   },
  * });
  */
-export function useCharacterTableRowsQuery(
-  baseOptions?: Apollo.QueryHookOptions<CharacterTableRowsQuery, CharacterTableRowsQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<CharacterTableRowsQuery, CharacterTableRowsQueryVariables>(
-    CharacterTableRowsDocument,
-    options,
-  );
-}
-export function useCharacterTableRowsLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<CharacterTableRowsQuery, CharacterTableRowsQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<CharacterTableRowsQuery, CharacterTableRowsQueryVariables>(
-    CharacterTableRowsDocument,
-    options,
-  );
-}
+export function useCharacterTableRowsQuery(baseOptions?: Apollo.QueryHookOptions<CharacterTableRowsQuery, CharacterTableRowsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<CharacterTableRowsQuery, CharacterTableRowsQueryVariables>(CharacterTableRowsDocument, options);
+      }
+export function useCharacterTableRowsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CharacterTableRowsQuery, CharacterTableRowsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<CharacterTableRowsQuery, CharacterTableRowsQueryVariables>(CharacterTableRowsDocument, options);
+        }
 export type CharacterTableRowsQueryHookResult = ReturnType<typeof useCharacterTableRowsQuery>;
 export type CharacterTableRowsLazyQueryHookResult = ReturnType<typeof useCharacterTableRowsLazyQuery>;
-export type CharacterTableRowsQueryResult = Apollo.QueryResult<
-  CharacterTableRowsQuery,
-  CharacterTableRowsQueryVariables
->;
+export type CharacterTableRowsQueryResult = Apollo.QueryResult<CharacterTableRowsQuery, CharacterTableRowsQueryVariables>;
 export const CreateComboCategoryDocument = gql`
-  mutation CreateComboCategory($characterSlug: String!, $attributes: ComboCategoryAttributes!) {
-    createComboCategory(input: { characterSlug: $characterSlug, attributes: $attributes }) {
-      comboCategory {
-        ...ComboDashboardCategory
-        character {
+    mutation CreateComboCategory($characterSlug: String!, $attributes: ComboCategoryAttributes!) {
+  createComboCategory(
+    input: {characterSlug: $characterSlug, attributes: $attributes}
+  ) {
+    comboCategory {
+      ...ComboDashboardCategory
+      character {
+        id
+        comboCategories {
           id
-          comboCategories {
-            id
-            position
-          }
+          position
         }
       }
     }
   }
-  ${ComboDashboardCategoryFragmentDoc}
-`;
-export type CreateComboCategoryMutationFn = Apollo.MutationFunction<
-  CreateComboCategoryMutation,
-  CreateComboCategoryMutationVariables
->;
+}
+    ${ComboDashboardCategoryFragmentDoc}`;
+export type CreateComboCategoryMutationFn = Apollo.MutationFunction<CreateComboCategoryMutation, CreateComboCategoryMutationVariables>;
 
 /**
  * __useCreateComboCategoryMutation__
@@ -6272,42 +4174,32 @@ export type CreateComboCategoryMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useCreateComboCategoryMutation(
-  baseOptions?: Apollo.MutationHookOptions<CreateComboCategoryMutation, CreateComboCategoryMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<CreateComboCategoryMutation, CreateComboCategoryMutationVariables>(
-    CreateComboCategoryDocument,
-    options,
-  );
-}
+export function useCreateComboCategoryMutation(baseOptions?: Apollo.MutationHookOptions<CreateComboCategoryMutation, CreateComboCategoryMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateComboCategoryMutation, CreateComboCategoryMutationVariables>(CreateComboCategoryDocument, options);
+      }
 export type CreateComboCategoryMutationHookResult = ReturnType<typeof useCreateComboCategoryMutation>;
 export type CreateComboCategoryMutationResult = Apollo.MutationResult<CreateComboCategoryMutation>;
-export type CreateComboCategoryMutationOptions = Apollo.BaseMutationOptions<
-  CreateComboCategoryMutation,
-  CreateComboCategoryMutationVariables
->;
+export type CreateComboCategoryMutationOptions = Apollo.BaseMutationOptions<CreateComboCategoryMutation, CreateComboCategoryMutationVariables>;
 export const UpdateComboCategoryDocument = gql`
-  mutation UpdateComboCategory($comboCategoryId: ID!, $attributes: ComboCategoryAttributes!) {
-    updateComboCategory(input: { comboCategoryId: $comboCategoryId, attributes: $attributes }) {
-      comboCategory {
-        ...ComboDashboardCategory
-        character {
+    mutation UpdateComboCategory($comboCategoryId: ID!, $attributes: ComboCategoryAttributes!) {
+  updateComboCategory(
+    input: {comboCategoryId: $comboCategoryId, attributes: $attributes}
+  ) {
+    comboCategory {
+      ...ComboDashboardCategory
+      character {
+        id
+        comboCategories {
           id
-          comboCategories {
-            id
-            position
-          }
+          position
         }
       }
     }
   }
-  ${ComboDashboardCategoryFragmentDoc}
-`;
-export type UpdateComboCategoryMutationFn = Apollo.MutationFunction<
-  UpdateComboCategoryMutation,
-  UpdateComboCategoryMutationVariables
->;
+}
+    ${ComboDashboardCategoryFragmentDoc}`;
+export type UpdateComboCategoryMutationFn = Apollo.MutationFunction<UpdateComboCategoryMutation, UpdateComboCategoryMutationVariables>;
 
 /**
  * __useUpdateComboCategoryMutation__
@@ -6327,42 +4219,30 @@ export type UpdateComboCategoryMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useUpdateComboCategoryMutation(
-  baseOptions?: Apollo.MutationHookOptions<UpdateComboCategoryMutation, UpdateComboCategoryMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<UpdateComboCategoryMutation, UpdateComboCategoryMutationVariables>(
-    UpdateComboCategoryDocument,
-    options,
-  );
-}
+export function useUpdateComboCategoryMutation(baseOptions?: Apollo.MutationHookOptions<UpdateComboCategoryMutation, UpdateComboCategoryMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateComboCategoryMutation, UpdateComboCategoryMutationVariables>(UpdateComboCategoryDocument, options);
+      }
 export type UpdateComboCategoryMutationHookResult = ReturnType<typeof useUpdateComboCategoryMutation>;
 export type UpdateComboCategoryMutationResult = Apollo.MutationResult<UpdateComboCategoryMutation>;
-export type UpdateComboCategoryMutationOptions = Apollo.BaseMutationOptions<
-  UpdateComboCategoryMutation,
-  UpdateComboCategoryMutationVariables
->;
+export type UpdateComboCategoryMutationOptions = Apollo.BaseMutationOptions<UpdateComboCategoryMutation, UpdateComboCategoryMutationVariables>;
 export const DeleteComboCategoryDocument = gql`
-  mutation DeleteComboCategory($comboCategoryId: ID!) {
-    deleteComboCategory(input: { comboCategoryId: $comboCategoryId }) {
-      comboCategory {
-        ...ComboDashboardCategory
-        character {
+    mutation DeleteComboCategory($comboCategoryId: ID!) {
+  deleteComboCategory(input: {comboCategoryId: $comboCategoryId}) {
+    comboCategory {
+      ...ComboDashboardCategory
+      character {
+        id
+        comboCategories {
           id
-          comboCategories {
-            id
-            position
-          }
+          position
         }
       }
     }
   }
-  ${ComboDashboardCategoryFragmentDoc}
-`;
-export type DeleteComboCategoryMutationFn = Apollo.MutationFunction<
-  DeleteComboCategoryMutation,
-  DeleteComboCategoryMutationVariables
->;
+}
+    ${ComboDashboardCategoryFragmentDoc}`;
+export type DeleteComboCategoryMutationFn = Apollo.MutationFunction<DeleteComboCategoryMutation, DeleteComboCategoryMutationVariables>;
 
 /**
  * __useDeleteComboCategoryMutation__
@@ -6381,38 +4261,29 @@ export type DeleteComboCategoryMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useDeleteComboCategoryMutation(
-  baseOptions?: Apollo.MutationHookOptions<DeleteComboCategoryMutation, DeleteComboCategoryMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<DeleteComboCategoryMutation, DeleteComboCategoryMutationVariables>(
-    DeleteComboCategoryDocument,
-    options,
-  );
-}
+export function useDeleteComboCategoryMutation(baseOptions?: Apollo.MutationHookOptions<DeleteComboCategoryMutation, DeleteComboCategoryMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteComboCategoryMutation, DeleteComboCategoryMutationVariables>(DeleteComboCategoryDocument, options);
+      }
 export type DeleteComboCategoryMutationHookResult = ReturnType<typeof useDeleteComboCategoryMutation>;
 export type DeleteComboCategoryMutationResult = Apollo.MutationResult<DeleteComboCategoryMutation>;
-export type DeleteComboCategoryMutationOptions = Apollo.BaseMutationOptions<
-  DeleteComboCategoryMutation,
-  DeleteComboCategoryMutationVariables
->;
+export type DeleteComboCategoryMutationOptions = Apollo.BaseMutationOptions<DeleteComboCategoryMutation, DeleteComboCategoryMutationVariables>;
 export const CreateComboDocument = gql`
-  mutation CreateCombo($comboCategoryId: ID!, $attributes: ComboAttributes!) {
-    createCombo(input: { comboCategoryId: $comboCategoryId, attributes: $attributes }) {
-      combo {
-        ...ComboTableRow
-        comboCategory {
+    mutation CreateCombo($comboCategoryId: ID!, $attributes: ComboAttributes!) {
+  createCombo(input: {comboCategoryId: $comboCategoryId, attributes: $attributes}) {
+    combo {
+      ...ComboTableRow
+      comboCategory {
+        id
+        combos {
           id
-          combos {
-            id
-            position
-          }
+          position
         }
       }
     }
   }
-  ${ComboTableRowFragmentDoc}
-`;
+}
+    ${ComboTableRowFragmentDoc}`;
 export type CreateComboMutationFn = Apollo.MutationFunction<CreateComboMutation, CreateComboMutationVariables>;
 
 /**
@@ -6433,32 +4304,29 @@ export type CreateComboMutationFn = Apollo.MutationFunction<CreateComboMutation,
  *   },
  * });
  */
-export function useCreateComboMutation(
-  baseOptions?: Apollo.MutationHookOptions<CreateComboMutation, CreateComboMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<CreateComboMutation, CreateComboMutationVariables>(CreateComboDocument, options);
-}
+export function useCreateComboMutation(baseOptions?: Apollo.MutationHookOptions<CreateComboMutation, CreateComboMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateComboMutation, CreateComboMutationVariables>(CreateComboDocument, options);
+      }
 export type CreateComboMutationHookResult = ReturnType<typeof useCreateComboMutation>;
 export type CreateComboMutationResult = Apollo.MutationResult<CreateComboMutation>;
 export type CreateComboMutationOptions = Apollo.BaseMutationOptions<CreateComboMutation, CreateComboMutationVariables>;
 export const UpdateComboDocument = gql`
-  mutation UpdateCombo($comboId: ID!, $attributes: ComboAttributes!) {
-    updateCombo(input: { comboId: $comboId, attributes: $attributes }) {
-      combo {
-        ...ComboTableRow
-        comboCategory {
+    mutation UpdateCombo($comboId: ID!, $attributes: ComboAttributes!) {
+  updateCombo(input: {comboId: $comboId, attributes: $attributes}) {
+    combo {
+      ...ComboTableRow
+      comboCategory {
+        id
+        combos {
           id
-          combos {
-            id
-            position
-          }
+          position
         }
       }
     }
   }
-  ${ComboTableRowFragmentDoc}
-`;
+}
+    ${ComboTableRowFragmentDoc}`;
 export type UpdateComboMutationFn = Apollo.MutationFunction<UpdateComboMutation, UpdateComboMutationVariables>;
 
 /**
@@ -6479,30 +4347,28 @@ export type UpdateComboMutationFn = Apollo.MutationFunction<UpdateComboMutation,
  *   },
  * });
  */
-export function useUpdateComboMutation(
-  baseOptions?: Apollo.MutationHookOptions<UpdateComboMutation, UpdateComboMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<UpdateComboMutation, UpdateComboMutationVariables>(UpdateComboDocument, options);
-}
+export function useUpdateComboMutation(baseOptions?: Apollo.MutationHookOptions<UpdateComboMutation, UpdateComboMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateComboMutation, UpdateComboMutationVariables>(UpdateComboDocument, options);
+      }
 export type UpdateComboMutationHookResult = ReturnType<typeof useUpdateComboMutation>;
 export type UpdateComboMutationResult = Apollo.MutationResult<UpdateComboMutation>;
 export type UpdateComboMutationOptions = Apollo.BaseMutationOptions<UpdateComboMutation, UpdateComboMutationVariables>;
 export const DeleteComboDocument = gql`
-  mutation DeleteCombo($comboId: ID!) {
-    deleteCombo(input: { comboId: $comboId }) {
-      combo {
+    mutation DeleteCombo($comboId: ID!) {
+  deleteCombo(input: {comboId: $comboId}) {
+    combo {
+      id
+      comboCategory {
         id
-        comboCategory {
+        combos {
           id
-          combos {
-            id
-          }
         }
       }
     }
   }
-`;
+}
+    `;
 export type DeleteComboMutationFn = Apollo.MutationFunction<DeleteComboMutation, DeleteComboMutationVariables>;
 
 /**
@@ -6522,33 +4388,27 @@ export type DeleteComboMutationFn = Apollo.MutationFunction<DeleteComboMutation,
  *   },
  * });
  */
-export function useDeleteComboMutation(
-  baseOptions?: Apollo.MutationHookOptions<DeleteComboMutation, DeleteComboMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<DeleteComboMutation, DeleteComboMutationVariables>(DeleteComboDocument, options);
-}
+export function useDeleteComboMutation(baseOptions?: Apollo.MutationHookOptions<DeleteComboMutation, DeleteComboMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteComboMutation, DeleteComboMutationVariables>(DeleteComboDocument, options);
+      }
 export type DeleteComboMutationHookResult = ReturnType<typeof useDeleteComboMutation>;
 export type DeleteComboMutationResult = Apollo.MutationResult<DeleteComboMutation>;
 export type DeleteComboMutationOptions = Apollo.BaseMutationOptions<DeleteComboMutation, DeleteComboMutationVariables>;
 export const CreateComboVideoDocument = gql`
-  mutation CreateComboVideo($comboId: ID!) {
-    createComboVideo(input: { comboId: $comboId }) {
-      combo {
-        ...ComboTableRow
-      }
-      videoUpload {
-        url
-        fields
-      }
+    mutation CreateComboVideo($comboId: ID!) {
+  createComboVideo(input: {comboId: $comboId}) {
+    combo {
+      ...ComboTableRow
+    }
+    videoUpload {
+      url
+      fields
     }
   }
-  ${ComboTableRowFragmentDoc}
-`;
-export type CreateComboVideoMutationFn = Apollo.MutationFunction<
-  CreateComboVideoMutation,
-  CreateComboVideoMutationVariables
->;
+}
+    ${ComboTableRowFragmentDoc}`;
+export type CreateComboVideoMutationFn = Apollo.MutationFunction<CreateComboVideoMutation, CreateComboVideoMutationVariables>;
 
 /**
  * __useCreateComboVideoMutation__
@@ -6567,42 +4427,32 @@ export type CreateComboVideoMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useCreateComboVideoMutation(
-  baseOptions?: Apollo.MutationHookOptions<CreateComboVideoMutation, CreateComboVideoMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<CreateComboVideoMutation, CreateComboVideoMutationVariables>(
-    CreateComboVideoDocument,
-    options,
-  );
-}
+export function useCreateComboVideoMutation(baseOptions?: Apollo.MutationHookOptions<CreateComboVideoMutation, CreateComboVideoMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateComboVideoMutation, CreateComboVideoMutationVariables>(CreateComboVideoDocument, options);
+      }
 export type CreateComboVideoMutationHookResult = ReturnType<typeof useCreateComboVideoMutation>;
 export type CreateComboVideoMutationResult = Apollo.MutationResult<CreateComboVideoMutation>;
-export type CreateComboVideoMutationOptions = Apollo.BaseMutationOptions<
-  CreateComboVideoMutation,
-  CreateComboVideoMutationVariables
->;
+export type CreateComboVideoMutationOptions = Apollo.BaseMutationOptions<CreateComboVideoMutation, CreateComboVideoMutationVariables>;
 export const CreateMoveCategoryDocument = gql`
-  mutation CreateMoveCategory($characterSlug: String!, $attributes: MoveCategoryAttributes!) {
-    createMoveCategory(input: { characterSlug: $characterSlug, attributes: $attributes }) {
-      moveCategory {
-        ...MoveDashboardCategory
-        character {
+    mutation CreateMoveCategory($characterSlug: String!, $attributes: MoveCategoryAttributes!) {
+  createMoveCategory(
+    input: {characterSlug: $characterSlug, attributes: $attributes}
+  ) {
+    moveCategory {
+      ...MoveDashboardCategory
+      character {
+        id
+        moveCategories {
           id
-          moveCategories {
-            id
-            position
-          }
+          position
         }
       }
     }
   }
-  ${MoveDashboardCategoryFragmentDoc}
-`;
-export type CreateMoveCategoryMutationFn = Apollo.MutationFunction<
-  CreateMoveCategoryMutation,
-  CreateMoveCategoryMutationVariables
->;
+}
+    ${MoveDashboardCategoryFragmentDoc}`;
+export type CreateMoveCategoryMutationFn = Apollo.MutationFunction<CreateMoveCategoryMutation, CreateMoveCategoryMutationVariables>;
 
 /**
  * __useCreateMoveCategoryMutation__
@@ -6622,42 +4472,32 @@ export type CreateMoveCategoryMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useCreateMoveCategoryMutation(
-  baseOptions?: Apollo.MutationHookOptions<CreateMoveCategoryMutation, CreateMoveCategoryMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<CreateMoveCategoryMutation, CreateMoveCategoryMutationVariables>(
-    CreateMoveCategoryDocument,
-    options,
-  );
-}
+export function useCreateMoveCategoryMutation(baseOptions?: Apollo.MutationHookOptions<CreateMoveCategoryMutation, CreateMoveCategoryMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateMoveCategoryMutation, CreateMoveCategoryMutationVariables>(CreateMoveCategoryDocument, options);
+      }
 export type CreateMoveCategoryMutationHookResult = ReturnType<typeof useCreateMoveCategoryMutation>;
 export type CreateMoveCategoryMutationResult = Apollo.MutationResult<CreateMoveCategoryMutation>;
-export type CreateMoveCategoryMutationOptions = Apollo.BaseMutationOptions<
-  CreateMoveCategoryMutation,
-  CreateMoveCategoryMutationVariables
->;
+export type CreateMoveCategoryMutationOptions = Apollo.BaseMutationOptions<CreateMoveCategoryMutation, CreateMoveCategoryMutationVariables>;
 export const UpdateMoveCategoryDocument = gql`
-  mutation UpdateMoveCategory($moveCategoryId: ID!, $attributes: MoveCategoryAttributes!) {
-    updateMoveCategory(input: { moveCategoryId: $moveCategoryId, attributes: $attributes }) {
-      moveCategory {
-        ...MoveDashboardCategory
-        character {
+    mutation UpdateMoveCategory($moveCategoryId: ID!, $attributes: MoveCategoryAttributes!) {
+  updateMoveCategory(
+    input: {moveCategoryId: $moveCategoryId, attributes: $attributes}
+  ) {
+    moveCategory {
+      ...MoveDashboardCategory
+      character {
+        id
+        moveCategories {
           id
-          moveCategories {
-            id
-            position
-          }
+          position
         }
       }
     }
   }
-  ${MoveDashboardCategoryFragmentDoc}
-`;
-export type UpdateMoveCategoryMutationFn = Apollo.MutationFunction<
-  UpdateMoveCategoryMutation,
-  UpdateMoveCategoryMutationVariables
->;
+}
+    ${MoveDashboardCategoryFragmentDoc}`;
+export type UpdateMoveCategoryMutationFn = Apollo.MutationFunction<UpdateMoveCategoryMutation, UpdateMoveCategoryMutationVariables>;
 
 /**
  * __useUpdateMoveCategoryMutation__
@@ -6677,42 +4517,30 @@ export type UpdateMoveCategoryMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useUpdateMoveCategoryMutation(
-  baseOptions?: Apollo.MutationHookOptions<UpdateMoveCategoryMutation, UpdateMoveCategoryMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<UpdateMoveCategoryMutation, UpdateMoveCategoryMutationVariables>(
-    UpdateMoveCategoryDocument,
-    options,
-  );
-}
+export function useUpdateMoveCategoryMutation(baseOptions?: Apollo.MutationHookOptions<UpdateMoveCategoryMutation, UpdateMoveCategoryMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateMoveCategoryMutation, UpdateMoveCategoryMutationVariables>(UpdateMoveCategoryDocument, options);
+      }
 export type UpdateMoveCategoryMutationHookResult = ReturnType<typeof useUpdateMoveCategoryMutation>;
 export type UpdateMoveCategoryMutationResult = Apollo.MutationResult<UpdateMoveCategoryMutation>;
-export type UpdateMoveCategoryMutationOptions = Apollo.BaseMutationOptions<
-  UpdateMoveCategoryMutation,
-  UpdateMoveCategoryMutationVariables
->;
+export type UpdateMoveCategoryMutationOptions = Apollo.BaseMutationOptions<UpdateMoveCategoryMutation, UpdateMoveCategoryMutationVariables>;
 export const DeleteMoveCategoryDocument = gql`
-  mutation DeleteMoveCategory($moveCategoryId: ID!) {
-    deleteMoveCategory(input: { moveCategoryId: $moveCategoryId }) {
-      moveCategory {
-        ...MoveDashboardCategory
-        character {
+    mutation DeleteMoveCategory($moveCategoryId: ID!) {
+  deleteMoveCategory(input: {moveCategoryId: $moveCategoryId}) {
+    moveCategory {
+      ...MoveDashboardCategory
+      character {
+        id
+        moveCategories {
           id
-          moveCategories {
-            id
-            position
-          }
+          position
         }
       }
     }
   }
-  ${MoveDashboardCategoryFragmentDoc}
-`;
-export type DeleteMoveCategoryMutationFn = Apollo.MutationFunction<
-  DeleteMoveCategoryMutation,
-  DeleteMoveCategoryMutationVariables
->;
+}
+    ${MoveDashboardCategoryFragmentDoc}`;
+export type DeleteMoveCategoryMutationFn = Apollo.MutationFunction<DeleteMoveCategoryMutation, DeleteMoveCategoryMutationVariables>;
 
 /**
  * __useDeleteMoveCategoryMutation__
@@ -6731,42 +4559,32 @@ export type DeleteMoveCategoryMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useDeleteMoveCategoryMutation(
-  baseOptions?: Apollo.MutationHookOptions<DeleteMoveCategoryMutation, DeleteMoveCategoryMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<DeleteMoveCategoryMutation, DeleteMoveCategoryMutationVariables>(
-    DeleteMoveCategoryDocument,
-    options,
-  );
-}
+export function useDeleteMoveCategoryMutation(baseOptions?: Apollo.MutationHookOptions<DeleteMoveCategoryMutation, DeleteMoveCategoryMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteMoveCategoryMutation, DeleteMoveCategoryMutationVariables>(DeleteMoveCategoryDocument, options);
+      }
 export type DeleteMoveCategoryMutationHookResult = ReturnType<typeof useDeleteMoveCategoryMutation>;
 export type DeleteMoveCategoryMutationResult = Apollo.MutationResult<DeleteMoveCategoryMutation>;
-export type DeleteMoveCategoryMutationOptions = Apollo.BaseMutationOptions<
-  DeleteMoveCategoryMutation,
-  DeleteMoveCategoryMutationVariables
->;
+export type DeleteMoveCategoryMutationOptions = Apollo.BaseMutationOptions<DeleteMoveCategoryMutation, DeleteMoveCategoryMutationVariables>;
 export const CreateAttackMoveDocument = gql`
-  mutation CreateAttackMove($moveCategoryId: ID!, $attributes: AttackMoveAttributes!) {
-    createAttackMove(input: { moveCategoryId: $moveCategoryId, attributes: $attributes }) {
-      move {
-        ...MoveTableRow
-        moveCategory {
+    mutation CreateAttackMove($moveCategoryId: ID!, $attributes: AttackMoveAttributes!) {
+  createAttackMove(
+    input: {moveCategoryId: $moveCategoryId, attributes: $attributes}
+  ) {
+    move {
+      ...MoveTableRow
+      moveCategory {
+        id
+        moves {
           id
-          moves {
-            id
-            position
-          }
+          position
         }
       }
     }
   }
-  ${MoveTableRowFragmentDoc}
-`;
-export type CreateAttackMoveMutationFn = Apollo.MutationFunction<
-  CreateAttackMoveMutation,
-  CreateAttackMoveMutationVariables
->;
+}
+    ${MoveTableRowFragmentDoc}`;
+export type CreateAttackMoveMutationFn = Apollo.MutationFunction<CreateAttackMoveMutation, CreateAttackMoveMutationVariables>;
 
 /**
  * __useCreateAttackMoveMutation__
@@ -6786,42 +4604,32 @@ export type CreateAttackMoveMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useCreateAttackMoveMutation(
-  baseOptions?: Apollo.MutationHookOptions<CreateAttackMoveMutation, CreateAttackMoveMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<CreateAttackMoveMutation, CreateAttackMoveMutationVariables>(
-    CreateAttackMoveDocument,
-    options,
-  );
-}
+export function useCreateAttackMoveMutation(baseOptions?: Apollo.MutationHookOptions<CreateAttackMoveMutation, CreateAttackMoveMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateAttackMoveMutation, CreateAttackMoveMutationVariables>(CreateAttackMoveDocument, options);
+      }
 export type CreateAttackMoveMutationHookResult = ReturnType<typeof useCreateAttackMoveMutation>;
 export type CreateAttackMoveMutationResult = Apollo.MutationResult<CreateAttackMoveMutation>;
-export type CreateAttackMoveMutationOptions = Apollo.BaseMutationOptions<
-  CreateAttackMoveMutation,
-  CreateAttackMoveMutationVariables
->;
+export type CreateAttackMoveMutationOptions = Apollo.BaseMutationOptions<CreateAttackMoveMutation, CreateAttackMoveMutationVariables>;
 export const CreateThrowMoveDocument = gql`
-  mutation CreateThrowMove($moveCategoryId: ID!, $attributes: ThrowMoveAttributes!) {
-    createThrowMove(input: { moveCategoryId: $moveCategoryId, attributes: $attributes }) {
-      move {
-        ...MoveTableRow
-        moveCategory {
+    mutation CreateThrowMove($moveCategoryId: ID!, $attributes: ThrowMoveAttributes!) {
+  createThrowMove(
+    input: {moveCategoryId: $moveCategoryId, attributes: $attributes}
+  ) {
+    move {
+      ...MoveTableRow
+      moveCategory {
+        id
+        moves {
           id
-          moves {
-            id
-            position
-          }
+          position
         }
       }
     }
   }
-  ${MoveTableRowFragmentDoc}
-`;
-export type CreateThrowMoveMutationFn = Apollo.MutationFunction<
-  CreateThrowMoveMutation,
-  CreateThrowMoveMutationVariables
->;
+}
+    ${MoveTableRowFragmentDoc}`;
+export type CreateThrowMoveMutationFn = Apollo.MutationFunction<CreateThrowMoveMutation, CreateThrowMoveMutationVariables>;
 
 /**
  * __useCreateThrowMoveMutation__
@@ -6841,42 +4649,32 @@ export type CreateThrowMoveMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useCreateThrowMoveMutation(
-  baseOptions?: Apollo.MutationHookOptions<CreateThrowMoveMutation, CreateThrowMoveMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<CreateThrowMoveMutation, CreateThrowMoveMutationVariables>(
-    CreateThrowMoveDocument,
-    options,
-  );
-}
+export function useCreateThrowMoveMutation(baseOptions?: Apollo.MutationHookOptions<CreateThrowMoveMutation, CreateThrowMoveMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateThrowMoveMutation, CreateThrowMoveMutationVariables>(CreateThrowMoveDocument, options);
+      }
 export type CreateThrowMoveMutationHookResult = ReturnType<typeof useCreateThrowMoveMutation>;
 export type CreateThrowMoveMutationResult = Apollo.MutationResult<CreateThrowMoveMutation>;
-export type CreateThrowMoveMutationOptions = Apollo.BaseMutationOptions<
-  CreateThrowMoveMutation,
-  CreateThrowMoveMutationVariables
->;
+export type CreateThrowMoveMutationOptions = Apollo.BaseMutationOptions<CreateThrowMoveMutation, CreateThrowMoveMutationVariables>;
 export const CreateReversalMoveDocument = gql`
-  mutation CreateReversalMove($moveCategoryId: ID!, $attributes: ReversalMoveAttributes!) {
-    createReversalMove(input: { moveCategoryId: $moveCategoryId, attributes: $attributes }) {
-      move {
-        ...MoveTableRow
-        moveCategory {
+    mutation CreateReversalMove($moveCategoryId: ID!, $attributes: ReversalMoveAttributes!) {
+  createReversalMove(
+    input: {moveCategoryId: $moveCategoryId, attributes: $attributes}
+  ) {
+    move {
+      ...MoveTableRow
+      moveCategory {
+        id
+        moves {
           id
-          moves {
-            id
-            position
-          }
+          position
         }
       }
     }
   }
-  ${MoveTableRowFragmentDoc}
-`;
-export type CreateReversalMoveMutationFn = Apollo.MutationFunction<
-  CreateReversalMoveMutation,
-  CreateReversalMoveMutationVariables
->;
+}
+    ${MoveTableRowFragmentDoc}`;
+export type CreateReversalMoveMutationFn = Apollo.MutationFunction<CreateReversalMoveMutation, CreateReversalMoveMutationVariables>;
 
 /**
  * __useCreateReversalMoveMutation__
@@ -6896,42 +4694,30 @@ export type CreateReversalMoveMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useCreateReversalMoveMutation(
-  baseOptions?: Apollo.MutationHookOptions<CreateReversalMoveMutation, CreateReversalMoveMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<CreateReversalMoveMutation, CreateReversalMoveMutationVariables>(
-    CreateReversalMoveDocument,
-    options,
-  );
-}
+export function useCreateReversalMoveMutation(baseOptions?: Apollo.MutationHookOptions<CreateReversalMoveMutation, CreateReversalMoveMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateReversalMoveMutation, CreateReversalMoveMutationVariables>(CreateReversalMoveDocument, options);
+      }
 export type CreateReversalMoveMutationHookResult = ReturnType<typeof useCreateReversalMoveMutation>;
 export type CreateReversalMoveMutationResult = Apollo.MutationResult<CreateReversalMoveMutation>;
-export type CreateReversalMoveMutationOptions = Apollo.BaseMutationOptions<
-  CreateReversalMoveMutation,
-  CreateReversalMoveMutationVariables
->;
+export type CreateReversalMoveMutationOptions = Apollo.BaseMutationOptions<CreateReversalMoveMutation, CreateReversalMoveMutationVariables>;
 export const UpdateAttackMoveDocument = gql`
-  mutation UpdateAttackMove($moveId: ID!, $attributes: AttackMoveAttributes!) {
-    updateAttackMove(input: { moveId: $moveId, attributes: $attributes }) {
-      move {
-        ...MoveTableRow
-        moveCategory {
+    mutation UpdateAttackMove($moveId: ID!, $attributes: AttackMoveAttributes!) {
+  updateAttackMove(input: {moveId: $moveId, attributes: $attributes}) {
+    move {
+      ...MoveTableRow
+      moveCategory {
+        id
+        moves {
           id
-          moves {
-            id
-            position
-          }
+          position
         }
       }
     }
   }
-  ${MoveTableRowFragmentDoc}
-`;
-export type UpdateAttackMoveMutationFn = Apollo.MutationFunction<
-  UpdateAttackMoveMutation,
-  UpdateAttackMoveMutationVariables
->;
+}
+    ${MoveTableRowFragmentDoc}`;
+export type UpdateAttackMoveMutationFn = Apollo.MutationFunction<UpdateAttackMoveMutation, UpdateAttackMoveMutationVariables>;
 
 /**
  * __useUpdateAttackMoveMutation__
@@ -6951,42 +4737,30 @@ export type UpdateAttackMoveMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useUpdateAttackMoveMutation(
-  baseOptions?: Apollo.MutationHookOptions<UpdateAttackMoveMutation, UpdateAttackMoveMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<UpdateAttackMoveMutation, UpdateAttackMoveMutationVariables>(
-    UpdateAttackMoveDocument,
-    options,
-  );
-}
+export function useUpdateAttackMoveMutation(baseOptions?: Apollo.MutationHookOptions<UpdateAttackMoveMutation, UpdateAttackMoveMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateAttackMoveMutation, UpdateAttackMoveMutationVariables>(UpdateAttackMoveDocument, options);
+      }
 export type UpdateAttackMoveMutationHookResult = ReturnType<typeof useUpdateAttackMoveMutation>;
 export type UpdateAttackMoveMutationResult = Apollo.MutationResult<UpdateAttackMoveMutation>;
-export type UpdateAttackMoveMutationOptions = Apollo.BaseMutationOptions<
-  UpdateAttackMoveMutation,
-  UpdateAttackMoveMutationVariables
->;
+export type UpdateAttackMoveMutationOptions = Apollo.BaseMutationOptions<UpdateAttackMoveMutation, UpdateAttackMoveMutationVariables>;
 export const UpdateThrowMoveDocument = gql`
-  mutation UpdateThrowMove($moveId: ID!, $attributes: ThrowMoveAttributes!) {
-    updateThrowMove(input: { moveId: $moveId, attributes: $attributes }) {
-      move {
-        ...MoveTableRow
-        moveCategory {
+    mutation UpdateThrowMove($moveId: ID!, $attributes: ThrowMoveAttributes!) {
+  updateThrowMove(input: {moveId: $moveId, attributes: $attributes}) {
+    move {
+      ...MoveTableRow
+      moveCategory {
+        id
+        moves {
           id
-          moves {
-            id
-            position
-          }
+          position
         }
       }
     }
   }
-  ${MoveTableRowFragmentDoc}
-`;
-export type UpdateThrowMoveMutationFn = Apollo.MutationFunction<
-  UpdateThrowMoveMutation,
-  UpdateThrowMoveMutationVariables
->;
+}
+    ${MoveTableRowFragmentDoc}`;
+export type UpdateThrowMoveMutationFn = Apollo.MutationFunction<UpdateThrowMoveMutation, UpdateThrowMoveMutationVariables>;
 
 /**
  * __useUpdateThrowMoveMutation__
@@ -7006,41 +4780,30 @@ export type UpdateThrowMoveMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useUpdateThrowMoveMutation(
-  baseOptions?: Apollo.MutationHookOptions<UpdateThrowMoveMutation, UpdateThrowMoveMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<UpdateThrowMoveMutation, UpdateThrowMoveMutationVariables>(
-    UpdateThrowMoveDocument,
-    options,
-  );
-}
+export function useUpdateThrowMoveMutation(baseOptions?: Apollo.MutationHookOptions<UpdateThrowMoveMutation, UpdateThrowMoveMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateThrowMoveMutation, UpdateThrowMoveMutationVariables>(UpdateThrowMoveDocument, options);
+      }
 export type UpdateThrowMoveMutationHookResult = ReturnType<typeof useUpdateThrowMoveMutation>;
 export type UpdateThrowMoveMutationResult = Apollo.MutationResult<UpdateThrowMoveMutation>;
-export type UpdateThrowMoveMutationOptions = Apollo.BaseMutationOptions<
-  UpdateThrowMoveMutation,
-  UpdateThrowMoveMutationVariables
->;
+export type UpdateThrowMoveMutationOptions = Apollo.BaseMutationOptions<UpdateThrowMoveMutation, UpdateThrowMoveMutationVariables>;
 export const UpdateReversalMoveDocument = gql`
-  mutation UpdateReversalMove($moveId: ID!, $attributes: ReversalMoveAttributes!) {
-    updateReversalMove(input: { moveId: $moveId, attributes: $attributes }) {
-      move {
+    mutation UpdateReversalMove($moveId: ID!, $attributes: ReversalMoveAttributes!) {
+  updateReversalMove(input: {moveId: $moveId, attributes: $attributes}) {
+    move {
+      id
+      moveCategory {
         id
-        moveCategory {
+        moves {
           id
-          moves {
-            id
-            position
-          }
+          position
         }
       }
     }
   }
-`;
-export type UpdateReversalMoveMutationFn = Apollo.MutationFunction<
-  UpdateReversalMoveMutation,
-  UpdateReversalMoveMutationVariables
->;
+}
+    `;
+export type UpdateReversalMoveMutationFn = Apollo.MutationFunction<UpdateReversalMoveMutation, UpdateReversalMoveMutationVariables>;
 
 /**
  * __useUpdateReversalMoveMutation__
@@ -7060,36 +4823,28 @@ export type UpdateReversalMoveMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useUpdateReversalMoveMutation(
-  baseOptions?: Apollo.MutationHookOptions<UpdateReversalMoveMutation, UpdateReversalMoveMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<UpdateReversalMoveMutation, UpdateReversalMoveMutationVariables>(
-    UpdateReversalMoveDocument,
-    options,
-  );
-}
+export function useUpdateReversalMoveMutation(baseOptions?: Apollo.MutationHookOptions<UpdateReversalMoveMutation, UpdateReversalMoveMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateReversalMoveMutation, UpdateReversalMoveMutationVariables>(UpdateReversalMoveDocument, options);
+      }
 export type UpdateReversalMoveMutationHookResult = ReturnType<typeof useUpdateReversalMoveMutation>;
 export type UpdateReversalMoveMutationResult = Apollo.MutationResult<UpdateReversalMoveMutation>;
-export type UpdateReversalMoveMutationOptions = Apollo.BaseMutationOptions<
-  UpdateReversalMoveMutation,
-  UpdateReversalMoveMutationVariables
->;
+export type UpdateReversalMoveMutationOptions = Apollo.BaseMutationOptions<UpdateReversalMoveMutation, UpdateReversalMoveMutationVariables>;
 export const DeleteMoveDocument = gql`
-  mutation DeleteMove($moveId: ID!) {
-    deleteMove(input: { moveId: $moveId }) {
-      move {
+    mutation DeleteMove($moveId: ID!) {
+  deleteMove(input: {moveId: $moveId}) {
+    move {
+      id
+      moveCategory {
         id
-        moveCategory {
+        moves {
           id
-          moves {
-            id
-          }
         }
       }
     }
   }
-`;
+}
+    `;
 export type DeleteMoveMutationFn = Apollo.MutationFunction<DeleteMoveMutation, DeleteMoveMutationVariables>;
 
 /**
@@ -7109,33 +4864,27 @@ export type DeleteMoveMutationFn = Apollo.MutationFunction<DeleteMoveMutation, D
  *   },
  * });
  */
-export function useDeleteMoveMutation(
-  baseOptions?: Apollo.MutationHookOptions<DeleteMoveMutation, DeleteMoveMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<DeleteMoveMutation, DeleteMoveMutationVariables>(DeleteMoveDocument, options);
-}
+export function useDeleteMoveMutation(baseOptions?: Apollo.MutationHookOptions<DeleteMoveMutation, DeleteMoveMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteMoveMutation, DeleteMoveMutationVariables>(DeleteMoveDocument, options);
+      }
 export type DeleteMoveMutationHookResult = ReturnType<typeof useDeleteMoveMutation>;
 export type DeleteMoveMutationResult = Apollo.MutationResult<DeleteMoveMutation>;
 export type DeleteMoveMutationOptions = Apollo.BaseMutationOptions<DeleteMoveMutation, DeleteMoveMutationVariables>;
 export const CreateMoveVideoDocument = gql`
-  mutation CreateMoveVideo($moveId: ID!) {
-    createMoveVideo(input: { moveId: $moveId }) {
-      move {
-        ...MoveTableRow
-      }
-      videoUpload {
-        url
-        fields
-      }
+    mutation CreateMoveVideo($moveId: ID!) {
+  createMoveVideo(input: {moveId: $moveId}) {
+    move {
+      ...MoveTableRow
+    }
+    videoUpload {
+      url
+      fields
     }
   }
-  ${MoveTableRowFragmentDoc}
-`;
-export type CreateMoveVideoMutationFn = Apollo.MutationFunction<
-  CreateMoveVideoMutation,
-  CreateMoveVideoMutationVariables
->;
+}
+    ${MoveTableRowFragmentDoc}`;
+export type CreateMoveVideoMutationFn = Apollo.MutationFunction<CreateMoveVideoMutation, CreateMoveVideoMutationVariables>;
 
 /**
  * __useCreateMoveVideoMutation__
@@ -7154,38 +4903,29 @@ export type CreateMoveVideoMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useCreateMoveVideoMutation(
-  baseOptions?: Apollo.MutationHookOptions<CreateMoveVideoMutation, CreateMoveVideoMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<CreateMoveVideoMutation, CreateMoveVideoMutationVariables>(
-    CreateMoveVideoDocument,
-    options,
-  );
-}
+export function useCreateMoveVideoMutation(baseOptions?: Apollo.MutationHookOptions<CreateMoveVideoMutation, CreateMoveVideoMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateMoveVideoMutation, CreateMoveVideoMutationVariables>(CreateMoveVideoDocument, options);
+      }
 export type CreateMoveVideoMutationHookResult = ReturnType<typeof useCreateMoveVideoMutation>;
 export type CreateMoveVideoMutationResult = Apollo.MutationResult<CreateMoveVideoMutation>;
-export type CreateMoveVideoMutationOptions = Apollo.BaseMutationOptions<
-  CreateMoveVideoMutation,
-  CreateMoveVideoMutationVariables
->;
+export type CreateMoveVideoMutationOptions = Apollo.BaseMutationOptions<CreateMoveVideoMutation, CreateMoveVideoMutationVariables>;
 export const PlayerTableRowsDocument = gql`
-  query PlayerTableRows($after: String, $keyword: String) {
-    players(first: 10, after: $after, keyword: $keyword) {
-      edges {
-        node {
-          ...PlayerTableRow
-        }
-        cursor
+    query PlayerTableRows($after: String, $keyword: String) {
+  players(first: 10, after: $after, keyword: $keyword) {
+    edges {
+      node {
+        ...PlayerTableRow
       }
-      pageInfo {
-        ...Pagination
-      }
+      cursor
+    }
+    pageInfo {
+      ...Pagination
     }
   }
-  ${PlayerTableRowFragmentDoc}
-  ${PaginationFragmentDoc}
-`;
+}
+    ${PlayerTableRowFragmentDoc}
+${PaginationFragmentDoc}`;
 
 /**
  * __usePlayerTableRowsQuery__
@@ -7204,30 +4944,26 @@ export const PlayerTableRowsDocument = gql`
  *   },
  * });
  */
-export function usePlayerTableRowsQuery(
-  baseOptions?: Apollo.QueryHookOptions<PlayerTableRowsQuery, PlayerTableRowsQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<PlayerTableRowsQuery, PlayerTableRowsQueryVariables>(PlayerTableRowsDocument, options);
-}
-export function usePlayerTableRowsLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<PlayerTableRowsQuery, PlayerTableRowsQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<PlayerTableRowsQuery, PlayerTableRowsQueryVariables>(PlayerTableRowsDocument, options);
-}
+export function usePlayerTableRowsQuery(baseOptions?: Apollo.QueryHookOptions<PlayerTableRowsQuery, PlayerTableRowsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PlayerTableRowsQuery, PlayerTableRowsQueryVariables>(PlayerTableRowsDocument, options);
+      }
+export function usePlayerTableRowsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PlayerTableRowsQuery, PlayerTableRowsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PlayerTableRowsQuery, PlayerTableRowsQueryVariables>(PlayerTableRowsDocument, options);
+        }
 export type PlayerTableRowsQueryHookResult = ReturnType<typeof usePlayerTableRowsQuery>;
 export type PlayerTableRowsLazyQueryHookResult = ReturnType<typeof usePlayerTableRowsLazyQuery>;
 export type PlayerTableRowsQueryResult = Apollo.QueryResult<PlayerTableRowsQuery, PlayerTableRowsQueryVariables>;
 export const DeletePlayerDocument = gql`
-  mutation DeletePlayer($playerSlug: String!) {
-    deletePlayer(input: { playerSlug: $playerSlug }) {
-      player {
-        id
-      }
+    mutation DeletePlayer($playerSlug: String!) {
+  deletePlayer(input: {playerSlug: $playerSlug}) {
+    player {
+      id
     }
   }
-`;
+}
+    `;
 export type DeletePlayerMutationFn = Apollo.MutationFunction<DeletePlayerMutation, DeletePlayerMutationVariables>;
 
 /**
@@ -7247,31 +4983,23 @@ export type DeletePlayerMutationFn = Apollo.MutationFunction<DeletePlayerMutatio
  *   },
  * });
  */
-export function useDeletePlayerMutation(
-  baseOptions?: Apollo.MutationHookOptions<DeletePlayerMutation, DeletePlayerMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<DeletePlayerMutation, DeletePlayerMutationVariables>(DeletePlayerDocument, options);
-}
+export function useDeletePlayerMutation(baseOptions?: Apollo.MutationHookOptions<DeletePlayerMutation, DeletePlayerMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeletePlayerMutation, DeletePlayerMutationVariables>(DeletePlayerDocument, options);
+      }
 export type DeletePlayerMutationHookResult = ReturnType<typeof useDeletePlayerMutation>;
 export type DeletePlayerMutationResult = Apollo.MutationResult<DeletePlayerMutation>;
-export type DeletePlayerMutationOptions = Apollo.BaseMutationOptions<
-  DeletePlayerMutation,
-  DeletePlayerMutationVariables
->;
+export type DeletePlayerMutationOptions = Apollo.BaseMutationOptions<DeletePlayerMutation, DeletePlayerMutationVariables>;
 export const CreatePlayerFromSmashggDocument = gql`
-  mutation CreatePlayerFromSmashgg($smashggId: String!) {
-    createPlayerFromSmashgg(input: { smashggId: $smashggId }) {
-      player {
-        id
-      }
+    mutation CreatePlayerFromSmashgg($smashggId: String!) {
+  createPlayerFromSmashgg(input: {smashggId: $smashggId}) {
+    player {
+      id
     }
   }
-`;
-export type CreatePlayerFromSmashggMutationFn = Apollo.MutationFunction<
-  CreatePlayerFromSmashggMutation,
-  CreatePlayerFromSmashggMutationVariables
->;
+}
+    `;
+export type CreatePlayerFromSmashggMutationFn = Apollo.MutationFunction<CreatePlayerFromSmashggMutation, CreatePlayerFromSmashggMutationVariables>;
 
 /**
  * __useCreatePlayerFromSmashggMutation__
@@ -7290,30 +5018,22 @@ export type CreatePlayerFromSmashggMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useCreatePlayerFromSmashggMutation(
-  baseOptions?: Apollo.MutationHookOptions<CreatePlayerFromSmashggMutation, CreatePlayerFromSmashggMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<CreatePlayerFromSmashggMutation, CreatePlayerFromSmashggMutationVariables>(
-    CreatePlayerFromSmashggDocument,
-    options,
-  );
-}
+export function useCreatePlayerFromSmashggMutation(baseOptions?: Apollo.MutationHookOptions<CreatePlayerFromSmashggMutation, CreatePlayerFromSmashggMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreatePlayerFromSmashggMutation, CreatePlayerFromSmashggMutationVariables>(CreatePlayerFromSmashggDocument, options);
+      }
 export type CreatePlayerFromSmashggMutationHookResult = ReturnType<typeof useCreatePlayerFromSmashggMutation>;
 export type CreatePlayerFromSmashggMutationResult = Apollo.MutationResult<CreatePlayerFromSmashggMutation>;
-export type CreatePlayerFromSmashggMutationOptions = Apollo.BaseMutationOptions<
-  CreatePlayerFromSmashggMutation,
-  CreatePlayerFromSmashggMutationVariables
->;
+export type CreatePlayerFromSmashggMutationOptions = Apollo.BaseMutationOptions<CreatePlayerFromSmashggMutation, CreatePlayerFromSmashggMutationVariables>;
 export const CreateStandingDocument = gql`
-  mutation CreateStanding($tournamentId: ID!, $attributes: StandingAttributes!) {
-    createStanding(input: { tournamentId: $tournamentId, attributes: $attributes }) {
-      standing {
-        id
-      }
+    mutation CreateStanding($tournamentId: ID!, $attributes: StandingAttributes!) {
+  createStanding(input: {tournamentId: $tournamentId, attributes: $attributes}) {
+    standing {
+      id
     }
   }
-`;
+}
+    `;
 export type CreateStandingMutationFn = Apollo.MutationFunction<CreateStandingMutation, CreateStandingMutationVariables>;
 
 /**
@@ -7334,27 +5054,22 @@ export type CreateStandingMutationFn = Apollo.MutationFunction<CreateStandingMut
  *   },
  * });
  */
-export function useCreateStandingMutation(
-  baseOptions?: Apollo.MutationHookOptions<CreateStandingMutation, CreateStandingMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<CreateStandingMutation, CreateStandingMutationVariables>(CreateStandingDocument, options);
-}
+export function useCreateStandingMutation(baseOptions?: Apollo.MutationHookOptions<CreateStandingMutation, CreateStandingMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateStandingMutation, CreateStandingMutationVariables>(CreateStandingDocument, options);
+      }
 export type CreateStandingMutationHookResult = ReturnType<typeof useCreateStandingMutation>;
 export type CreateStandingMutationResult = Apollo.MutationResult<CreateStandingMutation>;
-export type CreateStandingMutationOptions = Apollo.BaseMutationOptions<
-  CreateStandingMutation,
-  CreateStandingMutationVariables
->;
+export type CreateStandingMutationOptions = Apollo.BaseMutationOptions<CreateStandingMutation, CreateStandingMutationVariables>;
 export const DeleteStandingDocument = gql`
-  mutation DeleteStanding($standingId: ID!) {
-    deleteStanding(input: { standingId: $standingId }) {
-      standing {
-        id
-      }
+    mutation DeleteStanding($standingId: ID!) {
+  deleteStanding(input: {standingId: $standingId}) {
+    standing {
+      id
     }
   }
-`;
+}
+    `;
 export type DeleteStandingMutationFn = Apollo.MutationFunction<DeleteStandingMutation, DeleteStandingMutationVariables>;
 
 /**
@@ -7374,29 +5089,23 @@ export type DeleteStandingMutationFn = Apollo.MutationFunction<DeleteStandingMut
  *   },
  * });
  */
-export function useDeleteStandingMutation(
-  baseOptions?: Apollo.MutationHookOptions<DeleteStandingMutation, DeleteStandingMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<DeleteStandingMutation, DeleteStandingMutationVariables>(DeleteStandingDocument, options);
-}
+export function useDeleteStandingMutation(baseOptions?: Apollo.MutationHookOptions<DeleteStandingMutation, DeleteStandingMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteStandingMutation, DeleteStandingMutationVariables>(DeleteStandingDocument, options);
+      }
 export type DeleteStandingMutationHookResult = ReturnType<typeof useDeleteStandingMutation>;
 export type DeleteStandingMutationResult = Apollo.MutationResult<DeleteStandingMutation>;
-export type DeleteStandingMutationOptions = Apollo.BaseMutationOptions<
-  DeleteStandingMutation,
-  DeleteStandingMutationVariables
->;
+export type DeleteStandingMutationOptions = Apollo.BaseMutationOptions<DeleteStandingMutation, DeleteStandingMutationVariables>;
 export const StandingListDocument = gql`
-  query StandingList($tournamentId: ID!) {
-    tournament(tournamentId: $tournamentId) {
-      id
-      standings {
-        ...StandingListItem
-      }
+    query StandingList($tournamentId: ID!) {
+  tournament(tournamentId: $tournamentId) {
+    id
+    standings {
+      ...StandingListItem
     }
   }
-  ${StandingListItemFragmentDoc}
-`;
+}
+    ${StandingListItemFragmentDoc}`;
 
 /**
  * __useStandingListQuery__
@@ -7414,38 +5123,33 @@ export const StandingListDocument = gql`
  *   },
  * });
  */
-export function useStandingListQuery(
-  baseOptions: Apollo.QueryHookOptions<StandingListQuery, StandingListQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<StandingListQuery, StandingListQueryVariables>(StandingListDocument, options);
-}
-export function useStandingListLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<StandingListQuery, StandingListQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<StandingListQuery, StandingListQueryVariables>(StandingListDocument, options);
-}
+export function useStandingListQuery(baseOptions: Apollo.QueryHookOptions<StandingListQuery, StandingListQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<StandingListQuery, StandingListQueryVariables>(StandingListDocument, options);
+      }
+export function useStandingListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<StandingListQuery, StandingListQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<StandingListQuery, StandingListQueryVariables>(StandingListDocument, options);
+        }
 export type StandingListQueryHookResult = ReturnType<typeof useStandingListQuery>;
 export type StandingListLazyQueryHookResult = ReturnType<typeof useStandingListLazyQuery>;
 export type StandingListQueryResult = Apollo.QueryResult<StandingListQuery, StandingListQueryVariables>;
 export const TournamentTableRowsDocument = gql`
-  query TournamentTableRows($after: String, $keyword: String) {
-    tournaments(first: 10, after: $after, keyword: $keyword) {
-      edges {
-        node {
-          ...TournamentTableRow
-        }
-        cursor
+    query TournamentTableRows($after: String, $keyword: String) {
+  tournaments(first: 10, after: $after, keyword: $keyword) {
+    edges {
+      node {
+        ...TournamentTableRow
       }
-      pageInfo {
-        ...Pagination
-      }
+      cursor
+    }
+    pageInfo {
+      ...Pagination
     }
   }
-  ${TournamentTableRowFragmentDoc}
-  ${PaginationFragmentDoc}
-`;
+}
+    ${TournamentTableRowFragmentDoc}
+${PaginationFragmentDoc}`;
 
 /**
  * __useTournamentTableRowsQuery__
@@ -7464,43 +5168,27 @@ export const TournamentTableRowsDocument = gql`
  *   },
  * });
  */
-export function useTournamentTableRowsQuery(
-  baseOptions?: Apollo.QueryHookOptions<TournamentTableRowsQuery, TournamentTableRowsQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<TournamentTableRowsQuery, TournamentTableRowsQueryVariables>(
-    TournamentTableRowsDocument,
-    options,
-  );
-}
-export function useTournamentTableRowsLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<TournamentTableRowsQuery, TournamentTableRowsQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<TournamentTableRowsQuery, TournamentTableRowsQueryVariables>(
-    TournamentTableRowsDocument,
-    options,
-  );
-}
+export function useTournamentTableRowsQuery(baseOptions?: Apollo.QueryHookOptions<TournamentTableRowsQuery, TournamentTableRowsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TournamentTableRowsQuery, TournamentTableRowsQueryVariables>(TournamentTableRowsDocument, options);
+      }
+export function useTournamentTableRowsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TournamentTableRowsQuery, TournamentTableRowsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TournamentTableRowsQuery, TournamentTableRowsQueryVariables>(TournamentTableRowsDocument, options);
+        }
 export type TournamentTableRowsQueryHookResult = ReturnType<typeof useTournamentTableRowsQuery>;
 export type TournamentTableRowsLazyQueryHookResult = ReturnType<typeof useTournamentTableRowsLazyQuery>;
-export type TournamentTableRowsQueryResult = Apollo.QueryResult<
-  TournamentTableRowsQuery,
-  TournamentTableRowsQueryVariables
->;
+export type TournamentTableRowsQueryResult = Apollo.QueryResult<TournamentTableRowsQuery, TournamentTableRowsQueryVariables>;
 export const DeleteTournamentDocument = gql`
-  mutation DeleteTournament($tournamentId: ID!) {
-    deleteTournament(input: { tournamentId: $tournamentId }) {
-      tournament {
-        id
-      }
+    mutation DeleteTournament($tournamentId: ID!) {
+  deleteTournament(input: {tournamentId: $tournamentId}) {
+    tournament {
+      id
     }
   }
-`;
-export type DeleteTournamentMutationFn = Apollo.MutationFunction<
-  DeleteTournamentMutation,
-  DeleteTournamentMutationVariables
->;
+}
+    `;
+export type DeleteTournamentMutationFn = Apollo.MutationFunction<DeleteTournamentMutation, DeleteTournamentMutationVariables>;
 
 /**
  * __useDeleteTournamentMutation__
@@ -7519,34 +5207,23 @@ export type DeleteTournamentMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useDeleteTournamentMutation(
-  baseOptions?: Apollo.MutationHookOptions<DeleteTournamentMutation, DeleteTournamentMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<DeleteTournamentMutation, DeleteTournamentMutationVariables>(
-    DeleteTournamentDocument,
-    options,
-  );
-}
+export function useDeleteTournamentMutation(baseOptions?: Apollo.MutationHookOptions<DeleteTournamentMutation, DeleteTournamentMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteTournamentMutation, DeleteTournamentMutationVariables>(DeleteTournamentDocument, options);
+      }
 export type DeleteTournamentMutationHookResult = ReturnType<typeof useDeleteTournamentMutation>;
 export type DeleteTournamentMutationResult = Apollo.MutationResult<DeleteTournamentMutation>;
-export type DeleteTournamentMutationOptions = Apollo.BaseMutationOptions<
-  DeleteTournamentMutation,
-  DeleteTournamentMutationVariables
->;
+export type DeleteTournamentMutationOptions = Apollo.BaseMutationOptions<DeleteTournamentMutation, DeleteTournamentMutationVariables>;
 export const CreateTournamentVideoDocument = gql`
-  mutation CreateTournamentVideo($tournamentId: ID!, $url: String!) {
-    createTournamentVideo(input: { tournamentId: $tournamentId, url: $url }) {
-      tournamentVideo {
-        id
-      }
+    mutation CreateTournamentVideo($tournamentId: ID!, $url: String!) {
+  createTournamentVideo(input: {tournamentId: $tournamentId, url: $url}) {
+    tournamentVideo {
+      id
     }
   }
-`;
-export type CreateTournamentVideoMutationFn = Apollo.MutationFunction<
-  CreateTournamentVideoMutation,
-  CreateTournamentVideoMutationVariables
->;
+}
+    `;
+export type CreateTournamentVideoMutationFn = Apollo.MutationFunction<CreateTournamentVideoMutation, CreateTournamentVideoMutationVariables>;
 
 /**
  * __useCreateTournamentVideoMutation__
@@ -7566,34 +5243,23 @@ export type CreateTournamentVideoMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useCreateTournamentVideoMutation(
-  baseOptions?: Apollo.MutationHookOptions<CreateTournamentVideoMutation, CreateTournamentVideoMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<CreateTournamentVideoMutation, CreateTournamentVideoMutationVariables>(
-    CreateTournamentVideoDocument,
-    options,
-  );
-}
+export function useCreateTournamentVideoMutation(baseOptions?: Apollo.MutationHookOptions<CreateTournamentVideoMutation, CreateTournamentVideoMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateTournamentVideoMutation, CreateTournamentVideoMutationVariables>(CreateTournamentVideoDocument, options);
+      }
 export type CreateTournamentVideoMutationHookResult = ReturnType<typeof useCreateTournamentVideoMutation>;
 export type CreateTournamentVideoMutationResult = Apollo.MutationResult<CreateTournamentVideoMutation>;
-export type CreateTournamentVideoMutationOptions = Apollo.BaseMutationOptions<
-  CreateTournamentVideoMutation,
-  CreateTournamentVideoMutationVariables
->;
+export type CreateTournamentVideoMutationOptions = Apollo.BaseMutationOptions<CreateTournamentVideoMutation, CreateTournamentVideoMutationVariables>;
 export const DeleteTournamentVideoDocument = gql`
-  mutation DeleteTournamentVideo($tournamentVideoId: ID!) {
-    deleteTournamentVideo(input: { tournamentVideoId: $tournamentVideoId }) {
-      tournamentVideo {
-        id
-      }
+    mutation DeleteTournamentVideo($tournamentVideoId: ID!) {
+  deleteTournamentVideo(input: {tournamentVideoId: $tournamentVideoId}) {
+    tournamentVideo {
+      id
     }
   }
-`;
-export type DeleteTournamentVideoMutationFn = Apollo.MutationFunction<
-  DeleteTournamentVideoMutation,
-  DeleteTournamentVideoMutationVariables
->;
+}
+    `;
+export type DeleteTournamentVideoMutationFn = Apollo.MutationFunction<DeleteTournamentVideoMutation, DeleteTournamentVideoMutationVariables>;
 
 /**
  * __useDeleteTournamentVideoMutation__
@@ -7612,33 +5278,24 @@ export type DeleteTournamentVideoMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useDeleteTournamentVideoMutation(
-  baseOptions?: Apollo.MutationHookOptions<DeleteTournamentVideoMutation, DeleteTournamentVideoMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<DeleteTournamentVideoMutation, DeleteTournamentVideoMutationVariables>(
-    DeleteTournamentVideoDocument,
-    options,
-  );
-}
+export function useDeleteTournamentVideoMutation(baseOptions?: Apollo.MutationHookOptions<DeleteTournamentVideoMutation, DeleteTournamentVideoMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteTournamentVideoMutation, DeleteTournamentVideoMutationVariables>(DeleteTournamentVideoDocument, options);
+      }
 export type DeleteTournamentVideoMutationHookResult = ReturnType<typeof useDeleteTournamentVideoMutation>;
 export type DeleteTournamentVideoMutationResult = Apollo.MutationResult<DeleteTournamentVideoMutation>;
-export type DeleteTournamentVideoMutationOptions = Apollo.BaseMutationOptions<
-  DeleteTournamentVideoMutation,
-  DeleteTournamentVideoMutationVariables
->;
+export type DeleteTournamentVideoMutationOptions = Apollo.BaseMutationOptions<DeleteTournamentVideoMutation, DeleteTournamentVideoMutationVariables>;
 export const VideoListDocument = gql`
-  query VideoList($tournamentId: ID!) {
-    tournament(tournamentId: $tournamentId) {
+    query VideoList($tournamentId: ID!) {
+  tournament(tournamentId: $tournamentId) {
+    id
+    videos {
       id
-      videos {
-        id
-        ...VideoListItem
-      }
+      ...VideoListItem
     }
   }
-  ${VideoListItemFragmentDoc}
-`;
+}
+    ${VideoListItemFragmentDoc}`;
 
 /**
  * __useVideoListQuery__
@@ -7657,27 +5314,25 @@ export const VideoListDocument = gql`
  * });
  */
 export function useVideoListQuery(baseOptions: Apollo.QueryHookOptions<VideoListQuery, VideoListQueryVariables>) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<VideoListQuery, VideoListQueryVariables>(VideoListDocument, options);
-}
-export function useVideoListLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<VideoListQuery, VideoListQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<VideoListQuery, VideoListQueryVariables>(VideoListDocument, options);
-}
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<VideoListQuery, VideoListQueryVariables>(VideoListDocument, options);
+      }
+export function useVideoListLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<VideoListQuery, VideoListQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<VideoListQuery, VideoListQueryVariables>(VideoListDocument, options);
+        }
 export type VideoListQueryHookResult = ReturnType<typeof useVideoListQuery>;
 export type VideoListLazyQueryHookResult = ReturnType<typeof useVideoListLazyQuery>;
 export type VideoListQueryResult = Apollo.QueryResult<VideoListQuery, VideoListQueryVariables>;
 export const CreateArticleDocument = gql`
-  mutation CreateArticle($attributes: ArticleAttributes!) {
-    createArticle(input: { attributes: $attributes }) {
-      article {
-        id
-      }
+    mutation CreateArticle($attributes: ArticleAttributes!) {
+  createArticle(input: {attributes: $attributes}) {
+    article {
+      id
     }
   }
-`;
+}
+    `;
 export type CreateArticleMutationFn = Apollo.MutationFunction<CreateArticleMutation, CreateArticleMutationVariables>;
 
 /**
@@ -7697,27 +5352,22 @@ export type CreateArticleMutationFn = Apollo.MutationFunction<CreateArticleMutat
  *   },
  * });
  */
-export function useCreateArticleMutation(
-  baseOptions?: Apollo.MutationHookOptions<CreateArticleMutation, CreateArticleMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<CreateArticleMutation, CreateArticleMutationVariables>(CreateArticleDocument, options);
-}
+export function useCreateArticleMutation(baseOptions?: Apollo.MutationHookOptions<CreateArticleMutation, CreateArticleMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateArticleMutation, CreateArticleMutationVariables>(CreateArticleDocument, options);
+      }
 export type CreateArticleMutationHookResult = ReturnType<typeof useCreateArticleMutation>;
 export type CreateArticleMutationResult = Apollo.MutationResult<CreateArticleMutation>;
-export type CreateArticleMutationOptions = Apollo.BaseMutationOptions<
-  CreateArticleMutation,
-  CreateArticleMutationVariables
->;
+export type CreateArticleMutationOptions = Apollo.BaseMutationOptions<CreateArticleMutation, CreateArticleMutationVariables>;
 export const UpdateArticleDocument = gql`
-  mutation UpdateArticle($articleId: ID!, $attributes: ArticleAttributes!) {
-    updateArticle(input: { articleId: $articleId, attributes: $attributes }) {
-      article {
-        id
-      }
+    mutation UpdateArticle($articleId: ID!, $attributes: ArticleAttributes!) {
+  updateArticle(input: {articleId: $articleId, attributes: $attributes}) {
+    article {
+      id
     }
   }
-`;
+}
+    `;
 export type UpdateArticleMutationFn = Apollo.MutationFunction<UpdateArticleMutation, UpdateArticleMutationVariables>;
 
 /**
@@ -7738,26 +5388,20 @@ export type UpdateArticleMutationFn = Apollo.MutationFunction<UpdateArticleMutat
  *   },
  * });
  */
-export function useUpdateArticleMutation(
-  baseOptions?: Apollo.MutationHookOptions<UpdateArticleMutation, UpdateArticleMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<UpdateArticleMutation, UpdateArticleMutationVariables>(UpdateArticleDocument, options);
-}
+export function useUpdateArticleMutation(baseOptions?: Apollo.MutationHookOptions<UpdateArticleMutation, UpdateArticleMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateArticleMutation, UpdateArticleMutationVariables>(UpdateArticleDocument, options);
+      }
 export type UpdateArticleMutationHookResult = ReturnType<typeof useUpdateArticleMutation>;
 export type UpdateArticleMutationResult = Apollo.MutationResult<UpdateArticleMutation>;
-export type UpdateArticleMutationOptions = Apollo.BaseMutationOptions<
-  UpdateArticleMutation,
-  UpdateArticleMutationVariables
->;
+export type UpdateArticleMutationOptions = Apollo.BaseMutationOptions<UpdateArticleMutation, UpdateArticleMutationVariables>;
 export const ComboCategoryFormDocument = gql`
-  query ComboCategoryForm($comboCategoryId: ID!) {
-    comboCategory(comboCategoryId: $comboCategoryId) {
-      ...ComboCategoryForm
-    }
+    query ComboCategoryForm($comboCategoryId: ID!) {
+  comboCategory(comboCategoryId: $comboCategoryId) {
+    ...ComboCategoryForm
   }
-  ${ComboCategoryFormFragmentDoc}
-`;
+}
+    ${ComboCategoryFormFragmentDoc}`;
 
 /**
  * __useComboCategoryFormQuery__
@@ -7775,32 +5419,24 @@ export const ComboCategoryFormDocument = gql`
  *   },
  * });
  */
-export function useComboCategoryFormQuery(
-  baseOptions: Apollo.QueryHookOptions<ComboCategoryFormQuery, ComboCategoryFormQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<ComboCategoryFormQuery, ComboCategoryFormQueryVariables>(ComboCategoryFormDocument, options);
-}
-export function useComboCategoryFormLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<ComboCategoryFormQuery, ComboCategoryFormQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<ComboCategoryFormQuery, ComboCategoryFormQueryVariables>(
-    ComboCategoryFormDocument,
-    options,
-  );
-}
+export function useComboCategoryFormQuery(baseOptions: Apollo.QueryHookOptions<ComboCategoryFormQuery, ComboCategoryFormQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ComboCategoryFormQuery, ComboCategoryFormQueryVariables>(ComboCategoryFormDocument, options);
+      }
+export function useComboCategoryFormLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ComboCategoryFormQuery, ComboCategoryFormQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ComboCategoryFormQuery, ComboCategoryFormQueryVariables>(ComboCategoryFormDocument, options);
+        }
 export type ComboCategoryFormQueryHookResult = ReturnType<typeof useComboCategoryFormQuery>;
 export type ComboCategoryFormLazyQueryHookResult = ReturnType<typeof useComboCategoryFormLazyQuery>;
 export type ComboCategoryFormQueryResult = Apollo.QueryResult<ComboCategoryFormQuery, ComboCategoryFormQueryVariables>;
 export const ComboFormDocument = gql`
-  query ComboForm($comboId: ID!) {
-    combo(comboId: $comboId) {
-      ...ComboForm
-    }
+    query ComboForm($comboId: ID!) {
+  combo(comboId: $comboId) {
+    ...ComboForm
   }
-  ${ComboFormFragmentDoc}
-`;
+}
+    ${ComboFormFragmentDoc}`;
 
 /**
  * __useComboFormQuery__
@@ -7819,26 +5455,23 @@ export const ComboFormDocument = gql`
  * });
  */
 export function useComboFormQuery(baseOptions: Apollo.QueryHookOptions<ComboFormQuery, ComboFormQueryVariables>) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<ComboFormQuery, ComboFormQueryVariables>(ComboFormDocument, options);
-}
-export function useComboFormLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<ComboFormQuery, ComboFormQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<ComboFormQuery, ComboFormQueryVariables>(ComboFormDocument, options);
-}
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ComboFormQuery, ComboFormQueryVariables>(ComboFormDocument, options);
+      }
+export function useComboFormLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ComboFormQuery, ComboFormQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ComboFormQuery, ComboFormQueryVariables>(ComboFormDocument, options);
+        }
 export type ComboFormQueryHookResult = ReturnType<typeof useComboFormQuery>;
 export type ComboFormLazyQueryHookResult = ReturnType<typeof useComboFormLazyQuery>;
 export type ComboFormQueryResult = Apollo.QueryResult<ComboFormQuery, ComboFormQueryVariables>;
 export const MoveCategoryFormDocument = gql`
-  query MoveCategoryForm($moveCategoryId: ID!) {
-    moveCategory(moveCategoryId: $moveCategoryId) {
-      ...MoveCategoryForm
-    }
+    query MoveCategoryForm($moveCategoryId: ID!) {
+  moveCategory(moveCategoryId: $moveCategoryId) {
+    ...MoveCategoryForm
   }
-  ${MoveCategoryFormFragmentDoc}
-`;
+}
+    ${MoveCategoryFormFragmentDoc}`;
 
 /**
  * __useMoveCategoryFormQuery__
@@ -7856,29 +5489,24 @@ export const MoveCategoryFormDocument = gql`
  *   },
  * });
  */
-export function useMoveCategoryFormQuery(
-  baseOptions: Apollo.QueryHookOptions<MoveCategoryFormQuery, MoveCategoryFormQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<MoveCategoryFormQuery, MoveCategoryFormQueryVariables>(MoveCategoryFormDocument, options);
-}
-export function useMoveCategoryFormLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<MoveCategoryFormQuery, MoveCategoryFormQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<MoveCategoryFormQuery, MoveCategoryFormQueryVariables>(MoveCategoryFormDocument, options);
-}
+export function useMoveCategoryFormQuery(baseOptions: Apollo.QueryHookOptions<MoveCategoryFormQuery, MoveCategoryFormQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<MoveCategoryFormQuery, MoveCategoryFormQueryVariables>(MoveCategoryFormDocument, options);
+      }
+export function useMoveCategoryFormLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MoveCategoryFormQuery, MoveCategoryFormQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<MoveCategoryFormQuery, MoveCategoryFormQueryVariables>(MoveCategoryFormDocument, options);
+        }
 export type MoveCategoryFormQueryHookResult = ReturnType<typeof useMoveCategoryFormQuery>;
 export type MoveCategoryFormLazyQueryHookResult = ReturnType<typeof useMoveCategoryFormLazyQuery>;
 export type MoveCategoryFormQueryResult = Apollo.QueryResult<MoveCategoryFormQuery, MoveCategoryFormQueryVariables>;
 export const MoveFormDocument = gql`
-  query MoveForm($moveId: ID!) {
-    move(moveId: $moveId) {
-      ...MoveForm
-    }
+    query MoveForm($moveId: ID!) {
+  move(moveId: $moveId) {
+    ...MoveForm
   }
-  ${MoveFormFragmentDoc}
-`;
+}
+    ${MoveFormFragmentDoc}`;
 
 /**
  * __useMoveFormQuery__
@@ -7897,26 +5525,25 @@ export const MoveFormDocument = gql`
  * });
  */
 export function useMoveFormQuery(baseOptions: Apollo.QueryHookOptions<MoveFormQuery, MoveFormQueryVariables>) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<MoveFormQuery, MoveFormQueryVariables>(MoveFormDocument, options);
-}
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<MoveFormQuery, MoveFormQueryVariables>(MoveFormDocument, options);
+      }
 export function useMoveFormLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MoveFormQuery, MoveFormQueryVariables>) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<MoveFormQuery, MoveFormQueryVariables>(MoveFormDocument, options);
-}
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<MoveFormQuery, MoveFormQueryVariables>(MoveFormDocument, options);
+        }
 export type MoveFormQueryHookResult = ReturnType<typeof useMoveFormQuery>;
 export type MoveFormLazyQueryHookResult = ReturnType<typeof useMoveFormLazyQuery>;
 export type MoveFormQueryResult = Apollo.QueryResult<MoveFormQuery, MoveFormQueryVariables>;
 export const CreateUserDocument = gql`
-  mutation CreateUser {
-    createUser(input: {}) {
-      viewer {
-        ...Viewer
-      }
+    mutation CreateUser {
+  createUser(input: {}) {
+    viewer {
+      ...Viewer
     }
   }
-  ${ViewerFragmentDoc}
-`;
+}
+    ${ViewerFragmentDoc}`;
 export type CreateUserMutationFn = Apollo.MutationFunction<CreateUserMutation, CreateUserMutationVariables>;
 
 /**
@@ -7935,31 +5562,26 @@ export type CreateUserMutationFn = Apollo.MutationFunction<CreateUserMutation, C
  *   },
  * });
  */
-export function useCreateUserMutation(
-  baseOptions?: Apollo.MutationHookOptions<CreateUserMutation, CreateUserMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<CreateUserMutation, CreateUserMutationVariables>(CreateUserDocument, options);
-}
+export function useCreateUserMutation(baseOptions?: Apollo.MutationHookOptions<CreateUserMutation, CreateUserMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateUserMutation, CreateUserMutationVariables>(CreateUserDocument, options);
+      }
 export type CreateUserMutationHookResult = ReturnType<typeof useCreateUserMutation>;
 export type CreateUserMutationResult = Apollo.MutationResult<CreateUserMutation>;
 export type CreateUserMutationOptions = Apollo.BaseMutationOptions<CreateUserMutation, CreateUserMutationVariables>;
 export const CreateArticleLinkDocument = gql`
-  mutation CreateArticleLink($url: String!) {
-    createArticleLink(input: { url: $url }) {
-      articleLink {
-        url
-        title
-        description
-        imageUrl
-      }
+    mutation CreateArticleLink($url: String!) {
+  createArticleLink(input: {url: $url}) {
+    articleLink {
+      url
+      title
+      description
+      imageUrl
     }
   }
-`;
-export type CreateArticleLinkMutationFn = Apollo.MutationFunction<
-  CreateArticleLinkMutation,
-  CreateArticleLinkMutationVariables
->;
+}
+    `;
+export type CreateArticleLinkMutationFn = Apollo.MutationFunction<CreateArticleLinkMutation, CreateArticleLinkMutationVariables>;
 
 /**
  * __useCreateArticleLinkMutation__
@@ -7978,32 +5600,21 @@ export type CreateArticleLinkMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useCreateArticleLinkMutation(
-  baseOptions?: Apollo.MutationHookOptions<CreateArticleLinkMutation, CreateArticleLinkMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<CreateArticleLinkMutation, CreateArticleLinkMutationVariables>(
-    CreateArticleLinkDocument,
-    options,
-  );
-}
+export function useCreateArticleLinkMutation(baseOptions?: Apollo.MutationHookOptions<CreateArticleLinkMutation, CreateArticleLinkMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateArticleLinkMutation, CreateArticleLinkMutationVariables>(CreateArticleLinkDocument, options);
+      }
 export type CreateArticleLinkMutationHookResult = ReturnType<typeof useCreateArticleLinkMutation>;
 export type CreateArticleLinkMutationResult = Apollo.MutationResult<CreateArticleLinkMutation>;
-export type CreateArticleLinkMutationOptions = Apollo.BaseMutationOptions<
-  CreateArticleLinkMutation,
-  CreateArticleLinkMutationVariables
->;
+export type CreateArticleLinkMutationOptions = Apollo.BaseMutationOptions<CreateArticleLinkMutation, CreateArticleLinkMutationVariables>;
 export const CreateArticleImageDocument = gql`
-  mutation CreateArticleImage($image: String!) {
-    createArticleImage(input: { image: $image }) {
-      url
-    }
+    mutation CreateArticleImage($image: String!) {
+  createArticleImage(input: {image: $image}) {
+    url
   }
-`;
-export type CreateArticleImageMutationFn = Apollo.MutationFunction<
-  CreateArticleImageMutation,
-  CreateArticleImageMutationVariables
->;
+}
+    `;
+export type CreateArticleImageMutationFn = Apollo.MutationFunction<CreateArticleImageMutation, CreateArticleImageMutationVariables>;
 
 /**
  * __useCreateArticleImageMutation__
@@ -8022,40 +5633,29 @@ export type CreateArticleImageMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useCreateArticleImageMutation(
-  baseOptions?: Apollo.MutationHookOptions<CreateArticleImageMutation, CreateArticleImageMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<CreateArticleImageMutation, CreateArticleImageMutationVariables>(
-    CreateArticleImageDocument,
-    options,
-  );
-}
+export function useCreateArticleImageMutation(baseOptions?: Apollo.MutationHookOptions<CreateArticleImageMutation, CreateArticleImageMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateArticleImageMutation, CreateArticleImageMutationVariables>(CreateArticleImageDocument, options);
+      }
 export type CreateArticleImageMutationHookResult = ReturnType<typeof useCreateArticleImageMutation>;
 export type CreateArticleImageMutationResult = Apollo.MutationResult<CreateArticleImageMutation>;
-export type CreateArticleImageMutationOptions = Apollo.BaseMutationOptions<
-  CreateArticleImageMutation,
-  CreateArticleImageMutationVariables
->;
+export type CreateArticleImageMutationOptions = Apollo.BaseMutationOptions<CreateArticleImageMutation, CreateArticleImageMutationVariables>;
 export const CreateArticleVideoDocument = gql`
-  mutation CreateArticleVideo {
-    createArticleVideo(input: {}) {
-      articleVideo {
-        id
-        m3u8Url
-        thumbnailUrl
-      }
-      videoUpload {
-        url
-        fields
-      }
+    mutation CreateArticleVideo {
+  createArticleVideo(input: {}) {
+    articleVideo {
+      id
+      m3u8Url
+      thumbnailUrl
+    }
+    videoUpload {
+      url
+      fields
     }
   }
-`;
-export type CreateArticleVideoMutationFn = Apollo.MutationFunction<
-  CreateArticleVideoMutation,
-  CreateArticleVideoMutationVariables
->;
+}
+    `;
+export type CreateArticleVideoMutationFn = Apollo.MutationFunction<CreateArticleVideoMutation, CreateArticleVideoMutationVariables>;
 
 /**
  * __useCreateArticleVideoMutation__
@@ -8073,29 +5673,20 @@ export type CreateArticleVideoMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useCreateArticleVideoMutation(
-  baseOptions?: Apollo.MutationHookOptions<CreateArticleVideoMutation, CreateArticleVideoMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<CreateArticleVideoMutation, CreateArticleVideoMutationVariables>(
-    CreateArticleVideoDocument,
-    options,
-  );
-}
+export function useCreateArticleVideoMutation(baseOptions?: Apollo.MutationHookOptions<CreateArticleVideoMutation, CreateArticleVideoMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateArticleVideoMutation, CreateArticleVideoMutationVariables>(CreateArticleVideoDocument, options);
+      }
 export type CreateArticleVideoMutationHookResult = ReturnType<typeof useCreateArticleVideoMutation>;
 export type CreateArticleVideoMutationResult = Apollo.MutationResult<CreateArticleVideoMutation>;
-export type CreateArticleVideoMutationOptions = Apollo.BaseMutationOptions<
-  CreateArticleVideoMutation,
-  CreateArticleVideoMutationVariables
->;
+export type CreateArticleVideoMutationOptions = Apollo.BaseMutationOptions<CreateArticleVideoMutation, CreateArticleVideoMutationVariables>;
 export const ArticleElementComboDocument = gql`
-  query ArticleElementCombo($comboId: ID!) {
-    combo(comboId: $comboId) {
-      ...ComboMedia
-    }
+    query ArticleElementCombo($comboId: ID!) {
+  combo(comboId: $comboId) {
+    ...ComboMedia
   }
-  ${ComboMediaFragmentDoc}
-`;
+}
+    ${ComboMediaFragmentDoc}`;
 
 /**
  * __useArticleElementComboQuery__
@@ -8113,38 +5704,24 @@ export const ArticleElementComboDocument = gql`
  *   },
  * });
  */
-export function useArticleElementComboQuery(
-  baseOptions: Apollo.QueryHookOptions<ArticleElementComboQuery, ArticleElementComboQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<ArticleElementComboQuery, ArticleElementComboQueryVariables>(
-    ArticleElementComboDocument,
-    options,
-  );
-}
-export function useArticleElementComboLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<ArticleElementComboQuery, ArticleElementComboQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<ArticleElementComboQuery, ArticleElementComboQueryVariables>(
-    ArticleElementComboDocument,
-    options,
-  );
-}
+export function useArticleElementComboQuery(baseOptions: Apollo.QueryHookOptions<ArticleElementComboQuery, ArticleElementComboQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ArticleElementComboQuery, ArticleElementComboQueryVariables>(ArticleElementComboDocument, options);
+      }
+export function useArticleElementComboLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ArticleElementComboQuery, ArticleElementComboQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ArticleElementComboQuery, ArticleElementComboQueryVariables>(ArticleElementComboDocument, options);
+        }
 export type ArticleElementComboQueryHookResult = ReturnType<typeof useArticleElementComboQuery>;
 export type ArticleElementComboLazyQueryHookResult = ReturnType<typeof useArticleElementComboLazyQuery>;
-export type ArticleElementComboQueryResult = Apollo.QueryResult<
-  ArticleElementComboQuery,
-  ArticleElementComboQueryVariables
->;
+export type ArticleElementComboQueryResult = Apollo.QueryResult<ArticleElementComboQuery, ArticleElementComboQueryVariables>;
 export const ArticleElementMoveDocument = gql`
-  query ArticleElementMove($moveId: ID!) {
-    move(moveId: $moveId) {
-      ...MoveMedia
-    }
+    query ArticleElementMove($moveId: ID!) {
+  move(moveId: $moveId) {
+    ...MoveMedia
   }
-  ${MoveMediaFragmentDoc}
-`;
+}
+    ${MoveMediaFragmentDoc}`;
 
 /**
  * __useArticleElementMoveQuery__
@@ -8162,40 +5739,26 @@ export const ArticleElementMoveDocument = gql`
  *   },
  * });
  */
-export function useArticleElementMoveQuery(
-  baseOptions: Apollo.QueryHookOptions<ArticleElementMoveQuery, ArticleElementMoveQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<ArticleElementMoveQuery, ArticleElementMoveQueryVariables>(
-    ArticleElementMoveDocument,
-    options,
-  );
-}
-export function useArticleElementMoveLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<ArticleElementMoveQuery, ArticleElementMoveQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<ArticleElementMoveQuery, ArticleElementMoveQueryVariables>(
-    ArticleElementMoveDocument,
-    options,
-  );
-}
+export function useArticleElementMoveQuery(baseOptions: Apollo.QueryHookOptions<ArticleElementMoveQuery, ArticleElementMoveQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ArticleElementMoveQuery, ArticleElementMoveQueryVariables>(ArticleElementMoveDocument, options);
+      }
+export function useArticleElementMoveLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ArticleElementMoveQuery, ArticleElementMoveQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ArticleElementMoveQuery, ArticleElementMoveQueryVariables>(ArticleElementMoveDocument, options);
+        }
 export type ArticleElementMoveQueryHookResult = ReturnType<typeof useArticleElementMoveQuery>;
 export type ArticleElementMoveLazyQueryHookResult = ReturnType<typeof useArticleElementMoveLazyQuery>;
-export type ArticleElementMoveQueryResult = Apollo.QueryResult<
-  ArticleElementMoveQuery,
-  ArticleElementMoveQueryVariables
->;
+export type ArticleElementMoveQueryResult = Apollo.QueryResult<ArticleElementMoveQuery, ArticleElementMoveQueryVariables>;
 export const CharacterSelectOptionsDocument = gql`
-  query CharacterSelectOptions {
-    characters(first: 100) {
-      nodes {
-        ...CharacterSelectOption
-      }
+    query CharacterSelectOptions {
+  characters(first: 100) {
+    nodes {
+      ...CharacterSelectOption
     }
   }
-  ${CharacterSelectOptionFragmentDoc}
-`;
+}
+    ${CharacterSelectOptionFragmentDoc}`;
 
 /**
  * __useCharacterSelectOptionsQuery__
@@ -8212,45 +5775,32 @@ export const CharacterSelectOptionsDocument = gql`
  *   },
  * });
  */
-export function useCharacterSelectOptionsQuery(
-  baseOptions?: Apollo.QueryHookOptions<CharacterSelectOptionsQuery, CharacterSelectOptionsQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<CharacterSelectOptionsQuery, CharacterSelectOptionsQueryVariables>(
-    CharacterSelectOptionsDocument,
-    options,
-  );
-}
-export function useCharacterSelectOptionsLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<CharacterSelectOptionsQuery, CharacterSelectOptionsQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<CharacterSelectOptionsQuery, CharacterSelectOptionsQueryVariables>(
-    CharacterSelectOptionsDocument,
-    options,
-  );
-}
+export function useCharacterSelectOptionsQuery(baseOptions?: Apollo.QueryHookOptions<CharacterSelectOptionsQuery, CharacterSelectOptionsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<CharacterSelectOptionsQuery, CharacterSelectOptionsQueryVariables>(CharacterSelectOptionsDocument, options);
+      }
+export function useCharacterSelectOptionsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CharacterSelectOptionsQuery, CharacterSelectOptionsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<CharacterSelectOptionsQuery, CharacterSelectOptionsQueryVariables>(CharacterSelectOptionsDocument, options);
+        }
 export type CharacterSelectOptionsQueryHookResult = ReturnType<typeof useCharacterSelectOptionsQuery>;
 export type CharacterSelectOptionsLazyQueryHookResult = ReturnType<typeof useCharacterSelectOptionsLazyQuery>;
-export type CharacterSelectOptionsQueryResult = Apollo.QueryResult<
-  CharacterSelectOptionsQuery,
-  CharacterSelectOptionsQueryVariables
->;
+export type CharacterSelectOptionsQueryResult = Apollo.QueryResult<CharacterSelectOptionsQuery, CharacterSelectOptionsQueryVariables>;
 export const ComboSelectOptionsDocument = gql`
-  query ComboSelectOptions($characterSlug: String!) {
-    character(characterSlug: $characterSlug) {
+    query ComboSelectOptions($characterSlug: String!) {
+  character(characterSlug: $characterSlug) {
+    id
+    comboCategories {
       id
-      comboCategories {
+      name
+      combos {
         id
-        name
-        combos {
-          id
-          command
-        }
+        command
       }
     }
   }
-`;
+}
+    `;
 
 /**
  * __useComboSelectOptionsQuery__
@@ -8268,38 +5818,24 @@ export const ComboSelectOptionsDocument = gql`
  *   },
  * });
  */
-export function useComboSelectOptionsQuery(
-  baseOptions: Apollo.QueryHookOptions<ComboSelectOptionsQuery, ComboSelectOptionsQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<ComboSelectOptionsQuery, ComboSelectOptionsQueryVariables>(
-    ComboSelectOptionsDocument,
-    options,
-  );
-}
-export function useComboSelectOptionsLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<ComboSelectOptionsQuery, ComboSelectOptionsQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<ComboSelectOptionsQuery, ComboSelectOptionsQueryVariables>(
-    ComboSelectOptionsDocument,
-    options,
-  );
-}
+export function useComboSelectOptionsQuery(baseOptions: Apollo.QueryHookOptions<ComboSelectOptionsQuery, ComboSelectOptionsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ComboSelectOptionsQuery, ComboSelectOptionsQueryVariables>(ComboSelectOptionsDocument, options);
+      }
+export function useComboSelectOptionsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ComboSelectOptionsQuery, ComboSelectOptionsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ComboSelectOptionsQuery, ComboSelectOptionsQueryVariables>(ComboSelectOptionsDocument, options);
+        }
 export type ComboSelectOptionsQueryHookResult = ReturnType<typeof useComboSelectOptionsQuery>;
 export type ComboSelectOptionsLazyQueryHookResult = ReturnType<typeof useComboSelectOptionsLazyQuery>;
-export type ComboSelectOptionsQueryResult = Apollo.QueryResult<
-  ComboSelectOptionsQuery,
-  ComboSelectOptionsQueryVariables
->;
+export type ComboSelectOptionsQueryResult = Apollo.QueryResult<ComboSelectOptionsQuery, ComboSelectOptionsQueryVariables>;
 export const CountrySelectOptionsDocument = gql`
-  query CountrySelectOptions {
-    countries {
-      ...CountrySelectOption
-    }
+    query CountrySelectOptions {
+  countries {
+    ...CountrySelectOption
   }
-  ${CountrySelectOptionFragmentDoc}
-`;
+}
+    ${CountrySelectOptionFragmentDoc}`;
 
 /**
  * __useCountrySelectOptionsQuery__
@@ -8316,46 +5852,33 @@ export const CountrySelectOptionsDocument = gql`
  *   },
  * });
  */
-export function useCountrySelectOptionsQuery(
-  baseOptions?: Apollo.QueryHookOptions<CountrySelectOptionsQuery, CountrySelectOptionsQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<CountrySelectOptionsQuery, CountrySelectOptionsQueryVariables>(
-    CountrySelectOptionsDocument,
-    options,
-  );
-}
-export function useCountrySelectOptionsLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<CountrySelectOptionsQuery, CountrySelectOptionsQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<CountrySelectOptionsQuery, CountrySelectOptionsQueryVariables>(
-    CountrySelectOptionsDocument,
-    options,
-  );
-}
+export function useCountrySelectOptionsQuery(baseOptions?: Apollo.QueryHookOptions<CountrySelectOptionsQuery, CountrySelectOptionsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<CountrySelectOptionsQuery, CountrySelectOptionsQueryVariables>(CountrySelectOptionsDocument, options);
+      }
+export function useCountrySelectOptionsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CountrySelectOptionsQuery, CountrySelectOptionsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<CountrySelectOptionsQuery, CountrySelectOptionsQueryVariables>(CountrySelectOptionsDocument, options);
+        }
 export type CountrySelectOptionsQueryHookResult = ReturnType<typeof useCountrySelectOptionsQuery>;
 export type CountrySelectOptionsLazyQueryHookResult = ReturnType<typeof useCountrySelectOptionsLazyQuery>;
-export type CountrySelectOptionsQueryResult = Apollo.QueryResult<
-  CountrySelectOptionsQuery,
-  CountrySelectOptionsQueryVariables
->;
+export type CountrySelectOptionsQueryResult = Apollo.QueryResult<CountrySelectOptionsQuery, CountrySelectOptionsQueryVariables>;
 export const MoveSelectOptionsDocument = gql`
-  query MoveSelectOptions($characterSlug: String!) {
-    character(characterSlug: $characterSlug) {
+    query MoveSelectOptions($characterSlug: String!) {
+  character(characterSlug: $characterSlug) {
+    id
+    moveCategories {
       id
-      moveCategories {
+      name
+      moves {
         id
         name
-        moves {
-          id
-          name
-          command
-        }
+        command
       }
     }
   }
-`;
+}
+    `;
 
 /**
  * __useMoveSelectOptionsQuery__
@@ -8373,34 +5896,26 @@ export const MoveSelectOptionsDocument = gql`
  *   },
  * });
  */
-export function useMoveSelectOptionsQuery(
-  baseOptions: Apollo.QueryHookOptions<MoveSelectOptionsQuery, MoveSelectOptionsQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<MoveSelectOptionsQuery, MoveSelectOptionsQueryVariables>(MoveSelectOptionsDocument, options);
-}
-export function useMoveSelectOptionsLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<MoveSelectOptionsQuery, MoveSelectOptionsQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<MoveSelectOptionsQuery, MoveSelectOptionsQueryVariables>(
-    MoveSelectOptionsDocument,
-    options,
-  );
-}
+export function useMoveSelectOptionsQuery(baseOptions: Apollo.QueryHookOptions<MoveSelectOptionsQuery, MoveSelectOptionsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<MoveSelectOptionsQuery, MoveSelectOptionsQueryVariables>(MoveSelectOptionsDocument, options);
+      }
+export function useMoveSelectOptionsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<MoveSelectOptionsQuery, MoveSelectOptionsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<MoveSelectOptionsQuery, MoveSelectOptionsQueryVariables>(MoveSelectOptionsDocument, options);
+        }
 export type MoveSelectOptionsQueryHookResult = ReturnType<typeof useMoveSelectOptionsQuery>;
 export type MoveSelectOptionsLazyQueryHookResult = ReturnType<typeof useMoveSelectOptionsLazyQuery>;
 export type MoveSelectOptionsQueryResult = Apollo.QueryResult<MoveSelectOptionsQuery, MoveSelectOptionsQueryVariables>;
 export const PlayerSelectOptionsDocument = gql`
-  query PlayerSelectOptions {
-    players(first: 1000) {
-      nodes {
-        ...PlayerSelectOption
-      }
+    query PlayerSelectOptions {
+  players(first: 1000) {
+    nodes {
+      ...PlayerSelectOption
     }
   }
-  ${PlayerSelectOptionFragmentDoc}
-`;
+}
+    ${PlayerSelectOptionFragmentDoc}`;
 
 /**
  * __usePlayerSelectOptionsQuery__
@@ -8417,39 +5932,26 @@ export const PlayerSelectOptionsDocument = gql`
  *   },
  * });
  */
-export function usePlayerSelectOptionsQuery(
-  baseOptions?: Apollo.QueryHookOptions<PlayerSelectOptionsQuery, PlayerSelectOptionsQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<PlayerSelectOptionsQuery, PlayerSelectOptionsQueryVariables>(
-    PlayerSelectOptionsDocument,
-    options,
-  );
-}
-export function usePlayerSelectOptionsLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<PlayerSelectOptionsQuery, PlayerSelectOptionsQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<PlayerSelectOptionsQuery, PlayerSelectOptionsQueryVariables>(
-    PlayerSelectOptionsDocument,
-    options,
-  );
-}
+export function usePlayerSelectOptionsQuery(baseOptions?: Apollo.QueryHookOptions<PlayerSelectOptionsQuery, PlayerSelectOptionsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PlayerSelectOptionsQuery, PlayerSelectOptionsQueryVariables>(PlayerSelectOptionsDocument, options);
+      }
+export function usePlayerSelectOptionsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PlayerSelectOptionsQuery, PlayerSelectOptionsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PlayerSelectOptionsQuery, PlayerSelectOptionsQueryVariables>(PlayerSelectOptionsDocument, options);
+        }
 export type PlayerSelectOptionsQueryHookResult = ReturnType<typeof usePlayerSelectOptionsQuery>;
 export type PlayerSelectOptionsLazyQueryHookResult = ReturnType<typeof usePlayerSelectOptionsLazyQuery>;
-export type PlayerSelectOptionsQueryResult = Apollo.QueryResult<
-  PlayerSelectOptionsQuery,
-  PlayerSelectOptionsQueryVariables
->;
+export type PlayerSelectOptionsQueryResult = Apollo.QueryResult<PlayerSelectOptionsQuery, PlayerSelectOptionsQueryVariables>;
 export const SsgArticlePathsDocument = gql`
-  query SsgArticlePaths {
-    articles(first: 50) {
-      nodes {
-        id
-      }
+    query SsgArticlePaths {
+  articles(first: 50) {
+    nodes {
+      id
     }
   }
-`;
+}
+    `;
 
 /**
  * __useSsgArticlePathsQuery__
@@ -8466,31 +5968,27 @@ export const SsgArticlePathsDocument = gql`
  *   },
  * });
  */
-export function useSsgArticlePathsQuery(
-  baseOptions?: Apollo.QueryHookOptions<SsgArticlePathsQuery, SsgArticlePathsQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<SsgArticlePathsQuery, SsgArticlePathsQueryVariables>(SsgArticlePathsDocument, options);
-}
-export function useSsgArticlePathsLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<SsgArticlePathsQuery, SsgArticlePathsQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<SsgArticlePathsQuery, SsgArticlePathsQueryVariables>(SsgArticlePathsDocument, options);
-}
+export function useSsgArticlePathsQuery(baseOptions?: Apollo.QueryHookOptions<SsgArticlePathsQuery, SsgArticlePathsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SsgArticlePathsQuery, SsgArticlePathsQueryVariables>(SsgArticlePathsDocument, options);
+      }
+export function useSsgArticlePathsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SsgArticlePathsQuery, SsgArticlePathsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SsgArticlePathsQuery, SsgArticlePathsQueryVariables>(SsgArticlePathsDocument, options);
+        }
 export type SsgArticlePathsQueryHookResult = ReturnType<typeof useSsgArticlePathsQuery>;
 export type SsgArticlePathsLazyQueryHookResult = ReturnType<typeof useSsgArticlePathsLazyQuery>;
 export type SsgArticlePathsQueryResult = Apollo.QueryResult<SsgArticlePathsQuery, SsgArticlePathsQueryVariables>;
 export const SsgCharacterPathsDocument = gql`
-  query SsgCharacterPaths {
-    characters(first: 100) {
-      nodes {
-        id
-        slug
-      }
+    query SsgCharacterPaths {
+  characters(first: 100) {
+    nodes {
+      id
+      slug
     }
   }
-`;
+}
+    `;
 
 /**
  * __useSsgCharacterPathsQuery__
@@ -8507,34 +6005,27 @@ export const SsgCharacterPathsDocument = gql`
  *   },
  * });
  */
-export function useSsgCharacterPathsQuery(
-  baseOptions?: Apollo.QueryHookOptions<SsgCharacterPathsQuery, SsgCharacterPathsQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<SsgCharacterPathsQuery, SsgCharacterPathsQueryVariables>(SsgCharacterPathsDocument, options);
-}
-export function useSsgCharacterPathsLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<SsgCharacterPathsQuery, SsgCharacterPathsQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<SsgCharacterPathsQuery, SsgCharacterPathsQueryVariables>(
-    SsgCharacterPathsDocument,
-    options,
-  );
-}
+export function useSsgCharacterPathsQuery(baseOptions?: Apollo.QueryHookOptions<SsgCharacterPathsQuery, SsgCharacterPathsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SsgCharacterPathsQuery, SsgCharacterPathsQueryVariables>(SsgCharacterPathsDocument, options);
+      }
+export function useSsgCharacterPathsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SsgCharacterPathsQuery, SsgCharacterPathsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SsgCharacterPathsQuery, SsgCharacterPathsQueryVariables>(SsgCharacterPathsDocument, options);
+        }
 export type SsgCharacterPathsQueryHookResult = ReturnType<typeof useSsgCharacterPathsQuery>;
 export type SsgCharacterPathsLazyQueryHookResult = ReturnType<typeof useSsgCharacterPathsLazyQuery>;
 export type SsgCharacterPathsQueryResult = Apollo.QueryResult<SsgCharacterPathsQuery, SsgCharacterPathsQueryVariables>;
 export const SsgPlayerPathsDocument = gql`
-  query SsgPlayerPaths {
-    players(first: 50) {
-      nodes {
-        id
-        slug
-      }
+    query SsgPlayerPaths {
+  players(first: 50) {
+    nodes {
+      id
+      slug
     }
   }
-`;
+}
+    `;
 
 /**
  * __useSsgPlayerPathsQuery__
@@ -8551,30 +6042,26 @@ export const SsgPlayerPathsDocument = gql`
  *   },
  * });
  */
-export function useSsgPlayerPathsQuery(
-  baseOptions?: Apollo.QueryHookOptions<SsgPlayerPathsQuery, SsgPlayerPathsQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<SsgPlayerPathsQuery, SsgPlayerPathsQueryVariables>(SsgPlayerPathsDocument, options);
-}
-export function useSsgPlayerPathsLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<SsgPlayerPathsQuery, SsgPlayerPathsQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<SsgPlayerPathsQuery, SsgPlayerPathsQueryVariables>(SsgPlayerPathsDocument, options);
-}
+export function useSsgPlayerPathsQuery(baseOptions?: Apollo.QueryHookOptions<SsgPlayerPathsQuery, SsgPlayerPathsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SsgPlayerPathsQuery, SsgPlayerPathsQueryVariables>(SsgPlayerPathsDocument, options);
+      }
+export function useSsgPlayerPathsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SsgPlayerPathsQuery, SsgPlayerPathsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SsgPlayerPathsQuery, SsgPlayerPathsQueryVariables>(SsgPlayerPathsDocument, options);
+        }
 export type SsgPlayerPathsQueryHookResult = ReturnType<typeof useSsgPlayerPathsQuery>;
 export type SsgPlayerPathsLazyQueryHookResult = ReturnType<typeof useSsgPlayerPathsLazyQuery>;
 export type SsgPlayerPathsQueryResult = Apollo.QueryResult<SsgPlayerPathsQuery, SsgPlayerPathsQueryVariables>;
 export const SsgTournamentPathsDocument = gql`
-  query SsgTournamentPaths {
-    tournaments(first: 50) {
-      nodes {
-        id
-      }
+    query SsgTournamentPaths {
+  tournaments(first: 50) {
+    nodes {
+      id
     }
   }
-`;
+}
+    `;
 
 /**
  * __useSsgTournamentPathsQuery__
@@ -8591,39 +6078,26 @@ export const SsgTournamentPathsDocument = gql`
  *   },
  * });
  */
-export function useSsgTournamentPathsQuery(
-  baseOptions?: Apollo.QueryHookOptions<SsgTournamentPathsQuery, SsgTournamentPathsQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<SsgTournamentPathsQuery, SsgTournamentPathsQueryVariables>(
-    SsgTournamentPathsDocument,
-    options,
-  );
-}
-export function useSsgTournamentPathsLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<SsgTournamentPathsQuery, SsgTournamentPathsQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<SsgTournamentPathsQuery, SsgTournamentPathsQueryVariables>(
-    SsgTournamentPathsDocument,
-    options,
-  );
-}
+export function useSsgTournamentPathsQuery(baseOptions?: Apollo.QueryHookOptions<SsgTournamentPathsQuery, SsgTournamentPathsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SsgTournamentPathsQuery, SsgTournamentPathsQueryVariables>(SsgTournamentPathsDocument, options);
+      }
+export function useSsgTournamentPathsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SsgTournamentPathsQuery, SsgTournamentPathsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SsgTournamentPathsQuery, SsgTournamentPathsQueryVariables>(SsgTournamentPathsDocument, options);
+        }
 export type SsgTournamentPathsQueryHookResult = ReturnType<typeof useSsgTournamentPathsQuery>;
 export type SsgTournamentPathsLazyQueryHookResult = ReturnType<typeof useSsgTournamentPathsLazyQuery>;
-export type SsgTournamentPathsQueryResult = Apollo.QueryResult<
-  SsgTournamentPathsQuery,
-  SsgTournamentPathsQueryVariables
->;
+export type SsgTournamentPathsQueryResult = Apollo.QueryResult<SsgTournamentPathsQuery, SsgTournamentPathsQueryVariables>;
 export const SsgTournamentVideoPathsDocument = gql`
-  query SsgTournamentVideoPaths {
-    tournamentVideos(first: 50) {
-      nodes {
-        id
-      }
+    query SsgTournamentVideoPaths {
+  tournamentVideos(first: 50) {
+    nodes {
+      id
     }
   }
-`;
+}
+    `;
 
 /**
  * __useSsgTournamentVideoPathsQuery__
@@ -8640,38 +6114,24 @@ export const SsgTournamentVideoPathsDocument = gql`
  *   },
  * });
  */
-export function useSsgTournamentVideoPathsQuery(
-  baseOptions?: Apollo.QueryHookOptions<SsgTournamentVideoPathsQuery, SsgTournamentVideoPathsQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<SsgTournamentVideoPathsQuery, SsgTournamentVideoPathsQueryVariables>(
-    SsgTournamentVideoPathsDocument,
-    options,
-  );
-}
-export function useSsgTournamentVideoPathsLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<SsgTournamentVideoPathsQuery, SsgTournamentVideoPathsQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<SsgTournamentVideoPathsQuery, SsgTournamentVideoPathsQueryVariables>(
-    SsgTournamentVideoPathsDocument,
-    options,
-  );
-}
+export function useSsgTournamentVideoPathsQuery(baseOptions?: Apollo.QueryHookOptions<SsgTournamentVideoPathsQuery, SsgTournamentVideoPathsQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<SsgTournamentVideoPathsQuery, SsgTournamentVideoPathsQueryVariables>(SsgTournamentVideoPathsDocument, options);
+      }
+export function useSsgTournamentVideoPathsLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<SsgTournamentVideoPathsQuery, SsgTournamentVideoPathsQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<SsgTournamentVideoPathsQuery, SsgTournamentVideoPathsQueryVariables>(SsgTournamentVideoPathsDocument, options);
+        }
 export type SsgTournamentVideoPathsQueryHookResult = ReturnType<typeof useSsgTournamentVideoPathsQuery>;
 export type SsgTournamentVideoPathsLazyQueryHookResult = ReturnType<typeof useSsgTournamentVideoPathsLazyQuery>;
-export type SsgTournamentVideoPathsQueryResult = Apollo.QueryResult<
-  SsgTournamentVideoPathsQuery,
-  SsgTournamentVideoPathsQueryVariables
->;
+export type SsgTournamentVideoPathsQueryResult = Apollo.QueryResult<SsgTournamentVideoPathsQuery, SsgTournamentVideoPathsQueryVariables>;
 export const ViewerDocument = gql`
-  query Viewer {
-    viewer {
-      ...Viewer
-    }
+    query Viewer {
+  viewer {
+    ...Viewer
   }
-  ${ViewerFragmentDoc}
-`;
+}
+    ${ViewerFragmentDoc}`;
 
 /**
  * __useViewerQuery__
@@ -8689,24 +6149,23 @@ export const ViewerDocument = gql`
  * });
  */
 export function useViewerQuery(baseOptions?: Apollo.QueryHookOptions<ViewerQuery, ViewerQueryVariables>) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<ViewerQuery, ViewerQueryVariables>(ViewerDocument, options);
-}
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ViewerQuery, ViewerQueryVariables>(ViewerDocument, options);
+      }
 export function useViewerLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ViewerQuery, ViewerQueryVariables>) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<ViewerQuery, ViewerQueryVariables>(ViewerDocument, options);
-}
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ViewerQuery, ViewerQueryVariables>(ViewerDocument, options);
+        }
 export type ViewerQueryHookResult = ReturnType<typeof useViewerQuery>;
 export type ViewerLazyQueryHookResult = ReturnType<typeof useViewerLazyQuery>;
 export type ViewerQueryResult = Apollo.QueryResult<ViewerQuery, ViewerQueryVariables>;
 export const ArticlePageDocument = gql`
-  query ArticlePage($articleId: ID!) {
-    article(articleId: $articleId) {
-      ...ArticlePage
-    }
+    query ArticlePage($articleId: ID!) {
+  article(articleId: $articleId) {
+    ...ArticlePage
   }
-  ${ArticlePageFragmentDoc}
-`;
+}
+    ${ArticlePageFragmentDoc}`;
 
 /**
  * __useArticlePageQuery__
@@ -8725,28 +6184,25 @@ export const ArticlePageDocument = gql`
  * });
  */
 export function useArticlePageQuery(baseOptions: Apollo.QueryHookOptions<ArticlePageQuery, ArticlePageQueryVariables>) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<ArticlePageQuery, ArticlePageQueryVariables>(ArticlePageDocument, options);
-}
-export function useArticlePageLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<ArticlePageQuery, ArticlePageQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<ArticlePageQuery, ArticlePageQueryVariables>(ArticlePageDocument, options);
-}
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ArticlePageQuery, ArticlePageQueryVariables>(ArticlePageDocument, options);
+      }
+export function useArticlePageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ArticlePageQuery, ArticlePageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ArticlePageQuery, ArticlePageQueryVariables>(ArticlePageDocument, options);
+        }
 export type ArticlePageQueryHookResult = ReturnType<typeof useArticlePageQuery>;
 export type ArticlePageLazyQueryHookResult = ReturnType<typeof useArticlePageLazyQuery>;
 export type ArticlePageQueryResult = Apollo.QueryResult<ArticlePageQuery, ArticlePageQueryVariables>;
 export const ArticlesPageDocument = gql`
-  query ArticlesPage {
-    articles(first: 12) {
-      nodes {
-        ...ArticleCard
-      }
+    query ArticlesPage {
+  articles(first: 12) {
+    nodes {
+      ...ArticleCard
     }
   }
-  ${ArticleCardFragmentDoc}
-`;
+}
+    ${ArticleCardFragmentDoc}`;
 
 /**
  * __useArticlesPageQuery__
@@ -8763,33 +6219,28 @@ export const ArticlesPageDocument = gql`
  *   },
  * });
  */
-export function useArticlesPageQuery(
-  baseOptions?: Apollo.QueryHookOptions<ArticlesPageQuery, ArticlesPageQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<ArticlesPageQuery, ArticlesPageQueryVariables>(ArticlesPageDocument, options);
-}
-export function useArticlesPageLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<ArticlesPageQuery, ArticlesPageQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<ArticlesPageQuery, ArticlesPageQueryVariables>(ArticlesPageDocument, options);
-}
+export function useArticlesPageQuery(baseOptions?: Apollo.QueryHookOptions<ArticlesPageQuery, ArticlesPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<ArticlesPageQuery, ArticlesPageQueryVariables>(ArticlesPageDocument, options);
+      }
+export function useArticlesPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<ArticlesPageQuery, ArticlesPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<ArticlesPageQuery, ArticlesPageQueryVariables>(ArticlesPageDocument, options);
+        }
 export type ArticlesPageQueryHookResult = ReturnType<typeof useArticlesPageQuery>;
 export type ArticlesPageLazyQueryHookResult = ReturnType<typeof useArticlesPageLazyQuery>;
 export type ArticlesPageQueryResult = Apollo.QueryResult<ArticlesPageQuery, ArticlesPageQueryVariables>;
 export const CharacterBattlesPageDocument = gql`
-  query CharacterBattlesPage($characterSlug: String!) {
-    character(characterSlug: $characterSlug) {
-      ...CharacterBreadcrumbs
-      ...CharacterProfile
-      ...CharacterTabs
-    }
+    query CharacterBattlesPage($characterSlug: String!) {
+  character(characterSlug: $characterSlug) {
+    ...CharacterBreadcrumbs
+    ...CharacterProfile
+    ...CharacterTabs
   }
-  ${CharacterBreadcrumbsFragmentDoc}
-  ${CharacterProfileFragmentDoc}
-  ${CharacterTabsFragmentDoc}
-`;
+}
+    ${CharacterBreadcrumbsFragmentDoc}
+${CharacterProfileFragmentDoc}
+${CharacterTabsFragmentDoc}`;
 
 /**
  * __useCharacterBattlesPageQuery__
@@ -8807,55 +6258,41 @@ export const CharacterBattlesPageDocument = gql`
  *   },
  * });
  */
-export function useCharacterBattlesPageQuery(
-  baseOptions: Apollo.QueryHookOptions<CharacterBattlesPageQuery, CharacterBattlesPageQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<CharacterBattlesPageQuery, CharacterBattlesPageQueryVariables>(
-    CharacterBattlesPageDocument,
-    options,
-  );
-}
-export function useCharacterBattlesPageLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<CharacterBattlesPageQuery, CharacterBattlesPageQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<CharacterBattlesPageQuery, CharacterBattlesPageQueryVariables>(
-    CharacterBattlesPageDocument,
-    options,
-  );
-}
+export function useCharacterBattlesPageQuery(baseOptions: Apollo.QueryHookOptions<CharacterBattlesPageQuery, CharacterBattlesPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<CharacterBattlesPageQuery, CharacterBattlesPageQueryVariables>(CharacterBattlesPageDocument, options);
+      }
+export function useCharacterBattlesPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CharacterBattlesPageQuery, CharacterBattlesPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<CharacterBattlesPageQuery, CharacterBattlesPageQueryVariables>(CharacterBattlesPageDocument, options);
+        }
 export type CharacterBattlesPageQueryHookResult = ReturnType<typeof useCharacterBattlesPageQuery>;
 export type CharacterBattlesPageLazyQueryHookResult = ReturnType<typeof useCharacterBattlesPageLazyQuery>;
-export type CharacterBattlesPageQueryResult = Apollo.QueryResult<
-  CharacterBattlesPageQuery,
-  CharacterBattlesPageQueryVariables
->;
+export type CharacterBattlesPageQueryResult = Apollo.QueryResult<CharacterBattlesPageQuery, CharacterBattlesPageQueryVariables>;
 export const CharacterCombosPageDocument = gql`
-  query CharacterCombosPage($characterSlug: String!) {
-    character(characterSlug: $characterSlug) {
-      ...CharacterBreadcrumbs
-      ...CharacterProfile
-      ...CharacterTabs
-      comboCategories {
-        id
-        name
-        combos {
-          ...ComboListItem
-        }
-      }
-      comboStarters {
-        id
-        name
-        combosCount
+    query CharacterCombosPage($characterSlug: String!) {
+  character(characterSlug: $characterSlug) {
+    ...CharacterBreadcrumbs
+    ...CharacterProfile
+    ...CharacterTabs
+    comboCategories {
+      id
+      name
+      combos {
+        ...ComboListItem
       }
     }
+    comboStarters {
+      id
+      name
+      combosCount
+    }
   }
-  ${CharacterBreadcrumbsFragmentDoc}
-  ${CharacterProfileFragmentDoc}
-  ${CharacterTabsFragmentDoc}
-  ${ComboListItemFragmentDoc}
-`;
+}
+    ${CharacterBreadcrumbsFragmentDoc}
+${CharacterProfileFragmentDoc}
+${CharacterTabsFragmentDoc}
+${ComboListItemFragmentDoc}`;
 
 /**
  * __useCharacterCombosPageQuery__
@@ -8873,44 +6310,30 @@ export const CharacterCombosPageDocument = gql`
  *   },
  * });
  */
-export function useCharacterCombosPageQuery(
-  baseOptions: Apollo.QueryHookOptions<CharacterCombosPageQuery, CharacterCombosPageQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<CharacterCombosPageQuery, CharacterCombosPageQueryVariables>(
-    CharacterCombosPageDocument,
-    options,
-  );
-}
-export function useCharacterCombosPageLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<CharacterCombosPageQuery, CharacterCombosPageQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<CharacterCombosPageQuery, CharacterCombosPageQueryVariables>(
-    CharacterCombosPageDocument,
-    options,
-  );
-}
+export function useCharacterCombosPageQuery(baseOptions: Apollo.QueryHookOptions<CharacterCombosPageQuery, CharacterCombosPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<CharacterCombosPageQuery, CharacterCombosPageQueryVariables>(CharacterCombosPageDocument, options);
+      }
+export function useCharacterCombosPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CharacterCombosPageQuery, CharacterCombosPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<CharacterCombosPageQuery, CharacterCombosPageQueryVariables>(CharacterCombosPageDocument, options);
+        }
 export type CharacterCombosPageQueryHookResult = ReturnType<typeof useCharacterCombosPageQuery>;
 export type CharacterCombosPageLazyQueryHookResult = ReturnType<typeof useCharacterCombosPageLazyQuery>;
-export type CharacterCombosPageQueryResult = Apollo.QueryResult<
-  CharacterCombosPageQuery,
-  CharacterCombosPageQueryVariables
->;
+export type CharacterCombosPageQueryResult = Apollo.QueryResult<CharacterCombosPageQuery, CharacterCombosPageQueryVariables>;
 export const CharacterPageDocument = gql`
-  query CharacterPage($characterSlug: String!) {
-    character(characterSlug: $characterSlug) {
-      ...CharacterBreadcrumbs
-      ...CharacterProfile
-      ...CharacterTabs
-      story
-      description
-    }
+    query CharacterPage($characterSlug: String!) {
+  character(characterSlug: $characterSlug) {
+    ...CharacterBreadcrumbs
+    ...CharacterProfile
+    ...CharacterTabs
+    story
+    description
   }
-  ${CharacterBreadcrumbsFragmentDoc}
-  ${CharacterProfileFragmentDoc}
-  ${CharacterTabsFragmentDoc}
-`;
+}
+    ${CharacterBreadcrumbsFragmentDoc}
+${CharacterProfileFragmentDoc}
+${CharacterTabsFragmentDoc}`;
 
 /**
  * __useCharacterPageQuery__
@@ -8928,41 +6351,36 @@ export const CharacterPageDocument = gql`
  *   },
  * });
  */
-export function useCharacterPageQuery(
-  baseOptions: Apollo.QueryHookOptions<CharacterPageQuery, CharacterPageQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<CharacterPageQuery, CharacterPageQueryVariables>(CharacterPageDocument, options);
-}
-export function useCharacterPageLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<CharacterPageQuery, CharacterPageQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<CharacterPageQuery, CharacterPageQueryVariables>(CharacterPageDocument, options);
-}
+export function useCharacterPageQuery(baseOptions: Apollo.QueryHookOptions<CharacterPageQuery, CharacterPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<CharacterPageQuery, CharacterPageQueryVariables>(CharacterPageDocument, options);
+      }
+export function useCharacterPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CharacterPageQuery, CharacterPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<CharacterPageQuery, CharacterPageQueryVariables>(CharacterPageDocument, options);
+        }
 export type CharacterPageQueryHookResult = ReturnType<typeof useCharacterPageQuery>;
 export type CharacterPageLazyQueryHookResult = ReturnType<typeof useCharacterPageLazyQuery>;
 export type CharacterPageQueryResult = Apollo.QueryResult<CharacterPageQuery, CharacterPageQueryVariables>;
 export const CharacterMovesPageDocument = gql`
-  query CharacterMovesPage($characterSlug: String!) {
-    character(characterSlug: $characterSlug) {
-      ...CharacterBreadcrumbs
-      ...CharacterProfile
-      ...CharacterTabs
-      moveCategories {
-        id
-        name
-        moves {
-          ...MoveListItem
-        }
+    query CharacterMovesPage($characterSlug: String!) {
+  character(characterSlug: $characterSlug) {
+    ...CharacterBreadcrumbs
+    ...CharacterProfile
+    ...CharacterTabs
+    moveCategories {
+      id
+      name
+      moves {
+        ...MoveListItem
       }
     }
   }
-  ${CharacterBreadcrumbsFragmentDoc}
-  ${CharacterProfileFragmentDoc}
-  ${CharacterTabsFragmentDoc}
-  ${MoveListItemFragmentDoc}
-`;
+}
+    ${CharacterBreadcrumbsFragmentDoc}
+${CharacterProfileFragmentDoc}
+${CharacterTabsFragmentDoc}
+${MoveListItemFragmentDoc}`;
 
 /**
  * __useCharacterMovesPageQuery__
@@ -8980,40 +6398,26 @@ export const CharacterMovesPageDocument = gql`
  *   },
  * });
  */
-export function useCharacterMovesPageQuery(
-  baseOptions: Apollo.QueryHookOptions<CharacterMovesPageQuery, CharacterMovesPageQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<CharacterMovesPageQuery, CharacterMovesPageQueryVariables>(
-    CharacterMovesPageDocument,
-    options,
-  );
-}
-export function useCharacterMovesPageLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<CharacterMovesPageQuery, CharacterMovesPageQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<CharacterMovesPageQuery, CharacterMovesPageQueryVariables>(
-    CharacterMovesPageDocument,
-    options,
-  );
-}
+export function useCharacterMovesPageQuery(baseOptions: Apollo.QueryHookOptions<CharacterMovesPageQuery, CharacterMovesPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<CharacterMovesPageQuery, CharacterMovesPageQueryVariables>(CharacterMovesPageDocument, options);
+      }
+export function useCharacterMovesPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CharacterMovesPageQuery, CharacterMovesPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<CharacterMovesPageQuery, CharacterMovesPageQueryVariables>(CharacterMovesPageDocument, options);
+        }
 export type CharacterMovesPageQueryHookResult = ReturnType<typeof useCharacterMovesPageQuery>;
 export type CharacterMovesPageLazyQueryHookResult = ReturnType<typeof useCharacterMovesPageLazyQuery>;
-export type CharacterMovesPageQueryResult = Apollo.QueryResult<
-  CharacterMovesPageQuery,
-  CharacterMovesPageQueryVariables
->;
+export type CharacterMovesPageQueryResult = Apollo.QueryResult<CharacterMovesPageQuery, CharacterMovesPageQueryVariables>;
 export const CharactersPageDocument = gql`
-  query CharactersPage {
-    characters(first: 100) {
-      nodes {
-        ...CharacterCard
-      }
+    query CharactersPage {
+  characters(first: 100) {
+    nodes {
+      ...CharacterCard
     }
   }
-  ${CharacterCardFragmentDoc}
-`;
+}
+    ${CharacterCardFragmentDoc}`;
 
 /**
  * __useCharactersPageQuery__
@@ -9030,29 +6434,24 @@ export const CharactersPageDocument = gql`
  *   },
  * });
  */
-export function useCharactersPageQuery(
-  baseOptions?: Apollo.QueryHookOptions<CharactersPageQuery, CharactersPageQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<CharactersPageQuery, CharactersPageQueryVariables>(CharactersPageDocument, options);
-}
-export function useCharactersPageLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<CharactersPageQuery, CharactersPageQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<CharactersPageQuery, CharactersPageQueryVariables>(CharactersPageDocument, options);
-}
+export function useCharactersPageQuery(baseOptions?: Apollo.QueryHookOptions<CharactersPageQuery, CharactersPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<CharactersPageQuery, CharactersPageQueryVariables>(CharactersPageDocument, options);
+      }
+export function useCharactersPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<CharactersPageQuery, CharactersPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<CharactersPageQuery, CharactersPageQueryVariables>(CharactersPageDocument, options);
+        }
 export type CharactersPageQueryHookResult = ReturnType<typeof useCharactersPageQuery>;
 export type CharactersPageLazyQueryHookResult = ReturnType<typeof useCharactersPageLazyQuery>;
 export type CharactersPageQueryResult = Apollo.QueryResult<CharactersPageQuery, CharactersPageQueryVariables>;
 export const DashboardArticlePageDocument = gql`
-  query DashboardArticlePage($articleId: ID!) {
-    article(articleId: $articleId, myOwn: true) {
-      ...ArticleFormArticle
-    }
+    query DashboardArticlePage($articleId: ID!) {
+  article(articleId: $articleId, myOwn: true) {
+    ...ArticleFormArticle
   }
-  ${ArticleFormArticleFragmentDoc}
-`;
+}
+    ${ArticleFormArticleFragmentDoc}`;
 
 /**
  * __useDashboardArticlePageQuery__
@@ -9070,40 +6469,26 @@ export const DashboardArticlePageDocument = gql`
  *   },
  * });
  */
-export function useDashboardArticlePageQuery(
-  baseOptions: Apollo.QueryHookOptions<DashboardArticlePageQuery, DashboardArticlePageQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<DashboardArticlePageQuery, DashboardArticlePageQueryVariables>(
-    DashboardArticlePageDocument,
-    options,
-  );
-}
-export function useDashboardArticlePageLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<DashboardArticlePageQuery, DashboardArticlePageQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<DashboardArticlePageQuery, DashboardArticlePageQueryVariables>(
-    DashboardArticlePageDocument,
-    options,
-  );
-}
+export function useDashboardArticlePageQuery(baseOptions: Apollo.QueryHookOptions<DashboardArticlePageQuery, DashboardArticlePageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<DashboardArticlePageQuery, DashboardArticlePageQueryVariables>(DashboardArticlePageDocument, options);
+      }
+export function useDashboardArticlePageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<DashboardArticlePageQuery, DashboardArticlePageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<DashboardArticlePageQuery, DashboardArticlePageQueryVariables>(DashboardArticlePageDocument, options);
+        }
 export type DashboardArticlePageQueryHookResult = ReturnType<typeof useDashboardArticlePageQuery>;
 export type DashboardArticlePageLazyQueryHookResult = ReturnType<typeof useDashboardArticlePageLazyQuery>;
-export type DashboardArticlePageQueryResult = Apollo.QueryResult<
-  DashboardArticlePageQuery,
-  DashboardArticlePageQueryVariables
->;
+export type DashboardArticlePageQueryResult = Apollo.QueryResult<DashboardArticlePageQuery, DashboardArticlePageQueryVariables>;
 export const DashboardCharacterCombosPageDocument = gql`
-  query DashboardCharacterCombosPage($characterSlug: String!) {
-    character(characterSlug: $characterSlug) {
-      ...CharacterBreadcrumbs
-      ...ComboDashboard
-    }
+    query DashboardCharacterCombosPage($characterSlug: String!) {
+  character(characterSlug: $characterSlug) {
+    ...CharacterBreadcrumbs
+    ...ComboDashboard
   }
-  ${CharacterBreadcrumbsFragmentDoc}
-  ${ComboDashboardFragmentDoc}
-`;
+}
+    ${CharacterBreadcrumbsFragmentDoc}
+${ComboDashboardFragmentDoc}`;
 
 /**
  * __useDashboardCharacterCombosPageQuery__
@@ -9121,43 +6506,24 @@ export const DashboardCharacterCombosPageDocument = gql`
  *   },
  * });
  */
-export function useDashboardCharacterCombosPageQuery(
-  baseOptions: Apollo.QueryHookOptions<DashboardCharacterCombosPageQuery, DashboardCharacterCombosPageQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<DashboardCharacterCombosPageQuery, DashboardCharacterCombosPageQueryVariables>(
-    DashboardCharacterCombosPageDocument,
-    options,
-  );
-}
-export function useDashboardCharacterCombosPageLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    DashboardCharacterCombosPageQuery,
-    DashboardCharacterCombosPageQueryVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<DashboardCharacterCombosPageQuery, DashboardCharacterCombosPageQueryVariables>(
-    DashboardCharacterCombosPageDocument,
-    options,
-  );
-}
+export function useDashboardCharacterCombosPageQuery(baseOptions: Apollo.QueryHookOptions<DashboardCharacterCombosPageQuery, DashboardCharacterCombosPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<DashboardCharacterCombosPageQuery, DashboardCharacterCombosPageQueryVariables>(DashboardCharacterCombosPageDocument, options);
+      }
+export function useDashboardCharacterCombosPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<DashboardCharacterCombosPageQuery, DashboardCharacterCombosPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<DashboardCharacterCombosPageQuery, DashboardCharacterCombosPageQueryVariables>(DashboardCharacterCombosPageDocument, options);
+        }
 export type DashboardCharacterCombosPageQueryHookResult = ReturnType<typeof useDashboardCharacterCombosPageQuery>;
-export type DashboardCharacterCombosPageLazyQueryHookResult = ReturnType<
-  typeof useDashboardCharacterCombosPageLazyQuery
->;
-export type DashboardCharacterCombosPageQueryResult = Apollo.QueryResult<
-  DashboardCharacterCombosPageQuery,
-  DashboardCharacterCombosPageQueryVariables
->;
+export type DashboardCharacterCombosPageLazyQueryHookResult = ReturnType<typeof useDashboardCharacterCombosPageLazyQuery>;
+export type DashboardCharacterCombosPageQueryResult = Apollo.QueryResult<DashboardCharacterCombosPageQuery, DashboardCharacterCombosPageQueryVariables>;
 export const PageAdminCharacterEditDocument = gql`
-  query PageAdminCharacterEdit($characterSlug: String!) {
-    character(characterSlug: $characterSlug) {
-      ...CharacterForm
-    }
+    query PageAdminCharacterEdit($characterSlug: String!) {
+  character(characterSlug: $characterSlug) {
+    ...CharacterForm
   }
-  ${CharacterFormFragmentDoc}
-`;
+}
+    ${CharacterFormFragmentDoc}`;
 
 /**
  * __usePageAdminCharacterEditQuery__
@@ -9175,43 +6541,27 @@ export const PageAdminCharacterEditDocument = gql`
  *   },
  * });
  */
-export function usePageAdminCharacterEditQuery(
-  baseOptions: Apollo.QueryHookOptions<PageAdminCharacterEditQuery, PageAdminCharacterEditQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<PageAdminCharacterEditQuery, PageAdminCharacterEditQueryVariables>(
-    PageAdminCharacterEditDocument,
-    options,
-  );
-}
-export function usePageAdminCharacterEditLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<PageAdminCharacterEditQuery, PageAdminCharacterEditQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<PageAdminCharacterEditQuery, PageAdminCharacterEditQueryVariables>(
-    PageAdminCharacterEditDocument,
-    options,
-  );
-}
+export function usePageAdminCharacterEditQuery(baseOptions: Apollo.QueryHookOptions<PageAdminCharacterEditQuery, PageAdminCharacterEditQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PageAdminCharacterEditQuery, PageAdminCharacterEditQueryVariables>(PageAdminCharacterEditDocument, options);
+      }
+export function usePageAdminCharacterEditLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PageAdminCharacterEditQuery, PageAdminCharacterEditQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PageAdminCharacterEditQuery, PageAdminCharacterEditQueryVariables>(PageAdminCharacterEditDocument, options);
+        }
 export type PageAdminCharacterEditQueryHookResult = ReturnType<typeof usePageAdminCharacterEditQuery>;
 export type PageAdminCharacterEditLazyQueryHookResult = ReturnType<typeof usePageAdminCharacterEditLazyQuery>;
-export type PageAdminCharacterEditQueryResult = Apollo.QueryResult<
-  PageAdminCharacterEditQuery,
-  PageAdminCharacterEditQueryVariables
->;
+export type PageAdminCharacterEditQueryResult = Apollo.QueryResult<PageAdminCharacterEditQuery, PageAdminCharacterEditQueryVariables>;
 export const UpdateCharacterDocument = gql`
-  mutation UpdateCharacter($characterSlug: String!, $attributes: CharacterAttributes!) {
-    updateCharacter(input: { characterSlug: $characterSlug, attributes: $attributes }) {
-      character {
-        id
-      }
+    mutation UpdateCharacter($characterSlug: String!, $attributes: CharacterAttributes!) {
+  updateCharacter(input: {characterSlug: $characterSlug, attributes: $attributes}) {
+    character {
+      id
     }
   }
-`;
-export type UpdateCharacterMutationFn = Apollo.MutationFunction<
-  UpdateCharacterMutation,
-  UpdateCharacterMutationVariables
->;
+}
+    `;
+export type UpdateCharacterMutationFn = Apollo.MutationFunction<UpdateCharacterMutation, UpdateCharacterMutationVariables>;
 
 /**
  * __useUpdateCharacterMutation__
@@ -9231,31 +6581,22 @@ export type UpdateCharacterMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useUpdateCharacterMutation(
-  baseOptions?: Apollo.MutationHookOptions<UpdateCharacterMutation, UpdateCharacterMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<UpdateCharacterMutation, UpdateCharacterMutationVariables>(
-    UpdateCharacterDocument,
-    options,
-  );
-}
+export function useUpdateCharacterMutation(baseOptions?: Apollo.MutationHookOptions<UpdateCharacterMutation, UpdateCharacterMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateCharacterMutation, UpdateCharacterMutationVariables>(UpdateCharacterDocument, options);
+      }
 export type UpdateCharacterMutationHookResult = ReturnType<typeof useUpdateCharacterMutation>;
 export type UpdateCharacterMutationResult = Apollo.MutationResult<UpdateCharacterMutation>;
-export type UpdateCharacterMutationOptions = Apollo.BaseMutationOptions<
-  UpdateCharacterMutation,
-  UpdateCharacterMutationVariables
->;
+export type UpdateCharacterMutationOptions = Apollo.BaseMutationOptions<UpdateCharacterMutation, UpdateCharacterMutationVariables>;
 export const DashboardCharacterMovesPageDocument = gql`
-  query DashboardCharacterMovesPage($characterSlug: String!) {
-    character(characterSlug: $characterSlug) {
-      ...CharacterBreadcrumbs
-      ...MoveDashboard
-    }
+    query DashboardCharacterMovesPage($characterSlug: String!) {
+  character(characterSlug: $characterSlug) {
+    ...CharacterBreadcrumbs
+    ...MoveDashboard
   }
-  ${CharacterBreadcrumbsFragmentDoc}
-  ${MoveDashboardFragmentDoc}
-`;
+}
+    ${CharacterBreadcrumbsFragmentDoc}
+${MoveDashboardFragmentDoc}`;
 
 /**
  * __useDashboardCharacterMovesPageQuery__
@@ -9273,46 +6614,27 @@ export const DashboardCharacterMovesPageDocument = gql`
  *   },
  * });
  */
-export function useDashboardCharacterMovesPageQuery(
-  baseOptions: Apollo.QueryHookOptions<DashboardCharacterMovesPageQuery, DashboardCharacterMovesPageQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<DashboardCharacterMovesPageQuery, DashboardCharacterMovesPageQueryVariables>(
-    DashboardCharacterMovesPageDocument,
-    options,
-  );
-}
-export function useDashboardCharacterMovesPageLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    DashboardCharacterMovesPageQuery,
-    DashboardCharacterMovesPageQueryVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<DashboardCharacterMovesPageQuery, DashboardCharacterMovesPageQueryVariables>(
-    DashboardCharacterMovesPageDocument,
-    options,
-  );
-}
+export function useDashboardCharacterMovesPageQuery(baseOptions: Apollo.QueryHookOptions<DashboardCharacterMovesPageQuery, DashboardCharacterMovesPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<DashboardCharacterMovesPageQuery, DashboardCharacterMovesPageQueryVariables>(DashboardCharacterMovesPageDocument, options);
+      }
+export function useDashboardCharacterMovesPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<DashboardCharacterMovesPageQuery, DashboardCharacterMovesPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<DashboardCharacterMovesPageQuery, DashboardCharacterMovesPageQueryVariables>(DashboardCharacterMovesPageDocument, options);
+        }
 export type DashboardCharacterMovesPageQueryHookResult = ReturnType<typeof useDashboardCharacterMovesPageQuery>;
 export type DashboardCharacterMovesPageLazyQueryHookResult = ReturnType<typeof useDashboardCharacterMovesPageLazyQuery>;
-export type DashboardCharacterMovesPageQueryResult = Apollo.QueryResult<
-  DashboardCharacterMovesPageQuery,
-  DashboardCharacterMovesPageQueryVariables
->;
+export type DashboardCharacterMovesPageQueryResult = Apollo.QueryResult<DashboardCharacterMovesPageQuery, DashboardCharacterMovesPageQueryVariables>;
 export const CreateCharacterDocument = gql`
-  mutation CreateCharacter($attributes: CharacterAttributes!) {
-    createCharacter(input: { attributes: $attributes }) {
-      character {
-        id
-      }
+    mutation CreateCharacter($attributes: CharacterAttributes!) {
+  createCharacter(input: {attributes: $attributes}) {
+    character {
+      id
     }
   }
-`;
-export type CreateCharacterMutationFn = Apollo.MutationFunction<
-  CreateCharacterMutation,
-  CreateCharacterMutationVariables
->;
+}
+    `;
+export type CreateCharacterMutationFn = Apollo.MutationFunction<CreateCharacterMutation, CreateCharacterMutationVariables>;
 
 /**
  * __useCreateCharacterMutation__
@@ -9331,31 +6653,22 @@ export type CreateCharacterMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useCreateCharacterMutation(
-  baseOptions?: Apollo.MutationHookOptions<CreateCharacterMutation, CreateCharacterMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<CreateCharacterMutation, CreateCharacterMutationVariables>(
-    CreateCharacterDocument,
-    options,
-  );
-}
+export function useCreateCharacterMutation(baseOptions?: Apollo.MutationHookOptions<CreateCharacterMutation, CreateCharacterMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateCharacterMutation, CreateCharacterMutationVariables>(CreateCharacterDocument, options);
+      }
 export type CreateCharacterMutationHookResult = ReturnType<typeof useCreateCharacterMutation>;
 export type CreateCharacterMutationResult = Apollo.MutationResult<CreateCharacterMutation>;
-export type CreateCharacterMutationOptions = Apollo.BaseMutationOptions<
-  CreateCharacterMutation,
-  CreateCharacterMutationVariables
->;
+export type CreateCharacterMutationOptions = Apollo.BaseMutationOptions<CreateCharacterMutation, CreateCharacterMutationVariables>;
 export const AdminPlayerEditPageDocument = gql`
-  query AdminPlayerEditPage($playerSlug: String!) {
-    player(playerSlug: $playerSlug) {
-      ...PlayerForm
-      ...PlayerBreadcrumbs
-    }
+    query AdminPlayerEditPage($playerSlug: String!) {
+  player(playerSlug: $playerSlug) {
+    ...PlayerForm
+    ...PlayerBreadcrumbs
   }
-  ${PlayerFormFragmentDoc}
-  ${PlayerBreadcrumbsFragmentDoc}
-`;
+}
+    ${PlayerFormFragmentDoc}
+${PlayerBreadcrumbsFragmentDoc}`;
 
 /**
  * __useAdminPlayerEditPageQuery__
@@ -9373,46 +6686,29 @@ export const AdminPlayerEditPageDocument = gql`
  *   },
  * });
  */
-export function useAdminPlayerEditPageQuery(
-  baseOptions: Apollo.QueryHookOptions<AdminPlayerEditPageQuery, AdminPlayerEditPageQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<AdminPlayerEditPageQuery, AdminPlayerEditPageQueryVariables>(
-    AdminPlayerEditPageDocument,
-    options,
-  );
-}
-export function useAdminPlayerEditPageLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<AdminPlayerEditPageQuery, AdminPlayerEditPageQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<AdminPlayerEditPageQuery, AdminPlayerEditPageQueryVariables>(
-    AdminPlayerEditPageDocument,
-    options,
-  );
-}
+export function useAdminPlayerEditPageQuery(baseOptions: Apollo.QueryHookOptions<AdminPlayerEditPageQuery, AdminPlayerEditPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AdminPlayerEditPageQuery, AdminPlayerEditPageQueryVariables>(AdminPlayerEditPageDocument, options);
+      }
+export function useAdminPlayerEditPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AdminPlayerEditPageQuery, AdminPlayerEditPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AdminPlayerEditPageQuery, AdminPlayerEditPageQueryVariables>(AdminPlayerEditPageDocument, options);
+        }
 export type AdminPlayerEditPageQueryHookResult = ReturnType<typeof useAdminPlayerEditPageQuery>;
 export type AdminPlayerEditPageLazyQueryHookResult = ReturnType<typeof useAdminPlayerEditPageLazyQuery>;
-export type AdminPlayerEditPageQueryResult = Apollo.QueryResult<
-  AdminPlayerEditPageQuery,
-  AdminPlayerEditPageQueryVariables
->;
+export type AdminPlayerEditPageQueryResult = Apollo.QueryResult<AdminPlayerEditPageQuery, AdminPlayerEditPageQueryVariables>;
 export const AdminPlayerEditPageUpdatePlayerDocument = gql`
-  mutation AdminPlayerEditPageUpdatePlayer($playerSlug: String!, $attributes: PlayerAttributes!) {
-    updatePlayer(input: { playerSlug: $playerSlug, attributes: $attributes }) {
-      player {
-        ...PlayerForm
-        ...PlayerBreadcrumbs
-      }
+    mutation AdminPlayerEditPageUpdatePlayer($playerSlug: String!, $attributes: PlayerAttributes!) {
+  updatePlayer(input: {playerSlug: $playerSlug, attributes: $attributes}) {
+    player {
+      ...PlayerForm
+      ...PlayerBreadcrumbs
     }
   }
-  ${PlayerFormFragmentDoc}
-  ${PlayerBreadcrumbsFragmentDoc}
-`;
-export type AdminPlayerEditPageUpdatePlayerMutationFn = Apollo.MutationFunction<
-  AdminPlayerEditPageUpdatePlayerMutation,
-  AdminPlayerEditPageUpdatePlayerMutationVariables
->;
+}
+    ${PlayerFormFragmentDoc}
+${PlayerBreadcrumbsFragmentDoc}`;
+export type AdminPlayerEditPageUpdatePlayerMutationFn = Apollo.MutationFunction<AdminPlayerEditPageUpdatePlayerMutation, AdminPlayerEditPageUpdatePlayerMutationVariables>;
 
 /**
  * __useAdminPlayerEditPageUpdatePlayerMutation__
@@ -9432,40 +6728,23 @@ export type AdminPlayerEditPageUpdatePlayerMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useAdminPlayerEditPageUpdatePlayerMutation(
-  baseOptions?: Apollo.MutationHookOptions<
-    AdminPlayerEditPageUpdatePlayerMutation,
-    AdminPlayerEditPageUpdatePlayerMutationVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<AdminPlayerEditPageUpdatePlayerMutation, AdminPlayerEditPageUpdatePlayerMutationVariables>(
-    AdminPlayerEditPageUpdatePlayerDocument,
-    options,
-  );
-}
-export type AdminPlayerEditPageUpdatePlayerMutationHookResult = ReturnType<
-  typeof useAdminPlayerEditPageUpdatePlayerMutation
->;
-export type AdminPlayerEditPageUpdatePlayerMutationResult =
-  Apollo.MutationResult<AdminPlayerEditPageUpdatePlayerMutation>;
-export type AdminPlayerEditPageUpdatePlayerMutationOptions = Apollo.BaseMutationOptions<
-  AdminPlayerEditPageUpdatePlayerMutation,
-  AdminPlayerEditPageUpdatePlayerMutationVariables
->;
-export const AdminPlayersNewPageCreatePlayerDocument = gql`
-  mutation AdminPlayersNewPageCreatePlayer($attributes: PlayerAttributes!) {
-    createPlayer(input: { attributes: $attributes }) {
-      player {
-        id
+export function useAdminPlayerEditPageUpdatePlayerMutation(baseOptions?: Apollo.MutationHookOptions<AdminPlayerEditPageUpdatePlayerMutation, AdminPlayerEditPageUpdatePlayerMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<AdminPlayerEditPageUpdatePlayerMutation, AdminPlayerEditPageUpdatePlayerMutationVariables>(AdminPlayerEditPageUpdatePlayerDocument, options);
       }
+export type AdminPlayerEditPageUpdatePlayerMutationHookResult = ReturnType<typeof useAdminPlayerEditPageUpdatePlayerMutation>;
+export type AdminPlayerEditPageUpdatePlayerMutationResult = Apollo.MutationResult<AdminPlayerEditPageUpdatePlayerMutation>;
+export type AdminPlayerEditPageUpdatePlayerMutationOptions = Apollo.BaseMutationOptions<AdminPlayerEditPageUpdatePlayerMutation, AdminPlayerEditPageUpdatePlayerMutationVariables>;
+export const AdminPlayersNewPageCreatePlayerDocument = gql`
+    mutation AdminPlayersNewPageCreatePlayer($attributes: PlayerAttributes!) {
+  createPlayer(input: {attributes: $attributes}) {
+    player {
+      id
     }
   }
-`;
-export type AdminPlayersNewPageCreatePlayerMutationFn = Apollo.MutationFunction<
-  AdminPlayersNewPageCreatePlayerMutation,
-  AdminPlayersNewPageCreatePlayerMutationVariables
->;
+}
+    `;
+export type AdminPlayersNewPageCreatePlayerMutationFn = Apollo.MutationFunction<AdminPlayersNewPageCreatePlayerMutation, AdminPlayersNewPageCreatePlayerMutationVariables>;
 
 /**
  * __useAdminPlayersNewPageCreatePlayerMutation__
@@ -9484,37 +6763,22 @@ export type AdminPlayersNewPageCreatePlayerMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useAdminPlayersNewPageCreatePlayerMutation(
-  baseOptions?: Apollo.MutationHookOptions<
-    AdminPlayersNewPageCreatePlayerMutation,
-    AdminPlayersNewPageCreatePlayerMutationVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<AdminPlayersNewPageCreatePlayerMutation, AdminPlayersNewPageCreatePlayerMutationVariables>(
-    AdminPlayersNewPageCreatePlayerDocument,
-    options,
-  );
-}
-export type AdminPlayersNewPageCreatePlayerMutationHookResult = ReturnType<
-  typeof useAdminPlayersNewPageCreatePlayerMutation
->;
-export type AdminPlayersNewPageCreatePlayerMutationResult =
-  Apollo.MutationResult<AdminPlayersNewPageCreatePlayerMutation>;
-export type AdminPlayersNewPageCreatePlayerMutationOptions = Apollo.BaseMutationOptions<
-  AdminPlayersNewPageCreatePlayerMutation,
-  AdminPlayersNewPageCreatePlayerMutationVariables
->;
-export const UpdateViewerDocument = gql`
-  mutation UpdateViewer($attributes: ViewerAttributes!) {
-    updateViewer(input: { attributes: $attributes }) {
-      viewer {
-        ...Viewer
+export function useAdminPlayersNewPageCreatePlayerMutation(baseOptions?: Apollo.MutationHookOptions<AdminPlayersNewPageCreatePlayerMutation, AdminPlayersNewPageCreatePlayerMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<AdminPlayersNewPageCreatePlayerMutation, AdminPlayersNewPageCreatePlayerMutationVariables>(AdminPlayersNewPageCreatePlayerDocument, options);
       }
+export type AdminPlayersNewPageCreatePlayerMutationHookResult = ReturnType<typeof useAdminPlayersNewPageCreatePlayerMutation>;
+export type AdminPlayersNewPageCreatePlayerMutationResult = Apollo.MutationResult<AdminPlayersNewPageCreatePlayerMutation>;
+export type AdminPlayersNewPageCreatePlayerMutationOptions = Apollo.BaseMutationOptions<AdminPlayersNewPageCreatePlayerMutation, AdminPlayersNewPageCreatePlayerMutationVariables>;
+export const UpdateViewerDocument = gql`
+    mutation UpdateViewer($attributes: ViewerAttributes!) {
+  updateViewer(input: {attributes: $attributes}) {
+    viewer {
+      ...Viewer
     }
   }
-  ${ViewerFragmentDoc}
-`;
+}
+    ${ViewerFragmentDoc}`;
 export type UpdateViewerMutationFn = Apollo.MutationFunction<UpdateViewerMutation, UpdateViewerMutationVariables>;
 
 /**
@@ -9534,27 +6798,22 @@ export type UpdateViewerMutationFn = Apollo.MutationFunction<UpdateViewerMutatio
  *   },
  * });
  */
-export function useUpdateViewerMutation(
-  baseOptions?: Apollo.MutationHookOptions<UpdateViewerMutation, UpdateViewerMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<UpdateViewerMutation, UpdateViewerMutationVariables>(UpdateViewerDocument, options);
-}
+export function useUpdateViewerMutation(baseOptions?: Apollo.MutationHookOptions<UpdateViewerMutation, UpdateViewerMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateViewerMutation, UpdateViewerMutationVariables>(UpdateViewerDocument, options);
+      }
 export type UpdateViewerMutationHookResult = ReturnType<typeof useUpdateViewerMutation>;
 export type UpdateViewerMutationResult = Apollo.MutationResult<UpdateViewerMutation>;
-export type UpdateViewerMutationOptions = Apollo.BaseMutationOptions<
-  UpdateViewerMutation,
-  UpdateViewerMutationVariables
->;
+export type UpdateViewerMutationOptions = Apollo.BaseMutationOptions<UpdateViewerMutation, UpdateViewerMutationVariables>;
 export const CreateBattleDocument = gql`
-  mutation CreateBattle($attributes: BattleAttributes!) {
-    createBattle(input: { attributes: $attributes }) {
-      battle {
-        id
-      }
+    mutation CreateBattle($attributes: BattleAttributes!) {
+  createBattle(input: {attributes: $attributes}) {
+    battle {
+      id
     }
   }
-`;
+}
+    `;
 export type CreateBattleMutationFn = Apollo.MutationFunction<CreateBattleMutation, CreateBattleMutationVariables>;
 
 /**
@@ -9574,28 +6833,22 @@ export type CreateBattleMutationFn = Apollo.MutationFunction<CreateBattleMutatio
  *   },
  * });
  */
-export function useCreateBattleMutation(
-  baseOptions?: Apollo.MutationHookOptions<CreateBattleMutation, CreateBattleMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<CreateBattleMutation, CreateBattleMutationVariables>(CreateBattleDocument, options);
-}
+export function useCreateBattleMutation(baseOptions?: Apollo.MutationHookOptions<CreateBattleMutation, CreateBattleMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateBattleMutation, CreateBattleMutationVariables>(CreateBattleDocument, options);
+      }
 export type CreateBattleMutationHookResult = ReturnType<typeof useCreateBattleMutation>;
 export type CreateBattleMutationResult = Apollo.MutationResult<CreateBattleMutation>;
-export type CreateBattleMutationOptions = Apollo.BaseMutationOptions<
-  CreateBattleMutation,
-  CreateBattleMutationVariables
->;
+export type CreateBattleMutationOptions = Apollo.BaseMutationOptions<CreateBattleMutation, CreateBattleMutationVariables>;
 export const UpdateBattleDocument = gql`
-  mutation UpdateBattle($battleId: ID!, $attributes: BattleAttributes!) {
-    updateBattle(input: { battleId: $battleId, attributes: $attributes }) {
-      battle {
-        ...AdminBattlesPageBattleReslut
-      }
+    mutation UpdateBattle($battleId: ID!, $attributes: BattleAttributes!) {
+  updateBattle(input: {battleId: $battleId, attributes: $attributes}) {
+    battle {
+      ...AdminBattlesPageBattleReslut
     }
   }
-  ${AdminBattlesPageBattleReslutFragmentDoc}
-`;
+}
+    ${AdminBattlesPageBattleReslutFragmentDoc}`;
 export type UpdateBattleMutationFn = Apollo.MutationFunction<UpdateBattleMutation, UpdateBattleMutationVariables>;
 
 /**
@@ -9616,27 +6869,22 @@ export type UpdateBattleMutationFn = Apollo.MutationFunction<UpdateBattleMutatio
  *   },
  * });
  */
-export function useUpdateBattleMutation(
-  baseOptions?: Apollo.MutationHookOptions<UpdateBattleMutation, UpdateBattleMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<UpdateBattleMutation, UpdateBattleMutationVariables>(UpdateBattleDocument, options);
-}
+export function useUpdateBattleMutation(baseOptions?: Apollo.MutationHookOptions<UpdateBattleMutation, UpdateBattleMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateBattleMutation, UpdateBattleMutationVariables>(UpdateBattleDocument, options);
+      }
 export type UpdateBattleMutationHookResult = ReturnType<typeof useUpdateBattleMutation>;
 export type UpdateBattleMutationResult = Apollo.MutationResult<UpdateBattleMutation>;
-export type UpdateBattleMutationOptions = Apollo.BaseMutationOptions<
-  UpdateBattleMutation,
-  UpdateBattleMutationVariables
->;
+export type UpdateBattleMutationOptions = Apollo.BaseMutationOptions<UpdateBattleMutation, UpdateBattleMutationVariables>;
 export const DeleteBattleDocument = gql`
-  mutation DeleteBattle($battleId: ID!) {
-    deleteBattle(input: { battleId: $battleId }) {
-      battle {
-        id
-      }
+    mutation DeleteBattle($battleId: ID!) {
+  deleteBattle(input: {battleId: $battleId}) {
+    battle {
+      id
     }
   }
-`;
+}
+    `;
 export type DeleteBattleMutationFn = Apollo.MutationFunction<DeleteBattleMutation, DeleteBattleMutationVariables>;
 
 /**
@@ -9656,43 +6904,37 @@ export type DeleteBattleMutationFn = Apollo.MutationFunction<DeleteBattleMutatio
  *   },
  * });
  */
-export function useDeleteBattleMutation(
-  baseOptions?: Apollo.MutationHookOptions<DeleteBattleMutation, DeleteBattleMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<DeleteBattleMutation, DeleteBattleMutationVariables>(DeleteBattleDocument, options);
-}
+export function useDeleteBattleMutation(baseOptions?: Apollo.MutationHookOptions<DeleteBattleMutation, DeleteBattleMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<DeleteBattleMutation, DeleteBattleMutationVariables>(DeleteBattleDocument, options);
+      }
 export type DeleteBattleMutationHookResult = ReturnType<typeof useDeleteBattleMutation>;
 export type DeleteBattleMutationResult = Apollo.MutationResult<DeleteBattleMutation>;
-export type DeleteBattleMutationOptions = Apollo.BaseMutationOptions<
-  DeleteBattleMutation,
-  DeleteBattleMutationVariables
->;
+export type DeleteBattleMutationOptions = Apollo.BaseMutationOptions<DeleteBattleMutation, DeleteBattleMutationVariables>;
 export const AdminBattlesPageDocument = gql`
-  query AdminBattlesPage($tournamentVideoId: ID!) {
-    tournamentVideo(tournamentVideoId: $tournamentVideoId) {
+    query AdminBattlesPage($tournamentVideoId: ID!) {
+  tournamentVideo(tournamentVideoId: $tournamentVideoId) {
+    id
+    title
+    youtubeVideoId
+    tournament {
       id
-      title
-      youtubeVideoId
-      tournament {
-        id
-        name
-      }
-    }
-    players(first: 500) {
-      nodes {
-        ...PlayerSelectOption
-      }
-    }
-    characters(first: 100) {
-      nodes {
-        ...CharacterSelectOption
-      }
+      name
     }
   }
-  ${PlayerSelectOptionFragmentDoc}
-  ${CharacterSelectOptionFragmentDoc}
-`;
+  players(first: 500) {
+    nodes {
+      ...PlayerSelectOption
+    }
+  }
+  characters(first: 100) {
+    nodes {
+      ...CharacterSelectOption
+    }
+  }
+}
+    ${PlayerSelectOptionFragmentDoc}
+${CharacterSelectOptionFragmentDoc}`;
 
 /**
  * __useAdminBattlesPageQuery__
@@ -9710,32 +6952,27 @@ export const AdminBattlesPageDocument = gql`
  *   },
  * });
  */
-export function useAdminBattlesPageQuery(
-  baseOptions: Apollo.QueryHookOptions<AdminBattlesPageQuery, AdminBattlesPageQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<AdminBattlesPageQuery, AdminBattlesPageQueryVariables>(AdminBattlesPageDocument, options);
-}
-export function useAdminBattlesPageLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<AdminBattlesPageQuery, AdminBattlesPageQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<AdminBattlesPageQuery, AdminBattlesPageQueryVariables>(AdminBattlesPageDocument, options);
-}
+export function useAdminBattlesPageQuery(baseOptions: Apollo.QueryHookOptions<AdminBattlesPageQuery, AdminBattlesPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AdminBattlesPageQuery, AdminBattlesPageQueryVariables>(AdminBattlesPageDocument, options);
+      }
+export function useAdminBattlesPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AdminBattlesPageQuery, AdminBattlesPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AdminBattlesPageQuery, AdminBattlesPageQueryVariables>(AdminBattlesPageDocument, options);
+        }
 export type AdminBattlesPageQueryHookResult = ReturnType<typeof useAdminBattlesPageQuery>;
 export type AdminBattlesPageLazyQueryHookResult = ReturnType<typeof useAdminBattlesPageLazyQuery>;
 export type AdminBattlesPageQueryResult = Apollo.QueryResult<AdminBattlesPageQuery, AdminBattlesPageQueryVariables>;
 export const AdminBattlesPageBattlesDocument = gql`
-  query AdminBattlesPageBattles($tournamentVideoId: ID!) {
-    tournamentVideo(tournamentVideoId: $tournamentVideoId) {
-      id
-      battles {
-        ...AdminBattlesPageBattleReslut
-      }
+    query AdminBattlesPageBattles($tournamentVideoId: ID!) {
+  tournamentVideo(tournamentVideoId: $tournamentVideoId) {
+    id
+    battles {
+      ...AdminBattlesPageBattleReslut
     }
   }
-  ${AdminBattlesPageBattleReslutFragmentDoc}
-`;
+}
+    ${AdminBattlesPageBattleReslutFragmentDoc}`;
 
 /**
  * __useAdminBattlesPageBattlesQuery__
@@ -9753,40 +6990,26 @@ export const AdminBattlesPageBattlesDocument = gql`
  *   },
  * });
  */
-export function useAdminBattlesPageBattlesQuery(
-  baseOptions: Apollo.QueryHookOptions<AdminBattlesPageBattlesQuery, AdminBattlesPageBattlesQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<AdminBattlesPageBattlesQuery, AdminBattlesPageBattlesQueryVariables>(
-    AdminBattlesPageBattlesDocument,
-    options,
-  );
-}
-export function useAdminBattlesPageBattlesLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<AdminBattlesPageBattlesQuery, AdminBattlesPageBattlesQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<AdminBattlesPageBattlesQuery, AdminBattlesPageBattlesQueryVariables>(
-    AdminBattlesPageBattlesDocument,
-    options,
-  );
-}
+export function useAdminBattlesPageBattlesQuery(baseOptions: Apollo.QueryHookOptions<AdminBattlesPageBattlesQuery, AdminBattlesPageBattlesQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AdminBattlesPageBattlesQuery, AdminBattlesPageBattlesQueryVariables>(AdminBattlesPageBattlesDocument, options);
+      }
+export function useAdminBattlesPageBattlesLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AdminBattlesPageBattlesQuery, AdminBattlesPageBattlesQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AdminBattlesPageBattlesQuery, AdminBattlesPageBattlesQueryVariables>(AdminBattlesPageBattlesDocument, options);
+        }
 export type AdminBattlesPageBattlesQueryHookResult = ReturnType<typeof useAdminBattlesPageBattlesQuery>;
 export type AdminBattlesPageBattlesLazyQueryHookResult = ReturnType<typeof useAdminBattlesPageBattlesLazyQuery>;
-export type AdminBattlesPageBattlesQueryResult = Apollo.QueryResult<
-  AdminBattlesPageBattlesQuery,
-  AdminBattlesPageBattlesQueryVariables
->;
+export type AdminBattlesPageBattlesQueryResult = Apollo.QueryResult<AdminBattlesPageBattlesQuery, AdminBattlesPageBattlesQueryVariables>;
 export const AdminTournamentVideoEditPageDocument = gql`
-  query AdminTournamentVideoEditPage($tournamentVideoId: ID!) {
-    tournamentVideo(tournamentVideoId: $tournamentVideoId) {
-      ...TournamentVideoForm
-      ...TournamentVideoBreadcrumbs
-    }
+    query AdminTournamentVideoEditPage($tournamentVideoId: ID!) {
+  tournamentVideo(tournamentVideoId: $tournamentVideoId) {
+    ...TournamentVideoForm
+    ...TournamentVideoBreadcrumbs
   }
-  ${TournamentVideoFormFragmentDoc}
-  ${TournamentVideoBreadcrumbsFragmentDoc}
-`;
+}
+    ${TournamentVideoFormFragmentDoc}
+${TournamentVideoBreadcrumbsFragmentDoc}`;
 
 /**
  * __useAdminTournamentVideoEditPageQuery__
@@ -9804,49 +7027,29 @@ export const AdminTournamentVideoEditPageDocument = gql`
  *   },
  * });
  */
-export function useAdminTournamentVideoEditPageQuery(
-  baseOptions: Apollo.QueryHookOptions<AdminTournamentVideoEditPageQuery, AdminTournamentVideoEditPageQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<AdminTournamentVideoEditPageQuery, AdminTournamentVideoEditPageQueryVariables>(
-    AdminTournamentVideoEditPageDocument,
-    options,
-  );
-}
-export function useAdminTournamentVideoEditPageLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<
-    AdminTournamentVideoEditPageQuery,
-    AdminTournamentVideoEditPageQueryVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<AdminTournamentVideoEditPageQuery, AdminTournamentVideoEditPageQueryVariables>(
-    AdminTournamentVideoEditPageDocument,
-    options,
-  );
-}
-export type AdminTournamentVideoEditPageQueryHookResult = ReturnType<typeof useAdminTournamentVideoEditPageQuery>;
-export type AdminTournamentVideoEditPageLazyQueryHookResult = ReturnType<
-  typeof useAdminTournamentVideoEditPageLazyQuery
->;
-export type AdminTournamentVideoEditPageQueryResult = Apollo.QueryResult<
-  AdminTournamentVideoEditPageQuery,
-  AdminTournamentVideoEditPageQueryVariables
->;
-export const AdminTournamentVideoEditPageUpdateDocument = gql`
-  mutation AdminTournamentVideoEditPageUpdate($tournamentVideoId: ID!, $attributes: TournamentVideoAttributes!) {
-    updateTournamentVideo(input: { tournamentVideoId: $tournamentVideoId, attributes: $attributes }) {
-      tournamentVideo {
-        ...TournamentVideoForm
+export function useAdminTournamentVideoEditPageQuery(baseOptions: Apollo.QueryHookOptions<AdminTournamentVideoEditPageQuery, AdminTournamentVideoEditPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AdminTournamentVideoEditPageQuery, AdminTournamentVideoEditPageQueryVariables>(AdminTournamentVideoEditPageDocument, options);
       }
+export function useAdminTournamentVideoEditPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AdminTournamentVideoEditPageQuery, AdminTournamentVideoEditPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AdminTournamentVideoEditPageQuery, AdminTournamentVideoEditPageQueryVariables>(AdminTournamentVideoEditPageDocument, options);
+        }
+export type AdminTournamentVideoEditPageQueryHookResult = ReturnType<typeof useAdminTournamentVideoEditPageQuery>;
+export type AdminTournamentVideoEditPageLazyQueryHookResult = ReturnType<typeof useAdminTournamentVideoEditPageLazyQuery>;
+export type AdminTournamentVideoEditPageQueryResult = Apollo.QueryResult<AdminTournamentVideoEditPageQuery, AdminTournamentVideoEditPageQueryVariables>;
+export const AdminTournamentVideoEditPageUpdateDocument = gql`
+    mutation AdminTournamentVideoEditPageUpdate($tournamentVideoId: ID!, $attributes: TournamentVideoAttributes!) {
+  updateTournamentVideo(
+    input: {tournamentVideoId: $tournamentVideoId, attributes: $attributes}
+  ) {
+    tournamentVideo {
+      ...TournamentVideoForm
     }
   }
-  ${TournamentVideoFormFragmentDoc}
-`;
-export type AdminTournamentVideoEditPageUpdateMutationFn = Apollo.MutationFunction<
-  AdminTournamentVideoEditPageUpdateMutation,
-  AdminTournamentVideoEditPageUpdateMutationVariables
->;
+}
+    ${TournamentVideoFormFragmentDoc}`;
+export type AdminTournamentVideoEditPageUpdateMutationFn = Apollo.MutationFunction<AdminTournamentVideoEditPageUpdateMutation, AdminTournamentVideoEditPageUpdateMutationVariables>;
 
 /**
  * __useAdminTournamentVideoEditPageUpdateMutation__
@@ -9866,40 +7069,23 @@ export type AdminTournamentVideoEditPageUpdateMutationFn = Apollo.MutationFuncti
  *   },
  * });
  */
-export function useAdminTournamentVideoEditPageUpdateMutation(
-  baseOptions?: Apollo.MutationHookOptions<
-    AdminTournamentVideoEditPageUpdateMutation,
-    AdminTournamentVideoEditPageUpdateMutationVariables
-  >,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<
-    AdminTournamentVideoEditPageUpdateMutation,
-    AdminTournamentVideoEditPageUpdateMutationVariables
-  >(AdminTournamentVideoEditPageUpdateDocument, options);
-}
-export type AdminTournamentVideoEditPageUpdateMutationHookResult = ReturnType<
-  typeof useAdminTournamentVideoEditPageUpdateMutation
->;
-export type AdminTournamentVideoEditPageUpdateMutationResult =
-  Apollo.MutationResult<AdminTournamentVideoEditPageUpdateMutation>;
-export type AdminTournamentVideoEditPageUpdateMutationOptions = Apollo.BaseMutationOptions<
-  AdminTournamentVideoEditPageUpdateMutation,
-  AdminTournamentVideoEditPageUpdateMutationVariables
->;
-export const CreateTournamentDocument = gql`
-  mutation CreateTournament($attributes: TournamentAttributes!) {
-    createTournament(input: { attributes: $attributes }) {
-      tournament {
-        id
+export function useAdminTournamentVideoEditPageUpdateMutation(baseOptions?: Apollo.MutationHookOptions<AdminTournamentVideoEditPageUpdateMutation, AdminTournamentVideoEditPageUpdateMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<AdminTournamentVideoEditPageUpdateMutation, AdminTournamentVideoEditPageUpdateMutationVariables>(AdminTournamentVideoEditPageUpdateDocument, options);
       }
+export type AdminTournamentVideoEditPageUpdateMutationHookResult = ReturnType<typeof useAdminTournamentVideoEditPageUpdateMutation>;
+export type AdminTournamentVideoEditPageUpdateMutationResult = Apollo.MutationResult<AdminTournamentVideoEditPageUpdateMutation>;
+export type AdminTournamentVideoEditPageUpdateMutationOptions = Apollo.BaseMutationOptions<AdminTournamentVideoEditPageUpdateMutation, AdminTournamentVideoEditPageUpdateMutationVariables>;
+export const CreateTournamentDocument = gql`
+    mutation CreateTournament($attributes: TournamentAttributes!) {
+  createTournament(input: {attributes: $attributes}) {
+    tournament {
+      id
     }
   }
-`;
-export type CreateTournamentMutationFn = Apollo.MutationFunction<
-  CreateTournamentMutation,
-  CreateTournamentMutationVariables
->;
+}
+    `;
+export type CreateTournamentMutationFn = Apollo.MutationFunction<CreateTournamentMutation, CreateTournamentMutationVariables>;
 
 /**
  * __useCreateTournamentMutation__
@@ -9918,35 +7104,23 @@ export type CreateTournamentMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useCreateTournamentMutation(
-  baseOptions?: Apollo.MutationHookOptions<CreateTournamentMutation, CreateTournamentMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<CreateTournamentMutation, CreateTournamentMutationVariables>(
-    CreateTournamentDocument,
-    options,
-  );
-}
+export function useCreateTournamentMutation(baseOptions?: Apollo.MutationHookOptions<CreateTournamentMutation, CreateTournamentMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<CreateTournamentMutation, CreateTournamentMutationVariables>(CreateTournamentDocument, options);
+      }
 export type CreateTournamentMutationHookResult = ReturnType<typeof useCreateTournamentMutation>;
 export type CreateTournamentMutationResult = Apollo.MutationResult<CreateTournamentMutation>;
-export type CreateTournamentMutationOptions = Apollo.BaseMutationOptions<
-  CreateTournamentMutation,
-  CreateTournamentMutationVariables
->;
+export type CreateTournamentMutationOptions = Apollo.BaseMutationOptions<CreateTournamentMutation, CreateTournamentMutationVariables>;
 export const UpdateTournamentDocument = gql`
-  mutation UpdateTournament($tournamentId: ID!, $attributes: TournamentAttributes!) {
-    updateTournament(input: { tournamentId: $tournamentId, attributes: $attributes }) {
-      tournament {
-        ...TournamentTableRow
-      }
+    mutation UpdateTournament($tournamentId: ID!, $attributes: TournamentAttributes!) {
+  updateTournament(input: {tournamentId: $tournamentId, attributes: $attributes}) {
+    tournament {
+      ...TournamentTableRow
     }
   }
-  ${TournamentTableRowFragmentDoc}
-`;
-export type UpdateTournamentMutationFn = Apollo.MutationFunction<
-  UpdateTournamentMutation,
-  UpdateTournamentMutationVariables
->;
+}
+    ${TournamentTableRowFragmentDoc}`;
+export type UpdateTournamentMutationFn = Apollo.MutationFunction<UpdateTournamentMutation, UpdateTournamentMutationVariables>;
 
 /**
  * __useUpdateTournamentMutation__
@@ -9966,31 +7140,22 @@ export type UpdateTournamentMutationFn = Apollo.MutationFunction<
  *   },
  * });
  */
-export function useUpdateTournamentMutation(
-  baseOptions?: Apollo.MutationHookOptions<UpdateTournamentMutation, UpdateTournamentMutationVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useMutation<UpdateTournamentMutation, UpdateTournamentMutationVariables>(
-    UpdateTournamentDocument,
-    options,
-  );
-}
+export function useUpdateTournamentMutation(baseOptions?: Apollo.MutationHookOptions<UpdateTournamentMutation, UpdateTournamentMutationVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useMutation<UpdateTournamentMutation, UpdateTournamentMutationVariables>(UpdateTournamentDocument, options);
+      }
 export type UpdateTournamentMutationHookResult = ReturnType<typeof useUpdateTournamentMutation>;
 export type UpdateTournamentMutationResult = Apollo.MutationResult<UpdateTournamentMutation>;
-export type UpdateTournamentMutationOptions = Apollo.BaseMutationOptions<
-  UpdateTournamentMutation,
-  UpdateTournamentMutationVariables
->;
+export type UpdateTournamentMutationOptions = Apollo.BaseMutationOptions<UpdateTournamentMutation, UpdateTournamentMutationVariables>;
 export const AdminTournamentEditPageDocument = gql`
-  query AdminTournamentEditPage($tournamentId: ID!) {
-    tournament(tournamentId: $tournamentId) {
-      ...TournamentForm
-      ...TournamentBreadcrumbs
-    }
+    query AdminTournamentEditPage($tournamentId: ID!) {
+  tournament(tournamentId: $tournamentId) {
+    ...TournamentForm
+    ...TournamentBreadcrumbs
   }
-  ${TournamentFormFragmentDoc}
-  ${TournamentBreadcrumbsFragmentDoc}
-`;
+}
+    ${TournamentFormFragmentDoc}
+${TournamentBreadcrumbsFragmentDoc}`;
 
 /**
  * __useAdminTournamentEditPageQuery__
@@ -10008,58 +7173,44 @@ export const AdminTournamentEditPageDocument = gql`
  *   },
  * });
  */
-export function useAdminTournamentEditPageQuery(
-  baseOptions: Apollo.QueryHookOptions<AdminTournamentEditPageQuery, AdminTournamentEditPageQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<AdminTournamentEditPageQuery, AdminTournamentEditPageQueryVariables>(
-    AdminTournamentEditPageDocument,
-    options,
-  );
-}
-export function useAdminTournamentEditPageLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<AdminTournamentEditPageQuery, AdminTournamentEditPageQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<AdminTournamentEditPageQuery, AdminTournamentEditPageQueryVariables>(
-    AdminTournamentEditPageDocument,
-    options,
-  );
-}
+export function useAdminTournamentEditPageQuery(baseOptions: Apollo.QueryHookOptions<AdminTournamentEditPageQuery, AdminTournamentEditPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<AdminTournamentEditPageQuery, AdminTournamentEditPageQueryVariables>(AdminTournamentEditPageDocument, options);
+      }
+export function useAdminTournamentEditPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<AdminTournamentEditPageQuery, AdminTournamentEditPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<AdminTournamentEditPageQuery, AdminTournamentEditPageQueryVariables>(AdminTournamentEditPageDocument, options);
+        }
 export type AdminTournamentEditPageQueryHookResult = ReturnType<typeof useAdminTournamentEditPageQuery>;
 export type AdminTournamentEditPageLazyQueryHookResult = ReturnType<typeof useAdminTournamentEditPageLazyQuery>;
-export type AdminTournamentEditPageQueryResult = Apollo.QueryResult<
-  AdminTournamentEditPageQuery,
-  AdminTournamentEditPageQueryVariables
->;
+export type AdminTournamentEditPageQueryResult = Apollo.QueryResult<AdminTournamentEditPageQuery, AdminTournamentEditPageQueryVariables>;
 export const TopPageDocument = gql`
-  query TopPage {
-    tournaments(first: 3) {
-      nodes {
-        ...TournamentCard
-      }
-    }
-    players(first: 4) {
-      nodes {
-        ...PlayerCard
-      }
-    }
-    characters(first: 4, order: use_rate) {
-      nodes {
-        ...CharacterCard
-      }
-    }
-    articles(first: 3) {
-      nodes {
-        ...ArticleCard
-      }
+    query TopPage {
+  tournaments(first: 3) {
+    nodes {
+      ...TournamentCard
     }
   }
-  ${TournamentCardFragmentDoc}
-  ${PlayerCardFragmentDoc}
-  ${CharacterCardFragmentDoc}
-  ${ArticleCardFragmentDoc}
-`;
+  players(first: 4) {
+    nodes {
+      ...PlayerCard
+    }
+  }
+  characters(first: 4, order: use_rate) {
+    nodes {
+      ...CharacterCard
+    }
+  }
+  articles(first: 3) {
+    nodes {
+      ...ArticleCard
+    }
+  }
+}
+    ${TournamentCardFragmentDoc}
+${PlayerCardFragmentDoc}
+${CharacterCardFragmentDoc}
+${ArticleCardFragmentDoc}`;
 
 /**
  * __useTopPageQuery__
@@ -10077,28 +7228,27 @@ export const TopPageDocument = gql`
  * });
  */
 export function useTopPageQuery(baseOptions?: Apollo.QueryHookOptions<TopPageQuery, TopPageQueryVariables>) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<TopPageQuery, TopPageQueryVariables>(TopPageDocument, options);
-}
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TopPageQuery, TopPageQueryVariables>(TopPageDocument, options);
+      }
 export function useTopPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TopPageQuery, TopPageQueryVariables>) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<TopPageQuery, TopPageQueryVariables>(TopPageDocument, options);
-}
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TopPageQuery, TopPageQueryVariables>(TopPageDocument, options);
+        }
 export type TopPageQueryHookResult = ReturnType<typeof useTopPageQuery>;
 export type TopPageLazyQueryHookResult = ReturnType<typeof useTopPageLazyQuery>;
 export type TopPageQueryResult = Apollo.QueryResult<TopPageQuery, TopPageQueryVariables>;
 export const PlayerBattlesPageDocument = gql`
-  query PlayerBattlesPage($playerSlug: String!) {
-    player(playerSlug: $playerSlug) {
-      ...PlayerBreadcrumbs
-      ...PlayerProfile
-      ...PlayerTabs
-    }
+    query PlayerBattlesPage($playerSlug: String!) {
+  player(playerSlug: $playerSlug) {
+    ...PlayerBreadcrumbs
+    ...PlayerProfile
+    ...PlayerTabs
   }
-  ${PlayerBreadcrumbsFragmentDoc}
-  ${PlayerProfileFragmentDoc}
-  ${PlayerTabsFragmentDoc}
-`;
+}
+    ${PlayerBreadcrumbsFragmentDoc}
+${PlayerProfileFragmentDoc}
+${PlayerTabsFragmentDoc}`;
 
 /**
  * __usePlayerBattlesPageQuery__
@@ -10116,37 +7266,29 @@ export const PlayerBattlesPageDocument = gql`
  *   },
  * });
  */
-export function usePlayerBattlesPageQuery(
-  baseOptions: Apollo.QueryHookOptions<PlayerBattlesPageQuery, PlayerBattlesPageQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<PlayerBattlesPageQuery, PlayerBattlesPageQueryVariables>(PlayerBattlesPageDocument, options);
-}
-export function usePlayerBattlesPageLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<PlayerBattlesPageQuery, PlayerBattlesPageQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<PlayerBattlesPageQuery, PlayerBattlesPageQueryVariables>(
-    PlayerBattlesPageDocument,
-    options,
-  );
-}
+export function usePlayerBattlesPageQuery(baseOptions: Apollo.QueryHookOptions<PlayerBattlesPageQuery, PlayerBattlesPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PlayerBattlesPageQuery, PlayerBattlesPageQueryVariables>(PlayerBattlesPageDocument, options);
+      }
+export function usePlayerBattlesPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PlayerBattlesPageQuery, PlayerBattlesPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PlayerBattlesPageQuery, PlayerBattlesPageQueryVariables>(PlayerBattlesPageDocument, options);
+        }
 export type PlayerBattlesPageQueryHookResult = ReturnType<typeof usePlayerBattlesPageQuery>;
 export type PlayerBattlesPageLazyQueryHookResult = ReturnType<typeof usePlayerBattlesPageLazyQuery>;
 export type PlayerBattlesPageQueryResult = Apollo.QueryResult<PlayerBattlesPageQuery, PlayerBattlesPageQueryVariables>;
 export const PlayerPageDocument = gql`
-  query PlayerPage($playerSlug: String!) {
-    player(playerSlug: $playerSlug) {
-      ...PlayerBreadcrumbs
-      ...PlayerProfile
-      ...PlayerTabs
-      description
-    }
+    query PlayerPage($playerSlug: String!) {
+  player(playerSlug: $playerSlug) {
+    ...PlayerBreadcrumbs
+    ...PlayerProfile
+    ...PlayerTabs
+    description
   }
-  ${PlayerBreadcrumbsFragmentDoc}
-  ${PlayerProfileFragmentDoc}
-  ${PlayerTabsFragmentDoc}
-`;
+}
+    ${PlayerBreadcrumbsFragmentDoc}
+${PlayerProfileFragmentDoc}
+${PlayerTabsFragmentDoc}`;
 
 /**
  * __usePlayerPageQuery__
@@ -10165,36 +7307,33 @@ export const PlayerPageDocument = gql`
  * });
  */
 export function usePlayerPageQuery(baseOptions: Apollo.QueryHookOptions<PlayerPageQuery, PlayerPageQueryVariables>) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<PlayerPageQuery, PlayerPageQueryVariables>(PlayerPageDocument, options);
-}
-export function usePlayerPageLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<PlayerPageQuery, PlayerPageQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<PlayerPageQuery, PlayerPageQueryVariables>(PlayerPageDocument, options);
-}
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PlayerPageQuery, PlayerPageQueryVariables>(PlayerPageDocument, options);
+      }
+export function usePlayerPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PlayerPageQuery, PlayerPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PlayerPageQuery, PlayerPageQueryVariables>(PlayerPageDocument, options);
+        }
 export type PlayerPageQueryHookResult = ReturnType<typeof usePlayerPageQuery>;
 export type PlayerPageLazyQueryHookResult = ReturnType<typeof usePlayerPageLazyQuery>;
 export type PlayerPageQueryResult = Apollo.QueryResult<PlayerPageQuery, PlayerPageQueryVariables>;
 export const PlayerStandingsPageDocument = gql`
-  query PlayerStandingsPage($playerSlug: String!) {
-    player(playerSlug: $playerSlug) {
-      ...PlayerBreadcrumbs
-      ...PlayerProfile
-      ...PlayerTabs
-      standings(first: 10) {
-        nodes {
-          ...PlayerStandingCard
-        }
+    query PlayerStandingsPage($playerSlug: String!) {
+  player(playerSlug: $playerSlug) {
+    ...PlayerBreadcrumbs
+    ...PlayerProfile
+    ...PlayerTabs
+    standings(first: 10) {
+      nodes {
+        ...PlayerStandingCard
       }
     }
   }
-  ${PlayerBreadcrumbsFragmentDoc}
-  ${PlayerProfileFragmentDoc}
-  ${PlayerTabsFragmentDoc}
-  ${PlayerStandingCardFragmentDoc}
-`;
+}
+    ${PlayerBreadcrumbsFragmentDoc}
+${PlayerProfileFragmentDoc}
+${PlayerTabsFragmentDoc}
+${PlayerStandingCardFragmentDoc}`;
 
 /**
  * __usePlayerStandingsPageQuery__
@@ -10212,40 +7351,26 @@ export const PlayerStandingsPageDocument = gql`
  *   },
  * });
  */
-export function usePlayerStandingsPageQuery(
-  baseOptions: Apollo.QueryHookOptions<PlayerStandingsPageQuery, PlayerStandingsPageQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<PlayerStandingsPageQuery, PlayerStandingsPageQueryVariables>(
-    PlayerStandingsPageDocument,
-    options,
-  );
-}
-export function usePlayerStandingsPageLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<PlayerStandingsPageQuery, PlayerStandingsPageQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<PlayerStandingsPageQuery, PlayerStandingsPageQueryVariables>(
-    PlayerStandingsPageDocument,
-    options,
-  );
-}
+export function usePlayerStandingsPageQuery(baseOptions: Apollo.QueryHookOptions<PlayerStandingsPageQuery, PlayerStandingsPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PlayerStandingsPageQuery, PlayerStandingsPageQueryVariables>(PlayerStandingsPageDocument, options);
+      }
+export function usePlayerStandingsPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PlayerStandingsPageQuery, PlayerStandingsPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PlayerStandingsPageQuery, PlayerStandingsPageQueryVariables>(PlayerStandingsPageDocument, options);
+        }
 export type PlayerStandingsPageQueryHookResult = ReturnType<typeof usePlayerStandingsPageQuery>;
 export type PlayerStandingsPageLazyQueryHookResult = ReturnType<typeof usePlayerStandingsPageLazyQuery>;
-export type PlayerStandingsPageQueryResult = Apollo.QueryResult<
-  PlayerStandingsPageQuery,
-  PlayerStandingsPageQueryVariables
->;
+export type PlayerStandingsPageQueryResult = Apollo.QueryResult<PlayerStandingsPageQuery, PlayerStandingsPageQueryVariables>;
 export const PlayersPageDocument = gql`
-  query PlayersPage {
-    players(first: 20) {
-      nodes {
-        ...PlayerCard
-      }
+    query PlayersPage {
+  players(first: 20) {
+    nodes {
+      ...PlayerCard
     }
   }
-  ${PlayerCardFragmentDoc}
-`;
+}
+    ${PlayerCardFragmentDoc}`;
 
 /**
  * __usePlayersPageQuery__
@@ -10262,52 +7387,47 @@ export const PlayersPageDocument = gql`
  *   },
  * });
  */
-export function usePlayersPageQuery(
-  baseOptions?: Apollo.QueryHookOptions<PlayersPageQuery, PlayersPageQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<PlayersPageQuery, PlayersPageQueryVariables>(PlayersPageDocument, options);
-}
-export function usePlayersPageLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<PlayersPageQuery, PlayersPageQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<PlayersPageQuery, PlayersPageQueryVariables>(PlayersPageDocument, options);
-}
+export function usePlayersPageQuery(baseOptions?: Apollo.QueryHookOptions<PlayersPageQuery, PlayersPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<PlayersPageQuery, PlayersPageQueryVariables>(PlayersPageDocument, options);
+      }
+export function usePlayersPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<PlayersPageQuery, PlayersPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<PlayersPageQuery, PlayersPageQueryVariables>(PlayersPageDocument, options);
+        }
 export type PlayersPageQueryHookResult = ReturnType<typeof usePlayersPageQuery>;
 export type PlayersPageLazyQueryHookResult = ReturnType<typeof usePlayersPageLazyQuery>;
 export type PlayersPageQueryResult = Apollo.QueryResult<PlayersPageQuery, PlayersPageQueryVariables>;
 export const TournamentPageDocument = gql`
-  query TournamentPage($tournamentId: ID!) {
-    tournament(tournamentId: $tournamentId) {
+    query TournamentPage($tournamentId: ID!) {
+  tournament(tournamentId: $tournamentId) {
+    id
+    name
+    mainImageUrl
+    url
+    streamingUrl
+    description
+    startsAt
+    standings {
       id
-      name
-      mainImageUrl
-      url
-      streamingUrl
-      description
-      startsAt
-      standings {
+      place
+      player {
         id
-        place
-        player {
-          id
-          slug
-          name
-          avatarUrl
-        }
-      }
-      videos {
-        id
-        label
-        battlesCount
-        publishedAt
-        ...TournamentVideoPlayer
+        slug
+        name
+        avatarUrl
       }
     }
+    videos {
+      id
+      label
+      battlesCount
+      publishedAt
+      ...TournamentVideoPlayer
+    }
   }
-  ${TournamentVideoPlayerFragmentDoc}
-`;
+}
+    ${TournamentVideoPlayerFragmentDoc}`;
 
 /**
  * __useTournamentPageQuery__
@@ -10325,31 +7445,26 @@ export const TournamentPageDocument = gql`
  *   },
  * });
  */
-export function useTournamentPageQuery(
-  baseOptions: Apollo.QueryHookOptions<TournamentPageQuery, TournamentPageQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<TournamentPageQuery, TournamentPageQueryVariables>(TournamentPageDocument, options);
-}
-export function useTournamentPageLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<TournamentPageQuery, TournamentPageQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<TournamentPageQuery, TournamentPageQueryVariables>(TournamentPageDocument, options);
-}
+export function useTournamentPageQuery(baseOptions: Apollo.QueryHookOptions<TournamentPageQuery, TournamentPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TournamentPageQuery, TournamentPageQueryVariables>(TournamentPageDocument, options);
+      }
+export function useTournamentPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TournamentPageQuery, TournamentPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TournamentPageQuery, TournamentPageQueryVariables>(TournamentPageDocument, options);
+        }
 export type TournamentPageQueryHookResult = ReturnType<typeof useTournamentPageQuery>;
 export type TournamentPageLazyQueryHookResult = ReturnType<typeof useTournamentPageLazyQuery>;
 export type TournamentPageQueryResult = Apollo.QueryResult<TournamentPageQuery, TournamentPageQueryVariables>;
 export const TournamentsPageDocument = gql`
-  query TournamentsPage {
-    tournaments(first: 12) {
-      nodes {
-        ...TournamentCard
-      }
+    query TournamentsPage {
+  tournaments(first: 12) {
+    nodes {
+      ...TournamentCard
     }
   }
-  ${TournamentCardFragmentDoc}
-`;
+}
+    ${TournamentCardFragmentDoc}`;
 
 /**
  * __useTournamentsPageQuery__
@@ -10366,18 +7481,14 @@ export const TournamentsPageDocument = gql`
  *   },
  * });
  */
-export function useTournamentsPageQuery(
-  baseOptions?: Apollo.QueryHookOptions<TournamentsPageQuery, TournamentsPageQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useQuery<TournamentsPageQuery, TournamentsPageQueryVariables>(TournamentsPageDocument, options);
-}
-export function useTournamentsPageLazyQuery(
-  baseOptions?: Apollo.LazyQueryHookOptions<TournamentsPageQuery, TournamentsPageQueryVariables>,
-) {
-  const options = { ...defaultOptions, ...baseOptions };
-  return Apollo.useLazyQuery<TournamentsPageQuery, TournamentsPageQueryVariables>(TournamentsPageDocument, options);
-}
+export function useTournamentsPageQuery(baseOptions?: Apollo.QueryHookOptions<TournamentsPageQuery, TournamentsPageQueryVariables>) {
+        const options = {...defaultOptions, ...baseOptions}
+        return Apollo.useQuery<TournamentsPageQuery, TournamentsPageQueryVariables>(TournamentsPageDocument, options);
+      }
+export function useTournamentsPageLazyQuery(baseOptions?: Apollo.LazyQueryHookOptions<TournamentsPageQuery, TournamentsPageQueryVariables>) {
+          const options = {...defaultOptions, ...baseOptions}
+          return Apollo.useLazyQuery<TournamentsPageQuery, TournamentsPageQueryVariables>(TournamentsPageDocument, options);
+        }
 export type TournamentsPageQueryHookResult = ReturnType<typeof useTournamentsPageQuery>;
 export type TournamentsPageLazyQueryHookResult = ReturnType<typeof useTournamentsPageLazyQuery>;
 export type TournamentsPageQueryResult = Apollo.QueryResult<TournamentsPageQuery, TournamentsPageQueryVariables>;
