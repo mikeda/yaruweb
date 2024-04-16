@@ -5106,10 +5106,10 @@
   dependencies:
     "@types/node" "*"
 
-"@types/gtag.js@0.0.12":
-  version "0.0.12"
-  resolved "https://registry.yarnpkg.com/@types/gtag.js/-/gtag.js-0.0.12.tgz#095122edca896689bdfcdd73b057e23064d23572"
-  integrity sha512-YQV9bUsemkzG81Ea295/nF/5GijnD2Af7QhEofh7xu+kvCN6RdodgNwwGWXB5GMI3NoyvQo0odNctoH/qLMIpg==
+"@types/gtag.js@0.0.19":
+  version "0.0.19"
+  resolved "https://registry.yarnpkg.com/@types/gtag.js/-/gtag.js-0.0.19.tgz#40ebbef85c8b2915df164d16304d3fbdfdaa1a41"
+  integrity sha512-KHoDzrf9rSd0mooKN576PjExpdk/XRrNu4RQnmigsScSTSidwyOUe9kDrHz9UPKjiBrx2QEsSkexbJSgS0j72w==
 
 "@types/hast@^2.0.0":
   version "2.3.4"
@@ -5138,10 +5138,10 @@
   resolved "https://registry.yarnpkg.com/@types/is-hotkey/-/is-hotkey-0.1.2.tgz#94f00793b5a297a7f7e69c1ef49613da2243a987"
   integrity sha512-SUw9LpI3AIwbRNXS7FYy9AlXrTPIdBZGI7y4XxfIEYqgSW1UfFCUM9cMwHE/yCfTl0qeI0UQ/q8TdIxsIFgKPg==
 
-"@types/is-url@1.2.30":
-  version "1.2.30"
-  resolved "https://registry.yarnpkg.com/@types/is-url/-/is-url-1.2.30.tgz#85567e8bee4fee69202bc3448f9fb34b0d56c50a"
-  integrity sha512-AnlNFwjzC8XLda5VjRl4ItSd8qp8pSNowvsut0WwQyBWHpOxjxRJm8iO6uETWqEyLdYdb9/1j+Qd9gQ4l5I4fw==
+"@types/is-url@1.2.32":
+  version "1.2.32"
+  resolved "https://registry.yarnpkg.com/@types/is-url/-/is-url-1.2.32.tgz#2883814affd004d3a6182d4a09c135d90e4fe28c"
+  integrity sha512-46VLdbWI8Sc+hPexQ6NLNR2YpoDyDZIpASHkJQ2Yr+Kf9Giw6LdCTkwOdsnHKPQeh7xTjTmSnxbE8qpxYuCiHA==
 
 "@types/istanbul-lib-coverage@*", "@types/istanbul-lib-coverage@^2.0.0", "@types/istanbul-lib-coverage@^2.0.1":
   version "2.0.4"
@@ -5237,10 +5237,10 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-18.6.4.tgz#fd26723a8a3f8f46729812a7f9b4fc2d1608ed39"
   integrity sha512-I4BD3L+6AWiUobfxZ49DlU43gtI+FTHSv9pE2Zekg6KjMpre4ByusaljW3vYSLJrvQ1ck1hUaeVu8HVlY3vzHg==
 
-"@types/node@18.16.18":
-  version "18.16.18"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.16.18.tgz#85da09bafb66d4bc14f7c899185336d0c1736390"
-  integrity sha512-/aNaQZD0+iSBAGnvvN2Cx92HqE5sZCPZtx2TsK+4nvV23fFe09jVDvpArXr2j9DnYlzuU9WuoykDDc6wqvpNcw==
+"@types/node@18.16.20":
+  version "18.16.20"
+  resolved "https://registry.yarnpkg.com/@types/node/-/node-18.16.20.tgz#b27be1ceb267bfb47d8bac024ff6379998f62207"
+  integrity sha512-nL54VfDjThdP2UXJXZao5wp76CDiDw4zSRO8d4Tk7UgDqNKGKVEQB0/t3ti63NS+YNNkIQDvwEAF04BO+WYu7Q==
 
 "@types/node@^14.0.10 || ^16.0.0", "@types/node@^14.14.20 || ^16.0.0":
   version "16.11.45"
@@ -5292,10 +5292,10 @@
   resolved "https://registry.yarnpkg.com/@types/qs/-/qs-6.9.7.tgz#63bb7d067db107cc1e457c303bc25d511febf6cb"
   integrity sha512-FGa1F62FT09qcrueBA6qYTrJPVDzah9a+493+o2PCXsesWHIn27G98TsSMs3WPNbZIEj4+VJf6saSFpvD+3Zsw==
 
-"@types/react-dom@18.2.6":
-  version "18.2.6"
-  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-18.2.6.tgz#ad621fa71a8db29af7c31b41b2ea3d8a6f4144d1"
-  integrity sha512-2et4PDvg6PVCyS7fuTc4gPoksV58bW0RwSxWKcPRcHZf0PRUGq03TKcD/rUHe3azfV6/5/biUBJw+HhCQjaP0A==
+"@types/react-dom@18.2.25":
+  version "18.2.25"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-18.2.25.tgz#2946a30081f53e7c8d585eb138277245caedc521"
+  integrity sha512-o/V48vf4MQh7juIKZU2QGDfli6p1+OOi5oXx36Hffpc9adsHeXjVp8rHuPkjd8VT8sOJ2Zp05HR7CdpGTIUFUA==
   dependencies:
     "@types/react" "*"
 
@@ -5313,10 +5313,10 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-slick@0.23.10":
-  version "0.23.10"
-  resolved "https://registry.yarnpkg.com/@types/react-slick/-/react-slick-0.23.10.tgz#56126e6e4e95cdce7771535b2811c2c1931a7caa"
-  integrity sha512-ZiqdencANDZy6sWOWJ54LDvebuXFEhDlHtXU9FFipQR2BcYU2QJxZhvJPW6YK7cocibUiNn+YvDTbt1HtCIBVA==
+"@types/react-slick@0.23.13":
+  version "0.23.13"
+  resolved "https://registry.yarnpkg.com/@types/react-slick/-/react-slick-0.23.13.tgz#037434e73a58063047b121e08565f7185d811f36"
+  integrity sha512-bNZfDhe/L8t5OQzIyhrRhBr/61pfBcWaYJoq6UDqFtv5LMwfg4NsVDD2J8N01JqdAdxLjOt66OZEp6PX+dGs/A==
   dependencies:
     "@types/react" "*"
 
@@ -5336,13 +5336,12 @@
     "@types/scheduler" "*"
     csstype "^3.0.2"
 
-"@types/react@18.2.14":
-  version "18.2.14"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.2.14.tgz#fa7a6fecf1ce35ca94e74874f70c56ce88f7a127"
-  integrity sha512-A0zjq+QN/O0Kpe30hA1GidzyFjatVvrpIvWLxD+xv67Vt91TWWgco9IvrJBkeyHm1trGaFS/FSGqPlhyeZRm0g==
+"@types/react@18.2.79":
+  version "18.2.79"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-18.2.79.tgz#c40efb4f255711f554d47b449f796d1c7756d865"
+  integrity sha512-RwGAGXPl9kSXwdNTafkOEuFrTBD5SA2B3iEB96xi8+xu5ddUa/cpvyVCSNn+asgLCTHkb5ZxN8gbuibYJi4s1w==
   dependencies:
     "@types/prop-types" "*"
-    "@types/scheduler" "*"
     csstype "^3.0.2"
 
 "@types/scheduler@*":
@@ -5441,10 +5440,10 @@
   dependencies:
     "@types/yargs-parser" "*"
 
-"@types/youtube-player@5.5.7":
-  version "5.5.7"
-  resolved "https://registry.yarnpkg.com/@types/youtube-player/-/youtube-player-5.5.7.tgz#9679aa54f6b314877b7b482705224983d6161971"
-  integrity sha512-W8F4eoTIvzXeNrT3JroQPimZLXnlJA8smYygHZUKFPVoYwgs/OhJkA1VBhL3iSs57OQkuINqHlY4SmMT5wtnJg==
+"@types/youtube-player@5.5.11":
+  version "5.5.11"
+  resolved "https://registry.yarnpkg.com/@types/youtube-player/-/youtube-player-5.5.11.tgz#cc297e27151db946596d92fb7cfb837627e83be0"
+  integrity sha512-pM41CDBqJqBmTeJWnF7NOGz82IQoYOhqzMYXv5vKCXBqGiYSLldxMtpCk6KAEtADTy49S45AriYaCaZyeUX38Q==
 
 "@types/yup@0.29.14":
   version "0.29.14"
